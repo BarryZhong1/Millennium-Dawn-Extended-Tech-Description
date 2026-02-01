@@ -4,12 +4,10 @@ focus_tree = {
 		factor = 0
 		modifier = {
 			add = 10
-			AND = {
-				OR = {
-					original_tag = SYR
-					original_tag = FSA
-					original_tag = NUS
-				}
+			OR = {
+				original_tag = SYR
+				original_tag = FSA
+				original_tag = NUS
 			}
 		}
 	}
@@ -2804,7 +2802,7 @@ focus_tree = {
 		}
 
 	}
-focus = {
+	focus = {
 		id = SYR_islamic_socialism
 		icon = social_democracy_2
 		cost = 5
@@ -3064,7 +3062,7 @@ focus = {
 			}
 			set_temp_variable = { temp_opinion = 15 }
 			change_international_bankers_opinion = yes
-			random_country = {
+			every_other_country = {
 				limit = {
 					has_government = democratic
 					OR = {
@@ -3074,21 +3072,7 @@ focus = {
 						has_idea = regional_power
 					}
 				}
-				set_temp_variable = { percent_change = 5 }
-				set_temp_variable = { tag_index = THIS.id }
-				set_temp_variable = { influence_target = ROOT.id }
-				change_influence_percentage = yes
-			}
-			random_country = {
-				limit = {
-					has_government = democratic
-					OR = {
-						has_idea = superpower
-						has_idea = great_power
-						has_idea = large_power
-						has_idea = regional_power
-					}
-				}
+				random_select_amount = 2
 				set_temp_variable = { percent_change = 5 }
 				set_temp_variable = { tag_index = THIS.id }
 				set_temp_variable = { influence_target = ROOT.id }
@@ -6446,9 +6430,9 @@ focus = {
 			}
 			hidden_effect = {
 				#AI Syria has a 30% chance to go SSNP coup after this
-				random_list = {
-					30 = { set_country_flag = Go_full_SSNP }
-					70 = { }
+				random = {
+					chance = 30
+					set_country_flag = Go_full_SSNP
 				}
 			}
 		}
@@ -6540,9 +6524,9 @@ focus = {
 				}
 			}
 			hidden_effect = {
-				random_list = {
-					30 = { country_event = { id = SyriaFocus.8 days = 60 random_days = 60 } }
-					70 = { }
+				random = {
+					chance = 30
+					country_event = { id = SyriaFocus.8 days = 60 random_days = 60 }
 				}
 			}
 		}
@@ -7177,14 +7161,12 @@ focus = {
 				set_leader = yes
 				add_popularity = { ideology = nationalist popularity = 0.30 }
 				recalculate_party = yes
-				random_list = {
-					60 = {
-						start_civil_war = {
-							ideology = communism
-							size = 0.5
-						}
+				random = {
+					chance = 60
+					start_civil_war = {
+						ideology = communism
+						size = 0.5
 					}
-					40 = { }
 				}
 			}
 			else_if = {
@@ -7203,14 +7185,11 @@ focus = {
 				}
 				add_popularity = { ideology = nationalist popularity = 0.30 }
 				recalculate_party = yes
-				random_list = {
-					40 = {
-						start_civil_war = {
-							ideology = communism
-							size = 0.5
-						}
-					}
-					60 = {
+				random = {
+					chance = 40
+					start_civil_war = {
+						ideology = communism
+						size = 0.5
 					}
 				}
 			}
@@ -10444,8 +10423,8 @@ shared_focus = {
 			limit = {
 				IRQ = { has_civil_war = yes }
 			}
-			every_country = {
-				limit = { original_tag = IRQ }
+			every_country_with_original_tag = {
+				original_tag_to_check = IRQ
 				ROOT = {
 					create_wargoal = {
 						target = PREV
@@ -13870,11 +13849,10 @@ shared_focus = {
 				}
 			}
 			annex_country = { target = EGY transfer_troops = yes }
-			every_country = {
+			every_subject_country = {
 				limit = {
 					NOT = { original_tag = EGY }
 					is_arabic_nation = yes
-					is_subject_of = ROOT
 				}
 				every_owned_state = {
 					add_core_of = ROOT
