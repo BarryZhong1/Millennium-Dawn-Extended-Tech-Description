@@ -9577,3 +9577,44 @@ country_event = {
 		ai_chance = { factor = 50 }
 	}
 }
+
+# French Equipment Purchase Event
+country_event = {
+	id = chad.743
+	title = chad.743.t
+	desc = chad.743.d
+	picture = GFX_report_event_french_military
+
+	is_triggered_only = yes
+
+	# Option A: Sell weapons
+	option = {
+		name = chad.743.a
+		ai_chance = { factor = 70 }
+		send_equipment = {
+			target = CHA
+			type = infantry_weapons1
+			amount = 1000
+		}
+		CHA = {
+			add_opinion_modifier = {
+				target = FRA
+				modifier = small_increase
+			}
+		}
+		set_temp_variable = { treasury_change = 2 }
+		modify_treasury_effect = yes
+	}
+
+	# Option B: Refuse
+	option = {
+		name = chad.743.b
+		ai_chance = { factor = 30 }
+		CHA = {
+			add_opinion_modifier = {
+				target = FRA
+				modifier = medium_decrease
+			}
+		}
+	}
+}
