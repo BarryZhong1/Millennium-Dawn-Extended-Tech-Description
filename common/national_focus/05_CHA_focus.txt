@@ -14,7 +14,7 @@ focus_tree = {
 
 	shared_focus = AFRICAN_UNION_shared_focus
 
-	continuous_focus_position = { x = 50 y = 2500 }
+	continuous_focus_position = { x = 50 y = 4000 }
 
 	# Shortcuts for navigation
 	shortcut = {
@@ -299,6 +299,68 @@ focus_tree = {
 		}
 	}
 
+	focus = {
+		id = CHA_fifth_republic
+		icon = focus_generic_political_friends
+		x = -40
+		y = 6
+		relative_position_id = CHA_new_millennium
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		prerequisite = { focus = CHA_mahamat_succession }
+
+		mutually_exclusive = { focus = CHA_sahel_strongman }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHA_fifth_republic"
+			add_ideas = CHA_fifth_republic_idea
+			add_political_power = 150
+			add_stability = 0.05
+		}
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 2
+				has_stability > 0.5
+			}
+		}
+	}
+
+	focus = {
+		id = CHA_sahel_strongman
+		icon = focus_generic_military_dictatorship
+		x = -38
+		y = 6
+		relative_position_id = CHA_new_millennium
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MILITARY }
+
+		prerequisite = { focus = CHA_mahamat_succession }
+
+		mutually_exclusive = { focus = CHA_fifth_republic }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHA_sahel_strongman"
+			add_ideas = CHA_sahel_strongman_idea
+			army_experience = 25
+			add_war_support = 0.10
+		}
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+		}
+	}
+
 	# Democratic Path
 	focus = {
 		id = CHA_political_reform
@@ -452,6 +514,81 @@ focus_tree = {
 			# Prevents civil war
 			set_country_flag = CHA_civil_war_prevented
 			clr_global_flag = CHA_second_civil_war
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = CHA_western_liberal_democracy
+		icon = democracy
+		x = -31
+		y = 6
+		relative_position_id = CHA_new_millennium
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		prerequisite = { focus = CHA_peaceful_transition }
+
+		mutually_exclusive = { focus = CHA_african_democracy_model }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHA_western_liberal_democracy"
+			add_ideas = CHA_democratic_beacon
+			add_popularity = { ideology = democratic popularity = 0.10 }
+			recalculate_party = yes
+			USA = {
+				add_opinion_modifier = {
+					target = CHA
+					modifier = western_ally
+				}
+			}
+			FRA = {
+				add_opinion_modifier = {
+					target = CHA
+					modifier = western_ally
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = CHA_african_democracy_model
+		icon = align_to_africa
+		x = -29
+		y = 6
+		relative_position_id = CHA_new_millennium
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		prerequisite = { focus = CHA_peaceful_transition }
+
+		mutually_exclusive = { focus = CHA_western_liberal_democracy }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHA_african_democracy_model"
+			add_ideas = CHA_decentralized_governance
+			add_stability = 0.10
+			every_neighbor_country = {
+				limit = {
+					is_in_africa = yes
+					NOT = { has_war_with = CHA }
+				}
+				add_opinion_modifier = {
+					target = CHA
+					modifier = pan_african_solidarity
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -883,6 +1020,61 @@ focus_tree = {
 
 		ai_will_do = {
 			factor = 3
+		}
+	}
+
+	focus = {
+		id = CHA_pan_african_socialism
+		icon = communism3
+		x = -1
+		y = 1
+		relative_position_id = CHA_nationalize_oil
+
+		cost = 7
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		prerequisite = { focus = CHA_nationalize_oil }
+
+		mutually_exclusive = { focus = CHA_scientific_socialism }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHA_pan_african_socialism"
+			add_ideas = CHA_revolutionary_military
+			add_popularity = { ideology = communism popularity = 0.05 }
+			recalculate_party = yes
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = CHA_scientific_socialism
+		icon = focus_generic_industry
+		x = 1
+		y = 1
+		relative_position_id = CHA_nationalize_oil
+
+		cost = 7
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		prerequisite = { focus = CHA_nationalize_oil }
+
+		mutually_exclusive = { focus = CHA_pan_african_socialism }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHA_scientific_socialism"
+			add_ideas = CHA_state_controlled_economy
+			capital_scope = {
+				one_state_industrial_complex = yes
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
 		}
 	}
 
@@ -1350,12 +1542,7 @@ focus_tree = {
 			modify_treasury_effect = yes
 			326 = {
 				add_resource = { type = oil amount = 5 }
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
+				one_state_infrastructure = yes
 			}
 		}
 
@@ -1581,12 +1768,7 @@ focus_tree = {
 			set_temp_variable = { treasury_change = -12 }
 			modify_treasury_effect = yes
 			328 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
+				one_state_infrastructure = yes
 			}
 			one_random_agriculture_district = yes
 			add_ideas = CHA_improved_irrigation
@@ -1670,17 +1852,8 @@ focus_tree = {
 			set_temp_variable = { treasury_change = -12 }
 			modify_treasury_effect = yes
 			capital_scope = {
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
+				one_state_industrial_complex = yes
+				one_state_infrastructure = yes
 			}
 		}
 
@@ -1707,11 +1880,7 @@ focus_tree = {
 			set_temp_variable = { treasury_change = -15 }
 			modify_treasury_effect = yes
 			capital_scope = {
-				add_building_construction = {
-					type = fossil_powerplant
-					level = 2
-					instant_build = yes
-				}
+				two_state_fossil_fuel_powerplant = yes
 			}
 			swap_ideas = {
 				remove_idea = CHA_economic_development_2
@@ -1781,6 +1950,67 @@ focus_tree = {
 	}
 
 	focus = {
+		id = CHA_professional_army
+		icon = focus_generic_special_forces
+		x = 0
+		y = 1
+		relative_position_id = CHA_army_modernization
+
+		cost = 7
+
+		search_filters = { FOCUS_FILTER_MILITARY }
+
+		prerequisite = { focus = CHA_army_modernization }
+
+		mutually_exclusive = { focus = CHA_mass_conscription }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHA_professional_army"
+			army_experience = 25
+			add_ideas = CHA_military_elite
+		}
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 2
+				has_army_manpower = { size > 20000 }
+			}
+		}
+	}
+
+	focus = {
+		id = CHA_mass_conscription
+		icon = generic_manpower
+		x = 2
+		y = 1
+		relative_position_id = CHA_army_modernization
+
+		cost = 7
+
+		search_filters = { FOCUS_FILTER_MILITARY }
+
+		prerequisite = { focus = CHA_army_modernization }
+
+		mutually_exclusive = { focus = CHA_professional_army }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHA_mass_conscription"
+			add_manpower = 10000
+			add_war_support = 0.05
+			add_ideas = CHA_war_on_terror
+		}
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 2
+				has_manpower < 10000
+			}
+		}
+	}
+
+	focus = {
 		id = CHA_french_military_training
 		icon = align_to_france
 		x = 11
@@ -1846,6 +2076,63 @@ focus_tree = {
 
 		ai_will_do = {
 			factor = 8
+		}
+	}
+
+	focus = {
+		id = CHA_offensive_doctrine
+		icon = generic_infantry
+		x = -1
+		y = 1
+		relative_position_id = CHA_desert_warfare_doctrine
+
+		cost = 7
+
+		search_filters = { FOCUS_FILTER_MILITARY }
+
+		prerequisite = { focus = CHA_desert_warfare_doctrine }
+
+		mutually_exclusive = { focus = CHA_defensive_doctrine }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHA_offensive_doctrine"
+			army_experience = 20
+			add_tech_bonus = {
+				name = CHA_desert_warfare_bonus
+				bonus = 1.0
+				uses = 1
+				category = CAT_land_doctrine
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = CHA_defensive_doctrine
+		icon = Generic_Soldiers_Defense
+		x = 1
+		y = 1
+		relative_position_id = CHA_desert_warfare_doctrine
+
+		cost = 7
+
+		search_filters = { FOCUS_FILTER_MILITARY }
+
+		prerequisite = { focus = CHA_desert_warfare_doctrine }
+
+		mutually_exclusive = { focus = CHA_offensive_doctrine }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHA_defensive_doctrine"
+			army_experience = 20
+			add_ideas = CHA_fortress_chad_idea
+		}
+
+		ai_will_do = {
+			factor = 5
 		}
 	}
 
@@ -1950,11 +2237,7 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHA_air_force_development"
 			air_experience = 25
 			capital_scope = {
-				add_building_construction = {
-					type = air_base
-					level = 2
-					instant_build = yes
-				}
+				two_state_air_base = yes
 			}
 		}
 
@@ -2364,9 +2647,9 @@ focus_tree = {
 	focus = {
 		id = CHA_western_alignment
 		icon = align_to_america
-		x = 32.5
-		y = 3
-		relative_position_id = CHA_new_millennium
+		x = -1
+		y = 1
+		relative_position_id = CHA_great_power_relations
 
 		cost = 7
 
@@ -2408,9 +2691,9 @@ focus_tree = {
 	focus = {
 		id = CHA_pivot_to_east
 		icon = align_to_china
-		x = 34.5
-		y = 3
-		relative_position_id = CHA_new_millennium
+		x = 1
+		y = 1
+		relative_position_id = CHA_great_power_relations
 
 		cost = 7
 
@@ -3110,12 +3393,7 @@ focus_tree = {
 			set_temp_variable = { treasury_change = -7.5 }
 			modify_treasury_effect = yes
 			328 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = arms_factory
-					level = 1
-					instant_build = yes
-				}
+				one_state_arms_factory = yes
 			}
 			set_temp_variable = { temp_opinion = 5 }
 			change_the_military_opinion = yes
@@ -3179,22 +3457,7 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHA_ammunition_production"
 			set_temp_variable = { treasury_change = -7.5 }
 			modify_treasury_effect = yes
-			random_owned_controlled_state = {
-				prioritize = { 328 326 }
-				limit = {
-					free_building_slots = {
-						building = arms_factory
-						size > 0
-						include_locked = yes
-					}
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = arms_factory
-					level = 1
-					instant_build = yes
-				}
-			}
+			one_random_arms_factory = yes
 		}
 
 		ai_will_do = {
@@ -3397,18 +3660,10 @@ focus_tree = {
 			set_temp_variable = { treasury_change = -5 }
 			modify_treasury_effect = yes
 			327 = {
-				add_building_construction = {
-					type = air_base
-					level = 2
-					instant_build = yes
-				}
+				two_state_air_base = yes
 			}
 			580 = {
-				add_building_construction = {
-					type = air_base
-					level = 1
-					instant_build = yes
-				}
+				one_state_air_base = yes
 			}
 			air_experience = 15
 		}
@@ -3595,11 +3850,7 @@ focus_tree = {
 			set_temp_variable = { treasury_change = -10 }
 			modify_treasury_effect = yes
 			326 = {
-				add_building_construction = {
-					type = air_base
-					level = 2
-					instant_build = yes
-				}
+				two_state_air_base = yes
 			}
 			add_stability = 0.02
 		}
@@ -3692,12 +3943,7 @@ focus_tree = {
 				category = CAT_renewable
 			}
 			328 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = renewable_powerplant
-					level = 1
-					instant_build = yes
-				}
+				one_state_renewable_energy_infra = yes
 			}
 		}
 
@@ -4354,11 +4600,7 @@ focus_tree = {
 			set_temp_variable = { treasury_change = -10 }
 			modify_treasury_effect = yes
 			326 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
+				one_state_infrastructure = yes
 			}
 		}
 
@@ -5036,11 +5278,7 @@ focus_tree = {
 			set_temp_variable = { treasury_change = -25 }
 			modify_treasury_effect = yes
 			every_owned_state = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
+				one_state_infrastructure = yes
 			}
 			add_ideas = CHA_mega_infrastructure
 		}
@@ -5072,12 +5310,7 @@ focus_tree = {
 			set_temp_variable = { treasury_change = -15 }
 			modify_treasury_effect = yes
 			326 = {
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = hydro_powerplant
-					level = 2
-					instant_build = yes
-				}
+				two_state_renewable_energy_infra = yes
 			}
 		}
 
@@ -5108,11 +5341,9 @@ focus_tree = {
 			set_temp_variable = { treasury_change = -12 }
 			modify_treasury_effect = yes
 			capital_scope = {
-				add_building_construction = {
-					type = air_base
-					level = 3
-					instant_build = yes
-				}
+				one_state_air_base = yes
+				one_state_air_base = yes
+				one_state_air_base = yes
 			}
 			add_stability = 0.02
 		}
@@ -5175,12 +5406,7 @@ focus_tree = {
 			modify_treasury_effect = yes
 			add_stability = 0.05
 			327 = {
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = infrastructure
-					level = 2
-					instant_build = yes
-				}
+				two_state_infrastructure = yes
 			}
 			add_opinion_modifier = { target = NIG modifier = regional_cooperation }
 			add_opinion_modifier = { target = CAM modifier = regional_cooperation }
@@ -5291,12 +5517,7 @@ focus_tree = {
 			set_temp_variable = { treasury_change = 20 }
 			modify_treasury_effect = yes
 			capital_scope = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
+				one_state_industrial_complex = yes
 			}
 			set_temp_variable = { percent_change = 5 }
 			set_temp_variable = { tag_index = CHI.id }
@@ -6314,19 +6535,9 @@ focus_tree = {
 			CHA_update_sovereignty = yes
 			set_temp_variable = { treasury_change = -5 }
 			modify_treasury_effect = yes
-			random_owned_controlled_state = {
-				add_building_construction = {
-					type = infrastructure
-					level = 2
-					instant_build = yes
-				}
-			}
+			two_random_infrastructure = yes
 			capital_scope = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
+				one_state_infrastructure = yes
 			}
 			country_event = { id = chad.702 days = 1 }
 		}
@@ -6942,7 +7153,7 @@ focus_tree = {
 	}
 
 	focus = {
-		id = CHA_fifth_republic
+		id = CHA_fifth_republic_transition
 		icon = democracy_genericus
 		x = -44
 		y = 12
@@ -6958,7 +7169,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus CHA_fifth_republic"
+			log = "[GetDateText]: [Root.GetName]: Focus CHA_fifth_republic_transition"
 			add_ideas = CHA_fifth_republic_idea
 			add_political_power = 100
 			add_stability = 0.05
@@ -6981,7 +7192,7 @@ focus_tree = {
 
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
-		prerequisite = { focus = CHA_fifth_republic }
+		prerequisite = { focus = CHA_fifth_republic_transition }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHA_mahamat_presidency"
@@ -7007,7 +7218,7 @@ focus_tree = {
 
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MILITARY }
 
-		prerequisite = { focus = CHA_fifth_republic }
+		prerequisite = { focus = CHA_fifth_republic_transition }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHA_permanent_military_state"
@@ -7022,7 +7233,7 @@ focus_tree = {
 	}
 
 	focus = {
-		id = CHA_sahel_strongman
+		id = CHA_sahel_strongman_endgame
 		icon = focus_generic_national_security
 		x = -44
 		y = 14
@@ -7036,7 +7247,7 @@ focus_tree = {
 		prerequisite = { focus = CHA_permanent_military_state }
 
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus CHA_sahel_strongman"
+			log = "[GetDateText]: [Root.GetName]: Focus CHA_sahel_strongman_endgame"
 			add_ideas = CHA_sahel_strongman_idea
 			add_political_power = 150
 			add_stability = 0.10
@@ -7427,13 +7638,7 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHA_world_bank_projects"
 			set_temp_variable = { treasury_change = 15 }
 			modify_treasury_effect = yes
-			random_owned_controlled_state = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
+			one_random_infrastructure = yes
 		}
 
 		ai_will_do = {
@@ -8822,13 +9027,7 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHA_five_year_plan"
 			set_temp_variable = { treasury_change = -15 }
 			modify_treasury_effect = yes
-			random_owned_controlled_state = {
-				add_building_construction = {
-					type = infrastructure
-					level = 2
-					instant_build = yes
-				}
-			}
+			two_random_infrastructure = yes
 			add_stability = 0.03
 		}
 
@@ -9294,7 +9493,7 @@ focus_tree = {
 	focus = {
 		id = CHA_nomadic_integration
 		icon = generic_refugees
-		x = -71
+		x = -73
 		y = 9
 		relative_position_id = CHA_new_millennium
 
@@ -9415,7 +9614,7 @@ focus_tree = {
 	focus = {
 		id = CHA_militia_coordination
 		icon = generic_infantry
-		x = -67
+		x = -65
 		y = 7
 		relative_position_id = CHA_new_millennium
 
@@ -9442,7 +9641,7 @@ focus_tree = {
 	focus = {
 		id = CHA_desert_cavalry
 		icon = generic_infantry
-		x = -67
+		x = -65
 		y = 8
 		relative_position_id = CHA_new_millennium
 
@@ -9472,7 +9671,7 @@ focus_tree = {
 	focus = {
 		id = CHA_tribal_defense_pact
 		icon = Generic_Soldiers_Defense
-		x = -67
+		x = -65
 		y = 9
 		relative_position_id = CHA_new_millennium
 
@@ -9597,7 +9796,7 @@ focus_tree = {
 	focus = {
 		id = CHA_tribal_golden_age
 		icon = africa_guy_shield
-		x = -68
+		x = -67
 		y = 10
 		relative_position_id = CHA_new_millennium
 
@@ -9632,7 +9831,7 @@ focus_tree = {
 	focus = {
 		id = CHA_confederation_of_peoples
 		icon = democracy_genericus
-		x = -68
+		x = -67
 		y = 11
 		relative_position_id = CHA_new_millennium
 
@@ -9659,7 +9858,7 @@ focus_tree = {
 	focus = {
 		id = CHA_toubou_reconciliation
 		icon = focus_generic_court
-		x = -66
+		x = -64
 		y = 10
 		relative_position_id = CHA_new_millennium
 
@@ -9683,7 +9882,8 @@ focus_tree = {
 	focus = {
 		id = CHA_tribal_education
 		icon = generic_research
-		x = -72		y = 10
+		x = -74
+		y = 10
 		relative_position_id = CHA_new_millennium
 
 		cost = 7
@@ -9711,8 +9911,7 @@ focus_tree = {
 	focus = {
 		id = CHA_traditional_medicine
 		icon = generic_research
-		x = -72
-
+		x = -74
 		y = 11
 		relative_position_id = CHA_new_millennium
 
@@ -10374,13 +10573,7 @@ focus_tree = {
 			CHA_update_sovereignty = yes
 			set_temp_variable = { treasury_change = 15 }
 			modify_treasury_effect = yes
-			random_owned_controlled_state = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
+			one_random_infrastructure = yes
 		}
 
 		ai_will_do = {
