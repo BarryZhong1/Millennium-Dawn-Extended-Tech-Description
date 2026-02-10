@@ -871,6 +871,7 @@ country_event = { # Tajikistan Wants a Non-Aggro Pact
 			TAJ = {
 				custom_effect_tooltip = TAJ_decrease_bda_unrest_5_TT
 				add_to_variable = { var = TAJ_badakhshan_unrest_var value = -5 }
+				clamp_variable = { var = TAJ_badakhshan_unrest_var min = 0 }
 				add_stability = 0.05
 			}
 		}
@@ -2450,10 +2451,16 @@ country_event = {
 			}
 			SOV = {
 				country_event = tajik_focus.52
-				diplomatic_relation = { country = TAJ relation = military_access active = no }
+				if = {
+					limit = { SOV = { has_military_access_to = TAJ } }
+					diplomatic_relation = { country = TAJ relation = military_access active = no }
+				}
 			}
-			USA = {
-				diplomatic_relation = { country = TAJ relation = military_access active = yes }
+			if = {
+				limit = { NOT = { USA = { has_military_access_to = TAJ } } }
+				USA = {
+					diplomatic_relation = { country = TAJ relation = military_access active = yes }
+				}
 			}
 		}
 		if = {
@@ -2468,10 +2475,16 @@ country_event = {
 			}
 			SOV = {
 				country_event = tajik_focus.52
-				diplomatic_relation = { country = TAJ relation = military_access active = no }
+				if = {
+					limit = { SOV = { has_military_access_to = TAJ } }
+					diplomatic_relation = { country = TAJ relation = military_access active = no }
+				}
 			}
-			RAJ = {
-				diplomatic_relation = { country = TAJ relation = military_access active = yes }
+			if = {
+				limit = { NOT = { RAJ = { has_military_access_to = TAJ } } }
+				RAJ = {
+					diplomatic_relation = { country = TAJ relation = military_access active = yes }
+				}
 			}
 		}
 		if = {
@@ -2486,10 +2499,16 @@ country_event = {
 			}
 			SOV = {
 				country_event = tajik_focus.52
-				diplomatic_relation = { country = TAJ relation = military_access active = no }
+				if = {
+					limit = { SOV = { has_military_access_to = TAJ } }
+					diplomatic_relation = { country = TAJ relation = military_access active = no }
+				}
 			}
-			CHI = {
-				diplomatic_relation = { country = TAJ relation = military_access active = yes }
+			if = {
+				limit = { NOT = { CHI = { has_military_access_to = TAJ } } }
+				CHI = {
+					diplomatic_relation = { country = TAJ relation = military_access active = yes }
+				}
 			}
 		}
 		TAJ = {
@@ -6960,13 +6979,12 @@ country_event = { # Tajikistan Fails to Comply
 }
 
 #Tajik Lore Events
-
-country_event = { # Nadyrov's Plea
+# Nadyrov's Plea
+country_event = {
 	id = tajik_lore.0
 	title = tajik_lore.0.t
 	desc = tajik_lore.0.d
 	picture = GFX_TAJ_Army_reform
-
 	is_triggered_only = yes
 	fire_only_once = yes
 
@@ -6977,6 +6995,10 @@ country_event = { # Nadyrov's Plea
 	option = { # Just another day on the Job
 		name = tajik_lore.0.a
 		log = "[GetDateText]: [This.GetName]: tajik_lore.0.a executed"
+
+		hidden_effect = {
+			set_country_flag = TAJ_tajik_lore.1
+		}
 		ai_chance = {
 			base = 1
 		}
@@ -7203,6 +7225,10 @@ country_event = { # Mine the borders (Uzbek Event)
 			country_event = {
 				id = tajik_lore.10
 				days = 1
+			}
+			hidden_effect = {
+				set_country_flag = TAJ_tajik_lore.9
+				set_country_flag = TAJ_tajik_lore.11
 			}
 		}
 		hidden_effect = {

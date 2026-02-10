@@ -252,7 +252,6 @@ focus_tree = {
 				change_influence_percentage = yes
 			}
 			newline = yes
-			#TODO - Add effect
 			hidden_effect = {
 				if = {
 					limit = {
@@ -261,16 +260,9 @@ focus_tree = {
 							has_tech = modern_gmo
 						}
 					}
-					random_list = {
-						75 = {
-							country_event = {
-								id = belarus_md.3
-								days = 14
-							}
-						}
-						25 = {
-
-						}
+					random = {
+						chance = 75
+						country_event = { id = belarus_md.3 days = 14 }
 					}
 				}
 				else_if = {
@@ -280,16 +272,9 @@ focus_tree = {
 							has_tech = gene_therapy
 						}
 					}
-					random_list = {
-						50 = {
-							country_event = {
-								id = belarus_md.3
-								days = 14
-							}
-						}
-						50 = {
-
-						}
+					random = {
+						chance = 50
+						country_event = { id = belarus_md.3 days = 14 }
 					}
 				}
 				else_if = {
@@ -299,16 +284,9 @@ focus_tree = {
 							has_tech = genetically_modified_crops
 						}
 					}
-					random_list = {
-						25 = {
-							country_event = {
-								id = belarus_md.3
-								days = 14
-							}
-						}
-						75 = {
-
-						}
+					random = {
+						chance = 25
+						country_event = { id = belarus_md.3 days = 14 }
 					}
 				}
 			}
@@ -2121,7 +2099,7 @@ focus_tree = {
 		id = BLR_church_reforms
 		icon = anti_orthodoxy
 		x = 99
-		y = 15
+		y = 17
 		ai_will_do = { factor = 155 }
 		cost = 7
 		search_filters = { FOCUS_FILTER_POLITICAL }
@@ -9906,10 +9884,6 @@ focus_tree = {
 		cost = 3
 		ai_will_do = {
 			factor = 155
-			modifier = {
-				factor = 5
-				has_global_flag = BLR_ARMY_PRIORITY
-			}
 		}
 		search_filters = { FOCUS_FILTER_MILITARY_LAWS }
 		completion_reward = {
@@ -9937,10 +9911,6 @@ focus_tree = {
 
 		ai_will_do = {
 			factor = 155
-			modifier = {
-				factor = 5
-				has_global_flag = BLR_ARMY_PRIORITY
-			}
 		}
 
 		prerequisite = { focus = USSR_Legacy }
@@ -9964,10 +9934,6 @@ focus_tree = {
 		relative_position_id = USSR_Legacy
 		ai_will_do = {
 			factor = 155
-			modifier = {
-				factor = 5
-				has_global_flag = BLR_ARMY_PRIORITY
-			}
 		}
 		prerequisite = { focus = USSR_Legacy }
 		search_filters = { FOCUS_FILTER_MILITARY_LAWS }
@@ -9986,10 +9952,6 @@ focus_tree = {
 		relative_position_id = USSR_Legacy
 		ai_will_do = {
 			factor = 155
-			modifier = {
-				factor = 5
-				has_global_flag = BLR_ARMY_PRIORITY
-			}
 		}
 		prerequisite = { focus = BLR_MZKT }
 		prerequisite = { focus = BLR_558_zavod }
@@ -10011,10 +9973,6 @@ focus_tree = {
 		relative_position_id = USSR_Legacy
 		ai_will_do = {
 			factor = 155
-			modifier = {
-				factor = 5
-				has_global_flag = BLR_ARMY_PRIORITY
-			}
 		}
 		prerequisite = { focus = USSR_Legacy }
 		search_filters = { FOCUS_FILTER_MILITARY_LAWS }
@@ -10035,10 +9993,6 @@ focus_tree = {
 		relative_position_id = USSR_Legacy
 		ai_will_do = {
 			factor = 155
-			modifier = {
-				factor = 5
-				has_global_flag = BLR_ARMY_PRIORITY
-			}
 		}
 		prerequisite = { focus = BLR_140_zavod }
 		prerequisite = { focus = BLR_mtz }
@@ -10060,17 +10014,14 @@ focus_tree = {
 		relative_position_id = USSR_Legacy
 		prerequisite = { focus = BLR_minoitor }
 		prerequisite = { focus = BLR_peleng }
-		ai_will_do = {
-			factor = 155
-			modifier = {
-				factor = 5
-				has_global_flag = BLR_ARMY_PRIORITY
-			}
-		}
 		search_filters = { FOCUS_FILTER_MILITARY_LAWS }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus BLR_belspecveshtech"
 			one_random_industrial_complex = yes
+		}
+
+		ai_will_do = {
+			factor = 155
 		}
 	}
 	##140 zavod
@@ -10084,10 +10035,6 @@ focus_tree = {
 		prerequisite = { focus = USSR_Legacy }
 		ai_will_do = {
 			factor = 155
-			modifier = {
-				factor = 5
-				has_global_flag = BLR_ARMY_PRIORITY
-			}
 		}
 		search_filters = { FOCUS_FILTER_MILITARY_LAWS }
 		completion_reward = {
