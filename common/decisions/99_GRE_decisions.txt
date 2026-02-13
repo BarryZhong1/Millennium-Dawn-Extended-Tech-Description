@@ -164,6 +164,7 @@ generic_coalition_politics_decisions = {
 		}
 	}
 }
+
 ###########CYPRUS CONFLICT DECISIONS###########
 GRE_CYP_category = {
 	###########CYPRUS CONFLICT - GREECE INCREASE CYPRIOTS###########
@@ -614,6 +615,66 @@ GRE_CYP_category = {
 				factor = 0
 				is_historical_focus_on = yes
 			}
+		}
+	}
+}
+
+GRE_homelessness_crisis_category = {
+	GRE_issue_relief_funds_to_victims_decision = {
+		icon = GFX_decision_turkey # TODO: Replace with a proper icon
+
+		days_remove = 20
+
+		cost = 75
+
+		available = {
+			has_idea = GRE_homelessness_crisis_idea
+			NOT = { has_active_mission = bankruptcy_incoming_collapse }
+		}
+
+		complete_effect = {
+			set_temp_variable = { treasury_change = gdp_total }
+			multiply_temp_variable = { treasury_change = -0.001 }
+			modify_treasury_effect = yes
+		}
+		remove_effect = {
+			modify_timed_idea = {
+				idea = GRE_homelessness_crisis_idea
+				days = -40
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	GRE_reconstruction_efforts_in_athens_decision = {
+		icon = GFX_decision_turkey # TODO: Replace with a proper icon
+
+		days_remove = 20
+
+		cost = 75
+
+		available = {
+			has_idea = GRE_homelessness_crisis_idea
+			NOT = { has_active_mission = bankruptcy_incoming_collapse }
+		}
+
+		complete_effect = {
+			set_temp_variable = { treasury_change = gdp_total }
+			multiply_temp_variable = { treasury_change = -0.005 }
+			modify_treasury_effect = yes
+		}
+		remove_effect = {
+			modify_timed_idea = {
+				idea = GRE_homelessness_crisis_idea
+				days = -80
+			}
+		}
+
+		ai_will_do = {
+			base = 0
 		}
 	}
 }
