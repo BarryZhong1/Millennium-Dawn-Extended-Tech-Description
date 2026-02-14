@@ -1090,6 +1090,38 @@ CHA_economic_development_category = {
 			factor = 5
 		}
 	}
+
+	CHA_establish_free_trade_zone = {
+		icon = GFX_decision_generic_trade
+
+		allowed = {
+			tag = CHA
+		}
+
+		available = {
+			has_completed_focus = CHA_ndjamena_modernization
+			NOT = { has_idea = CHA_ndjamena_free_trade_zone }
+		}
+
+		visible = {
+			tag = CHA
+			has_completed_focus = CHA_ndjamena_modernization
+		}
+
+		fire_only_once = yes
+
+		cost = 50
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHA_establish_free_trade_zone"
+			add_timed_idea = { idea = CHA_ndjamena_free_trade_zone days = 730 }
+			add_stability = 0.03
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
 }
 
 CHA_military_modernization_category = {
@@ -1259,6 +1291,11 @@ CHA_military_modernization_category = {
 
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove CHA_french_equipment_purchase"
+			add_equipment_to_stockpile = {
+				type = infantry_weapons1
+				amount = 500
+				producer = FRA
+			}
 			FRA = {
 				country_event = { id = chad.743 days = 1 }
 			}
@@ -1649,6 +1686,64 @@ CHA_reconciliation_category = {
 			factor = 10
 		}
 	}
+
+	CHA_withdraw_minurcat = {
+		icon = GFX_decision_generic_diplomacy
+
+		allowed = {
+			tag = CHA
+		}
+
+		available = {
+			has_idea = CHA_minurcat_presence
+		}
+
+		visible = {
+			has_idea = CHA_minurcat_presence
+		}
+
+		cost = 50
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHA_withdraw_minurcat"
+			remove_ideas = CHA_minurcat_presence
+			add_stability = 0.03
+			add_political_power = 25
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	CHA_withdraw_eufor = {
+		icon = GFX_decision_generic_diplomacy
+
+		allowed = {
+			tag = CHA
+		}
+
+		available = {
+			has_idea = CHA_eufor_presence
+		}
+
+		visible = {
+			has_idea = CHA_eufor_presence
+		}
+
+		cost = 50
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHA_withdraw_eufor"
+			remove_ideas = CHA_eufor_presence
+			add_stability = 0.03
+			add_political_power = 25
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
 }
 
 CHA_tribal_politics_category = {
@@ -1683,6 +1778,10 @@ CHA_tribal_politics_category = {
 			add_to_variable = { CHA_arab_loyalty = 5 }
 			add_to_variable = { CHA_sara_loyalty = 5 }
 			add_to_variable = { CHA_toubou_loyalty = 5 }
+			clamp_variable = { var = CHA_zaghawa_loyalty min = 0 max = 100 }
+			clamp_variable = { var = CHA_arab_loyalty min = 0 max = 100 }
+			clamp_variable = { var = CHA_sara_loyalty min = 0 max = 100 }
+			clamp_variable = { var = CHA_toubou_loyalty min = 0 max = 100 }
 			country_event = { id = chad.405 days = 1 }
 		}
 
@@ -1733,6 +1832,10 @@ CHA_tribal_politics_category = {
 			add_to_variable = { CHA_arab_loyalty = -3 }
 			add_to_variable = { CHA_sara_loyalty = -3 }
 			add_to_variable = { CHA_toubou_loyalty = -3 }
+			clamp_variable = { var = CHA_zaghawa_loyalty min = 0 max = 100 }
+			clamp_variable = { var = CHA_arab_loyalty min = 0 max = 100 }
+			clamp_variable = { var = CHA_sara_loyalty min = 0 max = 100 }
+			clamp_variable = { var = CHA_toubou_loyalty min = 0 max = 100 }
 			add_political_power = 25
 		}
 
@@ -1786,6 +1889,10 @@ CHA_tribal_politics_category = {
 			add_to_variable = { CHA_zaghawa_loyalty = -3 }
 			add_to_variable = { CHA_sara_loyalty = -3 }
 			add_to_variable = { CHA_toubou_loyalty = -3 }
+			clamp_variable = { var = CHA_zaghawa_loyalty min = 0 max = 100 }
+			clamp_variable = { var = CHA_arab_loyalty min = 0 max = 100 }
+			clamp_variable = { var = CHA_sara_loyalty min = 0 max = 100 }
+			clamp_variable = { var = CHA_toubou_loyalty min = 0 max = 100 }
 			add_political_power = 25
 		}
 
@@ -1839,6 +1946,10 @@ CHA_tribal_politics_category = {
 			add_to_variable = { CHA_zaghawa_loyalty = -3 }
 			add_to_variable = { CHA_arab_loyalty = -3 }
 			add_to_variable = { CHA_toubou_loyalty = -3 }
+			clamp_variable = { var = CHA_zaghawa_loyalty min = 0 max = 100 }
+			clamp_variable = { var = CHA_arab_loyalty min = 0 max = 100 }
+			clamp_variable = { var = CHA_sara_loyalty min = 0 max = 100 }
+			clamp_variable = { var = CHA_toubou_loyalty min = 0 max = 100 }
 			add_political_power = 25
 		}
 
@@ -1892,6 +2003,10 @@ CHA_tribal_politics_category = {
 			add_to_variable = { CHA_zaghawa_loyalty = -3 }
 			add_to_variable = { CHA_arab_loyalty = -3 }
 			add_to_variable = { CHA_sara_loyalty = -3 }
+			clamp_variable = { var = CHA_zaghawa_loyalty min = 0 max = 100 }
+			clamp_variable = { var = CHA_arab_loyalty min = 0 max = 100 }
+			clamp_variable = { var = CHA_sara_loyalty min = 0 max = 100 }
+			clamp_variable = { var = CHA_toubou_loyalty min = 0 max = 100 }
 			add_political_power = 25
 		}
 
@@ -1946,6 +2061,10 @@ CHA_tribal_politics_category = {
 			add_to_variable = { CHA_arab_loyalty = -10 }
 			add_to_variable = { CHA_sara_loyalty = -10 }
 			add_to_variable = { CHA_toubou_loyalty = -10 }
+			clamp_variable = { var = CHA_zaghawa_loyalty min = 0 max = 100 }
+			clamp_variable = { var = CHA_arab_loyalty min = 0 max = 100 }
+			clamp_variable = { var = CHA_sara_loyalty min = 0 max = 100 }
+			clamp_variable = { var = CHA_toubou_loyalty min = 0 max = 100 }
 			add_war_support = 0.05
 		}
 
@@ -2121,6 +2240,7 @@ CHA_tribal_politics_category = {
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove CHA_address_zaghawa_grievances"
 			add_to_variable = { CHA_zaghawa_loyalty = 20 }
+			clamp_variable = { var = CHA_zaghawa_loyalty min = 0 max = 100 }
 			add_stability = 0.05
 		}
 
@@ -2157,6 +2277,7 @@ CHA_tribal_politics_category = {
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove CHA_address_arab_grievances"
 			add_to_variable = { CHA_arab_loyalty = 20 }
+			clamp_variable = { var = CHA_arab_loyalty min = 0 max = 100 }
 			add_stability = 0.05
 		}
 
@@ -2193,6 +2314,7 @@ CHA_tribal_politics_category = {
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove CHA_address_sara_grievances"
 			add_to_variable = { CHA_sara_loyalty = 20 }
+			clamp_variable = { var = CHA_sara_loyalty min = 0 max = 100 }
 			add_stability = 0.05
 		}
 
@@ -2229,6 +2351,7 @@ CHA_tribal_politics_category = {
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove CHA_address_toubou_grievances"
 			add_to_variable = { CHA_toubou_loyalty = 20 }
+			clamp_variable = { var = CHA_toubou_loyalty min = 0 max = 100 }
 			add_stability = 0.05
 		}
 
@@ -2266,6 +2389,7 @@ CHA_tribal_politics_category = {
 			add_manpower = 2000
 			army_experience = 5
 			add_to_variable = { CHA_zaghawa_loyalty = -5 }
+			clamp_variable = { var = CHA_zaghawa_loyalty min = 0 max = 100 }
 		}
 
 		ai_will_do = {
@@ -2304,6 +2428,7 @@ CHA_tribal_politics_category = {
 			add_manpower = 2000
 			army_experience = 5
 			add_to_variable = { CHA_arab_loyalty = -5 }
+			clamp_variable = { var = CHA_arab_loyalty min = 0 max = 100 }
 		}
 
 		ai_will_do = {
@@ -2341,6 +2466,7 @@ CHA_tribal_politics_category = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove CHA_recruit_sara_militia"
 			add_manpower = 3000
 			add_to_variable = { CHA_sara_loyalty = -5 }
+			clamp_variable = { var = CHA_sara_loyalty min = 0 max = 100 }
 		}
 
 		ai_will_do = {
@@ -2379,6 +2505,7 @@ CHA_tribal_politics_category = {
 			add_manpower = 1000
 			army_experience = 10
 			add_to_variable = { CHA_toubou_loyalty = -5 }
+			clamp_variable = { var = CHA_toubou_loyalty min = 0 max = 100 }
 		}
 
 		ai_will_do = {
@@ -3505,6 +3632,37 @@ CHA_oil_management_category = {
 
 		ai_will_do = {
 			factor = 10
+		}
+	}
+
+	CHA_oil_price_hedging = {
+		icon = GFX_decision_generic_economy
+
+		allowed = {
+			tag = CHA
+		}
+
+		available = {
+			has_completed_focus = CHA_oil_revenue_management
+			NOT = { has_idea = CHA_oil_price_insurance }
+		}
+
+		visible = {
+			tag = CHA
+			has_completed_focus = CHA_oil_revenue_management
+		}
+
+		fire_only_once = yes
+
+		cost = 75
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHA_oil_price_hedging"
+			add_ideas = CHA_oil_price_insurance
+		}
+
+		ai_will_do = {
+			factor = 3
 		}
 	}
 }
