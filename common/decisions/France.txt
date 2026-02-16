@@ -2007,6 +2007,43 @@ FRA_3rd_empire_decision_category = {#TODO add claim for all
 			}
 		}
 	}
+	FRA_napoleon_empire = {#core napoleon empire
+		fire_only_once = yes
+		days_remove = 35
+		cost = 50
+		visible = {
+			AND={
+				has_full_control_of_state = 86
+				86={compliance > 50}
+				has_full_control_of_state = 77
+				77={compliance > 50}
+				has_full_control_of_state = 1060
+				1060={compliance > 50}
+				has_full_control_of_state = 1059
+				1059={compliance > 50}
+				has_full_control_of_state = 79
+				79={compliance > 50}
+				has_full_control_of_state = 81
+				81={compliance > 50}
+				has_full_control_of_state = 127
+				127={compliance > 50}
+				has_full_control_of_state = 124
+				124={compliance > 50}
+				has_full_control_of_state = 1061
+				1061={compliance > 50}
+				has_full_control_of_state = 1169
+				1169={compliance > 50}
+				has_full_control_of_state = 48
+				48={compliance > 50}
+				has_full_control_of_state = 46
+				46={compliance > 50}
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision FRA_napoleon_empire"
+			country_event = france_md.494
+		}
+	}
 	FRA_prepare_russia = {
 		fire_only_once = yes
 		days_remove = 35
@@ -2137,6 +2174,203 @@ FRA_3rd_empire_decision_category = {#TODO add claim for all
 				}
 				LIT = {
 					country_event = france_md.321
+				}
+			}
+		}
+	}
+	FRA_2nd_empire_colonies = {#puppet former colonies
+		fire_only_once = yes
+		days_remove = 35
+		cost = 50
+		visible = {
+			OR = {
+				country_exists = VIE
+				country_exists = LAO
+				country_exists = CBD
+				country_exists = SYR
+				country_exists = LEB
+				country_exists = MAD
+				country_exists = MOR
+				country_exists = ALG
+				country_exists = SEN
+				country_exists = TUN
+				country_exists = LBA
+				country_exists = MAU
+				country_exists = MAL
+				country_exists = DJI
+				country_exists = CAM
+				country_exists = CNG
+				country_exists = CHA
+				country_exists = CDI
+				country_exists = CAR
+				country_exists = BEN
+				country_exists = NGR
+				country_exists = TOG
+				country_exists = GUI
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision FRA_2nd_empire_colonies"
+			country_event = france_md.495
+			if = {
+				limit = {country_exists = VIE}
+				create_wargoal = {
+						type = puppet_wargoal_focus
+						target = VIE
+				}
+			}
+			if = {
+				limit = {country_exists = LAO}
+				create_wargoal = {
+						type = puppet_wargoal_focus
+						target = LAO
+				}
+			}
+			if = {
+				limit = {country_exists = CBD}
+				create_wargoal = {
+						type = puppet_wargoal_focus
+						target = CBD
+				}
+			}
+			if = {
+				limit = {country_exists = SYR}
+				create_wargoal = {
+						type = puppet_wargoal_focus
+						target = SYR
+				}
+			}
+			if = {
+				limit = {country_exists = LEB}
+				create_wargoal = {
+						type = puppet_wargoal_focus
+						target = LEB
+				}
+			}
+			if = {
+				limit = {country_exists = MAD}
+				create_wargoal = {
+						type = puppet_wargoal_focus
+						target = MAD
+				}
+			}
+			if = {
+				limit = {country_exists = MOR}
+				create_wargoal = {
+						type = puppet_wargoal_focus
+						target = MOR
+				}
+			}
+			if = {
+				limit = {country_exists = ALG}
+				create_wargoal = {
+						type = annex_everything
+						target = ALG
+				}
+			}
+			if = {
+				limit = {country_exists = SEN}
+				create_wargoal = {
+						type = puppet_wargoal_focus
+						target = SEN
+				}
+			}
+			if = {
+				limit = {country_exists = TUN}
+				create_wargoal = {
+						type = puppet_wargoal_focus
+						target = TUN
+				}
+			}
+			if = {
+				limit = {country_exists = LBA}
+				create_wargoal = {
+						type = puppet_wargoal_focus
+						target = LBA
+				}
+			}
+			if = {
+				limit = {country_exists = MAU}
+				create_wargoal = {
+						type = puppet_wargoal_focus
+						target = MAU
+				}
+			}
+			if = {
+				limit = {country_exists = MAL}
+				create_wargoal = {
+						type = puppet_wargoal_focus
+						target = MAL
+				}
+			}
+			if = {
+				limit = {country_exists = DJI}
+				create_wargoal = {
+						type = puppet_wargoal_focus
+						target = DJI
+				}
+			}
+			if = {
+				limit = {country_exists = CAM}
+				create_wargoal = {
+						type = puppet_wargoal_focus
+						target = CAM
+				}
+			}
+			if = {
+				limit = {country_exists = CNG}
+				create_wargoal = {
+						type = puppet_wargoal_focus
+						target = CNG
+				}
+			}
+			if = {
+				limit = {country_exists = CHA}
+				create_wargoal = {
+						type = puppet_wargoal_focus
+						target = CHA
+				}
+			}
+			if = {
+				limit = {country_exists = CDI}
+				create_wargoal = {
+						type = puppet_wargoal_focus
+						target = CDI
+				}
+			}
+			if = {
+				limit = {country_exists = CAR}
+				create_wargoal = {
+						type = puppet_wargoal_focus
+						target = CAR
+				}
+			}
+			if = {
+				limit = {country_exists = BEN}
+				create_wargoal = {
+						type = puppet_wargoal_focus
+						target = BEN
+				}
+			}
+			if = {
+				limit = {country_exists = NGR}
+				create_wargoal = {
+						type = puppet_wargoal_focus
+						target = NGR
+				}
+			}
+			if = {
+				limit = {country_exists = TOG}
+				create_wargoal = {
+						type = puppet_wargoal_focus
+						target = TOG
+				}
+			}
+			if = {
+				limit = {country_exists = GUI}
+				create_wargoal = {
+						type = puppet_wargoal_focus
+						target = GUI
 				}
 			}
 		}
@@ -2737,6 +2971,99 @@ FRA_royalist_expansion_decision_category = {#TODO add claim for all
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision FRA_king_europe_victory"
 			country_event = france_md.485
+		}
+	}
+	FRA_recover_7_year_war_charlemagne = {#attack ancien colonies TODO integrate colonird
+		fire_only_once = yes
+		days_remove = 35
+		cost = 50
+		visible = {
+			AND = {
+				has_idea = FRA_EMPIRE_occident
+				OR = {
+					country_exists =RAJ
+					country_exists =CAN
+					country_exists =USA
+					country_exists =DOM
+					country_exists =HAI
+				}
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision FRA_recover_7_year_war_charlemagne"
+			if = {
+				limit = {country_exists = CAN}
+				CAN = {
+					country_event = france_md.479
+				}
+			}
+			if = {
+				limit = {country_exists = RAJ}
+				RAJ = {
+					country_event = france_md.479
+				}
+			}
+			if = {
+				limit = {country_exists = DOM}
+				DOM = {
+					country_event = france_md.479
+				}
+			}
+			if = {
+				limit = {country_exists = HAI}
+				HAI = {
+					country_event = france_md.479
+				}
+			}
+			if = {
+				limit = {country_exists = USA}
+				USA = {
+					country_event = france_md.484
+				}
+			}
+			859 = {add_claim_by = FRA}
+			860 = {add_claim_by = FRA}
+			861 = {add_claim_by = FRA}
+			862 = {add_claim_by = FRA}
+			760 = {add_claim_by = FRA}
+			761 = {add_claim_by = FRA}
+			760 = {add_claim_by = FRA}
+			759 = {add_claim_by = FRA}
+			762 = {add_claim_by = FRA}
+			1160 = {add_claim_by = FRA}
+			1159 = {add_claim_by = FRA}
+			763 = {add_claim_by = FRA}
+			757 = {add_claim_by = FRA}
+			797 = {add_claim_by = FRA}
+			796 = {add_claim_by = FRA}
+			798 = {add_claim_by = FRA}
+			793 = {add_claim_by = FRA}
+			783 = {add_claim_by = FRA}
+			778 = {add_claim_by = FRA}
+			776 = {add_claim_by = FRA}
+			775 = {add_claim_by = FRA}
+			782 = {add_claim_by = FRA}
+			779 = {add_claim_by = FRA}
+			774 = {add_claim_by = FRA}
+			799 = {add_claim_by = FRA}
+			784 = {add_claim_by = FRA}
+			804 = {add_claim_by = FRA}
+			789 = {add_claim_by = FRA}
+			788 = {add_claim_by = FRA}
+			787 = {add_claim_by = FRA}
+			786 = {add_claim_by = FRA}
+			785 = {add_claim_by = FRA}
+			781 = {add_claim_by = FRA}
+			780 = {add_claim_by = FRA}
+			777 = {add_claim_by = FRA}
+			990 = {add_claim_by = FRA}
+			460 = {add_claim_by = FRA}
+			458 = {add_claim_by = FRA}
+			459 = {add_claim_by = FRA}
+			470 = {add_claim_by = FRA}
+			991 = {add_claim_by = FRA}
+			989 = {add_claim_by = FRA}
+			985 = {add_claim_by = FRA}
 		}
 	}
 	FRA_start_crusade = {#claim rome sardignia and sicily
@@ -3457,6 +3784,102 @@ FRA_royalist_expansion_decision_category = {#TODO add claim for all
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision FRA_king_crusade2_victory"
 			country_event = france_md.489
+		}
+	}
+	FRA_recover_7_year_war_holy = {#attack ancien colonies TODO integrate colonird
+		fire_only_once = yes
+		days_remove = 35
+		cost = 50
+		visible = {
+			AND = {
+				OR = {
+					has_idea = FRA_victory_crusade_2_freedom_light
+					has_idea = FRA_victory_crusade_2_conversion
+				}
+				OR = {
+					country_exists =RAJ
+					country_exists =CAN
+					country_exists =USA
+					country_exists =DOM
+					country_exists =HAI
+				}
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision FRA_recover_7_year_war_holy"
+			if = {
+				limit = {country_exists = CAN}
+				CAN = {
+					country_event = france_md.479
+				}
+			}
+			if = {
+				limit = {country_exists = RAJ}
+				RAJ = {
+					country_event = france_md.479
+				}
+			}
+			if = {
+				limit = {country_exists = DOM}
+				DOM = {
+					country_event = france_md.479
+				}
+			}
+			if = {
+				limit = {country_exists = HAI}
+				HAI = {
+					country_event = france_md.479
+				}
+			}
+			if = {
+				limit = {country_exists = USA}
+				USA = {
+					country_event = france_md.484
+				}
+			}
+			859 = {add_claim_by = FRA}
+			860 = {add_claim_by = FRA}
+			861 = {add_claim_by = FRA}
+			862 = {add_claim_by = FRA}
+			760 = {add_claim_by = FRA}
+			761 = {add_claim_by = FRA}
+			760 = {add_claim_by = FRA}
+			759 = {add_claim_by = FRA}
+			762 = {add_claim_by = FRA}
+			1160 = {add_claim_by = FRA}
+			1159 = {add_claim_by = FRA}
+			763 = {add_claim_by = FRA}
+			757 = {add_claim_by = FRA}
+			797 = {add_claim_by = FRA}
+			796 = {add_claim_by = FRA}
+			798 = {add_claim_by = FRA}
+			793 = {add_claim_by = FRA}
+			783 = {add_claim_by = FRA}
+			778 = {add_claim_by = FRA}
+			776 = {add_claim_by = FRA}
+			775 = {add_claim_by = FRA}
+			782 = {add_claim_by = FRA}
+			779 = {add_claim_by = FRA}
+			774 = {add_claim_by = FRA}
+			799 = {add_claim_by = FRA}
+			784 = {add_claim_by = FRA}
+			804 = {add_claim_by = FRA}
+			789 = {add_claim_by = FRA}
+			788 = {add_claim_by = FRA}
+			787 = {add_claim_by = FRA}
+			786 = {add_claim_by = FRA}
+			785 = {add_claim_by = FRA}
+			781 = {add_claim_by = FRA}
+			780 = {add_claim_by = FRA}
+			777 = {add_claim_by = FRA}
+			990 = {add_claim_by = FRA}
+			460 = {add_claim_by = FRA}
+			458 = {add_claim_by = FRA}
+			459 = {add_claim_by = FRA}
+			470 = {add_claim_by = FRA}
+			991 = {add_claim_by = FRA}
+			989 = {add_claim_by = FRA}
+			985 = {add_claim_by = FRA}
 		}
 	}
 }
