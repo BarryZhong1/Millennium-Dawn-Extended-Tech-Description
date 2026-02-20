@@ -51,10 +51,18 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_hellenic_economy"
+			increase_economic_growth = yes
 		}
 
 		ai_will_do = {
-			base = 1
+			base = 5
+			modifier = {
+				factor = 2
+				OR = {
+					has_idea = recession
+					has_idea = depression
+				}
+			}
 		}
 	}
 
@@ -69,6 +77,10 @@ focus_tree = {
 		cost = 5
 
 		search_filters = { FOCUS_FILTER_ECONOMY }
+
+		available = {
+			gdp_debt_ratio_higher_80 = yes
+		}
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_debt_mounts"
@@ -161,6 +173,10 @@ focus_tree = {
 		prerequisite = { focus = GRE_hellenic_economy }
 
 		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_ECONOMY }
+
+		available = {
+			has_full_control_of_state = 140
+		}
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_skouries_mines"
@@ -351,12 +367,31 @@ focus_tree = {
 
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
+		available = {
+			has_full_control_of_state = 139
+		}
+
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_ilarionas_hydro"
+			set_temp_variable = { treasury_change = -3.2 }
+			modify_treasury_effect = yes
+			139 = {
+				set_temp_variable = { electric_addition = 0.470 }
+				set_temp_variable = { storage_addition = 0.5 }
+				add_hydroelectric_energy_production_effect = yes
+			}
 		}
 
 		ai_will_do = {
 			base = 1
+			modifier = {
+				factor = 1.5
+				has_an_energy_deficit = yes
+			}
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
 		}
 	}
 
@@ -364,7 +399,7 @@ focus_tree = {
 		id = GRE_telecomms
 		icon = economic_it
 
-		x = 0
+		x = 4
 		y = 1
 		relative_position_id = GRE_skouries_mines
 
@@ -410,7 +445,7 @@ focus_tree = {
 		id = GRE_highway_initiatives
 		icon = economic_roads_new
 
-		x = 0
+		x = -4
 		y = 1
 		relative_position_id = GRE_military_industrial
 
@@ -525,7 +560,7 @@ focus_tree = {
 		id = GRE_aegean_pipelines
 		icon = seize_oil
 
-		x = -2
+		x = -3
 		y = 1
 		relative_position_id = GRE_power_corporations
 
@@ -592,11 +627,105 @@ focus_tree = {
 		}
 	}
 
+
+	focus = {
+		id = GRE_euboea_bauxite_deposits
+		icon = develop_polish_shipbuilding
+
+		x = -3
+		y = 1
+		relative_position_id = GRE_new_railways
+
+		cost = 5
+
+		prerequisite = { focus = GRE_highway_initiatives }
+
+		search_filters = { FOCUS_FILTER_ECONOMY }
+
+		completion_reward = {
+			log = "[GetDateText]: [This.GetName]: focus GRE_western_shipping_magnate"
+		}
+
+		ai_will_do = {
+			base = 1
+		}
+	}
+
+	focus = {
+		id = GRE_hellas_gold
+		icon = develop_polish_shipbuilding
+
+		x = -1
+		y = 1
+		relative_position_id = GRE_new_railways
+
+		cost = 5
+
+		prerequisite = { focus = GRE_highway_initiatives }
+
+		search_filters = { FOCUS_FILTER_ECONOMY }
+
+		completion_reward = {
+			log = "[GetDateText]: [This.GetName]: focus GRE_western_shipping_magnate"
+		}
+
+		ai_will_do = {
+			base = 1
+		}
+	}
+
+	focus = {
+		id = GRE_industrial_lignite_mining
+		icon = develop_polish_shipbuilding
+
+		x = -2
+		y = 2
+		relative_position_id = GRE_new_railways
+
+		cost = 5
+
+		prerequisite = { focus = GRE_euboea_bauxite_deposits }
+		prerequisite = { focus = GRE_hellas_gold }
+
+		search_filters = { FOCUS_FILTER_ECONOMY }
+
+		completion_reward = {
+			log = "[GetDateText]: [This.GetName]: focus GRE_western_shipping_magnate"
+		}
+
+		ai_will_do = {
+			base = 1
+		}
+	}
+
+	focus = {
+		id = GRE_rare_element_prospecting
+		icon = develop_polish_shipbuilding
+
+		x = -2
+		y = 3
+		relative_position_id = GRE_new_railways
+
+		cost = 5
+
+		prerequisite = { focus = GRE_industrial_lignite_mining }
+
+		search_filters = { FOCUS_FILTER_ECONOMY }
+
+		completion_reward = {
+			log = "[GetDateText]: [This.GetName]: focus GRE_western_shipping_magnate"
+		}
+
+		ai_will_do = {
+			base = 1
+		}
+	}
+
 	focus = {
 		id = GRE_western_shipping_magnate
 		icon = develop_polish_shipbuilding
 
-		x = 0
+		x = 1
 		y = 1
 		relative_position_id = GRE_new_railways
 
@@ -734,7 +863,7 @@ focus_tree = {
 		id = GRE_prinos_basin
 		icon = generic_drill
 
-		x = -2
+		x = 0
 		y = 1
 		relative_position_id = GRE_aegean_pipelines
 
