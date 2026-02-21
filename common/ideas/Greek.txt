@@ -117,6 +117,10 @@ ideas = {
 			modifier = {
 				stability_factor = -0.05
 				consumer_goods_factor = 0.03
+				expected_adm_modifier = 1
+				expected_education_modifier = 1
+				expected_healthcare_modifier = 1
+				expected_welfare_modifier = 1
 			}
 		}
 
@@ -126,6 +130,10 @@ ideas = {
 			modifier = {
 				stability_factor = -0.1
 				consumer_goods_factor = 0.05
+				expected_adm_modifier = 2
+				expected_education_modifier = 2
+				expected_healthcare_modifier = 2
+				expected_welfare_modifier = 2
 			}
 		}
 
@@ -135,6 +143,10 @@ ideas = {
 			modifier = {
 				stability_factor = -0.15
 				consumer_goods_factor = 0.07
+				expected_adm_modifier = 3
+				expected_education_modifier = 3
+				expected_healthcare_modifier = 3
+				expected_welfare_modifier = 3
 			}
 		}
 
@@ -144,6 +156,10 @@ ideas = {
 			modifier = {
 				stability_factor = -0.2
 				consumer_goods_factor = 0.1
+				expected_adm_modifier = 4
+				expected_education_modifier = 4
+				expected_healthcare_modifier = 4
+				expected_welfare_modifier = 4
 			}
 		}
 
@@ -153,6 +169,11 @@ ideas = {
 			modifier = {
 				stability_factor = -0.25
 				consumer_goods_factor = 0.1
+				expected_adm_modifier = 5
+				expected_education_modifier = 5
+				expected_healthcare_modifier = 5
+				expected_welfare_modifier = 5
+				expected_mil_modifier = 2
 			}
 		}
 
@@ -172,6 +193,8 @@ ideas = {
 				line_change_production_efficiency_factor = 0.075
 				production_factory_max_efficiency_factor = 0.05
 				office_park_income_tax_modifier = 0.05
+				corporate_tax_income_multiplier_modifier = 0.08
+				projects_cost_modifier = -0.05
 			}
 		}
 
@@ -188,6 +211,10 @@ ideas = {
 
 		GRE_air = {
 			picture = air_bonus
+			modifier = {
+				ground_attack_factor = 0.10
+				experience_gain_air = 0.05
+			}
 			equipment_bonus = {
 				small_plane_airframe = {
 					air_defence = 0.1
@@ -195,10 +222,6 @@ ideas = {
 				medium_plane_airframe = {
 					air_defence = 0.1
 				}
-			}
-			modifier = {
-				ground_attack_factor = 0.10
-				experience_gain_air = 0.05
 			}
 		}
 
@@ -289,6 +312,8 @@ ideas = {
 				defence = -0.2
 				army_org_factor = -0.2
 				max_planning = -0.1
+				personnel_cost_multiplier_modifier = 0.15
+				equipment_cost_multiplier_modifier = 0.10
 			}
 		}
 
@@ -351,6 +376,7 @@ ideas = {
 			modifier = {
 				foreign_influence_defense_modifier = 0.15
 				productivity_growth_modifier = 1.0
+				state_productivity_growth_modifier = 0.5
 			}
 		}
 
@@ -458,15 +484,365 @@ ideas = {
 
 		GRE_homelessness_crisis_idea = {
 			picture = gre_fleet_idea # TODO: Replace with a proper idea
-
 			modifier = {
 				stability_factor = -0.05
 				social_cost_multiplier_modifier = 0.08
 				health_cost_multiplier_modifier = 0.08
 			}
 		}
-	}
 
+		GRE_tax_evasion_idea = {
+			picture = gre_fleet_idea # TODO: Replace with a proper idea
+			modifier = {
+				political_power_factor = -0.15
+				population_tax_income_multiplier_modifier = -0.10
+			}
+		}
+
+		GRE_the_drachma_idea = {
+			picture = gre_fleet_idea # TODO: Replace with a proper idea
+			modifier = {
+				political_power_factor = -0.15
+				consumer_goods_factor = 0.04
+				economic_cycles_cost_factor = 0.50
+				interest_rate_multiplier_modifier = 0.5
+			}
+		}
+
+		GRE_bonds_issued_idea = {
+			picture = gold
+			modifier = {
+				interest_rate_multiplier_modifier = 0.5
+			}
+		}
+
+		GRE_tax_enforcement_idea = {
+			picture = central_management
+			modifier = {
+				tax_rate_change_multiplier_modifier = 0.20
+				population_tax_income_multiplier_modifier = 0.10
+				corporate_tax_income_multiplier_modifier = 0.08
+				tax_gain_multiplier_modifier = 0.05
+				corruption_cost_factor = -0.15
+			}
+		}
+
+		GRE_euro_adopted = {
+			picture = international_treaty
+			modifier = {
+				stability_factor = 0.05
+				consumer_goods_factor = -0.02
+				foreign_influence_defense_modifier = -0.10
+				interest_rate_multiplier_modifier = -1
+				international_market_purchase_modifier = -0.05
+			}
+		}
+
+		GRE_local_manufacturing_boost = {
+			picture = industrial_focus
+			modifier = {
+				civilian_factories_productivity = 0.10
+				industrial_capacity_factory = 0.05
+				civ_facs_worker_requirement_modifier = -0.03
+				state_productivity_growth_modifier = 0.5
+			}
+		}
+
+		GRE_hellenic_arms_subsidies = {
+			picture = production_bonus
+			modifier = {
+				military_factories_productivity = 0.10
+				production_speed_arms_factory_factor = 0.10
+				mil_facs_worker_requirement_modifier = -0.03
+				international_market_income_modifier = 0.10
+			}
+		}
+
+		GRE_tourism_industry = {
+			picture = starttourismprojectscuba
+			modifier = {
+				service_sector_tax_modifier = 0.15
+				monthly_population = 0.05
+				consumer_goods_factor = -0.03
+			}
+		}
+
+		GRE_agriculture_modernization = {
+			picture = agriculture
+			modifier = {
+				agriculture_productivity_modifier = 0.15
+				agriculture_tax_modifier = 0.10
+				monthly_population = 0.05
+			}
+		}
+
+		GRE_energy_independence = {
+			picture = Coal_Power_Plant
+			modifier = {
+				industrial_capacity_factory = 0.08
+				stability_factor = 0.03
+				energy_gain_multiplier = 0.10
+				energy_use_multiplier = -0.05
+			}
+		}
+
+		GRE_debt_restructured = {
+			picture = generic_banks
+			modifier = {
+				consumer_goods_factor = -0.05
+				political_power_factor = 0.10
+				interest_rate_multiplier_modifier = -2
+			}
+		}
+
+		GRE_telecommunications_investment = {
+			picture = economic_it
+			modifier = {
+				production_speed_buildings_factor = 0.05
+				research_speed_factor = 0.03
+				political_power_factor = 0.05
+			}
+		}
+
+		GRE_railway_expansion = {
+			picture = economic_railroads
+			modifier = {
+				production_speed_infrastructure_factor = 0.10
+				army_speed_factor = 0.05
+				supply_combat_penalties_on_core_factor = -0.05
+			}
+		}
+
+		GRE_highway_network = {
+			picture = economic_roads_new
+			modifier = {
+				army_speed_factor = 0.08
+				supply_combat_penalties_on_core_factor = -0.08
+				production_speed_infrastructure_factor = 0.05
+			}
+		}
+
+		GRE_transport_modernization = {
+			picture = construction4
+			modifier = {
+				civilian_factories_productivity = 0.08
+				service_sector_tax_modifier = 0.08
+				consumer_goods_factor = -0.02
+			}
+		}
+
+		GRE_wine_exports = {
+			picture = vineyard
+			modifier = {
+				agriculture_productivity_modifier = 0.08
+				agriculture_tax_modifier = 0.15
+				resource_export_multiplier_modifier = 0.10
+			}
+		}
+
+		GRE_tobacco_industry = {
+			picture = Generic_Tobacco_Farming
+			modifier = {
+				agriculture_productivity_modifier = 0.10
+				agriculture_tax_modifier = 0.12
+				resource_export_multiplier_modifier = 0.08
+			}
+		}
+
+		GRE_refinery_expansion = {
+			picture = oil_production2
+			modifier = {
+				industrial_capacity_factory = 0.10
+				fuel_gain_factor = 0.15
+				oil_export_multiplier_modifier = 0.10
+			}
+		}
+
+		GRE_pipeline_corridor = {
+			picture = seize_oil
+			modifier = {
+				service_sector_tax_modifier = 0.10
+				political_power_factor = 0.08
+			}
+		}
+
+		GRE_government_efficiency = {
+			picture = central_management
+			modifier = {
+				bureaucracy_cost_multiplier_modifier = -0.15
+				political_power_factor = 0.15
+				stability_factor = 0.03
+			}
+		}
+
+		GRE_yen_swap_agreement = {
+			picture = chinese_rmb
+			modifier = {
+				consumer_goods_factor = -0.03
+				political_power_factor = 0.05
+			}
+		}
+
+		GRE_bauxite_extraction = {
+			picture = resource_extraction
+			modifier = {
+				local_resources_aluminium_factor = 0.25
+				aluminium_export_multiplier_modifier = 0.20
+			}
+		}
+
+		GRE_shipping_industry = {
+			picture = develop_polish_shipbuilding
+			modifier = {
+				convoy_escort_efficiency = 0.15
+				service_sector_tax_modifier = 0.12
+				civilian_industry_tax_modifier = 0.08
+				international_market_income_modifier = 0.08
+			}
+		}
+
+		GRE_olympic_revival = {
+			picture = economic_avia_industry
+			modifier = {
+				service_sector_tax_modifier = 0.08
+				air_accidents_factor = -0.10
+			}
+		}
+
+		GRE_trainose_expansion = {
+			picture = focus_generic_improve_roads
+			modifier = {
+				army_speed_factor = 0.05
+				supply_combat_penalties_on_core_factor = -0.05
+			}
+		}
+
+		GRE_cotton_industry = {
+			picture = GEO_wine
+			modifier = {
+				agriculture_productivity_modifier = 0.12
+				agriculture_tax_modifier = 0.10
+				civilian_factories_productivity = 0.05
+				resource_export_multiplier_modifier = 0.08
+			}
+		}
+
+		GRE_fisheries_modernization = {
+			picture = Canned_Fish
+			modifier = {
+				agriculture_productivity_modifier = 0.10
+				agriculture_tax_modifier = 0.08
+				monthly_population = 0.03
+			}
+		}
+
+		GRE_wind_energy = {
+			picture = windmills
+			modifier = {
+				industrial_capacity_factory = 0.08
+				stability_factor = 0.02
+				renewable_energy_gain = 5
+				energy_gain_multiplier = 0.08
+			}
+		}
+
+		GRE_prinos_oil = {
+			picture = generic_drill
+			modifier = {
+				local_resources_oil_factor = 0.30
+				fuel_gain_factor = 0.15
+				oil_export_multiplier_modifier = 0.20
+			}
+		}
+
+		GRE_crisis_resolved = {
+			picture = economic_prosperity2
+			modifier = {
+				stability_factor = 0.10
+				war_support_factor = 0.05
+				political_power_factor = 0.20
+				consumer_goods_factor = -0.08
+			}
+		}
+
+		GRE_merchant_fleet = {
+			picture = focus_generic_merchant_fleet
+			modifier = {
+				convoy_escort_efficiency = 0.20
+				service_sector_tax_modifier = 0.15
+				resource_export_multiplier_modifier = 0.12
+			}
+		}
+
+		GRE_port_modernization = {
+			picture = focus_generic_refit_civilian_ships
+			modifier = {
+				production_speed_dockyard_factor = 0.15
+				industrial_capacity_dockyard = 0.10
+			}
+		}
+
+		GRE_metro_expansion = {
+			picture = SOV_i_like_trains
+			modifier = {
+				stability_factor = 0.03
+				civilian_factories_productivity = 0.08
+			}
+		}
+
+		GRE_helleniq_dominance = {
+			picture = oil_trade
+			modifier = {
+				fuel_gain_factor = 0.20
+				industrial_capacity_factory = 0.10
+				oil_export_multiplier_modifier = 0.15
+			}
+		}
+
+		GRE_balkan_pipeline = {
+			picture = oil_trade
+			modifier = {
+				service_sector_tax_modifier = 0.08
+				political_power_factor = 0.05
+			}
+		}
+
+		GRE_turkish_pipeline_idea = {
+			picture = oil_trade
+			modifier = {
+				service_sector_tax_modifier = 0.10
+				political_power_factor = 0.08
+			}
+		}
+
+		GRE_solar_energy = {
+			picture = BRA_renewable_energy_funds
+			modifier = {
+				industrial_capacity_factory = 0.10
+				stability_factor = 0.02
+				renewable_energy_gain = 6
+				energy_gain_multiplier = 0.10
+			}
+		}
+
+		GRE_drydock_modernization = {
+			picture = generic_ship_fix
+			modifier = {
+				production_speed_dockyard_factor = 0.15
+				experience_gain_navy_factor = 0.05
+				naval_equipment_upgrade_xp_cost = -0.10
+			}
+		}
+
+		GRE_pension_reformed = {
+			picture = welfare
+			modifier = {
+				consumer_goods_factor = -0.05
+				stability_factor = -0.03
+				political_power_factor = 0.10
+			}
+		}
+	}
 	hidden_ideas = {
 		GRE_army_special_forces = {
 			picture = sov_sso_idea

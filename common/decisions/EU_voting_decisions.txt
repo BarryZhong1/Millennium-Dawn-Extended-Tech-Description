@@ -2644,13 +2644,23 @@ EU_apply_for_membership_category = {
 	EU_join_the_Euro = {
 		cost = 100
 		available = {
-			custom_trigger_tooltip = {
-				tooltip = interest_rate_less_than_3_5_tt
-				check_variable = { ROOT.interest_rate < 3.5 }
-			}
-			# Danish Specific Content
 			if = { limit = { original_tag = DEN }
 				has_country_flag = DEN_accept
+			}
+			if = { limit = { original_tag = GRE }
+				has_completed_focus = GRE_convert_to_euro
+				if = { limit = { has_country_flag = GRE_hide_financial_records }
+					custom_trigger_tooltip = {
+						tooltip = interest_rate_less_than_6_5_tt
+						check_variable = { ROOT.interest_rate < 6.5 }
+					}
+				}
+				else = {
+					custom_trigger_tooltip = {
+						tooltip = interest_rate_less_than_3_5_tt
+						check_variable = { ROOT.interest_rate < 3.5 }
+					}
+				}
 			}
 			OR = {
 				has_idea = widespread_corruption
@@ -2680,7 +2690,16 @@ EU_apply_for_membership_category = {
 
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision complete EU_join_the_Euro"
-			add_ideas = the_euro
+			if = {
+				limit = { original_tag = GRE }
+				swap_ideas = {
+					remove_idea = GRE_the_drachma_idea
+					add_idea = the_euro
+				}
+			}
+			else = {
+				add_ideas = the_euro
+			}
 		}
 
 		ai_will_do = {
@@ -2710,7 +2729,7 @@ EU_apply_for_membership_category = {
 				has_idea = negligible_corruption
 			}
 		}
-		activation = { always = no 	}
+		activation = { always = no }
 		visible = {
 			has_country_flag = EU_candidate
 			NOT = { has_idea = EU_member }

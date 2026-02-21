@@ -1,4 +1,4 @@
-﻿#Author(s): Tasos, Bobguy, AngriestBird
+﻿#Author(s): AngriestBird, Tasos, Bobguy
 focus_tree = {
 	id = greece_focus
 
@@ -79,11 +79,12 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_ECONOMY }
 
 		available = {
-			gdp_debt_ratio_higher_80 = yes
+			gdp_debt_ratio_higher_90 = yes
 		}
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_debt_mounts"
+
 		}
 
 		ai_will_do = {
@@ -107,6 +108,12 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_greek_bonds"
+			set_temp_variable = { treasury_change = gdp_total }
+			multiply_temp_variable = { treasury_change = 0.15 }
+			clamp_temp_variable = { var = treasury_change max = 150 }
+			modify_treasury_effect = yes
+			newline = yes
+			add_timed_idea = { idea = GRE_bonds_issued_idea days = 365 }
 		}
 
 		ai_will_do = {
@@ -130,10 +137,16 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_solve_evasion"
+			swap_ideas = {
+				remove_idea = GRE_tax_evasion_idea
+				add_idea = GRE_tax_enforcement_idea
+			}
+			newline = yes
+			add_political_power = 50
 		}
 
 		ai_will_do = {
-			base = 1
+			base = 10
 		}
 	}
 
@@ -152,7 +165,9 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_ECONOMY }
 
 		completion_reward = {
-			log = "[GetDateText]: [This.GetName]: focus GRE_solve_evasion"
+			log = "[GetDateText]: [This.GetName]: focus GRE_convert_to_euro"
+			unlock_decision_tooltip = EU_join_the_Euro
+			unlock_decision_tooltip = GRE_lie_about_financial_records_decision
 		}
 
 		ai_will_do = {
@@ -180,10 +195,22 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_skouries_mines"
+			140 = {
+				add_resource = {
+					type = chromium
+					amount = 8
+				}
+			}
+			set_temp_variable = { treasury_change = -4.5 }
+			modify_treasury_effect = yes
 		}
 
 		ai_will_do = {
 			base = 1
+			modifier = {
+				factor = 1.5
+
+			}
 		}
 	}
 
@@ -203,6 +230,8 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_local_manufacturing"
+			add_ideas = GRE_local_manufacturing_boost
+			one_random_industrial_complex = yes
 		}
 
 		ai_will_do = {
@@ -226,6 +255,25 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_military_industrial"
+			add_ideas = GRE_hellenic_arms_subsidies
+			set_temp_variable = { treasury_change = -5 }
+			modify_treasury_effect = yes
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -249,6 +297,15 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_focus_tourism"
+			add_ideas = GRE_tourism_industry
+			add_stability = 0.03
+			every_owned_state = {
+				limit = {
+					is_coastal = yes
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 1
+			}
 		}
 
 		ai_will_do = {
@@ -272,6 +329,9 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_agriculture_sector"
+			add_ideas = GRE_agriculture_modernization
+			set_temp_variable = { treasury_change = -3 }
+			modify_treasury_effect = yes
 		}
 
 		ai_will_do = {
@@ -296,6 +356,9 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_power_corporations"
+			add_ideas = GRE_energy_independence
+			set_temp_variable = { treasury_change = -5 }
+			modify_treasury_effect = yes
 		}
 
 		ai_will_do = {
@@ -322,6 +385,10 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_austerity_measures"
+			add_ideas = GRE_austerity_1
+			add_stability = -0.08
+			add_war_support = -0.03
+			add_political_power = 75
 		}
 
 		ai_will_do = {
@@ -346,6 +413,9 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_debt_refactoring"
+			add_ideas = GRE_debt_restructured
+			add_stability = 0.05
+			add_political_power = -50
 		}
 
 		ai_will_do = {
@@ -411,6 +481,15 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_telecomms"
+			add_ideas = GRE_telecommunications_investment
+			set_temp_variable = { treasury_change = -4 }
+			modify_treasury_effect = yes
+			add_tech_bonus = {
+				name = GRE_telecomms
+				bonus = 0.5
+				uses = 1
+				category = CAT_computing
+			}
 		}
 
 		ai_will_do = {
@@ -434,6 +513,19 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_new_railways"
+			add_ideas = GRE_railway_expansion
+			set_temp_variable = { treasury_change = -6 }
+			modify_treasury_effect = yes
+			every_owned_state = {
+				limit = {
+					is_core_of = ROOT
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -457,6 +549,19 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_highway_initiatives"
+			add_ideas = GRE_highway_network
+			set_temp_variable = { treasury_change = -5 }
+			modify_treasury_effect = yes
+			every_owned_state = {
+				limit = {
+					is_core_of = ROOT
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -480,6 +585,9 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_transport_sector"
+			add_ideas = GRE_transport_modernization
+			set_temp_variable = { treasury_change = -3 }
+			modify_treasury_effect = yes
 		}
 
 		ai_will_do = {
@@ -503,6 +611,9 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_vintage_wines"
+			add_ideas = GRE_wine_exports
+			set_temp_variable = { treasury_change = -2 }
+			modify_treasury_effect = yes
 		}
 
 		ai_will_do = {
@@ -526,6 +637,9 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_tobacco_plantations"
+			add_ideas = GRE_tobacco_industry
+			set_temp_variable = { treasury_change = -2 }
+			modify_treasury_effect = yes
 		}
 
 		ai_will_do = {
@@ -549,6 +663,26 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_gas_oil_plants"
+			add_ideas = GRE_refinery_expansion
+			set_temp_variable = { treasury_change = -6 }
+			modify_treasury_effect = yes
+			random_owned_controlled_state = {
+				limit = {
+					is_coastal = yes
+					is_core_of = ROOT
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -572,6 +706,10 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_aegean_pipelines"
+			add_ideas = GRE_pipeline_corridor
+			set_temp_variable = { treasury_change = -8 }
+			modify_treasury_effect = yes
+			add_political_power = 50
 		}
 
 		ai_will_do = {
@@ -597,6 +735,8 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_trim_the_fat"
+			add_ideas = GRE_government_efficiency
+			add_political_power = 100
 		}
 
 		ai_will_do = {
@@ -620,6 +760,8 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_yen_debt_swaps"
+			add_ideas = GRE_yen_swap_agreement
+			add_political_power = 50
 		}
 
 		ai_will_do = {
@@ -643,11 +785,24 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_ECONOMY }
 
 		completion_reward = {
-			log = "[GetDateText]: [This.GetName]: focus GRE_western_shipping_magnate"
+			log = "[GetDateText]: [This.GetName]: focus GRE_euboea_bauxite_deposits"
+			add_ideas = GRE_bauxite_extraction
+			142 = {
+				add_resource = {
+					type = aluminium
+					amount = 12
+				}
+			}
+			set_temp_variable = { treasury_change = -4 }
+			modify_treasury_effect = yes
 		}
 
 		ai_will_do = {
 			base = 1
+			modifier = {
+				factor = 2
+				is_currently_importing_any_resources = yes
+			}
 		}
 	}
 
@@ -666,11 +821,23 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_ECONOMY }
 
 		completion_reward = {
-			log = "[GetDateText]: [This.GetName]: focus GRE_western_shipping_magnate"
+			log = "[GetDateText]: [This.GetName]: focus GRE_hellas_gold"
+			140 = {
+				add_resource = {
+					type = chromium
+					amount = 8
+				}
+			}
+			set_temp_variable = { treasury_change = -4.5 }
+			modify_treasury_effect = yes
 		}
 
 		ai_will_do = {
 			base = 1
+			modifier = {
+				factor = 2
+				is_currently_importing_any_resources = yes
+			}
 		}
 	}
 
@@ -690,11 +857,23 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_ECONOMY }
 
 		completion_reward = {
-			log = "[GetDateText]: [This.GetName]: focus GRE_western_shipping_magnate"
+			log = "[GetDateText]: [This.GetName]: focus GRE_industrial_lignite_mining"
+			141 = {
+				add_resource = {
+					type = oil
+					amount = 10
+				}
+			}
+			set_temp_variable = { treasury_change = -5 }
+			modify_treasury_effect = yes
 		}
 
 		ai_will_do = {
 			base = 1
+			modifier = {
+				factor = 2
+				is_currently_importing_any_resources = yes
+			}
 		}
 	}
 
@@ -713,11 +892,30 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_ECONOMY }
 
 		completion_reward = {
-			log = "[GetDateText]: [This.GetName]: focus GRE_western_shipping_magnate"
+			log = "[GetDateText]: [This.GetName]: focus GRE_rare_element_prospecting"
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+				}
+				add_resource = {
+					type = tungsten
+					amount = 4
+				}
+				add_resource = {
+					type = chromium
+					amount = 4
+				}
+			}
+			set_temp_variable = { treasury_change = -5 }
+			modify_treasury_effect = yes
 		}
 
 		ai_will_do = {
 			base = 1
+			modifier = {
+				factor = 2
+				is_currently_importing_any_resources = yes
+			}
 		}
 	}
 
@@ -737,6 +935,12 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_western_shipping_magnate"
+			add_ideas = GRE_shipping_industry
+			add_political_power = 75
+			add_equipment_to_stockpile = {
+				type = convoy
+				amount = 50
+			}
 		}
 
 		ai_will_do = {
@@ -760,6 +964,10 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_olympic_airways"
+			add_ideas = GRE_olympic_revival
+			set_temp_variable = { treasury_change = -4 }
+			modify_treasury_effect = yes
+			one_air_base = yes
 		}
 
 		ai_will_do = {
@@ -783,6 +991,9 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_trainose"
+			add_ideas = GRE_trainose_expansion
+			set_temp_variable = { treasury_change = -3 }
+			modify_treasury_effect = yes
 		}
 
 		ai_will_do = {
@@ -806,6 +1017,9 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_cotton_plantations"
+			add_ideas = GRE_cotton_industry
+			set_temp_variable = { treasury_change = -2 }
+			modify_treasury_effect = yes
 		}
 
 		ai_will_do = {
@@ -829,6 +1043,9 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_fisheries_expansion"
+			add_ideas = GRE_fisheries_modernization
+			set_temp_variable = { treasury_change = -2 }
+			modify_treasury_effect = yes
 		}
 
 		ai_will_do = {
@@ -852,6 +1069,17 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_aegean_wind_banks"
+			add_ideas = GRE_wind_energy
+			set_temp_variable = { treasury_change = -5 }
+			modify_treasury_effect = yes
+			every_owned_state = {
+				limit = {
+					is_coastal = yes
+					is_core_of = ROOT
+				}
+				set_temp_variable = { electric_addition = 0.2 }
+				add_wind_energy_production_effect = yes
+			}
 		}
 
 		ai_will_do = {
@@ -875,6 +1103,15 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_prinos_basin"
+			add_ideas = GRE_prinos_oil
+			140 = {
+				add_resource = {
+					type = oil
+					amount = 15
+				}
+			}
+			set_temp_variable = { treasury_change = -6 }
+			modify_treasury_effect = yes
 		}
 
 		ai_will_do = {
@@ -900,6 +1137,29 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_resolution_crisis"
+			add_ideas = GRE_crisis_resolved
+			if = {
+				limit = { has_idea = GRE_austerity_1 }
+				remove_ideas = GRE_austerity_1
+			}
+			if = {
+				limit = { has_idea = GRE_austerity_2 }
+				remove_ideas = GRE_austerity_2
+			}
+			if = {
+				limit = { has_idea = GRE_austerity_3 }
+				remove_ideas = GRE_austerity_3
+			}
+			if = {
+				limit = { has_idea = GRE_austerity_4 }
+				remove_ideas = GRE_austerity_4
+			}
+			if = {
+				limit = { has_idea = GRE_austerity_5 }
+				remove_ideas = GRE_austerity_5
+			}
+			add_stability = 0.15
+			add_political_power = 150
 		}
 
 		ai_will_do = {
@@ -923,6 +1183,13 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_merchant_marine"
+			add_ideas = GRE_merchant_fleet
+			add_equipment_to_stockpile = {
+				type = convoy
+				amount = 100
+			}
+			set_temp_variable = { treasury_change = -5 }
+			modify_treasury_effect = yes
 		}
 
 		ai_will_do = {
@@ -946,6 +1213,26 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_harbor_renovations"
+			add_ideas = GRE_port_modernization
+			set_temp_variable = { treasury_change = -4 }
+			modify_treasury_effect = yes
+			random_owned_controlled_state = {
+				limit = {
+					is_coastal = yes
+					is_core_of = ROOT
+					free_building_slots = {
+						building = dockyard
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -969,6 +1256,16 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_urban_railways"
+			add_ideas = GRE_metro_expansion
+			set_temp_variable = { treasury_change = -6 }
+			modify_treasury_effect = yes
+			141 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -992,6 +1289,9 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_helleniq_energy"
+			add_ideas = GRE_helleniq_dominance
+			set_temp_variable = { treasury_change = -4 }
+			modify_treasury_effect = yes
 		}
 
 		ai_will_do = {
@@ -1015,6 +1315,22 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_north_macedonian_pipelines"
+			add_ideas = GRE_balkan_pipeline
+			set_temp_variable = { treasury_change = -5 }
+			modify_treasury_effect = yes
+			if = {
+				limit = { country_exists = FYR }
+				FYR = {
+					add_opinion_modifier = {
+						target = ROOT
+						modifier = economic_cooperation
+					}
+				}
+				reverse_add_opinion_modifier = {
+					target = FYR
+					modifier = economic_cooperation
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -1038,6 +1354,22 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_turkish_pipeline"
+			add_ideas = GRE_turkish_pipeline_idea
+			set_temp_variable = { treasury_change = -6 }
+			modify_treasury_effect = yes
+			if = {
+				limit = { country_exists = TUR }
+				TUR = {
+					add_opinion_modifier = {
+						target = ROOT
+						modifier = economic_cooperation
+					}
+				}
+				reverse_add_opinion_modifier = {
+					target = TUR
+					modifier = economic_cooperation
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -1061,6 +1393,17 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_ionian_solar"
+			add_ideas = GRE_solar_energy
+			set_temp_variable = { treasury_change = -5 }
+			modify_treasury_effect = yes
+			every_owned_state = {
+				limit = {
+					is_coastal = yes
+					is_core_of = ROOT
+				}
+				set_temp_variable = { electric_addition = 0.25 }
+				add_solar_energy_production_effect = yes
+			}
 		}
 
 		ai_will_do = {
@@ -1085,6 +1428,10 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_drydock_renovations"
+			add_ideas = GRE_drydock_modernization
+			set_temp_variable = { treasury_change = -4 }
+			modify_treasury_effect = yes
+			navy_experience = 25
 		}
 
 		ai_will_do = {
@@ -1118,7 +1465,7 @@ focus_tree = {
 
 	focus = {
 		id = GRE_targeted_pension_reforms
-		icon = welfare
+		icon = pensions_increase
 
 		x = -2
 		y = 1
@@ -1132,6 +1479,8 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_targeted_pension_reforms executed"
+			add_ideas = GRE_pension_reformed
+			add_political_power = 75
 		}
 
 		ai_will_do = {
@@ -1195,7 +1544,7 @@ focus_tree = {
 
 	focus = {
 		id = GRE_pharma
-		icon = generic_hospital2
+		icon = pharma_drugs
 
 		x = 0
 		y = 1
