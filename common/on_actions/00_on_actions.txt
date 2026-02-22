@@ -166,6 +166,125 @@ on_actions = {
 		}
 	}
 
+	# During justifying wargoals
+	# triggered daily, so make sure there is a sink somewhere not firing events
+	# country, FROM = target nation
+	on_justifying_wargoal_pulse = {
+		effect = {
+			FROM = {
+				if = { limit = { is_ai = yes }
+					ai_update_build_units = yes
+				}
+			}
+
+			# reset every day, stays lingering for some time after justification is finished
+			set_country_flag = { flag = country_is_justified_on_flag value = 1 days = 70 }
+		}
+	}
+
+	#ROOT = attacking side
+	#FROM = defending side
+	on_war_relation_added = { # ---> Fires in 2nd place (1st is on_declare_war) -> This one is triggered ALWAYS
+		effect = {
+			if = {
+				limit = {
+					NOT = { is_in_array = { global.un_sc_pressure_end_war = ROOT } }
+				}
+				add_to_array = { global.un_sc_pressure_end_war = ROOT }
+			}
+		}
+	}
+	on_declare_war = {
+		effect = {
+			if = {
+				limit = {
+					NOT = { is_in_array = { global.un_sc_pressure_end_war = ROOT } }
+				}
+				add_to_array = { global.un_sc_pressure_end_war = ROOT }
+			}
+		}
+	}
+	#ROOT - Winner
+	#FROM - Loser
+	#FIRES FOR ALL SIDES
+	on_peaceconference_ended = {
+		effect = {
+			if = {
+				limit = {
+					NOT = {
+						ROOT = {
+							has_offensive_war = yes
+						}
+					}
+				}
+				ROOT = {
+					if = {
+						limit = {
+							has_idea = unsc_restricted_volunteers_too
+						}
+						remove_ideas = unsc_restricted_volunteers_too
+					}
+					if = {
+						limit = {
+							has_idea = unsc_arms_embargo
+						}
+						remove_ideas = unsc_arms_embargo
+					}
+				}
+				if = {
+					limit = {
+						is_in_array = { global.un_sc_pressure_end_war = ROOT }
+					}
+					remove_from_array = { global.un_sc_pressure_end_war = ROOT }
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						FROM = {
+							has_offensive_war = yes
+						}
+					}
+				}
+				FROM = {
+					if = {
+						limit = {
+							has_idea = unsc_restricted_volunteers_too
+						}
+						remove_ideas = unsc_restricted_volunteers_too
+					}
+					if = {
+						limit = {
+							has_idea = unsc_arms_embargo
+						}
+						remove_ideas = unsc_arms_embargo
+					}
+				}
+				if = {
+					limit = {
+						is_in_array = { global.un_sc_pressure_end_war = FROM }
+					}
+					remove_from_array = { global.un_sc_pressure_end_war = FROM }
+				}
+			}
+		}
+	}
+
+	on_wargoal_expire = { }
+
+	#FROM is state #ROOT is broken as hell
+	on_nuke_drop = { }
+
+	on_border_war_lost = { }
+
+	on_leave_faction = { }
+
+	#FROM is the one that joins the faction
+	on_create_faction = { }
+
+	#FROM is country getting invited.
+	on_offer_join_faction = { }
+
 	#FROM is faction leader on join faction requests.
 	on_join_faction = {
 		effect = {
@@ -194,6 +313,12 @@ on_actions = {
 			}
 			if = {
 				limit = {
+					FROM = { has_idea = faction_aso_alliance }
+				}
+				add_ideas = faction_aso_alliance
+			}
+			if = {
+				limit = {
 					FROM = { has_idea = faction_seato_alliance }
 				}
 				add_ideas = faction_seato_alliance
@@ -209,6 +334,12 @@ on_actions = {
 					FROM = { has_idea = faction_brics_alliance }
 				}
 				add_ideas = faction_brics_alliance
+			}
+			if = {
+				limit = {
+					FROM = { has_idea = faction_warsaw_pact_idea }
+				}
+				add_ideas = faction_warsaw_pact_idea
 			}
 			if = {
 				limit = {
@@ -243,6 +374,12 @@ on_actions = {
 			}
 			if = {
 				limit = {
+					has_idea = faction_aso_alliance
+				}
+				FROM = { add_ideas = faction_aso_alliance }
+			}
+			if = {
+				limit = {
 					has_idea = faction_seato_alliance
 				}
 				FROM = { add_ideas = faction_seato_alliance }
@@ -258,6 +395,12 @@ on_actions = {
 					has_idea = faction_brics_alliance
 				}
 				FROM = { add_ideas = faction_brics_alliance }
+			}
+			if = {
+				limit = {
+					has_idea = faction_warsaw_pact_idea
+				}
+				FROM = { add_ideas = faction_warsaw_pact_idea }
 			}
 			if = {
 				limit = {
@@ -282,6 +425,10 @@ on_actions = {
 				remove_ideas = faction_cento_alliance
 			}
 			if = {
+				limit = { has_idea = faction_aso_alliance }
+				remove_ideas = faction_aso_alliance
+			}
+			if = {
 				limit = { has_idea = faction_imperial_bloc_alliance }
 				remove_ideas = faction_imperial_bloc_alliance
 			}
@@ -292,6 +439,12 @@ on_actions = {
 			if = {
 				limit = { has_idea = faction_brics_alliance }
 				remove_ideas = faction_brics_alliance
+			}
+			if = {
+				limit = {
+					has_idea = faction_warsaw_pact_idea
+				}
+				remove_ideas = faction_warsaw_pact_idea
 			}
 			if = {
 				limit = { has_idea = CSTO_member }
@@ -1187,6 +1340,7 @@ on_actions = {
 					#assumes ROOT = civil war tag
 					FROM = {
 						add_civil_war_debuff = yes
+						set_country_flag = original_owner_@ROOT
 					}
 					ROOT = {
 						add_civil_war_debuff = yes
@@ -1279,22 +1433,8 @@ on_actions = {
 						}
 
 						#Recognition
-						if = {
-							limit = {
-								NOT = {
-									has_government = fascism
-									FROM = { has_government = fascism }
-								}
-							}
-							add_ideas = { rival_government }
-							add_to_array = { global.rival_governments = THIS }
-							set_country_flag = rival_government_@FROM
-							FROM = {
-								add_to_array = { global.rival_governments = THIS }
-								set_country_flag = rival_government_@ROOT
-								add_to_variable = { var = Granted_Recognition value = 193 }
-							}
-						}
+						add_ideas = { Lacks_International_Recognition }
+
 						#Jihadist uprising
 						if = {
 							limit = {
@@ -2296,22 +2436,6 @@ on_actions = {
 						elections_allowed = no
 					}
 				}
-				# Recognition
-				if = { limit = { has_idea = rival_government }
-					remove_ideas = rival_government
-				}
-				if = { limit = { has_country_flag = rival_government_@FROM }
-					clr_country_flag = rival_government_@FROM
-				}
-				if = { limit = { is_in_array = { global.rival_governments = THIS.id } }
-					remove_from_array = { global.rival_governments = THIS.id }
-				}
-				# Counter Terror
-				if = {
-					limit = { is_in_array = { global.ct_states = THIS.id } }
-					subtract_from_variable = { threat_level = 30 }
-					clamp_threat = yes
-				}
 			}
 
 			if = {
@@ -2394,6 +2518,8 @@ on_actions = {
 				setup_global_arrays = yes
 				# PMC Setup
 				pmc_variables_setup = yes
+				# Counter Terror global setup
+				counter_terror_global_setup = yes
 
 				# Missile Configuration
 				missile_ui_update = yes
@@ -2408,6 +2534,9 @@ on_actions = {
 
 				# Renewable Randomization Variable Calculations
 				random_renewable_variable_calculation = yes
+
+				set_variable = { global.next_year = global.year }
+				add_to_variable = { global.next_year = 1 }
 			}
 			# Custom Startup Content
 			FRA = {
@@ -2489,8 +2618,13 @@ on_actions = {
 				calculate_expected_spending = yes
 				recalculate_law_desires = yes
 				resource_storage_system_setup = yes
+				counter_terror_nation_startup = yes #sets up the basic CT stuff
+				#Make sure all nations are setup for international systems
+				un_recog_setup_check = yes
 
 				set_static_state_modifier_on_game_start = yes
+
+				un_on_game_start_war_add = yes
 
 				#Sets modifiers for microchips and composites
 				if = {
@@ -2578,9 +2712,6 @@ on_actions = {
 
 				# Calculate Utilities
 				calculate_starting_utility_stockpile = yes
-
-				# Regional Influencers
-				set_counter_terror_influencer = yes
 
 				setup_missile_configuration_effect = yes
 
@@ -2885,13 +3016,23 @@ on_actions = {
 			ABK = {
 				set_power_ranking_ideas_for_every_country = yes
 
+				#Calculate the starting UN budget here!
+				set_variable = { global.general_operating_budget_contribute_percent = 0.0001 }
+				calculate_united_nations_base_budget = yes
+
 				every_country = {
 					calculate_starting_mio_size = yes
 
-					if = {
-						limit = { Is_Possible_Muslim_Brotherhood = yes }
+					if = { limit = { is_ai = yes }
+						yearly_investment_targets_routine = yes
+					}
+
+					if = { limit = { Is_Possible_Muslim_Brotherhood = yes }
 						set_country_flag = is_possible_muslim_brotherhood
 						add_to_array = { global.possible_muslim_brotherhood_nation = THIS.id }
+					}
+					if = { limit = { has_variable = literacy_rate }
+						add_to_array = { global.literacy_rate_nation = THIS.id }
 					}
 				}
 			}
@@ -2899,6 +3040,8 @@ on_actions = {
 			every_country = {
 				limit = { is_ai = no }
 				graph_initial_setup = yes
+
+				set_country_flag = construction_speeds_visible_in_menu
 
 				country_event = systems.1
 
@@ -3001,9 +3144,11 @@ on_actions = {
 				limit = { FROM = { tag = CHI } }
 				add_to_variable = { chinese_aggression = 5 }
 			}
-			if = { limit = { has_idea = Lacks_International_Recognition }
-				swap_ideas = { remove_idea = Lacks_International_Recognition add_idea = Non_State_Actor }
-				remove_from_array = { global.Unrecognised_States = THIS }
+			if = {
+				limit = {
+					FROM = { has_idea = Lacks_International_Recognition }
+				}
+				FROM = { remove_ideas = Lacks_International_Recognition }
 			}
 			if = {
 				limit = {
@@ -3016,14 +3161,6 @@ on_actions = {
 					set_cosmetic_tag = PMR_ROM_democratic_subject
 					add_state_claim = 695
 				}
-			}
-			# Counter Terror
-			if = {
-				limit = {
-					is_in_array = { global.ct_states = ROOT }
-					FROM = { NOT = { has_idea = sunni } }
-				}
-				ROOT = { add_to_variable = { threat_level = 30 } clamp_threat = yes }
 			}
 			if = {
 				limit = {
