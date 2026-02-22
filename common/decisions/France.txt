@@ -1001,14 +1001,6 @@ FRA_french_communism_expansionism_decision_category = {
 		}
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision FRA_red_benelux"
-			set_temp_variable = { temp_change = 0.01 }
-			FRA_WR_commie_drift = yes
-			set_temp_variable = { temp_change = 0.1 }
-			FRA_WR_coreattack =yes
-			set_temp_variable = { temp_change = -0.2 }
-			FRA_WR_education_cost =yes
-			set_temp_variable = { temp_change = -0.025 }
-			FRA_WR_stab =yes
 			if = {
 				limit = {
 					NOT = {
@@ -1047,6 +1039,50 @@ FRA_french_communism_expansionism_decision_category = {
 			}
 		}
 	}
+	FRA_benelux_boost = {
+		fire_only_once = yes
+		days_remove = 0
+		cost = 75
+		visible = {
+			OR = {
+				OR = {
+					NOT = {
+						country_exists = BEL
+					}
+					BEL = {
+						is_subject_of = FRA
+					}
+				}
+				OR = {
+					NOT = {
+						country_exists = HOL
+					}
+					HOL = {
+						is_subject_of = FRA
+					}
+				}
+				OR = {
+					NOT = {
+						country_exists = LUX
+					}
+					LUX = {
+						is_subject_of = FRA
+					}
+				}
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision FRA_benelux_boost"
+			set_temp_variable = { temp_change = 0.01 }
+			FRA_WR_commie_drift = yes
+			set_temp_variable = { temp_change = 0.1 }
+			FRA_WR_coreattack =yes
+			set_temp_variable = { temp_change = -0.2 }
+			FRA_WR_education_cost =yes
+			set_temp_variable = { temp_change = -0.025 }
+			FRA_WR_stab =yes
+		}
+	}
 	FRA_done_with_dumping = {
 		fire_only_once = yes
 		days_remove = 35
@@ -1081,14 +1117,6 @@ FRA_french_communism_expansionism_decision_category = {
 		}
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision FRA_done_with_dumping"
-			set_temp_variable = { temp_change = 0.01 }
-			FRA_WR_commie_drift = yes
-			set_temp_variable = { temp_change = -1 }
-			FRA_WR_interest =yes
-			set_temp_variable = { temp_change = 0.15 }
-			FRA_WR_office_money = yes
-			set_temp_variable = { temp_change = -0.025 }
-			FRA_WR_stab =yes
 			if = {
 				limit = {
 					NOT = {
@@ -1127,6 +1155,50 @@ FRA_french_communism_expansionism_decision_category = {
 			}
 		}
 	}
+	FRA_dumping_boost = {
+		fire_only_once = yes
+		days_remove = 0
+		cost = 75
+		visible = {
+			OR = {
+				OR = {
+					NOT = {
+						country_exists = SWI
+					}
+					SWI = {
+						is_subject_of = FRA
+					}
+				}
+				OR = {
+					NOT = {
+						country_exists = MNC
+					}
+					MNC = {
+						is_subject_of = FRA
+					}
+				}
+				OR = {
+					NOT = {
+						country_exists = ADO
+					}
+					ADO = {
+						is_subject_of = FRA
+					}
+				}
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision FRA_dumping_boost"
+			set_temp_variable = { temp_change = 0.01 }
+			FRA_WR_commie_drift = yes
+			set_temp_variable = { temp_change = -1 }
+			FRA_WR_interest =yes
+			set_temp_variable = { temp_change = 0.15 }
+			FRA_WR_office_money = yes
+			set_temp_variable = { temp_change = -0.025 }
+			FRA_WR_stab =yes
+		}
+	}
 	FRA_red_iberia = {
 		fire_only_once = yes
 		days_remove = 35
@@ -1153,14 +1225,6 @@ FRA_french_communism_expansionism_decision_category = {
 		}
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision FRA_red_iberia"
-			set_temp_variable = { temp_change = 0.02 }
-			FRA_WR_commie_drift = yes
-			set_temp_variable = { temp_change = -0.1 }
-			FRA_WR_terrain_penalty =yes
-			set_temp_variable = { temp_change = 0.15 }
-			FRA_WR_construction = yes
-			set_temp_variable = { temp_change = -0.05 }
-			FRA_WR_stab =yes
 			if = {
 				limit = {
 					NOT = {
@@ -1188,6 +1252,42 @@ FRA_french_communism_expansionism_decision_category = {
 			}
 		}
 	}
+	FRA_iberia_boost = {
+		fire_only_once = yes
+		days_remove = 0
+		cost = 75
+		visible = {
+			OR = {
+				OR = {
+					NOT = {
+						country_exists = SPR
+					}
+					SPR = {
+						is_subject_of = FRA
+					}
+				}
+				OR = {
+					NOT = {
+						country_exists = POR
+					}
+					POR = {
+						is_subject_of = FRA
+					}
+				}
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision FRA_iberia_boost"
+			set_temp_variable = { temp_change = 0.02 }
+			FRA_WR_commie_drift = yes
+			set_temp_variable = { temp_change = -0.1 }
+			FRA_WR_terrain_penalty =yes
+			set_temp_variable = { temp_change = 0.15 }
+			FRA_WR_construction = yes
+			set_temp_variable = { temp_change = -0.05 }
+			FRA_WR_stab =yes
+		}
+	}
 	FRA_ciao_bella = {
 		fire_only_once = yes
 		days_remove = 35
@@ -1204,6 +1304,23 @@ FRA_french_communism_expansionism_decision_category = {
 		}
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision FRA_ciao_bella"
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = ITA
+			}
+		}
+	}
+	FRA_italy_boost = {
+		fire_only_once = yes
+		days_remove = 0
+		cost = 75
+		visible = {
+			ITA = {
+				is_subject_of = FRA
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision FRA_italy_boost"
 			set_temp_variable = { temp_change = -0.1 }
 			FRA_WR_propaganda = yes
 			set_temp_variable = { temp_change = -0.15 }
@@ -1212,10 +1329,6 @@ FRA_french_communism_expansionism_decision_category = {
 			FRA_WR_navy_speed = yes
 			set_temp_variable = { temp_change = -0.05 }
 			FRA_WR_stab =yes
-			create_wargoal = {
-				type = puppet_wargoal_focus
-				target = ITA
-			}
 		}
 	}
 	FRA_avenge_long_knife = {
@@ -1244,16 +1357,6 @@ FRA_french_communism_expansionism_decision_category = {
 		}
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision FRA_avenge_long_knife"
-			set_temp_variable = { temp_change = 0.075 }
-			FRA_WR_coredefence = yes
-			set_temp_variable = { temp_change = 0.1 }
-			FRA_WR_tank_attack =yes
-			set_temp_variable = { temp_change = 0.15 }
-			FRA_WR_tank_speed =yes
-			set_temp_variable = { temp_change = 0.1 }
-			FRA_WR_renable =yes
-			set_temp_variable = { temp_change = -0.075 }
-			FRA_WR_stab =yes
 			if = {
 				limit = {
 					NOT = {
@@ -1279,6 +1382,44 @@ FRA_french_communism_expansionism_decision_category = {
 					country_event = france_md.313
 				}
 			}
+		}
+	}
+	FRA_ger_aus_boost = {
+		fire_only_once = yes
+		days_remove = 0
+		cost = 75
+		visible = {
+			OR = {
+				OR = {
+					NOT = {
+						country_exists = GER
+					}
+					GER = {
+						is_subject_of = FRA
+					}
+				}
+				OR = {
+					NOT = {
+						country_exists = AUS
+					}
+					AUS = {
+						is_subject_of = FRA
+					}
+				}
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision FRA_ger_aus_boost"
+			set_temp_variable = { temp_change = 0.075 }
+			FRA_WR_coredefence = yes
+			set_temp_variable = { temp_change = 0.1 }
+			FRA_WR_tank_attack =yes
+			set_temp_variable = { temp_change = 0.15 }
+			FRA_WR_tank_speed =yes
+			set_temp_variable = { temp_change = 0.1 }
+			FRA_WR_renable =yes
+			set_temp_variable = { temp_change = -0.075 }
+			FRA_WR_stab =yes
 		}
 	}
 	FRA_ostalgia = {
@@ -1379,14 +1520,6 @@ FRA_french_communism_expansionism_decision_category = {
 		}
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision FRA_ostalgia"
-			set_temp_variable = { temp_change = 0.05 }
-			FRA_WR_coredefence = yes
-			set_temp_variable = { temp_change = -0.15 }
-			FRA_WR_consummer_goods = yes
-			set_temp_variable = { temp_change = 0.1 }
-			FRA_WR_agriculture_prod =yes
-			set_temp_variable = { temp_change = -0.1 }
-			FRA_WR_stab =yes
 			if = {
 				limit = {
 					NOT = {
@@ -1521,6 +1654,114 @@ FRA_french_communism_expansionism_decision_category = {
 			}
 		}
 	}
+	FRA_ostalgia_boost = {
+		fire_only_once = yes
+		days_remove = 0
+		cost = 75
+		visible = {
+			OR = {
+				OR = {
+					NOT = {
+						country_exists = CZE
+					}
+					CZE = {
+						is_subject_of = FRA
+					}
+				}
+				OR = {
+					NOT = {
+						country_exists = SLO
+					}
+					SLO = {
+						is_subject_of = FRA
+					}
+				}
+				OR = {
+					NOT = {
+						country_exists = SLV
+					}
+					SLV = {
+						is_subject_of = FRA
+					}
+				}
+				OR = {
+					NOT = {
+						country_exists = POL
+					}
+					POL = {
+						is_subject_of = FRA
+					}
+				}
+				OR = {
+					NOT = {
+						country_exists = HUN
+					}
+					HUN = {
+						is_subject_of = FRA
+					}
+				}
+				OR = {
+					NOT = {
+						country_exists = BUL
+					}
+					BUL = {
+						is_subject_of = FRA
+					}
+				}
+				OR = {
+					NOT = {
+						country_exists = LAT
+					}
+					LAT = {
+						is_subject_of = FRA
+					}
+				}
+				OR = {
+					NOT = {
+						country_exists = LIT
+					}
+					LIT = {
+						is_subject_of = FRA
+					}
+				}
+				OR = {
+					NOT = {
+						country_exists = EST
+					}
+					EST = {
+						is_subject_of = FRA
+					}
+				}
+				OR = {
+					NOT = {
+						country_exists = ROM
+					}
+					ROM = {
+						is_subject_of = FRA
+					}
+				}
+				OR = {
+					NOT = {
+						country_exists = MLV
+					}
+					MLV = {
+						is_subject_of = FRA
+					}
+				}
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision FRA_ostalgia_boost"
+			set_temp_variable = { temp_change = 0.05 }
+			FRA_WR_coredefence = yes
+			set_temp_variable = { temp_change = -0.15 }
+			FRA_WR_consummer_goods = yes
+			set_temp_variable = { temp_change = 0.1 }
+			FRA_WR_agriculture_prod =yes
+			set_temp_variable = { temp_change = -0.1 }
+			FRA_WR_stab =yes
+		}
+	}
 	FRA_birthplace_revolution = {
 		fire_only_once = yes
 		days_remove = 35
@@ -1555,16 +1796,6 @@ FRA_french_communism_expansionism_decision_category = {
 		}
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision FRA_birthplace_revolution"
-			set_temp_variable = { temp_change = 0.075 }
-			FRA_WR_artillery_attack = yes
-			set_temp_variable = { temp_change = 0.1 }
-			FRA_WR_winter_climat = yes
-			set_temp_variable = { temp_change = 0.15 }
-			FRA_WR_agriculture_prod =yes
-			set_temp_variable = { temp_change = -0.2 }
-			FRA_WR_police_cost =yes
-			set_temp_variable = { temp_change = -0.12 }
-			FRA_WR_stab =yes
 			if = {
 				limit = {
 					NOT = {
@@ -1602,6 +1833,52 @@ FRA_french_communism_expansionism_decision_category = {
 					country_event = france_md.313
 				}
 			}
+		}
+	}
+	FRA_birthplace_boost = {
+		fire_only_once = yes
+		days_remove = 0
+		cost = 75
+		visible = {
+			OR = {
+				OR = {
+					NOT = {
+						country_exists = SOV
+					}
+					SOV = {
+						is_subject_of = FRA
+					}
+				}
+				OR = {
+					NOT = {
+						country_exists = UKR
+					}
+					UKR = {
+						is_subject_of = FRA
+					}
+				}
+				OR = {
+					NOT = {
+						country_exists = BLR
+					}
+					BLR = {
+						is_subject_of = FRA
+					}
+				}
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision FRA_birthplace_boost"
+			set_temp_variable = { temp_change = 0.075 }
+			FRA_WR_artillery_attack = yes
+			set_temp_variable = { temp_change = 0.1 }
+			FRA_WR_winter_climat = yes
+			set_temp_variable = { temp_change = 0.15 }
+			FRA_WR_agriculture_prod =yes
+			set_temp_variable = { temp_change = -0.2 }
+			FRA_WR_police_cost =yes
+			set_temp_variable = { temp_change = -0.12 }
+			FRA_WR_stab =yes
 		}
 	}
 	FRA_no_more_neutrality = {
@@ -1646,16 +1923,6 @@ FRA_french_communism_expansionism_decision_category = {
 		}
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision FRA_no_more_neutrality"
-			set_temp_variable = { temp_change = 0.075 }
-			FRA_WR_social_cost = yes
-			set_temp_variable = { temp_change = 0.15 }
-			FRA_WR_winter_climat = yes
-			set_temp_variable = { temp_change = 0.15 }
-			FRA_WR_prod_effi =yes
-			set_temp_variable = { temp_change = 0.05 }
-			FRA_WR_reco =yes
-			set_temp_variable = { temp_change = -0.075 }
-			FRA_WR_stab =yes
 			if = {
 				limit = {
 					NOT = {
@@ -1706,6 +1973,60 @@ FRA_french_communism_expansionism_decision_category = {
 			}
 		}
 	}
+	FRA_neutrality_boost = {
+		fire_only_once = yes
+		days_remove = 0
+		cost = 75
+		visible = {
+			OR = {
+				OR = {
+					NOT = {
+						country_exists = DEN
+					}
+					DEN = {
+						is_subject_of = FRA
+					}
+				}
+				OR = {
+					NOT = {
+						country_exists = SWE
+					}
+					SWE = {
+						is_subject_of = FRA
+					}
+				}
+				OR = {
+					NOT = {
+						country_exists = NOR
+					}
+					NOR = {
+						is_subject_of = FRA
+					}
+				}
+				OR = {
+					NOT = {
+						country_exists = FIN
+					}
+					FIN = {
+						is_subject_of = FRA
+					}
+				}
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision FRA_neutrality_boost"
+			set_temp_variable = { temp_change = 0.075 }
+			FRA_WR_social_cost = yes
+			set_temp_variable = { temp_change = 0.15 }
+			FRA_WR_winter_climat = yes
+			set_temp_variable = { temp_change = 0.15 }
+			FRA_WR_prod_effi =yes
+			set_temp_variable = { temp_change = 0.05 }
+			FRA_WR_reco =yes
+			set_temp_variable = { temp_change = -0.075 }
+			FRA_WR_stab =yes
+		}
+	}
 	FRA_cold_war2 = {
 		fire_only_once = yes
 		days_remove = 35
@@ -1732,16 +2053,6 @@ FRA_french_communism_expansionism_decision_category = {
 		}
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision FRA_cold_war2"
-			set_temp_variable = { temp_change = 0.1 }
-			FRA_WR_amphibious_invasion_speed = yes
-			set_temp_variable = { temp_change = 0.15 }
-			FRA_WR_navy_range = yes
-			set_temp_variable = { temp_change = 0.05 }
-			FRA_WR_navy_coord =yes
-			set_temp_variable = { temp_change = 0.075 }
-			FRA_WR_special_forces_attack =yes
-			set_temp_variable = { temp_change = -0.15 }
-			FRA_WR_stab =yes
 			if = {
 				limit = {
 					NOT = {
@@ -1768,6 +2079,44 @@ FRA_french_communism_expansionism_decision_category = {
 					target = ENG
 				}
 			}
+		}
+	}
+	FRA_cold_war_boost = {
+		fire_only_once = yes
+		days_remove = 0
+		cost = 75
+		visible = {
+			OR = {
+				OR = {
+					NOT = {
+						country_exists = USA
+					}
+					USA = {
+						is_subject_of = FRA
+					}
+				}
+				OR = {
+					NOT = {
+						country_exists =ENG
+					}
+					ENG = {
+						is_subject_of = FRA
+					}
+				}
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision FRA_cold_war_boost"
+			set_temp_variable = { temp_change = 0.1 }
+			FRA_WR_amphibious_invasion_speed = yes
+			set_temp_variable = { temp_change = 0.15 }
+			FRA_WR_navy_range = yes
+			set_temp_variable = { temp_change = 0.05 }
+			FRA_WR_navy_coord =yes
+			set_temp_variable = { temp_change = 0.075 }
+			FRA_WR_special_forces_attack =yes
+			set_temp_variable = { temp_change = -0.15 }
+			FRA_WR_stab =yes
 		}
 	}
 	FRA_red_Europe = {
@@ -1908,28 +2257,77 @@ FRA_3rd_empire_decision_category = {#TODO add claim for all
 			}
 		}
 	}
-	FRA_natural_border = {#core natural_border
+	FRA_natural_border = {#core natural_border TODO fix the dependentie take has modele first of this line
 		fire_only_once = yes
-		days_remove = 35
-		cost = 50
+		days_remove = 10
+		cost = 0
 		visible = {
 			AND={
-				has_full_control_of_state = 47
-				47={compliance > 50}
-				has_full_control_of_state = 50
-				50={compliance > 50}
-				has_full_control_of_state = 51
-				51={compliance > 50}
-				has_full_control_of_state = 52
-				52={compliance > 50}
-				has_full_control_of_state = 965
-				965={compliance > 50}
-				has_full_control_of_state = 53
-				53={compliance > 50}
-				has_full_control_of_state = 40
-				40={compliance > 50}
-				has_full_control_of_state = 966
-				966={compliance > 50}
+				OR = {
+					NOT = {
+						47=is_core_of=FRA
+					}
+					AND = {
+						has_full_control_of_state = 47
+						47={compliance > 50}
+					}
+				}
+				AND = {
+					NOT = {
+						50=is_core_of=FRA
+					}
+					has_full_control_of_state = 50
+					50={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						51=is_core_of=FRA
+					}
+					has_full_control_of_state = 51
+					51={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						52=is_core_of=FRA
+					}
+					has_full_control_of_state = 52
+					52={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						965=is_core_of=FRA
+					}
+					has_full_control_of_state = 965
+					965={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						53=is_core_of=FRA
+					}
+					has_full_control_of_state = 53
+					53={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						40=is_core_of=FRA
+					}
+					has_full_control_of_state = 40
+					40={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						966=is_core_of=FRA
+					}
+					has_full_control_of_state = 966
+					966={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						967=is_core_of=FRA
+					}
+					has_full_control_of_state = 967
+					967={compliance > 50}
+				}
 			}
 		}
 		remove_effect = {
@@ -2009,34 +2407,96 @@ FRA_3rd_empire_decision_category = {#TODO add claim for all
 	}
 	FRA_napoleon_empire = {#core napoleon empire
 		fire_only_once = yes
-		days_remove = 35
-		cost = 50
+		days_remove = 10
+		cost = 0
 		visible = {
 			AND={
-				has_full_control_of_state = 86
-				86={compliance > 50}
-				has_full_control_of_state = 77
-				77={compliance > 50}
-				has_full_control_of_state = 1060
-				1060={compliance > 50}
-				has_full_control_of_state = 1059
-				1059={compliance > 50}
-				has_full_control_of_state = 79
-				79={compliance > 50}
-				has_full_control_of_state = 81
-				81={compliance > 50}
-				has_full_control_of_state = 127
-				127={compliance > 50}
-				has_full_control_of_state = 124
-				124={compliance > 50}
-				has_full_control_of_state = 1061
-				1061={compliance > 50}
-				has_full_control_of_state = 1169
-				1169={compliance > 50}
-				has_full_control_of_state = 48
-				48={compliance > 50}
-				has_full_control_of_state = 46
-				46={compliance > 50}
+				OR = {
+					NOT = {
+						86=is_core_of=FRA
+					}
+					AND = {
+						has_full_control_of_state = 86
+						86={compliance > 50}
+					}
+				}
+				AND = {
+					NOT = {
+						77=is_core_of=FRA
+					}
+					has_full_control_of_state = 77
+					77={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						1060=is_core_of=FRA
+					}
+					has_full_control_of_state = 1060
+					1060={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						1059=is_core_of=FRA
+					}
+					has_full_control_of_state = 1059
+					1059={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						79=is_core_of=FRA
+					}
+					has_full_control_of_state = 79
+					79={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						81=is_core_of=FRA
+					}
+					has_full_control_of_state = 81
+					81={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						127=is_core_of=FRA
+					}
+					has_full_control_of_state = 127
+					127={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						124=is_core_of=FRA
+					}
+					has_full_control_of_state = 124
+					124={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						1061=is_core_of=FRA
+					}
+					has_full_control_of_state = 1061
+					1061={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						1169=is_core_of=FRA
+					}
+					has_full_control_of_state = 1169
+					1169={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						48=is_core_of=FRA
+					}
+					has_full_control_of_state = 48
+					48={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						46=is_core_of=FRA
+					}
+					has_full_control_of_state = 46
+					46={compliance > 50}
+				}
 			}
 		}
 		remove_effect = {
@@ -2657,28 +3117,73 @@ FRA_royalist_expansion_decision_category = {#TODO add claim for all
 	}
 	FRA_unite_frank_europe = {#core frank
 		fire_only_once = yes
-		days_remove = 35
-		cost = 50
+		days_remove = 10
+		cost = 0
 		visible = {
-			AND={
-				has_full_control_of_state = 47
-				47={compliance > 50}
-				has_full_control_of_state = 50
-				50={compliance > 50}
-				has_full_control_of_state = 51
-				51={compliance > 50}
-				has_full_control_of_state = 52
-				52={compliance > 50}
-				has_full_control_of_state = 965
-				965={compliance > 50}
-				has_full_control_of_state = 53
-				53={compliance > 50}
-				has_full_control_of_state = 40
-				40={compliance > 50}
-				has_full_control_of_state = 966
-				966={compliance > 50}
-				has_full_control_of_state = 72
-				72={compliance > 50}
+			OR={
+				AND = {
+					NOT = {
+						47=is_core_of=FRA
+					}
+					has_full_control_of_state = 47
+					47={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						50=is_core_of=FRA
+					}
+					has_full_control_of_state = 50
+					50={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						51=is_core_of=FRA
+					}
+					has_full_control_of_state = 51
+					51={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						52=is_core_of=FRA
+					}
+					has_full_control_of_state = 52
+					52={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						965=is_core_of=FRA
+					}
+					has_full_control_of_state = 965
+					965={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						53=is_core_of=FRA
+					}
+					has_full_control_of_state = 53
+					53={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						40=is_core_of=FRA
+					}
+					has_full_control_of_state = 40
+					40={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						966=is_core_of=FRA
+					}
+					has_full_control_of_state = 966
+					966={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						72=is_core_of=FRA
+					}
+					has_full_control_of_state = 72
+					72={compliance > 50}
+				}
 			}
 		}
 		remove_effect = {
@@ -2688,109 +3193,361 @@ FRA_royalist_expansion_decision_category = {#TODO add claim for all
 	}
 	FRA_frankish_empire = {#core charlemagne empire TODO change flag
 		fire_only_once = yes
-		days_remove = 35
-		cost = 50
+		days_remove = 10
+		cost = 0
 		visible = {
-			AND={
-				has_full_control_of_state = 946
-				946={compliance > 50}
-				has_full_control_of_state = 74
-				74={compliance > 50}
-				has_full_control_of_state = 73
-				73={compliance > 50}
-				has_full_control_of_state = 76
-				76={compliance > 50}
-				has_full_control_of_state = 75
-				75={compliance > 50}
-				has_full_control_of_state = 286
-				286={compliance > 50}
-				has_full_control_of_state = 1060
-				1060={compliance > 50}
-				has_full_control_of_state = 1059
-				1059={compliance > 50}
-				has_full_control_of_state = 77
-				77={compliance > 50}
-				has_full_control_of_state = 78
-				78={compliance > 50}
-				has_full_control_of_state = 285
-				285={compliance > 50}
-				has_full_control_of_state = 265
-				265={compliance > 50}
-				has_full_control_of_state = 1061
-				1061={compliance > 50}
-				has_full_control_of_state = 79
-				79={compliance > 50}
-				has_full_control_of_state = 967
-				967={compliance > 50}
-				has_full_control_of_state = 40
-				40={compliance > 50}
-				has_full_control_of_state = 43
-				43={compliance > 50}
-				has_full_control_of_state = 42
-				42={compliance > 50}
-				has_full_control_of_state = 41
-				41={compliance > 50}
-				has_full_control_of_state = 964
-				964={compliance > 50}
-				has_full_control_of_state = 966
-				966={compliance > 50}
-				has_full_control_of_state = 39
-				39={compliance > 50}
-				has_full_control_of_state = 38
-				38={compliance > 50}
-				has_full_control_of_state = 1080
-				1080={compliance > 50}
-				has_full_control_of_state = 37
-				37={compliance > 50}
-				has_full_control_of_state = 539
-				539={compliance > 50}
-				has_full_control_of_state = 45
-				45={compliance > 50}
-				has_full_control_of_state = 1079
-				1079={compliance > 50}
-				has_full_control_of_state = 44
-				44={compliance > 50}
-				has_full_control_of_state = 545
-				545={compliance > 50}
-				has_full_control_of_state = 972
-				972={compliance > 50}
-				has_full_control_of_state = 965
-				965={compliance > 50}
-				has_full_control_of_state = 52
-				52={compliance > 50}
-				has_full_control_of_state = 51
-				51={compliance > 50}
-				has_full_control_of_state = 50
-				50={compliance > 50}
-				has_full_control_of_state = 53
-				53={compliance > 50}
-				has_full_control_of_state = 47
-				47={compliance > 50}
-				has_full_control_of_state = 46
-				46={compliance > 50}
-				has_full_control_of_state = 48
-				48={compliance > 50}
-				has_full_control_of_state = 1169
-				1169={compliance > 50}
-				has_full_control_of_state = 88
-				88={compliance > 50}
-				has_full_control_of_state = 1041
-				1041={compliance > 50}
-				has_full_control_of_state = 87
-				87={compliance > 50}
-				has_full_control_of_state = 92
-				92={compliance > 50}
-				has_full_control_of_state = 86
-				86={compliance > 50}
-				has_full_control_of_state = 80
-				80={compliance > 50}
-				has_full_control_of_state = 945
-				945={compliance > 50}
+			OR={
+				AND = {
+					NOT = {
+						946=is_core_of=FRA
+					}
+					has_full_control_of_state = 946
+					946={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						74=is_core_of=FRA
+					}
+					has_full_control_of_state = 74
+					74={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						73=is_core_of=FRA
+					}
+					has_full_control_of_state = 73
+					73={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						76=is_core_of=FRA
+					}
+					has_full_control_of_state = 76
+					76={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						75=is_core_of=FRA
+					}
+					has_full_control_of_state = 75
+					75={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						286=is_core_of=FRA
+					}
+					has_full_control_of_state = 286
+					286={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						1060=is_core_of=FRA
+					}
+					has_full_control_of_state = 1060
+					1060={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						1059=is_core_of=FRA
+					}
+					has_full_control_of_state = 1059
+					1059={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						77=is_core_of=FRA
+					}
+					has_full_control_of_state = 77
+					77={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						78=is_core_of=FRA
+					}
+					has_full_control_of_state = 78
+					78={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						285=is_core_of=FRA
+					}
+					has_full_control_of_state = 285
+					285={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						265=is_core_of=FRA
+					}
+					has_full_control_of_state = 265
+					265={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						1061=is_core_of=FRA
+					}
+					has_full_control_of_state = 1061
+					1061={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						79=is_core_of=FRA
+					}
+					has_full_control_of_state = 79
+					79={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						967=is_core_of=FRA
+					}
+					has_full_control_of_state = 967
+					967={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						40=is_core_of=FRA
+					}
+					has_full_control_of_state = 40
+					40={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						43=is_core_of=FRA
+					}
+					has_full_control_of_state = 43
+					43={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						42=is_core_of=FRA
+					}
+					has_full_control_of_state = 42
+					42={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						41=is_core_of=FRA
+					}
+					has_full_control_of_state = 41
+					41={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						964=is_core_of=FRA
+					}
+					has_full_control_of_state = 964
+					964={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						966=is_core_of=FRA
+					}
+					has_full_control_of_state = 966
+					966={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						39=is_core_of=FRA
+					}
+					has_full_control_of_state = 39
+					39={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						38=is_core_of=FRA
+					}
+					has_full_control_of_state = 38
+					38={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						1080=is_core_of=FRA
+					}
+					has_full_control_of_state = 1080
+					1080={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						37=is_core_of=FRA
+					}
+					has_full_control_of_state = 37
+					37={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						539=is_core_of=FRA
+					}
+					has_full_control_of_state = 539
+					539={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						45=is_core_of=FRA
+					}
+					has_full_control_of_state = 45
+					45={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						1079=is_core_of=FRA
+					}
+					has_full_control_of_state = 1079
+					1079={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						44=is_core_of=FRA
+					}
+					has_full_control_of_state = 44
+					44={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						545=is_core_of=FRA
+					}
+					has_full_control_of_state = 545
+					545={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						972=is_core_of=FRA
+					}
+					has_full_control_of_state = 972
+					972={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						965=is_core_of=FRA
+					}
+					has_full_control_of_state = 965
+					965={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						52=is_core_of=FRA
+					}
+					has_full_control_of_state = 52
+					52={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						51=is_core_of=FRA
+					}
+					has_full_control_of_state = 51
+					51={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						50=is_core_of=FRA
+					}
+					has_full_control_of_state = 50
+					50={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						53=is_core_of=FRA
+					}
+					has_full_control_of_state = 53
+					53={compliance > 50}
+				}AND = {
+					NOT = {
+						47=is_core_of=FRA
+					}
+					has_full_control_of_state = 47
+					47={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						46=is_core_of=FRA
+					}
+					has_full_control_of_state = 46
+					46={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						48=is_core_of=FRA
+					}
+					has_full_control_of_state = 48
+					48={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						1169=is_core_of=FRA
+					}
+					has_full_control_of_state = 1169
+					1169={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						88=is_core_of=FRA
+					}
+					has_full_control_of_state = 88
+					88={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						1041=is_core_of=FRA
+					}
+					has_full_control_of_state = 1041
+					1041={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						87=is_core_of=FRA
+					}
+					has_full_control_of_state = 87
+					87={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						92=is_core_of=FRA
+					}
+					has_full_control_of_state = 92
+					92={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						86=is_core_of=FRA
+					}
+					has_full_control_of_state = 86
+					86={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						80=is_core_of=FRA
+					}
+					has_full_control_of_state = 80
+					80={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						945=is_core_of=FRA
+					}
+					has_full_control_of_state = 945
+					945={compliance > 50}
+				}
 			}
 		}
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision FRA_frankish_empire"
 			country_event = france_md.492
+		}
+	}
+	FRA_annex_puppet_king = {#TODO find a way to transfer states withount annexation or immidiatly realease
+		day_remove = 1
+		cost= 0
+		visible = {
+			any_subject_country = {
+				any_owned_state = { is claimed by FRA }
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision FRA_annex_puppet_king"
+			any_subject_country = {
+				if = {
+					limit = {any_owned_state = { is claimed by FRA }}
+					country_event = france_md.492
+				}
+			}
 		}
 	}
 	FRA_glacis = {
@@ -3326,84 +4083,269 @@ FRA_royalist_expansion_decision_category = {#TODO add claim for all
 	}
 	FRA_kingdom_heaven = {#core kingdom of heaven TODO change flag
 		fire_only_once = yes
-		days_remove = 35
-		cost = 50
+		days_remove = 10
+		cost = 0
 		visible = {
 			AND={
-				has_full_control_of_state = 929
-				929={compliance > 50}
-				has_full_control_of_state = 81
-				81={compliance > 50}
-				has_full_control_of_state = 84
-				84={compliance > 50}
-				has_full_control_of_state = 83
-				83={compliance > 50}
-				has_full_control_of_state = 85
-				85={compliance > 50}
-				has_full_control_of_state = 145
-				145={compliance > 50}
-				has_full_control_of_state = 202
-				202={compliance > 50}
-				has_full_control_of_state = 553
-				553={compliance > 50}
-				has_full_control_of_state = 203
-				203={compliance > 50}
-				has_full_control_of_state = 189
-				189={compliance > 50}
-				has_full_control_of_state = 571
-				571={compliance > 50}
-				has_full_control_of_state = 188
-				188={compliance > 50}
-				has_full_control_of_state = 186
-				186={compliance > 50}
-				has_full_control_of_state = 184
-				184={compliance > 50}
-				has_full_control_of_state = 185
-				185={compliance > 50}
-				has_full_control_of_state = 204
-				204={compliance > 50}
-				has_full_control_of_state = 207
-				207={compliance > 50}
-				has_full_control_of_state = 206
-				206={compliance > 50}
-				has_full_control_of_state = 209
-				209={compliance > 50}
-				has_full_control_of_state = 208
-				208={compliance > 50}
-				has_full_control_of_state = 205
-				205={compliance > 50}
-				has_full_control_of_state = 201
-				201={compliance > 50}
-				has_full_control_of_state = 587
-				587={compliance > 50}
-				has_full_control_of_state = 213
-				213={compliance > 50}
-				has_full_control_of_state = 214
-				214={compliance > 50}
-				has_full_control_of_state = 215
-				215={compliance > 50}
-				has_full_control_of_state = 216
-				216={compliance > 50}
-				has_full_control_of_state = 1102
-				1102={compliance > 50}
-				has_full_control_of_state = 210
-				210={compliance > 50}
-				has_full_control_of_state = 211
-				211={compliance > 50}
-				has_full_control_of_state = 212
-				212={compliance > 50}
-				has_full_control_of_state = 158
-				158={compliance > 50}
-				has_full_control_of_state = 992
-				992={compliance > 50}
-				has_full_control_of_state = 1205
-				1205={compliance > 50}
-				has_full_control_of_state = 161
-				161={compliance > 50}
-				has_full_control_of_state = 934
-				934={compliance > 50}
-				has_full_control_of_state = 146
-				146={compliance > 50}
+				AND = {
+					NOT = {
+						929=is_core_of=FRA
+					}
+					has_full_control_of_state = 929
+					929={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						81=is_core_of=FRA
+					}
+					has_full_control_of_state = 81
+					81={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						84=is_core_of=FRA
+					}
+					has_full_control_of_state = 84
+					84={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						83=is_core_of=FRA
+					}
+					has_full_control_of_state = 83
+					83={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						85=is_core_of=FRA
+					}
+					has_full_control_of_state = 85
+					85={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						145=is_core_of=FRA
+					}
+					has_full_control_of_state = 145
+					145={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						202=is_core_of=FRA
+					}
+					has_full_control_of_state = 202
+					202={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						553=is_core_of=FRA
+					}
+					has_full_control_of_state = 553
+					553={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						203=is_core_of=FRA
+					}
+					has_full_control_of_state = 203
+					203={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						189=is_core_of=FRA
+					}
+					has_full_control_of_state = 189
+					189={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						571=is_core_of=FRA
+					}
+					has_full_control_of_state = 571
+					571={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						188=is_core_of=FRA
+					}
+					has_full_control_of_state = 188
+					188={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						186=is_core_of=FRA
+					}
+					has_full_control_of_state = 186
+					186={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						184=is_core_of=FRA
+					}
+					has_full_control_of_state = 184
+					184={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						185=is_core_of=FRA
+					}
+					has_full_control_of_state = 185
+					185={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						204=is_core_of=FRA
+					}
+					has_full_control_of_state = 204
+					204={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						207=is_core_of=FRA
+					}
+					has_full_control_of_state = 207
+					207={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						206=is_core_of=FRA
+					}
+					has_full_control_of_state = 206
+					206={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						209=is_core_of=FRA
+					}
+					has_full_control_of_state = 209
+					209={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						208=is_core_of=FRA
+					}
+					has_full_control_of_state = 208
+					208={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						205=is_core_of=FRA
+					}
+					has_full_control_of_state = 205
+					205={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						201=is_core_of=FRA
+					}
+					has_full_control_of_state = 201
+					201={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						587=is_core_of=FRA
+					}
+					has_full_control_of_state = 587
+					587={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						213=is_core_of=FRA
+					}
+					has_full_control_of_state = 213
+					213={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						214=is_core_of=FRA
+					}
+					has_full_control_of_state = 214
+					214={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						215=is_core_of=FRA
+					}
+					has_full_control_of_state = 215
+					215={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						216=is_core_of=FRA
+					}
+					has_full_control_of_state = 216
+					216={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						1102=is_core_of=FRA
+					}
+					has_full_control_of_state = 1102
+					1102={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						210=is_core_of=FRA
+					}
+					has_full_control_of_state = 210
+					210={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						211=is_core_of=FRA
+					}
+					has_full_control_of_state = 211
+					211={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						212=is_core_of=FRA
+					}
+					has_full_control_of_state = 212
+					212={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						158=is_core_of=FRA
+					}
+					has_full_control_of_state = 158
+					158={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						992=is_core_of=FRA
+					}
+					has_full_control_of_state = 992
+					992={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						1205=is_core_of=FRA
+					}
+					has_full_control_of_state = 1205
+					1205={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						161=is_core_of=FRA
+					}
+					has_full_control_of_state = 161
+					161={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						934=is_core_of=FRA
+					}
+					has_full_control_of_state = 934
+					934={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						146=is_core_of=FRA
+					}
+					has_full_control_of_state = 146
+					146={compliance > 50}
+				}
 			}
 		}
 		remove_effect = {
@@ -3475,24 +4417,69 @@ FRA_royalist_expansion_decision_category = {#TODO add claim for all
 		cost = 50
 		visible = {
 			AND={
-				has_full_control_of_state = 47
-				47={compliance > 50}
-				has_full_control_of_state = 50
-				50={compliance > 50}
-				has_full_control_of_state = 51
-				51={compliance > 50}
-				has_full_control_of_state = 52
-				52={compliance > 50}
-				has_full_control_of_state = 965
-				965={compliance > 50}
-				has_full_control_of_state = 53
-				53={compliance > 50}
-				has_full_control_of_state = 40
-				40={compliance > 50}
-				has_full_control_of_state = 966
-				966={compliance > 50}
-				has_full_control_of_state = 72
-				72={compliance > 50}
+				AND = {
+					NOT = {
+						47=is_core_of=FRA
+					}
+					has_full_control_of_state = 47
+					47={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						50=is_core_of=FRA
+					}
+					has_full_control_of_state = 50
+					50={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						51=is_core_of=FRA
+					}
+					has_full_control_of_state = 51
+					51={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						52=is_core_of=FRA
+					}
+					has_full_control_of_state = 52
+					52={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						965=is_core_of=FRA
+					}
+					has_full_control_of_state = 965
+					965={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						53=is_core_of=FRA
+					}
+					has_full_control_of_state = 53
+					53={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						40=is_core_of=FRA
+					}
+					has_full_control_of_state = 40
+					40={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						966=is_core_of=FRA
+					}
+					has_full_control_of_state = 966
+					966={compliance > 50}
+				}
+				AND = {
+					NOT = {
+						72=is_core_of=FRA
+					}
+					has_full_control_of_state = 72
+					72={compliance > 50}
+				}
 			}
 		}
 		remove_effect = {

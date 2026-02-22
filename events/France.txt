@@ -8414,10 +8414,10 @@ country_event = {#target said no
 		name = france_md.481.b
 		log = "[GetDateText]: [This.GetName]: france_md.481.b executed"
 		set_temp_variable = { party_index = 23 }
-		set_temp_variable = { party_popularity_increase = -0.05}
-		set_temp_variable = { temp_outlook_increase = -0.05}
+		set_temp_variable = { party_popularity_increase = -0.025}
+		set_temp_variable = { temp_outlook_increase = -0.025}
 		add_relative_party_popularity = yes
-		add_political_power = -50
+		add_political_power = -25
 		ai_chance = {
 			base = 1
 		}
@@ -8812,6 +8812,7 @@ country_event = {#integration of natural border
 		53 = { add_core_of = FRA }
 		40 = { add_core_of = FRA }
 		966 = { add_core_of = FRA }
+		967 = { add_core_of = FRA }
 		ai_chance = {
 			base = 1
 		}
@@ -8997,6 +8998,92 @@ country_event = {#attack colonies
 		add_manpower = 20000
 		add_war_support = 0.2
 		add_timed_idea = { idea = FRA_attack_colonies days = 200 }
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+country_event = {#france demand annexation
+	id = france_md.496
+	title = france_md.496.t
+	desc = france_md.496.d
+	is_triggered_only = yes
+	option = {#yes
+		name = france_md.496.a
+		log = "[GetDateText]: [This.GetName]: france_md.496.a executed"
+		FRA= {
+			country_event = france_md.480
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+	option = {#no break free +annex wargoal only if is stronger than master
+		name = france_md.496.b
+		log = "[GetDateText]: [This.GetName]: france_md.496.b executed"
+		set_temp_variable = { party_index = 23 }
+		set_temp_variable = { party_popularity_increase = -0.2 }
+		set_temp_variable = { temp_outlook_increase = -0.2 }
+		add_relative_party_popularity = yes
+		add_stability = -0.4
+		add_war_support = 0.2
+		FRA= {
+			country_event = france_md.497
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+country_event = {#target said no to annexation of puppet
+	id = france_md.497
+	title = france_md.497.t
+	desc = france_md.497.d
+	is_triggered_only = yes
+	option = {#kill them
+		name = france_md.497.a
+		log = "[GetDateText]: [This.GetName]: france_md.497.a executed"
+		set_temp_variable = { party_index = 23 }
+		set_temp_variable = { party_popularity_increase = 0.05 }
+		set_temp_variable = { temp_outlook_increase = 0.05 }
+		add_relative_party_popularity = yes
+		add_war_support = 0.15
+		release_puppet = FROM
+			set_autonomy = {
+				target = FROM
+				autonomy_state = autonomy_free
+		}
+		create_wargoal = {
+			type = annex_everything
+			target = FROM
+		}
+		FROM = {
+			if = { limit = { is_in_faction = yes }
+				leave_faction = yes
+			}
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+	option = {#nothing
+		name = france_md.497.b
+		log = "[GetDateText]: [This.GetName]: france_md.497.b executed"
+		set_temp_variable = { party_index = 23 }
+		set_temp_variable = { party_popularity_increase = -0.025}
+		set_temp_variable = { temp_outlook_increase = -0.025}
+		add_relative_party_popularity = yes
+		release_puppet = FROM
+			set_autonomy = {
+				target = FROM
+				autonomy_state = autonomy_free
+		}
+		FROM = {
+			if = { limit = { is_in_faction = yes }
+				leave_faction = yes
+			}
+		}
+		add_political_power = -25
 		ai_chance = {
 			base = 1
 		}
