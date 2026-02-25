@@ -3,6 +3,9 @@
 	set_cosmetic_tag = MAL
 	set_country_flag = dynamic_flag
 	set_country_flag = dynamic_rebel_flag
+	set_country_flag = is_getting_cdf_subsidies
+	add_to_array = { global.uncdf_recipients = THIS }
+	add_dynamic_modifier = { modifier = un_aid_subsidies_modifier }
 	set_variable = { gdp_per_capita = 1.585 }
 
 	set_technology = {
@@ -37,6 +40,7 @@
 			SP_arty_0 = 1
 			nsb_Anti_Air_0 = 1
 			mbt_tech_ops = 1
+			mbt_tech = 1
 		}
 
 		else = {
@@ -63,6 +67,7 @@
 	if = {
 		limit = { has_dlc = "Gotterdammerung" }
 		set_technology = {
+			air_defense = 1
 			SAM = 1
 			SAM0 = 1
 		}
@@ -127,12 +132,6 @@
 		cfa_franc
 	}
 
-	#CT
-	set_country_flag = threat_level_negligible
-	set_variable = { threat_level = 5 }
-	set_variable = { radicalization = 5 }
-	add_to_array = { global.ct_states = THIS }
-
 	#Influence system
 	init_influence = yes
 	set_variable = { domestic_influence_amount = 100 }
@@ -162,8 +161,8 @@
 	}
 	set_politics = {
 		ruling_party = neutrality
-		last_election = "2000.1.1"
-		election_frequency = 48
+		last_election = "1997.5.11"
+		election_frequency = 60
 		elections_allowed = yes
 	}
 

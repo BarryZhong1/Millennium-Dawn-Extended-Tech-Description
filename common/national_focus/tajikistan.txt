@@ -1326,7 +1326,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus TAJ_liberty_through_strength"
 			custom_effect_tooltip = one_party_state_TT
-			set_country_flag = party0_banned
+			set_country_flag = party1_banned
 			set_country_flag = party1_banned
 			set_country_flag = party2_banned
 			set_country_flag = party3_banned
@@ -2304,7 +2304,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus TAJ_gulfs_bankroll"
 			add_tech_bonus = {
-				name = CAT_nfibers
+				name = TAJ_islamic_sceince
 				bonus = 0.5
 				uses = 2
 				category = CAT_nfibers
@@ -2372,7 +2372,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus TAJ_entrance_of_luxury"
 			add_tech_bonus = {
-				name = CAT_computing_tech
+				name = TAJ_entrance_of_luxury
 				category = CAT_computing_tech
 				category = CAT_construction_tech
 				bonus = 0.5
@@ -2767,7 +2767,7 @@ focus_tree = {
 			neutrality_neutral_muslim_brotherhood_are_in_power = yes
 			UZB = {
 				influence_higher_25 = yes
-				neutrality_muslim_brotherhood_not_in_power_or_coalition = yes
+				neutrality_muslim_brotherhood_in_power_or_coalition = no
 			}
 		}
 
@@ -2994,6 +2994,7 @@ focus_tree = {
 			log = "[GetDateText]: [THIS.GetName]: Focus TAJ_supporting_shiites_in_badakhshan"
 			custom_effect_tooltip = TAJ_decrease_bda_unrest_5_TT
 			add_to_variable = { var = TAJ_badakhshan_unrest_var value = -5 }
+			clamp_variable = { var = TAJ_badakhshan_unrest_var min = 0 }
 			newline = yes
 			set_temp_variable = { party_index = 8 }
 			set_temp_variable = { party_popularity_increase = 0.055 }
@@ -3155,6 +3156,9 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus TAJ_supporting_shiites_in_badakhshan"
+			hidden_effect = {
+				leave_faction = yes
+			}
 			PER = {
 				country_event = {
 					id = tajik_focus.11
@@ -3238,6 +3242,7 @@ focus_tree = {
 			log = "[GetDateText]: [THIS.GetName]: Focus TAJ_our_way_of_life"
 			custom_effect_tooltip = TAJ_increase_bda_unrest_5_TT
 			add_to_variable = { var = TAJ_badakhshan_unrest_var value = 5 }
+			clamp_variable = { var = TAJ_badakhshan_unrest_var min = 0 }
 			newline = yes
 			set_temp_variable = { party_index = 8 }
 			set_temp_variable = { party_popularity_increase = -0.1 }
@@ -4773,6 +4778,7 @@ focus_tree = {
 					newline = yes
 					custom_effect_tooltip = TAJ_decrease_bda_unrest_5_TT
 					add_to_variable = { var = TAJ_badakhshan_unrest_var value = -5 }
+					clamp_variable = { var = TAJ_badakhshan_unrest_var min = 0 }
 				}
 			}
 			newline = yes
@@ -7110,10 +7116,8 @@ focus_tree = {
 					has_country_leader = { name = "Rustam Emomali" ruling_only = yes }
 				}
 			}
-			custom_trigger_tooltip = {
-				tooltip = TAJ_atleast_85_independence_TT
-				check_variable = { domestic_influence_amount > 84.99 }
-			}
+			set_temp_variable = { temp_value = 84.99 }
+			has_domestic_independence_greater_than = yes
 		}
 
 		completion_reward = {
@@ -7808,6 +7812,7 @@ focus_tree = {
 				newline = yes
 				custom_effect_tooltip = TAJ_decrease_bda_unrest_5_TT
 				add_to_variable = { var = TAJ_badakhshan_unrest_var value = -5 }
+				clamp_variable = { var = TAJ_badakhshan_unrest_var min = 0 }
 			}
 		}
 
@@ -9740,21 +9745,21 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus TAJ_phase_out_t_seventy_two"
 			add_tech_bonus = {
-				name = CAT_mbt
+				name = TAJ_phase_out_t_seventy_two
 				bonus = 1
 				uses = 1
 				category = CAT_mbt
 			}
 			newline = yes
 			add_tech_bonus = {
-				name = CAT_afv
+				name = TAJ_phase_out_t_seventy_two
 				bonus = 1
 				uses = 1
 				category = CAT_afv
 			}
 			newline = yes
 			add_tech_bonus = {
-				name = CAT_apc
+				name = TAJ_phase_out_t_seventy_two
 				bonus = 1
 				uses = 1
 				category = CAT_apc
@@ -10165,14 +10170,14 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus TAJ_bode_to_industry"
 			add_tech_bonus = {
-				name = CAT_construction_tech
+				name = TAJ_bode_to_industry
 				bonus = 1
 				uses = 1
 				category = CAT_construction_tech
 			}
 			newline = yes
 			add_tech_bonus = {
-				name = CAT_industry
+				name = TAJ_bode_to_industry
 				bonus = 1
 				uses = 1
 				category = CAT_industry
@@ -10328,7 +10333,7 @@ focus_tree = {
 			custom_effect_tooltip = TAJ_723_50_prod_TT
 			newline = yes
 			add_tech_bonus = {
-				name = CAT_agriculture_tech
+				name = TAJ_modernization_of_farming_equipment
 				bonus = 1
 				uses = 1
 				category = CAT_agriculture_tech
@@ -10488,7 +10493,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus TAJ_mining_tech_upgrades"
 			add_tech_bonus = {
-				name = CAT_excavation_tech
+				name = TAJ_mining_tech_upgrades
 				bonus = 1
 				uses = 1
 				category = CAT_excavation_tech
@@ -10835,6 +10840,7 @@ focus_tree = {
 				newline = yes
 				custom_effect_tooltip = TAJ_decrease_bda_unrest_2_TT
 				add_to_variable = { var = TAJ_badakhshan_unrest_var value = -2 }
+				clamp_variable = { var = TAJ_badakhshan_unrest_var min = 0 }
 			}
 		}
 
@@ -11272,6 +11278,7 @@ focus_tree = {
 				newline = yes
 				custom_effect_tooltip = TAJ_decrease_bda_unrest_2_TT
 				add_to_variable = { var = TAJ_badakhshan_unrest_var value = -2 }
+				clamp_variable = { var = TAJ_badakhshan_unrest_var min = 0 }
 			}
 		}
 
@@ -11330,6 +11337,7 @@ focus_tree = {
 				newline = yes
 				custom_effect_tooltip = TAJ_decrease_bda_unrest_3_TT
 				add_to_variable = { var = TAJ_badakhshan_unrest_var value = -3 }
+				clamp_variable = { var = TAJ_badakhshan_unrest_var min = 0 }
 			}
 		}
 

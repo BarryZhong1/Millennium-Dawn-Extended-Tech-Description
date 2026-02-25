@@ -3,6 +3,9 @@
 	set_cosmetic_tag = ALB
 	set_country_flag = dynamic_flag
 	set_country_flag = dynamic_rebel_flag
+	set_country_flag = is_getting_cdf_subsidies
+	add_to_array = { global.uncdf_recipients = THIS }
+	add_dynamic_modifier = { modifier = un_aid_subsidies_modifier }
 
 	set_variable = { gdp_per_capita = 5.893 }
 
@@ -51,8 +54,10 @@
 
 		set_technology = {
 			mbt_tech_ops = 1
+			mbt_tech = 1
 			nsb_artillery_0 = 1
 			nsb_Anti_Air_0 = 1
+			helo_ops_tech = 1
 			nsb_transport_helicopter1 = 1
 		}
 
@@ -92,6 +97,7 @@
 	}
 	if = { limit = { has_dlc = "Gotterdammerung" }
 		set_technology = {
+			air_defense = 1
 			SAM = 1
 			SAM0 = 1
 		}
@@ -103,7 +109,6 @@
 		international_bankers
 		landowners
 		industrial_conglomerates
-
 		bureau_02
 		defence_02
 		police_03
