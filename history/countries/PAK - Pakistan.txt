@@ -51,8 +51,6 @@
 		basic_computing = 1
 		integrated_circuit = 1
 		computing1 = 1
-		decryption1 = 1
-		encryption1 = 1
 
 		radar = 1
 		fuel_silos = 1
@@ -109,6 +107,14 @@
 		tech_torpedoes = 1
 
 		tech_landing_craft = 1
+	}
+
+	if = {
+		limit = { NOT = { has_dlc = "La Resistance" } }
+		set_technology = {
+			decryption1 = 1
+			encryption1 = 1
+		}
 	}
 
 	if = {
@@ -519,5 +525,17 @@
 	recruit_character = PAK_naveed_mukhtar
 	recruit_character = PAK_moazzam_ilyas
 	set_variable = { overall_productivity = 551 }
+
+	if = {
+		limit = {
+			has_dlc = "La Resistance"
+		}
+		create_intelligence_agency = {
+			name = "Inter-Services Intelligence (ISI)"
+			icon = GFX_intelligence_agency_logo_generic
+		}
+		upgrade_intelligence_agency = upgrade_form_department
+		upgrade_intelligence_agency = upgrade_establish_cyber_operations_division
+	}
 
 }
