@@ -5,16 +5,12 @@ scripted_gui = {
 		parent_window_token = politics_tab
 
 		effects = {
-            companies_slot_btn_click = {
+            companies_show_btn_click = {
 				if = {
 					limit = {
-						has_country_flag = CAC_companies_list
+						NOT = { check_variable = { CAC_showed_list = 1 } }
 					}
 
-					clr_country_flag = CAC_companies_list
-					set_variable = { opened_company_details = -1 }
-				}
-				else = {
 					if = {
 						limit = { NOT = { check_variable = { CAC_companies^num = CAC_sorted_companies^num } } }
 
@@ -27,7 +23,37 @@ scripted_gui = {
 						}
 					}
 
-					set_country_flag = CAC_companies_list
+					set_variable = { CAC_showed_list = 1 }
+				}
+				else = {
+					set_variable = { CAC_showed_list = 0 }
+					set_variable = { opened_company_details = -1 }
+				}
+            }
+			foreign_companies_show_btn_click = {
+				if = {
+					limit = {
+						NOT = { check_variable = { CAC_showed_list = 2 } }
+					}
+
+					if = {
+						limit = { NOT = { check_variable = { CAC_foreign_companies^num = CAC_sorted_companies^num } } }
+
+						clear_array = CAC_sorted_companies
+
+						for_each_loop = {
+							array = CAC_foreign_companies
+							value = v
+							add_to_array = { CAC_sorted_companies = v }
+						}
+					}
+
+					set_variable = { CAC_showed_list = 2 }
+					set_variable = { opened_company_details = -1 }
+				}
+				else = {
+					set_variable = { CAC_showed_list = 0 }
+					set_variable = { opened_company_details = -1 }
 				}
             }
 		}
@@ -42,7 +68,7 @@ scripted_gui = {
 			ROOT = {
 				AND = {
 					is_ai = no
-					has_country_flag = CAC_companies_list
+					check_variable = { CAC_showed_list = 1 }
 				}
 			}
 		}
@@ -310,7 +336,7 @@ scripted_gui = {
 			}
 
 			close_click = {
-				clr_country_flag = CAC_companies_list
+				set_variable = { CAC_showed_list = 0 }
 				clr_country_flag = ceo_window_open
 				set_variable = { opened_company_details = -1 }
             }
@@ -330,6 +356,301 @@ scripted_gui = {
         }
 	}
 
+	foreign_list_window = {
+		window_name = "foreign_companies_list_window"
+        context_type = player_context
+		parent_window_token = politics_tab
+
+        visible = {
+			ROOT = {
+				AND = {
+					is_ai = no
+					check_variable = { CAC_showed_list = 2 }
+				}
+			}
+		}
+
+		triggers = {
+			has_ceo_icon_visible = {
+				check_variable = { CAC_companies_selected_ceo^i = -1 }
+			}
+		}
+		
+		effects = {
+			companies_details_button_click = {
+				for_each_loop = {
+					array = CAC_companies
+					value = company_id
+					index = index
+					break = break
+
+					if = {
+						limit = {
+							check_variable = { v = company_id }
+						}
+
+						set_variable = { opened_company_details = index }
+						set_temp_variable = { break = 1 }
+					}
+				}
+
+				clr_country_flag = ceo_window_open
+			}
+
+			sort_size_click = {
+				clear_array = CAC_sorted_companies
+
+				for_loop_effect = {
+					start = 0
+					end = CAC_companies^num
+					value = i
+
+					set_temp_variable = { added = 0 }
+
+					for_each_loop = {
+						array = CAC_sorted_companies
+						index = j
+						value = v
+						break = added
+
+						set_temp_variable = { index = CAC_sorted_companies^j }
+
+						if = {
+							limit = {
+								AND = {
+									check_variable = { CAC_companies_size^v < CAC_companies_size^i }
+								}
+							}
+
+							add_to_array = {
+								array = CAC_sorted_companies
+								value = CAC_companies^i
+								index = j
+							}
+
+							set_temp_variable = { added = 1 }
+						}
+					}
+
+					if = {
+						limit = { check_variable = { added = 0 } }
+
+						add_to_array = {
+							array = CAC_sorted_companies
+							value = CAC_companies^i
+							index = CAC_sorted_companies^num
+						}
+					}
+				}
+			}
+
+			sort_money_click = {
+				clear_array = CAC_sorted_companies
+
+				for_loop_effect = {
+					start = 0
+					end = CAC_companies^num
+					value = i
+
+					set_temp_variable = { added = 0 }
+
+					for_each_loop = {
+						array = CAC_sorted_companies
+						index = j
+						value = v
+						break = added
+
+						set_temp_variable = { index = CAC_sorted_companies^j }
+
+						if = {
+							limit = {
+								AND = {
+									check_variable = { CAC_companies_money^v < CAC_companies_money^i }
+								}
+							}
+
+							add_to_array = {
+								array = CAC_sorted_companies
+								value = CAC_companies^i
+								index = j
+							}
+
+							set_temp_variable = { added = 1 }
+						}
+					}
+
+					if = {
+						limit = { check_variable = { added = 0 } }
+
+						add_to_array = {
+							array = CAC_sorted_companies
+							value = CAC_companies^i
+							index = CAC_sorted_companies^num
+						}
+					}
+				}
+			}
+
+			sort_value_click = {
+				clear_array = CAC_sorted_companies
+
+				for_loop_effect = {
+					start = 0
+					end = CAC_companies^num
+					value = i
+
+					set_temp_variable = { added = 0 }
+
+					for_each_loop = {
+						array = CAC_sorted_companies
+						index = j
+						value = v
+						break = added
+
+						set_temp_variable = { index = CAC_sorted_companies^j }
+
+						if = {
+							limit = {
+								AND = {
+									check_variable = { CAC_companies_value^v < CAC_companies_value^i }
+								}
+							}
+
+							add_to_array = {
+								array = CAC_sorted_companies
+								value = CAC_companies^i
+								index = j
+							}
+
+							set_temp_variable = { added = 1 }
+						}
+					}
+
+					if = {
+						limit = { check_variable = { added = 0 } }
+
+						add_to_array = {
+							array = CAC_sorted_companies
+							value = CAC_companies^i
+							index = CAC_sorted_companies^num
+						}
+					}
+				}
+			}
+
+			sort_revenue_click = {
+				clear_array = CAC_sorted_companies
+
+				for_loop_effect = {
+					start = 0
+					end = CAC_companies^num
+					value = i
+
+					set_temp_variable = { added = 0 }
+
+					for_each_loop = {
+						array = CAC_sorted_companies
+						index = j
+						value = v
+						break = added
+
+						set_temp_variable = { index = CAC_sorted_companies^j }
+
+						if = {
+							limit = {
+								AND = {
+									check_variable = { CAC_companies_revenue^v < CAC_companies_revenue^i }
+								}
+							}
+
+							add_to_array = {
+								array = CAC_sorted_companies
+								value = CAC_companies^i
+								index = j
+							}
+
+							set_temp_variable = { added = 1 }
+						}
+					}
+
+					if = {
+						limit = { check_variable = { added = 0 } }
+
+						add_to_array = {
+							array = CAC_sorted_companies
+							value = CAC_companies^i
+							index = CAC_sorted_companies^num
+						}
+					}
+				}
+			}
+
+			sort_factories_click = {
+				clear_array = CAC_sorted_companies
+
+				for_loop_effect = {
+					start = 0
+					end = CAC_companies^num
+					value = i
+
+					set_temp_variable = { added = 0 }
+
+					for_each_loop = {
+						array = CAC_sorted_companies
+						index = j
+						value = v
+						break = added
+
+						set_temp_variable = { index = CAC_sorted_companies^j }
+
+						if = {
+							limit = {
+								AND = {
+									check_variable = { CAC_companies_factories^v < CAC_companies_factories^i }
+								}
+							}
+
+							add_to_array = {
+								array = CAC_sorted_companies
+								value = CAC_companies^i
+								index = j
+							}
+
+							set_temp_variable = { added = 1 }
+						}
+					}
+
+					if = {
+						limit = { check_variable = { added = 0 } }
+
+						add_to_array = {
+							array = CAC_sorted_companies
+							value = CAC_companies^i
+							index = CAC_sorted_companies^num
+						}
+					}
+				}
+			}
+
+			close_click = {
+				set_variable = { CAC_showed_list = 0 }
+            }
+		}
+
+		properties = {
+			available_companies_grid_item_icon = {
+				image = "[CAC_icon_of_company]"
+			}
+		}
+
+        dynamic_lists = {
+            available_companies_grid = {
+                array = CAC_sorted_companies
+                entry_container = "foreign_companies_grid_list_item"
+            }
+        }
+	}
+
     company_detail_window = {
 		window_name = "company_detail_window"
         context_type = player_context
@@ -339,7 +660,7 @@ scripted_gui = {
 				AND = {
 					is_ai = no
 					check_variable = { opened_company_details > -1 }
-					has_country_flag = CAC_companies_list
+					check_variable = { CAC_showed_list = 1 }
 				}
 			}
 		}
