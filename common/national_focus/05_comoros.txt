@@ -179,7 +179,7 @@ focus_tree = {
 				}
 			}
 			clr_country_flag = COM_army_route_3
-			custom_effect_tooltip = COM_african_mercenaries_tt
+			custom_effect_tooltip = COM_african_mercenaries_1_tt
 		}
 
 		ai_will_do = {
@@ -2003,10 +2003,6 @@ focus_tree = {
 			set_temp_variable = { tag_index = SOV }
 			set_temp_variable = { influence_target = COM }
 			change_influence_percentage = yes
-			SOV = {
-				set_country_flag = SOV_comoros_wagner_placed
-				clr_country_flag = SOV_comoros_wagner_notplaced
-			}
 		}
 
 		ai_will_do = {
@@ -2081,14 +2077,13 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus COM_draw_closer_to_the_au executed"
 			add_political_power = 100
-			every_country = {
-				limit = {
-					has_idea = AU_member
-				}
-				add_opinion_modifier = {
-					target = COM
-					modifier = declaration_of_friendship
-				}
+			custom_effect_tooltip = TT_ALL_AU_MEMBER_NATIONS_GAIN
+			effect_tooltip = {
+				add_opinion_modifier = { target = COM modifier = declaration_of_friendship }
+			}
+			for_each_scope_loop = {
+				array = global.AU_member
+				add_opinion_modifier = { target = COM modifier = declaration_of_friendship }
 			}
 			add_timed_idea = {
 				idea = AZE_trade_idea
@@ -2257,9 +2252,12 @@ focus_tree = {
 				idea = IND_islamic_schools
 				days = 400
 			}
-			swap_ideas = {
-				remove_idea = farmers
-				add_idea = the_ulema
+			if = {
+				limit = { has_idea = farmers }
+				swap_ideas = {
+					remove_idea = farmers
+					add_idea = the_ulema
+				}
 			}
 			every_country = {
 				limit = {
@@ -2270,10 +2268,7 @@ focus_tree = {
 					modifier = declaration_of_friendship
 				}
 			}
-			add_popularity = {
-				ideology = fascism
-				popularity = 0.10
-			}
+			add_popularity = { ideology = fascism popularity = 0.10 }
 		}
 
 		ai_will_do = {
@@ -2686,7 +2681,6 @@ focus_tree = {
 			add_ideas = BRA_idea_harsher_conscription
 			add_stability = 0.15
 			remove_ideas = COM_big_problems_idea
-			set_cosmetic_tag = UAR_12_democratic
 		}
 
 		ai_will_do = {
@@ -4098,6 +4092,48 @@ focus_tree = {
 	}
 
 	focus = {
+		id = COM_debt_refactoring
+		icon = money
+
+		x = -3
+		y = 1
+		relative_position_id = COM_ministry_of_economy
+
+		cost = 7.86
+
+		prerequisite = { focus = COM_ministry_of_economy }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		available = {
+			gdp_debt_ratio_higher_50 = yes
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus GENERIC_attract_foreign_investors"
+			set_temp_variable = { debt_change = debt }
+			multiply_temp_variable = { debt_change = 0.05 }
+			clamp_temp_variable = { var = debt_change min = 0 max = 100 }
+			modify_debt_effect = yes
+			add_timed_idea = {
+				idea = idea_generic_temporary_debt_refactoring
+				days = 730
+			}
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 10
+				check_variable = { interest_rate > 5 }
+			}
+			modifier = {
+				factor = 5
+				gdp_debt_ratio_higher_50 = yes
+			}
+		}
+	}
+
+	focus = {
 		id = COM_trading_with_west
 		icon = trade_with_europe
 
@@ -4354,6 +4390,6 @@ focus_tree = {
 
 		ai_will_do = {
 			base = 10
- 		}
+		 }
 	}
 }
