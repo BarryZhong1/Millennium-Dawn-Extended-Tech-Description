@@ -646,21 +646,6 @@ calculate_additional_income_rate = {
 		multiply_variable = { additional_income_overlord_subsidies = 0.005 }
 		add_to_variable = { additional_income_rate = additional_income_overlord_subsidies }
 	}
-	# Income from Companies
-	if = {
-		limit = { check_variable = { CAC_companies^num > 0 } }
-		set_variable = { CAC_additional_income_from_companies = 0 }
-
-		for_loop_effect = {
-			start = 0
-			end = CAC_companies^num
-    		value = i
-
-			subtract_from_variable = { CAC_additional_income_from_companies = CAC_companies_taxes^i }
-		}
-
-		add_to_variable = { additional_income_rate = CAC_additional_income_from_companies }
-	}
 	# Imposing Taxation on Religious Institutions
 	if = { limit = { has_idea = internal_factions_taxing_religious_institutions }
 		set_variable = { additional_income_taxing_religious_institutions = population_total_m }
@@ -3860,6 +3845,8 @@ calculate_resource_sale_rate = {
 	add_to_variable = { resource_sale_rate = microchip_exports }
 	add_to_variable = { resource_sale_rate = composite_exports }
 	clamp_variable = { var = resource_sale_rate min = 0 }
+	# Store a clean copy for CAC mining sector income — unaffected by later display-only overrides
+	set_variable = { CAC_resource_sale_raw = resource_sale_rate }
 }
 
 update_display = {
@@ -3904,8 +3891,63 @@ update_display = {
 	}
 
 	set_variable = { display_income = tax_gain }
-	add_to_variable = { display_income = resource_sale_rate }
-	set_variable = { resource_to_tax_income = resource_sale_rate } #t these next 2 lines are to get resource export income divided by tax income (pop and corp), then use this ratio as one of the prerequisites for when rentier state cancels so it's not just based on resource extraction as % of GDP
+	if = {
+		limit = { check_variable = { CAC_companies^num > 0 } }
+		# Override resource_sale_rate so UI elements that read it directly (TRADE_INCOME_RATE, ledger) show the tax value
+		set_variable = { resource_sale_rate = CAC_mining_tax_income }
+		add_to_variable = { display_income = CAC_mining_tax_income }
+		set_variable = { resource_to_tax_income = CAC_mining_tax_income } #t ratio of resource income to tax income — used for rentier state cancellation check
+		# Scale per-resource display variables by the tax fraction so the breakdown tooltip sums to CAC_mining_tax_income
+		if = {
+			limit = { check_variable = { CAC_resource_sale_raw > 0 } }
+			set_variable = { oil_exports_display = oil_exports }
+			multiply_variable = { oil_exports_display = CAC_mining_tax_income }
+			divide_variable = { oil_exports_display = CAC_resource_sale_raw }
+			set_variable = { steel_exports_display = steel_exports }
+			multiply_variable = { steel_exports_display = CAC_mining_tax_income }
+			divide_variable = { steel_exports_display = CAC_resource_sale_raw }
+			set_variable = { aluminium_exports_display = aluminium_exports }
+			multiply_variable = { aluminium_exports_display = CAC_mining_tax_income }
+			divide_variable = { aluminium_exports_display = CAC_resource_sale_raw }
+			set_variable = { tungsten_exports_display = tungsten_exports }
+			multiply_variable = { tungsten_exports_display = CAC_mining_tax_income }
+			divide_variable = { tungsten_exports_display = CAC_resource_sale_raw }
+			set_variable = { chromium_exports_display = chromium_exports }
+			multiply_variable = { chromium_exports_display = CAC_mining_tax_income }
+			divide_variable = { chromium_exports_display = CAC_resource_sale_raw }
+			set_variable = { rubber_exports_display = rubber_exports }
+			multiply_variable = { rubber_exports_display = CAC_mining_tax_income }
+			divide_variable = { rubber_exports_display = CAC_resource_sale_raw }
+			set_variable = { microchip_exports_display = microchip_exports }
+			multiply_variable = { microchip_exports_display = CAC_mining_tax_income }
+			divide_variable = { microchip_exports_display = CAC_resource_sale_raw }
+			set_variable = { composite_exports_display = composite_exports }
+			multiply_variable = { composite_exports_display = CAC_mining_tax_income }
+			divide_variable = { composite_exports_display = CAC_resource_sale_raw }
+		}
+		else = {
+			set_variable = { oil_exports_display = 0 }
+			set_variable = { steel_exports_display = 0 }
+			set_variable = { aluminium_exports_display = 0 }
+			set_variable = { tungsten_exports_display = 0 }
+			set_variable = { chromium_exports_display = 0 }
+			set_variable = { rubber_exports_display = 0 }
+			set_variable = { microchip_exports_display = 0 }
+			set_variable = { composite_exports_display = 0 }
+		}
+	}
+	else = {
+		add_to_variable = { display_income = resource_sale_rate }
+		set_variable = { resource_to_tax_income = resource_sale_rate } #t these next 2 lines are to get resource export income divided by tax income (pop and corp), then use this ratio as one of the prerequisites for when rentier state cancels so it's not just based on resource extraction as % of GDP
+		set_variable = { oil_exports_display = oil_exports }
+		set_variable = { steel_exports_display = steel_exports }
+		set_variable = { aluminium_exports_display = aluminium_exports }
+		set_variable = { tungsten_exports_display = tungsten_exports }
+		set_variable = { chromium_exports_display = chromium_exports }
+		set_variable = { rubber_exports_display = rubber_exports }
+		set_variable = { microchip_exports_display = microchip_exports }
+		set_variable = { composite_exports_display = composite_exports }
+	}
 	divide_variable = { resource_to_tax_income = tax_gain }
 	if = { limit = { NOT = { has_country_flag = int_reinvestment_flag } }
 		add_to_variable = { display_income = int_investments_rate }
@@ -4561,40 +4603,6 @@ calculate_gdp = {
 		subtract_from_temp_variable = { workforce_total = workers_in_synthetic_refinery }
 	}
 
-	set_temp_variable = { companies_worker_requirement_multiplier = 1 }
-	add_to_temp_variable = { companies_worker_requirement_multiplier = modifier@companies_worker_requirement_modifier }
-	add_to_temp_variable = { companies_worker_requirement_multiplier = modifier@buildings_worker_requirement_modifier }
-	clamp_temp_variable = { var = companies_worker_requirement_multiplier min = 0.10 }
-
-	multiply_temp_variable = { workers_per_company_factory = companies_worker_requirement_multiplier }
-	set_variable = { workers_per_company_factory_display = workers_per_company_factory }
-	multiply_variable = { workers_per_company_factory_display = 1000 }
-
-	set_variable = { workers_in_companies = 0 }
-
-	for_loop_effect = {
-        start = 0
-        end = CAC_companies^num
-        value = i
-
-		add_to_variable = { workers_in_companies = CAC_companies_factories^i }
-	}
-
-	multiply_variable = { workers_in_companies = workers_per_company_factory }
-
-	set_variable = { max_workers_in_companies = workers_in_companies }
-
-	clamp_variable = {
-		var = workers_in_companies
-		max = workforce_total
-	}
-	multiply_variable = { workers_in_companies = 1 } # companies_employment_var
-	set_variable = { companies_manpower_fulfillment = workers_in_companies }
-	divide_variable = { companies_manpower_fulfillment = max_workers_in_companies }
-	subtract_from_temp_variable = { workforce_total = workers_in_companies }
-	if = { limit = { check_variable = { CAC_companies^num = 0 } }
-		set_variable = { companies_manpower_fulfillment = 1 }
-	}
 	# Average Worker Fulfillment
 	set_variable = { average_worker_fulfillment = civilian_factories_manpower_fulfillment }
 	add_to_variable = { average_worker_fulfillment = military_factories_manpower_fulfillment }
@@ -4604,8 +4612,7 @@ calculate_gdp = {
 	add_to_variable = { average_worker_fulfillment = composite_plants_manpower_fulfillment }
 	add_to_variable = { average_worker_fulfillment = synthetic_refinery_manpower_fulfillment }
 	add_to_variable = { average_worker_fulfillment = agriculture_district_manpower_fulfillment }
-	add_to_variable = { average_worker_fulfillment = companies_manpower_fulfillment }
-	multiply_variable = { average_worker_fulfillment = 0.125 } # x number of buildings
+	multiply_variable = { average_worker_fulfillment = 0.125 } # x number of buildings (8 building types)
 
 	set_variable = { total_unemployed = workforce_total }
 	if = { limit = { NOT = { has_dynamic_modifier = { modifier = high_unemployment_modifier } } }
@@ -4703,7 +4710,7 @@ calculate_gdp = {
 	multiply_temp_variable = { gdp_from_dockyards = naval_factories_manpower_fulfillment }
 	multiply_temp_variable = { gdp_from_offices = offices_manpower_fulfillment }
 	multiply_temp_variable = { gdp_from_agriculture_district = agriculture_district_manpower_fulfillment }
-	multiply_temp_variable = { gdp_from_companies = companies_manpower_fulfillment }
+
 	multiply_temp_variable = { gdp_from_microchip_plants = microchip_plants_manpower_fulfillment }
 	multiply_temp_variable = { gdp_from_composite_plants = composite_plants_manpower_fulfillment }
 	multiply_temp_variable = { gdp_from_synthetic_refinery = synthetic_refinery_manpower_fulfillment }

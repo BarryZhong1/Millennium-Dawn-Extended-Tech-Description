@@ -1326,9 +1326,8 @@ CAC_calculate_sector_weights = {
     multiply_variable = { CAC_sector_weight_6 = 0.002 }
     clamp_variable = { var = CAC_sector_weight_6 min = 0.5 }
 
-    # Sum all weights
+    # Sum all weights (sector 1 excluded — draws from resource_sale_rate, not the pool)
     set_variable = { CAC_total_sector_weight = CAC_sector_weight_0 }
-    add_to_variable = { CAC_total_sector_weight = CAC_sector_weight_1 }
     add_to_variable = { CAC_total_sector_weight = CAC_sector_weight_2 }
     add_to_variable = { CAC_total_sector_weight = CAC_sector_weight_3 }
     add_to_variable = { CAC_total_sector_weight = CAC_sector_weight_4 }
@@ -1404,9 +1403,15 @@ CAC_update_variables = {
                 set_variable = { CAC_companies_sector_buildings^i = 0 }
             }
 
-            set_temp_variable = { company_income_temp = sector_weight_temp }
-            divide_temp_variable = { company_income_temp = CAC_total_sector_weight }
-            multiply_temp_variable = { company_income_temp = CAC_sector_pool }
+            if = {
+                limit = { check_variable = { CAC_companies_type^i = 1 } }
+                set_temp_variable = { company_income_temp = CAC_resource_sale_raw }
+            }
+            else = {
+                set_temp_variable = { company_income_temp = sector_weight_temp }
+                divide_temp_variable = { company_income_temp = CAC_total_sector_weight }
+                multiply_temp_variable = { company_income_temp = CAC_sector_pool }
+            }
 
             add_to_temp_variable = { company_income_temp = CAC_companies_additional_income^i }
 
@@ -1421,8 +1426,6 @@ CAC_update_variables = {
             }
 
             multiply_temp_variable = { company_income_temp = company_income_modifiers }
-
-            multiply_temp_variable = { company_income_temp = companies_manpower_fulfillment }
 
             set_variable = { CAC_companies_income^i = company_income_temp }
 
@@ -1441,8 +1444,6 @@ CAC_update_variables = {
             }
 
             multiply_temp_variable = { company_expenses_temp = company_expenses_modifiers }
-
-            multiply_temp_variable = { company_expenses_temp = companies_manpower_fulfillment }
 
             set_variable = { CAC_companies_expenses^i = company_expenses_temp }
 
@@ -1475,6 +1476,20 @@ CAC_update_variables = {
             set_variable = { CAC_companies_display_expenses^i = CAC_companies_expenses^i }
             add_to_variable = { CAC_companies_display_expenses^i = CAC_companies_taxes^i }
         }
+
+        # National resource export income = taxes paid by Mining & Resources sector
+        # (taxes are stored as negative; subtract makes the sum positive)
+        set_variable = { CAC_mining_tax_income = 0 }
+        for_loop_effect = {
+            start = 0
+            end = CAC_companies^num
+            value = i
+            if = {
+                limit = { check_variable = { CAC_companies_type^i = 1 } }
+                subtract_from_variable = { CAC_mining_tax_income = CAC_companies_taxes^i }
+            }
+        }
+        clamp_variable = { var = CAC_mining_tax_income min = 0 }
     }
 }
 
