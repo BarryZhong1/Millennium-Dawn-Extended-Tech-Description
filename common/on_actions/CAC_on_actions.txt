@@ -1,4 +1,4 @@
-on_actions = {
+﻿on_actions = {
 	on_startup = {
 		effect = {
 			every_country = {
@@ -10,6 +10,13 @@ on_actions = {
 				# ui variables
 				set_variable = { opened_company_details = -1 }
 				set_variable = { companies_upgrades_tab = 1 }
+
+				CAC_calculate_sector_pool = yes
+				CAC_calculate_sector_weights = yes
+
+				# Skip intermediate CAC_update_variables calls while adding companies —
+				# only the final call (after all 7 are present) needs to produce valid output.
+				set_temp_variable = { cac_skip_all_updates = 1 }
 
 				# generic industries
 				if = {
@@ -46,6 +53,8 @@ on_actions = {
 					CAC_add_company = yes
 				}
 
+				set_temp_variable = { cac_skip_all_updates = 0 }
+
 				add_dynamic_modifier = { modifier = CAC_companies_dynamic_modifiers }
 				add_dynamic_modifier = { modifier = CAC_foreign_companies_dynamic_modifiers }
 
@@ -54,9 +63,10 @@ on_actions = {
 			}
 		}
 	}
-	on_weekly = {
+	on_monthly = {
 		effect = {
-			CAC_update_upkeep = yes
+			CAC_calculate_sector_pool = yes
+			CAC_calculate_sector_weights = yes
 		}
 	}
 }
