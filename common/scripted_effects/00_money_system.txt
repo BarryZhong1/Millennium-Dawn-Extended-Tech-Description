@@ -3935,9 +3935,15 @@ calculate_resource_sale_rate = {
 	add_to_variable = { CAC_resource_sale_raw = composite_exports }
 	clamp_variable = { var = CAC_resource_sale_raw min = 0 }
 
-	# National resource_sale_rate applies CIC trade adjustment to avoid double-counting
-	set_variable = { resource_sale_rate = CAC_resource_sale_raw }
-	multiply_variable = { resource_sale_rate = CIC_from_trade }
+	# CIC-adjusted gross — applies trade efficiency once; used as Mining sector gross income
+	set_variable = { CAC_resource_sale_cic_adjusted = CAC_resource_sale_raw }
+	multiply_variable = { CAC_resource_sale_cic_adjusted = CIC_from_trade }
+	clamp_variable = { var = CAC_resource_sale_cic_adjusted min = 0 }
+
+	# National resource_sale_rate applies corporate tax scaling on top of CIC-adjusted gross
+	set_variable = { resource_sale_rate = CAC_resource_sale_cic_adjusted }
+	multiply_variable = { resource_sale_rate = corporate_tax_rate }
+	multiply_variable = { resource_sale_rate = 0.01 }
 	clamp_variable = { var = resource_sale_rate min = 0 }
 
 	# Used by CAC mining sector — mirrors resource_sale_rate so the sector panel and
