@@ -281,17 +281,31 @@ calculate_tax_gain = {
 
 	# Military Factories
 	if = { limit = { check_variable = { military_fac_tax > 0 } }
+		#First, see how many factories are active vs inactive
+		set_temp_variable = { active_factories = military_fac_tax }
+		set_temp_variable = { inactive_factories = num_of_available_military_factories }
+		subtract_from_temp_variable = { active_factories = inactive_factories }
+
 		# Pass 1: Gross income
 		set_temp_variable = { military_gross_unified = gross_unified_base }
-		multiply_temp_variable = { military_gross_unified = 0.2 }
+		multiply_temp_variable = { military_gross_unified = 0.4 }
 
 		set_temp_variable = { military_prod_mod = 1 }
 		add_to_temp_variable = { military_prod_mod = modifier@military_factories_productivity }
 		multiply_temp_variable = { military_prod_mod = military_factories_manpower_fulfillment }
 		multiply_temp_variable = { military_prod_mod = military_gross_unified }
 
-		set_variable = { military_gross_income = military_fac_tax }
-		multiply_variable = { military_gross_income = military_prod_mod }
+		set_temp_variable = { active_factory_income = active_factories }
+		multiply_temp_variable = { active_factory_income = military_prod_mod }
+		multiply_temp_variable = { active_factory_income = 1.6 }
+
+		set_temp_variable = { inactive_factory_income = inactive_factories }
+		multiply_temp_variable = { inactive_factory_income = military_prod_mod }
+
+		set_variable = { military_gross_income = active_factory_income }
+		add_to_variable = { military_gross_income = inactive_factory_income }
+		set_temp_variable = { def_ind_spend = defence_breakdown_industry }
+		add_to_variable = { military_gross_income = def_ind_spend }
 
 		# Pass 2: Tax extracted from gross
 		set_temp_variable = { military_tax_mod = corporate_tax_rate_decimal_adjuster }
