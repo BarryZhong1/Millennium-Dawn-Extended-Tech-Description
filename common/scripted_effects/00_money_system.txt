@@ -233,13 +233,19 @@ calculate_tax_gain = {
 	set_temp_variable = { gross_unified_base = unified_building_multiplier }
 	set_temp_variable = { corporate_tax_rate_decimal_adjuster = corporate_tax_rate }
 	multiply_temp_variable = { corporate_tax_rate_decimal_adjuster = 0.01 }
+
+	# Corporate Tax Modifier (pre-computed here; also used below for unified_building_multiplier)
+	set_temp_variable = { corporate_tax_gain_multiplier = 1 }
+	add_to_temp_variable = { corporate_tax_gain_multiplier = modifier@corporate_tax_income_multiplier_modifier }
+
+	# Pre-computed base for all sector tax mods: corporate_tax_rate_decimal_adjuster * corporate_tax_gain_multiplier
+	set_temp_variable = { base_tax_mod = corporate_tax_rate_decimal_adjuster }
+	multiply_temp_variable = { base_tax_mod = corporate_tax_gain_multiplier }
+
 	multiply_temp_variable = { unified_building_multiplier = corporate_tax_rate }
 	multiply_temp_variable = { unified_building_multiplier = tax_gain_multiplier }
 	multiply_temp_variable = { gross_unified_base = tax_gain_multiplier }
 
-	# Corporate Tax Modifier
-	set_temp_variable = { corporate_tax_gain_multiplier = 1 }
-	add_to_temp_variable = { corporate_tax_gain_multiplier = modifier@corporate_tax_income_multiplier_modifier }
 	multiply_temp_variable = { unified_building_multiplier = corporate_tax_gain_multiplier }
 
 	# Overall productivity
@@ -268,11 +274,10 @@ calculate_tax_gain = {
 		multiply_variable = { civil_gross_income = civil_prod_mod }
 
 		# Pass 2: Tax extracted from gross
-		set_temp_variable = { civil_tax_mod = corporate_tax_rate_decimal_adjuster }
+		set_temp_variable = { civil_tax_mod = base_tax_mod }
 		set_temp_variable = { civil_sector_tax_adj = 1 }
 		add_to_temp_variable = { civil_sector_tax_adj = modifier@civilian_industry_tax_modifier }
 		multiply_temp_variable = { civil_tax_mod = civil_sector_tax_adj }
-		multiply_temp_variable = { civil_tax_mod = corporate_tax_gain_multiplier }
 
 		set_variable = { civil_fac_tax = civil_gross_income }
 		multiply_variable = { civil_fac_tax = civil_tax_mod }
@@ -303,15 +308,13 @@ calculate_tax_gain = {
 
 		set_variable = { military_gross_income = active_factory_income }
 		add_to_variable = { military_gross_income = inactive_factory_income }
-		set_temp_variable = { def_ind_spend = defence_breakdown_industry }
-		add_to_variable = { military_gross_income = def_ind_spend }
+		add_to_variable = { military_gross_income = defence_breakdown_industry }
 
 		# Pass 2: Tax extracted from gross
-		set_temp_variable = { military_tax_mod = corporate_tax_rate_decimal_adjuster }
+		set_temp_variable = { military_tax_mod = base_tax_mod }
 		set_temp_variable = { military_sector_tax_adj = 1 }
 		add_to_temp_variable = { military_sector_tax_adj = modifier@military_industry_tax_modifier }
 		multiply_temp_variable = { military_tax_mod = military_sector_tax_adj }
-		multiply_temp_variable = { military_tax_mod = corporate_tax_gain_multiplier }
 
 		set_variable = { military_fac_tax = military_gross_income }
 		multiply_variable = { military_fac_tax = military_tax_mod }
@@ -319,7 +322,7 @@ calculate_tax_gain = {
 
 	# Dockyards
 	if = { limit = { check_variable = { dockyard_tax > 0 } }
-		set_temp_variable = { active_dockyards = military_fac_tax }
+		set_temp_variable = { active_dockyards = dockyard_tax }
 		set_temp_variable = { inactive_dockyards = num_of_available_naval_factories }
 		subtract_from_temp_variable = { active_dockyards = inactive_dockyards }
 		# Pass 1: Gross income
@@ -343,11 +346,10 @@ calculate_tax_gain = {
 		add_to_variable = { dockyard_gross_income = inactive_dockyard_income }
 
 		# Pass 2: Tax extracted from gross
-		set_temp_variable = { dockyard_tax_mod = corporate_tax_rate_decimal_adjuster }
+		set_temp_variable = { dockyard_tax_mod = base_tax_mod }
 		set_temp_variable = { dockyard_sector_tax_adj = 1 }
 		add_to_temp_variable = { dockyard_sector_tax_adj = modifier@dockyard_income_tax_modifier }
 		multiply_temp_variable = { dockyard_tax_mod = dockyard_sector_tax_adj }
-		multiply_temp_variable = { dockyard_tax_mod = corporate_tax_gain_multiplier }
 
 		set_variable = { dockyard_tax = dockyard_gross_income }
 		multiply_variable = { dockyard_tax = dockyard_tax_mod }
@@ -367,11 +369,10 @@ calculate_tax_gain = {
 		multiply_variable = { office_gross_income = office_prod_mod }
 
 		# Pass 2: Tax extracted from gross
-		set_temp_variable = { office_tax_mod = corporate_tax_rate_decimal_adjuster }
+		set_temp_variable = { office_tax_mod = base_tax_mod }
 		set_temp_variable = { office_sector_tax_adj = 1 }
 		add_to_temp_variable = { office_sector_tax_adj = modifier@office_park_income_tax_modifier }
 		multiply_temp_variable = { office_tax_mod = office_sector_tax_adj }
-		multiply_temp_variable = { office_tax_mod = corporate_tax_gain_multiplier }
 
 		set_variable = { office_tax = office_gross_income }
 		multiply_variable = { office_tax = office_tax_mod }
@@ -392,11 +393,10 @@ calculate_tax_gain = {
 		multiply_variable = { agriculture_district_gross_income = agri_district_prod_mod }
 
 		# Pass 2: Tax extracted from gross
-		set_temp_variable = { agri_district_tax_mod = corporate_tax_rate_decimal_adjuster }
+		set_temp_variable = { agri_district_tax_mod = base_tax_mod }
 		set_temp_variable = { agri_district_sector_tax_adj = 1 }
 		add_to_temp_variable = { agri_district_sector_tax_adj = modifier@agriculture_district_income_tax_modifier }
 		multiply_temp_variable = { agri_district_tax_mod = agri_district_sector_tax_adj }
-		multiply_temp_variable = { agri_district_tax_mod = corporate_tax_gain_multiplier }
 
 		set_variable = { agriculture_district_tax = agriculture_district_gross_income }
 		multiply_variable = { agriculture_district_tax = agri_district_tax_mod }
@@ -417,11 +417,10 @@ calculate_tax_gain = {
 		multiply_variable = { microchip_gross_income = microchip_prod_mod }
 
 		# Pass 2: Tax extracted from gross
-		set_temp_variable = { microchip_tax_mod = corporate_tax_rate_decimal_adjuster }
+		set_temp_variable = { microchip_tax_mod = base_tax_mod }
 		set_temp_variable = { microchip_sector_tax_adj = 1 }
 		add_to_temp_variable = { microchip_sector_tax_adj = modifier@microchip_plant_income_tax_modifier }
 		multiply_temp_variable = { microchip_tax_mod = microchip_sector_tax_adj }
-		multiply_temp_variable = { microchip_tax_mod = corporate_tax_gain_multiplier }
 
 		set_variable = { microchip_plant_tax = microchip_gross_income }
 		multiply_variable = { microchip_plant_tax = microchip_tax_mod }
@@ -442,11 +441,10 @@ calculate_tax_gain = {
 		multiply_variable = { composite_gross_income = composite_prod_mod }
 
 		# Pass 2: Tax extracted from gross
-		set_temp_variable = { composite_tax_mod = corporate_tax_rate_decimal_adjuster }
+		set_temp_variable = { composite_tax_mod = base_tax_mod }
 		set_temp_variable = { composite_sector_tax_adj = 1 }
 		add_to_temp_variable = { composite_sector_tax_adj = modifier@composite_plant_income_tax_modifier }
 		multiply_temp_variable = { composite_tax_mod = composite_sector_tax_adj }
-		multiply_temp_variable = { composite_tax_mod = corporate_tax_gain_multiplier }
 
 		set_variable = { composite_plant_tax = composite_gross_income }
 		multiply_variable = { composite_plant_tax = composite_tax_mod }
@@ -461,9 +459,8 @@ calculate_tax_gain = {
 		set_variable = { internet_station_gross_income = internet_station_tax }
 		multiply_variable = { internet_station_gross_income = internet_station_gross_unified }
 
-		# Pass 2: Tax extracted from gross
-		set_temp_variable = { internet_station_tax_mod = corporate_tax_rate_decimal_adjuster }
-		multiply_temp_variable = { internet_station_tax_mod = corporate_tax_gain_multiplier }
+		# Pass 2: Tax extracted from gross (no sector modifier — base_tax_mod applies directly)
+		set_temp_variable = { internet_station_tax_mod = base_tax_mod }
 
 		set_variable = { internet_station_tax = internet_station_gross_income }
 		multiply_variable = { internet_station_tax = internet_station_tax_mod }
@@ -484,11 +481,10 @@ calculate_tax_gain = {
 		multiply_variable = { synthetic_gross_income = synthetic_prod_mod }
 
 		# Pass 2: Tax extracted from gross
-		set_temp_variable = { synthetic_tax_mod = corporate_tax_rate_decimal_adjuster }
+		set_temp_variable = { synthetic_tax_mod = base_tax_mod }
 		set_temp_variable = { synthetic_sector_tax_adj = 1 }
 		add_to_temp_variable = { synthetic_sector_tax_adj = modifier@synthetic_refinery_income_tax_modifier }
 		multiply_temp_variable = { synthetic_tax_mod = synthetic_sector_tax_adj }
-		multiply_temp_variable = { synthetic_tax_mod = corporate_tax_gain_multiplier }
 
 		set_variable = { synthetic_refinery_tax = synthetic_gross_income }
 		multiply_variable = { synthetic_refinery_tax = synthetic_tax_mod }
@@ -513,32 +509,33 @@ calculate_tax_gain = {
 	# Apply consolidated multiplier
 	multiply_variable = { population_tax = pop_tax_gdp_c_multiplier }
 
-	CAC_update_variables = yes
+	#CAC_update_variables = yes
 
-	# Add Corporate Tax Rates Together
+	# Populate sector display vars for corporate tax tooltip (tooltip reads these as positive values)
+	# CAC_companies_taxes^0..6 are stored negative (display sign); negate back to get positive amounts
 	set_variable = { finance_sc = CAC_companies_taxes^0 }
-	set_variable = { mining_sc = CAC_companies_taxes^1 }
-	set_variable = { energy_sec = CAC_companies_taxes^2 }
-	set_variable = { defense_sec = CAC_companies_taxes^3 }
-	set_variable = { tech_sec = CAC_companies_taxes^4 }
-	set_variable = { const_sec = CAC_companies_taxes^5 }
-	set_variable = { healthcare_sec = CAC_companies_taxes^6 }
-
 	multiply_variable = { finance_sc = -1 }
+	set_variable = { mining_sc = CAC_companies_taxes^1 }
 	multiply_variable = { mining_sc = -1 }
+	set_variable = { energy_sec = CAC_companies_taxes^2 }
 	multiply_variable = { energy_sec = -1 }
+	set_variable = { defense_sec = CAC_companies_taxes^3 }
 	multiply_variable = { defense_sec = -1 }
+	set_variable = { tech_sec = CAC_companies_taxes^4 }
 	multiply_variable = { tech_sec = -1 }
+	set_variable = { const_sec = CAC_companies_taxes^5 }
 	multiply_variable = { const_sec = -1 }
+	set_variable = { healthcare_sec = CAC_companies_taxes^6 }
 	multiply_variable = { healthcare_sec = -1 }
 
-	add_to_variable = { corporate_tax = finance_sc }
-	add_to_variable = { corporate_tax = mining_sc }
-	add_to_variable = { corporate_tax = energy_sec }
-	add_to_variable = { corporate_tax = defense_sec }
-	add_to_variable = { corporate_tax = tech_sec }
-	add_to_variable = { corporate_tax = const_sec }
-	add_to_variable = { corporate_tax = healthcare_sec }
+	# Accumulate corporate_tax by subtracting the negated array values (subtracting a negative = adding a positive)
+	subtract_from_variable = { corporate_tax = CAC_companies_taxes^0 }
+	subtract_from_variable = { corporate_tax = CAC_companies_taxes^1 }
+	subtract_from_variable = { corporate_tax = CAC_companies_taxes^2 }
+	subtract_from_variable = { corporate_tax = CAC_companies_taxes^3 }
+	subtract_from_variable = { corporate_tax = CAC_companies_taxes^4 }
+	subtract_from_variable = { corporate_tax = CAC_companies_taxes^5 }
+	subtract_from_variable = { corporate_tax = CAC_companies_taxes^6 }
 
 	# Clamps Corporate and Population Tax Rates to 0 to prevent negative incomes
 	clamp_variable = { var = corporate_tax min = 0 }

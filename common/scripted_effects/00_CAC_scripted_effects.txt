@@ -795,104 +795,189 @@ CAC_modify_modifier_research_speed_effect = {
     add_to_variable = { CAC_modifier_research_speed = cac_modifier_research_speed_change }
 }
 
+# CAC_update_building_stats
+# Purpose: Computes building-count-derived values for all 7 company slots:
+# maintenance, workforce (stored as negative), and sector_buildings.
+# Called monthly and at startup (before CAC_update_variables).
+# These values only change when construction completes, so monthly cadence is sufficient.
+CAC_update_building_stats = {
+	# Pre-compute shared workforce scaling factor (gdp_per_capita * 0.007) used by all 7 slots
+	set_temp_variable = { cac_gdpc_scaled = gdp_per_capita }
+	multiply_temp_variable = { cac_gdpc_scaled = 0.007 }
+
+	# Slot 0 — Banking & Finance (offices)
+	set_variable = { CAC_companies_maintenance^0 = office_park_total }
+	multiply_variable = { CAC_companies_maintenance^0 = 0.01260 }         # 12.00 * 0.15 * 0.007
+	multiply_variable = { CAC_companies_maintenance^0 = -1 }
+	set_temp_variable = { cac_workforce_cost = office_park_total }
+	multiply_temp_variable = { cac_workforce_cost = 0.630 }               # workers_per_office
+	multiply_temp_variable = { cac_workforce_cost = cac_gdpc_scaled }
+	set_variable = { CAC_companies_workforce^0 = cac_workforce_cost }
+	multiply_variable = { CAC_companies_workforce^0 = -1 }
+	set_variable = { CAC_companies_sector_buildings^0 = office_park_total }
+
+	# Slot 1 — Mining & Resources (synthetic refineries + agriculture)
+	set_variable = { CAC_companies_maintenance^1 = synthetic_refinery_total }
+	multiply_variable = { CAC_companies_maintenance^1 = 0.00630 }         # 6.00 * 0.15 * 0.007
+	set_temp_variable = { cac_agri_maintenance = agriculture_district_total }
+	multiply_temp_variable = { cac_agri_maintenance = 0.00525 }           # 5.00 * 0.15 * 0.007
+	add_to_variable = { CAC_companies_maintenance^1 = cac_agri_maintenance }
+	multiply_variable = { CAC_companies_maintenance^1 = -1 }
+	set_temp_variable = { cac_workforce_cost = synthetic_refinery_total }
+	multiply_temp_variable = { cac_workforce_cost = 0.245 }               # workers_per_synthetic_refinery
+	set_temp_variable = { cac_agri_workforce = agriculture_district_total }
+	multiply_temp_variable = { cac_agri_workforce = 0.250 }               # workers_per_agriculture_district
+	add_to_temp_variable = { cac_workforce_cost = cac_agri_workforce }
+	multiply_temp_variable = { cac_workforce_cost = cac_gdpc_scaled }
+	set_variable = { CAC_companies_workforce^1 = cac_workforce_cost }
+	multiply_variable = { CAC_companies_workforce^1 = -1 }
+	set_variable = { CAC_companies_sector_buildings^1 = synthetic_refinery_total }
+	add_to_variable = { CAC_companies_sector_buildings^1 = agriculture_district_total }
+
+	# Slot 2 — Energy & Utilities (fuel silos + fossil powerplants + nuclear reactors + renewable energy)
+	set_variable = { CAC_companies_maintenance^2 = fuel_silos }
+	multiply_variable = { CAC_companies_maintenance^2 = 0.00315 }         # 3.00 * 0.15 * 0.007
+	set_temp_variable = { cac_energy_maint = number_of_fossil_pps }
+	multiply_temp_variable = { cac_energy_maint = 0.00341 }               # 3.25 * 0.15 * 0.007
+	add_to_variable = { CAC_companies_maintenance^2 = cac_energy_maint }
+	set_temp_variable = { cac_energy_maint = nuclear_reactors }
+	multiply_temp_variable = { cac_energy_maint = 0.00945 }               # 9.00 * 0.15 * 0.007
+	add_to_variable = { CAC_companies_maintenance^2 = cac_energy_maint }
+	set_temp_variable = { cac_energy_maint = renewable_energy_infra }
+	multiply_temp_variable = { cac_energy_maint = 0.00893 }               # 8.50 * 0.15 * 0.007
+	add_to_variable = { CAC_companies_maintenance^2 = cac_energy_maint }
+	multiply_variable = { CAC_companies_maintenance^2 = -1 }
+	set_temp_variable = { cac_workforce_cost = fuel_silos }
+	multiply_temp_variable = { cac_workforce_cost = 0.010 }               # workers_per_fuel_silo
+	set_temp_variable = { cac_energy_workforce = number_of_fossil_pps }
+	multiply_temp_variable = { cac_energy_workforce = 0.075 }             # workers_per_fossil_powerplant
+	add_to_temp_variable = { cac_workforce_cost = cac_energy_workforce }
+	set_temp_variable = { cac_energy_workforce = nuclear_reactors }
+	multiply_temp_variable = { cac_energy_workforce = 0.100 }             # workers_per_nuclear_reactor
+	add_to_temp_variable = { cac_workforce_cost = cac_energy_workforce }
+	set_temp_variable = { cac_energy_workforce = renewable_energy_infra }
+	multiply_temp_variable = { cac_energy_workforce = 0.030 }             # workers_per_renewable_energy
+	add_to_temp_variable = { cac_workforce_cost = cac_energy_workforce }
+	multiply_temp_variable = { cac_workforce_cost = cac_gdpc_scaled }
+	set_variable = { CAC_companies_workforce^2 = cac_workforce_cost }
+	multiply_variable = { CAC_companies_workforce^2 = -1 }
+	set_variable = { CAC_companies_sector_buildings^2 = fuel_silos }
+	add_to_variable = { CAC_companies_sector_buildings^2 = number_of_fossil_pps }
+	add_to_variable = { CAC_companies_sector_buildings^2 = nuclear_reactors }
+	add_to_variable = { CAC_companies_sector_buildings^2 = renewable_energy_infra }
+
+	# Slot 3 — Defense (military factories + dockyards)
+	set_variable = { CAC_companies_maintenance^3 = military_fac }
+	add_to_variable = { CAC_companies_maintenance^3 = dockyard_fac }
+	multiply_variable = { CAC_companies_maintenance^3 = 0.007875 }        # 7.50 * 0.15 * 0.007
+	multiply_variable = { CAC_companies_maintenance^3 = -1 }
+	set_temp_variable = { cac_workforce_cost = military_fac }
+	add_to_temp_variable = { cac_workforce_cost = dockyard_fac }
+	multiply_temp_variable = { cac_workforce_cost = 0.025 }               # workers_per_mil_fac / workers_per_dockyard
+	multiply_temp_variable = { cac_workforce_cost = cac_gdpc_scaled }
+	set_variable = { CAC_companies_workforce^3 = cac_workforce_cost }
+	multiply_variable = { CAC_companies_workforce^3 = -1 }
+	set_variable = { CAC_companies_sector_buildings^3 = military_fac }
+	add_to_variable = { CAC_companies_sector_buildings^3 = dockyard_fac }
+
+	# Slot 4 — Technology & Communications (microchip plants + composite plants + internet stations)
+	set_variable = { CAC_companies_maintenance^4 = microchip_plant_total }
+	multiply_variable = { CAC_companies_maintenance^4 = 0.01575 }         # 15.00 * 0.15 * 0.007
+	set_temp_variable = { cac_composite_maintenance = composite_plant_total }
+	multiply_temp_variable = { cac_composite_maintenance = 0.01365 }      # 13.00 * 0.15 * 0.007
+	add_to_variable = { CAC_companies_maintenance^4 = cac_composite_maintenance }
+	set_temp_variable = { cac_internet_maintenance = internet_station_total }
+	multiply_temp_variable = { cac_internet_maintenance = 0.00315 }       # 3.00 * 0.15 * 0.007
+	add_to_variable = { CAC_companies_maintenance^4 = cac_internet_maintenance }
+	multiply_variable = { CAC_companies_maintenance^4 = -1 }
+	set_temp_variable = { cac_workforce_cost = microchip_plant_total }
+	multiply_temp_variable = { cac_workforce_cost = 0.050 }               # workers_per_microchip_plant
+	set_temp_variable = { cac_composite_workforce = composite_plant_total }
+	multiply_temp_variable = { cac_composite_workforce = 0.050 }          # workers_per_composite_plant
+	add_to_temp_variable = { cac_workforce_cost = cac_composite_workforce }
+	set_temp_variable = { cac_internet_workforce = internet_station_total }
+	multiply_temp_variable = { cac_internet_workforce = 0.030 }           # workers_per_internet_station
+	add_to_temp_variable = { cac_workforce_cost = cac_internet_workforce }
+	multiply_temp_variable = { cac_workforce_cost = cac_gdpc_scaled }
+	set_variable = { CAC_companies_workforce^4 = cac_workforce_cost }
+	multiply_variable = { CAC_companies_workforce^4 = -1 }
+	set_variable = { CAC_companies_sector_buildings^4 = microchip_plant_total }
+	add_to_variable = { CAC_companies_sector_buildings^4 = composite_plant_total }
+	add_to_variable = { CAC_companies_sector_buildings^4 = internet_station_total }
+
+	# Slot 5 — Construction & Infrastructure (civilian factories)
+	set_variable = { CAC_companies_maintenance^5 = industrial_complex_total }
+	multiply_variable = { CAC_companies_maintenance^5 = 0.007875 }        # 7.50 * 0.15 * 0.007
+	multiply_variable = { CAC_companies_maintenance^5 = -1 }
+	set_temp_variable = { cac_workforce_cost = industrial_complex_total }
+	multiply_temp_variable = { cac_workforce_cost = 0.275 }               # workers_per_civ_fac
+	multiply_temp_variable = { cac_workforce_cost = cac_gdpc_scaled }
+	set_variable = { CAC_companies_workforce^5 = cac_workforce_cost }
+	multiply_variable = { CAC_companies_workforce^5 = -1 }
+	set_variable = { CAC_companies_sector_buildings^5 = industrial_complex_total }
+
+	# Slot 6 — Healthcare & Pharma (scales with state_hospital_need)
+	#TODO: add modifier so that increased health requires increased maintenance
+	set_variable = { CAC_companies_maintenance^6 = state_hospital_need }
+	multiply_variable = { CAC_companies_maintenance^6 = 0.175 }
+	multiply_variable = { CAC_companies_maintenance^6 = -1 }
+	set_variable = { CAC_companies_workforce^6 = state_hospital_need }
+	multiply_variable = { CAC_companies_workforce^6 = cac_gdpc_scaled }
+	multiply_variable = { CAC_companies_workforce^6 = -1 }
+	set_variable = { CAC_companies_sector_buildings^6 = 0 }
+}
+
 # CAC_update_variables
 # Purpose: Refreshes per-company display arrays from the latest gross income variables
 # computed in calculate_tax_gain. Called after every CAC_modify_* effect and weekly via
 # ingame_update_setup. Guarded by cac_skip_all_updates during startup initialization.
+# Maintenance and workforce are pre-computed monthly (stored as negative) by
+# CAC_update_building_stats and added directly into revenue/display_expenses here.
 CAC_update_variables = {
 	if = {
 		limit = { NOT = { check_variable = { cac_skip_all_updates = 1 } } }
 
+		# cac_gdpc_scaled still needed here for energy income (slot 2) and healthcare income (slot 6)
+		set_temp_variable = { cac_gdpc_scaled = gdp_per_capita }
+		multiply_temp_variable = { cac_gdpc_scaled = 0.007 }
+
 		# Slot 0 — Banking & Finance (offices)
-		set_variable = { CAC_companies_maintenance^0 = office_park_total }
-		multiply_variable = { CAC_companies_maintenance^0 = 0.01260 } # 12.00 * 0.15 * 0.007
-		set_temp_variable = { cac_workforce_cost = office_park_total }
-		multiply_temp_variable = { cac_workforce_cost = 0.630 }    # workers_per_office
-		multiply_temp_variable = { cac_workforce_cost = gdp_per_capita }
-		multiply_temp_variable = { cac_workforce_cost = 0.007 }
-		set_variable = { CAC_companies_workforce^0 = cac_workforce_cost }
+		# Maintenance and workforce pre-computed monthly (stored negative) by CAC_update_building_stats.
 		set_variable = { CAC_companies_income^0 = office_gross_income }
 		set_variable = { CAC_companies_taxes^0 = office_tax }
 		set_variable = { CAC_companies_revenue^0 = CAC_companies_income^0 }
 		subtract_from_variable = { CAC_companies_revenue^0 = CAC_companies_taxes^0 }
 		add_to_variable = { CAC_companies_revenue^0 = CAC_companies_additional_income^0 }
 		subtract_from_variable = { CAC_companies_revenue^0 = CAC_companies_additional_expenses^0 }
-		subtract_from_variable = { CAC_companies_revenue^0 = CAC_companies_maintenance^0 }
-		subtract_from_variable = { CAC_companies_revenue^0 = CAC_companies_workforce^0 }
-		set_variable = { CAC_companies_display_expenses^0 = CAC_companies_taxes^0 }
-		add_to_variable = { CAC_companies_display_expenses^0 = CAC_companies_additional_expenses^0 }
+		add_to_variable = { CAC_companies_revenue^0 = CAC_companies_maintenance^0 }
+		add_to_variable = { CAC_companies_revenue^0 = CAC_companies_workforce^0 }
+		set_variable = { CAC_companies_display_expenses^0 = 0 }
+		subtract_from_variable = { CAC_companies_display_expenses^0 = CAC_companies_taxes^0 }
+		subtract_from_variable = { CAC_companies_display_expenses^0 = CAC_companies_additional_expenses^0 }
 		add_to_variable = { CAC_companies_display_expenses^0 = CAC_companies_maintenance^0 }
 		add_to_variable = { CAC_companies_display_expenses^0 = CAC_companies_workforce^0 }
-		multiply_variable = { CAC_companies_display_expenses^0 = -1 }
 		multiply_variable = { CAC_companies_taxes^0 = -1 }
-		multiply_variable = { CAC_companies_maintenance^0 = -1 }
-		multiply_variable = { CAC_companies_workforce^0 = -1 }
-		set_variable = { CAC_companies_sector_buildings^0 = office_park_total }
 
 		# Slot 1 — Mining & Resources (resource exports + synthetic refineries + agriculture)
-		set_variable = { CAC_companies_maintenance^1 = synthetic_refinery_total }
-		multiply_variable = { CAC_companies_maintenance^1 = 0.00630 } # 6.00 * 0.15 * 0.007
-		set_temp_variable = { cac_agri_maintenance = agriculture_district_total }
-		multiply_temp_variable = { cac_agri_maintenance = 0.00525 } # 5.00 * 0.15 * 0.007
-		add_to_variable = { CAC_companies_maintenance^1 = cac_agri_maintenance }
-		set_temp_variable = { cac_workforce_cost = synthetic_refinery_total }
-		multiply_temp_variable = { cac_workforce_cost = 0.245 }    # workers_per_synthetic_refinery
-		set_temp_variable = { cac_agri_workforce = agriculture_district_total }
-		multiply_temp_variable = { cac_agri_workforce = 0.250 }    # workers_per_agriculture_district
-		add_to_temp_variable = { cac_workforce_cost = cac_agri_workforce }
-		multiply_temp_variable = { cac_workforce_cost = gdp_per_capita }
-		multiply_temp_variable = { cac_workforce_cost = 0.007 }
-		set_variable = { CAC_companies_workforce^1 = cac_workforce_cost }
 		set_variable = { CAC_companies_income^1 = CAC_resource_sale_cic_adjusted }
 		add_to_variable = { CAC_companies_income^1 = synthetic_gross_income }
 		add_to_variable = { CAC_companies_income^1 = agriculture_district_gross_income }
-		set_variable = { CAC_companies_taxes^1 = CAC_mining_tax_income }
-		add_to_variable = { CAC_companies_taxes^1 = synthetic_refinery_tax }
+		set_variable = { CAC_companies_taxes^1 = synthetic_refinery_tax }
 		add_to_variable = { CAC_companies_taxes^1 = agriculture_district_tax }
 		set_variable = { CAC_companies_revenue^1 = CAC_companies_income^1 }
 		subtract_from_variable = { CAC_companies_revenue^1 = CAC_companies_taxes^1 }
 		add_to_variable = { CAC_companies_revenue^1 = CAC_companies_additional_income^1 }
 		subtract_from_variable = { CAC_companies_revenue^1 = CAC_companies_additional_expenses^1 }
-		subtract_from_variable = { CAC_companies_revenue^1 = CAC_companies_maintenance^1 }
-		subtract_from_variable = { CAC_companies_revenue^1 = CAC_companies_workforce^1 }
-		set_variable = { CAC_companies_display_expenses^1 = CAC_companies_taxes^1 }
-		add_to_variable = { CAC_companies_display_expenses^1 = CAC_companies_additional_expenses^1 }
+		add_to_variable = { CAC_companies_revenue^1 = CAC_companies_maintenance^1 }
+		add_to_variable = { CAC_companies_revenue^1 = CAC_companies_workforce^1 }
+		set_variable = { CAC_companies_display_expenses^1 = 0 }
+		subtract_from_variable = { CAC_companies_display_expenses^1 = CAC_companies_taxes^1 }
+		subtract_from_variable = { CAC_companies_display_expenses^1 = CAC_companies_additional_expenses^1 }
 		add_to_variable = { CAC_companies_display_expenses^1 = CAC_companies_maintenance^1 }
 		add_to_variable = { CAC_companies_display_expenses^1 = CAC_companies_workforce^1 }
-		multiply_variable = { CAC_companies_display_expenses^1 = -1 }
 		multiply_variable = { CAC_companies_taxes^1 = -1 }
-		multiply_variable = { CAC_companies_maintenance^1 = -1 }
-		multiply_variable = { CAC_companies_workforce^1 = -1 }
-		set_variable = { CAC_companies_sector_buildings^1 = synthetic_refinery_total }
-		add_to_variable = { CAC_companies_sector_buildings^1 = agriculture_district_total }
 
 		# Slot 2 — Energy & Utilities (fuel silos + fossil powerplants + nuclear reactors + renewable energy)
-		set_variable = { CAC_companies_maintenance^2 = fuel_silos }
-		multiply_variable = { CAC_companies_maintenance^2 = 0.00315 }    # 3.00 * 0.15 * 0.007
-		set_temp_variable = { cac_energy_maint = number_of_fossil_pps }
-		multiply_temp_variable = { cac_energy_maint = 0.00341 }        # 3.25 * 0.15 * 0.007
-		add_to_variable = { CAC_companies_maintenance^2 = cac_energy_maint }
-		set_temp_variable = { cac_energy_maint = nuclear_reactors }
-		multiply_temp_variable = { cac_energy_maint = 0.00945 }          # 9.00 * 0.15 * 0.007
-		add_to_variable = { CAC_companies_maintenance^2 = cac_energy_maint }
-		set_temp_variable = { cac_energy_maint = renewable_energy_infra }
-		multiply_temp_variable = { cac_energy_maint = 0.00893 }         # 8.50 * 0.15 * 0.007
-		add_to_variable = { CAC_companies_maintenance^2 = cac_energy_maint }
-
-		set_temp_variable = { cac_workforce_cost = fuel_silos }
-		multiply_temp_variable = { cac_workforce_cost = 0.010 }          # workers_per_fuel_silo
-		set_temp_variable = { cac_energy_workforce = number_of_fossil_pps }
-		multiply_temp_variable = { cac_energy_workforce = 0.075 }        # workers_per_fossil_powerplant
-		add_to_temp_variable = { cac_workforce_cost = cac_energy_workforce }
-		set_temp_variable = { cac_energy_workforce = nuclear_reactors }
-		multiply_temp_variable = { cac_energy_workforce = 0.100 }        # workers_per_nuclear_reactor
-		add_to_temp_variable = { cac_workforce_cost = cac_energy_workforce }
-		set_temp_variable = { cac_energy_workforce = renewable_energy_infra }
-		multiply_temp_variable = { cac_energy_workforce = 0.030 }        # workers_per_renewable_energy
-		add_to_temp_variable = { cac_workforce_cost = cac_energy_workforce }
-		multiply_temp_variable = { cac_workforce_cost = gdp_per_capita }
-		multiply_temp_variable = { cac_workforce_cost = 0.007 }
-		set_variable = { CAC_companies_workforce^2 = cac_workforce_cost }
 		set_temp_variable = { cac_energy_income = fuel_silos }
 		multiply_temp_variable = { cac_energy_income = 0.05 }            # income_rate_fuel_silo
 		set_temp_variable = { cac_energy_temp = number_of_fossil_pps }
@@ -904,8 +989,7 @@ CAC_update_variables = {
 		set_temp_variable = { cac_energy_temp = renewable_energy_infra }
 		multiply_temp_variable = { cac_energy_temp = 0.20 }              # income_rate_renewable_energy
 		add_to_temp_variable = { cac_energy_income = cac_energy_temp }
-		multiply_temp_variable = { cac_energy_income = gdp_per_capita }
-		multiply_temp_variable = { cac_energy_income = 0.007 }
+		multiply_temp_variable = { cac_energy_income = cac_gdpc_scaled }
 		set_temp_variable = { energy_consumption_mod = 1 }
 		add_to_temp_variable = { energy_consumption_mod = modifier@energy_sector_consumption_multiplier_modifier }
 		multiply_temp_variable = { cac_energy_income = energy_consumption_mod }
@@ -917,31 +1001,16 @@ CAC_update_variables = {
 		subtract_from_variable = { CAC_companies_revenue^2 = CAC_companies_taxes^2 }
 		add_to_variable = { CAC_companies_revenue^2 = CAC_companies_additional_income^2 }
 		subtract_from_variable = { CAC_companies_revenue^2 = CAC_companies_additional_expenses^2 }
-		subtract_from_variable = { CAC_companies_revenue^2 = CAC_companies_maintenance^2 }
-		subtract_from_variable = { CAC_companies_revenue^2 = CAC_companies_workforce^2 }
-		set_variable = { CAC_companies_display_expenses^2 = CAC_companies_taxes^2 }
-		add_to_variable = { CAC_companies_display_expenses^2 = CAC_companies_additional_expenses^2 }
+		add_to_variable = { CAC_companies_revenue^2 = CAC_companies_maintenance^2 }
+		add_to_variable = { CAC_companies_revenue^2 = CAC_companies_workforce^2 }
+		set_variable = { CAC_companies_display_expenses^2 = 0 }
+		subtract_from_variable = { CAC_companies_display_expenses^2 = CAC_companies_taxes^2 }
+		subtract_from_variable = { CAC_companies_display_expenses^2 = CAC_companies_additional_expenses^2 }
 		add_to_variable = { CAC_companies_display_expenses^2 = CAC_companies_maintenance^2 }
 		add_to_variable = { CAC_companies_display_expenses^2 = CAC_companies_workforce^2 }
-		multiply_variable = { CAC_companies_display_expenses^2 = -1 }
 		multiply_variable = { CAC_companies_taxes^2 = -1 }
-		multiply_variable = { CAC_companies_maintenance^2 = -1 }
-		multiply_variable = { CAC_companies_workforce^2 = -1 }
-		set_variable = { CAC_companies_sector_buildings^2 = fuel_silos }
-		add_to_variable = { CAC_companies_sector_buildings^2 = number_of_fossil_pps }
-		add_to_variable = { CAC_companies_sector_buildings^2 = nuclear_reactors }
-		add_to_variable = { CAC_companies_sector_buildings^2 = renewable_energy_infra }
 
 		# Slot 3 — Defense (military factories + dockyards)
-		set_variable = { CAC_companies_maintenance^3 = military_fac }
-		add_to_variable = { CAC_companies_maintenance^3 = dockyard_fac }
-		multiply_variable = { CAC_companies_maintenance^3 = 0.007875 } # 7.50 * 0.15 * 0.007
-		set_temp_variable = { cac_workforce_cost = military_fac }
-		add_to_temp_variable = { cac_workforce_cost = dockyard_fac }
-		multiply_temp_variable = { cac_workforce_cost = 0.025 }    # workers_per_mil_fac / workers_per_dockyard
-		multiply_temp_variable = { cac_workforce_cost = gdp_per_capita }
-		multiply_temp_variable = { cac_workforce_cost = 0.007 }
-		set_variable = { CAC_companies_workforce^3 = cac_workforce_cost }
 		set_variable = { CAC_companies_income^3 = military_gross_income }
 		add_to_variable = { CAC_companies_income^3 = dockyard_gross_income }
 		set_variable = { CAC_companies_taxes^3 = military_fac_tax }
@@ -950,39 +1019,16 @@ CAC_update_variables = {
 		subtract_from_variable = { CAC_companies_revenue^3 = CAC_companies_taxes^3 }
 		add_to_variable = { CAC_companies_revenue^3 = CAC_companies_additional_income^3 }
 		subtract_from_variable = { CAC_companies_revenue^3 = CAC_companies_additional_expenses^3 }
-		subtract_from_variable = { CAC_companies_revenue^3 = CAC_companies_maintenance^3 }
-		subtract_from_variable = { CAC_companies_revenue^3 = CAC_companies_workforce^3 }
-		set_variable = { CAC_companies_display_expenses^3 = CAC_companies_taxes^3 }
-		add_to_variable = { CAC_companies_display_expenses^3 = CAC_companies_additional_expenses^3 }
+		add_to_variable = { CAC_companies_revenue^3 = CAC_companies_maintenance^3 }
+		add_to_variable = { CAC_companies_revenue^3 = CAC_companies_workforce^3 }
+		set_variable = { CAC_companies_display_expenses^3 = 0 }
+		subtract_from_variable = { CAC_companies_display_expenses^3 = CAC_companies_taxes^3 }
+		subtract_from_variable = { CAC_companies_display_expenses^3 = CAC_companies_additional_expenses^3 }
 		add_to_variable = { CAC_companies_display_expenses^3 = CAC_companies_maintenance^3 }
 		add_to_variable = { CAC_companies_display_expenses^3 = CAC_companies_workforce^3 }
-		multiply_variable = { CAC_companies_display_expenses^3 = -1 }
 		multiply_variable = { CAC_companies_taxes^3 = -1 }
-		multiply_variable = { CAC_companies_maintenance^3 = -1 }
-		multiply_variable = { CAC_companies_workforce^3 = -1 }
-		set_variable = { CAC_companies_sector_buildings^3 = military_fac }
-		add_to_variable = { CAC_companies_sector_buildings^3 = dockyard_fac }
 
 		# Slot 4 — Technology & Communications (microchip plants + composite plants + internet stations)
-		set_variable = { CAC_companies_maintenance^4 = microchip_plant_total }
-		multiply_variable = { CAC_companies_maintenance^4 = 0.01575 } # 15.00 * 0.15 * 0.007
-		set_temp_variable = { cac_composite_maintenance = composite_plant_total }
-		multiply_temp_variable = { cac_composite_maintenance = 0.01365 } # 13.00 * 0.15 * 0.007
-		add_to_variable = { CAC_companies_maintenance^4 = cac_composite_maintenance }
-		set_temp_variable = { cac_internet_maintenance = internet_station_total }
-		multiply_temp_variable = { cac_internet_maintenance = 0.00315 } # 3.00 * 0.15 * 0.007
-		add_to_variable = { CAC_companies_maintenance^4 = cac_internet_maintenance }
-		set_temp_variable = { cac_workforce_cost = microchip_plant_total }
-		multiply_temp_variable = { cac_workforce_cost = 0.050 }    # workers_per_microchip_plant
-		set_temp_variable = { cac_composite_workforce = composite_plant_total }
-		multiply_temp_variable = { cac_composite_workforce = 0.050 }    # workers_per_composite_plant
-		add_to_temp_variable = { cac_workforce_cost = cac_composite_workforce }
-		set_temp_variable = { cac_internet_workforce = internet_station_total }
-		multiply_temp_variable = { cac_internet_workforce = 0.030 }    # workers_per_internet_station (fixed)
-		add_to_temp_variable = { cac_workforce_cost = cac_internet_workforce }
-		multiply_temp_variable = { cac_workforce_cost = gdp_per_capita }
-		multiply_temp_variable = { cac_workforce_cost = 0.007 }
-		set_variable = { CAC_companies_workforce^4 = cac_workforce_cost }
 		set_variable = { CAC_companies_income^4 = microchip_gross_income }
 		add_to_variable = { CAC_companies_income^4 = composite_gross_income }
 		add_to_variable = { CAC_companies_income^4 = internet_station_gross_income }
@@ -993,73 +1039,51 @@ CAC_update_variables = {
 		subtract_from_variable = { CAC_companies_revenue^4 = CAC_companies_taxes^4 }
 		add_to_variable = { CAC_companies_revenue^4 = CAC_companies_additional_income^4 }
 		subtract_from_variable = { CAC_companies_revenue^4 = CAC_companies_additional_expenses^4 }
-		subtract_from_variable = { CAC_companies_revenue^4 = CAC_companies_maintenance^4 }
-		subtract_from_variable = { CAC_companies_revenue^4 = CAC_companies_workforce^4 }
-		set_variable = { CAC_companies_display_expenses^4 = CAC_companies_taxes^4 }
-		add_to_variable = { CAC_companies_display_expenses^4 = CAC_companies_additional_expenses^4 }
+		add_to_variable = { CAC_companies_revenue^4 = CAC_companies_maintenance^4 }
+		add_to_variable = { CAC_companies_revenue^4 = CAC_companies_workforce^4 }
+		set_variable = { CAC_companies_display_expenses^4 = 0 }
+		subtract_from_variable = { CAC_companies_display_expenses^4 = CAC_companies_taxes^4 }
+		subtract_from_variable = { CAC_companies_display_expenses^4 = CAC_companies_additional_expenses^4 }
 		add_to_variable = { CAC_companies_display_expenses^4 = CAC_companies_maintenance^4 }
 		add_to_variable = { CAC_companies_display_expenses^4 = CAC_companies_workforce^4 }
-		multiply_variable = { CAC_companies_display_expenses^4 = -1 }
 		multiply_variable = { CAC_companies_taxes^4 = -1 }
-		multiply_variable = { CAC_companies_maintenance^4 = -1 }
-		multiply_variable = { CAC_companies_workforce^4 = -1 }
-		set_variable = { CAC_companies_sector_buildings^4 = microchip_plant_total }
-		add_to_variable = { CAC_companies_sector_buildings^4 = composite_plant_total }
-		add_to_variable = { CAC_companies_sector_buildings^4 = internet_station_total }
 
 		# Slot 5 — Construction & Infrastructure (civilian factories)
-		set_variable = { CAC_companies_maintenance^5 = industrial_complex_total }
-		multiply_variable = { CAC_companies_maintenance^5 = 0.007875 } # 7.50 * 0.15 * 0.007
-		set_temp_variable = { cac_workforce_cost = industrial_complex_total }
-		multiply_temp_variable = { cac_workforce_cost = 0.275 }    # workers_per_civ_fac
-		multiply_temp_variable = { cac_workforce_cost = gdp_per_capita }
-		multiply_temp_variable = { cac_workforce_cost = 0.007 }
-		set_variable = { CAC_companies_workforce^5 = cac_workforce_cost }
 		set_variable = { CAC_companies_income^5 = civil_gross_income }
 		set_variable = { CAC_companies_taxes^5 = civil_fac_tax }
 		set_variable = { CAC_companies_revenue^5 = CAC_companies_income^5 }
 		subtract_from_variable = { CAC_companies_revenue^5 = CAC_companies_taxes^5 }
 		add_to_variable = { CAC_companies_revenue^5 = CAC_companies_additional_income^5 }
 		subtract_from_variable = { CAC_companies_revenue^5 = CAC_companies_additional_expenses^5 }
-		subtract_from_variable = { CAC_companies_revenue^5 = CAC_companies_maintenance^5 }
-		subtract_from_variable = { CAC_companies_revenue^5 = CAC_companies_workforce^5 }
-		set_variable = { CAC_companies_display_expenses^5 = CAC_companies_taxes^5 }
-		add_to_variable = { CAC_companies_display_expenses^5 = CAC_companies_additional_expenses^5 }
+		add_to_variable = { CAC_companies_revenue^5 = CAC_companies_maintenance^5 }
+		add_to_variable = { CAC_companies_revenue^5 = CAC_companies_workforce^5 }
+		set_variable = { CAC_companies_display_expenses^5 = 0 }
+		subtract_from_variable = { CAC_companies_display_expenses^5 = CAC_companies_taxes^5 }
+		subtract_from_variable = { CAC_companies_display_expenses^5 = CAC_companies_additional_expenses^5 }
 		add_to_variable = { CAC_companies_display_expenses^5 = CAC_companies_maintenance^5 }
 		add_to_variable = { CAC_companies_display_expenses^5 = CAC_companies_workforce^5 }
-		multiply_variable = { CAC_companies_display_expenses^5 = -1 }
 		multiply_variable = { CAC_companies_taxes^5 = -1 }
-		multiply_variable = { CAC_companies_maintenance^5 = -1 }
-		multiply_variable = { CAC_companies_workforce^5 = -1 }
-		set_variable = { CAC_companies_sector_buildings^5 = industrial_complex_total }
 
 		# Slot 6 — Healthcare & Pharma (scales with GDP/C * population)
 		# Income formula: 0.003 * gdp_per_capita * population_total_m
-		set_variable = { CAC_companies_maintenance^6 = state_hospital_need }
-		multiply_variable = { CAC_companies_maintenance^6 = 0.175 }
-		#TODO: add modifier so that increased health requires increased maintenance
-		set_variable = { CAC_companies_workforce^6 = state_hospital_need }
-		multiply_variable = { CAC_companies_workforce^6 = gdp_per_capita }
-		multiply_variable = { CAC_companies_workforce^6 = 0.007 }
-		set_variable = { CAC_companies_taxes^6 = civil_fac_tax }
 		set_temp_variable = { cac_healthcare_income = gdp_per_capita }
 		multiply_temp_variable = { cac_healthcare_income = population_total_m }
 		multiply_temp_variable = { cac_healthcare_income = 0.003 }
 		set_variable = { CAC_companies_income^6 = cac_healthcare_income }
+		set_variable = { CAC_companies_taxes^6 = CAC_companies_income^6 }
+		multiply_variable = { CAC_companies_taxes^6 = corporate_tax_rate }
+		multiply_variable = { CAC_companies_taxes^6 = 0.01 }
 		set_variable = { CAC_companies_revenue^6 = CAC_companies_income^6 }
 		add_to_variable = { CAC_companies_revenue^6 = CAC_companies_additional_income^6 }
 		subtract_from_variable = { CAC_companies_revenue^6 = CAC_companies_taxes^6 }
-		subtract_from_variable = { CAC_companies_revenue^6 = CAC_companies_maintenance^6 }
-		subtract_from_variable = { CAC_companies_revenue^6 = CAC_companies_workforce^6 }
+		add_to_variable = { CAC_companies_revenue^6 = CAC_companies_maintenance^6 }
+		add_to_variable = { CAC_companies_revenue^6 = CAC_companies_workforce^6 }
 		subtract_from_variable = { CAC_companies_revenue^6 = CAC_companies_additional_expenses^6 }
-		set_variable = { CAC_companies_display_expenses^6 = CAC_companies_taxes^6 }
-		add_to_variable = { CAC_companies_display_expenses^6 = CAC_companies_additional_expenses^6 }
+		set_variable = { CAC_companies_display_expenses^6 = 0 }
+		subtract_from_variable = { CAC_companies_display_expenses^6 = CAC_companies_taxes^6 }
+		subtract_from_variable = { CAC_companies_display_expenses^6 = CAC_companies_additional_expenses^6 }
 		add_to_variable = { CAC_companies_display_expenses^6 = CAC_companies_maintenance^6 }
 		add_to_variable = { CAC_companies_display_expenses^6 = CAC_companies_workforce^6 }
-		multiply_variable = { CAC_companies_display_expenses^6 = -1 }
 		multiply_variable = { CAC_companies_taxes^6 = -1 }
-		multiply_variable = { CAC_companies_maintenance^6 = -1 }
-		multiply_variable = { CAC_companies_workforce^6 = -1 }
-		set_variable = { CAC_companies_sector_buildings^6 = 0 }
 	}
 }
