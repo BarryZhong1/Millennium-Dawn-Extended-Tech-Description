@@ -928,56 +928,62 @@ CAC_update_building_stats = {
 }
 
 # CAC_update_variables
-# Purpose: Refreshes per-company display arrays from the latest gross income variables
-# computed in calculate_tax_gain. Called after every CAC_modify_* effect and weekly via
-# ingame_update_setup. Guarded by cac_skip_all_updates during startup initialization.
+# Purpose: Computes per-company taxes (needed for corporate_tax → tax_gain) and, for human
+# players only, refreshes income/revenue/display_expenses display arrays.
+# Called from calculate_tax_gain weekly and from CAC_modify_* effects on player actions.
+# Guarded by cac_skip_all_updates during startup initialization.
 # Maintenance and workforce are pre-computed monthly (stored as negative) by
 # CAC_update_building_stats and added directly into revenue/display_expenses here.
 CAC_update_variables = {
 	if = {
 		limit = { NOT = { check_variable = { cac_skip_all_updates = 1 } } }
 
-		# cac_gdpc_scaled still needed here for energy income (slot 2) and healthcare income (slot 6)
+		# cac_gdpc_scaled needed for energy income (slot 2) — computed for both AI and human
 		set_temp_variable = { cac_gdpc_scaled = gdp_per_capita }
 		multiply_temp_variable = { cac_gdpc_scaled = 0.007 }
 
 		# Slot 0 — Banking & Finance (offices)
-		# Maintenance and workforce pre-computed monthly (stored negative) by CAC_update_building_stats.
-		set_variable = { CAC_companies_income^0 = office_gross_income }
+		# Tax stored positive, used in display block, then negated for corporate_tax subtraction trick.
 		set_variable = { CAC_companies_taxes^0 = office_tax }
-		set_variable = { CAC_companies_revenue^0 = CAC_companies_income^0 }
-		subtract_from_variable = { CAC_companies_revenue^0 = CAC_companies_taxes^0 }
-		add_to_variable = { CAC_companies_revenue^0 = CAC_companies_additional_income^0 }
-		subtract_from_variable = { CAC_companies_revenue^0 = CAC_companies_additional_expenses^0 }
-		add_to_variable = { CAC_companies_revenue^0 = CAC_companies_maintenance^0 }
-		add_to_variable = { CAC_companies_revenue^0 = CAC_companies_workforce^0 }
-		set_variable = { CAC_companies_display_expenses^0 = 0 }
-		subtract_from_variable = { CAC_companies_display_expenses^0 = CAC_companies_taxes^0 }
-		subtract_from_variable = { CAC_companies_display_expenses^0 = CAC_companies_additional_expenses^0 }
-		add_to_variable = { CAC_companies_display_expenses^0 = CAC_companies_maintenance^0 }
-		add_to_variable = { CAC_companies_display_expenses^0 = CAC_companies_workforce^0 }
+		if = { limit = { is_ai = no }
+			set_variable = { CAC_companies_income^0 = office_gross_income }
+			set_variable = { CAC_companies_revenue^0 = CAC_companies_income^0 }
+			subtract_from_variable = { CAC_companies_revenue^0 = CAC_companies_taxes^0 }
+			add_to_variable = { CAC_companies_revenue^0 = CAC_companies_additional_income^0 }
+			subtract_from_variable = { CAC_companies_revenue^0 = CAC_companies_additional_expenses^0 }
+			add_to_variable = { CAC_companies_revenue^0 = CAC_companies_maintenance^0 }
+			add_to_variable = { CAC_companies_revenue^0 = CAC_companies_workforce^0 }
+			set_variable = { CAC_companies_display_expenses^0 = 0 }
+			subtract_from_variable = { CAC_companies_display_expenses^0 = CAC_companies_taxes^0 }
+			subtract_from_variable = { CAC_companies_display_expenses^0 = CAC_companies_additional_expenses^0 }
+			add_to_variable = { CAC_companies_display_expenses^0 = CAC_companies_maintenance^0 }
+			add_to_variable = { CAC_companies_display_expenses^0 = CAC_companies_workforce^0 }
+		}
 		multiply_variable = { CAC_companies_taxes^0 = -1 }
 
 		# Slot 1 — Mining & Resources (resource exports + synthetic refineries + agriculture)
-		set_variable = { CAC_companies_income^1 = CAC_resource_sale_cic_adjusted }
-		add_to_variable = { CAC_companies_income^1 = synthetic_gross_income }
-		add_to_variable = { CAC_companies_income^1 = agriculture_district_gross_income }
 		set_variable = { CAC_companies_taxes^1 = synthetic_refinery_tax }
 		add_to_variable = { CAC_companies_taxes^1 = agriculture_district_tax }
-		set_variable = { CAC_companies_revenue^1 = CAC_companies_income^1 }
-		subtract_from_variable = { CAC_companies_revenue^1 = CAC_companies_taxes^1 }
-		add_to_variable = { CAC_companies_revenue^1 = CAC_companies_additional_income^1 }
-		subtract_from_variable = { CAC_companies_revenue^1 = CAC_companies_additional_expenses^1 }
-		add_to_variable = { CAC_companies_revenue^1 = CAC_companies_maintenance^1 }
-		add_to_variable = { CAC_companies_revenue^1 = CAC_companies_workforce^1 }
-		set_variable = { CAC_companies_display_expenses^1 = 0 }
-		subtract_from_variable = { CAC_companies_display_expenses^1 = CAC_companies_taxes^1 }
-		subtract_from_variable = { CAC_companies_display_expenses^1 = CAC_companies_additional_expenses^1 }
-		add_to_variable = { CAC_companies_display_expenses^1 = CAC_companies_maintenance^1 }
-		add_to_variable = { CAC_companies_display_expenses^1 = CAC_companies_workforce^1 }
+		if = { limit = { is_ai = no }
+			set_variable = { CAC_companies_income^1 = CAC_resource_sale_cic_adjusted }
+			add_to_variable = { CAC_companies_income^1 = synthetic_gross_income }
+			add_to_variable = { CAC_companies_income^1 = agriculture_district_gross_income }
+			set_variable = { CAC_companies_revenue^1 = CAC_companies_income^1 }
+			subtract_from_variable = { CAC_companies_revenue^1 = CAC_companies_taxes^1 }
+			add_to_variable = { CAC_companies_revenue^1 = CAC_companies_additional_income^1 }
+			subtract_from_variable = { CAC_companies_revenue^1 = CAC_companies_additional_expenses^1 }
+			add_to_variable = { CAC_companies_revenue^1 = CAC_companies_maintenance^1 }
+			add_to_variable = { CAC_companies_revenue^1 = CAC_companies_workforce^1 }
+			set_variable = { CAC_companies_display_expenses^1 = 0 }
+			subtract_from_variable = { CAC_companies_display_expenses^1 = CAC_companies_taxes^1 }
+			subtract_from_variable = { CAC_companies_display_expenses^1 = CAC_companies_additional_expenses^1 }
+			add_to_variable = { CAC_companies_display_expenses^1 = CAC_companies_maintenance^1 }
+			add_to_variable = { CAC_companies_display_expenses^1 = CAC_companies_workforce^1 }
+		}
 		multiply_variable = { CAC_companies_taxes^1 = -1 }
 
 		# Slot 2 — Energy & Utilities (fuel silos + fossil powerplants + nuclear reactors + renewable energy)
+		# Income computed in temps; tax stored directly from temp (avoids reading persistent income^2).
 		set_temp_variable = { cac_energy_income = fuel_silos }
 		multiply_temp_variable = { cac_energy_income = 0.05 }            # income_rate_fuel_silo
 		set_temp_variable = { cac_energy_temp = number_of_fossil_pps }
@@ -993,97 +999,108 @@ CAC_update_variables = {
 		set_temp_variable = { energy_consumption_mod = 1 }
 		add_to_temp_variable = { energy_consumption_mod = modifier@energy_sector_consumption_multiplier_modifier }
 		multiply_temp_variable = { cac_energy_income = energy_consumption_mod }
-		set_variable = { CAC_companies_income^2 = cac_energy_income }
-		set_variable = { CAC_companies_taxes^2 = CAC_companies_income^2 }
+		set_variable = { CAC_companies_taxes^2 = cac_energy_income }
 		multiply_variable = { CAC_companies_taxes^2 = corporate_tax_rate }
 		multiply_variable = { CAC_companies_taxes^2 = 0.01 }
-		set_variable = { CAC_companies_revenue^2 = CAC_companies_income^2 }
-		subtract_from_variable = { CAC_companies_revenue^2 = CAC_companies_taxes^2 }
-		add_to_variable = { CAC_companies_revenue^2 = CAC_companies_additional_income^2 }
-		subtract_from_variable = { CAC_companies_revenue^2 = CAC_companies_additional_expenses^2 }
-		add_to_variable = { CAC_companies_revenue^2 = CAC_companies_maintenance^2 }
-		add_to_variable = { CAC_companies_revenue^2 = CAC_companies_workforce^2 }
-		set_variable = { CAC_companies_display_expenses^2 = 0 }
-		subtract_from_variable = { CAC_companies_display_expenses^2 = CAC_companies_taxes^2 }
-		subtract_from_variable = { CAC_companies_display_expenses^2 = CAC_companies_additional_expenses^2 }
-		add_to_variable = { CAC_companies_display_expenses^2 = CAC_companies_maintenance^2 }
-		add_to_variable = { CAC_companies_display_expenses^2 = CAC_companies_workforce^2 }
+		if = { limit = { is_ai = no }
+			set_variable = { CAC_companies_income^2 = cac_energy_income }
+			set_variable = { CAC_companies_revenue^2 = CAC_companies_income^2 }
+			subtract_from_variable = { CAC_companies_revenue^2 = CAC_companies_taxes^2 }
+			add_to_variable = { CAC_companies_revenue^2 = CAC_companies_additional_income^2 }
+			subtract_from_variable = { CAC_companies_revenue^2 = CAC_companies_additional_expenses^2 }
+			add_to_variable = { CAC_companies_revenue^2 = CAC_companies_maintenance^2 }
+			add_to_variable = { CAC_companies_revenue^2 = CAC_companies_workforce^2 }
+			set_variable = { CAC_companies_display_expenses^2 = 0 }
+			subtract_from_variable = { CAC_companies_display_expenses^2 = CAC_companies_taxes^2 }
+			subtract_from_variable = { CAC_companies_display_expenses^2 = CAC_companies_additional_expenses^2 }
+			add_to_variable = { CAC_companies_display_expenses^2 = CAC_companies_maintenance^2 }
+			add_to_variable = { CAC_companies_display_expenses^2 = CAC_companies_workforce^2 }
+		}
 		multiply_variable = { CAC_companies_taxes^2 = -1 }
 
 		# Slot 3 — Defense (military factories + dockyards)
-		set_variable = { CAC_companies_income^3 = military_gross_income }
-		add_to_variable = { CAC_companies_income^3 = dockyard_gross_income }
 		set_variable = { CAC_companies_taxes^3 = military_fac_tax }
 		add_to_variable = { CAC_companies_taxes^3 = dockyard_tax }
-		set_variable = { CAC_companies_revenue^3 = CAC_companies_income^3 }
-		subtract_from_variable = { CAC_companies_revenue^3 = CAC_companies_taxes^3 }
-		add_to_variable = { CAC_companies_revenue^3 = CAC_companies_additional_income^3 }
-		subtract_from_variable = { CAC_companies_revenue^3 = CAC_companies_additional_expenses^3 }
-		add_to_variable = { CAC_companies_revenue^3 = CAC_companies_maintenance^3 }
-		add_to_variable = { CAC_companies_revenue^3 = CAC_companies_workforce^3 }
-		set_variable = { CAC_companies_display_expenses^3 = 0 }
-		subtract_from_variable = { CAC_companies_display_expenses^3 = CAC_companies_taxes^3 }
-		subtract_from_variable = { CAC_companies_display_expenses^3 = CAC_companies_additional_expenses^3 }
-		add_to_variable = { CAC_companies_display_expenses^3 = CAC_companies_maintenance^3 }
-		add_to_variable = { CAC_companies_display_expenses^3 = CAC_companies_workforce^3 }
+		if = { limit = { is_ai = no }
+			set_variable = { CAC_companies_income^3 = military_gross_income }
+			add_to_variable = { CAC_companies_income^3 = dockyard_gross_income }
+			set_variable = { CAC_companies_revenue^3 = CAC_companies_income^3 }
+			subtract_from_variable = { CAC_companies_revenue^3 = CAC_companies_taxes^3 }
+			add_to_variable = { CAC_companies_revenue^3 = CAC_companies_additional_income^3 }
+			subtract_from_variable = { CAC_companies_revenue^3 = CAC_companies_additional_expenses^3 }
+			add_to_variable = { CAC_companies_revenue^3 = CAC_companies_maintenance^3 }
+			add_to_variable = { CAC_companies_revenue^3 = CAC_companies_workforce^3 }
+			set_variable = { CAC_companies_display_expenses^3 = 0 }
+			subtract_from_variable = { CAC_companies_display_expenses^3 = CAC_companies_taxes^3 }
+			subtract_from_variable = { CAC_companies_display_expenses^3 = CAC_companies_additional_expenses^3 }
+			add_to_variable = { CAC_companies_display_expenses^3 = CAC_companies_maintenance^3 }
+			add_to_variable = { CAC_companies_display_expenses^3 = CAC_companies_workforce^3 }
+		}
 		multiply_variable = { CAC_companies_taxes^3 = -1 }
 
 		# Slot 4 — Technology & Communications (microchip plants + composite plants + internet stations)
-		set_variable = { CAC_companies_income^4 = microchip_gross_income }
-		add_to_variable = { CAC_companies_income^4 = composite_gross_income }
-		add_to_variable = { CAC_companies_income^4 = internet_station_gross_income }
 		set_variable = { CAC_companies_taxes^4 = microchip_plant_tax }
 		add_to_variable = { CAC_companies_taxes^4 = composite_plant_tax }
 		add_to_variable = { CAC_companies_taxes^4 = internet_station_tax }
-		set_variable = { CAC_companies_revenue^4 = CAC_companies_income^4 }
-		subtract_from_variable = { CAC_companies_revenue^4 = CAC_companies_taxes^4 }
-		add_to_variable = { CAC_companies_revenue^4 = CAC_companies_additional_income^4 }
-		subtract_from_variable = { CAC_companies_revenue^4 = CAC_companies_additional_expenses^4 }
-		add_to_variable = { CAC_companies_revenue^4 = CAC_companies_maintenance^4 }
-		add_to_variable = { CAC_companies_revenue^4 = CAC_companies_workforce^4 }
-		set_variable = { CAC_companies_display_expenses^4 = 0 }
-		subtract_from_variable = { CAC_companies_display_expenses^4 = CAC_companies_taxes^4 }
-		subtract_from_variable = { CAC_companies_display_expenses^4 = CAC_companies_additional_expenses^4 }
-		add_to_variable = { CAC_companies_display_expenses^4 = CAC_companies_maintenance^4 }
-		add_to_variable = { CAC_companies_display_expenses^4 = CAC_companies_workforce^4 }
+		if = { limit = { is_ai = no }
+			set_variable = { CAC_companies_income^4 = microchip_gross_income }
+			add_to_variable = { CAC_companies_income^4 = composite_gross_income }
+			add_to_variable = { CAC_companies_income^4 = internet_station_gross_income }
+			set_variable = { CAC_companies_revenue^4 = CAC_companies_income^4 }
+			subtract_from_variable = { CAC_companies_revenue^4 = CAC_companies_taxes^4 }
+			add_to_variable = { CAC_companies_revenue^4 = CAC_companies_additional_income^4 }
+			subtract_from_variable = { CAC_companies_revenue^4 = CAC_companies_additional_expenses^4 }
+			add_to_variable = { CAC_companies_revenue^4 = CAC_companies_maintenance^4 }
+			add_to_variable = { CAC_companies_revenue^4 = CAC_companies_workforce^4 }
+			set_variable = { CAC_companies_display_expenses^4 = 0 }
+			subtract_from_variable = { CAC_companies_display_expenses^4 = CAC_companies_taxes^4 }
+			subtract_from_variable = { CAC_companies_display_expenses^4 = CAC_companies_additional_expenses^4 }
+			add_to_variable = { CAC_companies_display_expenses^4 = CAC_companies_maintenance^4 }
+			add_to_variable = { CAC_companies_display_expenses^4 = CAC_companies_workforce^4 }
+		}
 		multiply_variable = { CAC_companies_taxes^4 = -1 }
 
 		# Slot 5 — Construction & Infrastructure (civilian factories)
-		set_variable = { CAC_companies_income^5 = civil_gross_income }
 		set_variable = { CAC_companies_taxes^5 = civil_fac_tax }
-		set_variable = { CAC_companies_revenue^5 = CAC_companies_income^5 }
-		subtract_from_variable = { CAC_companies_revenue^5 = CAC_companies_taxes^5 }
-		add_to_variable = { CAC_companies_revenue^5 = CAC_companies_additional_income^5 }
-		subtract_from_variable = { CAC_companies_revenue^5 = CAC_companies_additional_expenses^5 }
-		add_to_variable = { CAC_companies_revenue^5 = CAC_companies_maintenance^5 }
-		add_to_variable = { CAC_companies_revenue^5 = CAC_companies_workforce^5 }
-		set_variable = { CAC_companies_display_expenses^5 = 0 }
-		subtract_from_variable = { CAC_companies_display_expenses^5 = CAC_companies_taxes^5 }
-		subtract_from_variable = { CAC_companies_display_expenses^5 = CAC_companies_additional_expenses^5 }
-		add_to_variable = { CAC_companies_display_expenses^5 = CAC_companies_maintenance^5 }
-		add_to_variable = { CAC_companies_display_expenses^5 = CAC_companies_workforce^5 }
+		if = { limit = { is_ai = no }
+			set_variable = { CAC_companies_income^5 = civil_gross_income }
+			set_variable = { CAC_companies_revenue^5 = CAC_companies_income^5 }
+			subtract_from_variable = { CAC_companies_revenue^5 = CAC_companies_taxes^5 }
+			add_to_variable = { CAC_companies_revenue^5 = CAC_companies_additional_income^5 }
+			subtract_from_variable = { CAC_companies_revenue^5 = CAC_companies_additional_expenses^5 }
+			add_to_variable = { CAC_companies_revenue^5 = CAC_companies_maintenance^5 }
+			add_to_variable = { CAC_companies_revenue^5 = CAC_companies_workforce^5 }
+			set_variable = { CAC_companies_display_expenses^5 = 0 }
+			subtract_from_variable = { CAC_companies_display_expenses^5 = CAC_companies_taxes^5 }
+			subtract_from_variable = { CAC_companies_display_expenses^5 = CAC_companies_additional_expenses^5 }
+			add_to_variable = { CAC_companies_display_expenses^5 = CAC_companies_maintenance^5 }
+			add_to_variable = { CAC_companies_display_expenses^5 = CAC_companies_workforce^5 }
+		}
 		multiply_variable = { CAC_companies_taxes^5 = -1 }
 
 		# Slot 6 — Healthcare & Pharma (scales with GDP/C * population)
 		# Income formula: 0.003 * gdp_per_capita * population_total_m
+		# Tax derived directly from temp income to avoid writing persistent income^6 on AI path.
 		set_temp_variable = { cac_healthcare_income = gdp_per_capita }
 		multiply_temp_variable = { cac_healthcare_income = population_total_m }
 		multiply_temp_variable = { cac_healthcare_income = 0.003 }
-		set_variable = { CAC_companies_income^6 = cac_healthcare_income }
-		set_variable = { CAC_companies_taxes^6 = CAC_companies_income^6 }
+		set_variable = { CAC_companies_taxes^6 = cac_healthcare_income }
 		multiply_variable = { CAC_companies_taxes^6 = corporate_tax_rate }
 		multiply_variable = { CAC_companies_taxes^6 = 0.01 }
-		set_variable = { CAC_companies_revenue^6 = CAC_companies_income^6 }
-		add_to_variable = { CAC_companies_revenue^6 = CAC_companies_additional_income^6 }
-		subtract_from_variable = { CAC_companies_revenue^6 = CAC_companies_taxes^6 }
-		add_to_variable = { CAC_companies_revenue^6 = CAC_companies_maintenance^6 }
-		add_to_variable = { CAC_companies_revenue^6 = CAC_companies_workforce^6 }
-		subtract_from_variable = { CAC_companies_revenue^6 = CAC_companies_additional_expenses^6 }
-		set_variable = { CAC_companies_display_expenses^6 = 0 }
-		subtract_from_variable = { CAC_companies_display_expenses^6 = CAC_companies_taxes^6 }
-		subtract_from_variable = { CAC_companies_display_expenses^6 = CAC_companies_additional_expenses^6 }
-		add_to_variable = { CAC_companies_display_expenses^6 = CAC_companies_maintenance^6 }
-		add_to_variable = { CAC_companies_display_expenses^6 = CAC_companies_workforce^6 }
+		if = { limit = { is_ai = no }
+			set_variable = { CAC_companies_income^6 = cac_healthcare_income }
+			set_variable = { CAC_companies_revenue^6 = CAC_companies_income^6 }
+			add_to_variable = { CAC_companies_revenue^6 = CAC_companies_additional_income^6 }
+			subtract_from_variable = { CAC_companies_revenue^6 = CAC_companies_taxes^6 }
+			add_to_variable = { CAC_companies_revenue^6 = CAC_companies_maintenance^6 }
+			add_to_variable = { CAC_companies_revenue^6 = CAC_companies_workforce^6 }
+			subtract_from_variable = { CAC_companies_revenue^6 = CAC_companies_additional_expenses^6 }
+			set_variable = { CAC_companies_display_expenses^6 = 0 }
+			subtract_from_variable = { CAC_companies_display_expenses^6 = CAC_companies_taxes^6 }
+			subtract_from_variable = { CAC_companies_display_expenses^6 = CAC_companies_additional_expenses^6 }
+			add_to_variable = { CAC_companies_display_expenses^6 = CAC_companies_maintenance^6 }
+			add_to_variable = { CAC_companies_display_expenses^6 = CAC_companies_workforce^6 }
+		}
 		multiply_variable = { CAC_companies_taxes^6 = -1 }
 	}
 }

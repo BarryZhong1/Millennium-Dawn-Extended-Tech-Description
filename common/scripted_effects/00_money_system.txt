@@ -509,24 +509,25 @@ calculate_tax_gain = {
 	# Apply consolidated multiplier
 	multiply_variable = { population_tax = pop_tax_gdp_c_multiplier }
 
-	#CAC_update_variables = yes
+	CAC_update_variables = yes
 
-	# Populate sector display vars for corporate tax tooltip (tooltip reads these as positive values)
-	# CAC_companies_taxes^0..6 are stored negative (display sign); negate back to get positive amounts
-	set_variable = { finance_sc = CAC_companies_taxes^0 }
-	multiply_variable = { finance_sc = -1 }
-	set_variable = { mining_sc = CAC_companies_taxes^1 }
-	multiply_variable = { mining_sc = -1 }
-	set_variable = { energy_sec = CAC_companies_taxes^2 }
-	multiply_variable = { energy_sec = -1 }
-	set_variable = { defense_sec = CAC_companies_taxes^3 }
-	multiply_variable = { defense_sec = -1 }
-	set_variable = { tech_sec = CAC_companies_taxes^4 }
-	multiply_variable = { tech_sec = -1 }
-	set_variable = { const_sec = CAC_companies_taxes^5 }
-	multiply_variable = { const_sec = -1 }
-	set_variable = { healthcare_sec = CAC_companies_taxes^6 }
-	multiply_variable = { healthcare_sec = -1 }
+	# Populate sector display vars for corporate tax tooltip — human player only
+	if = { limit = { is_ai = no }
+		set_variable = { finance_sc = CAC_companies_taxes^0 }
+		multiply_variable = { finance_sc = -1 }
+		set_variable = { mining_sc = CAC_companies_taxes^1 }
+		multiply_variable = { mining_sc = -1 }
+		set_variable = { energy_sec = CAC_companies_taxes^2 }
+		multiply_variable = { energy_sec = -1 }
+		set_variable = { defense_sec = CAC_companies_taxes^3 }
+		multiply_variable = { defense_sec = -1 }
+		set_variable = { tech_sec = CAC_companies_taxes^4 }
+		multiply_variable = { tech_sec = -1 }
+		set_variable = { const_sec = CAC_companies_taxes^5 }
+		multiply_variable = { const_sec = -1 }
+		set_variable = { healthcare_sec = CAC_companies_taxes^6 }
+		multiply_variable = { healthcare_sec = -1 }
+	}
 
 	# Accumulate corporate_tax by subtracting the negated array values (subtracting a negative = adding a positive)
 	subtract_from_variable = { corporate_tax = CAC_companies_taxes^0 }
