@@ -15,9 +15,9 @@ country_event = {
 	is_triggered_only = yes
 
 	trigger = {
-		OR = {
-			owns_state = 222
-			owns_state = 422
+		owns_any_state_of = {
+			222
+			422
 		}
 	}
 
@@ -90,8 +90,8 @@ country_event = {
 		hidden_effect = {
 			if = {
 				limit = {
-					any_other_country = {
-						original_tag = SUD
+					any_country_with_original_tag = {
+						original_tag_to_check = SUD
 						has_war_with = DAR
 					}
 				}
@@ -1152,7 +1152,7 @@ country_event = {
 		log = "[GetDateText]: [THIS.GetName]: Darfur.3.a executed"
 		set_country_flag = SUD_tine_uprising
 		send_equipment = {
-			equipment = Inf_equipment
+			equipment = infantry_weapons_type
 			amount = 1500
 			target = DAR
 		}

@@ -15,7 +15,7 @@ country_event = {
 		name = comoros.1.a
 		log = "[GetDateText]: [This.GetName]: comoros.1.a executed"
 		add_equipment_to_stockpile = {
-			type = infantry_weapons1
+			type = infantry_weapons_2
 			amount = 4000
 			producer = SOV
 		}
@@ -41,7 +41,7 @@ country_event = {
 		name = comoros.1.b
 		log = "[GetDateText]: [This.GetName]: comoros.1.b executed"
 		add_equipment_to_stockpile = {
-			type = infantry_weapons1
+			type = infantry_weapons_2
 			amount = 4000
 			producer = IRQ
 		}
@@ -314,13 +314,12 @@ country_event = {
 		name = comoros.9.a
 		log = "[GetDateText]: [This.GetName]: comoros.9.a executed"
 		send_equipment = {
-			equipment = Inf_equipment
+			equipment = infantry_weapons_type
 			amount = 250
 			target = COM
 		}
 		COM = {
 			add_manpower = 100
-			set_country_flag = COM_got_support
 			country_event = diplomatic_response.1
 		}
 		ai_chance = {
@@ -805,7 +804,7 @@ country_event = {
 		name = comoros.26.b
 		log = "[GetDateText]: [This.GetName]: comoros.26.b executed"
 		add_stability = -0.04
-		add_political_power = -25s
+		add_political_power = -25
 	}
 }
 
@@ -932,6 +931,13 @@ country_event = {
 			}
 		}
 
+		add_stability = -0.15
+
+		add_timed_idea = {
+			idea = COM_unstable_government_idea
+			days = 730
+		}
+
 		set_country_flag = COM_robert_denard_seized_power
 	}
 }
@@ -1034,6 +1040,7 @@ country_event = {
 		set_country_flag = { flag = COM_the_zanzibar_agreement_payee value = 1 days = 730 }
 		set_temp_variable = { additional_income_change = 0.25 }
 		custom_effect_tooltip = additional_income_rate_percent_tt
+		set_cosmetic_tag = TNZ_NOZAN
 		COM = {
 			custom_effect_tooltip = COM_the_zanzibar_agreement_tt
 			set_temp_variable = { additional_expense_change = 0.25 }

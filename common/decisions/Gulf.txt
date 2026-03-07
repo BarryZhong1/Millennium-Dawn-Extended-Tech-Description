@@ -6,12 +6,17 @@ gulf_society = {
 
 		fire_only_once = yes
 
-		visible = {
+		allowed = {
 			NOT = {
-				has_idea = muslim_brotherhood_crackdown
 				original_tag = KAZ
 				original_tag = UZB
 				original_tag = KYR
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_idea = muslim_brotherhood_crackdown
 			}
 		}
 
@@ -1212,7 +1217,7 @@ gcc_decisions = {
 
 		icon = GFX_decision_gulf_expel_button
 
-		target_array = global.gcc_members
+		target_array = global.gcc_member_state
 
 		target_trigger = { country_exists = FROM }
 
@@ -1230,7 +1235,7 @@ gcc_decisions = {
 
 		visible = {
 			has_idea = idea_gcc_member_state
-			NOT = { any_country = { has_country_flag = being_expelled } }
+			NOT = { any_of_scopes = { array = global.gcc_member_state has_country_flag = being_expelled } }
 			FROM = {
 				NOT = { has_country_flag = gcc_membership_secure }
 				NOT = { has_country_flag = being_expelled }
@@ -1242,7 +1247,7 @@ gcc_decisions = {
 
 		complete_effect = {
 			FROM = { set_country_flag = being_expelled }
-			every_country = { clr_country_flag = recently_expelled_from_gcc }
+			every_country = { limit = { has_country_flag = recently_expelled_from_gcc } clr_country_flag = recently_expelled_from_gcc }
 			every_other_country = {
 				limit = { has_idea = idea_gcc_member_state NOT = { tag = FROM } }
 				country_event = { id = gcc.18 }
@@ -1266,7 +1271,7 @@ gcc_decisions = {
 
 		icon = GFX_decision_gulf_leader_button
 
-		target_array = global.gcc_members
+		target_array = global.gcc_member_state
 
 		target_trigger = {
 			country_exists = FROM
@@ -2060,13 +2065,13 @@ gcc_decisions = {
 
 		icon = GFX_decision_gulf_expel_button
 
-		target_array = global.gcc_members
+		target_array = global.gcc_member_state
 
 		target_trigger = { country_exists = FROM }
 
 		visible = {
 			has_idea = idea_gcc_member_state
-			NOT = { any_country = { has_country_flag = blockade_@FROM } }
+			NOT = { any_of_scopes = { array = global.gcc_member_state has_country_flag = blockade_@FROM } }
 			OR = {
 				AND = {
 					FROM = { tag = QAT }
@@ -2137,7 +2142,7 @@ gcc_decisions = {
 
 	GCC_drop_the_blockade = {
 		icon = GFX_decision_gulf_agree_button
-		target_array = global.gcc_members
+		target_array = global.gcc_member_state
 
 		target_trigger = { country_exists = FROM }
 
@@ -2211,16 +2216,17 @@ gcc_decisions = {
 				news_event = { id = SAU_GCC_CRISIS.8 }
 				remove_ideas = al_jazeera
 				every_country = {
-					limit = { has_idea = al_jazeera_banned }
+					limit = {
+						OR = {
+							has_idea = al_jazeera_banned
+							has_idea = al_jazeera_allowed
+						}
+					}
 					remove_ideas = al_jazeera_banned
-				}
-				every_country = {
-					limit = { has_idea = al_jazeera_allowed }
 					remove_ideas = al_jazeera_allowed
 				}
 			}
-			if = {
-				limit = { NOT = { tag = QAT } }
+			else = {
 				news_event = { id = SAU_GCC_CRISIS.13 }
 			}
 			if = {
@@ -2409,7 +2415,7 @@ gcc_decisions = {
 		visible = {
 			has_country_flag = supports_membership_@FROM
 			any_of_scopes = {
-				array = global.gcc_members
+				array = global.gcc_member_state
 				NOT = { has_country_flag = supports_membership_@FROM }
 			}
 			has_idea = idea_gcc_member_state
@@ -2464,7 +2470,7 @@ gcc_decisions = {
 			NOT = {
 				jihadist_government = yes
 				has_idea = idea_gcc_member_state
-		 	}
+			}
 		}
 
 		complete_effect = {
@@ -2498,7 +2504,7 @@ gcc_decisions = {
 				tooltip = every_gcc_member_supports_tt
 				NOT = {
 					any_of_scopes = {
-						array = global.gcc_members
+						array = global.gcc_member_state
 						NOT = { has_country_flag = supports_membership_@ROOT }
 					}
 				}
@@ -2540,7 +2546,7 @@ gcc_decisions = {
 
 		complete_effect = {
 			clr_country_flag = gcc_accession_process
-			hidden_effect = { every_country = { news_event = { days = 1 id = gcc.21 } } }
+			hidden_effect = { news_event = { days = 1 id = gcc.21 } }
 			remove_from_array = { global.possible_gcc_member_state = THIS }
 			add_ideas = idea_gcc_member_state
 			force_update_map_mode = { mapmode = GCC_map_mode }
@@ -2677,7 +2683,8 @@ gcc_decisions = {
 				limit = {
 					has_global_flag = GCC_a_robust_alliance_completed
 				}
-				random_country = {
+				random_scope_in_array = {
+					array = global.gcc_member_state
 					limit = { has_country_flag = gcc_dominant_member }
 					add_to_faction = ROOT
 					ROOT = {
@@ -2769,7 +2776,8 @@ gcc_decisions = {
 				limit = {
 					has_global_flag = GCC_exploit_authority_completed
 				}
-				random_country = {
+				random_scope_in_array = {
+					array = global.gcc_member_state
 					limit = { has_country_flag = gcc_dominant_member }
 					puppet = ROOT
 				}
@@ -2778,12 +2786,10 @@ gcc_decisions = {
 				limit = {
 					has_global_flag = GCC_gulf_super_state_completed
 				}
-				random_country = {
+				random_scope_in_array = {
+					array = global.gcc_member_state
 					limit = { has_country_flag = gcc_dominant_member }
-					annex_country = {
-						target = ROOT
-						transfer_troops = yes
-					}
+					annex_country = { target = ROOT transfer_troops = yes }
 				}
 			}
 		}
@@ -2808,10 +2814,10 @@ subversive_activities = {
 					}
 				}
 			}
-			has_equipment = { Inf_equipment > 99 }
+			has_equipment = { infantry_weapons_type > 99 }
 			has_equipment = { L_AT_Equipment > 9 }
 			has_equipment = { AA_Equipment > 9 }
-			has_equipment = { util_vehicle_equipment > 4 }
+			has_equipment = { util_vehicle_type > 4 }
 		}
 
 		highlight_states = {
@@ -2825,7 +2831,7 @@ subversive_activities = {
 			if = {
 				limit = { country_exists = HAM }
 				send_equipment = {
-					equipment = infantry_weapons
+					equipment = infantry_weapons_1
 					amount = 100
 					target = HAM
 				}
@@ -2840,7 +2846,7 @@ subversive_activities = {
 					target = HAM
 				}
 				send_equipment = {
-					equipment = util_vehicle_equipment
+					equipment = util_vehicle_type
 					amount = 5
 					target = HAM
 				}
@@ -2848,7 +2854,7 @@ subversive_activities = {
 			}
 			else = {
 				send_equipment = {
-					equipment = infantry_weapons
+					equipment = infantry_weapons_1
 					amount = 100
 					target = PAL
 				}
@@ -2863,7 +2869,7 @@ subversive_activities = {
 					target = PAL
 				}
 				send_equipment = {
-					equipment = util_vehicle_equipment
+					equipment = util_vehicle_type
 					amount = 5
 					target = PAL
 				}
@@ -2882,10 +2888,10 @@ subversive_activities = {
 		}
 		available = {
 			country_exists = HEZ
-			has_equipment = { Inf_equipment > 99 }
+			has_equipment = { infantry_weapons_type > 99 }
 			has_equipment = { L_AT_Equipment > 9 }
 			has_equipment = { AA_Equipment > 9 }
-			has_equipment = { util_vehicle_equipment > 4 }
+			has_equipment = { util_vehicle_type > 4 }
 		}
 		highlight_states = {
 			highlight_states_trigger = {
@@ -2896,7 +2902,7 @@ subversive_activities = {
 		days_remove = 50
 		remove_effect = {
 			send_equipment = {
-				equipment = infantry_weapons
+				equipment = infantry_weapons_1
 				amount = 100
 				target = HEZ
 			}
@@ -2911,7 +2917,7 @@ subversive_activities = {
 				target = HEZ
 			}
 			send_equipment = {
-				equipment = util_vehicle_equipment
+				equipment = util_vehicle_type
 				amount = 5
 				target = HEZ
 			}
@@ -2928,10 +2934,10 @@ subversive_activities = {
 		available = {
 			country_exists = IRQ
 			IRQ = { has_government = communism }
-			has_equipment = { Inf_equipment > 99 }
+			has_equipment = { infantry_weapons_type > 99 }
 			has_equipment = { L_AT_Equipment > 9 }
 			has_equipment = { AA_Equipment > 9 }
-			has_equipment = { util_vehicle_equipment > 4 }
+			has_equipment = { util_vehicle_type > 4 }
 		}
 		highlight_states = {
 			highlight_states_trigger = {
@@ -2942,7 +2948,7 @@ subversive_activities = {
 		days_remove = 50
 		remove_effect = {
 			send_equipment = {
-				equipment = infantry_weapons
+				equipment = infantry_weapons_1
 				amount = 100
 				target = IRQ
 			}
@@ -2957,7 +2963,7 @@ subversive_activities = {
 				target = IRQ
 			}
 			send_equipment = {
-				equipment = util_vehicle_equipment
+				equipment = util_vehicle_type
 				amount = 5
 				target = IRQ
 			}
@@ -2979,10 +2985,10 @@ subversive_activities = {
 		available = {
 			country_exists = SYR
 			SYR = { has_government = communism }
-			has_equipment = { Inf_equipment > 99 }
+			has_equipment = { infantry_weapons_type > 99 }
 			has_equipment = { L_AT_Equipment > 9 }
 			has_equipment = { AA_Equipment > 9 }
-			has_equipment = { util_vehicle_equipment > 4 }
+			has_equipment = { util_vehicle_type > 4 }
 		}
 		highlight_states = {
 			highlight_states_trigger = {
@@ -2993,7 +2999,7 @@ subversive_activities = {
 		days_remove = 50
 		remove_effect = {
 			send_equipment = {
-				equipment = infantry_weapons
+				equipment = infantry_weapons_1
 				amount = 100
 				target = SYR
 			}
@@ -3008,7 +3014,7 @@ subversive_activities = {
 				target = SYR
 			}
 			send_equipment = {
-				equipment = util_vehicle_equipment
+				equipment = util_vehicle_type
 				amount = 5
 				target = SYR
 			}
@@ -3028,10 +3034,10 @@ subversive_activities = {
 		icon = GFX_decision_generic_prepare_civil_war_new
 		visible = { has_completed_focus = GCC_back_the_syrian_opposition }
 		available = {
-			has_equipment = { Inf_equipment > 99 }
+			has_equipment = { infantry_weapons_type > 99 }
 			has_equipment = { L_AT_Equipment > 9 }
 			has_equipment = { AA_Equipment > 9 }
-			has_equipment = { util_vehicle_equipment > 4 }
+			has_equipment = { util_vehicle_type > 4 }
 			country_exists = FSA
 		}
 
@@ -3044,7 +3050,7 @@ subversive_activities = {
 		days_remove = 50
 		remove_effect = {
 			send_equipment = {
-				equipment = infantry_weapons
+				equipment = infantry_weapons_1
 				amount = 100
 				target = FSA
 			}
@@ -3059,7 +3065,7 @@ subversive_activities = {
 				target = FSA
 			}
 			send_equipment = {
-				equipment = util_vehicle_equipment
+				equipment = util_vehicle_type
 				amount = 5
 				target = FSA
 			}
@@ -3074,7 +3080,7 @@ subversive_activities = {
 		icon = GFX_decision_generic_prepare_civil_war_new
 		visible = { has_completed_focus = GCC_support_iranian_separatists }
 		available = {
-			has_equipment = { Inf_equipment > 99 }
+			has_equipment = { infantry_weapons_type > 99 }
 			PER = { owns_state = 399 }
 		}
 		highlight_states = {
@@ -3086,7 +3092,7 @@ subversive_activities = {
 		days_remove = 50
 		complete_effect = {
 			add_equipment_to_stockpile = {
-				type = Inf_equipment
+				type = infantry_weapons_type
 				amount = -100
 			}
 		}
@@ -3103,7 +3109,7 @@ subversive_activities = {
 		icon = GFX_decision_generic_prepare_civil_war_new
 		visible = { has_completed_focus = GCC_support_iranian_separatists }
 		available = {
-			has_equipment = { Inf_equipment > 99 }
+			has_equipment = { infantry_weapons_type > 99 }
 			PER = { owns_state = 401 }
 		}
 		highlight_states = {
@@ -3115,7 +3121,7 @@ subversive_activities = {
 		days_remove = 50
 		complete_effect = {
 			add_equipment_to_stockpile = {
-				type = Inf_equipment
+				type = infantry_weapons_type
 				amount = -100
 			}
 		}
@@ -3136,10 +3142,10 @@ subversive_activities = {
 			country_exists = GNA
 		}
 		available = {
-			has_equipment = { Inf_equipment > 99 }
+			has_equipment = { infantry_weapons_type > 99 }
 			has_equipment = { L_AT_Equipment > 9 }
 			has_equipment = { AA_Equipment > 9 }
-			has_equipment = { util_vehicle_equipment > 4 }
+			has_equipment = { util_vehicle_type > 4 }
 		}
 		highlight_states = {
 			highlight_states_trigger = {
@@ -3150,7 +3156,7 @@ subversive_activities = {
 		days_remove = 50
 		remove_effect = {
 			send_equipment = {
-				equipment = infantry_weapons
+				equipment = infantry_weapons_1
 				amount = 100
 				target = GNA
 			}
@@ -3165,7 +3171,7 @@ subversive_activities = {
 				target = GNA
 			}
 			send_equipment = {
-				equipment = util_vehicle_equipment
+				equipment = util_vehicle_type
 				amount = 5
 				target = GNA
 			}
@@ -3185,10 +3191,10 @@ subversive_activities = {
 			NOT = { country_exists = GNA }
 		}
 		available = {
-			has_equipment = { Inf_equipment > 99 }
+			has_equipment = { infantry_weapons_type > 99 }
 			has_equipment = { L_AT_Equipment > 9 }
 			has_equipment = { AA_Equipment > 9 }
-			has_equipment = { util_vehicle_equipment > 4 }
+			has_equipment = { util_vehicle_type > 4 }
 		}
 		highlight_states = {
 			highlight_states_trigger = {
@@ -3199,7 +3205,7 @@ subversive_activities = {
 		days_remove = 50
 		remove_effect = {
 			send_equipment = {
-				equipment = infantry_weapons
+				equipment = infantry_weapons_1
 				amount = 100
 				target = GNC
 			}
@@ -3214,7 +3220,7 @@ subversive_activities = {
 				target = GNC
 			}
 			send_equipment = {
-				equipment = util_vehicle_equipment
+				equipment = util_vehicle_type
 				amount = 5
 				target = GNC
 			}
@@ -3233,10 +3239,10 @@ subversive_activities = {
 			country_exists = HOR
 		}
 		available = {
-			has_equipment = { Inf_equipment > 99 }
+			has_equipment = { infantry_weapons_type > 99 }
 			has_equipment = { L_AT_Equipment > 9 }
 			has_equipment = { AA_Equipment > 9 }
-			has_equipment = { util_vehicle_equipment > 4 }
+			has_equipment = { util_vehicle_type > 4 }
 		}
 		highlight_states = {
 			highlight_states_trigger = {
@@ -3247,7 +3253,7 @@ subversive_activities = {
 		days_remove = 60
 		remove_effect = {
 			send_equipment = {
-				equipment = infantry_weapons
+				equipment = infantry_weapons_1
 				amount = 100
 				target = HOR
 			}
@@ -3262,7 +3268,7 @@ subversive_activities = {
 				target = HOR
 			}
 			send_equipment = {
-				equipment = util_vehicle_equipment
+				equipment = util_vehicle_type
 				amount = 5
 				target = HOR
 			}

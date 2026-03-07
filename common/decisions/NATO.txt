@@ -305,6 +305,12 @@ NATO_decisions = {
 
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision become_NATO_aspirant"
+			custom_effect_tooltip = TT_ALL_NATO_MEMBER_NATIONS_GAIN
+			effect_tooltip = {
+				add_opinion_modifier = { target = PREV modifier = NATO_aspirant }
+				reverse_add_opinion_modifier = { target = PREV modifier = NATO_aspirant }
+				country_event = NATO.7
+			}
 			for_each_scope_loop = {
 				array = global.nato_members
 				add_opinion_modifier = { target = PREV modifier = NATO_aspirant }
@@ -595,6 +601,11 @@ NATO_decisions = {
 					}
 				}
 			}
+			modifier = {
+				factor = 0
+				original_tag = FRA
+				has_completed_focus = FRA_renounce_nato
+			}
 		}
 	}
 
@@ -829,6 +840,7 @@ NATO_decisions = {
 			hidden_effect = {
 				clr_country_flag = NATO_Accession_Voting
 				remove_from_array = { global.NATO_Accession_Candidates = THIS }
+				clear_array = NATO_waiting_on_ratify_list
 				clr_country_flag = NATO_Aspirant
 
 				for_each_scope_loop = {
@@ -916,6 +928,11 @@ NATO_decisions = {
 					SOV = { has_added_tension_amount > 5 }
 					SOV = { has_war_with = UKR }
 				}
+			}
+			modifier = {
+				factor = 0
+				original_tag = FRA
+				has_completed_focus = FRA_renounce_nato
 			}
 		}
 	}
@@ -1030,8 +1047,8 @@ NATO_ukraine_help = {
 		days_remove = 30
 
 		available = {
-			has_equipment = { Inf_equipment > 1999 }
-			has_equipment = { cnc_equipment > 299 }
+			has_equipment = { infantry_weapons_type > 1999 }
+			has_equipment = { cnc_equipment_type > 299 }
 			has_equipment = { L_AT_Equipment > 99 }
 			has_equipment = { AA_Equipment > 99 }
 		}
@@ -1046,11 +1063,11 @@ NATO_ukraine_help = {
 
 		remove_effect = {
 			add_equipment_to_stockpile = {
-				type = Inf_equipment
+				type = infantry_weapons_type
 				amount = -2000
 			}
 			add_equipment_to_stockpile = {
-				type = cnc_equipment
+				type = cnc_equipment_type
 				amount = -300
 			}
 			add_equipment_to_stockpile = {
@@ -1065,12 +1082,12 @@ NATO_ukraine_help = {
 			UKR = {
 				country_event = ukraine_nato_help.2
 				add_equipment_to_stockpile = {
-					type = Inf_equipment
+					type = infantry_weapons_type
 					amount = 2000
 					producer = PREV
 				}
 				add_equipment_to_stockpile = {
-					type = cnc_equipment
+					type = cnc_equipment_type
 					amount = 300
 					producer = PREV
 				}
@@ -1103,7 +1120,7 @@ NATO_ukraine_help = {
 		days_remove = 60
 
 		available = {
-			has_equipment = { util_vehicle_equipment > 149 }
+			has_equipment = { util_vehicle_type > 149 }
 			has_equipment = { H_AT_Equipment > 99 }
 			has_equipment = { artillery_equipment > 99 }
 			has_equipment = { medium_tank_amphibious_chassis > 99 }
@@ -1119,7 +1136,7 @@ NATO_ukraine_help = {
 
 		remove_effect = {
 			add_equipment_to_stockpile = {
-				type = util_vehicle_equipment
+				type = util_vehicle_type
 				amount = -150
 				producer = PREV
 			}
@@ -1142,7 +1159,7 @@ NATO_ukraine_help = {
 			UKR = {
 				country_event = ukraine_nato_help.3
 				add_equipment_to_stockpile = {
-					type = util_vehicle_equipment
+					type = util_vehicle_type
 					amount = 150
 				}
 				add_equipment_to_stockpile = {
@@ -1454,7 +1471,7 @@ NATO_ukraine_help = {
 		remove_effect = {
 			UKR = {
 				add_equipment_to_stockpile = {
-					type = Inf_equipment
+					type = infantry_weapons_type
 					amount = 1000
 				}
 			}
@@ -1465,7 +1482,7 @@ NATO_ukraine_help = {
 			modifier = {
 				factor = 5
 				UKR = {
-					has_equipment = { Inf_equipment < 5000 }
+					has_equipment = { infantry_weapons_type < 5000 }
 				}
 			}
 			modifier = {
@@ -1509,7 +1526,7 @@ NATO_ukraine_help = {
 		remove_effect = {
 			UKR = {
 				add_equipment_to_stockpile = {
-					type = cnc_equipment
+					type = cnc_equipment_type
 					amount = 300
 				}
 			}
@@ -1520,7 +1537,7 @@ NATO_ukraine_help = {
 			modifier = {
 				factor = 5
 				UKR = {
-					has_equipment = { cnc_equipment < 1000 }
+					has_equipment = { cnc_equipment_type < 1000 }
 				}
 			}
 			modifier = {
@@ -1626,7 +1643,7 @@ NATO_ukraine_help = {
 		remove_effect = {
 			UKR = {
 				add_equipment_to_stockpile = {
-					type = util_vehicle_equipment
+					type = util_vehicle_type
 					amount = 80
 				}
 			}
@@ -1637,7 +1654,7 @@ NATO_ukraine_help = {
 			modifier = {
 				factor = 5
 				UKR = {
-					has_equipment = { util_vehicle_equipment < 400 }
+					has_equipment = { util_vehicle_type < 400 }
 				}
 			}
 			modifier = {
@@ -1876,9 +1893,7 @@ NATO_CSTO_agreement = {
 		visible = {
 			is_faction_leader = yes
 			NOT = { has_global_flag = NATO_CSTO_treaty_adandoned }
-			any_other_country = {
-				has_idea = CSTO_member
-			}
+			check_variable = { global.CSTO_member^num > 0 }
 		}
 
 		# available = {
@@ -1964,16 +1979,23 @@ NATO_CSTO_agreement = {
 			log = "[GetDateText]: [Root.GetName]: Decision cancel effect NATO_CSTO_breach_mission"
 			if = {
 				limit = { has_idea = NATO_member }
-
-				every_country = {
-					limit = { has_idea = NATO_member }
+				custom_effect_tooltip = TT_ALL_NATO_MEMBER_NATIONS_GAIN
+				effect_tooltip = {
+					set_country_flag = { flag = NATO_CSTO_agreement_breach_warning value = 0 }
+				}
+				for_each_scope_loop = {
+					array = global.nato_members
 
 					set_country_flag = { flag = NATO_CSTO_agreement_breach_warning value = 0 }
 				}
 			}
 			else = {
-				every_country = {
-					limit = { has_idea = CSTO_member }
+				custom_effect_tooltip = TT_ALL_CSTO_MEMBER_NATIONS_GAIN
+				effect_tooltip = {
+					set_country_flag = { flag = NATO_CSTO_agreement_breach_warning value = 0 }
+				}
+				for_each_scope_loop = {
+					array = global.CSTO_member
 
 					set_country_flag = { flag = NATO_CSTO_agreement_breach_warning value = 0 }
 				}

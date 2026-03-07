@@ -2968,8 +2968,8 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus ABK_tourism2"
 			if = {
 				limit = {
-						has_idea = ABK_tourism1_idea
-					}
+					has_idea = ABK_tourism1_idea
+				}
 				swap_ideas = {
 					remove_idea = ABK_tourism1_idea
 					add_idea = ABK_tourism2_idea
@@ -3209,12 +3209,12 @@ focus_tree = {
 			set_temp_variable = { influence_target = ABK }
 			change_influence_percentage = yes
 			add_equipment_to_stockpile = {
-				type = Inf_equipment
+				type = infantry_weapons_type
 				amount = 2000
 				producer = SOV
 			}
 			add_equipment_to_stockpile = {
-				type = util_vehicle_equipment
+				type = util_vehicle_type
 				amount = 150
 				producer = SOV
 			}
@@ -3887,10 +3887,20 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus ABK_CSTO_training"
 			army_experience = 15
 			add_command_power = 10
-			every_country = {
-				limit = { has_idea = CSTO_member }
-				add_opinion_modifier = { target = ROOT modifier = maintained_CSTO }
-				reverse_add_opinion_modifier = { target = ROOT modifier = maintained_CSTO }
+			if = {
+				limit = { NOT = { has_global_flag = GAME_RULE_csto_disabled } }
+				custom_effect_tooltip = TT_ALL_CSTO_MEMBER_NATIONS_GAIN
+				effect_tooltip = {
+					add_opinion_modifier = { target = SOV modifier = maintained_CSTO }
+					reverse_add_opinion_modifier = { target = SOV modifier = maintained_CSTO }
+				}
+				hidden_effect = {
+					for_each_scope_loop = {
+						array = global.CSTO_member
+						add_opinion_modifier = { target = ROOT modifier = maintained_CSTO }
+						reverse_add_opinion_modifier = { target = ROOT modifier = maintained_CSTO }
+					}
+				}
 			}
 		}
 
@@ -4027,7 +4037,7 @@ focus_tree = {
 			set_temp_variable = { treasury_change = -5 }
 			modify_treasury_effect = yes
 			add_equipment_to_stockpile = {
-				type = infantry_weapons1
+				type = infantry_weapons_2
 				amount = 2500
 				producer = BUL
 			}
@@ -4066,7 +4076,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus ABK_armenia_sosiski"
 			add_equipment_to_stockpile = {
-				type = command_control_equipment
+				type = cnc_equipment_1
 				amount = 100
 				producer = ARM
 			}
@@ -4104,7 +4114,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus ABK_eng_sosiski"
 			add_equipment_to_stockpile = {
-				type = util_vehicle_equipment
+				type = util_vehicle_type
 				amount = 20
 				producer = ENG
 			}
@@ -4136,7 +4146,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus ABK_tur_sosiski"
 			add_equipment_to_stockpile = {
-				type = util_vehicle_equipment
+				type = util_vehicle_type
 				amount = 20
 				producer = TUR
 			}
@@ -4200,7 +4210,7 @@ focus_tree = {
 			set_temp_variable = { treasury_change = -8 }
 			modify_treasury_effect = yes
 			add_equipment_to_stockpile = {
-				type = infantry_weapons1
+				type = infantry_weapons_2
 				amount = 2500
 				producer = CHI
 			}
@@ -4310,7 +4320,7 @@ focus_tree = {
 			set_temp_variable = { treasury_change = -8 }
 			modify_treasury_effect = yes
 			add_equipment_to_stockpile = {
-				type = infantry_weapons1
+				type = infantry_weapons_2
 				amount = 2500
 				producer = SOV
 			}

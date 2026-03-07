@@ -177,6 +177,7 @@ shared_focus = {
 	}
 	# Allow to Make the Tree Visible
 	allow_branch = {
+		has_country_flag = focus_EU111_QMV_yes
 		OR = {
 			original_tag = ABK
 			original_tag = ADO
@@ -279,6 +280,22 @@ shared_focus = {
 		NOT = { has_global_flag = GAME_RULE_eu_disabled }
 	}
 
+	search_filters = { FOCUS_FILTER_EUROPEAN_UNION FOCUS_FILTER_POLITICAL }
+
+	cost = 26
+
+	available = {
+		has_country_flag = USoE
+		custom_trigger_tooltip = {
+			tooltip = requires_usoe_tt
+			is_in_array = {
+				array = global.EU_passed_votes
+				value = 111
+			}
+		}
+		NOT = { has_global_flag = GAME_RULE_eu_disabled }
+	}
+
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE001"
 		remove_ideas = EU_member
@@ -360,7 +377,6 @@ shared_focus = {
 
 	available = { has_country_flag = USoE }
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE004"
 		add_ideas = european_spirit
@@ -388,7 +404,6 @@ shared_focus = {
 
 	available = { has_country_flag = USoE }
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE005"
 		add_war_support = 0.1
@@ -414,7 +429,6 @@ shared_focus = {
 
 	available = { has_country_flag = USoE }
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE006"
 		add_stability = 0.1
@@ -438,7 +452,6 @@ shared_focus = {
 	mutually_exclusive = { focus = USoE200 }
 	mutually_exclusive = { focus = USoE300 }
 	available = { has_country_flag = USoE }
-
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE100"
@@ -551,7 +564,6 @@ shared_focus = {
 		}
 	}
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE104"
 		add_ideas = USoE_heart_of_iron
@@ -577,7 +589,6 @@ shared_focus = {
 	mutually_exclusive = { focus = USoE300 }
 	available = { has_country_flag = USoE }
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE200"
 		add_political_power = 100
@@ -600,7 +611,6 @@ shared_focus = {
 	prerequisite = { focus = USoE200 }
 
 	available = { has_country_flag = USoE }
-
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE201"
@@ -662,7 +672,6 @@ shared_focus = {
 
 	available = { has_country_flag = USoE }
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE203"
 		CHI = {
@@ -692,7 +701,6 @@ shared_focus = {
 
 	available = { has_country_flag = USoE }
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE204"
 		set_country_flag = eurosphere
@@ -719,7 +727,6 @@ shared_focus = {
 	mutually_exclusive = { focus = USoE200 }
 	available = { has_country_flag = USoE }
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE300"
 		add_named_threat = {
@@ -745,7 +752,6 @@ shared_focus = {
 	prerequisite = { focus = USoE300 }
 	mutually_exclusive = { focus = USoE320 }
 	available = { has_country_flag = USoE }
-
 
 	completion_reward = {
 		NATO_leave = yes
@@ -778,7 +784,6 @@ shared_focus = {
 	prerequisite = { focus = USoE301 }
 
 	available = { has_country_flag = USoE }
-
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE302"
@@ -829,7 +834,6 @@ shared_focus = {
 		}
 	}
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE303"
 		SOV = {
@@ -871,7 +875,6 @@ shared_focus = {
 			democratic > 0.20
 		}
 	}
-
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE304"
@@ -1130,7 +1133,6 @@ shared_focus = {
 
 	available = { has_country_flag = USoE }
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE311"
 		IRQ = {
@@ -1361,7 +1363,6 @@ shared_focus = {
 
 	available = { has_country_flag = USoE }
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE323"
 		JAP = {
@@ -1389,7 +1390,6 @@ shared_focus = {
 	prerequisite = { focus = USoE323 }
 
 	available = { has_country_flag = USoE }
-
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE324"
@@ -1485,7 +1485,6 @@ shared_focus = {
 
 	available = { has_country_flag = USoE }
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE401"
 		add_popularity = {
@@ -1523,7 +1522,6 @@ shared_focus = {
 	mutually_exclusive = { focus = USoE600 }
 	available = { has_country_flag = USoE }
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE402"
 		add_popularity = {
@@ -1555,16 +1553,12 @@ shared_focus = {
 
 	available = { has_country_flag = USoE }
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE403"
 		set_cosmetic_tag = USoE_com
 		set_temp_variable = { rul_party_temp = 5 }
+		set_temp_variable = { disable_elections = 1 }
 		change_ruling_party_effect = yes
-		set_politics = {
-			ruling_party = communism
-			elections_allowed = no
-		}
 		add_popularity = {
 			ideology = communism
 			popularity = 0.30
@@ -1590,7 +1584,6 @@ shared_focus = {
 	prerequisite = { focus = USoE403 focus = USoE502 focus = USoE605 }
 
 	available = { has_country_flag = USoE }
-
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE404"
@@ -1621,7 +1614,6 @@ shared_focus = {
 	mutually_exclusive = { focus = USoE400 }
 	mutually_exclusive = { focus = USoE600 }
 	available = { has_country_flag = USoE }
-
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE500"
@@ -1658,7 +1650,6 @@ shared_focus = {
 
 	available = { has_country_flag = USoE }
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE501"
 		add_stability = 0.1
@@ -1668,10 +1659,6 @@ shared_focus = {
 		set_cosmetic_tag = USoE_green
 		set_temp_variable = { rul_party_temp = 17 }
 		change_ruling_party_effect = yes
-		set_politics = {
-			ruling_party = neutrality
-			elections_allowed = yes
-		}
 		add_popularity = {
 			ideology = neutrality
 			popularity = 0.30
@@ -1697,7 +1684,6 @@ shared_focus = {
 	prerequisite = { focus = USoE501 }
 
 	available = { has_country_flag = USoE }
-
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE502"
@@ -1749,7 +1735,6 @@ shared_focus = {
 
 	available = { has_country_flag = USoE }
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE504"
 		set_global_flag = environmental_imperialism_south_america
@@ -1799,7 +1784,6 @@ shared_focus = {
 
 	available = { has_country_flag = USoE }
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE506"
 		set_global_flag = environmental_imperialism_africa
@@ -1823,7 +1807,6 @@ shared_focus = {
 	prerequisite = { focus = USoE502 }
 
 	available = { has_country_flag = USoE }
-
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE507"
@@ -1849,7 +1832,6 @@ shared_focus = {
 
 	available = { has_country_flag = USoE }
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE508"
 		set_global_flag = environmental_imperialism_asia
@@ -1874,7 +1856,6 @@ shared_focus = {
 
 	available = { has_country_flag = USoE }
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE509"
 		set_global_flag = environmental_imperialism_oceania
@@ -1898,7 +1879,6 @@ shared_focus = {
 	prerequisite = { focus = USoE502 }
 
 	available = { has_country_flag = USoE }
-
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE510"
@@ -1925,7 +1905,6 @@ shared_focus = {
 	mutually_exclusive = { focus = USoE500 }
 	mutually_exclusive = { focus = USoE400 }
 	available = { has_country_flag = USoE }
-
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE600"
@@ -1972,7 +1951,6 @@ shared_focus = {
 		}
 	}
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE601"
 		set_temp_variable = { temp_opinion = 5 }
@@ -2003,7 +1981,6 @@ shared_focus = {
 	mutually_exclusive = { focus = USoE603 }
 	mutually_exclusive = { focus = USoE604 }
 	available = { has_country_flag = USoE }
-
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE602"
@@ -2036,7 +2013,6 @@ shared_focus = {
 	mutually_exclusive = { focus = USoE604 }
 	available = { has_country_flag = USoE }
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE603"
 		set_temp_variable = { temp_opinion = 5 }
@@ -2068,7 +2044,6 @@ shared_focus = {
 	mutually_exclusive = { focus = USoE603 }
 	available = { has_country_flag = USoE }
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE604"
 		set_temp_variable = { temp_opinion = 5 }
@@ -2098,7 +2073,6 @@ shared_focus = {
 	prerequisite = { focus = USoE602 focus = USoE603 focus = USoE604 }
 
 	available = { has_country_flag = USoE }
-
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE605"
@@ -2149,7 +2123,6 @@ shared_focus = {
 	mutually_exclusive = { focus = USoE601 }
 	available = { has_country_flag = USoE }
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE620"
 		add_political_power = 100
@@ -2173,7 +2146,6 @@ shared_focus = {
 	prerequisite = { focus = USoE620 }
 
 	available = { has_country_flag = USoE }
-
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE621"
@@ -2209,7 +2181,6 @@ shared_focus = {
 		has_country_flag = USoE
 		controls_state = 857
 	}
-
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE622"
@@ -2263,7 +2234,6 @@ shared_focus = {
 		controls_state = 43
 	}
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE623"
 		custom_effect_tooltip = tooltip_USoE623_effect
@@ -2315,7 +2285,6 @@ shared_focus = {
 		has_country_flag = USoE
 		controls_state = 91
 	}
-
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE624"
@@ -2369,7 +2338,6 @@ shared_focus = {
 		controls_state = 56
 	}
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE625"
 		custom_effect_tooltip = tooltip_USoE625_effect
@@ -2421,7 +2389,6 @@ shared_focus = {
 		has_country_flag = USoE
 		controls_state = 38
 	}
-
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE626"
@@ -2476,7 +2443,6 @@ shared_focus = {
 		controls_state = 37
 	}
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE627"
 		custom_effect_tooltip = tooltip_USoE627_effect
@@ -2528,7 +2494,6 @@ shared_focus = {
 		has_country_flag = USoE
 		controls_state = 13
 	}
-
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE628"
@@ -2582,7 +2547,6 @@ shared_focus = {
 		controls_state = 46
 	}
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE629"
 		custom_effect_tooltip = tooltip_USoE629_effect
@@ -2634,7 +2598,6 @@ shared_focus = {
 		has_country_flag = USoE
 		controls_state = 76
 	}
-
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE630"
@@ -2689,7 +2652,6 @@ shared_focus = {
 		controls_state = 65
 	 }
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE631"
 		custom_effect_tooltip = tooltip_USoE631_effect
@@ -2742,7 +2704,6 @@ shared_focus = {
 		has_country_flag = USoE
 		controls_state = 42
 	}
-
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE632"
@@ -2797,11 +2758,9 @@ shared_focus = {
 		controls_state = 644
 	}
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE632"
 		custom_effect_tooltip = tooltip_USoE632_effect
-		set_country_flag = USoE_house_of_romanov
 		set_temp_variable = { temp_opinion = 5 }
 		change_the_military_opinion = yes
 		change_landowners_opinion = yes
@@ -2839,7 +2798,6 @@ shared_focus = {
 
 	available = { has_country_flag = USoE }
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE634"
 		add_political_power = 100
@@ -2872,7 +2830,6 @@ shared_focus = {
 		has_country_flag = USoE
 		controls_state = 81
 	}
-
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE635"
@@ -2925,7 +2882,6 @@ shared_focus = {
 		controls_state = 43
 	}
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE636"
 		set_country_flag = USoE_capital_moved
@@ -2976,7 +2932,6 @@ shared_focus = {
 		has_country_flag = USoE
 		controls_state = 91
 	}
-
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE637"
@@ -3029,7 +2984,6 @@ shared_focus = {
 		controls_state = 56
 	}
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE638"
 		set_country_flag = USoE_capital_moved
@@ -3080,7 +3034,6 @@ shared_focus = {
 		has_country_flag = USoE
 		controls_state = 13
 	}
-
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE639"
@@ -3133,7 +3086,6 @@ shared_focus = {
 		controls_state = 76
 	}
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE640"
 		set_country_flag = USoE_capital_moved
@@ -3184,7 +3136,6 @@ shared_focus = {
 		controls_state = 46
 	}
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE641"
 		set_country_flag = USoE_capital_moved
@@ -3234,7 +3185,6 @@ shared_focus = {
 		has_country_flag = USoE
 		controls_state = 644
 	}
-
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE642"
@@ -3287,7 +3237,6 @@ shared_focus = {
 		controls_state = 50
 	}
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE642"
 		set_country_flag = USoE_capital_moved
@@ -3329,7 +3278,6 @@ shared_focus = {
 
 	available = { has_country_flag = USoE }
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE644"
 		add_political_power = 100
@@ -3354,10 +3302,19 @@ shared_focus = {
 	mutually_exclusive = { focus = USoE646 }
 	available = { has_country_flag = USoE }
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE645"
-		catholic_leadership = yes
+		every_country = {
+			limit = { has_idea = christian }
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = friendly_monarchy
+			}
+			reverse_add_opinion_modifier = {
+				target = ROOT
+				modifier = friendly_monarchy
+			}
+		}
 		custom_effect_tooltip = tooltip_USoE645_effect
 		set_country_flag = USoE_imperial_crown
 	}
@@ -3380,10 +3337,24 @@ shared_focus = {
 	mutually_exclusive = { focus = USoE645 }
 	available = { has_country_flag = USoE }
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE646"
-		christian_leadership = yes
+		every_country = {
+			limit = {
+				OR = {
+					has_idea = christian
+					has_idea = orthodox_christian
+				}
+			}
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = friendly_monarchy
+			}
+			reverse_add_opinion_modifier = {
+				target = ROOT
+				modifier = friendly_monarchy
+			}
+		}
 		custom_effect_tooltip = tooltip_USoE646_effect
 		set_country_flag = USoE_new_crown
 	}
@@ -3406,18 +3377,14 @@ shared_focus = {
 	mutually_exclusive = { focus = USoE648 }
 	available = { has_country_flag = USoE }
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE647"
 		set_temp_variable = { temp_opinion = 5 }
 		change_the_clergy_opinion = yes
 		set_USoE_flag_of_the_house = yes
 		set_temp_variable = { rul_party_temp = 23 }
+		set_temp_variable = { disable_elections = 1 }
 		change_ruling_party_effect = yes
-		set_politics = {
-			ruling_party = nationalist
-			elections_allowed = no
-		}
 		add_popularity = {
 			ideology = nationalist
 			popularity = 0.20
@@ -3444,7 +3411,6 @@ shared_focus = {
 	mutually_exclusive = { focus = USoE647 }
 	available = { has_country_flag = USoE }
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE648"
 		set_temp_variable = { temp_opinion = -5 }
@@ -3452,10 +3418,6 @@ shared_focus = {
 		set_USoE_flag_of_the_house = yes
 		set_temp_variable = { rul_party_temp = 23 }
 		change_ruling_party_effect = yes
-		set_politics = {
-			ruling_party = nationalist
-			elections_allowed = yes
-		}
 		add_popularity = {
 			ideology = nationalist
 			popularity = 0.20
@@ -3482,7 +3444,6 @@ shared_focus = {
 
 	available = { has_country_flag = USoE }
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE649"
 		add_ideas = USoE_holy_european_empire
@@ -3508,7 +3469,6 @@ shared_focus = {
 
 	available = { has_country_flag = USoE }
 
-
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE700"
 		add_ideas = USoE_pax_occidentalis
@@ -3522,7 +3482,6 @@ shared_focus = {
 shared_focus = {
 	id = USoE701
 	icon = united_nations
-	#icon = USoE701
 	relative_position_id = USoE204
 	x = 0
 	y = 2
@@ -3531,7 +3490,6 @@ shared_focus = {
 	prerequisite = { focus = USoE204 }
 
 	available = { has_country_flag = USoE }
-
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus USoE701"

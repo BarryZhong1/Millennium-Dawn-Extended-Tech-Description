@@ -256,15 +256,15 @@ focus_tree = {
 				name = GENERIC_uniform_improvements
 				uses = 2
 				bonus = 0.5
-				technology = body_armor_1980
-				technology = body_armor_2000
-				technology = body_armor_2010
-				technology = body_armor_2030
-				technology = camouflage
-				technology = camouflage2
-				technology = camouflage3
-				technology = camouflage4
-				technology = camouflage5
+				technology = body_armor_1
+				technology = body_armor_2
+				technology = body_armor_3
+				technology = body_armor_4
+				technology = camouflage_1
+				technology = camouflage_2
+				technology = camouflage_3
+				technology = camouflage_4
+				technology = camouflage_5
 			}
 		}
 
@@ -605,7 +605,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus BOS_transportation_methods"
 			add_equipment_to_stockpile = {
-				type = util_vehicle_equipment
+				type = util_vehicle_type
 				amount = 60
 				producer = BOS
 			}
@@ -958,12 +958,12 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus BOS_small_arms_purchase"
 			add_equipment_to_stockpile = {
-				type = infantry_weapons3
+				type = infantry_weapons_4
 				amount = 240
 				producer = GER
 			}
 			add_equipment_to_stockpile = {
-				type = infantry_weapons1
+				type = infantry_weapons_2
 				amount = 1540
 				producer = SOV
 			}
@@ -1740,10 +1740,10 @@ focus_tree = {
 			modifier = {
 				factor = 0
 				OR = {
-				is_historical_focus_on = yes
-				NOT = {
-					has_idea = NATO_member
-				}
+					is_historical_focus_on = yes
+					NOT = {
+						has_idea = NATO_member
+					}
 				}
 			}
 		}
@@ -1934,9 +1934,10 @@ focus_tree = {
 			add_ideas = bos_trade_deal_with_russia
 			if = {
 				limit = {
-					any_country = {
-						has_idea = CSTO_member
+					any_of_scopes = {
+						array = global.CSTO_member
 						NOT = { has_war_with = ROOT }
+
 					}
 				}
 				add_opinion_modifier = { target = ROOT modifier = declaration_of_friendship }
@@ -2119,7 +2120,7 @@ focus_tree = {
 				create_production_license = {
 					target = BOS
 					equipment = {
-						type = infantry_weapons2
+						type = infantry_weapons_3
 					}
 					cost_factor = 5
 				}
@@ -2265,10 +2266,6 @@ focus_tree = {
 			OR = {
 				BOS_croat_attitude_friendly_trigger = yes
 				BOS_croat_attitude_loyal_trigger = yes
-			}
-			any_country = {
-				has_idea = CSTO_member
-				NOT = { is_in_faction_with = SOV }
 			}
 		}
 
@@ -3799,10 +3796,7 @@ focus_tree = {
 
 		available = {
 			hidden_trigger = { NOT = { has_country_flag = civil_war_focus } }
-			any_country = {
-				has_idea = NATO_member
-				NOT = { is_in_faction_with = ROOT }
-			}
+			NOT = { has_idea = NATO_member }
 			salafist_caliphate_are_in_power = yes
 		}
 
@@ -4266,7 +4260,7 @@ focus_tree = {
 			USA = {
 			create_production_license = {
 				target = BOS
-				equipment = { type = infantry_weapons2 }
+				equipment = { type = infantry_weapons_3 }
 				cost_factor = 5
 				}
 				}
@@ -4705,7 +4699,6 @@ focus_tree = {
 		available = { hidden_trigger = { NOT = { has_country_flag = civil_war_focus } } has_country_flag = BOS_financial_crisis }
 
 		###will auto complte in 5th of october viva event
-
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus BOS_bosnian_elections"
@@ -5428,15 +5421,15 @@ focus_tree = {
 						idea = bos_unproductive_farming
 						days = 365
 					}
-	  				custom_effect_tooltip = with_out_the_required_euipment_and_support_are_farming_industy_will_collapse_tt
+					  custom_effect_tooltip = with_out_the_required_euipment_and_support_are_farming_industy_will_collapse_tt
 				}
 				swap_ideas = {
-  					remove_idea = bos_farming_improvements
+					  remove_idea = bos_farming_improvements
 					add_idea = bos_farming_powerhouse
 				}
 			}
 			if = {
-			 	limit = { has_completed_focus = BOS_banja_luka_mine }
+				 limit = { has_completed_focus = BOS_banja_luka_mine }
 				else = {
 					set_temp_variable = { party_index = 5 }
 					set_temp_variable = { party_popularity_increase = 0.240 }
@@ -5446,18 +5439,18 @@ focus_tree = {
 						days = 365
 					}
 					custom_effect_tooltip = with_out_the_required_euipment_and_support_are_mining_industy_will_collapse_tt
-	  				random_list = {
+					  random_list = {
 					70 = { country_event = { id = Bosnia.14  days = 0 } }
 					30 = { country_event = { id = Bosnia.13 days = 0 } }
 					}
 				}
 				add_resource = {
 					type = steel
-			 		amount = 1
+					 amount = 1
 					state = 128
 				}
 				swap_ideas = {
-  					remove_idea = bos_mining_development
+					  remove_idea = bos_mining_development
 					add_idea = bos_mining_industry
 				}
 			}
@@ -6407,18 +6400,8 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus BOS_formation_of_a_junta"
 			hidden_effect = {
-				clear_array = ruling_party
-				clear_array = gov_coalition_array
-				add_to_array = { ruling_party = 22 }
-				update_government_coalition_strength = yes
-				update_party_name = yes
-				set_coalition_drift = yes
-				set_ruling_leader = yes
-				set_leader = yes
-			}
-			set_politics = {
-				ruling_party = nationalist
-				elections_allowed = yes
+				set_temp_variable = { rul_party_temp = 22 }
+				change_ruling_party_effect = yes
 			}
 			set_temp_variable = { party_index = 22 }
 			set_temp_variable = { party_popularity_increase = 0.6 }
