@@ -1033,15 +1033,33 @@ CAC_update_variables = {
 		multiply_variable = { CAC_companies_workforce^5 = -1 }
 		set_variable = { CAC_companies_sector_buildings^5 = industrial_complex_total }
 
-		# Slot 6 — Healthcare & Pharma (no buildings assigned)
-		set_variable = { CAC_companies_maintenance^6 = 0 }
-		set_variable = { CAC_companies_workforce^6 = 0 }
-		set_variable = { CAC_companies_income^6 = 0 }
-		set_variable = { CAC_companies_taxes^6 = 0 }
-		set_variable = { CAC_companies_revenue^6 = CAC_companies_additional_income^6 }
+		# Slot 6 — Healthcare & Pharma (scales with GDP/C * population)
+		# Income formula: 0.003 * gdp_per_capita * population_total_m
+		set_variable = { CAC_companies_maintenance^6 = state_hospital_need }
+		multiply_variable = { CAC_companies_maintenance^6 = 0.175 }
+		#TODO: add modifier so that increased health requires increased maintenance
+		set_variable = { CAC_companies_workforce^6 = state_hospital_need }
+		multiply_variable = { CAC_companies_workforce^6 = gdp_per_capita }
+		multiply_variable = { CAC_companies_workforce^6 = 0.007 }
+		set_variable = { CAC_companies_taxes^6 = civil_fac_tax }
+		set_temp_variable = { cac_healthcare_income = gdp_per_capita }
+		multiply_temp_variable = { cac_healthcare_income = population_total_m }
+		multiply_temp_variable = { cac_healthcare_income = 0.003 }
+		set_variable = { CAC_companies_income^6 = cac_healthcare_income }
+		set_variable = { CAC_companies_revenue^6 = CAC_companies_income^6 }
+		add_to_variable = { CAC_companies_revenue^6 = CAC_companies_additional_income^6 }
+		subtract_from_variable = { CAC_companies_revenue^6 = CAC_companies_taxes^6 }
+		subtract_from_variable = { CAC_companies_revenue^6 = CAC_companies_maintenance^6 }
+		subtract_from_variable = { CAC_companies_revenue^6 = CAC_companies_workforce^6 }
 		subtract_from_variable = { CAC_companies_revenue^6 = CAC_companies_additional_expenses^6 }
-		set_variable = { CAC_companies_display_expenses^6 = CAC_companies_additional_expenses^6 }
+		set_variable = { CAC_companies_display_expenses^6 = CAC_companies_taxes^6 }
+		add_to_variable = { CAC_companies_display_expenses^6 = CAC_companies_additional_expenses^6 }
+		add_to_variable = { CAC_companies_display_expenses^6 = CAC_companies_maintenance^6 }
+		add_to_variable = { CAC_companies_display_expenses^6 = CAC_companies_workforce^6 }
 		multiply_variable = { CAC_companies_display_expenses^6 = -1 }
+		multiply_variable = { CAC_companies_taxes^6 = -1 }
+		multiply_variable = { CAC_companies_maintenance^6 = -1 }
+		multiply_variable = { CAC_companies_workforce^6 = -1 }
 		set_variable = { CAC_companies_sector_buildings^6 = 0 }
 	}
 }
