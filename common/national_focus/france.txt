@@ -499,7 +499,7 @@ focus_tree = {
 			every_other_country = {
 				limit = { has_idea = EU_member }
 				set_temp_variable = { modify_eurosceptic = -0.1 }
-				set_temp_variable = { modify_eurosceptic_target = PREV }
+				set_temp_variable = { modify_eurosceptic_target = THIS }
 				eurosceptic_change = yes
 			}
 			unlock_decision_category_tooltip = FRA_EU_assistance_decision_category
@@ -743,49 +743,6 @@ focus_tree = {
 			}
 		}
 	}
-
-	focus = {
-		id = FRA_liberal_arms_contracts
-		icon = blr_ptrk_milan
-
-		x = -7
-		y = 6
-		relative_position_id = FRA_state_of_french_politics
-
-		cost = 10
-
-		prerequisite = { focus = FRA_liberal_turn }
-		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MILITARY }
-
-		available = {
-			is_subject = no
-			NOT = { has_idea = no_military }
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [THIS.GetName]: Focus FRA_liberal_arms_contracts"
-			add_political_power = 50
-			hidden_effect = {
-				country_event = { id = france_md.323 days = 10 }
-				country_event = { id = france_md.325 days = 30 }
-				country_event = { id = france_md.327 days = 50 }
-				country_event = { id = france_md.329 days = 70 }
-				country_event = { id = france_md.331 days = 90 }
-				country_event = { id = france_md.333 days = 110 }
-			}
-			custom_effect_tooltip = FRA_liberal_arms_contracts_tt
-		}
-
-		ai_will_do = {
-			factor = 1
-			modifier = {
-				factor = 1.5
-				NOT = { has_global_flag = FRA_CHAOS_PATH }
-				has_government = democratic
-			}
-		}
-	}
-
 	focus = {
 		id = FRA_ease_interventionism
 		icon = peace
@@ -1973,7 +1930,7 @@ focus_tree = {
 	}
 	focus = {
 		id = FRA_arms_deal
-		icon = arms_treade_deals
+		icon = blr_ptrk_milan
 
 		x = 3
 		y = 6
@@ -1986,24 +1943,30 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		available = {
-			OR = {
-				emerging_communist_state_are_in_power = yes
-				neutrality_neutral_communism_are_in_power = yes
-			}
+			is_subject = no
+			NOT = { has_idea = no_military }
 		}
 
 		completion_reward = {#event to sell weapon
 			log = "[GetDateText]: [THIS.GetName]: Focus FRA_arms_deal"
+			add_political_power = 50
+			hidden_effect = {
+				country_event = { id = france_md.323 days = 10 }
+				country_event = { id = france_md.325 days = 30 }
+				country_event = { id = france_md.327 days = 50 }
+				country_event = { id = france_md.329 days = 70 }
+				country_event = { id = france_md.331 days = 90 }
+				country_event = { id = france_md.333 days = 110 }
+			}
+			custom_effect_tooltip = FRA_liberal_arms_contracts_tt
 		}
 
 		ai_will_do = {
 			factor = 1
 			modifier = {
-				factor = 0
-				NOT = {
-					has_global_flag = FRA_CHAOS_PATH
-					has_government = communism
-				}
+				factor = 1.5
+				NOT = { has_global_flag = FRA_CHAOS_PATH }
+				has_government = democratic
 			}
 		}
 	}
@@ -5937,6 +5900,13 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus id = FRA_cooperate_eu"
+			every_other_country = {
+				limit = { has_idea = EU_member }
+				set_temp_variable = { modify_eurosceptic = -0.075 }
+				set_temp_variable = { modify_eurosceptic_target = THIS }
+				eurosceptic_change = yes
+			}
+			unlock_decision_category_tooltip = FRA_GREEN_EU_assistance_decision_category
 		}
 
 		ai_will_do = {
@@ -6260,43 +6230,6 @@ focus_tree = {
 			factor = 1
 		}
 	}
-	# Greens End Extraction - Removes ~1/3 of mainland resources
-	focus = {
-		id = FRA_end_extraction
-		icon = generic_resource_extraction_ban
-
-		x = -22
-		y = 7
-		relative_position_id = FRA_state_of_french_politics
-
-		cost = 10
-
-		prerequisite = { focus = FRA_end_fossile }
-		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
-
-		completion_reward = {
-			log = "[GetDateText]: [THIS.GetName]: Focus id = FRA_end_extraction"
-			# Add permanent national spirit that removes resources
-			add_ideas = FRA_green_extraction_ban
-			# Greens gain popularity from environmental victory
-			set_temp_variable = { party_index = 17 }
-			set_temp_variable = { party_popularity_increase = 0.10 }
-			set_temp_variable = { temp_outlook_increase = 0.10 }
-			add_relative_party_popularity = yes
-			# Economic impact from closing mines
-			set_temp_variable = { temp_change = -0.05 }
-			FRA_decrease_growth = yes
-			# Notify EU about France's radical environmental policy
-			every_other_country = {
-				limit = { has_idea = EU_member }
-				country_event = { id = france_md.960 days = 5 }
-			}
-		}
-
-		ai_will_do = {
-			factor = 1
-		}
-	}
 	focus = {
 		id = FRA_opti_indus
 		icon = production2
@@ -6440,12 +6373,21 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus id = FRA_reduce_extraction"
-			set_temp_variable = { temp_change = 0.1 }
-			FRA_monthly = yes
-			set_temp_variable = { temp_change = 0.025 }
-			FRA_unstab = yes
-			set_temp_variable = { temp_change = -0.3 }
-			FRA_ressource_extract=yes
+			# Add permanent national spirit that removes resources
+			add_ideas = FRA_green_extraction_ban
+			# Greens gain popularity from environmental victory
+			set_temp_variable = { party_index = 17 }
+			set_temp_variable = { party_popularity_increase = 0.10 }
+			set_temp_variable = { temp_outlook_increase = 0.10 }
+			add_relative_party_popularity = yes
+			# Economic impact from closing mines
+			set_temp_variable = { temp_change = -0.05 }
+			FRA_decrease_growth = yes
+			# Notify EU about France's radical environmental policy
+			every_other_country = {
+				limit = { has_idea = EU_member }
+				country_event = { id = france_md.960 days = 5 }
+			}
 		}
 
 		ai_will_do = {

@@ -9246,7 +9246,99 @@ country_event = {#invest infrastructure
 			add_opinion_modifier = { target = ROOT modifier = denied_us }
 			country_event = diplomatic_response.2
 			add_political_power = -25
-			set_temp_variable = { treasury_change = -3 }
+			set_temp_variable = { treasury_change = 3 }
+			modify_treasury_effect = yes
+		}
+		ai_chance = {
+			base = 15
+		}
+	}
+}
+#invest ecology
+country_event = {
+	id = france_md.502
+	title = france_md.502.t
+	desc = france_md.502.d
+	picture = GFX_united_states_dollar
+
+	is_triggered_only = no
+
+	option = {
+		name = france_md.502.a
+		log = "[GetDateText]: [This.GetName]: france_md.502.a executed"
+		add_political_power = 25
+		set_temp_variable = { treasury_change = -5 }
+		modify_treasury_effect = yes
+		set_temp_variable = { int_investment_change = 5 }
+		modify_international_investment_effect = yes
+		set_temp_variable = { percent_change = 3 }
+		set_temp_variable = { tag_index = FRA.id }
+		set_temp_variable = { influence_target = THIS.id }
+		change_influence_percentage = yes
+		THIS = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = recently_invest
+			}
+		}
+		random_owned_controlled_state = {
+			limit = {
+				free_building_slots = {
+					building = synthetic_refinery
+					size > 0
+					include_locked = yes
+				}
+				OR = {
+					is_in_home_area = yes
+					NOT = {
+						owner = {
+							any_owned_state = {
+								free_building_slots = {
+									building = synthetic_refinery
+									size > 0
+									include_locked = yes
+								}
+								is_in_home_area = yes
+							}
+						}
+					}
+				}
+			}
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = synthetic_refinery
+				level = 1
+				instant_build = yes
+			}
+		}
+		set_temp_variable = { modify_eurosceptic = 0.025 }
+		set_temp_variable = { modify_eurosceptic_target = THIS }
+		eurosceptic_change = yes
+		set_temp_variable = { party_index = 17 }
+		set_temp_variable = { temp_outlook_increase = 0.02 }
+		add_relative_party_popularity = yes
+		FRA = {
+			add_timed_idea = {
+				idea = FRA_investing_eu
+				days = 35
+			}
+			set_temp_variable = { int_investment_change = 4 }
+			modify_international_investment_effect = yes
+		}
+
+		ai_chance = {
+			base = 85
+		}
+	}
+
+	option = {
+		name = france_md.502.b
+		log = "[GetDateText]: [This.GetName]: france_md.502.b executed"
+		FRA = {
+			add_opinion_modifier = { target = ROOT modifier = denied_us }
+			country_event = diplomatic_response.2
+			add_political_power = -25
+			set_temp_variable = { treasury_change = 4 }
 			modify_treasury_effect = yes
 		}
 		ai_chance = {
@@ -13662,3 +13754,159 @@ country_event = {
 	}
 }
 
+#2002 election event
+#TODO give flag
+country_event = {
+	id = france_md.503
+	title = france_md.503.t
+	desc = france_md.503.d
+	picture = GFX_generic_parliament
+	is_triggered_only = yes
+	# left favored
+	option = {
+		name = france_md.503.a
+		log = "[GetDateText]: [This.GetName]: france_md.503.a executed"
+		set_temp_variable = { party_index = 3 }
+		set_temp_variable = { party_popularity_increase = 0.1 }
+		set_temp_variable = { temp_outlook_increase = 0.1 }
+		add_relative_party_popularity = yes
+		set_temp_variable = { party_index = 17 }
+		set_temp_variable = { party_popularity_increase = 0.05 }
+		set_temp_variable = { temp_outlook_increase = 0.05 }
+		add_relative_party_popularity = yes
+		set_temp_variable = { party_index = 4 }
+		set_temp_variable = { party_popularity_increase = 0.05 }
+		set_temp_variable = { temp_outlook_increase = 0.05 }
+		add_relative_party_popularity = yes
+		hidden_effect = {
+			country_event = { id = france_md.504 days = 3 }
+		}
+		ai_chance = { base = 3 }
+	}
+
+	# not that left
+	option = {
+		name = france_md.503.b
+		log = "[GetDateText]: [This.GetName]: france_md.503.b executed"
+		set_temp_variable = { party_index = 3 }
+		set_temp_variable = { party_popularity_increase = -0.15 }
+		set_temp_variable = { temp_outlook_increase = -0.15 }
+		add_relative_party_popularity = yes
+		set_temp_variable = { party_index = 17 }
+		set_temp_variable = { party_popularity_increase = -0.075 }
+		set_temp_variable = { temp_outlook_increase = -0.075 }
+		add_relative_party_popularity = yes
+		set_temp_variable = { party_index = 4 }
+		set_temp_variable = { party_popularity_increase = -0.075 }
+		set_temp_variable = { temp_outlook_increase = -0.075 }
+		add_relative_party_popularity = yes
+		hidden_effect = {
+			country_event = { id = france_md.505 days = 3 }
+		}
+		ai_chance = { base = 3 }
+	}
+}
+#PC vs communist
+country_event = {#yes
+	id = france_md.504
+	title = france_md.504.t
+	desc = france_md.504.d
+	picture = GFX_generic_parliament
+	is_triggered_only = yes
+	option = {#socialist favored
+		name = france_md.504.a
+		log = "[GetDateText]: [This.GetName]: france_md.504.a executed"
+		hidden_effect = {
+			country_event = { id = france_md.505 days = 10 }
+		}
+		ai_chance = { base = 3 }
+	}
+	option = {#communist and barrage
+		name = france_md.504.b
+		log = "[GetDateText]: [This.GetName]: france_md.504.b executed"
+		hidden_effect = {
+			country_event = { id = france_md.506 days = 10 }
+		}
+		ai_chance = { base = 3 }
+	}
+	option = {#inconclusive outcome green won
+		name = france_md.504.c
+		log = "[GetDateText]: [This.GetName]: france_md.504.c executed"
+		hidden_effect = {
+			country_event = { id = france_md.507 days = 10 }
+		}
+		ai_chance = { base = 3 }
+	}
+}
+country_event = {#socialist win left
+	id = france_md.505
+	title = france_md.505.t
+	desc = france_md.505.d
+	picture = GFX_generic_parliament
+	is_triggered_only = yes
+	option = {#socialist favored
+		name = france_md.505.a
+		log = "[GetDateText]: [This.GetName]: france_md.505.a executed"
+		set_temp_variable = { party_index = 3 }
+		set_temp_variable = { party_popularity_increase = 0.2 }
+		set_temp_variable = { temp_outlook_increase = 0.2 }
+		add_relative_party_popularity = yes
+		set_temp_variable = { party_index = 4 }
+		set_temp_variable = { party_popularity_increase = -0.1 }
+		set_temp_variable = { temp_outlook_increase = -0.01 }
+		add_relative_party_popularity = yes
+		set_temp_variable = { party_index = 17 }
+		set_temp_variable = { party_popularity_increase = -0.1 }
+		set_temp_variable = { temp_outlook_increase = -0.1 }
+		add_relative_party_popularity = yes
+		ai_chance = { base = 3 }
+	}
+}
+country_event = {#commies win left
+	id = france_md.506
+	title = france_md.506.t
+	desc = france_md.506.d
+	picture = GFX_generic_parliament
+	is_triggered_only = yes
+	option = {#commies favored
+		name = france_md.506.a
+		log = "[GetDateText]: [This.GetName]: france_md.506.a executed"
+		set_temp_variable = { party_index = 4 }
+		set_temp_variable = { party_popularity_increase = 0.2 }
+		set_temp_variable = { temp_outlook_increase = 0.2 }
+		add_relative_party_popularity = yes
+		set_temp_variable = { party_index = 3 }
+		set_temp_variable = { party_popularity_increase = -0.1 }
+		set_temp_variable = { temp_outlook_increase = -0.01 }
+		add_relative_party_popularity = yes
+		set_temp_variable = { party_index = 17 }
+		set_temp_variable = { party_popularity_increase = -0.1 }
+		set_temp_variable = { temp_outlook_increase = -0.1 }
+		add_relative_party_popularity = yes
+		ai_chance = { base = 3 }
+	}
+}
+country_event = {#greens win left
+	id = france_md.507
+	title = france_md.507.t
+	desc = france_md.507.d
+	picture = GFX_generic_parliament
+	is_triggered_only = yes
+	option = {#commies favored
+		name = france_md.507.a
+		log = "[GetDateText]: [This.GetName]: france_md.507.a executed"
+		set_temp_variable = { party_index = 17 }
+		set_temp_variable = { party_popularity_increase = 0.2 }
+		set_temp_variable = { temp_outlook_increase = 0.2 }
+		add_relative_party_popularity = yes
+		set_temp_variable = { party_index = 3 }
+		set_temp_variable = { party_popularity_increase = -0.1 }
+		set_temp_variable = { temp_outlook_increase = -0.01 }
+		add_relative_party_popularity = yes
+		set_temp_variable = { party_index = 4 }
+		set_temp_variable = { party_popularity_increase = -0.1 }
+		set_temp_variable = { temp_outlook_increase = -0.1 }
+		add_relative_party_popularity = yes
+		ai_chance = { base = 3 }
+	}
+}
