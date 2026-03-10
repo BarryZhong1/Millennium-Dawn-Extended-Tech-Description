@@ -1,3 +1,313 @@
+ENG_house_of_commons = {
+
+	ENG_dissolve_parliament = {
+		allowed = { original_tag = ENG }
+		icon = GFX_decision_generic_parliament
+
+		cost = 0
+		days_re_enable = 2160
+
+		visible = {
+			NOT = { has_country_flag = ENG_commons_abolished }
+			check_variable = { ENG_commons_election_var > 5 }
+		}
+
+		available = {
+			has_government = democratic
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision ENG_dissolve_parliament"
+			custom_effect_tooltip = ENG_dissolve_parliament_TT
+			hidden_effect = {
+				country_event = { id = ENG_commons.1 days = 7 }
+				set_variable = { ENG_commons_election_var = 0 }
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# --- Party seat display decisions ---
+	# Each is visible only when the party holds at least one seat.
+	# Cost 0, no effect — purely informational.
+
+	ENG_commons_view_lab = {
+		allowed = { original_tag = ENG }
+		icon = GFX_decision_generic_parliament
+		cost = 0
+		days_re_enable = 1
+		visible = {
+			NOT = { has_country_flag = ENG_commons_abolished }
+			check_variable = { ENG_commons_seats^3 > 0 }
+		}
+		complete_effect = { }
+		ai_will_do = { base = 0 }
+	}
+
+	ENG_commons_view_con = {
+		allowed = { original_tag = ENG }
+		icon = GFX_decision_generic_parliament
+		cost = 0
+		days_re_enable = 1
+		visible = {
+			NOT = { has_country_flag = ENG_commons_abolished }
+			check_variable = { ENG_commons_seats^1 > 0 }
+		}
+		complete_effect = { }
+		ai_will_do = { base = 0 }
+	}
+
+	ENG_commons_view_ld = {
+		allowed = { original_tag = ENG }
+		icon = GFX_decision_generic_parliament
+		cost = 0
+		days_re_enable = 1
+		visible = {
+			NOT = { has_country_flag = ENG_commons_abolished }
+			check_variable = { ENG_commons_seats^2 > 0 }
+		}
+		complete_effect = { }
+		ai_will_do = { base = 0 }
+	}
+
+	ENG_commons_view_ukip = {
+		allowed = { original_tag = ENG }
+		icon = GFX_decision_generic_parliament
+		cost = 0
+		days_re_enable = 1
+		visible = {
+			NOT = { has_country_flag = ENG_commons_abolished }
+			check_variable = { ENG_commons_seats^20 > 0 }
+		}
+		complete_effect = { }
+		ai_will_do = { base = 0 }
+	}
+
+	ENG_commons_view_green = {
+		allowed = { original_tag = ENG }
+		icon = GFX_decision_generic_parliament
+		cost = 0
+		days_re_enable = 1
+		visible = {
+			NOT = { has_country_flag = ENG_commons_abolished }
+			check_variable = { ENG_commons_seats^17 > 0 }
+		}
+		complete_effect = { }
+		ai_will_do = { base = 0 }
+	}
+
+	ENG_commons_view_lpuk = {
+		allowed = { original_tag = ENG }
+		icon = GFX_decision_generic_parliament
+		cost = 0
+		days_re_enable = 1
+		visible = {
+			NOT = { has_country_flag = ENG_commons_abolished }
+			check_variable = { ENG_commons_seats^16 > 0 }
+		}
+		complete_effect = { }
+		ai_will_do = { base = 0 }
+	}
+
+	ENG_commons_view_sdp = {
+		allowed = { original_tag = ENG }
+		icon = GFX_decision_generic_parliament
+		cost = 0
+		days_re_enable = 1
+		visible = {
+			NOT = { has_country_flag = ENG_commons_abolished }
+			check_variable = { ENG_commons_seats^18 > 0 }
+		}
+		complete_effect = { }
+		ai_will_do = { base = 0 }
+	}
+
+	ENG_commons_view_wrp = {
+		allowed = { original_tag = ENG }
+		icon = GFX_decision_generic_parliament
+		cost = 0
+		days_re_enable = 1
+		visible = {
+			NOT = { has_country_flag = ENG_commons_abolished }
+			check_variable = { ENG_commons_seats^19 > 0 }
+		}
+		complete_effect = { }
+		ai_will_do = { base = 0 }
+	}
+
+	ENG_commons_view_cpb = {
+		allowed = { original_tag = ENG }
+		icon = GFX_decision_generic_parliament
+		cost = 0
+		days_re_enable = 1
+		visible = {
+			NOT = { has_country_flag = ENG_commons_abolished }
+			check_variable = { ENG_commons_seats^4 > 0 }
+		}
+		complete_effect = { }
+		ai_will_do = { base = 0 }
+	}
+
+	ENG_commons_view_spgb = {
+		allowed = { original_tag = ENG }
+		icon = GFX_decision_generic_parliament
+		cost = 0
+		days_re_enable = 1
+		visible = {
+			NOT = { has_country_flag = ENG_commons_abolished }
+			check_variable = { ENG_commons_seats^5 > 0 }
+		}
+		complete_effect = { }
+		ai_will_do = { base = 0 }
+	}
+
+	ENG_commons_view_cpa = {
+		allowed = { original_tag = ENG }
+		icon = GFX_decision_generic_parliament
+		cost = 0
+		days_re_enable = 1
+		visible = {
+			NOT = { has_country_flag = ENG_commons_abolished }
+			check_variable = { ENG_commons_seats^14 > 0 }
+		}
+		complete_effect = { }
+		ai_will_do = { base = 0 }
+	}
+
+	ENG_commons_view_bnp = {
+		allowed = { original_tag = ENG }
+		icon = GFX_decision_generic_parliament
+		cost = 0
+		days_re_enable = 1
+		visible = {
+			NOT = { has_country_flag = ENG_commons_abolished }
+			check_variable = { ENG_commons_seats^21 > 0 }
+		}
+		complete_effect = { }
+		ai_will_do = { base = 0 }
+	}
+
+	ENG_commons_view_mab = {
+		allowed = { original_tag = ENG }
+		icon = GFX_decision_generic_parliament
+		cost = 0
+		days_re_enable = 1
+		visible = {
+			NOT = { has_country_flag = ENG_commons_abolished }
+			check_variable = { ENG_commons_seats^12 > 0 }
+		}
+		complete_effect = { }
+		ai_will_do = { base = 0 }
+	}
+
+	ENG_commons_view_i4uk = {
+		allowed = { original_tag = ENG }
+		icon = GFX_decision_generic_parliament
+		cost = 0
+		days_re_enable = 1
+		visible = {
+			NOT = { has_country_flag = ENG_commons_abolished }
+			check_variable = { ENG_commons_seats^11 > 0 }
+		}
+		complete_effect = { }
+		ai_will_do = { base = 0 }
+	}
+
+	ENG_commons_view_baf = {
+		allowed = { original_tag = ENG }
+		icon = GFX_decision_generic_parliament
+		cost = 0
+		days_re_enable = 1
+		visible = {
+			NOT = { has_country_flag = ENG_commons_abolished }
+			check_variable = { ENG_commons_seats^22 > 0 }
+		}
+		complete_effect = { }
+		ai_will_do = { base = 0 }
+	}
+
+	ENG_commons_view_how = {
+		allowed = { original_tag = ENG }
+		icon = GFX_decision_generic_parliament
+		cost = 0
+		days_re_enable = 1
+		visible = {
+			NOT = { has_country_flag = ENG_commons_abolished }
+			check_variable = { ENG_commons_seats^23 > 0 }
+		}
+		complete_effect = { }
+		ai_will_do = { base = 0 }
+	}
+
+	ENG_commons_view_snp = {
+		allowed = { original_tag = ENG }
+		icon = GFX_decision_generic_parliament
+		cost = 0
+		days_re_enable = 1
+		visible = {
+			NOT = { has_country_flag = ENG_commons_abolished }
+			check_variable = { ENG_commons_seats_SNP > 0 }
+		}
+		complete_effect = { }
+		ai_will_do = { base = 0 }
+	}
+
+	ENG_commons_view_plaid = {
+		allowed = { original_tag = ENG }
+		icon = GFX_decision_generic_parliament
+		cost = 0
+		days_re_enable = 1
+		visible = {
+			NOT = { has_country_flag = ENG_commons_abolished }
+			check_variable = { ENG_commons_seats_Plaid > 0 }
+		}
+		complete_effect = { }
+		ai_will_do = { base = 0 }
+	}
+
+	ENG_commons_view_unionist = {
+		allowed = { original_tag = ENG }
+		icon = GFX_decision_generic_parliament
+		cost = 0
+		days_re_enable = 1
+		visible = {
+			NOT = { has_country_flag = ENG_commons_abolished }
+			check_variable = { ENG_commons_seats_NIR_unionist > 0 }
+		}
+		complete_effect = { }
+		ai_will_do = { base = 0 }
+	}
+
+	ENG_commons_view_republican = {
+		allowed = { original_tag = ENG }
+		icon = GFX_decision_generic_parliament
+		cost = 0
+		days_re_enable = 1
+		visible = {
+			NOT = { has_country_flag = ENG_commons_abolished }
+			check_variable = { ENG_commons_seats_NIR_republican > 0 }
+		}
+		complete_effect = { }
+		ai_will_do = { base = 0 }
+	}
+
+	ENG_commons_view_independent = {
+		allowed = { original_tag = ENG }
+		icon = GFX_decision_generic_parliament
+		cost = 0
+		days_re_enable = 1
+		visible = {
+			NOT = { has_country_flag = ENG_commons_abolished }
+			check_variable = { ENG_commons_seats_INDEPENDENT > 0 }
+		}
+		complete_effect = { }
+		ai_will_do = { base = 0 }
+	}
+}
+
 decisions_ENG = {
 	ENG_invest_northern_ireland_mission = {
 		allowed = { original_tag = ENG }

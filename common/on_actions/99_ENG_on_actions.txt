@@ -1,6 +1,25 @@
 on_actions = {
 	on_monthly_ENG = {
 		effect = {
+			# --- House of Commons general election countdown (every 60 months / 5 years) ---
+			if = {
+				limit = {
+					NOT = { has_country_flag = ENG_commons_abolished }
+					check_variable = { ENG_commons_election_var > 0 }
+				}
+				add_to_variable = { var = ENG_commons_election_var value = -1 }
+				clamp_variable = { var = ENG_commons_election_var min = 0 max = 60 }
+			}
+			if = {
+				limit = {
+					NOT = { has_country_flag = ENG_commons_abolished }
+					check_variable = { ENG_commons_election_var = 0 }
+				}
+				add_to_variable = { var = ENG_commons_election_var value = 60 }
+				clamp_variable = { var = ENG_commons_election_var min = 0 max = 60 }
+				country_event = { id = ENG_commons.1 days = 30 }
+			}
+
 			if = {
 				limit = {
 					NOT = {	has_country_flag = ENG_devolution_purged }
