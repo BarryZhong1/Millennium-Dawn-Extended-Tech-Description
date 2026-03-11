@@ -1636,18 +1636,22 @@ ENG_commons_elections = {
 	ENG_commons_ban_parties = yes
 
 	# --- Identify the top two parties for FPTP seat amplification ---
-	# Write directly to persistent variables, then restore array before any loops.
+	# find_highest_in_array outputs are temp variables; copy to persistent before using as array indices.
 	find_highest_in_array = {
 		array = party_pop_array
-		value = ENG_commons_pop1
-		index = ENG_commons_idx1
+		value = ENG_commons_pop1_temp
+		index = ENG_commons_idx1_temp
 	}
+	set_variable = { ENG_commons_pop1 = ENG_commons_pop1_temp }
+	set_variable = { ENG_commons_idx1 = ENG_commons_idx1_temp }
 	set_variable = { party_pop_array^ENG_commons_idx1 = -2 }
 	find_highest_in_array = {
 		array = party_pop_array
-		value = ENG_commons_pop2
-		index = ENG_commons_idx2
+		value = ENG_commons_pop2_temp
+		index = ENG_commons_idx2_temp
 	}
+	set_variable = { ENG_commons_pop2 = ENG_commons_pop2_temp }
+	set_variable = { ENG_commons_idx2 = ENG_commons_idx2_temp }
 	# Restore winner — party_pop_array is never touched again
 	set_variable = { party_pop_array^ENG_commons_idx1 = ENG_commons_pop1 }
 
