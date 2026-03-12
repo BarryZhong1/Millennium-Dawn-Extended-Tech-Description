@@ -24,25 +24,18 @@ types = {
 
 		# Can prepare
 		available = {
-			FROM = {
-				NOT = {
-					is_subject_of = ROOT
-				}
-				NOT = {
-					has_non_aggression_pact_with = ROOT
-				}
-			}
-			has_tech = special_forces
+			raid_target_eligible = yes
+			has_tech = special_forces_tech_1
 			custom_trigger_tooltip = {
 				tooltip = has_spec_ops_4_TT
 				if = {
 					limit = {
 						NOT = {
-							has_tech = special_forces4
+							has_tech = special_forces_tech_4
 						}
 					}
 					FROM = {
-						PREV_is_on_same_continent = yes
+						is_on_same_continent_as = PREV
 					}
 				}
 			}
@@ -308,8 +301,12 @@ types = {
 				}
 			}
 			modifier = {
-				factor = 0.05
+				factor = 0
 				threat < 0.10
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
 			}
 			modifier = {
 				factor = 0.05
@@ -322,8 +319,11 @@ types = {
 			}
 			modifier = {
 				factor = 0
-				date < 2002.1.1
-				NOT = { has_country_flag = promised_retaliation_against@FROM }
+				date < 2001.1.1
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
 			}
 			modifier = {
 				NOT = {
@@ -345,7 +345,7 @@ types = {
 			modifier = {
 				NOT = {
 					FROM = {
-						PREV_is_on_same_continent = yes
+						is_on_same_continent_as = PREV
 					}
 				}
 				strength_ratio = {
@@ -353,6 +353,45 @@ types = {
 					ratio > 0.35
 				}
 				factor = 0
+			}
+			modifier = {
+				factor = 0
+				is_ally_with = FROM
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					FROM = { is_subject_of = ROOT }
+					is_subject_of = FROM
+				}
+			}
+			modifier = {
+				# Don't raid nations we have influence in
+				factor = 0
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
+				FROM = { is_influencer = yes }
+			}
+			modifier = {
+				# Don't raid if heavily in debt
+				factor = 0
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
+				check_variable = { debt_ratio > 0.25 }
+			}
+			modifier = {
+				# Less likely to raid if somewhat in debt
+				factor = 0.25
+				NOT = { has_war_with = FROM }
+				check_variable = { debt_ratio > 0.15 }
 			}
 		}
 	}
@@ -371,52 +410,23 @@ types = {
 
 		# Specific Target is visible
 		show_target = {
-			OR = {
-				has_war_with = FROM
-				has_wargoal_against = FROM
-				is_justifying_wargoal_against = FROM
-				AND = {
-					has_opinion = { target = FROM value < -50 }
-					FROM = { has_war = yes }
-					if = { limit = { has_idea = intervention_limited_interventionism }
-						is_neighbor_of = FROM
-					}
-					else_if = {
-						limit = {
-							has_idea = intervention_regional_interventionism
-						}
-						custom_trigger_tooltip = {
-							tooltip = nation_on_same_continent
-							FROM = {
-								PREV_is_on_same_continent = yes
-							}
-						}
-					}
-				}
-			}
+			raid_show_target_specops_hostile = yes
 		}
 
 		# Can prepare
 		available = {
-			FROM = {
-				NOT = {
-					is_subject_of = ROOT
-				}
-				NOT = {
-					has_non_aggression_pact_with = ROOT
-				}
-			}
-			has_tech = special_forces
+			raid_target_eligible = yes
+			has_tech = special_forces_tech_1
 			custom_trigger_tooltip = {
 				tooltip = has_spec_ops_4_TT
 				if = {
 					limit = {
 						NOT = {
-							has_tech = special_forces4
+							has_tech = special_forces_tech_4
 						}
 					}
 					FROM = {
-						PREV_is_on_same_continent = yes
+						is_on_same_continent_as = PREV
 					}
 				}
 			}
@@ -757,12 +767,19 @@ types = {
 			}
 			modifier = {
 				factor = 0
-				date < 2002.1.1
-				NOT = { has_country_flag = promised_retaliation_against@FROM }
+				date < 2001.1.1
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
 			}
 			modifier = {
-				factor = 0.05
+				factor = 0
 				threat < 0.10
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
 			}
 			modifier = {
 				factor = 0
@@ -781,7 +798,7 @@ types = {
 				factor = 0
 				NOT = {
 					FROM = {
-						PREV_is_on_same_continent = yes
+						is_on_same_continent_as = PREV
 					}
 				}
 				strength_ratio = {
@@ -790,8 +807,43 @@ types = {
 				}
 			}
 			modifier = {
-				factor = 0.40
+				factor = 0
 				is_ally_with = FROM
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					FROM = { is_subject_of = ROOT }
+					is_subject_of = FROM
+				}
+			}
+			modifier = {
+				# Don't raid nations we have influence in
+				factor = 0
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
+				FROM = { is_influencer = yes }
+			}
+			modifier = {
+				# Don't raid if heavily in debt
+				factor = 0
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
+				check_variable = { debt_ratio > 0.25 }
+			}
+			modifier = {
+				# Less likely to raid if somewhat in debt
+				factor = 0.25
+				NOT = { has_war_with = FROM }
+				check_variable = { debt_ratio > 0.15 }
 			}
 		}
 	}
@@ -810,60 +862,23 @@ types = {
 
 		# Specific Target is visible
 		show_target = {
-			OR = {
-				has_war_with = FROM
-				has_wargoal_against = FROM
-				is_justifying_wargoal_against = FROM
-				AND = {
-					has_opinion = {
-						target = FROM
-						value < -50
-					}
-					FROM = {
-						has_war = yes
-					}
-					if = {
-						limit = {
-							has_idea = intervention_limited_interventionism
-						}
-						is_neighbor_of = FROM
-					}
-					else_if = {
-						limit = {
-							has_idea = intervention_regional_interventionism
-						}
-						custom_trigger_tooltip = {
-							tooltip = nation_on_same_continent
-							FROM = {
-								PREV_is_on_same_continent = yes
-							}
-						}
-					}
-				}
-			}
+			raid_show_target_specops_hostile = yes
 		}
 
 		# Can prepare
 		available = {
-			FROM = {
-				NOT = {
-					is_subject_of = ROOT
-				}
-				NOT = {
-					has_non_aggression_pact_with = ROOT
-				}
-			}
-			has_tech = special_forces
+			raid_target_eligible = yes
+			has_tech = special_forces_tech_1
 			custom_trigger_tooltip = {
 				tooltip = has_spec_ops_4_TT
 				if = {
 					limit = {
 						NOT = {
-							has_tech = special_forces4
+							has_tech = special_forces_tech_4
 						}
 					}
 					FROM = {
-						PREV_is_on_same_continent = yes
+						is_on_same_continent_as = PREV
 					}
 				}
 			}
@@ -1154,8 +1169,12 @@ types = {
 				}
 			}
 			modifier = {
-				factor = 0.05
+				factor = 0
 				threat < 0.10
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
 			}
 			modifier = {
 				factor = 0.05
@@ -1168,8 +1187,11 @@ types = {
 			}
 			modifier = {
 				factor = 0
-				date < 2002.1.1
-				NOT = { has_country_flag = promised_retaliation_against@FROM }
+				date < 2001.1.1
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
 			}
 			modifier = {
 				NOT = {
@@ -1191,7 +1213,7 @@ types = {
 			modifier = {
 				NOT = {
 					FROM = {
-						PREV_is_on_same_continent = yes
+						is_on_same_continent_as = PREV
 					}
 				}
 				strength_ratio = {
@@ -1201,8 +1223,43 @@ types = {
 				factor = 0
 			}
 			modifier = {
-				factor = 0.40
+				factor = 0
 				is_ally_with = FROM
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					FROM = { is_subject_of = ROOT }
+					is_subject_of = FROM
+				}
+			}
+			modifier = {
+				# Don't raid nations we have influence in
+				factor = 0
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
+				FROM = { is_influencer = yes }
+			}
+			modifier = {
+				# Don't raid if heavily in debt
+				factor = 0
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
+				check_variable = { debt_ratio > 0.25 }
+			}
+			modifier = {
+				# Less likely to raid if somewhat in debt
+				factor = 0.25
+				NOT = { has_war_with = FROM }
+				check_variable = { debt_ratio > 0.15 }
 			}
 		}
 	}
@@ -1221,36 +1278,7 @@ types = {
 
 		# Specific Target is visible
 		show_target = {
-			OR = {
-				has_war_with = FROM
-				has_wargoal_against = FROM
-				is_justifying_wargoal_against = FROM
-				AND = {
-					has_opinion = {
-						target = FROM
-						value < -50
-					}
-					FROM = {
-						has_war = yes
-					}
-					if = {
-						limit = {
-							has_idea = intervention_limited_interventionism
-						}
-						is_neighbor_of = FROM
-					} else_if = {
-						limit = {
-							has_idea = intervention_regional_interventionism
-						}
-						custom_trigger_tooltip = {
-							tooltip = nation_on_same_continent
-							FROM = {
-								PREV_is_on_same_continent = yes
-							}
-						}
-					}
-				}
-			}
+			raid_show_target_specops_hostile = yes
 		}
 
 		# Can prepare
@@ -1258,18 +1286,18 @@ types = {
 			any_owned_state = {
 				is_coastal = yes
 			}
-			has_tech = tech_landing_craft
+			has_tech = tech_landing_craft_1
 			custom_trigger_tooltip = {
 				tooltip = has_modern_landing_craft_TT
 				if = {
 					if = {
 						limit = {
 							NOT = {
-								has_tech = tech_modern_landing_craft
+								has_tech = tech_landing_craft_4
 							}
 						}
 						FROM = {
-							PREV_is_on_same_continent = yes
+							is_on_same_continent_as = PREV
 						}
 					}
 				}
@@ -1571,8 +1599,12 @@ types = {
 				}
 			}
 			modifier = {
-				factor = 0.05
+				factor = 0
 				threat < 0.10
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
 			}
 			modifier = {
 				factor = 0.05
@@ -1585,8 +1617,11 @@ types = {
 			}
 			modifier = {
 				factor = 0
-				date < 2002.1.1
-				NOT = { has_country_flag = promised_retaliation_against@FROM }
+				date < 2001.1.1
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
 			}
 			modifier = {
 				NOT = {
@@ -1608,7 +1643,7 @@ types = {
 			modifier = {
 				NOT = {
 					FROM = {
-						PREV_is_on_same_continent = yes
+						is_on_same_continent_as = PREV
 					}
 				}
 				strength_ratio = {
@@ -1618,8 +1653,43 @@ types = {
 				factor = 0
 			}
 			modifier = {
-				factor = 0.40
+				factor = 0
 				is_ally_with = FROM
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					FROM = { is_subject_of = ROOT }
+					is_subject_of = FROM
+				}
+			}
+			modifier = {
+				# Don't raid nations we have influence in
+				factor = 0
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
+				FROM = { is_influencer = yes }
+			}
+			modifier = {
+				# Don't raid if heavily in debt
+				factor = 0
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
+				check_variable = { debt_ratio > 0.25 }
+			}
+			modifier = {
+				# Less likely to raid if somewhat in debt
+				factor = 0.25
+				NOT = { has_war_with = FROM }
+				check_variable = { debt_ratio > 0.15 }
 			}
 		}
 	}
@@ -1644,56 +1714,23 @@ types = {
 		}
 		# Specific Target is visible
 		show_target = {
-			OR = {
-				has_war_with = FROM
-				has_wargoal_against = FROM
-				is_justifying_wargoal_against = FROM
-				AND = {
-					has_opinion = {
-						target = FROM
-						value < -50
-					}
-					if = {
-						limit = {
-							has_idea = intervention_limited_interventionism
-						}
-						is_neighbor_of = FROM
-					} else_if = {
-						limit = {
-							has_idea = intervention_regional_interventionism
-						}
-						custom_trigger_tooltip = {
-							tooltip = nation_on_same_continent
-							FROM = {
-								PREV_is_on_same_continent = yes
-							}
-						}
-					}
-				}
-			}
+			raid_show_target_specops_hostile = yes
 		}
 
 		# Can prepare
 		available = {
-			FROM = {
-				NOT = {
-					is_subject_of = ROOT
-				}
-				NOT = {
-					has_non_aggression_pact_with = ROOT
-				}
-			}
-			has_tech = special_forces
+			raid_target_eligible = yes
+			has_tech = special_forces_tech_1
 			custom_trigger_tooltip = {
 				tooltip = has_spec_ops_4_TT
 				if = {
 					limit = {
 						NOT = {
-							has_tech = special_forces4
+							has_tech = special_forces_tech_4
 						}
 					}
 					FROM = {
-						PREV_is_on_same_continent = yes
+						is_on_same_continent_as = PREV
 					}
 				}
 			}
@@ -2023,14 +2060,18 @@ types = {
 			modifier = {
 				factor = 2
 				OR = {
-					has_idea = superpower
+					has_idea = super_power
 					has_idea = great_power
 					has_idea = large_power
 				}
 			}
 			modifier = {
-				factor = 0.05
+				factor = 0
 				threat < 0.10
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
 			}
 			modifier = {
 				# Don't target anyone who is not a potential enemy
@@ -2071,8 +2112,11 @@ types = {
 			}
 			modifier = {
 				factor = 0
-				date < 2002.1.1
-				NOT = { has_country_flag = promised_retaliation_against@FROM }
+				date < 2001.1.1
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
 			}
 			modifier = {
 				has_country_flag = conceded_to@FROM
@@ -2081,7 +2125,7 @@ types = {
 			modifier = {
 				NOT = {
 					FROM = {
-						PREV_is_on_same_continent = yes
+						is_on_same_continent_as = PREV
 					}
 				}
 				strength_ratio = {
@@ -2091,8 +2135,43 @@ types = {
 				factor = 0
 			}
 			modifier = {
-				factor = 0.40
+				factor = 0
 				is_ally_with = FROM
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					FROM = { is_subject_of = ROOT }
+					is_subject_of = FROM
+				}
+			}
+			modifier = {
+				# Don't raid nations we have influence in
+				factor = 0
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
+				FROM = { is_influencer = yes }
+			}
+			modifier = {
+				# Don't raid if heavily in debt
+				factor = 0
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
+				check_variable = { debt_ratio > 0.25 }
+			}
+			modifier = {
+				# Less likely to raid if somewhat in debt
+				factor = 0.25
+				NOT = { has_war_with = FROM }
+				check_variable = { debt_ratio > 0.15 }
 			}
 			#do some checks for nations here, like someone going for nukes will likely be targeted by enemies
 		}
@@ -2124,17 +2203,17 @@ types = {
 
 		# Can prepare
 		available = {
-			has_tech = special_forces
+			has_tech = special_forces_tech_1
 			custom_trigger_tooltip = {
 				tooltip = has_spec_ops_4_TT
 				if = {
 					limit = {
 						NOT = {
-							has_tech = special_forces4
+							has_tech = special_forces_tech_4
 						}
 					}
 					FROM = {
-						PREV_is_on_same_continent = yes
+						is_on_same_continent_as = PREV
 					}
 				}
 			}
@@ -2373,6 +2452,21 @@ types = {
 
 		ai_will_do = {
 			base = 50
+			modifier = {
+				factor = 0
+				is_ally_with = FROM
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					FROM = { is_subject_of = ROOT }
+					is_subject_of = FROM
+				}
+			}
 		}
 	}
 	#Counter-Terror HVT Raid
@@ -2408,7 +2502,7 @@ types = {
 					custom_trigger_tooltip = {
 						tooltip = nation_on_same_continent
 						FROM = {
-							PREV_is_on_same_continent = yes
+							is_on_same_continent_as = PREV
 						}
 					}
 				}
@@ -2420,17 +2514,17 @@ types = {
 
 		# Can prepare
 		available = {
-			has_tech = special_forces
+			has_tech = special_forces_tech_1
 			custom_trigger_tooltip = {
 				tooltip = has_spec_ops_4_TT
 				if = {
 					limit = {
 						NOT = {
-							has_tech = special_forces4
+							has_tech = special_forces_tech_4
 						}
 					}
 					FROM = {
-						PREV_is_on_same_continent = yes
+						is_on_same_continent_as = PREV
 					}
 				}
 			}
@@ -2660,92 +2754,28 @@ types = {
 
 		ai_will_do = {
 			base = 0
+			# Execute when CT operation has located an HVT
 			modifier = {
-				NOT = {
-					has_war_with = FROM
-					is_neighbor_of = FROM
-					has_country_flag = promised_retaliation_against@FROM
-				}
-				add = -100
+				add = 50
+				FROM = { has_country_flag = ct_hvt_target_found_by@ROOT }
 			}
-			modifier = {
-				add = 5
-				has_opinion = {
-					target = FROM
-					value < -95
-				}
-			}
-			modifier = {
-				add = 5
-				has_opinion = {
-					target = FROM
-					value < -125
-				}
-			}
-			modifier = {
-				add = 5
-				has_opinion = {
-					target = FROM
-					value > -150
-				}
-			}
-			modifier = {
-				add = -10
-				NOT = { has_war_with = FROM }
-				OR = {
-					AND = {
-						FROM = { has_government = democratic }
-						THIS = { has_government = democratic }
-					}
-					AND = {
-						FROM = { has_government = neutrality }
-						THIS = { has_government = neutrality }
-					}
-					AND = {
-						FROM = { has_government = communism }
-						THIS = { has_government = communism }
-					}
-				}
-			}
-			modifier = {
-				NOT = {
-					has_country_flag = promised_retaliation_against@FROM
-				}
-				factor = 0
-				FROM = {
-					has_idea = NATO_member
-				}
-			}
-			modifier = {
-				factor = 100
-				has_country_flag = promised_retaliation_against@FROM
-			}
+			# More likely for powerful nations
 			modifier = {
 				factor = 2
 				OR = {
-					has_idea = superpower
+					has_idea = super_power
 					has_idea = great_power
 					has_idea = large_power
 				}
 			}
+			# More urgent when recently attacked
 			modifier = {
-				factor = 0.05
-				threat < 0.10
-			}
-			modifier = {
-				# Don't target anyone who is not a potential enemy
-				factor = 0
-				NOT = {
-					has_country_flag = promised_retaliation_against@FROM
-					is_in_array = {
-						array = potential_and_current_enemies
-						value = FROM  # Target country
-					}
-				}
+				factor = 2
+				has_country_flag = ct_recently_attacked
 			}
 			modifier = {
 				factor = 0
-				has_war = yes
+				is_ally_with = FROM
 				NOT = {
 					has_war_with = FROM
 					has_country_flag = promised_retaliation_against@FROM
@@ -2753,44 +2783,11 @@ types = {
 			}
 			modifier = {
 				factor = 0
-				tag = USA
-				FROM = {
-					tag = IRQ
-				}
-				date < 2004.1.1
-				NOT = { has_country_flag = promised_retaliation_against@FROM }
-			}
-			modifier = {
-				factor = 0.05
 				OR = {
-					has_government = democratic
-					has_government = neutrality
-					has_elections = yes
+					FROM = { is_subject_of = ROOT }
+					is_subject_of = FROM
 				}
-				FROM = { has_added_tension_amount < 5 }
 			}
-			modifier = {
-				factor = 0
-				date < 2002.1.1
-				NOT = { has_country_flag = promised_retaliation_against@FROM }
-			}
-			modifier = {
-				has_country_flag = conceded_to@FROM
-				factor = 0
-			}
-			modifier = {
-				NOT = {
-					FROM = {
-						PREV_is_on_same_continent = yes
-					}
-				}
-				strength_ratio = {
-					tag = FROM
-					ratio > 0.35
-				}
-				factor = 0
-			}
-			#do some checks for nations here, like someone going for nukes will likely be targeted by enemies
 		}
 	}
 	#Counter-Terror Cache Raid
@@ -2826,7 +2823,7 @@ types = {
 					custom_trigger_tooltip = {
 						tooltip = nation_on_same_continent
 						FROM = {
-							PREV_is_on_same_continent = yes
+							is_on_same_continent_as = PREV
 						}
 					}
 				}
@@ -2838,17 +2835,17 @@ types = {
 
 		# Can prepare
 		available = {
-			has_tech = special_forces
+			has_tech = special_forces_tech_1
 			custom_trigger_tooltip = {
 				tooltip = has_spec_ops_4_TT
 				if = {
 					limit = {
 						NOT = {
-							has_tech = special_forces4
+							has_tech = special_forces_tech_4
 						}
 					}
 					FROM = {
-						PREV_is_on_same_continent = yes
+						is_on_same_continent_as = PREV
 					}
 				}
 			}
@@ -3078,92 +3075,26 @@ types = {
 
 		ai_will_do = {
 			base = 0
+			# Execute when CT operation has located an arms cache
 			modifier = {
-				NOT = {
-					has_war_with = FROM
-					is_neighbor_of = FROM
-					has_country_flag = promised_retaliation_against@FROM
-				}
-				add = -100
-			}
-			modifier = {
-				add = 5
-				has_opinion = {
-					target = FROM
-					value < -95
-				}
-			}
-			modifier = {
-				add = 5
-				has_opinion = {
-					target = FROM
-					value < -125
-				}
-			}
-			modifier = {
-				add = 5
-				has_opinion = {
-					target = FROM
-					value > -150
-				}
-			}
-			modifier = {
-				add = -10
-				NOT = { has_war_with = FROM }
-				OR = {
-					AND = {
-						FROM = { has_government = democratic }
-						THIS = { has_government = democratic }
-					}
-					AND = {
-						FROM = { has_government = neutrality }
-						THIS = { has_government = neutrality }
-					}
-					AND = {
-						FROM = { has_government = communism }
-						THIS = { has_government = communism }
-					}
-				}
-			}
-			modifier = {
-				NOT = {
-					has_country_flag = promised_retaliation_against@FROM
-				}
-				factor = 0
-				FROM = {
-					has_idea = NATO_member
-				}
-			}
-			modifier = {
-				factor = 100
-				has_country_flag = promised_retaliation_against@FROM
+				add = 50
+				FROM = { has_country_flag = ct_cache_target_found_by@ROOT }
 			}
 			modifier = {
 				factor = 2
 				OR = {
-					has_idea = superpower
+					has_idea = super_power
 					has_idea = great_power
 					has_idea = large_power
 				}
 			}
 			modifier = {
-				factor = 0.05
-				threat < 0.10
-			}
-			modifier = {
-				# Don't target anyone who is not a potential enemy
-				factor = 0
-				NOT = {
-					has_country_flag = promised_retaliation_against@FROM
-					is_in_array = {
-						array = potential_and_current_enemies
-						value = FROM  # Target country
-					}
-				}
+				factor = 2
+				has_country_flag = ct_recently_attacked
 			}
 			modifier = {
 				factor = 0
-				has_war = yes
+				is_ally_with = FROM
 				NOT = {
 					has_war_with = FROM
 					has_country_flag = promised_retaliation_against@FROM
@@ -3171,44 +3102,11 @@ types = {
 			}
 			modifier = {
 				factor = 0
-				tag = USA
-				FROM = {
-					tag = IRQ
-				}
-				date < 2004.1.1
-				NOT = { has_country_flag = promised_retaliation_against@FROM }
-			}
-			modifier = {
-				factor = 0.05
 				OR = {
-					has_government = democratic
-					has_government = neutrality
-					has_elections = yes
+					FROM = { is_subject_of = ROOT }
+					is_subject_of = FROM
 				}
-				FROM = { has_added_tension_amount < 5 }
 			}
-			modifier = {
-				factor = 0
-				date < 2002.1.1
-				NOT = { has_country_flag = promised_retaliation_against@FROM }
-			}
-			modifier = {
-				has_country_flag = conceded_to@FROM
-				factor = 0
-			}
-			modifier = {
-				NOT = {
-					FROM = {
-						PREV_is_on_same_continent = yes
-					}
-				}
-				strength_ratio = {
-					tag = FROM
-					ratio > 0.35
-				}
-				factor = 0
-			}
-			#do some checks for nations here, like someone going for nukes will likely be targeted by enemies
 		}
 	}
 	#Counter-Terror Training Camp Raid
@@ -3224,11 +3122,6 @@ types = {
 			type = line
 		}
 
-		allowed = {
-		}
-		# Raid Type is visible
-		visible = {
-		}
 		# Specific Target is visible
 		show_target = {
 			AND = {
@@ -3244,7 +3137,7 @@ types = {
 					custom_trigger_tooltip = {
 						tooltip = nation_on_same_continent
 						FROM = {
-							PREV_is_on_same_continent = yes
+							is_on_same_continent_as = PREV
 						}
 					}
 				}
@@ -3256,17 +3149,17 @@ types = {
 
 		# Can prepare
 		available = {
-			has_tech = special_forces
+			has_tech = special_forces_tech_1
 			custom_trigger_tooltip = {
 				tooltip = has_spec_ops_4_TT
 				if = {
 					limit = {
 						NOT = {
-							has_tech = special_forces4
+							has_tech = special_forces_tech_4
 						}
 					}
 					FROM = {
-						PREV_is_on_same_continent = yes
+						is_on_same_continent_as = PREV
 					}
 				}
 			}
@@ -3496,92 +3389,26 @@ types = {
 
 		ai_will_do = {
 			base = 0
+			# Execute when CT operation has located a training camp
 			modifier = {
-				NOT = {
-					has_war_with = FROM
-					is_neighbor_of = FROM
-					has_country_flag = promised_retaliation_against@FROM
-				}
-				add = -100
-			}
-			modifier = {
-				add = 5
-				has_opinion = {
-					target = FROM
-					value < -95
-				}
-			}
-			modifier = {
-				add = 5
-				has_opinion = {
-					target = FROM
-					value < -125
-				}
-			}
-			modifier = {
-				add = 5
-				has_opinion = {
-					target = FROM
-					value > -150
-				}
-			}
-			modifier = {
-				add = -10
-				NOT = { has_war_with = FROM }
-				OR = {
-					AND = {
-						FROM = { has_government = democratic }
-						THIS = { has_government = democratic }
-					}
-					AND = {
-						FROM = { has_government = neutrality }
-						THIS = { has_government = neutrality }
-					}
-					AND = {
-						FROM = { has_government = communism }
-						THIS = { has_government = communism }
-					}
-				}
-			}
-			modifier = {
-				NOT = {
-					has_country_flag = promised_retaliation_against@FROM
-				}
-				factor = 0
-				FROM = {
-					has_idea = NATO_member
-				}
-			}
-			modifier = {
-				factor = 100
-				has_country_flag = promised_retaliation_against@FROM
+				add = 50
+				FROM = { has_country_flag = ct_training_target_found_by@ROOT }
 			}
 			modifier = {
 				factor = 2
 				OR = {
-					has_idea = superpower
+					has_idea = super_power
 					has_idea = great_power
 					has_idea = large_power
 				}
 			}
 			modifier = {
-				factor = 0.05
-				threat < 0.10
-			}
-			modifier = {
-				# Don't target anyone who is not a potential enemy
-				factor = 0
-				NOT = {
-					has_country_flag = promised_retaliation_against@FROM
-					is_in_array = {
-						array = potential_and_current_enemies
-						value = FROM  # Target country
-					}
-				}
+				factor = 2
+				has_country_flag = ct_recently_attacked
 			}
 			modifier = {
 				factor = 0
-				has_war = yes
+				is_ally_with = FROM
 				NOT = {
 					has_war_with = FROM
 					has_country_flag = promised_retaliation_against@FROM
@@ -3589,44 +3416,11 @@ types = {
 			}
 			modifier = {
 				factor = 0
-				tag = USA
-				FROM = {
-					tag = IRQ
-				}
-				date < 2004.1.1
-				NOT = { has_country_flag = promised_retaliation_against@FROM }
-			}
-			modifier = {
-				factor = 0.05
 				OR = {
-					has_government = democratic
-					has_government = neutrality
-					has_elections = yes
+					FROM = { is_subject_of = ROOT }
+					is_subject_of = FROM
 				}
-				FROM = { has_added_tension_amount < 5 }
 			}
-			modifier = {
-				factor = 0
-				date < 2002.1.1
-				NOT = { has_country_flag = promised_retaliation_against@FROM }
-			}
-			modifier = {
-				has_country_flag = conceded_to@FROM
-				factor = 0
-			}
-			modifier = {
-				NOT = {
-					FROM = {
-						PREV_is_on_same_continent = yes
-					}
-				}
-				strength_ratio = {
-					tag = FROM
-					ratio > 0.35
-				}
-				factor = 0
-			}
-			#do some checks for nations here, like someone going for nukes will likely be targeted by enemies
 		}
 	}
 	#Counter-Terror Org elimination raid
@@ -3662,7 +3456,7 @@ types = {
 					custom_trigger_tooltip = {
 						tooltip = nation_on_same_continent
 						FROM = {
-							PREV_is_on_same_continent = yes
+							is_on_same_continent_as = PREV
 						}
 					}
 				}
@@ -3674,17 +3468,17 @@ types = {
 
 		# Can prepare
 		available = {
-			has_tech = special_forces
+			has_tech = special_forces_tech_1
 			custom_trigger_tooltip = {
 				tooltip = has_spec_ops_4_TT
 				if = {
 					limit = {
 						NOT = {
-							has_tech = special_forces4
+							has_tech = special_forces_tech_4
 						}
 					}
 					FROM = {
-						PREV_is_on_same_continent = yes
+						is_on_same_continent_as = PREV
 					}
 				}
 			}
@@ -3893,92 +3687,21 @@ types = {
 
 		ai_will_do = {
 			base = 0
+			# High priority — elimination raids can remove an org entirely
 			modifier = {
-				NOT = {
-					has_war_with = FROM
-					is_neighbor_of = FROM
-					has_country_flag = promised_retaliation_against@FROM
-				}
-				add = -100
-			}
-			modifier = {
-				add = 5
-				has_opinion = {
-					target = FROM
-					value < -95
-				}
-			}
-			modifier = {
-				add = 5
-				has_opinion = {
-					target = FROM
-					value < -125
-				}
-			}
-			modifier = {
-				add = 5
-				has_opinion = {
-					target = FROM
-					value > -150
-				}
-			}
-			modifier = {
-				add = -10
-				NOT = { has_war_with = FROM }
-				OR = {
-					AND = {
-						FROM = { has_government = democratic }
-						THIS = { has_government = democratic }
-					}
-					AND = {
-						FROM = { has_government = neutrality }
-						THIS = { has_government = neutrality }
-					}
-					AND = {
-						FROM = { has_government = communism }
-						THIS = { has_government = communism }
-					}
-				}
-			}
-			modifier = {
-				NOT = {
-					has_country_flag = promised_retaliation_against@FROM
-				}
-				factor = 0
-				FROM = {
-					has_idea = NATO_member
-				}
-			}
-			modifier = {
-				factor = 100
-				has_country_flag = promised_retaliation_against@FROM
+				add = 100
+				FROM = { has_country_flag = ct_elim_raid_prepared_by@ROOT }
 			}
 			modifier = {
 				factor = 2
 				OR = {
-					has_idea = superpower
+					has_idea = super_power
 					has_idea = great_power
-					has_idea = large_power
-				}
-			}
-			modifier = {
-				factor = 0.05
-				threat < 0.10
-			}
-			modifier = {
-				# Don't target anyone who is not a potential enemy
-				factor = 0
-				NOT = {
-					has_country_flag = promised_retaliation_against@FROM
-					is_in_array = {
-						array = potential_and_current_enemies
-						value = FROM  # Target country
-					}
 				}
 			}
 			modifier = {
 				factor = 0
-				has_war = yes
+				is_ally_with = FROM
 				NOT = {
 					has_war_with = FROM
 					has_country_flag = promised_retaliation_against@FROM
@@ -3986,44 +3709,11 @@ types = {
 			}
 			modifier = {
 				factor = 0
-				tag = USA
-				FROM = {
-					tag = IRQ
-				}
-				date < 2004.1.1
-				NOT = { has_country_flag = promised_retaliation_against@FROM }
-			}
-			modifier = {
-				factor = 0.05
 				OR = {
-					has_government = democratic
-					has_government = neutrality
-					has_elections = yes
+					FROM = { is_subject_of = ROOT }
+					is_subject_of = FROM
 				}
-				FROM = { has_added_tension_amount < 5 }
 			}
-			modifier = {
-				factor = 0
-				date < 2002.1.1
-				NOT = { has_country_flag = promised_retaliation_against@FROM }
-			}
-			modifier = {
-				has_country_flag = conceded_to@FROM
-				factor = 0
-			}
-			modifier = {
-				NOT = {
-					FROM = {
-						PREV_is_on_same_continent = yes
-					}
-				}
-				strength_ratio = {
-					tag = FROM
-					ratio > 0.35
-				}
-				factor = 0
-			}
-			#do some checks for nations here, like someone going for nukes will likely be targeted by enemies
 		}
 	}
 
@@ -4053,17 +3743,17 @@ types = {
 
 		# Can prepare
 		available = {
-			has_tech = special_forces
+			has_tech = special_forces_tech_1
 			custom_trigger_tooltip = {
 				tooltip = has_spec_ops_4_TT
 				if = {
 					limit = {
 						NOT = {
-							has_tech = special_forces4
+							has_tech = special_forces_tech_4
 						}
 					}
 					FROM = {
-						PREV_is_on_same_continent = yes
+						is_on_same_continent_as = PREV
 					}
 				}
 			}
@@ -4302,6 +3992,21 @@ types = {
 
 		ai_will_do = {
 			base = 50
+			modifier = {
+				factor = 0
+				is_ally_with = FROM
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					FROM = { is_subject_of = ROOT }
+					is_subject_of = FROM
+				}
+			}
 		}
 	}
 
@@ -4331,17 +4036,17 @@ types = {
 
 		# Can prepare
 		available = {
-			has_tech = special_forces
+			has_tech = special_forces_tech_1
 			custom_trigger_tooltip = {
 				tooltip = has_spec_ops_4_TT
 				if = {
 					limit = {
 						NOT = {
-							has_tech = special_forces4
+							has_tech = special_forces_tech_4
 						}
 					}
 					FROM = {
-						PREV_is_on_same_continent = yes
+						is_on_same_continent_as = PREV
 					}
 				}
 			}
@@ -4580,6 +4285,21 @@ types = {
 
 		ai_will_do = {
 			base = 50
+			modifier = {
+				factor = 0
+				is_ally_with = FROM
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					FROM = { is_subject_of = ROOT }
+					is_subject_of = FROM
+				}
+			}
 		}
 	}
 
@@ -4609,17 +4329,17 @@ types = {
 
 		# Can prepare
 		available = {
-			has_tech = special_forces
+			has_tech = special_forces_tech_1
 			custom_trigger_tooltip = {
 				tooltip = has_spec_ops_4_TT
 				if = {
 					limit = {
 						NOT = {
-							has_tech = special_forces4
+							has_tech = special_forces_tech_4
 						}
 					}
 					FROM = {
-						PREV_is_on_same_continent = yes
+						is_on_same_continent_as = PREV
 					}
 				}
 			}
@@ -4848,6 +4568,21 @@ types = {
 
 		ai_will_do = {
 			base = 50
+			modifier = {
+				factor = 0
+				is_ally_with = FROM
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					FROM = { is_subject_of = ROOT }
+					is_subject_of = FROM
+				}
+			}
 		}
 	}
 
@@ -5110,17 +4845,17 @@ types = {
 			FROM = {
 				is_subject_of = ROOT
 			}
-			has_tech = special_forces
+			has_tech = special_forces_tech_1
 			custom_trigger_tooltip = {
 				tooltip = has_spec_ops_4_TT
 				if = {
 					limit = {
 						NOT = {
-							has_tech = special_forces4
+							has_tech = special_forces_tech_4
 						}
 					}
 					FROM = {
-						PREV_is_on_same_continent = yes
+						is_on_same_continent_as = PREV
 					}
 				}
 			}
@@ -5494,6 +5229,21 @@ types = {
 
 		ai_will_do = {
 			base = 50
+			modifier = {
+				factor = 0
+				is_ally_with = FROM
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					FROM = { is_subject_of = ROOT }
+					is_subject_of = FROM
+				}
+			}
 		}
 	}
 }

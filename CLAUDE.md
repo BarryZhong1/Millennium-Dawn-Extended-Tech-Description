@@ -8,7 +8,15 @@ Millennium Dawn is a Hearts of Iron IV mod set in the modern era (2000-present).
 
 ## Directory Structure
 
-- `common/` - Game data (focuses, ideas, decisions, technologies, modifiers, AI configs)
+- `common/` - Game data files:
+  - `national_focus/` - Focus tree files
+  - `ideas/` - National spirits and ideas
+  - `decisions/` - Decision and mission files
+  - `scripted_effects/` - Reusable effect blocks
+  - `scripted_triggers/` - Reusable trigger blocks
+  - `on_actions/` - On action hooks (`on_daily_TAG`, `on_weekly`, etc.)
+  - `technologies/` - Research tree files
+  - `modifiers/`, `ai-*/` - Modifier and AI strategy files
 - `localisation/` - Language files (English yml files with UTF-8 BOM)
 - `events/` - Event chains and triggered events
 - `history/` - Historical country data, states, units
@@ -17,24 +25,33 @@ Millennium Dawn is a Hearts of Iron IV mod set in the modern era (2000-present).
 - `tools/` - Python development and validation scripts
 - `docs/` - Development documentation
 
+Ignore the `resources` directory entirely, this is mostly used for supporting team resources.
+
+## Available Skills
+
+The following slash commands are available in this project (`.claude/skills/`):
+
+| Skill                         | Description                                                                                   |
+| ----------------------------- | --------------------------------------------------------------------------------------------- |
+| `/validate [staged] [strict]` | Run all validation tools; optionally limit to staged files or fail on errors                  |
+| `/standardize <file>`         | Auto-standardize a focus/event/decision/idea file against MD conventions                      |
+| `/new-focus <TAG>`            | Scaffold a new country focus tree file with correct structure and localisation stubs          |
+| `/review-branch`              | Review the current branch diff vs main for style violations, logic errors, and balance issues |
+| `/fix-issue [number]`         | Find an open GitHub bug, diagnose the root cause, fix it, and open a PR                       |
+
 ## Validation & Formatting Tools
 
-```bash
-# Run all pre-commit hooks
-pre-commit run --all-files
+Validation runs automatically on GitHub CI when a PR is opened. Do not run validators proactively after making changes — only run `/validate` on explicit request.
 
-# Auto-format specific content types
-python3 tools/standardization/standardize.py focus
-python3 tools/standardization/standardize.py event
-python3 tools/standardization/standardize.py decision
-python3 tools/standardization/standardize.py idea
-```
+Standardization tools are available in `tools/standardization/`. Use the `/standardize` skill for quick access, or run the scripts directly — the directory has a README with full usage details.
+
+A standalone diff summary script is also available: `tools/review-branch.sh [base-branch]`.
 
 ## General Formatting Rules
 
 - Use **tabs** for indentation (not spaces), increase by 1 on `{`, decrease by 1 on `}`
 - Keep simple checks on one line: `available = { has_country_flag = some_flag }`
-- Place closing brackets on the same line as the keyword
+- Opening `{` stays on the same line as the property; closing `}` gets its own line at the outer indentation level
 - 1 blank line between elements
 - Remove unused/commented-out code
 - Use multiplication instead of division (e.g., `* 0.01` not `/ 100`)
@@ -60,6 +77,27 @@ python3 tools/standardization/standardize.py idea
 
 The prefix number forces load order: shared trees load before country-specific ones.
 
+### Focus Tree Container
+
+```
+focus_tree = {
+	id = greece_focus
+
+	country = {
+		factor = 0
+		modifier = {
+			tag = GRE
+			add = 100
+		}
+	}
+
+	shared_focus = USoE001
+	shared_focus = POTEF001
+
+	continuous_focus_position = { x = 2350 y = 1200 }
+}
+```
+
 ### Required Property Order
 
 ```
@@ -72,9 +110,8 @@ The prefix number forces load order: shared trees load before country-specific o
 7.  prerequisite / mutually_exclusive
 8.  search_filters
 9.  available / bypass / cancel
-10. will_lead_to_war_with       (only if giving war goal)
-11. select_effect / completion_reward / bypass_effect
-12. ai_will_do                  (ALWAYS LAST)
+10. completion_reward / select_effect / bypass_effect
+11. ai_will_do                  (ALWAYS LAST)
 ```
 
 ### Best Practices
@@ -236,6 +273,17 @@ BRA_idea_higher_minimum_wage_1 = {
 
 ## Military-Industrial Organizations (MIO)
 
+### Best Practices
+
+- Name MIOs with `TAG_organization_name` format
+- Always include `allowed = { original_tag = TAG }` to restrict to the correct country
+- Set `task_capacity` proportional to nation size (typically 10–25)
+- Equipment types must reference valid `equipment_type` categories
+- Trait grid runs `y = 0` to `y = 9`; use relative positioning for trait layout
+- Add `initial_trait` for the organization's defining bonus
+
+### Example MIO
+
 ```
 CHI_norinco_manufacturer = {
 	allowed = { original_tag = CHI }
@@ -244,7 +292,7 @@ CHI_norinco_manufacturer = {
 	task_capacity = 18
 
 	equipment_type = {
-		Inf_equipment
+		infantry_weapons_type
 		artillery_equipment
 		mio_cat_all_armor
 	}
@@ -265,27 +313,8 @@ CHI_norinco_manufacturer = {
 }
 ```
 
-Trait grid maximum: `y = 0 - 9`. Use relative positioning within the grid.
-
-## Localization Files (.yml)
-
-- 1-space indentation
-- Remove trailing 0/1 after colons (use `key: "value"` not `key:0 "value"`)
-- UTF-8 with BOM encoding required
-
-### Subideology Localization Format
-
-```
-TAG.ideology: "£PARTY_ICON (ABBRV) - Party Name"
-TAG.ideology_icon: "£PARTY_ICON"
-TAG.ideology_desc: "(Ideology Group) - Party Name (Native Name, ABBRV)\n\nDescription"
-```
-
 ## Key Resources
 
-- [Code Stylization Guide](./docs/dev-resources/code-stylization-guide.md) - Full formatting reference
-- [Code Resources](./docs/dev-resources/code-resource.md) - Modifiers, effects, and how-to guides
-- [Focus Tree Lifecycle](./docs/dev-resources/focus-tree-lifecycle-checklist.md) - Development checklist
-- [Game Rules Reference](./docs/player-tutorials/game-rules.md) - Complete game rules guide
-- [Error Debug Codes](./docs/dev-resources/error-debug-codes.md)
 - [Contributing Guidelines](./CONTRIBUTING.md)
+- [HOI4 Scripting Reference](./.claude/docs/hoi4-data-structures.md) - Variables, arrays, loops, collections, loc
+- [Documentation Index](./.claude/docs/documentation-references.md) - Effects, triggers, modifiers docs & wiki links

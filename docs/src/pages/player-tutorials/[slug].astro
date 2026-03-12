@@ -1,0 +1,23 @@
+---
+import type { CollectionEntry } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import { MarkdownDocLayout } from "@/app/layouts";
+import { getEntryBaseId, getTutorialPath } from "@/lib/content-routes";
+import { buildMarkdownDocStaticPaths, renderMarkdownDocEntry } from "@/lib/markdown-doc-entry";
+import MarkdownContent from "@/shared/ui/MarkdownContent.astro";
+
+interface Props {
+  entry: CollectionEntry<"tutorials">;
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return buildMarkdownDocStaticPaths("tutorials", getEntryBaseId);
+};
+
+const { entry }: Props = Astro.props;
+const { Content, headings } = await renderMarkdownDocEntry(entry);
+---
+
+<MarkdownDocLayout entry={entry} canonicalPath={getTutorialPath(entry)} headings={headings}>
+  <MarkdownContent Content={Content} />
+</MarkdownDocLayout>
