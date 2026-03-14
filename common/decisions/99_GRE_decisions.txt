@@ -5,7 +5,7 @@ GRE_debt_crisis_category = {
 		cost = 25
 
 		visible = {
-			NOT = { has_idea = the_euro }
+			NOT = { has_idea = euro }
 			has_completed_focus = GRE_convert_to_euro
 		}
 		fire_only_once = yes
@@ -177,6 +177,8 @@ GRE_debt_crisis_category = {
 	GRE_defer_payments_decision = {
 		icon = generic # TODO: Replace with an image
 
+		cost = 75
+
 		visible = {
 			NOT = { has_country_flag = GRE_defer_payments_flag }
 		}
@@ -184,6 +186,22 @@ GRE_debt_crisis_category = {
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision GRE_defer_payments_decision"
 			set_country_flag = GRE_defer_payments_flag
+		}
+	}
+
+	GRE_seek_a_debt_swap_partner_decision = {
+		icon = generic # TODO: Replace with an image
+
+		cost = 75
+
+		days_remove = 7
+
+		visible = {
+			NOT = { has_country_flag = GRE_has_a_debt_swap_partner }
+		}
+
+		remove_effect = {
+
 		}
 	}
 
@@ -767,7 +785,7 @@ GRE_generic_decisions_category = {
 		timeout_effect = {
 			log = "[GetDateText]: [Root.GetName]: mission timeout_effect GRE_defense_innovation_research_mission"
 			random_list = {
-				20 = { add_tech_bonus = { name = GRE_defense_innovation_research_mission bonus = 1 ahead_reduction = 3.5 uses = 1 category = CAT_armor} }
+				20 = { add_tech_bonus = { name = GRE_defense_innovation_research_mission bonus = 1 ahead_reduction = 3.5 uses = 1 category = CAT_armor } }
 				20 = { add_tech_bonus = { name = GRE_defense_innovation_research_mission bonus = 1 ahead_reduction = 3.5 uses = 1 category = CAT_artillery } }
 				20 = { add_tech_bonus = { name = GRE_defense_innovation_research_mission bonus = 1 ahead_reduction = 3.5 uses = 1 category = CAT_inf } }
 				20 = { add_tech_bonus = { name = GRE_defense_innovation_research_mission bonus = 1 ahead_reduction = 3.5 uses = 1 category = CAT_air_eqp } }

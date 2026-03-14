@@ -567,7 +567,7 @@ focus_tree = {
 			}
 			newline = yes
 			if = {
-				limit = { has_dlc = "No Step Back"}
+				limit = { has_dlc = "No Step Back" }
 				create_equipment_variant = {
 					name = "M270"
 					type = medium_tank_artillery_chassis_1
@@ -2843,7 +2843,9 @@ focus_tree = {
 			add_timed_idea = { idea = GRE_bonds_issued_idea days = 365 }
 		}
 
-		ai_will_do = { base = 10 }
+		ai_will_do = {
+			base = 10
+		}
 	}
 
 	focus = {
@@ -2888,6 +2890,10 @@ focus_tree = {
 		prerequisite = { focus = GRE_hellenic_economy focus = GRE_debt_mounts }
 
 		search_filters = { FOCUS_FILTER_ECONOMY }
+
+		available = {
+			NOT = { has_idea = euro }
+		}
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_convert_to_euro"
@@ -3088,7 +3094,6 @@ focus_tree = {
 		cost = 5
 
 		prerequisite = { focus = GRE_greek_bonds }
-		mutually_exclusive = { focus = GRE_debt_refactoring }
 
 		search_filters = { FOCUS_FILTER_ECONOMY }
 
@@ -3108,21 +3113,21 @@ focus_tree = {
 		icon = radical_tax_reform
 
 		x = 1
-		y = 1
+		y = 2
 		relative_position_id = GRE_greek_bonds
 
 		cost = 5
 
-		prerequisite = { focus = GRE_greek_bonds }
-		mutually_exclusive = { focus = GRE_austerity_measures }
+		prerequisite = { focus = GRE_debt_swaps }
 
 		search_filters = { FOCUS_FILTER_ECONOMY }
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_debt_refactoring"
-			add_ideas = GRE_debt_restructured
-			add_stability = 0.05
-			add_political_power = -50
+			set_temp_variable = { debt_change = debt }
+			multiply_temp_variable = { debt_change = 0.05 }
+			clamp_temp_variable = { var = debt_change min = 0 max = 100 }
+			modify_debt_effect = yes
 		}
 
 		ai_will_do = { base = 10 }
@@ -3184,6 +3189,10 @@ focus_tree = {
 
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
+		available = {
+			has_tech = internet1
+		}
+
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_telecomms"
 			two_random_network_infrastructure = yes
@@ -3213,6 +3222,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		available = {
+			has_tech = post_conventional_rail
 			has_full_control_of_state = 139
 			has_full_control_of_state = 140
 			has_full_control_of_state = 141
@@ -3249,18 +3259,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_highway_initiatives"
-			set_temp_variable = { treasury_change = -5 }
-			modify_treasury_effect = yes
-			every_owned_state = {
-				limit = {
-					is_core_of = ROOT
-				}
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
+			two_random_infrastructure = yes
 		}
 
 		ai_will_do = {
@@ -3460,20 +3459,19 @@ focus_tree = {
 		id = GRE_debt_swaps
 		icon = chinese_rmb
 
-		x = 0
+		x = 1
 		y = 1
-		relative_position_id = GRE_debt_refactoring
+		relative_position_id = GRE_greek_bonds
 
 		cost = 5
 
-		prerequisite = { focus = GRE_debt_refactoring }
+		prerequisite = { focus = GRE_greek_bonds }
 
 		search_filters = { FOCUS_FILTER_ECONOMY }
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus GRE_debt_swaps"
-			add_ideas = GRE_yen_swap_agreement
-			add_political_power = 50
+			add_political_power = 75
 		}
 
 		ai_will_do = { base = 10 }
@@ -3855,7 +3853,7 @@ focus_tree = {
 
 		cost = 5
 
-		prerequisite = { focus = GRE_trim_the_fat focus = GRE_debt_swaps }
+		prerequisite = { focus = GRE_trim_the_fat focus = GRE_debt_refactoring }
 
 		search_filters = { FOCUS_FILTER_ECONOMY }
 
