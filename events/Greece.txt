@@ -1547,52 +1547,76 @@ country_event = {
 
 
 country_event = {
-	id = greek_debt.1
-	title = greek_debt.1.t
-	desc = greek_debt.1.d
+	id = greece_debt.1
+	title = greece_debt.1.t
+	desc = greece_debt.1.d
 	#picture = #TODO
 
 	is_triggered_only = yes
 
 	# India
 	option = {
-		name = greek_debt.1.a
+		name = greece_debt.1.a
 		trigger = {
 			country_exists = RAJ
 		}
-		RAJ = { country_event = { id = greek_debt.2 days = 2 random_hours = 12 } }
+		RAJ = { country_event = { id = greece_debt.2 days = 2 random_hours = 12 } }
 	}
 
 	# Russia
 	option = {
-		name = greek_debt.1.b
+		name = greece_debt.1.b
 		trigger = {
 			country_exists = SOV
 		}
-		SOV = { country_event = { id = greek_debt.2 days = 2 random_hours = 12 } }
+		SOV = { country_event = { id = greece_debt.2 days = 2 random_hours = 12 } }
 	}
 
 	# China
 	option = {
-		name = greek_debt.1.c
+		name = greece_debt.1.c
 		trigger = {
 			country_exists = CHI
 		}
-		CHI = { country_event = { id = greek_debt.2 days = 2 random_hours = 12 } }
+		CHI = { country_event = { id = greece_debt.2 days = 2 random_hours = 12 } }
+	}
+
+	# Look to Europe
+	option = {
+		name = greece_debt.1.e
+		random_other_country = {
+			limit = { has_idea = ECB_president }
+
+		}
+	}
+
+	# Stay the Course
+	option = {
+		name = greece_debt.1.f
+
+		add_political_power = 100
+
+		ai_chance = {
+			base = 5
+			modifier = {
+				factor = 5
+				is_historical_focus_on = yes
+			}
+		}
 	}
 }
 
 # [FROM.GetName] Requests Debt Swap Deals
 country_event = {
-	id = greek_debt.1
-	title = greek_debt.1.t
-	desc = greek_debt.1.d
+	id = greece_debt.1
+	title = greece_debt.1.t
+	desc = greece_debt.1.d
 	#picture = #TODO
 	is_triggered_only = yes
 
 	# Reject the Deal
 	option = {
-		name = greek_debt.2.a
+		name = greece_debt.2.a
 
 		ai_chance = {
 			base = 1
@@ -1601,10 +1625,11 @@ country_event = {
 
 	# Accept the Deal
 	option = {
-		name = greek_debt.2.b
+		name = greece_debt.2.b
+		set_variable = { GRE.debt_swap_holder_nation = THIS.id }
 
 		ai_chance = {
-			base = 1
+			base = 100
 		}
 	}
 }
