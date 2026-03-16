@@ -6,11 +6,20 @@
 ammunition_daily_production = {
 	if = {
 		limit = { num_of_military_factories > 0 }
-		set_temp_variable = { ammo_prod = num_of_military_factories }
-		multiply_temp_variable = { ammo_prod = 15 }
+		#TODO: Add a modifier to the strategic reserve for ammo stockpiling;
+		#Nations have to have the stockpile space to store their ammo
+		#If you max your storage, then additional production stops till you start consuming again
+		set_temp_variable = { ammo_prod_reduced = num_of_military_factories }
+		set_temp_variable = { ammo_prod_full = num_of_available_military_factories }
+		subtract_from_temp_variable = { ammo_prod_reduced = ammo_prod_full }
+		multiply_temp_variable = { ammo_prod_full = 45 }
+		multiply_temp_variable = { ammo_prod_reduced = 11 }
+
+		set_temp_variable = { ammo_prod_final = ammo_prod_full }
+		add_to_temp_variable = { ammo_prod_final = ammo_prod_reduced }
 		add_equipment_to_stockpile = {
 			type = MD_Ammunition_1
-			amount = var:ammo_prod
+			amount = var:ammo_prod_final
 			producer = THIS
 		}
 	}
@@ -22,7 +31,7 @@ ammunition_startup_stockpile = {
 	if = {
 		limit = { num_of_military_factories > 0 }
 		set_temp_variable = { ammo_start = num_of_military_factories }
-		multiply_temp_variable = { ammo_start = 2500 }
+		multiply_temp_variable = { ammo_start = 3000 }
 		add_equipment_to_stockpile = {
 			type = MD_Ammunition_1
 			amount = var:ammo_start
