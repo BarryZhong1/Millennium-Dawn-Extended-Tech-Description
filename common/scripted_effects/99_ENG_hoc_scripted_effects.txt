@@ -568,28 +568,57 @@ ENG_hoc_sum_totals = {
 # Find largest party, check majority (326+), check extremist
 # ============================================================
 ENG_hoc_determine_government = {
-	# Find largest party among main indices by iterating
+	# Find the largest party overall (election winner)
 	set_variable = { ENG_hoc_largest_party = 0 }
-	set_variable = { ENG_hoc_ruling_seats = 0 }
+	set_variable = { ENG_hoc_largest_party_seats = 0 }
 	for_each_loop = {
 		array = party_pop_array
 		value = v
 		index = i
 		if = {
-			limit = { check_variable = { ENG_hoc_seats^i > ENG_hoc_ruling_seats } }
-			set_variable = { ENG_hoc_ruling_seats = ENG_hoc_seats^i }
+			limit = { check_variable = { ENG_hoc_seats^i > ENG_hoc_largest_party_seats } }
+			set_variable = { ENG_hoc_largest_party_seats = ENG_hoc_seats^i }
 			set_variable = { ENG_hoc_largest_party = i }
 		}
 	}
 
 	# Check if SNP has more seats than any main party
 	if = {
-		limit = { check_variable = { ENG_hoc_snp_seats > ENG_hoc_ruling_seats } }
-		set_variable = { ENG_hoc_ruling_seats = ENG_hoc_snp_seats }
+		limit = { check_variable = { ENG_hoc_snp_seats > ENG_hoc_largest_party_seats } }
+		set_variable = { ENG_hoc_largest_party_seats = ENG_hoc_snp_seats }
 		set_variable = { ENG_hoc_largest_party = 100 } # 100 = SNP special code
 	}
 
-	# Check majority
+	# Resolve current ruling party index from the ruling_party array
+	# ruling_party is an array, so we must use is_in_array checks
+	set_variable = { ENG_hoc_ruling_party_index = -1 }
+	if = { limit = { is_in_array = { ruling_party = 0 } } set_variable = { ENG_hoc_ruling_party_index = 0 } }
+	if = { limit = { is_in_array = { ruling_party = 1 } } set_variable = { ENG_hoc_ruling_party_index = 1 } }
+	if = { limit = { is_in_array = { ruling_party = 2 } } set_variable = { ENG_hoc_ruling_party_index = 2 } }
+	if = { limit = { is_in_array = { ruling_party = 3 } } set_variable = { ENG_hoc_ruling_party_index = 3 } }
+	if = { limit = { is_in_array = { ruling_party = 4 } } set_variable = { ENG_hoc_ruling_party_index = 4 } }
+	if = { limit = { is_in_array = { ruling_party = 5 } } set_variable = { ENG_hoc_ruling_party_index = 5 } }
+	if = { limit = { is_in_array = { ruling_party = 6 } } set_variable = { ENG_hoc_ruling_party_index = 6 } }
+	if = { limit = { is_in_array = { ruling_party = 13 } } set_variable = { ENG_hoc_ruling_party_index = 13 } }
+	if = { limit = { is_in_array = { ruling_party = 14 } } set_variable = { ENG_hoc_ruling_party_index = 14 } }
+	if = { limit = { is_in_array = { ruling_party = 16 } } set_variable = { ENG_hoc_ruling_party_index = 16 } }
+	if = { limit = { is_in_array = { ruling_party = 17 } } set_variable = { ENG_hoc_ruling_party_index = 17 } }
+	if = { limit = { is_in_array = { ruling_party = 18 } } set_variable = { ENG_hoc_ruling_party_index = 18 } }
+	if = { limit = { is_in_array = { ruling_party = 19 } } set_variable = { ENG_hoc_ruling_party_index = 19 } }
+	if = { limit = { is_in_array = { ruling_party = 20 } } set_variable = { ENG_hoc_ruling_party_index = 20 } }
+	if = { limit = { is_in_array = { ruling_party = 21 } } set_variable = { ENG_hoc_ruling_party_index = 21 } }
+
+	# Get the current RULING party's seats using the resolved index
+	set_variable = { ENG_hoc_ruling_seats = ENG_hoc_seats^ENG_hoc_ruling_party_index }
+
+	# Check if ruling party won the election (is the largest party)
+	set_variable = { ENG_hoc_ruling_party_won = 0 }
+	if = {
+		limit = { check_variable = { ENG_hoc_largest_party = ENG_hoc_ruling_party_index } }
+		set_variable = { ENG_hoc_ruling_party_won = 1 }
+	}
+
+	# Majority is based on RULING party's seats, not largest party overall
 	if = {
 		limit = { check_variable = { ENG_hoc_ruling_seats > 325 } }
 		set_variable = { ENG_hoc_majority = 1 }
@@ -612,6 +641,7 @@ ENG_hoc_determine_government = {
 			}
 		}
 		set_variable = { ENG_hoc_extremist_winner = 1 }
+		set_variable = { ENG_hoc_extremist_index = ENG_hoc_largest_party }
 	}
 }
 

@@ -30,12 +30,13 @@ country_event = {
 	picture = GFX_report_event_generic_parliament
 	is_triggered_only = yes
 
-	# Majority government - non extremist
+	# Majority government - ruling party won with 326+ seats, non extremist
 	option = {
 		name = ENG_parliament.2.a
 		log = "[GetDateText]: [This.GetName]: ENG_parliament.2.a executed"
 		trigger = {
 			check_variable = { ENG_hoc_majority = 1 }
+			check_variable = { ENG_hoc_ruling_party_won = 1 }
 			check_variable = { ENG_hoc_extremist_winner = 0 }
 		}
 		# Strong majority (>340)
@@ -49,13 +50,16 @@ country_event = {
 		ai_chance = { base = 1 }
 	}
 
-	# Hung parliament - no majority
+	# Hung parliament - ruling party doesn't have 326+ seats OR lost the election
 	option = {
 		name = ENG_parliament.2.b
 		log = "[GetDateText]: [This.GetName]: ENG_parliament.2.b executed"
 		trigger = {
-			check_variable = { ENG_hoc_majority = 0 }
 			check_variable = { ENG_hoc_extremist_winner = 0 }
+			OR = {
+				check_variable = { ENG_hoc_majority = 0 }
+				check_variable = { ENG_hoc_ruling_party_won = 0 }
+			}
 		}
 		country_event = { id = ENG_parliament.20 days = 5 }
 		ai_chance = { base = 1 }
@@ -266,6 +270,11 @@ country_event = {
 		set_variable = { ENG_hoc_coalition_satisfaction_libdem = 75 }
 		# Add LD seats to ruling total
 		add_to_variable = { ENG_hoc_ruling_seats = ENG_hoc_seats^2 }
+		# Recalculate majority with coalition seats
+		if = {
+			limit = { check_variable = { ENG_hoc_ruling_seats > 325 } }
+			set_variable = { ENG_hoc_majority = 1 }
+		}
 		add_ideas = ENG_coalition_government_spirit
 		ai_chance = { base = 8 }
 	}
@@ -298,6 +307,11 @@ country_event = {
 		set_country_flag = ENG_hoc_coalition_snp
 		set_variable = { ENG_hoc_coalition_satisfaction_snp = 75 }
 		add_to_variable = { ENG_hoc_ruling_seats = ENG_hoc_snp_seats }
+		# Recalculate majority with coalition seats
+		if = {
+			limit = { check_variable = { ENG_hoc_ruling_seats > 325 } }
+			set_variable = { ENG_hoc_majority = 1 }
+		}
 		add_ideas = ENG_coalition_government_spirit
 		ai_chance = { base = 6 }
 	}
@@ -330,6 +344,11 @@ country_event = {
 		set_country_flag = ENG_hoc_coalition_dup
 		set_variable = { ENG_hoc_coalition_satisfaction_dup = 75 }
 		add_to_variable = { ENG_hoc_ruling_seats = ENG_hoc_dup_seats }
+		# Recalculate majority with coalition seats
+		if = {
+			limit = { check_variable = { ENG_hoc_ruling_seats > 325 } }
+			set_variable = { ENG_hoc_majority = 1 }
+		}
 		add_ideas = ENG_coalition_government_spirit
 		ai_chance = { base = 7 }
 	}
