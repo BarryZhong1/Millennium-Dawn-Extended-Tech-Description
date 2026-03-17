@@ -268,6 +268,16 @@ ENG_hoc_scotland_seats = {
 	multiply_variable = { ENG_hoc_snp_seats = 59 }
 	round_variable = ENG_hoc_snp_seats
 
+	# Random election variance (+/- 3 seats)
+	set_temp_variable_to_random = {
+		var = snp_variance
+		min = -3
+		max = 4
+		integer = yes
+	}
+	add_to_variable = { ENG_hoc_snp_seats = snp_variance }
+	clamp_variable = { var = ENG_hoc_snp_seats min = 1 max = 50 }
+
 	# Remaining seats for UK-wide parties
 	set_temp_variable = { scot_remaining = 59 }
 	subtract_from_temp_variable = { scot_remaining = ENG_hoc_snp_seats }
@@ -354,6 +364,16 @@ ENG_hoc_wales_seats = {
 	multiply_variable = { ENG_hoc_pc_seats = 40 }
 	round_variable = ENG_hoc_pc_seats
 
+	# Random election variance (+/- 2 seats)
+	set_temp_variable_to_random = {
+		var = pc_variance
+		min = -2
+		max = 3
+		integer = yes
+	}
+	add_to_variable = { ENG_hoc_pc_seats = pc_variance }
+	clamp_variable = { var = ENG_hoc_pc_seats min = 1 max = 24 }
+
 	# Remaining seats for UK-wide parties
 	set_temp_variable = { wales_remaining = 40 }
 	subtract_from_temp_variable = { wales_remaining = ENG_hoc_pc_seats }
@@ -437,6 +457,16 @@ ENG_hoc_ni_seats = {
 		set_temp_variable = { ni_nationalist_seats = ni_nationalist_share }
 		multiply_temp_variable = { ni_nationalist_seats = 18 }
 		round_temp_variable = ni_nationalist_seats
+
+		# Random election variance (+/- 1 seat on nationalist total)
+		set_temp_variable_to_random = {
+			var = ni_total_variance
+			min = -1
+			max = 2
+			integer = yes
+		}
+		add_to_temp_variable = { ni_nationalist_seats = ni_total_variance }
+		clamp_temp_variable = { var = ni_nationalist_seats min = 3 max = 13 }
 
 		# Sinn Fein gets 55%, SDLP gets 45%
 		set_variable = { ENG_hoc_sf_seats = ni_nationalist_seats }
