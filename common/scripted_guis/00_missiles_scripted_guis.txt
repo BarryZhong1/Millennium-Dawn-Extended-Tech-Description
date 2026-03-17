@@ -8371,4 +8371,46 @@ scripted_gui = {
 			}
 		}
 	}
+
+	is_antarctica_dynamic_lists = {
+		context_type = player_context
+		parent_scripted_gui = MD_antarctica_gui
+		window_name = "IS_antarctica_claims_container"
+
+		dirty = global.missile_ui_updated
+
+		visible = {
+			has_country_flag = open_MD_countrymissilesview
+			check_variable = { var_open_MD_UN_gui = 2 }
+			has_country_flag = show_antarctica_claims
+		}
+
+		dynamic_lists = {
+			list_of_antarctica_claims = {
+				array = global.antarctica_claims
+				entry_container = IS_antarctica_claims_list
+				change_scope = yes
+			}
+		}
+
+		triggers = {
+			name_of_claim_button_click_enabled = {
+				has_war_with = no
+				has_civil_war = no
+			}
+		}
+
+		effects = {
+			name_of_claim_button_click = {
+				set_variable = { open_claim_info = i }
+				missile_ui_update = yes
+			}
+		}
+
+		properties = {
+			name_of_at_nation_icon = {
+				image = "[?global.at_members^i.GetFlag]"
+			}
+		}
+	}
 }
