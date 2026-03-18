@@ -1,0 +1,52 @@
+add_namespace = MD_antarctica
+add_namespace = MD_antarctica_news
+
+### News
+
+news_event = {
+	id = MD_antarctica_news.1
+	title = MD_antarctica_news.1.t
+	desc = MD_antarctica_news.1.d
+
+	picture = GFX_antarctic_treaty_news
+
+	is_triggered_only = yes
+
+	option = {
+		name = MD_antarctica_news.1.a
+		log = "[GetDateText]: [This.GetName]: MD_antarctica_news.1.a executed"
+		trigger = { NOT = { original_tag = FROM } }
+		ai_chance = { base = 100 }
+	}
+	option = {
+		log = "[GetDateText]: [This.GetName]: MD_antarctica_news.1.b executed"
+		name = MD_antarctica_news.1.b
+		trigger = { original_tag = FROM }
+		hidden_effect = { news_event = { id = MD_antarctica_news.2 days = 30 } }
+		ai_chance = { base = 100 }
+	}
+}
+
+news_event = {
+	id = MD_antarctica_news.2
+	title = MD_antarctica_news.2.t
+	desc = MD_antarctica_news.2.d
+
+	picture = GFX_antarctic_treaty_news
+
+	is_triggered_only = yes
+
+	option = {
+		name = MD_antarctica_news.2.a
+		log = "[GetDateText]: [This.GetName]: MD_antarctica_news.2.a executed"
+		trigger = { NOT = { original_tag = FROM } }
+		ai_chance = { base = 100 }
+	}
+	option = {
+		log = "[GetDateText]: [This.GetName]: MD_antarctica_news.2.b executed"
+		name = MD_antarctica_news.2.b
+		trigger = { original_tag = FROM }
+		add_ideas = at_member
+		ai_chance = { base = 100 }
+	}
+}

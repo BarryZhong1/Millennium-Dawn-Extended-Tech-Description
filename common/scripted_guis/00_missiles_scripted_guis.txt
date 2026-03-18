@@ -5101,7 +5101,7 @@ scripted_gui = {
 					tooltip = already_antarctica_treaty_member
 					NOT = { has_idea = at_member }
 				}
-				
+				has_political_power = 200
 			}
 			antarctica_treaty_join_atcp_button_click_enabled = {
 				has_idea = at_member
@@ -5109,6 +5109,14 @@ scripted_gui = {
 					flag = is_antarctic_research_station_constructed
 					days > 365
 				}
+			}
+		}
+
+		effects = {
+			antarctica_treaty_join_button_click = {
+				log = "[GetDateText]: [Root.GetName]: Join Antarctica Treaty GUI"
+				add_political_power = -200
+				news_event = MD_antarctica_news.1
 			}
 		}
 	}
