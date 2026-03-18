@@ -265,7 +265,7 @@
 
 	NDefines.NBuildings.MAX_BUILDING_LEVELS = 50
 	NDefines.NBuildings.SAM_MISSION_SUPERIORITY = 15.0	-- How much air superiority each SAM mission gives per rocket wing performing SAM missions.
-	NDefines.NBuildings.AIRBASE_CAPACITY_MULT = 50
+	NDefines.NBuildings.AIRBASE_CAPACITY_MULT = 24
 	NDefines.NBuildings.ROCKETSITE_CAPACITY_MULT = 50
 	NDefines.NBuildings.NAVALBASE_REPAIR_MULT = 0.075 -- 0.05 -- Each level of navalbase building repairs X strength and can repair as many ships as its level
 	NDefines.NBuildings.RADAR_RANGE_MAX = 220
@@ -282,7 +282,7 @@
 	NDefines.NMilitary.MAX_DIVISION_BRIGADE_WIDTH = 5 -- 5
 	NDefines.NMilitary.MIN_DIVISION_BRIGADE_HEIGHT = 3 -- 4
 	NDefines.NMilitary.HOURLY_ORG_MOVEMENT_IMPACT = -0.1 -- -0.2
-	NDefines.NMilitary.ZERO_ORG_MOVEMENT_MODIFIER = -0.2 -- -0.8
+	NDefines.NMilitary.ZERO_ORG_MOVEMENT_MODIFIER = -0.6 -- -0.8
 	NDefines.NMilitary.INFRASTRUCTURE_MOVEMENT_SPEED_IMPACT = -0.02 -- -0.05
 
 	NDefines.NMilitary.SOFT_ATTACK_TARGETING_FACTOR = 1.0 -- 1.0
@@ -291,8 +291,8 @@
 	NDefines.NMilitary.PIERCING_THRESHOLD_DAMAGE_VALUES = { 1.00, 0.95, 0.90, 0.85, 0.80, 0.75, 0.70, 0.65, 0.60, 0.55, 0.50 }
 	NDefines.NMilitary.SPOTTING_QUALITY_DROP_HOURS = 6 -- 4
 	NDefines.NMilitary.BASE_CHANCE_TO_AVOID_HIT = 80 -- 90
-	NDefines.NMilitary.CHANCE_TO_AVOID_HIT_AT_NO_DEF = 50 -- 60
-	NDefines.NMilitary.ARMOR_VS_AVERAGE = 0.3 -- 0.4 Decrease armor from individual units, to make needing to average armor out more important
+	NDefines.NMilitary.CHANCE_TO_AVOID_HIT_AT_NO_DEF = 30 -- 60
+	NDefines.NMilitary.ARMOR_VS_AVERAGE = 0.35 -- 0.4 Decrease armor from individual units, to make needing to average armor out more important
 	NDefines.NMilitary.PEN_VS_AVERAGE = 0.425 -- 0.4 Increase pen avaiable to units, so that infantry has a better chance against armor
 
 	NDefines.NMilitary.CORPS_COMMANDER_DIVISIONS_CAP = 18 -- Vanilla 24
@@ -326,10 +326,10 @@
 	NDefines.NMilitary.RIVER_CROSSING_SPEED_PENALTY_LARGE = -0.45 -- -0.5
 	NDefines.NMilitary.BASE_FORT_PENALTY = -0.075 -- -0.15
 	NDefines.NMilitary.RECON_SKILL_IMPACT = 2.5 -- 5
-	NDefines.NMilitary.ENEMY_AIR_SUPERIORITY_IMPACT = -0.5 -- -0.35
-	NDefines.NMilitary.ENEMY_AIR_SUPERIORITY_SPEED_IMPACT = -0.3 -- -0.3
+	NDefines.NMilitary.ENEMY_AIR_SUPERIORITY_IMPACT = -0.65 -- -0.35
+	NDefines.NMilitary.ENEMY_AIR_SUPERIORITY_SPEED_IMPACT = -0.4 -- -0.3
 	NDefines.NMilitary.SLOWEST_SPEED = 4 -- 4
-	NDefines.NMilitary.BASE_NIGHT_ATTACK_PENALTY = -0.6 -- -0.5
+	NDefines.NMilitary.BASE_NIGHT_ATTACK_PENALTY = -0.8 -- -0.5
 	NDefines.NMilitary.UNIT_DIGIN_CAP = 10 -- 5
 	NDefines.NMilitary.EXPERIENCE_COMBAT_FACTOR = 0.05 -- 0.25
 	NDefines.NMilitary.EXPERIENCE_LOSS_FACTOR = 0.7 -- 1.00
@@ -340,7 +340,7 @@
 	NDefines.NMilitary.NON_CORE_SUPPLY_SPEED = -0.20 -- -0.5
 	NDefines.NMilitary.NON_CORE_SUPPLY_AIR_SPEED = -0.10 -- -0.25
 	NDefines.NMilitary.OUT_OF_SUPPLY_MORALE = -0.15 -- -0.30
-	NDefines.NMilitary.AIR_SUPPORT_BASE = 0.5 -- 0.25
+	NDefines.NMilitary.AIR_SUPPORT_BASE = 0.45 -- 0.25
 	NDefines.NMilitary.REINFORCE_CHANCE = 0.05 -- 0.02
 	NDefines.NMilitary.PARACHUTE_DISRUPTED_AA_PENALTY = 0.75 -- 1
 	NDefines.NMilitary.PARACHUTE_COMPLETE_ORG = 0.3 -- 0.1
@@ -576,7 +576,6 @@
 	NDefines.NNavy.ANTI_AIR_POW_ON_INCOMING_AIR_DAMAGE = 0.2 -- 0.2
 	NDefines.NNavy.ANTI_AIR_MULT_ON_INCOMING_AIR_DAMAGE = 0.35 -- 0.15
 	NDefines.NNavy.MAX_ANTI_AIR_REDUCTION_EFFECT_ON_INCOMING_AIR_DAMAGE = 0.9 -- 0.75
-	NDefines.NNavy.ENEMY_AIR_SUPERIORITY_IMPACT = -1.25
 
 	NDefines.NNavy.MISSION_FUEL_COSTS = {
 		0.1, -- HOLD (consumes fuel HOLD_MISSION_MOVEMENT_COST fuel while moving)
