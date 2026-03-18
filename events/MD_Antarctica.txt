@@ -50,3 +50,51 @@ news_event = {
 		ai_chance = { base = 100 }
 	}
 }
+
+news_event = {
+	id = MD_antarctica_news.3
+	title = MD_antarctica_news.3.t
+	desc = MD_antarctica_news.3.d
+
+	picture = GFX_antarctic_treaty_news
+
+	is_triggered_only = yes
+
+	option = {
+		name = MD_antarctica_news.3.a
+		log = "[GetDateText]: [This.GetName]: MD_antarctica_news.3.a executed"
+		trigger = { NOT = { original_tag = FROM } }
+		ai_chance = { base = 100 }
+	}
+	option = {
+		log = "[GetDateText]: [This.GetName]: MD_antarctica_news.3.b executed"
+		name = MD_antarctica_news.3.b
+		trigger = { original_tag = FROM }
+		hidden_effect = { news_event = { id = MD_antarctica_news.4 days = 730 } }
+		ai_chance = { base = 100 }
+	}
+}
+
+news_event = {
+	id = MD_antarctica_news.4
+	title = MD_antarctica_news.4.t
+	desc = MD_antarctica_news.4.d
+
+	picture = GFX_antarctic_treaty_news
+
+	is_triggered_only = yes
+
+	option = {
+		name = MD_antarctica_news.4.a
+		log = "[GetDateText]: [This.GetName]: MD_antarctica_news.4.a executed"
+		trigger = { NOT = { original_tag = FROM } }
+		ai_chance = { base = 100 }
+	}
+	option = {
+		log = "[GetDateText]: [This.GetName]: MD_antarctica_news.4.b executed"
+		name = MD_antarctica_news.4.b
+		trigger = { original_tag = FROM }
+		remove_ideas = at_member
+		ai_chance = { base = 100 }
+	}
+}
