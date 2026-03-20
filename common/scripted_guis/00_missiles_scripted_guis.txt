@@ -1,4 +1,4 @@
-﻿# Author(s): AngriestBird, Doolittle, TheBrokenDroid
+# Author(s): AngriestBird, Doolittle, TheBrokenDroid, XCezor
 scripted_gui = {
 	MD_topbar_missiles_scripted_gui = {
 		window_name = after_logistics_button
@@ -5138,25 +5138,10 @@ scripted_gui = {
 				custom_effect_tooltip = leave_antarctica_treaty_warning_tt
 			}
 			antarctica_treaty_join_ccamlr_button_click = {
-				# Placeholder
-				if = {
-					limit = { check_variable = { global.next_antarctica_station_id < 1 } }
-					set_variable = { global.next_antarctica_station_id = 1 }
-				}
-
-				set_temp_variable = { station_id = global.next_antarctica_station_id }
-				add_to_variable = { global.next_antarctica_station_id = 1 }
-
-				antarctica_setup_research_station = yes
-				set_temp_variable = { station_id = station_id }
-				add_to_variable = { xxx = 55 }
-				add_to_variable = { yyy = 10 }
-				set_temp_variable = { station_x = xxx }
-				set_temp_variable = { station_y = yyy }
-				set_temp_variable = { station_offset = station_id }
-				multiply_temp_variable = { station_offset = 20 }
-				add_to_temp_variable = { station_x = station_offset }
-				add_to_temp_variable = { station_y = station_offset }
+				# Uncomment this and set proper station_id to manually change position of the station. For testing only.
+				set_temp_variable = { station_id = 21 }
+				set_temp_variable = { station_x = 735 }
+				set_temp_variable = { station_y = 131 }
 				antarctica_research_station_position = yes
 
 				set_country_flag = antarctica_map_opened

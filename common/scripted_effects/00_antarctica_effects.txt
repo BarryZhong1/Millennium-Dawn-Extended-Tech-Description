@@ -134,8 +134,8 @@ antarctica_research_station_position = {
 		}
 		meta_effect = {
 			text = {
-				set_global_variable = { name = research_station_[ID]_x value = [X] }
-				set_global_variable = { name = research_station_[ID]_y value = [Y] }
+				set_variable = { global.research_station_[ID]_x = [X] }
+				set_variable = { global.research_station_[ID]_y = [Y] }
 			}
 			ID = "[?station_id]"
 			X = "[?station_x]"
@@ -184,4 +184,58 @@ antarctica_research_station_position = {
 	else = {
 		log = "[GetDateText]: [Root.GetName]: Failed to set Antarctica station position. Station ID: [?station_id] does not exist."
 	}
+}
+
+# Usage
+# set_temp_variable = { station_x = x }
+# set_temp_variable = { station_y = y }
+# set_temp_variable = { station_name_id = n } # optional, for GUI name lookup later
+# antarctica_create_startup_research_station = yes
+antarctica_create_startup_research_station = {
+	if = {
+		limit = { check_variable = { global.next_antarctica_station_id < 1 } }
+		set_variable = { global.next_antarctica_station_id = 1 }
+	}
+
+	set_temp_variable = { station_id = global.next_antarctica_station_id }
+	add_to_variable = { global.next_antarctica_station_id = 1 }
+
+	# If startup coordinates are omitted, spread stations diagonally as a safe fallback.
+	if = {
+		limit = {
+			OR = {
+				check_variable = { station_x < 1 }
+				check_variable = { station_y < 1 }
+			}
+		}
+		set_temp_variable = { station_offset = station_id }
+		multiply_temp_variable = { station_offset = 18 }
+
+		if = {
+			limit = { check_variable = { station_x < 1 } }
+			set_temp_variable = { station_x = 420 }
+			add_to_temp_variable = { station_x = station_offset }
+		}
+		if = {
+			limit = { check_variable = { station_y < 1 } }
+			set_temp_variable = { station_y = 420 }
+			add_to_temp_variable = { station_y = station_offset }
+		}
+	}
+
+	antarctica_setup_research_station = yes
+	antarctica_research_station_position = yes
+
+	if = {
+		limit = { check_variable = { station_name_id > 0 } }
+		meta_effect = {
+			text = {
+				set_variable = { global.research_station_[ID]_name_id = [NAME] }
+			}
+			ID = "[?station_id]"
+			NAME = "[?station_name_id]"
+		}
+	}
+
+	log = "[GetDateText]: [Root.GetName]: Created startup Antarctica station. Station ID: [?station_id], Name ID: [?station_name_id], X: [?station_x], Y: [?station_y]."
 }
