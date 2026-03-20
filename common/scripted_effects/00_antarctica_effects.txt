@@ -20,10 +20,69 @@ antarctica_setup_research_station = {
 			}
 			ID = "[?station_id]"
 		}
+		if = {
+			limit = { check_variable = { global.selected_antarctica_station = 0 } }
+			set_variable = { global.selected_antarctica_station = station_id }
+		}
 		log = "[GetDateText]: [Root.GetName]: Set up research station in Antarctica. Station ID: [?station_id] with controller [Root.GetName]."
 	}
 	else = {
 		log = "[GetDateText]: [Root.GetName]: Failed to set up research station in Antarctica. Station ID: [?station_id] already exists."
+	}
+}
+
+# Usage
+# antarctica_initialize_station_display_arrays = yes
+antarctica_initialize_station_display_arrays = {
+	if = {
+		limit = {
+			NOT = { has_global_flag = antarctica_station_display_initialized }
+		}
+		clear_array = global.antarctica_station_ids
+		clear_array = global.antarctica_station_x
+		clear_array = global.antarctica_station_y
+
+		set_variable = { global.selected_antarctica_station = 0 }
+		set_variable = { global.selected_antarctica_station_x = 0 }
+		set_variable = { global.selected_antarctica_station_y = 0 }
+
+		set_global_flag = antarctica_station_display_initialized
+		log = "[GetDateText]: [Root.GetName]: Initialized Antarctica station display arrays."
+	}
+}
+
+# Usage
+# set_temp_variable = { station_id = x }
+# antarctica_remove_research_station_from_display = yes
+antarctica_remove_research_station_from_display = {
+	set_temp_variable = { remove_index = -1 }
+	for_each_loop = {
+		array = global.antarctica_station_ids
+		value = current_station_id
+		index = i
+		break = break_loop
+
+		if = {
+			limit = { check_variable = { current_station_id = station_id } }
+			set_temp_variable = { remove_index = i }
+			set_temp_variable = { break_loop = 1 }
+		}
+	}
+
+	if = {
+		limit = { check_variable = { remove_index > -1 } }
+		set_variable = { global.antarctica_station_ids^remove_index = -1 }
+		set_variable = { global.antarctica_station_x^remove_index = 0 }
+		set_variable = { global.antarctica_station_y^remove_index = 0 }
+
+		if = {
+			limit = { check_variable = { global.selected_antarctica_station = station_id } }
+			set_variable = { global.selected_antarctica_station = 0 }
+			set_variable = { global.selected_antarctica_station_x = 0 }
+			set_variable = { global.selected_antarctica_station_y = 0 }
+		}
+
+		log = "[GetDateText]: [Root.GetName]: Removed Antarctica station from display array. Station ID: [?station_id]."
 	}
 }
 
@@ -48,6 +107,7 @@ antarctica_remove_research_station = {
 			}
 			ID = "[?station_id]"
 		}
+		antarctica_remove_research_station_from_display = yes
 		log = "[GetDateText]: [Root.GetName]: Removed research station in Antarctica. Station ID: [?station_id] with controller [Root.GetName]."
 	}
 	else = {
@@ -61,6 +121,8 @@ antarctica_remove_research_station = {
 # set_temp_variable = { station_y = y }
 # antarctica_research_station_position = yes
 antarctica_research_station_position = {
+	antarctica_initialize_station_display_arrays = yes
+
 	if = {
 		limit = {
 			meta_trigger = {
@@ -79,5 +141,47 @@ antarctica_research_station_position = {
 			X = "[?station_x]"
 			Y = "[?station_y]"
 		}
+
+		set_temp_variable = { station_found = 0 }
+		for_each_loop = {
+			array = global.antarctica_station_ids
+			value = current_station_id
+			index = i
+			break = break_loop
+
+			if = {
+				limit = { check_variable = { current_station_id = station_id } }
+				set_variable = { global.antarctica_station_x^i = station_x }
+				set_variable = { global.antarctica_station_y^i = station_y }
+				set_temp_variable = { station_found = 1 }
+				set_temp_variable = { break_loop = 1 }
+			}
+		}
+
+		if = {
+			limit = { check_variable = { station_found = 0 } }
+			add_to_array = { global.antarctica_station_ids = station_id }
+			add_to_array = { global.antarctica_station_x = station_x }
+			add_to_array = { global.antarctica_station_y = station_y }
+		}
+
+		if = {
+			limit = {
+				OR = {
+					check_variable = { global.selected_antarctica_station = 0 }
+					check_variable = { global.selected_antarctica_station = station_id }
+				}
+			}
+			set_variable = { global.selected_antarctica_station = station_id }
+			set_variable = { global.selected_antarctica_station_x = station_x }
+			set_variable = { global.selected_antarctica_station_y = station_y }
+		}
+
+		set_variable = { global.missile_ui_updated = global.missile_ui_updated }
+		add_to_variable = { global.missile_ui_updated = 1 }
+		log = "[GetDateText]: [Root.GetName]: Updated Antarctica station position. Station ID: [?station_id], X: [?station_x], Y: [?station_y]."
+	}
+	else = {
+		log = "[GetDateText]: [Root.GetName]: Failed to set Antarctica station position. Station ID: [?station_id] does not exist."
 	}
 }
