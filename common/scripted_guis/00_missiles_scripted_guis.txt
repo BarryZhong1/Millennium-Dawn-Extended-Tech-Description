@@ -5101,7 +5101,7 @@ scripted_gui = {
 					tooltip = already_antarctica_treaty_member
 					NOT = { has_idea = at_member }
 				}
-				has_political_power = 200
+				has_political_power > 200
 			}
 			antarctica_treaty_join_atcp_button_click_enabled = {
 				has_idea = at_member
@@ -5109,6 +5109,9 @@ scripted_gui = {
 					flag = is_antarctic_research_station_constructed
 					days > 365
 				}
+			}
+			antarctica_map_open_button_click_enabled = {
+				has_idea = at_member
 			}
 			antarctica_treaty_join_button_visible = {
 				NOT = { has_idea = at_member }
@@ -5134,6 +5137,26 @@ scripted_gui = {
 				effect_tooltip = { remove_ideas = at_member }
 				custom_effect_tooltip = leave_antarctica_treaty_warning_tt
 			}
+			antarctica_map_open_button_click = {
+				log = "[GetDateText]: [Root.GetName]: Open Antarctica Map GUI"
+				if = { limit = { NOT = { has_country_flag = antarctica_map_opened } }
+					set_country_flag = antarctica_map_opened
+				}
+				else = { clr_country_flag = antarctica_map_opened }
+			}
+		}
+	}
+	MD_antarctica_map_gui = {
+		window_name = MD_antarctica_map_view_window
+		context_type = player_context
+		parent_window_name = MD_antarctica_system_gui
+
+		dirty = global.missile_ui_updated
+
+		visible = {
+			check_variable = { var_open_MD_antarctica_gui = 2 }
+			has_country_flag = open_MD_countrymissilesview
+			has_country_flag = antarctica_map_opened
 		}
 	}
 	#Dynamic Lists
