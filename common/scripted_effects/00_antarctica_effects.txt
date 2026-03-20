@@ -239,3 +239,16 @@ antarctica_create_startup_research_station = {
 
 	log = "[GetDateText]: [Root.GetName]: Created startup Antarctica station. Station ID: [?station_id], Name ID: [?station_name_id], X: [?station_x], Y: [?station_y]."
 }
+
+check_antarctica_filters = {
+	if = {
+		limit = {
+			check_variable = { station_filter_america < 2 }
+			check_variable = { station_filter_europe < 2 }
+			check_variable = { station_filter_asia < 2 }
+			check_variable = { station_filter_oceania < 2 }
+			check_variable = { station_filter_africa < 2 }
+		}
+		clr_country_flag = antarctica_filters_active
+	}
+}
