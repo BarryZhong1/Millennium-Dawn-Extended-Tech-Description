@@ -1,0 +1,83 @@
+# Author(s): XCezor
+
+# Usage
+# set_temp_variable = { station_id = x }
+# antarctica_setup_research_station = yes
+antarctica_setup_research_station = {
+	if = {
+		limit = {
+			meta_trigger = {
+				text = {
+					NOT = { has_global_flag = research_station_[ID]_exists }
+				}
+				ID = "[?station_id]"
+			}
+		}
+		meta_effect = {
+			text = {
+				set_global_flag = research_station_[ID]_exists
+				set_country_flag = research_station_[ID]_controller_@ROOT
+			}
+			ID = "[?station_id]"
+		}
+		log = "[GetDateText]: [Root.GetName]: Set up research station in Antarctica. Station ID: [?station_id] with controller [Root.GetName]."
+	}
+	else = {
+		log = "[GetDateText]: [Root.GetName]: Failed to set up research station in Antarctica. Station ID: [?station_id] already exists."
+	}
+}
+
+# Usage
+# set_temp_variable = { station_id = x }
+# antarctica_remove_research_station = yes
+antarctica_remove_research_station = {
+	if = {
+		limit = {
+			meta_trigger = {
+				text = {
+					has_global_flag = research_station_[ID]_exists
+					has_country_flag = research_station_[ID]_controller_@ROOT
+				}
+				ID = "[?station_id]"
+			}
+		}
+		meta_effect = {
+			text = {
+				clr_global_flag = research_station_[ID]_exists
+				clr_country_flag = research_station_[ID]_controller_@ROOT
+			}
+			ID = "[?station_id]"
+		}
+		log = "[GetDateText]: [Root.GetName]: Removed research station in Antarctica. Station ID: [?station_id] with controller [Root.GetName]."
+	}
+	else = {
+		log = "[GetDateText]: [Root.GetName]: Failed to remove research station in Antarctica. Station ID: [?station_id] does not exist or is not controlled by the current country."
+	}
+}
+
+# Usage
+# set_temp_variable = { station_id = id }
+# set_temp_variable = { station_x = x }
+# set_temp_variable = { station_y = y }
+# antarctica_research_station_position = yes
+antarctica_research_station_position = {
+	if = {
+		limit = {
+			meta_trigger = {
+				text = {
+					has_global_flag = research_station_[ID]_exists
+				}
+				ID = "[?station_id]"
+			}
+		}
+		meta_effect = {
+			text = {
+				set_global_variable = { name = research_station_[ID]_x value = [X] }
+				set_global_variable = { name = research_station_[ID]_y value = [Y] }
+			}
+			ID = "[?station_id]"
+			X = "[?station_x]"
+			Y = "[?station_y]"
+		}
+	}
+}
