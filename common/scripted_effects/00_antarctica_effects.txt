@@ -16,13 +16,15 @@ antarctica_setup_research_station = {
 		meta_effect = {
 			text = {
 				set_global_flag = research_station_[ID]_exists
-				set_country_flag = research_station_[ID]_controller_@ROOT
+				set_country_flag = research_station_[ID]_controller_@THIS
+				set_variable = { global.research_station_[ID]_controller = THIS.id }
 			}
 			ID = "[?station_id]"
 		}
 		if = {
 			limit = { check_variable = { global.selected_antarctica_station = 0 } }
 			set_variable = { global.selected_antarctica_station = station_id }
+			set_variable = { global.selected_antarctica_station_controller = THIS.id }
 		}
 		log = "[GetDateText]: [Root.GetName]: Set up research station in Antarctica. Station ID: [?station_id] with controller [Root.GetName]."
 	}
@@ -45,6 +47,7 @@ antarctica_initialize_station_display_arrays = {
 		set_variable = { global.selected_antarctica_station = 0 }
 		set_variable = { global.selected_antarctica_station_x = 0 }
 		set_variable = { global.selected_antarctica_station_y = 0 }
+		set_variable = { global.selected_antarctica_station_controller = 0 }
 
 		set_global_flag = antarctica_station_display_initialized
 		log = "[GetDateText]: [Root.GetName]: Initialized Antarctica station display arrays."
@@ -95,7 +98,7 @@ antarctica_remove_research_station = {
 			meta_trigger = {
 				text = {
 					has_global_flag = research_station_[ID]_exists
-					has_country_flag = research_station_[ID]_controller_@ROOT
+					has_country_flag = research_station_[ID]_controller_@THIS
 				}
 				ID = "[?station_id]"
 			}
@@ -103,7 +106,8 @@ antarctica_remove_research_station = {
 		meta_effect = {
 			text = {
 				clr_global_flag = research_station_[ID]_exists
-				clr_country_flag = research_station_[ID]_controller_@ROOT
+				clr_country_flag = research_station_[ID]_controller_@THIS
+				set_variable = { global.research_station_[ID]_controller = 0 }
 			}
 			ID = "[?station_id]"
 		}
@@ -175,6 +179,12 @@ antarctica_research_station_position = {
 			set_variable = { global.selected_antarctica_station = station_id }
 			set_variable = { global.selected_antarctica_station_x = station_x }
 			set_variable = { global.selected_antarctica_station_y = station_y }
+			meta_effect = {
+				text = {
+					set_variable = { global.selected_antarctica_station_controller = global.research_station_[ID]_controller }
+				}
+				ID = "[?station_id]"
+			}
 		}
 
 		set_variable = { global.missile_ui_updated = global.missile_ui_updated }
@@ -238,6 +248,21 @@ antarctica_create_startup_research_station = {
 	}
 
 	log = "[GetDateText]: [Root.GetName]: Created startup Antarctica station. Station ID: [?station_id], Name ID: [?station_name_id], X: [?station_x], Y: [?station_y]."
+}
+
+antarctica_set_selected_station_controller = {
+	if = {
+		limit = { check_variable = { global.selected_antarctica_station > 0 } }
+		meta_effect = {
+			text = {
+				set_variable = { global.selected_antarctica_station_controller = global.research_station_[ID]_controller }
+			}
+			ID = "[?global.selected_antarctica_station]"
+		}
+	}
+	else = {
+		set_variable = { global.selected_antarctica_station_controller = 0 }
+	}
 }
 
 check_antarctica_filters = {
