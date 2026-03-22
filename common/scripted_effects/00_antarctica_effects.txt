@@ -88,6 +88,7 @@ antarctica_recalculate_station_module_outputs = {
 		}
 
 		set_temp_variable = { out_power = 0 }
+		set_temp_variable = { out_power_total = 0 }
 		set_temp_variable = { out_fuel_usage = 0 }
 		set_temp_variable = { out_staff_satisfaction = 0 }
 		set_temp_variable = { out_storage = 0 }
@@ -104,6 +105,7 @@ antarctica_recalculate_station_module_outputs = {
 		if = {
 			limit = { check_variable = { pwr_module = 1 } }
 			add_to_temp_variable = { out_power = 250 }
+			add_to_temp_variable = { out_power_total = 250 }
 			add_to_temp_variable = { out_fuel_usage = 5 }
 			add_to_temp_variable = { out_install_cost = -0.5 }
 			add_to_temp_variable = { out_reliability = 92 }
@@ -115,6 +117,7 @@ antarctica_recalculate_station_module_outputs = {
 		else_if = {
 			limit = { check_variable = { pwr_module = 2 } }
 			add_to_temp_variable = { out_power = 350 }
+			add_to_temp_variable = { out_power_total = 350 }
 			add_to_temp_variable = { out_fuel_usage = 14 }
 			add_to_temp_variable = { out_install_cost = -0.9 }
 			add_to_temp_variable = { out_reliability = 93 }
@@ -201,6 +204,7 @@ antarctica_recalculate_station_module_outputs = {
 		meta_effect = {
 			text = {
 				set_variable = { global.research_station_[ID]_output_power = [PWR] }
+				set_variable = { global.research_station_[ID]_output_power_total = [TOTAL_PWR] }
 				set_variable = { global.research_station_[ID]_output_staff_satisfaction = [SAT] }
 				set_variable = { global.research_station_[ID]_output_storage = [STO] }
 				set_variable = { global.research_station_[ID]_output_capacity = [CAP] }
@@ -213,6 +217,7 @@ antarctica_recalculate_station_module_outputs = {
 			}
 			ID = "[?station_id]"
 			PWR = "[?out_power]"
+			TOTAL_PWR = "[?out_power_total]"
 			SAT = "[?out_staff_satisfaction]"
 			STO = "[?out_storage]"
 			CAP = "[?out_capacity]"
