@@ -34,6 +34,10 @@ GRE_debt_crisis_category = {
 			log = "[GetDateText]: [Root.GetName]: Decision GRE_negotiate_debt_swap_deals_decision"
 			country_event = greece_debt.1
 		}
+
+		ai_will_do = {
+			factor = 1
+		}
 	}
 
 	GRE_austerity_tension_mission = {
@@ -148,27 +152,15 @@ GRE_debt_crisis_category = {
 			factor = 1
 
 			modifier = {
-				if = {
-					limit = {
-						has_idea = GRE_austerity_3
-					}
-				}
+				has_idea = GRE_austerity_3
 				factor = 3
 			}
 			modifier = {
-				if = {
-					limit = {
-						has_idea = GRE_austerity_3
-					}
-				}
+				has_idea = GRE_austerity_4
 				factor = 5
 			}
 			modifier = {
-				if = {
-					limit = {
-						has_idea = GRE_austerity_5
-					}
-				}
+				has_idea = GRE_austerity_5
 				factor = 10
 			}
 		}
@@ -187,6 +179,10 @@ GRE_debt_crisis_category = {
 			log = "[GetDateText]: [Root.GetName]: Decision GRE_defer_payments_decision"
 			set_country_flag = GRE_defer_payments_flag
 		}
+
+		ai_will_do = {
+			factor = 1
+		}
 	}
 
 	GRE_do_not_defer_payments_decision = {
@@ -199,6 +195,10 @@ GRE_debt_crisis_category = {
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision GRE_do_not_defer_payments_decision"
 			clr_country_flag = GRE_defer_payments_flag
+		}
+
+		ai_will_do = {
+			factor = 1
 		}
 	}
 
@@ -642,6 +642,7 @@ GRE_CYP_category = {
 			}
 		}
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision TUR_CYP_propaganda_north removed"
 			GRE = {
 				clr_country_flag = GRE_cant_gain_strength
 			}
@@ -735,6 +736,7 @@ GRE_CYP_category = {
 		fire_only_once = yes
 
 		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision TUR_unify_cyprus"
 			custom_effect_tooltip = TUR_unify_cyp
 			clr_country_flag = GRE_TUR_CYP
 			hidden_effect = {
@@ -778,6 +780,7 @@ GRE_CYP_category = {
 		}
 
 		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GRE_unify_cyprus"
 			custom_effect_tooltip = GRE_unify_cyp
 			clr_country_flag = GRE_TUR_CYP
 			hidden_effect = {
@@ -817,11 +820,13 @@ GRE_homelessness_crisis_category = {
 		}
 
 		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GRE_issue_relief_funds_to_victims_decision"
 			set_temp_variable = { treasury_change = gdp_total }
 			multiply_temp_variable = { treasury_change = -0.001 }
 			modify_treasury_effect = yes
 		}
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GRE_issue_relief_funds_to_victims_decision removed"
 			modify_timed_idea = {
 				idea = GRE_homelessness_crisis_idea
 				days = -40
@@ -846,11 +851,13 @@ GRE_homelessness_crisis_category = {
 		}
 
 		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GRE_reconstruction_efforts_in_athens_decision"
 			set_temp_variable = { treasury_change = gdp_total }
 			multiply_temp_variable = { treasury_change = -0.005 }
 			modify_treasury_effect = yes
 		}
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GRE_reconstruction_efforts_in_athens_decision removed"
 			modify_timed_idea = {
 				idea = GRE_homelessness_crisis_idea
 				days = -80
@@ -875,6 +882,7 @@ GRE_homelessness_crisis_category = {
 		}
 
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GRE_petition_turkey_for_support_decision removed"
 			# TODO: Add an event here for Turkey to do something
 			custom_effect_tooltip = TT_IF_THEY_ACCEPT
 			effect_tooltip = {
@@ -1416,12 +1424,13 @@ GRE_generic_decisions_category = {
 		}
 
 		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GRE_aegean_survey"
 			set_temp_variable = { treasury_change = -4.50 }
 			modify_treasury_effect = yes
 		}
 
 		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision GRE_aegean_survey remove"
+			log = "[GetDateText]: [Root.GetName]: Decision GRE_aegean_survey removed"
 			set_country_flag = GRE_aegean_surveyed
 			143 = {
 				add_building_construction = {
@@ -1464,12 +1473,13 @@ GRE_generic_decisions_category = {
 		}
 
 		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GRE_aegean_extraction"
 			set_temp_variable = { treasury_change = -3.75 }
 			modify_treasury_effect = yes
 		}
 
 		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision GRE_aegean_extraction remove"
+			log = "[GetDateText]: [Root.GetName]: Decision GRE_aegean_extraction removed"
 			set_country_flag = GRE_aegean_extracting
 			143 = {
 				add_resource = {
@@ -1506,12 +1516,13 @@ GRE_generic_decisions_category = {
 		}
 
 		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GRE_aegean_offshore_industry"
 			set_temp_variable = { treasury_change = -13.50 }
 			modify_treasury_effect = yes
 		}
 
 		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision GRE_aegean_offshore_industry remove"
+			log = "[GetDateText]: [Root.GetName]: Decision GRE_aegean_offshore_industry removed"
 			set_country_flag = GRE_aegean_industry_built
 			143 = {
 				add_resource = {
@@ -1553,12 +1564,13 @@ GRE_generic_decisions_category = {
 		}
 
 		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GRE_crete_survey"
 			set_temp_variable = { treasury_change = -4.50 }
 			modify_treasury_effect = yes
 		}
 
 		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision GRE_crete_survey remove"
+			log = "[GetDateText]: [Root.GetName]: Decision GRE_crete_survey removed"
 			set_country_flag = GRE_crete_surveyed
 			144 = {
 				add_building_construction = {
@@ -1798,7 +1810,7 @@ GRE_creditor_management_category = {
 		}
 
 		ai_will_do = {
-			factor = 0
+			factor = 1
 			modifier = {
 				factor = 5
 				has_opinion = { target = GRE value < -25 }
@@ -1850,7 +1862,7 @@ GRE_creditor_management_category = {
 		}
 
 		ai_will_do = {
-			factor = 0
+			factor = 1
 			modifier = {
 				factor = 3
 				has_opinion = { target = GRE value > 75 }

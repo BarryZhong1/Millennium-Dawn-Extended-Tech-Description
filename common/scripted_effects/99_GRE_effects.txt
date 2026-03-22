@@ -64,10 +64,9 @@ GRE_remove_creditor = {
 }
 
 # Weekly creditor interest payment processing
-# Called from on_daily_GRE, scope = GRE
+# Called from on_weekly_GRE, scope = GRE
 GRE_process_creditor_payments = {
 	set_variable = { GRE_creditor_payment_total = 0 }
-	set_temp_variable = { GRE_removal_needed = 0 }
 
 	for_each_loop = {
 		array = GRE_creditors
@@ -212,7 +211,7 @@ GRE_calculate_unified_debt = {
 	# Map the ratio to 0-1 scale for the dynamic modifier
 	# 0% = 0, 150%+ = 1.0 (crisis threshold)
 	set_variable = { GRE_debt_variable = GRE_unified_debt_ratio }
-	divide_variable = { GRE_debt_variable = 1.5 }
+	multiply_variable = { GRE_debt_variable = 0.6667 }
 	clamp_variable = { var = GRE_debt_variable min = 0 max = 1 }
 
 	# Update dynamic modifier variables based on debt severity
