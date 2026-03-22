@@ -54,10 +54,18 @@ antarctica_initialize_station_display_arrays = {
 		set_variable = { global.selected_antarctica_station_module_housing = 0 }
 		set_variable = { global.selected_antarctica_station_module_laboratories = 0 }
 		set_variable = { global.selected_antarctica_station_output_power = 0 }
-		set_variable = { global.selected_antarctica_station_output_support = 0 }
+		set_variable = { global.selected_antarctica_station_output_power_total = 0 }
+		set_variable = { global.selected_antarctica_station_output_fuel_usage = 0 }
 		set_variable = { global.selected_antarctica_station_output_storage = 0 }
 		set_variable = { global.selected_antarctica_station_output_capacity = 0 }
-		set_variable = { global.selected_antarctica_station_output_research = 0 }
+		set_variable = { global.selected_antarctica_station_output_staff_satisfaction = 0 }
+		set_variable = { global.selected_antarctica_station_output_install_cost = 0 }
+		set_variable = { global.selected_antarctica_station_output_reliability = 0 }
+		set_variable = { global.selected_antarctica_station_output_construction_time = 0 }
+		set_variable = { global.selected_antarctica_station_output_upkeep_cost = 0 }
+		set_variable = { global.selected_antarctica_station_output_required_staff = 0 }
+		set_variable = { global.selected_antarctica_station_output_total_staff = 0 }
+		set_variable = { global.selected_antarctica_station_output_staff_capacity = 0 }
 
 		set_global_flag = antarctica_station_display_initialized
 		log = "[GetDateText]: [Root.GetName]: Initialized Antarctica station display arrays."
@@ -98,7 +106,7 @@ antarctica_recalculate_station_module_outputs = {
 		set_temp_variable = { out_construction_time = 0 }
 		set_temp_variable = { out_upkeep_cost = 0 }
 		set_temp_variable = { out_required_staff = 0 }
-		set_temp_variable = { out_staff_capacity = 0 }
+		set_temp_variable = { out_total_staff = 0 }
 
 		# Powerplant
 		### Caterpillar 3306
@@ -111,7 +119,7 @@ antarctica_recalculate_station_module_outputs = {
 			add_to_temp_variable = { out_reliability = 92 }
 			add_to_temp_variable = { out_construction_time = 5 }
 			add_to_temp_variable = { out_upkeep_cost = -0.03 }
-			add_to_temp_variable = { out_required_staff = 3 }
+			add_to_temp_variable = { out_required_staff = -3 }
 		}
 		### Caterpillar 3406
 		else_if = {
@@ -123,7 +131,7 @@ antarctica_recalculate_station_module_outputs = {
 			add_to_temp_variable = { out_reliability = 93 }
 			add_to_temp_variable = { out_construction_time = 5 }
 			add_to_temp_variable = { out_upkeep_cost = -0.03 }
-			add_to_temp_variable = { out_required_staff = 3 }
+			add_to_temp_variable = { out_required_staff = -3 }
 		}
 
 		# Life Support
@@ -135,7 +143,7 @@ antarctica_recalculate_station_module_outputs = {
 			add_to_temp_variable = { out_staff_satisfaction = -0.06 }
 			add_to_temp_variable = { out_construction_time = 3 }
 			add_to_temp_variable = { out_upkeep_cost = -0.02 }
-			add_to_temp_variable = { out_required_staff = 2 }
+			add_to_temp_variable = { out_required_staff = -2 }
 		}
 		### Basic Recycling Core
 		else_if = {
@@ -145,7 +153,7 @@ antarctica_recalculate_station_module_outputs = {
 			add_to_temp_variable = { out_staff_satisfaction = 0.02 }
 			add_to_temp_variable = { out_construction_time = 6 }
 			add_to_temp_variable = { out_upkeep_cost = -0.04 }
-			add_to_temp_variable = { out_required_staff = 2 }
+			add_to_temp_variable = { out_required_staff = -2 }
 		}
 
 		# Fuel Storage
@@ -157,7 +165,7 @@ antarctica_recalculate_station_module_outputs = {
 			add_to_temp_variable = { out_install_cost = -0.4 }
 			add_to_temp_variable = { out_construction_time = 10 }
 			add_to_temp_variable = { out_upkeep_cost = -0.02 }
-			add_to_temp_variable = { out_required_staff = 2 }
+			add_to_temp_variable = { out_required_staff = -2 }
 		}
 		### Medium Fuel Tank Farm
 		else_if = {
@@ -167,7 +175,7 @@ antarctica_recalculate_station_module_outputs = {
 			add_to_temp_variable = { out_install_cost = -0.2 }
 			add_to_temp_variable = { out_construction_time = 16 }
 			add_to_temp_variable = { out_upkeep_cost = -0.04 }
-			add_to_temp_variable = { out_required_staff = 2 }
+			add_to_temp_variable = { out_required_staff = -2 }
 		}
 
 		# Housing
@@ -176,7 +184,8 @@ antarctica_recalculate_station_module_outputs = {
 			limit = { check_variable = { house_module = 1 } }
 			add_to_temp_variable = { out_power = -20 }
 			add_to_temp_variable = { out_install_cost = -0.2 }
-			add_to_temp_variable = { out_staff_capacity = 8 }
+			add_to_temp_variable = { out_required_staff = 8 }
+			add_to_temp_variable = { out_total_staff = 8 }
 			add_to_temp_variable = { out_storage = 2000 }
 			add_to_temp_variable = { out_construction_time = 10 }
 		}
@@ -185,7 +194,8 @@ antarctica_recalculate_station_module_outputs = {
 			limit = { check_variable = { house_module = 2 } }
 			add_to_temp_variable = { out_power = -45 }
 			add_to_temp_variable = { out_install_cost = -0.8 }
-			add_to_temp_variable = { out_staff_capacity = 12 }
+			add_to_temp_variable = { out_required_staff = 12 }
+			add_to_temp_variable = { out_total_staff = 12 }
 			add_to_temp_variable = { out_storage = 4500 }
 			add_to_temp_variable = { out_staff_satisfaction = 0.07 }
 			add_to_temp_variable = { out_construction_time = 17 }
@@ -213,7 +223,7 @@ antarctica_recalculate_station_module_outputs = {
 				set_variable = { global.research_station_[ID]_output_construction_time = [CON] }
 				set_variable = { global.research_station_[ID]_output_upkeep_cost = [UPK] }
 				set_variable = { global.research_station_[ID]_output_required_staff = [REQ] }
-				set_variable = { global.research_station_[ID]_output_staff_capacity = [STAFF_CAP] }
+				set_variable = { global.research_station_[ID]_output_total_staff = [TOTAL_STAFF] }
 			}
 			ID = "[?station_id]"
 			PWR = "[?out_power]"
@@ -226,7 +236,7 @@ antarctica_recalculate_station_module_outputs = {
 			CON = "[?out_construction_time]"
 			UPK = "[?out_upkeep_cost]"
 			REQ = "[?out_required_staff]"
-			STAFF_CAP = "[?out_staff_capacity]"
+			TOTAL_STAFF = "[?out_total_staff]"
 		}
 	}
 }
@@ -519,10 +529,18 @@ antarctica_set_selected_station_controller = {
 				set_variable = { global.selected_antarctica_station_module_housing = global.research_station_[ID]_module_housing }
 				set_variable = { global.selected_antarctica_station_module_laboratories = global.research_station_[ID]_module_laboratories }
 				set_variable = { global.selected_antarctica_station_output_power = global.research_station_[ID]_output_power }
-				set_variable = { global.selected_antarctica_station_output_support = global.research_station_[ID]_output_support }
+				set_variable = { global.selected_antarctica_station_output_power_total = global.research_station_[ID]_output_power_total }
+				set_variable = { global.selected_antarctica_station_output_fuel_usage = global.research_station_[ID]_output_fuel_usage }
 				set_variable = { global.selected_antarctica_station_output_storage = global.research_station_[ID]_output_storage }
 				set_variable = { global.selected_antarctica_station_output_capacity = global.research_station_[ID]_output_capacity }
-				set_variable = { global.selected_antarctica_station_output_research = global.research_station_[ID]_output_research }
+				set_variable = { global.selected_antarctica_station_output_staff_satisfaction = global.research_station_[ID]_output_staff_satisfaction }
+				set_variable = { global.selected_antarctica_station_output_install_cost = global.research_station_[ID]_output_install_cost }
+				set_variable = { global.selected_antarctica_station_output_reliability = global.research_station_[ID]_output_reliability }
+				set_variable = { global.selected_antarctica_station_output_construction_time = global.research_station_[ID]_output_construction_time }
+				set_variable = { global.selected_antarctica_station_output_upkeep_cost = global.research_station_[ID]_output_upkeep_cost }
+				set_variable = { global.selected_antarctica_station_output_required_staff = global.research_station_[ID]_output_required_staff }
+				set_variable = { global.selected_antarctica_station_output_total_staff = global.research_station_[ID]_output_total_staff }
+				set_variable = { global.selected_antarctica_station_output_staff_capacity = global.research_station_[ID]_output_staff_capacity }
 			}
 			ID = "[?global.selected_antarctica_station]"
 		}
@@ -535,10 +553,18 @@ antarctica_set_selected_station_controller = {
 		set_variable = { global.selected_antarctica_station_module_housing = 0 }
 		set_variable = { global.selected_antarctica_station_module_laboratories = 0 }
 		set_variable = { global.selected_antarctica_station_output_power = 0 }
-		set_variable = { global.selected_antarctica_station_output_support = 0 }
+		set_variable = { global.selected_antarctica_station_output_power_total = 0 }
+		set_variable = { global.selected_antarctica_station_output_fuel_usage = 0 }
 		set_variable = { global.selected_antarctica_station_output_storage = 0 }
 		set_variable = { global.selected_antarctica_station_output_capacity = 0 }
-		set_variable = { global.selected_antarctica_station_output_research = 0 }
+		set_variable = { global.selected_antarctica_station_output_staff_satisfaction = 0 }
+		set_variable = { global.selected_antarctica_station_output_install_cost = 0 }
+		set_variable = { global.selected_antarctica_station_output_reliability = 0 }
+		set_variable = { global.selected_antarctica_station_output_construction_time = 0 }
+		set_variable = { global.selected_antarctica_station_output_upkeep_cost = 0 }
+		set_variable = { global.selected_antarctica_station_output_required_staff = 0 }
+		set_variable = { global.selected_antarctica_station_output_total_staff = 0 }
+		set_variable = { global.selected_antarctica_station_output_staff_capacity = 0 }
 	}
 }
 
