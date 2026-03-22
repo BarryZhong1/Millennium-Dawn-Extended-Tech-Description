@@ -3616,7 +3616,7 @@ local_resources_chromium_factor = 0.15
 		# provent user to spam invest
 		FRA_investing_eu = {
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_investing_eu" }
-			name = FFRA_investing_eu
+			name = FRA_investing_eu
 			picture = generic_goods_red_bonus
 			allowed = { always = no }
 
@@ -3624,6 +3624,17 @@ local_resources_chromium_factor = 0.15
 				consumer_goods_expected_value = 0.02
 				stability_factor = 0.05
 				democratic_drift = 0.02
+			}
+		}
+		#provent user from changing popularity during election
+		FRA_election_result = {
+			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_election_result" }
+			name = FRA_election_result
+			picture = generic_goods_red_bonus
+			allowed = { always = no }
+
+			modifier = {
+				drift_defence_factor = 1
 			}
 		}
 	}
