@@ -1,8 +1,65 @@
-﻿capital = 615
+capital = 615
 2000.1.1 = {
+	set_variable = { currency_strength = 1.05 }
+
 	set_country_flag = dynamic_flag
 	set_country_flag = dynamic_rebel_flag
 	set_variable = { gdp_per_capita = 36.323 }
+	set_country_flag = JAP_COALITION_KOMEITO
+
+	# DEFENSE BUDGET LIMITATIONS
+	set_variable = { jap_defenselimit_equipment_cost_multiplier_modifier = -0.20 }
+	set_variable = { jap_defenselimit_personnel_cost_multiplier_modifier = -0.20 }
+	set_variable = { jap_defenselimit_army_personnel_cost_multiplier_modifier = 0 }
+	set_variable = { jap_defenselimit_airforce_personnel_cost_multiplier_modifier = 0 }
+	set_variable = { jap_defenselimit_experience_gain_army_factor = -0.25 }
+	set_variable = { jap_defenselimit_experience_gain_navy_factor = -0.25 }
+	set_variable = { jap_defenselimit_experience_gain_air_factor = -0.25 }
+	set_variable = { jap_defenselimit_industrial_capacity_dockyard = 0 }
+	set_variable = { jap_defenselimit_dockyard_productivity = 0 }
+	set_variable = { jap_defenselimit_expected_mil_modifier = 0 }
+	set_variable = { jap_defenselimit_air_training_xp_gain_factor = 0 }
+	# JSDF STARTING VALUES
+	set_variable = { JAP_experience_gain_army_landforces = 0.05 }
+	set_variable = { JAP_experience_gain_air_airforce = 0.05 }
+	set_variable = { JAP_experience_gain_navy_navy = 0.05 }
+	# NATIVE HARDWARE STARTING VALUES
+	set_variable = { jap_nativehardware_repair_speed_factor = 0 }
+	set_variable = { jap_nativehardware_naval_retreat_speed = 0 }
+	set_variable = { jap_nativehardware_airforce_personnel_cost_multiplier_modifier = 0 }
+	set_variable = { jap_nativehardware_army_personnel_cost_multiplier_modifier = 0 }
+	set_variable = { jap_nativehardware_air_training_xp_gain_factor = 0 }
+	set_variable = { jap_nativehardware_air_accidents_factor = 0 }
+	# Transparency Audit
+	set_variable = { JAP_transparency_and_audit_reform_corruption_cost_factor = -0.1 }
+	set_variable = { JAP_transparency_and_audit_reform_political_power_factor = 0.03 }
+	# Human Rights
+	set_variable = { JAP_protecting_human_rights_stability_factor = 0.03 }
+	# Worker Protection
+	set_variable = { JAP_worker_protection_stability_factor = 0.03 }
+	set_variable = { JAP_worker_protection_total_workforce_modifier = 0.02 }
+	# Redistribution
+	set_variable = { JAP_redistribution_stability_factor = 0.02 }
+	set_variable = { JAP_redistribution_high_unemployment_threshold_modifier = 0.07 }
+	set_variable = { JAP_redistribution_expected_welfare_modifier = 0.5 }
+	# Cabinet Modifier
+	set_variable = { JAP_strengthening_cabinet_political_power_factor = 0.10 }
+	# Order Modifier
+	set_variable = { JAP_prioritizing_order_stability_factor = 0.03 }
+	# Regulatory Modifier
+	set_variable = { JAP_regulatory_reform_bureaucracy_cost_multiplier_modifier = -0.10 }
+	set_variable = { JAP_regulatory_reform_production_speed_buildings_factor = 0.10 }
+	#Patriotic Education
+	set_variable = { JAP_patriotic_education_stability_factor = 0.05 }
+	set_variable = { JAP_patriotic_education_foreign_influence_defense_modifier = 0.10 }
+	# Work Style
+	set_variable = { JAP_work_style_reform_stability_factor = 0.02 }
+	# Declining Birthrate
+	set_variable = { JAP_declining_birthrate_stability_factor = 0.02 }
+	# Ice Age Generation
+	set_variable = { JAP_save_ice_age_generation_stability_factor = 0.02 }
+
+
 
 	complete_special_project = sp:sp_composite_production
 	#This needs to be one less than the starting number to work properly
@@ -76,7 +133,9 @@
 			nsb_rocket_pods_tech_2 = 1
 			nsb_gun_pods_tech_2 = 1
 			nsb_light_nose_gun_tech_2 = 1
-			nsb_transport_helicopter1 = 1
+			nsb_transport_helicopter_1 = 1
+			nsb_transport_helicopter_2 = 1
+			nsb_artillery_1 = 1
 		}
 		create_equipment_variant = {
 			name = "Type 60"
@@ -460,9 +519,10 @@
 				AA_upgrade_1 = 1
 				Rec_tank_0 = 1
 				Rec_tank_1 = 1
-				attack_helicopter1 = 1
-				attack_helicopter2 = 1
-				transport_helicopter1 = 1
+				attack_helicopter_1 = 1
+				attack_helicopter_2 = 1
+				transport_helicopter_2 = 1
+				transport_helicopter_1 = 1
 			}
 		}
 	}
@@ -472,7 +532,7 @@
 
 	if = {
 		limit = { has_dlc = "By Blood Alone" }
-
+		complete_special_project = sp:sp_awacs_project
 		set_air_oob = "JAP_2000_bba"
 			set_technology = {
 				early_airframe_designs = 1
@@ -730,51 +790,61 @@
 		}
 	}
 
-	set_rule = { can_create_factions = no }
-	country_lock_all_division_template = yes
-	set_rule = {
-		can_not_declare_war = yes
+	set_power_balance = {
+		id = JAP_article_nine
+		set_value = -1
 	}
 
 	add_ideas = {
-		article_nine_jap
+		#National Statistics
 		shinto
-		g7_member
-		defence_01
-		consumption_economy
-		edu_04
-		health_03
-		social_03
-		bureau_03
-		police_02
-		Major_Non_NATO_Ally
-		western_country
-		maritime_industry
+		stagnation
+		widespread_corruption
+		#Internal Factions
+		labour_unions
 		industrial_conglomerates
 		small_medium_business_owners
-		article_nine_jap
-		shinto
-		g7_member
-		idea_JAP_emperor_akihito
-		widespread_corruption
+		#Government Expenditures
+		bureau_04
+		defence_01
+		police_04
+		edu_04
+		health_04
+		social_04
+		#Policies
+		consumption_economy
 		volunteer_army
 		volunteer_women
-		Major_Non_NATO_Ally
-		western_country
-		medium_far_right_movement
-		maritime_industry
-		industrial_conglomerates
-		nuclear_energy
-		small_medium_business_owners
-		JAP_deflation
+		intervention_local_security
 		officer_military_school
 		heavily_regulated_immigration
+		nuclear_energy
+		#Economic Sector
+		strong_regulations
+		partially_nationalized_healthcare
+		partial_environmental_protections
+		standard_maintenance
+		japanese_yen
+		#National Spirit
+		g7_member
+		Major_Non_NATO_Ally
+		idea_JAP_emperor_akihito
+		JAP_depopulation_1
+		JAP_entrenched_demand_shortfall_idea_1
+		JAP_banks_non_performing_loans_idea
+		JAP_corporate_excess_debt_idea
+		JAP_declining_economic_competitiveness_idea
+		JAP_long_working_idea
+		JAP_ice_age_generation_idea
+		#other
+		western_country
+		medium_far_right_movement
 		un_aid_esco_member
+		un_aid_ido_member
+		un_aid_cdf_member
 	}
 	add_to_array = { global.un_aid_esco_contributor = THIS }
-	add_ideas = un_aid_ido_member
 	add_to_array = { global.un_aid_ido_contributor = THIS }
-	add_ideas = un_aid_cdf_member
 	add_to_array = { global.un_aid_cdf_contributor = THIS }
 
 	#Influence system
@@ -878,6 +948,7 @@
 	reverse_add_opinion_modifier = { target = KOR modifier = minor_border_dispute }
 
 	complete_special_project = sp:sp_microchip_production
+	complete_special_project = sp:sp_nuclear_energy
 	add_opinion_modifier = { target = SAU modifier = Arabian_Peninsula_Asia_Economical_Relations }
 	reverse_add_opinion_modifier = { target = SAU modifier = Arabian_Peninsula_Asia_Economical_Relations }
 	add_opinion_modifier = { target = UAE modifier = Arabian_Peninsula_Asia_Economical_Relations }
@@ -886,8 +957,8 @@
 	reverse_add_opinion_modifier = { target = QAT modifier = Arabian_Peninsula_Asia_Economical_Relations }
 
 	set_technology = {
-		microchip_production_two = 1
-		microchip_production_three = 1
+		microchip_production_2 = 1
+		microchip_production_3 = 1
 
 		COMSAT1 = 1
 		COMSAT2 = 1
@@ -910,23 +981,24 @@
 		post_conventional_rail = 1
 		early_freight_locomotive = 1
 
+
 		superior_firepower = 1
 
 		#Howa Type 89
-		infantry_weapons = 1
-		infantry_weapons1 = 1
-		infantry_weapons2 = 1
-		infantry_weapons3 = 1
+		infantry_weapons_1 = 1
+		infantry_weapons_2 = 1
+		infantry_weapons_3 = 1
+		infantry_weapons_4 = 1
 		support_weapons = 1
 		tandem_charge_warheads = 1
 		squad_automatic_weapon = 1
 		support_weapons2 = 1
-		special_forces = 1
-		command_control_equipment = 1
-		command_control_equipment1 = 1
-		command_control_equipment2 = 1
+		special_forces_tech_1 = 1
+		cnc_equipment_1 = 1
+		cnc_equipment_2 = 1
+		cnc_equipment_3 = 1
 
-		land_Drone_equipment = 1
+		land_drone_equipment_type = 1
 
 		#Type 01 LMAT
 		Anti_tank_0 = 1
@@ -942,29 +1014,36 @@
 
 		#Type 87
 
-		util_vehicle_0 = 1
 		util_vehicle_1 = 1
 		util_vehicle_2 = 1
 		util_vehicle_3 = 1
 		util_vehicle_4 = 1
+		util_vehicle_5 = 1
 
 		#Type 3 Chu-Sam
 
 		#Kawasaki OH-1
 
+
 		night_vision_1 = 1
 		night_vision_2 = 1
 		night_vision_3 = 1
 
-		body_armor_1980 = 1
-		camouflage = 1
-		camouflage2 = 1
+
+
+		body_armor_1 = 1
+		camouflage_1 = 1
+		camouflage_2 = 1
 
 		basic_computing = 1
 		integrated_circuit = 1
 		computing1 = 1
+		decryption1 = 1
+		encryption1 = 1
 		microprocessors = 1
 		computing2 = 1
+		decryption2 = 1
+		encryption2 = 1
 
 		radar = 1
 		internet1 = 1
@@ -992,16 +1071,7 @@
 		stronghold_building_1 = 1
 		land_fort_building_1 = 1
 		construction2 = 1
-	}
-
-	if = {
-		limit = { NOT = { has_dlc = "La Resistance" } }
-		set_technology = {
-			decryption1 = 1
-			decryption2 = 1
-			encryption1 = 1
-			encryption2 = 1
-		}
+		microchip_production_1 = 1
 	}
 
 		complete_special_project = sp:sp_helicopter_project
@@ -1077,47 +1147,47 @@
 			aircraft_heli_engineering_1 = 1
 			aircraft_heli_engineering_2 = 1
 
-			tech_submarine_engineering = 1
 			tech_submarine_engineering_1 = 1
 			tech_submarine_engineering_2 = 1
+			tech_submarine_engineering_3 = 1
 
 			tech_naval_systems_engineering = 1
-			tech_power_systems = 1
 			tech_power_systems_1 = 1
+			tech_power_systems_2 = 1
 
 			tech_combat_support_systems = 1
-			tech_fire_control = 1
 			tech_fire_control_1 = 1
-			tech_combat_radar = 1
+			tech_fire_control_2 = 1
 			tech_combat_radar_1 = 1
 			tech_combat_radar_2 = 1
-			tech_combat_sonar = 1
+			tech_combat_radar_3 = 1
 			tech_combat_sonar_1 = 1
 			tech_combat_sonar_2 = 1
+			tech_combat_sonar_3 = 1
 
 			tech_early_naval_weapon_systems = 1
 			tech_naval_weapon_systems = 1
-			tech_light_guns = 1
 			tech_light_guns_1 = 1
+			tech_light_guns_2 = 1
 
-			tech_point_defense_system = 1
+			tech_point_defense_chain_gun = 1
 			tech_point_defense_system_1 = 1
 			tech_point_defense_system_2 = 1
 			tech_point_defense_system_3 = 1
 
-			tech_turret_missiles_surface = 1
 			tech_turret_missiles_surface_1 = 1
-			tech_turret_missiles_aa = 1
+			tech_turret_missiles_surface_2 = 1
 			tech_turret_missiles_aa_1 = 1
-			tech_vls_surface = 1
+			tech_turret_missiles_aa_2 = 1
 			tech_vls_surface_1 = 1
-			tech_vls_aa = 1
+			tech_vls_surface_2 = 1
 			tech_vls_aa_1 = 1
+			tech_vls_aa_2 = 1
 
-			tech_torpedoes = 1
 			tech_torpedoes_1 = 1
+			tech_torpedoes_2 = 1
 
-			tech_landing_craft = 1
+			tech_landing_craft_1 = 1
 		}
 
 	#Heavy Destroyers
@@ -1151,7 +1221,7 @@
 			name_group = JAP_DD_MODERN
 			parent_version = 2
 			modules = {
-				fixed_ship_engine_slot = module_surface_diesel_power
+				fixed_ship_engine_slot = module_surface_diesel_power_1
 				fixed_ship_fire_control_system_slot = module_capital_analog_fire_control
 				fixed_ship_radar_slot = module_radar_3
 				fixed_ship_auxillary_slot_3 = module_asm_2
@@ -1173,7 +1243,7 @@
 			name_group = JAP_DD_MODERN
 			parent_version = 1
 			modules = {
-				fixed_ship_engine_slot = module_surface_diesel_power
+				fixed_ship_engine_slot = module_surface_diesel_power_1
 				fixed_ship_fire_control_system_slot = module_capital_analog_fire_control
 				fixed_ship_radar_slot = module_radar_2
 				fixed_ship_auxillary_slot_3 = module_asm_2
@@ -1241,7 +1311,7 @@
 			name_group = JAP_DD_MODERN
 			parent_version = 0
 			modules = {
-				fixed_ship_engine_slot = module_surface_diesel_power
+				fixed_ship_engine_slot = module_surface_diesel_power_1
 				fixed_ship_fire_control_system_slot = module_capital_analog_fire_control
 				fixed_ship_radar_slot = module_radar_3
 				fixed_ship_auxillary_slot_3 = module_aa_missiles_2
@@ -1263,7 +1333,7 @@
 			name_group = JAP_DD_MODERN
 			parent_version = 0
 			modules = {
-				fixed_ship_engine_slot = module_surface_diesel_power
+				fixed_ship_engine_slot = module_surface_diesel_power_1
 				fixed_ship_fire_control_system_slot = module_capital_analog_fire_control
 				fixed_ship_radar_slot = module_radar_2
 				fixed_ship_auxillary_slot_3 = module_ciws_2
@@ -1285,7 +1355,7 @@
 			name_group = JAP_DD_MODERN
 			parent_version = 1
 			modules = {
-				fixed_ship_engine_slot = module_surface_diesel_power
+				fixed_ship_engine_slot = module_surface_diesel_power_1
 				fixed_ship_fire_control_system_slot = module_capital_analog_fire_control
 				fixed_ship_radar_slot = module_radar_2
 				fixed_ship_auxillary_slot_3 = module_aa_missiles_2
@@ -1349,10 +1419,10 @@
 		create_equipment_variant = {
 			name = "Yamagumo Class"
 			type = frigate_hull_1
-			name_group = JAP_DD_MODERN
+			name_group = JAP_FRIG_MODERN
 			parent_version = 0
 			modules = {
-				fixed_ship_engine_slot = module_light_surface_diesel_power
+				fixed_ship_engine_slot = module_light_surface_diesel_power_1
 				fixed_ship_fire_control_system_slot = module_analog_fire_control
 				fixed_ship_radar_slot = module_radar_2
 				fixed_ship_auxillary_slot_2 = module_anti_submarine_missile_1
@@ -1369,10 +1439,10 @@
 		create_equipment_variant = {
 			name = "Chikugo Class"
 			type = frigate_hull_1
-			name_group = JAP_DD_MODERN
+			name_group = JAP_FRIG_MODERN
 			parent_version = 0
 			modules = {
-				fixed_ship_engine_slot = module_light_surface_diesel_power
+				fixed_ship_engine_slot = module_light_surface_diesel_power_1
 				fixed_ship_fire_control_system_slot = module_analog_fire_control
 				fixed_ship_radar_slot = module_radar_2
 				fixed_ship_auxillary_slot_2 = module_ciws_2
@@ -1388,10 +1458,10 @@
 		create_equipment_variant = {
 			name = "Abukuma Class"
 			type = frigate_hull_2
-			name_group = JAP_DD_MODERN
+			name_group = JAP_FRIG_MODERN
 			parent_version = 0
 			modules = {
-				fixed_ship_engine_slot = module_light_surface_diesel_power
+				fixed_ship_engine_slot = module_light_surface_diesel_power_1
 				fixed_ship_fire_control_system_slot = module_digital_integrated_fire_control
 				fixed_ship_radar_slot = module_radar_3
 				fixed_ship_auxillary_slot = module_torpedoes_2
@@ -1409,10 +1479,10 @@
 		create_equipment_variant = {
 			name = "Ishikari Class"
 			type = corvette_hull_2
-			name_group = JAP_DD_MODERN
+			name_group = JAP_CORV_MODERN
 			parent_version = 1
 			modules = {
-				fixed_ship_engine_slot = module_light_surface_diesel_power
+				fixed_ship_engine_slot = module_light_surface_diesel_power_1
 				fixed_ship_fire_control_system_slot = module_digital_integrated_fire_control
 				fixed_ship_radar_slot = module_radar_2
 				fixed_ship_auxillary_slot = module_torpedoes_2
@@ -1427,10 +1497,10 @@
 		create_equipment_variant = {
 			name = "Yūbari Class"
 			type = corvette_hull_2
-			name_group = JAP_DD_MODERN
+			name_group = JAP_CORV_MODERN
 			parent_version = 2
 			modules = {
-				fixed_ship_engine_slot = module_light_surface_diesel_power
+				fixed_ship_engine_slot = module_light_surface_diesel_power_1
 				fixed_ship_fire_control_system_slot = module_digital_integrated_fire_control
 				fixed_ship_radar_slot = module_radar_3
 				fixed_ship_auxillary_slot = module_torpedoes_2
@@ -1445,10 +1515,10 @@
 		create_equipment_variant = {
 			name = "Uraga Class"
 			type = corvette_hull_2
-			#ame_group = JAP_CORV_MODERN
+			name_group = JAP_CORV_MODERN
 			parent_version = 0
 			modules = {
-				fixed_ship_engine_slot = module_light_surface_diesel_power
+				fixed_ship_engine_slot = module_light_surface_diesel_power_1
 				fixed_ship_fire_control_system_slot = module_digital_integrated_fire_control
 				fixed_ship_radar_slot = module_radar_3
 				fixed_ship_auxillary_slot = module_mineclearing
@@ -1543,16 +1613,18 @@
 		complete_special_project = sp:sp_naval_vessel_project
 		complete_special_project = sp:sp_medium_naval_nuclear_engines
 
+	set_country_flag = JAP_liberal_party_flag
+
 	set_popularities = {
-		democratic = 71.9
-		communism = 17.1
+		democratic = 79.9
+		communism = 0.0
 		fascism = 0.0
-		neutrality = 4.0
-		nationalist = 7.0
+		neutrality = 15.1
+		nationalist = 5.0
 	}
 	set_politics = {
 		ruling_party = democratic
-		last_election = "1998.7.12"
+		last_election = "1996.10.20"
 		election_frequency = 48
 		elections_allowed = yes
 	}
@@ -1561,12 +1633,12 @@
 
 	### Party Popularities
 	set_variable = { party_pop_array^0 = 0 } #Western_Autocracy
-	set_variable = { party_pop_array^1 = 0.41 } #conservatism
-	set_variable = { party_pop_array^2 = 0.271 } #liberalism
-	set_variable = { party_pop_array^3 = 0.038 } #socialism
-	set_variable = { party_pop_array^4 = 0.121 } #Communist-State
-	set_variable = { party_pop_array^5 = 0.03 } #anarchist_communism
-	set_variable = { party_pop_array^6 = 0.02 } #Conservative
+	set_variable = { party_pop_array^1 = 0.526 } #conservatism
+	set_variable = { party_pop_array^2 = 0.181 } #liberalism
+	set_variable = { party_pop_array^3 = 0.092 } #socialism
+	set_variable = { party_pop_array^4 = 0 } #Communist-State
+	set_variable = { party_pop_array^5 = 0 } #anarchist_communism
+	set_variable = { party_pop_array^6 = 0 } #Conservative
 	set_variable = { party_pop_array^7 = 0 } #Autocracy
 	set_variable = { party_pop_array^8 = 0 } #Mod_Vilayat_e_Faqih
 	set_variable = { party_pop_array^9 = 0 } #Vilayat_e_Faqih
@@ -1574,28 +1646,30 @@
 	set_variable = { party_pop_array^11 = 0 } #Caliphate
 	set_variable = { party_pop_array^12 = 0 } #Neutral_Muslim_Brotherhood
 	set_variable = { party_pop_array^13 = 0 } #Neutral_Autocracy
-	set_variable = { party_pop_array^14 = 0.02 } #Neutral_conservatism
+	set_variable = { party_pop_array^14 = 0.075 } #Neutral_conservatism
 	set_variable = { party_pop_array^15 = 0 } #oligarchism
 	set_variable = { party_pop_array^16 = 0 } #Neutral_Libertarian
 	set_variable = { party_pop_array^17 = 0 } #Neutral_green
-	set_variable = { party_pop_array^18 = 0.02 } #neutral_Social
-	set_variable = { party_pop_array^19 = 0 } #Neutral_Communism
-	set_variable = { party_pop_array^20 = 0.01 } #Nat_Populism
-	set_variable = { party_pop_array^21 = 0.02 } #Nat_Fascism
+	set_variable = { party_pop_array^18 = 0.026 } #neutral_Social
+	set_variable = { party_pop_array^19 = 0.05 } #Neutral_Communism
+	set_variable = { party_pop_array^20 = 0 } #Nat_Populism
+	set_variable = { party_pop_array^21 = 0 } #Nat_Fascism
 	set_variable = { party_pop_array^22 = 0 } #Nat_Autocracy
-	set_variable = { party_pop_array^23 = 0.04 } #Monarchist
+	set_variable = { party_pop_array^23 = 0.05 } #Monarchist
 
 	### Ruling Party
 	add_to_array = { ruling_party = 1 }
+	add_to_array = { gov_coalition_array = 3 }
 
 	startup_politics = yes
 
 	create_country_leader = {
-		name = "Yoshiro Mori"
-		picture = "yoshiro_mori.dds"
+		name = "Keizo Obuchi"
+		picture = "Keizo_Obuchi.dds"
 		ideology = conservatism
 		traits = {
 			western_conservatism
+			political_dancer
 		}
 	}
 
@@ -1624,7 +1698,56 @@
 	recruit_character = JAP_shunji_izutsu
 	recruit_character = JAP_shigeki_muto
 	recruit_character = JAP_shukaku_komuta
+	recruit_character = JAP_ishii_kazuo
+	recruit_character = JAP_yoshiyuki_sankai
+	recruit_character = JAP_hiroshi_ishiguro
+	recruit_character = JAP_yutaka_matsuo
+	recruit_character = JAP_yuichi_tsuda
+	recruit_character = JAP_junichiro_kawaguchi
+	recruit_character = JAP_yusuke_tahara
 
 	set_variable = { overall_productivity = 985 }
+	add_to_variable = { JAP_war_support_factor_monarchist = 0.05 }
+	add_to_variable = { JAP_monthly_population_monarchist = 0.05 }
+	add_to_variable = { JAP_foreign_influence_defense_modifier_monarchist = 0.05 }
 
+	if = {
+		limit = {
+			has_dlc = "La Resistance"
+		}
+		create_intelligence_agency = {
+			name = "Cabinet Intelligence and Research Office (CIRO)"
+			icon = GFX_intelligence_agency_logo_generic_1
+		}
+		upgrade_intelligence_agency = upgrade_form_department
+		upgrade_intelligence_agency = upgrade_establish_cyber_operations_division
+	}
+
+
+	# Relation Starting Configuration (moved from on_startup)
+	add_opinion_modifier = { target = HAM modifier = HAM_Not_A_Recognized_country }
+	add_opinion_modifier = { target = CUB modifier = sanctions }
+	add_relation_modifier = { target = USA modifier = USA_World_Economical_Relations }
+	add_relation_modifier = { target = SOV modifier = SOV_World_Economical_Relations }
+	add_relation_modifier = { target = CHI modifier = CHI_World_Economical_Relations }
+	add_relation_modifier = { target = FRA modifier = FRA_World_Economical_Relations }
+	add_relation_modifier = { target = GER modifier = GER_World_Economical_Relations }
+	add_relation_modifier = { target = ENG modifier = ENG_World_Economical_Relations }
+	add_relation_modifier = { target = SPR modifier = SPR_World_Economical_Relations }
+	add_relation_modifier = { target = ITA modifier = ITA_World_Economical_Relations }
+	add_relation_modifier = { target = UKR modifier = UKR_World_Economical_Relations }
+	add_relation_modifier = { target = ISR modifier = ISR_World_Economical_Relations }
+	add_opinion_modifier = { target = TTP modifier = AlQaida_Are_Terrorists }
+	add_opinion_modifier = { target = TTP modifier = AlQaida_Are_Terrorists_Trade }
+	add_opinion_modifier = { target = TAL modifier = Taliban_Are_Terrorists }
+	add_opinion_modifier = { target = TAL modifier = Taliban_Are_Terrorists_Trade }
+	add_opinion_modifier = { target = AST modifier = Major_Non_NATO_Ally }
+	add_opinion_modifier = { target = EGY modifier = Major_Non_NATO_Ally }
+	add_opinion_modifier = { target = ISR modifier = Major_Non_NATO_Ally }
+	add_opinion_modifier = { target = JAP modifier = Major_Non_NATO_Ally }
+	add_opinion_modifier = { target = KOR modifier = Major_Non_NATO_Ally }
+	add_opinion_modifier = { target = JOR modifier = Major_Non_NATO_Ally }
+	add_opinion_modifier = { target = NZL modifier = Major_Non_NATO_Ally }
+	add_opinion_modifier = { target = ARG modifier = Major_Non_NATO_Ally }
+	add_opinion_modifier = { target = USA modifier = Major_Non_NATO_Ally }
 }

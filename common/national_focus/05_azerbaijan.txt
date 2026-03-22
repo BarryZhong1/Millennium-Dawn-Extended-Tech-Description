@@ -1374,6 +1374,9 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus AZE_aze_escalate_the_incident"
+
+			set_temp_variable = { wargoal_on = PER }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = PER
@@ -2393,7 +2396,7 @@ focus_tree = {
 			if = {
 				limit = { has_completed_focus = AZE_aze_iran_dealw }
 				add_equipment_to_stockpile = {
-					type = Inf_equipment
+					type = infantry_weapons_type
 					producer = PER
 					amount = 5000
 				}
@@ -2403,14 +2406,14 @@ focus_tree = {
 					amount = 100
 				}
 				add_equipment_to_stockpile = {
-					type = util_vehicle_equipment
+					type = util_vehicle_type
 					producer = PER
 					amount = 500
 				}
 			}
 			else = {
 				add_equipment_to_stockpile = {
-					type = Inf_equipment
+					type = infantry_weapons_type
 					producer = SOV
 					amount = 5000
 				}
@@ -2420,7 +2423,7 @@ focus_tree = {
 					amount = 100
 				}
 				add_equipment_to_stockpile = {
-					type = util_vehicle_equipment
+					type = util_vehicle_type
 					producer = SOV
 					amount = 500
 				}
@@ -4591,7 +4594,7 @@ focus_tree = {
 			set_temp_variable = { treasury_change = -5 }
 			modify_treasury_effect = yes
 			add_equipment_to_stockpile = {
-				type = Inf_equipment
+				type = infantry_weapons_type
 				producer = AZE
 				amount = 1000
 			}
@@ -4601,12 +4604,12 @@ focus_tree = {
 				amount = 40
 			}
 			add_equipment_to_stockpile = {
-				type = util_vehicle_equipment
+				type = util_vehicle_type
 				producer = AZE
 				amount = 200
 			}
 			add_equipment_to_stockpile = {
-				type = cnc_equipment
+				type = cnc_equipment_type
 				producer = AZE
 				amount = 50
 			}
@@ -5004,7 +5007,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus AZE_air_control"
 			add_tech_bonus = {
-				name = AZE_air_control
+				name = CAT_mr_fighter
 				bonus = 0.50
 				uses = 1
 				category = CAT_mr_fighter
@@ -5069,6 +5072,10 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus AZE_crush_armenia"
+
+			set_temp_variable = { wargoal_on = ARM }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = annex_everything
 				target = ARM
@@ -5221,6 +5228,10 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus AZE_georgia_gortsnya"
+
+			set_temp_variable = { wargoal_on = GEO }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = annex_everything
 				target = GEO
@@ -5380,7 +5391,7 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus AZE_the_last_straw"
 			set_temp_variable = { treasury_change = -5 }
 			add_equipment_to_stockpile = {
-				type = Inf_equipment
+				type = infantry_weapons_type
 				producer = AZE
 				amount = 1000
 			}
@@ -5390,12 +5401,12 @@ focus_tree = {
 				amount = 50
 			}
 			add_equipment_to_stockpile = {
-				type = util_vehicle_equipment
+				type = util_vehicle_type
 				producer = AZE
 				amount = 200
 			}
 			add_equipment_to_stockpile = {
-				type = cnc_equipment
+				type = cnc_equipment_type
 				producer = AZE
 				amount = 100
 			}
@@ -5429,6 +5440,10 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus AZE_the_dice_is_cast"
+
+			set_temp_variable = { wargoal_on = PER }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = annex_everything
 				target = PER
@@ -6857,7 +6872,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus AZE_The_military_way"
 			add_equipment_to_stockpile = {
-				type = Inf_equipment
+				type = infantry_weapons_type
 				producer = PER
 				amount = 1000
 			}
@@ -6867,7 +6882,7 @@ focus_tree = {
 				amount = 50
 			}
 			add_equipment_to_stockpile = {
-				type = util_vehicle_equipment
+				type = util_vehicle_type
 				producer = PER
 				amount = 200
 			}
@@ -7791,7 +7806,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus AZE_surface_ships"
 			add_tech_bonus = {
-				name = AZE_surface_ships
+				name = CAT_surface_ship
 				uses = 2
 				bonus = 0.5
 				category = CAT_surface_ship
@@ -7855,7 +7870,7 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus AZE_Helicopter_plant"
 			one_random_arms_factory = yes
 			add_tech_bonus = {
-				name = AZE_Helicopter_plant
+				name = CAT_heli_research
 				bonus = 0.50
 				uses = 1
 				category = CAT_heli
@@ -7921,7 +7936,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus AZE_Domestic_air"
 			add_tech_bonus = {
-				name = AZE_Domestic_air
+				name = CAT_mr_fighter
 				bonus = 0.50
 				uses = 1
 				category = CAT_mr_fighter
@@ -8026,7 +8041,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus AZE_Home_dominance"
 			add_tech_bonus = {
-				name = AZE_Home_dominance
+				name = CAT_as_fighter
 				bonus = 0.4
 				uses = 1
 				category = CAT_as_fighter
@@ -8203,7 +8218,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus AZE_Motorized_drive"
 			add_tech_bonus = {
-				name = AZE_Motorized_drive
+				name = CAT_util_research
 				bonus = 0.35
 				category = CAT_util
 			}

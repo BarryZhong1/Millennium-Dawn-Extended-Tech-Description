@@ -2602,6 +2602,8 @@ focus_tree = {
 		will_lead_to_war_with = BLR
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SOV_belarus_strike"
+			set_temp_variable = { wargoal_on = BLR }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				target = BLR
 				type = puppet_wargoal_focus
@@ -2612,6 +2614,19 @@ focus_tree = {
 		}
 		ai_will_do = {
 			base = 155
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
+			modifier = {
+				factor = 0
+				BLR = {
+					OR = {
+						has_idea = NATO_member
+						has_idea = EU_member
+					}
+				}
+			}
 			modifier = {
 				has_global_flag = SOV_PUTIN_PATH
 				add = 50
@@ -2792,6 +2807,13 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus SOV_aggressive_foreign_policy"
 			add_ideas = SOV_aggresive_foriegn_policy_putin_idea
 			SOV_warcult_script_good = yes
+			newline = yes
+			JAP = {
+				unlock_decision_tooltip = {
+					decision = JAP_russian_agressiveness
+					show_effect_tooltip = yes
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -3137,6 +3159,8 @@ focus_tree = {
 		will_lead_to_war_with = UKR
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SOV_the_final_strike"
+			set_temp_variable = { wargoal_on = UKR }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				target = UKR
 				type = puppet_wargoal_focus
@@ -3149,6 +3173,19 @@ focus_tree = {
 		}
 		ai_will_do = {
 			base = 155
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
+			modifier = {
+				factor = 0
+				UKR = {
+					OR = {
+						has_idea = NATO_member
+						has_idea = EU_member
+					}
+				}
+			}
 			modifier = {
 				is_historical_focus_on = yes
 				add = 50
@@ -3201,6 +3238,8 @@ focus_tree = {
 		will_lead_to_war_with = FIN
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SOV_secret_strike"
+			set_temp_variable = { wargoal_on = FIN }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				target = FIN
 				type = puppet_wargoal_focus
@@ -3213,6 +3252,19 @@ focus_tree = {
 		}
 		ai_will_do = {
 			base = 155
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
+			modifier = {
+				factor = 0
+				FIN = {
+					OR = {
+						has_idea = NATO_member
+						has_idea = EU_member
+					}
+				}
+			}
 			modifier = {
 				is_historical_focus_on = yes
 				add = 50
@@ -3310,7 +3362,7 @@ focus_tree = {
 					country_event = russia.66
 				}
 				send_equipment = {
-					equipment = Inf_equipment
+					equipment = infantry_weapons_type
 					amount = 1000
 					target = LPR
 				}
@@ -3324,7 +3376,7 @@ focus_tree = {
 					country_event = russia.67
 				}
 				send_equipment = {
-					equipment = Inf_equipment
+					equipment = infantry_weapons_type
 					amount = 1000
 					target = DPR
 				}
@@ -3338,7 +3390,7 @@ focus_tree = {
 					country_event = russia.68
 				}
 				send_equipment = {
-					equipment = Inf_equipment
+					equipment = infantry_weapons_type
 					amount = 1000
 					target = HPR
 				}
@@ -3539,7 +3591,7 @@ focus_tree = {
 				amount = 150
 			}
 			add_equipment_to_stockpile = {
-				type = command_control_equipment2
+				type = cnc_equipment_3
 				amount = 200
 				producer = SOV
 			}
@@ -3597,7 +3649,7 @@ focus_tree = {
 				amount = 1000
 			}
 			add_equipment_to_stockpile = {
-				type = infantry_weapons2
+				type = infantry_weapons_3
 				amount = 6000
 				producer = SOV
 			}
@@ -4503,6 +4555,8 @@ focus_tree = {
 		will_lead_to_war_with = USA
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SOV_challenge_nato"
+			set_temp_variable = { wargoal_on = USA }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				target = USA
 				type = puppet_wargoal_focus
@@ -4510,6 +4564,8 @@ focus_tree = {
 			every_other_country = {
 				limit = { has_idea = EU_member }
 				SOV = {
+					set_temp_variable = { wargoal_on = PREV }
+					add_threat_from_wargoal_effect = yes
 					create_wargoal = {
 						target = PREV
 						type = puppet_wargoal_focus
@@ -4524,7 +4580,7 @@ focus_tree = {
 				factor = 0
 			}
 			modifier = {
-				is_historical_focus_on = yes
+				is_historical_focus_on = no
 				add = 50
 			}
 			modifier = {
@@ -7730,8 +7786,19 @@ focus_tree = {
 		ai_will_do = {
 			base = 155
 			modifier = {
+				has_war = yes
+				factor = 0
+			}
+			modifier = {
 				has_global_flag = SOV_RISE_OF_RUSSIA_PATH
 				add = 50
+			}
+			modifier = {
+				factor = 0
+				strength_ratio = {
+					tag = AZE
+					ratio < 0.75
+				}
 			}
 		}
 	}
@@ -7801,6 +7868,10 @@ focus_tree = {
 
 		ai_will_do = {
 			base = 155
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
 			modifier = {
 				has_global_flag = SOV_RISE_OF_RUSSIA_PATH
 				add = 50
@@ -8258,8 +8329,24 @@ focus_tree = {
 		ai_will_do = {
 			base = 155
 			modifier = {
+				has_war = yes
+				factor = 0
+			}
+			modifier = {
 				has_global_flag = SOV_RISE_OF_RUSSIA_PATH
 				add = 50
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					EST = { has_idea = NATO_member }
+					LAT = { has_idea = NATO_member }
+					LIT = { has_idea = NATO_member }
+				}
+				strength_ratio = {
+					tag = USA
+					ratio < 0.75
+				}
 			}
 		}
 	}
@@ -8492,6 +8579,9 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SOV_istanbul_is_constantinople"
+			set_temp_variable = { wargoal_on = TUR }
+			set_temp_variable = { wargoal_type = 1 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				target = TUR
 				type = liberate_wargoal
@@ -8501,8 +8591,28 @@ focus_tree = {
 		ai_will_do = {
 			base = 155
 			modifier = {
+				has_war = yes
+				factor = 0
+			}
+			modifier = {
+				factor = 0
+				TUR = {
+					OR = {
+						has_idea = NATO_member
+						has_idea = EU_member
+					}
+				}
+			}
+			modifier = {
 				has_global_flag = SOV_RISE_OF_RUSSIA_PATH
 				add = 50
+			}
+			modifier = {
+				factor = 0
+				strength_ratio = {
+					tag = TUR
+					ratio < 0.75
+				}
 			}
 		}
 	}
@@ -8940,8 +9050,25 @@ focus_tree = {
 		ai_will_do = {
 			base = 155
 			modifier = {
+				has_war = yes
+				factor = 0
+			}
+			modifier = {
 				has_global_flag = SOV_RISE_OF_RUSSIA_PATH
 				add = 50
+			}
+			modifier = {
+				factor = 0
+				ROM = {
+					OR = {
+						has_idea = NATO_member
+						has_idea = EU_member
+					}
+				}
+				strength_ratio = {
+					tag = USA
+					ratio < 0.75
+				}
 			}
 		}
 	}
@@ -8971,6 +9098,8 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SOV_end_the_usa"
+			set_temp_variable = { wargoal_on = USA }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = USA
@@ -8979,6 +9108,17 @@ focus_tree = {
 
 		ai_will_do = {
 			base = 1
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
+			modifier = {
+				factor = 0
+				strength_ratio = {
+					tag = USA
+					ratio < 0.75
+				}
+			}
 			modifier = {
 				has_global_flag = SOV_RISE_OF_RUSSIA_PATH
 				add = 50
@@ -9019,8 +9159,19 @@ focus_tree = {
 		ai_will_do = {
 			base = 1
 			modifier = {
+				has_war_with = USA
+				factor = 0
+			}
+			modifier = {
 				has_global_flag = SOV_RISE_OF_RUSSIA_PATH
 				add = 50
+			}
+			modifier = {
+				factor = 0
+				strength_ratio = {
+					tag = USA
+					ratio < 0.75
+				}
 			}
 		}
 	}
@@ -9548,6 +9699,7 @@ focus_tree = {
 			GER = {
 				custom_effect_tooltip = GER_bavarian_nationalism_increase_1
 				add_to_variable = { GER_bavarian_nationalism_var = 1 }
+				GER_update_dirty_variable = yes
 			}
 			GER = {
 				custom_effect_tooltip = GER_east_decrease_opinion
@@ -9635,6 +9787,13 @@ focus_tree = {
 			add_state_claim = 1095
 			add_state_claim = 596
 			add_state_claim = 597
+			newline = yes
+			JAP = {
+				unlock_decision_tooltip = {
+					decision = JAP_defence_russian_asian_ambitions
+					show_effect_tooltip = yes
+				}
+			}
 			hidden_effect = {
 				news_event = {
 					hours = 12
@@ -9882,6 +10041,12 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SOV_allied_nrk"
 			NKO = { country_event = korea_russia.11 }
+			JAP = {
+				unlock_decision_tooltip = {
+					decision = JAP_russian_north_korean_alliance
+					show_effect_tooltip = yes
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -9974,6 +10139,13 @@ focus_tree = {
 					instant_build = yes
 				}
 			}
+			newline = yes
+			JAP = {
+				unlock_decision_tooltip = {
+					decision = JAP_russian_pacific_naval_presence
+					show_effect_tooltip = yes
+				}
+			}
 			hidden_effect = {
 				news_event = {
 					hours = 12
@@ -10020,6 +10192,8 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SOV_avenge_tsushima"
+			set_temp_variable = { wargoal_on = JAP }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = JAP
@@ -10028,6 +10202,26 @@ focus_tree = {
 
 		ai_will_do = {
 			base = 155
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					strength_ratio = {
+						tag = JAP
+						ratio < 0.75
+					}
+					AND = {
+						JAP = { is_guaranteed_by = USA }
+						strength_ratio = {
+							tag = USA
+							ratio < 0.75
+						}
+					}
+				}
+			}
 			modifier = {
 				has_global_flag = SOV_RISE_OF_RUSSIA_PATH
 				add = 50
@@ -14266,6 +14460,8 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SOV_avenge_afgan"
+			set_temp_variable = { wargoal_on = AFG }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = AFG
@@ -14274,6 +14470,10 @@ focus_tree = {
 
 		ai_will_do = {
 			base = 155
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
 			modifier = {
 				has_global_flag = SOV_THE_RED_MENACE_PATH
 				add = 50
@@ -14386,7 +14586,7 @@ focus_tree = {
 		}
 		prerequisite = { focus = SOV_foster_multi_party_democracy }
 		search_filters = { FOCUS_FILTER_RUSSIA_YABLO }
-		relative_position_id = SOV_path_of_western
+
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SOV_navalny"
 			set_temp_variable = { party_index = 2 }
@@ -15086,7 +15286,6 @@ focus_tree = {
 		icon = sov_nemtsov
 		x = -3
 		y = 6
-		relative_position_id = SOV_union_of_right_forces
 		cost = 2
 		available = {
 			western_conservatism_are_in_power = yes
@@ -16288,13 +16487,7 @@ focus_tree = {
 				neutrality_neutral_oligarch_are_in_power = yes
 			}
 			has_completed_focus = SOV_safe_russia
-			custom_trigger_tooltip = {
-				tooltip = SOV_subjects_exist_tt
-				OR = {
-					SUB_state_availables = yes
-					SUB_subjects_availables = yes
-				}
-			}
+			SUB_has_russian_special_autonomy = yes
 		}
 
 		completion_reward = {
@@ -16332,13 +16525,7 @@ focus_tree = {
 				western_autocrats_are_in_power = yes
 				neutrality_neutral_oligarch_are_in_power = yes
 			}
-			custom_trigger_tooltip = {
-				tooltip = SOV_subjects_exist_tt
-				OR = {
-					SUB_state_availables = yes
-					SUB_subjects_availables = yes
-				}
-			}
+			SUB_has_russian_special_autonomy = yes
 		}
 
 		completion_reward = {
@@ -16376,13 +16563,7 @@ focus_tree = {
 				western_autocrats_are_in_power = yes
 				neutrality_neutral_oligarch_are_in_power = yes
 			}
-			custom_trigger_tooltip = {
-				tooltip = SOV_subjects_exist_tt
-				OR = {
-					SUB_state_availables = yes
-					SUB_subjects_availables = yes
-				}
-			}
+			SUB_has_russian_special_autonomy = yes
 		}
 
 		completion_reward = {
@@ -17302,6 +17483,8 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_RUSSIA_JUST FOCUS_FILTER_RUSSIA_YABLO FOCUS_FILTER_RUSSIA_SPS FOCUS_FILTER_RUSSIA_PARNAS }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SOV_attack_uzb"
+			set_temp_variable = { wargoal_on = UZB }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = UZB
@@ -17311,7 +17494,17 @@ focus_tree = {
 			add_political_power = -25
 			add_timed_idea = { idea = SOV_democracy_in_uzb days = 100 }
 		}
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
+			modifier = {
+				has_global_flag = SOV_PEACEFUL_REFORM_PATH
+				add = 50
+			}
+		}
 	}
 	focus = {
 		id = SOV_attack_kaz
@@ -17341,6 +17534,8 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_RUSSIA_JUST FOCUS_FILTER_RUSSIA_YABLO FOCUS_FILTER_RUSSIA_SPS FOCUS_FILTER_RUSSIA_PARNAS }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SOV_attack_kaz"
+			set_temp_variable = { wargoal_on = KAZ }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = KAZ
@@ -17350,7 +17545,17 @@ focus_tree = {
 			add_political_power = -25
 			add_timed_idea = { idea = SOV_democracy_in_kaz days = 100 }
 		}
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
+			modifier = {
+				has_global_flag = SOV_PEACEFUL_REFORM_PATH
+				add = 50
+			}
+		}
 	}
 	focus = {
 		id = SOV_attack_kyr
@@ -17380,6 +17585,8 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_RUSSIA_JUST FOCUS_FILTER_RUSSIA_YABLO FOCUS_FILTER_RUSSIA_SPS FOCUS_FILTER_RUSSIA_PARNAS }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SOV_attack_kyr"
+			set_temp_variable = { wargoal_on = KYR }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = KYR
@@ -17389,7 +17596,17 @@ focus_tree = {
 			add_political_power = -25
 			add_timed_idea = { idea = SOV_democracy_in_kyr days = 100 }
 		}
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
+			modifier = {
+				has_global_flag = SOV_PEACEFUL_REFORM_PATH
+				add = 50
+			}
+		}
 	}
 	focus = {
 		id = SOV_attack_taj
@@ -17419,6 +17636,8 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_RUSSIA_JUST FOCUS_FILTER_RUSSIA_YABLO FOCUS_FILTER_RUSSIA_SPS FOCUS_FILTER_RUSSIA_PARNAS }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SOV_attack_taj"
+			set_temp_variable = { wargoal_on = TAJ }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = TAJ
@@ -17428,7 +17647,17 @@ focus_tree = {
 			add_political_power = -25
 			add_timed_idea = { idea = SOV_democracy_in_taj days = 100 }
 		}
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
+			modifier = {
+				has_global_flag = SOV_PEACEFUL_REFORM_PATH
+				add = 50
+			}
+		}
 	}
 	focus = {
 		id = SOV_attack_trk
@@ -17458,6 +17687,8 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_RUSSIA_JUST FOCUS_FILTER_RUSSIA_YABLO FOCUS_FILTER_RUSSIA_SPS FOCUS_FILTER_RUSSIA_PARNAS }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SOV_attack_trk"
+			set_temp_variable = { wargoal_on = TRK }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = TRK
@@ -17467,7 +17698,17 @@ focus_tree = {
 			add_political_power = -25
 			add_timed_idea = { idea = SOV_democracy_in_trk days = 100 }
 		}
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
+			modifier = {
+				has_global_flag = SOV_PEACEFUL_REFORM_PATH
+				add = 50
+			}
+		}
 	}
 	focus = {
 		id = SOV_befriend_india
@@ -18155,6 +18396,10 @@ focus_tree = {
 		ai_will_do = {
 			base = 155
 			modifier = {
+				has_war = yes
+				factor = 0
+			}
+			modifier = {
 				has_global_flag = SOV_PEACEFUL_REFORM_PATH
 				add = 50
 			}
@@ -18291,6 +18536,8 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_RUSSIA_JUST FOCUS_FILTER_RUSSIA_YABLO FOCUS_FILTER_RUSSIA_SPS FOCUS_FILTER_RUSSIA_PARNAS }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SOV_ignite_revolution_in_iran"
+			set_temp_variable = { wargoal_on = PER }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = PER
@@ -18299,8 +18546,19 @@ focus_tree = {
 		ai_will_do = {
 			base = 155
 			modifier = {
+				has_war = yes
+				factor = 0
+			}
+			modifier = {
 				has_global_flag = SOV_PEACEFUL_REFORM_PATH
 				add = 50
+			}
+			modifier = {
+				factor = 0
+				strength_ratio = {
+					tag = PER
+					ratio < 0.75
+				}
 			}
 		}
 	}
@@ -19491,21 +19749,29 @@ focus_tree = {
 		will_lead_to_war_with = NKO
 		search_filters = { FOCUS_FILTER_RUSSIA_JUST FOCUS_FILTER_RUSSIA_YABLO FOCUS_FILTER_RUSSIA_SPS FOCUS_FILTER_RUSSIA_PARNAS }
 		completion_reward = {
+			set_temp_variable = { wargoal_on = CHI }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = CHI
 			}
+			set_temp_variable = { wargoal_on = NKO }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = NKO
 			}
 			TAI = {
+				set_temp_variable = { wargoal_on = CHI }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = {
 					type = take_core_state
 					target = CHI
 				}
 			}
 			KOR = {
+				set_temp_variable = { wargoal_on = NKO }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = {
 					type = take_core_state
 					target = NKO
@@ -19516,8 +19782,19 @@ focus_tree = {
 		ai_will_do = {
 			base = 155
 			modifier = {
+				has_war = yes
+				factor = 0
+			}
+			modifier = {
 				has_global_flag = SOV_PEACEFUL_REFORM_PATH
 				add = 50
+			}
+			modifier = {
+				factor = 0
+				strength_ratio = {
+					tag = CHI
+					ratio < 0.75
+				}
 			}
 		}
 	}
@@ -19546,6 +19823,8 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_RUSSIA_JUST FOCUS_FILTER_RUSSIA_YABLO FOCUS_FILTER_RUSSIA_SPS FOCUS_FILTER_RUSSIA_PARNAS }
 		completion_reward = {
 			KOR = {
+				set_temp_variable = { wargoal_on = NKO }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = {
 					type = take_core_state
 					target = NKO
@@ -19555,6 +19834,10 @@ focus_tree = {
 		}
 		ai_will_do = {
 			base = 155
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
 			modifier = {
 				has_global_flag = SOV_PEACEFUL_REFORM_PATH
 				add = 50
@@ -21272,7 +21555,7 @@ focus_tree = {
 				name = GER_invest_in_heli
 				bonus = 0.50
 				uses = 1
-				technology = transport_helicopter4
+				technology = transport_helicopter_4
 			}
 			add_tech_bonus = {
 				name = GER_invest_in_heli
@@ -22141,12 +22424,12 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SOV_wagner_cadres"
 			add_equipment_to_stockpile = {
-				type = infantry_weapons2
+				type = infantry_weapons_3
 				amount = -3000
 				producer = SOV
 			}
 			add_equipment_to_stockpile = {
-				type = util_vehicle_equipment
+				type = util_vehicle_type
 				amount = -60
 				producer = SOV
 			}
@@ -22161,7 +22444,7 @@ focus_tree = {
 				producer = SOV
 			}
 			add_equipment_to_stockpile = {
-				type = command_control_equipment2
+				type = cnc_equipment_3
 				amount = -300
 				producer = SOV
 			}
@@ -23810,6 +24093,13 @@ focus_tree = {
 				id = SOV_west_east_bop
 				value = 0.20
 				tooltip_side = SOV_west_east_bop_right_side
+			}
+			newline = yes
+			JAP = {
+				unlock_decision_tooltip = {
+					decision = JAP_russian_agressiveness
+					show_effect_tooltip = yes
+				}
 			}
 		}
 		ai_will_do = { base = 155 }
@@ -27027,27 +27317,27 @@ focus_tree = {
 				tooltip = SOV_elected_kasyanov_TT
 				has_country_flag = SOV_parnas
 			}
-			OR = {
-				owns_state = 687
-				owns_state = 688
-				owns_state = 689
-				owns_state = 691
-				owns_state = 1069
-				owns_state = 1137
-				owns_state = 1136
+			owns_any_state_of = {
+				687
+				688
+				689
+				691
+				1069
+				1137
+				1136
 			}
 		}
 
 		bypass = {
 			NOT = {
-				OR = {
-					owns_state = 687
-					owns_state = 688
-					owns_state = 689
-					owns_state = 691
-					owns_state = 1069
-					owns_state = 1137
-					owns_state = 1136
+				owns_any_state_of = {
+					687
+					688
+					689
+					691
+					1069
+					1137
+					1136
 				}
 			}
 		}
@@ -28647,7 +28937,13 @@ focus_tree = {
 				}
 				}
 		}
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
+		}
 	}
 	focus = {
 		id = SOV_seek_for_them_in_egypt
@@ -28666,13 +28962,21 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SOV_seek_for_them_in_egypt"
 			hidden_effect = {
+			set_temp_variable = { wargoal_on = EGY }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				target = EGY
 				type = puppet_wargoal_focus
 			}
 			}
 		}
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
+		}
 	}
 	focus = {
 		id = SOV_seek_for_them_in_swiss
@@ -28691,13 +28995,21 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SOV_seek_for_them_in_swiss"
 			hidden_effect = {
+			set_temp_variable = { wargoal_on = SWI }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				target = SWI
 				type = puppet_wargoal_focus
 			}
 			}
 		}
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
+		}
 	}
 	focus = {
 		id = SOV_seek_for_them_in_israel
@@ -28716,13 +29028,21 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SOV_seek_for_them_in_israel"
 			hidden_effect = {
+			set_temp_variable = { wargoal_on = ISR }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				target = ISR
 				type = puppet_wargoal_focus
 			}
 			}
 		}
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
+		}
 	}
 	focus = {
 		id = SOV_kill_predictor_corrector
@@ -28753,13 +29073,28 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SOV_kill_predictor_corrector"
 			hidden_effect = {
+			set_temp_variable = { wargoal_on = USA }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				target = USA
 				type = puppet_wargoal_focus
 			}
 			}
 		}
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
+			modifier = {
+				factor = 0
+				strength_ratio = {
+					tag = USA
+					ratio < 0.75
+				}
+			}
+		}
 	}
 	focus = {
 		id = SOV_new_cosmic_warfare
@@ -29173,7 +29508,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SOV_outer_space_asteroids_mining"
 			add_tech_bonus = {
-				name = SOV_outer_space_sateelites
+				name = CAT_satellite
 				bonus = 0.5
 				uses = 3
 				category = CAT_satellite
@@ -29275,13 +29610,13 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SOV_outer_space_space_combat_wombat"
 			add_tech_bonus = {
-				name = SOV_outer_space_moon_base
+				name = CAT_satellite
 				bonus = 1
 				uses = 1
 				category = CAT_satellite
 			}
 			add_tech_bonus = {
-				name = SOV_outer_space_moon_base
+				name = CAT_missile
 				bonus = 1
 				uses = 1
 				category = CAT_missile
@@ -30081,7 +30416,7 @@ focus_tree = {
 			modify_economic_support = yes
 			add_ideas = SOV_interrao
 			add_tech_bonus = {
-				name = SOV_economic_interrao
+				name = CAT_renewable
 				bonus = 0.5
 				uses = 1
 				category = CAT_renewable
@@ -30137,7 +30472,7 @@ focus_tree = {
 			set_temp_variable = { modify_economic = 1 }
 			modify_economic_support = yes
 			add_tech_bonus = {
-				name = SOV_economic_rus_hydro
+				name = CAT_renewable
 				bonus = 0.5
 				uses = 1
 				category = CAT_renewable
@@ -31415,7 +31750,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SOV_economic_rostelekom"
 			add_tech_bonus = {
-				name = SOV_economic_rostelekom
+				name = CAT_internet_tech
 				bonus = 1.0
 				uses = 2
 				category = CAT_internet_tech

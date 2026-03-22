@@ -6374,7 +6374,7 @@ focus_tree = {
 			base = 1
 			modifier = {
 				add = 5
-				has_equipment = { Inf_equipment < 1999 }
+				has_equipment = { infantry_weapons_type < 1999 }
 			}
 			modifier = {
 				add = 5
@@ -6443,7 +6443,7 @@ focus_tree = {
 			base = 1
 			modifier = {
 				add = 5
-				has_equipment = { Inf_equipment < 1999 }
+				has_equipment = { infantry_weapons_type < 1999 }
 			}
 			modifier = {
 				factor = 0
@@ -6537,7 +6537,7 @@ focus_tree = {
 			base = 1
 			modifier = {
 				add = 5
-				has_equipment = { Inf_equipment < 1999 }
+				has_equipment = { infantry_weapons_type < 1999 }
 			}
 			modifier = {
 				factor = 0
@@ -7156,7 +7156,7 @@ focus_tree = {
 				name = BRA_assault_carriers
 				bonus = 0.50
 				uses = 1
-				category = CAT_lha
+				category = CAT_helicopter_operators
 			}
 		}
 
@@ -10103,10 +10103,16 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus BRA_crackdown_south_american_socialists"
+
+			set_temp_variable = { wargoal_on = VEN }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = VEN
 			}
+
+			set_temp_variable = { wargoal_on = BOL }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = BOL
@@ -10148,6 +10154,9 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus BRA_the_caribbean_menace"
+
+			set_temp_variable = { wargoal_on = CUB }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = CUB
@@ -10546,7 +10555,7 @@ focus_tree = {
 			log = "[GetDateText]: [THIS.GetName]: Focus BRA_abundant_force"
 			army_experience = 25
 			send_equipment = {
-				equipment = infantry_weapons5
+				equipment = infantry_weapons_6
 				amount = 500
 				target = BRA
 			}
@@ -11457,6 +11466,9 @@ focus_tree = {
 			}
 			add_state_core = 894
 			add_state_core = 893
+
+			set_temp_variable = { wargoal_on = URG }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				target = URG
 				type = annex_everything

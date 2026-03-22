@@ -30,14 +30,11 @@ country_event = {
 				set_country_flag = civil_war_bosnia
 				set_country_flag = civil_war_bos_two
 				add_ideas = BOS_srpska_balkan_aspiration
+				add_ideas = BOS_aggressive_nation
 				declare_war_on = {
 					target = BOS
 					type = civil_war
 				}
-			}
-			retire_character = ratko_mladic_bosnia
-			RSK = {
-				add_ideas = BOS_aggressive_nation
 				declare_war_on = {
 					target = HZG
 					type = civil_war
@@ -256,7 +253,6 @@ country_event = {
 					type = civil_war
 				}
 			}
-			retire_character = ratko_mladic_bosnia
 			RSK = {
 				set_country_flag = civil_war_bosnia
 				set_country_flag = civil_war_bos_two
@@ -552,7 +548,7 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: Bosnia.9.a executed"
 		BOS = { country_event = { id = Bosnia.11  days = 3 } }
 		send_equipment = {
-			equipment = infantry_weapons1
+			equipment = infantry_weapons_2
 			amount = 9000
 			target = BOS
 		}
@@ -579,7 +575,7 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: Bosnia.10.a executed"
 		BOS = { country_event = { id = Bosnia.11  days = 5 } }
 		send_equipment = {
-			equipment = infantry_weapons1
+			equipment = infantry_weapons_2
 			amount = 100
 			target = BOS
 		}
@@ -1012,7 +1008,7 @@ country_event = { ###bosnia ask china for cash
 		}
 	}
 	option = {
-		name = Bosnia.31.a #no
+		name = Bosnia.31.b #no
 		log = "[GetDateText]: [This.GetName]: Bosnia.31.b executed"
 		BOS = { country_event = { id = Bosnia.33  days = 3 } }
 		ai_chance = {
@@ -1057,7 +1053,7 @@ country_event = { ###Join csto
 	picture = GFX_join_the_csto
 	is_triggered_only = yes
 	option = {
-		name = Bosnia.33.a ###yes
+		name = Bosnia.34.a ###yes
 		log = "[GetDateText]: [This.GetName]: Bosnia.34.a executed"
 		SOV = { add_to_faction = BOS }
 		BOS = { country_event = { id = Bosnia.35  days = 3 } }
@@ -1066,7 +1062,7 @@ country_event = { ###Join csto
 		}
 	}
 	option = {
-		name = Bosnia.33.a ###reject
+		name = Bosnia.34.b ###reject
 		log = "[GetDateText]: [This.GetName]: Bosnia.34.b executed"
 		BOS = { country_event = { id = Bosnia.36  days = 3 } }
 		ai_chance = {
@@ -1121,8 +1117,8 @@ country_event = { ###SALE OF EASTERN LANDS TO SERBIA
 		}
 	}
 	option = {
-		name = Bosnia.37.a ###reject
-		log = "[GetDateText]: [This.GetName]: Bosnia.37.a executed"
+		name = Bosnia.37.b ###reject
+		log = "[GetDateText]: [This.GetName]: Bosnia.37.b executed"
 		BOS = { country_event = { id = Bosnia.39  days = 3 } }
 		ai_chance = {
 			base = 30
@@ -1188,6 +1184,9 @@ country_event = { #croatia_union
 			}
 			}
 			BOS = {
+			set_temp_variable = { wargoal_on = SLV }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 			type = annex_everything
 			target = SLV
@@ -1239,6 +1238,9 @@ country_event = { ###reject
 		name = Bosnia.42.B ###NO
 		log = "[GetDateText]: [This.GetName]: Bosnia.42.b executed"
 		BOS = {
+		set_temp_variable = { wargoal_on = CRO }
+		set_temp_variable = { wargoal_type = 2 }
+		add_threat_from_wargoal_effect = yes
 		create_wargoal = {
 		   type = annex_everything
 		target = CRO
@@ -1590,7 +1592,6 @@ country_event = {
 					type = civil_war
 				}
 			}
-			retire_character = ratko_mladic_bosnia
 			RSK = {
 				set_country_flag = civil_war_bosnia
 				set_country_flag = civil_war_bos_two
@@ -2047,6 +2048,9 @@ country_event = {
 		name = bosnia_political.23.b
 		log = "[GetDateText]: [This.GetName]: bosnia_political.23.b executed"
 		BOS = {
+			set_temp_variable = { wargoal_on = PREV }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = annex_everything
 				target = PREV

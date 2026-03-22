@@ -1006,7 +1006,7 @@ country_event = {
 			localization_key = modifies_dynamic_modifier_tt
 			MODIFIER = GER_generic_spending_laws
 		}
-		add_to_variable = { GER_police_cost = 0.02 tooltip = GER_police_cost_tt }
+		add_to_variable = { GER_police_cost = 0.02 tooltip = police_cost_multiplier_modifier_tt }
 
 		ai_chance = {
 			base = 5
@@ -1782,7 +1782,7 @@ country_event = {
 			localization_key = modifies_dynamic_modifier_tt
 			MODIFIER = GER_generic_spending_laws
 		}
-		add_to_variable = { GER_health_cost = -0.03 tooltip = GER_healthcare_cost_tt }
+		add_to_variable = { GER_health_cost = -0.03 tooltip = health_cost_multiplier_modifier_tt }
 	}
 }
 #Krater von Wattenscheid
@@ -3734,8 +3734,8 @@ country_event = { # The drug question
 			localization_key = modifies_dynamic_modifier_tt
 			MODIFIER = GER_generic_spending_laws
 		}
-		add_to_variable = { GER_police_cost = -0.02 tooltip = GER_police_cost_tt }
-		add_to_variable = { GER_health_cost = 0.01 tooltip = GER_healthcare_cost_tt }
+		add_to_variable = { GER_police_cost = -0.02 tooltip = police_cost_multiplier_modifier_tt }
+		add_to_variable = { GER_health_cost = 0.01 tooltip = health_cost_multiplier_modifier_tt }
 		hidden_effect = {
 			random_list = {
 				70 = {
@@ -3752,8 +3752,8 @@ country_event = { # The drug question
 			localization_key = modifies_dynamic_modifier_tt
 			MODIFIER = GER_generic_spending_laws
 		}
-		add_to_variable = { GER_police_cost = 0.01 tooltip = GER_police_cost_tt }
-		add_to_variable = { GER_health_cost = -0.02 tooltip = GER_healthcare_cost_tt }
+		add_to_variable = { GER_police_cost = 0.01 tooltip = police_cost_multiplier_modifier_tt }
+		add_to_variable = { GER_health_cost = -0.02 tooltip = health_cost_multiplier_modifier_tt }
 	}
 }
 # GREEN EVENTS
@@ -3881,7 +3881,7 @@ country_event = { # Sanctuary for fleeing LGBT?
 			localization_key = modifies_dynamic_modifier_tt
 			MODIFIER = GER_generic_spending_laws
 		}
-		add_to_variable = { GER_health_cost = -0.05 tooltip = GER_healthcare_cost_tt }
+		add_to_variable = { GER_health_cost = -0.05 tooltip = health_cost_multiplier_modifier_tt }
 	}
 }
 # AfD Event
@@ -3902,7 +3902,7 @@ country_event = { # Circumcisions?
 			localization_key = modifies_dynamic_modifier_tt
 			MODIFIER = GER_generic_spending_laws
 		}
-		add_to_variable = { GER_health_cost = -0.01 tooltip = GER_healthcare_cost_tt }
+		add_to_variable = { GER_health_cost = -0.01 tooltip = health_cost_multiplier_modifier_tt }
 		add_stability = -0.05
 	}
 	option = {	# Why the hell are you asking me this? Get out of my office!
@@ -3938,12 +3938,12 @@ country_event = { # American weapons sales
 		name = Germany.210.b
 		log = "[GetDateText]: [This.GetName]: Germany.210.b executed"
 		add_equipment_to_stockpile = {
-			type = infantry_weapons2
+			type = infantry_weapons_3
 			amount = 3500
 			producer = USA
 		}
 		add_equipment_to_stockpile = {
-			type = command_control_equipment1
+			type = cnc_equipment_1
 			amount = 4000
 			producer = USA
 		}
@@ -4097,10 +4097,16 @@ country_event = {
 	option = {
 		name = Germany.214.a
 		log = "[GetDateText]: [This.GetName]: Germany.214.a executed"
+		set_temp_variable = { wargoal_on = SOV }
+		set_temp_variable = { wargoal_type = 2 }
+		add_threat_from_wargoal_effect = yes
 		create_wargoal = {
 			type = annex_everything
 			target = SOV
 		}
+		set_temp_variable = { wargoal_on = UKR }
+		set_temp_variable = { wargoal_type = 2 }
+		add_threat_from_wargoal_effect = yes
 		create_wargoal = {
 			type = annex_everything
 			target = UKR
@@ -4185,14 +4191,23 @@ country_event = {
 	option = {
 		name = Germany.217.a
 		log = "[GetDateText]: [This.GetName]: Germany.217.a executed"
+		set_temp_variable = { wargoal_on = CAN }
+		set_temp_variable = { wargoal_type = 2 }
+		add_threat_from_wargoal_effect = yes
 		create_wargoal = {
 			type = annex_everything
 			target = CAN
 		}
+		set_temp_variable = { wargoal_on = USA }
+		set_temp_variable = { wargoal_type = 2 }
+		add_threat_from_wargoal_effect = yes
 		create_wargoal = {
 			type = annex_everything
 			target = USA
 		}
+		set_temp_variable = { wargoal_on = MEX }
+		set_temp_variable = { wargoal_type = 2 }
+		add_threat_from_wargoal_effect = yes
 		create_wargoal = {
 			type = annex_everything
 			target = MEX
@@ -4445,6 +4460,9 @@ country_event = {
 	option = {
 		name = Germany.225.a
 		log = "[GetDateText]: [This.GetName]: Germany.225.a executed"
+		set_temp_variable = { wargoal_on = FROM }
+		set_temp_variable = { wargoal_type = 2 }
+		add_threat_from_wargoal_effect = yes
 		create_wargoal = {
 			type = annex_everything
 			target = FROM
@@ -5362,7 +5380,7 @@ country_event = {
 		name = Germany.405.b
 		log = "[GetDateText]: [This.GetName]: Germany.405.b executed"
 		add_equipment_to_stockpile = {
-			type = infantry_weapons
+			type = infantry_weapons_1
 			amount = -500
 		}
 		ai_chance = {
@@ -6239,7 +6257,7 @@ country_event = {
 			localization_key = modifies_dynamic_modifier_tt
 			MODIFIER = GER_generic_spending_laws
 		}
-		add_to_variable = { GER_welfare_cost = -0.02 tooltip = GER_welfare_cost_tt }
+		add_to_variable = { GER_welfare_cost = -0.02 tooltip = social_cost_multiplier_modifier_tt }
 		ai_chance = {
 			base = 5
 		}
@@ -6255,7 +6273,7 @@ country_event = {
 			localization_key = modifies_dynamic_modifier_tt
 			MODIFIER = GER_generic_spending_laws
 		}
-		add_to_variable = { GER_welfare_cost = 0.01 tooltip = GER_welfare_cost_tt }
+		add_to_variable = { GER_welfare_cost = 0.01 tooltip = social_cost_multiplier_modifier_tt }
 		ai_chance = {
 			base = 5
 		}
@@ -6433,7 +6451,7 @@ country_event = {
 			localization_key = modifies_dynamic_modifier_tt
 			MODIFIER = GER_generic_spending_laws
 		}
-		add_to_variable = { GER_health_cost = 0.01 tooltip = GER_healthcare_cost_tt }
+		add_to_variable = { GER_health_cost = 0.01 tooltip = health_cost_multiplier_modifier_tt }
 		add_stability = 0.04
 		ai_chance = {
 			base = 5
@@ -6497,7 +6515,7 @@ country_event = {
 			localization_key = modifies_dynamic_modifier_tt
 			MODIFIER = GER_generic_spending_laws
 		}
-		add_to_variable = { GER_police_cost = 0.01 tooltip = GER_police_cost_tt }
+		add_to_variable = { GER_police_cost = 0.01 tooltip = police_cost_multiplier_modifier_tt }
 		ai_chance = {
 			base = 5
 		}
@@ -6535,7 +6553,7 @@ country_event = {
 			localization_key = modifies_dynamic_modifier_tt
 			MODIFIER = GER_generic_spending_laws
 		}
-		add_to_variable = { GER_welfare_cost = 0.01 tooltip = GER_welfare_cost_tt }
+		add_to_variable = { GER_welfare_cost = 0.01 tooltip = social_cost_multiplier_modifier_tt }
 		ai_chance = {
 			base = 5
 		}
@@ -6561,7 +6579,7 @@ country_event = {
 	option = {
 		name = germany_yearly.17.b
 		log = "[GetDateText]: [This.GetName]: germany_yearly.17.b executed"
-		add_to_variable = { GER_interest_cost = 0.001 tooltip = GER_interest_cost_tt }
+		add_to_variable = { GER_interest_cost = 0.001 tooltip = interest_rate_multiplier_modifier_tt }
 		random_owned_state = {
 			add_extra_state_shared_building_slots = 3
 			add_building_construction = {
@@ -6799,7 +6817,7 @@ country_event = {
 			localization_key = modifies_dynamic_modifier_tt
 			MODIFIER = GER_generic_spending_laws
 		}
-		add_to_variable = { GER_welfare_cost = 0.01 tooltip = GER_welfare_cost_tt }
+		add_to_variable = { GER_welfare_cost = 0.01 tooltip = social_cost_multiplier_modifier_tt }
 		set_temp_variable = { temp_opinion = -3 }
 		change_industrial_conglomerates_opinion = yes
 		set_temp_variable = { temp_opinion = -2 }
@@ -6818,7 +6836,7 @@ country_event = {
 			localization_key = modifies_dynamic_modifier_tt
 			MODIFIER = GER_generic_spending_laws
 		}
-		add_to_variable = { GER_welfare_cost = -0.01 tooltip = GER_welfare_cost_tt }
+		add_to_variable = { GER_welfare_cost = -0.01 tooltip = social_cost_multiplier_modifier_tt }
 		set_temp_variable = { temp_opinion = 3 }
 		change_industrial_conglomerates_opinion = yes
 		set_temp_variable = { temp_opinion = 2 }
@@ -10420,7 +10438,8 @@ country_event = { #Post coldwar
 	is_triggered_only = yes
 
 	trigger = {
-		GER = { has_idea = NATO_member }
+		original_tag = GER
+		has_idea = NATO_member
 	}
 
 	option = { #Integrate Post soviet states
@@ -10474,7 +10493,8 @@ country_event = { #Strategic Discussions on the Military Integration
 	is_triggered_only = yes
 
 	trigger = {
-		GER = { has_idea = NATO_member }
+		original_tag = GER
+		has_idea = NATO_member
 	}
 
 	option = { #Emphasize Rapid Armament and Deployment (javier Solaná)
@@ -10601,7 +10621,8 @@ country_event = { #reforming officer Corps and command structures
 	is_triggered_only = yes
 
 	trigger = {
-		GER = { has_idea = NATO_member }
+		original_tag = GER
+		has_idea = NATO_member
 	}
 
 	option = { #Embed German advisors (klaus reinhardt)
@@ -10835,7 +10856,8 @@ country_event = { #Integrate Air and Missile Defense
 	is_triggered_only = yes
 
 	trigger = {
-		GER = { has_idea = NATO_member }
+		original_tag = GER
+		has_idea = NATO_member
 	}
 
 	option = { #Deploy Patriot missile systems to Poland (US-German joint initiative)
@@ -10945,7 +10967,8 @@ country_event = { #modernize military equipment poland
 	is_triggered_only = yes
 
 	trigger = {
-		GER = { has_idea = NATO_member }
+		original_tag = GER
+		has_idea = NATO_member
 	}
 
 	option = { #Supply leopard 2 tanks to poland
@@ -11052,7 +11075,8 @@ country_event = { #modernize military equipment Hungary
 	is_triggered_only = yes
 
 	trigger = {
-		GER = { has_idea = NATO_member }
+		original_tag = GER
+		has_idea = NATO_member
 	}
 
 	option = { #Transfer surplus western equipment
@@ -11142,7 +11166,8 @@ country_event = { #modernize military equipment czech
 	is_triggered_only = yes
 
 	trigger = {
-		GER = { has_idea = NATO_member }
+		original_tag = GER
+		has_idea = NATO_member
 	}
 
 	option = { #Facilitate the acquisition of western equipment (vaclav havel)
@@ -11172,7 +11197,7 @@ country_event = { #modernize military equipment czech
 		custom_effect_tooltip = GER_Coldwar_20
 		CZE = {
 			add_tech_bonus = {
-				name = GER_Cold_War.7.t
+				name = CAT_armor
 				bonus = 0.5
 				uses = 2
 				category = CAT_armor
@@ -11197,6 +11222,10 @@ country_event = { #Honor klaus reinhardt
 	picture = GFX_german_parliment
 
 	is_triggered_only = yes
+
+	trigger = {
+		original_tag = GER
+	}
 
 	option = { #he deserve the BVK
 		name = GER_Cold_War.8.a
@@ -11225,6 +11254,7 @@ country_event = { #Leopard 2E
 	is_triggered_only = yes
 
 	trigger = {
+		original_tag = GER
 		SPR = {
 			check_variable = { var = treasury value > 5 }
 		}
@@ -11345,6 +11375,10 @@ country_event = { #
 
 	is_triggered_only = yes
 
+	trigger = {
+		original_tag = GER
+	}
+
 	option = { #
 		name = GER_Cold_War.10.a
 		log = "[GetDateText]: [This.GetName]: GER_Cold_War.10.a executed"
@@ -11377,6 +11411,10 @@ country_event = { #
 	picture = GFX_Alte_kaserne
 
 	is_triggered_only = yes
+
+	trigger = {
+		original_tag = GER
+	}
 
 	option = { #
 		name = GER_Cold_War.11.a
@@ -11412,6 +11450,10 @@ country_event = { #Rec
 
 	is_triggered_only = yes
 
+	trigger = {
+		original_tag = GER
+	}
+
 	option = {	# Introduce Fennek JFST
 		name = GER_Cold_War.20.a
 		log = "[GetDateText]: [This.GetName]: GER_Cold_War.20.a executed"
@@ -11421,18 +11463,18 @@ country_event = { #Rec
 			localization_key = modifies_dynamic_modifier_tt
 			MODIFIER = GER_Bundeswehr_modifier
 		}
-		add_to_variable = { GER_Army_defence = 0.02 tooltip = GER_Army_defence_tt }
-		add_to_variable = { GER_Army_attack = 0.02 tooltip = GER_Army_attack_tt }
-		add_to_variable = { Ger_army_artillery_attack_factor = 0.09 tooltip = Ger_army_artillery_attack_factor_tt }
-		add_to_variable = { GER_army_speed_factor = 0.02 tooltip = GER_army_speed_factor_tt }
-		add_to_variable = { GER_intel_network_gain_factor_heer = 0.03 tooltip = GER_intel_network_gain_factor_heer_tt }
-		add_to_variable = { GER_recon_factor = 0.08 tooltip = GER_recon_factor_tt }
+		add_to_variable = { GER_Army_defence = 0.02 tooltip = army_defence_factor_tt }
+		add_to_variable = { GER_Army_attack = 0.02 tooltip = army_attack_factor_tt }
+		add_to_variable = { Ger_army_artillery_attack_factor = 0.09 tooltip = army_artillery_attack_factor_tt }
+		add_to_variable = { GER_army_speed_factor = 0.02 tooltip = army_speed_factor_tt }
+		add_to_variable = { GER_intel_network_gain_factor_heer = 0.03 tooltip = intel_network_gain_factor_tt }
+		add_to_variable = { GER_recon_factor = 0.08 tooltip = recon_factor_tt }
 		newline = yes
 		custom_effect_tooltip = {
 			localization_key = modifies_dynamic_modifier_tt
 			MODIFIER = GER_Luftwaffe_modifier
 		}
-		add_to_variable = { GER_ground_attack = 0.05 tooltip = GER_ground_attack_tt }
+		add_to_variable = { GER_ground_attack = 0.05 tooltip = ground_attack_factor_tt }
 		newline = yes
 		add_equipment_to_stockpile = {
 			type = medium_tank_destroyer_chassis_2
@@ -11580,6 +11622,10 @@ country_event = { #The Eurofighter
 	picture = GFX_GER_euroifighter
 
 	is_triggered_only = yes
+
+	trigger = {
+		original_tag = GER
+	}
 
 	option = {	# Order first tranche and Taurus
 		name = GER_Cold_War.22.a
@@ -11785,7 +11831,6 @@ news_event = { #The Eurofighter
 
 	option = {
 		name = GER_Eurofighter.5.a
-		log = "[GetDateText]: [This.GetName]: GER_Eurofighter.5.a executed"
 		mio:GER_Eurofighter_aircraft_manufacturer = {
 			add_mio_funds = 300
 		}
@@ -11801,7 +11846,6 @@ news_event = { #The Eurofighter
 
 	option = {
 		name = GER_Eurofighter.6.a
-		log = "[GetDateText]: [This.GetName]: GER_Eurofighter.6.a executed"
 		mio:GER_Eurofighter_aircraft_manufacturer = {
 			add_mio_funds = 300
 		}
@@ -11817,7 +11861,6 @@ news_event = { #The Eurofighter
 
 	option = {
 		name = GER_Eurofighter.7.a
-		log = "[GetDateText]: [This.GetName]: GER_Eurofighter.7.a executed"
 		mio:GER_Eurofighter_aircraft_manufacturer = {
 			add_mio_funds = 300
 			add_mio_research_bonus = 0.07
@@ -11916,7 +11959,11 @@ country_event = { #Heeresflieger
 
 	is_triggered_only = yes
 
-	option = {	# Order CH-53 GS and invest in Tiger
+	trigger = {
+		original_tag = GER
+	}
+
+	option = {	# Order CH-53 G and invest in Tiger
 		name = GER_Cold_War.23.a
 		log = "[GetDateText]: [This.GetName]: GER_Cold_War.23.a executed"
 		custom_effect_tooltip = GER_Tiger_TT
@@ -11924,21 +11971,23 @@ country_event = { #Heeresflieger
 		multiply_temp_variable = { treasury_change = -0.25 }
 		modify_treasury_effect = yes
 		if = {
-			limit = { has_dlc = "By Blood Alone" }
+			limit = { has_dlc = "No Step Back" }
 			set_technology = { nsb_attack_helicopter_tech_3 = 1 }
 			create_equipment_variant = {
 				name = "Eurocopter Tiger"
 				type = heavy_tank_chassis_2
 				parent_version = 0
 				modules = {
-					helicopter_inner_hardpoint = helicopter_rocket_pod_gen2
+					chassis_type_slot = helicopter_medium_chassis
+					helicopter_body_layout = gunship_layout
+					helicopter_body_mount_1 = helicopter_rocket_pod_gen3
 					nose_gun_type_slot = helicopter_medium_nose_gun_gen2
 					armor_type_slot = helicopter_armor_gen3
 					engine_type_slot = helicopter_turbine_engine_gen2
 					defence_type_slot = flare_launchers
 					sensor_and_avionics_slot = sensors_and_avionics_gen_3
-					helicopter_middle_hardpoint_1 = helicopter_multiple_atgm_gen2
-					special_defensive_type_slot_1 = em_lock_detection_system_gen1
+					helicopter_wing_mount_1 = helicopter_multiple_atgm_gen3
+					defence_type_slot_2 = em_lock_detection_system_gen2
 				}
 				upgrades = {
 					helicopter_nsb_upgrade = 4
@@ -11947,21 +11996,41 @@ country_event = { #Heeresflieger
 				icon = "gfx/interface/technologies/GER/AIR/AH3.dds"
 			}
 		}
-		set_technology = { transport_helicopter3 = 1 }
+		else = {
+			set_technology = { attack_helicopter_3 = 1 }
+		}
+		add_equipment_to_stockpile = {
+			type = transport_helicopter_2
+			amount = 50
+		}
 	}
-	option = {	# order CH-53 GS and Apache
+	option = {	# order CH-53 G and Apache
 		name = GER_Cold_War.23.b
 		log = "[GetDateText]: [This.GetName]: GER_Cold_War.23.b executed"
 		custom_effect_tooltip = GER_Apache_TT
 		set_temp_variable = { treasury_change = GER.gdp_per_capita }
 		multiply_temp_variable = { treasury_change = -0.20 }
 		modify_treasury_effect = yes
-		set_technology = { transport_helicopter3 = 1 }
+		if = {
+			limit = { has_dlc = "No Step Back" }
+			add_equipment_to_stockpile = {
+				type = heavy_tank_chassis_2
+				variant_name = "AH-64A Apache"
+				amount = 25
+				producer = USA
+			}
+		}
+		else = {
+			add_equipment_to_stockpile = {
+				type = attack_helicopter_2 # 1985
+				variant_name = "AH-64A Apache"
+				amount = 25
+				producer = USA
+			}
+		}
 		add_equipment_to_stockpile = {
-			type = heavy_tank_chassis_2
-			variant_name = "AH-64D Apache Longbow"
-			amount = 25
-			producer = USA
+			type = transport_helicopter_2
+			amount = 50
 		}
 	}
 	option = {	# to expensive
@@ -11977,6 +12046,10 @@ country_event = { #Update Armored Forces
 	picture = GFX_bundeswehr1
 
 	is_triggered_only = yes
+
+	trigger = {
+		original_tag = GER
+	}
 
 	option = {	# Update Leopard and Marder
 		name = GER_Cold_War.24.a
@@ -12064,6 +12137,10 @@ country_event = { #Heerestruppenkommando
 	picture = GFX_bundeswehr1
 
 	is_triggered_only = yes
+
+	trigger = {
+		original_tag = GER
+	}
 
 	option = {	# integrate Artillerie into a SIngle Unit
 		name = GER_Cold_War.25.a
@@ -12192,6 +12269,10 @@ country_event = { # Deepening Military Cooperation
 
 	fire_only_once = yes
 
+	trigger = {
+		original_tag = GER
+	}
+
 	option = {	# Strenghen ties
 		name = GER_Cold_War.30.a
 		log = "[GetDateText]: [This.GetName]: GER_Cold_War.30.a executed"
@@ -12238,6 +12319,10 @@ country_event = { # Synchronice Officer Training
 	picture = GFX_GER_NLI
 
 	is_triggered_only = yes
+
+	trigger = {
+		original_tag = GER
+	}
 
 	option = {	# Proceed with Synchronization
 		name = GER_Cold_War.31.a
@@ -12328,12 +12413,16 @@ country_event = { # synchronice Equipment
 
 	is_triggered_only = yes
 
+	trigger = {
+		original_tag = GER
+	}
+
 	option = {	# Standardize equipment
 		name = GER_Cold_War.32.a
 		log = "[GetDateText]: [This.GetName]: GER_Cold_War.32.a executed"
 		HOL = {
 			add_equipment_to_stockpile = {
-				type = infantry_weapons3 #Heckler & Koch G36
+				type = infantry_weapons_4 #Heckler & Koch G36
 				variant_name = "G36"
 				amount = 6000
 				producer = GER
@@ -12443,6 +12532,10 @@ country_event = { # Complimentary Army´s
 	picture = GFX_GER_NLII
 
 	is_triggered_only = yes
+
+	trigger = {
+		original_tag = GER
+	}
 
 	option = {	# Light Forces
 		name = GER_Cold_War.33.a
@@ -12598,6 +12691,10 @@ country_event = { # Mutual Airdefence
 
 	is_triggered_only = yes
 
+	trigger = {
+		original_tag = GER
+	}
+
 	option = {	# Stationate Patriots in NL
 		name = GER_Cold_War.34.a
 		log = "[GetDateText]: [This.GetName]: GER_Cold_War.34.a executed"
@@ -12664,6 +12761,10 @@ country_event = { # Complete integration
 
 	is_triggered_only = yes
 
+	trigger = {
+		original_tag = GER
+	}
+
 	option = {	# integrate Army
 		name = GER_Cold_War.35.a
 		log = "[GetDateText]: [This.GetName]: GER_Cold_War.35.a executed"
@@ -12714,6 +12815,10 @@ country_event = { # Leopard Trophy
 	picture = GFX_Bundeswehr_Panzer
 
 	is_triggered_only = yes
+
+	trigger = {
+		original_tag = GER
+	}
 
 	option = {
 		name = GER_Cold_War.40.a
@@ -12816,6 +12921,10 @@ country_event = { # Nato Military Skill Competition
 	picture = GFX_Bundeswehr_Panzer
 
 	is_triggered_only = yes
+
+	trigger = {
+		original_tag = GER
+	}
 
 	option = {
 		name = GER_Cold_War.41.a
@@ -12920,6 +13029,10 @@ country_event = { # Böselager
 
 	is_triggered_only = yes
 
+	trigger = {
+		original_tag = GER
+	}
+
 	option = {
 		name = GER_Cold_War.42.a
 		log = "[GetDateText]: [This.GetName]: GER_Cold_War.42.a executed"
@@ -13009,6 +13122,7 @@ country_event = {
 	picture = GFX_Bundeswehr_Panzer
 
 	trigger = {
+		original_tag = GER
 		date < 2000.08.20
 	}
 
@@ -13178,6 +13292,10 @@ country_event = {
 		name = Germany_mig.4.a #IT greencard
 		log = "[GetDateText]: [This.GetName]: Germany_mig.4.a executed"
 		add_ideas = GER_idea_Greencard_I
+		add_power_balance_value = {
+			id = GER_power_balance
+			value = -0.10
+		}
 		ai_chance = {
 			base = 5
 		}
@@ -13186,6 +13304,10 @@ country_event = {
 		name = Germany_mig.4.b #Greencard for skilled workers
 		log = "[GetDateText]: [This.GetName]: Germany_mig.4.b executed"
 		add_ideas = GER_idea_Greencard_II
+		add_power_balance_value = {
+			id = GER_power_balance
+			value = -0.15
+		}
 		ai_chance = {
 			base = 5
 		}
@@ -13193,6 +13315,12 @@ country_event = {
 	option = {
 		name = Germany_mig.4.c #we didn´t need
 		log = "[GetDateText]: [This.GetName]: Germany_mig.4.c executed"
+		add_political_power = 100
+		add_stability = 0.05
+		add_power_balance_value = {
+			id = GER_power_balance
+			value = 0.05
+		}
 		ai_chance = {
 			base = 5
 		}
@@ -15946,57 +16074,72 @@ country_event = {
 		name = germany_foci.150.a #Eurocopter Tiger
 		log = "[GetDateText]: [This.GetName]: germany_foci.150.a executed"
 		custom_effect_tooltip = germany_foci.150.a_desc
-		set_temp_variable = { treasury_change = GER.gdp_per_capita }
-		multiply_temp_variable = { treasury_change = -0.15 }
-		modify_treasury_effect = yes
 		if = {
 			limit = { has_dlc = "No Step Back" }
-			set_technology = { nsb_attack_helicopter_tech_3 = 1 }
-			create_equipment_variant = {
-				name = "Eurocopter Tiger UHT"
-				type = heavy_tank_chassis_2
-				parent_version = 1
-				modules = {
-					helicopter_inner_hardpoint = helicopter_rocket_pod_gen3
-					nose_gun_type_slot = helicopter_medium_nose_gun_gen2
-					armor_type_slot = helicopter_armor_gen3
-					engine_type_slot = helicopter_turbine_engine_gen2
-					defence_type_slot = flare_launchers
-					sensor_and_avionics_slot = sensors_and_avionics_gen_3
-					helicopter_middle_hardpoint_1 = helicopter_multiple_atgm_gen3
-					special_defensive_type_slot_1 = em_lock_detection_system_gen2
+			if = {
+				limit = { has_tech = nsb_attack_helicopter_tech_3 }
+				set_temp_variable = { treasury_change = GER.gdp_per_capita }
+				multiply_temp_variable = { treasury_change = -0.10 }
+				modify_treasury_effect = yes
+			}
+			else = {
+				set_temp_variable = { treasury_change = GER.gdp_per_capita }
+				multiply_temp_variable = { treasury_change = -0.25 }
+				modify_treasury_effect = yes
+				set_technology = { nsb_attack_helicopter_tech_3 = 1 }
+				create_equipment_variant = {
+					name = "Eurocopter Tiger"
+					type = heavy_tank_chassis_2
+					parent_version = 1
+					modules = {
+						chassis_type_slot = helicopter_medium_chassis
+						helicopter_body_layout = gunship_layout
+						helicopter_body_mount_1 = helicopter_rocket_pod_gen3
+						nose_gun_type_slot = helicopter_medium_nose_gun_gen2
+						armor_type_slot = helicopter_armor_gen3
+						engine_type_slot = helicopter_turbine_engine_gen2
+						defence_type_slot = flare_launchers
+						sensor_and_avionics_slot = sensors_and_avionics_gen_3
+						helicopter_wing_mount_1 = helicopter_multiple_atgm_gen3
+						defence_type_slot_2 = em_lock_detection_system_gen2
+					}
+					upgrades = {
+						helicopter_nsb_upgrade = 4
+					}
+					design_team = mio:GER_Eurocopter_helicopters_tank_manufacturer
 				}
-				upgrades = {
-					helicopter_nsb_upgrade = 4
-				}
-				design_team = mio:GER_Eurocopter_helicopters_tank_manufacturer
 			}
 			add_equipment_to_stockpile = {
-				type = heavy_tank_chassis_2 #Eurocopter
+				type = heavy_tank_chassis_2
 				variant_name = "Eurocopter Tiger"
 				amount = 50
-			}
-			add_tech_bonus = {
-				name = GER_invest_in_heli
-				bonus = 0.50
-				uses = 1
-				category = CAT_atk_heli
 			}
 		}
 		else = {
-			set_technology = { attack_helicopter3 = 1 }
+			if = {
+				limit = { has_tech = attack_helicopter_3 }
+				set_temp_variable = { treasury_change = GER.gdp_per_capita }
+				multiply_temp_variable = { treasury_change = -0.10 }
+				modify_treasury_effect = yes
+			}
+			else = {
+				set_temp_variable = { treasury_change = GER.gdp_per_capita }
+				multiply_temp_variable = { treasury_change = -0.25 }
+				modify_treasury_effect = yes
+				set_technology = { attack_helicopter_3 = 1 }
+			}
 
 			add_equipment_to_stockpile = {
-				type = heavy_tank_chassis_2 #Eurocopter
+				type = attack_helicopter_3 # 2005
 				variant_name = "Eurocopter Tiger"
 				amount = 50
 			}
-			add_tech_bonus = {
-				name = GER_invest_in_heli
-				bonus = 0.50
-				uses = 1
-				category = CAT_atk_heli
-			}
+		}
+		add_tech_bonus = {
+			name = GER_invest_in_heli
+			bonus = 0.50
+			uses = 1
+			category = CAT_atk_heli
 		}
 
 		ai_chance = {
@@ -16008,37 +16151,31 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: germany_foci.150.b executed"
 		custom_effect_tooltip = germany_foci.150.b_desc
 		set_temp_variable = { treasury_change = ITA.gdp_per_capita }
-		multiply_temp_variable = { treasury_change = -0.12 }
+		multiply_temp_variable = { treasury_change = -0.05 }
 		modify_treasury_effect = yes
 
 		if = {
 			limit = { has_dlc = "No Step Back" }
 
 			add_equipment_to_stockpile = {
-				type = heavy_tank_chassis_1 #Eurocopter
+				type = heavy_tank_chassis_1
 				variant_name = "A-129 Mangusta"
 				amount = 50
 				producer = ITA
 			}
-			add_tech_bonus = {
-				name = GER_invest_in_heli
-				bonus = 0.50
-				uses = 1
-				category = CAT_atk_heli
-			}
 		}
 		else = {
 			add_equipment_to_stockpile = {
-				type = attack_helicopter1
+				type = attack_helicopter_1 # 1965
 				amount = 50
 				producer = ITA
 			}
-			add_tech_bonus = {
-				name = GER_invest_in_heli
-				bonus = 0.50
-				uses = 1
-				category = CAT_atk_heli
-			}
+		}
+		add_tech_bonus = {
+			name = GER_invest_in_heli
+			bonus = 0.50
+			uses = 1
+			category = CAT_atk_heli
 		}
 
 		ai_chance = {
@@ -16057,33 +16194,25 @@ country_event = {
 			limit = { has_dlc = "No Step Back" }
 
 			add_equipment_to_stockpile = {
-				type = heavy_tank_chassis_2 #Eurocopter
+				type = heavy_tank_chassis_2
 				variant_name = "AH-64A Apache"
 				amount = 50
 				producer = USA
-			}
-			add_tech_bonus = {
-				name = GER_invest_in_heli
-				bonus = 0.50
-				uses = 1
-				category = CAT_atk_heli
 			}
 		}
 		else = {
-			set_technology = { attack_helicopter3 = 1 }
-
 			add_equipment_to_stockpile = {
-				type = attack_helicopter2 #Eurocopter
+				type = attack_helicopter_2 # 1985
 				variant_name = "AH-64A Apache"
 				amount = 50
 				producer = USA
 			}
-			add_tech_bonus = {
-				name = GER_invest_in_heli
-				bonus = 0.50
-				uses = 1
-				category = CAT_atk_heli
-			}
+		}
+		add_tech_bonus = {
+			name = GER_invest_in_heli
+			bonus = 0.50
+			uses = 1
+			category = CAT_atk_heli
 		}
 		ai_chance = {
 			base = 5
@@ -16103,11 +16232,17 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: germany_foci.151.a executed"
 		custom_effect_tooltip = germany_foci.151.a_desc
 		set_temp_variable = { treasury_change = GER.gdp_per_capita }
-		multiply_temp_variable = { treasury_change = -0.15 }
+		multiply_temp_variable = { treasury_change = -0.25 }
 		modify_treasury_effect = yes
-		set_technology = { transport_helicopter3 = 1 }
+		if = {
+			limit = { has_dlc = "No Step Back" }
+			set_technology = { nsb_transport_helicopter_3 = 1 }
+		}
+		else = {
+			set_technology = { transport_helicopter_3 = 1 }
+		}
 		add_equipment_to_stockpile = {
-			type = transport_helicopter3
+			type = transport_helicopter_3
 			amount = 50
 		}
 		ai_chance = {
@@ -16119,10 +16254,10 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: germany_foci.151.b executed"
 		custom_effect_tooltip = germany_foci.151.b_desc
 		set_temp_variable = { treasury_change = USA.gdp_per_capita }
-		multiply_temp_variable = { treasury_change = -0.15 }
+		multiply_temp_variable = { treasury_change = -0.10 }
 		modify_treasury_effect = yes
 		add_equipment_to_stockpile = {
-			type = transport_helicopter2
+			type = transport_helicopter_2
 			variant_name = "UH-60A"
 			amount = 50
 			producer = USA
@@ -16136,10 +16271,10 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: germany_foci.151.c executed"
 		custom_effect_tooltip = germany_foci.151.c_desc
 		set_temp_variable = { treasury_change = ENG.gdp_per_capita }
-		multiply_temp_variable = { treasury_change = -0.15 }
+		multiply_temp_variable = { treasury_change = -0.10 }
 		modify_treasury_effect = yes
 		add_equipment_to_stockpile = {
-			type = transport_helicopter2
+			type = transport_helicopter_2
 			variant_name = "AgustaWestland AW101"
 			amount = 50
 			producer = ENG
@@ -16257,38 +16392,48 @@ country_event = {
 				set_technology = { nsb_attack_helicopter_tech_4 = 1 }
 				create_equipment_variant = {
 					name = "Eurocopter Tiger II"
-					type = heavy_tank_chassis_4
+					type = heavy_tank_chassis_3 # 2015
 					parent_version = 0
 					modules = {
-						helicopter_inner_hardpoint = helicopter_rocket_pod_gen2
-						nose_gun_type_slot = helicopter_medium_nose_gun_gen2
+						chassis_type_slot = helicopter_medium_chassis
+						helicopter_body_layout = gunship_layout
+						helicopter_body_mount_1 = helicopter_rocket_pod_gen3
+						nose_gun_type_slot = helicopter_medium_nose_gun_gen3
 						armor_type_slot = helicopter_armor_gen3
 						engine_type_slot = helicopter_turbine_engine_gen3
-						defence_type_slot = flare_launchers
-						sensor_and_avionics_slot = sensors_and_avionics_gen_4
-						helicopter_middle_hardpoint_1 = helicopter_multiple_atgm_gen2
-						special_defensive_type_slot_1 = em_lock_detection_system_gen2
+						defence_type_slot = active_defence_system_gen1
+						sensor_and_avionics_slot = sensors_and_avionics_gen_3
+						helicopter_wing_mount_1 = helicopter_multiple_atgm_gen3
+						defence_type_slot_2 = em_lock_detection_system_gen2
 					}
 					upgrades = {
 						helicopter_nsb_upgrade = 3
 					}
+					design_team = mio:GER_Eurocopter_helicopters_tank_manufacturer
+				}
+				add_equipment_to_stockpile = {
+					type = heavy_tank_chassis_3 # 2015
+					variant_name = "Eurocopter Tiger II"
+					amount = 50
 				}
 			}
 			FRA = {
 				set_technology = { nsb_attack_helicopter_tech_4 = 1 }
 				create_equipment_variant = {
 					name = "Eurocopter Tiger II"
-					type = heavy_tank_chassis_4
+					type = heavy_tank_chassis_3 # 2015
 					parent_version = 0
 					modules = {
-						helicopter_inner_hardpoint = helicopter_rocket_pod_gen2
-						nose_gun_type_slot = helicopter_medium_nose_gun_gen2
+						chassis_type_slot = helicopter_medium_chassis
+						helicopter_body_layout = gunship_layout
+						helicopter_body_mount_1 = helicopter_rocket_pod_gen3
+						nose_gun_type_slot = helicopter_medium_nose_gun_gen3
 						armor_type_slot = helicopter_armor_gen3
 						engine_type_slot = helicopter_turbine_engine_gen3
-						defence_type_slot = flare_launchers
-						sensor_and_avionics_slot = sensors_and_avionics_gen_4
-						helicopter_middle_hardpoint_1 = helicopter_multiple_atgm_gen2
-						special_defensive_type_slot_1 = em_lock_detection_system_gen2
+						defence_type_slot = active_defence_system_gen1
+						sensor_and_avionics_slot = sensors_and_avionics_gen_3
+						helicopter_wing_mount_1 = helicopter_multiple_atgm_gen3
+						defence_type_slot_2 = em_lock_detection_system_gen2
 					}
 					upgrades = {
 						helicopter_nsb_upgrade = 3
@@ -16297,18 +16442,18 @@ country_event = {
 			}
 		}
 		else = {
-			set_technology = { attack_helicopter4 = 1 }
+			set_technology = { attack_helicopter_4 = 1 }
 
-			add_tech_bonus = {
-				name = GER_invest_in_heli
-				bonus = 0.50
-				uses = 1
-				category = CAT_atk_heli
-			}
 			add_equipment_to_stockpile = {
-				type = attack_helicopter4
+				type = attack_helicopter_4
 				amount = 50
 			}
+		}
+		add_tech_bonus = {
+			name = GER_invest_in_heli
+			bonus = 0.50
+			uses = 1
+			category = CAT_atk_heli
 		}
 		FRA = {
 			add_opinion_modifier = { target = GER modifier = military_cooperation }
@@ -16334,38 +16479,50 @@ country_event = {
 			GER = {
 				create_equipment_variant = {
 					name = "MBB Törni"
-					type = heavy_tank_chassis_4
+					type = heavy_tank_chassis_3 # 2015
 					parent_version = 0
 					modules = {
-						helicopter_inner_hardpoint = helicopter_aa_missile_gen2
-						nose_gun_type_slot = helicopter_medium_nose_gun_gen2
+						chassis_type_slot = helicopter_medium_chassis
+						helicopter_body_layout = gunship_layout
+						helicopter_body_mount_1 = helicopter_multiple_atgm_gen3
+						helicopter_body_mount_2 = helicopter_rocket_pod_gen3
+						nose_gun_type_slot = helicopter_medium_nose_gun_gen3
 						armor_type_slot = helicopter_armor_gen3
 						engine_type_slot = helicopter_turbine_engine_gen4
 						defence_type_slot = active_defence_system_gen1
-						sensor_and_avionics_slot = sensors_and_avionics_gen_4
-						helicopter_middle_hardpoint_1 = helicopter_multiple_atgm_gen2
-						special_defensive_type_slot_1 = em_lock_detection_system_gen2
+						sensor_and_avionics_slot = sensors_and_avionics_gen_3
+						helicopter_wing_mount_1 = helicopter_aa_missile_gen3
+						defence_type_slot_2 = em_lock_detection_system_gen2
 					}
 					upgrades = {
 						helicopter_nsb_upgrade = 2
 					}
+					design_team = mio:GER_MBB_helicopters_tank_manufacturer
+				}
+				add_equipment_to_stockpile = {
+					type = heavy_tank_chassis_3 # 2015
+					variant_name = "MBB Törni"
+					amount = 50
 				}
 			}
 			USA = {
 				set_technology = { nsb_attack_helicopter_tech_4 = 1 }
 				create_equipment_variant = {
 					name = "MBB Törni"
-					type = heavy_tank_chassis_4
+					type = heavy_tank_chassis_3 # 2015
 					parent_version = 0
 					modules = {
-						helicopter_inner_hardpoint = helicopter_aa_missile_gen2
-						nose_gun_type_slot = helicopter_medium_nose_gun_gen2
+						chassis_type_slot = helicopter_medium_chassis
+						helicopter_body_layout = gunship_layout
+						helicopter_body_mount_1 = helicopter_multiple_atgm_gen3
+						helicopter_body_mount_2 = helicopter_rocket_pod_gen3
+						nose_gun_type_slot = helicopter_medium_nose_gun_gen3
 						armor_type_slot = helicopter_armor_gen3
 						engine_type_slot = helicopter_turbine_engine_gen4
 						defence_type_slot = active_defence_system_gen1
-						sensor_and_avionics_slot = sensors_and_avionics_gen_4
-						helicopter_middle_hardpoint_1 = helicopter_multiple_atgm_gen2
-						special_defensive_type_slot_1 = em_lock_detection_system_gen2
+						sensor_and_avionics_slot = sensors_and_avionics_gen_3
+						helicopter_wing_mount_1 = helicopter_aa_missile_gen3
+						defence_type_slot_2 = em_lock_detection_system_gen2
 					}
 					upgrades = {
 						helicopter_nsb_upgrade = 2
@@ -16376,17 +16533,20 @@ country_event = {
 				set_technology = { nsb_attack_helicopter_tech_4 = 1 }
 				create_equipment_variant = {
 					name = "MBB Törni"
-					type = heavy_tank_chassis_4
+					type = heavy_tank_chassis_3 # 2015
 					parent_version = 0
 					modules = {
-						helicopter_inner_hardpoint = helicopter_aa_missile_gen2
-						nose_gun_type_slot = helicopter_medium_nose_gun_gen2
+						chassis_type_slot = helicopter_medium_chassis
+						helicopter_body_layout = gunship_layout
+						helicopter_body_mount_1 = helicopter_multiple_atgm_gen3
+						helicopter_body_mount_2 = helicopter_rocket_pod_gen3
+						nose_gun_type_slot = helicopter_medium_nose_gun_gen3
 						armor_type_slot = helicopter_armor_gen3
 						engine_type_slot = helicopter_turbine_engine_gen4
 						defence_type_slot = active_defence_system_gen1
-						sensor_and_avionics_slot = sensors_and_avionics_gen_4
-						helicopter_middle_hardpoint_1 = helicopter_multiple_atgm_gen2
-						special_defensive_type_slot_1 = em_lock_detection_system_gen2
+						sensor_and_avionics_slot = sensors_and_avionics_gen_3
+						helicopter_wing_mount_1 = helicopter_aa_missile_gen3
+						defence_type_slot_2 = em_lock_detection_system_gen2
 					}
 					upgrades = {
 						helicopter_nsb_upgrade = 2
@@ -16395,18 +16555,18 @@ country_event = {
 			}
 		}
 		else = {
-			set_technology = { attack_helicopter4 = 1 }
+			set_technology = { attack_helicopter_4 = 1 }
 
-			add_tech_bonus = {
-				name = GER_invest_in_heli
-				bonus = 0.50
-				uses = 1
-				category = CAT_atk_heli
-			}
 			add_equipment_to_stockpile = {
-				type = attack_helicopter4
+				type = attack_helicopter_4
 				amount = 50
 			}
+		}
+		add_tech_bonus = {
+			name = GER_invest_in_heli
+			bonus = 0.50
+			uses = 1
+			category = CAT_atk_heli
 		}
 		USA = {
 			add_opinion_modifier = { target = GER modifier = military_cooperation }
@@ -16429,44 +16589,51 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: germany_foci.154.c executed"
 		custom_effect_tooltip = germany_foci.154.c_desc
 		set_temp_variable = { treasury_change = GER.gdp_per_capita }
-		multiply_temp_variable = { treasury_change = -0.20 }
+		multiply_temp_variable = { treasury_change = -0.25 }
 		modify_treasury_effect = yes
 		if = {
 			limit = { has_dlc = "No Step Back" }
 			set_technology = { nsb_attack_helicopter_tech_4 = 1 }
 			create_equipment_variant = {
 				name = "Eurocopter Rudel"
-				type = heavy_tank_chassis_4
+				type = heavy_tank_chassis_3 # 2015
 				parent_version = 0
 				modules = {
-					helicopter_inner_hardpoint = helicopter_rocket_pod_gen2
-					nose_gun_type_slot = helicopter_light_nose_gun_gen2
+					chassis_type_slot = helicopter_medium_chassis
+					helicopter_body_layout = gunship_layout
+					helicopter_body_mount_1 = helicopter_rocket_pod_gen3
+					nose_gun_type_slot = helicopter_light_nose_gun_gen3
 					armor_type_slot = helicopter_armor_gen3
 					engine_type_slot = helicopter_piston_engine_gen3
-					defence_type_slot = flare_launchers
-					sensor_and_avionics_slot = sensors_and_avionics_gen_4
-					helicopter_middle_hardpoint_1 = helicopter_multiple_atgm_gen2
-					special_defensive_type_slot_1 = em_lock_detection_system_gen2
+					defence_type_slot = active_defence_system_gen1
+					sensor_and_avionics_slot = sensors_and_avionics_gen_3
+					helicopter_wing_mount_1 = helicopter_multiple_atgm_gen3
+					defence_type_slot_2 = em_lock_detection_system_gen2
 				}
 				upgrades = {
-					helicopter_nsb_upgrade = 2
+					helicopter_nsb_upgrade = 4
 				}
 				design_team = mio:GER_Eurocopter_helicopters_tank_manufacturer
 			}
-		}
-		else = {
-			set_technology = { attack_helicopter4 = 1 }
-
-			add_tech_bonus = {
-				name = GER_invest_in_heli
-				bonus = 0.50
-				uses = 1
-				category = CAT_atk_heli
-			}
 			add_equipment_to_stockpile = {
-				type = attack_helicopter4
+				type = heavy_tank_chassis_3 # 2015
+				variant_name = "Eurocopter Rudel"
 				amount = 50
 			}
+		}
+		else = {
+			set_technology = { attack_helicopter_4 = 1 }
+
+			add_equipment_to_stockpile = {
+				type = attack_helicopter_4
+				amount = 50
+			}
+		}
+		add_tech_bonus = {
+			name = GER_invest_in_heli
+			bonus = 0.50
+			uses = 1
+			category = CAT_atk_heli
 		}
 		ai_chance = {
 			base = 5
@@ -16507,7 +16674,6 @@ news_event = {
 
 	option = {
 		name = GER_news.03.a
-		log = "[GetDateText]: [This.GetName]: GER_news.03.a executed"
 
 	}
 }
@@ -16525,7 +16691,6 @@ news_event = {
 
 	option = {
 		name = GER_news.04.a
-		log = "[GetDateText]: [This.GetName]: GER_news.04.a executed"
 
 	}
 }
@@ -16542,7 +16707,6 @@ news_event = {
 
 	option = {
 		name = GER_news.05.a
-		log = "[GetDateText]: [This.GetName]: GER_news.05.a executed"
 
 	}
 }
@@ -16559,7 +16723,6 @@ news_event = {
 
 	option = {
 		name = GER_news.06.a
-		log = "[GetDateText]: [This.GetName]: GER_news.06.a executed"
 
 	}
 }
@@ -16577,7 +16740,6 @@ news_event = {
 
 	option = {
 		name = GER_news.07.a
-		log = "[GetDateText]: [This.GetName]: GER_news.07.a executed"
 
 	}
 }
@@ -16594,7 +16756,6 @@ news_event = {
 
 	option = {
 		name = GER_news.08.a
-		log = "[GetDateText]: [This.GetName]: GER_news.08.a executed"
 
 	}
 }
@@ -16611,7 +16772,6 @@ news_event = {
 
 	option = {
 		name = GER_news.09.a
-		log = "[GetDateText]: [This.GetName]: GER_news.09.a executed"
 
 	}
 }
@@ -16628,7 +16788,6 @@ news_event = {
 
 	option = {
 		name = GER_news.10.a
-		log = "[GetDateText]: [This.GetName]: GER_news.10.a executed"
 
 	}
 }
@@ -16646,7 +16805,6 @@ news_event = {
 
 	option = {
 		name = GER_news.11.a
-		log = "[GetDateText]: [This.GetName]: GER_news.11.a executed"
 
 	}
 }
@@ -16663,7 +16821,6 @@ news_event = {
 
 	option = {
 		name = GER_news.12.a
-		log = "[GetDateText]: [This.GetName]: GER_news.12.a executed"
 
 	}
 }
@@ -20233,7 +20390,7 @@ country_event = {
 			multiply_temp_variable = { debt_change = 0.30 }
 			modify_debt_effect = yes
 			add_tech_bonus = {
-				name = GER_Diplomacy.7.t
+				name = CAT_ai
 				category = CAT_ai
 				category = CAT_computing_tech
 				bonus = 1.0
