@@ -53,6 +53,9 @@ antarctica_initialize_station_display_arrays = {
 		set_variable = { global.selected_antarctica_station_module_fuel_storage = 0 }
 		set_variable = { global.selected_antarctica_station_module_housing = 0 }
 		set_variable = { global.selected_antarctica_station_module_laboratories = 0 }
+		clear_array = global.selected_antarctica_station_laboratories_list
+		set_variable = { global.selected_antarctica_station_laboratories_current_index = 0 }
+		set_variable = { global.selected_antarctica_station_output_research = 0 }
 		set_variable = { global.selected_antarctica_station_output_power = 0 }
 		set_variable = { global.selected_antarctica_station_output_power_total = 0 }
 		set_variable = { global.selected_antarctica_station_output_fuel_usage = 0 }
@@ -90,7 +93,7 @@ antarctica_recalculate_station_module_outputs = {
 				set_temp_variable = { life_module = global.research_station_[ID]_module_life_support }
 				set_temp_variable = { fuel_module = global.research_station_[ID]_module_fuel_storage }
 				set_temp_variable = { house_module = global.research_station_[ID]_module_housing }
-				set_temp_variable = { lab_module = global.research_station_[ID]_module_laboratories }
+				set_temp_variable = { lab_module = global.research_station_[ID]_module_laboratories_list^0 }
 			}
 			ID = "[?station_id]"
 		}
@@ -545,7 +548,7 @@ antarctica_set_station_module = {
 		else_if = {
 			limit = { check_variable = { module_category = 5 } }
 			meta_effect = {
-				text = { set_variable = { global.research_station_[ID]_module_laboratories = [MOD] } }
+				text = { add_to_array = { global.research_station_[ID]_module_laboratories_list = [MOD] } }
 				ID = "[?station_id]"
 				MOD = "[?module_id]"
 			}
@@ -751,7 +754,9 @@ antarctica_create_startup_research_station = {
 			set_variable = { global.research_station_[ID]_module_life_support = 1 }
 			set_variable = { global.research_station_[ID]_module_fuel_storage = 1 }
 			set_variable = { global.research_station_[ID]_module_housing = 1 }
-			set_variable = { global.research_station_[ID]_module_laboratories = 1 }
+			clear_array = global.research_station_[ID]_module_laboratories_list
+			add_to_array = { global.research_station_[ID]_module_laboratories_list = 1 }
+			set_variable = { global.research_station_[ID]_module_laboratories_current_index = 0 }
 		}
 		ID = "[?station_id]"
 	}
@@ -765,6 +770,12 @@ antarctica_create_startup_research_station = {
 			ID = "[?station_id]"
 			NAME = "[?station_name_id]"
 		}
+	}
+
+	# Initialize laboratory module tracking for new stations
+	meta_effect = {
+		text = { clear_array = global.research_station_[ID]_module_laboratories_list }
+		ID = "[?station_id]"
 	}
 
 	antarctica_recalculate_station_module_outputs = yes
@@ -782,7 +793,9 @@ antarctica_set_selected_station_controller = {
 				set_variable = { global.selected_antarctica_station_module_life_support = global.research_station_[ID]_module_life_support }
 				set_variable = { global.selected_antarctica_station_module_fuel_storage = global.research_station_[ID]_module_fuel_storage }
 				set_variable = { global.selected_antarctica_station_module_housing = global.research_station_[ID]_module_housing }
-				set_variable = { global.selected_antarctica_station_module_laboratories = global.research_station_[ID]_module_laboratories }
+				clear_array = global.selected_antarctica_station_laboratories_list
+				copy_array = { from = global.research_station_[ID]_module_laboratories_list to = global.selected_antarctica_station_laboratories_list }
+				set_variable = { global.selected_antarctica_station_laboratories_current_index = global.research_station_[ID]_module_laboratories_current_index }
 				set_variable = { global.selected_antarctica_station_output_power = global.research_station_[ID]_output_power }
 				set_variable = { global.selected_antarctica_station_output_power_total = global.research_station_[ID]_output_power_total }
 				set_variable = { global.selected_antarctica_station_output_fuel_usage = global.research_station_[ID]_output_fuel_usage }
@@ -796,9 +809,12 @@ antarctica_set_selected_station_controller = {
 				set_variable = { global.selected_antarctica_station_output_required_staff = global.research_station_[ID]_output_required_staff }
 				set_variable = { global.selected_antarctica_station_output_total_staff = global.research_station_[ID]_output_total_staff }
 				set_variable = { global.selected_antarctica_station_output_staff_capacity = global.research_station_[ID]_output_staff_capacity }
+				set_variable = { global.selected_antarctica_station_output_research = global.research_station_[ID]_output_research }
 			}
 			ID = "[?global.selected_antarctica_station]"
 		}
+
+		# Array will be properly initialized from station data
 	}
 	else = {
 		set_variable = { global.selected_antarctica_station_controller = 0 }
@@ -806,7 +822,8 @@ antarctica_set_selected_station_controller = {
 		set_variable = { global.selected_antarctica_station_module_life_support = 0 }
 		set_variable = { global.selected_antarctica_station_module_fuel_storage = 0 }
 		set_variable = { global.selected_antarctica_station_module_housing = 0 }
-		set_variable = { global.selected_antarctica_station_module_laboratories = 0 }
+		clear_array = global.selected_antarctica_station_laboratories_list
+		set_variable = { global.selected_antarctica_station_laboratories_current_index = 0 }
 		set_variable = { global.selected_antarctica_station_output_power = 0 }
 		set_variable = { global.selected_antarctica_station_output_power_total = 0 }
 		set_variable = { global.selected_antarctica_station_output_fuel_usage = 0 }
@@ -820,8 +837,10 @@ antarctica_set_selected_station_controller = {
 		set_variable = { global.selected_antarctica_station_output_required_staff = 0 }
 		set_variable = { global.selected_antarctica_station_output_total_staff = 0 }
 		set_variable = { global.selected_antarctica_station_output_staff_capacity = 0 }
+		set_variable = { global.selected_antarctica_station_output_research = 0 }
 	}
 }
+
 
 antarctica_clear_laboratory_country_effects = {
 	clear_variable = antarctica_lab_cat_agriculture_tech
@@ -879,7 +898,8 @@ antarctica_apply_station_laboratory_effects_to_controller = {
 		meta_effect = {
 			text = {
 				set_temp_variable = { station_controller = global.research_station_[ID]_controller }
-				set_temp_variable = { station_lab_module = global.research_station_[ID]_module_laboratories }
+				set_temp_variable = { current_lab_index = global.research_station_[ID]_module_laboratories_current_index }
+				set_temp_variable = { station_lab_module = global.research_station_[ID]_module_laboratories_list^current_lab_index }
 			}
 			ID = "[?station_id]"
 		}
