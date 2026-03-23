@@ -317,7 +317,7 @@ execute_OMT = {
 			#log = "start OTM interest_rate [THIS.GetTag] [?THIS.interest_rate] debt [?THIS.debt] OMT_size_limit [?global.OMT_size_limit] OMT_total_value [?global.OMT_total_value]"
 			if = {
 				limit = {
-					has_idea = the_euro
+					has_idea = euro
 					check_variable = {
 						var = THIS.debt
 						value = 10000.0
@@ -350,7 +350,7 @@ execute_OMT = {
 			}
 			else_if = {
 				limit = {
-					has_idea = the_euro
+					has_idea = euro
 					check_variable = { THIS.debt < 10000.0 }
 					check_variable = {
 						var = THIS.debt
@@ -386,7 +386,7 @@ execute_OMT = {
 			}
 			else_if = {
 				limit = {
-					has_idea = the_euro
+					has_idea = euro
 					check_variable = { THIS.debt < 1000.0 }
 					check_variable = {
 						var = THIS.debt
@@ -421,7 +421,7 @@ execute_OMT = {
 			}
 			else_if = {
 				limit = {
-					has_idea = the_euro
+					has_idea = euro
 					check_variable = { THIS.debt < 100.0 }
 					check_variable = {
 						var = THIS.debt
@@ -456,7 +456,7 @@ execute_OMT = {
 			}
 			else_if = {
 				limit = {
-					has_idea = the_euro
+					has_idea = euro
 					check_variable = { THIS.debt < 10.0 }
 					check_variable = {
 						var = THIS.debt
@@ -502,7 +502,7 @@ remove_OMT = {
 			array = global.EU_member
 			if = {
 				limit = {
-					has_idea = the_euro
+					has_idea = euro
 				}
 				log = "remove_effect interest_rate [THIS.GetTag] [?THIS.interest_rate] debt [?THIS.debt] OMT_size_limit [?global.OMT_size_limit] OMT_total_value [?global.OMT_total_value]"
 				add_to_variable = {
@@ -528,7 +528,7 @@ leaving_EU = {
 		remove_ideas = EU_member
 	}
 	EU_clear_voting = yes ### new one
-	remove_ideas = the_euro
+	remove_ideas = euro
 	custom_effect_tooltip = tooltip_EU_remove_laws_and_offices
 	hidden_effect = {
 		every_other_country = {
@@ -1423,11 +1423,13 @@ on_startup_euu_action = {
 		every_country = {
 			limit = { has_idea = EU_member }
 			remove_ideas = {
-				the_euro
+				euro
 				EU_member
 				foreign_data_kraken
 				asylum_shopping
 			}
+
+			add_ideas = no_foreign_reserve
 		}
 		set_global_flag = GAME_RULE_eu_disabled
 	}
@@ -2315,6 +2317,11 @@ update_EU_budget_call_rate = {
 		set_variable = { THIS.EU_budget_contribution_weekly = THIS.EU_budget_contribution }
 		divide_variable = { THIS.EU_budget_contribution_weekly = 52 } #Weeks in a year
 		divide_variable = { THIS.EU_budget_ratio = global.EU_total_budget }
+	}
+	# EUR seigniorage income accumulated while EUU was not active
+	if = { limit = { check_variable = { global.EU_seigniorage_pool > 0 } }
+		add_to_variable = { global.EU_total_budget = global.EU_seigniorage_pool }
+		set_variable = { global.EU_seigniorage_pool = 0 }
 	}
 	for_each_scope_loop = { # Needs to be seperate for the total budget to sum up first
 		array = global.EU_member
@@ -3288,240 +3295,55 @@ clr_global_flag_PG_X_support = {
 	update_eu_dirty_variable = yes
 }
 
-
-###############################
-### EU POTEF dynmod effects ###
-###############################
-
-update_POTEF_army_infantry_defence_factor = {
-	custom_effect_tooltip = POTEF_army_infantry_defence_factor_tt
-	add_to_variable = { POTEF_army_infantry_defence_factor = POTEF_army_infantry_defence_factor_change }
-}
-update_POTEF_terrain_penalty_reduction = {
-	custom_effect_tooltip = POTEF_terrain_penalty_reduction_tt
-	add_to_variable = { POTEF_terrain_penalty_reduction = POTEF_terrain_penalty_reduction_change }
-}
-update_POTEF_army_armor_attack_factor = {
-	custom_effect_tooltip = POTEF_army_armor_attack_factor_tt
-	add_to_variable = { POTEF_army_armor_attack_factor = POTEF_army_armor_attack_factor_change }
-}
-update_POTEF_army_armor_speed_factor = {
-	custom_effect_tooltip = POTEF_army_armor_speed_factor_tt
-	add_to_variable = { POTEF_army_armor_speed_factor = POTEF_army_armor_speed_factor_change }
-}
-update_POTEF_army_armor_defence_factor = {
-	custom_effect_tooltip = POTEF_army_armor_defence_factor_tt
-	add_to_variable = { POTEF_army_armor_defence_factor = POTEF_army_armor_defence_factor_change }
-}
-update_POTEF_recon_factor = {
-	custom_effect_tooltip = POTEF_recon_factor_tt
-	add_to_variable = { POTEF_recon_factor = POTEF_recon_factor_change }
-}
-update_POTEF_river_crossing_factor = {
-	custom_effect_tooltip = POTEF_river_crossing_factor_tt
-	add_to_variable = { POTEF_river_crossing_factor = POTEF_river_crossing_factor_change }
-}
-update_POTEF_paradrop_organization_factor = {
-	custom_effect_tooltip = POTEF_paradrop_organization_factor_tt
-	add_to_variable = { POTEF_paradrop_organization_factor = POTEF_paradrop_organization_factor_change }
-}
-update_POTEF_extra_paratrooper_supply_grace = {
-	custom_effect_tooltip = POTEF_extra_paratrooper_supply_grace_tt
-	add_to_variable = { POTEF_extra_paratrooper_supply_grace = POTEF_extra_paratrooper_supply_grace_change }
-}
-update_POTEF_experience_gain_navy = {
-	custom_effect_tooltip = POTEF_experience_gain_navy_tt
-	add_to_variable = { POTEF_experience_gain_navy = POTEF_experience_gain_navy_change }
-}
-update_POTEF_experience_gain_navy_factor = {
-	custom_effect_tooltip = POTEF_experience_gain_navy_factor_tt
-	add_to_variable = { POTEF_experience_gain_navy_factor = POTEF_experience_gain_navy_factor_change }
-}
-update_POTEF_navy_org_factor = {
-	custom_effect_tooltip = POTEF_navy_org_factor_tt
-	add_to_variable = { POTEF_navy_org_factor = POTEF_navy_org_factor_change }
-}
-update_POTEF_army_intel_factor = {
-	custom_effect_tooltip = POTEF_army_intel_factor_tt
-	add_to_variable = { POTEF_army_intel_factor = POTEF_army_intel_factor_change }
-}
-update_POTEF_navy_intel_factor = {
-	custom_effect_tooltip = POTEF_navy_intel_factor_tt
-	add_to_variable = { POTEF_navy_intel_factor = POTEF_navy_intel_factor_change }
-}
-update_POTEF_airforce_intel_factor = {
-	custom_effect_tooltip = POTEF_airforce_intel_factor_tt
-	add_to_variable = { POTEF_airforce_intel_factor = POTEF_airforce_intel_factor_change }
-}
-update_POTEF_winter_attrition_factor = {
-	custom_effect_tooltip = POTEF_winter_attrition_factor_tt
-	add_to_variable = { POTEF_winter_attrition_factor = POTEF_winter_attrition_factor_change }
-}
-update_POTEF_acclimatization_cold_climate_gain_factor = {
-	custom_effect_tooltip = POTEF_acclimatization_cold_climate_gain_factor_tt
-	add_to_variable = { POTEF_acclimatization_cold_climate_gain_factor = POTEF_acclimatization_cold_climate_gain_factor_change }
-}
-update_POTEF_mechanized_attack_factor = {
-	custom_effect_tooltip = POTEF_mechanized_attack_factor_tt
-	add_to_variable = { POTEF_mechanized_attack_factor = POTEF_mechanized_attack_factor_change }
-}
-update_POTEF_mechanized_defence_factor = {
-	custom_effect_tooltip = POTEF_mechanized_defence_factor_tt
-	add_to_variable = { POTEF_mechanized_defence_factor = POTEF_mechanized_defence_factor_change }
-}
-update_POTEF_motorized_attack_factor = {
-	custom_effect_tooltip = POTEF_motorized_attack_factor_tt
-	add_to_variable = { POTEF_motorized_attack_factor = POTEF_motorized_attack_factor_change }
-}
-update_POTEF_motorized_defence_factor = {
-	custom_effect_tooltip = POTEF_motorized_defence_factor_tt
-	add_to_variable = { POTEF_motorized_defence_factor = POTEF_motorized_defence_factor_change }
-}
-update_POTEF_max_planning = {
-	custom_effect_tooltip = POTEF_max_planning_tt
-	add_to_variable = { POTEF_max_planning = POTEF_max_planning_change }
-}
-update_POTEF_planning_speed = {
-	custom_effect_tooltip = POTEF_planning_speed_tt
-	add_to_variable = { POTEF_planning_speed = POTEF_planning_speed_change }
-}
-update_POTEF_political_power_factor = {
-	custom_effect_tooltip = POTEF_political_power_factor_tt
-	add_to_variable = { POTEF_political_power_factor = POTEF_political_power_factor_change }
-}
-update_POTEF_command_power_gain = {
-	custom_effect_tooltip = POTEF_command_power_gain_tt
-	add_to_variable = { POTEF_command_power_gain = POTEF_command_power_gain_change }
-}
-update_POTEF_monthly_population = {
-	custom_effect_tooltip = POTEF_monthly_population_tt
-	add_to_variable = { POTEF_monthly_population = POTEF_monthly_population_change }
-}
-update_POTEF_war_support_factor = {
-	custom_effect_tooltip = POTEF_war_support_factor_tt
-	add_to_variable = { POTEF_war_support_factor = POTEF_war_support_factor_change }
-}
-update_POTEF_trade_opinion_factor = {
-	custom_effect_tooltip = POTEF_trade_opinion_factor_tt
-	add_to_variable = { POTEF_trade_opinion_factor = POTEF_trade_opinion_factor_change }
-}
-update_POTEF_opinion_gain_monthly_factor = {
-	custom_effect_tooltip = POTEF_opinion_gain_monthly_factor_tt
-	add_to_variable = { POTEF_opinion_gain_monthly_factor = POTEF_opinion_gain_monthly_factor_change }
-}
-update_POTEF_consumer_goods_factor = {
-	custom_effect_tooltip = POTEF_consumer_goods_factor_tt
-	add_to_variable = { POTEF_consumer_goods_factor = POTEF_consumer_goods_factor_change }
-}
-update_POTEF_intel_network_gain_factor = {
-	custom_effect_tooltip = POTEF_intel_network_gain_factor_tt
-	add_to_variable = { POTEF_intel_network_gain_factor = POTEF_intel_network_gain_factor_change }
-}
-update_POTEF_send_volunteer_size = {
-	custom_effect_tooltip = POTEF_send_volunteer_size_tt
-	add_to_variable = { POTEF_send_volunteer_size = POTEF_send_volunteer_size_change }
-}
-update_POTEF_amphibious_invasion = {
-	custom_effect_tooltip = POTEF_amphibious_invasion_tt
-	add_to_variable = { POTEF_amphibious_invasion = POTEF_amphibious_invasion_change }
-}
-update_POTEF_amphibious_invasion_defence = {
-	custom_effect_tooltip = POTEF_amphibious_invasion_defence_tt
-	add_to_variable = { POTEF_amphibious_invasion_defence = POTEF_amphibious_invasion_defence_change }
-}
-update_POTEF_naval_invasion_penalty = {
-	custom_effect_tooltip = POTEF_naval_invasion_penalty_tt
-	add_to_variable = { POTEF_naval_invasion_penalty = POTEF_naval_invasion_penalty_change }
-}
-update_POTEF_naval_invasion_prep_speed = {
-	custom_effect_tooltip = POTEF_naval_invasion_prep_speed_tt
-	add_to_variable = { POTEF_naval_invasion_prep_speed = POTEF_naval_invasion_prep_speed_change }
-}
-update_POTEF_naval_invasion_capacity = {
-	custom_effect_tooltip = POTEF_naval_invasion_capacity_tt
-	add_to_variable = { POTEF_naval_invasion_capacity = POTEF_naval_invasion_capacity_change }
-}
-update_POTEF_invasion_preparation = {
-	custom_effect_tooltip = POTEF_invasion_preparation_tt
-	add_to_variable = { POTEF_invasion_preparation = POTEF_invasion_preparation_change }
-}
-update_POTEF_air_attack_factor = {
-	custom_effect_tooltip = POTEF_air_attack_factor_tt
-	add_to_variable = { POTEF_air_attack_factor = POTEF_air_attack_factor_change }
-}
-update_POTEF_cas_damage_reduction = {
-	custom_effect_tooltip = POTEF_cas_damage_reduction_tt
-	add_to_variable = { POTEF_cas_damage_reduction = POTEF_cas_damage_reduction_change }
-}
-update_POTEF_army_artillery_attack_factor = {
-	custom_effect_tooltip = POTEF_army_artillery_attack_factor_tt
-	add_to_variable = { POTEF_army_artillery_attack_factor = POTEF_army_artillery_attack_factor_change }
-}
-update_POTEF_army_artillery_defence_factor = {
-	custom_effect_tooltip = POTEF_army_artillery_defence_factor_tt
-	add_to_variable = { POTEF_army_artillery_defence_factor = POTEF_army_artillery_defence_factor_change }
-}
-update_POTEF_boost_resistance_factor = {
-	custom_effect_tooltip = POTEF_boost_resistance_factor_tt
-	add_to_variable = { POTEF_boost_resistance_factor = POTEF_boost_resistance_factor_change }
-}
-update_POTEF_root_out_resistance_effectiveness_factor = {
-	custom_effect_tooltip = POTEF_root_out_resistance_effectiveness_factor_tt
-	add_to_variable = { POTEF_root_out_resistance_effectiveness_factor = POTEF_root_out_resistance_effectiveness_factor_change }
-}
-update_POTEF_resistance_damage_to_garrison = {
-	custom_effect_tooltip = POTEF_resistance_damage_to_garrison_tt
-	add_to_variable = { POTEF_resistance_damage_to_garrison = POTEF_resistance_damage_to_garrison_change }
-}
-update_POTEF_resistance_target = {
-	custom_effect_tooltip = POTEF_resistance_target_tt
-	add_to_variable = { POTEF_resistance_target = POTEF_resistance_target_change }
-}
-update_POTEF_max_dig_in_factor = {
-	custom_effect_tooltip = POTEF_max_dig_in_factor_tt
-	add_to_variable = { POTEF_max_dig_in_factor = POTEF_max_dig_in_factor_change }
-}
-update_POTEF_dig_in_speed_factor = {
-	custom_effect_tooltip = POTEF_dig_in_speed_factor_tt
-	add_to_variable = { POTEF_dig_in_speed_factor = POTEF_dig_in_speed_factor_change }
-}
-update_POTEF_defence = {
-	custom_effect_tooltip = POTEF_defence_tt
-	add_to_variable = { POTEF_defence = POTEF_defence_change }
-}
-update_POTEF_production_speed_bunker_factor = {
-	custom_effect_tooltip = POTEF_production_speed_bunker_factor_tt
-	add_to_variable = { POTEF_production_speed_bunker_factor = POTEF_production_speed_bunker_factor_change }
-}
-update_POTEF_special_forces_attack_factor = {
-	custom_effect_tooltip = POTEF_special_forces_attack_factor_tt
-	add_to_variable = { POTEF_special_forces_attack_factor = POTEF_special_forces_attack_factor_change }
-}
-update_POTEF_special_forces_defence_factor = {
-	custom_effect_tooltip = POTEF_special_forces_defence_factor_tt
-	add_to_variable = { POTEF_special_forces_defence_factor = POTEF_special_forces_defence_factor_change }
-}
-update_POTEF_special_forces_min = {
-	custom_effect_tooltip = POTEF_special_forces_min_tt
-	add_to_variable = { POTEF_special_forces_min = POTEF_special_forces_min_change }
-}
-update_POTEF_special_forces_cap = {
-	custom_effect_tooltip = POTEF_special_forces_cap_tt
-	add_to_variable = { POTEF_special_forces_cap = POTEF_special_forces_cap_change }
-}
-update_POTEF_army_infantry_attack_factor = {
-	custom_effect_tooltip = POTEF_army_infantry_attack_factor_tt
-	add_to_variable = { POTEF_army_infantry_attack_factor = POTEF_army_infantry_attack_factor_change }
-}
-update_POTEF_army_speed_factor = {
-	custom_effect_tooltip = POTEF_army_speed_factor_tt
-	add_to_variable = { POTEF_army_speed_factor = POTEF_army_speed_factor_change }
-}
-update_POTEF_stability_factor = {
-	custom_effect_tooltip = POTEF_stability_factor_tt
-	add_to_variable = { POTEF_stability_factor = POTEF_stability_factor_change }
-}
-update_POTEF_research_speed_factor = {
-	custom_effect_tooltip = POTEF_research_speed_factor_tt
-	add_to_variable = { POTEF_research_speed_factor = POTEF_research_speed_factor_change }
+joining_the_euro = {
+	set_country_flag = EU_joined_the_eurozone
+	if = {
+		limit = { has_idea = us_dollar }
+		swap_ideas = {
+			remove_idea = us_dollar
+			add_idea = euro
+		}
+	}
+	if = {
+		limit = { has_idea = chinese_yuan }
+		swap_ideas = {
+			remove_idea = chinese_yuan
+			add_idea = euro
+		}
+	}
+	if = {
+		limit = { has_idea = japanese_yen }
+		swap_ideas = {
+			remove_idea = japanese_yen
+			add_idea = euro
+		}
+	}
+	if = {
+		limit = { has_idea = russia_rouble }
+		swap_ideas = {
+			remove_idea = russia_rouble
+			add_idea = euro
+		}
+	}
+	if = {
+		limit = { has_idea = british_pound }
+		swap_ideas = {
+			remove_idea = british_pound
+			add_idea = euro
+		}
+	}
+	if = {
+		limit = { has_idea = swiss_frank }
+		swap_ideas = {
+			remove_idea = swiss_frank
+			add_idea = euro
+		}
+	}
+	if = {
+		limit = { has_idea = no_foreign_reserve }
+		swap_ideas = {
+			remove_idea = no_foreign_reserve
+			add_idea = euro
+		}
+	}
 }

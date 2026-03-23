@@ -759,8 +759,8 @@ country_event = {
 			}
 		}
 		newline = yes
-		add_equipment_to_stockpile = { type = infantry_weapons amount = -500 producer = TUR }
-		add_equipment_to_stockpile = { type = util_vehicle_equipment amount = -75 producer = TUR }
+		add_equipment_to_stockpile = { type = infantry_weapons_1 amount = -500 producer = TUR }
+		add_equipment_to_stockpile = { type = util_vehicle_type amount = -75 producer = TUR }
 		newline = yes
 		add_timed_idea = {
 			idea = TUR_supply_disruption
@@ -774,14 +774,14 @@ country_event = {
 	option = {
 		name = TUR_pkk.200.b
 		log = "[GetDateText]: [This.GetName]: TUR_pkk.200.b executed"
-		add_equipment_to_stockpile = { type = infantry_weapons amount = -500 producer = TUR }
-		add_equipment_to_stockpile = { type = util_vehicle_equipment amount = -75 producer = TUR }
+		add_equipment_to_stockpile = { type = infantry_weapons_1 amount = -500 producer = TUR }
+		add_equipment_to_stockpile = { type = util_vehicle_type amount = -75 producer = TUR }
 		custom_effect_tooltip = TUR_2X_LOSS_TT
 		hidden_effect = {
 			random_list = {
 				50 = {
-					add_equipment_to_stockpile = { type = infantry_weapons amount = -500 producer = TUR }
-					add_equipment_to_stockpile = { type = util_vehicle_equipment amount = -75 producer = TUR }
+					add_equipment_to_stockpile = { type = infantry_weapons_1 amount = -500 producer = TUR }
+					add_equipment_to_stockpile = { type = util_vehicle_type amount = -75 producer = TUR }
 				}
 				50 = {
 					# Nothing happens
@@ -851,9 +851,9 @@ country_event = {
 			category = CAT_cnc
 		}
 		newline = yes
-		add_equipment_to_stockpile = { type = infantry_weapons amount = -900 producer = TUR }
-		add_equipment_to_stockpile = { type = cnc_equipment amount = -575 producer = TUR }
-		add_equipment_to_stockpile = { type = util_vehicle_equipment amount = -175 producer = TUR }
+		add_equipment_to_stockpile = { type = infantry_weapons_1 amount = -900 producer = TUR }
+		add_equipment_to_stockpile = { type = cnc_equipment_type amount = -575 producer = TUR }
+		add_equipment_to_stockpile = { type = util_vehicle_type amount = -175 producer = TUR }
 		newline = yes
 		TUR_PKK_attack = yes
 		ai_chance = {
@@ -915,8 +915,8 @@ country_event = {
 	option = {
 		name = TUR_pkk.202.a
 		log = "[GetDateText]: [This.GetName]: TUR_pkk.202.a executed"
-		add_equipment_to_stockpile = { type = infantry_weapons amount = -1000 producer = TUR }
-		add_equipment_to_stockpile = { type = util_vehicle_equipment amount = -275 producer = TUR }
+		add_equipment_to_stockpile = { type = infantry_weapons_1 amount = -1000 producer = TUR }
+		add_equipment_to_stockpile = { type = util_vehicle_type amount = -275 producer = TUR }
 		newline = yes
 		random_army_leader = {
 			add_skill_level = 1
@@ -1056,8 +1056,8 @@ country_event = {
 	option = {
 		name = TUR_pkk.203.b
 		log = "[GetDateText]: [This.GetName]: TUR_pkk.203.b executed"
-		add_equipment_to_stockpile = { type = infantry_weapons amount = 2500 producer = TUR }
-		add_equipment_to_stockpile = { type = util_vehicle_equipment amount = 450 producer = TUR }
+		add_equipment_to_stockpile = { type = infantry_weapons_1 amount = 2500 producer = TUR }
+		add_equipment_to_stockpile = { type = util_vehicle_type amount = 450 producer = TUR }
 		newline = yes
 		set_temp_variable = { temp_opinion = -10 }
 		change_the_Ulema_opinion = yes
@@ -1261,7 +1261,7 @@ country_event = {
 		name = TUR_pkk.209.a
 		log = "[GetDateText]: [This.GetName]: TUR_pkk.209.a executed"
 		add_equipment_to_stockpile = {
-			type = util_vehicle_equipment
+			type = util_vehicle_type
 			amount = -75
 			producer = TUR
 		}
@@ -1287,7 +1287,7 @@ country_event = {
 		army_experience = 45
 		newline = yes
 		add_equipment_to_stockpile = {
-			type = util_vehicle_equipment
+			type = util_vehicle_type
 			amount = 175
 			producer = TUR
 		}
@@ -1498,7 +1498,6 @@ news_event = {
 	major = yes
 	option = {
 		name = TUR_pkk.217.a
-		log = "[GetDateText]: [This.GetName]: TUR_pkk.217.a executed"
 		ai_chance = {
 			base = 1
 		}
@@ -2793,7 +2792,6 @@ news_event = { #Military Coup in Turkey Succeeds
 
 	option = {
 		name = Turkey.12.a	#ok
-		log = "[GetDateText]: [This.GetName]: Turkey.12.a executed"
 		ai_chance = {
 			factor = 100
 		}
@@ -2812,7 +2810,6 @@ news_event = { #Military Coup in Turkey Fails
 
 	option = {
 		name = Turkey.14.a	#ok
-		log = "[GetDateText]: [This.GetName]: Turkey.14.a executed"
 		ai_chance = {
 			factor = 100
 		}
@@ -2831,7 +2828,6 @@ news_event = { #Military Coup plunges Turkey into civilwar
 
 	option = {
 		name = Turkey.15.a	#ok
-		log = "[GetDateText]: [This.GetName]: Turkey.15.a executed"
 		ai_chance = {
 			factor = 100
 		}
@@ -3506,6 +3502,9 @@ country_event = { #Turkey asks us to invade Southern Cyprus
 	option = {
 		name = TurkeyFocusEvents.12.b
 		log = "[GetDateText]: [This.GetName]: TurkeyFocusEvents.12.b executed"
+		set_temp_variable = { wargoal_on = NCY }
+		set_temp_variable = { wargoal_type = 2 }
+		add_threat_from_wargoal_effect = yes
 		create_wargoal = {
 			type = annex_everything
 			target = NCY
@@ -3564,6 +3563,9 @@ country_event = { #Turkey asks us to join them
 	option = {
 		name = TurkeyFocusEvents.15.b
 		log = "[GetDateText]: [This.GetName]: TurkeyFocusEvents.15.b executed"
+		set_temp_variable = { wargoal_on = NCY }
+		set_temp_variable = { wargoal_type = 2 }
+		add_threat_from_wargoal_effect = yes
 		create_wargoal = {
 			type = annex_everything
 			target = NCY
@@ -3594,6 +3596,9 @@ country_event = { #Turkey asks us to join Cyprus
 		name = TurkeyFocusEvents.16.b
 		log = "[GetDateText]: [This.GetName]: TurkeyFocusEvents.16.b executed"
 		CYP = {
+			set_temp_variable = { wargoal_on = NCY }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = annex_everything
 				target = NCY
@@ -3741,6 +3746,9 @@ country_event = { #Syria permits the buffer zone
 		name = TurkeyFocusEvents.192.a #Sure
 		log = "[GetDateText]: [This.GetName]: TurkeyFocusEvents.192.a executed"
 		TUR = {
+			set_temp_variable = { wargoal_on = SYR }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = annex_everything
 				target = SYR
@@ -4231,7 +4239,7 @@ country_event = { #Who Revolts?
 		name = TurkeyFocusEvents.31.a
 		log = "[GetDateText]: [This.GetName]: TurkeyFocusEvents.31.a executed"
 		add_equipment_to_stockpile = {
-			type = infantry_weapons1
+			type = infantry_weapons_2
 			amount = -1000
 			producer = TUR
 		}
@@ -4273,7 +4281,7 @@ country_event = { #Who Revolts?
 		name = TurkeyFocusEvents.31.b
 		log = "[GetDateText]: [This.GetName]: TurkeyFocusEvents.31.b executed"
 		add_equipment_to_stockpile = {
-			type = infantry_weapons1
+			type = infantry_weapons_2
 			amount = -5000
 			producer = TUR
 		}
@@ -4620,6 +4628,9 @@ country_event = { #They don't accept
 	option = { # Great
 		name = TurkeyFocusEvents.352.a
 		log = "[GetDateText]: [This.GetName]: TurkeyFocusEvents.352.a executed"
+		set_temp_variable = { wargoal_on = SYR }
+		set_temp_variable = { wargoal_type = 2 }
+		add_threat_from_wargoal_effect = yes
 		create_wargoal = {
 			type = annex_everything
 			target = SYR
@@ -5171,6 +5182,9 @@ country_event = { #Turkey asks for Hejaz
 	option = { #No
 		name = TurkeyFocusEvents.57.a
 		log = "[GetDateText]: [This.GetName]: TurkeyFocusEvents.57.a executed"
+		set_temp_variable = { wargoal_on = SAU }
+		set_temp_variable = { wargoal_type = 2 }
+		add_threat_from_wargoal_effect = yes
 		create_wargoal = {
 			type = annex_everything
 			target = SAU
@@ -6284,7 +6298,6 @@ news_event = { #Moscow Governmental University in Armenia Blows up!
 
 	option = { #Boowoomp
 		name = Armenian_University.1.a
-		log = "[GetDateText]: [This.GetName]: Armenian_University.1.a executed"
 		ai_chance = { factor = 5 }
 	}
 }
@@ -6299,7 +6312,6 @@ news_event = { #Cyprus Unifies under NCY
 
 	option = { #Good!
 		name = Turkey.77.a
-		log = "[GetDateText]: [This.GetName]: Turkey.77.a executed"
 		ai_chance = { factor = 5 }
 	}
 }
@@ -6315,7 +6327,6 @@ news_event = { #Cyprus Unifies under SCY
 
 	option = { #Good!
 		name = Turkey.88.a
-		log = "[GetDateText]: [This.GetName]: Turkey.88.a executed"
 		ai_chance = { factor = 5 }
 	}
 }
@@ -6682,7 +6693,7 @@ country_event = { # Turkish mafia weapon cache discovered
 		name = Turkish_mafia.3.a
 		log = "[GetDateText]: [This.GetName]: Turkish_mafia.3.a executed"
 		add_equipment_to_stockpile = {
-			type = infantry_weapons1
+			type = infantry_weapons_2
 			amount = 300
 			producer = TUR
 		}
@@ -6756,7 +6767,7 @@ country_event = { # Police Lose
 		name = Turkish_mafia.31.a
 		log = "[GetDateText]: [This.GetName]: Turkish_mafia.31.a executed"
 		add_equipment_to_stockpile = {
-			type = infantry_weapons1
+			type = infantry_weapons_2
 			amount = -100
 			producer = TUR
 		}

@@ -374,11 +374,11 @@ faction_goal_marine_corps = {
 					is_field_marshal = no
 					NOT = { has_trait = cavalry_officer }
 					NOT = { has_trait = panzer_leader }
-					NOT = { has_trait = invader }
+					NOT = { has_trait = naval_invader }
 				}
 				gain_xp = 400
 				add_attack = 1
-				add_trait = { trait = invader }
+				add_trait = { trait = naval_invader }
 			}
 		}
 		newline = yes
@@ -397,21 +397,15 @@ faction_goal_marine_corps = {
 		modifier = {
 			add = 10
 			OR = {
-				any_controlled_state = {
-					is_coastal = yes
-				}
+				controls_a_coastal_state = yes
 				any_allied_country = {
-					any_controlled_state = {
-						is_coastal = yes
-					}
+					controls_a_coastal_state = yes
 				}
 			}
 		}
 		modifier = {
 			add = 5
-			any_controlled_state = {
-				is_coastal = yes
-			}
+			controls_a_coastal_state = yes
 		}
 	}
 }

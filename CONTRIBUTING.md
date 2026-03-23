@@ -6,8 +6,8 @@ Thank you for your interest in contributing to Millennium Dawn!
 
 - [Documentation](https://millenniumdawn.github.io/Millennium-Dawn/)
 - [Discord](http://discord.gg/millenniumdawn)
-- [Code Stylization Guide](./docs/dev-resources/code-stylization-guide.md)
-- [Code Resources](./docs/dev-resources/code-resource.md)
+- [Code Stylization Guide](./docs/src/content/resources/code-stylization-guide.md)
+- [Code Resources](./docs/src/content/resources/code-resource.md)
 
 ## Development Setup
 
@@ -51,7 +51,7 @@ pre-commit autoupdate
 
 ### Docs Content Rules (`docs/`)
 
-- Docs are now built with Astro 5+ and content lives in `docs/src/content/**`.
+- Docs are built with Astro 6 and content lives in `docs/src/content/**`.
 - Use Markdown/frontmatter only. Do not add Liquid tags (`{% ... %}` or `{{ ... }}`).
 - Internal links should be root-relative, for example: `[Tutorial](/tutorials/)`.
 - Do not hardcode `"/Millennium-Dawn/..."` in markdown links. Base path is applied during build.
@@ -60,7 +60,9 @@ pre-commit autoupdate
 
 ### Docs Local Checks
 
-[Install Bun](https://bun.com/) first (one-time setup on your computer).
+**Prerequisites:**
+- [Node.js 24 LTS](https://nodejs.org/) or newer (required by Astro 6)
+- [Bun](https://bun.com/) (package manager and script runner)
 
 If you only want to edit docs content (and are not a developer), follow these steps:
 
@@ -89,12 +91,12 @@ bun run dev
 Before opening a PR, run these checks from the same `docs` folder:
 
 ```bash
-bun run lint:md     # checks markdown formatting
-bun run build       # builds the production site
-bun run check:links # checks broken links
+bun run ci
 ```
 
-See [Code Stylization Guide](./docs/dev-resources/code-stylization-guide.md) for details.
+Or run individual checks: `lint:md`, `lint:remark`, `check`, `build`, `check:links`, `check:og`, `check:a11y`, `check:perf`. Full checks also require Python 3 for some validation scripts.
+
+See [Code Stylization Guide](./docs/src/content/resources/code-stylization-guide.md) for details.
 
 ## Pull Request Process
 
@@ -103,15 +105,58 @@ See [Code Stylization Guide](./docs/dev-resources/code-stylization-guide.md) for
 3. Make changes following style guidelines
 4. Run pre-commit hooks
 5. Update [Changelog.txt](./Changelog.txt)
-6. Add yourself to [AUTHORS.md](./docs/misc/authors.md)
+6. Add yourself to [AUTHORS.md](./docs/src/content/misc/authors.md)
 7. Submit a pull request
 
 ## Changelog Guidelines
 
-- Write full sentences describing changes
-- No internal code references (e.g., "ENG_ideas")
+All PRs must update [Changelog.txt](./Changelog.txt) under the current top-most version heading.
+
+### Formatting
+
+- **Version heading**: standalone line (e.g., `v2.0.0`), blank line after
+- **Category header**: 1 space + category name + colon (e.g., ` Bugfix:`)
+- **Entry**: 2 spaces + `- ` + text (e.g., `  - Fixed something`)
+- **Sub-entry**: 4 spaces + `- ` + text (e.g., `    - Detail about the fix`)
+- **Continuation text**: 6 spaces to align with the parent entry's text
+- Blank line between categories
+
+### Categories
+
+Use only these categories (skip any that have no entries):
+
+| Category        | Use for                                                                      |
+| --------------- | ---------------------------------------------------------------------------- |
+| Achievements    | New or changed achievements                                                  |
+| AI              | AI behavior, strategy, or decision-making changes                            |
+| Balance         | Stat tweaks, modifier adjustments, cost/value changes                        |
+| Bugfix          | Bug fixes, crash fixes, typo corrections                                     |
+| Content         | New focus trees, events, decisions, ideas, MIOs, or significant new gameplay |
+| Database        | Country history, OOBs, state data, technology assignments                    |
+| Documentation   | Docs, guides, modding resources                                              |
+| Factions        | Faction mechanics, membership, leadership changes                            |
+| Game Rules      | New or modified game rules                                                   |
+| Graphics        | GFX, icons, portraits, sprites, 3D models                                    |
+| Localization    | Localisation strings, translations, formatting                               |
+| Map             | Map changes, state boundaries, provinces, map modes                          |
+| Music           | New or changed music tracks, sound triggers                                  |
+| Performance     | Optimizations, removed redundant triggers, on_action improvements            |
+| Quality of Life | QoL improvements, UI polish, tooltips                                        |
+| Sound           | Sound effects and audio changes                                              |
+| Technology      | Tech tree changes, research categories                                       |
+| User Interface  | UI layout, scripted GUIs, interface definitions                              |
+
+### Writing Style
+
+- Use past tense ("Added", "Fixed", "Reduced", "Reworked")
+- Write full sentences describing the change — no internal code references (e.g., write "Fixed Serbian election focus prerequisite", not "Fixed SER_elections prereq")
+- Be specific: name the focus, event, decision, or mechanic affected
+- Prefix country-specific entries with `[TAG]` (e.g., `  - [SER] Fixed focus prerequisite for Serbian elections`)
+- No tag prefix for global or system-wide changes
+- One bullet per distinct change; group related micro-changes as sub-entries under a parent
+- Reference issue numbers when applicable (e.g., `(Issue #330)`)
 - Jokes allowed if in good taste
-- Document all significant changes
+- Use spaces only — no tab characters
 
 ## AI Policy
 
@@ -140,9 +185,9 @@ _Rules_
 
 ## Resources
 
-- [Dev Resources](./docs/dev-resources/) - Tools and guides
-- [Focus Tree Lifecycle](./docs/dev-resources/focus-tree-lifecycle-checklist.md)
-- [Game Rules Reference](./docs/dev-resources/game-rules.md)
+- [Dev Resources](./docs/src/content/resources/) - Tools and guides
+- [Focus Tree Lifecycle](./docs/src/content/resources/focus-tree-lifecycle-checklist.md)
+- [Game Rules Reference](./docs/src/content/tutorials/game-rules.md)
 
 ---
 
