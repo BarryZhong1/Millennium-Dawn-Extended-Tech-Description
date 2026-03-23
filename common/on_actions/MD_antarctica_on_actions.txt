@@ -386,6 +386,22 @@ on_actions = {
 				set_temp_variable = { module_category = 3 } set_temp_variable = { module_id = 1 } antarctica_set_station_module = yes
 				set_temp_variable = { module_category = 4 } set_temp_variable = { module_id = 1 } antarctica_set_station_module = yes
 				set_temp_variable = { module_category = 5 } set_temp_variable = { module_id = 9 } antarctica_set_station_module = yes
+
+				add_dynamic_modifier = { modifier = antarctica_laboratory_dynamic_modifier }
+			}
+			for_each_scope_loop = {
+				array = global.at_members
+				add_dynamic_modifier = { modifier = antarctica_laboratory_dynamic_modifier }
+				antarctica_recalculate_country_laboratory_effects = yes
+			}
+		}
+	}
+
+	on_monthly = {
+		effect = {
+			for_each_scope_loop = {
+				array = global.at_members
+				antarctica_recalculate_country_laboratory_effects = yes
 			}
 		}
 	}

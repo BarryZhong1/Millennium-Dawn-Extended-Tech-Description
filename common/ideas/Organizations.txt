@@ -143,10 +143,19 @@ ideas = {
 		at_member = {
 			on_add = {
 				add_to_array = { global.at_members = THIS }
+				if = {
+					limit = { NOT = { has_dynamic_modifier = { modifier = antarctica_laboratory_dynamic_modifier } } }
+					add_dynamic_modifier = { modifier = antarctica_laboratory_dynamic_modifier }
+				}
 			}
 
 			on_remove = {
 				remove_from_array = { global.at_members = THIS }
+				if = {
+					limit = { has_dynamic_modifier = { modifier = antarctica_laboratory_dynamic_modifier } }
+					remove_dynamic_modifier = { modifier = antarctica_laboratory_dynamic_modifier }
+				}
+				antarctica_clear_laboratory_country_effects = yes
 			}
 
 			modifier = {
