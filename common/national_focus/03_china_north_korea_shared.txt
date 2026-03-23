@@ -1,0 +1,1111 @@
+# Original Author(s): TheGeneral
+joint_focus = {
+	id = CHI_NKO_bilateral_cooperation
+	icon = consumer_goods
+	text_icon = JOINT_NKO_CHI_focus_style
+	x = 60
+	y = 20
+
+	cost = 5
+
+	offset = {
+		x = 10
+		y = -20
+		trigger = { original_tag = NKO }
+	}
+
+	search_filters = { FOCUS_FILTER_POLITICAL }
+
+	available = {
+		CHI = {
+			exists = yes
+			NOT = { has_war_with = NKO }
+			NOT = { has_completed_focus = CHI_End_the_Kim_Dynasty }
+		}
+		NKO = {
+			exists = yes
+			OR = {
+				is_subject = no
+				is_subject_of = CHI
+			}
+		}
+	}
+
+	joint_trigger = {
+		OR = {
+			tag = CHI
+			tag = NKO
+		}
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_NKO_bilateral_cooperation"
+		add_political_power = 25
+		if = {
+			limit = { original_tag = CHI }
+			add_opinion_modifier = {
+				target = NKO
+				modifier = mutual_trade_agreement
+			}
+		}
+		else = {
+			add_opinion_modifier = {
+				target = CHI
+				modifier = mutual_trade_agreement
+			}
+		}
+	}
+
+	ai_will_do = {
+		base = 5
+		modifier = {
+			factor = 0
+			original_tag = NKO
+		}
+	}
+}
+
+joint_focus = {
+	id = CHI_NKO_border_trade_zones
+	icon = consumer_goods
+	text_icon = JOINT_NKO_CHI_focus_style
+	x = -6
+	y = 1
+	relative_position_id = CHI_NKO_bilateral_cooperation
+
+	cost = 10
+
+	prerequisite = { focus = CHI_NKO_bilateral_cooperation }
+	search_filters = { FOCUS_FILTER_ECONOMY }
+
+	available = {
+		country_exists = CHI
+		country_exists = NKO
+		CHI = { NOT = { has_war_with = NKO } }
+	}
+
+	joint_trigger = {
+		OR = {
+			tag = CHI
+			tag = NKO
+		}
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_NKO_border_trade_zones"
+		add_stability = 0.01
+		if = {
+			limit = { original_tag = NKO }
+			add_timed_idea = {
+				idea = CHI_NKO_border_trade_idea
+				days = 720
+			}
+		}
+		if = {
+			limit = { original_tag = CHI }
+			add_opinion_modifier = {
+				target = NKO
+				modifier = mutual_trade_agreement
+			}
+		}
+	}
+
+	ai_will_do = {
+		base = 10
+	}
+}
+
+joint_focus = {
+	id = CHI_NKO_rason_sez
+	icon = consumer_goods
+	text_icon = JOINT_NKO_focus_style
+	x = -7
+	y = 2
+	relative_position_id = CHI_NKO_bilateral_cooperation
+
+	cost = 10
+
+	prerequisite = { focus = CHI_NKO_border_trade_zones }
+	search_filters = { FOCUS_FILTER_ECONOMY FOCUS_FILTER_INDUSTRY }
+
+	available = {
+		original_tag = NKO
+		country_exists = CHI
+		NOT = { has_war_with = CHI }
+	}
+
+	joint_trigger = {
+		OR = {
+			tag = CHI
+			tag = NKO
+		}
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_NKO_rason_sez"
+	}
+	completion_reward_joint_originator = {
+		601 = {
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+	completion_reward_joint_member = {
+		set_temp_variable = { treasury_change = -3 }
+		modify_treasury_effect = yes
+	}
+
+	ai_will_do = {
+		base = 15
+	}
+}
+
+joint_focus = {
+	id = CHI_NKO_dandong_trade_hub
+	icon = consumer_goods
+	text_icon = JOINT_CHI_focus_style
+	x = -5
+	y = 2
+	relative_position_id = CHI_NKO_bilateral_cooperation
+
+	cost = 10
+
+	prerequisite = { focus = CHI_NKO_border_trade_zones }
+	search_filters = { FOCUS_FILTER_ECONOMY }
+
+	available = {
+		original_tag = CHI
+		country_exists = NKO
+		NOT = { has_war_with = NKO }
+	}
+
+	joint_trigger = {
+		OR = {
+			tag = CHI
+			tag = NKO
+		}
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_NKO_dandong_trade_hub"
+	}
+	completion_reward_joint_originator = {
+		552 = {
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		set_temp_variable = { treasury_change = -3 }
+		modify_treasury_effect = yes
+	}
+
+	ai_will_do = {
+		base = 10
+	}
+}
+
+joint_focus = {
+	id = CHI_NKO_mineral_extraction
+	icon = consumer_goods
+	text_icon = JOINT_NKO_CHI_focus_style
+	x = -7
+	y = 3
+	relative_position_id = CHI_NKO_bilateral_cooperation
+
+	cost = 10
+
+	prerequisite = { focus = CHI_NKO_rason_sez }
+	search_filters = { FOCUS_FILTER_ECONOMY }
+
+	available = {
+		country_exists = CHI
+		country_exists = NKO
+		CHI = { NOT = { has_war_with = NKO } }
+	}
+
+	joint_trigger = {
+		OR = {
+			tag = CHI
+			tag = NKO
+		}
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_NKO_mineral_extraction"
+		if = {
+			limit = { original_tag = NKO }
+			set_temp_variable = { treasury_change = 3 }
+			modify_treasury_effect = yes
+		}
+		if = {
+			limit = { original_tag = CHI }
+			set_temp_variable = { treasury_change = -2 }
+			modify_treasury_effect = yes
+		}
+	}
+
+	ai_will_do = {
+		base = 10
+	}
+}
+
+joint_focus = {
+	id = CHI_NKO_fisheries_agreement
+	icon = consumer_goods
+	text_icon = JOINT_NKO_CHI_focus_style
+	x = -5
+	y = 3
+	relative_position_id = CHI_NKO_bilateral_cooperation
+
+	cost = 10
+
+	prerequisite = { focus = CHI_NKO_dandong_trade_hub }
+	search_filters = { FOCUS_FILTER_ECONOMY }
+
+	available = {
+		country_exists = CHI
+		country_exists = NKO
+		CHI = { NOT = { has_war_with = NKO } }
+	}
+
+	joint_trigger = {
+		OR = {
+			tag = CHI
+			tag = NKO
+		}
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_NKO_fisheries_agreement"
+		add_stability = 0.01
+		if = {
+			limit = { original_tag = NKO }
+			set_temp_variable = { treasury_change = 1 }
+			modify_treasury_effect = yes
+		}
+	}
+
+	ai_will_do = {
+		base = 10
+	}
+}
+
+joint_focus = {
+	id = CHI_NKO_yuan_settlement
+	icon = consumer_goods
+	text_icon = JOINT_NKO_CHI_focus_style
+	x = -6
+	y = 4
+	relative_position_id = CHI_NKO_bilateral_cooperation
+
+	cost = 10
+
+	prerequisite = { focus = CHI_NKO_mineral_extraction }
+	prerequisite = { focus = CHI_NKO_fisheries_agreement }
+	search_filters = { FOCUS_FILTER_ECONOMY }
+
+	available = {
+		country_exists = CHI
+		country_exists = NKO
+		CHI = { NOT = { has_war_with = NKO } }
+	}
+
+	joint_trigger = {
+		OR = {
+			tag = CHI
+			tag = NKO
+		}
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_NKO_yuan_settlement"
+		add_ideas = CHI_NKO_yuan_trade_idea
+	}
+
+	ai_will_do = {
+		base = 10
+	}
+}
+
+joint_focus = {
+	id = CHI_NKO_labor_export
+	icon = consumer_goods
+	text_icon = JOINT_NKO_focus_style
+	x = -6
+	y = 5
+	relative_position_id = CHI_NKO_bilateral_cooperation
+
+	cost = 10
+
+	prerequisite = { focus = CHI_NKO_yuan_settlement }
+	search_filters = { FOCUS_FILTER_ECONOMY }
+
+	available = {
+		original_tag = NKO
+		country_exists = CHI
+		NOT = { has_war_with = CHI }
+	}
+
+	joint_trigger = {
+		OR = {
+			tag = CHI
+			tag = NKO
+		}
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_NKO_labor_export"
+	}
+	completion_reward_joint_originator = {
+		set_temp_variable = { treasury_change = 2 }
+		modify_treasury_effect = yes
+	}
+	completion_reward_joint_member = {
+		add_timed_idea = {
+			idea = CHI_NKO_cheap_labor_idea
+			days = 1095
+		}
+	}
+
+	ai_will_do = {
+		base = 15
+	}
+}
+
+joint_focus = {
+	id = CHI_NKO_yalu_river_bridge
+	icon = infrastructure
+	text_icon = JOINT_NKO_CHI_focus_style
+	x = -2
+	y = 1
+	relative_position_id = CHI_NKO_bilateral_cooperation
+
+	cost = 10
+
+	prerequisite = { focus = CHI_NKO_bilateral_cooperation }
+	search_filters = { FOCUS_FILTER_INDUSTRY }
+
+	available = {
+		country_exists = CHI
+		country_exists = NKO
+		CHI = { NOT = { has_war_with = NKO } }
+	}
+
+	joint_trigger = {
+		OR = {
+			tag = CHI
+			tag = NKO
+		}
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_NKO_yalu_river_bridge"
+		if = {
+			limit = { original_tag = NKO }
+			1200 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		if = {
+			limit = { original_tag = CHI }
+			552 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	ai_will_do = {
+		base = 10
+	}
+}
+
+joint_focus = {
+	id = CHI_NKO_rail_modernization
+	icon = infrastructure
+	text_icon = JOINT_NKO_CHI_focus_style
+	x = -2
+	y = 2
+	relative_position_id = CHI_NKO_bilateral_cooperation
+
+	cost = 10
+
+	prerequisite = { focus = CHI_NKO_yalu_river_bridge }
+	search_filters = { FOCUS_FILTER_INDUSTRY }
+
+	available = {
+		country_exists = CHI
+		country_exists = NKO
+		CHI = { NOT = { has_war_with = NKO } }
+	}
+
+	joint_trigger = {
+		OR = {
+			tag = CHI
+			tag = NKO
+		}
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_NKO_rail_modernization"
+		if = {
+			limit = { original_tag = NKO }
+			602 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			1200 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		if = {
+			limit = { original_tag = CHI }
+			set_temp_variable = { treasury_change = -5 }
+			modify_treasury_effect = yes
+		}
+	}
+
+	ai_will_do = {
+		base = 10
+	}
+}
+
+joint_focus = {
+	id = CHI_NKO_energy_cooperation
+	icon = infrastructure
+	text_icon = JOINT_CHI_focus_style
+	x = -3
+	y = 3
+	relative_position_id = CHI_NKO_bilateral_cooperation
+
+	cost = 10
+
+	prerequisite = { focus = CHI_NKO_rail_modernization }
+	search_filters = { FOCUS_FILTER_INDUSTRY }
+
+	available = {
+		original_tag = CHI
+		country_exists = NKO
+		NOT = { has_war_with = NKO }
+	}
+
+	joint_trigger = {
+		OR = {
+			tag = CHI
+			tag = NKO
+		}
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_NKO_energy_cooperation"
+	}
+	completion_reward_joint_originator = {
+		set_temp_variable = { treasury_change = -5 }
+		modify_treasury_effect = yes
+	}
+	completion_reward_joint_member = {
+		add_timed_idea = {
+			idea = CHI_NKO_energy_supply_idea
+			days = 1095
+		}
+	}
+
+	ai_will_do = {
+		base = 5
+	}
+}
+
+joint_focus = {
+	id = CHI_NKO_telecom_network
+	icon = infrastructure
+	text_icon = JOINT_NKO_CHI_focus_style
+	x = -1
+	y = 3
+	relative_position_id = CHI_NKO_bilateral_cooperation
+
+	cost = 10
+
+	prerequisite = { focus = CHI_NKO_rail_modernization }
+	search_filters = { FOCUS_FILTER_INDUSTRY }
+
+	available = {
+		country_exists = CHI
+		country_exists = NKO
+		CHI = { NOT = { has_war_with = NKO } }
+	}
+
+	joint_trigger = {
+		OR = {
+			tag = CHI
+			tag = NKO
+		}
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_NKO_telecom_network"
+		add_political_power = 10
+		if = {
+			limit = { original_tag = NKO }
+			add_timed_idea = {
+				idea = CHI_NKO_telecom_idea
+				days = 720
+			}
+		}
+	}
+
+	ai_will_do = {
+		base = 10
+	}
+}
+
+joint_focus = {
+	id = CHI_NKO_power_grid_link
+	icon = infrastructure
+	text_icon = JOINT_NKO_CHI_focus_style
+	x = -2
+	y = 4
+	relative_position_id = CHI_NKO_bilateral_cooperation
+
+	cost = 10
+
+	prerequisite = { focus = CHI_NKO_energy_cooperation }
+	prerequisite = { focus = CHI_NKO_telecom_network }
+	search_filters = { FOCUS_FILTER_INDUSTRY }
+
+	available = {
+		country_exists = CHI
+		country_exists = NKO
+		CHI = { NOT = { has_war_with = NKO } }
+	}
+
+	joint_trigger = {
+		OR = {
+			tag = CHI
+			tag = NKO
+		}
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_NKO_power_grid_link"
+		if = {
+			limit = { original_tag = NKO }
+			602 = {
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		if = {
+			limit = { original_tag = CHI }
+			set_temp_variable = { treasury_change = -3 }
+			modify_treasury_effect = yes
+		}
+	}
+
+	ai_will_do = {
+		base = 10
+	}
+}
+
+joint_focus = {
+	id = CHI_NKO_paektu_tourism
+	icon = consumer_goods
+	text_icon = JOINT_NKO_focus_style
+	x = -2
+	y = 5
+	relative_position_id = CHI_NKO_bilateral_cooperation
+
+	cost = 10
+
+	prerequisite = { focus = CHI_NKO_power_grid_link }
+	search_filters = { FOCUS_FILTER_STABILITY }
+
+	available = {
+		original_tag = NKO
+		country_exists = CHI
+		NOT = { has_war_with = CHI }
+	}
+
+	joint_trigger = {
+		OR = {
+			tag = CHI
+			tag = NKO
+		}
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_NKO_paektu_tourism"
+		add_stability = 0.02
+	}
+	completion_reward_joint_originator = {
+		set_temp_variable = { treasury_change = 1 }
+		modify_treasury_effect = yes
+	}
+
+	ai_will_do = {
+		base = 10
+	}
+}
+
+### MILITARY BRANCH ###
+
+joint_focus = {
+	id = CHI_NKO_defense_consultations
+	icon = recruitment
+	text_icon = JOINT_NKO_CHI_focus_style
+	x = 2
+	y = 1
+	relative_position_id = CHI_NKO_bilateral_cooperation
+
+	cost = 10
+
+	prerequisite = { focus = CHI_NKO_bilateral_cooperation }
+	search_filters = { FOCUS_FILTER_WAR_SUPPORT }
+
+	available = {
+		country_exists = CHI
+		country_exists = NKO
+		CHI = { NOT = { has_war_with = NKO } }
+	}
+
+	joint_trigger = {
+		OR = {
+			tag = CHI
+			tag = NKO
+		}
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_NKO_defense_consultations"
+		army_experience = 25
+	}
+
+	ai_will_do = {
+		base = 5
+	}
+}
+
+joint_focus = {
+	id = CHI_NKO_military_exchanges
+	icon = recruitment
+	text_icon = JOINT_NKO_CHI_focus_style
+	x = 2
+	y = 2
+	relative_position_id = CHI_NKO_bilateral_cooperation
+
+	cost = 10
+
+	prerequisite = { focus = CHI_NKO_defense_consultations }
+	search_filters = { FOCUS_FILTER_WAR_SUPPORT }
+
+	available = {
+		country_exists = CHI
+		country_exists = NKO
+		CHI = { NOT = { has_war_with = NKO } }
+	}
+
+	joint_trigger = {
+		OR = {
+			tag = CHI
+			tag = NKO
+		}
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_NKO_military_exchanges"
+		army_experience = 25
+		add_mastery = { amount = 100 }
+	}
+
+	ai_will_do = {
+		base = 5
+	}
+}
+
+joint_focus = {
+	id = CHI_NKO_joint_naval_patrols
+	icon = recruitment
+	text_icon = JOINT_CHI_focus_style
+	x = 1
+	y = 3
+	relative_position_id = CHI_NKO_bilateral_cooperation
+
+	cost = 10
+
+	prerequisite = { focus = CHI_NKO_military_exchanges }
+	search_filters = { FOCUS_FILTER_WAR_SUPPORT }
+
+	available = {
+		original_tag = CHI
+		country_exists = NKO
+		NOT = { has_war_with = NKO }
+	}
+
+	joint_trigger = {
+		OR = {
+			tag = CHI
+			tag = NKO
+		}
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_NKO_joint_naval_patrols"
+		navy_experience = 15
+	}
+	completion_reward_joint_originator = {
+		if = {
+			limit = {
+				NOT = { has_guaranteed = NKO }
+			}
+			give_guarantee = NKO
+		}
+	}
+
+	ai_will_do = {
+		base = 5
+	}
+}
+
+joint_focus = {
+	id = CHI_NKO_air_defense_umbrella
+	icon = recruitment
+	text_icon = JOINT_CHI_focus_style
+	x = 3
+	y = 3
+	relative_position_id = CHI_NKO_bilateral_cooperation
+
+	cost = 10
+
+	prerequisite = { focus = CHI_NKO_military_exchanges }
+	search_filters = { FOCUS_FILTER_WAR_SUPPORT }
+
+	available = {
+		original_tag = CHI
+		country_exists = NKO
+		NOT = { has_war_with = NKO }
+	}
+
+	joint_trigger = {
+		OR = {
+			tag = CHI
+			tag = NKO
+		}
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_NKO_air_defense_umbrella"
+	}
+	completion_reward_joint_originator = {
+		set_temp_variable = { treasury_change = -5 }
+		modify_treasury_effect = yes
+	}
+	completion_reward_joint_member = {
+		add_ideas = CHI_NKO_air_defense_support_idea
+	}
+
+	ai_will_do = {
+		base = 5
+	}
+}
+
+joint_focus = {
+	id = CHI_NKO_arms_transfers
+	icon = recruitment
+	text_icon = JOINT_CHI_focus_style
+	x = 2
+	y = 4
+	relative_position_id = CHI_NKO_bilateral_cooperation
+
+	cost = 10
+
+	prerequisite = { focus = CHI_NKO_joint_naval_patrols }
+	prerequisite = { focus = CHI_NKO_air_defense_umbrella }
+	search_filters = { FOCUS_FILTER_WAR_SUPPORT }
+
+	available = {
+		original_tag = CHI
+		country_exists = NKO
+		NOT = { has_war_with = NKO }
+	}
+
+	joint_trigger = {
+		OR = {
+			tag = CHI
+			tag = NKO
+		}
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_NKO_arms_transfers"
+	}
+	completion_reward_joint_originator = {
+		set_temp_variable = { treasury_change = -8 }
+		modify_treasury_effect = yes
+	}
+	completion_reward_joint_member = {
+		602 = {
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+
+	ai_will_do = {
+		base = 5
+	}
+}
+
+joint_focus = {
+	id = CHI_NKO_buffer_state_doctrine
+	icon = recruitment
+	text_icon = JOINT_NKO_CHI_focus_style
+	x = 2
+	y = 5
+	relative_position_id = CHI_NKO_bilateral_cooperation
+
+	cost = 15
+
+	prerequisite = { focus = CHI_NKO_arms_transfers }
+	search_filters = { FOCUS_FILTER_WAR_SUPPORT }
+
+	available = {
+		country_exists = CHI
+		country_exists = NKO
+		CHI = { NOT = { has_war_with = NKO } }
+	}
+
+	joint_trigger = {
+		OR = {
+			tag = CHI
+			tag = NKO
+		}
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_NKO_buffer_state_doctrine"
+		add_ideas = CHI_NKO_defense_cooperation_idea
+	}
+
+	ai_will_do = {
+		base = 5
+	}
+}
+
+### POLITICAL BRANCH ###
+
+joint_focus = {
+	id = CHI_NKO_party_to_party_dialogue
+	icon = generic_government
+	text_icon = JOINT_NKO_CHI_focus_style
+	x = 6
+	y = 1
+	relative_position_id = CHI_NKO_bilateral_cooperation
+
+	cost = 10
+
+	prerequisite = { focus = CHI_NKO_bilateral_cooperation }
+	search_filters = { FOCUS_FILTER_POLITICAL }
+
+	available = {
+		country_exists = CHI
+		country_exists = NKO
+		CHI = { NOT = { has_war_with = NKO } }
+	}
+
+	joint_trigger = {
+		OR = {
+			tag = CHI
+			tag = NKO
+		}
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_NKO_party_to_party_dialogue"
+		add_political_power = 50
+	}
+
+	ai_will_do = {
+		base = 5
+	}
+}
+
+joint_focus = {
+	id = CHI_NKO_cultural_exchanges
+	icon = generic_government
+	text_icon = JOINT_NKO_CHI_focus_style
+	x = 6
+	y = 2
+	relative_position_id = CHI_NKO_bilateral_cooperation
+
+	cost = 10
+
+	prerequisite = { focus = CHI_NKO_party_to_party_dialogue }
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+
+	available = {
+		country_exists = CHI
+		country_exists = NKO
+		CHI = { NOT = { has_war_with = NKO } }
+	}
+
+	joint_trigger = {
+		OR = {
+			tag = CHI
+			tag = NKO
+		}
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_NKO_cultural_exchanges"
+		add_stability = 0.02
+		add_political_power = 15
+	}
+
+	ai_will_do = {
+		base = 5
+	}
+}
+
+joint_focus = {
+	id = CHI_NKO_un_coordination
+	icon = generic_government
+	text_icon = JOINT_NKO_focus_style
+	x = 5
+	y = 3
+	relative_position_id = CHI_NKO_bilateral_cooperation
+
+	cost = 10
+
+	prerequisite = { focus = CHI_NKO_cultural_exchanges }
+	mutually_exclusive = { focus = CHI_NKO_sanctions_circumvention }
+	search_filters = { FOCUS_FILTER_POLITICAL }
+
+	available = {
+		original_tag = NKO
+		country_exists = CHI
+		NOT = { has_war_with = CHI }
+	}
+
+	joint_trigger = {
+		OR = {
+			tag = CHI
+			tag = NKO
+		}
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_NKO_un_coordination"
+	}
+	completion_reward_joint_originator = {
+		add_stability = 0.03
+		add_political_power = 25
+	}
+
+	ai_will_do = {
+		base = 10
+	}
+}
+
+joint_focus = {
+	id = CHI_NKO_sanctions_circumvention
+	icon = generic_government
+	text_icon = JOINT_NKO_focus_style
+	x = 7
+	y = 3
+	relative_position_id = CHI_NKO_bilateral_cooperation
+
+	cost = 10
+
+	prerequisite = { focus = CHI_NKO_cultural_exchanges }
+	mutually_exclusive = { focus = CHI_NKO_un_coordination }
+	search_filters = { FOCUS_FILTER_POLITICAL }
+
+	available = {
+		original_tag = NKO
+		country_exists = CHI
+		NOT = { has_war_with = CHI }
+	}
+
+	joint_trigger = {
+		OR = {
+			tag = CHI
+			tag = NKO
+		}
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_NKO_sanctions_circumvention"
+	}
+	completion_reward_joint_originator = {
+		set_temp_variable = { treasury_change = 5 }
+		modify_treasury_effect = yes
+	}
+
+	ai_will_do = {
+		base = 5
+	}
+}
+
+joint_focus = {
+	id = CHI_NKO_strategic_partnership
+	icon = generic_government
+	text_icon = JOINT_NKO_CHI_focus_style
+	x = 6
+	y = 4
+	relative_position_id = CHI_NKO_bilateral_cooperation
+
+	cost = 15
+
+	prerequisite = { focus = CHI_NKO_un_coordination focus = CHI_NKO_sanctions_circumvention }
+	search_filters = { FOCUS_FILTER_POLITICAL }
+
+	available = {
+		country_exists = CHI
+		country_exists = NKO
+		CHI = { NOT = { has_war_with = NKO } }
+	}
+
+	joint_trigger = {
+		OR = {
+			tag = CHI
+			tag = NKO
+		}
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_NKO_strategic_partnership"
+		add_ideas = CHI_NKO_strategic_partners_idea
+	}
+
+	ai_will_do = {
+		base = 10
+	}
+}
