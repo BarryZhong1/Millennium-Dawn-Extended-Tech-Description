@@ -5331,6 +5331,15 @@ scripted_gui = {
 				add_to_variable = { global.missile_ui_updated = 1 }
 			}
 
+			antarctica_station_swap_laboratory_button_click = {
+				if = {
+					limit = { check_variable = { global.selected_antarctica_station > 0 } }
+					set_temp_variable = { station_id = global.selected_antarctica_station }
+					antarctica_cycle_station_laboratory_module = yes
+				}
+				add_to_variable = { global.missile_ui_updated = 1 }
+			}
+
 			antarctica_station_marker_0_click = {
 				set_variable = { global.selected_antarctica_station = global.antarctica_station_ids^0 }
 				set_variable = { global.selected_antarctica_station_x = global.antarctica_station_x^0 }
