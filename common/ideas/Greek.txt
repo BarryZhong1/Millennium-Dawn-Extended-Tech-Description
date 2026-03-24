@@ -424,10 +424,10 @@ ideas = {
 			modifier = {
 				stability_factor = -0.05
 				consumer_goods_factor = 0.03
-				expected_adm_modifier = 1
-				expected_education_modifier = 1
-				expected_healthcare_modifier = 1
-				expected_welfare_modifier = 1
+				expected_adm_modifier = -0.5
+				expected_education_modifier = -0.5
+				expected_healthcare_modifier = -0.5
+				expected_welfare_modifier = -0.5
 			}
 		}
 
@@ -438,10 +438,10 @@ ideas = {
 			modifier = {
 				stability_factor = -0.1
 				consumer_goods_factor = 0.05
-				expected_adm_modifier = 2
-				expected_education_modifier = 2
-				expected_healthcare_modifier = 2
-				expected_welfare_modifier = 2
+				expected_adm_modifier = -1
+				expected_education_modifier = -1
+				expected_healthcare_modifier = -1
+				expected_welfare_modifier = -1
 			}
 		}
 
@@ -452,10 +452,10 @@ ideas = {
 			modifier = {
 				stability_factor = -0.15
 				consumer_goods_factor = 0.07
-				expected_adm_modifier = 3
-				expected_education_modifier = 3
-				expected_healthcare_modifier = 3
-				expected_welfare_modifier = 3
+				expected_adm_modifier = -1.5
+				expected_education_modifier = -1.5
+				expected_healthcare_modifier = -1.5
+				expected_welfare_modifier = -1.5
 			}
 		}
 
@@ -466,10 +466,10 @@ ideas = {
 			modifier = {
 				stability_factor = -0.2
 				consumer_goods_factor = 0.1
-				expected_adm_modifier = 4
-				expected_education_modifier = 4
-				expected_healthcare_modifier = 4
-				expected_welfare_modifier = 4
+				expected_adm_modifier = -2
+				expected_education_modifier = -2
+				expected_healthcare_modifier = -2
+				expected_welfare_modifier = -2
 			}
 		}
 
@@ -480,11 +480,11 @@ ideas = {
 			modifier = {
 				stability_factor = -0.25
 				consumer_goods_factor = 0.1
-				expected_adm_modifier = 5
-				expected_education_modifier = 5
-				expected_healthcare_modifier = 5
-				expected_welfare_modifier = 5
-				expected_mil_modifier = 2
+				expected_adm_modifier = -2.5
+				expected_education_modifier = -2.5
+				expected_healthcare_modifier = -2.5
+				expected_welfare_modifier = -2.5
+				expected_mil_modifier = -1
 			}
 		}
 
@@ -780,6 +780,23 @@ ideas = {
 				stability_factor = -0.05
 				social_cost_multiplier_modifier = 0.08
 				health_cost_multiplier_modifier = 0.08
+			}
+		}
+
+		GRE_solving_tax_evasion_idea = {
+			allowed_civil_war = { always = yes }
+			picture = gre_fleet_idea # TODO: Replace with a proper idea
+			on_remove = {
+				swap_ideas = {
+					remove_idea = GRE_tax_evasion_idea
+					add_idea = GRE_tax_enforcement_idea
+				}
+			}
+
+			modifier = {
+				political_power_factor = -0.05
+				stability_factor = -0.02
+				bureaucracy_cost_multiplier_modifier = 0.25
 			}
 		}
 

@@ -2922,16 +2922,26 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus GRE_solve_evasion"
-			swap_ideas = {
-				remove_idea = GRE_tax_evasion_idea
-				add_idea = GRE_tax_enforcement_idea
+			add_timed_idea = {
+				idea = GRE_solving_tax_evasion_idea
+				years = 1
 			}
 			newline = yes
-			add_political_power = 50
+			custom_effect_tooltip = on_remove_idea_tt
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = GRE_tax_evasion_idea
+					add_idea = GRE_tax_enforcement_idea
+				}
+			}
 		}
 
 		ai_will_do = {
 			base = 25
+			modifier = {
+				factor = 0
+				has_stability < 0.30
+			}
 		}
 	}
 
@@ -2972,7 +2982,7 @@ focus_tree = {
 		y = 1
 		relative_position_id = GRE_hellenic_economy
 
-		cost = 5
+		cost = 7.86
 
 		prerequisite = { focus = GRE_hellenic_economy }
 
@@ -3133,7 +3143,7 @@ focus_tree = {
 		id = GRE_power_corporations
 		icon = Coal_Power_Plant
 
-		x = 13
+		x = 12
 		y = 2
 		relative_position_id = GRE_hellenic_economy
 
@@ -3142,7 +3152,7 @@ focus_tree = {
 		prerequisite = { focus = GRE_hellenic_economy }
 		prerequisite = { focus = GRE_strength }
 
-		search_filters = { FOCUS_FILTER_INDUSTRY }
+		search_filters = { FOCUS_FILTER_POWER_INFRASTRUCTURE }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus GRE_power_corporations"
@@ -3301,7 +3311,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		available = {
-			has_tech = internet1
+			has_tech = internet3
 		}
 
 		completion_reward = {
@@ -3524,7 +3534,7 @@ focus_tree = {
 
 		prerequisite = { focus = GRE_power_corporations }
 
-		search_filters = { FOCUS_FILTER_INDUSTRY }
+		search_filters = { FOCUS_FILTER_POWER_INFRASTRUCTURE }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus GRE_gas_oil_plants"
@@ -3538,64 +3548,6 @@ focus_tree = {
 
 		ai_will_do = {
 			base = 10
-			modifier = {
-				factor = 2
-				has_an_energy_deficit = yes
-			}
-		}
-	}
-
-	focus = {
-		id = GRE_aegean_pipelines
-		icon = seize_oil
-
-		x = -2
-		y = 1
-		relative_position_id = GRE_power_corporations
-
-		cost = 5
-
-		prerequisite = { focus = GRE_power_corporations }
-
-		search_filters = { FOCUS_FILTER_INDUSTRY }
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus GRE_aegean_pipelines"
-			# Propose joint energy exploitation to Turkey
-			if = {
-				limit = { country_exists = TUR }
-				custom_effect_tooltip = TT_IF_THEY_ACCEPT
-				effect_tooltip = {
-					143 = {
-						add_resource = { type = oil amount = 6 }
-					}
-				}
-				newline = yes
-				TUR = { country_event = { id = greece.43 days = 2 random_hours = 12 } }
-			}
-			else = {
-				# No Turkey - build uncontested
-				if = { limit = { has_country_flag = GRE_defer_payments_flag }
-					set_temp_variable = { skip_payment = 1 }
-					set_temp_variable = { debt_change = 6.5 }
-					GRE_defer_payment = yes
-				}
-				else = {
-					set_temp_variable = { treasury_change = -6.5 }
-					modify_treasury_effect = yes
-				}
-				143 = {
-					add_resource = { type = oil amount = 4 }
-				}
-			}
-		}
-
-		ai_will_do = {
-			base = 10
-			modifier = {
-				factor = 2
-				is_currently_importing_oil = yes
-			}
 			modifier = {
 				factor = 2
 				has_an_energy_deficit = yes
@@ -3687,7 +3639,7 @@ focus_tree = {
 		y = 1
 		relative_position_id = GRE_new_railways
 
-		cost = 5
+		cost = 7.86
 
 		prerequisite = { focus = GRE_highway_initiatives }
 		prerequisite = { focus = GRE_new_railways }
@@ -3696,6 +3648,7 @@ focus_tree = {
 
 		available = {
 			has_full_control_of_state = 142
+			has_tech = excavation3
 		}
 
 		completion_reward = {
@@ -3738,7 +3691,7 @@ focus_tree = {
 		y = 1
 		relative_position_id = GRE_new_railways
 
-		cost = 5
+		cost = 7.86
 
 		prerequisite = { focus = GRE_highway_initiatives }
 		prerequisite = { focus = GRE_new_railways }
@@ -3747,6 +3700,7 @@ focus_tree = {
 
 		available = {
 			has_full_control_of_state = 140
+			has_tech = excavation3
 		}
 
 		completion_reward = {
@@ -3789,7 +3743,7 @@ focus_tree = {
 		y = 2
 		relative_position_id = GRE_new_railways
 
-		cost = 5
+		cost = 7.86
 
 		prerequisite = { focus = GRE_euboea_bauxite_deposits }
 		prerequisite = { focus = GRE_hellas_gold }
@@ -3798,6 +3752,7 @@ focus_tree = {
 
 		available = {
 			has_full_control_of_state = 141
+			has_tech = excavation4
 		}
 
 		completion_reward = {
@@ -3845,6 +3800,10 @@ focus_tree = {
 		prerequisite = { focus = GRE_industrial_lignite_mining }
 
 		search_filters = { FOCUS_FILTER_ECONOMY }
+
+		available = {
+			has_tech = excavation5
+		}
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus GRE_rare_element_prospecting"
@@ -3901,7 +3860,6 @@ focus_tree = {
 			}
 			if = { limit = { has_country_flag = GRE_defer_payments_flag }
 				set_temp_variable = { skip_payment = 1 }
-				one_air_base = yes
 				set_temp_variable = { debt_change = 2.5 }
 				GRE_defer_payment = yes
 			}
@@ -3954,7 +3912,7 @@ focus_tree = {
 		id = GRE_cotton_plantations
 		icon = GEO_wine
 
-		x = -1
+		x = 0
 		y = 1
 		relative_position_id = GRE_vintage_wines
 
@@ -3995,7 +3953,7 @@ focus_tree = {
 		id = GRE_fisheries_expansion
 		icon = Canned_Fish
 
-		x = -1
+		x = 0
 		y = 1
 		relative_position_id = GRE_tobacco_plantations
 
@@ -4041,7 +3999,7 @@ focus_tree = {
 
 		prerequisite = { focus = GRE_gas_oil_plants }
 
-		search_filters = { FOCUS_FILTER_INDUSTRY }
+		search_filters = { FOCUS_FILTER_RENEWABLE_ENERGY_INFRASTRUCTURE }
 
 		available = {
 			has_tech = fuel_silos
@@ -4062,52 +4020,6 @@ focus_tree = {
 			modifier = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
-			}
-		}
-	}
-
-	focus = {
-		id = GRE_prinos_basin
-		icon = generic_drill
-
-		x = 0
-		y = 1
-		relative_position_id = GRE_aegean_pipelines
-
-		cost = 5
-
-		prerequisite = { focus = GRE_aegean_pipelines }
-
-		search_filters = { FOCUS_FILTER_INDUSTRY }
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus GRE_prinos_basin"
-			140 = {
-				add_resource = {
-					type = oil
-					amount = 12
-				}
-			}
-			if = { limit = { has_country_flag = GRE_defer_payments_flag }
-				set_temp_variable = { skip_payment = 1 }
-				set_temp_variable = { debt_change = 6 }
-				GRE_defer_payment = yes
-			}
-			else = {
-				set_temp_variable = { treasury_change = -6 }
-				modify_treasury_effect = yes
-			}
-		}
-
-		ai_will_do = {
-			base = 10
-			modifier = {
-				factor = 2
-				is_currently_importing_oil = yes
-			}
-			modifier = {
-				factor = 2
-				has_an_energy_deficit = yes
 			}
 		}
 	}
@@ -4215,161 +4127,6 @@ focus_tree = {
 	}
 
 	focus = {
-		id = GRE_helleniq_energy
-		icon = oil_trade
-
-		x = 0
-		y = 1
-		relative_position_id = GRE_prinos_basin
-
-		cost = 5
-
-		prerequisite = { focus = GRE_prinos_basin }
-
-		search_filters = { FOCUS_FILTER_INDUSTRY }
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus GRE_helleniq_energy"
-			if = { limit = { has_country_flag = GRE_defer_payments_flag }
-				set_temp_variable = { skip_payment = 1 }
-				set_temp_variable = { debt_change = 5 }
-				GRE_defer_payment = yes
-			}
-			else = {
-				set_temp_variable = { treasury_change = -5 }
-				modify_treasury_effect = yes
-			}
-			140 = {
-				add_resource = { type = oil amount = 6 }
-			}
-		}
-
-		ai_will_do = {
-			base = 10
-			modifier = {
-				factor = 2
-				is_currently_importing_oil = yes
-			}
-			modifier = {
-				factor = 2
-				has_an_energy_deficit = yes
-			}
-		}
-	}
-
-	focus = {
-		id = GRE_north_macedonian_pipelines
-		icon = oil_trade
-
-		x = 1
-		y = 2
-		relative_position_id = GRE_prinos_basin
-
-		cost = 5
-
-		prerequisite = { focus = GRE_prinos_basin }
-
-		search_filters = { FOCUS_FILTER_INDUSTRY }
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus GRE_north_macedonian_pipelines"
-			if = {
-				limit = { country_exists = FYR }
-				custom_effect_tooltip = TT_IF_THEY_ACCEPT
-				effect_tooltip = {
-					140 = {
-						add_resource = { type = oil amount = 4 }
-					}
-				}
-				newline = yes
-				FYR = { country_event = { id = greece.49 days = 2 random_hours = 12 } }
-			}
-			else = {
-				if = { limit = { has_country_flag = GRE_defer_payments_flag }
-					set_temp_variable = { skip_payment = 1 }
-					set_temp_variable = { debt_change = 6.5 }
-					GRE_defer_payment = yes
-				}
-				else = {
-					set_temp_variable = { treasury_change = -6.5 }
-					modify_treasury_effect = yes
-				}
-				140 = {
-					add_resource = { type = oil amount = 4 }
-				}
-			}
-		}
-
-		ai_will_do = {
-			base = 10
-			modifier = {
-				factor = 2
-				is_currently_importing_oil = yes
-			}
-			modifier = {
-				factor = 2
-				has_an_energy_deficit = yes
-			}
-		}
-	}
-
-	focus = {
-		id = GRE_turkish_pipeline
-		icon = oil_trade
-
-		x = -1
-		y = 2
-		relative_position_id = GRE_prinos_basin
-
-		cost = 5
-
-		prerequisite = { focus = GRE_prinos_basin }
-
-		search_filters = { FOCUS_FILTER_INDUSTRY }
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus GRE_turkish_pipeline"
-			if = {
-				limit = { country_exists = TUR }
-				custom_effect_tooltip = TT_IF_THEY_ACCEPT
-				effect_tooltip = {
-					140 = {
-						add_resource = { type = oil amount = 4 }
-					}
-				}
-				newline = yes
-				TUR = { country_event = { id = greece.52 days = 2 random_hours = 12 } }
-			}
-			else = {
-				if = { limit = { has_country_flag = GRE_defer_payments_flag }
-					set_temp_variable = { skip_payment = 1 }
-					set_temp_variable = { debt_change = 6.5 }
-					GRE_defer_payment = yes
-				}
-				else = {
-					set_temp_variable = { treasury_change = -6.5 }
-					modify_treasury_effect = yes
-				}
-				140 = {
-					add_resource = { type = oil amount = 4 }
-				}
-			}
-		}
-
-		ai_will_do = {
-			base = 10
-			modifier = {
-				factor = 2
-				is_currently_importing_oil = yes
-			}
-			modifier = {
-				factor = 2
-				has_an_energy_deficit = yes
-			}
-		}
-	}
-
-	focus = {
 		id = GRE_ionian_solar
 		icon = BRA_renewable_energy_funds
 
@@ -4381,7 +4138,7 @@ focus_tree = {
 
 		prerequisite = { focus = GRE_aegean_wind_banks }
 
-		search_filters = { FOCUS_FILTER_INDUSTRY }
+		search_filters = { FOCUS_FILTER_RENEWABLE_ENERGY_INFRASTRUCTURE }
 
 		available = {
 			has_tech = fuel_silos
@@ -4423,10 +4180,14 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus GRE_unemployed executed"
-			add_stability = 0.05
 			set_temp_variable = { temp_opinion = 7 }
 			change_labour_unions_opinion = yes
 			change_communist_cadres_opinion = yes
+			newline = yes
+			add_timed_idea = {
+				idea = idea_focus_unemployment_program
+				days = 210
+			}
 		}
 
 		ai_will_do = {
@@ -4455,7 +4216,7 @@ focus_tree = {
 		id = GRE_targeted_pension_reforms
 		icon = pensions_increase
 
-		x = -2
+		x = -1
 		y = 1
 		relative_position_id = GRE_unemployed
 
@@ -4470,6 +4231,22 @@ focus_tree = {
 			set_temp_variable = { temp_opinion = 5 }
 			change_labour_unions_opinion = yes
 			change_communist_cadres_opinion = yes
+			newline = yes
+			increase_social_spending = yes
+			newline = yes
+			if = {
+				limit = { NOT = { has_idea = idea_focus_unemployment_program } }
+				add_timed_idea = {
+					idea = idea_focus_unemployment_program
+					days = 210
+				}
+			}
+			else = {
+				modify_timed_idea = {
+					idea = idea_focus_unemployment_program
+					days = 210
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -4774,8 +4551,15 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus GRE_expand_elvo executed"
-			set_temp_variable = { treasury_change = -7.5 }
-			modify_treasury_effect = yes
+			if = { limit = { has_country_flag = GRE_defer_payments_flag }
+				set_temp_variable = { skip_payment = 1 }
+				set_temp_variable = { debt_change = 7.5 }
+				GRE_defer_payment = yes
+			}
+			else = {
+				set_temp_variable = { treasury_change = -7.5 }
+				modify_treasury_effect = yes
+			}
 			140 = {
 				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
@@ -4823,6 +4607,7 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus GRE_buy_elvo executed"
 			set_temp_variable = { treasury_change = -7.5 }
 			modify_treasury_effect = yes
+			# FIXME: This is missing osmething about the natioanlize
 		}
 
 		ai_will_do = {
@@ -7543,9 +7328,6 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: GRE_nationalize_banks"
 			set_temp_variable = { treasury_change = 10 }
 			modify_treasury_effect = yes
-			remove_dynamic_modifier = {
-				modifier = GRE_debt_modifier
-			}
 		}
 
 		ai_will_do = { base = 10 }
@@ -8850,7 +8632,6 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: GRE_recovery"
-			remove_dynamic_modifier = { modifier = GRE_debt_modifier }
 			clr_country_flag = GRE_austerity
 			hidden_effect = {
 				remove_ideas = GRE_austerity_1
@@ -8858,6 +8639,8 @@ focus_tree = {
 				remove_ideas = GRE_austerity_3
 				remove_ideas = GRE_austerity_4
 				remove_ideas = GRE_austerity_5
+
+				remove_dynamic_modifier = { modifier = GRE_debt_modifier }
 			}
 			custom_effect_tooltip = GRE_end_austerity_TT
 		}

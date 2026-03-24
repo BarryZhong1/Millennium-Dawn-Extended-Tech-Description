@@ -5,10 +5,8 @@
 # Adds a creditor to the Greek debt system
 # Expects: GRE_creditor_target (country ID), GRE_proposed_debt_amount (amount)
 GRE_add_creditor = {
-	# Check if already a creditor
 	if = {
 		limit = { is_in_array = { GRE_creditors = GRE_creditor_target } }
-		# Find existing index and add to their debt
 		set_temp_variable = { GRE_found_index = -1 }
 		for_each_loop = {
 			array = GRE_creditors
@@ -23,21 +21,17 @@ GRE_add_creditor = {
 		}
 	}
 	else = {
-		# Add new creditor
 		add_to_array = { GRE_creditors = GRE_creditor_target }
-		# Get the index of the newly added entry
 		set_temp_variable = { GRE_new_index = GRE_creditors^num }
 		subtract_from_temp_variable = { GRE_new_index = 1 }
 		set_variable = { GRE_creditor_debt^GRE_new_index = GRE_proposed_debt_amount }
 		set_variable = { GRE_creditor_rate^GRE_new_index = 3 }
 	}
 
-	# Transfer from generic debt to creditor-held debt
 	subtract_from_variable = { debt = GRE_proposed_debt_amount }
 	clamp_variable = { var = debt min = 0 max = 999999 }
 	add_to_variable = { GRE_total_creditor_debt = GRE_proposed_debt_amount }
 
-	# Update mirror variables on the creditor country
 	var:GRE_creditor_target = {
 		add_to_variable = { GRE_debt_held_by_us = GRE.GRE_proposed_debt_amount }
 		if = {
@@ -50,14 +44,12 @@ GRE_add_creditor = {
 # Removes a creditor from the system
 # Expects: GRE_creditor_remove_index (index to remove)
 GRE_remove_creditor = {
-	# Clear mirror variables on the creditor country
 	var:GRE_creditors^GRE_creditor_remove_index = {
 		set_variable = { GRE_debt_held_by_us = 0 }
 		set_variable = { GRE_our_interest_rate = 0 }
 		set_variable = { GRE_interest_income_from_greece = 0 }
 	}
 
-	# Remove from all parallel arrays by index
 	remove_from_array = { array = GRE_creditors index = GRE_creditor_remove_index }
 	remove_from_array = { array = GRE_creditor_debt index = GRE_creditor_remove_index }
 	remove_from_array = { array = GRE_creditor_rate index = GRE_creditor_remove_index }
@@ -73,25 +65,21 @@ GRE_process_creditor_payments = {
 		value = v
 		index = i
 
-		# Calculate weekly interest: debt * rate * 0.00019 (matching base system constant)
+		# Weekly interest: debt * rate * 0.00019
 		set_temp_variable = { GRE_weekly_interest = GRE_creditor_debt^i }
 		multiply_temp_variable = { GRE_weekly_interest = 0.00019 }
 		multiply_temp_variable = { GRE_weekly_interest = GRE_creditor_rate^i }
 
-		# Subtract from Greek treasury
 		subtract_from_variable = { treasury = GRE_weekly_interest }
 
-		# Add to creditor treasury and update their display variables
 		var:GRE_creditors^i = {
 			add_to_variable = { treasury = ROOT.GRE_weekly_interest }
 			set_variable = { GRE_interest_income_from_greece = ROOT.GRE_weekly_interest }
 		}
 
-		# Track total payment for display
 		add_to_variable = { GRE_creditor_payment_total = GRE_weekly_interest }
 	}
 
-	# Update total creditor debt display
 	set_variable = { GRE_total_creditor_debt = 0 }
 	for_each_loop = {
 		array = GRE_creditor_debt
@@ -102,7 +90,6 @@ GRE_process_creditor_payments = {
 # Distributes deferred focus costs proportionally across creditors
 # Expects: GRE_deferred_cost (amount to distribute)
 GRE_distribute_deferred_debt = {
-	# Calculate total creditor debt for proportional distribution
 	set_temp_variable = { GRE_total_cd = 0 }
 	for_each_loop = {
 		array = GRE_creditor_debt
@@ -116,15 +103,13 @@ GRE_distribute_deferred_debt = {
 			value = v
 			index = i
 
-			# This creditor's share = (their_debt / total_debt) * deferred_cost
+			# share = (their_debt / total_debt) * deferred_cost
 			set_temp_variable = { GRE_share = GRE_creditor_debt^i }
 			divide_temp_variable = { GRE_share = GRE_total_cd }
 			multiply_temp_variable = { GRE_share = GRE_deferred_cost }
 
-			# Add to this creditor's held debt
 			add_to_variable = { GRE_creditor_debt^i = GRE_share }
 
-			# Update creditor's mirror variable
 			var:GRE_creditors^i = {
 				add_to_variable = { GRE_debt_held_by_us = ROOT.GRE_share }
 			}
@@ -133,7 +118,6 @@ GRE_distribute_deferred_debt = {
 		custom_effect_tooltip = GRE_deferred_to_creditors_tt
 	}
 	else = {
-		# No creditors, use standard debt system
 		set_temp_variable = { debt_change = GRE_deferred_cost }
 		modify_debt_effect = yes
 	}
@@ -142,27 +126,21 @@ GRE_distribute_deferred_debt = {
 # Repay a portion of debt to a specific creditor
 # Expects: GRE_repay_index (creditor index), GRE_repay_amount (amount to repay)
 GRE_repay_creditor_debt = {
-	# Clamp repayment to actual debt owed
 	clamp_variable = { var = GRE_repay_amount min = 0 max = GRE_creditor_debt^GRE_repay_index }
 
-	# Subtract from Greek treasury
 	set_temp_variable = { treasury_change = GRE_repay_amount }
 	multiply_temp_variable = { treasury_change = -1 }
 	modify_treasury_effect = yes
 
-	# Reduce creditor debt
 	subtract_from_variable = { GRE_creditor_debt^GRE_repay_index = GRE_repay_amount }
 	subtract_from_variable = { GRE_total_creditor_debt = GRE_repay_amount }
 
-	# Update creditor mirror
 	var:GRE_creditors^GRE_repay_index = {
 		subtract_from_variable = { GRE_debt_held_by_us = ROOT.GRE_repay_amount }
 	}
 
-	# Check if fully repaid
 	if = {
 		limit = { check_variable = { GRE_creditor_debt^GRE_repay_index < 0.01 } }
-		# Notify creditor
 		var:GRE_creditors^GRE_repay_index = {
 			country_event = { id = greece_debt.18 days = 1 }
 		}
@@ -173,8 +151,6 @@ GRE_repay_creditor_debt = {
 
 # Defers a focus payment into the creditor debt pool
 # Expects: debt_change (amount to defer)
-# The cost goes into creditor-held debt (earning interest for creditors)
-# or into generic debt if no creditors exist
 GRE_defer_payment = {
 	set_temp_variable = { GRE_deferred_cost = debt_change }
 	if = {
@@ -187,10 +163,9 @@ GRE_defer_payment = {
 }
 
 # Calculates the unified Greek debt ratio
-# Factors in: generic debt (full weight) + creditor debt (half weight)
-# Result stored in GRE_unified_debt_ratio (debt-to-GDP as a decimal, e.g. 1.5 = 150%)
+# Generic debt (full weight) + creditor debt (half weight)
+# Result stored in GRE_unified_debt_ratio (decimal, e.g. 1.5 = 150%)
 GRE_calculate_unified_debt = {
-	# Generic national debt at full weight
 	set_variable = { GRE_effective_debt = debt }
 
 	# Creditor-held debt at half weight (restructured terms)
@@ -198,7 +173,6 @@ GRE_calculate_unified_debt = {
 	multiply_temp_variable = { GRE_creditor_half = 0.5 }
 	add_to_variable = { GRE_effective_debt = GRE_creditor_half }
 
-	# Calculate unified ratio against GDP
 	if = {
 		limit = { check_variable = { gdp_total > 0 } }
 		set_variable = { GRE_unified_debt_ratio = GRE_effective_debt }
@@ -208,13 +182,11 @@ GRE_calculate_unified_debt = {
 		set_variable = { GRE_unified_debt_ratio = 0 }
 	}
 
-	# Map the ratio to 0-1 scale for the dynamic modifier
-	# 0% = 0, 150%+ = 1.0 (crisis threshold)
+	# Map ratio to 0-1 scale: 0% = 0, 150%+ = 1.0
 	set_variable = { GRE_debt_variable = GRE_unified_debt_ratio }
 	multiply_variable = { GRE_debt_variable = 0.6667 }
 	clamp_variable = { var = GRE_debt_variable min = 0 max = 1 }
 
-	# Update dynamic modifier variables based on debt severity
 	set_temp_variable = { a = GRE_debt_variable }
 	set_temp_variable = { b = GRE_debt_variable }
 	set_temp_variable = { c = GRE_debt_variable }
@@ -228,7 +200,6 @@ GRE_calculate_unified_debt = {
 	set_variable = { var = GRE_debt_crisis_construction value = c }
 	set_variable = { var = GRE_debt_crisis_drift value = d }
 
-	# Trigger debt crisis mission at 150% unified ratio
 	if = {
 		limit = {
 			check_variable = { GRE_unified_debt_ratio > 1.5 }
@@ -240,14 +211,11 @@ GRE_calculate_unified_debt = {
 	}
 }
 
-# Legacy wrapper — focuses that manually set GRE_debt_change still work
-# but now they also trigger the unified recalculation
+# Legacy wrapper for focuses that manually set GRE_debt_change
 update_greek_debt = {
-	# Apply the manual debt change to generic debt
 	set_temp_variable = { debt_change = GRE_debt_change }
 	modify_debt_effect = yes
 
-	# Recalculate unified ratio
 	GRE_calculate_unified_debt = yes
 
 	if = {

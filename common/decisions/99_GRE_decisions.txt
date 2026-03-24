@@ -178,6 +178,7 @@ GRE_debt_crisis_category = {
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision GRE_defer_payments_decision"
 			set_country_flag = GRE_defer_payments_flag
+			custom_effect_tooltip = GRE_defer_payments_decision_tt
 		}
 
 		ai_will_do = {
@@ -815,7 +816,7 @@ GRE_homelessness_crisis_category = {
 
 		days_remove = 20
 
-		cost = 75
+		cost = 25
 
 		available = {
 			has_idea = GRE_homelessness_crisis_idea
@@ -846,7 +847,7 @@ GRE_homelessness_crisis_category = {
 
 		days_remove = 20
 
-		cost = 75
+		cost = 25
 
 		available = {
 			has_idea = GRE_homelessness_crisis_idea
@@ -877,7 +878,7 @@ GRE_homelessness_crisis_category = {
 
 		days_remove = 20
 
-		cost = 75
+		cost = 25
 
 		available = {
 			has_idea = GRE_homelessness_crisis_idea
@@ -1408,7 +1409,7 @@ GRE_generic_decisions_category = {
 
 	GRE_aegean_survey = {
 		allowed = { original_tag = GRE }
-		icon = oil
+		icon = GFX_decision_oil
 
 		cost = 50
 		days_remove = 70
@@ -1428,8 +1429,15 @@ GRE_generic_decisions_category = {
 
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision GRE_aegean_survey"
-			set_temp_variable = { treasury_change = -4.50 }
-			modify_treasury_effect = yes
+			if = { limit = { has_country_flag = GRE_defer_payments_flag }
+				set_temp_variable = { skip_payment = 1 }
+				set_temp_variable = { debt_change = 4.50 }
+				GRE_defer_payment = yes
+			}
+			else = {
+				set_temp_variable = { treasury_change = -4.50 }
+				modify_treasury_effect = yes
+			}
 		}
 
 		remove_effect = {
@@ -1456,7 +1464,7 @@ GRE_generic_decisions_category = {
 
 	GRE_aegean_extraction = {
 		allowed = { original_tag = GRE }
-		icon = oil
+		icon = GFX_decision_oil
 
 		cost = 75
 		days_remove = 120
@@ -1477,8 +1485,15 @@ GRE_generic_decisions_category = {
 
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision GRE_aegean_extraction"
-			set_temp_variable = { treasury_change = -3.75 }
-			modify_treasury_effect = yes
+			if = { limit = { has_country_flag = GRE_defer_payments_flag }
+				set_temp_variable = { skip_payment = 1 }
+				set_temp_variable = { debt_change = 3.75 }
+				GRE_defer_payment = yes
+			}
+			else = {
+				set_temp_variable = { treasury_change = -3.75 }
+				modify_treasury_effect = yes
+			}
 		}
 
 		remove_effect = {
@@ -1499,7 +1514,7 @@ GRE_generic_decisions_category = {
 
 	GRE_aegean_offshore_industry = {
 		allowed = { original_tag = GRE }
-		icon = oil
+		icon = GFX_decision_oil
 
 		cost = 100
 		days_remove = 150
@@ -1520,8 +1535,15 @@ GRE_generic_decisions_category = {
 
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision GRE_aegean_offshore_industry"
-			set_temp_variable = { treasury_change = -13.50 }
-			modify_treasury_effect = yes
+			if = { limit = { has_country_flag = GRE_defer_payments_flag }
+				set_temp_variable = { skip_payment = 1 }
+				set_temp_variable = { debt_change = 13.50 }
+				GRE_defer_payment = yes
+			}
+			else = {
+				set_temp_variable = { treasury_change = -13.50 }
+				modify_treasury_effect = yes
+			}
 		}
 
 		remove_effect = {
@@ -1548,7 +1570,7 @@ GRE_generic_decisions_category = {
 
 	GRE_crete_survey = {
 		allowed = { original_tag = GRE }
-		icon = oil
+		icon = GFX_decision_oil
 
 		cost = 50
 		days_remove = 70
@@ -1568,8 +1590,15 @@ GRE_generic_decisions_category = {
 
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision GRE_crete_survey"
-			set_temp_variable = { treasury_change = -4.50 }
-			modify_treasury_effect = yes
+			if = { limit = { has_country_flag = GRE_defer_payments_flag }
+				set_temp_variable = { skip_payment = 1 }
+				set_temp_variable = { debt_change = 4.50 }
+				GRE_defer_payment = yes
+			}
+			else = {
+				set_temp_variable = { treasury_change = -4.50 }
+				modify_treasury_effect = yes
+			}
 		}
 
 		remove_effect = {
@@ -1596,7 +1625,7 @@ GRE_generic_decisions_category = {
 
 	GRE_crete_extraction = {
 		allowed = { original_tag = GRE }
-		icon = oil
+		icon = GFX_decision_oil
 
 		cost = 75
 		days_remove = 120
@@ -1617,8 +1646,15 @@ GRE_generic_decisions_category = {
 
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision GRE_crete_extraction complete"
-			set_temp_variable = { treasury_change = -5.63 }
-			modify_treasury_effect = yes
+			if = { limit = { has_country_flag = GRE_defer_payments_flag }
+				set_temp_variable = { skip_payment = 1 }
+				set_temp_variable = { debt_change = 5.63 }
+				GRE_defer_payment = yes
+			}
+			else = {
+				set_temp_variable = { treasury_change = -5.63 }
+				modify_treasury_effect = yes
+			}
 		}
 
 		remove_effect = {
@@ -1639,7 +1675,7 @@ GRE_generic_decisions_category = {
 
 	GRE_crete_offshore_industry = {
 		allowed = { original_tag = GRE }
-		icon = oil
+		icon = GFX_decision_oil
 
 		cost = 100
 		days_remove = 150
@@ -1660,8 +1696,15 @@ GRE_generic_decisions_category = {
 
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision GRE_crete_offshore_industry"
-			set_temp_variable = { treasury_change = -19.75 }
-			modify_treasury_effect = yes
+			if = { limit = { has_country_flag = GRE_defer_payments_flag }
+				set_temp_variable = { skip_payment = 1 }
+				set_temp_variable = { debt_change = 19.75 }
+				GRE_defer_payment = yes
+			}
+			else = {
+				set_temp_variable = { treasury_change = -19.75 }
+				modify_treasury_effect = yes
+			}
 		}
 
 		remove_effect = {
@@ -1881,7 +1924,7 @@ GRE_prospecting_category = {
 
 	GRE_halkidiki_prospecting_1 = {
 		name = GRE_halkidiki_prospecting
-		icon = generic_resource_extr
+		icon = GFX_decision_chromium
 
 		cost = 50
 		days_remove = 30
@@ -1932,7 +1975,7 @@ GRE_prospecting_category = {
 
 	GRE_halkidiki_prospecting_2 = {
 		name = GRE_halkidiki_prospecting
-		icon = generic_resource_extr
+		icon = GFX_decision_chromium
 
 		cost = 50
 		days_remove = 30
@@ -1983,7 +2026,7 @@ GRE_prospecting_category = {
 
 	GRE_halkidiki_prospecting_3 = {
 		name = GRE_halkidiki_prospecting
-		icon = generic_resource_extr
+		icon = GFX_decision_steel
 
 		cost = 50
 		days_remove = 30
@@ -2034,7 +2077,7 @@ GRE_prospecting_category = {
 
 	GRE_halkidiki_prospecting_4 = {
 		name = GRE_halkidiki_prospecting
-		icon = generic_resource_extr
+		icon = GFX_decision_chromium
 
 		cost = 50
 		days_remove = 30
@@ -2086,7 +2129,7 @@ GRE_prospecting_category = {
 
 	GRE_peloponnese_bauxite_1 = {
 		name = GRE_peloponnese_bauxite
-		icon = generic_resource_extr
+		icon = GFX_decision_aluminium
 
 		cost = 50
 		days_remove = 30
@@ -2137,7 +2180,7 @@ GRE_prospecting_category = {
 
 	GRE_peloponnese_bauxite_2 = {
 		name = GRE_peloponnese_bauxite
-		icon = generic_resource_extr
+		icon = GFX_decision_aluminium
 
 		cost = 50
 		days_remove = 30
@@ -2188,7 +2231,7 @@ GRE_prospecting_category = {
 
 	GRE_peloponnese_bauxite_3 = {
 		name = GRE_peloponnese_bauxite
-		icon = generic_resource_extr
+		icon = GFX_decision_aluminium
 
 		cost = 50
 		days_remove = 30
@@ -2240,7 +2283,7 @@ GRE_prospecting_category = {
 
 	GRE_thessaly_mining_1 = {
 		name = GRE_thessaly_mining
-		icon = generic_resource_extr
+		icon = GFX_decision_steel
 
 		cost = 50
 		days_remove = 30
@@ -2291,7 +2334,7 @@ GRE_prospecting_category = {
 
 	GRE_thessaly_mining_2 = {
 		name = GRE_thessaly_mining
-		icon = generic_resource_extr
+		icon = GFX_decision_steel
 
 		cost = 50
 		days_remove = 30
@@ -2342,7 +2385,7 @@ GRE_prospecting_category = {
 
 	GRE_thessaly_mining_3 = {
 		name = GRE_thessaly_mining
-		icon = generic_resource_extr
+		icon = GFX_decision_steel
 
 		cost = 50
 		days_remove = 30
@@ -2395,7 +2438,7 @@ GRE_prospecting_category = {
 
 	GRE_aegean_mining_1 = {
 		name = GRE_aegean_mining
-		icon = generic_resource_extr
+		icon = GFX_decision_aluminium
 
 		cost = 50
 		days_remove = 30
@@ -2446,7 +2489,7 @@ GRE_prospecting_category = {
 
 	GRE_aegean_mining_2 = {
 		name = GRE_aegean_mining
-		icon = generic_resource_extr
+		icon = GFX_decision_aluminium
 
 		cost = 50
 		days_remove = 30

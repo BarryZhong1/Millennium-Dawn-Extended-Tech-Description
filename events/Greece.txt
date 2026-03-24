@@ -513,24 +513,6 @@ country_event = {
 	}
 }
 
-# Second Greek Civil War
-news_event = {
-	id = greece.21
-	title = greece.21.t
-	desc = greece.21.d
-	picture = GFX_news_generic_soldiers
-	major = yes
-	is_triggered_only = yes
-	trigger = {
-		GRE = { has_civil_war = yes }
-	}
-
-	# Terrible News...
-	option = {
-		name = greece.21.a
-	}
-}
-
 # Austerity tensions dissipate
 country_event = {
 	id = greece.22
@@ -1583,29 +1565,13 @@ country_event = {
 		}
 	}
 
-	# Look to Europe
-	option = {
-		name = greece_debt.1.d
-		trigger = {
-			any_other_country = { has_idea = ECB_president }
-		}
-		log = "[GetDateText]: [This.GetName]: greece_debt.1.d executed"
-		random_other_country = {
-			limit = { has_idea = ECB_president }
-			country_event = { id = greece_debt.2 days = 2 random_hours = 12 }
-		}
-
-		ai_chance = {
-			base = 5
-		}
-	}
-
 	# Stay the Course
 	option = {
 		name = greece_debt.1.e
 		log = "[GetDateText]: [This.GetName]: greece_debt.1.e executed"
 
 		add_political_power = 100
+		add_stability = 0.05
 
 		ai_chance = {
 			base = 5
@@ -1640,6 +1606,7 @@ country_event = {
 		name = greece_debt.2.b
 		log = "[GetDateText]: [This.GetName]: greece_debt.2.b executed"
 		set_variable = { GRE.debt_swap_holder_nation = THIS.id }
+		custom_effect_tooltip =
 
 		ai_chance = {
 			base = 100
@@ -2443,120 +2410,6 @@ country_event = {
 # Aegean Pipeline - Turkey Events
 ###################################
 
-# Propose joint Aegean energy exploitation to Turkey
-country_event = {
-	id = greece.43
-	title = greece.43.t
-	desc = greece.43.d
-	picture = GFX_report_generic_sign_treaty2
-	is_triggered_only = yes
-
-	# Accept - shared exploitation, both get oil
-	option = {
-		name = greece.43.a
-		log = "[GetDateText]: [This.GetName]: greece.43.a executed"
-		FROM = { country_event = { id = greece.44 days = 1 } }
-		# Turkey gets a share of oil
-		random_owned_state = {
-			limit = { is_coastal = yes }
-			add_resource = { type = oil amount = 3 }
-		}
-		add_opinion_modifier = { target = FROM modifier = earthquake_diplomacy }
-
-		ai_chance = {
-			base = 30
-			modifier = {
-				factor = 3
-				has_opinion = { target = FROM value > 25 }
-			}
-			modifier = {
-				factor = 0.1
-				has_opinion = { target = FROM value < -25 }
-			}
-		}
-	}
-
-	# Reject - Turkey refuses shared exploitation
-	option = {
-		name = greece.43.b
-		log = "[GetDateText]: [This.GetName]: greece.43.b executed"
-		FROM = { country_event = { id = greece.45 days = 1 } }
-		add_opinion_modifier = { target = FROM modifier = airspace_violations }
-
-		ai_chance = {
-			base = 70
-			modifier = {
-				factor = 0.5
-				has_opinion = { target = FROM value > 50 }
-			}
-		}
-	}
-}
-
-# Turkey accepted Aegean pipeline deal
-country_event = {
-	id = greece.44
-	title = greece.44.t
-	desc = greece.44.d
-	picture = GFX_report_generic_sign_treaty2
-	is_triggered_only = yes
-
-	option = {
-		name = greece.44.a
-		log = "[GetDateText]: [This.GetName]: greece.44.a executed"
-		if = { limit = { has_country_flag = GRE_defer_payments_flag }
-			set_temp_variable = { skip_payment = 1 }
-			set_temp_variable = { debt_change = 6.5 }
-			GRE_defer_payment = yes
-		}
-		else = {
-			set_temp_variable = { treasury_change = -6.5 }
-			modify_treasury_effect = yes
-		}
-		143 = {
-			add_resource = { type = oil amount = 6 }
-		}
-		add_opinion_modifier = { target = TUR modifier = earthquake_diplomacy }
-	}
-}
-
-# Turkey rejected Aegean pipeline deal
-country_event = {
-	id = greece.45
-	title = greece.45.t
-	desc = greece.45.d
-	picture = GFX_report_generic_sign_treaty2
-	is_triggered_only = yes
-
-	# Go ahead unilaterally
-	option = {
-		name = greece.45.a
-		log = "[GetDateText]: [This.GetName]: greece.45.a executed"
-		if = { limit = { has_country_flag = GRE_defer_payments_flag }
-			set_temp_variable = { skip_payment = 1 }
-			set_temp_variable = { debt_change = 4 }
-			GRE_defer_payment = yes
-		}
-		else = {
-			set_temp_variable = { treasury_change = -4 }
-			modify_treasury_effect = yes
-		}
-		143 = {
-			add_resource = { type = oil amount = 4 }
-		}
-		add_opinion_modifier = { target = TUR modifier = airspace_violations }
-
-		ai_chance = { base = 70 }
-	}
-
-	# Abandon the project
-	option = {
-		name = greece.45.b
-
-		ai_chance = { base = 30 }
-	}
-}
-
 ###################################
 # ICBC Loan Events
 ###################################
@@ -2634,225 +2487,6 @@ country_event = {
 
 	option = {
 		name = greece.48.a
-	}
-}
-
-###################################
-# North Macedonian Pipeline Events
-###################################
-
-# Pipeline proposal to North Macedonia
-country_event = {
-	id = greece.49
-	title = greece.49.t
-	desc = greece.49.d
-	picture = GFX_report_generic_sign_treaty2
-	is_triggered_only = yes
-
-	# Accept - shared pipeline, both benefit
-	option = {
-		name = greece.49.a
-		log = "[GetDateText]: [This.GetName]: greece.49.a executed"
-		FROM = { country_event = { id = greece.50 days = 1 } }
-		random_owned_state = {
-			limit = { is_core_of = ROOT }
-			add_resource = { type = oil amount = 2 }
-		}
-		add_opinion_modifier = { target = FROM modifier = earthquake_diplomacy }
-
-		ai_chance = {
-			base = 60
-			modifier = {
-				factor = 2
-				has_opinion = { target = FROM value > 25 }
-			}
-		}
-	}
-
-	# Reject
-	option = {
-		name = greece.49.b
-		log = "[GetDateText]: [This.GetName]: greece.49.b executed"
-		FROM = { country_event = { id = greece.51 days = 1 } }
-
-		ai_chance = {
-			base = 40
-		}
-	}
-}
-
-# North Macedonia accepted pipeline
-country_event = {
-	id = greece.50
-	title = greece.50.t
-	desc = greece.50.d
-	picture = GFX_report_generic_sign_treaty2
-	is_triggered_only = yes
-
-	option = {
-		name = greece.50.a
-		log = "[GetDateText]: [This.GetName]: greece.50.a executed"
-		if = { limit = { has_country_flag = GRE_defer_payments_flag }
-			set_temp_variable = { skip_payment = 1 }
-			set_temp_variable = { debt_change = 6.5 }
-			GRE_defer_payment = yes
-		}
-		else = {
-			set_temp_variable = { treasury_change = -6.5 }
-			modify_treasury_effect = yes
-		}
-		140 = {
-			add_resource = { type = oil amount = 4 }
-		}
-		add_opinion_modifier = { target = FYR modifier = earthquake_diplomacy }
-	}
-}
-
-# North Macedonia rejected pipeline
-country_event = {
-	id = greece.51
-	title = greece.51.t
-	desc = greece.51.d
-	picture = GFX_report_generic_sign_treaty2
-	is_triggered_only = yes
-
-	# Build unilaterally
-	option = {
-		name = greece.51.a
-		log = "[GetDateText]: [This.GetName]: greece.51.a executed"
-		if = { limit = { has_country_flag = GRE_defer_payments_flag }
-			set_temp_variable = { skip_payment = 1 }
-			set_temp_variable = { debt_change = 3 }
-			GRE_defer_payment = yes
-		}
-		else = {
-			set_temp_variable = { treasury_change = -3 }
-			modify_treasury_effect = yes
-		}
-		140 = {
-			add_resource = { type = oil amount = 3 }
-		}
-
-		ai_chance = { base = 70 }
-	}
-
-	# Abandon
-	option = {
-		name = greece.51.b
-
-		ai_chance = { base = 30 }
-	}
-}
-
-###################################
-# Turkish Pipeline Events
-###################################
-
-# Pipeline proposal to Turkey
-country_event = {
-	id = greece.52
-	title = greece.52.t
-	desc = greece.52.d
-	picture = GFX_report_generic_sign_treaty2
-	is_triggered_only = yes
-
-	# Accept - shared pipeline
-	option = {
-		name = greece.52.a
-		log = "[GetDateText]: [This.GetName]: greece.52.a executed"
-		FROM = { country_event = { id = greece.53 days = 1 } }
-		random_owned_state = {
-			limit = { is_core_of = ROOT is_coastal = yes }
-			add_resource = { type = oil amount = 3 }
-		}
-		add_opinion_modifier = { target = FROM modifier = earthquake_diplomacy }
-
-		ai_chance = {
-			base = 30
-			modifier = {
-				factor = 2
-				has_opinion = { target = FROM value > 25 }
-			}
-			modifier = {
-				factor = 0.2
-				has_opinion = { target = FROM value < -25 }
-			}
-		}
-	}
-
-	# Reject
-	option = {
-		name = greece.52.b
-		log = "[GetDateText]: [This.GetName]: greece.52.b executed"
-		FROM = { country_event = { id = greece.54 days = 1 } }
-
-		ai_chance = {
-			base = 70
-		}
-	}
-}
-
-# Turkey accepted pipeline
-country_event = {
-	id = greece.53
-	title = greece.53.t
-	desc = greece.53.d
-	picture = GFX_report_generic_sign_treaty2
-	is_triggered_only = yes
-
-	option = {
-		name = greece.53.a
-		log = "[GetDateText]: [This.GetName]: greece.53.a executed"
-		if = { limit = { has_country_flag = GRE_defer_payments_flag }
-			set_temp_variable = { skip_payment = 1 }
-			set_temp_variable = { debt_change = 6.5 }
-			GRE_defer_payment = yes
-		}
-		else = {
-			set_temp_variable = { treasury_change = -6.5 }
-			modify_treasury_effect = yes
-		}
-		140 = {
-			add_resource = { type = oil amount = 4 }
-		}
-		add_opinion_modifier = { target = TUR modifier = earthquake_diplomacy }
-	}
-}
-
-# Turkey rejected pipeline
-country_event = {
-	id = greece.54
-	title = greece.54.t
-	desc = greece.54.d
-	picture = GFX_report_generic_sign_treaty2
-	is_triggered_only = yes
-
-	# Build alone
-	option = {
-		name = greece.54.a
-		log = "[GetDateText]: [This.GetName]: greece.54.a executed"
-		if = { limit = { has_country_flag = GRE_defer_payments_flag }
-			set_temp_variable = { skip_payment = 1 }
-			set_temp_variable = { debt_change = 3 }
-			GRE_defer_payment = yes
-		}
-		else = {
-			set_temp_variable = { treasury_change = -3 }
-			modify_treasury_effect = yes
-		}
-		140 = {
-			add_resource = { type = oil amount = 3 }
-		}
-		add_opinion_modifier = { target = TUR modifier = airspace_violations }
-
-		ai_chance = { base = 60 }
-	}
-
-	# Abandon
-	option = {
-		name = greece.54.b
-
-		ai_chance = { base = 40 }
 	}
 }
 
