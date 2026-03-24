@@ -5178,6 +5178,7 @@ scripted_gui = {
 			}
 
 			antarctica_station_swap_laboratory_button_visible = {
+				has_country_flag = antarctica_station_bp_visible
 				original_tag = var:global.selected_antarctica_station_controller
 			}
 
@@ -5191,15 +5192,106 @@ scripted_gui = {
 
 			antarctica_station_swap_module_button_visible = {
 				has_country_flag = antarctica_station_bp_visible
+				check_variable = { global.selected_antarctica_station > 0 }
 			}
 
 			antarctica_station_install_module_button_visible = {
 				has_country_flag = antarctica_station_bp_visible
 			}
 
+			antarctica_station_install_module_button_click_enabled = {
+				check_variable = { global.selected_antarctica_station > 0 }
+				check_variable = { global.selected_antarctica_station_install_in_progress < 1 }
+				antarctica_station_install_module_unlocked = yes
+				original_tag = var:global.selected_antarctica_station_controller
+			}
+
 			antarctica_station_module_text_visible = {
 				has_country_flag = antarctica_station_bp_visible
 			}
+
+			antarctic_station_module_slot_1_visible = {
+				has_country_flag = antarctica_station_bp_visible
+			}
+
+			antarctic_station_module_slot_1_click_enabled = {
+				check_variable = { global.selected_antarctica_station > 0 }
+				original_tag = var:global.selected_antarctica_station_controller
+			}
+
+			antarctic_station_module_slot_2_visible = {
+				has_country_flag = antarctica_station_bp_visible
+			}
+
+			antarctic_station_module_slot_2_click_enabled = {
+				check_variable = { global.selected_antarctica_station > 0 }
+				original_tag = var:global.selected_antarctica_station_controller
+			}
+
+			antarctic_station_module_slot_3_visible = {
+				has_country_flag = antarctica_station_bp_visible
+			}
+
+			antarctic_station_module_slot_3_click_enabled = {
+				check_variable = { global.selected_antarctica_station > 0 }
+				original_tag = var:global.selected_antarctica_station_controller
+			}
+
+			antarctic_station_module_slot_4_visible = {
+				has_country_flag = antarctica_station_bp_visible
+			}
+
+			antarctic_station_module_slot_4_click_enabled = {
+				check_variable = { global.selected_antarctica_station > 0 }
+				original_tag = var:global.selected_antarctica_station_controller
+			}
+
+			antarctic_station_module_slot_5_visible = {
+				has_country_flag = antarctica_station_bp_visible
+			}
+
+			antarctic_station_module_slot_5_click_enabled = {
+				check_variable = { global.selected_antarctica_station > 0 }
+				original_tag = var:global.selected_antarctica_station_controller
+			}
+
+			antarctica_station_preview_powerplant_1_visible = { check_variable = { global.selected_antarctica_station_selected_module_category = 1 } check_variable = { global.selected_antarctica_station_selected_module = 1 } }
+			antarctica_station_preview_powerplant_2_visible = { check_variable = { global.selected_antarctica_station_selected_module_category = 1 } check_variable = { global.selected_antarctica_station_selected_module = 2 } }
+			antarctica_station_preview_powerplant_3_visible = { check_variable = { global.selected_antarctica_station_selected_module_category = 1 } check_variable = { global.selected_antarctica_station_selected_module = 3 } }
+			antarctica_station_preview_powerplant_4_visible = { check_variable = { global.selected_antarctica_station_selected_module_category = 1 } check_variable = { global.selected_antarctica_station_selected_module = 4 } }
+			antarctica_station_preview_powerplant_5_visible = { check_variable = { global.selected_antarctica_station_selected_module_category = 1 } check_variable = { global.selected_antarctica_station_selected_module = 5 } }
+			antarctica_station_preview_powerplant_6_visible = { check_variable = { global.selected_antarctica_station_selected_module_category = 1 } check_variable = { global.selected_antarctica_station_selected_module = 6 } }
+			antarctica_station_preview_powerplant_7_visible = { check_variable = { global.selected_antarctica_station_selected_module_category = 1 } check_variable = { global.selected_antarctica_station_selected_module = 7 } }
+			antarctica_station_preview_powerplant_9_visible = { check_variable = { global.selected_antarctica_station_selected_module_category = 1 } check_variable = { global.selected_antarctica_station_selected_module = 9 } }
+			antarctica_station_preview_powerplant_10_visible = { check_variable = { global.selected_antarctica_station_selected_module_category = 1 } check_variable = { global.selected_antarctica_station_selected_module = 10 } }
+
+			antarctica_station_preview_life_1_visible = { check_variable = { global.selected_antarctica_station_selected_module_category = 2 } check_variable = { global.selected_antarctica_station_selected_module = 1 } }
+			antarctica_station_preview_life_2_visible = { check_variable = { global.selected_antarctica_station_selected_module_category = 2 } check_variable = { global.selected_antarctica_station_selected_module = 2 } }
+			antarctica_station_preview_life_3_visible = { check_variable = { global.selected_antarctica_station_selected_module_category = 2 } check_variable = { global.selected_antarctica_station_selected_module = 3 } }
+			antarctica_station_preview_life_4_visible = { check_variable = { global.selected_antarctica_station_selected_module_category = 2 } check_variable = { global.selected_antarctica_station_selected_module = 4 } }
+
+			antarctica_station_preview_fuel_1_visible = { check_variable = { global.selected_antarctica_station_selected_module_category = 3 } check_variable = { global.selected_antarctica_station_selected_module = 1 } }
+			antarctica_station_preview_fuel_2_visible = { check_variable = { global.selected_antarctica_station_selected_module_category = 3 } check_variable = { global.selected_antarctica_station_selected_module = 2 } }
+			antarctica_station_preview_fuel_3_visible = { check_variable = { global.selected_antarctica_station_selected_module_category = 3 } check_variable = { global.selected_antarctica_station_selected_module = 3 } }
+			antarctica_station_preview_fuel_4_visible = { check_variable = { global.selected_antarctica_station_selected_module_category = 3 } check_variable = { global.selected_antarctica_station_selected_module = 4 } }
+
+			antarctica_station_preview_housing_1_visible = { check_variable = { global.selected_antarctica_station_selected_module_category = 4 } check_variable = { global.selected_antarctica_station_selected_module = 1 } }
+			antarctica_station_preview_housing_2_visible = { check_variable = { global.selected_antarctica_station_selected_module_category = 4 } check_variable = { global.selected_antarctica_station_selected_module = 2 } }
+			antarctica_station_preview_housing_3_visible = { check_variable = { global.selected_antarctica_station_selected_module_category = 4 } check_variable = { global.selected_antarctica_station_selected_module = 3 } }
+			antarctica_station_preview_housing_4_visible = { check_variable = { global.selected_antarctica_station_selected_module_category = 4 } check_variable = { global.selected_antarctica_station_selected_module = 4 } }
+
+			antarctica_station_preview_lab_1_visible = { check_variable = { global.selected_antarctica_station_selected_module_category = 5 } check_variable = { global.selected_antarctica_station_selected_module = 1 } }
+			antarctica_station_preview_lab_2_visible = { check_variable = { global.selected_antarctica_station_selected_module_category = 5 } check_variable = { global.selected_antarctica_station_selected_module = 2 } }
+			antarctica_station_preview_lab_3_visible = { check_variable = { global.selected_antarctica_station_selected_module_category = 5 } check_variable = { global.selected_antarctica_station_selected_module = 3 } }
+			antarctica_station_preview_lab_4_visible = { check_variable = { global.selected_antarctica_station_selected_module_category = 5 } check_variable = { global.selected_antarctica_station_selected_module = 4 } }
+			antarctica_station_preview_lab_5_visible = { check_variable = { global.selected_antarctica_station_selected_module_category = 5 } check_variable = { global.selected_antarctica_station_selected_module = 5 } }
+			antarctica_station_preview_lab_6_visible = { check_variable = { global.selected_antarctica_station_selected_module_category = 5 } check_variable = { global.selected_antarctica_station_selected_module = 6 } }
+			antarctica_station_preview_lab_7_visible = { check_variable = { global.selected_antarctica_station_selected_module_category = 5 } check_variable = { global.selected_antarctica_station_selected_module = 7 } }
+			antarctica_station_preview_lab_8_visible = { check_variable = { global.selected_antarctica_station_selected_module_category = 5 } check_variable = { global.selected_antarctica_station_selected_module = 8 } }
+			antarctica_station_preview_lab_9_visible = { check_variable = { global.selected_antarctica_station_selected_module_category = 5 } check_variable = { global.selected_antarctica_station_selected_module = 9 } }
+			antarctica_station_preview_lab_10_visible = { check_variable = { global.selected_antarctica_station_selected_module_category = 5 } check_variable = { global.selected_antarctica_station_selected_module = 10 } }
+			antarctica_station_preview_lab_11_visible = { check_variable = { global.selected_antarctica_station_selected_module_category = 5 } check_variable = { global.selected_antarctica_station_selected_module = 11 } }
+			antarctica_station_preview_lab_12_visible = { check_variable = { global.selected_antarctica_station_selected_module_category = 5 } check_variable = { global.selected_antarctica_station_selected_module = 12 } }
 
 			antarctica_station_marker_0_visible = { check_variable = { global.antarctica_station_ids^0 > 0 } OR = { check_variable = { station_filter_america > 1 } NOT = { has_country_flag = antarctica_filters_active } } }
 			antarctica_station_marker_1_visible = { check_variable = { global.antarctica_station_ids^1 > 0 } OR = { check_variable = { station_filter_asia > 1 } NOT = { has_country_flag = antarctica_filters_active } } }
@@ -5351,11 +5443,85 @@ scripted_gui = {
 				add_to_variable = { global.missile_ui_updated = 1 }
 			}
 
-			antarctica_station_swap_laboratory_button_click = {
+			antarctic_station_module_slot_1_click = {
 				if = {
 					limit = { check_variable = { global.selected_antarctica_station > 0 } }
+					set_variable = { global.selected_antarctica_station_selected_slot = 1 }
+					set_variable = { global.selected_antarctica_station_selected_module_category = 5 }
+					antarctica_set_selected_station_preview_defaults = yes
+				}
+				add_to_variable = { global.missile_ui_updated = 1 }
+			}
+
+			antarctic_station_module_slot_2_click = {
+				if = {
+					limit = { check_variable = { global.selected_antarctica_station > 0 } }
+					set_variable = { global.selected_antarctica_station_selected_slot = 2 }
+					set_variable = { global.selected_antarctica_station_selected_non_lab_category = 1 }
+					antarctica_set_selected_station_preview_defaults = yes
+				}
+				add_to_variable = { global.missile_ui_updated = 1 }
+			}
+
+			antarctic_station_module_slot_3_click = {
+				if = {
+					limit = { check_variable = { global.selected_antarctica_station > 0 } }
+					set_variable = { global.selected_antarctica_station_selected_slot = 3 }
+					set_variable = { global.selected_antarctica_station_selected_non_lab_category = 2 }
+					antarctica_set_selected_station_preview_defaults = yes
+				}
+				add_to_variable = { global.missile_ui_updated = 1 }
+			}
+
+			antarctic_station_module_slot_4_click = {
+				if = {
+					limit = { check_variable = { global.selected_antarctica_station > 0 } }
+					set_variable = { global.selected_antarctica_station_selected_slot = 4 }
+					set_variable = { global.selected_antarctica_station_selected_non_lab_category = 3 }
+					antarctica_set_selected_station_preview_defaults = yes
+				}
+				add_to_variable = { global.missile_ui_updated = 1 }
+			}
+
+			antarctic_station_module_slot_5_click = {
+				if = {
+					limit = { check_variable = { global.selected_antarctica_station > 0 } }
+					set_variable = { global.selected_antarctica_station_selected_slot = 5 }
+					set_variable = { global.selected_antarctica_station_selected_non_lab_category = 4 }
+					antarctica_set_selected_station_preview_defaults = yes
+				}
+				add_to_variable = { global.missile_ui_updated = 1 }
+			}
+
+			antarctica_station_swap_laboratory_button_click = {
+				if = {
+					limit = {
+						check_variable = { global.selected_antarctica_station > 0 }
+					}
 					set_temp_variable = { station_id = global.selected_antarctica_station }
 					antarctica_cycle_station_laboratory_module = yes
+				}
+				add_to_variable = { global.missile_ui_updated = 1 }
+			}
+
+			antarctica_station_swap_module_button_click = {
+				if = {
+					limit = {
+						check_variable = { global.selected_antarctica_station > 0 }
+					}
+					antarctica_cycle_selected_preview_module = yes
+				}
+				add_to_variable = { global.missile_ui_updated = 1 }
+			}
+
+			antarctica_station_install_module_button_click = {
+				if = {
+					limit = {
+						check_variable = { global.selected_antarctica_station > 0 }
+						check_variable = { global.selected_antarctica_station_install_in_progress < 1 }
+						antarctica_station_install_module_unlocked = yes
+					}
+					antarctica_queue_selected_station_module_install = yes
 				}
 				add_to_variable = { global.missile_ui_updated = 1 }
 			}
