@@ -1,0 +1,6622 @@
+#Author : Okazaki
+focus_tree = {
+	id = TUN_focus_tree
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = TUN
+		}
+	}
+	default = no
+	reset_on_civilwar = no
+	continuous_focus_position = { x = 100 y = 1500 }
+
+	focus = {
+		id = TUN_tunisian_military
+		icon = GFX_focus_Generic_Military_Reform
+		x = 10
+		y = 0
+		cost = 10
+		search_filters = { FOCUS_FILTER_MILITARY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_tunisian_military"
+			add_ideas = TUN_apolitical_army_idea
+			add_army_experience = 10
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_military_doctrine
+		icon = GFX_focus_Generic_Military_Reform
+		x = -10
+		y = 1
+		relative_position_id = TUN_tunisian_military
+		cost = 7
+		prerequisite = { focus = TUN_tunisian_military }
+		search_filters = { FOCUS_FILTER_MILITARY FOCUS_FILTER_RESEARCH }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_military_doctrine"
+			add_tech_bonus = { name = TUN_mil_doc_bonus bonus = 0.5 uses = 1 category = land_doctrine }
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_counterterrorism_focus
+		icon = GFX_focus_Generic_Intelligence_Agency
+		x = -1
+		y = 1
+		relative_position_id = TUN_military_doctrine
+		cost = 7
+		prerequisite = { focus = TUN_military_doctrine }
+		mutually_exclusive = { focus = TUN_conventional_defense }
+		search_filters = { FOCUS_FILTER_MILITARY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_counterterrorism_focus"
+			add_ideas = TUN_counterterrorism_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_conventional_defense
+		icon = GFX_focus_Generic_Army_Modernization
+		x = 1
+		y = 1
+		relative_position_id = TUN_military_doctrine
+		cost = 7
+		prerequisite = { focus = TUN_military_doctrine }
+		mutually_exclusive = { focus = TUN_counterterrorism_focus }
+		search_filters = { FOCUS_FILTER_MILITARY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_conventional_defense"
+			add_ideas = TUN_conventional_defense_idea
+		}
+
+		ai_will_do = { base = 5 }
+	}
+
+	focus = {
+		id = TUN_chaambi_operations
+		icon = GFX_focus_Generic_Army_Modernization
+		x = -1
+		y = 2
+		relative_position_id = TUN_military_doctrine
+		cost = 7
+		prerequisite = { focus = TUN_counterterrorism_focus }
+		search_filters = { FOCUS_FILTER_MILITARY }
+		available = { has_country_flag = TUN_revolution_complete }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_chaambi_operations"
+			add_ideas = TUN_chaambi_operations_idea
+			add_army_experience = 5
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_border_defense_doctrine
+		icon = GFX_focus_Generic_Border_Defense
+		x = 1
+		y = 2
+		relative_position_id = TUN_military_doctrine
+		cost = 7
+		prerequisite = { focus = TUN_conventional_defense }
+		search_filters = { FOCUS_FILTER_MILITARY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_border_defense_doctrine"
+			add_ideas = TUN_border_defense_doctrine_idea
+		}
+
+		ai_will_do = { base = 5 }
+	}
+
+	focus = {
+		id = TUN_national_defense_strategy
+		icon = GFX_focus_Generic_Military_Reform
+		x = 0
+		y = 3
+		relative_position_id = TUN_military_doctrine
+		cost = 10
+		prerequisite = { focus = TUN_chaambi_operations }
+		prerequisite = { focus = TUN_border_defense_doctrine }
+		search_filters = { FOCUS_FILTER_MILITARY FOCUS_FILTER_RESEARCH }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_national_defense_strategy"
+			add_ideas = TUN_national_defense_strategy_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_foreign_military_assistance
+		icon = GFX_focus_Generic_Military_Cooperation
+		x = -7
+		y = 1
+		relative_position_id = TUN_tunisian_military
+		cost = 7
+		prerequisite = { focus = TUN_tunisian_military }
+		search_filters = { FOCUS_FILTER_MILITARY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_foreign_military_assistance"
+			set_temp_variable = { treasury_change = 2.00 }
+			modify_treasury_effect = yes
+			add_political_power = 25
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_european_defense_ties
+		icon = GFX_focus_Generic_Military_Cooperation
+		x = 0
+		y = 1
+		relative_position_id = TUN_foreign_military_assistance
+		cost = 7
+		prerequisite = { focus = TUN_foreign_military_assistance }
+		search_filters = { FOCUS_FILTER_MILITARY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_european_defense_ties"
+			add_ideas = TUN_european_defense_ties_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_nato_partnership
+		icon = GFX_focus_Generic_NATO
+		x = 0
+		y = 1
+		relative_position_id = TUN_european_defense_ties
+		cost = 7
+		prerequisite = { focus = TUN_european_defense_ties }
+		search_filters = { FOCUS_FILTER_MILITARY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_nato_partnership"
+			add_ideas = TUN_nato_partnership_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_army_modernization
+		icon = GFX_focus_Generic_Army_Modernization
+		x = -4
+		y = 1
+		relative_position_id = TUN_tunisian_military
+		cost = 10
+		prerequisite = { focus = TUN_tunisian_military }
+		search_filters = { FOCUS_FILTER_MILITARY FOCUS_FILTER_EQUIPMENT }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_army_modernization"
+			set_temp_variable = { treasury_change = -5.00 }
+			modify_treasury_effect = yes
+			add_tech_bonus = { name = TUN_army_mod_bonus bonus = 0.3 uses = 2 category = armor }
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_infantry_equipment
+		icon = GFX_focus_Generic_Army_Modernization
+		x = -1
+		y = 1
+		relative_position_id = TUN_army_modernization
+		cost = 7
+		prerequisite = { focus = TUN_army_modernization }
+		search_filters = { FOCUS_FILTER_MILITARY FOCUS_FILTER_EQUIPMENT }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_infantry_equipment"
+			add_tech_bonus = { name = TUN_infantry_weapons_bonus bonus = 0.5 uses = 1 category = infantry_weapons }
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_armor_procurement
+		icon = GFX_focus_Generic_Army_Modernization
+		x = 1
+		y = 1
+		relative_position_id = TUN_army_modernization
+		cost = 10
+		prerequisite = { focus = TUN_army_modernization }
+		search_filters = { FOCUS_FILTER_MILITARY FOCUS_FILTER_EQUIPMENT }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_armor_procurement"
+			set_temp_variable = { treasury_change = -3.75 }
+			modify_treasury_effect = yes
+			add_tech_bonus = { name = TUN_armor_proc_bonus bonus = 0.3 uses = 1 category = armor }
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_m60_upgrade
+		icon = GFX_focus_Generic_Army_Modernization
+		x = -1
+		y = 1
+		relative_position_id = TUN_armor_procurement
+		cost = 7
+		prerequisite = { focus = TUN_armor_procurement }
+		mutually_exclusive = { focus = TUN_new_mbt }
+		search_filters = { FOCUS_FILTER_MILITARY FOCUS_FILTER_EQUIPMENT }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_m60_upgrade"
+			add_ideas = TUN_m60_upgraded_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_new_mbt
+		icon = GFX_focus_Generic_Army_Modernization
+		x = 1
+		y = 1
+		relative_position_id = TUN_armor_procurement
+		cost = 14
+		prerequisite = { focus = TUN_armor_procurement }
+		mutually_exclusive = { focus = TUN_m60_upgrade }
+		search_filters = { FOCUS_FILTER_MILITARY FOCUS_FILTER_EQUIPMENT }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_new_mbt"
+			set_temp_variable = { treasury_change = -7.50 }
+			modify_treasury_effect = yes
+			add_tech_bonus = { name = TUN_mbt_bonus bonus = 0.5 uses = 1 category = armor }
+		}
+
+		ai_will_do = { base = 5 }
+	}
+
+	focus = {
+		id = TUN_air_force
+		icon = GFX_focus_Generic_Air_Force
+		x = 1
+		y = 1
+		relative_position_id = TUN_tunisian_military
+		cost = 10
+		prerequisite = { focus = TUN_tunisian_military }
+		search_filters = { FOCUS_FILTER_MILITARY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_air_force"
+			add_air_experience = 10
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_fighter_modernization
+		icon = GFX_focus_Generic_Air_Force
+		x = -1
+		y = 1
+		relative_position_id = TUN_air_force
+		cost = 7
+		prerequisite = { focus = TUN_air_force }
+		search_filters = { FOCUS_FILTER_MILITARY FOCUS_FILTER_EQUIPMENT }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_fighter_modernization"
+			add_tech_bonus = { name = TUN_fighter_mod_bonus bonus = 0.3 uses = 1 category = air_equipment }
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_f5_upgrade
+		icon = GFX_focus_Generic_Air_Force
+		x = -1
+		y = 2
+		relative_position_id = TUN_fighter_modernization
+		cost = 7
+		prerequisite = { focus = TUN_fighter_modernization }
+		mutually_exclusive = { focus = TUN_f16_acquisition }
+		search_filters = { FOCUS_FILTER_MILITARY FOCUS_FILTER_EQUIPMENT }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_f5_upgrade"
+			add_ideas = TUN_f5_upgrade_idea
+		}
+
+		ai_will_do = { base = 5 }
+	}
+
+	focus = {
+		id = TUN_f16_acquisition
+		icon = GFX_focus_Generic_Air_Force
+		x = 1
+		y = 2
+		relative_position_id = TUN_fighter_modernization
+		cost = 14
+		prerequisite = { focus = TUN_fighter_modernization }
+		mutually_exclusive = { focus = TUN_f5_upgrade }
+		search_filters = { FOCUS_FILTER_MILITARY FOCUS_FILTER_EQUIPMENT }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_f16_acquisition"
+			set_temp_variable = { treasury_change = -10.00 }
+			modify_treasury_effect = yes
+			add_ideas = TUN_f16_fleet_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_helicopter_fleet
+		icon = GFX_focus_Generic_Air_Force
+		x = 1
+		y = 1
+		relative_position_id = TUN_air_force
+		cost = 7
+		prerequisite = { focus = TUN_air_force }
+		search_filters = { FOCUS_FILTER_MILITARY FOCUS_FILTER_EQUIPMENT }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_helicopter_fleet"
+			add_tech_bonus = { name = TUN_helo_bonus bonus = 0.5 uses = 1 category = helicopter_tech }
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_uav_program
+		icon = GFX_focus_Generic_Air_Force
+		x = 0
+		y = 1
+		relative_position_id = TUN_helicopter_fleet
+		cost = 10
+		prerequisite = { focus = TUN_helicopter_fleet }
+		search_filters = { FOCUS_FILTER_MILITARY FOCUS_FILTER_RESEARCH }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_uav_program"
+			add_ideas = TUN_uav_program_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_navy
+		icon = GFX_focus_Generic_Navy
+		x = 5
+		y = 1
+		relative_position_id = TUN_tunisian_military
+		cost = 7
+		prerequisite = { focus = TUN_tunisian_military }
+		search_filters = { FOCUS_FILTER_MILITARY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_navy"
+			add_naval_experience = 10
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_coast_guard
+		icon = GFX_focus_Generic_Navy
+		x = -1
+		y = 1
+		relative_position_id = TUN_navy
+		cost = 7
+		prerequisite = { focus = TUN_navy }
+		search_filters = { FOCUS_FILTER_MILITARY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_coast_guard"
+			add_ideas = TUN_coast_guard_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_patrol_boats
+		icon = GFX_focus_Generic_Navy
+		x = 0
+		y = 1
+		relative_position_id = TUN_coast_guard
+		cost = 7
+		prerequisite = { focus = TUN_coast_guard }
+		search_filters = { FOCUS_FILTER_MILITARY FOCUS_FILTER_EQUIPMENT }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_patrol_boats"
+			set_temp_variable = { treasury_change = -2.50 }
+			modify_treasury_effect = yes
+			add_ideas = TUN_patrol_boats_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_naval_combatants
+		icon = GFX_focus_Generic_Navy
+		x = 1
+		y = 1
+		relative_position_id = TUN_navy
+		cost = 10
+		prerequisite = { focus = TUN_navy }
+		search_filters = { FOCUS_FILTER_MILITARY FOCUS_FILTER_EQUIPMENT }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_naval_combatants"
+			set_temp_variable = { treasury_change = -7.50 }
+			modify_treasury_effect = yes
+			add_tech_bonus = { name = TUN_naval_ships_bonus bonus = 0.3 uses = 1 category = naval_equipment }
+		}
+
+		ai_will_do = { base = 5 }
+	}
+
+	focus = {
+		id = TUN_bizerte_naval_base
+		icon = GFX_focus_Generic_Construction
+		x = 0
+		y = 1
+		relative_position_id = TUN_naval_combatants
+		cost = 10
+		prerequisite = { focus = TUN_naval_combatants }
+		search_filters = { FOCUS_FILTER_MILITARY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_bizerte_naval_base"
+			set_temp_variable = { treasury_change = -3.50 }
+			modify_treasury_effect = yes
+			one_random_dockyard = yes
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_border_security
+		icon = GFX_focus_Generic_Border_Defense
+		x = 9
+		y = 1
+		relative_position_id = TUN_tunisian_military
+		cost = 7
+		prerequisite = { focus = TUN_tunisian_military }
+		search_filters = { FOCUS_FILTER_MILITARY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_border_security"
+			add_ideas = TUN_border_security_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_libyan_border_wall
+		icon = GFX_focus_Generic_Fortification
+		x = -1
+		y = 1
+		relative_position_id = TUN_border_security
+		cost = 10
+		prerequisite = { focus = TUN_border_security }
+		search_filters = { FOCUS_FILTER_MILITARY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_libyan_border_wall"
+			set_temp_variable = { treasury_change = -3.50 }
+			modify_treasury_effect = yes
+			add_ideas = TUN_libyan_wall_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_algerian_cooperation
+		icon = GFX_focus_Generic_Military_Cooperation
+		x = 1
+		y = 1
+		relative_position_id = TUN_border_security
+		cost = 7
+		prerequisite = { focus = TUN_border_security }
+		search_filters = { FOCUS_FILTER_MILITARY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_algerian_cooperation"
+			add_ideas = TUN_algerian_military_coop_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_integrated_border_defense
+		icon = GFX_focus_Generic_Border_Defense
+		x = 0
+		y = 2
+		relative_position_id = TUN_border_security
+		cost = 10
+		prerequisite = { focus = TUN_libyan_border_wall }
+		prerequisite = { focus = TUN_algerian_cooperation }
+		search_filters = { FOCUS_FILTER_MILITARY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_integrated_border_defense"
+			add_ideas = TUN_integrated_border_defense_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_economy_root
+		icon = GFX_focus_Generic_Industry
+		x = 39
+		y = 0
+		cost = 0
+		allow_branch = { always = yes }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		available = { always = no }
+		bypass = { always = yes }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_economy_root"
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_coastal_economic_model
+		icon = GFX_focus_Generic_Industry
+		x = -13
+		y = 1
+		relative_position_id = TUN_economy_root
+		cost = 7
+		prerequisite = { focus = TUN_economy_root }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_coastal_economic_model"
+			add_ideas = TUN_coastal_model_idea
+			set_temp_variable = { temp_productivity_change = 0.010 }
+			flat_productivity_change_effect = yes
+		}
+
+		ai_will_do = { base = 3 }
+	}
+
+	focus = {
+		id = TUN_tourism_investment
+		icon = GFX_focus_Generic_Tourism
+		x = -2
+		y = 1
+		relative_position_id = TUN_coastal_economic_model
+		cost = 7
+		prerequisite = { focus = TUN_coastal_economic_model }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_tourism_investment"
+			add_ideas = TUN_tourism_investment_idea
+		}
+
+		ai_will_do = { base = 3 }
+	}
+
+	focus = {
+		id = TUN_hammamet_riviera
+		icon = GFX_focus_Generic_Construction
+		x = -1
+		y = 1
+		relative_position_id = TUN_tourism_investment
+		cost = 7
+		prerequisite = { focus = TUN_tourism_investment }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_hammamet_riviera"
+			set_temp_variable = { treasury_change = -3.50 }
+			modify_treasury_effect = yes
+			one_random_infrastructure = yes
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_djerba_resort
+		icon = GFX_focus_Generic_Construction
+		x = 1
+		y = 1
+		relative_position_id = TUN_tourism_investment
+		cost = 7
+		prerequisite = { focus = TUN_tourism_investment }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_djerba_resort"
+			set_temp_variable = { treasury_change = -3.50 }
+			modify_treasury_effect = yes
+			one_random_infrastructure = yes
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_sahara_tourism
+		icon = GFX_focus_Generic_Tourism
+		x = 0
+		y = 2
+		relative_position_id = TUN_tourism_investment
+		cost = 7
+		prerequisite = { focus = TUN_hammamet_riviera }
+		prerequisite = { focus = TUN_djerba_resort }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_sahara_tourism"
+			add_ideas = TUN_sahara_tourism_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_offshore_manufacturing
+		icon = GFX_focus_Generic_Industry
+		x = 2
+		y = 1
+		relative_position_id = TUN_coastal_economic_model
+		cost = 7
+		prerequisite = { focus = TUN_coastal_economic_model }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_offshore_manufacturing"
+			set_temp_variable = { treasury_change = -7.50 }
+			modify_treasury_effect = yes
+			one_random_industrial_complex = yes
+		}
+
+		ai_will_do = { base = 3 }
+	}
+
+	focus = {
+		id = TUN_eu_association_agreement
+		icon = GFX_focus_Generic_Trade_Deal
+		x = -1
+		y = 1
+		relative_position_id = TUN_offshore_manufacturing
+		cost = 7
+		prerequisite = { focus = TUN_offshore_manufacturing }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_eu_association_agreement"
+			add_ideas = TUN_eu_assoc_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_automotive_supply_chain
+		icon = GFX_focus_Generic_Automotive_Industry
+		x = 1
+		y = 1
+		relative_position_id = TUN_offshore_manufacturing
+		cost = 10
+		prerequisite = { focus = TUN_offshore_manufacturing }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_automotive_supply_chain"
+			set_temp_variable = { treasury_change = -10.50 }
+			modify_treasury_effect = yes
+			one_random_industrial_complex = yes
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_textile_industry
+		icon = GFX_focus_Generic_Industry
+		x = 0
+		y = 2
+		relative_position_id = TUN_offshore_manufacturing
+		cost = 7
+		prerequisite = { focus = TUN_eu_association_agreement }
+		prerequisite = { focus = TUN_automotive_supply_chain }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_textile_industry"
+			set_temp_variable = { temp_productivity_change = 0.015 }
+			flat_productivity_change_effect = yes
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_phosphate_sector
+		icon = GFX_focus_Generic_Mining
+		x = -7
+		y = 1
+		relative_position_id = TUN_economy_root
+		cost = 7
+		prerequisite = { focus = TUN_economy_root }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_phosphate_sector"
+			add_ideas = TUN_phosphate_idea
+		}
+
+		ai_will_do = { base = 3 }
+	}
+
+	focus = {
+		id = TUN_cpg_expansion
+		icon = GFX_focus_Generic_Mining
+		x = -1
+		y = 1
+		relative_position_id = TUN_phosphate_sector
+		cost = 7
+		prerequisite = { focus = TUN_phosphate_sector }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_cpg_expansion"
+			set_temp_variable = { treasury_change = -3.50 }
+			modify_treasury_effect = yes
+			one_random_infrastructure = yes
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_gafsa_mining_modernization
+		icon = GFX_focus_Generic_Mining
+		x = 0
+		y = 1
+		relative_position_id = TUN_cpg_expansion
+		cost = 10
+		prerequisite = { focus = TUN_cpg_expansion }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_gafsa_mining_modernization"
+			set_temp_variable = { temp_productivity_change = 0.020 }
+			flat_productivity_change_effect = yes
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_gct_chemical_industry
+		icon = GFX_focus_Generic_Chemical_Industry
+		x = 1
+		y = 1
+		relative_position_id = TUN_phosphate_sector
+		cost = 7
+		prerequisite = { focus = TUN_phosphate_sector }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_gct_chemical_industry"
+			set_temp_variable = { treasury_change = -7.50 }
+			modify_treasury_effect = yes
+			one_random_industrial_complex = yes
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_fertilizer_exports
+		icon = GFX_focus_Generic_Trade_Deal
+		x = 0
+		y = 1
+		relative_position_id = TUN_gct_chemical_industry
+		cost = 7
+		prerequisite = { focus = TUN_gct_chemical_industry }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_fertilizer_exports"
+			add_ideas = TUN_fertilizer_exports_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_energy_sector
+		icon = GFX_focus_Generic_Energy
+		x = -2
+		y = 1
+		relative_position_id = TUN_economy_root
+		cost = 7
+		prerequisite = { focus = TUN_economy_root }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_energy_sector"
+			add_ideas = TUN_energy_sector_idea
+		}
+
+		ai_will_do = { base = 3 }
+	}
+
+	focus = {
+		id = TUN_etap_upstream
+		icon = GFX_focus_Generic_Mining
+		x = -2
+		y = 1
+		relative_position_id = TUN_energy_sector
+		cost = 7
+		prerequisite = { focus = TUN_energy_sector }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_etap_upstream"
+			add_ideas = TUN_etap_upstream_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_nawara_gas_field
+		icon = GFX_focus_Generic_Energy
+		x = 0
+		y = 1
+		relative_position_id = TUN_etap_upstream
+		cost = 10
+		prerequisite = { focus = TUN_etap_upstream }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_nawara_gas_field"
+			set_temp_variable = { treasury_change = -3.50 }
+			modify_treasury_effect = yes
+			add_ideas = TUN_nawara_gas_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_offshore_exploration
+		icon = GFX_focus_Generic_Mining
+		x = 0
+		y = 1
+		relative_position_id = TUN_nawara_gas_field
+		cost = 10
+		prerequisite = { focus = TUN_nawara_gas_field }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_offshore_exploration"
+			add_ideas = TUN_offshore_exploration_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_steg_reform
+		icon = GFX_focus_Generic_Energy
+		x = 0
+		y = 1
+		relative_position_id = TUN_energy_sector
+		cost = 7
+		prerequisite = { focus = TUN_energy_sector }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_steg_reform"
+			add_ideas = TUN_steg_reform_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_energy_subsidy_reform
+		icon = GFX_focus_Generic_Economic_Reform
+		x = 0
+		y = 1
+		relative_position_id = TUN_steg_reform
+		cost = 10
+		prerequisite = { focus = TUN_steg_reform }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_energy_subsidy_reform"
+			set_temp_variable = { treasury_change = 2.25 }
+			modify_treasury_effect = yes
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	focus = {
+		id = TUN_renewable_energy
+		icon = GFX_focus_Generic_Energy
+		x = 2
+		y = 2
+		relative_position_id = TUN_energy_sector
+		cost = 10
+		prerequisite = { focus = TUN_energy_sector }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_renewable_energy"
+			add_ideas = TUN_renewable_energy_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_solar_plan
+		icon = GFX_focus_Generic_Energy
+		x = -1
+		y = 1
+		relative_position_id = TUN_renewable_energy
+		cost = 10
+		prerequisite = { focus = TUN_renewable_energy }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_solar_plan"
+			set_temp_variable = { treasury_change = -8.50 }
+			modify_treasury_effect = yes
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_tataouine_solar_farm
+		icon = GFX_focus_Generic_Energy
+		x = 0
+		y = 1
+		relative_position_id = TUN_solar_plan
+		cost = 10
+		prerequisite = { focus = TUN_solar_plan }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_tataouine_solar_farm"
+			add_ideas = TUN_solar_farm_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_wind_farms
+		icon = GFX_focus_Generic_Energy
+		x = 1
+		y = 1
+		relative_position_id = TUN_renewable_energy
+		cost = 10
+		prerequisite = { focus = TUN_renewable_energy }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_wind_farms"
+			set_temp_variable = { treasury_change = -8.50 }
+			modify_treasury_effect = yes
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_bizerte_wind_park
+		icon = GFX_focus_Generic_Energy
+		x = 0
+		y = 1
+		relative_position_id = TUN_wind_farms
+		cost = 10
+		prerequisite = { focus = TUN_wind_farms }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_bizerte_wind_park"
+			add_ideas = TUN_wind_park_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_green_hydrogen
+		icon = GFX_focus_Generic_Energy
+		x = 0
+		y = 3
+		relative_position_id = TUN_renewable_energy
+		cost = 14
+		prerequisite = { focus = TUN_tataouine_solar_farm }
+		prerequisite = { focus = TUN_bizerte_wind_park }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_green_hydrogen"
+			add_ideas = TUN_green_hydrogen_idea
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	focus = {
+		id = TUN_agricultural_sector
+		icon = GFX_focus_Generic_Industry
+		x = 4
+		y = 1
+		relative_position_id = TUN_economy_root
+		cost = 7
+		prerequisite = { focus = TUN_economy_root }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_agricultural_sector"
+			add_ideas = TUN_agriculture_idea
+		}
+
+		ai_will_do = { base = 3 }
+	}
+
+	focus = {
+		id = TUN_olive_oil_industry
+		icon = GFX_focus_Generic_Trade_Deal
+		x = -1
+		y = 1
+		relative_position_id = TUN_agricultural_sector
+		cost = 7
+		prerequisite = { focus = TUN_agricultural_sector }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_olive_oil_industry"
+			add_ideas = TUN_olive_oil_idea
+		}
+
+		ai_will_do = { base = 3 }
+	}
+
+	focus = {
+		id = TUN_sfax_olive_expansion
+		icon = GFX_focus_Generic_Industry
+		x = 0
+		y = 1
+		relative_position_id = TUN_olive_oil_industry
+		cost = 7
+		prerequisite = { focus = TUN_olive_oil_industry }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_sfax_olive_expansion"
+			set_temp_variable = { treasury_change = -3.75 }
+			modify_treasury_effect = yes
+			one_random_agriculture_district = yes
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_organic_certification
+		icon = GFX_focus_Generic_Trade_Deal
+		x = 0
+		y = 2
+		relative_position_id = TUN_sfax_olive_expansion
+		cost = 7
+		prerequisite = { focus = TUN_sfax_olive_expansion }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_organic_certification"
+			add_ideas = TUN_organic_cert_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_deglet_nour_dates
+		icon = GFX_focus_Generic_Trade_Deal
+		x = 1
+		y = 1
+		relative_position_id = TUN_agricultural_sector
+		cost = 7
+		prerequisite = { focus = TUN_agricultural_sector }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_deglet_nour_dates"
+			add_ideas = TUN_dates_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_tozeur_date_industry
+		icon = GFX_focus_Generic_Industry
+		x = 0
+		y = 1
+		relative_position_id = TUN_deglet_nour_dates
+		cost = 7
+		prerequisite = { focus = TUN_deglet_nour_dates }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_tozeur_date_industry"
+			set_temp_variable = { treasury_change = -3.75 }
+			modify_treasury_effect = yes
+			one_random_agriculture_district = yes
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_irrigation_modernization
+		icon = GFX_focus_Generic_Infrastructure
+		x = 0
+		y = 3
+		relative_position_id = TUN_agricultural_sector
+		cost = 10
+		prerequisite = { focus = TUN_olive_oil_industry }
+		prerequisite = { focus = TUN_deglet_nour_dates }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_irrigation_modernization"
+			add_ideas = TUN_irrigation_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_medjerda_irrigation
+		icon = GFX_focus_Generic_Infrastructure
+		x = 0
+		y = 1
+		relative_position_id = TUN_irrigation_modernization
+		cost = 10
+		prerequisite = { focus = TUN_irrigation_modernization }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_medjerda_irrigation"
+			set_temp_variable = { treasury_change = -3.50 }
+			modify_treasury_effect = yes
+			one_random_infrastructure = yes
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_interior_development
+		icon = GFX_focus_Generic_Infrastructure
+		x = 10
+		y = 1
+		relative_position_id = TUN_economy_root
+		cost = 7
+		prerequisite = { focus = TUN_economy_root }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_interior_development"
+			add_ideas = TUN_interior_dev_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_interior_infrastructure
+		icon = GFX_focus_Generic_Infrastructure
+		x = -2
+		y = 1
+		relative_position_id = TUN_interior_development
+		cost = 10
+		prerequisite = { focus = TUN_interior_development }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_interior_infrastructure"
+			set_temp_variable = { treasury_change = -3.50 }
+			modify_treasury_effect = yes
+			one_random_infrastructure = yes
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_sidi_bouzid_development
+		icon = GFX_focus_Generic_Construction
+		x = -1
+		y = 1
+		relative_position_id = TUN_interior_infrastructure
+		cost = 7
+		prerequisite = { focus = TUN_interior_infrastructure }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_sidi_bouzid_development"
+			set_temp_variable = { treasury_change = -7.50 }
+			modify_treasury_effect = yes
+			one_random_industrial_complex = yes
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_kasserine_investment
+		icon = GFX_focus_Generic_Construction
+		x = 1
+		y = 1
+		relative_position_id = TUN_interior_infrastructure
+		cost = 7
+		prerequisite = { focus = TUN_interior_infrastructure }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_kasserine_investment"
+			set_temp_variable = { treasury_change = -7.50 }
+			modify_treasury_effect = yes
+			one_random_industrial_complex = yes
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_youth_employment
+		icon = GFX_focus_Generic_Education
+		x = 2
+		y = 1
+		relative_position_id = TUN_interior_development
+		cost = 7
+		prerequisite = { focus = TUN_interior_development }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_youth_employment"
+			add_ideas = TUN_youth_emp_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_vocational_training
+		icon = GFX_focus_Generic_Education
+		x = 0
+		y = 1
+		relative_position_id = TUN_youth_employment
+		cost = 7
+		prerequisite = { focus = TUN_youth_employment }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_vocational_training"
+			add_ideas = TUN_vocational_training_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_university_expansion
+		icon = GFX_focus_Generic_Education
+		x = 0
+		y = 1
+		relative_position_id = TUN_vocational_training
+		cost = 10
+		prerequisite = { focus = TUN_vocational_training }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_university_expansion"
+			set_temp_variable = { treasury_change = -12.00 }
+			modify_treasury_effect = yes
+			add_ideas = TUN_university_expansion_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_financial_sector
+		icon = GFX_focus_Generic_Economic_Reform
+		x = -13
+		y = 5
+		relative_position_id = TUN_economy_root
+		cost = 7
+		prerequisite = { focus = TUN_coastal_economic_model }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_financial_sector"
+			add_ideas = TUN_financial_sector_idea
+		}
+
+		ai_will_do = { base = 3 }
+	}
+
+	focus = {
+		id = TUN_bct_independence
+		icon = GFX_focus_Generic_Economic_Reform
+		x = -2
+		y = 1
+		relative_position_id = TUN_financial_sector
+		cost = 7
+		prerequisite = { focus = TUN_financial_sector }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_bct_independence"
+			add_ideas = TUN_bct_independence_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_state_bank_reform
+		icon = GFX_focus_Generic_Economic_Reform
+		x = 0
+		y = 1
+		relative_position_id = TUN_bct_independence
+		cost = 10
+		prerequisite = { focus = TUN_bct_independence }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_state_bank_reform"
+			set_temp_variable = { temp_productivity_change = 0.010 }
+			flat_productivity_change_effect = yes
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_imf_program
+		icon = GFX_focus_Generic_Economic_Reform
+		x = 2
+		y = 1
+		relative_position_id = TUN_financial_sector
+		cost = 7
+		prerequisite = { focus = TUN_financial_sector }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_imf_program"
+			set_temp_variable = { treasury_change = 10.00 }
+			modify_treasury_effect = yes
+			add_ideas = TUN_imf_program_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_imf_austerity
+		icon = GFX_focus_Generic_Economic_Reform
+		x = -1
+		y = 1
+		relative_position_id = TUN_imf_program
+		cost = 7
+		prerequisite = { focus = TUN_imf_program }
+		mutually_exclusive = { focus = TUN_reject_imf }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_imf_austerity"
+			decrease_social_spending = yes
+			add_stability = -0.05
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	focus = {
+		id = TUN_reject_imf
+		icon = GFX_focus_Generic_Economic_Reform
+		x = 1
+		y = 1
+		relative_position_id = TUN_imf_program
+		cost = 7
+		prerequisite = { focus = TUN_imf_program }
+		mutually_exclusive = { focus = TUN_imf_austerity }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_reject_imf"
+			add_ideas = TUN_rejected_imf_idea
+			add_stability = 0.05
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	focus = {
+		id = TUN_debt_restructuring
+		icon = GFX_focus_Generic_Economic_Reform
+		x = 0
+		y = 2
+		relative_position_id = TUN_imf_program
+		cost = 14
+		prerequisite = { focus = TUN_state_bank_reform }
+		prerequisite = { focus = TUN_imf_austerity focus = TUN_reject_imf }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_debt_restructuring"
+			set_temp_variable = { debt_change = -0.05 }
+			modify_debt_effect = yes
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	focus = {
+		id = TUN_informal_economy
+		icon = GFX_focus_Generic_Black_Market
+		x = -3
+		y = 5
+		relative_position_id = TUN_economy_root
+		cost = 7
+		prerequisite = { focus = TUN_energy_sector }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_informal_economy"
+			add_ideas = TUN_informal_econ_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_formalization_drive
+		icon = GFX_focus_Generic_Economic_Reform
+		x = -1
+		y = 1
+		relative_position_id = TUN_informal_economy
+		cost = 10
+		prerequisite = { focus = TUN_informal_economy }
+		mutually_exclusive = { focus = TUN_tolerate_informal }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_formalization_drive"
+			set_temp_variable = { temp_productivity_change = 0.010 }
+			flat_productivity_change_effect = yes
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_tolerate_informal
+		icon = GFX_focus_Generic_Black_Market
+		x = 1
+		y = 1
+		relative_position_id = TUN_informal_economy
+		cost = 7
+		prerequisite = { focus = TUN_informal_economy }
+		mutually_exclusive = { focus = TUN_formalization_drive }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_tolerate_informal"
+			add_stability = 0.03
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	focus = {
+		id = TUN_smuggling_networks
+		icon = GFX_focus_Generic_Black_Market
+		x = 0
+		y = 1
+		relative_position_id = TUN_tolerate_informal
+		cost = 7
+		prerequisite = { focus = TUN_tolerate_informal }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_smuggling_networks"
+			add_ideas = TUN_smuggling_networks_idea
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	focus = {
+		id = TUN_digital_economy
+		icon = GFX_focus_Generic_Industry
+		x = 10
+		y = 4
+		relative_position_id = TUN_economy_root
+		cost = 7
+		prerequisite = { focus = TUN_interior_development }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_digital_economy"
+			add_ideas = TUN_digital_econ_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_lac2_tech_hub
+		icon = GFX_focus_Generic_Industry
+		x = -1
+		y = 1
+		relative_position_id = TUN_digital_economy
+		cost = 7
+		prerequisite = { focus = TUN_digital_economy }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_lac2_tech_hub"
+			set_temp_variable = { treasury_change = -3.00 }
+			modify_treasury_effect = yes
+			one_random_network_infrastructure = yes
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_outsourcing_sector
+		icon = GFX_focus_Generic_Industry
+		x = 0
+		y = 2
+		relative_position_id = TUN_lac2_tech_hub
+		cost = 7
+		prerequisite = { focus = TUN_lac2_tech_hub }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_outsourcing_sector"
+			set_temp_variable = { temp_productivity_change = 0.010 }
+			flat_productivity_change_effect = yes
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_startup_act
+		icon = GFX_focus_Generic_Economic_Reform
+		x = 1
+		y = 1
+		relative_position_id = TUN_digital_economy
+		cost = 7
+		prerequisite = { focus = TUN_digital_economy }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_startup_act"
+			add_ideas = TUN_startup_act_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_fintech_regulation
+		icon = GFX_focus_Generic_Economic_Reform
+		x = 0
+		y = 2
+		relative_position_id = TUN_startup_act
+		cost = 7
+		prerequisite = { focus = TUN_startup_act }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_fintech_regulation"
+			add_ideas = TUN_fintech_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_e_government
+		icon = GFX_focus_Generic_Industry
+		x = 0
+		y = 2
+		relative_position_id = TUN_digital_economy
+		cost = 10
+		prerequisite = { focus = TUN_lac2_tech_hub }
+		prerequisite = { focus = TUN_startup_act }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_e_government"
+			set_temp_variable = { temp_productivity_change = 0.015 }
+			flat_productivity_change_effect = yes
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_affairs_relations_root
+		icon = GFX_focus_Generic_Political_Connections
+		x = 37
+		y = 9
+		cost = 0
+		allow_branch = { always = yes }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = { always = no }
+		bypass = { always = yes }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_affairs_relations_root"
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_social_affairs
+		icon = GFX_focus_Generic_Political_Reform
+		x = -14
+		y = 1
+		relative_position_id = TUN_affairs_relations_root
+		cost = 5
+		prerequisite = { focus = TUN_affairs_relations_root }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_social_affairs"
+			add_stability = 0.03
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_personal_status_code
+		icon = GFX_focus_Generic_Political_Reform
+		x = -2
+		y = 1
+		relative_position_id = TUN_social_affairs
+		cost = 5
+		prerequisite = { focus = TUN_social_affairs }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_personal_status_code"
+			add_stability = 0.03
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_gender_parity_law
+		icon = GFX_focus_Generic_Political_Reform
+		x = -1
+		y = 1
+		relative_position_id = TUN_personal_status_code
+		cost = 7
+		prerequisite = { focus = TUN_personal_status_code }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_gender_parity_law"
+			add_stability = 0.02
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_inheritance_equality
+		icon = GFX_focus_Generic_Political_Reform
+		x = 0
+		y = 1
+		relative_position_id = TUN_gender_parity_law
+		cost = 10
+		prerequisite = { focus = TUN_gender_parity_law }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_inheritance_equality"
+			add_stability = 0.03
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	focus = {
+		id = TUN_defend_secular_rights
+		icon = GFX_focus_Generic_Political_Reform
+		x = 1
+		y = 1
+		relative_position_id = TUN_personal_status_code
+		cost = 7
+		prerequisite = { focus = TUN_personal_status_code }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_defend_secular_rights"
+			add_ideas = TUN_secular_rights_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_civil_society_support
+		icon = GFX_focus_Generic_Trade_Unions
+		x = 2
+		y = 1
+		relative_position_id = TUN_social_affairs
+		cost = 7
+		prerequisite = { focus = TUN_social_affairs }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_civil_society_support"
+			add_stability = 0.02
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_ugtt_relations
+		icon = GFX_focus_Generic_Trade_Unions
+		x = 0
+		y = 1
+		relative_position_id = TUN_civil_society_support
+		cost = 7
+		prerequisite = { focus = TUN_civil_society_support }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_ugtt_relations"
+			add_ideas = TUN_ugtt_relations_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_migration_affairs
+		icon = GFX_focus_Generic_Refugees
+		x = -7
+		y = 1
+		relative_position_id = TUN_affairs_relations_root
+		cost = 5
+		prerequisite = { focus = TUN_affairs_relations_root }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_migration_affairs"
+			add_stability = 0.02
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_harraga_crisis
+		icon = GFX_focus_Generic_Refugees
+		x = -2
+		y = 1
+		relative_position_id = TUN_migration_affairs
+		cost = 5
+		prerequisite = { focus = TUN_migration_affairs }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_harraga_crisis"
+			add_ideas = TUN_harraga_crisis_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_diaspora_remittances
+		icon = GFX_focus_Generic_Trade_Deal
+		x = -1
+		y = 1
+		relative_position_id = TUN_harraga_crisis
+		cost = 5
+		prerequisite = { focus = TUN_harraga_crisis }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_diaspora_remittances"
+			set_temp_variable = { treasury_change = 2.00 }
+			modify_treasury_effect = yes
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_stem_exodus
+		icon = GFX_focus_Generic_Economic_Reform
+		x = 1
+		y = 1
+		relative_position_id = TUN_harraga_crisis
+		cost = 10
+		prerequisite = { focus = TUN_harraga_crisis }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_stem_exodus"
+			add_ideas = TUN_brain_drain_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_subsaharan_transit
+		icon = GFX_focus_Generic_Refugees
+		x = 2
+		y = 1
+		relative_position_id = TUN_migration_affairs
+		cost = 5
+		prerequisite = { focus = TUN_migration_affairs }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_subsaharan_transit"
+			add_ideas = TUN_subsaharan_transit_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_eu_migration_deal
+		icon = GFX_focus_Generic_Trade_Deal
+		x = -1
+		y = 1
+		relative_position_id = TUN_subsaharan_transit
+		cost = 7
+		prerequisite = { focus = TUN_subsaharan_transit }
+		mutually_exclusive = { focus = TUN_expulsion_policy }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_eu_migration_deal"
+			country_event = { id = tunisia_foreign.30 days = 1 }
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_expulsion_policy
+		icon = GFX_focus_Generic_Suppress_Protests
+		x = 1
+		y = 1
+		relative_position_id = TUN_subsaharan_transit
+		cost = 5
+		prerequisite = { focus = TUN_subsaharan_transit }
+		mutually_exclusive = { focus = TUN_eu_migration_deal }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_expulsion_policy"
+			add_ideas = TUN_expulsion_idea
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	focus = {
+		id = TUN_environment_affairs
+		icon = GFX_focus_Generic_Infrastructure
+		x = -1
+		y = 1
+		relative_position_id = TUN_affairs_relations_root
+		cost = 5
+		prerequisite = { focus = TUN_affairs_relations_root }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_environment_affairs"
+			add_ideas = TUN_environment_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_water_crisis
+		icon = GFX_focus_Generic_Infrastructure
+		x = -1
+		y = 1
+		relative_position_id = TUN_environment_affairs
+		cost = 7
+		prerequisite = { focus = TUN_environment_affairs }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_water_crisis"
+			add_ideas = TUN_water_crisis_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_medjerda_management
+		icon = GFX_focus_Generic_Infrastructure
+		x = 0
+		y = 1
+		relative_position_id = TUN_water_crisis
+		cost = 10
+		prerequisite = { focus = TUN_water_crisis }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_medjerda_management"
+			set_temp_variable = { treasury_change = -3.50 }
+			modify_treasury_effect = yes
+			one_random_infrastructure = yes
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_desertification
+		icon = GFX_focus_Generic_Infrastructure
+		x = 1
+		y = 1
+		relative_position_id = TUN_environment_affairs
+		cost = 7
+		prerequisite = { focus = TUN_environment_affairs }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_desertification"
+			add_ideas = TUN_desertification_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_green_belt
+		icon = GFX_focus_Generic_Infrastructure
+		x = 0
+		y = 1
+		relative_position_id = TUN_desertification
+		cost = 10
+		prerequisite = { focus = TUN_desertification }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_green_belt"
+			set_temp_variable = { treasury_change = -3.50 }
+			modify_treasury_effect = yes
+			one_random_infrastructure = yes
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_gabes_pollution
+		icon = GFX_focus_Generic_Chemical_Industry
+		x = 0
+		y = 3
+		relative_position_id = TUN_environment_affairs
+		cost = 7
+		prerequisite = { focus = TUN_water_crisis }
+		prerequisite = { focus = TUN_desertification }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_gabes_pollution"
+			add_ideas = TUN_gabes_remediation_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_maghreb_relations
+		icon = GFX_focus_Generic_Political_Connections
+		x = 5
+		y = 1
+		relative_position_id = TUN_affairs_relations_root
+		cost = 5
+		prerequisite = { focus = TUN_affairs_relations_root }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_maghreb_relations"
+			add_political_power = 25
+		}
+
+		ai_will_do = { base = 3 }
+	}
+
+	focus = {
+		id = TUN_algeria_partnership
+		icon = GFX_focus_Generic_Political_Connections
+		x = -2
+		y = 1
+		relative_position_id = TUN_maghreb_relations
+		cost = 7
+		prerequisite = { focus = TUN_maghreb_relations }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_algeria_partnership"
+			country_event = { id = tunisia_foreign.20 days = 1 }
+		}
+
+		ai_will_do = { base = 3 }
+	}
+
+	focus = {
+		id = TUN_transmed_pipeline
+		icon = GFX_focus_Generic_Energy
+		x = -1
+		y = 1
+		relative_position_id = TUN_algeria_partnership
+		cost = 7
+		prerequisite = { focus = TUN_algeria_partnership }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_transmed_pipeline"
+			add_ideas = TUN_transmed_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_algerian_security_coop
+		icon = GFX_focus_Generic_Military_Cooperation
+		x = 1
+		y = 2
+		relative_position_id = TUN_algeria_partnership
+		cost = 7
+		prerequisite = { focus = TUN_algeria_partnership }
+		search_filters = { FOCUS_FILTER_MILITARY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_algerian_security_coop"
+			add_ideas = TUN_algerian_sec_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_libya_policy
+		icon = GFX_focus_Generic_Political_Crisis
+		x = 2
+		y = 1
+		relative_position_id = TUN_maghreb_relations
+		cost = 5
+		prerequisite = { focus = TUN_maghreb_relations }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_libya_policy"
+			add_ideas = TUN_libya_policy_idea
+		}
+
+		ai_will_do = { base = 3 }
+	}
+
+	focus = {
+		id = TUN_libya_border_crisis
+		icon = GFX_focus_Generic_Border_Defense
+		x = -1
+		y = 2
+		relative_position_id = TUN_libya_policy
+		cost = 7
+		prerequisite = { focus = TUN_libya_policy }
+		search_filters = { FOCUS_FILTER_MILITARY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_libya_border_crisis"
+			add_ideas = TUN_libya_border_idea
+		}
+
+		ai_will_do = { base = 3 }
+	}
+
+	focus = {
+		id = TUN_libya_trade
+		icon = GFX_focus_Generic_Trade_Deal
+		x = 1
+		y = 1
+		relative_position_id = TUN_libya_policy
+		cost = 7
+		prerequisite = { focus = TUN_libya_policy }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_libya_trade"
+			set_temp_variable = { temp_productivity_change = 0.010 }
+			flat_productivity_change_effect = yes
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_amu_revival
+		icon = GFX_focus_Generic_Political_Connections
+		x = 0
+		y = 2
+		relative_position_id = TUN_maghreb_relations
+		cost = 10
+		prerequisite = { focus = TUN_algeria_partnership }
+		prerequisite = { focus = TUN_libya_policy }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_amu_revival"
+			add_ideas = TUN_amu_idea
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	focus = {
+		id = TUN_european_relations
+		icon = GFX_focus_Generic_Political_Connections
+		x = 11
+		y = 1
+		relative_position_id = TUN_affairs_relations_root
+		cost = 5
+		prerequisite = { focus = TUN_affairs_relations_root }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_european_relations"
+			add_political_power = 25
+		}
+
+		ai_will_do = { base = 3 }
+	}
+
+	focus = {
+		id = TUN_france_ties
+		icon = GFX_focus_Generic_Political_Connections
+		x = -2
+		y = 1
+		relative_position_id = TUN_european_relations
+		cost = 7
+		prerequisite = { focus = TUN_european_relations }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_france_ties"
+			country_event = { id = tunisia_foreign.16 days = 1 }
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_francophone_policy
+		icon = GFX_focus_Generic_Political_Reform
+		x = 0
+		y = 1
+		relative_position_id = TUN_france_ties
+		cost = 5
+		prerequisite = { focus = TUN_france_ties }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_francophone_policy"
+			add_ideas = TUN_francophone_idea
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	focus = {
+		id = TUN_italy_cooperation
+		icon = GFX_focus_Generic_Political_Connections
+		x = 0
+		y = 1
+		relative_position_id = TUN_european_relations
+		cost = 7
+		prerequisite = { focus = TUN_european_relations }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_italy_cooperation"
+			add_ideas = TUN_italy_coop_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_lampedusa_migration
+		icon = GFX_focus_Generic_Refugees
+		x = 0
+		y = 1
+		relative_position_id = TUN_italy_cooperation
+		cost = 7
+		prerequisite = { focus = TUN_italy_cooperation }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_lampedusa_migration"
+			add_ideas = TUN_lampedusa_migration_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_eu_deep_trade
+		icon = GFX_focus_Generic_Trade_Deal
+		x = 2
+		y = 1
+		relative_position_id = TUN_european_relations
+		cost = 10
+		prerequisite = { focus = TUN_european_relations }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_eu_deep_trade"
+			add_ideas = TUN_eu_deep_trade_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_eu_candidacy
+		icon = GFX_focus_Generic_Political_Reform
+		x = 0
+		y = 1
+		relative_position_id = TUN_eu_deep_trade
+		cost = 14
+		prerequisite = { focus = TUN_eu_deep_trade }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_eu_candidacy"
+			add_ideas = TUN_eu_candidate_idea
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	focus = {
+		id = TUN_middle_east_relations
+		icon = GFX_focus_Generic_Political_Connections
+		x = 17
+		y = 1
+		relative_position_id = TUN_affairs_relations_root
+		cost = 5
+		prerequisite = { focus = TUN_affairs_relations_root }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_middle_east_relations"
+			add_political_power = 25
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_qatar_ties
+		icon = GFX_focus_Generic_Political_Connections
+		x = -2
+		y = 1
+		relative_position_id = TUN_middle_east_relations
+		cost = 7
+		prerequisite = { focus = TUN_middle_east_relations }
+		mutually_exclusive = { focus = TUN_uae_ties }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_qatar_ties"
+			country_event = { id = tunisia_foreign.10 days = 1 }
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	focus = {
+		id = TUN_qatar_investment
+		icon = GFX_focus_Generic_Trade_Deal
+		x = 0
+		y = 1
+		relative_position_id = TUN_qatar_ties
+		cost = 7
+		prerequisite = { focus = TUN_qatar_ties }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_qatar_investment"
+			set_temp_variable = { treasury_change = 5.00 }
+			modify_treasury_effect = yes
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	focus = {
+		id = TUN_uae_ties
+		icon = GFX_focus_Generic_Political_Connections
+		x = 2
+		y = 1
+		relative_position_id = TUN_middle_east_relations
+		cost = 7
+		prerequisite = { focus = TUN_middle_east_relations }
+		mutually_exclusive = { focus = TUN_qatar_ties }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_uae_ties"
+			country_event = { id = tunisia_foreign.14 days = 1 }
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	focus = {
+		id = TUN_uae_investment
+		icon = GFX_focus_Generic_Trade_Deal
+		x = 0
+		y = 1
+		relative_position_id = TUN_uae_ties
+		cost = 7
+		prerequisite = { focus = TUN_uae_ties }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_uae_investment"
+			set_temp_variable = { treasury_change = 5.00 }
+			modify_treasury_effect = yes
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	focus = {
+		id = TUN_turkey_cooperation
+		icon = GFX_focus_Generic_Political_Connections
+		x = 0
+		y = 1
+		relative_position_id = TUN_middle_east_relations
+		cost = 7
+		prerequisite = { focus = TUN_middle_east_relations }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_turkey_cooperation"
+			country_event = { id = tunisia_foreign.12 days = 1 }
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	focus = {
+		id = TUN_turkey_trade
+		icon = GFX_focus_Generic_Trade_Deal
+		x = 0
+		y = 1
+		relative_position_id = TUN_turkey_cooperation
+		cost = 7
+		prerequisite = { focus = TUN_turkey_cooperation }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_turkey_trade"
+			set_temp_variable = { temp_productivity_change = 0.010 }
+			flat_productivity_change_effect = yes
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	focus = {
+		id = TUN_global_relations
+		icon = GFX_focus_Generic_Political_Connections
+		x = 11
+		y = 4
+		relative_position_id = TUN_affairs_relations_root
+		cost = 5
+		prerequisite = { focus = TUN_european_relations }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_global_relations"
+			add_political_power = 25
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_us_mnna
+		icon = GFX_focus_Generic_Military_Cooperation
+		x = -3
+		y = 1
+		relative_position_id = TUN_global_relations
+		cost = 7
+		prerequisite = { focus = TUN_global_relations }
+		search_filters = { FOCUS_FILTER_MILITARY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_us_mnna"
+			country_event = { id = tunisia_foreign.1 days = 1 }
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_us_military_aid
+		icon = GFX_focus_Generic_Military_Cooperation
+		x = 0
+		y = 1
+		relative_position_id = TUN_us_mnna
+		cost = 7
+		prerequisite = { focus = TUN_us_mnna }
+		search_filters = { FOCUS_FILTER_MILITARY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_us_military_aid"
+			add_ideas = TUN_us_military_aid_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_mnna_status
+		icon = GFX_focus_Generic_NATO
+		x = 0
+		y = 1
+		relative_position_id = TUN_us_military_aid
+		cost = 10
+		prerequisite = { focus = TUN_us_military_aid }
+		search_filters = { FOCUS_FILTER_MILITARY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_mnna_status"
+			add_ideas = TUN_mnna_status_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_china_bri
+		icon = GFX_focus_Generic_Infrastructure
+		x = 0
+		y = 1
+		relative_position_id = TUN_global_relations
+		cost = 7
+		prerequisite = { focus = TUN_global_relations }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_china_bri"
+			add_ideas = TUN_china_bri_idea
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	focus = {
+		id = TUN_china_port_investment
+		icon = GFX_focus_Generic_Construction
+		x = 1
+		y = 1
+		relative_position_id = TUN_china_bri
+		cost = 10
+		prerequisite = { focus = TUN_china_bri }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_china_port_investment"
+			set_temp_variable = { treasury_change = -3.50 }
+			modify_treasury_effect = yes
+			one_random_dockyard = yes
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	focus = {
+		id = TUN_world_bank_loans
+		icon = GFX_focus_Generic_Economic_Reform
+		x = 2
+		y = 1
+		relative_position_id = TUN_global_relations
+		cost = 7
+		prerequisite = { focus = TUN_global_relations }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_world_bank_loans"
+			set_temp_variable = { treasury_change = 5.00 }
+			modify_treasury_effect = yes
+			add_ideas = TUN_world_bank_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_african_union
+		icon = GFX_focus_Generic_Political_Connections
+		x = -1
+		y = 2
+		relative_position_id = TUN_global_relations
+		cost = 7
+		prerequisite = { focus = TUN_china_bri }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_african_union"
+			add_ideas = TUN_african_union_idea
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	focus = {
+		id = TUN_internal_politics_root
+		icon = GFX_focus_Generic_Political_Reform
+		x = 58
+		y = 0
+		cost = 0
+		allow_branch = { always = yes }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = { always = no }
+		bypass = { always = yes }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_internal_politics_root"
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_constitutional_framework
+		icon = GFX_focus_Ger_political_rearmament
+		x = -4
+		y = 1
+		relative_position_id = TUN_internal_politics_root
+		cost = 7
+		prerequisite = { focus = TUN_internal_politics_root }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_constitutional_framework"
+			add_stability = 0.05
+		}
+
+		ai_will_do = { base = 3 }
+	}
+
+	focus = {
+		id = TUN_strengthen_executive
+		icon = GFX_focus_Generic_Authoritarian_Rule
+		x = -1
+		y = 1
+		relative_position_id = TUN_constitutional_framework
+		cost = 7
+		prerequisite = { focus = TUN_constitutional_framework }
+		mutually_exclusive = { focus = TUN_strengthen_parliament }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_strengthen_executive"
+			add_ideas = TUN_strong_executive_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_presidential_powers
+		icon = GFX_focus_Generic_Authoritarian_Rule
+		x = 0
+		y = 2
+		relative_position_id = TUN_strengthen_executive
+		cost = 7
+		prerequisite = { focus = TUN_strengthen_executive }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_presidential_powers"
+			add_ideas = TUN_strong_presidency_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_strengthen_parliament
+		icon = GFX_focus_Generic_Democratic_Opposition
+		x = 1
+		y = 1
+		relative_position_id = TUN_constitutional_framework
+		cost = 7
+		prerequisite = { focus = TUN_constitutional_framework }
+		mutually_exclusive = { focus = TUN_strengthen_executive }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_strengthen_parliament"
+			add_ideas = TUN_strong_parliament_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_parliamentary_oversight
+		icon = GFX_focus_Generic_Political_Reform
+		x = 0
+		y = 2
+		relative_position_id = TUN_strengthen_parliament
+		cost = 7
+		prerequisite = { focus = TUN_strengthen_parliament }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_parliamentary_oversight"
+			add_stability = 0.03
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_judicial_independence
+		icon = GFX_focus_Generic_Political_Reform
+		x = 0
+		y = 2
+		relative_position_id = TUN_constitutional_framework
+		cost = 10
+		prerequisite = { focus = TUN_strengthen_executive }
+		prerequisite = { focus = TUN_strengthen_parliament }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_judicial_independence"
+			add_ideas = TUN_judicial_independence_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_media_landscape
+		icon = GFX_focus_Generic_Media_Control
+		x = 0
+		y = 1
+		relative_position_id = TUN_internal_politics_root
+		cost = 5
+		prerequisite = { focus = TUN_internal_politics_root }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_media_landscape"
+			add_political_power = 25
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_press_freedom
+		icon = GFX_focus_Generic_Political_Reform
+		x = -1
+		y = 1
+		relative_position_id = TUN_media_landscape
+		cost = 7
+		prerequisite = { focus = TUN_media_landscape }
+		mutually_exclusive = { focus = TUN_press_control }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_press_freedom"
+			add_ideas = TUN_press_freedom_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_independent_media
+		icon = GFX_focus_Generic_Political_Reform
+		x = 0
+		y = 1
+		relative_position_id = TUN_press_freedom
+		cost = 7
+		prerequisite = { focus = TUN_press_freedom }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_independent_media"
+			add_stability = 0.03
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_press_control
+		icon = GFX_focus_Generic_Media_Control
+		x = 1
+		y = 1
+		relative_position_id = TUN_media_landscape
+		cost = 5
+		prerequisite = { focus = TUN_media_landscape }
+		mutually_exclusive = { focus = TUN_press_freedom }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_press_control"
+			add_ideas = TUN_press_control_idea
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	focus = {
+		id = TUN_state_media
+		icon = GFX_focus_Generic_Media_Control
+		x = 0
+		y = 1
+		relative_position_id = TUN_press_control
+		cost = 7
+		prerequisite = { focus = TUN_press_control }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_state_media"
+			add_ideas = TUN_state_media_idea
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	focus = {
+		id = TUN_security_apparatus
+		icon = GFX_focus_Generic_Intelligence_Agency
+		x = 4
+		y = 1
+		relative_position_id = TUN_internal_politics_root
+		cost = 7
+		prerequisite = { focus = TUN_internal_politics_root }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_security_apparatus"
+			add_political_power = 25
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_intelligence_reform
+		icon = GFX_focus_Generic_Intelligence_Agency
+		x = -1
+		y = 1
+		relative_position_id = TUN_security_apparatus
+		cost = 7
+		prerequisite = { focus = TUN_security_apparatus }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_intelligence_reform"
+			add_ideas = TUN_intel_reform_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_civilian_oversight
+		icon = GFX_focus_Generic_Political_Reform
+		x = 0
+		y = 1
+		relative_position_id = TUN_intelligence_reform
+		cost = 7
+		prerequisite = { focus = TUN_intelligence_reform }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_civilian_oversight"
+			add_stability = 0.03
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_internal_security
+		icon = GFX_focus_Generic_Suppress_Protests
+		x = 1
+		y = 1
+		relative_position_id = TUN_security_apparatus
+		cost = 7
+		prerequisite = { focus = TUN_security_apparatus }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_internal_security"
+			add_ideas = TUN_internal_security_idea
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_emergency_powers
+		icon = GFX_focus_Generic_Suppress_Protests
+		x = 0
+		y = 1
+		relative_position_id = TUN_internal_security
+		cost = 5
+		prerequisite = { focus = TUN_internal_security }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_emergency_powers"
+			add_ideas = TUN_emergency_powers_idea
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	focus = {
+		id = TUN_transitional_justice
+		icon = GFX_focus_Generic_Political_Reform
+		x = 0
+		y = 4
+		relative_position_id = TUN_internal_politics_root
+		cost = 7
+		prerequisite = { focus = TUN_media_landscape }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = { has_country_flag = TUN_revolution_complete }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_transitional_justice"
+			add_stability = 0.02
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_ivd_commission
+		icon = GFX_focus_Generic_Political_Connections
+		x = 0
+		y = 1
+		relative_position_id = TUN_transitional_justice
+		cost = 7
+		prerequisite = { focus = TUN_transitional_justice }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_ivd_commission"
+			add_stability = 0.03
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_victims_hearings
+		icon = GFX_focus_Generic_Political_Reform
+		x = -1
+		y = 1
+		relative_position_id = TUN_ivd_commission
+		cost = 7
+		prerequisite = { focus = TUN_ivd_commission }
+		mutually_exclusive = { focus = TUN_economic_reconciliation }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_victims_hearings"
+			add_stability = 0.05
+		}
+
+		ai_will_do = { base = 2 }
+	}
+
+	focus = {
+		id = TUN_accountability
+		icon = GFX_focus_Generic_Political_Arrests
+		x = 0
+		y = 1
+		relative_position_id = TUN_victims_hearings
+		cost = 10
+		prerequisite = { focus = TUN_victims_hearings }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_accountability"
+			add_political_power = 50
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	focus = {
+		id = TUN_economic_reconciliation
+		icon = GFX_focus_Generic_Economic_Reform
+		x = 1
+		y = 1
+		relative_position_id = TUN_ivd_commission
+		cost = 7
+		prerequisite = { focus = TUN_ivd_commission }
+		mutually_exclusive = { focus = TUN_victims_hearings }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_economic_reconciliation"
+			set_temp_variable = { treasury_change = 5.00 }
+			modify_treasury_effect = yes
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	focus = {
+		id = TUN_amnesty_law
+		icon = GFX_focus_Generic_Political_Reform
+		x = 0
+		y = 1
+		relative_position_id = TUN_economic_reconciliation
+		cost = 7
+		prerequisite = { focus = TUN_economic_reconciliation }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_amnesty_law"
+			add_ideas = TUN_amnesty_law_idea
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	focus = {
+		id = TUN_rcd_regime
+		icon = GFX_focus_Generic_Authoritarian_Rule
+		x = 81
+		y = 0
+		cost = 10
+		allow_branch = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_rcd_regime"
+			add_ideas = TUN_ben_ali_rule_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_rcd_party_machine
+		icon = GFX_focus_Generic_Political_Connections
+		x = -15
+		y = 1
+		relative_position_id = TUN_rcd_regime
+		cost = 7
+		prerequisite = { focus = TUN_rcd_regime }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_rcd_party_machine"
+			add_ideas = TUN_rcd_machine_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_rcd_cells_expansion
+		icon = GFX_focus_Generic_Political_Connections
+		x = -1
+		y = 1
+		relative_position_id = TUN_rcd_party_machine
+		cost = 7
+		prerequisite = { focus = TUN_rcd_party_machine }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_rcd_cells_expansion"
+			add_political_power = 25
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_party_youth_wings
+		icon = GFX_focus_Generic_Political_Connections
+		x = 0
+		y = 1
+		relative_position_id = TUN_rcd_cells_expansion
+		cost = 5
+		prerequisite = { focus = TUN_rcd_cells_expansion }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_party_youth_wings"
+			add_ideas = TUN_party_youth_wings_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_managed_elections
+		icon = GFX_focus_Generic_Elections
+		x = 1
+		y = 1
+		relative_position_id = TUN_rcd_party_machine
+		cost = 5
+		prerequisite = { focus = TUN_rcd_party_machine }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_managed_elections"
+			add_ideas = TUN_managed_elections_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_controlled_opposition
+		icon = GFX_focus_Generic_Political_Opposition
+		x = 0
+		y = 1
+		relative_position_id = TUN_managed_elections
+		cost = 5
+		prerequisite = { focus = TUN_managed_elections }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_controlled_opposition"
+			add_ideas = TUN_controlled_opposition_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_2004_election_farce
+		icon = GFX_focus_Generic_Elections
+		x = 0
+		y = 1
+		relative_position_id = TUN_controlled_opposition
+		cost = 7
+		prerequisite = { focus = TUN_controlled_opposition }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_2004_election_farce"
+			country_event = { id = tunisia_elections.1 days = 1 }
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_2009_election_landslide
+		icon = GFX_focus_Generic_Elections
+		x = 0
+		y = 1
+		relative_position_id = TUN_2004_election_farce
+		cost = 7
+		prerequisite = { focus = TUN_2004_election_farce }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_2009_election_landslide"
+			country_event = { id = tunisia_elections.2 days = 1 }
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_trabelsi_clan
+		icon = GFX_focus_Generic_Cronyism
+		x = -11
+		y = 1
+		relative_position_id = TUN_rcd_regime
+		cost = 7
+		prerequisite = { focus = TUN_rcd_regime }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_trabelsi_clan"
+			add_ideas = TUN_trabelsi_clan_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_expand_trabelsi_business
+		icon = GFX_focus_Generic_Cronyism
+		x = -1
+		y = 1
+		relative_position_id = TUN_trabelsi_clan
+		cost = 7
+		prerequisite = { focus = TUN_trabelsi_clan }
+		mutually_exclusive = { focus = TUN_limit_family_influence }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_expand_trabelsi_business"
+			add_ideas = TUN_expand_trabelsi_business_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_limit_family_influence
+		icon = GFX_focus_Generic_Political_Reform
+		x = 1
+		y = 1
+		relative_position_id = TUN_trabelsi_clan
+		cost = 7
+		prerequisite = { focus = TUN_trabelsi_clan }
+		mutually_exclusive = { focus = TUN_expand_trabelsi_business }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_limit_family_influence"
+			add_stability = 0.05
+		}
+
+		ai_will_do = { base = 3 }
+	}
+
+	focus = {
+		id = TUN_economic_capture
+		icon = GFX_focus_Generic_Cronyism
+		x = -1
+		y = 2
+		relative_position_id = TUN_trabelsi_clan
+		cost = 10
+		prerequisite = { focus = TUN_expand_trabelsi_business }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_economic_capture"
+			add_ideas = TUN_economic_capture_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_dynastic_succession
+		icon = GFX_focus_Generic_Political_Connections
+		x = 0
+		y = 1
+		relative_position_id = TUN_economic_capture
+		cost = 10
+		prerequisite = { focus = TUN_economic_capture }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_dynastic_succession"
+			add_ideas = TUN_dynastic_succession_idea
+		}
+
+		ai_will_do = { base = 5 }
+	}
+
+	focus = {
+		id = TUN_technocratic_reform
+		icon = GFX_focus_Generic_Economic_Reform
+		x = 1
+		y = 2
+		relative_position_id = TUN_trabelsi_clan
+		cost = 10
+		prerequisite = { focus = TUN_limit_family_influence }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_technocratic_reform"
+			set_temp_variable = { temp_productivity_change = 0.015 }
+			flat_productivity_change_effect = yes
+		}
+
+		ai_will_do = { base = 3 }
+	}
+
+	focus = {
+		id = TUN_ben_ali_security_state
+		icon = GFX_focus_Generic_Intelligence_Agency
+		x = -5
+		y = 1
+		relative_position_id = TUN_rcd_regime
+		cost = 7
+		prerequisite = { focus = TUN_rcd_regime }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_ben_ali_security_state"
+			add_ideas = TUN_ben_ali_security_state_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_securitize_islamism
+		icon = GFX_focus_Generic_Suppress_Protests
+		x = -2
+		y = 1
+		relative_position_id = TUN_ben_ali_security_state
+		cost = 7
+		prerequisite = { focus = TUN_ben_ali_security_state }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_securitize_islamism"
+			add_ideas = TUN_securitize_islamism_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_dismantle_ennahda
+		icon = GFX_focus_Generic_Abolish_Party
+		x = -1
+		y = 1
+		relative_position_id = TUN_securitize_islamism
+		cost = 7
+		prerequisite = { focus = TUN_securitize_islamism }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_dismantle_ennahda"
+			set_temp_variable = { party_index = 12 }
+			ban_party_scripted_call = yes
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_prison_network
+		icon = GFX_focus_Generic_Political_Arrests
+		x = 1
+		y = 1
+		relative_position_id = TUN_securitize_islamism
+		cost = 7
+		prerequisite = { focus = TUN_securitize_islamism }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_prison_network"
+			add_ideas = TUN_prison_network_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_intelligence_state
+		icon = GFX_focus_Secret_Rearmament
+		x = 0
+		y = 1
+		relative_position_id = TUN_ben_ali_security_state
+		cost = 7
+		prerequisite = { focus = TUN_ben_ali_security_state }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_intelligence_state"
+			add_ideas = TUN_intelligence_state_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_expand_interior_ministry
+		icon = GFX_focus_Generic_Intelligence_Agency
+		x = 0
+		y = 2
+		relative_position_id = TUN_intelligence_state
+		cost = 7
+		prerequisite = { focus = TUN_intelligence_state }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_expand_interior_ministry"
+			add_ideas = TUN_expand_interior_ministry_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_surveillance_networks
+		icon = GFX_focus_Generic_Intelligence_Agency
+		x = 1
+		y = 1
+		relative_position_id = TUN_intelligence_state
+		cost = 7
+		prerequisite = { focus = TUN_intelligence_state }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_surveillance_networks"
+			add_ideas = TUN_surveillance_networks_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_anti_terror_western_cooperation
+		icon = GFX_focus_Generic_Military_Cooperation
+		x = 2
+		y = 1
+		relative_position_id = TUN_ben_ali_security_state
+		cost = 7
+		prerequisite = { focus = TUN_ben_ali_security_state }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_anti_terror_western_cooperation"
+			add_ideas = TUN_anti_terror_western_cooperation_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_cia_partnership
+		icon = GFX_focus_Generic_Intelligence_Agency
+		x = 0
+		y = 2
+		relative_position_id = TUN_anti_terror_western_cooperation
+		cost = 7
+		prerequisite = { focus = TUN_anti_terror_western_cooperation }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+			USA = {
+				country_exists = USA
+				NOT = { has_war_with = ROOT }
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_cia_partnership"
+			add_ideas = TUN_cia_partnership_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_dgse_cooperation
+		icon = GFX_focus_Generic_Intelligence_Agency
+		x = 1
+		y = 1
+		relative_position_id = TUN_anti_terror_western_cooperation
+		cost = 7
+		prerequisite = { focus = TUN_anti_terror_western_cooperation }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+			FRA = {
+				country_exists = FRA
+				NOT = { has_war_with = ROOT }
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_dgse_cooperation"
+			add_ideas = TUN_dgse_cooperation_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_media_control
+		icon = GFX_focus_Generic_Media_Control
+		x = 8
+		y = 1
+		relative_position_id = TUN_rcd_regime
+		cost = 5
+		prerequisite = { focus = TUN_rcd_regime }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_media_control"
+			add_ideas = TUN_media_control_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_press_censorship
+		icon = GFX_focus_Generic_Media_Control
+		x = -1
+		y = 1
+		relative_position_id = TUN_media_control
+		cost = 5
+		prerequisite = { focus = TUN_media_control }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_press_censorship"
+			add_ideas = TUN_press_censorship_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_ammar_404
+		icon = GFX_focus_Generic_Media_Control
+		x = 1
+		y = 1
+		relative_position_id = TUN_media_control
+		cost = 7
+		prerequisite = { focus = TUN_media_control }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_ammar_404"
+			add_ideas = TUN_ammar_404_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_block_social_media
+		icon = GFX_focus_Generic_Media_Control
+		x = 0
+		y = 1
+		relative_position_id = TUN_ammar_404
+		cost = 5
+		prerequisite = { focus = TUN_ammar_404 }
+		mutually_exclusive = { focus = TUN_selective_internet_access }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_block_social_media"
+			add_ideas = TUN_block_social_media_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_selective_internet_access
+		icon = GFX_focus_Generic_Political_Reform
+		x = 2
+		y = 1
+		relative_position_id = TUN_ammar_404
+		cost = 5
+		prerequisite = { focus = TUN_ammar_404 }
+		mutually_exclusive = { focus = TUN_block_social_media }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_selective_internet_access"
+			add_stability = 0.03
+		}
+
+		ai_will_do = { base = 3 }
+	}
+
+	focus = {
+		id = TUN_coopt_civil_society
+		icon = GFX_focus_Generic_Trade_Unions
+		x = -1
+		y = 1
+		relative_position_id = TUN_press_censorship
+		cost = 7
+		prerequisite = { focus = TUN_press_censorship }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_coopt_civil_society"
+			add_stability = 0.03
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_manage_ugtt
+		icon = GFX_focus_Generic_Trade_Unions
+		x = 0
+		y = 1
+		relative_position_id = TUN_coopt_civil_society
+		cost = 7
+		prerequisite = { focus = TUN_coopt_civil_society }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_manage_ugtt"
+			add_ideas = TUN_managed_ugtt_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_ben_ali_economic_model
+		icon = GFX_focus_Generic_Economic_Reform
+		x = 15
+		y = 1
+		relative_position_id = TUN_rcd_regime
+		cost = 7
+		prerequisite = { focus = TUN_rcd_regime }
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_ben_ali_economic_model"
+			add_ideas = TUN_ben_ali_economic_model_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_eu_partnership_agreement
+		icon = GFX_focus_Generic_Trade_Deal
+		x = -2
+		y = 1
+		relative_position_id = TUN_ben_ali_economic_model
+		cost = 7
+		prerequisite = { focus = TUN_ben_ali_economic_model }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_eu_partnership_agreement"
+			add_ideas = TUN_eu_partnership_agreement_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_free_trade_zones
+		icon = GFX_focus_Generic_Trade_Deal
+		x = 0
+		y = 1
+		relative_position_id = TUN_eu_partnership_agreement
+		cost = 7
+		prerequisite = { focus = TUN_eu_partnership_agreement }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_free_trade_zones"
+			set_temp_variable = { temp_productivity_change = 0.015 }
+			flat_productivity_change_effect = yes
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_privatization_program
+		icon = GFX_focus_Generic_Economic_Reform
+		x = 0
+		y = 1
+		relative_position_id = TUN_ben_ali_economic_model
+		cost = 10
+		prerequisite = { focus = TUN_ben_ali_economic_model }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_privatization_program"
+			add_ideas = TUN_privatization_program_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_crony_privatization
+		icon = GFX_focus_Generic_Cronyism
+		x = -1
+		y = 2
+		relative_position_id = TUN_privatization_program
+		cost = 7
+		prerequisite = { focus = TUN_privatization_program }
+		mutually_exclusive = { focus = TUN_transparent_privatization }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_crony_privatization"
+			set_temp_variable = { treasury_change = 5.00 }
+			modify_treasury_effect = yes
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_transparent_privatization
+		icon = GFX_focus_Generic_Economic_Reform
+		x = 1
+		y = 2
+		relative_position_id = TUN_privatization_program
+		cost = 10
+		prerequisite = { focus = TUN_privatization_program }
+		mutually_exclusive = { focus = TUN_crony_privatization }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_transparent_privatization"
+			set_temp_variable = { temp_productivity_change = 0.015 }
+			flat_productivity_change_effect = yes
+		}
+
+		ai_will_do = { base = 3 }
+	}
+
+	focus = {
+		id = TUN_tourism_showcase
+		icon = GFX_focus_Generic_Tourism
+		x = 2
+		y = 1
+		relative_position_id = TUN_ben_ali_economic_model
+		cost = 7
+		prerequisite = { focus = TUN_ben_ali_economic_model }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_tourism_showcase"
+			add_ideas = TUN_tourism_showcase_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_coastal_development_priority
+		icon = GFX_focus_Generic_Construction
+		x = 0
+		y = 1
+		relative_position_id = TUN_tourism_showcase
+		cost = 7
+		prerequisite = { focus = TUN_tourism_showcase }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_coastal_development_priority"
+			set_temp_variable = { temp_productivity_change = 0.015 }
+			flat_productivity_change_effect = yes
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_constitutional_revision_2002
+		icon = GFX_focus_Ger_political_rearmament
+		x = -1
+		y = 4
+		relative_position_id = TUN_rcd_regime
+		cost = 10
+		prerequisite = { focus = TUN_ben_ali_security_state }
+		prerequisite = { focus = TUN_rcd_party_machine }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_constitutional_revision_2002"
+			add_stability = 0.05
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_remove_term_limits
+		icon = GFX_focus_Generic_Authoritarian_Rule
+		x = -1
+		y = 1
+		relative_position_id = TUN_constitutional_revision_2002
+		cost = 7
+		prerequisite = { focus = TUN_constitutional_revision_2002 }
+		mutually_exclusive = { focus = TUN_extend_term_limits }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_remove_term_limits"
+			add_ideas = TUN_remove_term_limits_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+		focus = {
+		id = TUN_extend_term_limits
+		icon = GFX_focus_Generic_Political_Reform
+		x = 1
+		y = 1
+		relative_position_id = TUN_constitutional_revision_2002
+		cost = 7
+		prerequisite = { focus = TUN_constitutional_revision_2002 }
+		mutually_exclusive = { focus = TUN_remove_term_limits }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_extend_term_limits"
+			add_stability = 0.03
+			add_ideas = TUN_extend_term_limits_idea
+		}
+
+		ai_will_do = { base = 3 }
+	}
+
+	focus = {
+		id = TUN_president_for_life
+		icon = GFX_focus_Generic_Authoritarian_Rule
+		x = -1
+		y = 2
+		relative_position_id = TUN_constitutional_revision_2002
+		cost = 10
+		prerequisite = { focus = TUN_remove_term_limits }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_president_for_life"
+			add_ideas = TUN_president_for_life_idea
+			add_stability = 0.05
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_immunity_clause
+		icon = GFX_focus_Generic_Political_Reform
+		x = 0
+		y = 1
+		relative_position_id = TUN_president_for_life
+		cost = 7
+		prerequisite = { focus = TUN_president_for_life }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_immunity_clause"
+			add_ideas = TUN_immunity_clause_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_managed_transition
+		icon = GFX_focus_Generic_Political_Reform
+		x = 1
+		y = 2
+		relative_position_id = TUN_constitutional_revision_2002
+		cost = 10
+		prerequisite = { focus = TUN_extend_term_limits }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_managed_transition"
+			add_stability = 0.03
+			add_political_power = 50
+		}
+
+		ai_will_do = { base = 3 }
+	}
+
+	focus = {
+		id = TUN_managing_dissent
+		icon = GFX_focus_Generic_Suppress_Protests
+		x = 3
+		y = 2
+		relative_position_id = TUN_rcd_regime
+		cost = 7
+		prerequisite = { focus = TUN_ben_ali_security_state }
+		prerequisite = { focus = TUN_media_control }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_managing_dissent"
+			add_ideas = TUN_managing_dissent_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_gafsa_revolt_2008
+		icon = GFX_focus_Generic_Protests
+		x = -1
+		y = 1
+		relative_position_id = TUN_managing_dissent
+		cost = 7
+		prerequisite = { focus = TUN_managing_dissent }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_gafsa_revolt_2008"
+			add_stability = -0.05
+			add_political_power = -25
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_crush_gafsa
+		icon = GFX_focus_Generic_Suppress_Protests
+		x = -1
+		y = 1
+		relative_position_id = TUN_gafsa_revolt_2008
+		cost = 5
+		prerequisite = { focus = TUN_gafsa_revolt_2008 }
+		mutually_exclusive = { focus = TUN_concessions_gafsa }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_crush_gafsa"
+			add_war_support = 0.03
+			add_stability = -0.03
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_concessions_gafsa
+		icon = GFX_focus_Generic_Political_Reform
+		x = 1
+		y = 1
+		relative_position_id = TUN_gafsa_revolt_2008
+		cost = 7
+		prerequisite = { focus = TUN_gafsa_revolt_2008 }
+		mutually_exclusive = { focus = TUN_crush_gafsa }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_concessions_gafsa"
+			add_stability = 0.03
+			set_temp_variable = { treasury_change = -2.00 }
+			modify_treasury_effect = yes
+		}
+
+		ai_will_do = { base = 3 }
+	}
+
+	focus = {
+		id = TUN_student_movements
+		icon = GFX_focus_Generic_Protests
+		x = 1
+		y = 1
+		relative_position_id = TUN_managing_dissent
+		cost = 7
+		prerequisite = { focus = TUN_managing_dissent }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_student_movements"
+			add_stability = -0.03
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_infiltrate_campuses
+		icon = GFX_focus_Generic_Intelligence_Agency
+		x = 0
+		y = 1
+		relative_position_id = TUN_student_movements
+		cost = 5
+		prerequisite = { focus = TUN_student_movements }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_infiltrate_campuses"
+			add_ideas = TUN_infiltrate_campuses_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_western_legitimacy
+		icon = GFX_focus_Generic_Political_Connections
+		x = 8
+		y = 4
+		relative_position_id = TUN_rcd_regime
+		cost = 7
+		prerequisite = { focus = TUN_ben_ali_economic_model }
+		prerequisite = { focus = TUN_media_control }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_western_legitimacy"
+			add_political_power = 50
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_best_friend_of_west
+		icon = GFX_focus_Generic_Political_Connections
+		x = -1
+		y = 1
+		relative_position_id = TUN_western_legitimacy
+		cost = 7
+		prerequisite = { focus = TUN_western_legitimacy }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_best_friend_of_west"
+			add_ideas = TUN_best_friend_of_west_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_imf_world_bank_darling
+		icon = GFX_focus_Generic_Economic_Reform
+		x = 1
+		y = 1
+		relative_position_id = TUN_western_legitimacy
+		cost = 7
+		prerequisite = { focus = TUN_western_legitimacy }
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_imf_world_bank_darling"
+			set_temp_variable = { treasury_change = 3.00 }
+			modify_treasury_effect = yes
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_mediterranean_partnership
+		icon = GFX_focus_Generic_Political_Connections
+		x = 0
+		y = 2
+		relative_position_id = TUN_western_legitimacy
+		cost = 7
+		prerequisite = { focus = TUN_best_friend_of_west }
+		prerequisite = { focus = TUN_imf_world_bank_darling }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_mediterranean_partnership"
+			add_ideas = TUN_mediterranean_partnership_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_interior_neglect
+		icon = GFX_focus_Generic_Infrastructure
+		x = -9
+		y = 4
+		relative_position_id = TUN_rcd_regime
+		cost = 7
+		prerequisite = { focus = TUN_trabelsi_clan }
+		prerequisite = { focus = TUN_rcd_party_machine }
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_interior_neglect"
+			add_stability = -0.05
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_ignore_interior
+		icon = GFX_focus_Generic_Infrastructure
+		x = -1
+		y = 1
+		relative_position_id = TUN_interior_neglect
+		cost = 5
+		prerequisite = { focus = TUN_interior_neglect }
+		mutually_exclusive = { focus = TUN_token_development }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_ignore_interior"
+			add_stability = -0.05
+			set_temp_variable = { temp_productivity_change = 0.010 }
+			flat_productivity_change_effect = yes
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_token_development
+		icon = GFX_focus_Generic_Construction
+		x = 1
+		y = 1
+		relative_position_id = TUN_interior_neglect
+		cost = 10
+		prerequisite = { focus = TUN_interior_neglect }
+		mutually_exclusive = { focus = TUN_ignore_interior }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		available = {
+			has_government = democratic
+			NOT = { has_country_flag = TUN_revolution_complete }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_token_development"
+			set_temp_variable = { treasury_change = -3.50 }
+			modify_treasury_effect = yes
+			one_random_infrastructure = yes
+		}
+
+		ai_will_do = { base = 3 }
+	}
+
+	focus = {
+		id = TUN_end_of_ben_ali
+		icon = GFX_focus_Generic_Protests
+		x = -9
+		y = 8
+		relative_position_id = TUN_rcd_regime
+		cost = 1
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_country_flag = TUN_revolution_complete
+			NOT = { has_government = democratic }
+		}
+		bypass = {
+			has_country_flag = TUN_revolution_complete
+			NOT = { has_government = democratic }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_end_of_ben_ali"
+			add_stability = 0.05
+			country_event = { id = tunisia_politics.10 days = 1 }
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_ennahda_path
+		icon = GFX_focus_Generic_Political_Reform
+		x = -11
+		y = 1
+		relative_position_id = TUN_end_of_ben_ali
+		cost = 7
+		prerequisite = { focus = TUN_end_of_ben_ali }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			OR = {
+				neutrality_neutral_muslim_brotherhood_are_in_power = yes
+				AND = {
+					has_government = democratic
+					has_country_flag = TUN_ennahda_ruling
+				}
+			}
+			has_war = no
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_ennahda_path"
+			country_event = { id = tunisia_elections.10 days = 1 }
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_ghannouchi_leadership
+		icon = GFX_focus_Generic_Political_Connections
+		x = 0
+		y = 1
+		relative_position_id = TUN_ennahda_path
+		cost = 5
+		prerequisite = { focus = TUN_ennahda_path }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			OR = {
+				neutrality_neutral_muslim_brotherhood_are_in_power = yes
+				has_country_flag = TUN_ennahda_ruling
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_ghannouchi_leadership"
+			add_political_power = 50
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_moderate_islamism
+		icon = GFX_focus_Generic_Political_Reform
+		x = -1
+		y = 1
+		relative_position_id = TUN_ghannouchi_leadership
+		cost = 7
+		prerequisite = { focus = TUN_ghannouchi_leadership }
+		mutually_exclusive = { focus = TUN_islamist_hardline }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			OR = {
+				neutrality_neutral_muslim_brotherhood_are_in_power = yes
+				has_country_flag = TUN_ennahda_ruling
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_moderate_islamism"
+			add_stability = 0.05
+			add_ideas = TUN_moderate_islamism_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_islamist_hardline
+		icon = GFX_focus_Generic_Suppress_Protests
+		x = 1
+		y = 1
+		relative_position_id = TUN_ghannouchi_leadership
+		cost = 7
+		prerequisite = { focus = TUN_ghannouchi_leadership }
+		mutually_exclusive = { focus = TUN_moderate_islamism }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = { neutrality_neutral_muslim_brotherhood_are_in_power = yes }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_islamist_hardline"
+			add_war_support = 0.05
+			add_stability = -0.03
+			add_ideas = TUN_islamist_hardline_idea
+		}
+
+		ai_will_do = { base = 3 }
+	}
+
+	focus = {
+		id = TUN_separate_dawa_politics
+		icon = GFX_focus_Generic_Political_Reform
+		x = -1
+		y = 2
+		relative_position_id = TUN_ghannouchi_leadership
+		cost = 10
+		prerequisite = { focus = TUN_moderate_islamism }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_separate_dawa_politics"
+			country_event = { id = tunisia_parties.7 days = 1 }
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_sharia_constitution
+		icon = GFX_focus_Generic_Political_Reform
+		x = 1
+		y = 2
+		relative_position_id = TUN_ghannouchi_leadership
+		cost = 7
+		prerequisite = { focus = TUN_islamist_hardline }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_sharia_constitution"
+			add_ideas = TUN_sharia_constitution_idea
+		}
+
+		ai_will_do = { base = 5 }
+	}
+
+	focus = {
+		id = TUN_muslim_democrat_model
+		icon = GFX_focus_Generic_Political_Reform
+		x = -1
+		y = 3
+		relative_position_id = TUN_ghannouchi_leadership
+		cost = 10
+		prerequisite = { focus = TUN_separate_dawa_politics }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_muslim_democrat_model"
+			add_stability = 0.05
+			add_ideas = TUN_muslim_democrat_model_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_islamist_republic
+		icon = GFX_focus_Generic_Authoritarian_Rule
+		x = 1
+		y = 3
+		relative_position_id = TUN_ghannouchi_leadership
+		cost = 10
+		prerequisite = { focus = TUN_sharia_constitution }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_islamist_republic"
+			add_ideas = TUN_islamist_republic_idea
+		}
+
+		ai_will_do = { base = 3 }
+	}
+
+	focus = {
+		id = TUN_align_qatar_turkey
+		icon = GFX_focus_Generic_Political_Connections
+		x = -3
+		y = 2
+		relative_position_id = TUN_ghannouchi_leadership
+		cost = 7
+		prerequisite = { focus = TUN_moderate_islamism focus = TUN_islamist_hardline }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_align_qatar_turkey"
+			country_event = { id = tunisia_foreign.10 days = 1 }
+			country_event = { id = tunisia_foreign.12 days = 2 }
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_brotherhood_solidarity
+		icon = GFX_focus_Generic_Political_Connections
+		x = 0
+		y = 1
+		relative_position_id = TUN_align_qatar_turkey
+		cost = 7
+		prerequisite = { focus = TUN_align_qatar_turkey }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_brotherhood_solidarity"
+			add_ideas = TUN_brotherhood_solidarity_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_nidaa_tounes_path
+		icon = GFX_focus_Generic_Elections
+		x = -6
+		y = 1
+		relative_position_id = TUN_end_of_ben_ali
+		cost = 7
+		prerequisite = { focus = TUN_end_of_ben_ali }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			OR = {
+				western_conservatism_are_in_power = yes
+				neutrality_neutral_conservatism_are_in_power = yes
+			}
+			has_war = no
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_nidaa_tounes_path"
+			country_event = { id = tunisia_parties.1 days = 1 }
+			country_event = { id = tunisia_elections.20 days = 2 }
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_essebsi_leadership
+		icon = GFX_focus_Generic_Political_Connections
+		x = 0
+		y = 1
+		relative_position_id = TUN_nidaa_tounes_path
+		cost = 5
+		prerequisite = { focus = TUN_nidaa_tounes_path }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			OR = {
+				western_conservatism_are_in_power = yes
+				neutrality_neutral_conservatism_are_in_power = yes
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_essebsi_leadership"
+			add_political_power = 50
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_rehabilitate_rcd_cadres
+		icon = GFX_focus_Generic_Political_Connections
+		x = -1
+		y = 1
+		relative_position_id = TUN_essebsi_leadership
+		cost = 7
+		prerequisite = { focus = TUN_essebsi_leadership }
+		mutually_exclusive = { focus = TUN_big_tent_coalition }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			OR = {
+				western_conservatism_are_in_power = yes
+				neutrality_neutral_conservatism_are_in_power = yes
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_rehabilitate_rcd_cadres"
+			add_ideas = TUN_rehabilitate_rcd_cadres_idea
+		}
+
+		ai_will_do = { base = 5 }
+	}
+
+	focus = {
+		id = TUN_big_tent_coalition
+		icon = GFX_focus_Generic_Democratic_Opposition
+		x = 1
+		y = 1
+		relative_position_id = TUN_essebsi_leadership
+		cost = 7
+		prerequisite = { focus = TUN_essebsi_leadership }
+		mutually_exclusive = { focus = TUN_rehabilitate_rcd_cadres }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			OR = {
+				western_conservatism_are_in_power = yes
+				neutrality_neutral_conservatism_are_in_power = yes
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_big_tent_coalition"
+			add_stability = 0.05
+			add_ideas = TUN_big_tent_coalition_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_old_guard_restoration
+		icon = GFX_focus_Generic_Authoritarian_Rule
+		x = -1
+		y = 2
+		relative_position_id = TUN_essebsi_leadership
+		cost = 10
+		prerequisite = { focus = TUN_rehabilitate_rcd_cadres }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_old_guard_restoration"
+			add_ideas = TUN_old_guard_restoration_idea
+		}
+
+		ai_will_do = { base = 5 }
+	}
+
+	focus = {
+		id = TUN_consensus_politics
+		icon = GFX_focus_Generic_Political_Reform
+		x = 1
+		y = 2
+		relative_position_id = TUN_essebsi_leadership
+		cost = 10
+		prerequisite = { focus = TUN_big_tent_coalition }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_consensus_politics"
+			add_stability = 0.05
+			add_ideas = TUN_consensus_politics_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_anti_islamist_stance
+		icon = GFX_focus_Generic_Political_Opposition
+		x = 0
+		y = 3
+		relative_position_id = TUN_essebsi_leadership
+		cost = 7
+		prerequisite = { focus = TUN_old_guard_restoration focus = TUN_consensus_politics }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_anti_islamist_stance"
+			add_ideas = TUN_anti_islamist_stance_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_france_alignment
+		icon = GFX_focus_Generic_Political_Connections
+		x = -2
+		y = 3
+		relative_position_id = TUN_essebsi_leadership
+		cost = 7
+		prerequisite = { focus = TUN_rehabilitate_rcd_cadres focus = TUN_big_tent_coalition }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			FRA = {
+				country_exists = FRA
+				NOT = { has_war_with = ROOT }
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_france_alignment"
+			country_event = { id = tunisia_foreign.16 days = 1 }
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_eu_partnership
+		icon = GFX_focus_Generic_Trade_Deal
+		x = 2
+		y = 3
+		relative_position_id = TUN_essebsi_leadership
+		cost = 7
+		prerequisite = { focus = TUN_rehabilitate_rcd_cadres focus = TUN_big_tent_coalition }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_eu_partnership"
+			add_ideas = TUN_eu_partnership_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_pdl_path
+		icon = GFX_focus_Generic_Authoritarian_Rule
+		x = -1
+		y = 1
+		relative_position_id = TUN_end_of_ben_ali
+		cost = 7
+		prerequisite = { focus = TUN_end_of_ben_ali }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			OR = {
+				western_autocrats_are_in_power = yes
+				emerging_reactionaries_are_in_power = yes
+				neutrality_neutral_autocracy_are_in_power = yes
+			}
+			has_war = no
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_pdl_path"
+			country_event = { id = tunisia_parties.2 days = 1 }
+		}
+
+		ai_will_do = { base = 5 }
+	}
+
+	focus = {
+		id = TUN_abir_moussi_leadership
+		icon = GFX_focus_Generic_Political_Connections
+		x = 0
+		y = 1
+		relative_position_id = TUN_pdl_path
+		cost = 5
+		prerequisite = { focus = TUN_pdl_path }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			OR = {
+				western_autocrats_are_in_power = yes
+				emerging_reactionaries_are_in_power = yes
+				neutrality_neutral_autocracy_are_in_power = yes
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_abir_moussi_leadership"
+			add_political_power = 50
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_bourguiba_legacy
+		icon = GFX_focus_Generic_Political_Reform
+		x = -1
+		y = 1
+		relative_position_id = TUN_abir_moussi_leadership
+		cost = 7
+		prerequisite = { focus = TUN_abir_moussi_leadership }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_bourguiba_legacy"
+			add_stability = 0.05
+			add_ideas = TUN_bourguiba_legacy_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_ban_islamist_parties
+		icon = GFX_focus_Generic_Abolish_Party
+		x = 1
+		y = 1
+		relative_position_id = TUN_abir_moussi_leadership
+		cost = 7
+		prerequisite = { focus = TUN_abir_moussi_leadership }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_ban_islamist_parties"
+			set_temp_variable = { party_index = 12 }
+			ban_party_scripted_call = yes
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_secular_authoritarianism
+		icon = GFX_focus_Generic_Authoritarian_Rule
+		x = 0
+		y = 2
+		relative_position_id = TUN_abir_moussi_leadership
+		cost = 10
+		prerequisite = { focus = TUN_bourguiba_legacy }
+		prerequisite = { focus = TUN_ban_islamist_parties }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_secular_authoritarianism"
+			add_ideas = TUN_secular_authoritarianism_idea
+		}
+
+		ai_will_do = { base = 5 }
+	}
+
+	focus = {
+		id = TUN_uae_saudi_backing
+		icon = GFX_focus_Generic_Political_Connections
+		x = -2
+		y = 2
+		relative_position_id = TUN_abir_moussi_leadership
+		cost = 7
+		prerequisite = { focus = TUN_bourguiba_legacy }
+		prerequisite = { focus = TUN_ban_islamist_parties }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			UAE = {
+				country_exists = UAE
+				NOT = { has_war_with = ROOT }
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_uae_saudi_backing"
+			country_event = { id = tunisia_foreign.14 days = 1 }
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_new_destourian_republic
+		icon = GFX_focus_Generic_Authoritarian_Rule
+		x = 0
+		y = 3
+		relative_position_id = TUN_abir_moussi_leadership
+		cost = 14
+		prerequisite = { focus = TUN_secular_authoritarianism }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_new_destourian_republic"
+			add_ideas = TUN_new_destourian_republic_idea
+		}
+
+		ai_will_do = { base = 5 }
+	}
+
+	focus = {
+		id = TUN_saied_path
+		icon = GFX_focus_Generic_Political_Crisis
+		x = 3
+		y = 1
+		relative_position_id = TUN_end_of_ben_ali
+		cost = 7
+		prerequisite = { focus = TUN_end_of_ben_ali }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			OR = {
+				nationalist_right_wing_populists_are_in_power = yes
+				emerging_autocracy_are_in_power = yes
+			}
+			has_war = no
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_saied_path"
+			country_event = { id = tunisia_elections.30 days = 1 }
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_anti_system_populism
+		icon = GFX_focus_Generic_Political_Crisis
+		x = 0
+		y = 1
+		relative_position_id = TUN_saied_path
+		cost = 5
+		prerequisite = { focus = TUN_saied_path }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_anti_system_populism"
+			add_ideas = TUN_anti_system_populism_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_invoke_article_80
+		icon = GFX_focus_Generic_Suppress_Protests
+		x = -1
+		y = 1
+		relative_position_id = TUN_anti_system_populism
+		cost = 7
+		prerequisite = { focus = TUN_anti_system_populism }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_invoke_article_80"
+			country_event = { id = tunisia_crisis.20 days = 1 }
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_anti_corruption_campaign
+		icon = GFX_focus_Generic_Political_Arrests
+		x = 1
+		y = 1
+		relative_position_id = TUN_anti_system_populism
+		cost = 7
+		prerequisite = { focus = TUN_anti_system_populism }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_anti_corruption_campaign"
+			add_ideas = TUN_anti_corruption_campaign_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_freeze_parliament
+		icon = GFX_focus_Generic_Abolish_Party
+		x = -1
+		y = 2
+		relative_position_id = TUN_anti_system_populism
+		cost = 5
+		prerequisite = { focus = TUN_invoke_article_80 }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_freeze_parliament"
+			country_event = { id = tunisia_crisis.21 days = 1 }
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_prosecute_ennahda
+		icon = GFX_focus_Generic_Political_Arrests
+		x = 1
+		y = 2
+		relative_position_id = TUN_anti_system_populism
+		cost = 7
+		prerequisite = { focus = TUN_anti_corruption_campaign }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_prosecute_ennahda"
+			country_event = { id = tunisia_crisis.24 days = 1 }
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_new_constitution_2022
+		icon = GFX_focus_Ger_political_rearmament
+		x = 0
+		y = 3
+		relative_position_id = TUN_anti_system_populism
+		cost = 10
+		prerequisite = { focus = TUN_freeze_parliament }
+		prerequisite = { focus = TUN_prosecute_ennahda }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_new_constitution_2022"
+			country_event = { id = tunisia_crisis.30 days = 1 }
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_hyper_presidential_system
+		icon = GFX_focus_Generic_Authoritarian_Rule
+		x = 0
+		y = 1
+		relative_position_id = TUN_new_constitution_2022
+		cost = 10
+		prerequisite = { focus = TUN_new_constitution_2022 }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_hyper_presidential_system"
+			add_ideas = TUN_hyper_presidential_system_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_arrest_opposition
+		icon = GFX_focus_Generic_Political_Arrests
+		x = -1
+		y = 1
+		relative_position_id = TUN_hyper_presidential_system
+		cost = 7
+		prerequisite = { focus = TUN_hyper_presidential_system }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_arrest_opposition"
+			country_event = { id = tunisia_crisis.24 days = 1 }
+		}
+
+		ai_will_do = { base = 5 }
+	}
+
+	focus = {
+		id = TUN_rule_by_decree
+		icon = GFX_focus_Generic_Authoritarian_Rule
+		x = 1
+		y = 1
+		relative_position_id = TUN_hyper_presidential_system
+		cost = 10
+		prerequisite = { focus = TUN_hyper_presidential_system }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_rule_by_decree"
+			add_ideas = TUN_rule_by_decree_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_saied_republic
+		icon = GFX_focus_Generic_Authoritarian_Rule
+		x = 0
+		y = 2
+		relative_position_id = TUN_hyper_presidential_system
+		cost = 14
+		prerequisite = { focus = TUN_arrest_opposition }
+		prerequisite = { focus = TUN_rule_by_decree }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_saied_republic"
+			add_ideas = TUN_saied_republic_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_leftist_path
+		icon = GFX_focus_Generic_Trade_Unions
+		x = 7
+		y = 1
+		relative_position_id = TUN_end_of_ben_ali
+		cost = 7
+		prerequisite = { focus = TUN_end_of_ben_ali }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			OR = {
+				western_social_democrats_are_in_power = yes
+				emerging_communist_state_are_in_power = yes
+				neutrality_neutral_social_are_in_power = yes
+				neutrality_neutral_communism_are_in_power = yes
+			}
+			has_war = no
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_leftist_path"
+			add_ideas = TUN_leftist_path_idea
+		}
+
+		ai_will_do = { base = 5 }
+	}
+
+	focus = {
+		id = TUN_ugtt_power
+		icon = GFX_focus_Generic_Trade_Unions
+		x = 0
+		y = 1
+		relative_position_id = TUN_leftist_path
+		cost = 5
+		prerequisite = { focus = TUN_leftist_path }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_ugtt_power"
+			add_ideas = TUN_ugtt_power_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_social_democratic_model
+		icon = GFX_focus_Generic_Political_Reform
+		x = -1
+		y = 1
+		relative_position_id = TUN_ugtt_power
+		cost = 7
+		prerequisite = { focus = TUN_ugtt_power }
+		mutually_exclusive = { focus = TUN_revolutionary_socialism }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_social_democratic_model"
+			add_stability = 0.05
+			add_ideas = TUN_social_democratic_model_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_revolutionary_socialism
+		icon = GFX_focus_Generic_Trade_Unions
+		x = 1
+		y = 1
+		relative_position_id = TUN_ugtt_power
+		cost = 7
+		prerequisite = { focus = TUN_ugtt_power }
+		mutually_exclusive = { focus = TUN_social_democratic_model }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_revolutionary_socialism"
+			add_ideas = TUN_revolutionary_socialism_idea
+			add_stability = -0.02
+		}
+
+		ai_will_do = { base = 5 }
+	}
+
+	focus = {
+		id = TUN_worker_cooperatives
+		icon = GFX_focus_Generic_Industry
+		x = -1
+		y = 2
+		relative_position_id = TUN_ugtt_power
+		cost = 10
+		prerequisite = { focus = TUN_social_democratic_model }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_worker_cooperatives"
+			add_ideas = TUN_worker_cooperatives_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_nationalization_program
+		icon = GFX_focus_Generic_Economic_Reform
+		x = 1
+		y = 2
+		relative_position_id = TUN_ugtt_power
+		cost = 10
+		prerequisite = { focus = TUN_revolutionary_socialism }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_nationalization_program"
+			add_ideas = TUN_nationalization_program_idea
+		}
+
+		ai_will_do = { base = 5 }
+	}
+
+	focus = {
+		id = TUN_welfare_state
+		icon = GFX_focus_Generic_Political_Reform
+		x = -1
+		y = 3
+		relative_position_id = TUN_ugtt_power
+		cost = 10
+		prerequisite = { focus = TUN_worker_cooperatives }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_welfare_state"
+			increase_social_spending = yes
+			add_stability = 0.05
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_workers_republic
+		icon = GFX_focus_Generic_Trade_Unions
+		x = 1
+		y = 3
+		relative_position_id = TUN_ugtt_power
+		cost = 14
+		prerequisite = { focus = TUN_nationalization_program }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_workers_republic"
+			add_ideas = TUN_workers_republic_idea
+		}
+
+		ai_will_do = { base = 3 }
+	}
+
+	focus = {
+		id = TUN_democratic_resistance_path
+		icon = GFX_focus_Generic_Democratic_Opposition
+		x = 11
+		y = 1
+		relative_position_id = TUN_end_of_ben_ali
+		cost = 7
+		prerequisite = { focus = TUN_end_of_ben_ali }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			has_government = democratic
+			has_country_flag = TUN_saied_article_80_invoked
+			has_war = no
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_democratic_resistance_path"
+			add_ideas = TUN_democratic_resistance_idea
+		}
+
+		ai_will_do = { base = 5 }
+	}
+
+	focus = {
+		id = TUN_salvation_front
+		icon = GFX_focus_Generic_Democratic_Opposition
+		x = 0
+		y = 1
+		relative_position_id = TUN_democratic_resistance_path
+		cost = 5
+		prerequisite = { focus = TUN_democratic_resistance_path }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_salvation_front"
+			add_ideas = TUN_salvation_front_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_street_resistance
+		icon = GFX_focus_Generic_Protests
+		x = -1
+		y = 1
+		relative_position_id = TUN_salvation_front
+		cost = 7
+		prerequisite = { focus = TUN_salvation_front }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_street_resistance"
+			add_stability = -0.03
+			add_war_support = 0.02
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_general_strike
+		icon = GFX_focus_Generic_Trade_Unions
+		x = 1
+		y = 1
+		relative_position_id = TUN_salvation_front
+		cost = 7
+		prerequisite = { focus = TUN_salvation_front }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_general_strike"
+			add_ideas = TUN_general_strike_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_international_pressure
+		icon = GFX_focus_Generic_Political_Connections
+		x = 0
+		y = 2
+		relative_position_id = TUN_salvation_front
+		cost = 7
+		prerequisite = { focus = TUN_street_resistance }
+		prerequisite = { focus = TUN_general_strike }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_international_pressure"
+			add_ideas = TUN_international_pressure_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_second_revolution
+		icon = GFX_focus_Generic_Protests
+		x = 0
+		y = 1
+		relative_position_id = TUN_international_pressure
+		cost = 14
+		prerequisite = { focus = TUN_international_pressure }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_second_revolution"
+			add_stability = 0.10
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_restore_2014_constitution
+		icon = GFX_focus_Ger_political_rearmament
+		x = 0
+		y = 1
+		relative_position_id = TUN_second_revolution
+		cost = 10
+		prerequisite = { focus = TUN_second_revolution }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_restore_2014_constitution"
+			add_ideas = TUN_restore_2014_constitution_idea
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = TUN_democracy_secured
+		icon = GFX_focus_Generic_Elections
+		x = 0
+		y = 1
+		relative_position_id = TUN_restore_2014_constitution
+		cost = 10
+		prerequisite = { focus = TUN_restore_2014_constitution }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_democracy_secured"
+			add_stability = 0.10
+			add_political_power = 100
+		}
+
+		ai_will_do = { base = 10 }
+	}
+		focus = {
+		id = TUN_carthage_revival_path
+		icon = GFX_focus_Generic_Political_Reform
+		x = 16
+		y = 1
+		relative_position_id = TUN_end_of_ben_ali
+		cost = 7
+		allow_branch = {
+			has_game_rule = {
+				rule = TUN_alt_history_paths
+				option = TUN_ALT_HISTORY_ENABLED
+			}
+		}
+		prerequisite = { focus = TUN_end_of_ben_ali }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			OR = {
+				nationalist_fascist_are_in_power = yes
+				nationalist_right_wing_populists_are_in_power = yes
+				emerging_reactionaries_are_in_power = yes
+			}
+			has_war = no
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_carthage_revival_path"
+			country_event = { id = tunisia_parties.20 days = 1 }
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_rediscover_punic_heritage
+		icon = GFX_focus_Generic_Political_Reform
+		x = 0
+		y = 1
+		relative_position_id = TUN_carthage_revival_path
+		cost = 7
+		prerequisite = { focus = TUN_carthage_revival_path }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			OR = {
+				nationalist_fascist_are_in_power = yes
+				nationalist_right_wing_populists_are_in_power = yes
+				emerging_reactionaries_are_in_power = yes
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_rediscover_punic_heritage"
+			country_event = { id = tunisia_alt.10 days = 1 }
+			add_ideas = TUN_punic_heritage_idea
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_reject_arab_identity
+		icon = GFX_focus_Generic_Political_Crisis
+		x = -1
+		y = 1
+		relative_position_id = TUN_rediscover_punic_heritage
+		cost = 7
+		prerequisite = { focus = TUN_rediscover_punic_heritage }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			OR = {
+				nationalist_fascist_are_in_power = yes
+				nationalist_right_wing_populists_are_in_power = yes
+				emerging_reactionaries_are_in_power = yes
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_reject_arab_identity"
+			add_stability = -0.03
+			add_ideas = TUN_reject_arab_identity_idea
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_reject_french_influence
+		icon = GFX_focus_Generic_Political_Crisis
+		x = 1
+		y = 1
+		relative_position_id = TUN_rediscover_punic_heritage
+		cost = 7
+		prerequisite = { focus = TUN_rediscover_punic_heritage }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			OR = {
+				nationalist_fascist_are_in_power = yes
+				nationalist_right_wing_populists_are_in_power = yes
+				emerging_reactionaries_are_in_power = yes
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_reject_french_influence"
+			add_political_power = 50
+			add_ideas = TUN_reject_french_influence_idea
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_rebuild_carthage
+		icon = GFX_focus_Generic_Construction
+		x = -2
+		y = 2
+		relative_position_id = TUN_rediscover_punic_heritage
+		cost = 14
+		prerequisite = { focus = TUN_reject_arab_identity }
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_rebuild_carthage"
+			set_temp_variable = { treasury_change = -12.00 }
+			modify_treasury_effect = yes
+			one_random_infrastructure = yes
+			one_random_industrial_complex = yes
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_tanit_cult_revival
+		icon = GFX_focus_Generic_Political_Reform
+		x = 2
+		y = 2
+		relative_position_id = TUN_rediscover_punic_heritage
+		cost = 7
+		prerequisite = { focus = TUN_reject_french_influence }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_tanit_cult_revival"
+			add_ideas = TUN_tanit_cult_revival_idea
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_punic_language_revival
+		icon = GFX_focus_Generic_Political_Reform
+		x = 0
+		y = 2
+		relative_position_id = TUN_rediscover_punic_heritage
+		cost = 10
+		prerequisite = { focus = TUN_reject_arab_identity }
+		prerequisite = { focus = TUN_reject_french_influence }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_punic_language_revival"
+			add_ideas = TUN_punic_language_revival_idea
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_mediterranean_navy
+		icon = GFX_focus_Generic_Navy
+		x = -3
+		y = 3
+		relative_position_id = TUN_rediscover_punic_heritage
+		cost = 10
+		prerequisite = { focus = TUN_rebuild_carthage }
+		search_filters = { FOCUS_FILTER_MILITARY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_mediterranean_navy"
+			add_naval_experience = 20
+			add_ideas = TUN_mediterranean_navy_idea
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_new_republic_of_carthage
+		icon = GFX_focus_Generic_Political_Reform
+		x = 0
+		y = 3
+		relative_position_id = TUN_rediscover_punic_heritage
+		cost = 14
+		prerequisite = { focus = TUN_punic_language_revival }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_new_republic_of_carthage"
+			country_event = { id = tunisia_alt.12 days = 1 }
+			add_stability = 0.10
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_commercial_empire
+		icon = GFX_focus_Generic_Trade_Deal
+		x = -1
+		y = 1
+		relative_position_id = TUN_new_republic_of_carthage
+		cost = 10
+		prerequisite = { focus = TUN_new_republic_of_carthage }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_commercial_empire"
+			add_ideas = TUN_commercial_empire_idea
+			set_temp_variable = { temp_productivity_change = 0.020 }
+			flat_productivity_change_effect = yes
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_sacred_band
+		icon = GFX_focus_Generic_Army_Modernization
+		x = 1
+		y = 1
+		relative_position_id = TUN_new_republic_of_carthage
+		cost = 10
+		prerequisite = { focus = TUN_new_republic_of_carthage }
+		search_filters = { FOCUS_FILTER_MILITARY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_sacred_band"
+			add_army_experience = 20
+			add_ideas = TUN_sacred_band_idea
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_claim_western_libya
+		icon = GFX_focus_Generic_Political_Crisis
+		x = 3
+		y = 1
+		relative_position_id = TUN_new_republic_of_carthage
+		cost = 7
+		prerequisite = { focus = TUN_new_republic_of_carthage }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_claim_western_libya"
+			add_political_power = 50
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_claim_sicily
+		icon = GFX_focus_Generic_Political_Crisis
+		x = -3
+		y = 1
+		relative_position_id = TUN_new_republic_of_carthage
+		cost = 10
+		prerequisite = { focus = TUN_mediterranean_navy }
+		prerequisite = { focus = TUN_new_republic_of_carthage }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_claim_sicily"
+			add_political_power = 50
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_claim_sardinia
+		icon = GFX_focus_Generic_Political_Crisis
+		x = -1
+		y = 2
+		relative_position_id = TUN_claim_sicily
+		cost = 10
+		prerequisite = { focus = TUN_claim_sicily }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_claim_sardinia"
+			add_political_power = 50
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_claim_iberian_coast
+		icon = GFX_focus_Generic_Political_Crisis
+		x = 1
+		y = 2
+		relative_position_id = TUN_claim_sicily
+		cost = 14
+		prerequisite = { focus = TUN_claim_sardinia }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_claim_iberian_coast"
+			add_political_power = 75
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_new_punic_wars
+		icon = GFX_focus_Generic_Army_Modernization
+		x = 0
+		y = 3
+		relative_position_id = TUN_claim_sicily
+		cost = 14
+		prerequisite = { focus = TUN_claim_sardinia }
+		prerequisite = { focus = TUN_claim_iberian_coast }
+		search_filters = { FOCUS_FILTER_MILITARY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_new_punic_wars"
+			add_army_experience = 25
+			add_war_support = 0.10
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_hannibals_march
+		icon = GFX_focus_Generic_Army_Modernization
+		x = 0
+		y = 1
+		relative_position_id = TUN_new_punic_wars
+		cost = 14
+		prerequisite = { focus = TUN_new_punic_wars }
+		search_filters = { FOCUS_FILTER_MILITARY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_hannibals_march"
+			add_ideas = TUN_hannibals_march_idea
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_delenda_est_roma
+		icon = GFX_focus_Generic_Political_Crisis
+		x = 0
+		y = 1
+		relative_position_id = TUN_hannibals_march
+		cost = 14
+		prerequisite = { focus = TUN_hannibals_march }
+		search_filters = { FOCUS_FILTER_MILITARY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_delenda_est_roma"
+			add_war_support = 0.15
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_ifriqiya_caliphate_path
+		icon = GFX_focus_Generic_Terrorism
+		x = 24
+		y = 1
+		relative_position_id = TUN_end_of_ben_ali
+		cost = 7
+		allow_branch = {
+			has_game_rule = {
+				rule = TUN_extreme_paths
+				option = TUN_EXTREME_PATHS_ENABLED
+			}
+		}
+		prerequisite = { focus = TUN_end_of_ben_ali }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			OR = {
+				salafist_caliphate_are_in_power = yes
+				salafist_kingdom_are_in_power = yes
+				emerging_hardline_shiite_are_in_power = yes
+			}
+			has_war = no
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_ifriqiya_caliphate_path"
+			country_event = { id = tunisia_parties.22 days = 1 }
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_declare_ifriqiya
+		icon = GFX_focus_Generic_Political_Reform
+		x = 0
+		y = 1
+		relative_position_id = TUN_ifriqiya_caliphate_path
+		cost = 7
+		prerequisite = { focus = TUN_ifriqiya_caliphate_path }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			OR = {
+				salafist_caliphate_are_in_power = yes
+				salafist_kingdom_are_in_power = yes
+				emerging_hardline_shiite_are_in_power = yes
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_declare_ifriqiya"
+			country_event = { id = tunisia_alt.21 days = 1 }
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_establish_sharia_law
+		icon = GFX_focus_Generic_Political_Reform
+		x = -1
+		y = 1
+		relative_position_id = TUN_declare_ifriqiya
+		cost = 7
+		prerequisite = { focus = TUN_declare_ifriqiya }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_establish_sharia_law"
+			add_ideas = TUN_establish_sharia_law_idea
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_abolish_personal_status_code
+		icon = GFX_focus_Generic_Political_Crisis
+		x = 1
+		y = 1
+		relative_position_id = TUN_declare_ifriqiya
+		cost = 7
+		prerequisite = { focus = TUN_declare_ifriqiya }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_abolish_personal_status_code"
+			add_stability = -0.10
+			add_ideas = TUN_abolish_personal_status_code_idea
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_aghlabid_model
+		icon = GFX_focus_Generic_Political_Reform
+		x = -2
+		y = 2
+		relative_position_id = TUN_declare_ifriqiya
+		cost = 10
+		prerequisite = { focus = TUN_establish_sharia_law }
+		mutually_exclusive = { focus = TUN_fatimid_model }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_aghlabid_model"
+			add_ideas = TUN_aghlabid_model_idea
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_fatimid_model
+		icon = GFX_focus_Generic_Political_Reform
+		x = 2
+		y = 2
+		relative_position_id = TUN_declare_ifriqiya
+		cost = 10
+		prerequisite = { focus = TUN_establish_sharia_law }
+		mutually_exclusive = { focus = TUN_aghlabid_model }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_fatimid_model"
+			add_ideas = TUN_fatimid_model_idea
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_sunni_orthodoxy
+		icon = GFX_focus_Generic_Political_Reform
+		x = -2
+		y = 3
+		relative_position_id = TUN_declare_ifriqiya
+		cost = 7
+		prerequisite = { focus = TUN_aghlabid_model }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_sunni_orthodoxy"
+			add_ideas = TUN_sunni_orthodoxy_idea
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_ismaili_revival
+		icon = GFX_focus_Generic_Political_Reform
+		x = 2
+		y = 3
+		relative_position_id = TUN_declare_ifriqiya
+		cost = 7
+		prerequisite = { focus = TUN_fatimid_model }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_ismaili_revival"
+			add_ideas = TUN_ismaili_revival_idea
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_rebuild_great_mosque_kairouan
+		icon = GFX_focus_Generic_Construction
+		x = 0
+		y = 2
+		relative_position_id = TUN_declare_ifriqiya
+		cost = 10
+		prerequisite = { focus = TUN_establish_sharia_law }
+		prerequisite = { focus = TUN_abolish_personal_status_code }
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_rebuild_great_mosque_kairouan"
+			set_temp_variable = { treasury_change = -7.50 }
+			modify_treasury_effect = yes
+			one_random_industrial_complex = yes
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_islamic_scholars_network
+		icon = GFX_focus_Generic_Education
+		x = 0
+		y = 3
+		relative_position_id = TUN_declare_ifriqiya
+		cost = 7
+		prerequisite = { focus = TUN_rebuild_great_mosque_kairouan }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_islamic_scholars_network"
+			add_ideas = TUN_islamic_scholars_network_idea
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_declare_caliphate
+		icon = GFX_focus_Generic_Authoritarian_Rule
+		x = 0
+		y = 4
+		relative_position_id = TUN_declare_ifriqiya
+		cost = 14
+		prerequisite = { focus = TUN_sunni_orthodoxy focus = TUN_ismaili_revival }
+		prerequisite = { focus = TUN_islamic_scholars_network }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_declare_caliphate"
+			country_event = { id = tunisia_alt.21 days = 1 }
+			add_war_support = 0.15
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_jihadist_army
+		icon = GFX_focus_Generic_Army_Modernization
+		x = -3
+		y = 4
+		relative_position_id = TUN_declare_ifriqiya
+		cost = 10
+		prerequisite = { focus = TUN_declare_caliphate }
+		search_filters = { FOCUS_FILTER_MILITARY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_jihadist_army"
+			add_army_experience = 25
+			add_ideas = TUN_jihadist_army_idea
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_foreign_mujahideen
+		icon = GFX_focus_Generic_Army_Modernization
+		x = 0
+		y = 1
+		relative_position_id = TUN_jihadist_army
+		cost = 7
+		prerequisite = { focus = TUN_jihadist_army }
+		search_filters = { FOCUS_FILTER_MILITARY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_foreign_mujahideen"
+			add_ideas = TUN_foreign_mujahideen_idea
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_islamic_economy
+		icon = GFX_focus_Generic_Economic_Reform
+		x = 3
+		y = 4
+		relative_position_id = TUN_declare_ifriqiya
+		cost = 10
+		prerequisite = { focus = TUN_declare_caliphate }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_islamic_economy"
+			add_ideas = TUN_islamic_economy_idea
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_zakat_system
+		icon = GFX_focus_Generic_Economic_Reform
+		x = 0
+		y = 1
+		relative_position_id = TUN_islamic_economy
+		cost = 7
+		prerequisite = { focus = TUN_islamic_economy }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_zakat_system"
+			add_ideas = TUN_zakat_system_idea
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_claim_libya
+		icon = GFX_focus_Generic_Political_Crisis
+		x = -3
+		y = 5
+		relative_position_id = TUN_declare_ifriqiya
+		cost = 7
+		prerequisite = { focus = TUN_declare_caliphate }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_claim_libya"
+			add_political_power = 50
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_claim_algeria
+		icon = GFX_focus_Generic_Political_Crisis
+		x = -1
+		y = 5
+		relative_position_id = TUN_declare_ifriqiya
+		cost = 7
+		prerequisite = { focus = TUN_declare_caliphate }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_claim_algeria"
+			add_political_power = 50
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_claim_morocco
+		icon = GFX_focus_Generic_Political_Crisis
+		x = 1
+		y = 5
+		relative_position_id = TUN_declare_ifriqiya
+		cost = 10
+		prerequisite = { focus = TUN_declare_caliphate }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_claim_morocco"
+			add_political_power = 75
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_claim_egypt
+		icon = GFX_focus_Generic_Political_Crisis
+		x = 3
+		y = 5
+		relative_position_id = TUN_declare_ifriqiya
+		cost = 10
+		prerequisite = { focus = TUN_declare_caliphate }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_claim_egypt"
+			add_political_power = 75
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_unite_north_africa
+		icon = GFX_focus_Generic_Political_Connections
+		x = 0
+		y = 6
+		relative_position_id = TUN_declare_ifriqiya
+		cost = 14
+		prerequisite = { focus = TUN_claim_libya }
+		prerequisite = { focus = TUN_claim_algeria }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_unite_north_africa"
+			add_war_support = 0.10
+			add_ideas = TUN_unite_north_africa_idea
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_march_on_cairo
+		icon = GFX_focus_Generic_Army_Modernization
+		x = 0
+		y = 7
+		relative_position_id = TUN_declare_ifriqiya
+		cost = 14
+		prerequisite = { focus = TUN_unite_north_africa }
+		prerequisite = { focus = TUN_claim_egypt }
+		search_filters = { FOCUS_FILTER_MILITARY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_march_on_cairo"
+			add_army_experience = 30
+			add_war_support = 0.10
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_husainid_path
+		icon = GFX_focus_Generic_Political_Connections
+		x = 31
+		y = 1
+		relative_position_id = TUN_end_of_ben_ali
+		cost = 7
+		allow_branch = {
+			has_game_rule = {
+				rule = TUN_alt_history_paths
+				option = TUN_ALT_HISTORY_ENABLED
+			}
+		}
+		prerequisite = { focus = TUN_end_of_ben_ali }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			OR = {
+				nationalist_monarchists_are_in_power = yes
+				neutrality_neutral_conservatism_are_in_power = yes
+			}
+			has_war = no
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_husainid_path"
+			country_event = { id = tunisia_alt.1 days = 1 }
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_find_husainid_heir
+		icon = GFX_focus_Generic_Political_Connections
+		x = 0
+		y = 1
+		relative_position_id = TUN_husainid_path
+		cost = 7
+		prerequisite = { focus = TUN_husainid_path }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			OR = {
+				nationalist_monarchists_are_in_power = yes
+				neutrality_neutral_conservatism_are_in_power = yes
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_find_husainid_heir"
+			country_event = { id = tunisia_alt.1 days = 1 }
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_rehabilitate_monarchy
+		icon = GFX_focus_Generic_Political_Reform
+		x = 0
+		y = 1
+		relative_position_id = TUN_find_husainid_heir
+		cost = 7
+		prerequisite = { focus = TUN_find_husainid_heir }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			OR = {
+				nationalist_monarchists_are_in_power = yes
+				neutrality_neutral_conservatism_are_in_power = yes
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_rehabilitate_monarchy"
+			country_event = { id = tunisia_alt.2 days = 1 }
+			add_stability = 0.05
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_constitutional_monarchy
+		icon = GFX_focus_Generic_Political_Reform
+		x = -1
+		y = 1
+		relative_position_id = TUN_rehabilitate_monarchy
+		cost = 10
+		prerequisite = { focus = TUN_rehabilitate_monarchy }
+		mutually_exclusive = { focus = TUN_absolute_monarchy }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_constitutional_monarchy"
+			add_ideas = TUN_constitutional_monarchy_idea
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_absolute_monarchy
+		icon = GFX_focus_Generic_Authoritarian_Rule
+		x = 1
+		y = 1
+		relative_position_id = TUN_rehabilitate_monarchy
+		cost = 10
+		prerequisite = { focus = TUN_rehabilitate_monarchy }
+		mutually_exclusive = { focus = TUN_constitutional_monarchy }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_absolute_monarchy"
+			add_ideas = TUN_absolute_monarchy_idea
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_gulf_monarchy_ties
+		icon = GFX_focus_Generic_Political_Connections
+		x = -3
+		y = 1
+		relative_position_id = TUN_rehabilitate_monarchy
+		cost = 7
+		prerequisite = { focus = TUN_rehabilitate_monarchy }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			SAU = {
+				exists = yes
+				NOT = { has_war_with = ROOT }
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_gulf_monarchy_ties"
+			add_ideas = TUN_gulf_monarchy_ties_idea
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_moroccan_example
+		icon = GFX_focus_Generic_Political_Connections
+		x = 3
+		y = 1
+		relative_position_id = TUN_rehabilitate_monarchy
+		cost = 7
+		prerequisite = { focus = TUN_rehabilitate_monarchy }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			MOR = {
+				exists = yes
+				NOT = { has_war_with = ROOT }
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_moroccan_example"
+			add_ideas = TUN_moroccan_example_idea
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_royal_court
+		icon = GFX_focus_Generic_Political_Connections
+		x = 0
+		y = 2
+		relative_position_id = TUN_rehabilitate_monarchy
+		cost = 7
+		prerequisite = { focus = TUN_constitutional_monarchy focus = TUN_absolute_monarchy }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_royal_court"
+			add_ideas = TUN_royal_court_idea
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_bardo_palace_restoration
+		icon = GFX_focus_Generic_Construction
+		x = -2
+		y = 2
+		relative_position_id = TUN_rehabilitate_monarchy
+		cost = 10
+		prerequisite = { focus = TUN_constitutional_monarchy focus = TUN_absolute_monarchy }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_bardo_palace_restoration"
+			set_temp_variable = { treasury_change = -7.50 }
+			modify_treasury_effect = yes
+			one_random_industrial_complex = yes
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_royal_guard
+		icon = GFX_focus_Generic_Army_Modernization
+		x = 2
+		y = 2
+		relative_position_id = TUN_rehabilitate_monarchy
+		cost = 10
+		prerequisite = { focus = TUN_constitutional_monarchy focus = TUN_absolute_monarchy }
+		search_filters = { FOCUS_FILTER_MILITARY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_royal_guard"
+			add_army_experience = 15
+			add_ideas = TUN_royal_guard_idea
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_kingdom_of_tunisia
+		icon = GFX_focus_Generic_Political_Reform
+		x = 0
+		y = 3
+		relative_position_id = TUN_rehabilitate_monarchy
+		cost = 14
+		prerequisite = { focus = TUN_royal_court }
+		prerequisite = { focus = TUN_bardo_palace_restoration }
+		prerequisite = { focus = TUN_royal_guard }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_kingdom_of_tunisia"
+			country_event = { id = tunisia_alt.3 days = 1 }
+			add_stability = 0.10
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_parliamentary_monarchy
+		icon = GFX_focus_Generic_Democratic_Opposition
+		x = -2
+		y = 1
+		relative_position_id = TUN_kingdom_of_tunisia
+		cost = 10
+		prerequisite = { focus = TUN_kingdom_of_tunisia }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = { has_completed_focus = TUN_constitutional_monarchy }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_parliamentary_monarchy"
+			add_ideas = TUN_parliamentary_monarchy_idea
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_royal_prerogative
+		icon = GFX_focus_Generic_Authoritarian_Rule
+		x = 2
+		y = 1
+		relative_position_id = TUN_kingdom_of_tunisia
+		cost = 10
+		prerequisite = { focus = TUN_kingdom_of_tunisia }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = { has_completed_focus = TUN_absolute_monarchy }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_royal_prerogative"
+			add_ideas = TUN_royal_prerogative_idea
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_beylical_tradition
+		icon = GFX_focus_Generic_Political_Reform
+		x = 0
+		y = 4
+		relative_position_id = TUN_rehabilitate_monarchy
+		cost = 7
+		prerequisite = { focus = TUN_kingdom_of_tunisia }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_beylical_tradition"
+			add_ideas = TUN_beylical_tradition_idea
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_claim_beylik_of_constantine
+		icon = GFX_focus_Generic_Political_Crisis
+		x = -1
+		y = 1
+		relative_position_id = TUN_beylical_tradition
+		cost = 10
+		prerequisite = { focus = TUN_beylical_tradition }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_claim_beylik_of_constantine"
+			add_political_power = 50
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_claim_tripolitania
+		icon = GFX_focus_Generic_Political_Crisis
+		x = 1
+		y = 1
+		relative_position_id = TUN_beylical_tradition
+		cost = 10
+		prerequisite = { focus = TUN_beylical_tradition }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_claim_tripolitania"
+			add_political_power = 50
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	focus = {
+		id = TUN_restore_regency_of_tunis
+		icon = GFX_focus_Generic_Political_Reform
+		x = 0
+		y = 2
+		relative_position_id = TUN_beylical_tradition
+		cost = 14
+		prerequisite = { focus = TUN_claim_beylik_of_constantine }
+		prerequisite = { focus = TUN_claim_tripolitania }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TUN_restore_regency_of_tunis"
+			add_stability = 0.10
+			add_war_support = 0.10
+		}
+
+		ai_will_do = { base = 0 }
+	}
+}
