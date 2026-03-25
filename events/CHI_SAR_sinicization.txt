@@ -1,0 +1,332 @@
+###############################################
+# CHI–SAR Sinicization Threshold Events
+# Namespace: chi_sar_sin
+# Fired from update_TIB/ETK/OMG_sinicization_modifiers on first tier crossing.
+# ROOT = the SAR country (TIB, ETK, or OMG)
+#
+# .1–.3  Tibet thresholds (tension / repression / complete)
+# .4–.6  Xinjiang thresholds
+# .7–.9  Inner Mongolia thresholds
+###############################################
+
+add_namespace = chi_sar_sin
+
+###############################################
+### TIBET ###
+###############################################
+
+# .1 — TIB reaches Tier 1 (33): Buddhist protests
+country_event = {
+	id = chi_sar_sin.1
+	title = chi_sar_sin.1.t
+	desc = chi_sar_sin.1.d
+	picture = GFX_report_event_protest
+	is_triggered_only = yes
+
+	# ROOT = TIB
+
+	option = {
+		name = chi_sar_sin.1.a
+		log = "[GetDateText]: [Root.GetName]: chi_sar_sin.1.a"
+		# Ease pressure — reduce sinicization
+		add_to_variable = { sinicization_level = -5 }
+		update_TIB_sinicization_modifiers = yes
+		add_stability = 0.03
+		ai_chance = { base = 30 }
+	}
+
+	option = {
+		name = chi_sar_sin.1.b
+		log = "[GetDateText]: [Root.GetName]: chi_sar_sin.1.b"
+		# Ignore — stability penalty
+		add_stability = -0.05
+		ai_chance = { base = 70 }
+	}
+}
+
+# .2 — TIB reaches Tier 2 (66): Dalai Lama international appeal
+country_event = {
+	id = chi_sar_sin.2
+	title = chi_sar_sin.2.t
+	desc = chi_sar_sin.2.d
+	picture = GFX_report_event_protest
+	is_triggered_only = yes
+
+	# ROOT = TIB
+
+	option = {
+		name = chi_sar_sin.2.a
+		log = "[GetDateText]: [Root.GetName]: chi_sar_sin.2.a"
+		# Suppress — no concessions, mild international condemnation
+		add_stability = -0.05
+		OVERLORD = {
+			add_opinion_modifier = { target = ENG modifier = generic_unfriendly }
+			add_opinion_modifier = { target = USA modifier = generic_unfriendly }
+		}
+		ai_chance = { base = 60 }
+	}
+
+	option = {
+		name = chi_sar_sin.2.b
+		log = "[GetDateText]: [Root.GetName]: chi_sar_sin.2.b"
+		# Negotiate — reduce sinicization, stability gain
+		add_to_variable = { sinicization_level = -10 }
+		update_TIB_sinicization_modifiers = yes
+		add_stability = 0.05
+		OVERLORD = { add_political_power = -50 }
+		ai_chance = { base = 40 }
+	}
+}
+
+# .3 — TIB reaches Tier 3 (100): Sinicization complete
+country_event = {
+	id = chi_sar_sin.3
+	title = chi_sar_sin.3.t
+	desc = chi_sar_sin.3.d
+	picture = GFX_report_event_china_beijing
+	is_triggered_only = yes
+
+	# ROOT = TIB
+
+	option = {
+		name = chi_sar_sin.3.a
+		log = "[GetDateText]: [Root.GetName]: chi_sar_sin.3.a"
+		# Sinicization complete; unlock integration focus in CHI
+		OVERLORD = {
+			country_event = { id = chi_sar_sin.30 days = 1 }
+		}
+		ai_chance = { base = 100 }
+	}
+}
+
+# .30 — CHI receives notification: TIB sinicization complete
+country_event = {
+	id = chi_sar_sin.30
+	title = chi_sar_sin.30.t
+	desc = chi_sar_sin.30.d
+	picture = GFX_report_event_china_beijing
+	is_triggered_only = yes
+
+	# ROOT = CHI
+
+	option = {
+		name = chi_sar_sin.30.a
+		log = "[GetDateText]: [Root.GetName]: chi_sar_sin.30.a"
+		set_country_flag = CHI_TIB_sinicization_complete
+		ai_chance = { base = 100 }
+	}
+}
+
+###############################################
+### XINJIANG ###
+###############################################
+
+# .4 — ETK reaches Tier 1 (33): First terrorist incident
+country_event = {
+	id = chi_sar_sin.4
+	title = chi_sar_sin.4.t
+	desc = chi_sar_sin.4.d
+	picture = GFX_report_event_protest
+	is_triggered_only = yes
+
+	# ROOT = ETK
+
+	option = {
+		name = chi_sar_sin.4.a
+		log = "[GetDateText]: [Root.GetName]: chi_sar_sin.4.a"
+		# Reinforce security presence
+		add_stability = -0.03
+		OVERLORD = {
+			add_political_power = -50
+			set_country_flag = CHI_ETK_terrorism_active
+		}
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = chi_sar_sin.4.b
+		log = "[GetDateText]: [Root.GetName]: chi_sar_sin.4.b"
+		# Cultural accommodation — ease sinicization
+		add_to_variable = { sinicization_level = -5 }
+		update_ETK_sinicization_modifiers = yes
+		add_stability = 0.03
+		ai_chance = { base = 30 }
+	}
+}
+
+# .5 — ETK reaches Tier 2 (66): Mass security crackdown
+country_event = {
+	id = chi_sar_sin.5
+	title = chi_sar_sin.5.t
+	desc = chi_sar_sin.5.d
+	picture = GFX_report_event_china_beijing
+	is_triggered_only = yes
+
+	# ROOT = ETK
+
+	option = {
+		name = chi_sar_sin.5.a
+		log = "[GetDateText]: [Root.GetName]: chi_sar_sin.5.a"
+		# Full crackdown — international condemnation
+		add_stability = -0.08
+		OVERLORD = {
+			add_opinion_modifier = { target = USA modifier = generic_unfriendly }
+			add_opinion_modifier = { target = ENG modifier = generic_unfriendly }
+			add_opinion_modifier = { target = FRA modifier = generic_unfriendly }
+		}
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = chi_sar_sin.5.b
+		log = "[GetDateText]: [Root.GetName]: chi_sar_sin.5.b"
+		# Partial accommodation
+		add_to_variable = { sinicization_level = -10 }
+		update_ETK_sinicization_modifiers = yes
+		add_stability = 0.03
+		OVERLORD = { add_political_power = -75 }
+		ai_chance = { base = 30 }
+	}
+}
+
+# .6 — ETK reaches Tier 3 (100): Full integration ready
+country_event = {
+	id = chi_sar_sin.6
+	title = chi_sar_sin.6.t
+	desc = chi_sar_sin.6.d
+	picture = GFX_report_event_china_beijing
+	is_triggered_only = yes
+
+	# ROOT = ETK
+
+	option = {
+		name = chi_sar_sin.6.a
+		log = "[GetDateText]: [Root.GetName]: chi_sar_sin.6.a"
+		OVERLORD = {
+			country_event = { id = chi_sar_sin.60 days = 1 }
+		}
+		ai_chance = { base = 100 }
+	}
+}
+
+# .60 — CHI receives notification: ETK sinicization complete
+country_event = {
+	id = chi_sar_sin.60
+	title = chi_sar_sin.60.t
+	desc = chi_sar_sin.60.d
+	picture = GFX_report_event_china_beijing
+	is_triggered_only = yes
+
+	# ROOT = CHI
+
+	option = {
+		name = chi_sar_sin.60.a
+		log = "[GetDateText]: [Root.GetName]: chi_sar_sin.60.a"
+		set_country_flag = CHI_ETK_sinicization_complete
+		ai_chance = { base = 100 }
+	}
+}
+
+###############################################
+### INNER MONGOLIA ###
+###############################################
+
+# .7 — OMG reaches Tier 1 (33): Mongolian cultural protests
+country_event = {
+	id = chi_sar_sin.7
+	title = chi_sar_sin.7.t
+	desc = chi_sar_sin.7.d
+	picture = GFX_report_event_protest
+	is_triggered_only = yes
+
+	# ROOT = OMG
+
+	option = {
+		name = chi_sar_sin.7.a
+		log = "[GetDateText]: [Root.GetName]: chi_sar_sin.7.a"
+		# Press ahead — stability loss
+		add_stability = -0.04
+		ai_chance = { base = 60 }
+	}
+
+	option = {
+		name = chi_sar_sin.7.b
+		log = "[GetDateText]: [Root.GetName]: chi_sar_sin.7.b"
+		# Ease — reduce sinicization
+		add_to_variable = { sinicization_level = -5 }
+		update_OMG_sinicization_modifiers = yes
+		add_stability = 0.03
+		ai_chance = { base = 40 }
+	}
+}
+
+# .8 — OMG reaches Tier 2 (66): Repression backlash
+country_event = {
+	id = chi_sar_sin.8
+	title = chi_sar_sin.8.t
+	desc = chi_sar_sin.8.d
+	picture = GFX_report_event_protest
+	is_triggered_only = yes
+
+	# ROOT = OMG
+
+	option = {
+		name = chi_sar_sin.8.a
+		log = "[GetDateText]: [Root.GetName]: chi_sar_sin.8.a"
+		# Crack down
+		add_stability = -0.07
+		OVERLORD = {
+			add_opinion_modifier = { target = MON modifier = generic_unfriendly }
+		}
+		ai_chance = { base = 60 }
+	}
+
+	option = {
+		name = chi_sar_sin.8.b
+		log = "[GetDateText]: [Root.GetName]: chi_sar_sin.8.b"
+		# Step back
+		add_to_variable = { sinicization_level = -10 }
+		update_OMG_sinicization_modifiers = yes
+		add_stability = 0.04
+		OVERLORD = { add_political_power = -50 }
+		ai_chance = { base = 40 }
+	}
+}
+
+# .9 — OMG reaches Tier 3 (100): Sinicization complete
+country_event = {
+	id = chi_sar_sin.9
+	title = chi_sar_sin.9.t
+	desc = chi_sar_sin.9.d
+	picture = GFX_report_event_china_beijing
+	is_triggered_only = yes
+
+	# ROOT = OMG
+
+	option = {
+		name = chi_sar_sin.9.a
+		log = "[GetDateText]: [Root.GetName]: chi_sar_sin.9.a"
+		OVERLORD = {
+			country_event = { id = chi_sar_sin.90 days = 1 }
+		}
+		ai_chance = { base = 100 }
+	}
+}
+
+# .90 — CHI receives notification: OMG sinicization complete
+country_event = {
+	id = chi_sar_sin.90
+	title = chi_sar_sin.90.t
+	desc = chi_sar_sin.90.d
+	picture = GFX_report_event_china_beijing
+	is_triggered_only = yes
+
+	# ROOT = CHI
+
+	option = {
+		name = chi_sar_sin.90.a
+		log = "[GetDateText]: [Root.GetName]: chi_sar_sin.90.a"
+		set_country_flag = CHI_OMG_sinicization_complete
+		ai_chance = { base = 100 }
+	}
+}

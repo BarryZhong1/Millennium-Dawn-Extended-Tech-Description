@@ -1,4 +1,4 @@
-# CHI SAR Shared Focus Tree
+
 joint_focus = {
 	id = CHI_SAR_one_china_framework
 	icon = one_china_policy_prc
@@ -10,20 +10,7 @@ joint_focus = {
 	cost = 5
 
 	allow_branch = {
-		OR = {
-			original_tag = CHI
-			AND = {
-				OR = {
-					original_tag = HKG
-					original_tag = MAC
-					original_tag = TIB
-					original_tag = ETK
-					original_tag = TAI
-					original_tag = MON
-				}
-				is_subject_of = CHI
-			}
-		}
+		CHI_any_SAR_joint_focus_available = yes
 	}
 
 	search_filters = { FOCUS_FILTER_POLITICAL }
@@ -36,6 +23,7 @@ joint_focus = {
 			original_tag = TIB
 			original_tag = ETK
 			original_tag = TAI
+			original_tag = OMG
 			original_tag = MON
 		}
 	}
@@ -57,7 +45,15 @@ joint_focus = {
 			MAC = { add_opinion_modifier = { target = CHI  modifier = one_china_policy } }
 		}
 		if = {
-			limit = { country_exists = TIB  NOT = { TIB = { has_dynamic_modifier = { modifier = TIB_sinicization_modifier } } } }
+			limit = { country_exists = OMG  OMG = { is_subject_of = CHI } }
+			add_opinion_modifier = { target = OMG  modifier = one_china_policy }
+			OMG = { add_opinion_modifier = { target = CHI  modifier = one_china_policy } }
+		}
+		if = {
+			limit = {
+				country_exists = TIB
+				NOT = { TIB = { has_dynamic_modifier = { modifier = TIB_sinicization_modifier } } }
+			}
 			TIB = {
 				set_variable = { sinicization_level = 20 }
 				add_dynamic_modifier = { modifier = TIB_sinicization_modifier }
@@ -65,13 +61,17 @@ joint_focus = {
 			}
 		}
 		if = {
-			limit = { country_exists = ETK  NOT = { ETK = { has_dynamic_modifier = { modifier = ETK_sinicization_modifier } } } }
+			limit = {
+				country_exists = ETK
+				NOT = { ETK = { has_dynamic_modifier = { modifier = ETK_sinicization_modifier } } }
+			}
 			ETK = {
 				set_variable = { sinicization_level = 25 }
 				add_dynamic_modifier = { modifier = ETK_sinicization_modifier }
 				update_ETK_sinicization_modifiers = yes
 			}
 		}
+		update_CHI_SAR_network_modifiers = yes
 	}
 
 	completion_reward = {
@@ -98,6 +98,18 @@ joint_focus = {
 
 	search_filters = { FOCUS_FILTER_POLITICAL }
 
+	joint_trigger = {
+		OR = {
+			original_tag = CHI
+			original_tag = HKG
+			original_tag = MAC
+			original_tag = TIB
+			original_tag = ETK
+			original_tag = TAI
+			original_tag = OMG
+		}
+	}
+
 	available = {
 		original_tag = CHI
 	}
@@ -118,6 +130,14 @@ joint_focus = {
 			set_temp_variable = { influence_target = MAC }
 			change_influence_percentage = yes
 		}
+		if = {
+			limit = { country_exists = OMG  OMG = { is_subject_of = CHI } }
+			set_temp_variable = { percent_change = 3 }
+			set_temp_variable = { tag_index = CHI }
+			set_temp_variable = { influence_target = OMG }
+			change_influence_percentage = yes
+		}
+		update_CHI_SAR_network_modifiers = yes
 	}
 
 	ai_will_do = {
@@ -131,14 +151,26 @@ joint_focus = {
 	text_icon = JOINT_CHI_focus_style
 
 	x = 0
-	y = 1
-	relative_position_id = CHI_SAR_liaison_office_reform
+	y = 2
+	relative_position_id = CHI_SAR_one_china_framework
 
 	cost = 7
 
 	prerequisite = { focus = CHI_SAR_liaison_office_reform }
 
 	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+
+	joint_trigger = {
+		OR = {
+			original_tag = CHI
+			original_tag = HKG
+			original_tag = MAC
+			original_tag = TIB
+			original_tag = ETK
+			original_tag = TAI
+			original_tag = OMG
+		}
+	}
 
 	available = {
 		original_tag = CHI
@@ -185,6 +217,7 @@ joint_focus = {
 				add_to_variable = { sinicization_level = 5 }
 				update_ETK_sinicization_modifiers = yes
 			}
+			set_country_flag = CHI_ETK_terrorism_active
 		}
 	}
 
@@ -199,14 +232,26 @@ joint_focus = {
 	text_icon = JOINT_CHI_focus_style
 
 	x = 0
-	y = 2
-	relative_position_id = CHI_SAR_liaison_office_reform
+	y = 3
+	relative_position_id = CHI_SAR_one_china_framework
 
 	cost = 7
 
 	prerequisite = { focus = CHI_SAR_national_security_framework }
 
 	search_filters = { FOCUS_FILTER_POLITICAL }
+
+	joint_trigger = {
+		OR = {
+			original_tag = CHI
+			original_tag = HKG
+			original_tag = MAC
+			original_tag = TIB
+			original_tag = ETK
+			original_tag = TAI
+			original_tag = OMG
+		}
+	}
 
 	available = {
 		original_tag = CHI
@@ -230,34 +275,6 @@ joint_focus = {
 		}
 		if = {
 			limit = { country_exists = TIB  TIB = { is_subject_of = CHI } }
-			set_temp_variable = { percent_change = 3 }
-			set_temp_variable = { tag_index = CHI }
-			set_temp_variable = { influence_target = TIB }
-			change_influence_percentage = yes
-		}
-		if = {
-			limit = { country_exists = ETK  ETK = { is_subject_of = CHI } }
-			set_temp_variable = { percent_change = 3 }
-			set_temp_variable = { tag_index = CHI }
-			set_temp_variable = { influence_target = ETK }
-			change_influence_percentage = yes
-		}
-		if = {
-			limit = { country_exists = TAI  TAI = { is_subject_of = CHI } }
-			set_temp_variable = { percent_change = 3 }
-			set_temp_variable = { tag_index = CHI }
-			set_temp_variable = { influence_target = TAI }
-			change_influence_percentage = yes
-		}
-		if = {
-			limit = { country_exists = MON  MON = { is_subject_of = CHI } }
-			set_temp_variable = { percent_change = 3 }
-			set_temp_variable = { tag_index = CHI }
-			set_temp_variable = { influence_target = MON }
-			change_influence_percentage = yes
-		}
-		if = {
-			limit = { country_exists = TIB  TIB = { is_subject_of = CHI } }
 			TIB = {
 				add_to_variable = { sinicization_level = 5 }
 				update_TIB_sinicization_modifiers = yes
@@ -268,6 +285,13 @@ joint_focus = {
 			ETK = {
 				add_to_variable = { sinicization_level = 5 }
 				update_ETK_sinicization_modifiers = yes
+			}
+		}
+		if = {
+			limit = { country_exists = OMG  OMG = { is_subject_of = CHI } }
+			OMG = {
+				add_to_variable = { sinicization_level = 3 }
+				update_OMG_sinicization_modifiers = yes
 			}
 		}
 	}
@@ -283,8 +307,8 @@ joint_focus = {
 	text_icon = JOINT_CHI_focus_style
 
 	x = -2
-	y = 3
-	relative_position_id = CHI_SAR_liaison_office_reform
+	y = 4
+	relative_position_id = CHI_SAR_one_china_framework
 
 	cost = 7
 
@@ -293,12 +317,25 @@ joint_focus = {
 
 	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
+	joint_trigger = {
+		OR = {
+			original_tag = CHI
+			original_tag = HKG
+			original_tag = MAC
+			original_tag = TIB
+			original_tag = ETK
+			original_tag = TAI
+			original_tag = OMG
+		}
+	}
+
 	available = {
 		original_tag = CHI
 	}
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_SAR_two_systems_commitment"
+		set_global_flag = CHI_TWO_SYSTEMS_PATH
 		add_stability = 0.03
 		if = {
 			limit = { country_exists = HKG  HKG = { is_subject_of = CHI } }
@@ -316,6 +353,15 @@ joint_focus = {
 				add_stability = 0.03
 			}
 		}
+		if = {
+			limit = { country_exists = OMG  OMG = { is_subject_of = CHI } }
+			add_opinion_modifier = { target = OMG  modifier = mutual_trade_agreement }
+			OMG = {
+				add_opinion_modifier = { target = CHI  modifier = mutual_trade_agreement }
+				add_stability = 0.02
+			}
+		}
+		update_CHI_SAR_network_modifiers = yes
 	}
 
 	ai_will_do = {
@@ -336,8 +382,8 @@ joint_focus = {
 	text_icon = JOINT_CHI_focus_style
 
 	x = 2
-	y = 3
-	relative_position_id = CHI_SAR_liaison_office_reform
+	y = 4
+	relative_position_id = CHI_SAR_one_china_framework
 
 	cost = 7
 
@@ -346,12 +392,25 @@ joint_focus = {
 
 	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_WAR_SUPPORT }
 
+	joint_trigger = {
+		OR = {
+			original_tag = CHI
+			original_tag = HKG
+			original_tag = MAC
+			original_tag = TIB
+			original_tag = ETK
+			original_tag = TAI
+			original_tag = OMG
+		}
+	}
+
 	available = {
 		original_tag = CHI
 	}
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_SAR_one_system_declaration"
+		set_global_flag = CHI_ONE_SYSTEM_PATH
 		add_war_support = 0.03
 		add_stability = -0.02
 		if = {
@@ -368,6 +427,14 @@ joint_focus = {
 			set_temp_variable = { influence_target = MAC }
 			change_influence_percentage = yes
 		}
+		if = {
+			limit = { country_exists = OMG  OMG = { is_subject_of = CHI } }
+			set_temp_variable = { percent_change = 8 }
+			set_temp_variable = { tag_index = CHI }
+			set_temp_variable = { influence_target = OMG }
+			change_influence_percentage = yes
+		}
+		update_CHI_SAR_network_modifiers = yes
 	}
 
 	ai_will_do = {
@@ -381,68 +448,59 @@ joint_focus = {
 		}
 	}
 }
-joint_focus = {
-	id = CHI_SAR_influence_campaign
-	icon = chinese_nationalism
-	text_icon = JOINT_CHI_focus_style
 
-	x = 0
+joint_focus = {
+	id = CHI_HKG_greater_bay_area
+	icon = chinese_glory
+
+	x = 7
 	y = 1
-	relative_position_id = CHI_SAR_one_system_declaration
+	relative_position_id = CHI_SAR_one_china_framework
 
 	cost = 7
 
-	prerequisite = { focus = CHI_SAR_one_system_declaration }
-
-	search_filters = { FOCUS_FILTER_POLITICAL }
-
-	available = {
-		original_tag = CHI
+	allow_branch = {
+		OR = {
+			original_tag = CHI
+			AND = {
+				original_tag = HKG
+				is_subject_of = CHI
+			}
+		}
 	}
 
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_SAR_influence_campaign"
-		if = {
-			limit = { country_exists = TIB  TIB = { is_subject_of = CHI } }
-			set_temp_variable = { percent_change = 8 }
-			set_temp_variable = { tag_index = CHI }
-			set_temp_variable = { influence_target = TIB }
-			change_influence_percentage = yes
+	prerequisite = { focus = CHI_SAR_one_china_framework }
+
+	search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_STABILITY }
+
+	joint_trigger = {
+		OR = {
+			original_tag = CHI
+			original_tag = HKG
 		}
-		if = {
-			limit = { country_exists = ETK  ETK = { is_subject_of = CHI } }
-			set_temp_variable = { percent_change = 8 }
-			set_temp_variable = { tag_index = CHI }
-			set_temp_variable = { influence_target = ETK }
-			change_influence_percentage = yes
-		}
-		if = {
-			limit = { country_exists = MON  MON = { is_subject_of = CHI } }
-			set_temp_variable = { percent_change = 8 }
-			set_temp_variable = { tag_index = CHI }
-			set_temp_variable = { influence_target = MON }
-			change_influence_percentage = yes
-		}
-		if = {
-			limit = { country_exists = HKG  HKG = { is_subject_of = CHI } }
-			set_temp_variable = { percent_change = 8 }
-			set_temp_variable = { tag_index = CHI }
-			set_temp_variable = { influence_target = HKG }
-			change_influence_percentage = yes
-		}
-		if = {
-			limit = { country_exists = MAC  MAC = { is_subject_of = CHI } }
-			set_temp_variable = { percent_change = 8 }
-			set_temp_variable = { tag_index = CHI }
-			set_temp_variable = { influence_target = MAC }
-			change_influence_percentage = yes
-		}
-		if = {
-			limit = { country_exists = TAI  TAI = { is_subject_of = CHI } }
-			set_temp_variable = { percent_change = 8 }
-			set_temp_variable = { tag_index = CHI }
-			set_temp_variable = { influence_target = TAI }
-			change_influence_percentage = yes
+	}
+
+	available = {
+		CHI_HKG_joint_focus_available = yes
+	}
+
+	completion_reward_joint_originator = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_greater_bay_area"
+		add_political_power = 50
+		update_CHI_SAR_network_modifiers = yes
+	}
+
+	completion_reward_joint_member = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_greater_bay_area (HKG)"
+		add_stability = 0.03
+		add_political_power = 25
+		random_owned_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
 		}
 	}
 
@@ -452,19 +510,264 @@ joint_focus = {
 }
 
 joint_focus = {
-	id = CHI_SAR_integrate_HKG
-	icon = Hong_kong_2047
-	text_icon = JOINT_CHI_focus_style
+	id = CHI_HKG_financial_integration
+	icon = chinese_glory
 
-	x = -3
-	y = 2
-	relative_position_id = CHI_SAR_one_system_declaration
+	x = 0
+	y = 1
+	relative_position_id = CHI_HKG_greater_bay_area
 
 	cost = 7
 
-	prerequisite = { focus = CHI_SAR_influence_campaign }
+	prerequisite = { focus = CHI_HKG_greater_bay_area }
+
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
+
+	joint_trigger = {
+		OR = {
+			original_tag = CHI
+			original_tag = HKG
+		}
+	}
+
+	available = {
+		CHI_HKG_joint_focus_available = yes
+	}
+
+	completion_reward_joint_originator = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_financial_integration"
+		add_political_power = 75
+		update_CHI_SAR_network_modifiers = yes
+	}
+
+	completion_reward_joint_member = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_financial_integration (HKG)"
+		add_political_power = 50
+		random_owned_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+
+	ai_will_do = {
+		base = 5
+	}
+}
+
+joint_focus = {
+	id = CHI_HKG_media_freedom
+	icon = chinese_social_democracy
+
+	x = -1
+	y = 2
+	relative_position_id = CHI_HKG_greater_bay_area
+
+	cost = 7
+
+	prerequisite = { focus = CHI_HKG_financial_integration }
+	mutually_exclusive = { focus = CHI_HKG_rule_of_law }
+
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+
+	joint_trigger = {
+		OR = {
+			original_tag = CHI
+			original_tag = HKG
+		}
+	}
+
+	available = {
+		CHI_HKG_joint_focus_available = yes
+	}
+
+	completion_reward_joint_originator = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_media_freedom"
+		add_political_power = 50
+	}
+
+	completion_reward_joint_member = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_media_freedom (HKG)"
+		add_stability = 0.05
+		add_political_power = 50
+		set_temp_variable = { percent_change = -3 }
+		set_temp_variable = { tag_index = CHI }
+		set_temp_variable = { influence_target = HKG }
+		change_influence_percentage = yes
+	}
+
+	ai_will_do = {
+		base = 3
+		modifier = {
+			add = 3
+			has_global_flag = CHI_TWO_SYSTEMS_PATH
+		}
+	}
+}
+
+joint_focus = {
+	id = CHI_HKG_rule_of_law
+	icon = MEX_Bribe_the_judiciary
+
+	x = 1
+	y = 2
+	relative_position_id = CHI_HKG_greater_bay_area
+
+	cost = 7
+
+	prerequisite = { focus = CHI_HKG_financial_integration }
+	mutually_exclusive = { focus = CHI_HKG_media_freedom }
+
+	search_filters = { FOCUS_FILTER_POLITICAL }
+
+	joint_trigger = {
+		OR = {
+			original_tag = CHI
+			original_tag = HKG
+		}
+	}
+
+	available = {
+		CHI_HKG_joint_focus_available = yes
+	}
+
+	completion_reward_joint_originator = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_rule_of_law"
+		set_temp_variable = { percent_change = 5 }
+		set_temp_variable = { tag_index = CHI }
+		set_temp_variable = { influence_target = HKG }
+		change_influence_percentage = yes
+	}
+
+	completion_reward_joint_member = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_rule_of_law (HKG)"
+		add_political_power = 50
+		add_opinion_modifier = { target = CHI  modifier = mutual_trade_agreement }
+	}
+
+	ai_will_do = {
+		base = 3
+		modifier = {
+			add = 3
+			has_global_flag = CHI_ONE_SYSTEM_PATH
+		}
+	}
+}
+
+joint_focus = {
+	id = CHI_HKG_political_alignment
+	icon = chinese_nationalism
+
+	x = 0
+	y = 3
+	relative_position_id = CHI_HKG_greater_bay_area
+
+	cost = 7
+
+	prerequisite = { focus = CHI_HKG_media_freedom }
+	prerequisite = { focus = CHI_HKG_rule_of_law }
+
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INFLUENCE }
+
+	joint_trigger = {
+		OR = {
+			original_tag = CHI
+			original_tag = HKG
+		}
+	}
+
+	available = {
+		CHI_HKG_joint_focus_available = yes
+	}
+
+	completion_reward_joint_originator = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_political_alignment"
+		set_temp_variable = { percent_change = 5 }
+		set_temp_variable = { tag_index = CHI }
+		set_temp_variable = { influence_target = HKG }
+		change_influence_percentage = yes
+		update_CHI_SAR_network_modifiers = yes
+	}
+
+	completion_reward_joint_member = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_political_alignment (HKG)"
+		add_political_power = 50
+		add_opinion_modifier = { target = CHI  modifier = mutual_trade_agreement }
+	}
+
+	ai_will_do = {
+		base = 5
+	}
+}
+
+joint_focus = {
+	id = CHI_HKG_national_security_law
+	icon = peoples_republic_of_china
+
+	x = 1
+	y = 4
+	relative_position_id = CHI_HKG_greater_bay_area
+
+	cost = 7
+
+	prerequisite = { focus = CHI_HKG_political_alignment }
+
+	search_filters = { FOCUS_FILTER_POLITICAL }
+
+	joint_trigger = {
+		original_tag = CHI
+	}
+
+	available = {
+		original_tag = CHI
+		country_exists = HKG
+		HKG = { is_subject_of = CHI }
+		has_global_flag = CHI_ONE_SYSTEM_PATH
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_national_security_law"
+		HKG = {
+			if = {
+				limit = { has_idea = One_Country_Two_Systems }
+				remove_ideas = One_Country_Two_Systems
+			}
+		}
+		set_temp_variable = { percent_change = 8 }
+		set_temp_variable = { tag_index = CHI }
+		set_temp_variable = { influence_target = HKG }
+		change_influence_percentage = yes
+	}
+
+	ai_will_do = {
+		base = 1
+		modifier = {
+			add = 5
+			has_global_flag = CHI_ONE_SYSTEM_PATH
+		}
+	}
+}
+
+joint_focus = {
+	id = CHI_SAR_integrate_HKG
+	icon = Hong_kong_2047
+
+	x = 0
+	y = 5
+	relative_position_id = CHI_HKG_greater_bay_area
+
+	cost = 10
+
+	prerequisite = { focus = CHI_HKG_political_alignment }
 
 	search_filters = { FOCUS_FILTER_ANNEXATION }
+
+	joint_trigger = {
+		original_tag = CHI
+	}
 
 	available = {
 		original_tag = CHI
@@ -484,6 +787,7 @@ joint_focus = {
 			remove_core_of = HKG
 		}
 		annex_country = { target = HKG  transfer_troops = yes }
+		update_CHI_SAR_network_modifiers = yes
 		every_other_country = {
 			limit = { NOT = { original_tag = ENG } }
 			country_event = { id = hongkong.3 }
@@ -497,19 +801,347 @@ joint_focus = {
 }
 
 joint_focus = {
-	id = CHI_SAR_integrate_MAC
-	icon = MEX_Bribe_the_judiciary
-	text_icon = JOINT_CHI_focus_style
+	id = HKG_civil_society_mobilization
+	icon = generic_nationalism
 
-	x = -1
-	y = 1
-	relative_position_id = CHI_SAR_influence_campaign
+	x = -3
+	y = 2
+	relative_position_id = CHI_HKG_greater_bay_area
 
 	cost = 7
 
-	prerequisite = { focus = CHI_SAR_influence_campaign }
+	prerequisite = { focus = CHI_HKG_greater_bay_area }
+
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+
+	joint_trigger = {
+		original_tag = HKG
+	}
+
+	available = {
+		CHI_HKG_SAR_only_focus_available = yes
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus HKG_civil_society_mobilization"
+		add_stability = 0.03
+		add_political_power = 50
+		set_temp_variable = { percent_change = -5 }
+		set_temp_variable = { tag_index = CHI }
+		set_temp_variable = { influence_target = HKG }
+		change_influence_percentage = yes
+	}
+
+	ai_will_do = {
+		base = 3
+	}
+}
+
+joint_focus = {
+	id = HKG_international_solidarity
+	icon = generic_nationalism
+
+	x = -3
+	y = 3
+	relative_position_id = CHI_HKG_greater_bay_area
+
+	cost = 7
+
+	prerequisite = { focus = HKG_civil_society_mobilization }
+
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+
+	joint_trigger = {
+		original_tag = HKG
+	}
+
+	available = {
+		CHI_HKG_SAR_only_focus_available = yes
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus HKG_international_solidarity"
+		add_stability = 0.04
+		add_political_power = 25
+		ENG = { add_opinion_modifier = { target = HKG  modifier = mutual_trade_agreement } }
+		USA = { add_opinion_modifier = { target = HKG  modifier = mutual_trade_agreement } }
+		set_temp_variable = { percent_change = -3 }
+		set_temp_variable = { tag_index = CHI }
+		set_temp_variable = { influence_target = HKG }
+		change_influence_percentage = yes
+	}
+
+	ai_will_do = {
+		base = 3
+	}
+}
+
+
+joint_focus = {
+	id = CHI_MAC_pearl_river_delta
+	icon = chinese_glory
+
+	x = 13
+	y = 1
+	relative_position_id = CHI_SAR_one_china_framework
+
+	cost = 7
+
+	allow_branch = {
+		OR = {
+			original_tag = CHI
+			AND = {
+				original_tag = MAC
+				is_subject_of = CHI
+			}
+		}
+	}
+
+	prerequisite = { focus = CHI_SAR_one_china_framework }
+
+	search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_STABILITY }
+
+	joint_trigger = {
+		OR = {
+			original_tag = CHI
+			original_tag = MAC
+		}
+	}
+
+	available = {
+		CHI_MAC_joint_focus_available = yes
+	}
+
+	completion_reward_joint_originator = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_pearl_river_delta"
+		add_political_power = 50
+		update_CHI_SAR_network_modifiers = yes
+	}
+
+	completion_reward_joint_member = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_pearl_river_delta (MAC)"
+		add_stability = 0.03
+		add_political_power = 25
+		random_owned_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+
+	ai_will_do = {
+		base = 5
+	}
+}
+
+joint_focus = {
+	id = CHI_MAC_gaming_diversification
+	icon = chinese_glory
+
+	x = -1
+	y = 1
+	relative_position_id = CHI_MAC_pearl_river_delta
+
+	cost = 7
+
+	prerequisite = { focus = CHI_MAC_pearl_river_delta }
+
+	search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_STABILITY }
+
+	joint_trigger = {
+		OR = {
+			original_tag = CHI
+			original_tag = MAC
+		}
+	}
+
+	available = {
+		CHI_MAC_joint_focus_available = yes
+	}
+
+	completion_reward_joint_originator = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_gaming_diversification"
+		add_ideas = CHI_mac_consumer_goods_idea
+	}
+
+	completion_reward_joint_member = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_gaming_diversification (MAC)"
+		add_stability = 0.03
+		add_political_power = 50
+		set_temp_variable = { percent_change = -3 }
+		set_temp_variable = { tag_index = CHI }
+		set_temp_variable = { influence_target = MAC }
+		change_influence_percentage = yes
+	}
+
+	ai_will_do = {
+		base = 5
+	}
+}
+
+joint_focus = {
+	id = CHI_MAC_financial_services
+	icon = chinese_glory
+
+	x = 1
+	y = 1
+	relative_position_id = CHI_MAC_pearl_river_delta
+
+	cost = 7
+
+	prerequisite = { focus = CHI_MAC_pearl_river_delta }
+
+	search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_POLITICAL }
+
+	joint_trigger = {
+		OR = {
+			original_tag = CHI
+			original_tag = MAC
+		}
+	}
+
+	available = {
+		CHI_MAC_joint_focus_available = yes
+	}
+
+	completion_reward_joint_originator = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_financial_services"
+		add_political_power = 75
+	}
+
+	completion_reward_joint_member = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_financial_services (MAC)"
+		add_political_power = 50
+		random_owned_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+
+	ai_will_do = {
+		base = 5
+	}
+}
+
+joint_focus = {
+	id = CHI_MAC_infrastructure_link
+	icon = infrastructure
+
+	x = 0
+	y = 2
+	relative_position_id = CHI_MAC_pearl_river_delta
+
+	cost = 7
+
+	prerequisite = { focus = CHI_MAC_gaming_diversification }
+	prerequisite = { focus = CHI_MAC_financial_services }
+
+	search_filters = { FOCUS_FILTER_INDUSTRY }
+
+	joint_trigger = {
+		OR = {
+			original_tag = CHI
+			original_tag = MAC
+		}
+	}
+
+	available = {
+		CHI_MAC_joint_focus_available = yes
+	}
+
+	completion_reward_joint_originator = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_infrastructure_link"
+		set_temp_variable = { percent_change = 2 }
+		set_temp_variable = { tag_index = CHI }
+		set_temp_variable = { influence_target = MAC }
+		change_influence_percentage = yes
+	}
+
+	completion_reward_joint_member = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_infrastructure_link (MAC)"
+		every_owned_state = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+
+	ai_will_do = {
+		base = 5
+	}
+}
+
+joint_focus = {
+	id = CHI_MAC_guangdong_integration
+	icon = chinese_nationalism
+
+	x = 0
+	y = 3
+	relative_position_id = CHI_MAC_pearl_river_delta
+
+	cost = 7
+
+	prerequisite = { focus = CHI_MAC_infrastructure_link }
+
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INFLUENCE }
+
+	joint_trigger = {
+		OR = {
+			original_tag = CHI
+			original_tag = MAC
+		}
+	}
+
+	available = {
+		CHI_MAC_joint_focus_available = yes
+	}
+
+	completion_reward_joint_originator = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_guangdong_integration"
+		set_temp_variable = { percent_change = 5 }
+		set_temp_variable = { tag_index = CHI }
+		set_temp_variable = { influence_target = MAC }
+		change_influence_percentage = yes
+		update_CHI_SAR_network_modifiers = yes
+	}
+
+	completion_reward_joint_member = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_guangdong_integration (MAC)"
+		add_political_power = 50
+		add_opinion_modifier = { target = CHI  modifier = mutual_trade_agreement }
+	}
+
+	ai_will_do = {
+		base = 5
+	}
+}
+
+joint_focus = {
+	id = CHI_SAR_integrate_MAC
+	icon = MEX_Bribe_the_judiciary
+
+	x = 0
+	y = 4
+	relative_position_id = CHI_MAC_pearl_river_delta
+
+	cost = 10
+
+	prerequisite = { focus = CHI_MAC_guangdong_integration }
 
 	search_filters = { FOCUS_FILTER_ANNEXATION }
+
+	joint_trigger = {
+		original_tag = CHI
+	}
 
 	available = {
 		original_tag = CHI
@@ -529,6 +1161,7 @@ joint_focus = {
 			remove_core_of = MAC
 		}
 		annex_country = { target = MAC  transfer_troops = yes }
+		update_CHI_SAR_network_modifiers = yes
 	}
 
 	ai_will_do = {
@@ -537,259 +1170,35 @@ joint_focus = {
 }
 
 joint_focus = {
-	id = CHI_SAR_greater_china_dividend
-	icon = chinese_glory
-	text_icon = JOINT_CHI_focus_style
+	id = MAC_cultural_autonomy_push
+	icon = generic_nationalism
 
-	x = 4
-	y = 3
-	relative_position_id = CHI_SAR_two_systems_commitment
-
-	cost = 10
-
-	prerequisite = { focus = CHI_SAR_two_systems_commitment }
-
-	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_INFLUENCE }
-
-	available = {
-		original_tag = CHI
-		HKG = { is_subject_of = CHI }
-		MAC = { is_subject_of = CHI }
-		OR = {
-			TIB = { is_subject_of = CHI }
-			ETK = { is_subject_of = CHI }
-			TAI = { is_subject_of = CHI }
-			MON = { is_subject_of = CHI }
-		}
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_SAR_greater_china_dividend"
-		add_ideas = CHI_SAR_greater_china_idea
-	}
-
-	ai_will_do = {
-		base = 5
-	}
-}
-joint_focus = {
-	id = CHI_SAR_defense_industry_access
-	icon = examine_foreign_small_arms
-
-	x = 2
-	y = 1
-	relative_position_id = CHI_SAR_one_china_framework
-
-	cost = 10
-
-	prerequisite = { focus = CHI_SAR_one_china_framework }
-
-	search_filters = { FOCUS_FILTER_POLITICAL }
-
-	joint_trigger = {
-		OR = {
-			original_tag = HKG
-			original_tag = MAC
-			original_tag = TIB
-			original_tag = ETK
-			original_tag = TAI
-			original_tag = MON
-		}
-	}
-
-	available = {
-		CHI_any_SAR_joint_focus_available = yes
-		NOT = { original_tag = CHI }
-		is_subject_of = CHI
-		CHI = { has_completed_focus = CHI_SAR_two_systems_commitment }
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_SAR_defense_industry_access"
-		set_country_flag = CHI_SAR_mio_access
-	}
-
-	ai_will_do = {
-		base = 5
-	}
-}
-
-joint_focus = {
-	id = CHI_HKG_greater_bay_area
-	icon = trade
-	text_icon = JOINT_HKG_CHI_focus_style
-
-	x = 4
-	y = 1
-	relative_position_id = CHI_SAR_one_china_framework
-
-	offset = {
-		x = 0
-		y = 0
-		trigger = { original_tag = HKG }
-	}
+	x = -3
+	y = 2
+	relative_position_id = CHI_MAC_pearl_river_delta
 
 	cost = 7
 
-	prerequisite = { focus = CHI_SAR_one_china_framework }
+	prerequisite = { focus = CHI_MAC_pearl_river_delta }
 
-	search_filters = { FOCUS_FILTER_INFLUENCE }
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 	joint_trigger = {
-		OR = {
-			tag = CHI
-			tag = HKG
-		}
+		original_tag = MAC
 	}
 
 	available = {
-		CHI_HKG_joint_focus_available = yes
+		CHI_MAC_SAR_only_focus_available = yes
 	}
 
-	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_greater_bay_area (CHI)"
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MAC_cultural_autonomy_push"
+		add_stability = 0.04
 		add_political_power = 25
-		set_temp_variable = { percent_change = 2 }
+		set_temp_variable = { percent_change = -5 }
 		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = HKG }
+		set_temp_variable = { influence_target = MAC }
 		change_influence_percentage = yes
-	}
-
-	completion_reward_joint_member = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_greater_bay_area (HKG)"
-		add_stability = 0.03
-		random_owned_controlled_state = {
-			limit = { free_building_slots = { building = industrial_complex size > 1 } }
-			add_building_construction = { type = industrial_complex  level = 1  instant_build = yes }
-		}
-		random_owned_controlled_state = {
-			limit = { free_building_slots = { building = industrial_complex size > 1 } }
-			add_building_construction = { type = industrial_complex  level = 1  instant_build = yes }
-		}
-		set_temp_variable = { percent_change = -3 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = ROOT }
-		change_influence_percentage = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_greater_bay_area"
-	}
-
-	ai_will_do = {
-		base = 5
-	}
-}
-
-joint_focus = {
-	id = CHI_HKG_financial_integration
-	icon = ExpandTrade
-	text_icon = JOINT_HKG_CHI_focus_style
-
-	x = -2
-	y = 1
-	relative_position_id = CHI_HKG_greater_bay_area
-
-	offset = {
-		x = 0
-		y = 0
-		trigger = { original_tag = HKG }
-	}
-
-	cost = 7
-
-	prerequisite = { focus = CHI_HKG_greater_bay_area }
-
-	search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_INFLUENCE }
-
-	joint_trigger = {
-		OR = {
-			tag = CHI
-			tag = HKG
-		}
-	}
-
-	available = {
-		CHI_HKG_joint_focus_available = yes
-	}
-
-	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_financial_integration (CHI)"
-		add_political_power = 50
-	}
-
-	completion_reward_joint_member = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_financial_integration (HKG)"
-		add_political_power = 75
-		random_owned_controlled_state = {
-			limit = { free_building_slots = { building = industrial_complex size > 1 } }
-			add_building_construction = { type = industrial_complex  level = 1  instant_build = yes }
-		}
-		set_temp_variable = { percent_change = -3 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = ROOT }
-		change_influence_percentage = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_financial_integration"
-	}
-
-	ai_will_do = {
-		base = 5
-	}
-}
-
-joint_focus = {
-	id = CHI_HKG_media_freedom
-	icon = liberal_press
-	text_icon = JOINT_HKG_CHI_focus_style
-
-	x = 0
-	y = 1
-	relative_position_id = CHI_HKG_greater_bay_area
-
-	offset = {
-		x = 0
-		y = 0
-		trigger = { original_tag = HKG }
-	}
-
-	cost = 7
-
-	prerequisite = { focus = CHI_HKG_greater_bay_area }
-	mutually_exclusive = { focus = CHI_HKG_rule_of_law }
-
-	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
-
-	joint_trigger = {
-		OR = {
-			tag = CHI
-			tag = HKG
-		}
-	}
-
-	available = {
-		CHI_HKG_joint_focus_available = yes
-	}
-
-	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_media_freedom (CHI)"
-		add_political_power = 25
-	}
-
-	completion_reward_joint_member = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_media_freedom (HKG)"
-		add_stability = 0.03
-		add_political_power = 50
-		set_temp_variable = { percent_change = -3 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = ROOT }
-		change_influence_percentage = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_media_freedom"
 	}
 
 	ai_will_do = {
@@ -798,436 +1207,72 @@ joint_focus = {
 }
 
 joint_focus = {
-	id = CHI_HKG_rule_of_law
-	icon = MEX_Bribe_the_judiciary
-	text_icon = JOINT_HKG_CHI_focus_style
+	id = MAC_lusophone_connections
+	icon = generic_nationalism
 
-	x = 2
-	y = 1
-	relative_position_id = CHI_HKG_greater_bay_area
-
-	offset = {
-		x = 0
-		y = 0
-		trigger = { original_tag = HKG }
-	}
-
-	cost = 7
-
-	prerequisite = { focus = CHI_HKG_greater_bay_area }
-	mutually_exclusive = { focus = CHI_HKG_media_freedom }
-
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INFLUENCE }
-
-	joint_trigger = {
-		OR = {
-			tag = CHI
-			tag = HKG
-		}
-	}
-
-	available = {
-		CHI_HKG_joint_focus_available = yes
-	}
-
-	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_rule_of_law (CHI)"
-		set_temp_variable = { percent_change = 3 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = HKG }
-		change_influence_percentage = yes
-	}
-
-	completion_reward_joint_member = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_rule_of_law (HKG)"
-		add_political_power = 75
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_rule_of_law"
-	}
-
-	ai_will_do = {
-		base = 5
-	}
-}
-
-joint_focus = {
-	id = CHI_HKG_political_alignment
-	icon = focus_chi_nko_friendship
-	text_icon = JOINT_HKG_CHI_focus_style
-
-	x = 1
+	x = -3
 	y = 3
-	relative_position_id = CHI_HKG_greater_bay_area
-
-	offset = {
-		x = 0
-		y = 0
-		trigger = { original_tag = HKG }
-	}
-
-	cost = 7
-
-	prerequisite = { focus = CHI_HKG_media_freedom focus = CHI_HKG_rule_of_law }
-
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INFLUENCE }
-
-	joint_trigger = {
-		OR = {
-			tag = CHI
-			tag = HKG
-		}
-	}
-
-	available = {
-		CHI_HKG_joint_focus_available = yes
-	}
-
-	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_political_alignment (CHI)"
-		set_temp_variable = { percent_change = 5 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = HKG }
-		change_influence_percentage = yes
-	}
-
-	completion_reward_joint_member = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_political_alignment (HKG)"
-		add_political_power = 50
-		add_opinion_modifier = { target = CHI  modifier = mutual_trade_agreement }
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_political_alignment"
-	}
-
-	ai_will_do = {
-		base = 5
-	}
-}
-
-joint_focus = {
-	id = CHI_MAC_pearl_river_delta
-	icon = generic_ship1
-	text_icon = JOINT_MAC_CHI_focus_style
-
-	x = 16
-	y = 1
-	relative_position_id = CHI_SAR_one_china_framework
-
-	offset = {
-		x = 0
-		y = 0
-		trigger = { original_tag = MAC }
-	}
-
-	cost = 7
-
-	prerequisite = { focus = CHI_SAR_one_china_framework }
-
-	search_filters = { FOCUS_FILTER_INFLUENCE }
-
-	joint_trigger = {
-		OR = {
-			tag = CHI
-			tag = MAC
-		}
-	}
-
-	available = {
-		CHI_MAC_joint_focus_available = yes
-	}
-
-	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_pearl_river_delta (CHI)"
-		add_political_power = 25
-	}
-
-	completion_reward_joint_member = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_pearl_river_delta (MAC)"
-		add_stability = 0.03
-		random_owned_controlled_state = {
-			limit = { free_building_slots = { building = industrial_complex size > 1 } }
-			add_building_construction = { type = industrial_complex  level = 1  instant_build = yes }
-		}
-		random_owned_controlled_state = {
-			limit = { free_building_slots = { building = industrial_complex size > 1 } }
-			add_building_construction = { type = industrial_complex  level = 1  instant_build = yes }
-		}
-		set_temp_variable = { percent_change = -3 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = ROOT }
-		change_influence_percentage = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_pearl_river_delta"
-	}
-
-	ai_will_do = {
-		base = 5
-	}
-}
-
-joint_focus = {
-	id = CHI_MAC_gaming_diversification
-	icon = consumer_goods
-	text_icon = JOINT_MAC_CHI_focus_style
-
-	x = -2
-	y = 1
 	relative_position_id = CHI_MAC_pearl_river_delta
 
-	offset = {
-		x = 0
-		y = 0
-		trigger = { original_tag = MAC }
-	}
-
 	cost = 7
 
-	prerequisite = { focus = CHI_MAC_pearl_river_delta }
+	prerequisite = { focus = MAC_cultural_autonomy_push }
 
-	search_filters = { FOCUS_FILTER_STABILITY }
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 	joint_trigger = {
-		OR = {
-			tag = CHI
-			tag = MAC
-		}
+		original_tag = MAC
 	}
 
 	available = {
-		CHI_MAC_joint_focus_available = yes
-	}
-
-	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_gaming_diversification (CHI)"
-		add_ideas = CHI_mac_consumer_goods_idea
-	}
-
-	completion_reward_joint_member = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_gaming_diversification (MAC)"
-		add_political_power = 50
-		add_stability = 0.03
-		set_temp_variable = { percent_change = -3 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = ROOT }
-		change_influence_percentage = yes
+		CHI_MAC_SAR_only_focus_available = yes
 	}
 
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_gaming_diversification"
-	}
-
-	ai_will_do = {
-		base = 5
-	}
-}
-
-joint_focus = {
-	id = CHI_MAC_financial_services
-	icon = generic_bank
-	text_icon = JOINT_MAC_CHI_focus_style
-
-	x = 0
-	y = 1
-	relative_position_id = CHI_MAC_pearl_river_delta
-
-	offset = {
-		x = 0
-		y = 0
-		trigger = { original_tag = MAC }
-	}
-
-	cost = 7
-
-	prerequisite = { focus = CHI_MAC_pearl_river_delta }
-
-	search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_INFLUENCE }
-
-	joint_trigger = {
-		OR = {
-			tag = CHI
-			tag = MAC
-		}
-	}
-
-	available = {
-		CHI_MAC_joint_focus_available = yes
-	}
-
-	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_financial_services (CHI)"
+		log = "[GetDateText]: [Root.GetName]: Focus MAC_lusophone_connections"
+		add_stability = 0.04
 		add_political_power = 50
-	}
-
-	completion_reward_joint_member = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_financial_services (MAC)"
-		add_political_power = 50
-		random_owned_controlled_state = {
-			limit = { free_building_slots = { building = industrial_complex size > 1 } }
-			add_building_construction = { type = industrial_complex  level = 1  instant_build = yes }
-		}
+		POR = { add_opinion_modifier = { target = MAC  modifier = mutual_trade_agreement } }
+		BRA = { add_opinion_modifier = { target = MAC  modifier = mutual_trade_agreement } }
 		set_temp_variable = { percent_change = -3 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = ROOT }
-		change_influence_percentage = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_financial_services"
-	}
-
-	ai_will_do = {
-		base = 5
-	}
-}
-
-joint_focus = {
-	id = CHI_MAC_infrastructure_link
-	icon = infrastructure
-	text_icon = JOINT_MAC_CHI_focus_style
-
-	x = 2
-	y = 1
-	relative_position_id = CHI_MAC_pearl_river_delta
-
-	offset = {
-		x = 0
-		y = 0
-		trigger = { original_tag = MAC }
-	}
-
-	cost = 7
-
-	prerequisite = { focus = CHI_MAC_pearl_river_delta }
-
-	search_filters = { FOCUS_FILTER_INDUSTRY }
-
-	joint_trigger = {
-		OR = {
-			tag = CHI
-			tag = MAC
-		}
-	}
-
-	available = {
-		CHI_MAC_joint_focus_available = yes
-	}
-
-	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_infrastructure_link (CHI)"
-		set_temp_variable = { percent_change = 1 }
 		set_temp_variable = { tag_index = CHI }
 		set_temp_variable = { influence_target = MAC }
 		change_influence_percentage = yes
 	}
 
-	completion_reward_joint_member = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_infrastructure_link (MAC)"
-		every_owned_state = {
-			add_building_construction = {
-				type = infrastructure
-				level = 1
-				instant_build = yes
+	ai_will_do = {
+		base = 3
+	}
+}
+
+joint_focus = {
+	id = CHI_TIB_plateau_development
+	icon = generic_nationalism
+
+	x = -7
+	y = 3
+	relative_position_id = CHI_SAR_one_china_framework
+
+	cost = 7
+
+	allow_branch = {
+		OR = {
+			original_tag = CHI
+			AND = {
+				original_tag = TIB
+				is_subject_of = CHI
 			}
 		}
 	}
 
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_infrastructure_link"
-	}
+	prerequisite = { focus = CHI_SAR_national_security_framework }
 
-	ai_will_do = {
-		base = 5
-	}
-}
-
-joint_focus = {
-	id = CHI_MAC_guangdong_integration
-	icon = trade_with_taiwan
-	text_icon = JOINT_MAC_CHI_focus_style
-
-	x = 0
-	y = 2
-	relative_position_id = CHI_MAC_pearl_river_delta
-
-	offset = {
-		x = 0
-		y = 0
-		trigger = { original_tag = MAC }
-	}
-
-	cost = 7
-
-	prerequisite = { focus = CHI_MAC_gaming_diversification }
-	prerequisite = { focus = CHI_MAC_infrastructure_link }
-
-	search_filters = { FOCUS_FILTER_INFLUENCE FOCUS_FILTER_POLITICAL }
+	search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_STABILITY }
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = MAC
-		}
-	}
-
-	available = {
-		CHI_MAC_joint_focus_available = yes
-	}
-
-	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_guangdong_integration (CHI)"
-		set_temp_variable = { percent_change = 5 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = MAC }
-		change_influence_percentage = yes
-	}
-
-	completion_reward_joint_member = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_guangdong_integration (MAC)"
-		add_political_power = 50
-		add_opinion_modifier = { target = CHI  modifier = mutual_trade_agreement }
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_guangdong_integration"
-	}
-
-	ai_will_do = {
-		base = 5
-	}
-}
-
-### BRANCH 6 — TIB JOINT FOCUSES ###
-
-joint_focus = {
-	id = CHI_TIB_plateau_development
-	icon = tibet
-	text_icon = JOINT_TIB_CHI_focus_style
-
-	x = -14
-	y = 1
-	relative_position_id = CHI_SAR_one_china_framework
-
-	offset = {
-		x = 0
-		y = 0
-		trigger = { original_tag = TIB }
-	}
-
-	cost = 7
-
-	prerequisite = { focus = CHI_SAR_one_china_framework }
-
-	search_filters = { FOCUS_FILTER_INDUSTRY }
-
-	joint_trigger = {
-		OR = {
-			tag = CHI
-			tag = TIB
+			original_tag = CHI
+			original_tag = TIB
 		}
 	}
 
@@ -1236,8 +1281,9 @@ joint_focus = {
 	}
 
 	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TIB_plateau_development (CHI)"
-		add_political_power = 25
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TIB_plateau_development"
+		add_political_power = 50
+		update_CHI_SAR_network_modifiers = yes
 	}
 
 	completion_reward_joint_member = {
@@ -1250,14 +1296,6 @@ joint_focus = {
 				instant_build = yes
 			}
 		}
-		set_temp_variable = { percent_change = -3 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = ROOT }
-		change_influence_percentage = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TIB_plateau_development"
 	}
 
 	ai_will_do = {
@@ -1267,18 +1305,11 @@ joint_focus = {
 
 joint_focus = {
 	id = CHI_TIB_railway_modernization
-	icon = infrastructure
-	text_icon = JOINT_TIB_CHI_focus_style
+	icon = construction_development
 
-	x = 2
+	x = 0
 	y = 1
 	relative_position_id = CHI_TIB_plateau_development
-
-	offset = {
-		x = 0
-		y = 0
-		trigger = { original_tag = TIB }
-	}
 
 	cost = 7
 
@@ -1288,8 +1319,8 @@ joint_focus = {
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = TIB
+			original_tag = CHI
+			original_tag = TIB
 		}
 	}
 
@@ -1298,8 +1329,7 @@ joint_focus = {
 	}
 
 	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TIB_railway_modernization (CHI)"
-		add_political_power = 25
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TIB_railway_modernization"
 		set_temp_variable = { percent_change = 3 }
 		set_temp_variable = { tag_index = CHI }
 		set_temp_variable = { influence_target = TIB }
@@ -1315,14 +1345,6 @@ joint_focus = {
 				instant_build = yes
 			}
 		}
-		set_temp_variable = { percent_change = -3 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = ROOT }
-		change_influence_percentage = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TIB_railway_modernization"
 	}
 
 	ai_will_do = {
@@ -1332,30 +1354,23 @@ joint_focus = {
 
 joint_focus = {
 	id = CHI_TIB_sinification
-	icon = generic_nationalism
-	text_icon = JOINT_TIB_CHI_focus_style
+	icon = peoples_republic_of_china
 
-	x = 0
-	y = 1
+	x = -1
+	y = 2
 	relative_position_id = CHI_TIB_plateau_development
-
-	offset = {
-		x = 0
-		y = 0
-		trigger = { original_tag = TIB }
-	}
 
 	cost = 7
 
-	prerequisite = { focus = CHI_TIB_plateau_development }
+	prerequisite = { focus = CHI_TIB_railway_modernization }
 	mutually_exclusive = { focus = CHI_TIB_autonomy_preservation }
 
 	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INFLUENCE }
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = TIB
+			original_tag = CHI
+			original_tag = TIB
 		}
 	}
 
@@ -1364,64 +1379,47 @@ joint_focus = {
 	}
 
 	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TIB_sinification (CHI)"
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TIB_sinification"
 		set_temp_variable = { percent_change = 5 }
 		set_temp_variable = { tag_index = CHI }
 		set_temp_variable = { influence_target = TIB }
 		change_influence_percentage = yes
-		if = {
-			limit = { country_exists = TIB }
-			TIB = {
-				add_to_variable = { sinicization_level = 15 }
-				update_TIB_sinicization_modifiers = yes
-			}
-		}
 	}
 
 	completion_reward_joint_member = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_TIB_sinification (TIB)"
-		add_political_power = 50
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TIB_sinification"
+		add_to_variable = { sinicization_level = 15 }
+		update_TIB_sinicization_modifiers = yes
 	}
 
 	ai_will_do = {
 		base = 3
 		modifier = {
-			factor = 0
-			has_global_flag = CHI_RED_DAWN_FOCUS_PATH
+			add = 5
+			has_global_flag = CHI_ONE_SYSTEM_PATH
 		}
 	}
 }
 
 joint_focus = {
 	id = CHI_TIB_autonomy_preservation
-	icon = smiling_buddha
-	text_icon = JOINT_TIB_CHI_focus_style
+	icon = chinese_social_democracy
 
-	x = -2
-	y = 1
+	x = 1
+	y = 2
 	relative_position_id = CHI_TIB_plateau_development
-
-	offset = {
-		x = 0
-		y = 0
-		trigger = { original_tag = TIB }
-	}
 
 	cost = 7
 
-	prerequisite = { focus = CHI_TIB_plateau_development }
+	prerequisite = { focus = CHI_TIB_railway_modernization }
 	mutually_exclusive = { focus = CHI_TIB_sinification }
 
-	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = TIB
+			original_tag = CHI
+			original_tag = TIB
 		}
 	}
 
@@ -1430,65 +1428,49 @@ joint_focus = {
 	}
 
 	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TIB_autonomy_preservation (CHI)"
-		add_stability = 0.02
-		if = {
-			limit = { country_exists = TIB }
-			TIB = {
-				add_to_variable = { sinicization_level = -10 }
-				update_TIB_sinicization_modifiers = yes
-			}
-		}
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TIB_autonomy_preservation"
+		add_stability = 0.03
 	}
 
 	completion_reward_joint_member = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_TIB_autonomy_preservation (TIB)"
 		add_stability = 0.05
 		add_political_power = 50
+		add_to_variable = { sinicization_level = -10 }
+		update_TIB_sinicization_modifiers = yes
 		set_temp_variable = { percent_change = -3 }
 		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = ROOT }
+		set_temp_variable = { influence_target = TIB }
 		change_influence_percentage = yes
 	}
 
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TIB_autonomy_preservation"
-	}
-
 	ai_will_do = {
-		base = 5
+		base = 3
 		modifier = {
-			add = 3
-			is_historical_focus_on = yes
+			add = 5
+			has_global_flag = CHI_TWO_SYSTEMS_PATH
 		}
 	}
 }
 
 joint_focus = {
-	id = CHI_TIB_silk_road_gateway
-	icon = trade_with_taiwan
-	text_icon = JOINT_TIB_CHI_focus_style
+	id = CHI_TIB_cultural_integration
+	icon = peoples_republic_of_china
 
-	x = 0
-	y = 2
+	x = -1
+	y = 3
 	relative_position_id = CHI_TIB_plateau_development
-
-	offset = {
-		x = 0
-		y = 0
-		trigger = { original_tag = TIB }
-	}
 
 	cost = 7
 
-	prerequisite = { focus = CHI_TIB_sinification focus = CHI_TIB_autonomy_preservation }
+	prerequisite = { focus = CHI_TIB_sinification }
 
-	search_filters = { FOCUS_FILTER_INFLUENCE FOCUS_FILTER_INDUSTRY }
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INFLUENCE }
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = TIB
+			original_tag = CHI
+			original_tag = TIB
 		}
 	}
 
@@ -1497,26 +1479,17 @@ joint_focus = {
 	}
 
 	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TIB_silk_road_gateway (CHI)"
-		set_temp_variable = { percent_change = 3 }
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TIB_cultural_integration"
+		set_temp_variable = { percent_change = 5 }
 		set_temp_variable = { tag_index = CHI }
 		set_temp_variable = { influence_target = TIB }
 		change_influence_percentage = yes
-		add_political_power = 25
 	}
 
 	completion_reward_joint_member = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TIB_silk_road_gateway (TIB)"
-		add_political_power = 50
-		add_stability = 0.03
-		random_owned_controlled_state = {
-			limit = { free_building_slots = { building = industrial_complex size > 1 } }
-			add_building_construction = { type = industrial_complex  level = 1  instant_build = yes }
-		}
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TIB_silk_road_gateway"
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TIB_cultural_integration (TIB)"
+		add_to_variable = { sinicization_level = 10 }
+		update_TIB_sinicization_modifiers = yes
 	}
 
 	ai_will_do = {
@@ -1524,33 +1497,246 @@ joint_focus = {
 	}
 }
 
-### BRANCH 7 — ETK JOINT FOCUSES (gated: ETK is_subject_of CHI) ###
+joint_focus = {
+	id = CHI_SAR_integrate_TIB
+	icon = peoples_republic_of_china
+
+	x = -1
+	y = 4
+	relative_position_id = CHI_TIB_plateau_development
+
+	cost = 10
+
+	prerequisite = { focus = CHI_TIB_cultural_integration }
+
+	search_filters = { FOCUS_FILTER_ANNEXATION }
+
+	joint_trigger = {
+		original_tag = CHI
+	}
+
+	available = {
+		original_tag = CHI
+		country_exists = TIB
+		TIB = { is_subject_of = CHI }
+		OR = {
+			TIB = { influence_higher_80 = yes }
+			TIB = { check_variable = { sinicization_level > 70 } }
+		}
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_SAR_integrate_TIB"
+		annex_country = { target = TIB  transfer_troops = yes }
+		update_CHI_SAR_network_modifiers = yes
+	}
+
+	ai_will_do = {
+		base = 5
+	}
+}
 
 joint_focus = {
-	id = CHI_ETK_corridor_investment
-	icon = infrastructure
-	text_icon = JOINT_ETK_CHI_focus_style
+	id = CHI_TIB_buddhist_cultural_zone
+	icon = chinese_social_democracy
 
-	x = -4
-	y = 1
-	relative_position_id = CHI_SAR_one_china_framework
-
-	offset = {
-		x = 0
-		y = 0
-		trigger = { original_tag = ETK }
-	}
+	x = 1
+	y = 3
+	relative_position_id = CHI_TIB_plateau_development
 
 	cost = 7
 
-	prerequisite = { focus = CHI_SAR_one_china_framework }
+	prerequisite = { focus = CHI_TIB_autonomy_preservation }
 
-	search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_INFLUENCE }
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = ETK
+			original_tag = CHI
+			original_tag = TIB
+		}
+	}
+
+	available = {
+		CHI_TIB_joint_focus_available = yes
+	}
+
+	completion_reward_joint_originator = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TIB_buddhist_cultural_zone"
+		add_stability = 0.02
+	}
+
+	completion_reward_joint_member = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TIB_buddhist_cultural_zone (TIB)"
+		add_stability = 0.05
+		set_autonomy = {
+			target = TIB
+			autonomy_state = autonomy_special_administrative_region_TIB
+		}
+	}
+
+	ai_will_do = {
+		base = 3
+		modifier = {
+			add = 3
+			has_global_flag = CHI_TWO_SYSTEMS_PATH
+		}
+	}
+}
+
+joint_focus = {
+	id = CHI_TIB_silk_road_gateway
+	icon = chinese_glory
+
+	x = 3
+	y = 3
+	relative_position_id = CHI_TIB_plateau_development
+
+	cost = 7
+
+	prerequisite = { focus = CHI_TIB_autonomy_preservation }
+
+	search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_POLITICAL }
+
+	joint_trigger = {
+		OR = {
+			original_tag = CHI
+			original_tag = TIB
+		}
+	}
+
+	available = {
+		CHI_TIB_joint_focus_available = yes
+	}
+
+	completion_reward_joint_originator = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TIB_silk_road_gateway"
+		add_political_power = 50
+		set_temp_variable = { percent_change = 3 }
+		set_temp_variable = { tag_index = CHI }
+		set_temp_variable = { influence_target = TIB }
+		change_influence_percentage = yes
+	}
+
+	completion_reward_joint_member = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TIB_silk_road_gateway (TIB)"
+		add_political_power = 50
+		random_owned_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+
+	ai_will_do = {
+		base = 5
+	}
+}
+
+joint_focus = {
+	id = TIB_monastery_economy
+	icon = generic_nationalism
+
+	x = 3
+	y = 1
+	relative_position_id = CHI_TIB_plateau_development
+
+	cost = 7
+
+	prerequisite = { focus = CHI_TIB_plateau_development }
+
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+
+	joint_trigger = {
+		original_tag = TIB
+	}
+
+	available = {
+		CHI_TIB_SAR_only_focus_available = yes
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus TIB_monastery_economy"
+		add_stability = 0.04
+		add_political_power = 50
+	}
+
+	ai_will_do = {
+		base = 5
+	}
+}
+
+joint_focus = {
+	id = TIB_plateau_resources
+	icon = generic_resource_extr
+
+	x = 3
+	y = 2
+	relative_position_id = CHI_TIB_plateau_development
+
+	cost = 7
+
+	prerequisite = { focus = TIB_monastery_economy }
+
+	search_filters = { FOCUS_FILTER_INDUSTRY }
+
+	joint_trigger = {
+		original_tag = TIB
+	}
+
+	available = {
+		CHI_TIB_SAR_only_focus_available = yes
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus TIB_plateau_resources"
+		random_owned_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		OVERLORD = { update_CHI_SAR_network_modifiers = yes }
+	}
+
+	ai_will_do = {
+		base = 5
+	}
+}
+
+joint_focus = {
+	id = CHI_ETK_corridor_investment
+	icon = construction_development
+
+	x = -13
+	y = 3
+	relative_position_id = CHI_SAR_one_china_framework
+
+	cost = 7
+
+	allow_branch = {
+		OR = {
+			original_tag = CHI
+			AND = {
+				original_tag = ETK
+				is_subject_of = CHI
+			}
+		}
+	}
+
+	prerequisite = { focus = CHI_SAR_national_security_framework }
+
+	search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_STABILITY }
+
+	joint_trigger = {
+		OR = {
+			original_tag = CHI
+			original_tag = ETK
 		}
 	}
 
@@ -1559,12 +1745,12 @@ joint_focus = {
 	}
 
 	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_ETK_corridor_investment (CHI)"
-		add_political_power = 25
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_ETK_corridor_investment"
 		set_temp_variable = { percent_change = 3 }
 		set_temp_variable = { tag_index = CHI }
 		set_temp_variable = { influence_target = ETK }
 		change_influence_percentage = yes
+		update_CHI_SAR_network_modifiers = yes
 	}
 
 	completion_reward_joint_member = {
@@ -1577,14 +1763,6 @@ joint_focus = {
 				instant_build = yes
 			}
 		}
-		set_temp_variable = { percent_change = -3 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = ROOT }
-		change_influence_percentage = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_ETK_corridor_investment"
 	}
 
 	ai_will_do = {
@@ -1595,28 +1773,21 @@ joint_focus = {
 joint_focus = {
 	id = CHI_ETK_resource_extraction
 	icon = generic_resource_extr
-	text_icon = JOINT_ETK_CHI_focus_style
 
-	x = -2
+	x = 0
 	y = 1
 	relative_position_id = CHI_ETK_corridor_investment
-
-	offset = {
-		x = 0
-		y = 0
-		trigger = { original_tag = ETK }
-	}
 
 	cost = 7
 
 	prerequisite = { focus = CHI_ETK_corridor_investment }
 
-	search_filters = { FOCUS_FILTER_INDUSTRY }
+	search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_INFLUENCE }
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = ETK
+			original_tag = CHI
+			original_tag = ETK
 		}
 	}
 
@@ -1625,8 +1796,7 @@ joint_focus = {
 	}
 
 	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_ETK_resource_extraction (CHI)"
-		add_political_power = 25
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_ETK_resource_extraction"
 		set_temp_variable = { percent_change = 3 }
 		set_temp_variable = { tag_index = CHI }
 		set_temp_variable = { influence_target = ETK }
@@ -1635,18 +1805,14 @@ joint_focus = {
 
 	completion_reward_joint_member = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_ETK_resource_extraction (ETK)"
-		random_owned_controlled_state = {
-			limit = { free_building_slots = { building = industrial_complex size > 1 } }
-			add_building_construction = { type = industrial_complex  level = 1  instant_build = yes }
+		random_owned_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
 		}
-		set_temp_variable = { percent_change = -3 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = ROOT }
-		change_influence_percentage = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_ETK_resource_extraction"
 	}
 
 	ai_will_do = {
@@ -1656,30 +1822,23 @@ joint_focus = {
 
 joint_focus = {
 	id = CHI_ETK_sinification
-	icon = generic_nationalism
-	text_icon = JOINT_ETK_CHI_focus_style
+	icon = peoples_republic_of_china
 
-	x = 0
-	y = 1
+	x = -1
+	y = 2
 	relative_position_id = CHI_ETK_corridor_investment
-
-	offset = {
-		x = 0
-		y = 0
-		trigger = { original_tag = ETK }
-	}
 
 	cost = 7
 
-	prerequisite = { focus = CHI_ETK_corridor_investment }
+	prerequisite = { focus = CHI_ETK_resource_extraction }
 	mutually_exclusive = { focus = CHI_ETK_cultural_accommodation }
 
 	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INFLUENCE }
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = ETK
+			original_tag = CHI
+			original_tag = ETK
 		}
 	}
 
@@ -1688,60 +1847,47 @@ joint_focus = {
 	}
 
 	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_ETK_sinification (CHI)"
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_ETK_sinification"
 		set_temp_variable = { percent_change = 5 }
 		set_temp_variable = { tag_index = CHI }
 		set_temp_variable = { influence_target = ETK }
 		change_influence_percentage = yes
-		if = {
-			limit = { country_exists = ETK }
-			ETK = {
-				add_to_variable = { sinicization_level = 15 }
-				update_ETK_sinicization_modifiers = yes
-			}
-		}
 	}
 
 	completion_reward_joint_member = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_ETK_sinification (ETK)"
-		add_political_power = 50
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_ETK_sinification"
+		add_to_variable = { sinicization_level = 15 }
+		update_ETK_sinicization_modifiers = yes
 	}
 
 	ai_will_do = {
 		base = 3
+		modifier = {
+			add = 5
+			has_global_flag = CHI_ONE_SYSTEM_PATH
+		}
 	}
 }
 
 joint_focus = {
 	id = CHI_ETK_cultural_accommodation
-	icon = ummah
-	text_icon = JOINT_ETK_CHI_focus_style
+	icon = chinese_social_democracy
 
-	x = 2
-	y = 1
+	x = 1
+	y = 2
 	relative_position_id = CHI_ETK_corridor_investment
-
-	offset = {
-		x = 0
-		y = 0
-		trigger = { original_tag = ETK }
-	}
 
 	cost = 7
 
-	prerequisite = { focus = CHI_ETK_corridor_investment }
+	prerequisite = { focus = CHI_ETK_resource_extraction }
 	mutually_exclusive = { focus = CHI_ETK_sinification }
 
-	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = ETK
+			original_tag = CHI
+			original_tag = ETK
 		}
 	}
 
@@ -1750,65 +1896,49 @@ joint_focus = {
 	}
 
 	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_ETK_cultural_accommodation (CHI)"
-		add_stability = 0.02
-		if = {
-			limit = { country_exists = ETK }
-			ETK = {
-				add_to_variable = { sinicization_level = -10 }
-				update_ETK_sinicization_modifiers = yes
-			}
-		}
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_ETK_cultural_accommodation"
+		add_stability = 0.03
 	}
 
 	completion_reward_joint_member = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_ETK_cultural_accommodation (ETK)"
 		add_stability = 0.05
 		add_political_power = 50
+		add_to_variable = { sinicization_level = -10 }
+		update_ETK_sinicization_modifiers = yes
 		set_temp_variable = { percent_change = -3 }
 		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = ROOT }
+		set_temp_variable = { influence_target = ETK }
 		change_influence_percentage = yes
 	}
 
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_ETK_cultural_accommodation"
-	}
-
 	ai_will_do = {
-		base = 5
+		base = 3
 		modifier = {
-			add = 3
-			is_historical_focus_on = yes
+			add = 5
+			has_global_flag = CHI_TWO_SYSTEMS_PATH
 		}
 	}
 }
 
 joint_focus = {
-	id = CHI_ETK_BRI_hub
-	icon = infrastructure
-	text_icon = JOINT_ETK_CHI_focus_style
+	id = CHI_ETK_surveillance_infrastructure
+	icon = MEX_Defy_the_constitution
 
-	x = 0
-	y = 2
+	x = -1
+	y = 3
 	relative_position_id = CHI_ETK_corridor_investment
-
-	offset = {
-		x = 0
-		y = 0
-		trigger = { original_tag = ETK }
-	}
 
 	cost = 7
 
-	prerequisite = { focus = CHI_ETK_sinification focus = CHI_ETK_cultural_accommodation }
+	prerequisite = { focus = CHI_ETK_sinification }
 
-	search_filters = { FOCUS_FILTER_INFLUENCE FOCUS_FILTER_INDUSTRY }
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = ETK
+			original_tag = CHI
+			original_tag = ETK
 		}
 	}
 
@@ -1817,25 +1947,20 @@ joint_focus = {
 	}
 
 	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_ETK_BRI_hub (CHI)"
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_ETK_surveillance_infrastructure"
+		ETK = { add_ideas = ETK_surveillance_state_idea }
+		clr_country_flag = CHI_ETK_terrorism_active
+		country_event = { id = etk_terror.2  days = 7 }
 		set_temp_variable = { percent_change = 5 }
 		set_temp_variable = { tag_index = CHI }
 		set_temp_variable = { influence_target = ETK }
 		change_influence_percentage = yes
-		add_political_power = 25
 	}
 
 	completion_reward_joint_member = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_ETK_BRI_hub (ETK)"
-		add_stability = 0.05
-		random_owned_controlled_state = {
-			limit = { free_building_slots = { building = industrial_complex size > 1 } }
-			add_building_construction = { type = industrial_complex  level = 1  instant_build = yes }
-		}
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_ETK_BRI_hub"
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_ETK_surveillance_infrastructure (ETK)"
+		add_to_variable = { sinicization_level = 5 }
+		update_ETK_sinicization_modifiers = yes
 	}
 
 	ai_will_do = {
@@ -1843,33 +1968,703 @@ joint_focus = {
 	}
 }
 
-### BRANCH 8 — TAI JOINT FOCUSES ###
-
 joint_focus = {
-	id = CHI_TAI_economic_miracle
-	icon = buy_microchips_taiwan
-	text_icon = JOINT_TAI_CHI_focus_style
+	id = CHI_ETK_reeducation_initiative
+	icon = peoples_republic_of_china
 
-	x = 25
-	y = 1
-	relative_position_id = CHI_SAR_one_china_framework
-
-	offset = {
-		x = 0
-		y = 0
-		trigger = { original_tag = TAI }
-	}
+	x = -1
+	y = 4
+	relative_position_id = CHI_ETK_corridor_investment
 
 	cost = 7
 
-	prerequisite = { focus = CHI_SAR_one_china_framework }
+	prerequisite = { focus = CHI_ETK_surveillance_infrastructure }
 
-	search_filters = { FOCUS_FILTER_INFLUENCE FOCUS_FILTER_INDUSTRY }
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INFLUENCE }
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = TAI
+			original_tag = CHI
+			original_tag = ETK
+		}
+	}
+
+	available = {
+		CHI_ETK_joint_focus_available = yes
+	}
+
+	completion_reward_joint_originator = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_ETK_reeducation_initiative"
+		set_temp_variable = { percent_change = 5 }
+		set_temp_variable = { tag_index = CHI }
+		set_temp_variable = { influence_target = ETK }
+		change_influence_percentage = yes
+	}
+
+	completion_reward_joint_member = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_ETK_reeducation_initiative (ETK)"
+		add_stability = -0.05
+		add_to_variable = { sinicization_level = 10 }
+		update_ETK_sinicization_modifiers = yes
+	}
+
+	ai_will_do = {
+		base = 5
+	}
+}
+
+joint_focus = {
+	id = CHI_SAR_integrate_ETK
+	icon = peoples_republic_of_china
+
+	x = -1
+	y = 5
+	relative_position_id = CHI_ETK_corridor_investment
+
+	cost = 10
+
+	prerequisite = { focus = CHI_ETK_reeducation_initiative }
+
+	search_filters = { FOCUS_FILTER_ANNEXATION }
+
+	joint_trigger = {
+		original_tag = CHI
+	}
+
+	available = {
+		original_tag = CHI
+		country_exists = ETK
+		ETK = { is_subject_of = CHI }
+		OR = {
+			ETK = { influence_higher_80 = yes }
+			ETK = { check_variable = { sinicization_level > 70 } }
+		}
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_SAR_integrate_ETK"
+		annex_country = { target = ETK  transfer_troops = yes }
+		update_CHI_SAR_network_modifiers = yes
+	}
+
+	ai_will_do = {
+		base = 5
+	}
+}
+
+joint_focus = {
+	id = CHI_ETK_islamic_governance_framework
+	icon = chinese_social_democracy
+
+	x = 1
+	y = 3
+	relative_position_id = CHI_ETK_corridor_investment
+
+	cost = 7
+
+	prerequisite = { focus = CHI_ETK_cultural_accommodation }
+
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+
+	joint_trigger = {
+		OR = {
+			original_tag = CHI
+			original_tag = ETK
+		}
+	}
+
+	available = {
+		CHI_ETK_joint_focus_available = yes
+	}
+
+	completion_reward_joint_originator = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_ETK_islamic_governance_framework"
+		add_stability = 0.02
+	}
+
+	completion_reward_joint_member = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_ETK_islamic_governance_framework (ETK)"
+		add_stability = 0.05
+		set_autonomy = {
+			target = ETK
+			autonomy_state = autonomy_special_administrative_region_ETK
+		}
+	}
+
+	ai_will_do = {
+		base = 3
+		modifier = {
+			add = 3
+			has_global_flag = CHI_TWO_SYSTEMS_PATH
+		}
+	}
+}
+
+joint_focus = {
+	id = CHI_ETK_BRI_hub
+	icon = chinese_glory
+
+	x = 3
+	y = 3
+	relative_position_id = CHI_ETK_corridor_investment
+
+	cost = 7
+
+	prerequisite = { focus = CHI_ETK_cultural_accommodation }
+
+	search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_POLITICAL }
+
+	joint_trigger = {
+		OR = {
+			original_tag = CHI
+			original_tag = ETK
+		}
+	}
+
+	available = {
+		CHI_ETK_joint_focus_available = yes
+	}
+
+	completion_reward_joint_originator = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_ETK_BRI_hub"
+		add_political_power = 50
+		set_temp_variable = { percent_change = 3 }
+		set_temp_variable = { tag_index = CHI }
+		set_temp_variable = { influence_target = ETK }
+		change_influence_percentage = yes
+	}
+
+	completion_reward_joint_member = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_ETK_BRI_hub (ETK)"
+		add_political_power = 50
+		random_owned_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+
+	ai_will_do = {
+		base = 5
+	}
+}
+
+joint_focus = {
+	id = ETK_silk_road_commerce
+	icon = generic_factory
+
+	x = 3
+	y = 1
+	relative_position_id = CHI_ETK_corridor_investment
+
+	cost = 7
+
+	prerequisite = { focus = CHI_ETK_corridor_investment }
+
+	search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_POLITICAL }
+
+	joint_trigger = {
+		original_tag = ETK
+	}
+
+	available = {
+		CHI_ETK_SAR_only_focus_available = yes
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ETK_silk_road_commerce"
+		add_political_power = 50
+		random_owned_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		OVERLORD = { update_CHI_SAR_network_modifiers = yes }
+	}
+
+	ai_will_do = {
+		base = 5
+	}
+}
+
+joint_focus = {
+	id = ETK_oilfield_development
+	icon = generic_gas
+
+	x = 3
+	y = 2
+	relative_position_id = CHI_ETK_corridor_investment
+
+	cost = 7
+
+	prerequisite = { focus = ETK_silk_road_commerce }
+
+	search_filters = { FOCUS_FILTER_INDUSTRY }
+
+	joint_trigger = {
+		original_tag = ETK
+	}
+
+	available = {
+		CHI_ETK_SAR_only_focus_available = yes
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ETK_oilfield_development"
+		random_owned_state = {
+			add_resource = {
+				type = oil
+				amount = 8
+			}
+		}
+		OVERLORD = { update_CHI_SAR_network_modifiers = yes }
+	}
+
+	ai_will_do = {
+		base = 5
+	}
+}
+
+joint_focus = {
+	id = CHI_TAI_cross_strait_policy
+	icon = chinese_nationalism
+
+	x = 18
+	y = 1
+	relative_position_id = CHI_SAR_one_china_framework
+
+	cost = 7
+
+	allow_branch = {
+		OR = {
+			AND = {
+				original_tag = CHI
+				country_exists = TAI
+			}
+			AND = {
+				original_tag = TAI
+				is_subject_of = CHI
+			}
+		}
+	}
+
+	search_filters = { FOCUS_FILTER_POLITICAL }
+	prerequisite = { focus = CHI_SAR_one_china_framework }
+
+	joint_trigger = {
+		original_tag = CHI
+	}
+
+	available = {
+		original_tag = CHI
+		country_exists = TAI
+		NOT = { has_war_with = TAI }
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_cross_strait_policy"
+		set_country_flag = CHI_TAI_diplomatic_route_active
+		add_political_power = 50
+	}
+
+	ai_will_do = {
+		base = 5
+	}
+}
+
+joint_focus = {
+	id = CHI_TAI_economic_interdependence
+	icon = chinese_glory
+
+	x = -2
+	y = 1
+	relative_position_id = CHI_TAI_cross_strait_policy
+
+	cost = 7
+
+	prerequisite = { focus = CHI_TAI_cross_strait_policy }
+
+	search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_POLITICAL }
+
+	joint_trigger = {
+		original_tag = CHI
+	}
+
+	available = {
+		original_tag = CHI
+		country_exists = TAI
+		NOT = { has_war_with = TAI }
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_economic_interdependence"
+		add_political_power = 75
+		TAI = { add_opinion_modifier = { target = CHI  modifier = mutual_trade_agreement } }
+		add_opinion_modifier = { target = TAI  modifier = mutual_trade_agreement }
+	}
+
+	ai_will_do = {
+		base = 5
+	}
+}
+
+joint_focus = {
+	id = CHI_TAI_pro_china_networks
+	icon = chinese_nationalism
+
+	x = -3
+	y = 2
+	relative_position_id = CHI_TAI_cross_strait_policy
+
+	cost = 7
+
+	prerequisite = { focus = CHI_TAI_economic_interdependence }
+
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INFLUENCE }
+
+	joint_trigger = {
+		original_tag = CHI
+	}
+
+	available = {
+		original_tag = CHI
+		country_exists = TAI
+		NOT = { has_war_with = TAI }
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_pro_china_networks"
+		TAI = { country_event = { id = CHI_SAR_relations.1 days = 7 } }
+		add_opinion_modifier = { target = TAI  modifier = mutual_trade_agreement }
+	}
+
+	ai_will_do = {
+		base = 5
+	}
+}
+
+joint_focus = {
+	id = CHI_TAI_92_consensus_revival
+	icon = chinese_social_democracy
+
+	x = -1
+	y = 2
+	relative_position_id = CHI_TAI_cross_strait_policy
+
+	cost = 7
+
+	prerequisite = { focus = CHI_TAI_economic_interdependence }
+
+	search_filters = { FOCUS_FILTER_POLITICAL }
+
+	joint_trigger = {
+		original_tag = CHI
+	}
+
+	available = {
+		original_tag = CHI
+		country_exists = TAI
+		NOT = { has_war_with = TAI }
+		TAI = { has_opinion = { target = CHI value > 0 } }
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_92_consensus_revival"
+		set_country_flag = CHI_TAI_92_consensus_active
+		add_political_power = 50
+		add_opinion_modifier = { target = TAI  modifier = mutual_trade_agreement }
+		TAI = { add_opinion_modifier = { target = CHI  modifier = mutual_trade_agreement } }
+	}
+
+	ai_will_do = {
+		base = 5
+	}
+}
+
+joint_focus = {
+	id = CHI_TAI_back_channel_negotiations
+	icon = MEX_Bribe_the_judiciary
+
+	x = -3
+	y = 3
+	relative_position_id = CHI_TAI_cross_strait_policy
+
+	cost = 7
+
+	prerequisite = { focus = CHI_TAI_pro_china_networks }
+	prerequisite = { focus = CHI_TAI_92_consensus_revival }
+
+	search_filters = { FOCUS_FILTER_POLITICAL }
+
+	joint_trigger = {
+		original_tag = CHI
+	}
+
+	available = {
+		original_tag = CHI
+		country_exists = TAI
+		NOT = { has_war_with = TAI }
+		TAI = { has_opinion = { target = CHI value > 15 } }
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_back_channel_negotiations"
+		add_political_power = 75
+		add_opinion_modifier = { target = TAI  modifier = mutual_trade_agreement }
+		TAI = { add_opinion_modifier = { target = CHI  modifier = mutual_trade_agreement } }
+	}
+
+	ai_will_do = {
+		base = 5
+	}
+}
+
+joint_focus = {
+	id = CHI_TAI_peaceful_reunification_accord
+	icon = chinese_glory
+
+	x = -3
+	y = 4
+	relative_position_id = CHI_TAI_cross_strait_policy
+
+	cost = 10
+
+	prerequisite = { focus = CHI_TAI_back_channel_negotiations }
+
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INFLUENCE }
+
+	joint_trigger = {
+		OR = {
+			original_tag = CHI
+			AND = {
+				original_tag = TAI
+				CHI_TAI_prereunification_focus_available = yes
+			}
+		}
+	}
+
+	available = {
+		CHI_TAI_prereunification_focus_available = yes
+	}
+
+	completion_reward_joint_originator = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_peaceful_reunification_accord"
+		set_country_flag = CHI_TAI_peaceful_reunification_done
+		TAI = {
+			set_autonomy = {
+				target = TAI
+				autonomy_state = autonomy_special_administrative_region_TAI
+			}
+		}
+		update_CHI_SAR_network_modifiers = yes
+	}
+
+	completion_reward_joint_member = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_peaceful_reunification_accord (TAI)"
+		add_stability = 0.05
+		add_political_power = 100
+	}
+
+	ai_will_do = {
+		base = 5
+	}
+}
+
+joint_focus = {
+	id = CHI_TAI_military_buildup
+	icon = examine_foreign_small_arms
+
+	x = 1
+	y = 1
+	relative_position_id = CHI_TAI_cross_strait_policy
+
+	cost = 7
+
+	prerequisite = { focus = CHI_TAI_cross_strait_policy }
+
+	search_filters = { FOCUS_FILTER_MILITARY FOCUS_FILTER_WAR_SUPPORT }
+
+	joint_trigger = {
+		original_tag = CHI
+	}
+
+	available = {
+		original_tag = CHI
+		country_exists = TAI
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_military_buildup"
+		add_war_support = 0.05
+		add_ideas = CHI_crossstrait_operations
+	}
+
+	ai_will_do = {
+		base = 1
+		modifier = {
+			add = 5
+			has_global_flag = CHI_ONE_SYSTEM_PATH
+		}
+	}
+}
+
+joint_focus = {
+	id = CHI_TAI_amphibious_doctrine
+	icon = examine_foreign_small_arms
+
+	x = 1
+	y = 2
+	relative_position_id = CHI_TAI_cross_strait_policy
+
+	cost = 7
+
+	prerequisite = { focus = CHI_TAI_military_buildup }
+
+	search_filters = { FOCUS_FILTER_MILITARY }
+
+	joint_trigger = {
+		original_tag = CHI
+	}
+
+	available = {
+		original_tag = CHI
+		country_exists = TAI
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_amphibious_doctrine"
+		add_doctrine_cost_reduction = {
+			name = CHI_TAI_amphibious_doctrine
+			cost_reduction = 0.5
+			uses = 1
+			category = CAT_land_doctrine
+		}
+	}
+
+	ai_will_do = {
+		base = 1
+		modifier = {
+			add = 5
+			has_global_flag = CHI_ONE_SYSTEM_PATH
+		}
+	}
+}
+
+joint_focus = {
+	id = CHI_TAI_blockade_declaration
+	icon = examine_foreign_small_arms
+
+	x = 1
+	y = 3
+	relative_position_id = CHI_TAI_cross_strait_policy
+
+	cost = 7
+
+	prerequisite = { focus = CHI_TAI_amphibious_doctrine }
+
+	search_filters = { FOCUS_FILTER_MILITARY FOCUS_FILTER_WAR_SUPPORT }
+
+	joint_trigger = {
+		original_tag = CHI
+	}
+
+	available = {
+		original_tag = CHI
+		country_exists = TAI
+		NOT = { has_war_with = TAI }
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_blockade_declaration"
+		add_war_support = 0.05
+		TAI = { add_stability = -0.05 }
+		every_country = {
+			limit = {
+				OR = {
+					original_tag = USA
+					original_tag = JAP
+					original_tag = ENG
+				}
+			}
+			add_opinion_modifier = { target = CHI  modifier = sanctions }
+		}
+	}
+
+	ai_will_do = {
+		base = 1
+		modifier = {
+			add = 5
+			has_global_flag = CHI_ONE_SYSTEM_PATH
+		}
+	}
+}
+
+joint_focus = {
+	id = CHI_TAI_operation_storm
+	icon = examine_foreign_small_arms
+
+	x = 1
+	y = 4
+	relative_position_id = CHI_TAI_cross_strait_policy
+
+	cost = 10
+
+	prerequisite = { focus = CHI_TAI_blockade_declaration }
+
+	search_filters = { FOCUS_FILTER_MILITARY FOCUS_FILTER_ANNEXATION }
+
+	joint_trigger = {
+		original_tag = CHI
+	}
+
+	available = {
+		original_tag = CHI
+		country_exists = TAI
+		NOT = { has_war_with = TAI }
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_operation_storm"
+		create_wargoal = {
+			type = annex_everything
+			target = TAI
+		}
+	}
+
+	ai_will_do = {
+		base = 1
+		modifier = {
+			add = 5
+			has_global_flag = CHI_ONE_SYSTEM_PATH
+		}
+	}
+}
+
+joint_focus = {
+	id = CHI_TAI_economic_miracle
+	icon = chinese_glory
+
+	x = -3
+	y = 5
+	relative_position_id = CHI_TAI_cross_strait_policy
+
+	cost = 7
+
+	prerequisite = { focus = CHI_TAI_peaceful_reunification_accord }
+	prerequisite = { focus = CHI_TAI_operation_storm }
+
+	search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_STABILITY }
+
+	joint_trigger = {
+		OR = {
+			original_tag = CHI
+			original_tag = TAI
 		}
 	}
 
@@ -1878,33 +2673,22 @@ joint_focus = {
 	}
 
 	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_economic_miracle (CHI)"
-		add_political_power = 25
-		set_temp_variable = { percent_change = 3 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = TAI }
-		change_influence_percentage = yes
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_economic_miracle"
+		add_political_power = 75
+		update_CHI_SAR_network_modifiers = yes
 	}
 
 	completion_reward_joint_member = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_economic_miracle (TAI)"
-		add_stability = 0.03
-		random_owned_controlled_state = {
-			limit = { free_building_slots = { building = industrial_complex size > 1 } }
-			add_building_construction = { type = industrial_complex  level = 1  instant_build = yes }
+		add_stability = 0.05
+		random_owned_state = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
 		}
-		random_owned_controlled_state = {
-			limit = { free_building_slots = { building = industrial_complex size > 1 } }
-			add_building_construction = { type = industrial_complex  level = 1  instant_build = yes }
-		}
-		set_temp_variable = { percent_change = -3 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = ROOT }
-		change_influence_percentage = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_economic_miracle"
 	}
 
 	ai_will_do = {
@@ -1914,29 +2698,22 @@ joint_focus = {
 
 joint_focus = {
 	id = CHI_TAI_tech_cooperation
-	icon = generic_machinery
-	text_icon = JOINT_TAI_CHI_focus_style
+	icon = generic_university
 
-	x = -1
-	y = 1
-	relative_position_id = CHI_TAI_economic_miracle
-
-	offset = {
-		x = 0
-		y = 0
-		trigger = { original_tag = TAI }
-	}
+	x = -4
+	y = 6
+	relative_position_id = CHI_TAI_cross_strait_policy
 
 	cost = 7
 
 	prerequisite = { focus = CHI_TAI_economic_miracle }
 
-	search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_INFLUENCE }
+	search_filters = { FOCUS_FILTER_RESEARCH }
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = TAI
+			original_tag = CHI
+			original_tag = TAI
 		}
 	}
 
@@ -1945,25 +2722,14 @@ joint_focus = {
 	}
 
 	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_tech_cooperation (CHI)"
-		add_political_power = 50
-		set_temp_variable = { percent_change = 3 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = TAI }
-		change_influence_percentage = yes
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_tech_cooperation"
+		add_research_slot = 1
+		update_CHI_SAR_network_modifiers = yes
 	}
 
 	completion_reward_joint_member = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_tech_cooperation (TAI)"
-		add_political_power = 75
-		set_temp_variable = { percent_change = -3 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = ROOT }
-		change_influence_percentage = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_tech_cooperation"
+		add_research_slot = 1
 	}
 
 	ai_will_do = {
@@ -1972,30 +2738,23 @@ joint_focus = {
 }
 
 joint_focus = {
-	id = CHI_TAI_financial_integration
-	icon = ExpandTrade
-	text_icon = JOINT_TAI_CHI_focus_style
+	id = CHI_TAI_financial_hub
+	icon = chinese_glory
 
-	x = 1
-	y = 1
-	relative_position_id = CHI_TAI_economic_miracle
-
-	offset = {
-		x = 0
-		y = 0
-		trigger = { original_tag = TAI }
-	}
+	x = -2
+	y = 6
+	relative_position_id = CHI_TAI_cross_strait_policy
 
 	cost = 7
 
 	prerequisite = { focus = CHI_TAI_economic_miracle }
 
-	search_filters = { FOCUS_FILTER_INFLUENCE }
+	search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_POLITICAL }
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = TAI
+			original_tag = CHI
+			original_tag = TAI
 		}
 	}
 
@@ -2004,25 +2763,21 @@ joint_focus = {
 	}
 
 	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_financial_integration (CHI)"
-		add_political_power = 25
-		set_temp_variable = { percent_change = 3 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = TAI }
-		change_influence_percentage = yes
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_financial_hub"
+		add_political_power = 75
 	}
 
 	completion_reward_joint_member = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_financial_integration (TAI)"
-		add_political_power = 50
-		set_temp_variable = { percent_change = -3 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = ROOT }
-		change_influence_percentage = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_financial_integration"
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_financial_hub (TAI)"
+		add_political_power = 75
+		random_owned_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
 	}
 
 	ai_will_do = {
@@ -2032,172 +2787,165 @@ joint_focus = {
 
 joint_focus = {
 	id = CHI_TAI_governance_alignment
-	icon = TAI_kmt
-	text_icon = JOINT_TAI_CHI_focus_style
+	icon = peoples_republic_of_china
 
-	x = 3
-	y = 1
-	relative_position_id = CHI_TAI_economic_miracle
-
-	offset = {
-		x = 0
-		y = 0
-		trigger = { original_tag = TAI }
-	}
+	x = -4
+	y = 7
+	relative_position_id = CHI_TAI_cross_strait_policy
 
 	cost = 7
 
-	prerequisite = { focus = CHI_TAI_economic_miracle }
+	prerequisite = { focus = CHI_TAI_tech_cooperation }
+	prerequisite = { focus = CHI_TAI_financial_hub }
 	mutually_exclusive = { focus = CHI_TAI_autonomous_governance }
 
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INFLUENCE }
+	search_filters = { FOCUS_FILTER_POLITICAL }
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = TAI
+			original_tag = CHI
+			original_tag = TAI
 		}
 	}
 
 	available = {
 		CHI_TAI_SAR_joint_focus_available = yes
+		has_global_flag = CHI_ONE_SYSTEM_PATH
 	}
 
 	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_governance_alignment (CHI)"
-		set_temp_variable = { percent_change = 5 }
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_governance_alignment"
+		set_temp_variable = { percent_change = 10 }
 		set_temp_variable = { tag_index = CHI }
 		set_temp_variable = { influence_target = TAI }
 		change_influence_percentage = yes
+		update_CHI_SAR_network_modifiers = yes
 	}
 
 	completion_reward_joint_member = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_governance_alignment (TAI)"
-		add_political_power = 50
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_governance_alignment"
+		add_political_power = -50
+		add_stability = -0.02
 	}
 
 	ai_will_do = {
-		base = 5
+		base = 1
+		modifier = {
+			add = 5
+			has_global_flag = CHI_ONE_SYSTEM_PATH
+		}
 	}
 }
 
 joint_focus = {
 	id = CHI_TAI_autonomous_governance
-	icon = ind_taiwan
-	text_icon = JOINT_TAI_CHI_focus_style
+	icon = chinese_social_democracy
 
-	x = 5
-	y = 1
-	relative_position_id = CHI_TAI_economic_miracle
-
-	offset = {
-		x = 0
-		y = 0
-		trigger = { original_tag = TAI }
-	}
+	x = -2
+	y = 7
+	relative_position_id = CHI_TAI_cross_strait_policy
 
 	cost = 7
 
-	prerequisite = { focus = CHI_TAI_economic_miracle }
+	prerequisite = { focus = CHI_TAI_tech_cooperation }
+	prerequisite = { focus = CHI_TAI_financial_hub }
 	mutually_exclusive = { focus = CHI_TAI_governance_alignment }
 
-	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = TAI
+			original_tag = CHI
+			original_tag = TAI
 		}
 	}
 
 	available = {
 		CHI_TAI_SAR_joint_focus_available = yes
+		has_global_flag = CHI_TWO_SYSTEMS_PATH
 	}
 
 	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_autonomous_governance (CHI)"
-		add_stability = 0.02
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_autonomous_governance"
+		add_stability = 0.03
 	}
 
 	completion_reward_joint_member = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_autonomous_governance (TAI)"
-		add_stability = 0.05
+		add_stability = 0.06
 		add_political_power = 75
-		set_temp_variable = { percent_change = -3 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = ROOT }
-		change_influence_percentage = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_autonomous_governance"
+		set_autonomy = {
+			target = TAI
+			autonomy_state = autonomy_special_administrative_region_TAI
+		}
 	}
 
 	ai_will_do = {
-		base = 3
+		base = 1
 		modifier = {
-			add = 3
-			is_historical_focus_on = yes
+			add = 5
+			has_global_flag = CHI_TWO_SYSTEMS_PATH
 		}
 	}
 }
 
-### BRANCH 9 — MON JOINT FOCUSES (gated: MON is_subject_of CHI) ###
+###############################################
+### OMG BRANCH ###
+###############################################
 
 joint_focus = {
-	id = CHI_MON_steppe_resources
-	icon = outer_mongolia_sar
-	text_icon = JOINT_MON_CHI_focus_style
+	id = CHI_OMG_steppe_development
+	icon = generic_nationalism
 
-	x = -24
+	x = -18
 	y = 1
 	relative_position_id = CHI_SAR_one_china_framework
 
 	cost = 7
 
+	allow_branch = {
+		OR = {
+			original_tag = CHI
+			AND = {
+				original_tag = OMG
+				is_subject_of = CHI
+			}
+		}
+	}
+
 	prerequisite = { focus = CHI_SAR_one_china_framework }
 
-	search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_INFLUENCE }
+	search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_STABILITY }
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = MON
+			original_tag = CHI
+			original_tag = OMG
 		}
 	}
 
 	available = {
-		CHI_MON_joint_focus_available = yes
+		CHI_OMG_joint_focus_available = yes
 	}
 
 	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MON_steppe_resources (CHI)"
-		add_political_power = 25
-		set_temp_variable = { percent_change = 3 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = MON }
-		change_influence_percentage = yes
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_OMG_steppe_development"
+		add_political_power = 50
+		update_CHI_SAR_network_modifiers = yes
 	}
 
 	completion_reward_joint_member = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MON_steppe_resources (MON)"
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_OMG_steppe_development (OMG)"
 		add_stability = 0.03
-		random_owned_controlled_state = {
-			limit = { free_building_slots = { building = industrial_complex size > 1 } }
-			add_building_construction = { type = industrial_complex  level = 1  instant_build = yes }
+		add_political_power = 25
+		random_owned_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
 		}
-		set_temp_variable = { percent_change = -3 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = ROOT }
-		change_influence_percentage = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MON_steppe_resources"
 	}
 
 	ai_will_do = {
@@ -2206,48 +2954,40 @@ joint_focus = {
 }
 
 joint_focus = {
-	id = CHI_MON_northern_corridor
-	icon = infrastructure
-	text_icon = JOINT_MON_CHI_focus_style
+	id = CHI_OMG_northern_corridor
+	icon = construction_development
 
-	x = -2
+	x = 0
 	y = 1
-	relative_position_id = CHI_MON_steppe_resources
-
-	offset = {
-		x = 0
-		y = 0
-		trigger = { original_tag = MON }
-	}
+	relative_position_id = CHI_OMG_steppe_development
 
 	cost = 7
 
-	prerequisite = { focus = CHI_MON_steppe_resources }
+	prerequisite = { focus = CHI_OMG_steppe_development }
 
-	search_filters = { FOCUS_FILTER_INDUSTRY }
+	search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_INFLUENCE }
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = MON
+			original_tag = CHI
+			original_tag = OMG
 		}
 	}
 
 	available = {
-		CHI_MON_joint_focus_available = yes
+		CHI_OMG_joint_focus_available = yes
 	}
 
 	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MON_northern_corridor (CHI)"
-		add_political_power = 25
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_OMG_northern_corridor"
 		set_temp_variable = { percent_change = 2 }
 		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = MON }
+		set_temp_variable = { influence_target = OMG }
 		change_influence_percentage = yes
 	}
 
 	completion_reward_joint_member = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MON_northern_corridor (MON)"
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_OMG_northern_corridor (OMG)"
 		every_owned_state = {
 			add_building_construction = {
 				type = infrastructure
@@ -2255,14 +2995,6 @@ joint_focus = {
 				instant_build = yes
 			}
 		}
-		set_temp_variable = { percent_change = -3 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = ROOT }
-		change_influence_percentage = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MON_northern_corridor"
 	}
 
 	ai_will_do = {
@@ -2271,152 +3003,144 @@ joint_focus = {
 }
 
 joint_focus = {
-	id = CHI_MON_sinification
-	icon = generic_nationalism
-	text_icon = JOINT_MON_CHI_focus_style
+	id = CHI_OMG_sinicization
+	icon = peoples_republic_of_china
 
-	x = 0
-	y = 1
-	relative_position_id = CHI_MON_steppe_resources
+	x = -1
+	y = 2
+	relative_position_id = CHI_OMG_steppe_development
 
 	cost = 7
 
-	prerequisite = { focus = CHI_MON_steppe_resources }
-	mutually_exclusive = { focus = CHI_MON_nomadic_culture }
+	prerequisite = { focus = CHI_OMG_northern_corridor }
+	mutually_exclusive = { focus = CHI_OMG_mongol_identity_recognition }
 
 	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INFLUENCE }
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = MON
+			original_tag = CHI
+			original_tag = OMG
 		}
 	}
 
 	available = {
-		CHI_MON_joint_focus_available = yes
+		CHI_OMG_joint_focus_available = yes
 	}
 
 	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MON_sinification (CHI)"
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_OMG_sinicization"
 		set_temp_variable = { percent_change = 5 }
 		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = MON }
+		set_temp_variable = { influence_target = OMG }
 		change_influence_percentage = yes
 	}
 
 	completion_reward_joint_member = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MON_sinification (MON)"
-		add_political_power = 50
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MON_sinification"
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_OMG_sinicization (OMG)"
+		add_to_variable = { sinicization_level = 15 }
+		update_OMG_sinicization_modifiers = yes
 	}
 
 	ai_will_do = {
 		base = 3
-	}
-}
-
-joint_focus = {
-	id = CHI_MON_nomadic_culture
-	icon = generic_government
-	text_icon = JOINT_MON_CHI_focus_style
-
-	x = 2
-	y = 1
-	relative_position_id = CHI_MON_steppe_resources
-
-	cost = 7
-
-	prerequisite = { focus = CHI_MON_steppe_resources }
-	mutually_exclusive = { focus = CHI_MON_sinification }
-
-	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
-
-	joint_trigger = {
-		OR = {
-			tag = CHI
-			tag = MON
-		}
-	}
-
-	available = {
-		CHI_MON_joint_focus_available = yes
-	}
-
-	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MON_nomadic_culture (CHI)"
-		add_stability = 0.02
-	}
-
-	completion_reward_joint_member = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MON_nomadic_culture (MON)"
-		add_stability = 0.05
-		add_political_power = 50
-		set_temp_variable = { percent_change = -3 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = ROOT }
-		change_influence_percentage = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MON_nomadic_culture"
-	}
-
-	ai_will_do = {
-		base = 5
 		modifier = {
-			add = 3
-			is_historical_focus_on = yes
+			add = 5
+			has_global_flag = CHI_ONE_SYSTEM_PATH
 		}
 	}
 }
 
 joint_focus = {
-	id = CHI_MON_strategic_partnership
-	icon = focus_chi_nko_friendship
-	text_icon = JOINT_MON_CHI_focus_style
+	id = CHI_OMG_mongol_identity_recognition
+	icon = chinese_social_democracy
 
 	x = 1
 	y = 2
-	relative_position_id = CHI_MON_steppe_resources
+	relative_position_id = CHI_OMG_steppe_development
 
 	cost = 7
 
-	prerequisite = { focus = CHI_MON_sinification focus = CHI_MON_nomadic_culture }
+	prerequisite = { focus = CHI_OMG_northern_corridor }
+	mutually_exclusive = { focus = CHI_OMG_sinicization }
 
-	search_filters = { FOCUS_FILTER_INFLUENCE FOCUS_FILTER_POLITICAL }
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = MON
+			original_tag = CHI
+			original_tag = OMG
 		}
 	}
 
 	available = {
-		CHI_MON_joint_focus_available = yes
+		CHI_OMG_joint_focus_available = yes
 	}
 
 	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MON_strategic_partnership (CHI)"
-		set_temp_variable = { percent_change = 5 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = MON }
-		change_influence_percentage = yes
-		add_political_power = 25
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_OMG_mongol_identity_recognition"
+		add_stability = 0.03
+		set_country_flag = CHI_OMG_mongol_path
 	}
 
 	completion_reward_joint_member = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MON_strategic_partnership (MON)"
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_OMG_mongol_identity_recognition (OMG)"
 		add_stability = 0.05
-		add_political_power = 75
+		add_political_power = 50
+		add_to_variable = { sinicization_level = -10 }
+		update_OMG_sinicization_modifiers = yes
+		set_temp_variable = { percent_change = -3 }
+		set_temp_variable = { tag_index = CHI }
+		set_temp_variable = { influence_target = OMG }
+		change_influence_percentage = yes
 	}
 
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MON_strategic_partnership"
+	ai_will_do = {
+		base = 3
+		modifier = {
+			add = 5
+			has_global_flag = CHI_TWO_SYSTEMS_PATH
+		}
+	}
+}
+
+joint_focus = {
+	id = CHI_OMG_han_settlement_program
+	icon = peoples_republic_of_china
+
+	x = -1
+	y = 3
+	relative_position_id = CHI_OMG_steppe_development
+
+	cost = 7
+
+	prerequisite = { focus = CHI_OMG_sinicization }
+
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INFLUENCE }
+
+	joint_trigger = {
+		OR = {
+			original_tag = CHI
+			original_tag = OMG
+		}
+	}
+
+	available = {
+		CHI_OMG_joint_focus_available = yes
+	}
+
+	completion_reward_joint_originator = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_OMG_han_settlement_program"
+		set_temp_variable = { percent_change = 5 }
+		set_temp_variable = { tag_index = CHI }
+		set_temp_variable = { influence_target = OMG }
+		change_influence_percentage = yes
+	}
+
+	completion_reward_joint_member = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_OMG_han_settlement_program (OMG)"
+		add_to_variable = { sinicization_level = 10 }
+		update_OMG_sinicization_modifiers = yes
 	}
 
 	ai_will_do = {
@@ -2425,262 +3149,164 @@ joint_focus = {
 }
 
 joint_focus = {
-	id = CHI_SAR_integrate_TIB
-	icon = tibet
-	text_icon = JOINT_CHI_focus_style
+	id = CHI_SAR_integrate_OMG
+	icon = peoples_republic_of_china
 
-	x = 1
-	y = 1
-	relative_position_id = CHI_SAR_influence_campaign
+	x = -1
+	y = 4
+	relative_position_id = CHI_OMG_steppe_development
 
 	cost = 10
 
-	prerequisite = { focus = CHI_SAR_influence_campaign }
+	prerequisite = { focus = CHI_OMG_han_settlement_program }
 
-	search_filters = { FOCUS_FILTER_POLITICAL }
+	search_filters = { FOCUS_FILTER_ANNEXATION }
+
+	joint_trigger = {
+		original_tag = CHI
+	}
 
 	available = {
 		original_tag = CHI
-		TIB = {
+		country_exists = OMG
+		OMG = {
 			is_subject_of = CHI
 			influence_higher_80 = yes
 		}
 	}
 
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_SAR_integrate_TIB"
-		TIB = {
-			every_core_state = {
-				add_core_of = CHI
-				remove_core_of = TIB
-			}
-			if = {
-				limit = { has_dynamic_modifier = { modifier = TIB_sinicization_modifier } }
-				remove_dynamic_modifier = { modifier = TIB_sinicization_modifier }
-			}
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_SAR_integrate_OMG"
+		annex_country = { target = OMG  transfer_troops = yes }
+		update_CHI_SAR_network_modifiers = yes
+	}
+
+	ai_will_do = {
+		base = 5
+	}
+}
+
+joint_focus = {
+	id = CHI_OMG_mongolian_sar
+	icon = chinese_social_democracy
+
+	x = 1
+	y = 3
+	relative_position_id = CHI_OMG_steppe_development
+
+	cost = 7
+
+	prerequisite = { focus = CHI_OMG_mongol_identity_recognition }
+
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+
+	joint_trigger = {
+		OR = {
+			original_tag = CHI
+			original_tag = OMG
 		}
-		annex_country = { target = TIB  transfer_troops = yes }
+	}
+
+	available = {
+		CHI_OMG_joint_focus_available = yes
+	}
+
+	completion_reward_joint_originator = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_OMG_mongolian_sar"
+		add_stability = 0.02
+	}
+
+	completion_reward_joint_member = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_OMG_mongolian_sar (OMG)"
+		add_stability = 0.05
+		set_autonomy = {
+			target = OMG
+			autonomy_state = autonomy_special_administrative_region_OMG
+		}
 	}
 
 	ai_will_do = {
 		base = 3
 		modifier = {
-			factor = 0
-			TIB = { influence_higher_80 = no }
+			add = 3
+			has_global_flag = CHI_TWO_SYSTEMS_PATH
 		}
 	}
 }
 
 joint_focus = {
-	id = CHI_SAR_integrate_ETK
-	icon = infrastructure
-	text_icon = JOINT_CHI_focus_style
+	id = CHI_OMG_greater_mongolia_vision
+	icon = chinese_glory
+
+	x = 1
+	y = 4
+	relative_position_id = CHI_OMG_steppe_development
+
+	cost = 7
+
+	prerequisite = { focus = CHI_OMG_mongolian_sar }
+
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INFLUENCE }
+
+	joint_trigger = {
+		OR = {
+			original_tag = CHI
+			original_tag = OMG
+		}
+	}
+
+	available = {
+		CHI_OMG_joint_focus_available = yes
+		has_country_flag = CHI_OMG_mongol_path
+	}
+
+	completion_reward_joint_originator = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_OMG_greater_mongolia_vision"
+		set_country_flag = CHI_OMG_greater_mongolia_active
+		add_political_power = 50
+		MON = { add_opinion_modifier = { target = CHI  modifier = mutual_trade_agreement } }
+	}
+
+	completion_reward_joint_member = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_OMG_greater_mongolia_vision (OMG)"
+		add_political_power = 50
+		add_stability = 0.03
+	}
+
+	ai_will_do = {
+		base = 3
+	}
+}
+
+joint_focus = {
+	id = OMG_steppe_livestock_industry
+	icon = generic_factory
 
 	x = 3
 	y = 1
-	relative_position_id = CHI_SAR_influence_campaign
-
-	cost = 10
-
-	prerequisite = { focus = CHI_SAR_influence_campaign }
-
-	search_filters = { FOCUS_FILTER_POLITICAL }
-
-	available = {
-		original_tag = CHI
-		ETK = {
-			is_subject_of = CHI
-			influence_higher_80 = yes
-		}
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_SAR_integrate_ETK"
-		ETK = {
-			every_core_state = {
-				add_core_of = CHI
-				remove_core_of = ETK
-			}
-			if = {
-				limit = { has_dynamic_modifier = { modifier = ETK_sinicization_modifier } }
-				remove_dynamic_modifier = { modifier = ETK_sinicization_modifier }
-			}
-		}
-		annex_country = { target = ETK  transfer_troops = yes }
-	}
-
-	ai_will_do = {
-		base = 3
-		modifier = {
-			factor = 0
-			ETK = { influence_higher_80 = no }
-		}
-	}
-}
-
-joint_focus = {
-	id = CHI_SAR_integrate_MON
-	icon = outer_mongolia_sar
-	text_icon = JOINT_CHI_focus_style
-
-	x = 5
-	y = 1
-	relative_position_id = CHI_SAR_influence_campaign
-
-	cost = 10
-
-	prerequisite = { focus = CHI_SAR_influence_campaign }
-
-	search_filters = { FOCUS_FILTER_POLITICAL }
-
-	available = {
-		original_tag = CHI
-		MON = {
-			is_subject_of = CHI
-			influence_higher_80 = yes
-		}
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_SAR_integrate_MON"
-		MON = {
-			every_core_state = {
-				add_core_of = CHI
-				remove_core_of = MON
-			}
-		}
-		annex_country = { target = MON  transfer_troops = yes }
-	}
-
-	ai_will_do = {
-		base = 3
-		modifier = {
-			factor = 0
-			MON = { influence_higher_80 = no }
-		}
-	}
-}
-
-joint_focus = {
-	id = CHI_TAI_soft_power
-	icon = focus_chi_nko_friendship
-	text_icon = JOINT_CHI_focus_style
-
-	x = 7
-	y = 1
-	relative_position_id = CHI_SAR_influence_campaign
+	relative_position_id = CHI_OMG_steppe_development
 
 	cost = 7
 
-	prerequisite = { focus = CHI_SAR_influence_campaign }
-	mutually_exclusive = { focus = CHI_TAI_hard_power }
+	prerequisite = { focus = CHI_OMG_steppe_development }
 
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+	search_filters = { FOCUS_FILTER_INDUSTRY }
+
+	joint_trigger = {
+		original_tag = OMG
+	}
 
 	available = {
-		original_tag = CHI
-		TAI = {
-			exists = yes
-			NOT = { is_subject_of = CHI }
-		}
-		NOT = { has_war_with = TAI }
+		CHI_OMG_SAR_only_focus_available = yes
 	}
 
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_soft_power"
-		add_stability = 0.02
-		add_political_power = 50
-		set_temp_variable = { percent_change = 5 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = TAI }
-		change_influence_percentage = yes
-		TAI = {
-			add_opinion_modifier = { target = CHI  modifier = mutual_trade_agreement }
+		log = "[GetDateText]: [Root.GetName]: Focus OMG_steppe_livestock_industry"
+		add_political_power = 25
+		random_owned_state = {
+			add_extra_state_shared_building_slots = 1
 		}
-	}
-
-	ai_will_do = {
-		base = 5
-		modifier = {
-			add = 5
-			is_historical_focus_on = yes
-		}
-	}
-}
-
-joint_focus = {
-	id = CHI_TAI_hard_power
-	icon = peoples_republic_of_china
-	text_icon = JOINT_CHI_focus_style
-
-	x = 9
-	y = 1
-	relative_position_id = CHI_SAR_influence_campaign
-
-	cost = 7
-
-	prerequisite = { focus = CHI_SAR_influence_campaign }
-	mutually_exclusive = { focus = CHI_TAI_soft_power }
-
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MANPOWER }
-
-	available = {
-		original_tag = CHI
-		TAI = {
-			exists = yes
-			NOT = { is_subject_of = CHI }
-		}
-		NOT = { has_war_with = TAI }
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_hard_power"
-		add_war_support = 0.05
-		add_manpower = 15000
-		set_temp_variable = { percent_change = 8 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = TAI }
-		change_influence_percentage = yes
-	}
-
-	ai_will_do = {
-		base = 3
-	}
-}
-
-joint_focus = {
-	id = CHI_TAI_economic_coercion
-	icon = trade
-	text_icon = JOINT_CHI_focus_style
-
-	x = 0
-	y = 1
-	relative_position_id = CHI_TAI_soft_power
-
-	cost = 7
-
-	prerequisite = { focus = CHI_TAI_soft_power }
-
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_ECONOMIC }
-
-	available = {
-		original_tag = CHI
-		TAI = {
-			exists = yes
-			NOT = { is_subject_of = CHI }
-			influence_higher_30 = yes
-		}
-		NOT = { has_war_with = TAI }
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_economic_coercion"
-		add_political_power = 50
-		set_temp_variable = { percent_change = 7 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = TAI }
-		change_influence_percentage = yes
-		TAI = { add_stability = -0.03 }
+		OVERLORD = { update_CHI_SAR_network_modifiers = yes }
 	}
 
 	ai_will_do = {
@@ -2689,407 +3315,40 @@ joint_focus = {
 }
 
 joint_focus = {
-	id = CHI_TAI_military_preparation
-	icon = examine_foreign_small_arms
-	text_icon = JOINT_CHI_focus_style
+	id = OMG_mongolian_mining_expansion
+	icon = generic_resource_extr
 
-	x = 0
-	y = 1
-	relative_position_id = CHI_TAI_hard_power
-
-	cost = 7
-
-	prerequisite = { focus = CHI_TAI_hard_power }
-
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MANPOWER }
-
-	available = {
-		original_tag = CHI
-		TAI = {
-			exists = yes
-			NOT = { is_subject_of = CHI }
-		}
-		NOT = { has_war_with = TAI }
-		has_war_support > 0.30
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_military_preparation"
-		add_war_support = 0.05
-		add_manpower = 25000
-		set_temp_variable = { percent_change = 7 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = TAI }
-		change_influence_percentage = yes
-		TAI = { add_stability = -0.05 }
-	}
-
-	ai_will_do = {
-		base = 3
-	}
-}
-
-joint_focus = {
-	id = CHI_TAI_cross_strait_framework
-	icon = chinese_social_democracy
-	text_icon = JOINT_CHI_focus_style
-
-	x = 0
-	y = 1
-	relative_position_id = CHI_TAI_economic_coercion
-
-	cost = 10
-
-	prerequisite = { focus = CHI_TAI_economic_coercion }
-
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
-
-	available = {
-		original_tag = CHI
-		TAI = {
-			exists = yes
-			NOT = { is_subject_of = CHI }
-			influence_higher_50 = yes
-		}
-		NOT = { has_war_with = TAI }
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_cross_strait_framework"
-		add_political_power = 50
-		set_temp_variable = { percent_change = 5 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = TAI }
-		change_influence_percentage = yes
-		TAI = { country_event = { id = CHI_SAR_relations.21 days = 3 } }
-	}
-
-	ai_will_do = {
-		base = 5
-		modifier = {
-			factor = 0
-			TAI = { influence_higher_50 = no }
-		}
-	}
-}
-
-joint_focus = {
-	id = CHI_TAI_strait_ultimatum
-	icon = peoples_republic_of_china
-	text_icon = JOINT_CHI_focus_style
-
-	x = 0
-	y = 1
-	relative_position_id = CHI_TAI_military_preparation
-
-	cost = 10
-
-	prerequisite = { focus = CHI_TAI_military_preparation }
-
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MANPOWER }
-
-	available = {
-		original_tag = CHI
-		TAI = {
-			exists = yes
-			NOT = { is_subject_of = CHI }
-			influence_higher_40 = yes
-		}
-		NOT = { has_war_with = TAI }
-		has_war_support > 0.50
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_strait_ultimatum"
-		add_war_support = 0.03
-		set_temp_variable = { percent_change = 8 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = TAI }
-		change_influence_percentage = yes
-		TAI = { country_event = { id = CHI_SAR_relations.21 days = 3 } }
-	}
-
-	ai_will_do = {
-		base = 3
-		modifier = {
-			factor = 0
-			TAI = { influence_higher_40 = no }
-		}
-		modifier = {
-			factor = 0
-			has_war_support < 0.50
-		}
-	}
-}
-
-joint_focus = {
-	id = CHI_TAI_political_consolidation
-	icon = buy_microchips_taiwan
-	text_icon = JOINT_CHI_focus_style
-
-	x = 1
-	y = 1
-	relative_position_id = CHI_TAI_cross_strait_framework
-
-	cost = 7
-
-	prerequisite = { focus = CHI_TAI_cross_strait_framework  focus = CHI_TAI_strait_ultimatum }
-
-	search_filters = { FOCUS_FILTER_POLITICAL }
-
-	available = {
-		original_tag = CHI
-		TAI = {
-			is_subject_of = CHI
-			influence_higher_50 = yes
-		}
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_political_consolidation"
-		add_political_power = 75
-		set_temp_variable = { percent_change = 5 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = TAI }
-		change_influence_percentage = yes
-		TAI = { add_timed_idea = { idea = TAI_political_consolidation_chi days = 1460 } }
-	}
-
-	ai_will_do = {
-		base = 5
-		modifier = {
-			factor = 0
-			TAI = { influence_higher_50 = no }
-		}
-	}
-}
-
-joint_focus = {
-	id = CHI_TAI_administrative_merger
-	icon = peoples_republic_of_china
-	text_icon = JOINT_CHI_focus_style
-
-	x = 0
-	y = 1
-	relative_position_id = CHI_TAI_political_consolidation
-
-	cost = 7
-
-	prerequisite = { focus = CHI_TAI_political_consolidation }
-
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_ECONOMIC }
-
-	available = {
-		original_tag = CHI
-		TAI = {
-			is_subject_of = CHI
-			influence_higher_60 = yes
-		}
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_administrative_merger"
-		add_research_slot = 1
-		set_temp_variable = { percent_change = 8 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = TAI }
-		change_influence_percentage = yes
-		TAI = {
-			remove_ideas = TAI_political_consolidation_chi
-			add_timed_idea = { idea = TAI_cross_strait_economic_ties days = 1460 }
-		}
-	}
-
-	ai_will_do = {
-		base = 5
-		modifier = {
-			factor = 0
-			TAI = { influence_higher_60 = no }
-		}
-	}
-}
-
-joint_focus = {
-	id = CHI_SAR_integrate_TAI
-	icon = buy_microchips_taiwan
-	text_icon = JOINT_CHI_focus_style
-
-	x = 0
-	y = 1
-	relative_position_id = CHI_TAI_administrative_merger
-
-	cost = 10
-
-	prerequisite = { focus = CHI_TAI_administrative_merger }
-
-	search_filters = { FOCUS_FILTER_POLITICAL }
-
-	available = {
-		original_tag = CHI
-		TAI = {
-			is_subject_of = CHI
-			influence_higher_80 = yes
-		}
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_SAR_integrate_TAI"
-		add_research_slot = 1
-		TAI = {
-			every_core_state = {
-				add_core_of = CHI
-				remove_core_of = TAI
-			}
-		}
-		annex_country = { target = TAI  transfer_troops = yes }
-	}
-
-	ai_will_do = {
-		base = 3
-		modifier = {
-			factor = 0
-			TAI = { influence_higher_80 = no }
-		}
-	}
-}
-
-### NEW: CHINA SYSTEM BRANCH — TWO SYSTEMS PATH EXPANSION ###
-
-joint_focus = {
-	id = CHI_SAR_international_legitimacy
-	icon = chinese_social_democracy
-	text_icon = JOINT_CHI_focus_style
-
-	x = -2
-	y = 1
-	relative_position_id = CHI_SAR_two_systems_commitment
-
-	cost = 7
-
-	prerequisite = { focus = CHI_SAR_two_systems_commitment }
-
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
-
-	available = {
-		original_tag = CHI
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_SAR_international_legitimacy"
-		add_stability = 0.04
-		add_political_power = 75
-		every_country = {
-			limit = {
-				NOT = { tag = CHI }
-				NOT = { has_war_with = CHI }
-			}
-			add_opinion_modifier = { target = CHI  modifier = mutual_trade_agreement }
-		}
-	}
-
-	ai_will_do = {
-		base = 5
-		modifier = {
-			add = 5
-			is_historical_focus_on = yes
-		}
-	}
-}
-
-joint_focus = {
-	id = CHI_SAR_sar_prosperity_program
-	icon = trade
-	text_icon = JOINT_CHI_focus_style
-
-	x = 0
-	y = 1
-	relative_position_id = CHI_SAR_two_systems_commitment
-
-	cost = 7
-
-	prerequisite = { focus = CHI_SAR_two_systems_commitment }
-
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_ECONOMIC }
-
-	available = {
-		original_tag = CHI
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_SAR_sar_prosperity_program"
-		add_political_power = 50
-		if = {
-			limit = { country_exists = HKG  HKG = { is_subject_of = CHI } }
-			HKG = { add_political_power = 50  add_stability = 0.03 }
-		}
-		if = {
-			limit = { country_exists = MAC  MAC = { is_subject_of = CHI } }
-			MAC = { add_political_power = 50  add_stability = 0.03 }
-		}
-		if = {
-			limit = { country_exists = TIB  TIB = { is_subject_of = CHI } }
-			TIB = { add_political_power = 25  add_stability = 0.02 }
-		}
-		if = {
-			limit = { country_exists = ETK  ETK = { is_subject_of = CHI } }
-			ETK = { add_political_power = 25  add_stability = 0.02 }
-		}
-		if = {
-			limit = { country_exists = MON  MON = { is_subject_of = CHI } }
-			MON = { add_political_power = 25  add_stability = 0.02 }
-		}
-	}
-
-	ai_will_do = {
-		base = 5
-	}
-}
-
-joint_focus = {
-	id = CHI_SAR_united_front_diplomacy
-	icon = focus_chi_nko_friendship
-	text_icon = JOINT_CHI_focus_style
-
-	x = -1
+	x = 3
 	y = 2
-	relative_position_id = CHI_SAR_two_systems_commitment
+	relative_position_id = CHI_OMG_steppe_development
 
 	cost = 7
 
-	prerequisite = { focus = CHI_SAR_international_legitimacy }
-	prerequisite = { focus = CHI_SAR_sar_prosperity_program }
+	prerequisite = { focus = OMG_steppe_livestock_industry }
 
-	search_filters = { FOCUS_FILTER_POLITICAL }
+	search_filters = { FOCUS_FILTER_INDUSTRY }
+
+	joint_trigger = {
+		original_tag = OMG
+	}
 
 	available = {
-		original_tag = CHI
+		CHI_OMG_SAR_only_focus_available = yes
 	}
 
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_SAR_united_front_diplomacy"
-		add_political_power = 100
-		add_stability = 0.03
-		if = {
-			limit = { country_exists = HKG  HKG = { is_subject_of = CHI } }
-			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = CHI }
-			set_temp_variable = { influence_target = HKG }
-			change_influence_percentage = yes
+		log = "[GetDateText]: [Root.GetName]: Focus OMG_mongolian_mining_expansion"
+		random_owned_state = {
+			add_resource = {
+				type = steel
+				amount = 8
+			}
+			add_resource = {
+				type = chromium
+				amount = 4
+			}
 		}
-		if = {
-			limit = { country_exists = MAC  MAC = { is_subject_of = CHI } }
-			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = CHI }
-			set_temp_variable = { influence_target = MAC }
-			change_influence_percentage = yes
-		}
-		if = {
-			limit = { country_exists = TAI  TAI = { is_subject_of = CHI } }
-			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = CHI }
-			set_temp_variable = { influence_target = TAI }
-			change_influence_percentage = yes
-		}
+		OVERLORD = { update_CHI_SAR_network_modifiers = yes }
 	}
 
 	ai_will_do = {
@@ -3098,128 +3357,36 @@ joint_focus = {
 }
 
 joint_focus = {
-	id = CHI_SAR_model_governance
+	id = CHI_MON_diplomatic_outreach
 	icon = chinese_nationalism
-	text_icon = JOINT_CHI_focus_style
 
-	x = 0
-	y = 1
-	relative_position_id = CHI_SAR_greater_china_dividend
+	x = 1
+	y = 5
+	relative_position_id = CHI_OMG_steppe_development
 
 	cost = 7
 
-	prerequisite = { focus = CHI_SAR_greater_china_dividend }
+	prerequisite = { focus = CHI_OMG_greater_mongolia_vision }
 
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+	search_filters = { FOCUS_FILTER_POLITICAL }
 
-	available = {
+	joint_trigger = {
 		original_tag = CHI
 	}
 
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_SAR_model_governance"
-		add_stability = 0.05
-		add_political_power = 100
-		add_war_support = 0.03
-	}
-
-	ai_will_do = {
-		base = 5
-	}
-}
-
-joint_focus = {
-	id = CHI_HKG_national_security_law
-	icon = MEX_Bribe_the_judiciary
-	text_icon = JOINT_HKG_CHI_focus_style
-
-	x = 0
-	y = 1
-	relative_position_id = CHI_HKG_rule_of_law
-
-	cost = 7
-
-	prerequisite = { focus = CHI_HKG_rule_of_law }
-
-	search_filters = { FOCUS_FILTER_POLITICAL }
-
-	joint_trigger = {
-		OR = {
-			tag = CHI
-			tag = HKG
-		}
-	}
-
 	available = {
-		CHI_HKG_joint_focus_available = yes
-	}
-
-	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_national_security_law (CHI)"
-		set_temp_variable = { percent_change = 6 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = HKG }
-		change_influence_percentage = yes
-	}
-
-	completion_reward_joint_member = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_national_security_law (HKG)"
-		add_stability = -0.04
-		add_political_power = -25
+		original_tag = CHI
+		country_exists = MON
+		NOT = { MON = { is_subject_of = CHI } }
+		NOT = { has_war_with = MON }
+		has_country_flag = CHI_OMG_greater_mongolia_active
 	}
 
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_national_security_law"
-	}
-
-	ai_will_do = {
-		base = 5
-	}
-}
-
-joint_focus = {
-	id = CHI_HKG_protest_crackdown
-	icon = MEX_Bribe_the_judiciary
-	text_icon = JOINT_HKG_CHI_focus_style
-
-	x = 2
-	y = 1
-	relative_position_id = CHI_HKG_rule_of_law
-
-	cost = 7
-
-	prerequisite = { focus = CHI_HKG_rule_of_law }
-
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
-
-	joint_trigger = {
-		OR = {
-			tag = CHI
-			tag = HKG
-		}
-	}
-
-	available = {
-		CHI_HKG_joint_focus_available = yes
-	}
-
-	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_protest_crackdown (CHI)"
-		set_temp_variable = { percent_change = 4 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = HKG }
-		change_influence_percentage = yes
-	}
-
-	completion_reward_joint_member = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_protest_crackdown (HKG)"
-		add_stability = -0.06
-		add_war_support = -0.03
-		add_political_power = -50
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_protest_crackdown"
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_MON_diplomatic_outreach"
+		add_political_power = 50
+		add_opinion_modifier = { target = MON  modifier = mutual_trade_agreement }
+		MON = { add_opinion_modifier = { target = CHI  modifier = mutual_trade_agreement } }
 	}
 
 	ai_will_do = {
@@ -3228,246 +3395,51 @@ joint_focus = {
 }
 
 joint_focus = {
-	id = CHI_HKG_electoral_reform
-	icon = peoples_republic_of_china
-	text_icon = JOINT_HKG_CHI_focus_style
+	id = CHI_MON_economic_partnership
+	icon = chinese_glory
 
 	x = 1
-	y = 2
-	relative_position_id = CHI_HKG_rule_of_law
+	y = 6
+	relative_position_id = CHI_OMG_steppe_development
 
 	cost = 7
 
-	prerequisite = { focus = CHI_HKG_national_security_law }
-	prerequisite = { focus = CHI_HKG_protest_crackdown }
+	prerequisite = { focus = CHI_MON_diplomatic_outreach }
 
-	search_filters = { FOCUS_FILTER_POLITICAL }
+	search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_POLITICAL }
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = HKG
+			original_tag = CHI
+			AND = {
+				original_tag = MON
+				CHI_MON_country_joint_focus_available = yes
+			}
 		}
 	}
 
 	available = {
-		CHI_HKG_joint_focus_available = yes
+		CHI_MON_country_joint_focus_available = yes
 	}
 
 	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_electoral_reform (CHI)"
-		set_temp_variable = { percent_change = 8 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = HKG }
-		change_influence_percentage = yes
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_MON_economic_partnership"
 		add_political_power = 50
+		add_opinion_modifier = { target = MON  modifier = mutual_trade_agreement }
 	}
 
 	completion_reward_joint_member = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_electoral_reform (HKG)"
-		add_stability = -0.05
-		add_political_power = -75
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_electoral_reform"
-	}
-
-	ai_will_do = {
-		base = 5
-	}
-}
-
-joint_focus = {
-	id = CHI_HKG_brain_drain_crisis
-	icon = ExpandTrade
-	text_icon = JOINT_HKG_CHI_focus_style
-
-	x = 0
-	y = 1
-	relative_position_id = CHI_HKG_media_freedom
-
-	cost = 5
-
-	prerequisite = { focus = CHI_HKG_media_freedom }
-
-	search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_ECONOMIC }
-
-	joint_trigger = {
-		OR = {
-			tag = CHI
-			tag = HKG
-		}
-	}
-
-	available = {
-		CHI_HKG_joint_focus_available = yes
-	}
-
-	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_brain_drain_crisis (CHI)"
-	}
-
-	completion_reward_joint_member = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_brain_drain_crisis (HKG)"
-		add_stability = 0.04
-		add_political_power = 25
-		set_temp_variable = { percent_change = -3 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = ROOT }
-		change_influence_percentage = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_brain_drain_crisis"
-	}
-
-	ai_will_do = {
-		base = 5
-		modifier = {
-			add = 5
-			is_historical_focus_on = yes
-		}
-	}
-}
-
-### HKG SAR-ONLY — Defend Hong Kong's Future ###
-
-joint_focus = {
-	id = CHI_HKG_SAR_defend_autonomy
-	icon = liberal_press
-	text_icon = JOINT_HKG_focus_style
-
-	x = 11
-	y = 1
-	relative_position_id = CHI_SAR_one_china_framework
-
-	prerequisite = { focus = CHI_SAR_one_china_framework }
-
-	cost = 5
-
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
-
-	joint_trigger = {
-		tag = HKG
-	}
-
-	available = {
-		CHI_HKG_SAR_only_focus_available = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_SAR_defend_autonomy"
-		add_stability = 0.04
-		add_political_power = 50
-	}
-
-	ai_will_do = {
-		base = 5
-	}
-}
-
-joint_focus = {
-	id = CHI_HKG_SAR_umbrella_legacy
-	icon = liberal_press
-	text_icon = JOINT_HKG_focus_style
-
-	x = -1
-	y = 1
-	relative_position_id = CHI_HKG_SAR_defend_autonomy
-
-	cost = 5
-
-	prerequisite = { focus = CHI_HKG_SAR_defend_autonomy }
-
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
-
-	joint_trigger = {
-		tag = HKG
-	}
-
-	available = {
-		CHI_HKG_SAR_only_focus_available = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_SAR_umbrella_legacy"
-		add_stability = 0.05
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_MON_economic_partnership (MON)"
 		add_political_power = 75
-	}
-
-	ai_will_do = {
-		base = 5
-	}
-}
-
-joint_focus = {
-	id = CHI_HKG_SAR_capital_retention
-	icon = ExpandTrade
-	text_icon = JOINT_HKG_focus_style
-
-	x = 1
-	y = 1
-	relative_position_id = CHI_HKG_SAR_defend_autonomy
-
-	cost = 5
-
-	prerequisite = { focus = CHI_HKG_SAR_defend_autonomy }
-
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_ECONOMIC }
-
-	joint_trigger = {
-		tag = HKG
-	}
-
-	available = {
-		CHI_HKG_SAR_only_focus_available = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_SAR_capital_retention"
-		add_stability = 0.03
-		add_political_power = 25
-	}
-
-	ai_will_do = {
-		base = 5
-	}
-}
-
-joint_focus = {
-	id = CHI_HKG_SAR_resist_integration
-	icon = MEX_Defy_the_constitution
-	text_icon = JOINT_HKG_focus_style
-
-	x = -1
-	y = 2
-	relative_position_id = CHI_HKG_SAR_defend_autonomy
-
-	cost = 7
-
-	prerequisite = { focus = CHI_HKG_SAR_umbrella_legacy }
-	prerequisite = { focus = CHI_HKG_SAR_capital_retention }
-	mutually_exclusive = { focus = CHI_HKG_SAR_pragmatic_cooperation }
-
-	search_filters = { FOCUS_FILTER_POLITICAL }
-
-	joint_trigger = {
-		tag = HKG
-	}
-
-	available = {
-		CHI_HKG_SAR_only_focus_available = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_SAR_resist_integration"
-		add_stability = 0.04
-		set_temp_variable = { percent_change = -10 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = ROOT }
-		change_influence_percentage = yes
-		CHI = { add_opinion_modifier = { target = HKG  modifier = mutual_trade_agreement } }
+		add_opinion_modifier = { target = CHI  modifier = mutual_trade_agreement }
+		random_owned_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
 	}
 
 	ai_will_do = {
@@ -3476,968 +3448,51 @@ joint_focus = {
 }
 
 joint_focus = {
-	id = CHI_HKG_SAR_pragmatic_cooperation
-	icon = trade
-	text_icon = JOINT_HKG_focus_style
+	id = CHI_MON_reunification_offer
+	icon = chinese_glory
 
 	x = 1
-	y = 2
-	relative_position_id = CHI_HKG_SAR_defend_autonomy
+	y = 7
+	relative_position_id = CHI_OMG_steppe_development
 
-	cost = 7
+	cost = 10
 
-	prerequisite = { focus = CHI_HKG_SAR_umbrella_legacy }
-	prerequisite = { focus = CHI_HKG_SAR_capital_retention }
-	mutually_exclusive = { focus = CHI_HKG_SAR_resist_integration }
+	prerequisite = { focus = CHI_MON_economic_partnership }
 
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_ECONOMIC }
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INFLUENCE }
 
 	joint_trigger = {
-		tag = HKG
+		original_tag = CHI
 	}
 
 	available = {
-		CHI_HKG_SAR_only_focus_available = yes
+		original_tag = CHI
+		country_exists = MON
+		NOT = { MON = { is_subject_of = CHI } }
+		MON = { has_opinion = { target = CHI value > 24 } }
+		NOT = { has_war_with = MON }
 	}
 
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_SAR_pragmatic_cooperation"
-		add_stability = 0.04
-		add_political_power = 75
-	}
-
-	ai_will_do = {
-		base = 5
-	}
-}
-
-### MAC SAR-ONLY — Macau's Own Path ###
-
-joint_focus = {
-	id = CHI_MAC_SAR_local_governance
-	icon = generic_government
-	text_icon = JOINT_MAC_focus_style
-
-	x = 21
-	y = 1
-	relative_position_id = CHI_SAR_one_china_framework
-
-	cost = 5
-
-	prerequisite = { focus = CHI_SAR_one_china_framework }
-
-	search_filters = { FOCUS_FILTER_POLITICAL }
-
-	joint_trigger = {
-		tag = MAC
-	}
-
-	available = {
-		CHI_MAC_SAR_only_focus_available = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_SAR_local_governance"
-		add_stability = 0.04
-		add_political_power = 50
-	}
-
-	ai_will_do = {
-		base = 5
-	}
-}
-
-joint_focus = {
-	id = CHI_MAC_SAR_lusophone_ties
-	icon = generic_ship1
-	text_icon = JOINT_MAC_focus_style
-
-	x = -1
-	y = 1
-	relative_position_id = CHI_MAC_SAR_local_governance
-
-	cost = 5
-
-	prerequisite = { focus = CHI_MAC_SAR_local_governance }
-
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_ECONOMIC }
-
-	joint_trigger = {
-		tag = MAC
-	}
-
-	available = {
-		CHI_MAC_SAR_only_focus_available = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_SAR_lusophone_ties"
-		add_stability = 0.03
-		add_political_power = 50
-	}
-
-	ai_will_do = {
-		base = 5
-	}
-}
-
-joint_focus = {
-	id = CHI_MAC_SAR_gaming_regulation
-	icon = consumer_goods
-	text_icon = JOINT_MAC_focus_style
-
-	x = 1
-	y = 1
-	relative_position_id = CHI_MAC_SAR_local_governance
-
-	cost = 5
-
-	prerequisite = { focus = CHI_MAC_SAR_local_governance }
-
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_ECONOMIC }
-
-	joint_trigger = {
-		tag = MAC
-	}
-
-	available = {
-		CHI_MAC_SAR_only_focus_available = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_SAR_gaming_regulation"
-		add_stability = 0.03
-		add_political_power = 25
-	}
-
-	ai_will_do = {
-		base = 5
-	}
-}
-
-joint_focus = {
-	id = CHI_MAC_SAR_resist_absorption
-	icon = MEX_Defy_the_constitution
-	text_icon = JOINT_MAC_focus_style
-
-	x = -1
-	y = 2
-	relative_position_id = CHI_MAC_SAR_local_governance
-
-	cost = 7
-
-	prerequisite = { focus = CHI_MAC_SAR_lusophone_ties }
-	prerequisite = { focus = CHI_MAC_SAR_gaming_regulation }
-	mutually_exclusive = { focus = CHI_MAC_SAR_economic_pragmatism }
-
-	search_filters = { FOCUS_FILTER_POLITICAL }
-
-	joint_trigger = {
-		tag = MAC
-	}
-
-	available = {
-		CHI_MAC_SAR_only_focus_available = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_SAR_resist_absorption"
-		add_stability = 0.04
-		set_temp_variable = { percent_change = -10 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = ROOT }
-		change_influence_percentage = yes
-	}
-
-	ai_will_do = {
-		base = 3
-	}
-}
-
-joint_focus = {
-	id = CHI_MAC_SAR_economic_pragmatism
-	icon = trade
-	text_icon = JOINT_MAC_focus_style
-
-	x = 1
-	y = 2
-	relative_position_id = CHI_MAC_SAR_local_governance
-
-	cost = 7
-
-	prerequisite = { focus = CHI_MAC_SAR_lusophone_ties }
-	prerequisite = { focus = CHI_MAC_SAR_gaming_regulation }
-	mutually_exclusive = { focus = CHI_MAC_SAR_resist_absorption }
-
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_ECONOMIC }
-
-	joint_trigger = {
-		tag = MAC
-	}
-
-	available = {
-		CHI_MAC_SAR_only_focus_available = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_SAR_economic_pragmatism"
-		add_stability = 0.04
-		add_political_power = 75
-	}
-
-	ai_will_do = {
-		base = 5
-	}
-}
-
-### TIB SAR-ONLY — Free Tibet ###
-
-joint_focus = {
-	id = CHI_TIB_SAR_preserve_identity
-	icon = smiling_buddha
-	text_icon = JOINT_TIB_focus_style
-
-	x = -19
-	y = 1
-	relative_position_id = CHI_SAR_one_china_framework
-
-	cost = 5
-
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
-	prerequisite = { focus = CHI_SAR_one_china_framework }
-
-	joint_trigger = {
-		tag = TIB
-	}
-
-	available = {
-		CHI_TIB_SAR_only_focus_available = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TIB_SAR_preserve_identity"
-		add_stability = 0.05
-		add_political_power = 50
-		add_to_variable = { sinicization_level = -10 }
-		update_TIB_sinicization_modifiers = yes
-	}
-
-	ai_will_do = {
-		base = 5
-	}
-}
-
-joint_focus = {
-	id = CHI_TIB_SAR_exile_network
-	icon = trade_with_taiwan
-	text_icon = JOINT_TIB_focus_style
-
-	x = -1
-	y = 1
-	relative_position_id = CHI_TIB_SAR_preserve_identity
-
-	cost = 5
-
-	prerequisite = { focus = CHI_TIB_SAR_preserve_identity }
-
-	search_filters = { FOCUS_FILTER_POLITICAL }
-
-	joint_trigger = {
-		tag = TIB
-	}
-
-	available = {
-		CHI_TIB_SAR_only_focus_available = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TIB_SAR_exile_network"
-		add_stability = 0.03
-		add_political_power = 50
-	}
-
-	ai_will_do = {
-		base = 5
-	}
-}
-
-joint_focus = {
-	id = CHI_TIB_SAR_monastic_schools
-	icon = smiling_buddha
-	text_icon = JOINT_TIB_focus_style
-
-	x = 1
-	y = 1
-	relative_position_id = CHI_TIB_SAR_preserve_identity
-
-	cost = 5
-
-	prerequisite = { focus = CHI_TIB_SAR_preserve_identity }
-
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
-
-	joint_trigger = {
-		tag = TIB
-	}
-
-	available = {
-		CHI_TIB_SAR_only_focus_available = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TIB_SAR_monastic_schools"
-		add_stability = 0.04
-		add_political_power = 25
-		add_to_variable = { sinicization_level = -5 }
-		update_TIB_sinicization_modifiers = yes
-	}
-
-	ai_will_do = {
-		base = 5
-	}
-}
-
-joint_focus = {
-	id = CHI_TIB_SAR_peaceful_resistance
-	icon = generic_government
-	text_icon = JOINT_TIB_focus_style
-
-	x = -1
-	y = 2
-	relative_position_id = CHI_TIB_SAR_preserve_identity
-
-	cost = 7
-
-	prerequisite = { focus = CHI_TIB_SAR_exile_network }
-	prerequisite = { focus = CHI_TIB_SAR_monastic_schools }
-	mutually_exclusive = { focus = CHI_TIB_SAR_armed_struggle }
-
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
-
-	joint_trigger = {
-		tag = TIB
-	}
-
-	available = {
-		CHI_TIB_SAR_only_focus_available = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TIB_SAR_peaceful_resistance"
-		add_stability = 0.05
-		add_political_power = 75
-		set_temp_variable = { percent_change = -8 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = ROOT }
-		change_influence_percentage = yes
-	}
-
-	ai_will_do = {
-		base = 5
-		modifier = {
-			add = 3
-			is_historical_focus_on = yes
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_MON_reunification_offer"
+		if = {
+			limit = { has_global_flag = CHI_TWO_SYSTEMS_PATH }
+			MON = {
+				set_autonomy = {
+					target = MON
+					autonomy_state = autonomy_special_administrative_region_MON
+				}
+			}
 		}
-	}
-}
-
-joint_focus = {
-	id = CHI_TIB_SAR_armed_struggle
-	icon = MEX_Defy_the_constitution
-	text_icon = JOINT_TIB_focus_style
-
-	x = 1
-	y = 2
-	relative_position_id = CHI_TIB_SAR_preserve_identity
-
-	cost = 7
-
-	prerequisite = { focus = CHI_TIB_SAR_exile_network }
-	prerequisite = { focus = CHI_TIB_SAR_monastic_schools }
-	mutually_exclusive = { focus = CHI_TIB_SAR_peaceful_resistance }
-
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MANPOWER }
-
-	joint_trigger = {
-		tag = TIB
-	}
-
-	available = {
-		CHI_TIB_SAR_only_focus_available = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TIB_SAR_armed_struggle"
-		add_stability = -0.05
-		add_war_support = 0.08
-		set_temp_variable = { percent_change = -15 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = ROOT }
-		change_influence_percentage = yes
-	}
-
-	ai_will_do = {
-		base = 2
-	}
-}
-
-### ETK SAR-ONLY — Uyghur Resilience ###
-
-joint_focus = {
-	id = CHI_ETK_SAR_cultural_survival
-	icon = ummah
-	text_icon = JOINT_ETK_focus_style
-
-	x = -9
-	y = 1
-	relative_position_id = CHI_SAR_one_china_framework
-
-	cost = 5
-
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
-	prerequisite = { focus = CHI_SAR_one_china_framework }
-
-	joint_trigger = {
-		tag = ETK
-	}
-
-	available = {
-		CHI_ETK_SAR_only_focus_available = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_ETK_SAR_cultural_survival"
-		add_stability = 0.05
-		add_political_power = 50
-		add_to_variable = { sinicization_level = -10 }
-		update_ETK_sinicization_modifiers = yes
-	}
-
-	ai_will_do = {
-		base = 5
-	}
-}
-
-joint_focus = {
-	id = CHI_ETK_SAR_diaspora_support
-	icon = trade_with_taiwan
-	text_icon = JOINT_ETK_focus_style
-
-	x = -1
-	y = 1
-	relative_position_id = CHI_ETK_SAR_cultural_survival
-
-	cost = 5
-
-	prerequisite = { focus = CHI_ETK_SAR_cultural_survival }
-
-	search_filters = { FOCUS_FILTER_POLITICAL }
-
-	joint_trigger = {
-		tag = ETK
-	}
-
-	available = {
-		CHI_ETK_SAR_only_focus_available = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_ETK_SAR_diaspora_support"
-		add_stability = 0.03
-		add_political_power = 50
-	}
-
-	ai_will_do = {
-		base = 5
-	}
-}
-
-joint_focus = {
-	id = CHI_ETK_SAR_economic_self_reliance
-	icon = generic_resource_extr
-	text_icon = JOINT_ETK_focus_style
-
-	x = 1
-	y = 1
-	relative_position_id = CHI_ETK_SAR_cultural_survival
-
-	cost = 5
-
-	prerequisite = { focus = CHI_ETK_SAR_cultural_survival }
-
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_ECONOMIC }
-
-	joint_trigger = {
-		tag = ETK
-	}
-
-	available = {
-		CHI_ETK_SAR_only_focus_available = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_ETK_SAR_economic_self_reliance"
-		add_stability = 0.03
-		add_political_power = 25
-		add_to_variable = { sinicization_level = -5 }
-		update_ETK_sinicization_modifiers = yes
-	}
-
-	ai_will_do = {
-		base = 5
-	}
-}
-
-joint_focus = {
-	id = CHI_ETK_SAR_nonviolent_resistance
-	icon = generic_government
-	text_icon = JOINT_ETK_focus_style
-
-	x = -1
-	y = 2
-	relative_position_id = CHI_ETK_SAR_cultural_survival
-
-	cost = 7
-
-	prerequisite = { focus = CHI_ETK_SAR_diaspora_support }
-	prerequisite = { focus = CHI_ETK_SAR_economic_self_reliance }
-	mutually_exclusive = { focus = CHI_ETK_SAR_independence_cells }
-
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
-
-	joint_trigger = {
-		tag = ETK
-	}
-
-	available = {
-		CHI_ETK_SAR_only_focus_available = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_ETK_SAR_nonviolent_resistance"
-		add_stability = 0.05
-		add_political_power = 75
-		set_temp_variable = { percent_change = -8 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = ROOT }
-		change_influence_percentage = yes
-	}
-
-	ai_will_do = {
-		base = 5
-		modifier = {
-			add = 3
-			is_historical_focus_on = yes
+		else = {
+			MON = {
+				set_autonomy = {
+					target = MON
+					autonomy_state = autonomy_puppet
+				}
+			}
 		}
-	}
-}
-
-joint_focus = {
-	id = CHI_ETK_SAR_independence_cells
-	icon = MEX_Defy_the_constitution
-	text_icon = JOINT_ETK_focus_style
-
-	x = 1
-	y = 2
-	relative_position_id = CHI_ETK_SAR_cultural_survival
-
-	cost = 7
-
-	prerequisite = { focus = CHI_ETK_SAR_diaspora_support }
-	prerequisite = { focus = CHI_ETK_SAR_economic_self_reliance }
-	mutually_exclusive = { focus = CHI_ETK_SAR_nonviolent_resistance }
-
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MANPOWER }
-
-	joint_trigger = {
-		tag = ETK
-	}
-
-	available = {
-		CHI_ETK_SAR_only_focus_available = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_ETK_SAR_independence_cells"
-		add_stability = -0.05
-		add_war_support = 0.08
-		set_temp_variable = { percent_change = -15 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = ROOT }
-		change_influence_percentage = yes
-	}
-
-	ai_will_do = {
-		base = 2
-	}
-}
-
-### TAI SAR-ONLY — Taiwan's Destiny ###
-
-joint_focus = {
-	id = CHI_TAI_SAR_democratic_resilience
-	icon = ind_taiwan
-	text_icon = JOINT_TAI_focus_style
-
-	x = 33
-	y = 1
-	relative_position_id = CHI_SAR_one_china_framework
-
-	prerequisite = { focus = CHI_SAR_one_china_framework }
-
-	cost = 5
-
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
-
-	joint_trigger = {
-		tag = TAI
-	}
-
-	available = {
-		CHI_TAI_SAR_only_focus_available = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_SAR_democratic_resilience"
-		add_stability = 0.05
-		add_political_power = 50
-	}
-
-	ai_will_do = {
-		base = 5
-	}
-}
-
-joint_focus = {
-	id = CHI_TAI_SAR_semiconductor_leverage
-	icon = buy_microchips_taiwan
-	text_icon = JOINT_TAI_focus_style
-
-	x = -1
-	y = 1
-	relative_position_id = CHI_TAI_SAR_democratic_resilience
-
-	cost = 5
-
-	prerequisite = { focus = CHI_TAI_SAR_democratic_resilience }
-
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_ECONOMIC }
-
-	joint_trigger = {
-		tag = TAI
-	}
-
-	available = {
-		CHI_TAI_SAR_only_focus_available = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_SAR_semiconductor_leverage"
-		add_stability = 0.03
-		add_political_power = 50
-	}
-
-	ai_will_do = {
-		base = 5
-	}
-}
-
-joint_focus = {
-	id = CHI_TAI_SAR_international_outreach
-	icon = trade_with_taiwan
-	text_icon = JOINT_TAI_focus_style
-
-	x = 1
-	y = 1
-	relative_position_id = CHI_TAI_SAR_democratic_resilience
-
-	cost = 5
-
-	prerequisite = { focus = CHI_TAI_SAR_democratic_resilience }
-
-	search_filters = { FOCUS_FILTER_POLITICAL }
-
-	joint_trigger = {
-		tag = TAI
-	}
-
-	available = {
-		CHI_TAI_SAR_only_focus_available = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_SAR_international_outreach"
-		add_stability = 0.03
-		add_political_power = 50
-	}
-
-	ai_will_do = {
-		base = 5
-	}
-}
-
-joint_focus = {
-	id = CHI_TAI_SAR_accommodate_beijing
-	icon = TAI_kmt
-	text_icon = JOINT_TAI_focus_style
-
-	x = -1
-	y = 2
-	relative_position_id = CHI_TAI_SAR_democratic_resilience
-
-	cost = 7
-
-	prerequisite = { focus = CHI_TAI_SAR_semiconductor_leverage }
-	prerequisite = { focus = CHI_TAI_SAR_international_outreach }
-	mutually_exclusive = { focus = CHI_TAI_SAR_assert_independence }
-
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
-
-	joint_trigger = {
-		tag = TAI
-	}
-
-	available = {
-		CHI_TAI_SAR_only_focus_available = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_SAR_accommodate_beijing"
-		add_stability = 0.05
-		add_political_power = 50
-		set_temp_variable = { percent_change = 5 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = ROOT }
-		change_influence_percentage = yes
-	}
-
-	ai_will_do = {
-		base = 5
-		modifier = {
-			add = 5
-			is_historical_focus_on = yes
-		}
-	}
-}
-
-joint_focus = {
-	id = CHI_TAI_SAR_assert_independence
-	icon = ind_taiwan
-	text_icon = JOINT_TAI_focus_style
-
-	x = 1
-	y = 2
-	relative_position_id = CHI_TAI_SAR_democratic_resilience
-
-	cost = 7
-
-	prerequisite = { focus = CHI_TAI_SAR_semiconductor_leverage }
-	prerequisite = { focus = CHI_TAI_SAR_international_outreach }
-	mutually_exclusive = { focus = CHI_TAI_SAR_accommodate_beijing }
-
-	search_filters = { FOCUS_FILTER_POLITICAL }
-
-	joint_trigger = {
-		tag = TAI
-	}
-
-	available = {
-		CHI_TAI_SAR_only_focus_available = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_SAR_assert_independence"
-		add_stability = 0.03
-		add_war_support = 0.05
-		set_temp_variable = { percent_change = -12 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = ROOT }
-		change_influence_percentage = yes
-	}
-
-	ai_will_do = {
-		base = 3
-	}
-}
-
-### MON SAR-ONLY — Mongolian Sovereignty ###
-
-joint_focus = {
-	id = CHI_MON_SAR_national_identity
-	icon = outer_mongolia_sar
-	text_icon = JOINT_MON_focus_style
-
-	x = -29
-	y = 1
-	relative_position_id = CHI_SAR_one_china_framework
-
-	cost = 5
-
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
-	prerequisite = {
-		focus = CHI_SAR_one_china_framework
-	}
-
-	joint_trigger = {
-		tag = MON
-	}
-
-	available = {
-		CHI_MON_SAR_only_focus_available = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MON_SAR_national_identity"
-		add_stability = 0.04
-		add_political_power = 50
-	}
-
-	ai_will_do = {
-		base = 5
-	}
-}
-
-joint_focus = {
-	id = CHI_MON_SAR_russian_ties
-	icon = focus_chi_nko_friendship
-	text_icon = JOINT_MON_focus_style
-
-	x = -1
-	y = 1
-	relative_position_id = CHI_MON_SAR_national_identity
-
-	cost = 5
-
-	prerequisite = { focus = CHI_MON_SAR_national_identity }
-
-	search_filters = { FOCUS_FILTER_POLITICAL }
-
-	joint_trigger = {
-		tag = MON
-	}
-
-	available = {
-		CHI_MON_SAR_only_focus_available = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MON_SAR_russian_ties"
-		add_stability = 0.03
-		add_political_power = 50
-	}
-
-	ai_will_do = {
-		base = 5
-	}
-}
-
-joint_focus = {
-	id = CHI_MON_SAR_mining_sovereignty
-	icon = generic_resource_extr
-	text_icon = JOINT_MON_focus_style
-
-	x = 1
-	y = 1
-	relative_position_id = CHI_MON_SAR_national_identity
-
-	cost = 5
-
-	prerequisite = { focus = CHI_MON_SAR_national_identity }
-
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_ECONOMIC }
-
-	joint_trigger = {
-		tag = MON
-	}
-
-	available = {
-		CHI_MON_SAR_only_focus_available = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MON_SAR_mining_sovereignty"
-		add_stability = 0.03
-		add_political_power = 25
-	}
-
-	ai_will_do = {
-		base = 5
-	}
-}
-
-joint_focus = {
-	id = CHI_MON_SAR_balanced_dependency
-	icon = trade
-	text_icon = JOINT_MON_focus_style
-
-	x = -1
-	y = 2
-	relative_position_id = CHI_MON_SAR_national_identity
-
-	cost = 7
-
-	prerequisite = { focus = CHI_MON_SAR_russian_ties }
-	prerequisite = { focus = CHI_MON_SAR_mining_sovereignty }
-	mutually_exclusive = { focus = CHI_MON_SAR_break_free }
-
-	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_ECONOMIC }
-
-	joint_trigger = {
-		tag = MON
-	}
-
-	available = {
-		CHI_MON_SAR_only_focus_available = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MON_SAR_balanced_dependency"
-		add_stability = 0.04
-		add_political_power = 75
-	}
-
-	ai_will_do = {
-		base = 5
-		modifier = {
-			add = 3
-			is_historical_focus_on = yes
-		}
-	}
-}
-
-joint_focus = {
-	id = CHI_MON_SAR_break_free
-	icon = MEX_Defy_the_constitution
-	text_icon = JOINT_MON_focus_style
-
-	x = 1
-	y = 2
-	relative_position_id = CHI_MON_SAR_national_identity
-
-	cost = 7
-
-	prerequisite = { focus = CHI_MON_SAR_russian_ties }
-	prerequisite = { focus = CHI_MON_SAR_mining_sovereignty }
-	mutually_exclusive = { focus = CHI_MON_SAR_balanced_dependency }
-
-	search_filters = { FOCUS_FILTER_POLITICAL }
-
-	joint_trigger = {
-		tag = MON
-	}
-
-	available = {
-		CHI_MON_SAR_only_focus_available = yes
-	}
-
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MON_SAR_break_free"
-		add_stability = 0.04
-		add_war_support = 0.05
-		set_temp_variable = { percent_change = -12 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = ROOT }
-		change_influence_percentage = yes
+		update_CHI_SAR_network_modifiers = yes
 	}
 
 	ai_will_do = {

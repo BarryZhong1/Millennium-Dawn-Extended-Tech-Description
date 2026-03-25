@@ -68,7 +68,7 @@ CHI_any_SAR_joint_focus_available = {
 				original_tag = TIB
 				original_tag = ETK
 				original_tag = TAI
-				original_tag = MON
+				original_tag = OMG
 			}
 			is_subject_of = CHI
 			if = {
@@ -301,4 +301,62 @@ CHI_MON_idea_cancel = {
 			}
 		}
 	}
+}
+
+### CHI-OMG ###
+
+CHI_OMG_joint_focus_available = {
+	country_exists = CHI
+	country_exists = OMG
+	OMG = { is_subject_of = CHI }
+	NOT = { has_war_with = CHI }
+	NOT = { has_war_with = OMG }
+	if = {
+		limit = { original_tag = OMG }
+		has_opinion = { target = CHI value > -1 }
+	}
+}
+
+CHI_OMG_idea_cancel = {
+	OR = {
+		NOT = { country_exists = CHI }
+		NOT = { country_exists = OMG }
+		AND = { original_tag = CHI  has_war_with = OMG }
+		AND = {
+			original_tag = OMG
+			OR = {
+				NOT = { is_subject_of = CHI }
+				has_war_with = CHI
+			}
+		}
+	}
+}
+
+CHI_OMG_SAR_only_focus_available = {
+	NOT = { original_tag = CHI }
+	original_tag = OMG
+	country_exists = OMG
+	is_subject_of = CHI
+	NOT = { has_war_with = CHI }
+}
+
+### CHI-TAI pre-reunification (no subject requirement — diplomatic route) ###
+
+CHI_TAI_prereunification_focus_available = {
+	country_exists = CHI
+	country_exists = TAI
+	NOT = { has_war_with = CHI }
+	NOT = { has_war_with = TAI }
+	TAI = { has_opinion = { target = CHI value > 24 } }
+}
+
+### CHI-MON country diplomatic track (MON as independent country, not subject) ###
+
+CHI_MON_country_joint_focus_available = {
+	country_exists = CHI
+	country_exists = MON
+	NOT = { MON = { is_subject_of = CHI } }
+	NOT = { has_war_with = CHI }
+	NOT = { has_war_with = MON }
+	MON = { has_opinion = { target = CHI value > 24 } }
 }

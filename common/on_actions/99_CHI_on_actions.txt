@@ -64,6 +64,23 @@ on_actions = {
 				set_country_flag = { flag = CHI_ETK_condemnation_recent days = 365 }
 				country_event = { id = CHI_SAR_relations.24 days = 14 }
 			}
+			# ETK terrorism — ~4% chance per month (~24 month avg); halved with surveillance
+			if = {
+				limit = {
+					has_country_flag = CHI_ETK_terrorism_active
+					ETK = { exists = yes  is_subject_of = CHI }
+				}
+				random_list = {
+					96 = { }
+					4 = {
+						modifier = {
+							factor = 0.5
+							ETK = { has_idea = ETK_surveillance_state_idea }
+						}
+						country_event = { id = etk_terror.1 days = 7 }
+					}
+				}
+			}
 		}
 	}
 
