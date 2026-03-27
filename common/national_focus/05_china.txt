@@ -701,7 +701,7 @@ focus_tree = {
 		id = CHI_The_Korean_Peninsula
 		icon = korean_peninsula
 
-		x = -28
+		x = -23
 		y = 1
 		relative_position_id = CHI_Chinese_Diplomacy
 
@@ -725,7 +725,7 @@ focus_tree = {
 		id = CHI_Criticize_the_American_Presence
 		icon = usa
 
-		x = -4
+		x = -3
 		y = 1
 		relative_position_id = CHI_The_Korean_Peninsula
 
@@ -770,9 +770,9 @@ focus_tree = {
 		id = CHI_Demand_a_Withdrawal
 		icon = sov_nazbol_anti_usa
 
-		x = -4
-		y = 2
-		relative_position_id = CHI_The_Korean_Peninsula
+		x = 0
+		y = 1
+		relative_position_id = CHI_Criticize_the_American_Presence
 
 		cost = 10
 
@@ -801,9 +801,9 @@ focus_tree = {
 		id = CHI_Support_the_Norths_Military_Buildup
 		icon = NKO_komid
 
-		x = -4
-		y = 3
-		relative_position_id = CHI_The_Korean_Peninsula
+		x = 0
+		y = 2
+		relative_position_id = CHI_Criticize_the_American_Presence
 
 		cost = 10
 
@@ -846,9 +846,9 @@ focus_tree = {
 		id = CHI_Ignite_the_Second_Korean_War
 		icon = attack_south_korea
 
-		x = -4
-		y = 4
-		relative_position_id = CHI_The_Korean_Peninsula
+		x = 0
+		y = 3
+		relative_position_id = CHI_Criticize_the_American_Presence
 
 		cost = 10
 
@@ -1333,7 +1333,7 @@ focus_tree = {
 		id = CHI_End_the_Kim_Dynasty
 		icon = remove_dprk
 
-		x = 4
+		x = 3
 		y = 1
 		relative_position_id = CHI_The_Korean_Peninsula
 
@@ -1403,9 +1403,9 @@ focus_tree = {
 		id = CHI_Gain_the_Support_of_the_KPA
 		icon = NKO_party_reform
 
-		x = 4
-		y = 2
-		relative_position_id = CHI_The_Korean_Peninsula
+		x = 0
+		y = 1
+		relative_position_id = CHI_End_the_Kim_Dynasty
 
 		cost = 10
 
@@ -1444,9 +1444,9 @@ focus_tree = {
 		id = CHI_The_North_Korean_Coup
 		icon = communist_spies2
 
-		x = 4
-		y = 3
-		relative_position_id = CHI_The_Korean_Peninsula
+		x = 0
+		y = 2
+		relative_position_id = CHI_End_the_Kim_Dynasty
 
 		cost = 10
 
@@ -1547,9 +1547,9 @@ focus_tree = {
 		id = CHI_Establish_a_Puppet_Government
 		icon = attack_north_korea
 
-		x = 4
-		y = 4
-		relative_position_id = CHI_The_Korean_Peninsula
+		x = 0
+		y = 3
+		relative_position_id = CHI_End_the_Kim_Dynasty
 
 		cost = 10
 
@@ -3264,402 +3264,10 @@ focus_tree = {
 	}
 
 	focus = {
-		id = CHI_The_Northern_Shield
-		icon = shield_of_china
-
-		x = -11
-		y = 1
-		relative_position_id = CHI_Chinese_Diplomacy
-
-		cost = 5
-
-		prerequisite = { focus = CHI_Chinese_Diplomacy }
-
-		search_filters = { FOCUS_FILTER_POLITICAL }
-
-		completion_reward = {
-			log = "[GetDateText]: [This.GetName]: focus CHI_The_Northern_Shield executed"
-			add_political_power = 50
-			news_event = china_news.27
-			if = {
-				limit = {
-					country_exists = TAI
-					NOT = { TAI = { is_subject_of = CHI } }
-				}
-				TAI = { add_ideas = fate_of_mongolian_area }
-			}
-		}
-
-		ai_will_do = {
-			base = 1
-		}
-	}
-
-	focus = {
-		id = CHI_Raid_The_Dragon_City
-		icon = attack_mongolia
-
-		x = -1
-		y = 1
-		relative_position_id = CHI_The_Northern_Shield
-
-		cost = 2
-
-		prerequisite = { focus = CHI_The_Northern_Shield }
-		mutually_exclusive = { focus = CHI_Sino_Mongol_Friendship_Treaty }
-
-		available = {
-			country_exists = MON
-			NOT = { MON = { is_subject_of = CHI } }
-		}
-		search_filters = { FOCUS_FILTER_ANNEXATION }
-
-		completion_reward = {
-			log = "[GetDateText]: [This.GetName]: focus CHI_Raid_The_Dragon_City executed"
-			add_war_support = 0.05
-			add_popularity = { ideology = communism popularity = 0.02 }
-			recalculate_party = yes
-			set_temp_variable = { temp_opinion = 3 }
-			change_communist_cadres_opinion = yes
-			custom_effect_tooltip = CHI_khalkha_cores_TT
-			hidden_effect = {
-				add_state_core = 596
-				add_state_core = 597
-			}
-			SOV = {
-				add_opinion_modifier = {
-					target = CHI
-					modifier = raid_of_dragon_city
-				}
-			}
-			MON = {
-				add_opinion_modifier = {
-					target = CHI
-					modifier = raid_of_dragon_city
-				}
-			}
-			set_temp_variable = { modify_chinese_aggression = 1 }
-			CHI_modify_chinese_aggression = yes
-		}
-
-		ai_will_do = {
-			base = 0
-			modifier = {
-				add = 1
-				OR = {
-					has_idea = great_power
-					has_idea = super_power
-				}
-			}
-			modifier = {
-				factor = 0
-				has_global_flag = CHI_A_LONG_PEACE_FOCUS_PATH
-			}
-			modifier = {
-				add = 1
-				AND = { is_historical_focus_on = yes
-						threat > 0.3
-					 }
-			}
-		}
-	}
-
-	focus = {
-		id = CHI_Ceremony_in_Khentii_Mountains
-		icon = a_land_of_mountains
-
-		x = -1
-		y = 2
-		relative_position_id = CHI_The_Northern_Shield
-
-		cost = 2
-
-		prerequisite = { focus = CHI_Raid_The_Dragon_City }
-
-		available = {
-			country_exists = MON
-			NOT = { MON = { is_subject_of = CHI } }
-		}
-
-		search_filters = { FOCUS_FILTER_ANNEXATION }
-
-		completion_reward = {
-			log = "[GetDateText]: [This.GetName]: focus CHI_Ceremony_in_Khentii_Mountains executed"
-			add_ideas = ceremony_in_khentii_1
-			add_popularity = { ideology = communism popularity = 0.02 }
-			recalculate_party = yes
-			set_temp_variable = { temp_opinion = 5 }
-			change_the_military_opinion = yes
-			set_temp_variable = { modify_chinese_aggression = 1 }
-			CHI_modify_chinese_aggression = yes
-			news_event = china_news.18
-		}
-
-		ai_will_do = {
-			base = 1
-		}
-	}
-
-	focus = {
-		id = CHI_Inscription_of_Yanran
-		icon = Generic_Sun_Tzu
-
-		x = -1
-		y = 3
-		relative_position_id = CHI_The_Northern_Shield
-
-		cost = 2
-
-		prerequisite = { focus = CHI_Ceremony_in_Khentii_Mountains }
-
-		available = {
-			country_exists = MON
-			NOT = {
-				MON = { is_subject_of = CHI }
-			}
-		}
-
-		will_lead_to_war_with = MON
-
-		search_filters = { FOCUS_FILTER_ANNEXATION }
-
-		completion_reward = {
-			log = "[GetDateText]: [This.GetName]: focus CHI_Inscription_of_Yanran executed"
-			country_event = china.63
-			set_temp_variable = { modify_chinese_aggression = 1 }
-			CHI_modify_chinese_aggression = yes
-			set_temp_variable = { temp_opinion = 5 }
-			change_the_military_opinion = yes
-		}
-
-		ai_will_do = {
-			base = 1
-		}
-	}
-
-	focus = {
-		id = CHI_Outer_Mongolia_Return
-		icon = prc_begonia_leaf
-
-		x = 0
-		y = 4
-		relative_position_id = CHI_The_Northern_Shield
-
-		cost = 1
-
-		prerequisite = { focus = CHI_Inscription_of_Yanran focus = CHI_Outer_Mongolia_SAR }
-
-		available = {
-			OR = {
-				is_outer_mongolia_state_owned = yes
-				MON = {
-					is_subject_of = CHI
-					influence_higher_90 = yes
-				}
-			}
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [This.GetName]: focus CHI_Outer_Mongolia_Return executed"
-			add_stability = 0.1
-			add_war_support = 0.1
-			add_ideas = chinese_khalkha
-			add_popularity = { ideology = communism popularity = 0.1 }
-			recalculate_party = yes
-			set_temp_variable = { temp_opinion = 10 }
-			change_communist_cadres_opinion = yes
-			change_the_military_opinion = yes
-			country_event = china.21
-			swap_ideas = {
-				remove_idea = ceremony_in_khentii_1
-				add_idea = ceremony_in_khentii_2
-			}
-			596 = {
-				add_building_construction = {
-					type = air_base
-					level = 1
-					instant_build = yes
-				}
-			}
-			if = {
-				limit = {
-					country_exists = TAI
-					NOT = { TAI = { is_subject_of = CHI } }
-				}
-				TAI = {
-					swap_ideas = {
-						remove_idea = fate_of_mongolian_area
-						add_idea = fate_of_mongolian_area_1
-					}
-				}
-			}
-			hidden_effect = {
-				if = {
-					limit = { has_idea = CHI_Hong_Kong_Protests_01 }
-					remove_ideas = CHI_Hong_Kong_Protests_01
-				}
-				if = {
-					limit = { has_idea = CHI_Hong_Kong_Protests_02 }
-					remove_ideas = CHI_Hong_Kong_Protests_02
-				}
-				if = {
-					limit = { has_idea = CHI_Hong_Kong_Protests_03 }
-					remove_ideas = CHI_Hong_Kong_Protests_03
-				}
-			}
-		}
-
-		ai_will_do = {
-			base = 1
-		}
-	}
-
-	focus = {
-		id = CHI_Sino_Mongol_Friendship_Treaty
-		icon = align_to_mongolia
-
-		x = 1
-		y = 1
-		relative_position_id = CHI_The_Northern_Shield
-
-		cost = 7
-
-		prerequisite = { focus = CHI_The_Northern_Shield }
-		mutually_exclusive = { focus = CHI_Raid_The_Dragon_City }
-
-		search_filters = { FOCUS_FILTER_CHI_AGGRESSION }
-
-		available = {
-			has_war = no
-			has_completed_focus = CHI_Extend_Interpretation_of_the_Systems
-			custom_trigger_tooltip = {
-				tooltip = CHI_aggression_less_10_tt
-				check_variable = { chinese_aggression < 11 }
-			}
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [This.GetName]: focus CHI_China_Mongol_Friendship_Treaty executed"
-			SOV = {
-				add_opinion_modifier = { target = CHI modifier = political_outreach }
-			}
-			MON = {
-				add_opinion_modifier = { target = CHI modifier = political_outreach }
-			}
-			country_event = china.48
-		}
-
-		ai_will_do = {
-			base = 0
-			modifier = {
-				add = 1
-				OR = {
-					has_government = democratic
-					has_government = neutrality
-				}
-			}
-			modifier = {
-				add = 1
-				is_historical_focus_on = yes
-			}
-			modifier = {
-				factor = 0
-				has_global_flag = CHI_RED_DAWN_FOCUS_PATH
-			}
-		}
-	}
-
-	focus = {
-		id = CHI_Aid_Outer_Mongolia
-		icon = coins
-
-		x = 1
-		y = 2
-		relative_position_id = CHI_The_Northern_Shield
-
-		prerequisite = { focus = CHI_Sino_Mongol_Friendship_Treaty }
-
-		cost = 10
-
-		search_filters = { FOCUS_FILTER_CHI_AGGRESSION }
-
-		available = {
-			  country_exists = MON
-			   NOT = { has_war_with = MON }
-				MON = {
-					has_opinion = {
-						target = CHI
-						value > 24
-					}
-				}
-		}
-
-		bypass = { MON = { is_subject = yes } }
-
-		completion_reward = {
-			CHI = { set_temp_variable = { treasury_change = -5 }
-			modify_treasury_effect = yes
-			set_temp_variable = { modify_chinese_aggression = -1 }
-			CHI_modify_chinese_aggression = yes }
-			MON = { set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = CHI }
-			set_temp_variable = { influence_target = MON }
-			change_influence_percentage = yes }
-			custom_effect_tooltip = CHI_jebtsundamba_TT
-			log = "[GetDateText]: [This.GetName]: focus CHI_Aid_Outer_Mongolia executed"
-		}
-
-		ai_will_do = {
-			base = 1
-		}
-
-	}
-
-	focus = {
-		id = CHI_Outer_Mongolia_SAR
-		icon = outer_mongolia_sar
-
-		x = 1
-		y = 3
-		relative_position_id = CHI_The_Northern_Shield
-
-		prerequisite = { focus = CHI_Aid_Outer_Mongolia }
-
-		cost = 10
-
-		search_filters = { FOCUS_FILTER_ANNEXATION }
-
-		available = {
-			   country_exists = MON
-			   has_country_flag = jebtsundamba_sat
-			   NOT = { has_war_with = MON }
-			   MON = {
-					influence_higher_50 = yes
-			 }
-
-		}
-
-		bypass = { MON = { is_subject_of = CHI } }
-
-		completion_reward = {
-			set_temp_variable = { temp_opinion = 10 }
-			change_communist_cadres_opinion = yes
-			custom_effect_tooltip = CHI_MON_SAR_tt
-			MON = { country_event = { id = china.19 days = 1 } }
-			log = "[GetDateText]: [This.GetName]: focus CHI_Outer_Mongolia_SAR executed"
-		}
-
-		ai_will_do = {
-			base = 1
-		}
-
-	}
-
-	focus = {
 		id = CHI_Form_the_SCO
 		icon = sco
 
-		x = -18
+		x = -14
 		y = 1
 		relative_position_id = CHI_Chinese_Diplomacy
 

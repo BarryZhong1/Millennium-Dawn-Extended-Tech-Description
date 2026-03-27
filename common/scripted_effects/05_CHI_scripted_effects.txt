@@ -1,3 +1,4 @@
+# Author(s): TheGeneral
 SCO_dirty_update = {
 	if = { limit = { check_variable = { SCO_dirty_update_var < 10000 } }
 		add_to_variable = { SCO_dirty_update_var = 1 }
@@ -108,9 +109,7 @@ CHI_reset_ic_commissions = {
 	clr_country_flag = CHI_ic_nsc_chen_xiaojiang_active
 }
 
-# ===================================================================
 # Secretary Assignment System
-# ===================================================================
 # Secretary ID mapping per era per department:
 #   Org:    Hu [9,10,11,12,13]   Xi [34,35,36,37,38]
 #   Pub:    Hu [14,15,16,17,18]  Xi [39,40,41,42,43]
@@ -119,7 +118,6 @@ CHI_reset_ic_commissions = {
 #   CPLAC:  Hu [29,30,31,32,33] Xi [54,55,56,57,58]
 #   Social: Xi [59,60,61,62,63]
 #   NSC:    Xi [64,65,66,67,68]
-# ===================================================================
 CHI_assign_all_secretaries = {
 	# Slot 1
 	if = {
@@ -181,11 +179,9 @@ CHI_ic_copy_picks_to_slot = {
 	}
 }
 
-# ===================================================================
 # Organization Department (dept_id = 1)
 # Hu: 9=He Guoqiang, 10=Li Yuanchao, 11=Shen Yueyue, 12=Zhao Hongzhu, 13=Wang Ercheng
 # Xi: 34=Zhao Leji, 35=Chen Xi, 36=Li Ganjie, 37=Jiang Xinzhi, 38=Qi Yu
-# ===================================================================
 CHI_assign_org_secretaries = {
 	if = {
 		limit = { check_variable = { CHI_ic_leader = 2 } }
@@ -249,11 +245,9 @@ CHI_assign_org_secretaries = {
 	if = { limit = { OR = { check_variable = { CHI_ic_pick1 = 38 } check_variable = { CHI_ic_pick2 = 38 } check_variable = { CHI_ic_pick3 = 38 } } } set_country_flag = CHI_ic_org_qi_yu_active }
 }
 
-# ===================================================================
 # Publicity Department (dept_id = 2)
 # Hu: 14=Liu Yunshan, 15=Ji Bingxuan, 16=Cai Wu, 17=Li Dongsheng, 18=Cai Mingzhao
 # Xi: 39=Liu Qibao, 40=Huang Kunming, 41=Li Shulei, 42=Xu Lin, 43=Luo Shugang
-# ===================================================================
 CHI_assign_pub_secretaries = {
 	if = {
 		limit = { check_variable = { CHI_ic_leader = 2 } }
@@ -316,11 +310,9 @@ CHI_assign_pub_secretaries = {
 	if = { limit = { OR = { check_variable = { CHI_ic_pick1 = 43 } check_variable = { CHI_ic_pick2 = 43 } check_variable = { CHI_ic_pick3 = 43 } } } set_country_flag = CHI_ic_pub_luo_shugang_active }
 }
 
-# ===================================================================
 # United Front Work Department (dept_id = 3)
 # Hu: 19=Liu Yandong, 20=Du Qinglin, 21=Zhu Weiqun, 22=Quan Zhezhu, 23=Huang Mengfu
 # Xi: 44=Sun Chunlan, 45=You Quan, 46=Shi Taifeng, 47=Wang Zhengwei, 48=Wan Gang
-# ===================================================================
 CHI_assign_ufwd_secretaries = {
 	if = {
 		limit = { check_variable = { CHI_ic_leader = 2 } }
@@ -383,11 +375,9 @@ CHI_assign_ufwd_secretaries = {
 	if = { limit = { OR = { check_variable = { CHI_ic_pick1 = 48 } check_variable = { CHI_ic_pick2 = 48 } check_variable = { CHI_ic_pick3 = 48 } } } set_country_flag = CHI_ic_ufwd_wan_gang_active }
 }
 
-# ===================================================================
 # International Department (dept_id = 4)
 # Hu: 24=Dai Bingguo, 25=Wang Jiarui, 26=Liu Jieyi, 27=Li Jinjun, 28=Li Jun
 # Xi: 49=Song Tao, 50=Liu Jianchao, 51=Liu Haixing, 52=Guo Yezhou, 53=Qian Hongshan
-# ===================================================================
 CHI_assign_intl_secretaries = {
 	if = {
 		limit = { check_variable = { CHI_ic_leader = 2 } }
@@ -450,11 +440,9 @@ CHI_assign_intl_secretaries = {
 	if = { limit = { OR = { check_variable = { CHI_ic_pick1 = 53 } check_variable = { CHI_ic_pick2 = 53 } check_variable = { CHI_ic_pick3 = 53 } } } set_country_flag = CHI_ic_intl_qian_hongshan_active }
 }
 
-# ===================================================================
 # Central Political and Legal Affairs Commission (dept_id = 6)
 # Hu: 29=Luo Gan, 30=Zhou Yongkang, 31=Wang Shengjun, 32=Meng Jianzhu, 33=Wang Qishan
 # Xi: 54=Guo Shengkun, 55=Chen Wenqing, 56=Chen Yixin, 57=Wang Xiaohong, 58=Fu Zhenghua
-# ===================================================================
 CHI_assign_cplac_secretaries = {
 	if = {
 		limit = { check_variable = { CHI_ic_leader = 2 } }
@@ -517,10 +505,8 @@ CHI_assign_cplac_secretaries = {
 	if = { limit = { OR = { check_variable = { CHI_ic_pick1 = 58 } check_variable = { CHI_ic_pick2 = 58 } check_variable = { CHI_ic_pick3 = 58 } } } set_country_flag = CHI_ic_cplac_fu_zhenghua_active }
 }
 
-# ===================================================================
 # Society Work Department (dept_id = 5) — Xi era only
 # Xi: 59=Wu Hansheng, 60=Tang Yijun, 61=Ying Yong, 62=Zhang Jun, 63=He Rong
-# ===================================================================
 CHI_assign_social_secretaries = {
 	random_list = {
 		1 = { set_temp_variable = { CHI_ic_pick1 = 59 } }
@@ -551,10 +537,8 @@ CHI_assign_social_secretaries = {
 	if = { limit = { OR = { check_variable = { CHI_ic_pick1 = 63 } check_variable = { CHI_ic_pick2 = 63 } check_variable = { CHI_ic_pick3 = 63 } } } set_country_flag = CHI_ic_social_he_rong_active }
 }
 
-# ===================================================================
 # National Security Commission (dept_id = 7) — Xi era only
 # Xi: 64=Li Zhanshu, 65=Yang Jiechi, 66=Cai Qi, 67=Ding Xuexiang, 68=Chen Xiaojiang
-# ===================================================================
 CHI_assign_nsc_secretaries = {
 	random_list = {
 		1 = { set_temp_variable = { CHI_ic_pick1 = 64 } }
@@ -583,4 +567,15 @@ CHI_assign_nsc_secretaries = {
 	if = { limit = { OR = { check_variable = { CHI_ic_pick1 = 66 } check_variable = { CHI_ic_pick2 = 66 } check_variable = { CHI_ic_pick3 = 66 } } } set_country_flag = CHI_ic_nsc_cai_qi_active }
 	if = { limit = { OR = { check_variable = { CHI_ic_pick1 = 67 } check_variable = { CHI_ic_pick2 = 67 } check_variable = { CHI_ic_pick3 = 67 } } } set_country_flag = CHI_ic_nsc_ding_xuexiang_active }
 	if = { limit = { OR = { check_variable = { CHI_ic_pick1 = 68 } check_variable = { CHI_ic_pick2 = 68 } check_variable = { CHI_ic_pick3 = 68 } } } set_country_flag = CHI_ic_nsc_chen_xiaojiang_active }
+}
+CHI_update_ETK_sinofication = {
+	set_temp_variable = { sinofication_extra_change = sinofication_base_change } #5
+	set_temp_variable = { sinofication_compliance = THIS.compliance } #35.03595
+	multiply_temp_variable = { sinofication_compliance = sinofication_extra_change } #35.03595 * 5 = 175.17975
+	set_temp_variable = { sinofication_resistance = THIS.resistance } #42.4
+	multiply_temp_variable = { sinofication_resistance = sinofication_extra_change } #42.4 * 5 = 212
+	add_to_temp_variable = { sinofication_compliance = sinofication_resistance } #175 - 212 = -36,82025
+	divide_temp_variable = { sinofication_compliance = 100 } #-37 / 100 = -0,36820255
+	multiply_temp_variable = { sinofication_extra_change = sinofication_compliance } # 5 * -0,36820255 = -1,8410125
+	add_to_temp_variable = { sinofication_base_change = sinofication_extra_change } # 5 + -1,8410125 = 3,1589875
 }

@@ -25,21 +25,12 @@ joint_focus = {
 
 	search_filters = { FOCUS_FILTER_POLITICAL }
 
-	available = {
-		CHI = {
-			exists = yes
-			NOT = { has_war_with = SOV }
-		}
-		SOV = {
-			exists = yes
-			NOT = { has_war_with = CHI }
-		}
-	}
+	available = { CHI_SOV_joint_focus_available = yes }
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = SOV
+			original_tag = CHI
+			original_tag = SOV
 		}
 	}
 
@@ -83,7 +74,7 @@ joint_focus = {
 	id = CHI_SOV_sco_framework
 	icon = diplomacy
 	text_icon = JOINT_SOV_CHI_focus_style
-	x = -7
+	x = -9
 	y = 1
 	relative_position_id = CHI_SOV_treaty_good_neighbourliness
 
@@ -92,19 +83,12 @@ joint_focus = {
 	prerequisite = { focus = CHI_SOV_treaty_good_neighbourliness }
 	search_filters = { FOCUS_FILTER_POLITICAL }
 
-	available = {
-		country_exists = CHI
-		country_exists = SOV
-		CHI = {
-			NOT = { has_war_with = SOV }
-			has_completed_focus = CHI_Form_the_SCO
-		}
-	}
+	available = { CHI_SOV_joint_focus_available = yes }
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = SOV
+			original_tag = CHI
+			original_tag = SOV
 		}
 	}
 
@@ -122,27 +106,18 @@ joint_focus = {
 	id = CHI_SOV_turn_to_east
 	icon = diplomacy
 	text_icon = JOINT_SOV_focus_style
-	x = -9
-	y = 2
-	relative_position_id = CHI_SOV_treaty_good_neighbourliness
+	x = -2
+	y = 1
+	relative_position_id = CHI_SOV_sco_framework
 
 	cost = 10
 
 	prerequisite = { focus = CHI_SOV_sco_framework }
 	search_filters = { FOCUS_FILTER_POLITICAL }
 
-	available = {
-		original_tag = SOV
-		country_exists = CHI
-		NOT = { has_war_with = CHI }
-	}
+	available = { CHI_SOV_joint_focus_available = yes }
 
-	joint_trigger = {
-		OR = {
-			tag = CHI
-			tag = SOV
-		}
-	}
+	joint_trigger = { original_tag = SOV }
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_SOV_turn_to_east"
@@ -167,27 +142,18 @@ joint_focus = {
 	id = CHI_SOV_bri_russia_corridor
 	icon = prc_railroad
 	text_icon = JOINT_CHI_focus_style
-	x = -7
-	y = 2
-	relative_position_id = CHI_SOV_treaty_good_neighbourliness
+	x = 0
+	y = 1
+	relative_position_id = CHI_SOV_sco_framework
 
 	cost = 10
 
 	prerequisite = { focus = CHI_SOV_sco_framework }
 	search_filters = { FOCUS_FILTER_ECONOMY }
 
-	available = {
-		original_tag = CHI
-		country_exists = SOV
-		NOT = { has_war_with = SOV }
-	}
+	available = { CHI_SOV_joint_focus_available = yes }
 
-	joint_trigger = {
-		OR = {
-			tag = CHI
-			tag = SOV
-		}
-	}
+	joint_trigger = { original_tag = CHI }
 
 	completion_reward = {
 		SOV = {
@@ -230,25 +196,21 @@ joint_focus = {
 	id = CHI_SOV_brics_coordination
 	icon = diplomacy
 	text_icon = JOINT_SOV_CHI_focus_style
-	x = -5
-	y = 2
-	relative_position_id = CHI_SOV_treaty_good_neighbourliness
+	x = 2
+	y = 1
+	relative_position_id = CHI_SOV_sco_framework
 
 	cost = 10
 
 	prerequisite = { focus = CHI_SOV_sco_framework }
 	search_filters = { FOCUS_FILTER_POLITICAL }
 
-	available = {
-		country_exists = CHI
-		country_exists = SOV
-		CHI = { NOT = { has_war_with = SOV } }
-	}
+	available = { CHI_SOV_joint_focus_available = yes }
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = SOV
+			original_tag = CHI
+			original_tag = SOV
 		}
 	}
 
@@ -267,9 +229,9 @@ joint_focus = {
 	id = CHI_SOV_sco_antiterror
 	icon = police_funding_bonus
 	text_icon = JOINT_SOV_CHI_focus_style
-	x = -7
-	y = 3
-	relative_position_id = CHI_SOV_treaty_good_neighbourliness
+	x = 1
+	y = 2
+	relative_position_id = CHI_SOV_sco_framework
 
 	cost = 10
 
@@ -277,16 +239,12 @@ joint_focus = {
 	prerequisite = { focus = CHI_SOV_bri_russia_corridor }
 	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_WAR_SUPPORT }
 
-	available = {
-		country_exists = CHI
-		country_exists = SOV
-		CHI = { NOT = { has_war_with = SOV } }
-	}
+	available = { CHI_SOV_joint_focus_available = yes }
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = SOV
+			original_tag = CHI
+			original_tag = SOV
 		}
 	}
 
@@ -309,25 +267,21 @@ joint_focus = {
 	id = CHI_SOV_no_limits_partnership
 	icon = defense
 	text_icon = JOINT_SOV_CHI_focus_style
-	x = -7
-	y = 4
-	relative_position_id = CHI_SOV_treaty_good_neighbourliness
+	x = 1
+	y = 3
+	relative_position_id = CHI_SOV_sco_framework
 
 	cost = 15
 
 	prerequisite = { focus = CHI_SOV_sco_antiterror }
 	search_filters = { FOCUS_FILTER_POLITICAL }
 
-	available = {
-		country_exists = CHI
-		country_exists = SOV
-		CHI = { NOT = { has_war_with = SOV } }
-	}
+	available = { CHI_SOV_joint_focus_available = yes }
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = SOV
+			original_tag = CHI
+			original_tag = SOV
 		}
 	}
 
@@ -365,7 +319,7 @@ joint_focus = {
 	id = CHI_SOV_yuan_ruble_settlement
 	icon = blr_our_ruble
 	text_icon = JOINT_SOV_CHI_focus_style
-	x = -1
+	x = -3
 	y = 1
 	relative_position_id = CHI_SOV_treaty_good_neighbourliness
 
@@ -374,16 +328,12 @@ joint_focus = {
 	prerequisite = { focus = CHI_SOV_treaty_good_neighbourliness }
 	search_filters = { FOCUS_FILTER_ECONOMY }
 
-	available = {
-		country_exists = CHI
-		country_exists = SOV
-		CHI = { NOT = { has_war_with = SOV } }
-	}
+	available = { CHI_SOV_joint_focus_available = yes }
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = SOV
+			original_tag = CHI
+			original_tag = SOV
 		}
 	}
 
@@ -411,27 +361,18 @@ joint_focus = {
 	id = CHI_SOV_agricultural_corridor
 	icon = focus_CHL_high_quality_nitrate
 	text_icon = JOINT_SOV_focus_style
-	x = -3
-	y = 2
-	relative_position_id = CHI_SOV_treaty_good_neighbourliness
+	x = -2
+	y = 1
+	relative_position_id = CHI_SOV_yuan_ruble_settlement
 
 	cost = 10
 
 	prerequisite = { focus = CHI_SOV_yuan_ruble_settlement }
 	search_filters = { FOCUS_FILTER_ECONOMY }
 
-	available = {
-		original_tag = SOV
-		country_exists = CHI
-		NOT = { has_war_with = CHI }
-	}
+	available = { CHI_SOV_joint_focus_available = yes }
 
-	joint_trigger = {
-		OR = {
-			tag = CHI
-			tag = SOV
-		}
-	}
+	joint_trigger = { original_tag = SOV }
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_SOV_agricultural_corridor"
@@ -468,27 +409,18 @@ joint_focus = {
 	id = CHI_SOV_russian_far_east_zone
 	icon = prc_sign
 	text_icon = JOINT_CHI_focus_style
-	x = -1
-	y = 2
-	relative_position_id = CHI_SOV_treaty_good_neighbourliness
+	x = 0
+	y = 1
+	relative_position_id = CHI_SOV_yuan_ruble_settlement
 
 	cost = 10
 
 	prerequisite = { focus = CHI_SOV_yuan_ruble_settlement }
 	search_filters = { FOCUS_FILTER_ECONOMY FOCUS_FILTER_INDUSTRY }
 
-	available = {
-		original_tag = CHI
-		country_exists = SOV
-		NOT = { has_war_with = SOV }
-	}
+	available = { CHI_SOV_joint_focus_available = yes }
 
-	joint_trigger = {
-		OR = {
-			tag = CHI
-			tag = SOV
-		}
-	}
+	joint_trigger = { original_tag = CHI }
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_SOV_russian_far_east_zone"
@@ -534,9 +466,9 @@ joint_focus = {
 	id = CHI_SOV_zarubino_port
 	icon = infrastructure
 	text_icon = JOINT_CHI_focus_style
-	x = -2
-	y = 3
-	relative_position_id = CHI_SOV_treaty_good_neighbourliness
+	x = -1
+	y = 2
+	relative_position_id = CHI_SOV_yuan_ruble_settlement
 
 	cost = 10
 
@@ -544,19 +476,9 @@ joint_focus = {
 	prerequisite = { focus = CHI_SOV_russian_far_east_zone }
 	search_filters = { FOCUS_FILTER_ECONOMY FOCUS_FILTER_INDUSTRY }
 
-	available = {
-		original_tag = CHI
-		country_exists = CHI
-		country_exists = SOV
-		CHI = { NOT = { has_war_with = SOV } }
-	}
+	available = { CHI_SOV_joint_focus_available = yes }
 
-	joint_trigger = {
-		OR = {
-			tag = CHI
-			tag = SOV
-		}
-	}
+	joint_trigger = { original_tag = CHI }
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_SOV_zarubino_port"
@@ -591,25 +513,21 @@ joint_focus = {
 	id = CHI_SOV_trans_siberian_freight
 	icon = Trade_with_the_east
 	text_icon = JOINT_SOV_CHI_focus_style
-	x = -2
-	y = 4
-	relative_position_id = CHI_SOV_treaty_good_neighbourliness
+	x = -1
+	y = 3
+	relative_position_id = CHI_SOV_yuan_ruble_settlement
 
 	cost = 10
 
 	prerequisite = { focus = CHI_SOV_zarubino_port }
 	search_filters = { FOCUS_FILTER_ECONOMY FOCUS_FILTER_INDUSTRY }
 
-	available = {
-		country_exists = CHI
-		country_exists = SOV
-		CHI = { NOT = { has_war_with = SOV } }
-	}
+	available = { CHI_SOV_joint_focus_available = yes }
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = SOV
+			original_tag = CHI
+			original_tag = SOV
 		}
 	}
 
@@ -642,25 +560,21 @@ joint_focus = {
 	id = CHI_SOV_timber_mineral_trade
 	icon = Logging_sheep
 	text_icon = JOINT_SOV_CHI_focus_style
-	x = 1
-	y = 2
-	relative_position_id = CHI_SOV_treaty_good_neighbourliness
+	x = 2
+	y = 1
+	relative_position_id = CHI_SOV_yuan_ruble_settlement
 
 	cost = 10
 
 	prerequisite = { focus = CHI_SOV_yuan_ruble_settlement }
 	search_filters = { FOCUS_FILTER_ECONOMY }
 
-	available = {
-		country_exists = CHI
-		country_exists = SOV
-		CHI = { NOT = { has_war_with = SOV } }
-	}
+	available = { CHI_SOV_joint_focus_available = yes }
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = SOV
+			original_tag = CHI
+			original_tag = SOV
 		}
 	}
 
@@ -720,25 +634,21 @@ joint_focus = {
 	id = CHI_SOV_arctic_lng
 	icon = oil_trade
 	text_icon = JOINT_SOV_CHI_focus_style
-	x = 1
-	y = 3
-	relative_position_id = CHI_SOV_treaty_good_neighbourliness
+	x = 2
+	y = 2
+	relative_position_id = CHI_SOV_yuan_ruble_settlement
 
 	cost = 10
 
 	prerequisite = { focus = CHI_SOV_timber_mineral_trade }
 	search_filters = { FOCUS_FILTER_ECONOMY FOCUS_FILTER_INDUSTRY }
 
-	available = {
-		country_exists = CHI
-		country_exists = SOV
-		CHI = { NOT = { has_war_with = SOV } }
-	}
+	available = { CHI_SOV_joint_focus_available = yes }
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = SOV
+			original_tag = CHI
+			original_tag = SOV
 		}
 	}
 
@@ -783,7 +693,7 @@ joint_focus = {
 	id = CHI_SOV_power_of_siberia_2
 	icon = oil_companies
 	text_icon = JOINT_SOV_focus_style
-	x = 5
+	x = 3
 	y = 1
 	relative_position_id = CHI_SOV_treaty_good_neighbourliness
 
@@ -792,16 +702,12 @@ joint_focus = {
 	prerequisite = { focus = CHI_SOV_treaty_good_neighbourliness }
 	search_filters = { FOCUS_FILTER_ECONOMY FOCUS_FILTER_INDUSTRY }
 
-	available = {
-		original_tag = SOV
-		country_exists = CHI
-		NOT = { has_war_with = CHI }
-	}
+	available = { CHI_SOV_joint_focus_available = yes }
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = SOV
+			original_tag = CHI
+			original_tag = SOV
 		}
 	}
 
@@ -859,18 +765,9 @@ joint_focus = {
 	prerequisite = { focus = CHI_SOV_power_of_siberia_2 }
 	search_filters = { FOCUS_FILTER_INDUSTRY }
 
-	available = {
-		original_tag = SOV
-		country_exists = CHI
-		NOT = { has_war_with = CHI }
-	}
+	available = { CHI_SOV_joint_focus_available = yes }
 
-	joint_trigger = {
-		OR = {
-			tag = CHI
-			tag = SOV
-		}
-	}
+	joint_trigger = { original_tag = SOV }
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_SOV_tianwan_nuclear"
@@ -913,18 +810,9 @@ joint_focus = {
 	prerequisite = { focus = CHI_SOV_power_of_siberia_2 }
 	search_filters = { FOCUS_FILTER_ECONOMY FOCUS_FILTER_INDUSTRY }
 
-	available = {
-		original_tag = CHI
-		country_exists = SOV
-		NOT = { has_war_with = SOV }
-	}
+	available = { CHI_SOV_joint_focus_available = yes }
 
-	joint_trigger = {
-		OR = {
-			tag = CHI
-			tag = SOV
-		}
-	}
+	joint_trigger = { original_tag = CHI }
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_SOV_huawei_russia"
@@ -980,16 +868,12 @@ joint_focus = {
 	prerequisite = { focus = CHI_SOV_huawei_russia }
 	search_filters = { FOCUS_FILTER_INDUSTRY }
 
-	available = {
-		country_exists = CHI
-		country_exists = SOV
-		CHI = { NOT = { has_war_with = SOV } }
-	}
+	available = { CHI_SOV_joint_focus_available = yes }
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = SOV
+			original_tag = CHI
+			original_tag = SOV
 		}
 	}
 
@@ -1025,16 +909,12 @@ joint_focus = {
 	prerequisite = { focus = CHI_SOV_huawei_russia }
 	search_filters = { FOCUS_FILTER_ECONOMY }
 
-	available = {
-		original_tag = CHI
-		country_exists = SOV
-		NOT = { has_war_with = SOV }
-	}
+	available = { CHI_SOV_joint_focus_available = yes }
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = SOV
+			original_tag = CHI
+			original_tag = SOV
 		}
 	}
 
@@ -1077,16 +957,12 @@ joint_focus = {
 	prerequisite = { focus = CHI_SOV_polar_silk_road }
 	search_filters = { FOCUS_FILTER_ECONOMY FOCUS_FILTER_INDUSTRY }
 
-	available = {
-		country_exists = CHI
-		country_exists = SOV
-		CHI = { NOT = { has_war_with = SOV } }
-	}
+	available = { CHI_SOV_joint_focus_available = yes }
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = SOV
+			original_tag = CHI
+			original_tag = SOV
 		}
 	}
 
@@ -1127,18 +1003,9 @@ joint_focus = {
 	prerequisite = { focus = CHI_SOV_northern_sea_route }
 	search_filters = { FOCUS_FILTER_INDUSTRY }
 
-	available = {
-		original_tag = SOV
-		country_exists = CHI
-		NOT = { has_war_with = CHI }
-	}
+	available = { CHI_SOV_joint_focus_available = yes }
 
-	joint_trigger = {
-		OR = {
-			tag = CHI
-			tag = SOV
-		}
-	}
+	joint_trigger = { original_tag = SOV }
 
 	completion_reward_joint_originator = {
 		set_temp_variable = { treasury_change = 50 }
@@ -1186,16 +1053,12 @@ joint_focus = {
 	prerequisite = { focus = CHI_SOV_northern_sea_route }
 	search_filters = { FOCUS_FILTER_INDUSTRY }
 
-	available = {
-		country_exists = CHI
-		country_exists = SOV
-		CHI = { NOT = { has_war_with = SOV } }
-	}
+	available = { CHI_SOV_joint_focus_available = yes }
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = SOV
+			original_tag = CHI
+			original_tag = SOV
 		}
 	}
 
@@ -1226,7 +1089,7 @@ joint_focus = {
 	id = CHI_SOV_peace_mission
 	icon = coalition_army
 	text_icon = JOINT_SOV_CHI_focus_style
-	x = 11
+	x = 9
 	y = 1
 	relative_position_id = CHI_SOV_treaty_good_neighbourliness
 
@@ -1236,18 +1099,14 @@ joint_focus = {
 	search_filters = { FOCUS_FILTER_WAR_SUPPORT }
 
 	available = {
-		country_exists = CHI
-		country_exists = SOV
-		CHI = {
-			NOT = { has_war_with = SOV }
-			has_completed_focus = CHI_Form_the_SCO
-		}
+		CHI_SOV_joint_focus_available = yes
+		CHI = { has_completed_focus = CHI_Form_the_SCO }
 	}
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = SOV
+			original_tag = CHI
+			original_tag = SOV
 		}
 	}
 
@@ -1280,27 +1139,18 @@ joint_focus = {
 	id = CHI_SOV_advanced_arms_sales
 	icon = arms_treade_deals
 	text_icon = JOINT_SOV_focus_style
-	x = 9
-	y = 2
-	relative_position_id = CHI_SOV_treaty_good_neighbourliness
+	x = -2
+	y = 1
+	relative_position_id = CHI_SOV_peace_mission
 
 	cost = 10
 
 	prerequisite = { focus = CHI_SOV_peace_mission }
 	search_filters = { FOCUS_FILTER_WAR_SUPPORT }
 
-	available = {
-		original_tag = SOV
-		country_exists = CHI
-		NOT = { has_war_with = CHI }
-	}
+	available = { CHI_SOV_joint_focus_available = yes }
 
-	joint_trigger = {
-		OR = {
-			tag = CHI
-			tag = SOV
-		}
-	}
+	joint_trigger = { original_tag = SOV }
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_SOV_advanced_arms_sales"
@@ -1342,25 +1192,21 @@ joint_focus = {
 	id = CHI_SOV_pacific_fleet_coord
 	icon = naval_doctrine
 	text_icon = JOINT_SOV_CHI_focus_style
-	x = 11
-	y = 2
-	relative_position_id = CHI_SOV_treaty_good_neighbourliness
+	x = 0
+	y = 1
+	relative_position_id = CHI_SOV_peace_mission
 
 	cost = 10
 
 	prerequisite = { focus = CHI_SOV_peace_mission }
 	search_filters = { FOCUS_FILTER_WAR_SUPPORT }
 
-	available = {
-		country_exists = CHI
-		country_exists = SOV
-		CHI = { NOT = { has_war_with = SOV } }
-	}
+	available = { CHI_SOV_joint_focus_available = yes }
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = SOV
+			original_tag = CHI
+			original_tag = SOV
 		}
 	}
 
@@ -1393,27 +1239,18 @@ joint_focus = {
 	id = CHI_SOV_defense_industrial
 	icon = industry_military
 	text_icon = JOINT_CHI_focus_style
-	x = 13
-	y = 2
-	relative_position_id = CHI_SOV_treaty_good_neighbourliness
+	x = 2
+	y = 1
+	relative_position_id = CHI_SOV_peace_mission
 
 	cost = 10
 
 	prerequisite = { focus = CHI_SOV_peace_mission }
 	search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_INDUSTRY }
 
-	available = {
-		original_tag = CHI
-		country_exists = SOV
-		NOT = { has_war_with = SOV }
-	}
+	available = { CHI_SOV_joint_focus_available = yes }
 
-	joint_trigger = {
-		OR = {
-			tag = CHI
-			tag = SOV
-		}
-	}
+	joint_trigger = { original_tag = CHI }
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_SOV_defense_industrial"
@@ -1455,9 +1292,9 @@ joint_focus = {
 	id = CHI_SOV_strategic_bomber_patrol
 	icon = bombers
 	text_icon = JOINT_SOV_CHI_focus_style
-	x = 10
-	y = 3
-	relative_position_id = CHI_SOV_treaty_good_neighbourliness
+	x = -1
+	y = 2
+	relative_position_id = CHI_SOV_peace_mission
 
 	cost = 10
 
@@ -1465,16 +1302,12 @@ joint_focus = {
 	prerequisite = { focus = CHI_SOV_pacific_fleet_coord }
 	search_filters = { FOCUS_FILTER_WAR_SUPPORT }
 
-	available = {
-		country_exists = CHI
-		country_exists = SOV
-		CHI = { NOT = { has_war_with = SOV } }
-	}
+	available = { CHI_SOV_joint_focus_available = yes }
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = SOV
+			original_tag = CHI
+			original_tag = SOV
 		}
 	}
 
@@ -1499,9 +1332,9 @@ joint_focus = {
 	id = CHI_SOV_vostok_exercises
 	icon = continuous_reduce_training_time
 	text_icon = JOINT_SOV_CHI_focus_style
-	x = 12
-	y = 3
-	relative_position_id = CHI_SOV_treaty_good_neighbourliness
+	x = 1
+	y = 2
+	relative_position_id = CHI_SOV_peace_mission
 
 	cost = 10
 
@@ -1509,16 +1342,12 @@ joint_focus = {
 	prerequisite = { focus = CHI_SOV_defense_industrial }
 	search_filters = { FOCUS_FILTER_WAR_SUPPORT }
 
-	available = {
-		country_exists = CHI
-		country_exists = SOV
-		CHI = { NOT = { has_war_with = SOV } }
-	}
+	available = { CHI_SOV_joint_focus_available = yes }
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = SOV
+			original_tag = CHI
+			original_tag = SOV
 		}
 	}
 
@@ -1550,9 +1379,9 @@ joint_focus = {
 	id = CHI_SOV_military_space
 	icon = weaponized_satellites
 	text_icon = JOINT_SOV_CHI_focus_style
-	x = 11
-	y = 4
-	relative_position_id = CHI_SOV_treaty_good_neighbourliness
+	x = 0
+	y = 3
+	relative_position_id = CHI_SOV_peace_mission
 
 	cost = 15
 
@@ -1560,16 +1389,12 @@ joint_focus = {
 	prerequisite = { focus = CHI_SOV_vostok_exercises }
 	search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_INDUSTRY }
 
-	available = {
-		country_exists = CHI
-		country_exists = SOV
-		CHI = { NOT = { has_war_with = SOV } }
-	}
+	available = { CHI_SOV_joint_focus_available = yes }
 
 	joint_trigger = {
 		OR = {
-			tag = CHI
-			tag = SOV
+			original_tag = CHI
+			original_tag = SOV
 		}
 	}
 
