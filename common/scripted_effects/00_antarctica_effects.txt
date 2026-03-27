@@ -779,6 +779,13 @@ antarctica_set_selected_station_controller = {
 				}
 				if = {
 					limit = {
+						check_variable = { global.research_station_[ID]_module_slot_11 < 1 }
+						check_variable = { global.research_station_[ID]_module_powerplant_active > 0 }
+					}
+					set_variable = { global.research_station_[ID]_module_slot_11 = global.research_station_[ID]_module_powerplant_active }
+				}
+				if = {
+					limit = {
 						check_variable = { global.research_station_[ID]_module_slot_12 < 1 }
 						check_variable = { global.research_station_[ID]_module_life_support_active > 0 }
 					}
@@ -1640,6 +1647,29 @@ antarctica_process_station_research_progress = {
 				set_temp_variable = { station_tier = 1 }
 			}
 
+			# Preserve intended startup tiers for predefined startup stations.
+			set_temp_variable = { startup_min_tier = 1 }
+			set_temp_variable = { startup_min_iterations = 0 }
+			if = {
+				limit = { check_variable = { process_station_id < 4 } }
+				set_temp_variable = { startup_min_tier = 3 }
+				set_temp_variable = { startup_min_iterations = 6 }
+			}
+			else_if = {
+				limit = { check_variable = { process_station_id < 11 } }
+				set_temp_variable = { startup_min_tier = 2 }
+				set_temp_variable = { startup_min_iterations = 3 }
+			}
+
+			if = {
+				limit = { check_variable = { station_tier < startup_min_tier } }
+				set_temp_variable = { station_tier = startup_min_tier }
+			}
+			if = {
+				limit = { check_variable = { station_iterations < startup_min_iterations } }
+				set_temp_variable = { station_iterations = startup_min_iterations }
+			}
+
 			if = {
 				limit = { check_variable = { station_active_lab_slots > 0 } }
 				add_to_temp_variable = { station_iteration_progress = station_active_lab_slots }
@@ -1661,6 +1691,11 @@ antarctica_process_station_research_progress = {
 				else = {
 					set_temp_variable = { station_tier = 1 }
 				}
+			}
+
+			if = {
+				limit = { check_variable = { station_tier < startup_min_tier } }
+				set_temp_variable = { station_tier = startup_min_tier }
 			}
 
 			meta_effect = {
