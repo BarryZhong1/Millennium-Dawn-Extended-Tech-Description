@@ -1077,9 +1077,9 @@ antarctica_set_selected_station_preview_defaults = {
 					AND = {
 						check_variable = { global.selected_antarctica_station_tier < 2 }
 						OR = {
+							check_variable = { global.selected_antarctica_station_selected_slot = 1 }
 							check_variable = { global.selected_antarctica_station_selected_slot = 2 }
 							check_variable = { global.selected_antarctica_station_selected_slot = 6 }
-							check_variable = { global.selected_antarctica_station_selected_slot = 7 }
 						}
 					}
 					AND = {
@@ -1204,8 +1204,102 @@ antarctica_set_selected_station_preview_defaults = {
 			limit = { check_variable = { global.selected_antarctica_station_selected_slot_installed_module > 0 } }
 			set_variable = { global.selected_antarctica_station_selected_module = global.selected_antarctica_station_selected_slot_installed_module }
 		}
+		else = {
+			# Empty slot should not auto-fallback to another category module.
+			set_variable = { global.selected_antarctica_station_selected_module = 0 }
+		}
 
 		antarctica_calculate_selected_preview_module_install_time = yes
+	}
+}
+
+# Usage
+# set_temp_variable = { station_id = id }
+# antarctica_normalize_startup_station_slots = yes
+antarctica_normalize_startup_station_slots = {
+	if = {
+		limit = {
+			meta_trigger = {
+				text = { has_global_flag = research_station_[ID]_exists }
+				ID = "[?station_id]"
+			}
+		}
+
+		set_temp_variable = { station_tier = 1 }
+		set_temp_variable = { station_start_iterations = 0 }
+		if = {
+			limit = { check_variable = { station_id < 4 } }
+			set_temp_variable = { station_tier = 3 }
+			set_temp_variable = { station_start_iterations = 6 }
+		}
+		else_if = {
+			limit = { check_variable = { station_id < 11 } }
+			set_temp_variable = { station_tier = 2 }
+			set_temp_variable = { station_start_iterations = 3 }
+		}
+
+		meta_effect = {
+			text = {
+				set_variable = { global.research_station_[ID]_tier = [TIER] }
+				set_variable = { global.research_station_[ID]_iteration_progress = 0 }
+				set_variable = { global.research_station_[ID]_iterations = [ITER] }
+
+				set_variable = { global.research_station_[ID]_module_slot_1 = 0 }
+				set_variable = { global.research_station_[ID]_module_slot_2 = 0 }
+				set_variable = { global.research_station_[ID]_module_slot_4 = 0 }
+				set_variable = { global.research_station_[ID]_module_slot_5 = 0 }
+				set_variable = { global.research_station_[ID]_module_slot_6 = 0 }
+				set_variable = { global.research_station_[ID]_module_slot_7 = 0 }
+				set_variable = { global.research_station_[ID]_module_slot_8 = 0 }
+				set_variable = { global.research_station_[ID]_module_slot_9 = 0 }
+				set_variable = { global.research_station_[ID]_module_slot_10 = 0 }
+				set_variable = { global.research_station_[ID]_module_slot_11 = 0 }
+				set_variable = { global.research_station_[ID]_module_slot_12 = 0 }
+				set_variable = { global.research_station_[ID]_module_slot_13 = 0 }
+				set_variable = { global.research_station_[ID]_module_slot_14 = 0 }
+
+				# Tier 1 slots
+				set_variable = { global.research_station_[ID]_module_slot_5 = global.research_station_[ID]_module_housing_active }
+				set_variable = { global.research_station_[ID]_module_slot_7 = global.research_station_[ID]_module_laboratories_active }
+				set_variable = { global.research_station_[ID]_module_slot_8 = global.research_station_[ID]_module_laboratories_active }
+				set_variable = { global.research_station_[ID]_module_slot_11 = global.research_station_[ID]_module_powerplant_active }
+				set_variable = { global.research_station_[ID]_module_slot_12 = global.research_station_[ID]_module_life_support_active }
+				set_variable = { global.research_station_[ID]_module_slot_14 = global.research_station_[ID]_module_fuel_storage_active }
+			}
+			ID = "[?station_id]"
+			TIER = "[?station_tier]"
+			ITER = "[?station_start_iterations]"
+		}
+
+		if = {
+			limit = { check_variable = { station_tier > 1 } }
+			meta_effect = {
+				text = {
+					# Tier 2 slots
+					set_variable = { global.research_station_[ID]_module_slot_1 = global.research_station_[ID]_module_housing_active }
+					set_variable = { global.research_station_[ID]_module_slot_2 = global.research_station_[ID]_module_powerplant_active }
+					set_variable = { global.research_station_[ID]_module_slot_6 = global.research_station_[ID]_module_laboratories_active }
+				}
+				ID = "[?station_id]"
+			}
+		}
+
+		if = {
+			limit = { check_variable = { station_tier > 2 } }
+			meta_effect = {
+				text = {
+					# Tier 3 slots
+					set_variable = { global.research_station_[ID]_module_slot_4 = global.research_station_[ID]_module_fuel_storage_active }
+					set_variable = { global.research_station_[ID]_module_slot_9 = global.research_station_[ID]_module_laboratories_active }
+					set_variable = { global.research_station_[ID]_module_slot_10 = global.research_station_[ID]_module_housing_active }
+					set_variable = { global.research_station_[ID]_module_slot_13 = global.research_station_[ID]_module_powerplant_active }
+				}
+				ID = "[?station_id]"
+			}
+		}
+
+		antarctica_rebuild_station_module_lists_from_slots = yes
+		antarctica_recalculate_station_module_outputs = yes
 	}
 }
 
@@ -1391,6 +1485,7 @@ antarctica_queue_selected_station_module_install = {
 	if = {
 		limit = {
 			check_variable = { global.selected_antarctica_station > 0 }
+			check_variable = { global.selected_antarctica_station_selected_module > 0 }
 			NOT = {
 				meta_trigger = {
 					text = { check_variable = { global.research_station_[ID]_install_pending > 0 } }
