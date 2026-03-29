@@ -234,6 +234,7 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_state_of_french_politics }
+		prerequisite = { has_country_flag = FRA_LFI_CREATED }
 		search_filters = { FOCUS_FILTER_EUROPEAN_UNION FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
@@ -2458,7 +2459,7 @@ focus_tree = {
 		prerequisite = { focus = FRA_Neo_gaulism }
 		prerequisite = { focus = FRA_no_left_collab }
 		prerequisite = { focus = FRA_known }
-
+		mutually_exclusive = {FRA_third_voice}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -2498,6 +2499,7 @@ focus_tree = {
 		prerequisite = { focus = FRA_Neo_gaulism }
 		prerequisite = { focus = FRA_no_left_collab }
 		prerequisite = { focus = FRA_known }
+		mutually_exclusive = {FRA_third_voice}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 		available = {
 			OR = {
@@ -6762,6 +6764,7 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_turn_reform }
+		mutually_exclusive = { focus = FRA_deal_devil_pcf }
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {#if they accept TODO put this in event if they refuse get flat popularity
@@ -6793,6 +6796,7 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_turn_reform }
+		mutually_exclusive = { focus = FRA_left_front }
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {#if they accept TODO put this in event if they refuse get flat popularity
@@ -8620,6 +8624,7 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_8th_coalition }
+		mutually_exclusive = { focus = FRA_our_own_system }
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {#threatened uk make them create faction
@@ -8642,6 +8647,7 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_8th_coalition }
+		mutually_exclusive = { focus = FRA_declare_hostile }
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -8701,7 +8707,7 @@ focus_tree = {
 			factor = 1
 		}
 	}
-	focus = {#unlock decision to coup non major european country
+	focus = {#train our spies by harrassing neightbor
 		id = FRA_ennemy_isolate
 		icon = secret_police
 
@@ -8716,6 +8722,57 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus id = FRA_ennemy_weak"
+			if = { limit = { has_dlc = "La Resistance" }
+				add_ideas = FRA_spy_napoleon_lar
+				if = {
+					limit = {
+						has_intelligence_agency = yes
+					}
+					upgrade_intelligence_agency = upgrade_army_department
+					newline = yes
+					upgrade_intelligence_agency = upgrade_computer_servers
+					newline = yes
+					upgrade_intelligence_agency = upgrade_commando_training
+					newline = yes
+					upgrade_intelligence_agency = upgrade_economy_civilian
+				}
+				else = {
+					create_intelligence_agency = yes
+					newline = yes
+					upgrade_intelligence_agency = upgrade_computer_servers
+					newline = yes
+					upgrade_intelligence_agency = upgrade_army_department
+					newline = yes
+					upgrade_intelligence_agency = upgrade_commando_training
+					newline = yes
+					upgrade_intelligence_agency = upgrade_economy_civilian
+				}
+			}
+			else = {
+				add_ideas = FRA_spy_napoleon_non_lar
+			}
+			add_war_support = 0.05
+			every_other_country = {
+				limit = {
+					AND = {
+						is_in_europe = yes
+						is_neighbor_of = FRA
+					}
+					NOT = {
+						is_in_faction_with = FRA
+					}
+				}
+				random_list = {
+					70 = {#attack succeed
+						country_event = { id = france_md.521 days = 5 }
+					}
+					30 = {#attack failed
+						country_event = { id = france_md.522 days = 5 }
+					}
+				}
+			}
+			set_temp_variable = { treasury_change = -50 }
+			modify_treasury_effect = yes
 		}
 
 		ai_will_do = {
