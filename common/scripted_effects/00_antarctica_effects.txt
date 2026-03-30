@@ -413,7 +413,7 @@ antarctica_set_station_module = {
 					add_to_array = { global.research_station_[ID]_module_powerplant_list = [MOD] }
 					set_variable = { global.research_station_[ID]_module_powerplant_active = [MOD] }
 					set_variable = { global.research_station_[ID]_module_powerplant = [MOD] }
-					set_variable = { global.research_station_[ID]_module_slot_2 = [MOD] }
+					set_variable = { global.research_station_[ID]_module_slot_11 = [MOD] }
 				}
 				ID = "[?station_id]"
 				MOD = "[?module_id]"
@@ -783,13 +783,6 @@ antarctica_set_selected_station_controller = {
 			text = {
 				if = {
 					limit = {
-						check_variable = { global.research_station_[ID]_module_slot_2 < 1 }
-						check_variable = { global.research_station_[ID]_module_powerplant_active > 0 }
-					}
-					set_variable = { global.research_station_[ID]_module_slot_2 = global.research_station_[ID]_module_powerplant_active }
-				}
-				if = {
-					limit = {
 						check_variable = { global.research_station_[ID]_module_slot_11 < 1 }
 						check_variable = { global.research_station_[ID]_module_powerplant_active > 0 }
 					}
@@ -997,12 +990,97 @@ antarctica_set_selected_station_controller = {
 			ID = "[?global.selected_antarctica_station]"
 		}
 
-		meta_effect = {
-			text = {
-				set_variable = { global.selected_antarctica_station_selected_slot_installed_module = global.research_station_[ID]_module_slot_[SLOT] }
+		set_variable = { global.selected_antarctica_station_selected_slot_installed_module = 0 }
+		if = {
+			limit = { check_variable = { global.selected_antarctica_station_selected_slot = 1 } }
+			meta_effect = {
+				text = { set_variable = { global.selected_antarctica_station_selected_slot_installed_module = global.research_station_[ID]_module_slot_1 } }
+				ID = "[?global.selected_antarctica_station]"
 			}
-			ID = "[?global.selected_antarctica_station]"
-			SLOT = "[?global.selected_antarctica_station_selected_slot]"
+		}
+		else_if = {
+			limit = { check_variable = { global.selected_antarctica_station_selected_slot = 2 } }
+			meta_effect = {
+				text = { set_variable = { global.selected_antarctica_station_selected_slot_installed_module = global.research_station_[ID]_module_slot_2 } }
+				ID = "[?global.selected_antarctica_station]"
+			}
+		}
+		else_if = {
+			limit = { check_variable = { global.selected_antarctica_station_selected_slot = 4 } }
+			meta_effect = {
+				text = { set_variable = { global.selected_antarctica_station_selected_slot_installed_module = global.research_station_[ID]_module_slot_4 } }
+				ID = "[?global.selected_antarctica_station]"
+			}
+		}
+		else_if = {
+			limit = { check_variable = { global.selected_antarctica_station_selected_slot = 5 } }
+			meta_effect = {
+				text = { set_variable = { global.selected_antarctica_station_selected_slot_installed_module = global.research_station_[ID]_module_slot_5 } }
+				ID = "[?global.selected_antarctica_station]"
+			}
+		}
+		else_if = {
+			limit = { check_variable = { global.selected_antarctica_station_selected_slot = 6 } }
+			meta_effect = {
+				text = { set_variable = { global.selected_antarctica_station_selected_slot_installed_module = global.research_station_[ID]_module_slot_6 } }
+				ID = "[?global.selected_antarctica_station]"
+			}
+		}
+		else_if = {
+			limit = { check_variable = { global.selected_antarctica_station_selected_slot = 7 } }
+			meta_effect = {
+				text = { set_variable = { global.selected_antarctica_station_selected_slot_installed_module = global.research_station_[ID]_module_slot_7 } }
+				ID = "[?global.selected_antarctica_station]"
+			}
+		}
+		else_if = {
+			limit = { check_variable = { global.selected_antarctica_station_selected_slot = 8 } }
+			meta_effect = {
+				text = { set_variable = { global.selected_antarctica_station_selected_slot_installed_module = global.research_station_[ID]_module_slot_8 } }
+				ID = "[?global.selected_antarctica_station]"
+			}
+		}
+		else_if = {
+			limit = { check_variable = { global.selected_antarctica_station_selected_slot = 9 } }
+			meta_effect = {
+				text = { set_variable = { global.selected_antarctica_station_selected_slot_installed_module = global.research_station_[ID]_module_slot_9 } }
+				ID = "[?global.selected_antarctica_station]"
+			}
+		}
+		else_if = {
+			limit = { check_variable = { global.selected_antarctica_station_selected_slot = 10 } }
+			meta_effect = {
+				text = { set_variable = { global.selected_antarctica_station_selected_slot_installed_module = global.research_station_[ID]_module_slot_10 } }
+				ID = "[?global.selected_antarctica_station]"
+			}
+		}
+		else_if = {
+			limit = { check_variable = { global.selected_antarctica_station_selected_slot = 11 } }
+			meta_effect = {
+				text = { set_variable = { global.selected_antarctica_station_selected_slot_installed_module = global.research_station_[ID]_module_slot_11 } }
+				ID = "[?global.selected_antarctica_station]"
+			}
+		}
+		else_if = {
+			limit = { check_variable = { global.selected_antarctica_station_selected_slot = 12 } }
+			meta_effect = {
+				text = { set_variable = { global.selected_antarctica_station_selected_slot_installed_module = global.research_station_[ID]_module_slot_12 } }
+				ID = "[?global.selected_antarctica_station]"
+			}
+		}
+		else_if = {
+			limit = { check_variable = { global.selected_antarctica_station_selected_slot = 13 } }
+			meta_effect = {
+				text = { set_variable = { global.selected_antarctica_station_selected_slot_installed_module = global.research_station_[ID]_module_slot_13 } }
+				ID = "[?global.selected_antarctica_station]"
+			}
+		}
+		else_if = {
+			limit = { check_variable = { global.selected_antarctica_station_selected_slot = 14 } }
+			meta_effect = {
+				text = { set_variable = { global.selected_antarctica_station_selected_slot_installed_module = global.research_station_[ID]_module_slot_14 } }
+				ID = "[?global.selected_antarctica_station]"
+			}
 		}
 
 		if = {
@@ -1339,7 +1417,6 @@ antarctica_normalize_startup_station_slots = {
 				text = {
 					# Tier 2 slots
 					set_variable = { global.research_station_[ID]_module_slot_1 = global.research_station_[ID]_module_housing_active }
-					set_variable = { global.research_station_[ID]_module_slot_2 = global.research_station_[ID]_module_powerplant_active }
 					set_variable = { global.research_station_[ID]_module_slot_6 = global.research_station_[ID]_module_laboratories_active }
 				}
 				ID = "[?station_id]"
