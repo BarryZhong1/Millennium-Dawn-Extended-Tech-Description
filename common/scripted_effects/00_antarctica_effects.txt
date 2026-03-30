@@ -1,4 +1,4 @@
-# Author(s): XCezor
+﻿# Author(s): XCezor
 
 # Usage
 # set_temp_variable = { station_id = x }
@@ -2655,53 +2655,42 @@ antarctica_apply_single_laboratory_module_effect = {
 # set_temp_variable = { station_id = id }
 # antarctica_apply_station_laboratory_effects_to_controller = yes
 antarctica_apply_station_laboratory_effects_to_controller = {
+	meta_effect = {
+		text = {
+			set_temp_variable = { station_controller = global.research_station_[ID]_controller }
+			set_temp_variable = { station_fuel_usage = global.research_station_[ID]_output_fuel_usage }
+			set_temp_variable = { station_fuel_storage = global.research_station_[ID]_output_storage }
+		}
+		ID = "[?station_id]"
+	}
+
 	if = {
-		limit = {
-			meta_trigger = {
-				text = {
-					has_global_flag = research_station_[ID]_exists
-				}
-				ID = "[?station_id]"
-			}
-		}
+		limit = { check_variable = { station_controller = THIS.id } }
 
-		meta_effect = {
-			text = {
-				set_temp_variable = { station_controller = global.research_station_[ID]_controller }
-				set_temp_variable = { station_fuel_usage = global.research_station_[ID]_output_fuel_usage }
-				set_temp_variable = { station_fuel_storage = global.research_station_[ID]_output_storage }
-			}
-			ID = "[?station_id]"
-		}
-
+		# Fuel blackout gate:
+		# - always allow renewable stations (fuel usage <= 0)
+		# - for fuel-consuming stations, require remaining storage > 0
 		if = {
-			limit = { check_variable = { station_controller = THIS.id } }
-
-			# Fuel blackout gate:
-			# - always allow renewable stations (fuel usage <= 0)
-			# - for fuel-consuming stations, require remaining storage > 0
-			if = {
-				limit = {
-					OR = {
-						check_variable = { station_fuel_usage < 1 }
-						check_variable = { station_fuel_storage > 0 }
-					}
+			limit = {
+				OR = {
+					check_variable = { station_fuel_usage < 1 }
+					check_variable = { station_fuel_storage > 0 }
 				}
+			}
 
-				meta_effect = {
-					text = {
-						for_each_loop = {
-							array = global.research_station_[ID]_module_laboratories_list
-							value = current_lab_module
-							if = {
-								limit = { check_variable = { current_lab_module > 0 } }
-								set_temp_variable = { station_lab_module = current_lab_module }
-								antarctica_apply_single_laboratory_module_effect = yes
-							}
+			meta_effect = {
+				text = {
+					for_each_loop = {
+						array = global.research_station_[ID]_module_laboratories_list
+						value = current_lab_module
+						if = {
+							limit = { check_variable = { current_lab_module > 0 } }
+							set_temp_variable = { station_lab_module = current_lab_module }
+							antarctica_apply_single_laboratory_module_effect = yes
 						}
 					}
-					ID = "[?station_id]"
 				}
+				ID = "[?station_id]"
 			}
 		}
 	}
@@ -2740,7 +2729,7 @@ antarctica_apply_station_maintenance_costs = {
 
 			meta_effect = {
 				text = {
-					set_temp_variable = { station_upkeep_cost = global.research_station_[ID]_output_upkeep_cost }
+					set_global_variable = { antarctica_temp_upkeep_cost = global.research_station_[ID]_output_upkeep_cost }
 					set_temp_variable = { station_controller_id = global.research_station_[ID]_controller }
 				}
 				ID = "[?process_station_id]"
@@ -2749,14 +2738,14 @@ antarctica_apply_station_maintenance_costs = {
 			# Add maintenance cost to the owning country.
 			if = {
 				limit = {
-					check_variable = { station_upkeep_cost > 0 }
+					check_variable = { global.antarctica_temp_upkeep_cost > 0 }
 					check_variable = { station_controller_id > 0 }
 				}
 				set_variable = { temp_controller_id = station_controller_id }
 
 				# Scope directly to the owner country ID and add upkeep there.
 				var:temp_controller_id = {
-					add_to_variable = { antarctica_station_total_upkeep_multiplier = station_upkeep_cost }
+					add_to_variable = { antarctica_station_total_upkeep_multiplier = global.antarctica_temp_upkeep_cost }
 				}
 			}
 		}
