@@ -389,15 +389,24 @@ on_actions = {
 
 			}
 
-			for_each_loop = {
-				array = global.antarctica_station_ids
-				value = startup_station_id
+			ENG = { # Any country
+				for_each_loop = {
+					array = global.antarctica_station_ids
+					value = startup_station_id
 
-				if = {
-					limit = { check_variable = { startup_station_id > 0 } }
-					set_temp_variable = { station_id = startup_station_id }
-					antarctica_normalize_startup_station_slots = yes
+					if = {
+						limit = { check_variable = { startup_station_id > 0 } }
+						set_temp_variable = { station_id = startup_station_id }
+						antarctica_normalize_startup_station_slots = yes
+					}
 				}
+				# Calculate maintenance costs once globally (not per-country in loop)
+				antarctica_apply_station_maintenance_costs = yes
+
+				# Run shared station processing
+				antarctica_process_station_fuel_consumption = yes
+				antarctica_process_station_research_progress = yes
+				antarctica_process_station_module_installations = yes
 			}
 
 			for_each_scope_loop = {
@@ -406,14 +415,6 @@ on_actions = {
 				antarctica_recalculate_country_laboratory_effects = yes
 				set_variable = { antarctica_station_total_upkeep_multiplier = 0 }
 			}
-
-			# Calculate maintenance costs once globally (not per-country in loop)
-			antarctica_apply_station_maintenance_costs = yes
-
-			# Run shared station processing
-			antarctica_process_station_fuel_consumption = yes
-			antarctica_process_station_research_progress = yes
-			antarctica_process_station_module_installations = yes
 		}
 	}
 

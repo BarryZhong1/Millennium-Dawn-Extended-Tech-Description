@@ -1,4 +1,4 @@
-﻿# Author(s): XCezor
+# Author(s): XCezor
 
 # Usage
 # set_temp_variable = { station_id = x }
@@ -1427,9 +1427,8 @@ antarctica_normalize_startup_station_slots = {
 				set_variable = { global.research_station_[ID]_module_slot_13 = 0 }
 				set_variable = { global.research_station_[ID]_module_slot_14 = 0 }
 
-				# Tier 1 slots
+				# Keep startup stations with one installed module per category in canonical slots only.
 				set_variable = { global.research_station_[ID]_module_slot_5 = global.research_station_[ID]_module_housing_active }
-				set_variable = { global.research_station_[ID]_module_slot_7 = global.research_station_[ID]_module_laboratories_active }
 				set_variable = { global.research_station_[ID]_module_slot_8 = global.research_station_[ID]_module_laboratories_active }
 				set_variable = { global.research_station_[ID]_module_slot_11 = global.research_station_[ID]_module_powerplant_active }
 				set_variable = { global.research_station_[ID]_module_slot_12 = global.research_station_[ID]_module_life_support_active }
@@ -1438,32 +1437,6 @@ antarctica_normalize_startup_station_slots = {
 			ID = "[?station_id]"
 			TIER = "[?station_tier]"
 			ITER = "[?station_start_iterations]"
-		}
-
-		if = {
-			limit = { check_variable = { station_tier > 1 } }
-			meta_effect = {
-				text = {
-					# Tier 2 slots
-					set_variable = { global.research_station_[ID]_module_slot_1 = global.research_station_[ID]_module_housing_active }
-					set_variable = { global.research_station_[ID]_module_slot_6 = global.research_station_[ID]_module_laboratories_active }
-				}
-				ID = "[?station_id]"
-			}
-		}
-
-		if = {
-			limit = { check_variable = { station_tier > 2 } }
-			meta_effect = {
-				text = {
-					# Tier 3 slots
-					set_variable = { global.research_station_[ID]_module_slot_4 = global.research_station_[ID]_module_fuel_storage_active }
-					set_variable = { global.research_station_[ID]_module_slot_9 = global.research_station_[ID]_module_laboratories_active }
-					set_variable = { global.research_station_[ID]_module_slot_10 = global.research_station_[ID]_module_housing_active }
-					set_variable = { global.research_station_[ID]_module_slot_13 = global.research_station_[ID]_module_powerplant_active }
-				}
-				ID = "[?station_id]"
-			}
 		}
 
 		antarctica_rebuild_station_module_lists_from_slots = yes
