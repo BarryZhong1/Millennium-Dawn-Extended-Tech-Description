@@ -37,18 +37,18 @@ scripted_gui = {
 
 		triggers = {
 			cyber_gui_ledger_button_click_enabled = {
-			 	if = {
-			 		limit = {
-			 			has_dlc = "La Resistance"
-			 		}
-			 		has_done_agency_upgrade = upgrade_establish_cyber_operations_division
-			 	}else = {
-			 		custom_trigger_tooltip = {
-			 			tooltip = is_cyber_complete_techs_to_unlock_tt
-			 			has_tech = encryption1
-			 			has_tech = decryption1
-			 		}
-			 	}
+				 if = {
+					 limit = {
+						 has_dlc = "La Resistance"
+					 }
+					 has_done_agency_upgrade = upgrade_establish_cyber_operations_division
+				 } else = {
+					 custom_trigger_tooltip = {
+						 tooltip = is_cyber_complete_techs_to_unlock_tt
+						 has_tech = encryption1
+						 has_tech = decryption1
+					 }
+				 }
 			 }
 		}
 
@@ -247,7 +247,7 @@ scripted_gui = {
 	MD_countrymissilesview_production_gui = {
 		window_name = MD_countrymissilesview_production
 		context_type = player_context
-		parent_window_name = MD_space_program_window
+		parent_window_name = MD_space_program_window_instance
 
 		dirty = global.missile_ui_updated
 
@@ -1262,7 +1262,7 @@ scripted_gui = {
 	MD_countrymissilesview_space_gui = {
 		window_name = MD_countrymissilesview_space
 		context_type = player_context
-		parent_window_name = MD_space_program_window
+		parent_window_name = MD_space_program_window_instance
 
 		dirty = global.missile_ui_updated
 
@@ -1935,7 +1935,7 @@ scripted_gui = {
 	MD_countrymissilesview_satellites_gui = {
 		window_name = MD_countrymissilesview_satellites
 		context_type = player_context
-		parent_window_name = MD_space_program_window
+		parent_window_name = MD_space_program_window_instance
 
 		dirty = global.missile_ui_updated
 
@@ -2890,7 +2890,7 @@ scripted_gui = {
 						}
 						set_temp_variable = { focus_increase = 0.02 }
 						add_to_variable = { international_terror_org_specific_intel^i = focus_increase }
-					}else = {
+					} else = {
 						set_temp_variable = { focus_decrease = -0.01 }
 						add_to_variable = { international_terror_org_specific_intel^i = focus_decrease }
 					}
@@ -2913,7 +2913,7 @@ scripted_gui = {
 						}
 						set_temp_variable = { focus_increase = -0.02 }
 						add_to_variable = { international_terror_org_specific_intel^i = focus_increase }
-					}else = {
+					} else = {
 						set_temp_variable = { focus_decrease = 0.01 }
 						add_to_variable = { international_terror_org_specific_intel^i = focus_decrease }
 					}
@@ -2954,7 +2954,7 @@ scripted_gui = {
 				set_temp_variable = { party_popularity_increase = 0.02 }
 				add_relative_party_popularity = yes
 
-				set_temp_variable = { defense_var = -1}
+				set_temp_variable = { defense_var = -1 }
 				add_to_variable = { ct_home_defense_var = defense_var }
 				set_temp_variable = { intel_gain_var = -1 }
 				add_to_variable = { ct_global_base_detect_var = intel_gain_var }
@@ -3376,6 +3376,65 @@ scripted_gui = {
 				}
 			}
 		}
+
+		effects = {
+			remove_light_inf_button_click = {
+				if = { limit = { has_country_flag = blackwater_sel } delete_light_infantry_blackwater = yes }
+				else_if = { limit = { has_country_flag = aegis_sel } delete_light_infantry_aegis = yes }
+				else_if = { limit = { has_country_flag = constellis_sel } delete_light_infantry_constellis = yes }
+				else_if = { limit = { has_country_flag = wagner_sel } delete_light_infantry_wagner = yes }
+				else_if = { limit = { has_country_flag = md_sel } delete_light_infantry_md = yes }
+				missile_ui_update = yes
+			}
+			remove_mot_inf_button_click = {
+				if = { limit = { has_country_flag = blackwater_sel } delete_mot_infantry_blackwater = yes }
+				else_if = { limit = { has_country_flag = aegis_sel } delete_mot_infantry_aegis = yes }
+				else_if = { limit = { has_country_flag = constellis_sel } delete_mot_infantry_constellis = yes }
+				else_if = { limit = { has_country_flag = wagner_sel } delete_mot_infantry_wagner = yes }
+				else_if = { limit = { has_country_flag = md_sel } delete_mot_infantry_md = yes }
+				missile_ui_update = yes
+			}
+			remove_mech_inf_button_click = {
+				if = { limit = { has_country_flag = blackwater_sel } delete_mech_infantry_blackwater = yes }
+				else_if = { limit = { has_country_flag = aegis_sel } delete_mech_infantry_aegis = yes }
+				else_if = { limit = { has_country_flag = constellis_sel } delete_mech_infantry_constellis = yes }
+				else_if = { limit = { has_country_flag = wagner_sel } delete_mech_infantry_wagner = yes }
+				else_if = { limit = { has_country_flag = md_sel } delete_mech_infantry_md = yes }
+				missile_ui_update = yes
+			}
+			remove_hvy_inf_button_click = {
+				if = { limit = { has_country_flag = blackwater_sel } delete_heavy_mech_infantry_blackwater = yes }
+				else_if = { limit = { has_country_flag = aegis_sel } delete_heavy_mech_infantry_aegis = yes }
+				else_if = { limit = { has_country_flag = constellis_sel } delete_heavy_mech_infantry_constellis = yes }
+				else_if = { limit = { has_country_flag = wagner_sel } delete_heavy_mech_infantry_wagner = yes }
+				else_if = { limit = { has_country_flag = md_sel } delete_heavy_mech_infantry_md = yes }
+				missile_ui_update = yes
+			}
+			remove_spec_inf_button_click = {
+				if = { limit = { has_country_flag = blackwater_sel } delete_special_unit_blackwater = yes }
+				else_if = { limit = { has_country_flag = aegis_sel } delete_special_unit_aegis = yes }
+				else_if = { limit = { has_country_flag = constellis_sel } delete_special_unit_constellis = yes }
+				else_if = { limit = { has_country_flag = wagner_sel } delete_special_unit_wagner = yes }
+				else_if = { limit = { has_country_flag = md_sel } delete_special_unit_md = yes }
+				missile_ui_update = yes
+			}
+			remove_tank_button_click = {
+				if = { limit = { has_country_flag = blackwater_sel } delete_tank_unit_blackwater = yes }
+				else_if = { limit = { has_country_flag = aegis_sel } delete_tank_unit_aegis = yes }
+				else_if = { limit = { has_country_flag = constellis_sel } delete_tank_unit_constellis = yes }
+				else_if = { limit = { has_country_flag = wagner_sel } delete_tank_unit_wagner = yes }
+				else_if = { limit = { has_country_flag = md_sel } delete_tank_unit_md = yes }
+				missile_ui_update = yes
+			}
+			remove_sf_inf_button_click = {
+				if = { limit = { has_country_flag = blackwater_sel } delete_specops_unit_blackwater = yes }
+				else_if = { limit = { has_country_flag = aegis_sel } delete_specops_unit_aegis = yes }
+				else_if = { limit = { has_country_flag = constellis_sel } delete_specops_unit_constellis = yes }
+				else_if = { limit = { has_country_flag = wagner_sel } delete_specops_unit_wagner = yes }
+				else_if = { limit = { has_country_flag = md_sel } delete_specops_unit_md = yes }
+				missile_ui_update = yes
+			}
+		}
 	}
 	#UN System
 	MD_UN_main_gui = {
@@ -3439,7 +3498,7 @@ scripted_gui = {
 	MD_UN_system_gui = {
 		window_name = MD_UN_system_window
 		context_type = player_context
-		parent_window_name = MD_UN_main_window
+		parent_window_name = MD_UN_main_window_instance
 
 		dirty = global.missile_ui_updated
 
@@ -3779,7 +3838,7 @@ scripted_gui = {
 	MD_UN_SC_gui = {
 		window_name = MD_UN_SC_window
 		context_type = player_context
-		parent_window_name = MD_UN_main_window
+		parent_window_name = MD_UN_main_window_instance
 
 		dirty = global.missile_ui_updated
 
@@ -3909,7 +3968,7 @@ scripted_gui = {
 	MD_UN_GA_gui = {
 		window_name = MD_UN_GA_window
 		context_type = player_context
-		parent_window_name = MD_UN_main_window
+		parent_window_name = MD_UN_main_window_instance
 
 		dirty = global.missile_ui_updated
 
@@ -4015,7 +4074,7 @@ scripted_gui = {
 					}
 					clr_country_flag = auto_accept_all_ga_votes
 					set_variable = { UN_GA_auto_accept_frame_var = 1 }
-				}else = {
+				} else = {
 					set_country_flag = auto_accept_all_ga_votes
 					set_variable = { UN_GA_auto_accept_frame_var = 2 }
 				}
@@ -4037,7 +4096,7 @@ scripted_gui = {
 					}
 					clr_country_flag = auto_reject_all_ga_votes
 					set_variable = { UN_GA_auto_reject_frame_var = 1 }
-				}else = {
+				} else = {
 					set_country_flag = auto_reject_all_ga_votes
 					set_variable = { UN_GA_auto_reject_frame_var = 2 }
 				}
@@ -4066,7 +4125,7 @@ scripted_gui = {
 	MD_UN_aid_gui = {
 		window_name = MD_UN_aid_window
 		context_type = player_context
-		parent_window_name = MD_UN_main_window
+		parent_window_name = MD_UN_main_window_instance
 
 		dirty = global.missile_ui_updated
 
@@ -4332,7 +4391,7 @@ scripted_gui = {
 							}
 						}
 					}
-				}else = {
+				} else = {
 					add_ideas = un_aid_esco_member
 					custom_effect_tooltip = TT_ALL_UN_MEMBER_NATIONS_GAIN
 					effect_tooltip = {
@@ -4381,7 +4440,7 @@ scripted_gui = {
 							}
 						}
 					}
-				}else = {
+				} else = {
 					add_ideas = un_aid_ido_member
 					custom_effect_tooltip = TT_ALL_UN_MEMBER_NATIONS_GAIN
 					effect_tooltip = {
@@ -4429,7 +4488,7 @@ scripted_gui = {
 							}
 						}
 					}
-				}else = {
+				} else = {
 					add_ideas = un_aid_cdf_member
 					custom_effect_tooltip = TT_ALL_UN_MEMBER_NATIONS_GAIN
 					effect_tooltip = {
@@ -5206,6 +5265,8 @@ scripted_gui = {
 				antarctica_station_slot_unlocked_by_tier = yes
 				antarctica_station_selected_slot_module_different = yes
 				antarctica_station_install_module_unlocked = yes
+				antarctica_can_install_module_power_balance = yes
+				antarctica_can_install_module_staff_availability = yes
 				original_tag = var:global.selected_antarctica_station_controller
 			}
 
@@ -5542,15 +5603,7 @@ scripted_gui = {
 			antarctica_station_send_supplies_button_click = {
 				if = {
 					limit = { check_variable = { global.selected_antarctica_station > 0 } }
-					log = "[GetDateText]: [Root.GetName]: Send supplies to Antarctica station [?global.selected_antarctica_station]"
-					meta_effect = {
-						text = {
-							set_variable = { global.research_station_[ID]_output_storage = global.research_station_[ID]_output_storage |add| 5000 }
-							clamp_variable = { var = global.research_station_[ID]_output_storage min = 0 max = 999999 }
-						}
-						ID = "[?global.selected_antarctica_station]"
-					}
-					antarctica_set_selected_station_controller = yes
+					antarctica_send_supplies_to_selected_station = yes
 				}
 				add_to_variable = { global.missile_ui_updated = 1 }
 			}

@@ -387,7 +387,6 @@ on_actions = {
 				set_temp_variable = { module_category = 4 } set_temp_variable = { module_id = 1 } antarctica_set_station_module = yes
 				set_temp_variable = { module_category = 5 } set_temp_variable = { module_id = 9 } antarctica_set_station_module = yes
 
-				add_dynamic_modifier = { modifier = antarctica_laboratory_dynamic_modifier }
 			}
 
 			for_each_loop = {
@@ -405,7 +404,16 @@ on_actions = {
 				array = global.at_members
 				add_dynamic_modifier = { modifier = antarctica_laboratory_dynamic_modifier }
 				antarctica_recalculate_country_laboratory_effects = yes
+				set_variable = { antarctica_station_total_upkeep_multiplier = 0 }
 			}
+
+			# Calculate maintenance costs once globally (not per-country in loop)
+			antarctica_apply_station_maintenance_costs = yes
+
+			# Run shared station processing
+			antarctica_process_station_fuel_consumption = yes
+			antarctica_process_station_research_progress = yes
+			antarctica_process_station_module_installations = yes
 		}
 	}
 
@@ -413,7 +421,14 @@ on_actions = {
 		effect = {
 			if = {
 				limit = { is_ai = no }
+				# Process delivery queue for currently selected station
+				antarctica_process_delivery_queue = yes
+
 				antarctica_process_station_fuel_consumption = yes
+				for_each_scope_loop = {
+					array = global.at_members
+					antarctica_recalculate_country_laboratory_effects = yes
+				}
 				antarctica_process_station_research_progress = yes
 				antarctica_process_station_module_installations = yes
 			}
@@ -422,9 +437,17 @@ on_actions = {
 
 	on_monthly = {
 		effect = {
-			for_each_scope_loop = {
-				array = global.at_members
-				antarctica_recalculate_country_laboratory_effects = yes
+			if = {
+				limit = { is_ai = no }
+
+				# Reset maintenance costs for all AT members
+				for_each_scope_loop = {
+					array = global.at_members
+					set_variable = { antarctica_station_total_upkeep_multiplier = 0 }
+				}
+
+				# Calculate maintenance costs once globally (not per-country)
+				antarctica_apply_station_maintenance_costs = yes
 			}
 		}
 	}

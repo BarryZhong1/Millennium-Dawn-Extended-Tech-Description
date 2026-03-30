@@ -1,4 +1,4 @@
-# Author(s): XCezor
+﻿# Author(s): XCezor
 
 # Usage
 # set_temp_variable = { station_id = x }
@@ -90,6 +90,8 @@ antarctica_initialize_station_display_arrays = {
 		set_variable = { global.selected_antarctica_station_iteration_progress = 0 }
 		set_variable = { global.selected_antarctica_station_iterations = 0 }
 		set_variable = { global.selected_antarctica_station_iterations_until_next_tier = 0 }
+		set_variable = { global.selected_antarctica_station_preview_output_power = 0 }
+		set_variable = { global.selected_antarctica_station_preview_output_required_staff = 0 }
 
 		set_global_flag = antarctica_station_display_initialized
 		log = "[GetDateText]: [Root.GetName]: Initialized Antarctica station display arrays."
@@ -348,10 +350,37 @@ antarctica_recalculate_station_module_outputs = {
 			antarctica_apply_single_laboratory_station_output = yes
 		}
 
+		meta_effect = {
+			text = {
+				set_temp_variable = { existing_storage = global.research_station_[ID]_output_storage }
+			}
+			ID = "[?station_id]"
+		}
+
+		# out_storage is the module-defined max fuel capacity.
+		set_temp_variable = { out_capacity = out_storage }
+		set_temp_variable = { effective_storage = out_capacity }
+
+		# Preserve current remaining fuel between recalculations when available.
+		if = {
+			limit = { check_variable = { existing_storage > 0 } }
+			set_temp_variable = { effective_storage = existing_storage }
+		}
+
+		if = {
+			limit = { check_variable = { effective_storage > out_capacity } }
+			set_temp_variable = { effective_storage = out_capacity }
+		}
+
+		if = {
+			limit = { check_variable = { effective_storage < 0 } }
+			set_temp_variable = { effective_storage = 0 }
+		}
+
 		set_temp_variable = { out_fuel_capacity_days = 0 }
 		if = {
 			limit = { check_variable = { out_fuel_usage > 0 } }
-			set_temp_variable = { out_fuel_capacity_days = out_storage }
+			set_temp_variable = { out_fuel_capacity_days = effective_storage }
 			divide_temp_variable = { out_fuel_capacity_days = out_fuel_usage }
 			round_variable = out_fuel_capacity_days
 		}
@@ -380,7 +409,7 @@ antarctica_recalculate_station_module_outputs = {
 			FUEL_BONUS = "[?out_fuel_usage_bonus]"
 			TOTAL_PWR = "[?out_power_total]"
 			SAT = "[?out_staff_satisfaction]"
-			STO = "[?out_storage]"
+			STO = "[?effective_storage]"
 			CAP = "[?out_capacity]"
 			INS = "[?out_install_cost]"
 			REL = "[?out_reliability]"
@@ -1444,6 +1473,8 @@ antarctica_normalize_startup_station_slots = {
 
 antarctica_calculate_selected_preview_module_install_time = {
 	set_temp_variable = { out_construction_time = 0 }
+	set_temp_variable = { out_power = 0 }
+	set_temp_variable = { out_required_staff = 0 }
 
 	if = {
 		limit = { check_variable = { global.selected_antarctica_station_selected_module_category = 1 } }
@@ -1474,6 +1505,13 @@ antarctica_calculate_selected_preview_module_install_time = {
 	set_variable = { global.selected_antarctica_station_selected_module_install_time = out_construction_time }
 	round_variable = global.selected_antarctica_station_selected_module_install_time
 	clamp_variable = { var = global.selected_antarctica_station_selected_module_install_time min = 1 max = 999 }
+
+	# Calculate preview balance with selected module included
+	set_variable = { global.selected_antarctica_station_preview_output_power = global.selected_antarctica_station_output_power }
+	add_to_variable = { global.selected_antarctica_station_preview_output_power = out_power }
+
+	set_variable = { global.selected_antarctica_station_preview_output_required_staff = global.selected_antarctica_station_output_required_staff }
+	add_to_variable = { global.selected_antarctica_station_preview_output_required_staff = out_required_staff }
 }
 
 # Usage
@@ -1747,6 +1785,58 @@ antarctica_process_station_module_installations = {
 
 
 antarctica_process_station_fuel_consumption = {
+	if = {
+		limit = { NOT = { has_global_flag = antarctica_fuel_storage_migrated_v2 } }
+		for_each_loop = {
+			array = global.antarctica_station_ids
+			value = migrate_station_id
+
+			if = {
+				limit = {
+					check_variable = { migrate_station_id > 0 }
+					meta_trigger = {
+						text = { has_global_flag = research_station_[ID]_exists }
+						ID = "[?migrate_station_id]"
+					}
+				}
+
+				set_temp_variable = { station_id = migrate_station_id }
+				antarctica_recalculate_station_module_outputs = yes
+
+				meta_effect = {
+					text = {
+						set_temp_variable = { migrate_capacity = global.research_station_[ID]_output_capacity }
+						set_temp_variable = { migrate_usage = global.research_station_[ID]_output_fuel_usage }
+					}
+					ID = "[?migrate_station_id]"
+				}
+
+				if = {
+					limit = {
+						check_variable = { migrate_capacity > 0 }
+						check_variable = { migrate_usage > 0 }
+					}
+					set_temp_variable = { migrate_days = migrate_capacity }
+					divide_temp_variable = { migrate_days = migrate_usage }
+					round_variable = migrate_days
+
+					meta_effect = {
+						text = {
+							set_variable = { global.research_station_[ID]_output_storage = [STORAGE] }
+							set_variable = { global.research_station_[ID]_output_fuel_capacity_days = [DAYS] }
+							set_global_flag = research_station_[ID]_fuel_initialized
+						}
+						ID = "[?migrate_station_id]"
+						STORAGE = "[?migrate_capacity]"
+						DAYS = "[?migrate_days]"
+					}
+				}
+			}
+		}
+
+		set_global_flag = antarctica_fuel_storage_migrated_v2
+	}
+
 	for_each_loop = {
 		array = global.antarctica_station_ids
 		value = process_station_id
@@ -1764,8 +1854,43 @@ antarctica_process_station_fuel_consumption = {
 				text = {
 					set_temp_variable = { fuel_usage = global.research_station_[ID]_output_fuel_usage }
 					set_temp_variable = { current_storage = global.research_station_[ID]_output_storage }
+					set_temp_variable = { max_capacity = global.research_station_[ID]_output_capacity }
 				}
 				ID = "[?process_station_id]"
+			}
+
+			if = {
+				limit = { check_variable = { max_capacity < 1 } }
+				set_temp_variable = { station_id = process_station_id }
+				antarctica_recalculate_station_module_outputs = yes
+				meta_effect = {
+					text = {
+						set_temp_variable = { fuel_usage = global.research_station_[ID]_output_fuel_usage }
+						set_temp_variable = { current_storage = global.research_station_[ID]_output_storage }
+						set_temp_variable = { max_capacity = global.research_station_[ID]_output_capacity }
+					}
+					ID = "[?process_station_id]"
+				}
+			}
+
+			# One-time initialization for legacy saves: if storage was never seeded,
+			# start from max capacity once and then let daily consumption deplete it.
+			if = {
+				limit = {
+					check_variable = { current_storage < 1 }
+					check_variable = { max_capacity > 0 }
+					meta_trigger = {
+						text = {
+							NOT = { has_global_flag = research_station_[ID]_fuel_initialized }
+						}
+						ID = "[?process_station_id]"
+					}
+				}
+				set_temp_variable = { current_storage = max_capacity }
+				meta_effect = {
+					text = { set_global_flag = research_station_[ID]_fuel_initialized }
+					ID = "[?process_station_id]"
+				}
 			}
 
 			if = {
@@ -1820,6 +1945,8 @@ antarctica_process_station_research_progress = {
 					set_temp_variable = { station_tier = global.research_station_[ID]_tier }
 					set_temp_variable = { station_iteration_progress = global.research_station_[ID]_iteration_progress }
 					set_temp_variable = { station_iterations = global.research_station_[ID]_iterations }
+					set_temp_variable = { station_fuel_usage = global.research_station_[ID]_output_fuel_usage }
+					set_temp_variable = { station_fuel_storage = global.research_station_[ID]_output_storage }
 					set_temp_variable = { station_active_lab_slots = 0 }
 					if = { limit = { check_variable = { global.research_station_[ID]_module_slot_6 > 0 } } add_to_temp_variable = { station_active_lab_slots = 1 } }
 					if = { limit = { check_variable = { global.research_station_[ID]_module_slot_7 > 0 } } add_to_temp_variable = { station_active_lab_slots = 1 } }
@@ -1827,6 +1954,16 @@ antarctica_process_station_research_progress = {
 					if = { limit = { check_variable = { global.research_station_[ID]_module_slot_9 > 0 } } add_to_temp_variable = { station_active_lab_slots = 1 } }
 				}
 				ID = "[?process_station_id]"
+			}
+
+			# Blackout gate for iteration progress:
+			# fuel-consuming stations need remaining storage; renewable stations can progress normally.
+			if = {
+				limit = {
+					check_variable = { station_fuel_usage > 0 }
+					check_variable = { station_fuel_storage < 1 }
+				}
+				set_temp_variable = { station_active_lab_slots = 0 }
 			}
 
 			if = {
@@ -1907,6 +2044,150 @@ antarctica_process_station_research_progress = {
 	add_to_variable = { global.missile_ui_updated = 1 }
 }
 
+# Usage
+# antarctica_send_supplies_to_selected_station = yes
+antarctica_send_supplies_to_selected_station = {
+	if = {
+		limit = { check_variable = { global.selected_antarctica_station > 0 } }
+
+		set_temp_variable = { station_id = global.selected_antarctica_station }
+		antarctica_recalculate_station_module_outputs = yes
+
+		# Get max capacity and determine delivery parameters
+		meta_effect = {
+			text = {
+				set_temp_variable = { max_capacity = global.research_station_[ID]_output_capacity }
+			}
+			ID = "[?station_id]"
+		}
+
+		if = {
+			limit = { check_variable = { max_capacity > 0 } }
+
+			# Determine delivery time and cost multiplier based on season (April-October = winter = 2x)
+			set_temp_variable = { delivery_days = 15 }
+			set_temp_variable = { cost_multiplier = 1 }
+			if = {
+				limit = { OR = { check_variable = { global.month = 4 } check_variable = { global.month = 5 } check_variable = { global.month = 6 } check_variable = { global.month = 7 } check_variable = { global.month = 8 } check_variable = { global.month = 9 } check_variable = { global.month = 10 } } }
+				set_temp_variable = { delivery_days = 30 }
+				set_temp_variable = { cost_multiplier = 2 }
+			}
+
+			# Calculate cost: 0.25b per 1000 fuel = max_capacity * 0.00025 * multiplier
+			set_temp_variable = { delivery_cost = max_capacity }
+			multiply_temp_variable = { delivery_cost = 0.00025 }
+			multiply_temp_variable = { delivery_cost = cost_multiplier }
+			round_variable = delivery_cost
+
+			# Deduct cost from treasury using MD's treasury system
+			set_temp_variable = { treasury_change = delivery_cost }
+			multiply_temp_variable = { treasury_change = -1 }
+			modify_treasury_effect = yes
+
+			# Start delivery queue
+			meta_effect = {
+				text = {
+					set_variable = { global.research_station_[ID]_delivery_days_remaining = [DAYS] }
+					set_variable = { global.research_station_[ID]_delivery_fuel_pending = [FUEL] }
+				}
+				ID = "[?station_id]"
+				DAYS = "[?delivery_days]"
+				FUEL = "[?max_capacity]"
+			}
+
+			log = "[GetDateText]: [Root.GetName]: Ordered fuel delivery to Antarctica station [?global.selected_antarctica_station] for $$[?delivery_cost]b (delivery time: [?delivery_days] days)"
+
+			antarctica_set_selected_station_controller = yes
+			add_to_variable = { global.missile_ui_updated = 1 }
+		}
+	}
+}
+
+# Process delivery queue for selected station (decrements counter, adds fuel on completion)
+antarctica_process_delivery_queue = {
+	if = { limit = { check_variable = { global.selected_antarctica_station > 0 } }
+		set_temp_variable = { station_id = global.selected_antarctica_station }
+
+		# Get delivery days remaining for this station
+		meta_effect = {
+			text = {
+				set_temp_variable = { delivery_days = global.research_station_[ID]_delivery_days_remaining }
+			}
+			ID = "[?station_id]"
+		}
+
+		# Only process if delivery is active
+		if = { limit = { check_variable = { delivery_days > 0 } }
+			# Decrement counter
+			meta_effect = {
+				text = {
+					subtract_from_variable = { global.research_station_[ID]_delivery_days_remaining = 1 }
+				}
+				ID = "[?station_id]"
+			}
+
+			# Check if delivery just completed (now 0)
+			meta_effect = {
+				text = {
+					if = { limit = { check_variable = { global.research_station_[ID]_delivery_days_remaining = 0 } }
+						set_temp_variable = { delivery_complete = 1 }
+					}
+				}
+				ID = "[?station_id]"
+			}
+
+			# If delivery completed, add fuel now
+			if = { limit = { check_variable = { delivery_complete = 1 } }
+				# Retrieve station values
+				meta_effect = {
+					text = {
+						set_temp_variable = { current_storage = global.research_station_[ID]_output_storage }
+						set_temp_variable = { pending_fuel = global.research_station_[ID]_delivery_fuel_pending }
+						set_temp_variable = { max_capacity = global.research_station_[ID]_output_capacity }
+					}
+					ID = "[?station_id]"
+				}
+
+				# Add fuel and clamp to capacity
+				add_to_temp_variable = { current_storage = pending_fuel }
+				if = { limit = { check_variable = { current_storage > max_capacity } }
+					set_temp_variable = { current_storage = max_capacity }
+				}
+
+				# Recalculate fuel days
+				meta_effect = {
+					text = {
+						set_temp_variable = { fuel_usage = global.research_station_[ID]_output_fuel_usage }
+					}
+					ID = "[?station_id]"
+				}
+
+				set_temp_variable = { fuel_capacity_days = 0 }
+				if = { limit = { check_variable = { fuel_usage > 0 } }
+					set_temp_variable = { fuel_capacity_days = current_storage }
+					divide_temp_variable = { fuel_capacity_days = fuel_usage }
+					round_variable = fuel_capacity_days
+				}
+
+				# Update storage, clear queue, and recalculate days
+				meta_effect = {
+					text = {
+						set_variable = { global.research_station_[ID]_output_storage = [STORAGE] }
+						set_variable = { global.research_station_[ID]_delivery_fuel_pending = 0 }
+						set_variable = { global.research_station_[ID]_output_fuel_capacity_days = [DAYS] }
+					}
+					ID = "[?station_id]"
+					STORAGE = "[?current_storage]"
+					DAYS = "[?fuel_capacity_days]"
+				}
+
+				log = "[GetDateText]: Fuel delivery completed for Antarctica station [?station_id]. New storage: [?current_storage] fuel ([?fuel_capacity_days] days)"
+				add_to_variable = { global.missile_ui_updated = 1 }
+			}
+		}
+	}
+}
+
 
 antarctica_clear_laboratory_country_effects = {
 	clear_variable = antarctica_lab_cat_agriculture_tech
@@ -1952,7 +2233,7 @@ antarctica_apply_single_powerplant_station_output = {
 		limit = { check_variable = { pwr_module = 1 } }
 		add_to_temp_variable = { out_power = 250 }
 		add_to_temp_variable = { out_power_total = 250 }
-		add_to_temp_variable = { out_fuel_usage = 5 }
+		add_to_temp_variable = { out_fuel_usage = 300 } # 5
 		add_to_temp_variable = { out_install_cost = -0.5 }
 		add_to_temp_variable = { out_construction_time = 5 }
 		add_to_temp_variable = { out_upkeep_cost = 0.03 }
@@ -1962,7 +2243,7 @@ antarctica_apply_single_powerplant_station_output = {
 		limit = { check_variable = { pwr_module = 2 } }
 		add_to_temp_variable = { out_power = 350 }
 		add_to_temp_variable = { out_power_total = 350 }
-		add_to_temp_variable = { out_fuel_usage = 14 }
+		add_to_temp_variable = { out_fuel_usage = 300 } # 14
 		add_to_temp_variable = { out_install_cost = -0.9 }
 		add_to_temp_variable = { out_construction_time = 5 }
 		add_to_temp_variable = { out_upkeep_cost = 0.03 }
@@ -1972,7 +2253,7 @@ antarctica_apply_single_powerplant_station_output = {
 		limit = { check_variable = { pwr_module = 3 } }
 		add_to_temp_variable = { out_power = 1250 }
 		add_to_temp_variable = { out_power_total = 1250 }
-		add_to_temp_variable = { out_fuel_usage = 50 }
+		add_to_temp_variable = { out_fuel_usage = 350 } # 50
 		add_to_temp_variable = { out_install_cost = -5 }
 		add_to_temp_variable = { out_construction_time = 5 }
 		add_to_temp_variable = { out_upkeep_cost = 0.08 }
@@ -2374,25 +2655,28 @@ antarctica_apply_single_laboratory_module_effect = {
 # set_temp_variable = { station_id = id }
 # antarctica_apply_station_laboratory_effects_to_controller = yes
 antarctica_apply_station_laboratory_effects_to_controller = {
+	meta_effect = {
+		text = {
+			set_temp_variable = { station_controller = global.research_station_[ID]_controller }
+			set_temp_variable = { station_fuel_usage = global.research_station_[ID]_output_fuel_usage }
+			set_temp_variable = { station_fuel_storage = global.research_station_[ID]_output_storage }
+		}
+		ID = "[?station_id]"
+	}
+
 	if = {
-		limit = {
-			meta_trigger = {
-				text = {
-					has_global_flag = research_station_[ID]_exists
-				}
-				ID = "[?station_id]"
-			}
-		}
+		limit = { check_variable = { station_controller = THIS.id } }
 
-		meta_effect = {
-			text = {
-				set_temp_variable = { station_controller = global.research_station_[ID]_controller }
-			}
-			ID = "[?station_id]"
-		}
-
+		# Fuel blackout gate:
+		# - always allow renewable stations (fuel usage <= 0)
+		# - for fuel-consuming stations, require remaining storage > 0
 		if = {
-			limit = { check_variable = { station_controller = THIS.id } }
+			limit = {
+				OR = {
+					check_variable = { station_fuel_usage < 1 }
+					check_variable = { station_fuel_storage > 0 }
+				}
+			}
 
 			meta_effect = {
 				text = {
@@ -2418,6 +2702,8 @@ antarctica_recalculate_country_laboratory_effects = {
 			has_idea = at_member
 		}
 
+		antarctica_clear_laboratory_country_effects = yes
+
 		for_each_loop = {
 			array = global.antarctica_station_ids
 			value = current_station_id
@@ -2426,6 +2712,41 @@ antarctica_recalculate_country_laboratory_effects = {
 				limit = { check_variable = { current_station_id > 0 } }
 				set_temp_variable = { station_id = current_station_id }
 				antarctica_apply_station_laboratory_effects_to_controller = yes
+			}
+		}
+	}
+}
+
+# Usage
+# antarctica_apply_station_maintenance_costs = yes
+antarctica_apply_station_maintenance_costs = {
+	for_each_loop = {
+		array = global.antarctica_station_ids
+		value = process_station_id
+
+		if = {
+			limit = { check_variable = { process_station_id > 0 } }
+
+			meta_effect = {
+				text = {
+					set_global_variable = { antarctica_temp_upkeep_cost = global.research_station_[ID]_output_upkeep_cost }
+					set_temp_variable = { station_controller_id = global.research_station_[ID]_controller }
+				}
+				ID = "[?process_station_id]"
+			}
+
+			# Add maintenance cost to the owning country.
+			if = {
+				limit = {
+					check_variable = { global.antarctica_temp_upkeep_cost > 0 }
+					check_variable = { station_controller_id > 0 }
+				}
+				set_variable = { temp_controller_id = station_controller_id }
+
+				# Scope directly to the owner country ID and add upkeep there.
+				var:temp_controller_id = {
+					add_to_variable = { antarctica_station_total_upkeep_multiplier = global.antarctica_temp_upkeep_cost }
+				}
 			}
 		}
 	}
