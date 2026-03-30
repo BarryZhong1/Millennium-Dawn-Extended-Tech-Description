@@ -2200,6 +2200,7 @@ antarctica_apply_station_laboratory_effects_to_controller = {
 		meta_effect = {
 			text = {
 				set_temp_variable = { station_controller = global.research_station_[ID]_controller }
+				set_temp_variable = { station_fuel_capacity = global.research_station_[ID]_output_capacity }
 			}
 			ID = "[?station_id]"
 		}
@@ -2207,19 +2208,24 @@ antarctica_apply_station_laboratory_effects_to_controller = {
 		if = {
 			limit = { check_variable = { station_controller = THIS.id } }
 
-			meta_effect = {
-				text = {
-					for_each_loop = {
-						array = global.research_station_[ID]_module_laboratories_list
-						value = current_lab_module
-						if = {
-							limit = { check_variable = { current_lab_module > 0 } }
-							set_temp_variable = { station_lab_module = current_lab_module }
-							antarctica_apply_single_laboratory_module_effect = yes
+			# Check for fuel blackout: if capacity = 0, don't apply lab effects
+			if = {
+				limit = { check_variable = { station_fuel_capacity > 0 } }
+
+				meta_effect = {
+					text = {
+						for_each_loop = {
+							array = global.research_station_[ID]_module_laboratories_list
+							value = current_lab_module
+							if = {
+								limit = { check_variable = { current_lab_module > 0 } }
+								set_temp_variable = { station_lab_module = current_lab_module }
+								antarctica_apply_single_laboratory_module_effect = yes
+							}
 						}
 					}
+					ID = "[?station_id]"
 				}
-				ID = "[?station_id]"
 			}
 		}
 	}
@@ -2239,6 +2245,48 @@ antarctica_recalculate_country_laboratory_effects = {
 				limit = { check_variable = { current_station_id > 0 } }
 				set_temp_variable = { station_id = current_station_id }
 				antarctica_apply_station_laboratory_effects_to_controller = yes
+			}
+		}
+	}
+}
+
+# Usage
+# antarctica_apply_station_maintenance_costs = yes
+antarctica_apply_station_maintenance_costs = {
+	for_each_loop = {
+		array = global.antarctica_station_ids
+		value = process_station_id
+
+		if = {
+			limit = {
+				check_variable = { process_station_id > 0 }
+				meta_trigger = {
+					text = {
+						has_global_flag = research_station_[ID]_exists
+					}
+					ID = "[?process_station_id]"
+				}
+			}
+
+			meta_effect = {
+				text = {
+					set_temp_variable = { station_upkeep_cost = global.research_station_[ID]_output_upkeep_cost }
+					set_temp_variable = { station_controller_id = global.research_station_[ID]_controller }
+				}
+				ID = "[?process_station_id]"
+			}
+
+			# Add maintenance cost to the owning country
+			if = {
+				limit = { check_variable = { station_upkeep_cost > 0 } }
+				set_variable = { temp_controller_id = station_controller_id }
+				for_each_scope_loop = {
+					array = global.at_members
+					if = {
+						limit = { check_variable = { THIS.id = temp_controller_id } }
+						add_to_variable = { antarctica_station_total_upkeep_multiplier = station_upkeep_cost }
+					}
+				}
 			}
 		}
 	}
