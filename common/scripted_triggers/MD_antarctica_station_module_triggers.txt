@@ -86,12 +86,18 @@ antarctica_station_module_unlock_5_12 = { always = yes }
 
 # Usage: Check if installing selected module will maintain positive power balance
 antarctica_can_install_module_power_balance = {
-	check_variable = { global.selected_antarctica_station_output_power >= 0 }
+	OR = {
+		check_variable = { global.selected_antarctica_station_preview_output_power > 0 }
+		check_variable = { global.selected_antarctica_station_preview_output_power = 0 }
+	}
 }
 
 # Usage: Check if installing selected module will maintain sufficient staff availability
-# out_required_staff represents net available staff (housing capacity - staff needed)
+# preview_required_staff represents net available staff with selected module (housing capacity - staff needed)
 # Negative value means insufficient staff capacity
 antarctica_can_install_module_staff_availability = {
-	check_variable = { global.selected_antarctica_station_output_required_staff >= 0 }
+	OR = {
+		check_variable = { global.selected_antarctica_station_preview_output_required_staff > 0 }
+		check_variable = { global.selected_antarctica_station_preview_output_required_staff = 0 }
+	}
 }

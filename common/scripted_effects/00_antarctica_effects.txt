@@ -90,6 +90,8 @@ antarctica_initialize_station_display_arrays = {
 		set_variable = { global.selected_antarctica_station_iteration_progress = 0 }
 		set_variable = { global.selected_antarctica_station_iterations = 0 }
 		set_variable = { global.selected_antarctica_station_iterations_until_next_tier = 0 }
+		set_variable = { global.selected_antarctica_station_preview_output_power = 0 }
+		set_variable = { global.selected_antarctica_station_preview_output_required_staff = 0 }
 
 		set_global_flag = antarctica_station_display_initialized
 		log = "[GetDateText]: [Root.GetName]: Initialized Antarctica station display arrays."
@@ -1444,6 +1446,8 @@ antarctica_normalize_startup_station_slots = {
 
 antarctica_calculate_selected_preview_module_install_time = {
 	set_temp_variable = { out_construction_time = 0 }
+	set_temp_variable = { out_power = 0 }
+	set_temp_variable = { out_required_staff = 0 }
 
 	if = {
 		limit = { check_variable = { global.selected_antarctica_station_selected_module_category = 1 } }
@@ -1474,6 +1478,13 @@ antarctica_calculate_selected_preview_module_install_time = {
 	set_variable = { global.selected_antarctica_station_selected_module_install_time = out_construction_time }
 	round_variable = global.selected_antarctica_station_selected_module_install_time
 	clamp_variable = { var = global.selected_antarctica_station_selected_module_install_time min = 1 max = 999 }
+
+	# Calculate preview balance with selected module included
+	set_variable = { global.selected_antarctica_station_preview_output_power = global.selected_antarctica_station_output_power }
+	add_to_variable = { global.selected_antarctica_station_preview_output_power = out_power }
+
+	set_variable = { global.selected_antarctica_station_preview_output_required_staff = global.selected_antarctica_station_output_required_staff }
+	add_to_variable = { global.selected_antarctica_station_preview_output_required_staff = out_required_staff }
 }
 
 # Usage
