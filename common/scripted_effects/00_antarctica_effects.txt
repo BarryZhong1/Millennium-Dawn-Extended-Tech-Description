@@ -2053,9 +2053,9 @@ antarctica_send_supplies_to_selected_station = {
 		set_temp_variable = { station_id = global.selected_antarctica_station }
 		antarctica_recalculate_station_module_outputs = yes
 
+		# Get max capacity and determine delivery parameters
 		meta_effect = {
 			text = {
-				set_temp_variable = { current_storage = global.research_station_[ID]_output_storage }
 				set_temp_variable = { max_capacity = global.research_station_[ID]_output_capacity }
 			}
 			ID = "[?station_id]"
@@ -2063,45 +2063,128 @@ antarctica_send_supplies_to_selected_station = {
 
 		if = {
 			limit = { check_variable = { max_capacity > 0 } }
-			add_to_temp_variable = { current_storage = 5000 }
+
+			# Determine delivery time and cost multiplier based on season (April-October = winter = 2x)
+			set_temp_variable = { delivery_days = 15 }
+			set_temp_variable = { cost_multiplier = 1 }
 			if = {
-				limit = { check_variable = { current_storage > max_capacity } }
-				set_temp_variable = { current_storage = max_capacity }
-			}
-			if = {
-				limit = { check_variable = { current_storage < 0 } }
-				set_temp_variable = { current_storage = 0 }
+				limit = { OR = { check_variable = { global.month = 4 } check_variable = { global.month = 5 } check_variable = { global.month = 6 } check_variable = { global.month = 7 } check_variable = { global.month = 8 } check_variable = { global.month = 9 } check_variable = { global.month = 10 } } }
+				set_temp_variable = { delivery_days = 30 }
+				set_temp_variable = { cost_multiplier = 2 }
 			}
 
-			set_temp_variable = { fuel_capacity_days = 0 }
+			# Calculate cost: 0.25b per 1000 fuel = max_capacity * 0.00025 * multiplier
+			set_temp_variable = { delivery_cost = max_capacity }
+			multiply_temp_variable = { delivery_cost = 0.00025 }
+			multiply_temp_variable = { delivery_cost = cost_multiplier }
+			round_variable = delivery_cost
+
+			# Deduct cost from treasury using MD's treasury system
+			set_temp_variable = { treasury_change = delivery_cost }
+			multiply_temp_variable = { treasury_change = -1 }
+			modify_treasury_effect = yes
+
+			# Start delivery queue
 			meta_effect = {
 				text = {
-					set_temp_variable = { fuel_usage = global.research_station_[ID]_output_fuel_usage }
+					set_variable = { global.research_station_[ID]_delivery_days_remaining = [DAYS] }
+					set_variable = { global.research_station_[ID]_delivery_fuel_pending = [FUEL] }
 				}
 				ID = "[?station_id]"
-			}
-			if = {
-				limit = { check_variable = { fuel_usage > 0 } }
-				set_temp_variable = { fuel_capacity_days = current_storage }
-				divide_temp_variable = { fuel_capacity_days = fuel_usage }
-				round_variable = fuel_capacity_days
+				DAYS = "[?delivery_days]"
+				FUEL = "[?max_capacity]"
 			}
 
-			meta_effect = {
-				text = {
-					set_variable = { global.research_station_[ID]_output_storage = [STORAGE] }
-					set_variable = { global.research_station_[ID]_output_fuel_capacity_days = [DAYS] }
-					set_global_flag = research_station_[ID]_fuel_initialized
-				}
-				ID = "[?station_id]"
-				STORAGE = "[?current_storage]"
-				DAYS = "[?fuel_capacity_days]"
+			log = "[GetDateText]: [Root.GetName]: Ordered fuel delivery to Antarctica station [?global.selected_antarctica_station] for $$[?delivery_cost]b (delivery time: [?delivery_days] days)"
+
+			antarctica_set_selected_station_controller = yes
+			add_to_variable = { global.missile_ui_updated = 1 }
+		}
+	}
+}
+
+# Process delivery queue for selected station (decrements counter, adds fuel on completion)
+antarctica_process_delivery_queue = {
+	if = { limit = { check_variable = { global.selected_antarctica_station > 0 } }
+		set_temp_variable = { station_id = global.selected_antarctica_station }
+
+		# Get delivery days remaining for this station
+		meta_effect = {
+			text = {
+				set_temp_variable = { delivery_days = global.research_station_[ID]_delivery_days_remaining }
 			}
+			ID = "[?station_id]"
 		}
 
-		antarctica_set_selected_station_controller = yes
-		add_to_variable = { global.missile_ui_updated = 1 }
-		log = "[GetDateText]: [Root.GetName]: Send supplies to Antarctica station [?global.selected_antarctica_station]"
+		# Only process if delivery is active
+		if = { limit = { check_variable = { delivery_days > 0 } }
+			# Decrement counter
+			meta_effect = {
+				text = {
+					subtract_from_variable = { global.research_station_[ID]_delivery_days_remaining = 1 }
+				}
+				ID = "[?station_id]"
+			}
+
+			# Check if delivery just completed (now 0)
+			meta_effect = {
+				text = {
+					if = { limit = { check_variable = { global.research_station_[ID]_delivery_days_remaining = 0 } }
+						set_temp_variable = { delivery_complete = 1 }
+					}
+				}
+				ID = "[?station_id]"
+			}
+
+			# If delivery completed, add fuel now
+			if = { limit = { check_variable = { delivery_complete = 1 } }
+				# Retrieve station values
+				meta_effect = {
+					text = {
+						set_temp_variable = { current_storage = global.research_station_[ID]_output_storage }
+						set_temp_variable = { pending_fuel = global.research_station_[ID]_delivery_fuel_pending }
+						set_temp_variable = { max_capacity = global.research_station_[ID]_output_capacity }
+					}
+					ID = "[?station_id]"
+				}
+
+				# Add fuel and clamp to capacity
+				add_to_temp_variable = { current_storage = pending_fuel }
+				if = { limit = { check_variable = { current_storage > max_capacity } }
+					set_temp_variable = { current_storage = max_capacity }
+				}
+
+				# Recalculate fuel days
+				meta_effect = {
+					text = {
+						set_temp_variable = { fuel_usage = global.research_station_[ID]_output_fuel_usage }
+					}
+					ID = "[?station_id]"
+				}
+
+				set_temp_variable = { fuel_capacity_days = 0 }
+				if = { limit = { check_variable = { fuel_usage > 0 } }
+					set_temp_variable = { fuel_capacity_days = current_storage }
+					divide_temp_variable = { fuel_capacity_days = fuel_usage }
+					round_variable = fuel_capacity_days
+				}
+
+				# Update storage, clear queue, and recalculate days
+				meta_effect = {
+					text = {
+						set_variable = { global.research_station_[ID]_output_storage = [STORAGE] }
+						set_variable = { global.research_station_[ID]_delivery_fuel_pending = 0 }
+						set_variable = { global.research_station_[ID]_output_fuel_capacity_days = [DAYS] }
+					}
+					ID = "[?station_id]"
+					STORAGE = "[?current_storage]"
+					DAYS = "[?fuel_capacity_days]"
+				}
+
+				log = "[GetDateText]: Fuel delivery completed for Antarctica station [?station_id]. New storage: [?current_storage] fuel ([?fuel_capacity_days] days)"
+				add_to_variable = { global.missile_ui_updated = 1 }
+			}
+		}
 	}
 }
 
