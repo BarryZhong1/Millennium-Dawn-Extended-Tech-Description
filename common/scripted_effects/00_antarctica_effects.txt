@@ -2736,15 +2736,7 @@ antarctica_apply_station_maintenance_costs = {
 		value = process_station_id
 
 		if = {
-			limit = {
-				check_variable = { process_station_id > 0 }
-				meta_trigger = {
-					text = {
-						has_global_flag = research_station_[ID]_exists
-					}
-					ID = "[?process_station_id]"
-				}
-			}
+			limit = { check_variable = { process_station_id > 0 } }
 
 			meta_effect = {
 				text = {
@@ -2754,9 +2746,12 @@ antarctica_apply_station_maintenance_costs = {
 				ID = "[?process_station_id]"
 			}
 
-			# Add maintenance cost to the owning country (use direct index access, not nested loop)
+			# Add maintenance cost to the owning country.
 			if = {
-				limit = { check_variable = { station_upkeep_cost > 0 } }
+				limit = {
+					check_variable = { station_upkeep_cost > 0 }
+					check_variable = { station_controller_id > 0 }
+				}
 				set_variable = { temp_controller_id = station_controller_id }
 
 				# Scope directly to the owner country ID and add upkeep there.
