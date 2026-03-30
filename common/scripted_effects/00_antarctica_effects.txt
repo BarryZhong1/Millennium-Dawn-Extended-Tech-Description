@@ -2754,10 +2754,12 @@ antarctica_apply_station_maintenance_costs = {
 				ID = "[?process_station_id]"
 			}
 
-			# Add maintenance cost to the owning country
+			# Add maintenance cost to the owning country (use direct index access, not nested loop)
 			if = {
 				limit = { check_variable = { station_upkeep_cost > 0 } }
 				set_variable = { temp_controller_id = station_controller_id }
+
+				# Scope into the owning country and add upkeep there.
 				for_each_scope_loop = {
 					array = global.at_members
 					if = {

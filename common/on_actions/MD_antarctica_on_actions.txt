@@ -436,13 +436,14 @@ on_actions = {
 
 	on_monthly = {
 		effect = {
+			# Reset maintenance costs for all AT members
 			for_each_scope_loop = {
 				array = global.at_members
-				# Reset and recalculate maintenance costs
 				set_variable = { antarctica_station_total_upkeep_multiplier = 0 }
-				antarctica_apply_station_maintenance_costs = yes
-				antarctica_recalculate_country_laboratory_effects = yes
 			}
+
+			# Calculate maintenance costs once globally (not per-country)
+			antarctica_apply_station_maintenance_costs = yes
 		}
 	}
 }
