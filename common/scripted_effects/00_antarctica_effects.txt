@@ -2759,13 +2759,9 @@ antarctica_apply_station_maintenance_costs = {
 				limit = { check_variable = { station_upkeep_cost > 0 } }
 				set_variable = { temp_controller_id = station_controller_id }
 
-				# Scope into the owning country and add upkeep there.
-				for_each_scope_loop = {
-					array = global.at_members
-					if = {
-						limit = { check_variable = { THIS.id = temp_controller_id } }
-						add_to_variable = { antarctica_station_total_upkeep_multiplier = station_upkeep_cost }
-					}
+				# Scope directly to the owner country ID and add upkeep there.
+				var:temp_controller_id = {
+					add_to_variable = { antarctica_station_total_upkeep_multiplier = station_upkeep_cost }
 				}
 			}
 		}
