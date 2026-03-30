@@ -5544,15 +5544,7 @@ scripted_gui = {
 			antarctica_station_send_supplies_button_click = {
 				if = {
 					limit = { check_variable = { global.selected_antarctica_station > 0 } }
-					log = "[GetDateText]: [Root.GetName]: Send supplies to Antarctica station [?global.selected_antarctica_station]"
-					meta_effect = {
-						text = {
-							set_variable = { global.research_station_[ID]_output_storage = global.research_station_[ID]_output_storage |add| 5000 }
-							clamp_variable = { var = global.research_station_[ID]_output_storage min = 0 max = 999999 }
-						}
-						ID = "[?global.selected_antarctica_station]"
-					}
-					antarctica_set_selected_station_controller = yes
+					antarctica_send_supplies_to_selected_station = yes
 				}
 				add_to_variable = { global.missile_ui_updated = 1 }
 			}
