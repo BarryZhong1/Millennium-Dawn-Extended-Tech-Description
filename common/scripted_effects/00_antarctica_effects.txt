@@ -1918,6 +1918,7 @@ antarctica_process_station_research_progress = {
 					set_temp_variable = { station_tier = global.research_station_[ID]_tier }
 					set_temp_variable = { station_iteration_progress = global.research_station_[ID]_iteration_progress }
 					set_temp_variable = { station_iterations = global.research_station_[ID]_iterations }
+					set_temp_variable = { station_controller = global.research_station_[ID]_controller }
 					set_temp_variable = { station_fuel_usage = global.research_station_[ID]_output_fuel_usage }
 					set_temp_variable = { station_fuel_storage = global.research_station_[ID]_output_storage }
 					set_temp_variable = { station_active_lab_slots = 0 }
@@ -1967,6 +1968,8 @@ antarctica_process_station_research_progress = {
 				set_temp_variable = { station_iterations = startup_min_iterations }
 			}
 
+			set_temp_variable = { station_completed_iteration = 0 }
+
 			if = {
 				limit = { check_variable = { station_active_lab_slots > 0 } }
 				add_to_temp_variable = { station_iteration_progress = station_active_lab_slots }
@@ -1975,6 +1978,7 @@ antarctica_process_station_research_progress = {
 					limit = { check_variable = { station_iteration_progress > 99 } }
 					add_to_temp_variable = { station_iteration_progress = -100 }
 					add_to_temp_variable = { station_iterations = 1 }
+					set_temp_variable = { station_completed_iteration = 1 }
 				}
 
 				if = {
@@ -1993,6 +1997,52 @@ antarctica_process_station_research_progress = {
 			if = {
 				limit = { check_variable = { station_tier < startup_min_tier } }
 				set_temp_variable = { station_tier = startup_min_tier }
+			}
+
+			if = {
+				limit = {
+					check_variable = { station_completed_iteration > 0 }
+					check_variable = { station_controller > 0 }
+				}
+
+				set_variable = { global.antarctica_iteration_lab_module_0 = 0 }
+				set_variable = { global.antarctica_iteration_lab_module_1 = 0 }
+				set_variable = { global.antarctica_iteration_lab_module_2 = 0 }
+				set_variable = { global.antarctica_iteration_lab_module_3 = 0 }
+
+				meta_effect = {
+					text = {
+						set_variable = { global.antarctica_iteration_lab_module_0 = global.research_station_[ID]_module_slot_6 }
+						set_variable = { global.antarctica_iteration_lab_module_1 = global.research_station_[ID]_module_slot_7 }
+						set_variable = { global.antarctica_iteration_lab_module_2 = global.research_station_[ID]_module_slot_8 }
+						set_variable = { global.antarctica_iteration_lab_module_3 = global.research_station_[ID]_module_slot_9 }
+					}
+					ID = "[?process_station_id]"
+				}
+
+				set_variable = { temp_controller_id = station_controller }
+				var:temp_controller_id = {
+					if = {
+						limit = { check_variable = { global.antarctica_iteration_lab_module_0 > 0 } }
+						set_temp_variable = { station_lab_module = global.antarctica_iteration_lab_module_0 }
+						antarctica_apply_single_laboratory_iteration_reward = yes
+					}
+					if = {
+						limit = { check_variable = { global.antarctica_iteration_lab_module_1 > 0 } }
+						set_temp_variable = { station_lab_module = global.antarctica_iteration_lab_module_1 }
+						antarctica_apply_single_laboratory_iteration_reward = yes
+					}
+					if = {
+						limit = { check_variable = { global.antarctica_iteration_lab_module_2 > 0 } }
+						set_temp_variable = { station_lab_module = global.antarctica_iteration_lab_module_2 }
+						antarctica_apply_single_laboratory_iteration_reward = yes
+					}
+					if = {
+						limit = { check_variable = { global.antarctica_iteration_lab_module_3 > 0 } }
+						set_temp_variable = { station_lab_module = global.antarctica_iteration_lab_module_3 }
+						antarctica_apply_single_laboratory_iteration_reward = yes
+					}
+				}
 			}
 
 			meta_effect = {
@@ -2624,6 +2674,231 @@ antarctica_apply_single_laboratory_module_effect = {
 	}
 }
 
+antarctica_apply_single_laboratory_iteration_reward = {
+	# Cryo-Genetic Seed Vault
+	if = {
+		limit = { check_variable = { station_lab_module = 1 } }
+
+		if = {
+			limit = { check_variable = { antarctica_lab_iter_population_growth_factor < 0.3 } }
+			add_to_variable = { antarctica_lab_iter_population_growth_factor = 0.002 }
+			clamp_variable = { var = antarctica_lab_iter_population_growth_factor max = 0.3 }
+			add_to_variable = { antarctica_lab_population_growth_factor = 0.002 }
+		}
+
+		add_tech_bonus = { name = antarctica_lab_tech_bonus bonus = 0.03 uses = 1 category = CAT_agriculture_tech }
+		add_tech_bonus = { name = antarctica_lab_tech_bonus bonus = 0.02 uses = 1 category = CAT_genes }
+	}
+	# Civilian Satellite Uplink
+	else_if = {
+		limit = { check_variable = { station_lab_module = 2 } }
+
+		if = {
+			limit = { check_variable = { antarctica_lab_iter_gnss_production_speed_modifier < 0.3 } }
+			add_to_variable = { antarctica_lab_iter_gnss_production_speed_modifier = 0.015 }
+			clamp_variable = { var = antarctica_lab_iter_gnss_production_speed_modifier max = 0.3 }
+			add_to_variable = { antarctica_lab_gnss_production_speed_modifier = 0.015 }
+		}
+
+		add_tech_bonus = { name = antarctica_lab_tech_bonus bonus = 0.02 uses = 1 category = CAT_satellite }
+	}
+	# Military Satellite Uplink
+	else_if = {
+		limit = { check_variable = { station_lab_module = 3 } }
+
+		if = {
+			limit = { check_variable = { antarctica_lab_iter_spysat_production_speed_modifier < 0.3 } }
+			add_to_variable = { antarctica_lab_iter_spysat_production_speed_modifier = 0.015 }
+			clamp_variable = { var = antarctica_lab_iter_spysat_production_speed_modifier max = 0.3 }
+			add_to_variable = { antarctica_lab_spysat_production_speed_modifier = 0.015 }
+		}
+
+		add_tech_bonus = { name = antarctica_lab_tech_bonus bonus = 0.02 uses = 1 category = CAT_satellite }
+	}
+	# Extreme Environment Medical Center
+	else_if = {
+		limit = { check_variable = { station_lab_module = 4 } }
+
+		if = {
+			limit = { check_variable = { antarctica_lab_iter_health_cost_multiplier_modifier > -0.3 } }
+			add_to_variable = { antarctica_lab_iter_health_cost_multiplier_modifier = -0.015 }
+			clamp_variable = { var = antarctica_lab_iter_health_cost_multiplier_modifier min = -0.3 }
+			add_to_variable = { antarctica_lab_health_cost_multiplier_modifier = -0.015 }
+		}
+
+		if = {
+			limit = { check_variable = { antarctica_lab_iter_acclimatization_cold_climate_gain_factor < 0.3 } }
+			add_to_variable = { antarctica_lab_iter_acclimatization_cold_climate_gain_factor = 0.01 }
+			clamp_variable = { var = antarctica_lab_iter_acclimatization_cold_climate_gain_factor max = 0.3 }
+			add_to_variable = { antarctica_lab_acclimatization_cold_climate_gain_factor = 0.01 }
+		}
+
+		add_tech_bonus = { name = antarctica_lab_tech_bonus bonus = 0.04 uses = 1 category = CAT_nfibers }
+	}
+	# Subsurface Sonar
+	else_if = {
+		limit = { check_variable = { station_lab_module = 5 } }
+
+		if = {
+			limit = {
+				has_country_flag = antarctica_lab_illegal_research
+				check_variable = { antarctica_lab_iter_naval_detection < 0.3 }
+			}
+			add_to_variable = { antarctica_lab_iter_naval_detection = 0.013 }
+			clamp_variable = { var = antarctica_lab_iter_naval_detection max = 0.3 }
+			add_to_variable = { antarctica_lab_naval_detection = 0.013 }
+		}
+
+		add_tech_bonus = { name = antarctica_lab_tech_bonus bonus = 0.015 uses = 1 category = CAT_sub }
+		add_tech_bonus = { name = antarctica_lab_tech_bonus bonus = 0.015 uses = 1 category = CAT_naval_modules }
+	}
+	# Rare Earth Mineral Survey Lab
+	else_if = {
+		limit = { check_variable = { station_lab_module = 6 } }
+
+		if = {
+			limit = { check_variable = { antarctica_lab_iter_local_resources_factor < 0.3 } }
+			add_to_variable = { antarctica_lab_iter_local_resources_factor = 0.01 }
+			clamp_variable = { var = antarctica_lab_iter_local_resources_factor max = 0.3 }
+			add_to_variable = { antarctica_lab_local_resources_factor = 0.01 }
+		}
+
+		add_tech_bonus = { name = antarctica_lab_tech_bonus bonus = 0.018 uses = 1 category = CAT_construction_tech }
+		add_tech_bonus = { name = antarctica_lab_tech_bonus bonus = 0.015 uses = 1 category = CAT_excavation_tech }
+	}
+	# Radiation Laboratory
+	else_if = {
+		limit = { check_variable = { station_lab_module = 7 } }
+
+		if = {
+			limit = { check_variable = { antarctica_lab_iter_nuclear_fuel_consumption_modifier > -0.3 } }
+			add_to_variable = { antarctica_lab_iter_nuclear_fuel_consumption_modifier = -0.01 }
+			clamp_variable = { var = antarctica_lab_iter_nuclear_fuel_consumption_modifier min = -0.3 }
+			add_to_variable = { antarctica_lab_nuclear_fuel_consumption_modifier = -0.01 }
+		}
+
+		add_tech_bonus = { name = antarctica_lab_tech_bonus bonus = 0.015 uses = 1 category = CAT_nuclear_reactors }
+		add_tech_bonus = { name = antarctica_lab_tech_bonus bonus = 0.02 uses = 1 category = CAT_electrical_tech }
+
+		if = {
+			limit = { has_country_flag = antarctica_lab_illegal_research }
+			add_tech_bonus = { name = antarctica_lab_tech_bonus bonus = 0.02 uses = 1 category = CAT_nuclear_weapons }
+		}
+	}
+	# High-Frequency Radio Station
+	else_if = {
+		limit = { check_variable = { station_lab_module = 8 } }
+
+		if = {
+			limit = { check_variable = { antarctica_lab_iter_production_speed_radar_station_factor < 0.3 } }
+			add_to_variable = { antarctica_lab_iter_production_speed_radar_station_factor = 0.013 }
+			clamp_variable = { var = antarctica_lab_iter_production_speed_radar_station_factor max = 0.3 }
+			add_to_variable = { antarctica_lab_production_speed_radar_station_factor = 0.013 }
+		}
+
+		if = {
+			limit = {
+				has_country_flag = antarctica_lab_illegal_research
+				check_variable = { antarctica_lab_iter_intel_network_gain_factor < 0.3 }
+			}
+			add_to_variable = { antarctica_lab_iter_intel_network_gain_factor = 0.012 }
+			clamp_variable = { var = antarctica_lab_iter_intel_network_gain_factor max = 0.3 }
+			add_to_variable = { antarctica_lab_intel_network_gain_factor = 0.012 }
+		}
+
+		add_tech_bonus = { name = antarctica_lab_tech_bonus bonus = 0.02 uses = 1 category = CAT_encryption_tech }
+		add_tech_bonus = { name = antarctica_lab_tech_bonus bonus = 0.015 uses = 1 category = CAT_computing_tech }
+		if = {
+			limit = { has_country_flag = antarctica_lab_illegal_research }
+			add_tech_bonus = { name = antarctica_lab_tech_bonus bonus = 0.015 uses = 1 category = CAT_decryption_tech }
+		}
+	}
+	# Global Weather Observatory
+	else_if = {
+		limit = { check_variable = { station_lab_module = 9 } }
+
+		if = {
+			limit = { check_variable = { antarctica_lab_iter_air_mission_efficiency < 0.3 } }
+			add_to_variable = { antarctica_lab_iter_air_mission_efficiency = 0.012 }
+			clamp_variable = { var = antarctica_lab_iter_air_mission_efficiency max = 0.3 }
+			add_to_variable = { antarctica_lab_air_mission_efficiency = 0.012 }
+		}
+
+		if = {
+			limit = { check_variable = { antarctica_lab_iter_carrier_traffic < 0.3 } }
+			add_to_variable = { antarctica_lab_iter_carrier_traffic = 0.013 }
+			clamp_variable = { var = antarctica_lab_iter_carrier_traffic max = 0.3 }
+			add_to_variable = { antarctica_lab_carrier_traffic = 0.013 }
+		}
+
+		add_tech_bonus = { name = antarctica_lab_tech_bonus bonus = 0.023 uses = 1 category = CAT_air_eqp }
+	}
+	# Stratospheric Balloon Launchpad
+	else_if = {
+		limit = { check_variable = { station_lab_module = 10 } }
+
+		if = {
+			limit = { check_variable = { antarctica_lab_iter_screening_efficiency < 0.3 } }
+			add_to_variable = { antarctica_lab_iter_screening_efficiency = 0.018 }
+			clamp_variable = { var = antarctica_lab_iter_screening_efficiency max = 0.3 }
+			add_to_variable = { antarctica_lab_screening_efficiency = 0.018 }
+		}
+
+		if = {
+			limit = { check_variable = { antarctica_lab_iter_air_accidents_factor > -0.3 } }
+			add_to_variable = { antarctica_lab_iter_air_accidents_factor = -0.012 }
+			clamp_variable = { var = antarctica_lab_iter_air_accidents_factor min = -0.3 }
+			add_to_variable = { antarctica_lab_air_accidents_factor = -0.012 }
+		}
+
+		if = {
+			limit = { check_variable = { antarctica_lab_iter_airforce_intel_factor < 0.3 } }
+			add_to_variable = { antarctica_lab_iter_airforce_intel_factor = 0.015 }
+			clamp_variable = { var = antarctica_lab_iter_airforce_intel_factor max = 0.3 }
+			add_to_variable = { antarctica_lab_airforce_intel_factor = 0.015 }
+		}
+	}
+	# Quantum Research Vault
+	else_if = {
+		limit = { check_variable = { station_lab_module = 11 } }
+
+		if = {
+			limit = { check_variable = { antarctica_lab_iter_productivity_growth_modifier < 0.3 } }
+			add_to_variable = { antarctica_lab_iter_productivity_growth_modifier = 0.05 }
+			clamp_variable = { var = antarctica_lab_iter_productivity_growth_modifier max = 0.3 }
+			add_to_variable = { antarctica_lab_productivity_growth_modifier = 0.05 }
+		}
+
+		add_tech_bonus = { name = antarctica_lab_tech_bonus bonus = 0.034 uses = 1 category = CAT_ai }
+		add_tech_bonus = { name = antarctica_lab_tech_bonus bonus = 0.026 uses = 1 category = CAT_3d }
+		add_tech_bonus = { name = antarctica_lab_tech_bonus bonus = 0.03 uses = 1 category = CAT_computing_tech }
+	}
+	# Ice Core Deep Drilling Rig
+	else_if = {
+		limit = { check_variable = { station_lab_module = 12 } }
+		add_tech_bonus = { name = antarctica_lab_tech_bonus bonus = 0.025 uses = 1 category = CAT_excavation_tech }
+	}
+}
+
+antarctica_apply_laboratory_iteration_progression = {
+	add_to_variable = { antarctica_lab_population_growth_factor = antarctica_lab_iter_population_growth_factor }
+	add_to_variable = { antarctica_lab_gnss_production_speed_modifier = antarctica_lab_iter_gnss_production_speed_modifier }
+	add_to_variable = { antarctica_lab_spysat_production_speed_modifier = antarctica_lab_iter_spysat_production_speed_modifier }
+	add_to_variable = { antarctica_lab_health_cost_multiplier_modifier = antarctica_lab_iter_health_cost_multiplier_modifier }
+	add_to_variable = { antarctica_lab_acclimatization_cold_climate_gain_factor = antarctica_lab_iter_acclimatization_cold_climate_gain_factor }
+	add_to_variable = { antarctica_lab_naval_detection = antarctica_lab_iter_naval_detection }
+	add_to_variable = { antarctica_lab_local_resources_factor = antarctica_lab_iter_local_resources_factor }
+	add_to_variable = { antarctica_lab_nuclear_fuel_consumption_modifier = antarctica_lab_iter_nuclear_fuel_consumption_modifier }
+	add_to_variable = { antarctica_lab_production_speed_radar_station_factor = antarctica_lab_iter_production_speed_radar_station_factor }
+	add_to_variable = { antarctica_lab_intel_network_gain_factor = antarctica_lab_iter_intel_network_gain_factor }
+	add_to_variable = { antarctica_lab_air_mission_efficiency = antarctica_lab_iter_air_mission_efficiency }
+	add_to_variable = { antarctica_lab_carrier_traffic = antarctica_lab_iter_carrier_traffic }
+	add_to_variable = { antarctica_lab_screening_efficiency = antarctica_lab_iter_screening_efficiency }
+	add_to_variable = { antarctica_lab_air_accidents_factor = antarctica_lab_iter_air_accidents_factor }
+	add_to_variable = { antarctica_lab_airforce_intel_factor = antarctica_lab_iter_airforce_intel_factor }
+	add_to_variable = { antarctica_lab_productivity_growth_modifier = antarctica_lab_iter_productivity_growth_modifier }
+}
+
 # Usage
 # set_temp_variable = { station_id = id }
 # antarctica_apply_station_laboratory_effects_to_controller = yes
@@ -2687,6 +2962,8 @@ antarctica_recalculate_country_laboratory_effects = {
 				antarctica_apply_station_laboratory_effects_to_controller = yes
 			}
 		}
+
+		antarctica_apply_laboratory_iteration_progression = yes
 	}
 }
 
@@ -2702,7 +2979,7 @@ antarctica_apply_station_maintenance_costs = {
 
 			meta_effect = {
 				text = {
-					set_global_variable = { antarctica_temp_upkeep_cost = global.research_station_[ID]_output_upkeep_cost }
+					set_variable = { global.antarctica_temp_upkeep_cost = global.research_station_[ID]_output_upkeep_cost }
 					set_temp_variable = { station_controller_id = global.research_station_[ID]_controller }
 				}
 				ID = "[?process_station_id]"
