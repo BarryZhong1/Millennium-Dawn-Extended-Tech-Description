@@ -568,14 +568,15 @@ CHI_assign_nsc_secretaries = {
 	if = { limit = { OR = { check_variable = { CHI_ic_pick1 = 67 } check_variable = { CHI_ic_pick2 = 67 } check_variable = { CHI_ic_pick3 = 67 } } } set_country_flag = CHI_ic_nsc_ding_xuexiang_active }
 	if = { limit = { OR = { check_variable = { CHI_ic_pick1 = 68 } check_variable = { CHI_ic_pick2 = 68 } check_variable = { CHI_ic_pick3 = 68 } } } set_country_flag = CHI_ic_nsc_chen_xiaojiang_active }
 }
-CHI_update_ETK_sinofication = {
-	set_temp_variable = { sinofication_extra_change = sinofication_base_change } #5
-	set_temp_variable = { sinofication_compliance = THIS.compliance } #35.03595
-	multiply_temp_variable = { sinofication_compliance = sinofication_extra_change } #35.03595 * 5 = 175.17975
-	set_temp_variable = { sinofication_resistance = THIS.resistance } #42.4
-	multiply_temp_variable = { sinofication_resistance = sinofication_extra_change } #42.4 * 5 = 212
-	add_to_temp_variable = { sinofication_compliance = sinofication_resistance } #175 - 212 = -36,82025
-	divide_temp_variable = { sinofication_compliance = 100 } #-37 / 100 = -0,36820255
-	multiply_temp_variable = { sinofication_extra_change = sinofication_compliance } # 5 * -0,36820255 = -1,8410125
-	add_to_temp_variable = { sinofication_base_change = sinofication_extra_change } # 5 + -1,8410125 = 3,1589875
+CHI_update_sinofication = {
+	set_temp_variable = { sinofication_compliance = THIS.compliance }
+	subtract_from_temp_variable = { sinofication_compliance = THIS.resistance }
+	divide_temp_variable = { sinofication_compliance = 100 }
+	set_temp_variable = { sinofication_extra_change = sinofication_base_change }
+	multiply_temp_variable = { sinofication_extra_change = sinofication_compliance }
+	add_to_temp_variable = { sinofication_base_change = sinofication_extra_change }
+	set_temp_variable = { sinofication_compliance = CHI.CHI_sinofication_modifier }
+	set_temp_variable = { sinofication_extra_change = sinofication_base_change }
+	multiply_temp_variable = { sinofication_extra_change = sinofication_compliance }
+	add_to_temp_variable = { sinofication_base_change = sinofication_extra_change }
 }
