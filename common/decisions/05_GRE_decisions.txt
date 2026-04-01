@@ -358,175 +358,6 @@ GRE_debt_crisis_category = {
 
 # Cyprus Conflict
 GRE_CYP_category = {
-	###########CYPRUS CONFLICT - GREECE INCREASE CYPRIOTS###########
-	GRE_guarantee_turkish_property = {
-		allowed = { original_tag = GRE }
-		icon = GFX_decision_turkey
-		days_remove = 100
-
-		cost = 300
-
-		visible = {
-			country_exists = NCY
-			country_exists = CYP
-			has_country_flag = GRE_Enosis_In_Progress
-		}
-		available = {
-			has_equipment = {
-				infantry_weapons_1 > 99
-			}
-			check_variable = { 145.GRE_SUPPORT > 50 }
-			custom_trigger_tooltip = {
-				tooltip = GRE_NCY_incite_riot_TT
-				check_variable = { 145.GRE_SUPPORT > 49 }
-			}
-			custom_trigger_tooltip = {
-				tooltip = PER_presidential_decisions_only_one_is_available_TT
-				NOT = {
-					has_decision = GRE_please_north
-					has_decision = GRE_attack_turkish_strength
-				}
-			}
-		}
-
-		complete_effect = {
-			custom_effect_tooltip = GRE_lose_20_gain_20
-			custom_effect_tooltip = GRE_gain_20_strength
-			add_equipment_to_stockpile = {
-				type = infantry_weapons_1
-				amount = -100
-				producer = GRE
-			}
-			hidden_effect = {
-				log = "[GetDateText]: [Root.GetName]: Decision GRE_guarantee_turkish_property"
-				add_to_variable = { 145.GRE_SUPPORT = 20 }
-				add_to_variable = { 146.GRE_SUPPORT = -20 }
-				clamp_variable = { var = 146.GRE_SUPPORT min = 0 max = 100 }
-				clamp_variable = { var = 145.GRE_SUPPORT min = 0 max = 100 }
-			}
-		}
-
-		ai_will_do = {
-			base = 0.5
-			modifier = {
-				factor = 10
-				check_variable = { 146.GRE_SUPPORT < 50 }
-				check_variable = { 145.GRE_SUPPORT > 90 }
-			}
-			modifier = {
-				factor = 2
-				has_equipment = {
-					infantry_weapons_1 > 999
-				}
-			}
-		}
-	}
-	###########CYPRUS CONFLICT - GREECE PROPAGANDA NORTH CYPRIOTS###########
-	GRE_please_north = {
-		allowed = { original_tag = GRE }
-		icon = GFX_decision_turkey
-
-		visible = {
-			has_country_flag = GRE_Enosis_In_Progress
-			country_exists = NCY
-			country_exists = CYP
-		}
-		available = {
-			custom_trigger_tooltip = {
-				tooltip = PER_presidential_decisions_only_one_is_available_TT
-				NOT = {
-					has_decision = GRE_guarantee_turkish_property
-					has_decision = GRE_attack_turkish_strength
-				}
-			}
-			hidden_trigger = {
-				NOT = {
-					has_country_flag = GRE_cant_gain_strength
-				}
-			}
-		}
-
-		cost = 30
-		days_remove = 100
-
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision GRE_please_north"
-			custom_effect_tooltip = GRE_gain_5_strength
-			custom_effect_tooltip = GRE_turks_lose_5_strength
-			add_to_variable = { 145.GRE_SUPPORT = 5 }
-			add_to_variable = { 146.GRE_SUPPORT = -5 }
-			clamp_variable = { var = 146.GRE_SUPPORT min = 0 max = 100 }
-		}
-
-		ai_will_do = {
-			base = 3
-			modifier = {
-				factor = 2
-				check_variable = { 146.GRE_SUPPORT > 50 }
-			}
-			modifier = {
-				factor = 2
-				check_variable = { 146.GRE_SUPPORT > 80 }
-			}
-		}
-	}
-
-	###########CYPRUS CONFLICT - GREECE INCREASE CYPRIOTS###########
-	GRE_attack_turkish_strength = {
-		allowed = { original_tag = GRE }
-		icon = GFX_decision_turkey
-
-		days_remove = 100
-		cost = 30
-
-		visible = {
-			has_country_flag = GRE_Enosis_In_Progress
-			country_exists = NCY
-			country_exists = CYP
-			country_exists = TUR
-		}
-		available = {
-			custom_trigger_tooltip = {
-				tooltip = PER_presidential_decisions_only_one_is_available_TT
-				NOT = {
-					has_decision = GRE_guarantee_turkish_property
-					has_decision = GRE_please_north
-				}
-			}
-		}
-
-
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision GRE_attack_turkish_strength"
-			custom_effect_tooltip = TUR_unable_to_gain_strength
-			TUR = {
-				set_country_flag = { flag = TUR_greece_blocked_us days = 100 value = 1 }
-			}
-		}
-		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision GRE_attack_turkish_strength"
-			hidden_effect = {
-				TUR = {
-					if = {
-						limit = { has_country_flag = TUR_greece_blocked_us }
-						clr_country_flag = TUR_greece_blocked_us
-					}
-				}
-			}
-		}
-
-		ai_will_do = {
-			base = 4
-			modifier = {
-				factor = 3
-				check_variable = { 145.GRE_SUPPORT > 50 }
-			}
-			modifier = {
-				factor = 1
-				check_variable = { 145.GRE_SUPPORT > 80 }
-			}
-		}
-	}
 	###########CYPRUS CONFLICT - TURKEY INCREASE CYPRIOTS###########
 	TUR_CYP_incite_riot = {
 		allowed = { original_tag = TUR }
@@ -767,51 +598,168 @@ GRE_CYP_category = {
 			base = 5
 		}
 	}
-	###########CYPRUS CONFLICT - GREECE UNITE CYPRUS##########
-	GRE_unify_cyprus = {
-		allowed = { original_tag = GRE }
+}
+
+# Cyprus & Northern Cyprus — Diplomatic Actions
+CYP_NCY_diplomatic_category = {
+	CYP_seek_greek_union = {
+		allowed = { original_tag = CYP }
 		icon = eng_propaganda_campaigns
 
-		cost = 150
-
-		days_remove = 180
-		fire_only_once = yes
+		cost = 30
+		days_remove = 90
 
 		visible = {
 			country_exists = NCY
-			country_exists = CYP
+			country_exists = GRE
 		}
 		available = {
-			custom_trigger_tooltip = {
-				tooltip = GRE_has_100_strength
-				check_variable = { 145.GRE_SUPPORT > 99 }
-			}
+			NOT = { has_country_flag = CYP_seek_greek_union_cooldown }
 		}
 
 		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision GRE_unify_cyprus"
-			custom_effect_tooltip = GRE_unify_cyp
-			clr_country_flag = GRE_TUR_CYP
-			hidden_effect = {
-				news_event = {
-					id = Turkey.88
-				}
-				GRE = {
-					add_state_core = 146
-					add_state_core = 145
-				}
-				146 = { transfer_state_to = GRE }
-				145 = { transfer_state_to = GRE }
-			}
+			log = "[GetDateText]: [Root.GetName]: Decision CYP_seek_greek_union"
+			set_temp_variable = { percent_change = 5 }
+			set_temp_variable = { tag_index = GRE.id }
+			set_temp_variable = { influence_target = CYP.id }
+			change_influence_percentage = yes
+			add_political_power = -30
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CYP_seek_greek_union removed"
+			set_country_flag = { flag = CYP_seek_greek_union_cooldown days = 1 }
 		}
 
 		ai_will_do = {
 			base = 5
 			modifier = {
-				factor = 0
-				is_historical_focus_on = yes
+				factor = 2
+				GRE = { influence_higher_50 = yes }
 			}
 		}
+	}
+
+	CYP_appeal_to_un = {
+		allowed = { original_tag = CYP }
+		icon = GFX_decision_generic_political_discourse
+
+		cost = 50
+		fire_only_once = yes
+
+		visible = {
+			country_exists = NCY
+			country_exists = GRE
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CYP_appeal_to_un"
+			set_temp_variable = { percent_change = 3 }
+			set_temp_variable = { tag_index = GRE.id }
+			set_temp_variable = { influence_target = CYP.id }
+			change_influence_percentage = yes
+			set_temp_variable = { influence_target = NCY.id }
+			change_influence_percentage = yes
+			add_political_power = 50
+		}
+
+		ai_will_do = { base = 5 }
+	}
+
+	CYP_economic_incentive_north = {
+		allowed = { original_tag = CYP }
+		icon = GFX_decision_trade_deal
+
+		cost = 50
+		days_remove = 120
+
+		visible = {
+			country_exists = NCY
+			country_exists = GRE
+		}
+		available = {
+			NOT = { has_country_flag = CYP_economic_incentive_north_cooldown }
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CYP_economic_incentive_north"
+			set_temp_variable = { percent_change = 4 }
+			set_temp_variable = { tag_index = GRE.id }
+			set_temp_variable = { influence_target = NCY.id }
+			change_influence_percentage = yes
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CYP_economic_incentive_north removed"
+			set_country_flag = { flag = CYP_economic_incentive_north_cooldown days = 1 }
+		}
+
+		ai_will_do = { base = 3 }
+	}
+
+	NCY_seek_turkish_union = {
+		allowed = { original_tag = NCY }
+		icon = eng_propaganda_campaigns
+
+		cost = 30
+		days_remove = 90
+
+		visible = {
+			country_exists = CYP
+			country_exists = TUR
+		}
+		available = {
+			NOT = { has_country_flag = NCY_seek_turkish_union_cooldown }
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision NCY_seek_turkish_union"
+			set_temp_variable = { percent_change = 5 }
+			set_temp_variable = { tag_index = TUR.id }
+			set_temp_variable = { influence_target = NCY.id }
+			change_influence_percentage = yes
+			set_temp_variable = { percent_change = 2 }
+			set_temp_variable = { influence_target = CYP.id }
+			change_influence_percentage = yes
+			add_political_power = -30
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision NCY_seek_turkish_union removed"
+			set_country_flag = { flag = NCY_seek_turkish_union_cooldown days = 1 }
+		}
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				factor = 2
+				TUR = { influence_higher_50 = yes }
+			}
+		}
+	}
+
+	NCY_recognition_campaign = {
+		allowed = { original_tag = NCY }
+		icon = GFX_decision_generic_political_discourse
+
+		cost = 50
+		fire_only_once = yes
+
+		visible = {
+			country_exists = CYP
+			country_exists = TUR
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision NCY_recognition_campaign"
+			set_temp_variable = { percent_change = 3 }
+			set_temp_variable = { tag_index = TUR.id }
+			set_temp_variable = { influence_target = NCY.id }
+			change_influence_percentage = yes
+			add_stability = 0.02
+		}
+
+		ai_will_do = { base = 5 }
 	}
 }
 
