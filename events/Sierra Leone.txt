@@ -37,10 +37,15 @@ country_event = {
 			remove_core_of = SIE
 		}
 		#Make the winner Sierra Leone
-		random_country = {
-			limit = {
-				tag = AFR
-			}
+		if = {
+			limit = { tag = AFR }
+			set_cosmetic_tag = SIE_AUTH
+			set_country_flag = dynamic_flag
+			set_country_flag = dynamic_rebel_flag
+			remove_ideas = Non_State_Actor
+		}
+		if = {
+			limit = { tag = SIE }
 			set_cosmetic_tag = SIE_AUTH
 			set_country_flag = dynamic_flag
 			set_country_flag = dynamic_rebel_flag
@@ -160,7 +165,6 @@ news_event = {
 
 	option = {
 		name = SierraLeoneNews.1.a
-		log = "[GetDateText]: [This.GetName]: SierraLeoneNews.1.a executed"
 	}
 
 }

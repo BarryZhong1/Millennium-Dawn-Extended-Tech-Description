@@ -10,7 +10,8 @@ HOL_ING_Group_strategy_category = {
 				factor = 0
 				OR = {
 					has_war = yes
-					any_other_country = {
+					any_of_scopes = {
+						array = ROOT.potential_and_current_enemies
 						OR = {
 							is_justifying_wargoal_against = ROOT
 							ROOT = { is_justifying_wargoal_against = PREV }
@@ -44,10 +45,13 @@ HOL_ING_Group_strategy_category = {
 
 		fire_only_once = yes
 
-		visible = {
+		target_root_trigger = {
 			has_dynamic_modifier = { modifier = HOL_ING_Group_Strategies_modifier }
 			has_completed_focus = HOL_ING_Group_Strategy
 			NOT = { has_country_flag = HOL_ing_group_lvl_1_completed }
+		}
+
+		visible = {
 			country_exists = FROM
 			NOT = { has_war_with = FROM }
 		}
@@ -68,9 +72,11 @@ HOL_ING_Group_strategy_category = {
 
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision HOL_ING_Group_Strategies_Expansion_GER"
-			custom_effect_tooltip = HOL_Change_ING_Spirit_TT
-			set_temp_variable = { HOL_global_building_slots_factor_change = 0.10 }
-			HOL_modify_HOL_global_building_slots_factor_effect = yes
+			custom_effect_tooltip = {
+				localization_key = modifies_dynamic_modifier_tt
+				MODIFIER = HOL_ING_Group_Strategies_modifier
+			}
+			add_to_variable = { HOL_global_building_slots_factor = 0.10 tooltip = global_building_slots_factor_tt }
 			set_temp_variable = { percent_change = 5 }
 			set_temp_variable = { tag_index = HOL }
 			set_temp_variable = { influence_target = GER }
@@ -90,7 +96,8 @@ HOL_ING_Group_strategy_category = {
 				factor = 0
 				OR = {
 					has_war = yes
-					any_other_country = {
+					any_of_scopes = {
+						array = ROOT.potential_and_current_enemies
 						OR = {
 							is_justifying_wargoal_against = ROOT
 							ROOT = { is_justifying_wargoal_against = PREV }
@@ -124,10 +131,13 @@ HOL_ING_Group_strategy_category = {
 
 		fire_only_once = yes
 
-		visible = {
+		target_root_trigger = {
 			has_dynamic_modifier = { modifier = HOL_ING_Group_Strategies_modifier }
 			has_completed_focus = HOL_ING_Group_Strategy
 			NOT = { has_country_flag = HOL_ing_group_lvl_1_completed }
+		}
+
+		visible = {
 			country_exists = FROM
 			NOT = { has_war_with = FROM }
 		}
@@ -148,9 +158,11 @@ HOL_ING_Group_strategy_category = {
 
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision HOL_ING_Group_Strategies_Expansion_POL"
-				custom_effect_tooltip = HOL_Change_ING_Spirit_TT
-				set_temp_variable = { HOL_consumer_goods_factor_change = -0.10 }
-				HOL_modify_HOL_consumer_goods_factor_effect = yes
+				custom_effect_tooltip = {
+					localization_key = modifies_dynamic_modifier_tt
+					MODIFIER = HOL_ING_Group_Strategies_modifier
+				}
+				add_to_variable = { HOL_consumer_goods_factor = -0.10 tooltip = consumer_goods_factor_tt }
 				set_temp_variable = { percent_change = 5 }
 				set_temp_variable = { tag_index = HOL }
 				set_temp_variable = { influence_target = POL }
@@ -170,7 +182,8 @@ HOL_ING_Group_strategy_category = {
 				factor = 0
 				OR = {
 					has_war = yes
-					any_other_country = {
+					any_of_scopes = {
+						array = ROOT.potential_and_current_enemies
 						OR = {
 							is_justifying_wargoal_against = ROOT
 							ROOT = { is_justifying_wargoal_against = PREV }
@@ -204,10 +217,13 @@ HOL_ING_Group_strategy_category = {
 
 		fire_only_once = yes
 
-		visible = {
+		target_root_trigger = {
 			has_dynamic_modifier = { modifier = HOL_ING_Group_Strategies_modifier }
 			has_completed_focus = HOL_ING_Group_Strategy
 			NOT = { has_country_flag = HOL_ing_group_lvl_1_completed }
+		}
+
+		visible = {
 			country_exists = FROM
 			NOT = { has_war_with = FROM }
 		}
@@ -228,9 +244,11 @@ HOL_ING_Group_strategy_category = {
 
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision HOL_ING_Group_Strategies_Expansion_AST"
-				custom_effect_tooltip = HOL_Change_ING_Spirit_TT
-				set_temp_variable = { HOL_research_speed_factor_change = 0.05 }
-				HOL_modify_HOL_research_speed_factor_effect = yes
+				custom_effect_tooltip = {
+					localization_key = modifies_dynamic_modifier_tt
+					MODIFIER = HOL_ING_Group_Strategies_modifier
+				}
+				add_to_variable = { HOL_research_speed_factor = 0.05 tooltip = research_speed_factor_tt }
 				set_temp_variable = { percent_change = 5 }
 				set_temp_variable = { tag_index = HOL }
 				set_temp_variable = { influence_target = AST }
@@ -250,7 +268,8 @@ HOL_ING_Group_strategy_category = {
 				factor = 0
 				OR = {
 					has_war = yes
-					any_other_country = {
+					any_of_scopes = {
+						array = ROOT.potential_and_current_enemies
 						OR = {
 							is_justifying_wargoal_against = ROOT
 							ROOT = { is_justifying_wargoal_against = PREV }
@@ -284,10 +303,13 @@ HOL_ING_Group_strategy_category = {
 
 		fire_only_once = yes
 
-		visible = {
+		target_root_trigger = {
 			has_dynamic_modifier = { modifier = HOL_ING_Group_Strategies_modifier }
 			has_completed_focus = HOL_ING_Group_Strategy
 			NOT = { has_country_flag = HOL_ing_group_lvl_1_completed }
+		}
+
+		visible = {
 			country_exists = FROM
 			NOT = { has_war_with = FROM }
 		}
@@ -308,9 +330,11 @@ HOL_ING_Group_strategy_category = {
 
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision HOL_ING_Group_Strategies_Expansion_SPR"
-				custom_effect_tooltip = HOL_Change_ING_Spirit_TT
-				set_temp_variable = { HOL_production_speed_buildings_factor_change = 0.10 }
-				HOL_modify_HOL_production_speed_buildings_factor_effect = yes
+				custom_effect_tooltip = {
+					localization_key = modifies_dynamic_modifier_tt
+					MODIFIER = HOL_ING_Group_Strategies_modifier
+				}
+				add_to_variable = { HOL_production_speed_buildings_factor = 0.10 tooltip = production_speed_buildings_factor_tt }
 				set_temp_variable = { percent_change = 5 }
 				set_temp_variable = { tag_index = HOL }
 				set_temp_variable = { influence_target = SPR }
@@ -330,7 +354,8 @@ HOL_ING_Group_strategy_category = {
 				factor = 0
 				OR = {
 					has_war = yes
-					any_other_country = {
+					any_of_scopes = {
+						array = ROOT.potential_and_current_enemies
 						OR = {
 							is_justifying_wargoal_against = ROOT
 							ROOT = { is_justifying_wargoal_against = PREV }
@@ -363,7 +388,7 @@ HOL_ING_Group_strategy_category = {
 
 		fire_only_once = yes
 
-		visible = {
+		target_root_trigger = {
 			has_dynamic_modifier = { modifier = HOL_ING_Group_Strategies_modifier }
 			has_country_flag = HOL_ing_group_lvl_1_completed
 			NOT = { has_country_flag = HOL_ing_group_lvl_2_completed }
@@ -385,9 +410,11 @@ HOL_ING_Group_strategy_category = {
 
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision HOL_ING_Group_Strategies_Expansion2 Italy"
-				custom_effect_tooltip = HOL_Change_ING_Spirit_TT
-				set_temp_variable = { HOL_offices_productivity_change = 0.05 }
-				HOL_modify_HOL_offices_productivity_effect = yes
+				custom_effect_tooltip = {
+					localization_key = modifies_dynamic_modifier_tt
+					MODIFIER = HOL_ING_Group_Strategies_modifier
+				}
+				add_to_variable = { HOL_offices_productivity = 0.05 tooltip = offices_productivity_tt }
 				set_temp_variable = { percent_change = 5 }
 				set_temp_variable = { tag_index = HOL }
 				set_temp_variable = { influence_target = ITA }
@@ -407,7 +434,8 @@ HOL_ING_Group_strategy_category = {
 				factor = 0
 				OR = {
 					has_war = yes
-					any_other_country = {
+					any_of_scopes = {
+						array = ROOT.potential_and_current_enemies
 						OR = {
 							is_justifying_wargoal_against = ROOT
 							ROOT = { is_justifying_wargoal_against = PREV }
@@ -440,7 +468,7 @@ HOL_ING_Group_strategy_category = {
 
 		fire_only_once = yes
 
-		visible = {
+		target_root_trigger = {
 			has_dynamic_modifier = { modifier = HOL_ING_Group_Strategies_modifier }
 			has_country_flag = HOL_ing_group_lvl_1_completed
 			NOT = { has_country_flag = HOL_ing_group_lvl_2_completed }
@@ -462,9 +490,11 @@ HOL_ING_Group_strategy_category = {
 
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision HOL_ING_Group_Strategies_Expansion_TUR"
-				custom_effect_tooltip = HOL_Change_ING_Spirit_TT
-				set_temp_variable = { HOL_ING_trade_opinion_factor_change = 0.20 }
-				HOL_modify_HOL_ING_trade_opinion_factor_effect = yes
+				custom_effect_tooltip = {
+					localization_key = modifies_dynamic_modifier_tt
+					MODIFIER = HOL_ING_Group_Strategies_modifier
+				}
+				add_to_variable = { HOL_ING_trade_opinion_factor = 0.20 tooltip = trade_opinion_factor_tt }
 				set_temp_variable = { percent_change = 5 }
 				set_temp_variable = { tag_index = HOL }
 				set_temp_variable = { influence_target = TUR }
@@ -484,7 +514,8 @@ HOL_ING_Group_strategy_category = {
 				factor = 0
 				OR = {
 					has_war = yes
-					any_other_country = {
+					any_of_scopes = {
+						array = ROOT.potential_and_current_enemies
 						OR = {
 							is_justifying_wargoal_against = ROOT
 							ROOT = { is_justifying_wargoal_against = PREV }
@@ -517,7 +548,7 @@ HOL_ING_Group_strategy_category = {
 
 		fire_only_once = yes
 
-		visible = {
+		target_root_trigger = {
 			has_dynamic_modifier = { modifier = HOL_ING_Group_Strategies_modifier }
 			has_country_flag = HOL_ing_group_lvl_1_completed
 			NOT = { has_country_flag = HOL_ing_group_lvl_2_completed }
@@ -539,9 +570,11 @@ HOL_ING_Group_strategy_category = {
 
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision HOL_ING_Group_Strategies_Expansion_USA"
-			custom_effect_tooltip = HOL_Change_ING_Spirit_TT
-			set_temp_variable = { HOL_tax_gain_multiplier_modifier_change = 0.10 }
-			HOL_modify_HOL_tax_gain_multiplier_modifier_effect = yes
+			custom_effect_tooltip = {
+				localization_key = modifies_dynamic_modifier_tt
+				MODIFIER = HOL_ING_Group_Strategies_modifier
+			}
+			add_to_variable = { HOL_tax_gain_multiplier_modifier = 0.10 tooltip = tax_gain_multiplier_modifier_tt }
 			set_temp_variable = { percent_change = 5 }
 			set_temp_variable = { tag_index = HOL }
 			set_temp_variable = { influence_target = USA }
@@ -561,7 +594,8 @@ HOL_ING_Group_strategy_category = {
 				factor = 0
 				OR = {
 					has_war = yes
-					any_other_country = {
+					any_of_scopes = {
+						array = ROOT.potential_and_current_enemies
 						OR = {
 							is_justifying_wargoal_against = ROOT
 							ROOT = { is_justifying_wargoal_against = PREV }
@@ -594,7 +628,7 @@ HOL_ING_Group_strategy_category = {
 
 		fire_only_once = yes
 
-		visible = {
+		target_root_trigger = {
 			has_dynamic_modifier = { modifier = HOL_ING_Group_Strategies_modifier }
 			has_country_flag = HOL_ing_group_lvl_1_completed
 			NOT = { has_country_flag = HOL_ing_group_lvl_2_completed }
@@ -616,9 +650,11 @@ HOL_ING_Group_strategy_category = {
 
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision HOL_ING_Group_Strategies_Expansion_ROM"
-			custom_effect_tooltip = HOL_Change_ING_Spirit_TT
-			set_temp_variable = { HOL_return_on_investment_modifier_change = 0.03 }
-			HOL_modify_HOL_return_on_investment_modifier_effect = yes
+			custom_effect_tooltip = {
+				localization_key = modifies_dynamic_modifier_tt
+				MODIFIER = HOL_ING_Group_Strategies_modifier
+			}
+			add_to_variable = { HOL_return_on_investment_modifier = 0.03 tooltip = return_on_investment_modifier_tt }
 			set_temp_variable = { percent_change = 5 }
 			set_temp_variable = { tag_index = HOL }
 			set_temp_variable = { influence_target = ROM }
@@ -671,9 +707,11 @@ HOL_ING_Group_strategy_category = {
 		}
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision HOL_ING_Group_Strategies_Expansion_Speciality1"
-			custom_effect_tooltip = HOL_Change_ING_Spirit_TT
-			set_temp_variable = { HOL_interest_rate_multiplier_modifier_change = -1.5 }
-			HOL_modify_HOL_interest_rate_multiplier_modifier_effect = yes
+			custom_effect_tooltip = {
+				localization_key = modifies_dynamic_modifier_tt
+				MODIFIER = HOL_ING_Group_Strategies_modifier
+			}
+			add_to_variable = { HOL_interest_rate_multiplier_modifier = -1.5 tooltip = interest_rate_multiplier_modifier_tt }
 			set_temp_variable = { treasury_change = gdp_per_capita }
 			multiply_temp_variable = { treasury_change = -0.20 }
 			modify_treasury_effect = yes
@@ -727,9 +765,11 @@ HOL_ING_Group_strategy_category = {
 		}
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision HOL_ING_Group_Strategies_Expansion_Speciality2"
-			custom_effect_tooltip = HOL_Change_ING_Spirit_TT
-			set_temp_variable = { HOL_production_speed_renewable_energy_infra_factor_change = 0.20 }
-			HOL_modify_HOL_production_speed_renewable_energy_infra_factor_effect = yes
+			custom_effect_tooltip = {
+				localization_key = modifies_dynamic_modifier_tt
+				MODIFIER = HOL_ING_Group_Strategies_modifier
+			}
+			add_to_variable = { HOL_production_speed_renewable_energy_infra_factor = 0.20 tooltip = production_speed_renewable_energy_infra_factor_tt }
 			set_temp_variable = { treasury_change = gdp_per_capita }
 			multiply_temp_variable = { treasury_change = -0.20 }
 			modify_treasury_effect = yes
@@ -783,9 +823,11 @@ HOL_ING_Group_strategy_category = {
 		}
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision HOL_ING_Group_Strategies_Expansion_Speciality3"
-			custom_effect_tooltip = HOL_Change_ING_Spirit_TT
-			set_temp_variable = { HOL_corporate_tax_income_multiplier_modifier_change = 0.10 }
-			HOL_modify_HOL_corporate_tax_income_multiplier_modifier_effect = yes
+			custom_effect_tooltip = {
+				localization_key = modifies_dynamic_modifier_tt
+				MODIFIER = HOL_ING_Group_Strategies_modifier
+			}
+			add_to_variable = { HOL_corporate_tax_income_multiplier_modifier = 0.10 tooltip = corporate_tax_income_multiplier_modifier_tt }
 			set_temp_variable = { treasury_change = gdp_per_capita }
 			multiply_temp_variable = { treasury_change = -0.20 }
 			modify_treasury_effect = yes
@@ -839,9 +881,11 @@ HOL_ING_Group_strategy_category = {
 		}
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision HOL_ING_Group_Strategies_Expansion_Speciality4"
-			custom_effect_tooltip = HOL_Change_ING_Spirit_TT
-			set_temp_variable = { HOL_econ_cycle_upg_cost_multiplier_modifier_change = -0.15 }
-			HOL_modify_HOL_econ_cycle_upg_cost_multiplier_modifier_effect = yes
+			custom_effect_tooltip = {
+				localization_key = modifies_dynamic_modifier_tt
+				MODIFIER = HOL_ING_Group_Strategies_modifier
+			}
+			add_to_variable = { HOL_econ_cycle_upg_cost_multiplier_modifier = -0.15 tooltip = econ_cycle_upg_cost_multiplier_modifier_tt }
 			set_temp_variable = { treasury_change = gdp_per_capita }
 			multiply_temp_variable = { treasury_change = -0.20 }
 			modify_treasury_effect = yes
@@ -856,8 +900,7 @@ HOL_Carrier_Production = {
 	HOL_request_carrier_production_USA = {
 		icon = GFX_devision_HOL_air_carrier
 		targets = { USA }
-		visible = {
-			always = yes
+		target_root_trigger = {
 			NOT = { has_country_flag = HOL_Carrier_Production_in_progress_flag_USA }
 			NOT = { has_country_flag = HOL_Carrier_Production_Completed_USA }
 		}
@@ -904,7 +947,7 @@ HOL_Carrier_Production = {
 	HOL_request_carrier_production_UK = {
 		icon = GFX_devision_HOL_air_carrier
 		targets = { ENG }
-		visible = {
+		target_root_trigger = {
 			NOT = { has_country_flag = HOL_Carrier_Production_in_progress_flag_UK }
 			NOT = { has_country_flag = HOL_Carrier_Production_Completed_UK }
 		}
@@ -950,7 +993,7 @@ HOL_Carrier_Production = {
 	HOL_request_carrier_production_FRA = {
 		icon = GFX_devision_HOL_air_carrier
 		targets = { FRA }
-		visible = {
+		target_root_trigger = {
 			NOT = { has_country_flag = HOL_Carrier_Production_in_progress_flag_FRA }
 			NOT = { has_country_flag = HOL_Carrier_Production_Completed_FRA }
 		}
@@ -989,13 +1032,14 @@ HOL_Carrier_Production = {
 		complete_effect = {
 			FRA = { country_event = { id = HOL_military.055 days = 1 } }
 			set_country_flag = HOL_Carrier_Production_in_progress_flag_FRA
+			set_country_flag = HOL_accepted_FRA_carrier
 		}
 		ai_will_do = { factor = 0 }
 	}
 	HOL_request_carrier_production_RUS = {
 		icon = GFX_devision_HOL_air_carrier
 		targets = { SOV }
-		visible = {
+		target_root_trigger = {
 			NOT = { has_country_flag = HOL_Carrier_Production_in_progress_flag_RUS }
 			NOT = { has_country_flag = HOL_Carrier_Production_Completed_RUS }
 		}
@@ -1040,7 +1084,7 @@ HOL_Carrier_Production = {
 	HOL_request_carrier_production_CHN = {
 		icon = GFX_devision_HOL_air_carrier
 		targets = { CHI }
-		visible = {
+		target_root_trigger = {
 			NOT = { has_country_flag = HOL_Carrier_Production_in_progress_flag_CHN }
 			NOT = { has_country_flag = HOL_Carrier_Production_Completed_CHN }
 		}
@@ -1065,7 +1109,6 @@ HOL_Carrier_Production = {
 	HOL_request_carrier_production_Dutch = {
 		icon = GFX_decision_generic_construction
 		targets = { HOL }
-		visible = { always = yes }
 		available = {
 			NOT = {
 				has_country_flag = HOL_Carrier_Production_Completed_USA
@@ -1135,7 +1178,7 @@ HOL_Influence_Flanders = {
 
 		targets = { BEL }
 
-		visible = {
+		target_root_trigger = {
 			HOL = { has_completed_focus = HOL_increase_corporation_vlaanderen }
 		}
 
@@ -1802,7 +1845,7 @@ HOL_VOC_category = {
 
 		targets = { RAJ }
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_financial_influence_india
 		}
 
@@ -1854,7 +1897,7 @@ HOL_VOC_category = {
 
 		days_re_enable = 180
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_financial_influence_india
 		}
 
@@ -1880,7 +1923,7 @@ HOL_VOC_category = {
 		available = {
 			RAJ = {
 				has_civil_war = yes
-				war_with_us = no
+				NOT = { has_war_with = FROM }
 				influence_higher_60 = yes
 			}
 		}
@@ -1891,7 +1934,7 @@ HOL_VOC_category = {
 
 		days_re_enable = 180
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_financial_influence_india
 		}
 
@@ -1915,11 +1958,11 @@ HOL_VOC_category = {
 
 			436 = {
 				OR = {
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel1 }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel2 }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel3 }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel4 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_2 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_3 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_4 }
 				}
 				owner = { tag = RAJ }
 			}
@@ -1932,7 +1975,7 @@ HOL_VOC_category = {
 
 		fire_only_once = yes
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_financial_influence_india
 		}
 
@@ -1967,11 +2010,11 @@ HOL_VOC_category = {
 		available = {
 			436 = {
 				OR = {
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel1 }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel2 }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel3 }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel4 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_2 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_3 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_4 }
 				}
 				owner = { tag = RAJ }
 			}
@@ -1985,7 +2028,7 @@ HOL_VOC_category = {
 
 		fire_only_once = yes
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_financial_influence_india
 		}
 
@@ -2015,11 +2058,11 @@ HOL_VOC_category = {
 		available = {
 			436 = {
 				OR = {
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel1 }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel2 }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel3 }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel4 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_2 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_3 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_4 }
 				}
 				owner = { tag = RAJ }
 			}
@@ -2033,7 +2076,7 @@ HOL_VOC_category = {
 
 		fire_only_once = yes
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_financial_influence_india
 		}
 
@@ -2071,11 +2114,11 @@ HOL_VOC_category = {
 		available = {
 			436 = {
 				OR = {
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel1 }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel2 }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel3 }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel4 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_2 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_3 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_4 }
 				}
 				owner = { tag = RAJ }
 			}
@@ -2089,7 +2132,7 @@ HOL_VOC_category = {
 
 		fire_only_once = yes
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_financial_influence_india
 		}
 
@@ -2127,11 +2170,11 @@ HOL_VOC_category = {
 		available = {
 			436 = {
 				OR = {
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel1 }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel2 }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel3 }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel4 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_2 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_3 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_4 }
 				}
 				owner = { tag = RAJ }
 			}
@@ -2145,7 +2188,7 @@ HOL_VOC_category = {
 
 		fire_only_once = yes
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_financial_influence_india
 		}
 
@@ -2178,11 +2221,11 @@ HOL_VOC_category = {
 		available = {
 			452 = {
 				OR = {
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel1 }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel2 }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel3 }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel4 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_2 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_3 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_4 }
 				}
 				owner = { tag = RAJ }
 			}
@@ -2195,7 +2238,7 @@ HOL_VOC_category = {
 
 		fire_only_once = yes
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_financial_influence_india
 		}
 
@@ -2230,11 +2273,11 @@ HOL_VOC_category = {
 		available = {
 			452 = {
 				OR = {
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel1 }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel2 }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel3 }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel4 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_2 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_3 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_4 }
 				}
 				owner = { tag = RAJ }
 			}
@@ -2248,7 +2291,7 @@ HOL_VOC_category = {
 
 		fire_only_once = yes
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_financial_influence_india
 		}
 
@@ -2278,11 +2321,11 @@ HOL_VOC_category = {
 		available = {
 			452 = {
 				OR = {
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel1 }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel2 }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel3 }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel4 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_2 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_3 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_4 }
 				}
 				owner = { tag = RAJ }
 			}
@@ -2297,7 +2340,7 @@ HOL_VOC_category = {
 
 		fire_only_once = yes
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_financial_influence_india
 		}
 
@@ -2335,11 +2378,11 @@ HOL_VOC_category = {
 		available = {
 			452 = {
 				OR = {
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel1 }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel2 }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel3 }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel4 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_2 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_3 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_4 }
 				}
 				owner = { tag = RAJ }
 			}
@@ -2353,7 +2396,7 @@ HOL_VOC_category = {
 
 		fire_only_once = yes
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_financial_influence_india
 		}
 
@@ -2391,11 +2434,11 @@ HOL_VOC_category = {
 		available = {
 			452 = {
 				OR = {
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel1 }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel2 }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel3 }
-					has_dynamic_modifier = { modifier = RAJ_hoxaists_rebel4 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_2 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_3 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_4 }
 				}
 				owner = { tag = RAJ }
 			}
@@ -2409,7 +2452,7 @@ HOL_VOC_category = {
 
 		fire_only_once = yes
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_financial_influence_india
 		}
 
@@ -2454,7 +2497,7 @@ HOL_VOC_category = {
 
 		days_re_enable = 180
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_voc_economic_zone_india
 			NOT = { 436 = { is_owned_by = HOL } }
 		}
@@ -2496,7 +2539,7 @@ HOL_VOC_category = {
 
 		days_re_enable = 180
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_voc_economic_zone_india
 			NOT = { 452 = { is_owned_by = HOL } }
 		}
@@ -2538,7 +2581,7 @@ HOL_VOC_category = {
 
 		days_re_enable = 180
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_voc_economic_zone_india
 			NOT = { 465 = { is_owned_by = HOL } }
 		}
@@ -2580,7 +2623,7 @@ HOL_VOC_category = {
 
 		days_re_enable = 180
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_voc_economic_zone_india
 			NOT = { 462 = { is_owned_by = HOL } }
 		}
@@ -2714,7 +2757,7 @@ HOL_VOC_category = {
 
 		days_re_enable = 180
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_semiconductor_export_control_taiwan
 			OR = {
 				NOT = { has_country_flag = HOL_usa_wants_compensation_for_taiwan }
@@ -2838,7 +2881,7 @@ HOL_VOC_category = {
 
 		days_re_enable = 180
 
-		visible = {
+		target_root_trigger = {
 			AND = {
 				has_completed_focus = HOL_modernize_agriculture_srilanka
 				NOT = {
@@ -2867,7 +2910,7 @@ HOL_VOC_category = {
 			has_country_flag = HOL_refused_investment_sri_lanka
 		}
 
-		visible = {
+		target_root_trigger = {
 			has_country_flag = HOL_refused_investment_sri_lanka
 			NOT = { has_country_flag = HOL_voc_sri_done }
 			SRI = { exists = yes }
@@ -2903,7 +2946,7 @@ HOL_VOC_category = {
 			}
 		}
 
-		visible = {
+		target_root_trigger = {
 			OR = {
 				NOT = { has_country_flag = HOL_refused_investment_sri_lanka }
 				has_country_flag = HOL_small_investment_sri_lanka
@@ -2970,7 +3013,7 @@ HOL_VOC_category = {
 
 		days_re_enable = 180
 
-		visible = {
+		target_root_trigger = {
 			NOT = { has_country_flag = HOL_refused_investment_sri_lanka }
 			OR = {
 				has_country_flag = HOL_medium_investment_sri_lanka
@@ -3036,7 +3079,7 @@ HOL_VOC_category = {
 
 		days_re_enable = 180
 
-		visible = {
+		target_root_trigger = {
 			NOT = { has_country_flag = HOL_refused_investment_sri_lanka }
 			has_country_flag = HOL_heavy_investment_sri_lanka
 			NOT = { has_country_flag = HOL_voc_sri_done }
@@ -3222,7 +3265,7 @@ HOL_VOC_category = {
 
 		days_re_enable = 300
 
-		visible = {
+		target_root_trigger = {
 			SAF = { exists = yes }
 			has_completed_focus = HOL_afrikaner_political_partnerships
 			NOT = { has_country_flag = HOL_saf_voc_done }
@@ -3300,7 +3343,7 @@ HOL_VOC_category = {
 				limit = { has_completed_focus = HOL_reclaim_outer_islands }
 				add_to_variable = { HOL_islands_detection = HOL_sumatra_detection_chance }
 				add_to_variable = { HOL_islands_detection = HOL_kalimantan_detection_chance }
-				divide_variable = { HOL_islands_detection = 2 }
+				multiply_variable = { HOL_islands_detection = 0.5 }
 			}
 			HOL = { country_event = HOL_VOC.36 }
 		}
@@ -3311,7 +3354,7 @@ HOL_VOC_category = {
 
 		cost = 50
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_reclaim_crown_colony
 			AST = {
 				exists = yes
@@ -3321,7 +3364,7 @@ HOL_VOC_category = {
 		available = {
 			AST = {
 				is_subject = no
-				war_with_us = no
+				NOT = { has_war_with = FROM }
 			}
 		}
 		targets = { AST }
@@ -3357,11 +3400,9 @@ HOL_VOC_category = {
 		custom_cost_text = army_xp_20
 		custom_cost_text = command_power_more_than_20
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_reclaim_batavia
-			hidden_trigger = {
-				NOT = { has_country_flag = HOL_dutch_indies_conquest }
-			}
+			NOT = { has_country_flag = HOL_dutch_indies_conquest }
 		}
 
 		complete_effect = {
@@ -3402,11 +3443,9 @@ HOL_VOC_category = {
 		days_re_enable = 30
 		days_remove = 60
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_reclaim_batavia
-			hidden_trigger = {
-				NOT = { has_country_flag = HOL_dutch_indies_conquest }
-			}
+			NOT = { has_country_flag = HOL_dutch_indies_conquest }
 		}
 
 		modifier = {
@@ -3437,18 +3476,14 @@ HOL_VOC_category = {
 				has_completed_focus = HOL_reclaim_batavia
 				has_completed_focus = HOL_reclaim_outer_islands
 			}
-			hidden_trigger = {
-				NOT = { has_country_flag = HOL_dutch_indies_conquest }
-			}
+			NOT = { has_country_flag = HOL_dutch_indies_conquest }
 		}
-		visible = {
+		target_root_trigger = {
 			OR = {
 				has_completed_focus = HOL_reclaim_batavia
 				has_completed_focus = HOL_reclaim_outer_islands
 			}
-			hidden_trigger = {
-				NOT = { has_country_flag = HOL_dutch_indies_conquest }
-			}
+			NOT = { has_country_flag = HOL_dutch_indies_conquest }
 		}
 
 		custom_cost_trigger = {
@@ -3508,7 +3543,7 @@ HOL_VOC_category = {
 			has_country_flag = HOL_dutch_indies_conquest
 		}
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_reclaim_batavia
 		}
 
@@ -3611,11 +3646,9 @@ HOL_VOC_category = {
 		custom_cost_text = army_xp_20
 		custom_cost_text = command_power_more_than_20
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_reclaim_outer_islands
-			hidden_trigger = {
-				NOT = { has_country_flag = HOL_dutch_indies_conquest }
-			}
+			NOT = { has_country_flag = HOL_dutch_indies_conquest }
 		}
 
 		complete_effect = {
@@ -3658,11 +3691,9 @@ HOL_VOC_category = {
 		custom_cost_text = army_xp_20
 		custom_cost_text = command_power_more_than_20
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_reclaim_outer_islands
-			hidden_trigger = {
-				NOT = { has_country_flag = HOL_dutch_indies_conquest }
-			}
+			NOT = { has_country_flag = HOL_dutch_indies_conquest }
 		}
 
 		complete_effect = {
@@ -3699,11 +3730,9 @@ HOL_VOC_category = {
 		days_re_enable = 30
 		days_remove = 60
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_reclaim_outer_islands
-			hidden_trigger = {
-				NOT = { has_country_flag = HOL_dutch_indies_conquest }
-			}
+			NOT = { has_country_flag = HOL_dutch_indies_conquest }
 		}
 
 		modifier = {
@@ -3746,11 +3775,9 @@ HOL_VOC_category = {
 		days_re_enable = 30
 		days_remove = 60
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_reclaim_outer_islands
-			hidden_trigger = {
-				NOT = { has_country_flag = HOL_dutch_indies_conquest }
-			}
+			NOT = { has_country_flag = HOL_dutch_indies_conquest }
 		}
 
 		modifier = {
@@ -3801,11 +3828,9 @@ HOL_VOC_category = {
 
 		cost = 150
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_reclaim_outer_islands
-			hidden_trigger = {
-				NOT = { has_country_flag = HOL_dutch_indies_conquest }
-			}
+			NOT = { has_country_flag = HOL_dutch_indies_conquest }
 		}
 
 		complete_effect = {
@@ -3845,11 +3870,9 @@ HOL_VOC_category = {
 
 		cost = 150
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_reclaim_outer_islands
-			hidden_trigger = {
-				NOT = { has_country_flag = HOL_dutch_indies_conquest }
-			}
+			NOT = { has_country_flag = HOL_dutch_indies_conquest }
 		}
 
 		complete_effect = {
@@ -3889,11 +3912,9 @@ HOL_VOC_category = {
 
 		cost = 150
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_reclaim_batavia
-			hidden_trigger = {
-				NOT = { has_country_flag = HOL_dutch_indies_conquest }
-			}
+			NOT = { has_country_flag = HOL_dutch_indies_conquest }
 		}
 
 		complete_effect = {
@@ -3934,14 +3955,12 @@ HOL_VOC_category = {
 
 		cost = 150
 
-		visible = {
+		target_root_trigger = {
 			OR = {
 				has_completed_focus = HOL_reclaim_batavia
 				has_completed_focus = HOL_reclaim_outer_islands
 			}
-			hidden_trigger = {
-				NOT = { has_country_flag = HOL_dutch_indies_conquest }
-			}
+			NOT = { has_country_flag = HOL_dutch_indies_conquest }
 		}
 
 		complete_effect = {
@@ -4436,7 +4455,7 @@ HOL_grey_society_category = {
 		}
 
 		cancel_trigger = {
-			western_social_democrats_are_not_in_power = yes
+			western_social_democrats_are_in_power = no
 		}
 
 		days_remove = 360
@@ -4500,13 +4519,13 @@ HOL_grey_society_category = {
 		available = {
 			has_country_flag = HOL_grey_society_flag
 			western_social_democrats_are_in_power = yes
-			western_liberal_are_not_in_power_or_coalition = yes
-			western_conservative_are_not_in_power_or_coalition = yes
+			western_liberal_are_in_power_or_coalition = no
+			western_conservatism_are_in_power_or_coalition = no
 			NOT = { has_country_flag = HOL_grey_society_flag_improvement }
 		}
 
 		cancel_trigger = {
-			western_social_democrats_are_not_in_power = yes
+			western_social_democrats_are_in_power = no
 		}
 
 		days_remove = 360
@@ -4560,12 +4579,12 @@ HOL_grey_society_category = {
 		available = {
 			has_country_flag = HOL_grey_society_flag
 			western_social_democrats_are_in_power = yes
-			western_liberal_are_not_in_power_or_coalition = yes
+			western_liberal_are_in_power_or_coalition = no
 			NOT = { has_country_flag = HOL_grey_society_flag_improvement }
 		}
 
 		cancel_trigger = {
-			western_social_democrats_are_not_in_power = yes
+			western_social_democrats_are_in_power = no
 		}
 
 		days_remove = 360
@@ -4621,7 +4640,7 @@ HOL_grey_society_category = {
 		}
 
 		cancel_trigger = {
-			western_social_democrats_are_not_in_power = yes
+			western_social_democrats_are_in_power = no
 		}
 
 		days_remove = 360
@@ -4673,12 +4692,12 @@ HOL_grey_society_category = {
 		available = {
 			has_country_flag = HOL_grey_society_flag
 			western_social_democrats_are_in_power = yes
-			western_conservative_are_not_in_power_or_coalition = yes
+			western_conservatism_are_in_power_or_coalition = no
 			NOT = { has_country_flag = HOL_grey_society_flag_improvement }
 		}
 
 		cancel_trigger = {
-			western_social_democrats_are_not_in_power = yes
+			western_social_democrats_are_in_power = no
 		}
 
 		days_remove = 360
@@ -4788,7 +4807,7 @@ HOL_grey_society_category = {
 		}
 
 		cancel_trigger = {
-			western_conservatism_are_not_in_power = yes
+			western_conservatism_are_in_power = no
 		}
 
 		days_remove = 360
@@ -4845,7 +4864,7 @@ HOL_grey_society_category = {
 		}
 
 		cancel_trigger = {
-			western_conservatism_are_not_in_power = yes
+			western_conservatism_are_in_power = no
 		}
 
 		days_remove = 360
@@ -4899,13 +4918,13 @@ HOL_grey_society_category = {
 		available = {
 			has_country_flag = HOL_grey_society_flag
 			western_conservatism_are_in_power = yes
-			western_liberal_are_not_in_power_or_coalition = yes
-			western_socialism_are_not_in_power_or_coalition = yes
+			western_liberal_are_in_power_or_coalition = no
+			western_socialism_are_in_power_or_coalition = no
 			NOT = { has_country_flag = HOL_grey_society_flag_improvement }
 		}
 
 		cancel_trigger = {
-			western_conservatism_are_not_in_power = yes
+			western_conservatism_are_in_power = no
 		}
 
 		days_remove = 360
@@ -4959,12 +4978,12 @@ HOL_grey_society_category = {
 		available = {
 			has_country_flag = HOL_grey_society_flag
 			western_conservatism_are_in_power = yes
-			western_socialism_are_not_in_power_or_coalition = yes
+			western_socialism_are_in_power_or_coalition = no
 			NOT = { has_country_flag = HOL_grey_society_flag_improvement }
 		}
 
 		cancel_trigger = {
-			western_conservatism_are_not_in_power = yes
+			western_conservatism_are_in_power = no
 		}
 
 		days_remove = 360
@@ -5018,12 +5037,12 @@ HOL_grey_society_category = {
 		available = {
 			has_country_flag = HOL_grey_society_flag
 			western_conservatism_are_in_power = yes
-			western_liberal_are_not_in_power_or_coalition = yes
+			western_liberal_are_in_power_or_coalition = no
 			NOT = { has_country_flag = HOL_grey_society_flag_improvement }
 		}
 
 		cancel_trigger = {
-			western_conservatism_are_not_in_power = yes
+			western_conservatism_are_in_power = no
 		}
 
 		days_remove = 360
@@ -5074,13 +5093,13 @@ HOL_grey_society_category = {
 		available = {
 			has_country_flag = HOL_grey_society_flag
 			western_liberals_are_in_power = yes
-			western_conservative_are_not_in_power_or_coalition = yes
-			nationalist_right_wing_populists_are_not_in_power_or_coalition = yes
+			western_conservatism_are_in_power_or_coalition = no
+			nationalist_right_wing_populists_are_in_power_or_coalition = no
 			NOT = { has_country_flag = HOL_grey_society_flag_improvement }
 		}
 
 		cancel_trigger = {
-			western_liberals_are_not_in_power = yes
+			western_liberals_are_in_power = no
 		}
 
 		days_remove = 360
@@ -5132,13 +5151,13 @@ HOL_grey_society_category = {
 		available = {
 			has_country_flag = HOL_grey_society_flag
 			western_liberals_are_in_power = yes
-			western_socialism_are_not_in_power_or_coalition = yes
-			nationalist_right_wing_populists_are_not_in_power_or_coalition = yes
+			western_socialism_are_in_power_or_coalition = no
+			nationalist_right_wing_populists_are_in_power_or_coalition = no
 			NOT = { has_country_flag = HOL_grey_society_flag_improvement }
 		}
 
 		cancel_trigger = {
-			western_liberals_are_not_in_power = yes
+			western_liberals_are_in_power = no
 		}
 
 		days_remove = 360
@@ -5191,13 +5210,13 @@ HOL_grey_society_category = {
 		available = {
 			has_country_flag = HOL_grey_society_flag
 			western_liberals_are_in_power = yes
-			western_conservative_are_not_in_power_or_coalition = yes
-			nationalist_right_wing_populists_are_not_in_power_or_coalition = yes
+			western_conservatism_are_in_power_or_coalition = no
+			nationalist_right_wing_populists_are_in_power_or_coalition = no
 			NOT = { has_country_flag = HOL_grey_society_flag_improvement }
 		}
 
 		cancel_trigger = {
-			western_liberals_are_not_in_power = yes
+			western_liberals_are_in_power = no
 		}
 
 		days_remove = 360
@@ -5254,7 +5273,7 @@ HOL_grey_society_category = {
 		}
 
 		cancel_trigger = {
-			western_liberals_are_not_in_power = yes
+			western_liberals_are_in_power = no
 		}
 
 		days_remove = 360
@@ -5307,12 +5326,12 @@ HOL_grey_society_category = {
 		available = {
 			has_country_flag = HOL_grey_society_flag
 			western_liberals_are_in_power = yes
-			western_socialism_are_not_in_power_or_coalition = yes
+			western_socialism_are_in_power_or_coalition = no
 			NOT = { has_country_flag = HOL_grey_society_flag_improvement }
 		}
 
 		cancel_trigger = {
-			western_liberals_are_not_in_power = yes
+			western_liberals_are_in_power = no
 		}
 
 		days_remove = 360
@@ -5363,12 +5382,12 @@ HOL_grey_society_category = {
 		available = {
 			has_country_flag = HOL_grey_society_flag
 			nationalist_right_wing_populists_are_in_power = yes
-			western_liberal_are_not_in_power_or_coalition = yes
+			western_liberal_are_in_power_or_coalition = no
 			NOT = { has_country_flag = HOL_grey_society_flag_improvement }
 		}
 
 		cancel_trigger = {
-			nationalist_right_wing_populists_are_not_in_power = yes
+			nationalist_right_wing_populists_are_in_power = no
 		}
 
 		days_remove = 360
@@ -5426,7 +5445,7 @@ HOL_grey_society_category = {
 		}
 
 		cancel_trigger = {
-			nationalist_right_wing_populists_are_not_in_power = yes
+			nationalist_right_wing_populists_are_in_power = no
 		}
 
 		days_remove = 360
@@ -5480,13 +5499,13 @@ HOL_grey_society_category = {
 		available = {
 			has_country_flag = HOL_grey_society_flag
 			nationalist_right_wing_populists_are_in_power = yes
-			western_liberal_are_not_in_power_or_coalition = yes
-			western_socialism_are_not_in_power_or_coalition = yes
+			western_liberal_are_in_power_or_coalition = no
+			western_socialism_are_in_power_or_coalition = no
 			NOT = { has_country_flag = HOL_grey_society_flag_improvement }
 		}
 
 		cancel_trigger = {
-			nationalist_right_wing_populists_are_not_in_power = yes
+			nationalist_right_wing_populists_are_in_power = no
 		}
 
 		days_remove = 360
@@ -5540,12 +5559,12 @@ HOL_grey_society_category = {
 		available = {
 			has_country_flag = HOL_grey_society_flag
 			nationalist_right_wing_populists_are_in_power = yes
-			western_socialism_are_not_in_power_or_coalition = yes
+			western_socialism_are_in_power_or_coalition = no
 			NOT = { has_country_flag = HOL_grey_society_flag_improvement }
 		}
 
 		cancel_trigger = {
-			nationalist_right_wing_populists_are_not_in_power = yes
+			nationalist_right_wing_populists_are_in_power = no
 		}
 
 		days_remove = 360
@@ -5601,7 +5620,7 @@ HOL_grey_society_category = {
 		}
 
 		cancel_trigger = {
-			nationalist_right_wing_populists_are_not_in_power = yes
+			nationalist_right_wing_populists_are_in_power = no
 		}
 
 		days_remove = 360
@@ -5657,7 +5676,7 @@ HOL_grey_society_category = {
 		}
 
 		cancel_trigger = {
-			nationalist_monarchists_are_not_in_power = yes
+			nationalist_monarchists_are_in_power = no
 		}
 
 		days_remove = 360
@@ -5719,7 +5738,7 @@ HOL_grey_society_category = {
 		}
 
 		cancel_trigger = {
-			nationalist_monarchists_are_not_in_power = yes
+			nationalist_monarchists_are_in_power = no
 		}
 
 		days_remove = 360
@@ -5781,7 +5800,7 @@ HOL_grey_society_category = {
 		}
 
 		cancel_trigger = {
-			nationalist_monarchists_are_not_in_power = yes
+			nationalist_monarchists_are_in_power = no
 		}
 
 		days_remove = 360
@@ -5837,7 +5856,7 @@ HOL_grey_society_category = {
 		}
 
 		cancel_trigger = {
-			nationalist_monarchists_are_not_in_power = yes
+			nationalist_monarchists_are_in_power = no
 		}
 
 		days_remove = 360
@@ -5948,7 +5967,7 @@ HOL_grey_society_category = {
 		}
 
 		cancel_trigger = {
-			nationalist_monarchists_are_not_in_power = yes
+			nationalist_monarchists_are_in_power = no
 		}
 
 		days_remove = 360
@@ -6004,7 +6023,7 @@ HOL_grey_society_category = {
 		}
 
 		cancel_trigger = {
-			nationalist_fascist_are_not_in_power = yes
+			nationalist_fascist_are_in_power = no
 		}
 
 		days_remove = 360
@@ -6061,7 +6080,7 @@ HOL_grey_society_category = {
 		}
 
 		cancel_trigger = {
-			nationalist_fascist_are_not_in_power = yes
+			nationalist_fascist_are_in_power = no
 		}
 
 		days_remove = 360
@@ -6118,7 +6137,7 @@ HOL_grey_society_category = {
 		}
 
 		cancel_trigger = {
-			nationalist_fascist_are_not_in_power = yes
+			nationalist_fascist_are_in_power = no
 		}
 
 		days_remove = 360
@@ -6176,7 +6195,7 @@ HOL_grey_society_category = {
 		}
 
 		cancel_trigger = {
-			nationalist_fascist_are_not_in_power = yes
+			nationalist_fascist_are_in_power = no
 		}
 
 		days_remove = 360
@@ -6237,7 +6256,7 @@ HOL_grey_society_category = {
 		}
 
 		cancel_trigger = {
-			nationalist_fascist_are_not_in_power = yes
+			nationalist_fascist_are_in_power = no
 		}
 
 		days_remove = 360
@@ -6305,7 +6324,7 @@ HOL_foreign_policy_category = {
 
 		cost = 100
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_economic_development_antilles
 		}
 
@@ -6358,7 +6377,7 @@ HOL_foreign_policy_category = {
 
 		cost = 100
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_economic_development_antilles
 		}
 
@@ -6411,7 +6430,7 @@ HOL_foreign_policy_category = {
 
 		cost = 100
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_economic_development_antilles
 		}
 
@@ -6462,7 +6481,7 @@ HOL_foreign_policy_category = {
 
 		cost = 100
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_economic_development_antilles
 		}
 
@@ -6495,7 +6514,7 @@ HOL_foreign_policy_category = {
 
 		targets = { VEN }
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_dutch_latin_energy_cooperation
 			NOT = { has_country_flag = HOL_VEN_accepted_deal }
 		}
@@ -6525,7 +6544,7 @@ HOL_foreign_policy_category = {
 
 		targets = { ARG }
 
-		visible = {
+		target_root_trigger = {
 			NOT = { has_country_flag = HOL_ARG_accepted_deal }
 			has_completed_focus = HOL_dutch_latin_energy_cooperation
 		}
@@ -6555,7 +6574,7 @@ HOL_foreign_policy_category = {
 
 		targets = { MEX }
 
-		visible = {
+		target_root_trigger = {
 			NOT = { has_country_flag = HOL_MEX_accepted_deal }
 			has_completed_focus = HOL_dutch_latin_energy_cooperation
 		}
@@ -6585,7 +6604,7 @@ HOL_foreign_policy_category = {
 
 		targets = { COL }
 
-		visible = {
+		target_root_trigger = {
 			NOT = { has_country_flag = HOL_COL_accepted_deal }
 			has_completed_focus = HOL_dutch_latin_energy_cooperation
 		}
@@ -6615,7 +6634,7 @@ HOL_foreign_policy_category = {
 
 		targets = { PAR }
 
-		visible = {
+		target_root_trigger = {
 			NOT = { has_country_flag = HOL_PAR_accepted_deal }
 			has_completed_focus = HOL_dutch_latin_energy_cooperation
 		}
@@ -6645,7 +6664,7 @@ HOL_foreign_policy_category = {
 
 		targets = { PRU }
 
-		visible = {
+		target_root_trigger = {
 			NOT = { has_country_flag = HOL_PAR_accepted_deal }
 			has_completed_focus = HOL_dutch_latin_energy_cooperation
 		}
@@ -6676,11 +6695,9 @@ HOL_foreign_policy_category = {
 
 		days_re_enable = 360
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_operation_market_vision
-			hidden_trigger = {
-				NOT = { has_country_flag = HOL_operation_market_vision_accepted }
-			}
+			NOT = { has_country_flag = HOL_operation_market_vision_accepted }
 		}
 
 		cost = 75
@@ -6750,7 +6767,7 @@ HOL_foreign_policy_category = {
 						}
 					}
 				}
-		   }
+		 }
 		}
 
 		ai_will_do = { factor = 50 }
@@ -6766,11 +6783,9 @@ HOL_foreign_policy_category = {
 
 		days_re_enable = 360
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_suriname_trade_development_agreement
-			hidden_trigger = {
-				NOT = { has_country_flag = HOL_suriname_agreement_accepted }
-			}
+			NOT = { has_country_flag = HOL_suriname_agreement_accepted }
 		}
 
 		cost = 75
@@ -6795,11 +6810,9 @@ HOL_foreign_policy_category = {
 
 		days_re_enable = 360
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_rebuild_infrastructure_paramaribo
-			hidden_trigger = {
-				NOT = { has_country_flag = HOL_suriname_accepted_infrastructure }
-			}
+			NOT = { has_country_flag = HOL_suriname_accepted_infrastructure }
 		}
 
 		cost = 75
@@ -6824,11 +6837,9 @@ HOL_foreign_policy_category = {
 
 		days_re_enable = 360
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_maritime_suriname_agreement
-			hidden_trigger = {
-				NOT = { has_country_flag = HOL_suriname_agreement_maritime_accepted }
-			}
+			NOT = { has_country_flag = HOL_suriname_agreement_maritime_accepted }
 		}
 
 		cost = 75
@@ -6853,11 +6864,9 @@ HOL_foreign_policy_category = {
 
 		days_re_enable = 360
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_train_suriname_forces
-			hidden_trigger = {
-				NOT = { has_country_flag = HOL_suriname_training_accepted }
-			}
+			NOT = { has_country_flag = HOL_suriname_training_accepted }
 		}
 
 		cost = 75
@@ -6882,11 +6891,9 @@ HOL_foreign_policy_category = {
 
 		days_re_enable = 360
 
-		visible = {
+		target_root_trigger = {
 			has_completed_focus = HOL_invest_suriname_resources
-			hidden_trigger = {
-				NOT = { has_country_flag = HOL_suriname_training_accepted }
-			}
+			NOT = { has_country_flag = HOL_suriname_training_accepted }
 		}
 
 		cost = 75

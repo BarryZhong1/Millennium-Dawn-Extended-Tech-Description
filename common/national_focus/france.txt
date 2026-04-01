@@ -339,55 +339,53 @@ focus_tree = {
 			}
 		}
 
-
-
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus FRA_euro_investments"
 			if = {
 				limit = {
-					GER = { has_idea = the_euro }
+					GER = { has_idea = euro }
 					country_exists = GER
 				}
 				GER = { invest_in_EU_single_market_infra = yes }
 			}
 			if = {
 				limit = {
-					ITA = { has_idea = the_euro }
+					ITA = { has_idea = euro }
 					country_exists = ITA
 				}
 				ITA = { invest_in_EU_single_market_cic = yes }
 			}
 			if = {
 				limit = {
-					ENG = { has_idea = the_euro }
+					ENG = { has_idea = euro }
 					country_exists = ENG
 				}
 				ENG = { invest_in_EU_single_market_cic = yes }
 			}
 			if = {
 				limit = {
-					SPR = { has_idea = the_euro }
+					SPR = { has_idea = euro }
 					country_exists = SPR
 				}
 				SPR = { invest_in_EU_single_market_cic = yes }
 			}
 			if = {
 				limit = {
-					BEL = { has_idea = the_euro }
+					BEL = { has_idea = euro }
 					country_exists = BEL
 				}
 				BEL = { invest_in_EU_single_market_infra = yes }
 			}
 			if = {
 				limit = {
-					HOL = { has_idea = the_euro }
+					HOL = { has_idea = euro }
 					country_exists = HOL
 				}
 				HOL = { invest_in_EU_single_market_infra = yes }
 			}
 			if = {
 				limit = {
-					POR = { has_idea = the_euro }
+					POR = { has_idea = euro }
 					country_exists = POR
 				}
 				POR = { invest_in_EU_single_market_cic = yes }
@@ -400,7 +398,7 @@ focus_tree = {
 				factor = 0
 				NOT = {
 					has_global_flag = FRA_CHAOS_PATH
-					has_idea = the_euro
+					has_idea = euro
 				}
 			}
 			modifier = {
@@ -514,8 +512,12 @@ focus_tree = {
 				idea = FRA_idea_french_nato_restructures
 				days = 730
 			}
-			every_country = {
-				limit = { has_idea = NATO_member }
+			custom_effect_tooltip = TT_ALL_NATO_MEMBER_NATIONS_GAIN
+			effect_tooltip = {
+				add_opinion_modifier = { target = ROOT modifier = has_expressed_loyalty }
+			}
+			for_each_scope_loop = {
+				array = global.nato_members
 				add_opinion_modifier = { target = ROOT modifier = has_expressed_loyalty }
 			}
 			set_temp_variable = { temp_opinion = 5 }
@@ -1273,7 +1275,7 @@ focus_tree = {
 
 		available = {
 			has_idea = EU_member
-			has_idea = the_euro
+			has_idea = euro
 			OR = {
 				AND = {
 					country_exists = SPR
@@ -1302,13 +1304,11 @@ focus_tree = {
 			}
 		}
 
-
-
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus FRA_preparing_the_union"
 			if = {
 				limit = {
-					SPR = { has_idea = the_euro }
+					SPR = { has_idea = euro }
 					country_exists = SPR
 				}
 				SPR = {
@@ -1317,7 +1317,7 @@ focus_tree = {
 			}
 			if = {
 				limit = {
-					POR = { has_idea = the_euro }
+					POR = { has_idea = euro }
 					country_exists = POR
 				}
 				POR = {
@@ -1326,7 +1326,7 @@ focus_tree = {
 			}
 			if = {
 				limit = {
-					ITA = { has_idea = the_euro }
+					ITA = { has_idea = euro }
 					country_exists = ITA
 				}
 				ITA = {
@@ -1335,7 +1335,7 @@ focus_tree = {
 			}
 			if = {
 				limit = {
-					GRE = { has_idea = the_euro }
+					GRE = { has_idea = euro }
 					country_exists = GRE
 				}
 				GRE = {
@@ -1344,7 +1344,7 @@ focus_tree = {
 			}
 			if = {
 				limit = {
-					CYP = { has_idea = the_euro }
+					CYP = { has_idea = euro }
 					country_exists = CYP
 				}
 				CYP = {
@@ -1353,7 +1353,7 @@ focus_tree = {
 			}
 			if = {
 				limit = {
-					MLT = { has_idea = the_euro }
+					MLT = { has_idea = euro }
 					country_exists = MLT
 				}
 				MLT = {
@@ -1394,8 +1394,6 @@ focus_tree = {
 		prerequisite = { focus = FRA_french_political_dominance }
 
 		search_filters = { FOCUS_FILTER_EUROPEAN_UNION FOCUS_FILTER_INFLUENCE }
-
-
 
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus FRA_a_international_language"
@@ -1453,8 +1451,6 @@ focus_tree = {
 		prerequisite = { focus = FRA_french_political_dominance }
 
 		search_filters = { FOCUS_FILTER_EUROPEAN_UNION FOCUS_FILTER_POLITICAL }
-
-
 
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus FRA_the_new_seat"
@@ -1521,8 +1517,6 @@ focus_tree = {
 				}
 			}
 		}
-
-
 
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus FRA_uniting_the_union"
@@ -1617,8 +1611,6 @@ focus_tree = {
 
 		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_POLITICAL }
 
-
-
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus FRA_means_of_production"
 			add_ideas = FRA_idea_means_of_production
@@ -1648,7 +1640,6 @@ focus_tree = {
 		prerequisite = { focus = FRA_equality }
 
 		search_filters = { FOCUS_FILTER_EUROPEAN_UNION FOCUS_FILTER_POLITICAL FOCUS_FILTER_WAR_SUPPORT }
-
 
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus FRA_honor_the_communes"
@@ -1743,7 +1734,6 @@ focus_tree = {
 		prerequisite = { focus = FRA_honor_the_communes }
 
 		search_filters = { FOCUS_FILTER_EUROPEAN_UNION FOCUS_FILTER_POLITICAL }
-
 
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus FRA_marxist_ideology"
@@ -1871,11 +1861,8 @@ focus_tree = {
 				else = {
 					set_temp_variable = { change_leader_temp = 1 }
 				}
+				set_temp_variable = { disable_elections = 1 }
 				change_ruling_party_effect = yes
-				set_politics = {
-					ruling_party = communism
-					elections_allowed = no
-				}
 				set_temp_variable = { party_index = 4 }
 				set_temp_variable = { party_popularity_increase = 0.075 }
 				set_temp_variable = { temp_outlook_increase = 0.075 }
@@ -1888,11 +1875,8 @@ focus_tree = {
 				else = {
 					set_temp_variable = { change_leader_temp = 1 }
 				}
+				set_temp_variable = { disable_elections = 1 }
 				change_ruling_party_effect = yes
-				set_politics = {
-					ruling_party = neutrality
-					elections_allowed = no
-				}
 				set_temp_variable = { party_index = 19 }
 				set_temp_variable = { party_popularity_increase = 0.075 }
 				set_temp_variable = { temp_outlook_increase = 0.075 }
@@ -2665,7 +2649,7 @@ focus_tree = {
 			if = { limit = { has_war_support < 0.75 }
 				add_war_support = 0.03
 			}
-	 	}
+		 }
 
 		ai_will_do = {
 			factor = 1
@@ -2691,7 +2675,7 @@ focus_tree = {
 
 		prerequisite = { focus = FRA_napoleon_dream }
 
-		search_filters = { FOCUS_FILTER_INTERNAL_FACTION FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_INTERNAL_FACTION FOCUS_FILTER_MILITARY_LAWS }
 
 		available = {
 			OR = {
@@ -2786,7 +2770,7 @@ focus_tree = {
 		prerequisite = { focus = FRA_new_napoleon_guard }
 		prerequisite = { focus = FRA_european_betrayal }
 
-		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MILITARY_LAWS }
 
 		available = {
 			OR = {
@@ -2985,7 +2969,7 @@ focus_tree = {
 				NOT = { has_global_flag = FRA_CHAOS_PATH }
 				has_war = yes
 			}
- 			modifier = {
+			 modifier = {
 				factor = 0
 				NOT = { has_global_flag = FRA_CHAOS_PATH }
 				is_in_array = { array = ruling_party value = 16 } #Libertarian
@@ -3186,7 +3170,7 @@ focus_tree = {
 				factor = 0.1
 				check_variable = { total_unemployed_percentage_display < 0.005 }
 			}
- 			modifier = {
+			 modifier = {
 				factor = 0
 				NOT = { has_global_flag = FRA_CHAOS_PATH }
 				is_in_array = { array = ruling_party value = 16 } #Libertarian
@@ -3248,7 +3232,7 @@ focus_tree = {
 				NOT = { has_global_flag = FRA_CHAOS_PATH }
 				has_war = yes
 			}
- 			modifier = {
+			 modifier = {
 				factor = 0
 				NOT = { has_global_flag = FRA_CHAOS_PATH }
 				is_in_array = { array = ruling_party value = 16 } #Libertarian
@@ -3480,7 +3464,7 @@ focus_tree = {
 				factor = 0.1
 				check_variable = { total_unemployed_percentage_display < 0.005 }
 			}
- 			modifier = {
+			 modifier = {
 				factor = 0
 				NOT = { has_global_flag = FRA_CHAOS_PATH }
 				is_in_array = { array = ruling_party value = 16 } #Libertarian
@@ -3819,7 +3803,7 @@ focus_tree = {
 				NOT = { has_global_flag = FRA_CHAOS_PATH }
 				has_war = yes
 			}
- 			modifier = {
+			 modifier = {
 				factor = 0
 				NOT = { has_global_flag = FRA_CHAOS_PATH }
 				is_in_array = { array = ruling_party value = 16 } #Libertarian
@@ -4426,7 +4410,6 @@ focus_tree = {
 
 		cost = 5
 
-
 		prerequisite = { focus = FRA_economic_policy }
 
 		search_filters = { FOCUS_FILTER_EXPENDITURE }
@@ -4434,7 +4417,6 @@ focus_tree = {
 			has_full_control_of_state = 56
 			NOT = { has_active_mission = bankruptcy_incoming_collapse }
 		}
-
 
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus FRA_luxury_goods"
@@ -4525,7 +4507,6 @@ focus_tree = {
 			}
 			NOT = { has_active_mission = bankruptcy_incoming_collapse }
 		}
-
 
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus FRA_the_gorgeous_coasts"
@@ -4625,7 +4606,7 @@ focus_tree = {
 				factor = 0.1
 				check_variable = { total_unemployed_percentage_display < 0.005 }
 			}
- 			modifier = {
+			 modifier = {
 				factor = 0
 				NOT = { has_global_flag = FRA_CHAOS_PATH }
 				is_in_array = { array = ruling_party value = 16 } #Libertarian
@@ -4655,7 +4636,6 @@ focus_tree = {
 			}
 			NOT = { has_active_mission = bankruptcy_incoming_collapse }
 		}
-
 
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus FRA_the_spaces_between"
@@ -4724,7 +4704,7 @@ focus_tree = {
 				NOT = { has_global_flag = FRA_CHAOS_PATH }
 				has_war = yes
 			}
- 			modifier = {
+			 modifier = {
 				factor = 0
 				NOT = { has_global_flag = FRA_CHAOS_PATH }
 				is_in_array = { array = ruling_party value = 16 } #Libertarian
@@ -4748,7 +4728,6 @@ focus_tree = {
 		available = {
 			NOT = { has_active_mission = bankruptcy_incoming_collapse }
 		}
-
 
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus FRA_beaches_of_france"
@@ -4810,7 +4789,7 @@ focus_tree = {
 				NOT = { has_global_flag = FRA_CHAOS_PATH }
 				has_war = yes
 			}
- 			modifier = {
+			 modifier = {
 				factor = 0
 				NOT = { has_global_flag = FRA_CHAOS_PATH }
 				is_in_array = { array = ruling_party value = 16 } #Libertarian
@@ -4876,7 +4855,6 @@ focus_tree = {
 			NOT = { has_active_mission = bankruptcy_incoming_collapse }
 		}
 
-
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: FRA_high_speed_rail_lines"
 			# TODO: Connect this focus to the other infrastructure project focus somehow so we don't skip it
@@ -4917,7 +4895,6 @@ focus_tree = {
 		available = {
 			NOT = { has_active_mission = bankruptcy_incoming_collapse }
 		}
-
 
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: FRA_energy_sector"
@@ -5027,7 +5004,6 @@ focus_tree = {
 			NOT = { has_active_mission = bankruptcy_incoming_collapse }
 		}
 
-
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus FRA_solar_investments"
 			set_temp_variable = { treasury_change = -17 }
@@ -5098,7 +5074,6 @@ focus_tree = {
 			}
 			NOT = { has_active_mission = bankruptcy_incoming_collapse }
 		}
-
 
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus FRA_wind_investments"
@@ -5314,7 +5289,6 @@ focus_tree = {
 		}
 	}
 
-
 	### Military - French Armed Forces
 	focus = {
 		id = FRA_french_armed_forces
@@ -5325,7 +5299,7 @@ focus_tree = {
 
 		cost = 5
 
-		search_filters = { FOCUS_FILTER_MILITARY FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_NAVY_XP FOCUS_FILTER_ARMY_XP FOCUS_FILTER_AIR_XP }
+		search_filters = { FOCUS_FILTER_MILITARY_LAWS FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_NAVY_XP FOCUS_FILTER_ARMY_XP FOCUS_FILTER_AIR_XP }
 
 		available = {
 			is_subject = no
@@ -5373,7 +5347,7 @@ focus_tree = {
 
 		prerequisite = { focus = FRA_french_armed_forces }
 
-		search_filters = { FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_MILITARY_LAWS }
 
 		available = {
 			is_subject = no
@@ -5456,7 +5430,7 @@ focus_tree = {
 
 		prerequisite = { focus = FRA_french_armed_forces }
 
-		search_filters = { FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_MILITARY_LAWS }
 		available = {
 			is_subject = no
 			NOT = { has_idea = no_military }
@@ -5543,7 +5517,7 @@ focus_tree = {
 			NOT = { has_idea = no_military }
 		}
 
-		search_filters = { FOCUS_FILTER_MILITARY_LAWS FOCUS_FILTER_NAVY FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_MILITARY_LAWS FOCUS_FILTER_NAVY FOCUS_FILTER_MILITARY_LAWS }
 
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus FRA_french_navy"
@@ -5621,7 +5595,7 @@ focus_tree = {
 
 		prerequisite = { focus = FRA_the_french_army }
 
-		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_MILITARY_LAWS }
 
 		available = {
 			is_subject = no
@@ -5688,7 +5662,7 @@ focus_tree = {
 
 		prerequisite = { focus = FRA_the_french_army }
 
-		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_MILITARY_LAWS }
 
 		available = {
 			is_subject = no
@@ -5740,7 +5714,7 @@ focus_tree = {
 			focus = FRA_the_french_army
 			focus = FRA_the_french_air_force
 		}
-		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_AIRCRAFT FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_AIRCRAFT FOCUS_FILTER_MILITARY_LAWS }
 
 		available = {
 			is_subject = no
@@ -5794,7 +5768,7 @@ focus_tree = {
 
 		prerequisite = { focus = FRA_the_french_air_force }
 
-		search_filters = { FOCUS_FILTER_AIR_XP FOCUS_FILTER_AIRCRAFT FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_AIR_XP FOCUS_FILTER_AIRCRAFT FOCUS_FILTER_MILITARY_LAWS }
 
 		available = {
 			is_subject = no
@@ -5841,7 +5815,7 @@ focus_tree = {
 			focus = FRA_the_french_air_force
 			focus = FRA_french_navy
 		}
-		search_filters = { FOCUS_FILTER_MILITARY FOCUS_FILTER_RESEARCH FOCUS_FILTER_AIRCRAFT }
+		search_filters = { FOCUS_FILTER_MILITARY_LAWS FOCUS_FILTER_RESEARCH FOCUS_FILTER_AIRCRAFT }
 		available = {
 			is_subject = no
 			NOT = { has_idea = no_military }
@@ -5895,7 +5869,7 @@ focus_tree = {
 
 		prerequisite = { focus = FRA_french_navy }
 
-		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_NAVY FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_NAVY FOCUS_FILTER_MILITARY_LAWS }
 
 		available = {
 			is_subject = no
@@ -5945,7 +5919,7 @@ focus_tree = {
 
 		prerequisite = { focus = FRA_french_navy }
 
-		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_NAVY FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_NAVY FOCUS_FILTER_MILITARY_LAWS }
 
 		available = {
 			is_subject = no
@@ -5958,7 +5932,7 @@ focus_tree = {
 				name = FRA_de_gaulle_class
 				bonus = 0.50
 				uses = 1
-				category = CAT_n_cv
+				category = CAT_carrier
 			}
 		}
 
@@ -5995,7 +5969,7 @@ focus_tree = {
 
 		prerequisite = { focus = FRA_amx_leclerc }
 
-		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_MILITARY_LAWS }
 
 		available = {
 			is_subject = no
@@ -6062,7 +6036,7 @@ focus_tree = {
 
 		prerequisite = { focus = FRA_network_centric_warfare }
 
-		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_MILITARY_LAWS }
 
 		available = {
 			is_subject = no
@@ -6112,7 +6086,7 @@ focus_tree = {
 
 		prerequisite = { focus = FRA_land_air_coordination }
 
-		search_filters = { FOCUS_FILTER_EXPENDITURE FOCUS_FILTER_AIRCRAFT FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_EXPENDITURE FOCUS_FILTER_AIRCRAFT FOCUS_FILTER_MILITARY_LAWS }
 
 		available = {
 			is_subject = no
@@ -6190,7 +6164,7 @@ focus_tree = {
 			is_subject = no
 			NOT = { has_idea = no_military }
 		}
-		search_filters = { FOCUS_FILTER_MILITARY FOCUS_FILTER_AIRCRAFT FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_MILITARY_LAWS FOCUS_FILTER_AIRCRAFT FOCUS_FILTER_MILITARY_LAWS }
 
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus FRA_mirage_2000d"
@@ -6230,7 +6204,7 @@ focus_tree = {
 
 		prerequisite = { focus = FRA_maritime_fighters }
 
-		search_filters = { FOCUS_FILTER_MILITARY FOCUS_FILTER_RESEARCH FOCUS_FILTER_AIRCRAFT }
+		search_filters = { FOCUS_FILTER_MILITARY_LAWS FOCUS_FILTER_RESEARCH FOCUS_FILTER_AIRCRAFT }
 
 		available = {
 			is_subject = no
@@ -6275,7 +6249,7 @@ focus_tree = {
 
 		prerequisite = { focus = FRA_lafayette_class }
 
-		search_filters = { FOCUS_FILTER_EXPENDITURE FOCUS_FILTER_NAVY FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_EXPENDITURE FOCUS_FILTER_NAVY FOCUS_FILTER_MILITARY_LAWS }
 
 		available = {
 			is_subject = no
@@ -6338,7 +6312,7 @@ focus_tree = {
 
 		prerequisite = { focus = FRA_de_gaulle_class }
 
-		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_NAVY FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_NAVY FOCUS_FILTER_MILITARY_LAWS }
 		available = {
 			is_subject = no
 			NOT = { has_idea = no_military }
@@ -6387,7 +6361,7 @@ focus_tree = {
 
 		prerequisite = { focus = FRA_amx_10 }
 
-		search_filters = { FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_MILITARY_LAWS }
 
 		available = {
 			is_subject = no
@@ -6434,7 +6408,7 @@ focus_tree = {
 
 		prerequisite = { focus = FRA_vbci }
 
-		search_filters = { FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_MILITARY_LAWS }
 
 		available = {
 			is_subject = no
@@ -6523,7 +6497,7 @@ focus_tree = {
 
 		prerequisite = { focus = FRA_med_naval_bases }
 
-		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_NAVY FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_NAVY FOCUS_FILTER_MILITARY_LAWS }
 
 		available = {
 			is_subject = no
@@ -6573,7 +6547,7 @@ focus_tree = {
 
 		prerequisite = { focus = FRA_triomphant_class }
 
-		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_NAVY FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_NAVY FOCUS_FILTER_MILITARY_LAWS }
 
 		available = {
 			is_subject = no
@@ -6624,7 +6598,7 @@ focus_tree = {
 		prerequisite = { focus = FRA_ifv_investment }
 		prerequisite = { focus = FRA_national_arms_exports }
 
-		search_filters = { FOCUS_FILTER_ARMY_XP FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_ARMY_XP FOCUS_FILTER_MILITARY_LAWS }
 
 		available = {
 			is_subject = no
@@ -6885,7 +6859,7 @@ focus_tree = {
 		prerequisite = { focus = FRA_floreal_class }
 		prerequisite = { focus = FRA_laredoubtable_class }
 
-		search_filters = { FOCUS_FILTER_NAVY_XP FOCUS_FILTER_NAVY FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_NAVY_XP FOCUS_FILTER_NAVY FOCUS_FILTER_MILITARY_LAWS }
 
 		available = {
 			is_subject = no
@@ -7483,7 +7457,13 @@ focus_tree = {
 			}
 			else_if = {
 				limit = { has_country_flag = FRA_an_aggressive_expansionism_flag }
+				set_temp_variable = { wargoal_on = DOM }
+				set_temp_variable = { wargoal_type = 2 }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = { type = annex_everything target = DOM }
+				set_temp_variable = { wargoal_on = HAI }
+				set_temp_variable = { wargoal_type = 2 }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = { type = annex_everything target = HAI }
 			}
 			else = {
@@ -7613,14 +7593,23 @@ focus_tree = {
 			}
 			if = {
 				limit = { has_country_flag = FRA_an_aggressive_expansionism_flag }
+				set_temp_variable = { wargoal_on = MOR }
+				set_temp_variable = { wargoal_type = 2 }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = {
 					type = annex_everything
 					target = MOR
 				}
+				set_temp_variable = { wargoal_on = ALG }
+				set_temp_variable = { wargoal_type = 2 }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = {
 					type = annex_everything
 					target = ALG
 				}
+				set_temp_variable = { wargoal_on = TUN }
+				set_temp_variable = { wargoal_type = 2 }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = {
 					type = annex_everything
 					target = TUN
@@ -7701,14 +7690,23 @@ focus_tree = {
 			}
 			if = {
 				limit = { has_country_flag = FRA_an_aggressive_expansionism_flag }
+				set_temp_variable = { wargoal_on = DJI }
+				set_temp_variable = { wargoal_type = 2 }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = {
 					type = annex_everything
 					target = DJI
 				}
+				set_temp_variable = { wargoal_on = ETH }
+				set_temp_variable = { wargoal_type = 2 }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = {
 					type = annex_everything
 					target = ETH
 				}
+				set_temp_variable = { wargoal_on = SOM }
+				set_temp_variable = { wargoal_type = 2 }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = {
 					type = annex_everything
 					target = SOM
@@ -7868,6 +7866,9 @@ focus_tree = {
 				}
 			}
 			else_if = { limit = { has_country_flag = FRA_an_aggressive_expansionism_flag }
+				set_temp_variable = { wargoal_on = ITA }
+				set_temp_variable = { wargoal_type = 2 }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = {
 					type = annex_everything
 					target = ITA
@@ -7945,14 +7946,23 @@ focus_tree = {
 			}
 			if = {
 				limit = { has_country_flag = FRA_an_aggressive_expansionism_flag }
+				set_temp_variable = { wargoal_on = HOL }
+				set_temp_variable = { wargoal_type = 2 }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = {
 					type = annex_everything
 					target = HOL
 				}
+				set_temp_variable = { wargoal_on = BEL }
+				set_temp_variable = { wargoal_type = 2 }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = {
 					type = annex_everything
 					target = BEL
 				}
+				set_temp_variable = { wargoal_on = LUX }
+				set_temp_variable = { wargoal_type = 2 }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = {
 					type = annex_everything
 					target = LUX
@@ -8099,14 +8109,23 @@ focus_tree = {
 			}
 			if = {
 				limit = { has_country_flag = FRA_an_aggressive_expansionism_flag }
+				set_temp_variable = { wargoal_on = LAO }
+				set_temp_variable = { wargoal_type = 2 }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = {
 					type = annex_everything
 					target = LAO
 				}
+				set_temp_variable = { wargoal_on = VIE }
+				set_temp_variable = { wargoal_type = 2 }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = {
 					type = annex_everything
 					target = VIE
 				}
+				set_temp_variable = { wargoal_on = CBD }
+				set_temp_variable = { wargoal_type = 2 }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = {
 					type = annex_everything
 					target = CBD
@@ -8249,18 +8268,30 @@ focus_tree = {
 			}
 			if = {
 				limit = { has_country_flag = FRA_an_aggressive_expansionism_flag }
+				set_temp_variable = { wargoal_on = SEN }
+				set_temp_variable = { wargoal_type = 2 }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = {
 					type = annex_everything
 					target = SEN
 				}
+				set_temp_variable = { wargoal_on = GUB }
+				set_temp_variable = { wargoal_type = 2 }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = {
 					type = annex_everything
 					target = GUB
 				}
+				set_temp_variable = { wargoal_on = GUI }
+				set_temp_variable = { wargoal_type = 2 }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = {
 					type = annex_everything
 					target = GUI
 				}
+				set_temp_variable = { wargoal_on = MAU }
+				set_temp_variable = { wargoal_type = 2 }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = {
 					type = annex_everything
 					target = MAU
@@ -8336,10 +8367,25 @@ focus_tree = {
 			}
 			else_if = {
 				limit = { has_country_flag = FRA_an_aggressive_expansionism_flag }
+				set_temp_variable = { wargoal_on = MAL }
+				set_temp_variable = { wargoal_type = 2 }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = { type = annex_everything target = MAL }
+				set_temp_variable = { wargoal_on = CDI }
+				set_temp_variable = { wargoal_type = 2 }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = { type = annex_everything target = CDI }
+				set_temp_variable = { wargoal_on = NGR }
+				set_temp_variable = { wargoal_type = 2 }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = { type = annex_everything target = NGR }
+				set_temp_variable = { wargoal_on = BFA }
+				set_temp_variable = { wargoal_type = 2 }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = { type = annex_everything target = BFA }
+				set_temp_variable = { wargoal_on = CHA }
+				set_temp_variable = { wargoal_type = 2 }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = { type = annex_everything target = CHA }
 			}
 			else = {
@@ -8388,7 +8434,6 @@ focus_tree = {
 			}
 		}
 
-
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus FRA_lousiana"
 			if = {
@@ -8402,6 +8447,9 @@ focus_tree = {
 			}
 			if = {
 				limit = { has_country_flag = FRA_an_aggressive_expansionism_flag }
+				set_temp_variable = { wargoal_on = USA }
+				set_temp_variable = { wargoal_type = 2 }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = {
 					type = annex_everything
 					target = USA
@@ -8477,10 +8525,16 @@ focus_tree = {
 			}
 			if = {
 				limit = { has_country_flag = FRA_an_aggressive_expansionism_flag }
+				set_temp_variable = { wargoal_on = SPR }
+				set_temp_variable = { wargoal_type = 2 }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = {
 					type = annex_everything
 					target = SPR
 				}
+				set_temp_variable = { wargoal_on = POR }
+				set_temp_variable = { wargoal_type = 2 }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = {
 					type = annex_everything
 					target = POR
@@ -8555,11 +8609,17 @@ focus_tree = {
 			}
 			if = {
 				limit = { has_country_flag = FRA_an_aggressive_expansionism_flag }
+				set_temp_variable = { wargoal_on = SWI }
+				set_temp_variable = { wargoal_type = 2 }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = {
 					type = annex_everything
 					target = SWI
 				}
 				add_state_core = 72
+				set_temp_variable = { wargoal_on = AUS }
+				set_temp_variable = { wargoal_type = 2 }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = {
 					type = annex_everything
 					target = AUS
@@ -8629,6 +8689,9 @@ focus_tree = {
 			}
 			if = {
 				limit = { has_country_flag = FRA_an_aggressive_expansionism_flag }
+				set_temp_variable = { wargoal_on = GER }
+				set_temp_variable = { wargoal_type = 2 }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = {
 					type = annex_everything
 					target = GER
@@ -8699,6 +8762,9 @@ focus_tree = {
 			}
 			if = {
 				limit = { has_country_flag = FRA_an_aggressive_expansionism_flag }
+				set_temp_variable = { wargoal_on = SOV }
+				set_temp_variable = { wargoal_type = 2 }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = {
 					type = annex_everything
 					target = SOV
@@ -8772,7 +8838,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 			modifier = {
 				factor = 1.5
@@ -8872,7 +8938,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 		}
 	}
@@ -8943,7 +9009,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 		}
 	}
@@ -8998,7 +9064,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 		}
 	}
@@ -9073,7 +9139,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 		}
 	}
@@ -9148,7 +9214,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 		}
 	}
@@ -9205,7 +9271,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus FRA_collaboration_with_the_fsa"
 			send_equipment = {
-				equipment = infantry_weapons
+				equipment = infantry_weapons_1
 				amount = 2000
 				target = FSA
 			}
@@ -9231,7 +9297,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 		}
 	}
@@ -9291,7 +9357,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 		}
 	}
@@ -9352,7 +9418,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 		}
 	}
@@ -9396,12 +9462,12 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus FRA_root_out_hezbollah"
 			send_equipment = {
-				equipment = infantry_weapons
+				equipment = infantry_weapons_1
 				amount = 3000
 				target = LEB
 			}
 			send_equipment = {
-				equipment = command_control_equipment1
+				equipment = cnc_equipment_2
 				amount = 500
 				target = LEB
 			}
@@ -9421,6 +9487,9 @@ focus_tree = {
 				target = LEB
 			}
 			LEB = {
+				set_temp_variable = { wargoal_on = HEZ }
+				set_temp_variable = { wargoal_type = 2 }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = {
 					type = annex_everything
 					target = HEZ
@@ -9444,7 +9513,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 		}
 	}
@@ -9487,7 +9556,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 		}
 	}
@@ -9532,7 +9601,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 		}
 	}
@@ -9575,7 +9644,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 		}
 	}
@@ -9618,7 +9687,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 			modifier = {
 				factor = 1.5
@@ -9664,9 +9733,10 @@ focus_tree = {
 				SOM = { has_war_with = SHB }
 			}
 			else = {
-				any_country = {
-					has_cosmetic_tag = SOM
-					has_war_with = SHB
+				SHB = {
+					any_enemy_country = {
+						has_cosmetic_tag = SOM
+					}
 				}
 			}
 			NOT = { has_war_with = SHB }
@@ -9714,7 +9784,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 		}
 	}
@@ -9766,7 +9836,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 		}
 	}
@@ -9840,7 +9910,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 		}
 	}
@@ -9894,7 +9964,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 		}
 	}
@@ -9949,7 +10019,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 			modifier = {
 				factor = 1.25
@@ -10012,7 +10082,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 		}
 	}
@@ -10046,9 +10116,9 @@ focus_tree = {
 				}
 				date > 2005.1.1
 			}
-			nationalist_right_wing_populists_are_not_in_power_or_coalition = yes
-			nationalist_fascists_are_not_in_power_or_coalition = yes
-			nationalist_military_junta_are_not_in_power_or_coalition = yes
+			nationalist_right_wing_populists_are_in_power_or_coalition = no
+			nationalist_fascists_are_in_power_or_coalition = no
+			nationalist_military_junta_are_in_power_or_coalition = no
 		}
 
 		completion_reward = {
@@ -10074,7 +10144,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 		}
 	}
@@ -10124,7 +10194,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 		}
 	}
@@ -10176,7 +10246,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 		}
 	}
@@ -10227,7 +10297,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 		}
 	}
@@ -10269,7 +10339,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 		}
 	}
@@ -10331,7 +10401,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 		}
 	}
@@ -10394,7 +10464,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 		}
 	}
@@ -10438,7 +10508,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 		}
 	}
@@ -10485,7 +10555,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 		}
 	}
@@ -10555,7 +10625,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 		}
 	}
@@ -10604,7 +10674,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 		}
 	}
@@ -10663,7 +10733,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 		}
 	}
@@ -10722,7 +10792,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 		}
 	}
@@ -10781,7 +10851,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 		}
 	}
@@ -10825,7 +10895,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 		}
 	}
@@ -10847,7 +10917,7 @@ focus_tree = {
 				has_idea = minor_power
 				has_idea = non_power
 			}
-			has_equipment = { Inf_equipment > 3000 }
+			has_equipment = { infantry_weapons_type > 3000 }
 		}
 
 		completion_reward = {
@@ -10858,7 +10928,7 @@ focus_tree = {
 				limit = { is_sahel_nation = yes }
 				PREV = {
 					send_equipment = {
-						equipment = Inf_equipment
+						equipment = infantry_weapons_type
 						amount = 200
 						target = PREV
 					}
@@ -10879,7 +10949,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 		}
 	}
@@ -10935,7 +11005,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 		}
 	}
@@ -10979,7 +11049,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 		}
 	}
@@ -11029,7 +11099,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 		}
 	}
@@ -11080,7 +11150,7 @@ focus_tree = {
 			}
 			modifier = {
 				factor = 2
-				has_idea = superpower
+				has_idea = super_power
 			}
 		}
 	}

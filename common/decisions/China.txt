@@ -294,6 +294,7 @@ sco_category = {
 		visible = {
 			OR = {
 				AND = { #Italy
+					original_tag = ITA
 					is_subject = no
 					has_completed_focus = ITA_attempt_join_sco
 					CHI = {
@@ -321,8 +322,8 @@ sco_category = {
 					}
 				}
 				AND = { #Ukraine
-					is_subject = no
 					original_tag = UKR
+					is_subject = no
 					CHI = {
 						has_completed_focus = CHI_Form_the_SCO
 					}
@@ -346,8 +347,8 @@ sco_category = {
 					}
 				}
 				AND = { #Libya
-					is_subject = no
 					original_tag = LBA
+					is_subject = no
 					CHI = {
 						AND = {
 							has_completed_focus = CHI_Form_the_SCO
@@ -668,7 +669,6 @@ sco_category = {
 				has_idea = NATO_member
 				has_idea = Non_State_Actor
 				has_idea = Lacks_International_Recognition
-				has_idea = rival_government
 				has_idea = Massive_International_Sanctions
 				has_idea = International_Sanctions
 			}
@@ -683,7 +683,6 @@ sco_category = {
 				state = 540
 			}
 		}
-
 
 		cost = 100
 
@@ -935,9 +934,7 @@ sco_category = {
 				limit = { has_idea = ASEAN_Member }
 				remove_ideas = ASEAN_Member
 			}
-			every_country = {
-				news_event = { id = sco.7 }
-			}
+			news_event = { id = sco.7 }
 			remove_ideas = sco_observer
 		}
 
@@ -1002,9 +999,7 @@ sco_category = {
 				limit = { is_in_faction_with = CHI }
 				leave_faction = yes
 			}
-			every_country = {
-				news_event = { id = sco.8 }
-			}
+			news_event = { id = sco.8 }
 		}
 
 		ai_will_do = {
@@ -1114,7 +1109,7 @@ sco_category = {
 					limit = { is_sco = yes }
 					add_timed_idea = {
 						idea = SCO_joint_drill_1
-						days = 14
+						days = 21
 					}
 				}
 			}
@@ -1123,13 +1118,11 @@ sco_category = {
 					limit = { is_sco = yes }
 					add_timed_idea = {
 						idea = SCO_joint_drill
-						days = 14
+						days = 21
 					}
 				}
 			}
-			every_country = {
-				news_event = { days = 1 id = sco.6 }
-			}
+			news_event = { days = 1 id = sco.6 }
 		}
 
 		days_remove = 14
@@ -1352,6 +1345,14 @@ south_china_sea_category = {
 				}
 			}
 		}
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				add = 15
+				is_currently_importing_oil = yes
+			}
+		}
 	}
 
 	oil_exploration_macclesfield = {
@@ -1423,6 +1424,14 @@ south_china_sea_category = {
 						amount = 6
 					}
 				}
+			}
+		}
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				add = 15
+				is_currently_importing_oil = yes
 			}
 		}
 	}
@@ -1830,6 +1839,14 @@ south_china_sea_category = {
 			}
 			log = "[GetDateText]: [This.GetName]: decision oil_exploration_northern_spratlys executed"
 		}
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				add = 15
+				is_currently_importing_oil = yes
+			}
+		}
 	}
 
 	oil_exploration_western_spratlys = {
@@ -2234,6 +2251,14 @@ south_china_sea_category = {
 			}
 			log = "[GetDateText]: [This.GetName]: decision oil_exploration_western_spratlys executed"
 		}
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				add = 15
+				is_currently_importing_oil = yes
+			}
+		}
 	}
 	oil_exploration_eastern_spratlys = {
 		icon = GFX_decision_oil
@@ -2637,6 +2662,14 @@ south_china_sea_category = {
 				CHI_modify_chinese_aggression = yes
 			}
 			log = "[GetDateText]: [This.GetName]: decision oil_exploration_eastern_spratlys executed"
+		}
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				add = 15
+				is_currently_importing_oil = yes
+			}
 		}
 	}
 
@@ -3043,6 +3076,14 @@ south_china_sea_category = {
 			}
 			log = "[GetDateText]: [This.GetName]: decision oil_exploration_southern_spratlys executed"
 		}
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				add = 15
+				is_currently_importing_oil = yes
+			}
+		}
 	}
 
 	joint_development_zone_malaysia = {
@@ -3057,6 +3098,10 @@ south_china_sea_category = {
 				controls_state = 526
 			}
 			NOT = { has_country_flag = spratlys_deal_MAY }
+			if = {
+				limit = { original_tag = CHI }
+				has_completed_focus = CHI_Joint_Development_Zones
+			}
 		}
 
 		highlight_states = {
@@ -3071,10 +3116,6 @@ south_china_sea_category = {
 					target = ROOT
 					value > 14
 				}
-			}
-			if = {
-				limit = { original_tag = CHI }
-				has_completed_focus = CHI_Joint_Development_Zones
 			}
 		}
 
@@ -3121,6 +3162,10 @@ south_china_sea_category = {
 				controls_state = 526
 			}
 			NOT = { has_country_flag = spratlys_deal_PHI }
+			if = {
+				limit = { original_tag = CHI }
+				has_completed_focus = CHI_Joint_Development_Zones
+			}
 		}
 
 		available = {
@@ -3129,10 +3174,6 @@ south_china_sea_category = {
 					target = ROOT
 					value > 14
 				}
-			}
-			if = {
-				limit = { original_tag = CHI }
-				has_completed_focus = CHI_Joint_Development_Zones
 			}
 		}
 
@@ -3186,6 +3227,10 @@ south_china_sea_category = {
 				controls_state = 526
 			}
 			NOT = { has_country_flag = spratlys_deal_VIE }
+			if = {
+				limit = { original_tag = CHI }
+				has_completed_focus = CHI_Joint_Development_Zones
+			}
 		}
 
 		highlight_states = {
@@ -3200,10 +3245,6 @@ south_china_sea_category = {
 					target = ROOT
 					value > 14
 				}
-			}
-			if = {
-				limit = { original_tag = CHI }
-				has_completed_focus = CHI_Joint_Development_Zones
 			}
 		}
 
@@ -3259,8 +3300,11 @@ south_china_sea_category = {
 					526 = { is_claimed_by = MAY }
 				}
 			}
+			if = {
+				limit = { original_tag = CHI }
+				has_completed_focus = CHI_Negotiate_Maritime_Boundaries
+			}
 		}
-
 
 		highlight_states = {
 			highlight_states_trigger = {
@@ -3276,10 +3320,6 @@ south_china_sea_category = {
 				}
 			}
 			has_country_flag = spratlys_deal_MAY
-			if = {
-				limit = { original_tag = CHI }
-				has_completed_focus = CHI_Negotiate_Maritime_Boundaries
-			}
 		}
 
 		cost = 100
@@ -3287,7 +3327,6 @@ south_china_sea_category = {
 		days_remove = 7
 
 		remove_effect = {
-			set_country_flag = maritime_boundary_agreed
 			816 = { remove_claim_by = ROOT }
 			if = {
 				limit = { original_tag = CHI }
@@ -3333,6 +3372,10 @@ south_china_sea_category = {
 					526 = { is_claimed_by = PHI }
 				}
 			}
+			if = {
+				limit = { original_tag = CHI }
+				has_completed_focus = CHI_Negotiate_Maritime_Boundaries
+			}
 		}
 		highlight_states = {
 			highlight_states_trigger = {
@@ -3348,10 +3391,6 @@ south_china_sea_category = {
 				}
 			}
 			has_country_flag = spratlys_deal_PHI
-			if = {
-				limit = { original_tag = CHI }
-				has_completed_focus = CHI_Negotiate_Maritime_Boundaries
-			}
 		}
 
 		cost = 100
@@ -3403,6 +3442,10 @@ south_china_sea_category = {
 					526 = { is_claimed_by = VIE }
 				}
 			}
+			if = {
+				limit = { original_tag = CHI }
+				has_completed_focus = CHI_Negotiate_Maritime_Boundaries
+			}
 		}
 
 		highlight_states = {
@@ -3419,10 +3462,6 @@ south_china_sea_category = {
 				}
 			}
 			has_country_flag = spratlys_deal_VIE
-			if = {
-				limit = { original_tag = CHI }
-				has_completed_focus = CHI_Negotiate_Maritime_Boundaries
-			}
 		}
 
 		cost = 100
@@ -3714,27 +3753,11 @@ one_china_category = {
 		icon = GFX_decision_generic_nationalism
 
 		complete_effect = {
-			set_variable = {
-				var = pan_green_coalition_support
-				value = party_pop_array^2
-			}
-			add_to_variable = {
-				var = pan_green_coalition_support
-				value = party_pop_array^18
-
-			}
-			set_variable = {
-				var = pan_blue_coalition_support
-				value = party_pop_array^1
-			}
-			add_to_variable = {
-				var = pan_blue_coalition_support
-				value = party_pop_array^6
-			}
-			add_to_variable = {
-				var = pan_blue_coalition_support
-				value = party_pop_array^14
-			}
+			set_variable = { var = pan_green_coalition_support value = party_pop_array^2 }
+			add_to_variable = { var = pan_green_coalition_support value = party_pop_array^18 }
+			set_variable = { var = pan_blue_coalition_support value = party_pop_array^1 }
+			add_to_variable = { var = pan_blue_coalition_support value = party_pop_array^6 }
+			add_to_variable = { var = pan_blue_coalition_support value = party_pop_array^14 }
 		}
 
 		ai_will_do = {
@@ -3773,7 +3796,6 @@ one_china_category = {
 				newline = yes
 			}
 		}
-
 
 	}
 
@@ -3943,8 +3965,7 @@ one_china_category = {
 			}
 		}
 
-		available = {
-		}
+
 
 		complete_effect = {
 			TAI = {
@@ -3981,8 +4002,7 @@ one_china_category = {
 
 		cost = 50
 
-		available = {
-		}
+
 
 		highlight_states = {
 			highlight_states_trigger = {
@@ -4123,10 +4143,7 @@ one_china_category = {
 		}
 
 		complete_effect = {
-			swap_ideas = {
-				remove_idea = rival_government
-				add_idea = Lacks_International_Recognition
-			}
+			add_ideas = Lacks_International_Recognition
 			add_to_array = {
 				global.Unrecognised_States = THIS
 			}
@@ -4152,6 +4169,10 @@ one_china_category = {
 						modifier = one_china_policy
 						target = ROOT
 					}
+
+					set_temp_variable = { wargoal_on = ROOT }
+					set_temp_variable = { wargoal_type = 2 }
+					add_threat_from_wargoal_effect = yes
 					create_wargoal = {
 						type = annex_everything
 						target = ROOT
@@ -4170,16 +4191,16 @@ one_china_category = {
 			custom_effect_tooltip = TAI_loses_cores_tt
 			hidden_effect = {
 				every_state = { #remove core for former Mainland states
-				limit = {
-				is_greater_china_state = yes
-				}
-				remove_core_of = TAI
+					limit = {
+						is_greater_china_state = yes
+					}
+					remove_core_of = TAI
 				}
 				every_state = { #add core for current own
-				limit = {
-				is_taiwan_area_state = yes
-				}
-				add_core_of = TAI
+					limit = {
+						is_taiwan_area_state = yes
+					}
+					add_core_of = TAI
 				}
 			}
 			set_temp_variable = { percent_change = 10 }
@@ -4974,19 +4995,19 @@ southwest_hydroelectricity_dev_category = {
 		days_remove = 420
 
 		remove_effect = {
-			custom_effect_tooltip = CHI_jinshajiang_dam_TT
 			set_country_flag = jinshajiang_dam_built
 			585 = {
-				set_variable = { hydroelectric_energy_production_var = 7.5 }
-				set_variable = { hydroelectric_energy_storage_var = 0 }
-				add_dynamic_modifier = {
-					modifier = hydroelectric_infrastructure_in_state
-				}
+				set_temp_variable = { electric_addition = 7.5 }
+				add_hydroelectric_energy_production_effect = yes
 			}
 		}
 
 		ai_will_do = {
-			base = 1
+			base = 25
+			modifier = {
+				factor = 5
+				has_an_energy_deficit = yes
+			}
 		}
 	}
 
@@ -5014,19 +5035,19 @@ southwest_hydroelectricity_dev_category = {
 		days_remove = 700
 
 		remove_effect = {
-			custom_effect_tooltip = CHI_yalongjiang_dam_TT
 			set_country_flag = yalongjiang_dam_built
 			586 = {
-				set_variable = { hydroelectric_energy_production_var = 12.5 }
-				set_variable = { hydroelectric_energy_storage_var = 0 }
-				add_dynamic_modifier = {
-					modifier = hydroelectric_infrastructure_in_state
-				}
+				set_temp_variable = { electric_addition = 12.50 }
+				add_hydroelectric_energy_production_effect = yes
 			}
 		}
 
 		ai_will_do = {
-			base = 1
+			base = 25
+			modifier = {
+				factor = 5
+				has_an_energy_deficit = yes
+			}
 		}
 	}
 
@@ -5054,19 +5075,19 @@ southwest_hydroelectricity_dev_category = {
 		days_remove = 240
 
 		remove_effect = {
-			custom_effect_tooltip = CHI_wujiang_dam_TT
 			set_country_flag = wujiang_dam_built
 			582 = {
-				set_variable = { hydroelectric_energy_production_var = 2.5 }
-				set_variable = { hydroelectric_energy_storage_var = 0 }
-				add_dynamic_modifier = {
-					modifier = hydroelectric_infrastructure_in_state
-				}
+				set_temp_variable = { electric_addition = 2.5 }
+				add_hydroelectric_energy_production_effect = yes
 			}
 		}
 
 		ai_will_do = {
-			base = 1
+			base = 25
+			modifier = {
+				factor = 5
+				has_an_energy_deficit = yes
+			}
 		}
 	}
 
@@ -5094,22 +5115,21 @@ southwest_hydroelectricity_dev_category = {
 		days_remove = 360
 
 		remove_effect = {
-			custom_effect_tooltip = CHI_jialingjiang_dam_TT
 			set_country_flag = jialing_dam_built
 			583 = {
-				set_variable = { hydroelectric_energy_production_var = 5 }
-				set_variable = { hydroelectric_energy_storage_var = 0 }
-				add_dynamic_modifier = {
-					modifier = hydroelectric_infrastructure_in_state
-				}
+				set_temp_variable = { electric_addition = 5 }
+				add_hydroelectric_energy_production_effect = yes
 			}
 		}
 
 		ai_will_do = {
-			base = 1
+			base = 25
+			modifier = {
+				factor = 5
+				has_an_energy_deficit = yes
+			}
 		}
 	}
-
 }
 
 xinjiang_category = {
@@ -5603,7 +5623,6 @@ taiwan_coup_category = {
 			}
 		}
 
-
 		complete_effect = {
 			log = "[GetDateText]: [This.GetName]: decision send_political_support_taiwan executed"
 		}
@@ -5698,7 +5717,6 @@ taiwan_coup_category = {
 		}
 	}
 
-
 	prevent_coup_taiwan = {
 
 		allowed = { original_tag = TAI }
@@ -5735,10 +5753,6 @@ taiwan_coup_category = {
 					CHI = { has_government = communism }
 				}
 				TAI = {
-					set_politics = {
-						ruling_party = communism
-						elections_allowed = no
-					}
 					hidden_effect = {
 						set_popularities = {
 							democratic = 59.0
@@ -5752,12 +5766,9 @@ taiwan_coup_category = {
 						set_variable = { party_pop_array^6 = 0.370 } #Reactionary
 						set_variable = { party_pop_array^14 = 0.03 } #Neutral_conservatism
 						set_variable = { party_pop_array^18 = 0.01 } #neutral_Social
-						clear_array = ruling_party
-						clear_array = gov_coalition_array
-						add_to_array = { ruling_party = 6 }
-						update_government_coalition_strength = yes
-						update_party_name = yes
-						set_coalition_drift = yes
+						set_temp_variable = { rul_party_temp = 6 }
+						set_temp_variable = { disable_elections = 1 }
+						change_ruling_party_effect = yes
 						recalculate_party = yes
 					}
 				}
@@ -5769,10 +5780,6 @@ taiwan_coup_category = {
 					}
 				}
 				TAI = {
-					set_politics = {
-						ruling_party = democratic
-						elections_allowed = yes
-					}
 					hidden_effect = {
 						set_popularities = {
 							democratic = 68.0
@@ -5786,14 +5793,10 @@ taiwan_coup_category = {
 						set_variable = { party_pop_array^6 = 0.005 } #conservatism
 						set_variable = { party_pop_array^14 = 0.3 } #Neutral_conservatism
 						set_variable = { party_pop_array^18 = 0.015 } #neutral_Social
-						clear_array = ruling_party
-						clear_array = gov_coalition_array
-						add_to_array = { ruling_party = 1 }
-						add_to_array = { gov_coalition_array = 6 }
-						add_to_array = { gov_coalition_array = 14 }
-						update_government_coalition_strength = yes
-						update_party_name = yes
-						set_coalition_drift = yes
+						set_temp_variable = { rul_party_temp = 1 }
+						set_temp_variable = { col_one = 6 }
+						set_temp_variable = { col_two = 14 }
+						change_ruling_party_effect = yes
 						recalculate_party = yes
 						recalculate_party = yes
 					}
@@ -5856,6 +5859,10 @@ hongkong_category = {
 					modifier = declared_independence
 					target = ROOT
 				}
+
+				set_temp_variable = { wargoal_on = ROOT }
+				set_temp_variable = { wargoal_type = 2 }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = {
 					type = annex_everything
 					target = ROOT
@@ -6449,8 +6456,8 @@ arunachal_war_decisions_category = {
 	prepare_army_training_arunachal = {
 		available = {
 			has_war = no
-			has_equipment = { Inf_equipment > 30 }
-			has_equipment = { cnc_equipment > 7 }
+			has_equipment = { infantry_weapons_type > 30 }
+			has_equipment = { cnc_equipment_type > 7 }
 		}
 
 		days_remove = 15
@@ -6467,11 +6474,11 @@ arunachal_war_decisions_category = {
 			custom_effect_tooltip = arunachal_increase_readiness_TT
 
 			add_equipment_to_stockpile = {
-				type = Inf_equipment
+				type = infantry_weapons_type
 				amount = -30
 			}
 			add_equipment_to_stockpile = {
-				type = cnc_equipment
+				type = cnc_equipment_type
 				amount = -7
 			}
 

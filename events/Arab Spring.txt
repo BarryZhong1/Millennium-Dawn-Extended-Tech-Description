@@ -59,14 +59,12 @@ news_event = {
 	option = {
 		trigger = { tag = FROM }
 		name = arab_spring.1.a
-		log = "[GetDateText]: [This.GetName]: arab_spring.1.a executed"
 	}
 
 	# The Winds of Change are Blowing in the Middle East...
 	option = {
 		trigger = { NOT = { tag = FROM } }
 		name = arab_spring.1.b
-		log = "[GetDateText]: [This.GetName]: arab_spring.1.b executed"
 	}
 }
 
@@ -140,7 +138,7 @@ country_event = {
 			modifier = {
 				add = 15
 				has_idea = intervention_local_security
-				FROM = { PREV_is_on_same_continent = no }
+				FROM = { NOT = { is_on_same_continent_as = PREV } }
 			}
 		}
 	}
@@ -381,7 +379,7 @@ country_event = {
 
 		if = { limit = { check_variable = { arab_spring > 200 } }
 			set_temp_variable = { arab_spring_protest_size = arab_spring }
-			divide_temp_variable = { arab_spring_protest_size = 10000 } # Normalizes to the nearest thousandth
+			multiply_temp_variable = { arab_spring_protest_size = 0.0001 }
 			add_to_temp_variable = { arab_spring_mutiny_size = arab_spring_protest_size }
 		}
 
@@ -396,8 +394,6 @@ country_event = {
 			hidden_effect = {
 				set_global_flag = SYR_civil_war_started_early
 				#Recognition
-				add_to_array = { global.rival_governments = THIS }
-				set_country_flag = rival_government_FSA
 				hidden_effect = {
 					add_civil_war_debuff = yes
 				}
@@ -421,10 +417,6 @@ country_event = {
 								load_oob = FSA_2000_nonnsb
 							}
 						}
-
-						#Recognition
-						add_to_array = { global.rival_governments = THIS }
-						set_country_flag = rival_government_SYR
 
 						add_timed_idea = {
 							idea = FSA_rebel_fighting_spirit_idea
@@ -463,8 +455,7 @@ country_event = {
 				190 = { add_core_of = NUS }
 				release = NUS
 				190 = { add_core_of = ROOT }
-				every_state = {
-					limit = { is_core_of = ROOT }
+				every_core_state = {
 					add_core_of = NUS
 				}
 				NUS = {
@@ -504,7 +495,7 @@ country_event = {
 				}
 
 				if = {
-					limit = { has_template = "Mili"}
+					limit = { has_template = "Mili" }
 					division_template = {
 						name = "Militia Brigade"
 						is_locked = yes
@@ -551,8 +542,8 @@ country_event = {
 			modifier = {
 				factor = 10
 				OR = {
-					SYR = { has_country_flag = GAME_RULE_guarantee_syrian_historical_as_civil_war }
-					SYR = { has_country_flag = GAME_RULE_guarantee_islamic_state_spawn }
+					has_game_rule = { rule = rule_syria_arab_spring_choice option = historical_civil_war }
+					has_game_rule = { rule = rule_syria_arab_spring_choice option = historical_isis_spawn }
 				}
 			}
 			modifier = {
@@ -621,14 +612,12 @@ news_event = {
 	option = {
 		trigger = { NOT = { tag = FROM } is_arabic_nation = yes }
 		name = arab_spring.12.b
-		log = "[GetDateText]: [This.GetName]: arab_spring.12.b executed"
 	}
 
 	# Democracy Advances...
 	option = {
 		trigger = { NOT = { tag = FROM is_arabic_nation = yes } }
 		name = arab_spring.12.c
-		log = "[GetDateText]: [This.GetName]: arab_spring.12.c executed"
 	}
 }
 
@@ -644,7 +633,6 @@ news_event = {
 	# The Winds of Change are Blowing in the Middle East...
 	option = {
 		name = arab_spring.13.a
-		log = "[GetDateText]: [This.GetName]: arab_spring.13.a executed"
 	}
 }
 
@@ -660,7 +648,6 @@ news_event = {
 	# The Future of [FROM.GetNameDef] hangs in the Balance...
 	option = {
 		name = arab_spring.14.a
-		log = "[GetDateText]: [This.GetName]: arab_spring.14.a executed"
 	}
 }
 
@@ -701,14 +688,12 @@ news_event = {
 	option = {
 		trigger = { NOT = { original_tag = SYR } no_jihadist_government = yes }
 		name = arab_spring.15.b
-		log = "[GetDateText]: [This.GetName]: arab_spring.15.b executed"
 	}
 
 	# These upstarts are Doomed to Failure...
 	option = {
 		trigger = { NOT = { original_tag = SYR } jihadist_government = yes }
 		name = arab_spring.15.c
-		log = "[GetDateText]: [This.GetName]: arab_spring.15.c executed"
 	}
 
 	# By Allah, We Rise!
@@ -743,7 +728,7 @@ country_event = {
 			limit = {
 				var:influence_array^0 = {
 					OR = {
-						has_idea = superpower
+						has_idea = super_power
 						has_idea = great_power
 						has_idea = large_power
 					}
@@ -919,6 +904,5 @@ news_event = {
 
 	option = {
 		name = arab_spring.22.a
-		log = "[GetDateText]: [This.GetName]: arab_spring.22.a executed"
 	}
 }

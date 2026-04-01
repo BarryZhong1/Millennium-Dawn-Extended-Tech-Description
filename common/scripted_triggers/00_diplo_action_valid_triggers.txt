@@ -13,6 +13,10 @@ is_diplomatic_action_valid_boost_party_popularity = {
 	NOT = { has_dlc = "La Resistance" } # we have operation for it
 }
 
+is_diplomatic_action_valid_embargo = {
+	always = yes
+}
+
 is_autonomy_that_cannot_change_level = {
 	OR = {
 		has_autonomy_state = autonomy_republic_khm
@@ -52,21 +56,6 @@ is_autonomy_that_cannot_change_level = {
 	}
 }
 
-has_state_in_range_of_one_of_our_owned_states = {
-	custom_trigger_tooltip = {
-		tooltip = has_state_in_range_of_one_of_our_owned_states_TT
-		any_owned_state = {
-			any_state = {
-				is_owned_by = ROOT
-				distance_to = {
-					target = PREV
-					value < 1000
-				}
-			}
-		}
-	}
-}
-
 has_war_with_or_allies_have_war_with_ROOT = {
 	custom_trigger_tooltip = {
 		tooltip = has_war_with_or_allies_have_war_with_ROOT_TT
@@ -81,5 +70,12 @@ has_war_with_or_allies_have_war_with_ROOT = {
 				has_war_with = ROOT
 			}
 		}
+	}
+}
+
+embassy_with_root_closed = {
+	custom_override_tooltip = {
+		tooltip = embassy_with_root_closed_tt
+		has_country_flag = closed_embassy_@ROOT
 	}
 }

@@ -214,12 +214,9 @@ focus_tree = {
 				random_list = {
 					50 = {
 						set_temp_variable = { rul_party_temp = 4 }
+						set_temp_variable = { disable_elections = 1 }
 						change_ruling_party_effect = yes
 						hidden_effect = {
-							set_politics = {
-								ruling_party = communism
-								elections_allowed = no
-							}
 							set_popularities = {
 								democratic = 0
 								neutrality = 0
@@ -231,12 +228,9 @@ focus_tree = {
 					}
 					50 = {
 						set_temp_variable = { rul_party_temp = 5 }
+						set_temp_variable = { disable_elections = 1 }
 						change_ruling_party_effect = yes
 						hidden_effect = {
-							set_politics = {
-								ruling_party = communism
-								elections_allowed = no
-							}
 							set_popularities = {
 								democratic = 0
 								neutrality = 0
@@ -483,7 +477,7 @@ focus_tree = {
 		}
 
 		search_filters = {
-			FOCUS_FILTER_MILITARY
+			FOCUS_FILTER_MILITARY_LAWS
 			FOCUS_FILTER_INTERNAL_AFFAIRS
 			FOCUS_FILTER_MILITARY_LAWS
 		}
@@ -494,6 +488,10 @@ focus_tree = {
 			add_ideas = POL_military_state_idea
 			set_temp_variable = { desire_change = -0.5 }
 			change_expected_bureaucracy_spending = yes
+
+			hidden_effect = {
+				country_event = { id = poland.148 days = 150 }
+			}
 		}
 
 		ai_will_do = { factor = 50 }
@@ -662,7 +660,7 @@ focus_tree = {
 		}
 
 		search_filters = {
-			FOCUS_FILTER_MILITARY
+			FOCUS_FILTER_MILITARY_LAWS
 		}
 
 		completion_reward = {
@@ -954,13 +952,20 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_regain_western_trust"
-			every_other_country = {
-				limit = {
-					OR = {
-						has_idea = EU_member
-						has_idea = NATO_member
-					}
-				}
+			custom_effect_tooltip = TT_ALL_NATO_MEMBER_NATIONS_GAIN
+			effect_tooltip = {
+				add_opinion_modifier = { target = ROOT modifier = POL_regains_our_trust }
+			}
+			for_each_scope_loop = {
+				array = global.nato_members
+				add_opinion_modifier = { target = ROOT modifier = POL_regains_our_trust }
+			}
+			custom_effect_tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+			effect_tooltip = {
+				add_opinion_modifier = { target = ROOT modifier = POL_regains_our_trust }
+			}
+			for_each_scope_loop = {
+				array = global.EU_member
 				add_opinion_modifier = { target = ROOT modifier = POL_regains_our_trust }
 			}
 			add_political_power = 50
@@ -1204,13 +1209,20 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_calm_down_the_west"
-			every_other_country = {
-				limit = {
-					OR = {
-						has_idea = NATO_member
-						has_idea = EU_member
-					}
-				}
+			custom_effect_tooltip = TT_ALL_NATO_MEMBER_NATIONS_GAIN
+			effect_tooltip = {
+				add_opinion_modifier = { target = ROOT modifier = POL_poland_takes_initiative }
+			}
+			for_each_scope_loop = {
+				array = global.nato_members
+				add_opinion_modifier = { target = ROOT modifier = POL_poland_takes_initiative }
+			}
+			custom_effect_tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+			effect_tooltip = {
+				add_opinion_modifier = { target = ROOT modifier = POL_poland_takes_initiative }
+			}
+			for_each_scope_loop = {
+				array = global.EU_member
 				add_opinion_modifier = { target = ROOT modifier = POL_poland_takes_initiative }
 			}
 			add_political_power = 100
@@ -1529,7 +1541,7 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_INTERNAL_AFFAIRS
 			FOCUS_FILTER_ECONOMY
-			FOCUS_FILTER_MILITARY
+			FOCUS_FILTER_MILITARY_LAWS
 			FOCUS_FILTER_STABILITY
 			FOCUS_FILTER_WAR_SUPPORT
 		}
@@ -1630,7 +1642,7 @@ focus_tree = {
 		}
 
 		search_filters = {
-			FOCUS_FILTER_MILITARY
+			FOCUS_FILTER_MILITARY_LAWS
 		}
 
 		completion_reward = {
@@ -1852,7 +1864,7 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_STABILITY
 			FOCUS_FILTER_WAR_SUPPORT
-			FOCUS_FILTER_MILITARY
+			FOCUS_FILTER_MILITARY_LAWS
 		}
 
 		completion_reward = {
@@ -1888,7 +1900,7 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 			FOCUS_FILTER_INTERNAL_AFFAIRS
-			FOCUS_FILTER_MILITARY
+			FOCUS_FILTER_MILITARY_LAWS
 		}
 
 		completion_reward = {
@@ -1922,7 +1934,7 @@ focus_tree = {
 
 		search_filters = {
 			FOCUS_FILTER_INTERNAL_AFFAIRS
-			FOCUS_FILTER_MILITARY
+			FOCUS_FILTER_MILITARY_LAWS
 		}
 
 		completion_reward = {
@@ -1968,6 +1980,10 @@ focus_tree = {
 			add_ideas = POL_spy_the_citizens_idea
 			set_temp_variable = { temp_opinion = -5 }
 			change_oligarchs_opinion = yes
+
+			hidden_effect = {
+				country_event = { id = poland.149 days = 80 }
+			}
 		}
 
 		ai_will_do = { factor = 60 }
@@ -2390,7 +2406,7 @@ focus_tree = {
 		}
 
 		search_filters = {
-			FOCUS_FILTER_MILITARY
+			FOCUS_FILTER_MILITARY_LAWS
 		}
 
 		completion_reward = {
@@ -2437,7 +2453,7 @@ focus_tree = {
 		}
 
 		search_filters = {
-			FOCUS_FILTER_MILITARY
+			FOCUS_FILTER_MILITARY_LAWS
 		}
 
 		completion_reward = {
@@ -3091,7 +3107,7 @@ focus_tree = {
 			FOCUS_FILTER_INDUSTRY
 			FOCUS_FILTER_FOREIGN_POLICY
 			FOCUS_FILTER_INTERNAL_AFFAIRS
-			FOCUS_FILTER_MILITARY
+			FOCUS_FILTER_MILITARY_LAWS
 		}
 
 		completion_reward = {
@@ -3159,13 +3175,10 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_join_the_eurozone_communist"
-			every_country = {
-				limit = {
-					OR = {
-						has_idea = ECB_president
-						has_idea = EU_commission_president
-					}
-				}
+			var:global.eucomission = {
+				country_event = poland.164
+			}
+			var:global.eucentralbank = {
 				country_event = poland.164
 			}
 			set_temp_variable = { modify_eurosceptic = -0.05 }
@@ -3348,12 +3361,12 @@ focus_tree = {
 			}
 			add_stability = 0.05
 			add_equipment_to_stockpile = {
-				type = infantry_weapons3
+				type = infantry_weapons_4
 				amount = 600
 				producer = POL
 			}
 			add_equipment_to_stockpile = {
-				type = command_control_equipment2
+				type = cnc_equipment_3
 				amount = 300
 				producer = POL
 			}
@@ -3929,21 +3942,25 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_antagonize_west"
-			every_other_country = {
-				limit = {
-					OR = {
-						has_idea = EU_member
-						has_idea = NATO_member
-					}
-				}
-				add_opinion_modifier = {
-					target = POL
-					modifier = POL_poland_cuts_the_trade
-				}
-				add_opinion_modifier = {
-					target = POL
-					modifier = POL_trade_poland_cuts_the_trade
-				}
+			custom_effect_tooltip = TT_ALL_NATO_MEMBER_NATIONS_GAIN
+			effect_tooltip = {
+				add_opinion_modifier = { target = POL modifier = POL_poland_cuts_the_trade }
+				add_opinion_modifier = { target = POL modifier = POL_trade_poland_cuts_the_trade }
+			}
+			for_each_scope_loop = {
+				array = global.nato_members
+				add_opinion_modifier = { target = POL modifier = POL_poland_cuts_the_trade }
+				add_opinion_modifier = { target = POL modifier = POL_trade_poland_cuts_the_trade }
+			}
+			custom_effect_tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+			effect_tooltip = {
+				add_opinion_modifier = { target = POL modifier = POL_poland_cuts_the_trade }
+				add_opinion_modifier = { target = POL modifier = POL_trade_poland_cuts_the_trade }
+			}
+			for_each_scope_loop = {
+				array = global.EU_member
+				add_opinion_modifier = { target = POL modifier = POL_poland_cuts_the_trade }
+				add_opinion_modifier = { target = POL modifier = POL_trade_poland_cuts_the_trade }
 			}
 			every_other_country = {
 				limit = {
@@ -4016,21 +4033,25 @@ focus_tree = {
 					modifier = POL_trade_poland_cuts_the_trade
 				}
 			}
-			every_other_country = {
-				limit = {
-					OR = {
-						has_idea = EU_member
-						has_idea = NATO_member
-					}
-				}
-				add_opinion_modifier = {
-					target = POL
-					modifier = POL_poland_opens_the_trade
-				}
-				add_opinion_modifier = {
-					target = POL
-					modifier = POL_trade_poland_opens_the_trade
-				}
+			custom_effect_tooltip = TT_ALL_NATO_MEMBER_NATIONS_GAIN
+			effect_tooltip = {
+				add_opinion_modifier = { target = POL modifier = POL_poland_opens_the_trade }
+				add_opinion_modifier = { target = POL modifier = POL_trade_poland_opens_the_trade }
+			}
+			for_each_scope_loop = {
+				array = global.nato_members
+				add_opinion_modifier = { target = POL modifier = POL_poland_opens_the_trade }
+				add_opinion_modifier = { target = POL modifier = POL_trade_poland_opens_the_trade }
+			}
+			custom_effect_tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+			effect_tooltip = {
+				add_opinion_modifier = { target = POL modifier = POL_poland_opens_the_trade }
+				add_opinion_modifier = { target = POL modifier = POL_trade_poland_opens_the_trade }
+			}
+			for_each_scope_loop = {
+				array = global.EU_member
+				add_opinion_modifier = { target = POL modifier = POL_poland_opens_the_trade }
+				add_opinion_modifier = { target = POL modifier = POL_trade_poland_opens_the_trade }
 			}
 			add_political_power = 100
 			swap_ideas = {
@@ -4523,7 +4544,7 @@ focus_tree = {
 		}
 
 		search_filters = {
-			FOCUS_FILTER_MILITARY
+			FOCUS_FILTER_MILITARY_LAWS
 			FOCUS_FILTER_POLITICAL
 		}
 
@@ -4554,7 +4575,7 @@ focus_tree = {
 		}
 
 		search_filters = {
-			FOCUS_FILTER_MILITARY
+			FOCUS_FILTER_MILITARY_LAWS
 			FOCUS_FILTER_AIR_XP
 			FOCUS_FILTER_WAR_SUPPORT
 		}
@@ -4616,11 +4637,13 @@ focus_tree = {
 		}
 
 		search_filters = {
-			FOCUS_FILTER_MILITARY
+			FOCUS_FILTER_MILITARY_LAWS
 		}
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_surround_germany"
+			set_temp_variable = { wargoal_on = AUS }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = AUS
@@ -4674,11 +4697,13 @@ focus_tree = {
 		}
 
 		search_filters = {
-			FOCUS_FILTER_MILITARY
+			FOCUS_FILTER_MILITARY_LAWS
 		}
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_stop_swiss_neutrality"
+			set_temp_variable = { wargoal_on = SWI }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = SWI
@@ -4765,21 +4790,27 @@ focus_tree = {
 		}
 
 		search_filters = {
-			FOCUS_FILTER_MILITARY
+			FOCUS_FILTER_MILITARY_LAWS
 		}
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_take_west_balkans"
+			set_temp_variable = { wargoal_on = SLV }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = SLV
 				expire = 365
 			}
+			set_temp_variable = { wargoal_on = CRO }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = CRO
 				expire = 365
 			}
+			set_temp_variable = { wargoal_on = BOS }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = BOS
@@ -4874,21 +4905,27 @@ focus_tree = {
 		}
 
 		search_filters = {
-			FOCUS_FILTER_MILITARY
+			FOCUS_FILTER_MILITARY_LAWS
 		}
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_finish_yugoslavia"
+			set_temp_variable = { wargoal_on = SER }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = SER
 				expire = 365
 			}
+			set_temp_variable = { wargoal_on = ALB }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = ALB
 				expire = 365
 			}
+			set_temp_variable = { wargoal_on = FYR }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = FYR
@@ -4917,7 +4954,7 @@ focus_tree = {
 		}
 
 		search_filters = {
-			FOCUS_FILTER_MILITARY
+			FOCUS_FILTER_MILITARY_LAWS
 			FOCUS_FILTER_WAR_SUPPORT
 		}
 
@@ -4969,7 +5006,7 @@ focus_tree = {
 		}
 
 		search_filters = {
-			FOCUS_FILTER_MILITARY
+			FOCUS_FILTER_MILITARY_LAWS
 			FOCUS_FILTER_WAR_SUPPORT
 		}
 
@@ -5016,11 +5053,13 @@ focus_tree = {
 		}
 
 		search_filters = {
-			FOCUS_FILTER_MILITARY
+			FOCUS_FILTER_MILITARY_LAWS
 		}
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_revenge_on_germany"
+			set_temp_variable = { wargoal_on = GER }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = GER
@@ -5063,11 +5102,13 @@ focus_tree = {
 		}
 
 		search_filters = {
-			FOCUS_FILTER_MILITARY
+			FOCUS_FILTER_MILITARY_LAWS
 		}
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_conquer_italy"
+			set_temp_variable = { wargoal_on = ITA }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = ITA
@@ -5110,11 +5151,13 @@ focus_tree = {
 		}
 
 		search_filters = {
-			FOCUS_FILTER_MILITARY
+			FOCUS_FILTER_MILITARY_LAWS
 		}
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_dominate_france"
+			set_temp_variable = { wargoal_on = FRA }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = FRA
@@ -5198,16 +5241,20 @@ focus_tree = {
 		}
 
 		search_filters = {
-			FOCUS_FILTER_MILITARY
+			FOCUS_FILTER_MILITARY_LAWS
 		}
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_conquer_unconquerable"
+			set_temp_variable = { wargoal_on = ENG }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = ENG
 				expire = 365
 			}
+			set_temp_variable = { wargoal_on = USA }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = USA
@@ -5251,7 +5298,7 @@ focus_tree = {
 		}
 
 		search_filters = {
-			FOCUS_FILTER_MILITARY
+			FOCUS_FILTER_MILITARY_LAWS
 		}
 
 		completion_reward = {
@@ -5294,11 +5341,13 @@ focus_tree = {
 		}
 
 		search_filters = {
-			FOCUS_FILTER_MILITARY
+			FOCUS_FILTER_MILITARY_LAWS
 		}
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_get_closer_to_moscow"
+			set_temp_variable = { wargoal_on = UKR }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = UKR
@@ -5335,7 +5384,7 @@ focus_tree = {
 
 		search_filters = {
 			FOCUS_FILTER_WAR_SUPPORT
-			FOCUS_FILTER_MILITARY
+			FOCUS_FILTER_MILITARY_LAWS
 		}
 
 		completion_reward = {
@@ -5386,12 +5435,14 @@ focus_tree = {
 		}
 
 		search_filters = {
-			FOCUS_FILTER_MILITARY
+			FOCUS_FILTER_MILITARY_LAWS
 		}
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_belarusian_strategy"
 			add_timed_idea = { idea = POL_modern_blitzkrieg_idea days = 45 }
+			set_temp_variable = { wargoal_on = BLR }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = BLR
@@ -5421,7 +5472,7 @@ focus_tree = {
 		}
 
 		search_filters = {
-			FOCUS_FILTER_MILITARY
+			FOCUS_FILTER_MILITARY_LAWS
 		}
 
 		completion_reward = {
@@ -5471,12 +5522,14 @@ focus_tree = {
 		}
 
 		search_filters = {
-			FOCUS_FILTER_MILITARY
+			FOCUS_FILTER_MILITARY_LAWS
 		}
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_moscow_march"
 			add_war_support = 0.2
+			set_temp_variable = { wargoal_on = SOV }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = SOV
@@ -5635,7 +5688,7 @@ focus_tree = {
 				name = POL_beryl
 				bonus = 0.35
 				uses = 1
-				technology = infantry_weapons4
+				technology = infantry_weapons_5
 			}
 
 			set_temp_variable = { treasury_change = -5 }
@@ -5690,7 +5743,6 @@ focus_tree = {
 		y = 2
 		relative_position_id = POL_ppk_spike
 		cost = 5
-
 
 		mutually_exclusive = {
 			focus = POL_stinger
@@ -5749,7 +5801,7 @@ focus_tree = {
 				name = POL_grot
 				bonus = 0.25
 				uses = 1
-				technology = infantry_weapons5
+				technology = infantry_weapons_6
 				ahead_reduction = 4
 			}
 
@@ -8772,7 +8824,7 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_uh_60_black_hawk"
 
 			add_equipment_to_stockpile = {
-				type = transport_helicopter2
+				type = transport_helicopter_2
 				amount = 45
 				producer = USA
 			}
@@ -10224,8 +10276,6 @@ focus_tree = {
 		ai_will_do = { factor = 10 }
 	}
 
-############################################################### Roseru's Space: (Old military tree, waiting to be deleted) ###############################################################
-############################################################################ Here lies old military tree #################################################################################
 	###### Poland can into space!!! ~By XCezor ######
 	focus = {
 		id = POL_begin_contruction_of_space_company
@@ -12331,9 +12381,7 @@ focus_tree = {
 				western_liberals_are_in_power = yes
 				western_social_democrats_are_in_power = yes
 			}
-			any_country = {
-				has_idea = EU_member
-			}
+			EU_european_union_currently_exists = yes
 		}
 
 		prerequisite = { focus = POL_united_we_stand }
@@ -12341,8 +12389,12 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_FOREIGN_POLICY }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_security_summit"
-			every_other_country = {
-				limit = { has_idea = NATO_member }
+			custom_effect_tooltip = TT_ALL_NATO_MEMBER_NATIONS_GAIN
+			effect_tooltip = {
+				add_opinion_modifier = { target = ROOT modifier = POL_held_security_summit }
+			}
+			for_each_scope_loop = {
+				array = global.nato_members
 				add_opinion_modifier = { target = ROOT modifier = POL_held_security_summit }
 			}
 
@@ -12692,9 +12744,8 @@ focus_tree = {
 				western_liberals_are_in_power = yes
 				western_social_democrats_are_in_power = yes
 			}
-			any_country = {
-				has_idea = EU_member
-			}
+
+			EU_european_union_currently_exists = yes
 		}
 
 		prerequisite = {
@@ -12755,9 +12806,8 @@ focus_tree = {
 				western_liberals_are_in_power = yes
 				western_social_democrats_are_in_power = yes
 			}
-			any_country = {
-				has_idea = EU_member
-			}
+
+			EU_european_union_currently_exists = yes
 		}
 
 		prerequisite = { focus = POL_eu_funding }
@@ -12792,9 +12842,8 @@ focus_tree = {
 				western_liberals_are_in_power = yes
 				western_social_democrats_are_in_power = yes
 			}
-			any_country = {
-				has_idea = EU_member
-			}
+
+			EU_european_union_currently_exists = yes
 		}
 
 		prerequisite = { focus = POL_connections_to_eu_members }
@@ -12946,9 +12995,8 @@ focus_tree = {
 				western_conservatism_are_in_power = yes
 				western_autocrats_are_in_power = yes
 			}
-			any_country = {
-				has_idea = EU_member
-			}
+
+			EU_european_union_currently_exists = yes
 		}
 
 		prerequisite = { focus = POL_conservatives_win }
@@ -14044,7 +14092,6 @@ focus_tree = {
 			}
 		}
 
-
 		prerequisite = { focus = POL_foreign_investors }
 
 		search_filters = { FOCUS_FILTER_RESEARCH }
@@ -14175,9 +14222,8 @@ focus_tree = {
 					emerging_anarchist_communism_are_in_power = yes
 				}
 			}
-			any_country = {
-				has_idea = EU_member
-			}
+
+			EU_european_union_currently_exists = yes
 		}
 
 		prerequisite = { focus = POL_soften_the_cons }
@@ -14887,9 +14933,8 @@ focus_tree = {
 				western_social_democrats_are_in_power = yes
 				emerging_anarchist_communism_are_in_power = yes
 			}
-			any_country = {
-				has_idea = EU_member
-			}
+
+			EU_european_union_currently_exists = yes
 		}
 
 		search_filters = { FOCUS_FILTER_FOREIGN_POLICY }
@@ -15699,9 +15744,8 @@ focus_tree = {
 					emerging_anarchist_communism_are_in_power = yes
 				}
 			}
-			any_country = {
-				has_idea = EU_member
-			}
+
+			EU_european_union_currently_exists = yes
 		}
 
 		prerequisite = { focus = POL_eastern_infrastructure }
@@ -15728,8 +15772,8 @@ focus_tree = {
 			}
 
 			if = {
-				limit = { has_idea = the_euro }
-				remove_ideas = the_euro
+				limit = { has_idea = euro }
+				remove_ideas = euro
 			}
 			custom_effect_tooltip = POL_eurozone_opposition_dec_TT
 		}
@@ -15826,9 +15870,8 @@ focus_tree = {
 					emerging_anarchist_communism_are_in_power = yes
 				}
 			}
-			any_country = {
-				has_idea = EU_member
-			}
+
+			EU_european_union_currently_exists = yes
 		}
 
 		prerequisite = { focus = POL_strengthen_east_border }
@@ -16577,8 +16620,6 @@ focus_tree = {
 		}
 	}
 
-
-
 	focus = {
 		id = POL_question_of_socialism
 		icon = purgesocial
@@ -17211,9 +17252,33 @@ focus_tree = {
 				target = HUN
 			}
 			add_ideas = POL_united_visehgrad_idea
-			swap_ideas = {
-				remove_idea = POL_country_of_peace1_idea
-				add_idea = POL_country_of_peace2_idea
+			if = {
+				limit = { has_idea = POL_country_of_peace1_idea }
+				swap_ideas = {
+					remove_idea = POL_country_of_peace1_idea
+					add_idea = POL_country_of_peace2_idea
+				}
+			}
+			else_if = {
+				limit = { has_idea = POL_country_of_peace2_idea }
+				swap_ideas = {
+					remove_idea = POL_country_of_peace2_idea
+					add_idea = POL_country_of_peace3_idea
+				}
+			}
+			else_if = {
+				limit = { has_idea = POL_country_of_peace3_idea }
+				swap_ideas = {
+					remove_idea = POL_country_of_peace3_idea
+					add_idea = POL_country_of_peace4_idea
+				}
+			}
+			else_if = {
+				limit = { has_idea = POL_country_of_peace4_idea }
+				swap_ideas = {
+					remove_idea = POL_country_of_peace4_idea
+					add_idea = POL_country_of_peace5_idea
+				}
 			}
 		}
 
@@ -18038,7 +18103,6 @@ focus_tree = {
 			EST = {
 				add_opinion_modifier = { target = POL modifier = POL_rail_baltica_funded }
 			}
-
 
 			set_temp_variable = { treasury_change = -45 }
 			modify_treasury_effect = yes
@@ -18980,7 +19044,7 @@ focus_tree = {
 			random_list = {
 				20 = {
 					add_equipment_to_stockpile = {
-						type = infantry_weapons1 #AK-74
+						type = infantry_weapons_2 #AK-74
 						amount = 1000
 						producer = SOV
 					}
@@ -18989,7 +19053,7 @@ focus_tree = {
 				}
 				40 = {
 					add_equipment_to_stockpile = {
-						type = infantry_weapons1 #AK-74
+						type = infantry_weapons_2 #AK-74
 						amount = 500
 						producer = SOV
 					}
@@ -18998,7 +19062,7 @@ focus_tree = {
 				}
 				10 = {
 					add_equipment_to_stockpile = {
-						type = infantry_weapons1 #AK-74
+						type = infantry_weapons_2 #AK-74
 						amount = 250
 						producer = SOV
 					}
@@ -19101,19 +19165,8 @@ focus_tree = {
 			if = {
 				limit = { NOT = { is_in_array = { ruling_party = 20 } } }
 				hidden_effect = {
-					clear_array = ruling_party
-					clear_array = gov_coalition_array
-					add_to_array = { ruling_party = 20 }
-					update_government_coalition_strength = yes
-					update_party_name = yes
-					set_coalition_drift = yes
-					set_ruling_leader = yes
-					set_leader = yes
-				}
-
-				set_politics = {
-					ruling_party = nationalist
-					elections_allowed = yes
+					set_temp_variable = { rul_party_temp = 20 }
+					change_ruling_party_effect = yes
 				}
 
 				add_popularity = {
@@ -19535,7 +19588,6 @@ focus_tree = {
 			}
 			custom_effect_tooltip = POL_allowed_justification_TT
 			set_country_flag = POL_enabled_justification
-			set_country_flag = Eastern_europe_pact_flag
 			create_faction_from_template = faction_template_pol_eep
 			set_temp_variable = { desire_change = 0.5 }
 			change_expected_defense_spending = yes
@@ -21555,7 +21607,7 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 			FOCUS_FILTER_INTERNAL_AFFAIRS
-			FOCUS_FILTER_MILITARY
+			FOCUS_FILTER_MILITARY_LAWS
 		}
 
 		completion_reward = {
@@ -22511,17 +22563,15 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_erasing_old_disputes"
-			every_country = {
-				limit = { has_idea = NATO_member }
-				add_opinion_modifier = {
-					target = POL
-					modifier = POL_poland_seeks_russian_cooperation
-				}
+			custom_effect_tooltip = TT_ALL_NATO_MEMBER_NATIONS_GAIN
+			effect_tooltip = {
+				add_opinion_modifier = { target = POL modifier = POL_poland_seeks_russian_cooperation }
 			}
-			reverse_add_opinion_modifier = {
-				target = SOV
-				modifier = POL_trade_poland_starts_cooperation
+			for_each_scope_loop = {
+				array = global.nato_members
+				add_opinion_modifier = { target = POL modifier = POL_poland_seeks_russian_cooperation }
 			}
+			reverse_add_opinion_modifier = { target = SOV modifier = POL_trade_poland_starts_cooperation }
 		}
 
 		ai_will_do = { factor = 50 }
@@ -22614,14 +22664,13 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_recognition_of_the_greatness_of_the_CSTO"
-			every_country = {
-				limit = {
-					has_idea = NATO_member
-				}
-				add_opinion_modifier = {
-					target = POL
-					modifier = POL_Poland_seeks_alliance_with_russia
-				}
+			custom_effect_tooltip = TT_ALL_NATO_MEMBER_NATIONS_GAIN
+			effect_tooltip = {
+				add_opinion_modifier = { target = POL modifier = POL_Poland_seeks_alliance_with_russia }
+			}
+			for_each_scope_loop = {
+				array = global.nato_members
+				add_opinion_modifier = { target = POL modifier = POL_Poland_seeks_alliance_with_russia }
 			}
 			reverse_add_opinion_modifier = {
 				target = SOV
@@ -23728,12 +23777,12 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_sell_old_equipment"
 			add_equipment_to_stockpile = {
-				type = infantry_weapons1
+				type = infantry_weapons_2
 				amount = -7000
 				producer = POL
 			}
 			add_equipment_to_stockpile = {
-				type = infantry_weapons2
+				type = infantry_weapons_3
 				amount = -7000
 				producer = POL
 			}
@@ -24203,9 +24252,8 @@ focus_tree = {
 				name = "Lech Wałęsa"
 				ruling_only = yes
 			}
-			any_country = {
-				has_idea = EU_member
-			}
+
+			EU_european_union_currently_exists = yes
 		}
 
 		prerequisite = {
@@ -24456,7 +24504,8 @@ focus_tree = {
 			set_temp_variable = { modify_eurosceptic = -0.05 }
 			set_temp_variable = { modify_eurosceptic_target = ROOT }
 			eurosceptic_change = yes
-			add_ideas = the_euro
+			newline = yes
+			joining_the_euro = yes
 			hidden_effect = {
 				news_event = { id = poland_news.4 }
 			}
@@ -24522,8 +24571,8 @@ focus_tree = {
 			}
 
 			if = {
-				limit = { has_idea = the_euro }
-				remove_ideas = the_euro
+				limit = { has_idea = euro }
+				remove_ideas = euro
 			}
 			custom_effect_tooltip = POL_eurozone_opposition_dec_TT
 		}
@@ -24618,7 +24667,6 @@ focus_tree = {
 		relative_position_id = POL_wake_up_old_military_factories
 		cost = 5
 
-
 		available = {
 			neutrality_neutral_conservatism_are_in_power = yes
 			has_country_flag = POL_walesa_wins
@@ -24676,7 +24724,6 @@ focus_tree = {
 		relative_position_id = POL_reinforced_roads
 		cost = 5
 
-
 		available = {
 			neutrality_neutral_conservatism_are_in_power = yes
 			has_country_flag = POL_walesa_wins
@@ -24713,7 +24760,6 @@ focus_tree = {
 		relative_position_id = POL_decentralization_of_industry
 		cost = 5
 
-
 		available = {
 			neutrality_neutral_conservatism_are_in_power = yes
 			has_country_flag = POL_walesa_wins
@@ -24734,7 +24780,7 @@ focus_tree = {
 		}
 
 		search_filters = {
-			FOCUS_FILTER_MILITARY
+			FOCUS_FILTER_MILITARY_LAWS
 		}
 
 		completion_reward = {
@@ -24756,7 +24802,6 @@ focus_tree = {
 		y = 1
 		relative_position_id = POL_soldiers_protect_our_homeland
 		cost = 5
-
 
 		available = {
 			neutrality_neutral_conservatism_are_in_power = yes
@@ -24862,7 +24907,6 @@ focus_tree = {
 		relative_position_id = POL_challenge_russia
 		cost = 5
 
-
 		available = {
 			neutrality_neutral_conservatism_are_in_power = yes
 			has_country_flag = POL_walesa_wins
@@ -24918,7 +24962,6 @@ focus_tree = {
 		relative_position_id = POL_infiltrate_belarusian_policy
 		cost = 5
 
-
 		available = {
 			neutrality_neutral_conservatism_are_in_power = yes
 			has_country_flag = POL_walesa_wins
@@ -24956,7 +24999,6 @@ focus_tree = {
 		y = 1
 		relative_position_id = POL_troubled_border
 		cost = 5
-
 
 		available = {
 			neutrality_neutral_conservatism_are_in_power = yes
@@ -24999,7 +25041,6 @@ focus_tree = {
 		relative_position_id = POL_communism_never_sleep
 		cost = 5
 
-
 		available = {
 			neutrality_neutral_conservatism_are_in_power = yes
 			has_country_flag = POL_walesa_wins
@@ -25017,7 +25058,7 @@ focus_tree = {
 		}
 
 		search_filters = {
-			FOCUS_FILTER_MILITARY
+			FOCUS_FILTER_MILITARY_LAWS
 		}
 
 		completion_reward = {
@@ -25035,7 +25076,6 @@ focus_tree = {
 		y = 1
 		relative_position_id = POL_troubled_border
 		cost = 5
-
 
 		available = {
 			neutrality_neutral_conservatism_are_in_power = yes
@@ -25074,11 +25114,15 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_take_control_over_belarus"
+			set_temp_variable = { wargoal_on = BLR }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = BLR
 				expire = 2000
 			}
+			set_temp_variable = { wargoal_on = SOV }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = SOV
@@ -25100,7 +25144,6 @@ focus_tree = {
 		relative_position_id = POL_self_protective_country
 		cost = 5
 
-
 		available = {
 			neutrality_neutral_conservatism_are_in_power = yes
 			has_country_flag = POL_walesa_wins
@@ -25118,7 +25161,7 @@ focus_tree = {
 		}
 
 		search_filters = {
-			FOCUS_FILTER_MILITARY
+			FOCUS_FILTER_MILITARY_LAWS
 		}
 
 		completion_reward = {
@@ -25141,7 +25184,6 @@ focus_tree = {
 		relative_position_id = POL_increase_defense_budget
 		cost = 5
 
-
 		available = {
 			neutrality_neutral_conservatism_are_in_power = yes
 			has_country_flag = POL_walesa_wins
@@ -25161,7 +25203,7 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 			FOCUS_FILTER_FOREIGN_POLICY
-			FOCUS_FILTER_MILITARY
+			FOCUS_FILTER_MILITARY_LAWS
 		}
 
 		completion_reward = {
@@ -25212,7 +25254,6 @@ focus_tree = {
 		relative_position_id = POL_protect_democratic_africa
 		cost = 5
 
-
 		available = {
 			neutrality_neutral_conservatism_are_in_power = yes
 			has_country_flag = POL_walesa_wins
@@ -25231,7 +25272,7 @@ focus_tree = {
 
 		search_filters = {
 			FOCUS_FILTER_WAR_SUPPORT
-			FOCUS_FILTER_MILITARY
+			FOCUS_FILTER_MILITARY_LAWS
 		}
 
 		completion_reward = {
@@ -25250,7 +25291,6 @@ focus_tree = {
 		y = 1
 		relative_position_id = POL_protect_democratic_africa
 		cost = 5
-
 
 		available = {
 			neutrality_neutral_conservatism_are_in_power = yes
@@ -25303,7 +25343,6 @@ focus_tree = {
 		relative_position_id = POL_katyn_recognition
 		cost = 5
 
-
 		available = {
 			neutrality_neutral_conservatism_are_in_power = yes
 			has_country_flag = POL_walesa_wins
@@ -25340,7 +25379,6 @@ focus_tree = {
 		y = 2
 		relative_position_id = POL_radar_improvement
 		cost = 5
-
 
 		available = {
 			neutrality_neutral_conservatism_are_in_power = yes
@@ -25456,7 +25494,6 @@ focus_tree = {
 		relative_position_id = POL_close_east_border
 		cost = 5
 
-
 		available = {
 			neutrality_neutral_conservatism_are_in_power = yes
 			has_country_flag = POL_walesa_wins
@@ -25507,7 +25544,6 @@ focus_tree = {
 		relative_position_id = POL_stop_eastern_trade
 		cost = 5
 
-
 		available = {
 			neutrality_neutral_conservatism_are_in_power = yes
 			has_country_flag = POL_walesa_wins
@@ -25552,7 +25588,6 @@ focus_tree = {
 		relative_position_id = POL_solidarnosc_rise_again
 		cost = 5
 
-
 		available = {
 			neutrality_neutral_conservatism_are_in_power = yes
 			has_country_flag = POL_walesa_wins
@@ -25591,7 +25626,6 @@ focus_tree = {
 		y = 1
 		relative_position_id = POL_always_prepared
 		cost = 5
-
 
 		available = {
 			neutrality_neutral_conservatism_are_in_power = yes
@@ -25653,7 +25687,6 @@ focus_tree = {
 		relative_position_id = POL_stop_eastern_trade
 		cost = 7
 
-
 		available = {
 			neutrality_neutral_conservatism_are_in_power = yes
 			has_country_flag = POL_walesa_wins
@@ -25703,7 +25736,6 @@ focus_tree = {
 		relative_position_id = POL_dig_deeper
 		cost = 7
 
-
 		available = {
 			neutrality_neutral_conservatism_are_in_power = yes
 			has_country_flag = POL_walesa_wins
@@ -25752,7 +25784,6 @@ focus_tree = {
 		y = 1
 		relative_position_id = POL_intensified_metals_production
 		cost = 8
-
 
 		available = {
 			neutrality_neutral_conservatism_are_in_power = yes
@@ -25810,7 +25841,6 @@ focus_tree = {
 		relative_position_id = POL_dig_deeper
 		cost = 5
 
-
 		available = {
 			neutrality_neutral_conservatism_are_in_power = yes
 			has_country_flag = POL_walesa_wins
@@ -25843,14 +25873,14 @@ focus_tree = {
 
 		ai_will_do = { factor = 150 }
 	}
-##############################
-###	Start of EU Focus Tree ###
-##############################
+	##############################
+	###	Start of EU Focus Tree ###
+	##############################
 
-shared_focus = USoE001
-shared_focus = POTEF001
+	shared_focus = USoE001
+	shared_focus = POTEF001
 
-############################
-### End of EU Focus Tree ###
-############################
+	############################
+	### End of EU Focus Tree ###
+	############################
 }

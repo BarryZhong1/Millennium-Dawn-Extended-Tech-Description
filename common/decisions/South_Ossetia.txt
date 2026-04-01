@@ -117,7 +117,7 @@ SOO_revoult_south_caucas = {
 		fire_only_once = no
 		days_remove = 70
 		available = {
-			AZE = { emerging_communist_state_are_not_in_power = yes }
+			AZE = { emerging_communist_state_are_in_power = no }
 		}
 		visible = {
 			country_exists = AZE
@@ -156,7 +156,7 @@ SOO_revoult_south_caucas = {
 		fire_only_once = no
 		days_remove = 65
 		available = {
-			AZE = { emerging_communist_state_are_not_in_power = yes }
+			AZE = { emerging_communist_state_are_in_power = no }
 		}
 		visible = {
 			country_exists = AZE
@@ -196,7 +196,7 @@ SOO_revoult_south_caucas = {
 		fire_only_once = no
 		days_remove = 45
 		available = {
-			AZE = { emerging_communist_state_are_not_in_power = yes }
+			AZE = { emerging_communist_state_are_in_power = no }
 		}
 		visible = {
 			country_exists = AZE
@@ -309,8 +309,7 @@ SOO_revoult_south_caucas = {
 		cost = 40
 		fire_only_once = no
 		days_remove = 55
-		available = {
-		}
+
 		visible = {
 			country_exists = GEO
 			emerging_communist_state_are_in_power = yes
@@ -350,7 +349,7 @@ SOO_revoult_south_caucas = {
 		fire_only_once = no
 		days_remove = 70
 		available = {
-			GEO = { emerging_communist_state_are_not_in_power = yes }
+			GEO = { emerging_communist_state_are_in_power = no }
 		}
 		visible = {
 			country_exists = GEO
@@ -389,7 +388,7 @@ SOO_revoult_south_caucas = {
 		fire_only_once = no
 		days_remove = 65
 		available = {
-			GEO = { emerging_communist_state_are_not_in_power = yes }
+			GEO = { emerging_communist_state_are_in_power = no }
 		}
 		visible = {
 			country_exists = GEO
@@ -429,7 +428,7 @@ SOO_revoult_south_caucas = {
 		fire_only_once = no
 		days_remove = 45
 		available = {
-			GEO = { emerging_communist_state_are_not_in_power = yes }
+			GEO = { emerging_communist_state_are_in_power = no }
 		}
 		visible = {
 			country_exists = GEO
@@ -542,8 +541,7 @@ SOO_revoult_south_caucas = {
 		cost = 40
 		fire_only_once = no
 		days_remove = 55
-		available = {
-		}
+
 		visible = {
 			country_exists = ABK
 			emerging_communist_state_are_in_power = yes
@@ -583,7 +581,7 @@ SOO_revoult_south_caucas = {
 		fire_only_once = no
 		days_remove = 70
 		available = {
-			ARM = { emerging_communist_state_are_not_in_power = yes }
+			ARM = { emerging_communist_state_are_in_power = no }
 		}
 		visible = {
 			country_exists = ABK
@@ -622,7 +620,7 @@ SOO_revoult_south_caucas = {
 		fire_only_once = no
 		days_remove = 65
 		available = {
-			ABK = { emerging_communist_state_are_not_in_power = yes }
+			ABK = { emerging_communist_state_are_in_power = no }
 		}
 		visible = {
 			country_exists = ABK
@@ -662,7 +660,7 @@ SOO_revoult_south_caucas = {
 		fire_only_once = no
 		days_remove = 45
 		available = {
-			ABK = { emerging_communist_state_are_not_in_power = yes }
+			ABK = { emerging_communist_state_are_in_power = no }
 		}
 		visible = {
 			country_exists = ABK
@@ -775,8 +773,7 @@ SOO_revoult_south_caucas = {
 		cost = 40
 		fire_only_once = no
 		days_remove = 55
-		available = {
-		}
+
 		visible = {
 			country_exists = ARM
 			emerging_communist_state_are_in_power = yes
@@ -816,7 +813,7 @@ SOO_revoult_south_caucas = {
 		fire_only_once = no
 		days_remove = 70
 		available = {
-			ARM = { emerging_communist_state_are_not_in_power = yes }
+			ARM = { emerging_communist_state_are_in_power = no }
 		}
 		visible = {
 			country_exists = ARM
@@ -855,7 +852,7 @@ SOO_revoult_south_caucas = {
 		fire_only_once = no
 		days_remove = 65
 		available = {
-			ARM = { emerging_communist_state_are_not_in_power = yes }
+			ARM = { emerging_communist_state_are_in_power = no }
 		}
 		visible = {
 			country_exists = ARM
@@ -895,7 +892,7 @@ SOO_revoult_south_caucas = {
 		fire_only_once = no
 		days_remove = 45
 		available = {
-			ARM = { emerging_communist_state_are_not_in_power = yes }
+			ARM = { emerging_communist_state_are_in_power = no }
 		}
 		visible = {
 			country_exists = ARM
@@ -989,12 +986,8 @@ SOO_greater_skifia_decisions_category = {
 				}
 				UKR = {
 					set_temp_variable = { rul_party_temp = 21 }
-					if = {
-						limit = { has_elections = no }
+					if = { limit = { has_elections = no }
 						set_temp_variable = { disable_elections = 1 }
-					}
-					else = {
-						set_temp_variable = { disable_elections = 0 }
 					}
 					change_ruling_party_effect = yes
 
@@ -1022,10 +1015,18 @@ SOO_greater_skifia_decisions_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision SOO_caucas_south_attack"
+
+			set_temp_variable = { wargoal_on = AZE }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = annex_everything
 				target = AZE
 			}
+
+			set_temp_variable = { wargoal_on = GEO }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = annex_everything
 				target = GEO
@@ -1043,18 +1044,34 @@ SOO_greater_skifia_decisions_category = {
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision SOO_central_azia_attack"
 			TAJ = { country_event = Ossetia.7 }
+
+			set_temp_variable = { wargoal_on = KAZ }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = annex_everything
 				target = KAZ
 			}
+
+			set_temp_variable = { wargoal_on = TRK }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = annex_everything
 				target = TRK
 			}
+
+			set_temp_variable = { wargoal_on = KYR }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = annex_everything
 				target = KYR
 			}
+
+			set_temp_variable = { wargoal_on = UZB }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = annex_everything
 				target = UZB
@@ -1071,6 +1088,10 @@ SOO_greater_skifia_decisions_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision SOO_CHINA_attack"
+
+			set_temp_variable = { wargoal_on = CHI }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = annex_everything
 				target = CHI
@@ -1087,10 +1108,18 @@ SOO_greater_skifia_decisions_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision SOO_libya_attack"
+
+			set_temp_variable = { wargoal_on = LBA }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = annex_everything
 				target = LBA
 			}
+
+			set_temp_variable = { wargoal_on = ITA }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = annex_everything
 				target = ITA
@@ -1107,6 +1136,10 @@ SOO_greater_skifia_decisions_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision SOO_spain_attack"
+
+			set_temp_variable = { wargoal_on = SPR }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = annex_everything
 				target = SPR

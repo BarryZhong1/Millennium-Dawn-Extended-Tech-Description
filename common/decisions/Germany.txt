@@ -355,7 +355,7 @@ GER_east_vs_west_divide = {
 		}
 
 		ai_will_do = {
-			factor = 100
+			base = 1
 		}
 	}
 	GER_divide_close = {
@@ -366,6 +366,9 @@ GER_east_vs_west_divide = {
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision GER_divide_close"
 			clr_country_flag = GER_open_divide
+		}
+		ai_will_do = {
+			base = 1
 		}
 	}
 
@@ -410,7 +413,7 @@ GER_east_vs_west_divide = {
 			production_speed_buildings_factor = 0.10
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -455,7 +458,7 @@ GER_east_vs_west_divide = {
 			production_speed_buildings_factor = 0.10
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -701,6 +704,9 @@ GER_bavarian_nationalism = {
 				set_country_flag = GER_federalization_two
 			}
 		}
+		ai_will_do = {
+			base = 1
+		}
 	}
 	GER_relocate_military_personnel = {
 		fire_only_once = yes
@@ -747,6 +753,9 @@ GER_bavarian_nationalism = {
 				clr_country_flag = GER_federalization_two
 				set_country_flag = GER_federalization_three
 			}
+		}
+		ai_will_do = {
+			base = 1
 		}
 	}
 	GER_relocate_the_industrial_heartland = {
@@ -795,6 +804,9 @@ GER_bavarian_nationalism = {
 				set_country_flag = GER_federalization_four
 			}
 		}
+		ai_will_do = {
+			base = 1
+		}
 	}
 
 	GER_hold_referendum_BAY = {
@@ -820,17 +832,9 @@ GER_bavarian_nationalism = {
 						has_country_flag = GER_BAY_SPD
 					}
 					BAY = {
-						clear_array = ruling_party
-						clear_array = gov_coalition_array
-						add_to_array = { ruling_party = 3 }
-						update_government_coalition_strength = yes
-						set_coalition_drift = yes
-						set_ruling_leader = yes
-						set_leader = yes
-						set_politics = {
-							ruling_party = democratic
-							elections_allowed = no
-						}
+						set_temp_variable = { rul_party_temp = 3 }
+						set_temp_variable = { disable_elections = 1 }
+						change_ruling_party_effect = yes
 					}
 				}
 
@@ -839,17 +843,9 @@ GER_bavarian_nationalism = {
 						has_country_flag = GER_BAY_CSU
 					}
 					BAY = {
-						clear_array = ruling_party
-						clear_array = gov_coalition_array
-						add_to_array = { ruling_party = 1 }
-						update_government_coalition_strength = yes
-						set_coalition_drift = yes
-						set_ruling_leader = yes
-						set_leader = yes
-						set_politics = {
-							ruling_party = democratic
-							elections_allowed = no
-						}
+						set_temp_variable = { rul_party_temp = 1 }
+						set_temp_variable = { disable_elections = 1 }
+						change_ruling_party_effect = yes
 					}
 				}
 
@@ -858,20 +854,15 @@ GER_bavarian_nationalism = {
 						has_country_flag = GER_BAY_GRUNE
 					}
 					BAY = {
-						clear_array = ruling_party
-						clear_array = gov_coalition_array
-						add_to_array = { ruling_party = 17 }
-						update_government_coalition_strength = yes
-						set_coalition_drift = yes
-						set_ruling_leader = yes
-						set_leader = yes
-						set_politics = {
-							ruling_party = neutrality
-							elections_allowed = no
-						}
+						set_temp_variable = { rul_party_temp = 17 }
+						set_temp_variable = { disable_elections = 1 }
+						change_ruling_party_effect = yes
 					}
 				}
 			}
+		}
+		ai_will_do = {
+			base = 1
 		}
 	}
 }
@@ -932,6 +923,9 @@ GER_the_false_state = {
 				}
 			}
 		}
+		ai_will_do = {
+			base = 1
+		}
 	}
 
 	GER_trip_to_egypt = {
@@ -988,6 +982,9 @@ GER_the_false_state = {
 					days = 1
 				}
 			}
+		}
+		ai_will_do = {
+			base = 1
 		}
 	}
 
@@ -1046,6 +1043,9 @@ GER_the_false_state = {
 				}
 			}
 		}
+		ai_will_do = {
+			base = 1
+		}
 	}
 
 	GER_arm_palestinian_groups = {
@@ -1087,7 +1087,7 @@ GER_the_false_state = {
 				amount = -7175
 			}
 			add_equipment_to_stockpile = {
-				type = Inf_equipment
+				type = infantry_weapons_type
 				amount = -4550
 			}
 			newline = yes
@@ -1097,7 +1097,7 @@ GER_the_false_state = {
 					amount = 7175
 				}
 				add_equipment_to_stockpile = {
-					type = Inf_equipment
+					type = infantry_weapons_type
 					amount = 4550
 				}
 			}
@@ -1108,6 +1108,9 @@ GER_the_false_state = {
 					days = 1
 				}
 			}
+		}
+		ai_will_do = {
+			base = 1
 		}
 	}
 
@@ -1129,15 +1132,45 @@ GER_the_false_state = {
 				target = ISR
 				type = puppet_wargoal_focus
 			}
-			every_country = {
-				limit = {
-					has_country_flag = GER_were_joining_the_war
-				}
-				declare_war_on = {
-					target = ISR
-					type = puppet_wargoal_focus
+			if = {
+				limit = { SYR = { has_country_flag = GER_were_joining_the_war } }
+				SYR = {
+					declare_war_on = {
+						target = ISR
+						type = puppet_wargoal_focus
+					}
 				}
 			}
+			if = {
+				limit = { EGY = { has_country_flag = GER_were_joining_the_war } }
+				EGY = {
+					declare_war_on = {
+						target = ISR
+						type = puppet_wargoal_focus
+					}
+				}
+			}
+			if = {
+				limit = { HEZ = { has_country_flag = GER_were_joining_the_war } }
+				HEZ = {
+					declare_war_on = {
+						target = ISR
+						type = puppet_wargoal_focus
+					}
+				}
+			}
+			if = {
+				limit = { PAL = { has_country_flag = GER_were_joining_the_war } }
+				PAL = {
+					declare_war_on = {
+						target = ISR
+						type = puppet_wargoal_focus
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
 		}
 	}
 }
@@ -1171,9 +1204,13 @@ GER_bundeswehr_reforms_decisions = {
 				var = bundeswehr_recovery_status
 				value = 10
 			}
+			GER_update_dirty_variable = yes
 		}
 		modifier = {
 			personnel_cost_multiplier_modifier = 0.15
+		}
+		ai_will_do = {
+			base = 1
 		}
 	}
 	GER_upgrade_military_infrastructure = {
@@ -1204,10 +1241,14 @@ GER_bundeswehr_reforms_decisions = {
 				var = bundeswehr_recovery_status
 				value = 5
 			}
+			GER_update_dirty_variable = yes
 		}
 		modifier = {
 			industrial_capacity_factory = 0.10
 			production_speed_arms_factory_factor = 0.10
+		}
+		ai_will_do = {
+			base = 1
 		}
 	}
 	GER_modernize_equipment = {
@@ -1238,11 +1279,12 @@ GER_bundeswehr_reforms_decisions = {
 				var = bundeswehr_recovery_status
 				value = 5
 			}
+			GER_update_dirty_variable = yes
 			newline = yes
 			random_list = {
 				10 = {
 					add_tech_bonus = {
-						name = CAT_air_eqp
+						name = GER_modernize_equipment
 						bonus = 0.10
 						uses = 1
 						category = CAT_air_eqp
@@ -1250,7 +1292,7 @@ GER_bundeswehr_reforms_decisions = {
 				}
 				10 = {
 					add_tech_bonus = {
-						name = CAT_trans_plane
+						name = GER_modernize_equipment
 						bonus = 0.10
 						uses = 1
 						category = CAT_trans_plane
@@ -1258,7 +1300,7 @@ GER_bundeswehr_reforms_decisions = {
 				}
 				10 = {
 					add_tech_bonus = {
-						name = CAT_afv
+						name = GER_modernize_equipment
 						bonus = 0.10
 						uses = 1
 						category = CAT_afv
@@ -1266,7 +1308,7 @@ GER_bundeswehr_reforms_decisions = {
 				}
 				10 = {
 					add_tech_bonus = {
-						name = CAT_mbt
+						name = GER_modernize_equipment
 						bonus = 0.10
 						uses = 1
 						category = CAT_mbt
@@ -1274,7 +1316,7 @@ GER_bundeswehr_reforms_decisions = {
 				}
 				10 = {
 					add_tech_bonus = {
-						name = CAT_util
+						name = GER_modernize_equipment
 						bonus = 0.10
 						uses = 1
 						category = CAT_util
@@ -1282,7 +1324,7 @@ GER_bundeswehr_reforms_decisions = {
 				}
 				10 = {
 					add_tech_bonus = {
-						name = CAT_artillery
+						name = GER_modernize_equipment
 						bonus = 0.10
 						uses = 1
 						category = CAT_artillery
@@ -1290,7 +1332,7 @@ GER_bundeswehr_reforms_decisions = {
 				}
 				10 = {
 					add_tech_bonus = {
-						name = CAT_fuel_oil
+						name = GER_modernize_equipment
 						bonus = 0.10
 						uses = 1
 						category = CAT_fuel_oil
@@ -1298,7 +1340,7 @@ GER_bundeswehr_reforms_decisions = {
 				}
 				10 = {
 					add_tech_bonus = {
-						name = CAT_tanks
+						name = GER_modernize_equipment
 						bonus = 0.10
 						uses = 1
 						category = CAT_tanks
@@ -1306,7 +1348,7 @@ GER_bundeswehr_reforms_decisions = {
 				}
 				10 = {
 					add_tech_bonus = {
-						name = CAT_ifv
+						name = GER_modernize_equipment
 						bonus = 0.10
 						uses = 1
 						category = CAT_ifv
@@ -1314,13 +1356,16 @@ GER_bundeswehr_reforms_decisions = {
 				}
 				10 = {
 					add_tech_bonus = {
-						name = CAT_apc
+						name = GER_modernize_equipment
 						bonus = 0.10
 						uses = 1
 						category = CAT_apc
 					}
 				}
 			}
+		}
+		ai_will_do = {
+			base = 5
 		}
 	}
 	GER_maximize_training_efficiency = {
@@ -1348,9 +1393,13 @@ GER_bundeswehr_reforms_decisions = {
 				var = bundeswehr_recovery_status
 				value = 5
 			}
+			GER_update_dirty_variable = yes
 		}
 		modifier = {
 			experience_gain_army_unit_factor = 0.20
+		}
+		ai_will_do = {
+			base = 1
 		}
 	}
 	GER_recruitment_campaigns = {
@@ -1378,7 +1427,11 @@ GER_bundeswehr_reforms_decisions = {
 				var = bundeswehr_recovery_status
 				value = 5
 			}
+			GER_update_dirty_variable = yes
 			add_manpower = 900
+		}
+		ai_will_do = {
+			base = 1
 		}
 	}
 }
@@ -1408,6 +1461,9 @@ GER_civil_war_mission = {
 				}
 			}
 		}
+		ai_will_do = {
+			base = 1
+		}
 	}
 	GER_purge_banks = {
 		fire_only_once = yes
@@ -1429,6 +1485,9 @@ GER_civil_war_mission = {
 				decrease_economic_growth = yes
 				decrease_economic_growth = yes
 			}
+		}
+		ai_will_do = {
+			base = 1
 		}
 	}
 	GER_purge_government_institutions = {
@@ -1454,6 +1513,9 @@ GER_civil_war_mission = {
 				decrease_centralization = yes
 			}
 		}
+		ai_will_do = {
+			base = 1
+		}
 	}
 	GER_purge_military = {
 		fire_only_once = yes
@@ -1477,6 +1539,9 @@ GER_civil_war_mission = {
 				decrease_intervention_law_effect = yes
 				decrease_officer_training_level = yes
 			}
+		}
+		ai_will_do = {
+			base = 1
 		}
 	}
 }
@@ -1523,6 +1588,9 @@ GER_war_on_terror = {
 				}
 			}
 		}
+		ai_will_do = {
+			base = 1
+		}
 	}
 
 	GER_authorize_airstrike = {
@@ -1566,6 +1634,9 @@ GER_war_on_terror = {
 				}
 			}
 		}
+		ai_will_do = {
+			base = 1
+		}
 	}
 	GER_authorize_aid_mission = {
 		days_remove = 60
@@ -1589,6 +1660,9 @@ GER_war_on_terror = {
 			custom_effect_tooltip = GER_increase_popularity_TT
 			add_to_variable = { var = GER_soldiers_popularity_mideast value = 1 }
 			clamp_variable = { var = GER_soldiers_popularity_mideast min = 0 max = 100 }
+		}
+		ai_will_do = {
+			base = 1
 		}
 	}
 	GER_authorize_20_new_troops = {
@@ -1615,6 +1689,9 @@ GER_war_on_terror = {
 			add_to_variable = { var = GER_soldiers_in_mideast value = 20 }
 			clamp_variable = { var = GER_soldiers_in_mideast min = 0 max = 8000 }
 		}
+		ai_will_do = {
+			base = 1
+		}
 	}
 	GER_withdraw_troops = {
 		days_remove = 180
@@ -1634,6 +1711,9 @@ GER_war_on_terror = {
 			clr_country_flag = GER_war_on_terror_started
 			clear_variable = GER_soldiers_in_mideast
 			clear_variable = GER_soldiers_popularity_mideast
+		}
+		ai_will_do = {
+			base = 1
 		}
 	}
 }
@@ -1673,6 +1753,9 @@ GER_imperial_bloc_invites = {
 				}
 			}
 		}
+		ai_will_do = {
+			base = 1
+		}
 	}
 	GER_invite_turkey = {
 		fire_only_once = yes
@@ -1707,6 +1790,9 @@ GER_imperial_bloc_invites = {
 					days = 1
 				}
 			}
+		}
+		ai_will_do = {
+			base = 1
 		}
 	}
 	GER_invite_france = {
@@ -1743,6 +1829,9 @@ GER_imperial_bloc_invites = {
 				}
 			}
 		}
+		ai_will_do = {
+			base = 1
+		}
 	}
 	GER_invite_england = {
 		fire_only_once = yes
@@ -1778,6 +1867,9 @@ GER_imperial_bloc_invites = {
 				}
 			}
 		}
+		ai_will_do = {
+			base = 1
+		}
 	}
 }
 
@@ -1787,7 +1879,9 @@ GER_V_fall_Decision = {
 			OR = {
 				has_defensive_war = yes
 				threat > 0.6
-				any_country = {
+				any_of_scopes = {
+					array = potential_and_current_enemies
+					tooltip = TT_IS_BEING_JUSTIFIED_AGAINST
 					is_justifying_wargoal_against = GER
 				}
 			}
@@ -2186,11 +2280,11 @@ GER_V_fall_Decision = {
 			}
 			if = {
 				limit = { has_idea = police_02 }
-				swap_ideas = { remove_idea = police_01 add_idea = police_01 }
+				swap_ideas = { remove_idea = police_02 add_idea = police_01 }
 			}
 			else_if = {
 				limit = { has_idea = police_03 }
-				swap_ideas = { remove_idea = police_02 add_idea = police_02 }
+				swap_ideas = { remove_idea = police_03 add_idea = police_02 }
 			}
 			else_if = {
 				limit = { has_idea = police_04 }
@@ -2240,8 +2334,7 @@ GER_Officer_Training_Decisions = {
 		}
 
 		visible = {
-			original_tag = GER
-			has_idea = Nato_member
+			has_idea = NATO_member
 		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision GER_General_Staff_Course_Hamburg"
@@ -2277,7 +2370,7 @@ GER_Officer_Training_Decisions = {
 					}
 				}
 			}
-	  	}
+		 }
 		ai_will_do = {
 			factor = 1
 		}
@@ -2291,8 +2384,7 @@ GER_Officer_Training_Decisions = {
 		}
 
 		visible = {
-			original_tag = GER
-			has_idea = Nato_member
+			has_idea = NATO_member
 		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision GER_Leadership_course_for_officers_Koblenz"
@@ -2342,7 +2434,7 @@ GER_Officer_Training_Decisions = {
 		}
 
 		visible = {
-			has_idea = Nato_member
+			has_idea = NATO_member
 		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision GER_National_Defense_and_Armed_forces_Planning_Course"
@@ -2393,7 +2485,7 @@ GER_Officer_Training_Decisions = {
 		}
 
 		visible = {
-			has_idea = Nato_member
+			has_idea = NATO_member
 		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision GER_Operational_leadership_and_command_course"
@@ -2444,7 +2536,7 @@ GER_Officer_Training_Decisions = {
 		}
 
 		visible = {
-			has_idea = Nato_member
+			has_idea = NATO_member
 		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision GER_military_intelligence_course"
@@ -2495,7 +2587,7 @@ GER_Officer_Training_Decisions = {
 		}
 
 		visible = {
-			has_idea = Nato_member
+			has_idea = NATO_member
 		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision GER_multinational_planning_seminar"
@@ -2547,7 +2639,7 @@ GER_Officer_Training_Decisions = {
 		}
 
 		visible = {
-			has_idea = Nato_member
+			has_idea = NATO_member
 		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision GER_Admiral_staff_course"
@@ -2586,9 +2678,9 @@ GER_Officer_Training_Decisions = {
 					}
 				}
 			}
-	  }
+	 }
 	   ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	GER_Multi_national_Maritime_leadership_course = {
@@ -2600,7 +2692,7 @@ GER_Officer_Training_Decisions = {
 		}
 
 		visible = {
-			has_idea = Nato_member
+			has_idea = NATO_member
 		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision GER_Multi_national_Maritime_leadership_course"
@@ -2655,7 +2747,7 @@ GER_Officer_Training_Decisions = {
 		}
 
 		visible = {
-			has_idea = Nato_member
+			has_idea = NATO_member
 		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision GER_Launch_small_Trainings_exercise"
@@ -2682,7 +2774,7 @@ GER_Officer_Training_Decisions = {
 		}
 
 		visible = {
-			has_idea = Nato_member
+			has_idea = NATO_member
 		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision GER_Launch_big_Trainings_exercise"
@@ -3129,13 +3221,13 @@ GER_SAPOS_decision = {
 	GER_lease_acces_china = {
 		available = {
 			GER = {
- 				has_government = democratic
- 				NOT = { has_war_with = CHI }
+				 has_government = democratic
+				 NOT = { has_war_with = CHI }
 				has_opinion = {
 					target = CHI
 					value > 9
 				}
- 			}
+			 }
 			CHI = {
 				NOT = { has_war_with = GER }
 				NOT = { has_government = nationalist }
@@ -3186,13 +3278,13 @@ GER_SAPOS_decision = {
 		days_remove = 365
 		available = {
 			GER = {
- 				has_government = democratic
- 				NOT = { has_war_with = SOV }
+				 has_government = democratic
+				 NOT = { has_war_with = SOV }
 				has_opinion = {
 					target = SOV
 					value > 9
 				}
- 			}
+			 }
 			SOV = {
 				NOT = { has_war_with = GER }
 				NOT = { has_government = nationalist }
@@ -3242,13 +3334,13 @@ GER_SAPOS_decision = {
 		days_remove = 365
 		available = {
 			GER = {
- 				has_government = democratic
- 				NOT = { has_war_with = USA }
+				 has_government = democratic
+				 NOT = { has_war_with = USA }
 				has_opinion = {
 					target = USA
 					value > 9
 				}
- 			}
+			 }
 			USA = {
 				NOT = { has_war_with = GER }
 				NOT = { has_government = nationalist }

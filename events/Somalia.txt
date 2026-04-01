@@ -243,22 +243,12 @@ country_event = {
 			}
 			PUN = {
 				hidden_effect = {
-					clear_array = ruling_party
-					clear_array = gov_coalition_array
-					add_to_array = { ruling_party = 13 }
-					update_government_coalition_strength = yes
-					update_party_name = yes
-					set_coalition_drift = yes
-					set_ruling_leader = yes
-					set_leader = yes
+					set_temp_variable = { rul_party_temp = 13 }
+					change_ruling_party_effect = yes
 
 					add_popularity = {
 						ideology = neutrality
 						popularity = 0.15
-					}
-					set_politics = {
-						ruling_party = neutrality
-						elections_allowed = yes
 					}
 				}
 
@@ -295,30 +285,33 @@ country_event = {
 
 		# Somalia
 		if = { limit = { original_tag = SNA }
-			hidden_effect = {
-				SOM = { change_tag_from = SNA }
-			}
 			if = { limit = { SOM = { has_country_flag = SOM_supports_the_autonomy_tng } }
-				set_autonomy = {
-					target = SNA
-					autonomy_state = autonomy_associated_state
+				SOM = {
+					change_tag_from = SNA
+					set_autonomy = {
+						target = SNA
+						autonomy_state = autonomy_associated_state
+					}
 				}
 			}
 			else_if = { limit = { SOM = { has_country_flag = SOM_supports_the_annexation_tng } }
-				annex_country = {
-					target = SNA
-					transfer_troops = yes
-				}
 				SNA = {
 					every_unit_leader = {
-						set_nationality = PREV.PREV
+						set_nationality = SOM
 					}
 					hidden_effect = {
-						FROM = {
+						SOM = {
 							add_to_variable = { treasury = SNA.treasury }
 							add_to_variable = { debt = SNA.debt }
 							add_to_variable = { int_investments = SNA.int_investments }
 						}
+					}
+				}
+				SOM = {
+					change_tag_from = SNA
+					annex_country = {
+						target = SNA
+						transfer_troops = yes
 					}
 				}
 			}
@@ -337,20 +330,10 @@ country_event = {
 				}
 				SNA = {
 					hidden_effect = {
-						clear_array = ruling_party
-						clear_array = gov_coalition_array
-						add_to_array = { ruling_party = 14 }
-						update_government_coalition_strength = yes
-						update_party_name = yes
-						set_coalition_drift = yes
-						set_ruling_leader = yes
-						set_leader = yes
+						set_temp_variable = { rul_party_temp = 14 }
+						change_ruling_party_effect = yes
 
 						add_popularity = { ideology = neutrality popularity = 0.15 }
-						set_politics = {
-							ruling_party = neutrality
-							elections_allowed = yes
-						}
 					}
 					set_cosmetic_tag = SOM_ARPCT
 					create_country_leader = {
@@ -391,20 +374,10 @@ country_event = {
 			}
 			SWS = {
 				hidden_effect = {
-					clear_array = ruling_party
-					clear_array = gov_coalition_array
-					add_to_array = { ruling_party = 13 }
-					update_government_coalition_strength = yes
-					update_party_name = yes
-					set_coalition_drift = yes
-					set_ruling_leader = yes
-					set_leader = yes
+					set_temp_variable = { rul_party_temp = 13 }
+					change_ruling_party_effect = yes
 
 					add_popularity = { ideology = neutrality popularity = 0.15 }
-					set_politics = {
-						ruling_party = neutrality
-						elections_allowed = yes
-					}
 				}
 				create_country_leader = {
 					name = "Hasan Muhammad Nur Shatigadud"
@@ -462,18 +435,8 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: somalia.4.a executed"
 		if = { limit = { NOT = { has_country_leader = { name = "Abdiqasim Salad Hassan" ruling_only = yes } } }
 			hidden_effect = {
-				clear_array = ruling_party
-				clear_array = gov_coalition_array
-				add_to_array = { ruling_party = 14 }
-				update_government_coalition_strength = yes
-				update_party_name = yes
-				set_coalition_drift = yes
-				set_ruling_leader = yes
-				set_leader = yes
-				set_politics = {
-					ruling_party = neutrality
-					elections_allowed = yes
-				}
+				set_temp_variable = { rul_party_temp = 14 }
+				change_ruling_party_effect = yes
 			}
 
 			create_country_leader = {
@@ -619,20 +582,10 @@ country_event = {
 		}
 		JUB = {
 			hidden_effect = {
-				clear_array = ruling_party
-				clear_array = gov_coalition_array
-				add_to_array = { ruling_party = 22 }
-				update_government_coalition_strength = yes
-				update_party_name = yes
-				set_coalition_drift = yes
-				set_ruling_leader = yes
-				set_leader = yes
+				set_temp_variable = { rul_party_temp = 22 }
+				change_ruling_party_effect = yes
 
 				add_popularity = { ideology = nationalist popularity = 0.15 }
-				set_politics = {
-					ruling_party = nationalist
-					elections_allowed = yes
-				}
 			}
 
 			create_country_leader = {
@@ -672,6 +625,9 @@ country_event = {
 			limit = {
 				NOT = { has_war_with = JUB }
 			}
+			set_temp_variable = { wargoal_on = JUB }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = annex_everything
 				target = JUB
@@ -832,18 +788,8 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: somalia.9.a executed"
 		if = { limit = { NOT = { has_country_leader = { name = "Abdullahi Yusuf Ahmed" ruling_only = yes } } }
 			hidden_effect = {
-				clear_array = ruling_party
-				clear_array = gov_coalition_array
-				add_to_array = { ruling_party = 13 }
-				update_government_coalition_strength = yes
-				update_party_name = yes
-				set_coalition_drift = yes
-				set_ruling_leader = yes
-				set_leader = yes
-				set_politics = {
-					ruling_party = neutrality
-					elections_allowed = yes
-				}
+				set_temp_variable = { rul_party_temp = 13 }
+				change_ruling_party_effect = yes
 			}
 
 			create_country_leader = {
@@ -859,18 +805,8 @@ country_event = {
 
 			PUN = {
 				hidden_effect = {
-					clear_array = ruling_party
-					clear_array = gov_coalition_array
-					add_to_array = { ruling_party = 13 }
-					update_government_coalition_strength = yes
-					update_party_name = yes
-					set_coalition_drift = yes
-					set_ruling_leader = yes
-					set_leader = yes
-					set_politics = {
-						ruling_party = neutrality
-						elections_allowed = yes
-					}
+					set_temp_variable = { rul_party_temp = 13 }
+					change_ruling_party_effect = yes
 					create_country_leader = {
 						name = "Mohamed Abdi Hashi"
 						picture = "gfx/leaders/PUN/Mohamed_Abdi_Hashi.dds"
@@ -879,7 +815,7 @@ country_event = {
 							neutrality_Neutral_Autocracy
 						}
 					}
-				}			
+				}
 			}
 		}
 
@@ -931,18 +867,8 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: somalia.9.c executed"
 		if = { limit = { NOT = { has_country_leader = { name = "Abdiqasim Salad Hassan" ruling_only = yes } } }
 			hidden_effect = {
-				clear_array = ruling_party
-				clear_array = gov_coalition_array
-				add_to_array = { ruling_party = 14 }
-				update_government_coalition_strength = yes
-				update_party_name = yes
-				set_coalition_drift = yes
-				set_ruling_leader = yes
-				set_leader = yes
-				set_politics = {
-					ruling_party = neutrality
-					elections_allowed = yes
-				}
+				set_temp_variable = { rul_party_temp = 14 }
+				change_ruling_party_effect = yes
 			}
 
 			create_country_leader = {
@@ -994,12 +920,20 @@ country_event = {
 		name = somalia.10.a
 		log = "[GetDateText]: [This.GetName]: somalia.10.a executed"
 		hidden_effect = {
+			add_ideas = SHB_state_civil_war_idea
+			annex_country = {
+				target = WL2
+				transfer_troops = yes
+			}
 			WL3 = {
 				clr_country_flag = Mansoor_Alkabab_mantle_id
 			}
-			every_country = { news_event = somalia.1013 }
-			set_global_flag =  SOM_the_al_kabab_began
+			news_event = somalia.1013
+			set_global_flag = SOM_the_al_kabab_began
 			SHB = {
+				add_ideas = SHB_state_civil_war_idea
+				drop_cosmetic_tag = yes
+				set_cosmetic_tag = SHB_colour
 				remove_ideas = SHB_insurgency_idea
 				add_state_core = 239
 				add_state_core = 240
@@ -1109,11 +1043,19 @@ country_event = {
 		custom_effect_tooltip = somalia.10.b_TT
 		log = "[GetDateText]: [This.GetName]: somalia.10.b executed"
 		hidden_effect = {
+			add_ideas = SHB_state_civil_war_idea
+			annex_country = {
+				target = WL2
+				transfer_troops = yes
+			}
 			WL3 = {
 				clr_country_flag = Mansoor_Alkabab_mantle_id
 			}
-			set_global_flag =  SOM_the_al_kabab_began
+			set_global_flag = SOM_the_al_kabab_began
 			SHB = {
+				add_ideas = SHB_state_civil_war_idea
+				drop_cosmetic_tag = yes
+				set_cosmetic_tag = SHB_colour
 				remove_ideas = SHB_insurgency_idea
 				add_state_core = 239
 				add_state_core = 240
@@ -1310,7 +1252,7 @@ country_event = {
 	is_triggered_only = yes
 	fire_only_once = yes
 	immediate = {
-		hidden_effect = { 
+		hidden_effect = {
 			country_event = { id = somalia.21 days = 40 }
 		}
 	}
@@ -1319,12 +1261,6 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: somalia.20.a executed"
 		custom_effect_tooltip = somalia.20_TT
 		newline = yes
-		set_temp_variable = { threat_change = radicalization }
-		divide_temp_variable = { threat_change = 5 }
-		multiply_temp_variable = { threat_change = 0.3 }
-		clamp_temp_variable = { var = threat_change min = 1 max = 10 }
-		modify_terror_threat_effect = yes
-
 		set_temp_variable = { party_index = 12 }
 		set_temp_variable = { party_popularity_increase = 0.04 }
 		add_relative_party_popularity = yes
@@ -1334,12 +1270,6 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: somalia.20.a executed"
 		custom_effect_tooltip = somalia.20_TT
 		newline = yes
-		set_temp_variable = { threat_change = radicalization }
-		divide_temp_variable = { threat_change = 5 }
-		multiply_temp_variable = { threat_change = 0.3 }
-		clamp_temp_variable = { var = threat_change min = 1 max = 10 }
-		modify_terror_threat_effect = yes
-
 		set_temp_variable = { party_index = 11 }
 		set_temp_variable = { party_popularity_increase = 0.01 }
 		set_temp_variable = { temp_outlook_increase = 0.01 }
@@ -1355,7 +1285,7 @@ country_event = {
 	is_triggered_only = yes
 	immediate = {
 		hidden_effect = {
-			every_country = { news_event = somalia.1004 }
+			news_event = somalia.1004
 			create_dynamic_country = {
 				original_tag = SNA
 				set_country_flag = Somalia_ARPCT
@@ -1457,7 +1387,7 @@ country_event = {
 				num_provinces = 1
 			}
 		}
-		hidden_effect = { 
+		hidden_effect = {
 			country_event = { id = somalia.26 days = 40 }
 		}
 	}
@@ -1483,14 +1413,9 @@ country_event = {
 	desc = somalia.26.d
 	picture = GFX_3_SOM
 	is_triggered_only = yes
-	
+
 	option = {
 		name = somalia.26.a
-		set_temp_variable = { threat_change = radicalization }
-		divide_temp_variable = { threat_change = 5 }
-		multiply_temp_variable = { threat_change = 0.3 }
-		clamp_temp_variable = { var = threat_change min = 1 max = 10 }
-		modify_terror_threat_effect = yes
 
 		set_temp_variable = { party_index = 11 }
 		set_temp_variable = { party_popularity_increase = 0.01 }
@@ -1506,15 +1431,10 @@ country_event = {
 	desc = somalia.23.d
 	picture = GFX_6_SOM
 	is_triggered_only = yes
-	
+
 	option = {
 		name = somalia.23.a
 		custom_effect_tooltip = somalia.23.a_TT
-		set_temp_variable = { threat_change = radicalization }
-		divide_temp_variable = { threat_change = 5 }
-		multiply_temp_variable = { threat_change = 0.3 }
-		clamp_temp_variable = { var = threat_change min = 1 max = 10 }
-		modify_terror_threat_effect = yes
 
 		set_temp_variable = { party_index = 11 }
 		set_temp_variable = { party_popularity_increase = 0.01 }
@@ -1534,9 +1454,9 @@ country_event = {
 	picture = GFX_10_SOM
 	immediate = {
 		hidden_effect = {
-			ROOT = { every_core_state = { add_core_of  = SHB }}
+			ROOT = { every_core_state = { add_core_of = SHB } }
 			country_event = { id = somalia.34 days = 3 }
-			every_country = { news_event = somalia.1005 }
+			news_event = somalia.1005
 			ETH = {
 				add_relation_modifier = {
 					target = SOM
@@ -1618,7 +1538,7 @@ country_event = {
 		NOT = { ROOT = { has_war_with = SHB } }
 		NOT = { ROOT = { has_government = fascism } }
 	}
-	
+
 	option = {
 		name = somalia.24.a
 		add_political_power = -10
@@ -1641,12 +1561,6 @@ country_event = {
 	is_triggered_only = yes
 	option = {
 		name = somalia.29.a
-		set_temp_variable = { threat_change = radicalization }
-		divide_temp_variable = { threat_change = 5 }
-		multiply_temp_variable = { threat_change = 0.3 }
-		clamp_temp_variable = { var = threat_change min = 1 max = 10 }
-		modify_terror_threat_effect = yes
-
 		set_temp_variable = { party_index = 11 }
 		set_temp_variable = { party_popularity_increase = 0.01 }
 		set_temp_variable = { temp_outlook_increase = 0.01 }
@@ -1755,7 +1669,7 @@ country_event = {
 			}
 		}
 	}
-	
+
 	option = {
 		name = somalia.32.a
 		log = "[GetDateText]: [This.GetName]: somalia.31.a executed"
@@ -1766,7 +1680,7 @@ country_event = {
 	title = "dont touch sheeps events"
 	is_triggered_only = yes
 	hidden = yes
-	
+
 	option = {
 		name = somalia.32.a
 		log = "[GetDateText]: [This.GetName]: somalia.33.a executed"
@@ -1799,7 +1713,7 @@ country_event = {
 	trigger = {
 		NOT = { country_exists = PUN }
 	}
-	
+
 	option = {
 		name = somalia.34.a
 		hidden_effect = {
@@ -1830,8 +1744,9 @@ country_event = {
 	fire_only_once = yes
 	immediate = {
 		hidden_effect = {
-			every_country = { news_event = somalia.1012 }
-			country_event = { id = somalia.50 days = 1 random_days = 120 random_days = 5 }
+			add_ideas = SHB_state_civil_war_idea
+			news_event = somalia.1012
+			country_event = { id = somalia.50 days = 20 random_days = 60 }
 			set_global_flag = SOM_low_level_Alkabab #add this to on actions
 			create_dynamic_country = {
 				original_tag = SHB
@@ -1863,7 +1778,7 @@ country_event = {
 				transfer_state = 584
 				TFG = { set_state_controller = 584 }
 				584 = {
-					WL4= {
+					WL4 = {
 						set_province_controller = 10928
 					}
 				}
@@ -1884,7 +1799,7 @@ country_event = {
 						logistics_skill = 2
 					}
 				}
-				##END BULK
+				add_ideas = SHB_state_civil_war_idea
 				create_country_leader = {
 					name = "Yusuf Indhacade"
 					picture = "gfx/leaders/AIA/AIA_Yusuf_Indhacade.dds"
@@ -1943,7 +1858,7 @@ country_event = {
 				}
 				TFG = { set_state_controller = 240 }
 				240 = {
-					WL5= {
+					WL5 = {
 						set_province_controller = 14719
 						set_province_controller = 16306
 						set_province_controller = 16305
@@ -1966,6 +1881,7 @@ country_event = {
 						logistics_skill = 2
 					}
 				}
+				add_ideas = SHB_state_civil_war_idea
 				create_country_leader = {
 					name = "Aden Hashi Farah Ayro"
 					picture = "gfx/leaders/SHB/SHB_Aden_Ayro.dds"
@@ -2045,6 +1961,7 @@ country_event = {
 						logistics_skill = 2
 					}
 				}
+				add_ideas = SHB_state_civil_war_idea
 				create_country_leader = {
 					name = "Abu Mansoor"
 					picture = "gfx/leaders/SHB/SHB_abu_mansoor.dds"
@@ -2079,6 +1996,7 @@ country_event = {
 						num_provinces = 1
 					}
 				}
+				add_ideas = SHB_state_civil_war_idea
 				set_cosmetic_tag = AIA_Ras_Kamboni_Brigades
 				retire_country_leader = yes
 				create_country_leader = {
@@ -2101,7 +2019,7 @@ country_event = {
 				random_owned_controlled_state = {
 					create_unit = {
 						division = "name = \"Milishia\" division_template = \"Milishia\"start_experience_factor = 1.00 start_equipment_factor = 1.00"
-						count = 5
+						count = 1
 						owner = AIA
 					}
 				}
@@ -2154,7 +2072,7 @@ country_event = {
 
 	immediate = {
 		hidden_effect = {
-			country_event = { id = somalia.10 days = 1 random_days = 50 random_days = 5  }
+			country_event = { id = somalia.10 days = 10 random_days = 50 }
 			WL3 = {
 				annex_country = {
 					target = WL4
@@ -2166,7 +2084,7 @@ country_event = {
 					transfer_state = 584
 				}
 				584 = {
-					WL3= {
+					WL3 = {
 						set_province_controller = 8164
 					}
 				}
@@ -2201,7 +2119,6 @@ country_event = {
 					farmers
 				}
 				drop_cosmetic_tag = yes
-				set_cosmetic_tag = SHB_colour
 				retire_country_leader = yes
 				create_country_leader = {
 					name = "Abdullahi Sudi Arale"
@@ -2213,6 +2130,7 @@ country_event = {
 						war_criminal
 					}
 				}
+				set_cosmetic_tag = SHB_colour
 				AIA = {
 					set_cosmetic_tag = AIA_Hizbul_Islam
 					retire_country_leader = yes
@@ -2224,29 +2142,17 @@ country_event = {
 							salafist_Caliphate
 						}
 					}
-					random_owned_controlled_state = {
-						create_unit = {
-							division = "name = \"Milishia\" division_template = \"Milishia\"start_experience_factor = 1.00 start_equipment_factor = 1.00"
-							count = 1
-							owner = AIA
-						}
-					}
 				}
 			}
 			annex_country = {
 				target = WL5
-			}	
+			}
 		}
 	}
 
 	option = {
 		name = somalia.50.a
 		log = "[GetDateText]: [This.GetName]: somalia.50.a executed"
-		set_temp_variable = { threat_change = radicalization }
-		divide_temp_variable = { threat_change = 5 }
-		multiply_temp_variable = { threat_change = 0.3 }
-		clamp_temp_variable = { var = threat_change min = 1 max = 10 }
-		modify_terror_threat_effect = yes
 
 		set_temp_variable = { party_index = 11 }
 		set_temp_variable = { party_popularity_increase = 0.01 }
@@ -2254,7 +2160,6 @@ country_event = {
 		add_relative_party_popularity = yes
 	}
 }
-
 
 # News Event
 # The Transitional Federal Government Won
@@ -2268,7 +2173,6 @@ news_event = {
 
 	option = {
 		name = somalia.1000.a
-		log = "[GetDateText]: [This.GetName]: somalia.1000.a executed"
 	}
 }
 
@@ -2283,7 +2187,6 @@ news_event = {
 
 	option = {
 		name = somalia.1001.a
-		log = "[GetDateText]: [This.GetName]: somalia.1001.a executed"
 	}
 }
 
@@ -2298,7 +2201,6 @@ news_event = {
 
 	option = {
 		name = somalia.1002.a
-		log = "[GetDateText]: [This.GetName]: somalia.1002.a executed"
 	}
 }
 
@@ -2313,15 +2215,13 @@ news_event = {
 
 	option = {
 		name = somalia.1003.a
-		log = "[GetDateText]: [This.GetName]: somalia.1003.a executed"
 	}
 }
 
 news_event = {
 	id = somalia.1004
 	title = somalia.1004.t
-	fire_only_once = yes
-	
+
 	desc = {
 		text = somalia.1004.d1
 		trigger = {
@@ -2357,8 +2257,6 @@ news_event = {
 
 	option = {
 		name = somalia.1004.a
-		trigger = { }
-		log = "[GetDateText]: [This.GetName]: somalia.1004.a executed"
 	}
 }
 
@@ -2366,7 +2264,6 @@ news_event = {
 news_event = {
 	id = somalia.1005
 	title = somalia.1005.t
-	fire_only_once = yes
 	desc = {
 		text = somalia.1005.d1
 		trigger = {
@@ -2403,11 +2300,12 @@ news_event = {
 	option = {
 		name = somalia.1005.a
 		trigger = {
-			has_government = democratic
-			has_government = neutrality
+			OR = {
+				has_government = democratic
+				has_government = neutrality
+			}
 			NOT = { original_tag = SAU }
 		}
-		log = "[GetDateText]: [This.GetName]: somalia.1005.a executed"
 	}
 	option = {
 		name = somalia.1005.b
@@ -2419,7 +2317,6 @@ news_event = {
 				original_tag = ETH
 			}
 		}
-		log = "[GetDateText]: [This.GetName]: somalia.1005.b executed"
 	}
 	option = {
 		name = somalia.1005.c
@@ -2429,7 +2326,6 @@ news_event = {
 				original_tag = ETH
 			}
 		}
-		log = "[GetDateText]: [This.GetName]: somalia.1005.c executed"
 	}
 }
 
@@ -2441,11 +2337,9 @@ news_event = {
 	picture = GFX_news_election_rally
 	major = yes
 	is_triggered_only = yes
-	fire_only_once = yes
 
 	option = {
 		name = somalia.1010.a
-		log = "[GetDateText]: [This.GetName]: somalia.1010.a executed"
 	}
 }
 # Capture
@@ -2456,11 +2350,9 @@ news_event = {
 	picture = GFX_news_election_rally
 	major = yes
 	is_triggered_only = yes
-	fire_only_once = yes
 
 	option = {
 		name = somalia.1011.a
-		log = "[GetDateText]: [This.GetName]: somalia.1011.a executed"
 	}
 }
 
@@ -2471,11 +2363,9 @@ news_event = {
 	picture = GFX_4_SOM_NEWS
 	major = yes
 	is_triggered_only = yes
-	fire_only_once = yes
 
 	option = {
 		name = somalia.1012.a
-		log = "[GetDateText]: [This.GetName]: somalia.1012.a executed"
 	}
 }
 
@@ -2486,10 +2376,8 @@ news_event = {
 	picture = GFX_news_somalia_civil_war_jihadists
 	major = yes
 	is_triggered_only = yes
-	fire_only_once = yes
 
 	option = {
 		name = somalia.1013.a
-		log = "[GetDateText]: [This.GetName]: somalia.1013.a executed"
 	}
 }
