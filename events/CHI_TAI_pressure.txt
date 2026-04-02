@@ -1,0 +1,299 @@
+# Author(s): TheGeneral
+# Event chain: China's campaign to sever US-Taiwan ties
+# Triggered by: CHI_TAI_cut_us_support focus
+
+add_namespace = chi_tai_pressure
+
+# Event 1: Economic Pressure — China opens the campaign
+country_event = {
+	id = chi_tai_pressure.1
+	title = chi_tai_pressure.1.t
+	desc = chi_tai_pressure.1.d
+	picture = GFX_report_event_china_diplomacy
+
+	is_triggered_only = yes
+
+	option = {
+		name = chi_tai_pressure.1.a
+		log = "[GetDateText]: [This.GetName]: chi_tai_pressure.1.a executed"
+		# Aggressive trade leverage — higher short-term impact, risk of retaliation
+		custom_effect_tooltip = CHI_tai_pressure_economic_tt
+		hidden_effect = {
+			set_country_flag = CHI_TAI_pressure_aggressive
+			USA = { country_event = { id = chi_tai_pressure.2  days = 14 } }
+		}
+		add_opinion_modifier = { target = USA  modifier = chi_usa_pressure_campaign }
+		ai_chance = {
+			base = 6
+			modifier = {
+				add = 3
+				has_global_flag = CHI_ONE_SYSTEM_PATH
+			}
+		}
+	}
+
+	option = {
+		name = chi_tai_pressure.1.b
+		log = "[GetDateText]: [This.GetName]: chi_tai_pressure.1.b executed"
+		# Measured diplomatic pressure — lower risk, slower progress
+		custom_effect_tooltip = CHI_tai_pressure_diplomatic_tt
+		hidden_effect = {
+			USA = { country_event = { id = chi_tai_pressure.2  days = 21 } }
+		}
+		add_opinion_modifier = { target = USA  modifier = chi_usa_pressure_campaign }
+		ai_chance = {
+			base = 4
+		}
+	}
+}
+
+# Event 2: US Internal Debate — US decides how to respond to Chinese pressure
+country_event = {
+	id = chi_tai_pressure.2
+	title = chi_tai_pressure.2.t
+	desc = chi_tai_pressure.2.d
+	picture = GFX_report_event_usa_congress
+
+	is_triggered_only = yes
+
+	# US rejects Chinese pressure — escalation path
+	option = {
+		name = chi_tai_pressure.2.a
+		log = "[GetDateText]: [This.GetName]: chi_tai_pressure.2.a executed"
+		CHI = { country_event = { id = chi_tai_pressure.3  days = 14 } }
+		CHI = { add_opinion_modifier = { target = USA  modifier = tai_diplomatic_isolation } }
+		TAI = { add_opinion_modifier = { target = USA  modifier = reduced_tensions } }
+		ai_chance = {
+			base = 8
+			modifier = {
+				add = 5
+				has_opinion = { target = CHI  value < -10 }
+			}
+			modifier = {
+				add = 4
+				TAI = { is_in_faction_with = USA }
+			}
+			modifier = {
+				factor = 0
+				has_opinion = { target = CHI  value > 30 }
+			}
+		}
+	}
+
+	# US makes limited concessions — partial success path
+	option = {
+		name = chi_tai_pressure.2.b
+		log = "[GetDateText]: [This.GetName]: chi_tai_pressure.2.b executed"
+		CHI = { country_event = { id = chi_tai_pressure.4  days = 14 } }
+		ai_chance = {
+			base = 4
+			modifier = {
+				add = 3
+				has_opinion = { target = CHI  value > 10 }
+			}
+			modifier = {
+				factor = 0
+				TAI = { is_in_faction_with = USA }
+			}
+		}
+	}
+}
+
+# Event 3: China escalates — Diplomatic isolation + military signalling
+country_event = {
+	id = chi_tai_pressure.3
+	title = chi_tai_pressure.3.t
+	desc = chi_tai_pressure.3.d
+	picture = GFX_report_event_china_military
+
+	is_triggered_only = yes
+
+	# Launch full diplomatic isolation campaign
+	option = {
+		name = chi_tai_pressure.3.a
+		log = "[GetDateText]: [This.GetName]: chi_tai_pressure.3.a executed"
+		add_war_support = 0.03
+		# Build coalition: countries with low US opinion apply pressure
+		every_other_country = {
+			limit = {
+				has_opinion = { target = USA  value < -15 }
+				NOT = { is_in_faction_with = USA }
+				is_major = yes
+			}
+			add_opinion_modifier = { target = CHI  modifier = shared_future_community }
+		}
+		hidden_effect = {
+			USA = { country_event = { id = chi_tai_pressure.5  days = 21 } }
+		}
+		ai_chance = { base = 8 }
+	}
+
+	# Conduct Taiwan Strait military exercises — direct pressure
+	option = {
+		name = chi_tai_pressure.3.b
+		log = "[GetDateText]: [This.GetName]: chi_tai_pressure.3.b executed"
+		add_war_support = 0.05
+		add_threat = 0.5
+		hidden_effect = {
+			USA = { country_event = { id = chi_tai_pressure.5  days = 14 } }
+		}
+		ai_chance = {
+			base = 4
+			modifier = {
+				add = 4
+				has_global_flag = CHI_ONE_SYSTEM_PATH
+			}
+		}
+	}
+}
+
+# Event 4: Partial US Concession — US limits arms sales but maintains diplomatic ties
+country_event = {
+	id = chi_tai_pressure.4
+	title = chi_tai_pressure.4.t
+	desc = chi_tai_pressure.4.d
+	picture = GFX_report_event_usa_diplomacy
+
+	is_triggered_only = yes
+
+	# Accept the partial concession — secure what was gained
+	option = {
+		name = chi_tai_pressure.4.a
+		log = "[GetDateText]: [This.GetName]: chi_tai_pressure.4.a executed"
+		custom_effect_tooltip = {
+			localization_key = modifies_dynamic_modifier_tt
+			MODIFIER = CHI_SAR_network_modifier
+		}
+		add_to_variable = { CHI_network_trade_opinion_factor = 0.03  tooltip = trade_opinion_factor_tt }
+		TAI = {
+			add_timed_idea = {
+				idea = TAI_reduced_us_support
+				days = 730
+			}
+		}
+		ai_chance = { base = 7 }
+	}
+
+	# Push for full withdrawal — risk US reversal
+	option = {
+		name = chi_tai_pressure.4.b
+		log = "[GetDateText]: [This.GetName]: chi_tai_pressure.4.b executed"
+		hidden_effect = {
+			USA = { country_event = { id = chi_tai_pressure.5  days = 14 } }
+		}
+		ai_chance = {
+			base = 3
+			modifier = {
+				add = 5
+				has_global_flag = CHI_ONE_SYSTEM_PATH
+			}
+		}
+	}
+}
+
+# Event 5: US — Final Decision on Taiwan Support
+country_event = {
+	id = chi_tai_pressure.5
+	title = chi_tai_pressure.5.t
+	desc = chi_tai_pressure.5.d
+	picture = GFX_report_event_usa_congress
+
+	is_triggered_only = yes
+
+	# US withdraws formal support — China succeeds
+	option = {
+		name = chi_tai_pressure.5.a
+		log = "[GetDateText]: [This.GetName]: chi_tai_pressure.5.a executed"
+		CHI = { country_event = { id = chi_tai_pressure.6  days = 7 } }
+		ai_chance = {
+			base = 3
+			modifier = {
+				add = 5
+				has_opinion = { target = CHI  value > 20 }
+			}
+			modifier = {
+				factor = 0
+				TAI = { is_in_faction_with = ROOT }
+			}
+			modifier = {
+				factor = 0
+				check_variable = { num_of_military_factories > 150 }
+			}
+		}
+	}
+
+	# US reaffirms commitment — China's campaign fails, consequences follow
+	option = {
+		name = chi_tai_pressure.5.b
+		log = "[GetDateText]: [This.GetName]: chi_tai_pressure.5.b executed"
+		CHI = { country_event = { id = chi_tai_pressure.7  days = 7 } }
+		TAI = { add_opinion_modifier = { target = USA  modifier = reduced_tensions } }
+		ai_chance = {
+			base = 7
+			modifier = {
+				add = 5
+				has_opinion = { target = CHI  value < 0 }
+			}
+			modifier = {
+				add = 5
+				TAI = { is_in_faction_with = ROOT }
+			}
+		}
+	}
+}
+
+# Event 6: SUCCESS — US withdraws support from Taiwan
+country_event = {
+	id = chi_tai_pressure.6
+	title = chi_tai_pressure.6.t
+	desc = chi_tai_pressure.6.d
+	picture = GFX_report_event_china_taiwan
+
+	is_triggered_only = yes
+
+	option = {
+		name = chi_tai_pressure.6.a
+		log = "[GetDateText]: [This.GetName]: chi_tai_pressure.6.a executed"
+		set_country_flag = CHI_TAI_us_support_severed
+		custom_effect_tooltip = {
+			localization_key = modifies_dynamic_modifier_tt
+			MODIFIER = CHI_SAR_network_modifier
+		}
+		add_to_variable = { CHI_network_border_control_multiplier_modifier = 0.03  tooltip = border_control_multiplier_modifier_tt }
+		add_war_support = 0.05
+		TAI = {
+			add_timed_idea = {
+				idea = TAI_isolated_from_us
+				days = 1825
+			}
+		}
+		USA = {
+			add_opinion_modifier = { target = CHI  modifier = chi_usa_pressure_campaign }
+		}
+		ai_chance = { base = 10 }
+	}
+}
+
+# Event 7: FAILURE — US reaffirms commitment, imposes counter-measures
+country_event = {
+	id = chi_tai_pressure.7
+	title = chi_tai_pressure.7.t
+	desc = chi_tai_pressure.7.d
+	picture = GFX_report_event_usa_military
+
+	is_triggered_only = yes
+
+	option = {
+		name = chi_tai_pressure.7.a
+		log = "[GetDateText]: [This.GetName]: chi_tai_pressure.7.a executed"
+		USA = {
+			add_opinion_modifier = { target = CHI  modifier = chi_usa_sanctions_response }
+		}
+		add_war_support = -0.03
+		add_opinion_modifier = { target = USA  modifier = chi_usa_sanctions_response }
+		TAI = {
+			add_opinion_modifier = { target = USA  modifier = reduced_tensions }
+		}
+		ai_chance = { base = 10 }
+	}
+}
