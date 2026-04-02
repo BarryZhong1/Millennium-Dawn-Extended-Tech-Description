@@ -3759,9 +3759,7 @@ calculate_additional_expense_rate = {
 	if = {
 		limit = { original_tag = CZE }
 		if = {
-			limit = {
-				has_completed_focus = CZE_keynesianism
-			}
+			limit = { has_completed_focus = CZE_keynesianism }
 			set_variable = { CZE_increased_state_expenditure = gdp_total }
 			multiply_variable = { CZE_increased_state_expenditure = CZE.CZE_increased_state_expenditure_multiplier }
 			add_to_variable = { additional_expenses_rate = CZE_increased_state_expenditure }
@@ -3777,19 +3775,20 @@ calculate_additional_expense_rate = {
 	if = {
 		limit = { original_tag = HUN }
 		if = {
-			limit = {
-				has_idea = CZE_HUN_manipulating_our_commerce
-			}
+			limit = { has_idea = CZE_HUN_manipulating_our_commerce }
 			set_variable = { CZE_HUN_stolen_income = resource_sale_rate }
 			multiply_variable = { CZE_HUN_stolen_income = 0.1 }
 			add_to_variable = { additional_expenses_rate = CZE_HUN_stolen_income }
 		}
 		if = {
-			limit = {
-				has_idea = HUN_tourism_industry
-			}
+			limit = { has_idea = HUN_tourism_industry }
 			set_variable = { HUN_turism_income = 0.3 }
 			add_to_variable = { additional_income_rate = HUN_turism_income }
+		}
+		if = {
+			limit = { has_idea = HUN_building_wall }
+			set_variable = { HUN_building_wall_expense = 0.1 }
+			add_to_variable = { additional_expenses_rate = HUN_building_wall_expense }
 		}
 	}
 	# North Korea
