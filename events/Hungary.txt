@@ -100,3 +100,151 @@ country_event = {
 		}
 	}
 }
+
+# Hungary internet tax protests 2014 Budapest BBC Reuters
+country_event = {
+	id = hungary_historical.5
+	title = hungary_historical.5.t
+	desc = hungary_historical.5.d
+	picture = NULL
+
+	is_triggered_only = yes
+
+	# Start applyig the tax
+	option = {
+		log = "[GetDateText]: [This.GetName]: hungary_historical.5.a executed"
+		name = hungary_historical.5.a
+
+		hidden_effect = {
+			country_event = { id = hungary_historical.6 days = 90 }
+		}
+
+		ai_chance = {
+			base = 60
+		}
+	}
+
+	# Refuse the tax
+	option = {
+		log = "[GetDateText]: [This.GetName]: hungary_historical.5.b executed"
+		name = hungary_historical.5.b
+		ai_chance = {
+			base = 40
+		}
+	}
+}
+
+# Introducing the law to the public opinion
+country_event = {
+	id = hungary_historical.6
+	title = hungary_historical.6.t
+	desc = hungary_historical.6.d
+	picture = NULL
+
+	is_triggered_only = yes
+
+	option = {
+		log = "[GetDateText]: [This.GetName]: hungary_historical.6.a executed"
+		name = hungary_historical.6.a
+		add_ideas = { HUN_Internet_Tax }
+
+		hidden_effect = {
+			country_event = { id = hungary_historical.7 days = 14  random_days = 3 }
+		}
+
+		ai_chance = {
+			base = 60
+		}
+	}
+
+	option = {
+		log = "[GetDateText]: [This.GetName]: hungary_historical.6.b executed"
+		name = hungary_historical.6.b
+		ai_chance = {
+			base = 40
+		}
+	}
+}
+
+country_event = {
+	id = hungary_historical.7
+	title = hungary_historical.7.t
+	desc = hungary_historical.7.d
+	picture = NULL
+
+	is_triggered_only = yes
+
+	# Keep the law
+	option = {
+		log = "[GetDateText]: [This.GetName]: hungary_historical.7.a executed"
+		name = hungary_historical.7.a
+		add_timed_idea = {
+			idea = HUN_Internet_tax_riots
+			days = 365
+		}
+
+		ai_chance = {
+			base = 30
+		}
+	}
+
+	# Remove the law
+	option = {
+		log = "[GetDateText]: [This.GetName]: hungary_historical.7.b executed"
+		name = hungary_historical.7.b
+		remove_ideas = HUN_Internet_Tax
+		ai_chance = {
+			base = 70
+		}
+	}
+}
+
+# Budapest controversial German occupation monument protests 2014 Hungary
+country_event = {
+	id = hungary_historical.5
+	title = NULL
+	desc = NULL
+	picture = NULL
+
+	is_triggered_only = yes
+}
+
+# Hungary farmers protest tractors road blockade Hungary agriculture protests
+country_event = {
+	id = hungary_historical.5
+	title = NULL
+	desc = NULL
+	picture = NULL
+
+	is_triggered_only = yes
+}
+
+# Hungary Serbia border fence 2015 migrant crisis Hungary wall
+country_event = {
+	id = hungary_historical.5
+	title = NULL
+	desc = NULL
+	picture = NULL
+
+	is_triggered_only = yes
+}
+
+# Hungary homelessness law illegal living on streets 2018 criticism
+country_event = {
+	id = hungary_historical.5
+	title = NULL
+	desc = NULL
+	picture = NULL
+
+	is_triggered_only = yes
+}
+
+# Budapest ruin bars Szimpla Kert abandoned buildings nightlife Hungary
+
+# Danube river frozen Budapest 2017 people skating Hungary cold wave
+
+# Hungary 2008 referendum healthcare fees education Gyurcsany vote results
+
+# Budapest metro line 4 delays corruption investigation Hungary metro project
+
+# Hungary red sludge disaster 2010 Ajka toxic spill environmental disaster
