@@ -1473,6 +1473,46 @@ antarctica_normalize_startup_station_slots = {
 antarctica_calculate_selected_preview_module_install_time = {
 	set_temp_variable = { out_construction_time = 0 }
 	set_temp_variable = { out_power = 0 }
+	set_temp_variable = { out_power_total = 0 }
+	set_temp_variable = { out_required_staff = 0 }
+	set_temp_variable = { installed_module_power = 0 }
+	set_temp_variable = { installed_module_required_staff = 0 }
+
+	if = {
+		limit = { check_variable = { global.selected_antarctica_station_selected_slot_installed_module > 0 } }
+		if = {
+			limit = { check_variable = { global.selected_antarctica_station_selected_module_category = 1 } }
+			set_temp_variable = { pwr_module = global.selected_antarctica_station_selected_slot_installed_module }
+			antarctica_apply_single_powerplant_station_output = yes
+		}
+		else_if = {
+			limit = { check_variable = { global.selected_antarctica_station_selected_module_category = 2 } }
+			set_temp_variable = { life_module = global.selected_antarctica_station_selected_slot_installed_module }
+			antarctica_apply_single_life_support_station_output = yes
+		}
+		else_if = {
+			limit = { check_variable = { global.selected_antarctica_station_selected_module_category = 3 } }
+			set_temp_variable = { fuel_module = global.selected_antarctica_station_selected_slot_installed_module }
+			antarctica_apply_single_fuel_storage_station_output = yes
+		}
+		else_if = {
+			limit = { check_variable = { global.selected_antarctica_station_selected_module_category = 4 } }
+			set_temp_variable = { house_module = global.selected_antarctica_station_selected_slot_installed_module }
+			antarctica_apply_single_housing_station_output = yes
+		}
+		else_if = {
+			limit = { check_variable = { global.selected_antarctica_station_selected_module_category = 5 } }
+			set_temp_variable = { lab_module = global.selected_antarctica_station_selected_slot_installed_module }
+			antarctica_apply_single_laboratory_station_output = yes
+		}
+
+		set_temp_variable = { installed_module_power = out_power }
+		set_temp_variable = { installed_module_required_staff = out_required_staff }
+	}
+
+	set_temp_variable = { out_construction_time = 0 }
+	set_temp_variable = { out_power = 0 }
+	set_temp_variable = { out_power_total = 0 }
 	set_temp_variable = { out_required_staff = 0 }
 
 	if = {
@@ -1505,11 +1545,13 @@ antarctica_calculate_selected_preview_module_install_time = {
 	round_variable = global.selected_antarctica_station_selected_module_install_time
 	clamp_variable = { var = global.selected_antarctica_station_selected_module_install_time min = 1 max = 999 }
 
-	# Calculate preview balance with selected module included
+	# Calculate preview balance as a swap result: current value minus removed module plus selected module.
 	set_variable = { global.selected_antarctica_station_preview_output_power = global.selected_antarctica_station_output_power }
+	subtract_from_variable = { global.selected_antarctica_station_preview_output_power = installed_module_power }
 	add_to_variable = { global.selected_antarctica_station_preview_output_power = out_power }
 
 	set_variable = { global.selected_antarctica_station_preview_output_required_staff = global.selected_antarctica_station_output_required_staff }
+	subtract_from_variable = { global.selected_antarctica_station_preview_output_required_staff = installed_module_required_staff }
 	add_to_variable = { global.selected_antarctica_station_preview_output_required_staff = out_required_staff }
 }
 
