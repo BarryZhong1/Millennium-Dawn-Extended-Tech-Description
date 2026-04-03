@@ -6,42 +6,48 @@ antarctica_station_install_module_unlocked = {
 }
 
 antarctica_station_slot_unlocked_by_tier = {
-	OR = {
-		AND = {
-			check_variable = { global.selected_antarctica_station_tier > 0 }
-			OR = {
-				check_variable = { global.selected_antarctica_station_selected_slot = 5 }
-				check_variable = { global.selected_antarctica_station_selected_slot = 7 }
-				check_variable = { global.selected_antarctica_station_selected_slot = 8 }
-				check_variable = { global.selected_antarctica_station_selected_slot = 11 }
-				check_variable = { global.selected_antarctica_station_selected_slot = 12 }
-				check_variable = { global.selected_antarctica_station_selected_slot = 14 }
+	custom_trigger_tooltip = {
+		tooltip = ANTARCTICA_STATION_INSTALL_MODULE_SLOT_UNLOCK_TT
+		OR = {
+			AND = {
+				check_variable = { global.selected_antarctica_station_tier > 0 }
+				OR = {
+					check_variable = { global.selected_antarctica_station_selected_slot = 5 }
+					check_variable = { global.selected_antarctica_station_selected_slot = 7 }
+					check_variable = { global.selected_antarctica_station_selected_slot = 8 }
+					check_variable = { global.selected_antarctica_station_selected_slot = 11 }
+					check_variable = { global.selected_antarctica_station_selected_slot = 12 }
+					check_variable = { global.selected_antarctica_station_selected_slot = 14 }
+				}
 			}
-		}
-		AND = {
-			check_variable = { global.selected_antarctica_station_tier > 1 }
-			OR = {
-				check_variable = { global.selected_antarctica_station_selected_slot = 1 }
-				check_variable = { global.selected_antarctica_station_selected_slot = 2 }
-				check_variable = { global.selected_antarctica_station_selected_slot = 6 }
+			AND = {
+				check_variable = { global.selected_antarctica_station_tier > 1 }
+				OR = {
+					check_variable = { global.selected_antarctica_station_selected_slot = 1 }
+					check_variable = { global.selected_antarctica_station_selected_slot = 2 }
+					check_variable = { global.selected_antarctica_station_selected_slot = 6 }
+				}
 			}
-		}
-		AND = {
-			check_variable = { global.selected_antarctica_station_tier > 2 }
-			OR = {
-				check_variable = { global.selected_antarctica_station_selected_slot = 4 }
-				check_variable = { global.selected_antarctica_station_selected_slot = 9 }
-				check_variable = { global.selected_antarctica_station_selected_slot = 10 }
-				check_variable = { global.selected_antarctica_station_selected_slot = 13 }
+			AND = {
+				check_variable = { global.selected_antarctica_station_tier > 2 }
+				OR = {
+					check_variable = { global.selected_antarctica_station_selected_slot = 4 }
+					check_variable = { global.selected_antarctica_station_selected_slot = 9 }
+					check_variable = { global.selected_antarctica_station_selected_slot = 10 }
+					check_variable = { global.selected_antarctica_station_selected_slot = 13 }
+				}
 			}
 		}
 	}
 }
 
 antarctica_station_selected_slot_module_different = {
-	OR = {
-		check_variable = { global.selected_antarctica_station_selected_slot_installed_module < 1 }
-		NOT = { check_variable = { global.selected_antarctica_station_selected_slot_installed_module = global.selected_antarctica_station_selected_module } }
+	custom_trigger_tooltip = {
+		tooltip = ANTARCTICA_STATION_INSTALL_MODULE_DIFFERENT_TT
+		OR = {
+			check_variable = { global.selected_antarctica_station_selected_slot_installed_module < 1 }
+			NOT = { check_variable = { global.selected_antarctica_station_selected_slot_installed_module = global.selected_antarctica_station_selected_module } }
+		}
 	}
 }
 
@@ -86,18 +92,24 @@ antarctica_station_module_unlock_5_12 = { always = yes }
 
 # Usage: Check if installing selected module will maintain positive power balance
 antarctica_can_install_module_power_balance = {
-	OR = {
-		check_variable = { global.selected_antarctica_station_preview_output_power > 0 }
-		check_variable = { global.selected_antarctica_station_preview_output_power = 0 }
+	custom_trigger_tooltip = {
+		tooltip = ANTARCTICA_STATION_INSTALL_MODULE_POWER_BALANCE_TT
+		OR = {
+			check_variable = { global.selected_antarctica_station_preview_output_power > 0 }
+			check_variable = { global.selected_antarctica_station_preview_output_power = 0 }
+		}
 	}
 }
 
 # Usage: Check if installing selected module will maintain sufficient staff availability
-# preview_required_staff represents net available staff with selected module (housing capacity - staff needed)
-# Negative value means insufficient staff capacity
+# preview_required_staff represents net available staff after swapping modules.
+# Negative value means insufficient staff capacity.
 antarctica_can_install_module_staff_availability = {
-	OR = {
-		check_variable = { global.selected_antarctica_station_preview_output_required_staff > 0 }
-		check_variable = { global.selected_antarctica_station_preview_output_required_staff = 0 }
+	custom_trigger_tooltip = {
+		tooltip = ANTARCTICA_STATION_INSTALL_MODULE_STAFF_BALANCE_TT
+		OR = {
+			check_variable = { global.selected_antarctica_station_preview_output_required_staff > 0 }
+			check_variable = { global.selected_antarctica_station_preview_output_required_staff = 0 }
+		}
 	}
 }
