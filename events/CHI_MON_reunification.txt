@@ -1,0 +1,76 @@
+# Author(s): TheGeneral
+add_namespace = chi_mon_reunification
+
+# Greater Mongolia Vision — China exerts cultural influence on Mongolia
+country_event = {
+	id = chi_mon_reunification.1
+	title = chi_mon_reunification.1.t
+	desc = chi_mon_reunification.1.d
+	picture = x
+
+	is_triggered_only = yes
+
+	option = {
+		name = chi_mon_reunification.1.a
+		log = "[GetDateText]: [This.GetName]: chi_mon_reunification.1.a executed"
+
+		add_ideas = MON_CHI_cultural_sphere_idea
+	}
+}
+
+# Reunification Offer — China and Inner Mongolia ask Mongolia to join
+country_event = {
+	id = chi_mon_reunification.2
+	title = chi_mon_reunification.2.t
+	desc = chi_mon_reunification.2.d
+	picture = x
+
+	is_triggered_only = yes
+
+	option = {
+		name = chi_mon_reunification.2.a
+		log = "[GetDateText]: [This.GetName]: chi_mon_reunification.2.a executed"
+		every_unit_leader = {
+			set_nationality = OMG
+		}
+		OMG = {
+			annex_country = {
+				target = MON
+				transfer_troops = yes
+			}
+			add_state_core = 596
+			add_state_core = 597
+		}
+
+		ai_chance = {
+			base = 1
+		}
+	}
+
+	option = {
+		name = chi_mon_reunification.2.b
+		log = "[GetDateText]: [This.GetName]: chi_mon_reunification.2.b executed"
+
+		CHI = { country_event = { id = chi_mon_reunification.3  days = 1 } }
+
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+# Reunification Rejected — Mongolia declined the offer
+country_event = {
+	id = chi_mon_reunification.3
+	title = chi_mon_reunification.3.t
+	desc = chi_mon_reunification.3.d
+	picture = x
+
+	is_triggered_only = yes
+
+	option = {
+		name = chi_mon_reunification.3.a
+		log = "[GetDateText]: [This.GetName]: chi_mon_reunification.3.a executed"
+		unlock_decision_tooltip = CHI_MON_reunification_retry
+	}
+}

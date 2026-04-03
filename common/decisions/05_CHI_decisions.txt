@@ -2306,5 +2306,197 @@ CHI_SAR_decisions_category = {
 			civilian_factory_use = 10
 		}
 	}
+	CHI_han_settlement_small = {
+		icon = GFX_decision_generic_political_discourse
+
+		allowed = { original_tag = CHI }
+
+		visible = {
+			has_country_flag = CHI_han_settlement_unlocked
+			556 = { is_owned_by = CHI }
+		}
+
+		available = {
+			NOT = { has_active_mission = bankruptcy_incoming_collapse }
+		}
+
+		fire_only_once = no
+		days_re_enable = 180
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_han_settlement_small"
+			random_list = {
+				25 = { 564 = { add_manpower = -25000 } }
+				25 = { 549 = { add_manpower = -25000 } }
+				25 = { 534 = { add_manpower = -25000 } }
+				25 = { 574 = { add_manpower = -25000 } }
+			}
+			556 = {
+				add_manpower = 25000
+				newline = yes
+				custom_effect_tooltip = {
+					localization_key = modifies_dynamic_modifier_tt
+					MODIFIER = CHI_OMG_sinicization_modifier
+				}
+				set_temp_variable = { sinofication_base_change = 3 }
+				CHI_update_sinofication = yes
+				add_to_variable = { OMG_sinofication_var = sinofication_base_change  tooltip = OMG_sinofication_tt }
+				newline = yes
+				random = {
+					chance = 30
+					add_compliance = 5
+				}
+				newline = yes
+				random_list = {
+					33 = { add_resistance = 5}
+					33 = { add_resistance = 10 }
+					33 = { add_resistance = 15 }
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 3
+		}
+	}
+
+	CHI_han_settlement_medium = {
+		icon = GFX_decision_generic_political_discourse
+
+		allowed = { original_tag = CHI }
+
+		visible = {
+			has_country_flag = CHI_han_settlement_unlocked
+			556 = { is_owned_by = CHI }
+		}
+
+		available = {
+			NOT = { has_active_mission = bankruptcy_incoming_collapse }
+		}
+
+		fire_only_once = no
+		days_re_enable = 270
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_han_settlement_medium"
+			random_list = {
+				25 = { 564 = { add_manpower = -75000 } }
+				25 = { 549 = { add_manpower = -75000 } }
+				25 = { 534 = { add_manpower = -75000 } }
+				25 = { 574 = { add_manpower = -75000 } }
+			}
+			556 = {
+				add_manpower = 75000
+				newline = yes
+				custom_effect_tooltip = {
+					localization_key = modifies_dynamic_modifier_tt
+					MODIFIER = CHI_OMG_sinicization_modifier
+				}
+				set_temp_variable = { sinofication_base_change = 5 }
+				CHI_update_sinofication = yes
+				add_to_variable = { OMG_sinofication_var = sinofication_base_change  tooltip = OMG_sinofication_tt }
+				newline = yes
+				random = {
+					chance = 30
+					add_compliance = 10
+				}
+				newline = yes
+				random_list = {
+					33 = { add_resistance = 5}
+					33 = { add_resistance = 10 }
+					33 = { add_resistance = 15 }
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 2
+		}
+	}
+
+	CHI_han_settlement_large = {
+		icon = GFX_decision_generic_political_discourse
+
+		allowed = { original_tag = CHI }
+
+		fixed_random_seed = no
+
+		visible = {
+			has_completed_focus = CHI_OMG_han_settlement_program
+			556 = { is_owned_by = CHI }
+		}
+
+		fire_only_once = no
+		days_re_enable = 365
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_han_settlement_large"
+			random_list = {
+				25 = { 564 = { add_manpower = -150000 } }
+				25 = { 549 = { add_manpower = -150000 } }
+				25 = { 534 = { add_manpower = -150000 } }
+				25 = { 574 = { add_manpower = -150000 } }
+			}
+			556 = {
+				add_manpower = 150000
+				newline = yes
+				custom_effect_tooltip = {
+					localization_key = modifies_dynamic_modifier_tt
+					MODIFIER = CHI_OMG_sinicization_modifier
+				}
+				set_temp_variable = { sinofication_base_change = 8 }
+				CHI_update_sinofication = yes
+				add_to_variable = { OMG_sinofication_var = sinofication_base_change  tooltip = OMG_sinofication_tt }
+				newline = yes
+				random = {
+					chance = 30
+					add_compliance = 20
+				}
+				newline = yes
+				random_list = {
+					33 = { add_resistance = 5}
+					33 = { add_resistance = 10 }
+					33 = { add_resistance = 15 }
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 1
+		}
+	}
+	CHI_MON_reunification_retry = {
+		icon = GFX_decision_generic_political_discourse
+
+		allowed = { original_tag = CHI }
+
+		visible = {
+			has_country_flag = CHI_MON_reunification_rejected
+			MON = { exists = yes }
+		}
+
+		available = {
+			MON = { exists = yes }
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_MON_reunification_retry"
+			clr_country_flag = CHI_MON_reunification_rejected
+			MON = { country_event = { id = chi_mon_reunification.2  days = 1 } }
+			custom_effect_tooltip = TT_IF_THEY_REJECT
+			effect_tooltip = { custom_effect_tooltip = CHI_MON_reunification_rejected_tt }
+			custom_effect_tooltip = TT_IF_THEY_ACCEPT
+			effect_tooltip = {
+				OMG = {
+					add_state_core = 596
+					add_state_core = 597
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 5
+		}
+	}
 
 }
