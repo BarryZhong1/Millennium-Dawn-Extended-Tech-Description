@@ -5884,7 +5884,14 @@ scripted_gui = {
 						antarctica_station_selected_slot_module_different = yes
 						antarctica_station_install_module_unlocked = yes
 					}
-					antarctica_queue_selected_station_module_install = yes
+					if = {
+						limit = { antarctica_station_install_module_winter_penalty = yes }
+						# Winter branch: seasonal multiplier is applied by installation calculation.
+						antarctica_queue_selected_station_module_install = yes
+					}
+					else = {
+						antarctica_queue_selected_station_module_install = yes
+					}
 				}
 				add_to_variable = { global.missile_ui_updated = 1 }
 			}

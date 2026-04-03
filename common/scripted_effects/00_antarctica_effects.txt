@@ -84,6 +84,8 @@ antarctica_initialize_station_display_arrays = {
 		set_variable = { global.selected_antarctica_station_selected_module = 1 }
 		set_variable = { global.selected_antarctica_station_selected_slot_installed_module = 0 }
 		set_variable = { global.selected_antarctica_station_selected_module_install_time = 0 }
+		set_variable = { global.selected_antarctica_station_selected_module_install_cost = 0 }
+		set_variable = { global.selected_antarctica_station_selected_module_install_time_multiplier = 1 }
 		set_variable = { global.selected_antarctica_station_install_in_progress = 0 }
 		set_variable = { global.selected_antarctica_station_install_days_remaining = 0 }
 		set_variable = { global.selected_antarctica_station_tier = 0 }
@@ -1206,6 +1208,8 @@ antarctica_set_selected_station_controller = {
 		set_variable = { global.selected_antarctica_station_selected_module = 1 }
 		set_variable = { global.selected_antarctica_station_selected_slot_installed_module = 0 }
 		set_variable = { global.selected_antarctica_station_selected_module_install_time = 0 }
+		set_variable = { global.selected_antarctica_station_selected_module_install_cost = 0 }
+		set_variable = { global.selected_antarctica_station_selected_module_install_time_multiplier = 1 }
 		set_variable = { global.selected_antarctica_station_install_in_progress = 0 }
 		set_variable = { global.selected_antarctica_station_install_days_remaining = 0 }
 		set_variable = { global.selected_antarctica_station_tier = 0 }
@@ -1475,6 +1479,7 @@ antarctica_calculate_selected_preview_module_install_time = {
 	set_temp_variable = { out_power = 0 }
 	set_temp_variable = { out_power_total = 0 }
 	set_temp_variable = { out_required_staff = 0 }
+	set_temp_variable = { out_install_cost = 0 }
 	set_temp_variable = { installed_module_power = 0 }
 	set_temp_variable = { installed_module_required_staff = 0 }
 
@@ -1514,6 +1519,7 @@ antarctica_calculate_selected_preview_module_install_time = {
 	set_temp_variable = { out_power = 0 }
 	set_temp_variable = { out_power_total = 0 }
 	set_temp_variable = { out_required_staff = 0 }
+	set_temp_variable = { out_install_cost = 0 }
 
 	if = {
 		limit = { check_variable = { global.selected_antarctica_station_selected_module_category = 1 } }
@@ -1541,9 +1547,28 @@ antarctica_calculate_selected_preview_module_install_time = {
 		antarctica_apply_single_laboratory_station_output = yes
 	}
 
+	# Apply seasonal multiplier (April-October = winter = 2x)
+	set_temp_variable = { install_time_multiplier = 1 }
+	set_temp_variable = { install_cost_multiplier = 1 }
+	if = {
+		limit = { OR = { check_variable = { global.month = 4 } check_variable = { global.month = 5 } check_variable = { global.month = 6 } check_variable = { global.month = 7 } check_variable = { global.month = 8 } check_variable = { global.month = 9 } check_variable = { global.month = 10 } } }
+		set_temp_variable = { install_time_multiplier = 2 }
+		set_temp_variable = { install_cost_multiplier = 2 }
+	}
+
+	multiply_temp_variable = { out_construction_time = install_time_multiplier }
+
 	set_variable = { global.selected_antarctica_station_selected_module_install_time = out_construction_time }
+	set_variable = { global.selected_antarctica_station_selected_module_install_time_multiplier = install_time_multiplier }
 	round_variable = global.selected_antarctica_station_selected_module_install_time
 	clamp_variable = { var = global.selected_antarctica_station_selected_module_install_time min = 1 max = 999 }
+
+	# Calculate installation cost: use actual module cost (negative value), convert to positive, and apply multiplier
+	# out_install_cost is negative (e.g., -0.5), so multiply by -1 to get positive cost
+	set_temp_variable = { install_cost = out_install_cost }
+	multiply_temp_variable = { install_cost = -1 }
+	multiply_temp_variable = { install_cost = install_cost_multiplier }
+	set_variable = { global.selected_antarctica_station_selected_module_install_cost = install_cost }
 
 	# Calculate preview balance as a swap result: current value minus removed module plus selected module.
 	set_variable = { global.selected_antarctica_station_preview_output_power = global.selected_antarctica_station_output_power }
@@ -1714,6 +1739,11 @@ antarctica_queue_selected_station_module_install = {
 
 		antarctica_calculate_selected_preview_module_install_time = yes
 
+		# Deduct installation cost from treasury
+		set_temp_variable = { treasury_change = global.selected_antarctica_station_selected_module_install_cost }
+		multiply_temp_variable = { treasury_change = -1 }
+		modify_treasury_effect = yes
+
 		meta_effect = {
 			text = {
 				set_variable = { global.research_station_[ID]_install_pending = 1 }
@@ -1732,6 +1762,8 @@ antarctica_queue_selected_station_module_install = {
 		set_variable = { global.selected_antarctica_station_install_in_progress = 1 }
 		set_variable = { global.selected_antarctica_station_install_days_remaining = global.selected_antarctica_station_selected_module_install_time }
 		add_to_variable = { global.missile_ui_updated = 1 }
+	=
+		log = "[GetDateText]: [Root.GetName]: Queued module installation for Antarctica station [?global.selected_antarctica_station]. Installation time: [?global.selected_antarctica_station_selected_module_install_time] days, Cost: $$[?global.selected_antarctica_station_selected_module_install_cost]b (winter multiplier: [?global.selected_antarctica_station_selected_module_install_time_multiplier]x)"
 	}
 }
 
