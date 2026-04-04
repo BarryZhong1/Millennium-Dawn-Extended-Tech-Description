@@ -130,3 +130,42 @@ antarctica_station_install_module_winter_penalty = {
 		}
 	}
 }
+
+# Usage: Called via meta_trigger with ID resolved to the station id from global.antarctica_station_ids^N.
+# Uses country-capital continent and the active Antarctica region filters.
+antarctica_dynamic_station_matches_selected_filter = {
+	OR = {
+		AND = {
+			check_variable = { station_filter_america > 1 }
+			OR = {
+				var:global.research_station_[ID]_controller = { capital_scope = { is_on_continent = north_america } }
+				var:global.research_station_[ID]_controller = { capital_scope = { is_on_continent = south_america } }
+			}
+		}
+		AND = {
+			check_variable = { station_filter_asia > 1 }
+			OR = {
+				var:global.research_station_[ID]_controller = { capital_scope = { is_on_continent = asia } }
+				var:global.research_station_[ID]_controller = { capital_scope = { is_on_continent = australia } }
+			}
+		}
+		AND = {
+			check_variable = { station_filter_oceania > 1 }
+			OR = {
+				var:global.research_station_[ID]_controller = { capital_scope = { is_on_continent = asia } }
+				var:global.research_station_[ID]_controller = { capital_scope = { is_on_continent = australia } }
+			}
+		}
+		AND = {
+			check_variable = { station_filter_europe > 1 }
+			var:global.research_station_[ID]_controller = { capital_scope = { is_on_continent = europe } }
+		}
+		AND = {
+			check_variable = { station_filter_africa > 1 }
+			OR = {
+				var:global.research_station_[ID]_controller = { capital_scope = { is_on_continent = africa } }
+				var:global.research_station_[ID]_controller = { capital_scope = { is_on_continent = middle_east } }
+			}
+		}
+	}
+}

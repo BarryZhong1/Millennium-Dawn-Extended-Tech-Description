@@ -5231,9 +5231,14 @@ scripted_gui = {
 			antarctica_map_bp_glow_visible = { has_country_flag = antarctica_station_bp_visible }
 			antarctica_map_bp_visible = { has_country_flag = antarctica_station_bp_visible }
 			antarctica_map_continent_glow_visible = { NOT = { has_country_flag = antarctica_station_bp_visible } }
+			antarctica_station_find_or_create_button_visible = { NOT = { has_country_flag = antarctica_station_bp_visible } }
 
 			antarctica_station_show_blueprint_button_click_enabled = {
 				original_tag = var:global.selected_antarctica_station_controller
+			}
+
+			antarctica_station_find_or_create_button_click_enabled = {
+				check_variable = { antarctica_station_setup_days_remaining = 0 }
 			}
 
 			antarctica_station_swap_laboratory_button_visible = {
@@ -5272,6 +5277,15 @@ scripted_gui = {
 			}
 
 			antarctica_station_send_supplies_button_click_enabled = {
+				check_variable = { global.selected_antarctica_station > 0 }
+				original_tag = var:global.selected_antarctica_station_controller
+			}
+
+			antarctica_station_toggle_illegal_activities_button_visible = {
+				has_country_flag = antarctica_station_bp_visible
+			}
+
+			antarctica_station_toggle_illegal_activities_button_click_enabled = {
 				check_variable = { global.selected_antarctica_station > 0 }
 				original_tag = var:global.selected_antarctica_station_controller
 			}
@@ -5594,49 +5608,49 @@ scripted_gui = {
 			antarctica_station_marker_24_visible = { check_variable = { global.antarctica_station_ids^24 > 0 } OR = { check_variable = { station_filter_america > 1 } NOT = { has_country_flag = antarctica_filters_active } } }
 			antarctica_station_marker_25_visible = { check_variable = { global.antarctica_station_ids^25 > 0 } OR = { check_variable = { station_filter_america > 1 } NOT = { has_country_flag = antarctica_filters_active } } }
 			antarctica_station_marker_26_visible = { check_variable = { global.antarctica_station_ids^26 > 0 } OR = { check_variable = { station_filter_asia > 1 } NOT = { has_country_flag = antarctica_filters_active } } }
-			antarctica_station_marker_27_visible = { check_variable = { global.antarctica_station_ids^27 > 0 } }
-			antarctica_station_marker_28_visible = { check_variable = { global.antarctica_station_ids^28 > 0 } }
-			antarctica_station_marker_29_visible = { check_variable = { global.antarctica_station_ids^29 > 0 } }
-			antarctica_station_marker_30_visible = { check_variable = { global.antarctica_station_ids^30 > 0 } }
-			antarctica_station_marker_31_visible = { check_variable = { global.antarctica_station_ids^31 > 0 } }
-			antarctica_station_marker_32_visible = { check_variable = { global.antarctica_station_ids^32 > 0 } }
-			antarctica_station_marker_33_visible = { check_variable = { global.antarctica_station_ids^33 > 0 } }
-			antarctica_station_marker_34_visible = { check_variable = { global.antarctica_station_ids^34 > 0 } }
-			antarctica_station_marker_35_visible = { check_variable = { global.antarctica_station_ids^35 > 0 } }
-			antarctica_station_marker_36_visible = { check_variable = { global.antarctica_station_ids^36 > 0 } }
-			antarctica_station_marker_37_visible = { check_variable = { global.antarctica_station_ids^37 > 0 } }
-			antarctica_station_marker_38_visible = { check_variable = { global.antarctica_station_ids^38 > 0 } }
-			antarctica_station_marker_39_visible = { check_variable = { global.antarctica_station_ids^39 > 0 } }
-			antarctica_station_marker_40_visible = { check_variable = { global.antarctica_station_ids^40 > 0 } }
-			antarctica_station_marker_41_visible = { check_variable = { global.antarctica_station_ids^41 > 0 } }
-			antarctica_station_marker_42_visible = { check_variable = { global.antarctica_station_ids^42 > 0 } }
-			antarctica_station_marker_43_visible = { check_variable = { global.antarctica_station_ids^43 > 0 } }
-			antarctica_station_marker_44_visible = { check_variable = { global.antarctica_station_ids^44 > 0 } }
-			antarctica_station_marker_45_visible = { check_variable = { global.antarctica_station_ids^45 > 0 } }
-			antarctica_station_marker_46_visible = { check_variable = { global.antarctica_station_ids^46 > 0 } }
-			antarctica_station_marker_47_visible = { check_variable = { global.antarctica_station_ids^47 > 0 } }
-			antarctica_station_marker_48_visible = { check_variable = { global.antarctica_station_ids^48 > 0 } }
-			antarctica_station_marker_49_visible = { check_variable = { global.antarctica_station_ids^49 > 0 } }
-			antarctica_station_marker_50_visible = { check_variable = { global.antarctica_station_ids^50 > 0 } }
-			antarctica_station_marker_51_visible = { check_variable = { global.antarctica_station_ids^51 > 0 } }
-			antarctica_station_marker_52_visible = { check_variable = { global.antarctica_station_ids^52 > 0 } }
-			antarctica_station_marker_53_visible = { check_variable = { global.antarctica_station_ids^53 > 0 } }
-			antarctica_station_marker_54_visible = { check_variable = { global.antarctica_station_ids^54 > 0 } }
-			antarctica_station_marker_55_visible = { check_variable = { global.antarctica_station_ids^55 > 0 } }
-			antarctica_station_marker_56_visible = { check_variable = { global.antarctica_station_ids^56 > 0 } }
-			antarctica_station_marker_57_visible = { check_variable = { global.antarctica_station_ids^57 > 0 } }
-			antarctica_station_marker_58_visible = { check_variable = { global.antarctica_station_ids^58 > 0 } }
-			antarctica_station_marker_59_visible = { check_variable = { global.antarctica_station_ids^59 > 0 } }
-			antarctica_station_marker_60_visible = { check_variable = { global.antarctica_station_ids^60 > 0 } }
-			antarctica_station_marker_61_visible = { check_variable = { global.antarctica_station_ids^61 > 0 } }
-			antarctica_station_marker_62_visible = { check_variable = { global.antarctica_station_ids^62 > 0 } }
-			antarctica_station_marker_63_visible = { check_variable = { global.antarctica_station_ids^63 > 0 } }
-			antarctica_station_marker_64_visible = { check_variable = { global.antarctica_station_ids^64 > 0 } }
-			antarctica_station_marker_65_visible = { check_variable = { global.antarctica_station_ids^65 > 0 } }
-			antarctica_station_marker_66_visible = { check_variable = { global.antarctica_station_ids^66 > 0 } }
-			antarctica_station_marker_67_visible = { check_variable = { global.antarctica_station_ids^67 > 0 } }
-			antarctica_station_marker_68_visible = { check_variable = { global.antarctica_station_ids^68 > 0 } }
-			antarctica_station_marker_69_visible = { check_variable = { global.antarctica_station_ids^69 > 0 } }
+			antarctica_station_marker_27_visible = { check_variable = { global.antarctica_station_ids^27 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^27 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^27 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^27 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^27 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_28_visible = { check_variable = { global.antarctica_station_ids^28 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^28 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^28 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^28 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^28 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_29_visible = { check_variable = { global.antarctica_station_ids^29 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^29 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^29 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^29 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^29 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_30_visible = { check_variable = { global.antarctica_station_ids^30 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^30 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^30 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^30 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^30 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_31_visible = { check_variable = { global.antarctica_station_ids^31 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^31 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^31 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^31 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^31 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_32_visible = { check_variable = { global.antarctica_station_ids^32 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^32 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^32 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^32 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^32 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_33_visible = { check_variable = { global.antarctica_station_ids^33 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^33 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^33 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^33 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^33 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_34_visible = { check_variable = { global.antarctica_station_ids^34 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^34 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^34 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^34 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^34 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_35_visible = { check_variable = { global.antarctica_station_ids^35 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^35 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^35 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^35 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^35 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_36_visible = { check_variable = { global.antarctica_station_ids^36 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^36 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^36 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^36 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^36 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_37_visible = { check_variable = { global.antarctica_station_ids^37 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^37 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^37 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^37 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^37 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_38_visible = { check_variable = { global.antarctica_station_ids^38 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^38 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^38 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^38 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^38 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_39_visible = { check_variable = { global.antarctica_station_ids^39 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^39 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^39 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^39 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^39 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_40_visible = { check_variable = { global.antarctica_station_ids^40 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^40 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^40 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^40 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^40 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_41_visible = { check_variable = { global.antarctica_station_ids^41 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^41 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^41 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^41 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^41 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_42_visible = { check_variable = { global.antarctica_station_ids^42 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^42 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^42 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^42 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^42 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_43_visible = { check_variable = { global.antarctica_station_ids^43 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^43 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^43 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^43 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^43 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_44_visible = { check_variable = { global.antarctica_station_ids^44 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^44 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^44 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^44 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^44 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_45_visible = { check_variable = { global.antarctica_station_ids^45 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^45 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^45 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^45 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^45 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_46_visible = { check_variable = { global.antarctica_station_ids^46 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^46 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^46 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^46 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^46 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_47_visible = { check_variable = { global.antarctica_station_ids^47 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^47 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^47 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^47 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^47 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_48_visible = { check_variable = { global.antarctica_station_ids^48 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^48 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^48 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^48 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^48 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_49_visible = { check_variable = { global.antarctica_station_ids^49 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^49 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^49 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^49 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^49 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_50_visible = { check_variable = { global.antarctica_station_ids^50 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^50 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^50 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^50 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^50 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_51_visible = { check_variable = { global.antarctica_station_ids^51 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^51 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^51 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^51 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^51 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_52_visible = { check_variable = { global.antarctica_station_ids^52 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^52 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^52 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^52 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^52 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_53_visible = { check_variable = { global.antarctica_station_ids^53 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^53 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^53 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^53 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^53 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_54_visible = { check_variable = { global.antarctica_station_ids^54 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^54 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^54 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^54 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^54 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_55_visible = { check_variable = { global.antarctica_station_ids^55 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^55 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^55 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^55 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^55 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_56_visible = { check_variable = { global.antarctica_station_ids^56 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^56 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^56 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^56 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^56 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_57_visible = { check_variable = { global.antarctica_station_ids^57 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^57 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^57 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^57 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^57 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_58_visible = { check_variable = { global.antarctica_station_ids^58 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^58 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^58 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^58 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^58 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_59_visible = { check_variable = { global.antarctica_station_ids^59 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^59 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^59 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^59 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^59 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_60_visible = { check_variable = { global.antarctica_station_ids^60 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^60 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^60 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^60 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^60 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_61_visible = { check_variable = { global.antarctica_station_ids^61 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^61 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^61 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^61 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^61 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_62_visible = { check_variable = { global.antarctica_station_ids^62 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^62 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^62 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^62 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^62 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_63_visible = { check_variable = { global.antarctica_station_ids^63 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^63 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^63 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^63 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^63 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_64_visible = { check_variable = { global.antarctica_station_ids^64 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^64 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^64 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^64 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^64 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_65_visible = { check_variable = { global.antarctica_station_ids^65 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^65 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^65 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^65 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^65 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_66_visible = { check_variable = { global.antarctica_station_ids^66 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^66 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^66 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^66 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^66 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_67_visible = { check_variable = { global.antarctica_station_ids^67 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^67 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^67 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^67 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^67 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_68_visible = { check_variable = { global.antarctica_station_ids^68 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^68 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^68 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^68 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^68 = 4 } check_variable = { station_filter_africa > 1 } } } }
+			antarctica_station_marker_69_visible = { check_variable = { global.antarctica_station_ids^69 > 0 } OR = { NOT = { has_country_flag = antarctica_filters_active } AND = { check_variable = { global.antarctica_station_region^69 = 1 } check_variable = { station_filter_america > 1 } } AND = { check_variable = { global.antarctica_station_region^69 = 2 } OR = { check_variable = { station_filter_asia > 1 } check_variable = { station_filter_oceania > 1 } } } AND = { check_variable = { global.antarctica_station_region^69 = 3 } check_variable = { station_filter_europe > 1 } } AND = { check_variable = { global.antarctica_station_region^69 = 4 } check_variable = { station_filter_africa > 1 } } } }
 		}
 
 		effects = {
@@ -5706,21 +5720,64 @@ scripted_gui = {
 			}
 
 			antarctica_station_show_blueprint_button_click = {
-				if = { limit = { has_country_flag = antarctica_station_bp_visible }
-					clr_country_flag = antarctica_station_bp_visible
-					check_antarctica_filters = yes
+					if = {
+						limit = { has_country_flag = antarctica_station_bp_visible }
+						clr_country_flag = antarctica_station_bp_visible
+						check_antarctica_filters = yes
+					}
+					else_if = {
+						limit = {
+							check_variable = { global.selected_antarctica_station > 0 }
+							original_tag = var:global.selected_antarctica_station_controller
+						}
+						set_country_flag = antarctica_station_bp_visible
+						set_country_flag = antarctica_filters_active
+					}
+					add_to_variable = { global.missile_ui_updated = 1 }
 				}
-				else = {
-					set_country_flag = antarctica_station_bp_visible
-					set_country_flag = antarctica_filters_active
+
+				antarctica_station_find_or_create_button_click = {
+					antarctica_select_or_create_player_station = yes
+					if = {
+						limit = {
+							check_variable = { global.selected_antarctica_station > 0 }
+							original_tag = var:global.selected_antarctica_station_controller
+						}
+						set_country_flag = antarctica_station_bp_visible
+						set_country_flag = antarctica_filters_active
+					}
+					add_to_variable = { global.missile_ui_updated = 1 }
 				}
-				add_to_variable = { global.missile_ui_updated = 1 }
-			}
 
 			antarctica_station_send_supplies_button_click = {
 				if = {
 					limit = { check_variable = { global.selected_antarctica_station > 0 } }
 					antarctica_send_supplies_to_selected_station = yes
+				}
+				add_to_variable = { global.missile_ui_updated = 1 }
+			}
+
+			antarctica_station_toggle_illegal_activities_button_click = {
+				if = {
+					limit = {
+						check_variable = { global.selected_antarctica_station > 0 }
+						original_tag = var:global.selected_antarctica_station_controller
+					}
+					if = {
+						limit = { check_variable = { global.selected_antarctica_station_illegal_activities > 0 } }
+						meta_effect = {
+							text = { set_variable = { global.research_station_[ID]_illegal_activities_enabled = 0 } }
+							ID = "[?global.selected_antarctica_station]"
+						}
+					}
+					else = {
+						meta_effect = {
+							text = { set_variable = { global.research_station_[ID]_illegal_activities_enabled = 1 } }
+							ID = "[?global.selected_antarctica_station]"
+						}
+					}
+
+					antarctica_set_selected_station_controller = yes
 				}
 				add_to_variable = { global.missile_ui_updated = 1 }
 			}
