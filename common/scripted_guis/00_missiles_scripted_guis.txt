@@ -5164,6 +5164,10 @@ scripted_gui = {
 			}
 			antarctica_treaty_join_atcp_button_click_enabled = {
 				has_idea = at_member
+				NOT = {
+					has_country_flag = antarctica_atcp_application_pending
+					has_country_flag = is_antarctica_atcp_consultative_member
+				}
 				OR = {
 					has_country_flag = {
 						flag = is_antarctic_research_station_constructed
@@ -5190,6 +5194,13 @@ scripted_gui = {
 				news_event = MD_antarctica_news.1
 				custom_effect_tooltip = join_antarctica_treaty_tt
 				effect_tooltip = { add_ideas = at_member }
+			}
+			antarctica_treaty_join_atcp_button_click = {
+				log = "[GetDateText]: [Root.GetName]: Apply for ATCP GUI"
+				set_country_flag = antarctica_atcp_application_pending
+				custom_effect_tooltip = antarctica_atcp_apply_pending_tt
+				set_variable = { global.missile_ui_updated = global.missile_ui_updated }
+				add_to_variable = { global.missile_ui_updated = 1 }
 			}
 			antarctica_treaty_leave_button_click = {
 				log = "[GetDateText]: [Root.GetName]: Leave Antarctica Treaty GUI"
@@ -9919,22 +9930,40 @@ scripted_gui = {
 
 		dynamic_lists = {
 			list_of_AT_members = {
-				array = global.at_members
+				array = global.at_regular_members
 				entry_container = IS_ANTARCTICA_AT_members_list
 			}
 		}
 
-		triggers = {
+		properties = {
+			name_of_at_nation_button = {
+				image = "[?global.at_regular_members^i.GetFlag]"
+			}
+		}
+	}
 
+	is_antarctica_consultative_dynamic_lists = {
+		context_type = player_context
+		parent_scripted_gui = MD_antarctica_system_gui
+		window_name = "IS_antarctica_ATCP_container"
+
+		dirty = global.missile_ui_updated
+
+		visible = {
+			check_variable = { var_open_MD_antarctica_gui = 2 }
+			has_country_flag = open_MD_countrymissilesview
 		}
 
-		effects = {
-
+		dynamic_lists = {
+			list_of_ATCP_members = {
+				array = global.atcp_members
+				entry_container = IS_ANTARCTICA_ATCP_members_list
+			}
 		}
 
 		properties = {
-			name_of_at_nation_button = {
-				image = "[?global.at_members^i.GetFlag]"
+			name_of_atcp_nation_button = {
+				image = "[?global.atcp_members^i.GetFlag]"
 			}
 		}
 	}
