@@ -334,7 +334,7 @@ joint_focus = {
 ### Hong Kong Branch
 joint_focus = {
 	id = CHI_HKG_greater_bay_area
-	icon = peoples_republic_of_china
+	icon = CHI_HKG_focus
 	text_icon = JOINT_HKG_CHI_focus_style
 
 	x = 4
@@ -365,23 +365,58 @@ joint_focus = {
 
 	completion_reward_joint_originator = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_greater_bay_area"
-		custom_effect_tooltip = {
-			localization_key = modifies_dynamic_modifier_tt
-			MODIFIER = CHI_SAR_network_modifier
+		if = {
+			limit = { original_tag = CHI }
+			custom_effect_tooltip = {
+				localization_key = modifies_dynamic_modifier_tt
+				MODIFIER = CHI_SAR_network_modifier
+			}
+			add_to_variable = { CHI_network_civilian_factories_productivity = 0.05  tooltip = civilian_factories_productivity_tt }
 		}
-		add_to_variable = { CHI_network_civilian_factories_productivity = 0.02  tooltip = civilian_factories_productivity_tt }
-		update_CHI_SAR_network_modifiers = yes
+		else = {
+			custom_effect_tooltip = {
+				localization_key = modifies_dynamic_modifier_tt
+				MODIFIER = CHI_HKG_sinicization_modifier
+			}
+			add_to_variable = { CHI_HKG_civilian_factories_productivity = 0.10  tooltip = civilian_factories_productivity_tt }
+			add_political_power = 75
+		}
+	}
+	completion_reward_joint_member = {
+		if = {
+			limit = { original_tag = CHI }
+			custom_effect_tooltip = {
+				localization_key = modifies_dynamic_modifier_tt
+				MODIFIER = CHI_SAR_network_modifier
+			}
+			add_to_variable = { CHI_network_civilian_factories_productivity = 0.025  tooltip = civilian_factories_productivity_tt }
+		}
+		else = {
+			custom_effect_tooltip = {
+				localization_key = modifies_dynamic_modifier_tt
+				MODIFIER = CHI_HKG_sinicization_modifier
+			}
+			add_to_variable = { CHI_HKG_civilian_factories_productivity = 0.05  tooltip = civilian_factories_productivity_tt }
+		}
 	}
 
 	completion_reward_joint_member = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_greater_bay_area (HKG)"
-		random_owned_state = {
-			add_extra_state_shared_building_slots = 1
-			add_building_construction = {
-				type = industrial_complex
-				level = 2
-				instant_build = yes
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_greater_bay_area (member)"
+		if = {
+			limit = { original_tag = CHI }
+			custom_effect_tooltip = {
+				localization_key = modifies_dynamic_modifier_tt
+				MODIFIER = CHI_SAR_network_modifier
 			}
+			add_to_variable = { CHI_network_civilian_factories_productivity = 0.01  tooltip = civilian_factories_productivity_tt }
+			update_CHI_SAR_network_modifiers = yes
+		}
+		else = {
+			custom_effect_tooltip = {
+				localization_key = modifies_dynamic_modifier_tt
+				MODIFIER = CHI_HKG_sinicization_modifier
+			}
+			add_to_variable = { CHI_HKG_civilian_factories_productivity = 0.02  tooltip = civilian_factories_productivity_tt }
 		}
 	}
 
@@ -409,20 +444,41 @@ joint_focus = {
 
 	completion_reward_joint_originator = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_financial_integration"
-		custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_SAR_network_modifier }
-		add_to_variable = { CHI_network_corporate_tax_income_multiplier_modifier = 0.03  tooltip = corporate_tax_income_multiplier_modifier_tt }
-		update_CHI_SAR_network_modifiers = yes
+		if = {
+			limit = { original_tag = CHI }
+			custom_effect_tooltip = {
+				localization_key = modifies_dynamic_modifier_tt
+				MODIFIER = CHI_SAR_network_modifier
+			}
+			add_to_variable = { CHI_network_corporate_tax_income_multiplier_modifier = 0.04  tooltip = corporate_tax_income_multiplier_modifier_tt }
+			update_CHI_SAR_network_modifiers = yes
+		}
+		else = {
+			custom_effect_tooltip = {
+				localization_key = modifies_dynamic_modifier_tt
+				MODIFIER = CHI_HKG_sinicization_modifier
+			}
+			add_to_variable = { CHI_HKG_corporate_tax_income_multiplier_modifier = 0.04  tooltip = corporate_tax_income_multiplier_modifier_tt }
+		}
 	}
 
 	completion_reward_joint_member = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_financial_integration (HKG)"
-		random_owned_state = {
-			add_extra_state_shared_building_slots = 1
-			add_building_construction = {
-				type = industrial_complex
-				level = 1
-				instant_build = yes
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_financial_integration (member)"
+		if = {
+			limit = { original_tag = CHI }
+			custom_effect_tooltip = {
+				localization_key = modifies_dynamic_modifier_tt
+				MODIFIER = CHI_SAR_network_modifier
 			}
+			add_to_variable = { CHI_network_corporate_tax_income_multiplier_modifier = 0.02  tooltip = corporate_tax_income_multiplier_modifier_tt }
+			update_CHI_SAR_network_modifiers = yes
+		}
+		else = {
+			custom_effect_tooltip = {
+				localization_key = modifies_dynamic_modifier_tt
+				MODIFIER = CHI_HKG_sinicization_modifier
+			}
+			add_to_variable = { CHI_HKG_corporate_tax_income_multiplier_modifier = 0.02  tooltip = corporate_tax_income_multiplier_modifier_tt }
 		}
 	}
 
@@ -449,21 +505,48 @@ joint_focus = {
 
 	completion_reward_joint_originator = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_express_rail_link"
-		custom_effect_tooltip = {
-			localization_key = modifies_dynamic_modifier_tt
-			MODIFIER = CHI_SAR_network_modifier
+		if = {
+			limit = { original_tag = CHI }
+			custom_effect_tooltip = {
+				localization_key = modifies_dynamic_modifier_tt
+				MODIFIER = CHI_SAR_network_modifier
+			}
+			add_to_variable = { CHI_network_production_factory_efficiency_gain_factor = 0.03  tooltip = production_factory_efficiency_gain_factor_tt }
+			update_CHI_SAR_network_modifiers = yes
 		}
-		add_to_variable = { CHI_network_production_factory_efficiency_gain_factor = 0.02  tooltip = production_factory_efficiency_gain_factor_tt }
+		else = {
+			custom_effect_tooltip = {
+				localization_key = modifies_dynamic_modifier_tt
+				MODIFIER = CHI_HKG_sinicization_modifier
+			}
+			add_to_variable = { CHI_HKG_production_factory_efficiency_gain_factor = 0.03  tooltip = production_factory_efficiency_gain_factor_tt }
+			random_owned_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
 	}
 
 	completion_reward_joint_member = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_express_rail_link (HKG)"
-		random_owned_state = {
-			add_building_construction = {
-				type = infrastructure
-				level = 2
-				instant_build = yes
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_express_rail_link (member)"
+		if = {
+			limit = { original_tag = CHI }
+			custom_effect_tooltip = {
+				localization_key = modifies_dynamic_modifier_tt
+				MODIFIER = CHI_SAR_network_modifier
 			}
+			add_to_variable = { CHI_network_production_factory_efficiency_gain_factor = 0.01  tooltip = production_factory_efficiency_gain_factor_tt }
+			update_CHI_SAR_network_modifiers = yes
+		}
+		else = {
+			custom_effect_tooltip = {
+				localization_key = modifies_dynamic_modifier_tt
+				MODIFIER = CHI_HKG_sinicization_modifier
+			}
+			add_to_variable = { CHI_HKG_production_factory_efficiency_gain_factor = 0.015  tooltip = production_factory_efficiency_gain_factor_tt }
 		}
 	}
 
@@ -490,22 +573,41 @@ joint_focus = {
 
 	completion_reward_joint_originator = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_individual_visit_scheme"
-		custom_effect_tooltip = {
-			localization_key = modifies_dynamic_modifier_tt
-			MODIFIER = CHI_SAR_network_modifier
+		if = {
+			limit = { original_tag = CHI }
+			custom_effect_tooltip = {
+				localization_key = modifies_dynamic_modifier_tt
+				MODIFIER = CHI_SAR_network_modifier
+			}
+			add_to_variable = { CHI_network_consumer_goods_factor = -0.015  tooltip = consumer_goods_factor_tt }
+			update_CHI_SAR_network_modifiers = yes
 		}
-		add_to_variable = { CHI_network_consumer_goods_factor = -0.01  tooltip = consumer_goods_factor_tt }
+		else = {
+			custom_effect_tooltip = {
+				localization_key = modifies_dynamic_modifier_tt
+				MODIFIER = CHI_HKG_sinicization_modifier
+			}
+			add_to_variable = { CHI_HKG_consumer_goods_factor = -0.02  tooltip = consumer_goods_factor_tt }
+		}
 	}
 
 	completion_reward_joint_member = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_individual_visit_scheme (HKG)"
-		random_owned_state = {
-			add_extra_state_shared_building_slots = 1
-			add_building_construction = {
-				type = industrial_complex
-				level = 1
-				instant_build = yes
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_individual_visit_scheme (member)"
+		if = {
+			limit = { original_tag = CHI }
+			custom_effect_tooltip = {
+				localization_key = modifies_dynamic_modifier_tt
+				MODIFIER = CHI_SAR_network_modifier
 			}
+			add_to_variable = { CHI_network_consumer_goods_factor = -0.005  tooltip = consumer_goods_factor_tt }
+			update_CHI_SAR_network_modifiers = yes
+		}
+		else = {
+			custom_effect_tooltip = {
+				localization_key = modifies_dynamic_modifier_tt
+				MODIFIER = CHI_HKG_sinicization_modifier
+			}
+			add_to_variable = { CHI_HKG_consumer_goods_factor = -0.008  tooltip = consumer_goods_factor_tt }
 		}
 	}
 
@@ -532,22 +634,42 @@ joint_focus = {
 
 	completion_reward_joint_originator = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_shenzhen_hk_stock_connect"
-		custom_effect_tooltip = {
-			localization_key = modifies_dynamic_modifier_tt
-			MODIFIER = CHI_SAR_network_modifier
+		if = {
+			limit = { original_tag = CHI }
+			custom_effect_tooltip = {
+				localization_key = modifies_dynamic_modifier_tt
+				MODIFIER = CHI_SAR_network_modifier
+			}
+			add_to_variable = { CHI_network_corporate_tax_income_multiplier_modifier = 0.04  tooltip = corporate_tax_income_multiplier_modifier_tt }
+			add_to_variable = { CHI_network_office_park_income_tax_modifier = 0.03  tooltip = office_park_income_tax_modifier_tt }
+			update_CHI_SAR_network_modifiers = yes
 		}
-		add_to_variable = { CHI_network_corporate_tax_income_multiplier_modifier = 0.03  tooltip = corporate_tax_income_multiplier_modifier_tt }
+		else = {
+			custom_effect_tooltip = {
+				localization_key = modifies_dynamic_modifier_tt
+				MODIFIER = CHI_HKG_sinicization_modifier
+			}
+			add_to_variable = { CHI_HKG_offices_productivity = 0.05  tooltip = offices_productivity_tt }
+		}
 	}
 
 	completion_reward_joint_member = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_shenzhen_hk_stock_connect (HKG)"
-		random_owned_state = {
-			add_extra_state_shared_building_slots = 1
-			add_building_construction = {
-				type = industrial_complex
-				level = 1
-				instant_build = yes
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_shenzhen_hk_stock_connect (member)"
+		if = {
+			limit = { original_tag = CHI }
+			custom_effect_tooltip = {
+				localization_key = modifies_dynamic_modifier_tt
+				MODIFIER = CHI_SAR_network_modifier
 			}
+			add_to_variable = { CHI_network_corporate_tax_income_multiplier_modifier = 0.02  tooltip = corporate_tax_income_multiplier_modifier_tt }
+			update_CHI_SAR_network_modifiers = yes
+		}
+		else = {
+			custom_effect_tooltip = {
+				localization_key = modifies_dynamic_modifier_tt
+				MODIFIER = CHI_HKG_sinicization_modifier
+			}
+			add_to_variable = { CHI_HKG_offices_productivity = 0.02  tooltip = offices_productivity_tt }
 		}
 	}
 
