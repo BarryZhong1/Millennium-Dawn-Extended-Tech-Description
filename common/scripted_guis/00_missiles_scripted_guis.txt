@@ -5164,9 +5164,12 @@ scripted_gui = {
 			}
 			antarctica_treaty_join_atcp_button_click_enabled = {
 				has_idea = at_member
-				has_country_flag = {
-					flag = is_antarctic_research_station_constructed
-					days > 365
+				OR = {
+					has_country_flag = {
+						flag = is_antarctic_research_station_constructed
+						days > 365
+					}
+					is_startup_research_station = yes
 				}
 			}
 			antarctica_map_open_button_click_enabled = {
@@ -5194,6 +5197,9 @@ scripted_gui = {
 				news_event = MD_antarctica_news.3
 				custom_effect_tooltip = leave_antarctica_treaty_tt
 				effect_tooltip = { remove_ideas = at_member }
+				newline = yes
+				custom_effect_tooltip = leave_antarctica_cannot_be_stopped_tt
+				newline = yes
 				custom_effect_tooltip = leave_antarctica_treaty_warning_tt
 			}
 			antarctica_treaty_join_ccamlr_button_click = {
