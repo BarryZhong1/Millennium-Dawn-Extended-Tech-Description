@@ -3219,6 +3219,15 @@ antarctica_apply_single_laboratory_iteration_reward = {
 	else_if = {
 		limit = { check_variable = { station_lab_module = 12 } }
 		add_tech_bonus = { name = antarctica_lab_tech_bonus bonus = 0.025 uses = 1 category = CAT_excavation_tech }
+		if = {
+			limit = { check_variable = { antarctica_lab_ice_tech_boost > 0 } }
+			random_list = {
+				25 = { add_tech_bonus = { name = antarctica_lab_tech_bonus bonus = 0.04 uses = 1 category = CAT_genes } }
+				25 = { add_tech_bonus = { name = antarctica_lab_tech_bonus bonus = 0.04 uses = 1 category = CAT_industry } }
+				25 = { add_tech_bonus = { name = antarctica_lab_tech_bonus bonus = 0.04 uses = 1 category = CAT_agriculture_tech } }
+				25 = { add_tech_bonus = { name = antarctica_lab_tech_bonus bonus = 0.04 uses = 1 category = CAT_microchips } }
+			}
+		}
 	}
 }
 
