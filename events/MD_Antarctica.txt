@@ -1,6 +1,64 @@
 add_namespace = MD_antarctica
 add_namespace = MD_antarctica_news
 
+country_event = {
+	id = MD_antarctica.1
+	title = MD_antarctica.1.t
+	desc = MD_antarctica.1.d
+	picture = GFX_antarctic_treaty_news
+
+	is_triggered_only = yes
+
+	option = {
+		name = MD_antarctica.1.a
+		ai_chance = { base = 100 }
+	}
+}
+
+country_event = {
+	id = MD_antarctica.2
+	hidden = yes
+	is_triggered_only = yes
+
+	immediate = {
+		clr_country_flag = antarctica_observer_mission_in_progress
+
+		if = {
+			limit = { check_variable = { antarctica_observer_target_station > 0 } }
+
+			meta_effect = {
+				text = {
+					clr_global_flag = research_station_[ID]_observers_incoming
+				}
+				ID = "[?antarctica_observer_target_station]"
+			}
+
+			meta_effect = {
+				text = {
+					set_temp_variable = { station_illegal_activities = global.research_station_[ID]_illegal_activities_enabled }
+					set_temp_variable = { station_open_loop_module = global.research_station_[ID]_module_slot_12 }
+				}
+				ID = "[?antarctica_observer_target_station]"
+			}
+
+			if = {
+				limit = {
+					OR = {
+						check_variable = { station_illegal_activities > 0 }
+						check_variable = { station_open_loop_module = 1 }
+					}
+				}
+				add_to_variable = { antarctica_illegal_research_reports = 1 }
+			}
+		}
+	}
+
+	option = {
+		name = MD_antarctica.2.a
+		ai_chance = { base = 100 }
+	}
+}
+
 ### News
 
 news_event = {
