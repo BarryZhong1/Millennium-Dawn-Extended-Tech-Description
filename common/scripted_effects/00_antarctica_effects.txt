@@ -3455,3 +3455,31 @@ check_antarctica_filters = {
 		clr_country_flag = antarctica_filters_active
 	}
 }
+
+# Observer consequence hooks.
+# Called from MD_antarctica.2 after violation classification.
+increase_antarctica_station_reports = {
+	custom_effect_tooltip = increase_antarctica_station_reports_tt
+	add_to_variable = { antarctica_station_reports = antarctica_station_reports_temp }
+}
+
+antarctica_observer_detected_open_loop_effect = {
+	news_event = MD_antarctica_news.5
+	country_event = MD_antarctica.3
+}
+
+antarctica_observer_detected_illegal_research_effect = {
+
+}
+
+antarctica_observer_detected_nukes_research_effect = {
+
+}
+
+check_station_reports = {
+	# TODO, happens after too many breaches of Antarctic Treaty law.
+	if = {
+		limit = { check_variable = { antarctica_station_reports > 7 } }
+
+	}
+}
