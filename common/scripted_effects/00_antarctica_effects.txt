@@ -2396,6 +2396,20 @@ antarctica_process_station_research_progress = {
 				limit = { check_variable = { station_active_lab_slots > 0 } }
 				add_to_temp_variable = { station_iteration_progress = station_active_lab_slots }
 
+				# Controller-scoped iteration throughput bonus comes from a country modifier so spirits can tune it.
+				set_temp_variable = { station_iteration_speed_bonus = 0 }
+				set_variable = { global.antarctica_temp_station_iteration_speed_bonus = 0 }
+				if = {
+					limit = { check_variable = { station_controller > 0 } }
+					set_variable = { global.antarctica_temp_station_iteration_speed_bonus = station_active_lab_slots }
+					set_variable = { temp_controller_id = station_controller }
+					var:temp_controller_id = {
+						multiply_variable = { global.antarctica_temp_station_iteration_speed_bonus = modifier@antarctica_lab_iteration_progress_modifier }
+					}
+					set_temp_variable = { station_iteration_speed_bonus = global.antarctica_temp_station_iteration_speed_bonus }
+					add_to_temp_variable = { station_iteration_progress = station_iteration_speed_bonus }
+				}
+
 				if = {
 					limit = { check_variable = { station_iteration_progress > 99 } }
 					add_to_temp_variable = { station_iteration_progress = -100 }
@@ -3405,6 +3419,60 @@ antarctica_recalculate_country_laboratory_effects = {
 		}
 
 		antarctica_apply_laboratory_iteration_progression = yes
+		antarctica_apply_small_treaty_laboratory_bonuses = yes
+	}
+}
+
+antarctica_update_small_treaty_status_effects = {
+	# Remove old state first, then apply treaty-count state.
+	if = {
+		limit = { has_idea = antarctica_small_treaty_admin_cost_1 }
+		remove_ideas = antarctica_small_treaty_admin_cost_1
+	}
+	if = {
+		limit = { has_idea = antarctica_small_treaty_admin_cost_2 }
+		remove_ideas = antarctica_small_treaty_admin_cost_2
+	}
+
+	if = {
+		limit = { has_idea = at_member }
+		set_temp_variable = { antarctica_signed_small_treaties = 0 }
+
+		if = {
+			limit = { has_country_flag = antarctica_ccas_member }
+			add_to_temp_variable = { antarctica_signed_small_treaties = 1 }
+		}
+		if = {
+			limit = { has_country_flag = antarctica_ccamlr_member }
+			add_to_temp_variable = { antarctica_signed_small_treaties = 1 }
+		}
+
+		if = {
+			limit = { check_variable = { antarctica_signed_small_treaties > 1 } }
+			add_ideas = antarctica_small_treaty_admin_cost_2
+		}
+		else_if = {
+			limit = { check_variable = { antarctica_signed_small_treaties > 0 } }
+			add_ideas = antarctica_small_treaty_admin_cost_1
+		}
+	}
+}
+
+# Minor treaty-specific bonuses layered on top of station lab outputs.
+# CCAS focuses on biosphere/staff sustainability; CCAMLR on marine and sonar-aligned research.
+antarctica_apply_small_treaty_laboratory_bonuses = {
+	if = {
+		limit = { has_country_flag = antarctica_ccas_member }
+		multiply_variable = { antarctica_lab_cat_genes = 1.2 }
+		multiply_variable = { antarctica_lab_health_cost_multiplier_modifier = 1.2 }
+		multiply_variable = { antarctica_lab_population_growth_factor = 1.2 }
+	}
+
+	if = {
+		limit = { has_country_flag = antarctica_ccamlr_member }
+		multiply_variable = { antarctica_lab_cat_sub = 1.2 }
+		multiply_variable = { antarctica_lab_cat_naval_modules = 1.2 }
+		multiply_variable = { antarctica_lab_naval_detection = 1.2 }
 	}
 }
 
