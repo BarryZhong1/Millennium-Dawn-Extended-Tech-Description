@@ -1,0 +1,59 @@
+antarctica_post_treaty_activity_category = {
+	icon = GFX_antarctic_treaty_button
+	allowed = { always = yes }
+
+	antarctica_post_treaty_resource_extraction = {
+		icon = tungsten
+		visible = { has_country_flag = antarctica_post_treaty_station_violation }
+		available = { has_country_flag = antarctica_post_treaty_station_violation }
+		cost = 50
+		days_remove = 90
+
+		complete_effect = {
+			set_temp_variable = { treasury_change = 2.0 }
+			modify_treasury_effect = yes
+			add_stability = -0.005
+			set_temp_variable = { antarctica_station_reports_temp = 1 }
+			increase_antarctica_station_reports = yes
+			for_each_scope_loop = {
+				array = global.atcp_members
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = antarctica_modifier_small_consequences
+				}
+			}
+			log = "[GetDateText]: [Root.GetName]: Decision antarctica_post_treaty_resource_extraction"
+		}
+
+		ai_will_do = {
+			base = 1
+		}
+	}
+
+	antarctica_post_treaty_military_preparations = {
+		icon = army_reform
+		cost = 75
+		days_remove = 120
+
+		complete_effect = {
+			add_army_experience = 10
+			add_war_support = 0.01
+			add_stability = -0.01
+			add_threat = 0.5
+			set_temp_variable = { antarctica_station_reports_temp = 2 }
+			increase_antarctica_station_reports = yes
+			for_each_scope_loop = {
+				array = global.atcp_members
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = antarctica_modifier_medium_consequences
+				}
+			}
+			log = "[GetDateText]: [Root.GetName]: Decision antarctica_post_treaty_military_preparations"
+		}
+
+		ai_will_do = {
+			base = 1
+		}
+	}
+}

@@ -27,6 +27,8 @@ antarctica_setup_research_station = {
 			set_country_flag = is_antarctic_research_station_constructed
 		}
 
+		set_country_flag = antarctica_has_active_station
+
 		set_temp_variable = { station_region = 3 }
 		if = {
 			limit = {
@@ -665,7 +667,16 @@ antarctica_remove_research_station = {
 			}
 			ID = "[?station_id]"
 		}
+		clr_country_flag = antarctica_has_active_station
 		antarctica_remove_research_station_from_display = yes
+		if = {
+			limit = { has_idea = at_member }
+			antarctica_recalculate_country_laboratory_effects = yes
+		}
+		else = {
+			antarctica_clear_laboratory_country_effects = yes
+		}
+		add_to_variable = { global.missile_ui_updated = 1 }
 		log = "[GetDateText]: [Root.GetName]: Removed research station in Antarctica. Station ID: [?station_id] with controller [Root.GetName]."
 	}
 	else = {
@@ -1007,6 +1018,123 @@ antarctica_select_or_create_player_station = {
 
 		antarctica_set_selected_station_controller = yes
 		add_to_variable = { global.missile_ui_updated = 1 }
+	}
+}
+
+# Usage
+# antarctica_find_player_station = yes
+# Sets temp variable player_station_id to controlled station ID or 0.
+antarctica_find_player_station = {
+	set_temp_variable = { player_station_id = 0 }
+
+	for_each_loop = {
+		array = global.antarctica_station_ids
+		value = current_station_id
+		break = break_loop
+
+		if = {
+			limit = {
+				check_variable = { current_station_id > 0 }
+				meta_trigger = {
+					text = {
+						has_global_flag = research_station_[ID]_exists
+						check_variable = { global.research_station_[ID]_controller = THIS.id }
+					}
+					ID = "[?current_station_id]"
+				}
+			}
+
+			set_temp_variable = { player_station_id = current_station_id }
+			set_temp_variable = { break_loop = 1 }
+		}
+	}
+}
+
+# Usage
+# antarctica_start_station_dismantle = yes
+antarctica_start_station_dismantle = {
+	if = {
+		limit = {
+			has_country_flag = antarctica_treaty_leave_pending
+			check_variable = { antarctica_station_dismantle_in_progress < 1 }
+		}
+
+		antarctica_find_player_station = yes
+
+		if = {
+			limit = { check_variable = { player_station_id > 0 } }
+			set_temp_variable = { dismantle_modules = 0 }
+
+			meta_effect = {
+				text = {
+					set_temp_variable = { station_slot_1 = global.research_station_[ID]_module_slot_1 }
+					set_temp_variable = { station_slot_2 = global.research_station_[ID]_module_slot_2 }
+					set_temp_variable = { station_slot_4 = global.research_station_[ID]_module_slot_4 }
+					set_temp_variable = { station_slot_5 = global.research_station_[ID]_module_slot_5 }
+					set_temp_variable = { station_slot_6 = global.research_station_[ID]_module_slot_6 }
+					set_temp_variable = { station_slot_7 = global.research_station_[ID]_module_slot_7 }
+					set_temp_variable = { station_slot_8 = global.research_station_[ID]_module_slot_8 }
+					set_temp_variable = { station_slot_9 = global.research_station_[ID]_module_slot_9 }
+					set_temp_variable = { station_slot_10 = global.research_station_[ID]_module_slot_10 }
+					set_temp_variable = { station_slot_11 = global.research_station_[ID]_module_slot_11 }
+					set_temp_variable = { station_slot_12 = global.research_station_[ID]_module_slot_12 }
+					set_temp_variable = { station_slot_13 = global.research_station_[ID]_module_slot_13 }
+					set_temp_variable = { station_slot_14 = global.research_station_[ID]_module_slot_14 }
+				}
+				ID = "[?player_station_id]"
+			}
+
+			if = { limit = { check_variable = { station_slot_1 > 0 } } add_to_temp_variable = { dismantle_modules = 1 } }
+			if = { limit = { check_variable = { station_slot_2 > 0 } } add_to_temp_variable = { dismantle_modules = 1 } }
+			if = { limit = { check_variable = { station_slot_4 > 0 } } add_to_temp_variable = { dismantle_modules = 1 } }
+			if = { limit = { check_variable = { station_slot_5 > 0 } } add_to_temp_variable = { dismantle_modules = 1 } }
+			if = { limit = { check_variable = { station_slot_6 > 0 } } add_to_temp_variable = { dismantle_modules = 1 } }
+			if = { limit = { check_variable = { station_slot_7 > 0 } } add_to_temp_variable = { dismantle_modules = 1 } }
+			if = { limit = { check_variable = { station_slot_8 > 0 } } add_to_temp_variable = { dismantle_modules = 1 } }
+			if = { limit = { check_variable = { station_slot_9 > 0 } } add_to_temp_variable = { dismantle_modules = 1 } }
+			if = { limit = { check_variable = { station_slot_10 > 0 } } add_to_temp_variable = { dismantle_modules = 1 } }
+			if = { limit = { check_variable = { station_slot_11 > 0 } } add_to_temp_variable = { dismantle_modules = 1 } }
+			if = { limit = { check_variable = { station_slot_12 > 0 } } add_to_temp_variable = { dismantle_modules = 1 } }
+			if = { limit = { check_variable = { station_slot_13 > 0 } } add_to_temp_variable = { dismantle_modules = 1 } }
+			if = { limit = { check_variable = { station_slot_14 > 0 } } add_to_temp_variable = { dismantle_modules = 1 } }
+
+			set_temp_variable = { dismantle_days = dismantle_modules }
+			multiply_temp_variable = { dismantle_days = 20 }
+			add_to_temp_variable = { dismantle_days = 30 }
+
+			set_variable = { antarctica_station_dismantle_in_progress = 1 }
+			set_variable = { antarctica_station_dismantle_days_remaining = dismantle_days }
+			set_variable = { antarctica_station_dismantle_target = player_station_id }
+			set_variable = { global.selected_antarctica_station = player_station_id }
+
+			log = "[GetDateText]: [Root.GetName]: Started Antarctica station dismantling. Station ID: [?player_station_id], Modules: [?dismantle_modules], Time: [?dismantle_days] days."
+		}
+	}
+}
+
+# Usage
+# antarctica_process_station_dismantle = yes
+antarctica_process_station_dismantle = {
+	if = {
+		limit = { check_variable = { antarctica_station_dismantle_in_progress > 0 } }
+		subtract_from_variable = { antarctica_station_dismantle_days_remaining = 1 }
+
+		if = {
+			limit = { check_variable = { antarctica_station_dismantle_days_remaining < 1 } }
+			set_temp_variable = { station_id = antarctica_station_dismantle_target }
+			set_variable = { antarctica_station_dismantle_in_progress = 0 }
+			set_variable = { antarctica_station_dismantle_days_remaining = 0 }
+			set_variable = { antarctica_station_dismantle_target = 0 }
+
+			if = {
+				limit = { check_variable = { station_id > 0 } }
+				antarctica_remove_research_station = yes
+			}
+
+			clr_country_flag = antarctica_post_treaty_station_violation
+			add_to_variable = { global.missile_ui_updated = 1 }
+			log = "[GetDateText]: [Root.GetName]: Completed Antarctica station dismantling."
+		}
 	}
 }
 
@@ -3407,19 +3535,23 @@ antarctica_recalculate_country_laboratory_effects = {
 
 		antarctica_clear_laboratory_country_effects = yes
 
-		for_each_loop = {
-			array = global.antarctica_station_ids
-			value = current_station_id
+		if = {
+			limit = { has_country_flag = antarctica_has_active_station }
 
-			if = {
-				limit = { check_variable = { current_station_id > 0 } }
-				set_temp_variable = { station_id = current_station_id }
-				antarctica_apply_station_laboratory_effects_to_controller = yes
+			for_each_loop = {
+				array = global.antarctica_station_ids
+				value = current_station_id
+
+				if = {
+					limit = { check_variable = { current_station_id > 0 } }
+					set_temp_variable = { station_id = current_station_id }
+					antarctica_apply_station_laboratory_effects_to_controller = yes
+				}
 			}
-		}
 
-		antarctica_apply_laboratory_iteration_progression = yes
-		antarctica_apply_small_treaty_laboratory_bonuses = yes
+			antarctica_apply_laboratory_iteration_progression = yes
+			antarctica_apply_small_treaty_laboratory_bonuses = yes
+		}
 	}
 }
 

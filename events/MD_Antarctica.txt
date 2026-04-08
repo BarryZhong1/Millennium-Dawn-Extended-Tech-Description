@@ -299,6 +299,8 @@ news_event = {
 		name = MD_antarctica_news.2.b
 		trigger = { original_tag = FROM }
 		add_ideas = at_member
+		clr_country_flag = antarctica_post_treaty_station_violation
+		clr_country_flag = antarctica_treaty_leave_pending
 		ai_chance = { base = 100 }
 	}
 }
@@ -322,6 +324,7 @@ news_event = {
 		log = "[GetDateText]: [This.GetName]: MD_antarctica_news.3.b executed"
 		name = MD_antarctica_news.3.b
 		trigger = { original_tag = FROM }
+		set_country_flag = antarctica_treaty_leave_pending
 		hidden_effect = { news_event = { id = MD_antarctica_news.4 days = 730 } }
 		ai_chance = { base = 100 }
 	}
@@ -346,8 +349,23 @@ news_event = {
 		log = "[GetDateText]: [This.GetName]: MD_antarctica_news.4.b executed"
 		name = MD_antarctica_news.4.b
 		trigger = { original_tag = FROM }
+		clr_country_flag = antarctica_treaty_leave_pending
 		remove_from_array = { global.atcp_members = FROM }
 		remove_ideas = at_member
+		if = {
+			limit = { has_country_flag = antarctica_has_active_station }
+			set_country_flag = antarctica_post_treaty_station_violation
+			for_each_scope_loop = {
+				array = global.atcp_members
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = antarctica_modifier_medium_consequences
+				}
+			}
+		}
+		else = {
+			clr_country_flag = antarctica_post_treaty_station_violation
+		}
 		ai_chance = { base = 100 }
 	}
 }
