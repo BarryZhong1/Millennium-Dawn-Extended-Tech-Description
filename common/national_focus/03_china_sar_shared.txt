@@ -407,7 +407,7 @@ joint_focus = {
 
 joint_focus = {
 	id = CHI_HKG_financial_integration
-	icon = peoples_republic_of_china
+	icon = crane_and_tower
 	text_icon = JOINT_HKG_CHI_focus_style
 
 	x = 0
@@ -431,7 +431,6 @@ joint_focus = {
 				MODIFIER = CHI_SAR_network_modifier
 			}
 			add_to_variable = { CHI_network_corporate_tax_income_multiplier_modifier = 0.04  tooltip = corporate_tax_income_multiplier_modifier_tt }
-			update_CHI_SAR_network_modifiers = yes
 		}
 		else = {
 			custom_effect_tooltip = {
@@ -440,6 +439,24 @@ joint_focus = {
 			}
 			add_to_variable = { CHI_HKG_corporate_tax_income_multiplier_modifier = 0.04  tooltip = corporate_tax_income_multiplier_modifier_tt }
 		}
+		random_owned_state = {
+			add_building_construction = {
+				type = offices
+				level = 2
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 2
+		}
+		random_owned_state = {
+			add_building_construction = {
+				type = offices
+				level = 2
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 2
+		}
+		set_temp_variable = { treasury_change = -39.00 }
+		modify_treasury_effect = yes
 	}
 
 	completion_reward_joint_member = {
@@ -451,7 +468,6 @@ joint_focus = {
 				MODIFIER = CHI_SAR_network_modifier
 			}
 			add_to_variable = { CHI_network_corporate_tax_income_multiplier_modifier = 0.02  tooltip = corporate_tax_income_multiplier_modifier_tt }
-			update_CHI_SAR_network_modifiers = yes
 		}
 		else = {
 			custom_effect_tooltip = {
@@ -460,6 +476,16 @@ joint_focus = {
 			}
 			add_to_variable = { CHI_HKG_corporate_tax_income_multiplier_modifier = 0.02  tooltip = corporate_tax_income_multiplier_modifier_tt }
 		}
+		random_owned_state = {
+			add_building_construction = {
+				type = offices
+				level = 1
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 1
+		}
+		set_temp_variable = { treasury_change = -26.00 }
+		modify_treasury_effect = yes
 	}
 
 	ai_will_do = {
@@ -468,7 +494,7 @@ joint_focus = {
 }
 joint_focus = {
 	id = CHI_HKG_express_rail_link
-	icon = peoples_republic_of_china
+	icon = grants_for_high_speed_trains
 	text_icon = JOINT_HKG_CHI_focus_style
 
 	x = 1
@@ -492,7 +518,6 @@ joint_focus = {
 				MODIFIER = CHI_SAR_network_modifier
 			}
 			add_to_variable = { CHI_network_production_factory_efficiency_gain_factor = 0.03  tooltip = production_factory_efficiency_gain_factor_tt }
-			update_CHI_SAR_network_modifiers = yes
 		}
 		else = {
 			custom_effect_tooltip = {
@@ -519,7 +544,6 @@ joint_focus = {
 				MODIFIER = CHI_SAR_network_modifier
 			}
 			add_to_variable = { CHI_network_production_factory_efficiency_gain_factor = 0.01  tooltip = production_factory_efficiency_gain_factor_tt }
-			update_CHI_SAR_network_modifiers = yes
 		}
 		else = {
 			custom_effect_tooltip = {
@@ -536,7 +560,7 @@ joint_focus = {
 }
 joint_focus = {
 	id = CHI_HKG_individual_visit_scheme
-	icon = peoples_republic_of_china
+	icon = economic_tourism
 	text_icon = JOINT_HKG_CHI_focus_style
 
 	x = -1
@@ -560,7 +584,6 @@ joint_focus = {
 				MODIFIER = CHI_SAR_network_modifier
 			}
 			add_to_variable = { CHI_network_consumer_goods_factor = -0.015  tooltip = consumer_goods_factor_tt }
-			update_CHI_SAR_network_modifiers = yes
 		}
 		else = {
 			custom_effect_tooltip = {
@@ -580,7 +603,6 @@ joint_focus = {
 				MODIFIER = CHI_SAR_network_modifier
 			}
 			add_to_variable = { CHI_network_consumer_goods_factor = -0.005  tooltip = consumer_goods_factor_tt }
-			update_CHI_SAR_network_modifiers = yes
 		}
 		else = {
 			custom_effect_tooltip = {
@@ -597,7 +619,7 @@ joint_focus = {
 }
 joint_focus = {
 	id = CHI_HKG_shenzhen_hk_stock_connect
-	icon = peoples_republic_of_china
+	icon = focus_RAJ_issue_bonds_on_the_stock_market
 	text_icon = JOINT_HKG_CHI_focus_style
 
 	x = -1
@@ -622,7 +644,6 @@ joint_focus = {
 			}
 			add_to_variable = { CHI_network_corporate_tax_income_multiplier_modifier = 0.04  tooltip = corporate_tax_income_multiplier_modifier_tt }
 			add_to_variable = { CHI_network_office_park_income_tax_modifier = 0.03  tooltip = office_park_income_tax_modifier_tt }
-			update_CHI_SAR_network_modifiers = yes
 		}
 		else = {
 			custom_effect_tooltip = {
@@ -642,7 +663,6 @@ joint_focus = {
 				MODIFIER = CHI_SAR_network_modifier
 			}
 			add_to_variable = { CHI_network_corporate_tax_income_multiplier_modifier = 0.02  tooltip = corporate_tax_income_multiplier_modifier_tt }
-			update_CHI_SAR_network_modifiers = yes
 		}
 		else = {
 			custom_effect_tooltip = {
@@ -660,7 +680,7 @@ joint_focus = {
 
 joint_focus = {
 	id = CHI_HKG_media_freedom
-	icon = peoples_republic_of_china
+	icon = USA_millennium_media
 	text_icon = JOINT_CHI_focus_style
 	overlay = GFX_focus_overlay_sar_flags
 
@@ -721,10 +741,21 @@ joint_focus = {
 		random_owned_state = {
 			add_extra_state_shared_building_slots = 1
 			add_building_construction = {
-				type = industrial_complex
+				type = offices
 				level = 1
 				instant_build = yes
 			}
+		}
+		595 = {
+			custom_effect_tooltip = {
+				localization_key = modifies_dynamic_modifier_tt
+				MODIFIER = CHI_HKG_sinicization_modifier
+			}
+			add_to_variable = { CHI_HKG_offices_productivity = 0.02  tooltip = offices_productivity_tt }
+			add_to_variable = { CHI_HKG_communism_drift = -0.05  tooltip = communism_drift_tt }
+			set_temp_variable = { sinofication_base_change = -5 }
+			CHI_update_sinofication = yes
+			add_to_variable = { HKG_sinofication_var = sinofication_base_change  tooltip = HKG_sinofication_tt }
 		}
 	}
 
@@ -843,6 +874,7 @@ joint_focus = {
 		set_temp_variable = { sinofication_base_change = 10 }
 		CHI_update_sinofication = yes
 		add_to_variable = { HKG_sinofication_var = sinofication_base_change  tooltip = HKG_sinofication_tt }
+		add_ideas = HKG_under_press_controls
 	}
 
 	ai_will_do = {
@@ -1079,28 +1111,28 @@ joint_focus = {
 
 	joint_trigger = { CHI_HKG_joint_trigger = yes }
 
+	completion_reward_joint_originator = {
+		x
+	}
+
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_palace_museum"
-		if = {
-			limit = { original_tag = CHI }
+		CHI = {
 			custom_effect_tooltip = {
 				localization_key = modifies_dynamic_modifier_tt
 				MODIFIER = CHI_SAR_network_modifier
 			}
 			add_to_variable = { CHI_network_office_park_income_tax_modifier = 0.03  tooltip = office_park_income_tax_modifier_tt }
-			JAP = { add_opinion_modifier = { target = CHI  modifier = peaceful_rise } }
-			KOR = { add_opinion_modifier = { target = CHI  modifier = peaceful_rise } }
-			SIN = { add_opinion_modifier = { target = CHI  modifier = peaceful_rise } }
 		}
-		else_if = {
-			limit = { original_tag = HKG }
+		newline	= yes
+		HKG = {
 			random_owned_state = {
-				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
-					type = office_park
+					type = offices
 					level = 1
 					instant_build = yes
 				}
+				add_extra_state_shared_building_slots = 1
 			}
 		}
 	}
