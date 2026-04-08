@@ -5,8 +5,8 @@ JAP_stop_selling_our_weapons = { #Japan is banned from exporting weapon but can 
 		country_exists = JAP
 	}
 	abort_when_not_enabled = yes
-	
-	
+
+
 	ai_strategy = { type = equipment_market_for_sale_factor id = anti_air value = -500 }
 	ai_strategy = { type = equipment_market_for_sale_factor id = anti_tank value = -500 }
 	ai_strategy = { type = equipment_market_for_sale_factor id = infantry value = -500 }
@@ -36,58 +36,6 @@ JAP_default_naval_breakdown = {
 	ai_strategy = { type = role_ratio id = naval_carrier value = 3 }
 	ai_strategy = { type = role_ratio id = naval_cruiser value = 5 }
 
-}
-
-CHI_japan_went_aggressive = {
-	allowed = { original_tag = CHI }
-	enable = {
-		NOT = { CHI = { is_subject_of = JAP } }
-		JAP = { has_completed_focus = JAP_aggressive_strategies }
-	}
-	abort_when_not_enabled = yes
-
-	ai_strategy = { type = befriend id = "NKO" value = 100 }
-	ai_strategy = { type = protect id = "NKO" value = 100 }
-	ai_strategy = { type = support id = "NKO" value = 150 }
-	ai_strategy = { type = befriend id = "KOR" value = 100 }
-	ai_strategy = { type = protect id = "KOR" value = 100 }
-	ai_strategy = { type = support id = "KOR" value = 150 }
-	ai_strategy = { type = antagonize id = "JAP" value = 200 }
-	ai_strategy = { type = contain id = "JAP" value = 200 }
-}
-
-KOR_japan_went_aggressive = {
-	allowed = { original_tag = KOR }
-	enable = {
-		NOT = { KOR = { is_subject_of = JAP } }
-		JAP = { has_completed_focus = JAP_aggressive_strategies }
-	}
-	abort_when_not_enabled = yes
-	ai_strategy = { type = befriend id = "CHI" value = 100 }
-	ai_strategy = { type = protect id = "CHI" value = 100 }
-	ai_strategy = { type = support id = "CHI" value = 150 }
-	ai_strategy = { type = befriend id = "NKO" value = 100 }
-	ai_strategy = { type = protect id = "NKO" value = 100 }
-	ai_strategy = { type = support id = "NKO" value = 150 }
-	ai_strategy = { type = antagonize id = "JAP" value = 200 }
-	ai_strategy = { type = contain id = "JAP" value = 200 }
-}
-
-NKO_japan_went_aggressive = {
-	allowed = { original_tag = KOR }
-	enable = {
-		NOT = { NKO = { is_subject_of = JAP } }
-		JAP = { has_completed_focus = JAP_aggressive_strategies }
-	}
-	abort_when_not_enabled = yes
-	ai_strategy = { type = befriend id = "CHI" value = 100 }
-	ai_strategy = { type = protect id = "CHI" value = 100 }
-	ai_strategy = { type = support id = "CHI" value = 150 }
-	ai_strategy = { type = befriend id = "KOR" value = 100 }
-	ai_strategy = { type = protect id = "KOR" value = 100 }
-	ai_strategy = { type = support id = "KOR" value = 150 }
-	ai_strategy = { type = antagonize id = "JAP" value = 200 }
-	ai_strategy = { type = contain id = "JAP" value = 200 }
 }
 
 JAP_no_war_if_at_war = {
@@ -143,4 +91,17 @@ JAP_ally_japan_after_accepting_alliance = {
 	ai_strategy = { type = befriend id = "JAP" value = 100 }
 	ai_strategy = { type = support id = "JAP" value = 100 }
 	ai_strategy = { type = alliance id = "JAP" value = 100 }
+}
+
+JAP_construct_additional_microchips = {
+	allowed = { original_tag = JAP }
+	enable = {
+		check_variable = { resource@microchips < 0 }
+		check_variable = { microchip_plant_total < 50 }
+		num_of_available_civilian_factories > 14
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = { type = build_building id = microchip_plant value = 15 }
+	ai_strategy = { type = building_target id = microchip_plant value = 125 }
 }

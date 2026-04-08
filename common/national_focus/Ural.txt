@@ -1655,22 +1655,22 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus URA_sklads"
 			add_equipment_to_stockpile = {
-				type = infantry_weapons1
+				type = infantry_weapons_2
 				amount = 1500
 				producer = SOV
 			}
 			add_equipment_to_stockpile = {
-				type = infantry_weapons2
+				type = infantry_weapons_3
 				amount = 750
 				producer = SOV
 			}
 			add_equipment_to_stockpile = {
-				type = Inf_equipment
+				type = infantry_weapons_type
 				amount = 1000
 				producer = SOV
 			}
 			add_equipment_to_stockpile = {
-				type = util_vehicle_equipment
+				type = util_vehicle_type
 				amount = 50
 				producer = SOV
 			}
@@ -2064,12 +2064,12 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus URA_germany_weapons"
 			add_equipment_to_stockpile = {
-				type = infantry_weapons1
+				type = infantry_weapons_2
 				amount = 3500
 				producer = GER
 			}
 			add_equipment_to_stockpile = {
-				type = infantry_weapons2
+				type = infantry_weapons_3
 				amount = 3500
 				producer = GER
 			}
@@ -2891,7 +2891,7 @@ focus_tree = {
 
 		available = {
 			owns_state = 676
-			emerging_communist_state_not_in_power_or_coalition = yes
+			emerging_communist_state_in_power_or_coalition = no
 		}
 
 		completion_reward = {
@@ -3070,7 +3070,7 @@ focus_tree = {
 
 		available = {
 			owns_state = 676
-			emerging_communist_state_are_not_in_power = yes
+			emerging_communist_state_are_in_power = no
 		}
 
 		completion_reward = {
@@ -3099,7 +3099,7 @@ focus_tree = {
 
 		available = {
 			owns_state = 676
-			emerging_communist_state_are_not_in_power = yes
+			emerging_communist_state_are_in_power = no
 		}
 
 		completion_reward = {
@@ -3128,7 +3128,7 @@ focus_tree = {
 
 		available = {
 			owns_state = 676
-			emerging_communist_state_are_not_in_power = yes
+			emerging_communist_state_are_in_power = no
 		}
 
 		completion_reward = {
@@ -3159,7 +3159,7 @@ focus_tree = {
 
 		available = {
 			owns_state = 676
-			emerging_communist_state_are_not_in_power = yes
+			emerging_communist_state_are_in_power = no
 		}
 
 		completion_reward = {
@@ -5247,22 +5247,22 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus URA_democratic_sklads"
 			add_equipment_to_stockpile = {
-				type = infantry_weapons1
+				type = infantry_weapons_2
 				amount = 1500
 				producer = SOV
 			}
 			add_equipment_to_stockpile = {
-				type = infantry_weapons2
+				type = infantry_weapons_3
 				amount = 750
 				producer = SOV
 			}
 			add_equipment_to_stockpile = {
-				type = Inf_equipment
+				type = infantry_weapons_type
 				amount = 1000
 				producer = SOV
 			}
 			add_equipment_to_stockpile = {
-				type = util_vehicle_equipment
+				type = util_vehicle_type
 				amount = 50
 				producer = SOV
 			}
@@ -5411,19 +5411,19 @@ focus_tree = {
 				set_temp_variable = { modify_subjectavtoritet = -6 }
 				modify_subjectavtoritet_support = yes
 			}
-			every_country = {
-				limit = {
-					OR = {
-						has_idea = EU_member
+			if = {
+				limit = { NOT = { has_global_flag = GAME_RULE_eu_disabled } }
+				custom_effect_tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				effect_tooltip = {
+					add_opinion_modifier = { target = URA modifier = recent_actions_positive }
+					add_opinion_modifier = { target = URA modifier = declaration_of_friendship }
+				}
+				hidden_effect = {
+					for_each_scope_loop = {
+						array = global.EU_member
+						add_opinion_modifier = { target = URA modifier = recent_actions_positive }
+						add_opinion_modifier = { target = URA modifier = declaration_of_friendship }
 					}
-				}
-				add_opinion_modifier = {
-					target = URA
-					modifier = recent_actions_positive
-				}
-				add_opinion_modifier = {
-					target = URA
-					modifier = declaration_of_friendship
 				}
 			}
 		}
@@ -5679,22 +5679,22 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus URA_democratic_euro_defence"
 			URA_idea_ural_army_reforms = yes
 			add_equipment_to_stockpile = {
-				type = infantry_weapons1
+				type = infantry_weapons_2
 				amount = -2000
 				producer = USA
 			}
 			add_equipment_to_stockpile = {
-				type = infantry_weapons1
+				type = infantry_weapons_2
 				amount = -1500
 				producer = ENG
 			}
 			add_equipment_to_stockpile = {
-				type = infantry_weapons2
+				type = infantry_weapons_3
 				amount = -1500
 				producer = GER
 			}
 			add_equipment_to_stockpile = {
-				type = infantry_weapons2
+				type = infantry_weapons_3
 				amount = -1500
 				producer = FRA
 			}
@@ -6634,22 +6634,22 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus URA_communism_ural_red_army"
 			add_equipment_to_stockpile = {
-				type = infantry_weapons1
+				type = infantry_weapons_2
 				amount = 1500
 				producer = SOV
 			}
 			add_equipment_to_stockpile = {
-				type = infantry_weapons2
+				type = infantry_weapons_3
 				amount = 750
 				producer = SOV
 			}
 			add_equipment_to_stockpile = {
-				type = Inf_equipment
+				type = infantry_weapons_type
 				amount = 1000
 				producer = SOV
 			}
 			add_equipment_to_stockpile = {
-				type = util_vehicle_equipment
+				type = util_vehicle_type
 				amount = 50
 				producer = SOV
 			}
@@ -10280,7 +10280,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus URA_roizman_federal"
-			676 = { add_dynamic_modifier = { modifier = EKB_city_1_level } }
+			676 = { add_dynamic_modifier = { modifier = URA_city_1_level } }
 			if = {
 				limit = {
 					URA = { is_subject_of = SOV }

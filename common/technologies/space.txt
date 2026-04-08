@@ -22,6 +22,12 @@ technologies = {
 	@2040 = 19
 	@2045 = 20
 	@2050 = 21
+	@2055 = 22
+	@2060 = 23
+	@2065 = 24
+	@2070 = 25
+	@2075 = 26
+	@2080 = 27
 
 	#Y Axis
 	@row1 = -4
@@ -42,7 +48,7 @@ technologies = {
 	@row16 = 56
 
 	GNSS1 = {
-		research_cost = 1
+		research_cost = 1.5
 		start_year = 1965
 		show_equipment_icon = yes
 
@@ -98,7 +104,7 @@ technologies = {
 		}
 	}
 	GNSS2 = {
-		research_cost = 1
+		research_cost = 1.5
 		start_year = 1975
 		show_equipment_icon = yes
 		enable_equipments = {
@@ -146,7 +152,7 @@ technologies = {
 		}
 	}
 	GNSS3 = {
-		research_cost = 1
+		research_cost = 1.5
 		start_year = 1985
 			show_equipment_icon = yes
 			enable_equipments = {
@@ -193,7 +199,7 @@ technologies = {
 		}
 	}
 	GNSS4 = {
-		research_cost = 1
+		research_cost = 1.5
 		start_year = 1995
 			show_equipment_icon = yes
 			enable_equipments = {
@@ -240,7 +246,7 @@ technologies = {
 		}
 	}
 	GNSS5 = {
-		research_cost = 1
+		research_cost = 1.5
 		start_year = 2005
 			show_equipment_icon = yes
 			enable_equipments = {
@@ -288,7 +294,7 @@ technologies = {
 		}
 	}
 	GNSS6 = {
-		research_cost = 1
+		research_cost = 1.5
 		start_year = 2015
 			show_equipment_icon = yes
 			enable_equipments = {
@@ -335,7 +341,7 @@ technologies = {
 		}
 	}
 	GNSS7 = {
-		research_cost = 1
+		research_cost = 1.5
 		start_year = 2025
 			show_equipment_icon = yes
 			enable_equipments = {
@@ -382,7 +388,7 @@ technologies = {
 		}
 	}
 	GNSS8 = {
-		research_cost = 1
+		research_cost = 1.5
 		start_year = 2035
 			show_equipment_icon = yes
 			enable_equipments = {
@@ -391,6 +397,10 @@ technologies = {
 		folder = {
 			name = space_folder
 			position = { x = -4 y = @2035 }
+		}
+		path = {
+			leads_to_tech = GNSS9
+			research_cost_coeff = 1
 		}
 		categories = {
 			CAT_Military
@@ -424,8 +434,192 @@ technologies = {
 			}
 		}
 	}
+	GNSS9 = {
+		research_cost = 1.5
+		start_year = 2045
+			show_equipment_icon = yes
+			enable_equipments = {
+				GNSS9
+			}
+		folder = {
+			name = space_folder
+			position = { x = -4 y = @2045 }
+		}
+		path = {
+			leads_to_tech = GNSS10
+			research_cost_coeff = 1
+		}
+		categories = {
+			CAT_Military
+			CAT_space
+			CAT_satellite
+			CAT_gnss
+		}
+		special_project_specialization = { specialization_nuclear }
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.5
+				date < 2045.01.01
+			}
+			modifier = {
+				factor = 0.2
+				date < 2040.01.01
+			}
+			modifier = {
+				factor = 2
+				check_variable = { gdp_per_capita > 19.999 }
+			}
+			modifier = {
+				factor = 0
+				AND = {
+					NOT = {
+						unique_missile_model_names = yes
+					}
+					check_variable = { gdp_per_capita < 20 }
+				}
+			}
+		}
+	}
+	GNSS10 = {
+		research_cost = 1.5
+		start_year = 2055
+			show_equipment_icon = yes
+			enable_equipments = {
+				GNSS10
+			}
+		folder = {
+			name = space_folder
+			position = { x = -4 y = @2055 }
+		}
+		path = {
+			leads_to_tech = GNSS11
+			research_cost_coeff = 1
+		}
+		categories = {
+			CAT_Military
+			CAT_space
+			CAT_satellite
+			CAT_gnss
+		}
+		special_project_specialization = { specialization_nuclear }
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.5
+				date < 2055.01.01
+			}
+			modifier = {
+				factor = 0.2
+				date < 2050.01.01
+			}
+			modifier = {
+				factor = 2
+				check_variable = { gdp_per_capita > 19.999 }
+			}
+			modifier = {
+				factor = 0
+				AND = {
+					NOT = {
+						unique_missile_model_names = yes
+					}
+					check_variable = { gdp_per_capita < 20 }
+				}
+			}
+		}
+	}
+	GNSS11 = {
+		research_cost = 1.5
+		start_year = 2065
+			show_equipment_icon = yes
+			enable_equipments = {
+				GNSS11
+			}
+		folder = {
+			name = space_folder
+			position = { x = -4 y = @2065 }
+		}
+		path = {
+			leads_to_tech = GNSS12
+			research_cost_coeff = 1
+		}
+		categories = {
+			CAT_Military
+			CAT_space
+			CAT_satellite
+			CAT_gnss
+		}
+		special_project_specialization = { specialization_nuclear }
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.5
+				date < 2065.01.01
+			}
+			modifier = {
+				factor = 0.2
+				date < 2060.01.01
+			}
+			modifier = {
+				factor = 2
+				check_variable = { gdp_per_capita > 19.999 }
+			}
+			modifier = {
+				factor = 0
+				AND = {
+					NOT = {
+						unique_missile_model_names = yes
+					}
+					check_variable = { gdp_per_capita < 20 }
+				}
+			}
+		}
+	}
+	GNSS12 = {
+		research_cost = 1.5
+		start_year = 2075
+			show_equipment_icon = yes
+			enable_equipments = {
+				GNSS12
+			}
+		folder = {
+			name = space_folder
+			position = { x = -4 y = @2075 }
+		}
+		categories = {
+			CAT_Military
+			CAT_space
+			CAT_satellite
+			CAT_gnss
+		}
+		special_project_specialization = { specialization_nuclear }
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.5
+				date < 2075.01.01
+			}
+			modifier = {
+				factor = 0.2
+				date < 2070.01.01
+			}
+			modifier = {
+				factor = 2
+				check_variable = { gdp_per_capita > 19.999 }
+			}
+			modifier = {
+				factor = 0
+				AND = {
+					NOT = {
+						unique_missile_model_names = yes
+					}
+					check_variable = { gdp_per_capita < 20 }
+				}
+			}
+		}
+	}
 	COMSAT1 = {
-		research_cost = 1
+		research_cost = 1.7
 		start_year = 1965
 		show_equipment_icon = yes
 		enable_equipments = {
@@ -478,7 +672,7 @@ technologies = {
 		}
 	}
 	COMSAT2 = {
-		research_cost = 1
+		research_cost = 1.7
 		start_year = 1975
 			show_equipment_icon = yes
 			enable_equipments = {
@@ -524,7 +718,7 @@ technologies = {
 		}
 	}
 	COMSAT3 = {
-		research_cost = 1
+		research_cost = 1.7
 		start_year = 1985
 			show_equipment_icon = yes
 			enable_equipments = {
@@ -570,7 +764,7 @@ technologies = {
 		}
 	}
 	COMSAT4 = {
-		research_cost = 1
+		research_cost = 1.7
 		start_year = 1995
 			show_equipment_icon = yes
 			enable_equipments = {
@@ -616,7 +810,7 @@ technologies = {
 		}
 	}
 	COMSAT5 = {
-		research_cost = 1
+		research_cost = 1.7
 		start_year = 2005
 			show_equipment_icon = yes
 			enable_equipments = {
@@ -662,7 +856,7 @@ technologies = {
 		}
 	}
 	COMSAT6 = {
-		research_cost = 1
+		research_cost = 1.7
 		start_year = 2015
 			show_equipment_icon = yes
 			enable_equipments = {
@@ -708,7 +902,7 @@ technologies = {
 		}
 	}
 	COMSAT7 = {
-		research_cost = 1
+		research_cost = 1.7
 		start_year = 2025
 			show_equipment_icon = yes
 			enable_equipments = {
@@ -754,7 +948,7 @@ technologies = {
 		}
 	}
 	COMSAT8 = {
-		research_cost = 1
+		research_cost = 1.7
 		start_year = 2035
 			show_equipment_icon = yes
 			enable_equipments = {
@@ -763,6 +957,10 @@ technologies = {
 		folder = {
 			name = space_folder
 			position = { x = 0 y = @2035 }
+		}
+		path = {
+			leads_to_tech = COMSAT9
+			research_cost_coeff = 1
 		}
 		categories = {
 			CAT_Military
@@ -795,8 +993,188 @@ technologies = {
 			}
 		}
 	}
+	COMSAT9 = {
+		research_cost = 1.7
+		start_year = 2045
+			show_equipment_icon = yes
+			enable_equipments = {
+				COMSAT9
+			}
+		folder = {
+			name = space_folder
+			position = { x = 0 y = @2045 }
+		}
+		path = {
+			leads_to_tech = COMSAT10
+			research_cost_coeff = 1
+		}
+		categories = {
+			CAT_Military
+			CAT_space
+			CAT_satellite
+		}
+		special_project_specialization = { specialization_nuclear }
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.5
+				date < 2045.01.01
+			}
+			modifier = {
+				factor = 0.2
+				date < 2040.01.01
+			}
+			modifier = {
+				factor = 2
+				check_variable = { gdp_per_capita > 19.999 }
+			}
+			modifier = {
+				factor = 0
+				AND = {
+					NOT = {
+						unique_missile_model_names = yes
+					}
+					check_variable = { gdp_per_capita < 20 }
+				}
+			}
+		}
+	}
+	COMSAT10 = {
+		research_cost = 1.7
+		start_year = 2055
+			show_equipment_icon = yes
+			enable_equipments = {
+				COMSAT10
+			}
+		folder = {
+			name = space_folder
+			position = { x = 0 y = @2055 }
+		}
+		path = {
+			leads_to_tech = COMSAT11
+			research_cost_coeff = 1
+		}
+		categories = {
+			CAT_Military
+			CAT_space
+			CAT_satellite
+		}
+		special_project_specialization = { specialization_nuclear }
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.5
+				date < 2055.01.01
+			}
+			modifier = {
+				factor = 0.2
+				date < 2050.01.01
+			}
+			modifier = {
+				factor = 2
+				check_variable = { gdp_per_capita > 19.999 }
+			}
+			modifier = {
+				factor = 0
+				AND = {
+					NOT = {
+						unique_missile_model_names = yes
+					}
+					check_variable = { gdp_per_capita < 20 }
+				}
+			}
+		}
+	}
+	COMSAT11 = {
+		research_cost = 1.7
+		start_year = 2065
+			show_equipment_icon = yes
+			enable_equipments = {
+				COMSAT11
+			}
+		folder = {
+			name = space_folder
+			position = { x = 0 y = @2065 }
+		}
+		path = {
+			leads_to_tech = COMSAT12
+			research_cost_coeff = 1
+		}
+		categories = {
+			CAT_Military
+			CAT_space
+			CAT_satellite
+		}
+		special_project_specialization = { specialization_nuclear }
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.5
+				date < 2065.01.01
+			}
+			modifier = {
+				factor = 0.2
+				date < 2060.01.01
+			}
+			modifier = {
+				factor = 2
+				check_variable = { gdp_per_capita > 19.999 }
+			}
+			modifier = {
+				factor = 0
+				AND = {
+					NOT = {
+						unique_missile_model_names = yes
+					}
+					check_variable = { gdp_per_capita < 20 }
+				}
+			}
+		}
+	}
+	COMSAT12 = {
+		research_cost = 1.7
+		start_year = 2075
+			show_equipment_icon = yes
+			enable_equipments = {
+				COMSAT12
+			}
+		folder = {
+			name = space_folder
+			position = { x = 0 y = @2075 }
+		}
+		categories = {
+			CAT_Military
+			CAT_space
+			CAT_satellite
+		}
+		special_project_specialization = { specialization_nuclear }
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.5
+				date < 2075.01.01
+			}
+			modifier = {
+				factor = 0.2
+				date < 2070.01.01
+			}
+			modifier = {
+				factor = 2
+				check_variable = { gdp_per_capita > 19.999 }
+			}
+			modifier = {
+				factor = 0
+				AND = {
+					NOT = {
+						unique_missile_model_names = yes
+					}
+					check_variable = { gdp_per_capita < 20 }
+				}
+			}
+		}
+	}
 	SPYSAT1 = {
-		research_cost = 1
+		research_cost = 1.7
 		start_year = 1965
 			show_equipment_icon = yes
 			enable_equipments = {
@@ -848,7 +1226,7 @@ technologies = {
 		}
 	}
 	SPYSAT2 = {
-		research_cost = 1
+		research_cost = 1.7
 		start_year = 1975
 			show_equipment_icon = yes
 			enable_equipments = {
@@ -894,7 +1272,7 @@ technologies = {
 		}
 	}
 	SPYSAT3 = {
-		research_cost = 1
+		research_cost = 1.7
 		start_year = 1985
 			show_equipment_icon = yes
 			enable_equipments = {
@@ -940,7 +1318,7 @@ technologies = {
 		}
 	}
 	SPYSAT4 = {
-		research_cost = 1
+		research_cost = 1.7
 		start_year = 1995
 			show_equipment_icon = yes
 			enable_equipments = {
@@ -986,7 +1364,7 @@ technologies = {
 		}
 	}
 	SPYSAT5 = {
-		research_cost = 1
+		research_cost = 1.7
 		start_year = 2005
 			show_equipment_icon = yes
 			enable_equipments = {
@@ -1032,7 +1410,7 @@ technologies = {
 		}
 	}
 	SPYSAT6 = {
-		research_cost = 1
+		research_cost = 1.7
 		start_year = 2015
 			show_equipment_icon = yes
 			enable_equipments = {
@@ -1078,7 +1456,7 @@ technologies = {
 		}
 	}
 	SPYSAT7 = {
-		research_cost = 1
+		research_cost = 1.7
 		start_year = 2025
 			show_equipment_icon = yes
 			enable_equipments = {
@@ -1124,7 +1502,7 @@ technologies = {
 		}
 	}
 	SPYSAT8 = {
-		research_cost = 1
+		research_cost = 1.7
 		start_year = 2035
 			show_equipment_icon = yes
 			enable_equipments = {
@@ -1133,6 +1511,10 @@ technologies = {
 		folder = {
 			name = space_folder
 			position = { x = 4 y = @2035 }
+		}
+		path = {
+			leads_to_tech = SPYSAT9
+			research_cost_coeff = 1
 		}
 		categories = {
 			CAT_Military
@@ -1165,8 +1547,188 @@ technologies = {
 			}
 		}
 	}
+	SPYSAT9 = {
+		research_cost = 1.7
+		start_year = 2045
+			show_equipment_icon = yes
+			enable_equipments = {
+				SPYSAT9
+			}
+		folder = {
+			name = space_folder
+			position = { x = 4 y = @2045 }
+		}
+		path = {
+			leads_to_tech = SPYSAT10
+			research_cost_coeff = 1
+		}
+		categories = {
+			CAT_Military
+			CAT_space
+			CAT_satellite
+		}
+		special_project_specialization = { specialization_nuclear }
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.5
+				date < 2045.01.01
+			}
+			modifier = {
+				factor = 0.2
+				date < 2040.01.01
+			}
+			modifier = {
+				factor = 2
+				check_variable = { gdp_per_capita > 19.999 }
+			}
+			modifier = {
+				factor = 0
+				AND = {
+					NOT = {
+						unique_missile_model_names = yes
+					}
+					check_variable = { gdp_per_capita < 20 }
+				}
+			}
+		}
+	}
+	SPYSAT10 = {
+		research_cost = 1.7
+		start_year = 2055
+			show_equipment_icon = yes
+			enable_equipments = {
+				SPYSAT10
+			}
+		folder = {
+			name = space_folder
+			position = { x = 4 y = @2055 }
+		}
+		path = {
+			leads_to_tech = SPYSAT11
+			research_cost_coeff = 1
+		}
+		categories = {
+			CAT_Military
+			CAT_space
+			CAT_satellite
+		}
+		special_project_specialization = { specialization_nuclear }
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.5
+				date < 2055.01.01
+			}
+			modifier = {
+				factor = 0.2
+				date < 2050.01.01
+			}
+			modifier = {
+				factor = 2
+				check_variable = { gdp_per_capita > 19.999 }
+			}
+			modifier = {
+				factor = 0
+				AND = {
+					NOT = {
+						unique_missile_model_names = yes
+					}
+					check_variable = { gdp_per_capita < 20 }
+				}
+			}
+		}
+	}
+	SPYSAT11 = {
+		research_cost = 1.7
+		start_year = 2065
+			show_equipment_icon = yes
+			enable_equipments = {
+				SPYSAT11
+			}
+		folder = {
+			name = space_folder
+			position = { x = 4 y = @2065 }
+		}
+		path = {
+			leads_to_tech = SPYSAT12
+			research_cost_coeff = 1
+		}
+		categories = {
+			CAT_Military
+			CAT_space
+			CAT_satellite
+		}
+		special_project_specialization = { specialization_nuclear }
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.5
+				date < 2065.01.01
+			}
+			modifier = {
+				factor = 0.2
+				date < 2060.01.01
+			}
+			modifier = {
+				factor = 2
+				check_variable = { gdp_per_capita > 19.999 }
+			}
+			modifier = {
+				factor = 0
+				AND = {
+					NOT = {
+						unique_missile_model_names = yes
+					}
+					check_variable = { gdp_per_capita < 20 }
+				}
+			}
+		}
+	}
+	SPYSAT12 = {
+		research_cost = 1.7
+		start_year = 2075
+			show_equipment_icon = yes
+			enable_equipments = {
+				SPYSAT12
+			}
+		folder = {
+			name = space_folder
+			position = { x = 4 y = @2075 }
+		}
+		categories = {
+			CAT_Military
+			CAT_space
+			CAT_satellite
+		}
+		special_project_specialization = { specialization_nuclear }
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.5
+				date < 2075.01.01
+			}
+			modifier = {
+				factor = 0.2
+				date < 2070.01.01
+			}
+			modifier = {
+				factor = 2
+				check_variable = { gdp_per_capita > 19.999 }
+			}
+			modifier = {
+				factor = 0
+				AND = {
+					NOT = {
+						unique_missile_model_names = yes
+					}
+					check_variable = { gdp_per_capita < 20 }
+				}
+			}
+		}
+	}
 	KILLSAT1 = {
-		research_cost = 1
+		research_cost = 2
 		start_year = 1985
 		show_equipment_icon = yes
 		enable_equipments = {
@@ -1221,12 +1783,18 @@ technologies = {
 		}
 	}
 	KILLSAT2 = {
-		research_cost = 1
+		research_cost = 2
 		start_year = 1995
-			show_equipment_icon = yes
-			enable_equipments = {
-				KILLSAT2
+		show_equipment_icon = yes
+		enable_equipments = {
+			KILLSAT2
+		}
+		on_research_complete = {
+			custom_effect_tooltip = {
+				localization_key = SP_UNLOCK_PROJECT
+				PROJECT = sp_space_artillery
 			}
+		}
 		folder = {
 			name = space_folder
 			position = { x = 8 y = @1995 }
@@ -1267,7 +1835,7 @@ technologies = {
 		}
 	}
 	KILLSAT3 = {
-		research_cost = 1
+		research_cost = 2
 		start_year = 2005
 			show_equipment_icon = yes
 			enable_equipments = {
@@ -1313,7 +1881,7 @@ technologies = {
 		}
 	}
 	KILLSAT4 = {
-		research_cost = 1
+		research_cost = 2
 		start_year = 2015
 			show_equipment_icon = yes
 			enable_equipments = {
@@ -1359,7 +1927,7 @@ technologies = {
 		}
 	}
 	KILLSAT5 = {
-		research_cost = 1
+		research_cost = 2
 		start_year = 2025
 			show_equipment_icon = yes
 			enable_equipments = {
@@ -1405,7 +1973,7 @@ technologies = {
 		}
 	}
 	KILLSAT6 = {
-		research_cost = 1
+		research_cost = 2
 		start_year = 2035
 		show_equipment_icon = yes
 		enable_equipments = {
@@ -1414,6 +1982,10 @@ technologies = {
 		folder = {
 			name = space_folder
 			position = { x = 8 y = @2035 }
+		}
+		path = {
+			leads_to_tech = KILLSAT7
+			research_cost_coeff = 1
 		}
 		categories = {
 			CAT_Military
@@ -1446,8 +2018,188 @@ technologies = {
 			}
 		}
 	}
+	KILLSAT7 = {
+		research_cost = 2
+		start_year = 2045
+		show_equipment_icon = yes
+		enable_equipments = {
+			KILLSAT7
+		}
+		folder = {
+			name = space_folder
+			position = { x = 8 y = @2045 }
+		}
+		path = {
+			leads_to_tech = KILLSAT8
+			research_cost_coeff = 1
+		}
+		categories = {
+			CAT_Military
+			CAT_space
+			CAT_satellite
+		}
+		special_project_specialization = { specialization_nuclear }
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.5
+				date < 2045.01.01
+			}
+			modifier = {
+				factor = 0.2
+				date < 2040.01.01
+			}
+			modifier = {
+				factor = 2
+				check_variable = { gdp_per_capita > 19.999 }
+			}
+			modifier = {
+				factor = 0
+				AND = {
+					NOT = {
+						unique_missile_model_names = yes
+					}
+					check_variable = { gdp_per_capita < 20 }
+				}
+			}
+		}
+	}
+	KILLSAT8 = {
+		research_cost = 2
+		start_year = 2055
+		show_equipment_icon = yes
+		enable_equipments = {
+			KILLSAT8
+		}
+		folder = {
+			name = space_folder
+			position = { x = 8 y = @2055 }
+		}
+		path = {
+			leads_to_tech = KILLSAT9
+			research_cost_coeff = 1
+		}
+		categories = {
+			CAT_Military
+			CAT_space
+			CAT_satellite
+		}
+		special_project_specialization = { specialization_nuclear }
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.5
+				date < 2055.01.01
+			}
+			modifier = {
+				factor = 0.2
+				date < 2050.01.01
+			}
+			modifier = {
+				factor = 2
+				check_variable = { gdp_per_capita > 19.999 }
+			}
+			modifier = {
+				factor = 0
+				AND = {
+					NOT = {
+						unique_missile_model_names = yes
+					}
+					check_variable = { gdp_per_capita < 20 }
+				}
+			}
+		}
+	}
+	KILLSAT9 = {
+		research_cost = 2
+		start_year = 2065
+		show_equipment_icon = yes
+		enable_equipments = {
+			KILLSAT9
+		}
+		folder = {
+			name = space_folder
+			position = { x = 8 y = @2065 }
+		}
+		path = {
+			leads_to_tech = KILLSAT10
+			research_cost_coeff = 1
+		}
+		categories = {
+			CAT_Military
+			CAT_space
+			CAT_satellite
+		}
+		special_project_specialization = { specialization_nuclear }
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.5
+				date < 2065.01.01
+			}
+			modifier = {
+				factor = 0.2
+				date < 2060.01.01
+			}
+			modifier = {
+				factor = 2
+				check_variable = { gdp_per_capita > 19.999 }
+			}
+			modifier = {
+				factor = 0
+				AND = {
+					NOT = {
+						unique_missile_model_names = yes
+					}
+					check_variable = { gdp_per_capita < 20 }
+				}
+			}
+		}
+	}
+	KILLSAT10 = {
+		research_cost = 2
+		start_year = 2075
+		show_equipment_icon = yes
+		enable_equipments = {
+			KILLSAT10
+		}
+		folder = {
+			name = space_folder
+			position = { x = 8 y = @2075 }
+		}
+		categories = {
+			CAT_Military
+			CAT_space
+			CAT_satellite
+		}
+		special_project_specialization = { specialization_nuclear }
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.5
+				date < 2075.01.01
+			}
+			modifier = {
+				factor = 0.2
+				date < 2070.01.01
+			}
+			modifier = {
+				factor = 2
+				check_variable = { gdp_per_capita > 19.999 }
+			}
+			modifier = {
+				factor = 0
+				AND = {
+					NOT = {
+						unique_missile_model_names = yes
+					}
+					check_variable = { gdp_per_capita < 20 }
+				}
+			}
+		}
+	}
 	OLV1 = {
-		research_cost = 1
+		research_cost = 2.0
 		start_year = 1965
 			show_equipment_icon = yes
 			enable_equipments = {
@@ -1502,7 +2254,7 @@ technologies = {
 		}
 	}
 	OLV2 = {
-		research_cost = 1
+		research_cost = 2.0
 		start_year = 1975
 			show_equipment_icon = yes
 			enable_equipments = {
@@ -1550,7 +2302,7 @@ technologies = {
 		}
 	}
 	OLV3 = {
-		research_cost = 1
+		research_cost = 2.0
 		start_year = 1985
 			show_equipment_icon = yes
 			enable_equipments = {
@@ -1598,7 +2350,7 @@ technologies = {
 		}
 	}
 	OLV4 = {
-		research_cost = 1
+		research_cost = 2.0
 		start_year = 1995
 			show_equipment_icon = yes
 			enable_equipments = {
@@ -1646,7 +2398,7 @@ technologies = {
 		}
 	}
 	OLV5 = {
-		research_cost = 1
+		research_cost = 2.0
 		start_year = 2005
 			show_equipment_icon = yes
 			enable_equipments = {
@@ -1694,7 +2446,7 @@ technologies = {
 		}
 	}
 	OLV6 = {
-		research_cost = 1
+		research_cost = 2.0
 		start_year = 2015
 		show_equipment_icon = yes
 		enable_equipments = {
@@ -1747,11 +2499,10 @@ technologies = {
 	}
 	part_reusable_OLV6 = {
 		on_research_complete = {
-			log = "[GetDateText]: [Root.GetName]: add tech part_reusable_OLV6"
 			custom_effect_tooltip = part_reusable_OLV6_techtree_effect_TT
 			part_reusable_OLV6 = yes
 		}
-		research_cost = 1
+		research_cost = 1.6
 		start_year = 2020
 		folder = {
 			name = space_folder
@@ -1790,7 +2541,7 @@ technologies = {
 		}
 	}
 	OLV7 = {
-		research_cost = 1
+		research_cost = 2.0
 		start_year = 2025
 			show_equipment_icon = yes
 			enable_equipments = {
@@ -1843,11 +2594,10 @@ technologies = {
 	}
 	full_reusable_OLV7 = {
 		on_research_complete = {
-			log = "[GetDateText]: [Root.GetName]: add tech full_reusable_OLV7"
 			custom_effect_tooltip = full_reusable_OLV7_techtree_effect_TT
 			full_reusable_OLV7 = yes
 		}
-		research_cost = 1
+		research_cost = 1.6
 		start_year = 2030
 		folder = {
 			name = space_folder
@@ -1886,7 +2636,7 @@ technologies = {
 		}
 	}
 	OLV8 = {
-		research_cost = 1
+		research_cost = 2.0
 		start_year = 2035
 		show_equipment_icon = yes
 		enable_equipments = {
@@ -1936,15 +2686,18 @@ technologies = {
 	}
 	full_reusable_OLV8 = {
 		on_research_complete = {
-			log = "[GetDateText]: [Root.GetName]: add tech full_reusable_OLV8"
 			custom_effect_tooltip = full_reusable_OLV8_techtree_effect_TT
 			full_reusable_OLV8 = yes
 		}
-		research_cost = 1
+		research_cost = 1.6
 		start_year = 2040
 		folder = {
 			name = space_folder
 			position = { x = 14 y = @2040 }
+		}
+		path = {
+			leads_to_tech = OLV9
+			research_cost_coeff = 1
 		}
 		categories = {
 			CAT_Military
@@ -1962,6 +2715,198 @@ technologies = {
 			modifier = {
 				factor = 0.2
 				date < 2010.01.01
+			}
+			modifier = {
+				factor = 2
+				check_variable = { gdp_per_capita > 19.999 }
+			}
+			modifier = {
+				factor = 0
+				AND = {
+					NOT = {
+						unique_missile_model_names = yes
+					}
+					check_variable = { gdp_per_capita < 20 }
+				}
+			}
+		}
+	}
+	OLV9 = {
+		research_cost = 2.0
+		start_year = 2045
+		show_equipment_icon = yes
+		enable_equipments = {
+			OLV9
+		}
+		folder = {
+			name = space_folder
+			position = { x = 16 y = @2045 }
+		}
+		path = {
+			leads_to_tech = OLV10
+			research_cost_coeff = 1
+		}
+		categories = {
+			CAT_Military
+			CAT_missile
+			CAT_space
+			CAT_bm
+			CAT_icbm
+		}
+		special_project_specialization = { specialization_nuclear }
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.5
+				date < 2045.01.01
+			}
+			modifier = {
+				factor = 0.2
+				date < 2040.01.01
+			}
+			modifier = {
+				factor = 2
+				check_variable = { gdp_per_capita > 19.999 }
+			}
+			modifier = {
+				factor = 0
+				AND = {
+					NOT = {
+						unique_missile_model_names = yes
+					}
+					check_variable = { gdp_per_capita < 20 }
+				}
+			}
+		}
+	}
+	OLV10 = {
+		research_cost = 2.0
+		start_year = 2055
+		show_equipment_icon = yes
+		enable_equipments = {
+			OLV10
+		}
+		folder = {
+			name = space_folder
+			position = { x = 16 y = @2055 }
+		}
+		path = {
+			leads_to_tech = OLV11
+			research_cost_coeff = 1
+		}
+		categories = {
+			CAT_Military
+			CAT_missile
+			CAT_space
+			CAT_bm
+			CAT_icbm
+		}
+		special_project_specialization = { specialization_nuclear }
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.5
+				date < 2055.01.01
+			}
+			modifier = {
+				factor = 0.2
+				date < 2050.01.01
+			}
+			modifier = {
+				factor = 2
+				check_variable = { gdp_per_capita > 19.999 }
+			}
+			modifier = {
+				factor = 0
+				AND = {
+					NOT = {
+						unique_missile_model_names = yes
+					}
+					check_variable = { gdp_per_capita < 20 }
+				}
+			}
+		}
+	}
+	OLV11 = {
+		research_cost = 2.0
+		start_year = 2065
+		show_equipment_icon = yes
+		enable_equipments = {
+			OLV11
+		}
+		folder = {
+			name = space_folder
+			position = { x = 16 y = @2065 }
+		}
+		path = {
+			leads_to_tech = OLV12
+			research_cost_coeff = 1
+		}
+		categories = {
+			CAT_Military
+			CAT_missile
+			CAT_space
+			CAT_bm
+			CAT_icbm
+		}
+		special_project_specialization = { specialization_nuclear }
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.5
+				date < 2065.01.01
+			}
+			modifier = {
+				factor = 0.2
+				date < 2060.01.01
+			}
+			modifier = {
+				factor = 2
+				check_variable = { gdp_per_capita > 19.999 }
+			}
+			modifier = {
+				factor = 0
+				AND = {
+					NOT = {
+						unique_missile_model_names = yes
+					}
+					check_variable = { gdp_per_capita < 20 }
+				}
+			}
+		}
+	}
+	OLV12 = {
+		research_cost = 2.0
+		start_year = 2075
+		show_equipment_icon = yes
+		enable_equipments = {
+			OLV12
+		}
+		folder = {
+			name = space_folder
+			position = { x = 16 y = @2075 }
+		}
+		categories = {
+			CAT_Military
+			CAT_missile
+			CAT_space
+			CAT_bm
+			CAT_icbm
+		}
+		special_project_specialization = { specialization_nuclear }
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.5
+				date < 2075.01.01
+			}
+			modifier = {
+				factor = 0.2
+				date < 2070.01.01
 			}
 			modifier = {
 				factor = 2

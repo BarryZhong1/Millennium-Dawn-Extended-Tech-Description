@@ -7,7 +7,7 @@ SOV_Sovfed_category = {
 		icon = GFX_decision_sovfed_annex_button
 
 		visible = {
-			SUB_subjects_availables = yes
+			SUB_has_russian_special_autonomy = yes
 		}
 		available = {
 			NOT = { has_government = democratic }
@@ -98,7 +98,9 @@ SOV_Sovfed_category = {
 		icon = GFX_decision_sovfed_annex_button
 
 		visible = {
-			SUB_state_availables = yes
+			any_subject_country = {
+				has_autonomy_state = autonomy_state_rf
+			}
 		}
 		available = {
 			NOT = { has_government = democratic }
@@ -197,16 +199,10 @@ SOV_Sovfed_category = {
 		icon = GFX_decision_sovfed_governorate_button
 		days_remove = 140
 		available = {
-			custom_trigger_tooltip = {
-				tooltip = SOV_available_governorate_annex_tt
-				SOV_russian_empire_annex_governorates_availables = yes
-			}
+			SOV_russian_empire_annex_governorates_availables = yes
 		}
 		visible = {
-			custom_trigger_tooltip = {
-				tooltip = SOV_available_governorate_annex_tt
-				SOV_russian_empire_annex_governorates_availables = yes
-			}
+			SOV_russian_empire_annex_governorates_availables = yes
 			OR = {
 				nationalist_monarchists_are_in_power = yes
 				nationalist_right_wing_populists_are_in_power = yes
@@ -327,7 +323,7 @@ SOV_Sovfed_category = {
 			NOT = {
 				has_country_flag = SUB_moscow_9
 			}
-			SUB_moscow_exist_development = yes
+			NOT = { has_country_flag = SOV_moscow_no_more }
 		}
 		available = {
 			date > 2003.1.1
@@ -503,7 +499,7 @@ SOV_Sovfed_category = {
 
 		visible = {
 			has_country_flag = SUB_taxes_to_close
-			SUB_subjects_availables = yes
+			SUB_has_russian_special_autonomy = yes
 			NOT = {
 				SOV = {
 					has_country_flag = SOV_subjects_no_taxes
@@ -972,6 +968,7 @@ SOV_Sovfed_category = {
 		days_remove = 100
 
 		visible = {
+			country_exists = HPR
 			NOT = { has_idea = HPR_concern_sov }
 			NOT = { has_idea = HPR_concern_sov1 }
 			HPR = {	has_completed_focus = HPR_concers }
@@ -2500,7 +2497,6 @@ TAT_tatneft_category = {
 		}
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision TAT_tatneft_tech2"
-			set_country_flag = TAT_tech2
 			swap_ideas = {
 				remove_idea = TAT_tatneft_idea1
 				add_idea = TAT_tatneft_idea2
@@ -2988,7 +2984,7 @@ SIL_bund_category = {
 						has_country_flag = SIL_end_bund
 						has_country_flag = SIL_start_bund
 					}
-			  }
+			 }
 			}
 		}
 		complete_effect = {
@@ -3049,10 +3045,6 @@ SIL_bund_category = {
 			}
 			has_completed_focus = SOV_slavic_corps
 			custom_trigger_tooltip = {
-				tooltip = wagner_rebellion
-				NOT = { has_country_flag = SOV_wagner_rebeliion_flag }
-			}
-			custom_trigger_tooltip = {
 				tooltip = SOV_wagner_recruit_1500
 				check_variable = { SOV.wagner > 1499 }
 			}
@@ -3110,7 +3102,7 @@ SIL_bund_category = {
 				modify_silesiabund_support = yes
 			}
 			add_equipment_to_stockpile = {
-				type = infantry_weapons3
+				type = infantry_weapons_4
 				amount = -300
 				producer = SOV
 			}
@@ -3137,7 +3129,7 @@ SIL_bund_category = {
 				original_tag = CZE
 				original_tag = SLO
 				original_tag = ALB
-				has_idea = SOV_warsaw_pact_idea
+				has_idea = faction_warsaw_pact_idea
 			}
 		}
 		visible = {
@@ -3259,7 +3251,7 @@ SIL_bund_category = {
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision SIL_bund_che_boeviks"
 			add_equipment_to_stockpile = {
-				type = infantry_weapons3
+				type = infantry_weapons_4
 				amount = -2300
 				producer = CHE
 			}

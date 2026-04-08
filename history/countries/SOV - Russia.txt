@@ -1,9 +1,13 @@
 capital = 652
 
 2000.1.1 = {
+	set_variable = { currency_strength = 0.7 }
 	set_cosmetic_tag = SOV
 	set_country_flag = dynamic_flag
 	set_country_flag = dynamic_rebel_flag
+	set_country_flag = is_getting_cdf_subsidies
+	add_to_array = { global.uncdf_recipients = THIS }
+	add_dynamic_modifier = { modifier = un_aid_subsidies_modifier }
 	set_variable = { gdp_per_capita = 14.570 }
 
 	declare_war_on = {
@@ -19,6 +23,7 @@ capital = 652
 		set_value = 0
 	}
 
+	complete_special_project = sp:sp_microchip_production
 	complete_special_project = sp:sp_aircraft_project
 
 	if = {
@@ -116,6 +121,17 @@ capital = 652
 			name = "Federal Security Service (FSB)"
 			icon = GFX_intelligence_agency_logo_sov
 		}
+
+		# Pre-existing agency upgrades (FSB/SVR inherited KGB capabilities)
+		upgrade_intelligence_agency = upgrade_form_department
+		upgrade_intelligence_agency = upgrade_crypto_strength
+		upgrade_intelligence_agency = upgrade_passive_defense
+		upgrade_intelligence_agency = upgrade_passive_defense
+		upgrade_intelligence_agency = upgrade_invisible_ink
+		upgrade_intelligence_agency = upgrade_invisible_ink
+		upgrade_intelligence_agency = upgrade_training_centers
+		upgrade_intelligence_agency = upgrade_commando_training
+
 		create_operative_leader = {
 			name = "Anna Chapman"
 			GFX = GFX_portrait_Anna_Vasilyevna_Chapman_Russia_Spy
@@ -146,29 +162,13 @@ capital = 652
 			available_to_spy_master = yes
 			nationalities = { USA }
 		}
-
-		else = {
-			add_to_array = { cyber_targets = USA }
-			add_to_array = { cyber_targets = ENG }
-			add_to_array = { cyber_targets = FRA }
-			add_to_array = { cyber_targets = GER }
-			add_to_array = { cyber_targets = CZE }
-			add_to_array = { cyber_targets = POL }
-			add_to_array = { cyber_targets = UKR }
-			add_to_array = { cyber_targets = EST }
-			add_to_array = { cyber_targets = LAT }
-			add_to_array = { cyber_targets = LIT }
-			add_to_array = { cyber_targets = FIN }
-			add_to_array = { cyber_targets = NOR }
-			add_to_array = { cyber_targets = SWE }
-			add_to_array = { cyber_targets = CHI }
-			add_to_array = { cyber_targets = JAP }
-			add_to_array = { cyber_targets = KOR }
-			add_to_array = { cyber_targets = NKO }
-			add_to_array = { cyber_targets = PER }
-			add_to_array = { cyber_targets = ISR }
-			add_to_array = { cyber_targets = TUR }
-			add_to_array = { cyber_targets_propaganda = USA }
+		create_operative_leader = {
+			name = "Igor Girkin"
+			GFX = GFX_portrait_igor_girkin
+			traits = { operative_insurgent operative_tough }
+			bypass_recruitment = no
+			available_to_spy_master = no
+			nationalities = { SOV }
 		}
 	}
 
@@ -209,48 +209,48 @@ capital = 652
 		aircraft_heli_engineering_1 = 1
 		aircraft_heli_engineering_2 = 1
 
-		tech_submarine_engineering = 1
 		tech_submarine_engineering_1 = 1
 		tech_submarine_engineering_2 = 1
+		tech_submarine_engineering_3 = 1
 
 		tech_naval_systems_engineering = 1
-		tech_power_systems = 1
 		tech_power_systems_1 = 1
-		tech_nuclear_power_systems = 1
+		tech_power_systems_2 = 1
 		tech_nuclear_power_systems_1 = 1
+		tech_nuclear_power_systems_2 = 1
 
 		tech_combat_support_systems = 1
-		tech_fire_control = 1
 		tech_fire_control_1 = 1
-		tech_combat_radar = 1
+		tech_fire_control_2 = 1
 		tech_combat_radar_1 = 1
-		tech_combat_sonar = 1
+		tech_combat_radar_2 = 1
 		tech_combat_sonar_1 = 1
+		tech_combat_sonar_2 = 1
 
 		tech_early_naval_weapon_systems = 1
 		tech_naval_weapon_systems = 1
-		tech_light_guns = 1
 		tech_light_guns_1 = 1
+		tech_light_guns_2 = 1
 
-		tech_point_defense_system = 1
+		tech_point_defense_chain_gun = 1
 		tech_point_defense_system_1 = 1
 		tech_point_defense_system_2 = 1
 
-		tech_turret_missiles_surface = 1
 		tech_turret_missiles_surface_1 = 1
 		tech_turret_missiles_surface_2 = 1
-		tech_turret_missiles_aa = 1
+		tech_turret_missiles_surface_3 = 1
 		tech_turret_missiles_aa_1 = 1
-		tech_vls_surface = 1
+		tech_turret_missiles_aa_2 = 1
 		tech_vls_surface_1 = 1
-		tech_vls_aa = 1
+		tech_vls_surface_2 = 1
 		tech_vls_aa_1 = 1
+		tech_vls_aa_2 = 1
 
-		tech_torpedoes = 1
 		tech_torpedoes_1 = 1
+		tech_torpedoes_2 = 1
 
-		tech_landing_craft = 1
-		tech_amphibious_assault_ship = 1
+		tech_landing_craft_1 = 1
+		tech_landing_craft_2 = 1
 	}
 
 	#Kiev Class/Pr.1143
@@ -271,9 +271,10 @@ capital = 652
 			front_1_custom_slot = module_helipads_1
 			front_2_custom_slot = module_helipads_1
 			mid_1_custom_slot = module_ciws_2
-			mid_2_custom_slot = module_ciws_2
+			mid_2_custom_slot = module_aa_missiles_1
 			mid_3_custom_slot = module_ciws_2
 		}
+		icon = "gfx/interface/technologies/SOV/NAV/Kiev.dds"
 		obsolete = yes
 	}
 
@@ -297,6 +298,7 @@ capital = 652
 			mid_1_custom_slot = module_helipads_1
 			mid_2_custom_slot = module_aa_missiles_2
 		}
+		icon = "gfx/interface/technologies/SOV/NAV/Kuznetsov.dds"
 	}
 
 	#Kirov Class/Pr. 1144
@@ -321,6 +323,7 @@ capital = 652
 			rear_1_custom_slot = module_ciws_2
 			rear_2_custom_slot = module_light_helipad_1
 		}
+		icon = "gfx/interface/technologies/SOV/NAV/Kirov.dds"
 		obsolete = yes
 	}
 
@@ -345,6 +348,7 @@ capital = 652
 			rear_1_custom_slot = module_ram_3
 			rear_2_custom_slot = module_light_helipad_1
 		}
+		icon = "gfx/interface/technologies/SOV/NAV/Kirov-II.dds"
 	}
 
 	#Slava Class
@@ -369,6 +373,7 @@ capital = 652
 			rear_1_custom_slot = module_aa_missiles_2
 			rear_2_custom_slot = module_light_helipad_1
 		}
+		icon = "gfx/interface/technologies/SOV/NAV/Slava.dds"
 	}
 	create_production_license = {
 		target = UKR
@@ -387,7 +392,7 @@ capital = 652
 		parent_version = 0
 		role_icon_index = 5
 		modules = {
-			fixed_ship_engine_slot = module_surface_diesel_power
+			fixed_ship_engine_slot = module_surface_diesel_power_1
 			fixed_ship_fire_control_system_slot = module_analog_fire_control
 			fixed_ship_radar_slot = module_radar_2
 			fixed_ship_battery_slot_4 = module_aa_missiles_1
@@ -401,7 +406,7 @@ capital = 652
 			rear_1_custom_slot = module_torpedoes_1
 			rear_2_custom_slot = module_light_helipad_1
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/CA1_Kara.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/Kara.dds"
 		obsolete = yes
 	}
 
@@ -413,8 +418,8 @@ capital = 652
 		parent_version = 0
 		role_icon_index = 4
 		modules = {
-			fixed_ship_engine_slot = module_surface_diesel_power
-			fixed_ship_fire_control_system_slot = module_analog_fire_control
+			fixed_ship_engine_slot = module_surface_diesel_power_1
+			fixed_ship_fire_control_system_slot = module_capital_analog_fire_control
 			fixed_ship_radar_slot = module_radar_2
 			fixed_ship_auxillary_slot_3 = module_aa_missiles_1
 			fixed_ship_auxillary_slot_2 = module_asm_1
@@ -425,7 +430,7 @@ capital = 652
 			mid_2_custom_slot = module_fuel_tank
 			rear_1_custom_slot = module_light_helipad_1
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/DDG1_Kashin.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/Kashin.dds"
 	}
 	#Kashin Class
 	create_equipment_variant = {
@@ -435,8 +440,8 @@ capital = 652
 		parent_version = 0
 		role_icon_index = 4
 		modules = {
-			fixed_ship_engine_slot = module_surface_diesel_power
-			fixed_ship_fire_control_system_slot = module_analog_fire_control
+			fixed_ship_engine_slot = module_surface_diesel_power_1
+			fixed_ship_fire_control_system_slot = module_capital_analog_fire_control
 			fixed_ship_radar_slot = module_radar_3
 			fixed_ship_auxillary_slot_3 = module_aa_missiles_1
 			fixed_ship_auxillary_slot_2 = module_asm_3
@@ -447,7 +452,7 @@ capital = 652
 			mid_2_custom_slot = module_fuel_tank
 			rear_1_custom_slot = module_light_helipad_1
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/DDG1_Kashin.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/Kashin.dds"
 	}
 
 	#Sovremennyy Class
@@ -458,8 +463,8 @@ capital = 652
 		parent_version = 0
 		role_icon_index = 4
 		modules = {
-			fixed_ship_engine_slot = module_surface_diesel_power
-			fixed_ship_fire_control_system_slot = module_analog_fire_control
+			fixed_ship_engine_slot = module_surface_diesel_power_1
+			fixed_ship_fire_control_system_slot = module_capital_analog_fire_control
 			fixed_ship_radar_slot = module_radar_2
 			fixed_ship_auxillary_slot_3 = module_aa_missiles_2
 			fixed_ship_auxillary_slot_2 = module_asm_2
@@ -470,7 +475,7 @@ capital = 652
 			mid_2_custom_slot = module_ciws_2
 			rear_1_custom_slot = module_light_helipad_1
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/DDG2_Sovremennyy.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/Sovremenny.dds"
 		model = "SOV_destroyer_2_entity"
 	}
 
@@ -482,8 +487,8 @@ capital = 652
 		parent_version = 1
 		role_icon_index = 4
 		modules = {
-			fixed_ship_engine_slot = module_surface_diesel_power
-			fixed_ship_fire_control_system_slot = module_analog_fire_control
+			fixed_ship_engine_slot = module_surface_diesel_power_1
+			fixed_ship_fire_control_system_slot = module_capital_analog_fire_control
 			fixed_ship_radar_slot = module_sonar_2
 			fixed_ship_auxillary_slot_3 = module_ciws_2
 			fixed_ship_auxillary_slot_2 = module_vls_sam_2
@@ -494,7 +499,7 @@ capital = 652
 			mid_2_custom_slot = module_anti_submarine_missile_2
 			rear_1_custom_slot = module_light_helipad_1
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/DDG2_Udaloy.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/Udaloy.dds"
 		model = "SOV_udaloy_entity"
 	}
 
@@ -506,8 +511,8 @@ capital = 652
 		parent_version = 2
 		role_icon_index = 4
 		modules = {
-			fixed_ship_engine_slot = module_surface_diesel_power
-			fixed_ship_fire_control_system_slot = module_analog_fire_control
+			fixed_ship_engine_slot = module_surface_diesel_power_1
+			fixed_ship_fire_control_system_slot = module_capital_analog_fire_control
 			fixed_ship_radar_slot = module_sonar_3
 			fixed_ship_auxillary_slot_3 = module_ram_2
 			fixed_ship_auxillary_slot_2 = module_aa_missiles_2
@@ -518,7 +523,7 @@ capital = 652
 			mid_2_custom_slot = module_vls_sam_2
 			rear_1_custom_slot = module_light_helipad_1
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/DDG2.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/Udaloy-II.dds"
 		model = "SOV_udaloy_entity"
 	}
 
@@ -530,7 +535,7 @@ capital = 652
 		parent_version = 0
 		role_icon_index = 2
 		modules = {
-			fixed_ship_engine_slot = module_light_surface_diesel_power
+			fixed_ship_engine_slot = module_light_surface_diesel_power_1
 			fixed_ship_fire_control_system_slot = module_digital_integrated_fire_control
 			fixed_ship_radar_slot = module_sonar_3
 			fixed_ship_auxillary_slot_2 = module_ciws_2
@@ -540,6 +545,7 @@ capital = 652
 			front_1_custom_slot = module_torpedoes_2
 			rear_1_custom_slot = module_light_helipad_1
 		}
+		icon = "gfx/interface/technologies/SOV/NAV/Neustra.dds"
 	}
 
 	#Talwar Class
@@ -560,7 +566,7 @@ capital = 652
 			front_1_custom_slot = module_torpedoes_2
 			rear_1_custom_slot = module_light_helipad_1
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/F4_Krivak_IV_Talwar.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/Grigorovich.dds"
 		obsolete = yes
 	}
 
@@ -582,7 +588,7 @@ capital = 652
 			front_1_custom_slot = module_torpedoes_2
 			rear_1_custom_slot = module_light_helipad_1
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/F4_Krivak_IV_Talwar.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/Grigorovich.dds"
 		obsolete = yes
 	}
 
@@ -604,7 +610,7 @@ capital = 652
 			front_1_custom_slot = module_asm_2
 			rear_1_custom_slot = module_light_helipad_1
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/F4_Krivak_IV_Talwar.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/Grigorovich.dds"
 		obsolete = yes
 	}
 
@@ -616,7 +622,7 @@ capital = 652
 		parent_version = 0
 		role_icon_index = 2
 		modules = {
-			fixed_ship_engine_slot = module_light_surface_diesel_power
+			fixed_ship_engine_slot = module_light_surface_diesel_power_1
 			fixed_ship_fire_control_system_slot = module_analog_fire_control
 			fixed_ship_radar_slot = module_sonar_1
 			fixed_ship_auxillary_slot_2 = module_anti_submarine_mortar
@@ -626,6 +632,7 @@ capital = 652
 			front_1_custom_slot = module_torpedoes_1
 			rear_1_custom_slot = module_anti_submarine_missile_2
 		}
+		icon = "gfx/interface/technologies/SOV/NAV/Krivak1.dds"
 	}
 
 	#Krivak II Class
@@ -636,7 +643,7 @@ capital = 652
 		parent_version = 1
 		role_icon_index = 2
 		modules = {
-			fixed_ship_engine_slot = module_light_surface_diesel_power
+			fixed_ship_engine_slot = module_light_surface_diesel_power_1
 			fixed_ship_fire_control_system_slot = module_analog_fire_control
 			fixed_ship_radar_slot = module_sonar_2
 			fixed_ship_auxillary_slot_2 = module_anti_submarine_mortar
@@ -646,7 +653,7 @@ capital = 652
 			front_1_custom_slot = module_torpedoes_1
 			rear_1_custom_slot = module_anti_submarine_missile_2
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/F2_Krivak_II.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/Krivak2.dds"
 	}
 
 	#Krivak III Class
@@ -657,7 +664,7 @@ capital = 652
 		parent_version = 2
 		role_icon_index = 2
 		modules = {
-			fixed_ship_engine_slot = module_light_surface_diesel_power
+			fixed_ship_engine_slot = module_light_surface_diesel_power_1
 			fixed_ship_fire_control_system_slot = module_analog_fire_control
 			fixed_ship_radar_slot = module_sonar_2
 			fixed_ship_auxillary_slot_2 = module_anti_submarine_mortar
@@ -667,7 +674,7 @@ capital = 652
 			front_1_custom_slot = module_torpedoes_1
 			rear_1_custom_slot = module_light_helipad_1
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/F2_Krivak_III.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/Krivak3.dds"
 		obsolete = yes
 	}
 
@@ -679,7 +686,7 @@ capital = 652
 		parent_version = 3
 		role_icon_index = 2
 		modules = {
-			fixed_ship_engine_slot = module_light_surface_diesel_power
+			fixed_ship_engine_slot = module_light_surface_diesel_power_1
 			fixed_ship_fire_control_system_slot = module_analog_fire_control
 			fixed_ship_radar_slot = module_sonar_3
 			fixed_ship_auxillary_slot_2 = module_anti_submarine_mortar
@@ -689,7 +696,7 @@ capital = 652
 			front_1_custom_slot = module_torpedoes_1
 			rear_1_custom_slot = module_anti_submarine_missile_2
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/F2_Krivak_II.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/KrivakM.dds"
 		obsolete = yes
 	}
 
@@ -702,7 +709,7 @@ capital = 652
 		parent_version = 0
 		role_icon_index = 2
 		modules = {
-			fixed_ship_engine_slot = module_light_surface_diesel_power
+			fixed_ship_engine_slot = module_light_surface_diesel_power_1
 			fixed_ship_fire_control_system_slot = module_digital_integrated_fire_control
 			fixed_ship_radar_slot = module_radar_3
 			fixed_ship_auxillary_slot = module_asm_2
@@ -710,7 +717,7 @@ capital = 652
 			front_1_custom_slot = module_ciws_2
 			rear_1_custom_slot = module_ciws_2
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/CRV3_Bora.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/Bora.dds"
 	}
 
 	#Gepard Class
@@ -721,7 +728,7 @@ capital = 652
 		parent_version = 1
 		role_icon_index = 2
 		modules = {
-			fixed_ship_engine_slot = module_light_surface_diesel_power
+			fixed_ship_engine_slot = module_light_surface_diesel_power_1
 			fixed_ship_fire_control_system_slot = module_digital_integrated_fire_control
 			fixed_ship_radar_slot = module_radar_3
 			fixed_ship_auxillary_slot_2 = module_ciws_3
@@ -731,7 +738,7 @@ capital = 652
 			front_1_custom_slot = module_asm_2
 			rear_1_custom_slot = module_fuel_tank
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/F3_Gepard.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/Gepard.dds"
 	}
 
 	#Gepard Class
@@ -742,7 +749,7 @@ capital = 652
 		parent_version = 2
 		role_icon_index = 2
 		modules = {
-			fixed_ship_engine_slot = module_light_surface_diesel_power
+			fixed_ship_engine_slot = module_light_surface_diesel_power_1
 			fixed_ship_fire_control_system_slot = module_digital_integrated_fire_control
 			fixed_ship_radar_slot = module_radar_3
 			fixed_ship_auxillary_slot_2 = empty
@@ -752,7 +759,7 @@ capital = 652
 			front_1_custom_slot = module_asm_2
 			rear_1_custom_slot = module_fuel_tank
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/F3_Gepard.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/Gepard.dds"
 		obsolete = yes
 	}
 
@@ -764,7 +771,7 @@ capital = 652
 		parent_version = 0
 		role_icon_index = 2
 		modules = {
-			fixed_ship_engine_slot = module_light_surface_diesel_power
+			fixed_ship_engine_slot = module_light_surface_diesel_power_1
 			fixed_ship_fire_control_system_slot = module_analog_fire_control
 			fixed_ship_radar_slot = module_radar_1
 			fixed_ship_auxillary_slot = module_mineclearing
@@ -772,7 +779,7 @@ capital = 652
 			front_1_custom_slot = module_ciws_1
 			rear_1_custom_slot = module_minelaying
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/CRV1_Sonya.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/Sonya.dds"
 		obsolete = yes
 	}
 	#Tarantul Class /poles & rom & Ukr use this aswell
@@ -783,7 +790,7 @@ capital = 652
 		parent_version = 0
 		role_icon_index = 2
 		modules = {
-			fixed_ship_engine_slot = module_light_surface_diesel_power
+			fixed_ship_engine_slot = module_light_surface_diesel_power_1
 			fixed_ship_fire_control_system_slot = module_analog_fire_control
 			fixed_ship_radar_slot = module_radar_2
 			fixed_ship_auxillary_slot = module_asm_2
@@ -791,6 +798,7 @@ capital = 652
 			front_1_custom_slot = module_ciws_2
 			rear_1_custom_slot = module_asm_2
 		}
+		icon = "gfx/interface/technologies/SOV/NAV/Tarantul.dds"
 	}
 
 	#Molniya Class /poles & rom & Ukr use this aswell
@@ -801,7 +809,7 @@ capital = 652
 		parent_version = 1
 		role_icon_index = 2
 		modules = {
-			fixed_ship_engine_slot = module_light_surface_diesel_power
+			fixed_ship_engine_slot = module_light_surface_diesel_power_1
 			fixed_ship_fire_control_system_slot = module_analog_fire_control
 			fixed_ship_radar_slot = module_radar_3
 			fixed_ship_auxillary_slot = module_asm_2
@@ -810,6 +818,7 @@ capital = 652
 			rear_1_custom_slot = module_asm_2
 		}
 		obsolete = yes
+		icon = "gfx/interface/technologies/SOV/NAV/Molniya.dds"
 	}
 
 	#Grisha Class
@@ -820,7 +829,7 @@ capital = 652
 		parent_version = 2
 		role_icon_index = 2
 		modules = {
-			fixed_ship_engine_slot = module_light_surface_diesel_power
+			fixed_ship_engine_slot = module_light_surface_diesel_power_1
 			fixed_ship_fire_control_system_slot = module_analog_fire_control
 			fixed_ship_radar_slot = module_sonar_2
 			fixed_ship_auxillary_slot = module_anti_submarine_mortar
@@ -828,7 +837,7 @@ capital = 652
 			front_1_custom_slot = module_torpedoes_1
 			rear_1_custom_slot = module_ciws_2 #I don't have the cwis
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/CRV2_Grisha.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/GrishaI.dds"
 		obsolete = yes
 	}
 	create_equipment_variant = {
@@ -838,7 +847,7 @@ capital = 652
 		parent_version = 2
 		role_icon_index = 2
 		modules = {
-			fixed_ship_engine_slot = module_light_surface_diesel_power
+			fixed_ship_engine_slot = module_light_surface_diesel_power_1
 			fixed_ship_fire_control_system_slot = module_analog_fire_control
 			fixed_ship_radar_slot = module_sonar_2
 			fixed_ship_auxillary_slot = module_anti_submarine_mortar
@@ -846,7 +855,7 @@ capital = 652
 			front_1_custom_slot = module_torpedoes_1
 			rear_1_custom_slot = empty
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/CRV2_Grisha.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/GrishaII.dds"
 		obsolete = yes
 	}
 	#IV is one prototype
@@ -857,7 +866,7 @@ capital = 652
 		parent_version = 2
 		role_icon_index = 2
 		modules = {
-			fixed_ship_engine_slot = module_light_surface_diesel_power
+			fixed_ship_engine_slot = module_light_surface_diesel_power_1
 			fixed_ship_fire_control_system_slot = module_analog_fire_control
 			fixed_ship_radar_slot = module_sonar_2
 			fixed_ship_auxillary_slot = module_anti_submarine_mortar
@@ -865,7 +874,7 @@ capital = 652
 			front_1_custom_slot = module_torpedoes_1
 			rear_1_custom_slot = module_ciws_2
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/CRV2_Grisha.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/GrishaV.dds"
 	}
 
 	#Parchim Class
@@ -876,7 +885,7 @@ capital = 652
 		parent_version = 3
 		role_icon_index = 2
 		modules = {
-			fixed_ship_engine_slot = module_light_surface_diesel_power
+			fixed_ship_engine_slot = module_light_surface_diesel_power_1
 			fixed_ship_fire_control_system_slot = module_analog_fire_control
 			fixed_ship_radar_slot = module_sonar_3
 			fixed_ship_auxillary_slot = module_anti_submarine_mortar
@@ -884,7 +893,7 @@ capital = 652
 			front_1_custom_slot = module_torpedoes_2
 			rear_1_custom_slot = module_ciws_1
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/CRV2_Parchim.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/ParchimII.dds"
 	}
 
 	#Koni Class
@@ -895,7 +904,7 @@ capital = 652
 		parent_version = 4
 		role_icon_index = 2
 		modules = {
-			fixed_ship_engine_slot = module_light_surface_diesel_power
+			fixed_ship_engine_slot = module_light_surface_diesel_power_1
 			fixed_ship_fire_control_system_slot = module_analog_fire_control
 			fixed_ship_radar_slot = module_radar_1
 			fixed_ship_auxillary_slot = module_anti_submarine_mortar
@@ -903,7 +912,7 @@ capital = 652
 			front_1_custom_slot = module_aa_missiles_1
 			rear_1_custom_slot = module_ciws_1
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/CRV2_Koni.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/Koni.dds"
 		obsolete = yes
 	}
 
@@ -914,7 +923,7 @@ capital = 652
 		parent_version = 4
 		role_icon_index = 2
 		modules = {
-			fixed_ship_engine_slot = module_light_surface_diesel_power
+			fixed_ship_engine_slot = module_light_surface_diesel_power_1
 			fixed_ship_fire_control_system_slot = module_analog_fire_control
 			fixed_ship_radar_slot = module_radar_1
 			fixed_ship_auxillary_slot = module_asm_1
@@ -922,7 +931,7 @@ capital = 652
 			front_1_custom_slot = module_aa_missiles_1
 			rear_1_custom_slot = module_ciws_1
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/CRV2_Koni.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/KoniIV.dds"
 		obsolete = yes
 	}
 
@@ -934,7 +943,7 @@ capital = 652
 		parent_version = 5
 		role_icon_index = 2
 		modules = {
-			fixed_ship_engine_slot = module_light_surface_diesel_power
+			fixed_ship_engine_slot = module_light_surface_diesel_power_1
 			fixed_ship_fire_control_system_slot = module_analog_fire_control
 			fixed_ship_radar_slot = module_radar_2
 			fixed_ship_auxillary_slot = module_anti_ship_torpedoes_2
@@ -942,7 +951,7 @@ capital = 652
 			front_1_custom_slot = module_aa_missiles_1
 			rear_1_custom_slot = module_ciws_2
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/CRV2_Pauk.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/Pauk.dds"
 	}
 
 	#Abhay Class
@@ -953,7 +962,7 @@ capital = 652
 		parent_version = 6
 		role_icon_index = 2
 		modules = {
-			fixed_ship_engine_slot = module_light_surface_diesel_power
+			fixed_ship_engine_slot = module_light_surface_diesel_power_1
 			fixed_ship_fire_control_system_slot = module_analog_fire_control
 			fixed_ship_radar_slot = module_radar_2
 			fixed_ship_auxillary_slot = module_torpedoes_1
@@ -961,7 +970,7 @@ capital = 652
 			front_1_custom_slot = module_aa_missiles_1
 			rear_1_custom_slot = module_ciws_1
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/CRV2_Pauk.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/Abhay.dds"
 		obsolete = yes
 	}
 
@@ -973,7 +982,7 @@ capital = 652
 		parent_version = 0
 		role_icon_index = 2
 		modules = {
-			fixed_ship_engine_slot = module_light_surface_diesel_power
+			fixed_ship_engine_slot = module_light_surface_diesel_power_1
 			fixed_ship_fire_control_system_slot = module_analog_fire_control
 			fixed_ship_radar_slot = module_radar_1
 			fixed_ship_auxillary_slot = module_asm_2
@@ -981,7 +990,7 @@ capital = 652
 			front_1_custom_slot = module_aa_missiles_1
 			rear_1_custom_slot = empty
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/CRV1_Nanuchka.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/Nanuchka.dds"
 	}
 	create_equipment_variant = {
 		name = "Nanuchka II Class"
@@ -990,7 +999,7 @@ capital = 652
 		parent_version = 0
 		role_icon_index = 2
 		modules = {
-			fixed_ship_engine_slot = module_light_surface_diesel_power
+			fixed_ship_engine_slot = module_light_surface_diesel_power_1
 			fixed_ship_fire_control_system_slot = module_analog_fire_control
 			fixed_ship_radar_slot = module_radar_2
 			fixed_ship_auxillary_slot = module_asm_1
@@ -998,7 +1007,7 @@ capital = 652
 			front_1_custom_slot = module_aa_missiles_1
 			rear_1_custom_slot = empty
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/CRV1_Nanuchka.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/NanuchkaI.dds"
 	}
 	create_equipment_variant = {
 		name = "Nanuchka III Class"
@@ -1007,7 +1016,7 @@ capital = 652
 		parent_version = 0
 		role_icon_index = 2
 		modules = {
-			fixed_ship_engine_slot = module_light_surface_diesel_power
+			fixed_ship_engine_slot = module_light_surface_diesel_power_1
 			fixed_ship_fire_control_system_slot = module_analog_fire_control
 			fixed_ship_radar_slot = module_radar_2
 			fixed_ship_auxillary_slot = module_asm_2
@@ -1015,7 +1024,7 @@ capital = 652
 			front_1_custom_slot = module_aa_missiles_1
 			rear_1_custom_slot = module_ciws_2
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/CRV1_Nanuchka.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/NanuchkaIII.dds"
 	}
 	create_equipment_variant = {
 		name = "Nanuchka IV Class"
@@ -1024,7 +1033,7 @@ capital = 652
 		parent_version = 0
 		role_icon_index = 2
 		modules = {
-			fixed_ship_engine_slot = module_light_surface_diesel_power
+			fixed_ship_engine_slot = module_light_surface_diesel_power_1
 			fixed_ship_fire_control_system_slot = module_analog_fire_control
 			fixed_ship_radar_slot = module_radar_2
 			fixed_ship_auxillary_slot = module_vls_asm_3
@@ -1032,7 +1041,7 @@ capital = 652
 			front_1_custom_slot = module_aa_missiles_1
 			rear_1_custom_slot = module_ciws_2
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/CRV1_Nanuchka.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/NanuchkaIII.dds"
 	}
 
 	#Petya Class
@@ -1043,7 +1052,7 @@ capital = 652
 		parent_version = 1
 		role_icon_index = 2
 		modules = {
-			fixed_ship_engine_slot = module_light_surface_diesel_power
+			fixed_ship_engine_slot = module_light_surface_diesel_power_1
 			fixed_ship_fire_control_system_slot = module_analog_fire_control
 			fixed_ship_radar_slot = module_sonar_1
 			fixed_ship_auxillary_slot = module_anti_submarine_mortar
@@ -1052,6 +1061,7 @@ capital = 652
 			rear_1_custom_slot = module_torpedoes_1
 		}
 		obsolete = yes
+		icon = "gfx/interface/technologies/SOV/NAV/Petya.dds"
 	}
 	create_equipment_variant = {
 		name = "Delta III Class"
@@ -1068,7 +1078,7 @@ capital = 652
 			fixed_ship_battery_slot = module_anti_ship_torpedoes_1
 		}
 		obsolete = yes
-		icon = "gfx/interface/technologies/SOV/NAV/SSBN1.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/Delta-III.dds"
 		model = "SOV_missile_submarine_entity"
 	}
 	create_equipment_variant = {
@@ -1086,7 +1096,7 @@ capital = 652
 			fixed_ship_battery_slot = module_anti_ship_torpedoes_1
 		}
 		obsolete = yes
-		icon = "gfx/interface/technologies/SOV/NAV/SSBN1.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/Delta-IV.dds"
 		model = "SOV_missile_submarine_entity"
 	}
 	create_equipment_variant = {
@@ -1104,7 +1114,7 @@ capital = 652
 			fixed_ship_battery_slot = module_anti_ship_torpedoes_2
 		}
 		obsolete = yes
-		icon = "gfx/interface/technologies/SOV/NAV/SSBN2.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/Typhoon.dds"
 		model = "SOV_missile_submarine_2_entity"
 	}
 
@@ -1124,7 +1134,7 @@ capital = 652
 			fixed_ship_auxillary_slot = module_vls_sub_lam_2
 			fixed_ship_battery_slot = module_anti_ship_torpedoes_2
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/SSBN3.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/Borei.dds"
 		model = "SOV_missile_submarine_3_entity"
 	}
 	#Yasen Class
@@ -1143,7 +1153,7 @@ capital = 652
 			fixed_ship_auxillary_slot = module_vls_sub_asm_2
 			fixed_ship_battery_slot = module_anti_ship_torpedoes_2
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/SSN3.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/Yasen.dds"
 		model = "SOV_attack_submarine_3_entity"
 	}
 
@@ -1164,7 +1174,7 @@ capital = 652
 			fixed_ship_battery_slot = module_anti_ship_torpedoes_2
 		}
 		obsolete = yes
-		icon = "gfx/interface/technologies/SOV/NAV/SSN2.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/Oscar-II.dds"
 		model = "SOV_attack_submarine_2_entity"
 	}
 
@@ -1184,7 +1194,7 @@ capital = 652
 			fixed_ship_auxillary_slot = module_torpedoes_1
 			fixed_ship_battery_slot = module_anti_ship_torpedoes_1
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/SS1_Romeo.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/Romeo.dds"
 		obsolete = yes
 		model = "SOV_romeo_submarine_entity"
 	}
@@ -1205,7 +1215,7 @@ capital = 652
 			fixed_ship_auxillary_slot = module_torpedoes_1
 			fixed_ship_battery_slot = module_anti_ship_torpedoes_1
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/SS1_Foxtrot.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/Foxtrot.dds"
 		obsolete = yes
 		model = "SOV_romeo_submarine_entity"
 	}
@@ -1225,7 +1235,7 @@ capital = 652
 			fixed_ship_auxillary_slot = module_torpedoes_1
 			fixed_ship_battery_slot = module_anti_ship_torpedoes_2
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/SS1_Foxtrot.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/Tango.dds"
 		obsolete = yes
 		model = "SOV_romeo_submarine_entity"
 	}
@@ -1246,7 +1256,7 @@ capital = 652
 			fixed_ship_auxillary_slot = module_minelaying
 			fixed_ship_battery_slot = module_anti_ship_torpedoes_1
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/SS1_Whiskey.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/Whiskey.dds"
 		obsolete = yes
 		model = "SOV_romeo_submarine_entity"
 	}
@@ -1268,7 +1278,7 @@ capital = 652
 			fixed_ship_battery_slot = module_anti_ship_torpedoes_2
 		}
 		obsolete = yes
-		icon = "gfx/interface/technologies/SOV/NAV/SS3.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/Kilo.dds"
 		model = "SOV_kilo_submarine_entity"
 	}
 
@@ -1288,7 +1298,7 @@ capital = 652
 			fixed_ship_auxillary_slot = module_vls_sub_asm_1
 			fixed_ship_battery_slot = module_anti_ship_torpedoes_2
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/SS3.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/ImprovedKilo.dds"
 		model = "SOV_kilo_submarine_entity"
 	}
 
@@ -1308,7 +1318,7 @@ capital = 652
 			fixed_ship_auxillary_slot = module_vls_sub_asm_1
 			fixed_ship_battery_slot = module_anti_ship_torpedoes_2
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/SS4.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/Lada.dds"
 		model = "SOV_kilo_submarine_entity"
 	}
 
@@ -1328,7 +1338,7 @@ capital = 652
 			fixed_ship_auxillary_slot = module_vls_sub_asm_1
 			fixed_ship_battery_slot = module_anti_ship_torpedoes_2
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/SSN2.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/Sierra.dds"
 		obsolete = yes
 		model = "SOV_attack_submarine_2_entity"
 	}
@@ -1349,7 +1359,7 @@ capital = 652
 			fixed_ship_auxillary_slot = module_torpedoes_1
 			fixed_ship_battery_slot = module_anti_ship_torpedoes_1
 		}
-		icon = "gfx/interface/technologies/SOV/NAV/SSN1.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/Victor.dds"
 		obsolete = yes
 		model = "SOV_attack_submarine_entity"
 	}
@@ -1371,7 +1381,7 @@ capital = 652
 			fixed_ship_battery_slot = module_anti_ship_torpedoes_2
 		}
 		obsolete = yes
-		icon = "gfx/interface/technologies/SOV/NAV/SSN2.dds"
+		icon = "gfx/interface/technologies/SOV/NAV/Akula.dds"
 		model = "SOV_attack_submarine_2_entity"
 	}
 
@@ -1392,6 +1402,7 @@ capital = 652
 			fixed_ship_battery_slot = module_anti_ship_torpedoes_2
 		}
 		obsolete = yes
+		icon = "gfx/interface/technologies/SOV/NAV/Akula.dds"
 		model = "SOV_attack_submarine_2_entity"
 	}
 
@@ -1404,7 +1415,7 @@ capital = 652
 		set_technology = {
 			mbt_tech_ops = 1
 			mbt_tech = 1
-			early_cold_war_ammo = 1
+			tank_ammo_1 = 1
 			defensive_systems = 1
 			nsb_gun_technology_1 = 1
 			nsb_artillery_ammo_1 = 1
@@ -1420,7 +1431,7 @@ capital = 652
 			nsb_AA_autocannon_1 = 1
 			nsb_SHORAD_missile_1 = 1
 			mbt_tech_2 = 1
-			cold_war_ammo = 1
+			tank_ammo_2 = 1
 			defensive_systems_3 = 1
 			nsb_gun_technology_3 = 1
 			nsb_artillery_ammo_3 = 1
@@ -1500,6 +1511,8 @@ capital = 652
 			nsb_rocket_pods_tech_2 = 1
 			nsb_gun_pods_tech_2 = 1
 			nsb_light_nose_gun_tech_2 = 1
+			nsb_transport_helicopter_1 = 1
+			nsb_transport_helicopter_2 = 1
 		}
 
 		# Tanks
@@ -1522,7 +1535,7 @@ capital = 652
 				tank_nsb_armor_upgrade = 3
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/T55.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/T-55A.dds"
 			model = "SOV_T55A_entity"
 		}
 		add_equipment_to_stockpile = {
@@ -1552,7 +1565,7 @@ capital = 652
 				tank_nsb_armor_upgrade = 5
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/MBT1.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/T-55AM-1.dds"
 			model = "SOV_T55A_entity"
 		}
 		add_equipment_to_stockpile = {
@@ -1581,7 +1594,7 @@ capital = 652
 				tank_nsb_armor_upgrade = 4
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/T62.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/T-62.dds"
 		}
 		add_equipment_to_stockpile = {
 			type = medium_tank_chassis_0
@@ -1610,7 +1623,7 @@ capital = 652
 				tank_nsb_armor_upgrade = 4
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/T62M.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/T-62MS.dds"
 		}
 		add_equipment_to_stockpile = {
 			type = medium_tank_chassis_0
@@ -1637,7 +1650,7 @@ capital = 652
 			upgrades = {
 				tank_nsb_armor_upgrade = 0
 			}
-			icon = "gfx/interface/technologies/SOV/LAND/T80.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/T-80.dds"
 			obsolete = yes
 		}
 		add_equipment_to_stockpile = {
@@ -1666,7 +1679,7 @@ capital = 652
 			upgrades = {
 				tank_nsb_armor_upgrade = 2
 			}
-			icon = "gfx/interface/technologies/SOV/LAND/T80B.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/T-80B.dds"
 			obsolete = yes
 		}
 		add_equipment_to_stockpile = {
@@ -1697,7 +1710,7 @@ capital = 652
 				tank_nsb_armor_upgrade = 2
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/T80BV.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/T-80BV.dds"
 			model = "T80bv_entity"
 		}
 		add_equipment_to_stockpile = {
@@ -1727,7 +1740,7 @@ capital = 652
 			upgrades = {
 				tank_nsb_armor_upgrade = 3
 			}
-			icon = "gfx/interface/technologies/SOV/LAND/T80U.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/T-80U.dds"
 			model = "T80u_entity"
 		}
 		add_equipment_to_stockpile = {
@@ -1755,7 +1768,7 @@ capital = 652
 				tank_nsb_armor_upgrade = 0
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/T72.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/T-72_Ural.dds"
 			model = "SOV_T72A_entity"
 		}
 		add_equipment_to_stockpile = {
@@ -1784,7 +1797,7 @@ capital = 652
 				tank_nsb_armor_upgrade = 1
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/T72A.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/T-72A.dds"
 			model = "SOV_T72A_entity"
 		}
 		add_equipment_to_stockpile = {
@@ -1815,7 +1828,7 @@ capital = 652
 				tank_nsb_armor_upgrade = 3
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/T72B.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/T-72B.dds"
 			model = "SOV_MD4_medium_armor_entity"
 		}
 		add_equipment_to_stockpile = {
@@ -1846,7 +1859,7 @@ capital = 652
 				tank_nsb_armor_upgrade = 3
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/T72B3.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/T-72B_1990.dds"
 			model = "SOV_T72B3_entity"
 		}
 		add_equipment_to_stockpile = {
@@ -1876,7 +1889,7 @@ capital = 652
 			upgrades = {
 				tank_nsb_armor_upgrade = 3
 			}
-			icon = "gfx/interface/technologies/SOV/LAND/MBT4.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/T-90A_WT.dds"
 			model = "SOV_T90early_entity"
 		}
 		add_equipment_to_stockpile = {
@@ -1907,7 +1920,7 @@ capital = 652
 				tank_nsb_armor_upgrade = 1
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/BMP1.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/BMP-1.dds"
 			model = "SOV_BMP1_entity"
 		}
 		add_equipment_to_stockpile = {
@@ -1937,7 +1950,7 @@ capital = 652
 				tank_nsb_armor_upgrade = 0
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/IFVA1.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/BMD-1.dds"
 			model = "SOV_BMP1_entity"
 		}
 		add_equipment_to_stockpile = {
@@ -1967,7 +1980,7 @@ capital = 652
 				tank_nsb_armor_upgrade = 2
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/BMP2.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/BMP-2.dds"
 			model = "SOV_BMP2_entity"
 		}
 		add_equipment_to_stockpile = {
@@ -1997,7 +2010,7 @@ capital = 652
 				tank_nsb_armor_upgrade = 1
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/IFVA3.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/BMD-2.dds"
 			model = "SOV_BMD2_entity"
 		}
 		add_equipment_to_stockpile = {
@@ -2026,7 +2039,7 @@ capital = 652
 			upgrades = {
 				tank_nsb_armor_upgrade = 1
 			}
-			icon = "gfx/interface/technologies/SOV/LAND/IFVA4.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/BMD-3A.dds"
 			model = "SOV_BMP3_entity"
 		}
 		add_equipment_to_stockpile = {
@@ -2056,7 +2069,7 @@ capital = 652
 			upgrades = {
 				tank_nsb_armor_upgrade = 2
 			}
-			icon = "gfx/interface/technologies/SOV/LAND/BMP3.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/BMP-3.dds"
 			model = "SOV_BMP3_entity"
 		}
 		add_equipment_to_stockpile = {
@@ -2080,7 +2093,7 @@ capital = 652
 				special_type_slot_1 = afv_troop_capacity
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/btr40.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/BTR-40.dds"
 			model = "SOV_MTLB_entity"
 		 }
 		 create_equipment_variant = {
@@ -2097,7 +2110,7 @@ capital = 652
 				special_type_slot_1 = afv_troop_capacity
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/btr152.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/BTR-152.dds"
 			model = "SOV_MTLB_entity"
 		 }
 		 create_equipment_variant = {
@@ -2118,7 +2131,7 @@ capital = 652
 				tank_nsb_armor_upgrade = 1
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/BTR50.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/BTR-50.dds"
 			model = "SOV_MTLB_entity"
 		 }
 		 add_equipment_to_stockpile = {
@@ -2145,7 +2158,7 @@ capital = 652
 				tank_nsb_armor_upgrade = 1
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/APC2.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/MT_LB.dds"
 			model = "SOV_MTLB_entity"
 		}
 		create_production_license = {
@@ -2182,7 +2195,7 @@ capital = 652
 				tank_nsb_armor_upgrade = 2
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/APC1.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/BTR-60.dds"
 			model = "btr80_vehicle_entity"
 		}
 		create_production_license = {
@@ -2219,7 +2232,7 @@ capital = 652
 				tank_nsb_armor_upgrade = 3
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/APC3.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/BTR-70.dds"
 			model = "btr80_vehicle_entity"
 		}
 		add_equipment_to_stockpile = {
@@ -2253,7 +2266,7 @@ capital = 652
 				tank_nsb_armor_upgrade = 1
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/BTRD.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/BTR_D.dds"
 			model = "btrd_vehicle_entity"
 		}
 		add_equipment_to_stockpile = {
@@ -2281,7 +2294,7 @@ capital = 652
 			upgrades = {
 				tank_nsb_armor_upgrade = 4
 			}
-			icon = "gfx/interface/technologies/SOV/LAND/APC4.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/BTR-80.dds"
 			model = "btr80_vehicle_entity"
 		}
 		add_equipment_to_stockpile = {
@@ -2309,7 +2322,7 @@ capital = 652
 			upgrades = {
 				tank_nsb_armor_upgrade = 4
 			}
-			icon = "gfx/interface/technologies/SOV/LAND/APC5.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/BTR-80A.dds"
 			model = "btr80a_vehicle_entity"
 		}
 		add_equipment_to_stockpile = {
@@ -2336,7 +2349,7 @@ capital = 652
 			upgrades = {
 				tank_nsb_armor_upgrade = 1
 			}
-			icon = "gfx/interface/technologies/SOV/LAND/BTR90.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/BTR-90.dds"
 			model = "btr80a_vehicle_entity"
 		}
 		#Light tank
@@ -2358,7 +2371,7 @@ capital = 652
 				tank_nsb_armor_upgrade = 1
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/BRDM.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/BRDM-2M.dds"
 		}
 		add_equipment_to_stockpile = {
 			type = medium_tank_destroyer_chassis_0
@@ -2384,7 +2397,7 @@ capital = 652
 				tank_nsb_armor_upgrade = 0
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/BRDM1.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/BRDM-1.dds"
 		}
 		#Iranian Maggot sorry attempts at making stuff below
 		create_equipment_variant = {
@@ -2409,7 +2422,7 @@ capital = 652
 				tank_nsb_armor_upgrade = 2
 			}
 			obsolete = no
-			icon = "gfx/interface/technologies/SOV/LAND/REC1.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/PT-76M1.dds"
 		}
 		add_equipment_to_stockpile = {
 			type = medium_tank_destroyer_chassis_0 #PT-76
@@ -2440,7 +2453,7 @@ capital = 652
 				tank_nsb_armor_upgrade = 2
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/BRM1K.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/BRM-1K.dds"
 		}
 		add_equipment_to_stockpile = {
 			type = medium_tank_destroyer_chassis_0
@@ -2467,7 +2480,7 @@ capital = 652
 			upgrades = {
 				tank_nsb_armor_upgrade = 2
 			}
-			icon = "gfx/interface/technologies/SOV/LAND/APC5.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/BRDM-3.dds"
 			model = "btr80a_vehicle_entity"
 		}
 
@@ -2491,7 +2504,7 @@ capital = 652
 			upgrades = {
 				tank_nsb_armor_upgrade = 2
 			}
-			icon = "gfx/interface/technologies/SOV/LAND/BMP3.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/BRM-3K.dds"
 			model = "SOV_BMP3_entity"
 		 }
 		 add_equipment_to_stockpile = {
@@ -2522,7 +2535,7 @@ capital = 652
 				tank_nsb_fire_upgrade = 2
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/SPA1.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/ZSU-23-4.dds"
 		}
 		create_equipment_variant = {
 			name = "ZSU-23-4M4 Shilka"
@@ -2545,7 +2558,7 @@ capital = 652
 			upgrades = {
 				tank_nsb_fire_upgrade = 3
 			}
-			icon = "gfx/interface/technologies/SOV/LAND/SPA1_alt1.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/ZSU-23-4M4.dds"
 		}
 
 		 create_equipment_variant = {
@@ -2569,7 +2582,7 @@ capital = 652
 				tank_nsb_fire_upgrade = 4
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/KUB.dds"
+			icon = "gfx/interface/technologies/SOV/MISSILE/1965_SAM.dds"
 		 }
 
 		 create_equipment_variant = {
@@ -2594,7 +2607,7 @@ capital = 652
 				tank_nsb_fire_upgrade = 0
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/KUB.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/2K12.dds"
 		}
 
 		create_equipment_variant = {
@@ -2618,7 +2631,7 @@ capital = 652
 				tank_nsb_fire_upgrade = 0
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/OSA.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/9K33.dds"
 		}
 		create_production_license = {
 			target = BLR
@@ -2650,7 +2663,7 @@ capital = 652
 				tank_nsb_fire_upgrade = 1
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/Zu57_2.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/ZSU-57-2.dds"
 		}
 
 		create_equipment_variant = {
@@ -2675,7 +2688,7 @@ capital = 652
 				tank_nsb_fire_upgrade = 0
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/Krug.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/2K11.dds"
 		}
 
 		 create_equipment_variant = {
@@ -2699,7 +2712,7 @@ capital = 652
 				tank_nsb_fire_upgrade = 0
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/Strela1.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/9K31.dds"
 		 }
 		create_equipment_variant = {
 			name = "BTR-ZD"
@@ -2721,7 +2734,7 @@ capital = 652
 				tank_nsb_armor_upgrade = 1
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/IFVA2.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/BTR-ZD.dds"
 			model = "btrd_vehicle_entity"
 		}
 		add_equipment_to_stockpile = {
@@ -2752,7 +2765,7 @@ capital = 652
 				tank_nsb_fire_upgrade = 2
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/BUK.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/Buk-M1.dds"
 		 }
 
 		 create_equipment_variant = {
@@ -2775,7 +2788,7 @@ capital = 652
 				tank_nsb_fire_upgrade = 0
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/SPA2.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/9K35.dds"
 		 }
 
 		create_equipment_variant = {
@@ -2799,7 +2812,7 @@ capital = 652
 			upgrades = {
 				tank_nsb_fire_upgrade = 1
 			}
-			icon = "gfx/interface/technologies/SOV/LAND/TOR.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/Tor-E2M.dds"
 		}
 
 		 create_equipment_variant = {
@@ -2824,7 +2837,7 @@ capital = 652
 				tank_nsb_fire_upgrade = 5
 			}
 			obsolete = no
-			icon = "gfx/interface/technologies/SOV/LAND/SPA3.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/2K22.dds"
 		 }
 		# #Iranian Maggot stuff, repeatedly fixed by simone, above
 
@@ -2848,7 +2861,7 @@ capital = 652
 				tank_nsb_fire_upgrade = 1
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/SPR1.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/BM-21.dds"
 		}
 		create_production_license = {
 			target = IRQ
@@ -2899,7 +2912,7 @@ capital = 652
 				tank_nsb_fire_upgrade = 1
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/SPG1.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/2S1.dds"
 		}
 		add_equipment_to_stockpile = {
 			type = medium_tank_artillery_chassis_0
@@ -2927,7 +2940,7 @@ capital = 652
 				tank_nsb_fire_upgrade = 1
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/SPR2.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/Uragan.dds"
 		}
 		add_equipment_to_stockpile = {
 			type = medium_tank_rocket_chassis_0
@@ -2963,7 +2976,7 @@ capital = 652
 				tank_nsb_fire_upgrade = 2
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/SPG2.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/2S3.dds"
 		}
 		add_equipment_to_stockpile = {
 			type = medium_tank_artillery_chassis_1
@@ -2973,7 +2986,7 @@ capital = 652
 
 		create_equipment_variant = {
 			name = "TOS-1"
-			type = medium_tank_rocket_chassis_0
+			type = medium_tank_rocket_chassis_1
 			parent_version = 4
 			modules = {
 				main_armament_slot = art_med_rocket_gen1
@@ -2990,10 +3003,10 @@ capital = 652
 			upgrades = {
 				tank_nsb_fire_upgrade = 3
 			}
-			icon = "gfx/interface/technologies/SOV/LAND/TOS1.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/TOS-1.dds"
 		}
 		add_equipment_to_stockpile = {
-			type = medium_tank_rocket_chassis_0
+			type = medium_tank_rocket_chassis_1
 			variant_name = "TOS-1"
 			amount = 36
 		}
@@ -3017,7 +3030,7 @@ capital = 652
 				tank_nsb_fire_upgrade = 2
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/Giatsint.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/2S5.dds"
 		}
 		add_equipment_to_stockpile = {
 			type = medium_tank_artillery_chassis_0
@@ -3045,7 +3058,7 @@ capital = 652
 				tank_nsb_fire_upgrade = 1
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/Pion.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/2S7.dds"
 		}
 		#all deployed
 
@@ -3069,7 +3082,7 @@ capital = 652
 			upgrades = {
 				tank_nsb_fire_upgrade = 1
 			}
-			icon = "gfx/interface/technologies/SOV/LAND/SPR3.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/9A52.dds"
 		}
 		add_equipment_to_stockpile = {
 			type = medium_tank_rocket_chassis_1
@@ -3099,7 +3112,7 @@ capital = 652
 				tank_nsb_fire_upgrade = 2
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/Nona.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/2S9.dds"
 		}
 		add_equipment_to_stockpile = {
 			type = medium_tank_artillery_chassis_1
@@ -3149,7 +3162,7 @@ capital = 652
 			upgrades = {
 				tank_nsb_fire_upgrade = 3
 			}
-			icon = "gfx/interface/technologies/SOV/LAND/NonaSVK.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/2S23.dds"
 		}
 		add_equipment_to_stockpile = {
 			type = medium_tank_artillery_chassis_2
@@ -3177,7 +3190,7 @@ capital = 652
 			upgrades = {
 				tank_nsb_fire_upgrade = 3
 			}
-			icon = "gfx/interface/technologies/SOV/LAND/SPG3.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/2S19.dds"
 		}
 		add_equipment_to_stockpile = {
 			type = medium_tank_artillery_chassis_2
@@ -3186,26 +3199,27 @@ capital = 652
 		}
 		create_equipment_variant = {
 			name = "Mil Mi-4"
-			type = transport_helicopter1
+			type = transport_helicopter_1
 			obsolete = yes
-			icon = "gfx/interface/technologies/CHI/AIR/UH1_alt1.dds"
+			icon = "gfx/interface/technologies/SOV/HELI/Mi-4.dds"
 		}
 		create_equipment_variant = {
 			name = "Mil Mi-6"
-			type = transport_helicopter1
+			type = transport_helicopter_1
 			obsolete = yes
-			#need GFX
+			icon = "gfx/interface/technologies/SOV/HELI/Mi-6.dds"
 		}
 		create_equipment_variant = {
 			name = "Mil Mi-8"
-			type = transport_helicopter1
+			type = transport_helicopter_1
 			obsolete = yes
+			icon = "gfx/interface/technologies/SOV/HELI/Mi-8MT.dds"
 		}
 		create_equipment_variant = {
 			name = "Mil Mi-17"
-			type = transport_helicopter1
+			type = transport_helicopter_1
 			obsolete = yes
-			#need GFX
+			icon = "gfx/interface/technologies/SOV/HELI/Mi-171SH.dds"
 		}
 		create_equipment_variant = {
 			name = "Mi-8"
@@ -3213,7 +3227,7 @@ capital = 652
 			parent_version = 0
 			modules = {
 				chassis_type_slot = helicopter_medium_chassis
-			  	helicopter_body_layout = gunship_layout
+				  helicopter_body_layout = gunship_layout
 				helicopter_body_mount_1 = helicopter_atgm_gen1
 				nose_gun_type_slot = helicopter_light_nose_gun_gen1
 				armor_type_slot = helicopter_armor_gen1
@@ -3226,7 +3240,7 @@ capital = 652
 				helicopter_nsb_upgrade = 0
 			}
 			obsolete = yes
-			icon = "GFX_SOV_attack_helicopter1_medium"
+			icon = "gfx/interface/technologies/SOV/HELI/Mi-8MT.dds"
 		}
 
 		create_equipment_variant = {
@@ -3235,7 +3249,7 @@ capital = 652
 			parent_version = 0
 			modules = {
 				chassis_type_slot = helicopter_medium_chassis
-			  	helicopter_body_layout = gunship_layout
+				  helicopter_body_layout = gunship_layout
 				helicopter_body_mount_1 = helicopter_atgm_gen1
 				nose_gun_type_slot = helicopter_light_nose_gun_gen1
 				armor_type_slot = helicopter_armor_gen1
@@ -3248,7 +3262,7 @@ capital = 652
 				helicopter_nsb_upgrade = 2
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/AIR/AH2.dds"
+			icon = "gfx/interface/technologies/SOV/HELI/Mi-24A.dds"
 		}
 
 		create_equipment_variant = {
@@ -3257,7 +3271,7 @@ capital = 652
 			parent_version = 0
 			modules = {
 				chassis_type_slot = helicopter_medium_chassis
-			  	helicopter_body_layout = gunship_layout
+				  helicopter_body_layout = gunship_layout
 				helicopter_body_mount_1 = helicopter_atgm_gen1
 				nose_gun_type_slot = helicopter_light_nose_gun_gen1
 				armor_type_slot = helicopter_armor_gen1
@@ -3270,7 +3284,7 @@ capital = 652
 				helicopter_nsb_upgrade = 2
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/AIR/AH2.dds"
+			icon = "gfx/interface/technologies/SOV/HELI/Mi-24D.dds"
 		}
 
 		create_equipment_variant = {
@@ -3279,7 +3293,7 @@ capital = 652
 			parent_version = 0
 			modules = {
 				chassis_type_slot = helicopter_medium_chassis
-			  	helicopter_body_layout = gunship_layout
+				  helicopter_body_layout = gunship_layout
 				helicopter_body_mount_1 = helicopter_atgm_gen2
 				nose_gun_type_slot = helicopter_heavy_nose_gun_gen1
 				armor_type_slot = helicopter_armor_gen1
@@ -3293,7 +3307,7 @@ capital = 652
 				helicopter_nsb_upgrade = 3
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/AIR/AH2_alt2.dds"
+			icon = "gfx/interface/technologies/SOV/HELI/Mi-24P.dds"
 		}
 
 		create_equipment_variant = {
@@ -3302,7 +3316,7 @@ capital = 652
 			parent_version = 0
 			modules = {
 				chassis_type_slot = helicopter_medium_chassis
-			  	helicopter_body_layout = gunship_layout
+				  helicopter_body_layout = gunship_layout
 				helicopter_body_mount_1 = helicopter_atgm_gen2
 				nose_gun_type_slot = helicopter_light_nose_gun_gen1
 				armor_type_slot = helicopter_armor_gen1
@@ -3316,7 +3330,7 @@ capital = 652
 				helicopter_nsb_upgrade = 3
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/AIR/AH2_alt1.dds"
+			icon = "gfx/interface/technologies/SOV/HELI/Mi-24V.dds"
 		}
 
 
@@ -3326,7 +3340,7 @@ capital = 652
 			parent_version = 0
 			modules = {
 				chassis_type_slot = helicopter_medium_chassis
-			  	helicopter_body_layout = gunship_layout
+				  helicopter_body_layout = gunship_layout
 				helicopter_body_mount_1 = helicopter_atgm_gen2
 				nose_gun_type_slot = helicopter_medium_nose_gun_gen2
 				armor_type_slot = helicopter_armor_gen1
@@ -3340,7 +3354,7 @@ capital = 652
 				helicopter_nsb_upgrade = 3
 			}
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/AIR/AH2_alt2.dds"
+			icon = "gfx/interface/technologies/SOV/HELI/Mi-24PM.dds"
 		}
 
 		create_equipment_variant = {
@@ -3349,7 +3363,7 @@ capital = 652
 			parent_version = 0
 			modules = {
 				chassis_type_slot = helicopter_medium_chassis
-			  	helicopter_body_layout = gunship_layout
+				  helicopter_body_layout = gunship_layout
 				helicopter_body_mount_1 = helicopter_atgm_gen2
 				nose_gun_type_slot = helicopter_medium_nose_gun_gen2
 				armor_type_slot = helicopter_armor_gen1
@@ -3363,7 +3377,7 @@ capital = 652
 			upgrades = {
 				helicopter_nsb_upgrade = 4
 			}
-			icon = "GFX_SOV_attack_helicopter2_medium"
+			icon = "gfx/interface/technologies/SOV/HELI/Mi-35.dds"
 		}
 		create_equipment_variant = {
 			name = "Ka-50N"
@@ -3371,7 +3385,7 @@ capital = 652
 			parent_version = 0
 			modules = {
 				chassis_type_slot = helicopter_medium_chassis
-			  	helicopter_body_layout = gunship_layout
+				  helicopter_body_layout = gunship_layout
 				helicopter_body_mount_1 = helicopter_atgm_gen2
 				nose_gun_type_slot = helicopter_medium_nose_gun_gen2
 				armor_type_slot = helicopter_armor_gen1
@@ -3385,7 +3399,7 @@ capital = 652
 			upgrades = {
 				helicopter_nsb_upgrade = 4
 			}
-			icon = "gfx/interface/technologies/SOV/AIR/AH4_alt1.dds"
+			icon = "gfx/interface/technologies/SOV/HELI/Ka-50A.dds"
 		}
 		create_equipment_variant = {
 			name = "BTR-RD Rebot"
@@ -3393,7 +3407,7 @@ capital = 652
 			upgrades = {
 
 			}
-			icon = "gfx/interface/technologies/SOV/LAND/BTRDRD.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/BTR-RD.dds"
 		}
 		create_equipment_variant = {
 			name = "9P149 Sturm-S" #AT-6
@@ -3403,7 +3417,7 @@ capital = 652
 				H_AT_Warhead = 1
 				H_AT_Reliability = 1
 			}
-			icon = "gfx/interface/technologies/SOV/LAND/HAT2_Sturm.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/SAT2.dds"
 			mark_older_equipment_obsolete = yes
 		}
 		create_equipment_variant = {
@@ -3424,6 +3438,7 @@ capital = 652
 				L_AT_Warhead = 3
 			}
 			obsolete = yes
+			icon = "gfx/interface/technologies/SOV/INF/RPG-7.dds"
 		}
 		create_equipment_variant = {
 			name = "RPG-18"
@@ -3432,7 +3447,7 @@ capital = 652
 				L_AT_Fire_Control = 2
 				L_AT_Warhead = 3
 			}
-			icon = "gfx/interface/technologies/SOV/INF/RPG18.dds"
+			icon = "gfx/interface/technologies/SOV/INF/RPG-18.dds"
 			obsolete = yes
 		}
 		create_equipment_variant = {
@@ -3442,13 +3457,13 @@ capital = 652
 				L_AT_Fire_Control = 1
 				L_AT_Warhead = 3
 			}
-			icon = "gfx/interface/technologies/SOV/INF/spg9.dds"
+			icon = "gfx/interface/technologies/SOV/INF/SPG-9.dds"
 			obsolete = yes
 		}
 		create_equipment_variant = {
 			name = "B-10"
 			type = Anti_tank_0
-			icon = "gfx/interface/technologies/SOV/INF/B10.dds"
+			icon = "gfx/interface/technologies/SOV/INF/B-10.dds"
 			obsolete = yes
 		}
 		create_equipment_variant = {
@@ -3457,13 +3472,13 @@ capital = 652
 			upgrades = {
 				L_AT_Fire_Control = 1
 			}
-			icon = "gfx/interface/technologies/SOV/INF/B11.dds"
+			icon = "gfx/interface/technologies/SOV/INF/B-11.dds"
 			obsolete = yes
 		}
 		create_equipment_variant = {
 			name = "ZIS-2"
 			type = Anti_tank_0
-			icon = "gfx/interface/technologies/SOV/LAND/zis2.dds"
+			icon = "gfx/interface/technologies/SOV/INF/ZiS-2.dds"
 			obsolete = yes
 		}
 		create_equipment_variant = {
@@ -3473,7 +3488,7 @@ capital = 652
 				L_AT_Fire_Control = 1
 				L_AT_Warhead = 1
 			}
-			icon = "gfx/interface/technologies/SOV/LAND/d44.dds"
+			icon = "gfx/interface/technologies/SOV/INF/D-44.dds"
 			obsolete = yes
 		}
 		create_equipment_variant = {
@@ -3484,7 +3499,7 @@ capital = 652
 				L_AT_Warhead = 2
 				L_AT_Reliability = 2
 			}
-			icon = "gfx/interface/technologies/SOV/LAND/mt12.dds" #need GFX
+			icon = "gfx/interface/technologies/SOV/INF/T-12.dds"
 			obsolete = yes
 		}
 		create_equipment_variant = {
@@ -3495,18 +3510,18 @@ capital = 652
 				L_AT_Warhead = 4
 				L_AT_Reliability = 2
 			}
-			icon = "gfx/interface/technologies/SOV/LAND/mt12.dds"
+			icon = "gfx/interface/technologies/SOV/INF/MT-12.dds"
 			obsolete = yes
 		}
 		create_equipment_variant = {
-			name = "9M14 Malyutka" #AT-3 #need GFX
+			name = "9M14 Malyutka"
 			type = Anti_tank_0
 			upgrades = {
 				L_AT_Fire_Control = 4
 				L_AT_Warhead = 3
 				L_AT_Reliability = 1
 			}
-			icon = "gfx/interface/technologies/SOV/INF/AT2.dds"
+			icon = "gfx/interface/technologies/SOV/INF/9M14.dds"
 			obsolete = yes
 		}
 		create_equipment_variant = {
@@ -3515,12 +3530,14 @@ capital = 652
 			upgrades = {
 				L_AT_Warhead = 1
 			}
+			icon = "gfx/interface/technologies/SOV/INF/9M113.dds"
 			obsolete = yes
 		}
 		create_equipment_variant = {
 			name = "9K111 Fagot" #AT-4
 			type = Anti_tank_1
 			obsolete = yes
+			icon = "gfx/interface/technologies/SOV/INF/9K111.dds"
 		}
 		create_equipment_variant = {
 			name = "9M113M Konkurs-M"
@@ -3528,6 +3545,7 @@ capital = 652
 			upgrades = {
 				L_AT_Warhead = 2
 			}
+			icon = "gfx/interface/technologies/SOV/INF/9M113M.dds"
 			obsolete = yes
 		}
 		create_equipment_variant = {
@@ -3539,12 +3557,12 @@ capital = 652
 				L_AT_Reliability = 2
 			}
 			mark_older_equipment_obsolete = yes
-			icon = "gfx/interface/technologies/SOV/INF/AT3.dds"
+			icon = "gfx/interface/technologies/SOV/INF/9M133.dds"
 		}
 		create_equipment_variant = {
 			name = "M-1939"
 			type = Anti_Air_0
-			icon = "gfx/interface/technologies/SOV/LAND/m1939.dds"
+			icon = "gfx/interface/technologies/SOV/INF/M1939.dds"
 			obsolete = yes
 		}
 		create_equipment_variant = {
@@ -3553,25 +3571,25 @@ capital = 652
 			upgrades = {
 				AA_Fire_Control = 1
 			}
-			icon = "gfx/interface/technologies/SOV/LAND/zpu1.dds"
+			icon = "gfx/interface/technologies/SOV/INF/ZPU-1.dds"
 			obsolete = yes
 		}
 		create_equipment_variant = {
 			name = "ZPU-2"
 			type = Anti_Air_0
-			icon = "gfx/interface/technologies/SOV/LAND/zpu2.dds"
+			icon = "gfx/interface/technologies/SOV/INF/ZPU-2.dds"
 			obsolete = yes
 		}
 		create_equipment_variant = {
 			name = "ZPU-4"
 			type = Anti_Air_0
-			icon = "gfx/interface/technologies/SOV/LAND/zpu4.dds"
+			icon = "gfx/interface/technologies/SOV/INF/ZPU-4.dds"
 			obsolete = yes
 		}
 		create_equipment_variant = {
 			name = "S-60"
 			type = Anti_Air_0
-			icon = "gfx/interface/technologies/SOV/LAND/S60.dds"
+			icon = "gfx/interface/technologies/SOV/INF/S-60.dds"
 			obsolete = yes
 		}
 		create_equipment_variant = {
@@ -3580,7 +3598,7 @@ capital = 652
 			upgrades = {
 				AA_Fire_Control = 1
 			}
-			icon = "gfx/interface/technologies/SOV/LAND/zu23.dds"
+			icon = "gfx/interface/technologies/SOV/INF/ZU-23-2.dds"
 		}
 		create_equipment_variant = {
 			name = "9K32M Strela-2M" #SA-7
@@ -3588,12 +3606,13 @@ capital = 652
 			upgrades = {
 				AA_Fire_Control = 2
 			}
+			icon = "gfx/interface/technologies/SOV/INF/9K32M.dds"
 			mark_older_equipment_obsolete = yes
 		}
 		create_equipment_variant = {
 			name = "ZIS-3"
 			type = artillery_0
-			icon = "gfx/interface/technologies/SOV/LAND/zis3.dds"
+			icon = "gfx/interface/technologies/SOV/INF/ZiS-3.dds"
 			obsolete = yes
 		}
 		create_equipment_variant = {
@@ -3602,7 +3621,7 @@ capital = 652
 			upgrades = {
 				L_Arty_Warhead = 1
 			}
-			icon = "gfx/interface/technologies/SOV/LAND/D20.dds"
+			icon = "gfx/interface/technologies/SOV/INF/D-20.dds"
 			obsolete = yes
 		}
 		add_equipment_to_stockpile = {
@@ -3618,7 +3637,7 @@ capital = 652
 			upgrades = {
 				L_Arty_Fire_Control = 1
 			}
-			icon = "gfx/interface/technologies/SOV/LAND/2A36.dds"
+			icon = "gfx/interface/technologies/SOV/INF/2A36.dds"
 		}
 		add_equipment_to_stockpile = {
 			type = artillery_1
@@ -3634,6 +3653,7 @@ capital = 652
 				L_Arty_Warhead = 1
 				L_Arty_Fire_Control = 1
 			}
+			icon = "gfx/interface/technologies/SOV/INF/2A65.dds"
 			mark_older_equipment_obsolete = yes
 		}
 		add_equipment_to_stockpile = {
@@ -3647,7 +3667,7 @@ capital = 652
 			name = "D-74"
 			type = artillery_0
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/D74.dds"
+			icon = "gfx/interface/technologies/SOV/INF/D-20.dds"
 			mark_older_equipment_obsolete = yes
 		}
 
@@ -3655,7 +3675,7 @@ capital = 652
 			name = "ML-20"
 			type = artillery_0
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/ML20.dds"
+			icon = "gfx/interface/technologies/SOV/INF/ML-20.dds"
 			mark_older_equipment_obsolete = yes
 		}
 
@@ -3663,7 +3683,7 @@ capital = 652
 			name = "D-1"
 			type = artillery_0
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/D1.dds"
+			icon = "gfx/interface/technologies/SOV/INF/D-1.dds"
 			mark_older_equipment_obsolete = yes
 		}
 
@@ -3671,7 +3691,7 @@ capital = 652
 			name = "M-30"
 			type = artillery_0
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/M30.dds"
+			icon = "gfx/interface/technologies/SOV/INF/M-30.dds"
 			mark_older_equipment_obsolete = yes
 		}
 
@@ -3679,7 +3699,7 @@ capital = 652
 			name = "M-46"
 			type = artillery_0
 			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/M46.dds"
+			icon = "gfx/interface/technologies/SOV/INF/M-46.dds"
 			mark_older_equipment_obsolete = yes
 		}
 
@@ -3699,17 +3719,17 @@ capital = 652
 		}
 		create_equipment_variant = {
 			name = "PPSH"
-			type = infantry_weapons
+			type = infantry_weapons_1
 			icon = "gfx/interface/technologies/SOV/INF/PPSH.dds"
 		}
 		create_equipment_variant = {
 			name = "Mosin"
-			type = infantry_weapons
+			type = infantry_weapons_1
 			icon = "gfx/interface/technologies/SOV/INF/mosin.dds"
 		}
 		create_equipment_variant = {
 			name = "SKS"
-			type = infantry_weapons
+			type = infantry_weapons_1
 			upgrades = {
 				Inf_eq_heavy_weapons = 1
 			}
@@ -3717,7 +3737,7 @@ capital = 652
 		}
 		create_equipment_variant = {
 			name = "AKM"
-			type = infantry_weapons
+			type = infantry_weapons_1
 			upgrades = {
 				Inf_eq_heavy_weapons = 2
 				Inf_eq_mortars = 1
@@ -3726,7 +3746,7 @@ capital = 652
 		}
 		#create_equipment_variant = {
 			#name = "AS VAL" #commented out for now because it replaced AK-74M
-			#type = infantry_weapons3
+			#type = infantry_weapons_4
 			#upgrades = {
 			#	Inf_eq_gadjets = 4
 			#	Inf_eq_heavy_weapons = 2
@@ -3736,7 +3756,7 @@ capital = 652
 		#}
 		#create_equipment_variant = {
 			#name = "AN-94" #commented out for now because it replaced AK-74M
-			#type = infantry_weapons3
+			#type = infantry_weapons_4
 			#upgrades = {
 			#	Inf_eq_gadjets = 2
 			#	Inf_eq_heavy_weapons = 2
@@ -3746,7 +3766,7 @@ capital = 652
 		#}
 		create_equipment_variant = {
 			name = "AK-74M"
-			type = infantry_weapons3
+			type = infantry_weapons_4
 			upgrades = {
 				Inf_eq_mortars = 1
 			}
@@ -3754,22 +3774,22 @@ capital = 652
 		}
 		create_equipment_variant = {
 			name = "UAZ-452"
-			type = util_vehicle_0
+			type = util_vehicle_1
 			mark_older_equipment_obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/U1_alt1.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/UAZ-452.dds"
 		}
 		create_equipment_variant = {
 			name = "GAZ-66"
-			type = util_vehicle_0
+			type = util_vehicle_1
 			upgrades = {
 				Util_Mobility = 1
 			}
 			mark_older_equipment_obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/gaz66.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/GAZ-66.dds"
 		}
 		create_equipment_variant = {
 			name = "ZIL-131"
-			type = util_vehicle_0
+			type = util_vehicle_1
 			upgrades = {
 				Util_Mobility = 1
 			}
@@ -3778,22 +3798,22 @@ capital = 652
 		}
 		create_equipment_variant = {
 			name = "Ural-375D"
-			type = util_vehicle_0
+			type = util_vehicle_1
 			upgrades = {
 				Util_Mobility = 2
 			}
 			mark_older_equipment_obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/Ural375.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/Ural-375D.dds"
 		}
 		create_equipment_variant = {
 			name = "UAZ-469"
-			type = util_vehicle_1
+			type = util_vehicle_2
 			mark_older_equipment_obsolete = yes
-			icon = "gfx/interface/technologies/SOV/LAND/U2_alt1.dds"
+			icon = "gfx/interface/technologies/SOV/LAND/UAZ-469.dds"
 		}
 		create_equipment_variant = {
 			name = "Ural-4320"
-			type = util_vehicle_1
+			type = util_vehicle_2
 			upgrades = {
 				Util_Mobility = 1
 			}
@@ -3820,11 +3840,11 @@ capital = 652
 				IFV_2 = 1
 				IFV_3 = 1
 				IFV_4 = 1
-				artillery_0 = 1
+				tech_arty_0 = 1
 				Arty_upgrade_1 = 1
 				SP_arty_0 = 1
 				SP_R_arty_0 = 1
-				artillery_1 = 1
+				tech_arty_1 = 1
 				SP_arty_1 = 1
 				SP_R_arty_1 = 1
 				SP_R_arty_2 = 1
@@ -3841,9 +3861,11 @@ capital = 652
 				AA_upgrade_3 = 1
 				Anti_Air_2 = 1
 				SP_Anti_Air_2 = 1
-				attack_helicopter1 = 1
-				attack_helicopter2 = 1
-				attack_helicopter3 = 1
+				attack_helicopter_1 = 1
+				attack_helicopter_2 = 1
+				attack_helicopter_3 = 1
+				transport_helicopter_1 = 1
+				transport_helicopter_2 = 1
 			}
 
 			create_equipment_variant = {
@@ -4098,11 +4120,932 @@ capital = 652
 			}
 		}
 	}
-	if = { limit = { has_dlc = "By Blood Alone" }
+	if = {
+		limit = { has_dlc = "By Blood Alone" }
+		complete_special_project = sp:sp_awacs_project
 		set_air_oob = "SOV_2000_bba"
-
+		set_technology = {
+			early_airframe_designs = 1
+			gen_3_light = 1
+			gen_4_light = 1
+			gen_3_medium = 1
+			gen_4_medium = 1
+			gen_3_large = 1
+			gen_4_large = 1
+			flying_wing_design = 1
+			variable_wing_design = 1
+			delta_wing_design = 1
+			fwdswept_wing_design = 1
+			avionics_1 = 1
+			avionics_2 = 1
+			drone_1 = 1
+			awacs_1 = 1
+			engines_2 = 1
+			engines_3 = 1
+			refueling_1 = 1
+			redundant_1 = 1
+			early_weapons = 1
+			air_weapons_1 = 1
+			air_weapons_2 = 1
+			countermeasures_1 = 1
+			countermeasures_2 = 1
+			ag_weapons_1 = 1
+			naval_weapons_1 = 1
+			naval_weapons_2 = 1
+			special_mad_1 = 1
+			special_mad_2 = 1
+			tgp_recon_1 = 1
+		}
+		##BBA designs ##
+		create_equipment_variant = {
+			name = "MiG-21 Bis"
+			type = small_plane_strike_airframe_1
+			parent_version = 0
+			modules = {
+				fixed_main_weapon_slot = weap_mp_light_hardpoint_1
+				fixed_gun_slot = weap_multi_gun_2
+				engine_type_slot = engine_light_single_2
+				avionics_type_slot = avionics_manned_1
+				wingform_type_slot = wing_delta
+				special_slot_type_1 = spec_countermeasures_1
+			}
+			obsolete = yes
+			model = "SOV_small_plane_airframe_1_entity"
+			icon = "gfx/interface/technologies/SOV/AIR/MiG-21Bis.dds"
+		}
+		create_equipment_variant = {
+			name = "Su-7"
+			type = small_plane_strike_airframe_1
+			parent_version = 1
+			modules = {
+				fixed_main_weapon_slot = weap_mp_light_hardpoint_1
+				fixed_gun_slot = weap_multi_gun_1
+				engine_type_slot = engine_light_single_1
+				avionics_type_slot = avionics_manned_1
+				wingform_type_slot = wing_swept
+				special_slot_type_1 = empty
+			}
+			obsolete = yes
+			icon = "gfx/interface/technologies/SOV/AIR/Su-17M2.dds"
+			model = "SOV_small_plane_cas_airframe_1_entity"
+		}
+		create_equipment_variant = {
+			name = "MiG-23"
+			type = medium_plane_airframe_1
+			parent_version = 0
+			modules = {
+				fixed_main_weapon_slot = weap_mp_med_hardpoint_1
+				fixed_gun_slot = weap_multi_gun_2
+				engine_type_slot = engine_jet_single_2
+				avionics_type_slot = avionics_manned_1
+				wingform_type_slot = wing_variable
+				special_slot_type_1 = spec_countermeasures_1
+				special_slot_type_2 = empty
+				special_slot_type_3 = empty
+				fixed_auxiliary_weapon_slot_1 = weap_mp_light_hardpoint_1
+			}
+			upgrades = {
+				plane_bba_radar_upgrade = 2
+				plane_bba_engine_upgrade = 4
+			}
+			obsolete = yes
+			icon = "gfx/interface/technologies/SOV/AIR/MiG-23ML.dds"
+			model = "SOV_medium_plane_airframe_1_entity"
+		}
+		create_equipment_variant = {
+			name = "MiG-23 ML/MLD"
+			type = medium_plane_airframe_1
+			parent_version = 0
+			modules = {
+				fixed_main_weapon_slot = weap_mp_med_hardpoint_2
+				fixed_gun_slot = weap_multi_gun_2
+				engine_type_slot = engine_jet_single_2
+				avionics_type_slot = avionics_manned_2
+				wingform_type_slot = wing_variable
+				special_slot_type_1 = spec_countermeasures_2
+				special_slot_type_2 = empty
+				special_slot_type_3 = empty
+				fixed_auxiliary_weapon_slot_1 = weap_mp_light_hardpoint_1
+			}
+			upgrades = {
+				plane_bba_radar_upgrade = 2
+				plane_bba_engine_upgrade = 4
+			}
+			obsolete = yes
+			icon = "gfx/interface/technologies/SOV/AIR/MiG-23MLD.dds"
+			model = "SOV_medium_plane_airframe_1_entity"
+		}
+		create_equipment_variant = {
+			name = "Su-17M"
+			type = small_plane_cas_airframe_1
+			parent_version = 0
+			modules = {
+				fixed_main_weapon_slot = weap_ag_cas_hardpoint_1
+				fixed_gun_slot = weap_multi_gun_1
+				engine_type_slot = engine_light_single_2
+				avionics_type_slot = avionics_manned_1
+				wingform_type_slot = wing_variable
+				special_slot_type_1 = spec_countermeasures_1
+				special_slot_type_2 = empty
+			}
+			icon = "gfx/interface/technologies/SOV/AIR/Su-17M2.dds"
+			obsolete = yes
+			model = "SOV_small_plane_cas_airframe_1_entity"
+		}
+		create_equipment_variant = {
+			name = "Su-17M4"
+			type = small_plane_cas_airframe_1
+			parent_version = 1
+			modules = {
+				fixed_main_weapon_slot = weap_ag_cas_hardpoint_1
+				fixed_gun_slot = weap_multi_gun_1
+				engine_type_slot = engine_light_single_2
+				avionics_type_slot = avionics_manned_1
+				wingform_type_slot = wing_variable
+				special_slot_type_1 = spec_countermeasures_1
+				special_slot_type_2 = spec_tgp_1
+			}
+			icon = "gfx/interface/technologies/SOV/AIR/Su-17M4.dds"
+			model = "SOV_small_plane_cas_airframe_1_entity"
+		}
+		create_equipment_variant = {
+			name = "MiG-27"
+			type = medium_plane_cas_airframe_1
+			parent_version = 0
+			modules = {
+				fixed_main_weapon_slot = weap_ag_cas_hardpoint_1
+				fixed_gun_slot = weap_multi_at_2
+				fixed_auxiliary_weapon_slot_1 = weap_mp_med_hardpoint_1
+				engine_type_slot = engine_jet_single_2
+				avionics_type_slot = avionics_manned_1
+				wingform_type_slot = wing_variable
+				special_slot_type_1 = spec_countermeasures_1
+				special_slot_type_2 = spec_tgp_1
+			}
+			obsolete = yes
+			icon = "gfx/interface/technologies/SOV/AIR/MiG-27M.dds"
+			model = "SOV_medium_plane_airframe_1_entity"
+		}
+		create_equipment_variant = {
+			name = "MiG-25 Foxbat"
+			type = medium_plane_fighter_airframe_1
+			parent_version = 0
+			modules = {
+				fixed_main_weapon_slot = weap_a2a_hardpoint_1
+				fixed_gun_slot = empty
+				fixed_auxiliary_weapon_slot_1 = empty
+				engine_type_slot = engine_jet_double_2
+				avionics_type_slot = avionics_manned_1
+				wingform_type_slot = wing_delta
+				special_slot_type_1 = spec_countermeasures_1
+				special_slot_type_2 = empty
+			}
+			upgrades = {
+				plane_bba_radar_upgrade = 2
+				plane_bba_engine_upgrade = 6
+			}
+			obsolete = yes
+			icon = "gfx/interface/technologies/SOV/AIR/MiG-25P.dds"
+			model = "SOV_MIG31_entity"
+		}
+		create_equipment_variant = {
+			name = "MiG-25R Foxbat"
+			type = medium_plane_fighter_airframe_1
+			parent_version = 1
+			modules = {
+				fixed_main_weapon_slot = weap_a2a_hardpoint_1
+				fixed_gun_slot = empty
+				fixed_auxiliary_weapon_slot_1 = empty
+				engine_type_slot = engine_jet_double_2
+				avionics_type_slot = avionics_manned_1
+				wingform_type_slot = wing_delta
+				special_slot_type_1 = spec_countermeasures_1
+				special_slot_type_2 = spec_recon_1
+			}
+			upgrades = {
+				plane_bba_radar_upgrade = 2
+				plane_bba_engine_upgrade = 6
+			}
+			obsolete = yes
+			icon = "gfx/interface/technologies/SOV/AIR/MiG-25RBT.dds"
+			model = "SOV_MIG31_entity"
+		}
+		create_equipment_variant = {
+			name = "MiG-31 Foxhound"
+			type = medium_plane_fighter_airframe_2
+			parent_version = 0
+			modules = {
+				fixed_main_weapon_slot = weap_a2a_hardpoint_1
+				fixed_gun_slot = weap_multi_gun_2
+				fixed_auxiliary_weapon_slot_1 = weap_a2a_hardpoint_1
+				engine_type_slot = engine_jet_double_2
+				avionics_type_slot = avionics_manned_2
+				wingform_type_slot = wing_delta
+				special_slot_type_1 = spec_countermeasures_1
+				special_slot_type_2 = spec_refuel_2
+			}
+			upgrades = {
+				plane_bba_radar_upgrade = 3
+				plane_bba_engine_upgrade = 8
+			}
+			icon = "gfx/interface/technologies/SOV/AIR/MiG-31.dds"
+			model = "SOV_MIG31_entity"
+		}
+		create_equipment_variant = {
+			name = "MiG-29 Fulcrum"
+			type = small_plane_airframe_2
+			parent_version = 0
+			modules = {
+				fixed_main_weapon_slot = weap_a2a_hardpoint_1
+				fixed_gun_slot = weap_multi_gun_3
+				fixed_auxiliary_weapon_slot_1 = weap_mp_light_hardpoint_1
+				engine_type_slot = engine_light_double_2
+				avionics_type_slot = avionics_manned_2
+				wingform_type_slot = wing_swept
+				special_slot_type_1 = spec_countermeasures_1
+			}
+			obsolete = yes
+			icon = "gfx/interface/technologies/SOV/AIR/MiG-29UBT.dds"
+			model = "SOV_small_plane_airframe_2_entity"
+		}
+		create_equipment_variant = {
+			name = "MiG-29S Fulcrum"
+			type = small_plane_strike_airframe_2
+			parent_version = 1
+			modules = {
+				fixed_main_weapon_slot = weap_mp_light_hardpoint_2
+				fixed_gun_slot = weap_multi_gun_3
+				fixed_auxiliary_weapon_slot_1 = weap_a2a_hardpoint_1
+				engine_type_slot = engine_light_double_2
+				avionics_type_slot = avionics_manned_2
+				wingform_type_slot = wing_swept
+				special_slot_type_1 = spec_countermeasures_1
+			}
+			icon = "gfx/interface/technologies/SOV/AIR/MiG-29S.dds"
+			model = "SOV_small_plane_airframe_2_entity"
+		}
+		create_equipment_variant = {
+			name = "MiG-29K Fulcrum-D"
+			type = cv_small_plane_strike_airframe_2
+			parent_version = 0
+			modules = {
+				fixed_main_weapon_slot = weap_mp_light_hardpoint_2
+				fixed_gun_slot = weap_multi_gun_3
+				fixed_auxiliary_weapon_slot_1 = weap_a2a_hardpoint_1
+				engine_type_slot = engine_light_double_3
+				avionics_type_slot = avionics_manned_2
+				wingform_type_slot = wing_swept
+				special_slot_type_1 = spec_countermeasures_1
+			}
+			icon = "gfx/interface/technologies/SOV/AIR/MiG-29K.dds"
+		}
+		create_equipment_variant = {
+			name = "Su-27M" #early version of the Su-35
+			type = medium_plane_fighter_airframe_2
+			parent_version = 1
+			modules = {
+				fixed_main_weapon_slot = weap_a2a_hardpoint_2
+				fixed_gun_slot = weap_multi_gun_3
+				fixed_auxiliary_weapon_slot_1 = weap_a2a_hardpoint_2
+				fixed_auxiliary_weapon_slot_2 = weap_mp_light_hardpoint_2 #R-73
+				engine_type_slot = engine_jet_double_2
+				avionics_type_slot = avionics_manned_3
+				wingform_type_slot = wing_swept
+				special_slot_type_1 = spec_countermeasures_1
+				special_slot_type_2 = spec_refuel_1
+			}
+			upgrades = {
+						plane_bba_radar_upgrade = 3
+						plane_bba_engine_upgrade = 8
+			 }
+			icon = "gfx/interface/technologies/SOV/AIR/Su-27SM2.dds"
+			model = "SOV_medium_plane_fighter_airframe_2_entity"
+		}
+		create_equipment_variant = {
+			name = "Su-27S"
+			type = medium_plane_fighter_airframe_2
+			parent_version = 0
+			modules = {
+				fixed_main_weapon_slot = weap_a2a_hardpoint_1
+				fixed_gun_slot = weap_multi_gun_3
+				fixed_auxiliary_weapon_slot_1 = weap_a2a_hardpoint_1
+				fixed_auxiliary_weapon_slot_2 = weap_mp_light_hardpoint_2 #R-73
+				engine_type_slot = engine_jet_double_2
+				avionics_type_slot = avionics_manned_2
+				wingform_type_slot = wing_swept
+				special_slot_type_1 = spec_countermeasures_1
+				special_slot_type_2 = spec_refuel_1
+			}
+			icon = "gfx/interface/technologies/SOV/AIR/Su-27S.dds"
+			model = "SOV_medium_plane_fighter_airframe_2_entity"
+		}
+		create_equipment_variant = {
+			name = "Su-30"
+			type = medium_plane_airframe_2
+			parent_version = 0
+			modules = {
+				fixed_main_weapon_slot = weap_mp_med_hardpoint_1
+				fixed_gun_slot = weap_multi_gun_3
+				fixed_auxiliary_weapon_slot_1 = weap_a2a_hardpoint_1
+				fixed_auxiliary_weapon_slot_2 = weap_mp_light_hardpoint_2 #R-73
+				engine_type_slot = engine_jet_double_2
+				avionics_type_slot = avionics_manned_2
+				wingform_type_slot = wing_delta_canard
+				special_slot_type_1 = spec_countermeasures_1
+				special_slot_type_2 = spec_refuel_1
+			}
+			icon = "gfx/interface/technologies/SOV/AIR/Su-30M2.dds"
+			model = "SOV_medium_plane_airframe_2_entity"
+		}
+		create_equipment_variant = {
+			name = "Su-30MKI"
+			type = medium_plane_airframe_2
+			parent_version = 0
+			modules = {
+				fixed_main_weapon_slot = weap_mp_med_hardpoint_1
+				fixed_gun_slot = weap_multi_gun_3
+				fixed_auxiliary_weapon_slot_1 = weap_a2a_hardpoint_1
+				fixed_auxiliary_weapon_slot_2 = weap_a2a_hardpoint_1 #R-73
+				engine_type_slot = engine_jet_double_2
+				avionics_type_slot = avionics_manned_2
+				wingform_type_slot = wing_swept
+				special_slot_type_1 = spec_countermeasures_1
+				special_slot_type_2 = spec_refuel_1
+			}
+			obsolete = yes
+			icon = "gfx/interface/technologies/SOV/AIR/Su-30MKI.dds"
+			model = "GEN_SU30_entity"
+		}
+		create_production_license = {
+			target = RAJ
+			equipment = {
+				type = medium_plane_airframe_2
+				version_name = "Su-30MKI"
+			}
+			cost_factor = 0
+		}
+		create_equipment_variant = {
+			name = "Su-34"
+			type = medium_plane_cas_airframe_2
+			parent_version = 0
+			modules = {
+				fixed_main_weapon_slot = weap_ag_cas_hardpoint_1
+				fixed_gun_slot = weap_multi_gun_3
+				fixed_auxiliary_weapon_slot_1 = weap_mp_med_hardpoint_1
+				fixed_auxiliary_weapon_slot_2 = weap_mp_light_hardpoint_2 #R-73
+				engine_type_slot = engine_jet_double_2
+				avionics_type_slot = avionics_manned_2
+				wingform_type_slot = wing_delta_canard
+				special_slot_type_1 = spec_countermeasures_1
+				special_slot_type_2 = spec_refuel_1
+			}
+			icon = "gfx/interface/technologies/SOV/AIR/Su-34.dds"
+			model = "SOV_medium_plane_cas_airframe_2_entity"
+		}
+		create_equipment_variant = {
+			name = "Su-33"
+			type = cv_medium_plane_fighter_airframe_2
+			parent_version = 0
+			modules = {
+				fixed_main_weapon_slot = weap_a2a_hardpoint_1
+				fixed_gun_slot = weap_multi_gun_3
+				fixed_auxiliary_weapon_slot_1 = weap_a2a_hardpoint_1
+				fixed_auxiliary_weapon_slot_2 = weap_mp_light_hardpoint_2 #R-73
+				engine_type_slot = engine_jet_double_2
+				avionics_type_slot = avionics_manned_2
+				wingform_type_slot = wing_delta_canard
+				special_slot_type_1 = spec_countermeasures_1
+				special_slot_type_2 = spec_refuel_1
+			}
+			icon = "gfx/interface/technologies/SOV/AIR/Su-33.dds"
+			model = "SOV_cv_medium_plane_airframe_2_entity"
+		}
+		create_equipment_variant = {
+			name = "Su-24"
+			type = medium_plane_cas_airframe_1
+			parent_version = 1
+			modules = {
+				fixed_main_weapon_slot = weap_ag_cas_hardpoint_1
+				fixed_gun_slot = weap_multi_gun_2
+				engine_type_slot = engine_jet_double_2
+				avionics_type_slot = avionics_manned_2
+				wingform_type_slot = wing_variable
+				special_slot_type_1 = spec_countermeasures_1
+				special_slot_type_2 = empty
+			}
+			icon = "gfx/interface/technologies/SOV/AIR/Su-24M.dds"
+			model = "SOV_medium_plane_cas_airframe_1_entity"
+			obsolete = yes
+		}
+		create_equipment_variant = {
+			name = "Su-24M"
+			type = medium_plane_cas_airframe_1
+			parent_version = 2
+			modules = {
+				fixed_main_weapon_slot = weap_ag_cas_hardpoint_1
+				fixed_gun_slot = weap_multi_gun_2
+				fixed_auxiliary_weapon_slot_1 = weap_ag_cas_hardpoint_1
+				engine_type_slot = engine_jet_double_2
+				avionics_type_slot = avionics_manned_2
+				wingform_type_slot = wing_variable
+				special_slot_type_1 = spec_countermeasures_1
+				special_slot_type_2 = spec_refuel_2
+			}
+			upgrades = {
+					plane_bba_engine_upgrade = 1
+				}
+			icon = "gfx/interface/technologies/SOV/AIR/Su-24MK.dds"
+			model = "SOV_medium_plane_cas_airframe_1_entity"
+			obsolete = yes
+		}
+		create_equipment_variant = {
+			name = "Su-24MR"
+			type = medium_plane_airframe_1
+			parent_version = 2
+			modules = {
+				fixed_main_weapon_slot = weap_mp_heavy_hardpoint_1
+				fixed_gun_slot = empty
+				fixed_auxiliary_weapon_slot_1 = empty
+				engine_type_slot = engine_jet_double_2
+				avionics_type_slot = avionics_manned_2
+				wingform_type_slot = wing_variable
+				special_slot_type_1 = spec_countermeasures_1
+				special_slot_type_2 = spec_tgp_1
+			}
+			upgrades = {
+					plane_bba_engine_upgrade = 1
+				}
+			icon = "gfx/interface/technologies/SOV/AIR/Su-24M2.dds"
+			model = "SOV_medium_plane_cas_airframe_1_entity"
+		}
+		create_equipment_variant = {
+			name = "Su-24M2"
+			type = medium_plane_cas_airframe_1
+			parent_version = 3
+			modules = {
+				fixed_main_weapon_slot = weap_ag_cas_hardpoint_1
+				fixed_gun_slot = weap_multi_gun_2
+				fixed_auxiliary_weapon_slot_1 = weap_mp_heavy_hardpoint_1
+				engine_type_slot = engine_jet_double_2
+				avionics_type_slot = avionics_manned_3
+				wingform_type_slot = wing_variable
+				special_slot_type_1 = spec_countermeasures_2
+				special_slot_type_2 = empty
+			}
+			upgrades = {
+					plane_bba_engine_upgrade = 1
+				}
+			icon = "gfx/interface/technologies/SOV/AIR/Su-24M2.dds"
+			model = "SOV_medium_plane_cas_airframe_1_entity"
+		}
+		create_equipment_variant = {
+			name = "Su-25"
+			type = small_plane_cas_airframe_2
+			parent_version = 0
+			modules = {
+				fixed_main_weapon_slot = weap_ag_cas_hardpoint_1
+				fixed_gun_slot = weap_multi_gun_3
+				fixed_auxiliary_weapon_slot_1 = weap_mp_light_hardpoint_1
+				engine_type_slot = engine_light_double_2
+				avionics_type_slot = avionics_manned_1
+				wingform_type_slot = wing_straight
+				special_slot_type_1 = spec_countermeasures_1
+				special_slot_type_2 = spec_protection_1
+				special_slot_type_3 = spec_redundant_2
+			}
+			obsolete = yes
+			icon = "gfx/interface/technologies/SOV/AIR/Su-25.dds"
+			model = "SOV_small_plane_cas_airframe_2_entity"
+		}
+		create_production_license = { #Tbilissi aircaft factory
+			target = GEO
+			equipment = {
+				type = small_plane_cas_airframe_2
+				version_name = "Su-25"
+			}
+			cost_factor = 0
+		}
+		create_equipment_variant = {
+			name = "Su-25T"
+			type = small_plane_cas_airframe_2
+			parent_version = 1
+			modules = {
+				fixed_main_weapon_slot = weap_ag_cas_hardpoint_1
+				fixed_gun_slot = weap_multi_gun_3
+				fixed_auxiliary_weapon_slot_1 = weap_mp_light_hardpoint_2
+				engine_type_slot = engine_light_double_2
+				avionics_type_slot = avionics_manned_2
+				wingform_type_slot = wing_straight
+				special_slot_type_1 = spec_countermeasures_1
+				special_slot_type_2 = spec_protection_1
+				special_slot_type_3 = spec_redundant_2
+			}
+			obsolete = yes
+			icon = "gfx/interface/technologies/SOV/AIR/Su-25T.dds"
+			model = "SOV_small_plane_cas_airframe_2_entity"
+		}
+		create_equipment_variant = {
+			name = "Su-25SM"
+			type = small_plane_cas_airframe_2
+			parent_version = 2
+			modules = {
+				fixed_main_weapon_slot = weap_ag_cas_hardpoint_1
+				fixed_gun_slot = weap_multi_gun_3
+				fixed_auxiliary_weapon_slot_1 = weap_mp_light_hardpoint_2
+				engine_type_slot = engine_light_double_2
+				avionics_type_slot = avionics_manned_2
+				wingform_type_slot = wing_straight
+				special_slot_type_1 = spec_countermeasures_1
+				special_slot_type_2 = spec_protection_1
+				special_slot_type_3 = spec_redundant_2
+			}
+			upgrades = {
+				plane_bba_engine_upgrade = 1
+			}
+			icon = "gfx/interface/technologies/SOV/AIR/Su-25SM.dds"
+			model = "SOV_small_plane_cas_airframe_2_entity"
+		}
+		create_equipment_variant = { #Strat Bombers
+			name = "Tu-95MS"
+			type = large_plane_airframe_1
+			parent_version = 0
+			modules = {
+				fixed_main_weapon_slot = weap_ag_strat_1
+				fixed_gun_slot = empty
+				engine_type_slot = engine_prop_quad_1
+				avionics_type_slot = avionics_manned_1
+				wingform_type_slot = wing_swept
+				special_slot_type_1 = spec_countermeasures_1
+				special_slot_type_2 = spec_refuel_1
+				special_slot_type_3 = spec_nuclear_consent
+				fixed_auxiliary_weapon_slot_1 = weap_ag_strat_1
+				fixed_auxiliary_weapon_slot_2 = weap_ag_cas_hardpoint_1
+			}
+			obsolete = yes
+			icon = "gfx/interface/technologies/SOV/AIR/Tu-95.dds"
+			model = "SOV_large_plane_airframe_1_entity"
+		}
+		create_equipment_variant = { #Strat Bombers
+			name = "Tu-22M3"
+			type = large_plane_airframe_1
+			parent_version = 0
+			modules = {
+				fixed_main_weapon_slot = weap_ag_strat_1
+				fixed_gun_slot = empty
+				engine_type_slot = engine_jet_double_3
+				avionics_type_slot = avionics_manned_2
+				wingform_type_slot = wing_variable
+				special_slot_type_1 = spec_countermeasures_1
+				special_slot_type_2 = spec_redundant_1
+				special_slot_type_3 = spec_nuclear_consent
+				fixed_auxiliary_weapon_slot_1 = weap_ag_strat_1
+				fixed_auxiliary_weapon_slot_2 = weap_mp_heavy_hardpoint_1
+			}
+			obsolete = yes
+			icon = "gfx/interface/technologies/SOV/AIR/Tu-22M3.dds"
+		}
+		create_equipment_variant = { #Strat Bombers
+			name = "Tu-142"
+			type = large_plane_maritime_patrol_airframe_1
+			parent_version = 2
+			modules = {
+				fixed_main_weapon_slot = weap_as_hardpoint_2
+				fixed_gun_slot = empty
+				engine_type_slot = engine_prop_quad_2
+				avionics_type_slot = avionics_manned_1
+				wingform_type_slot = wing_swept
+				special_slot_type_1 = spec_countermeasures_1
+				special_slot_type_2 = spec_mad_2
+				special_slot_type_3 = spec_refuel_1
+				fixed_auxiliary_weapon_slot_1 = weap_as_hardpoint_1
+				fixed_auxiliary_weapon_slot_2 = weap_ag_strat_1
+			}
+			icon = "gfx/interface/technologies/SOV/AIR/Tu-142.dds"
+			model = "SOV_large_plane_airframe_1_entity"
+		}
+		create_equipment_variant = { #Strat Bombers
+			name = "Il-38"
+			type = large_plane_maritime_patrol_airframe_1
+			parent_version = 1
+			modules = {
+				fixed_main_weapon_slot = weap_as_hardpoint_1
+				fixed_gun_slot = empty
+				fixed_auxiliary_weapon_slot_1 = weap_as_hardpoint_1
+				engine_type_slot = engine_prop_quad_1
+				avionics_type_slot = avionics_manned_1
+				wingform_type_slot = wing_straight
+				special_slot_type_1 = spec_countermeasures_1
+				special_slot_type_2 = spec_mad_1
+				special_slot_type_3 = spec_refuel_1
+			}
+			obsolete = yes
+			icon = "gfx/interface/technologies/SOV/AIR/Il-38.dds"
+			model = "SOV_large_plane_airframe_1_entity"
+		}
+		create_equipment_variant = { #Strat Bombers
+			name = "Be-12"
+			type = large_plane_maritime_patrol_airframe_1
+			parent_version = 0
+			modules = {
+				fixed_main_weapon_slot = weap_as_hardpoint_1
+				fixed_gun_slot = empty
+				fixed_auxiliary_weapon_slot_1 = weap_as_hardpoint_1
+				engine_type_slot = engine_prop_double_1
+				avionics_type_slot = avionics_manned_1
+				wingform_type_slot = wing_straight
+				special_slot_type_1 = empty
+				special_slot_type_2 = spec_mad_1
+				special_slot_type_3 = empty
+			}
+			obsolete = yes
+			icon = "gfx/interface/technologies/SOV/AIR/NAV1.dds"
+			model = "SOV_large_plane_airframe_1_entity"
+		}
+		create_equipment_variant = { #Strat Bombers
+			name = "Tu-160"
+			type = large_plane_airframe_2
+			parent_version = 0
+			modules = {
+				fixed_main_weapon_slot = weap_ag_strat_2
+				fixed_gun_slot = empty
+				engine_type_slot = engine_jet_quad_2
+				avionics_type_slot = avionics_manned_2
+				wingform_type_slot = wing_variable
+				special_slot_type_1 = spec_countermeasures_1
+				special_slot_type_2 = empty
+				special_slot_type_3 = empty
+				special_slot_type_4 = spec_nuclear_consent
+				fixed_auxiliary_weapon_slot_1 = weap_ag_strat_2
+				fixed_auxiliary_weapon_slot_2 = weap_ag_cas_hardpoint_1
+			}
+			icon = "gfx/interface/technologies/SOV/AIR/Tu-160.dds"
+		}
+		create_equipment_variant = { #Large Transport
+			name = "An-2"
+			type = large_plane_air_transport_airframe_1
+			parent_version = 0
+			modules = {
+				fixed_main_weapon_slot = weap_buff_transport
+				fixed_gun_slot = empty
+				engine_type_slot = engine_prop_double_1
+				avionics_type_slot = avionics_manned_1
+				wingform_type_slot = wing_straight
+				special_slot_type_1 = empty
+				special_slot_type_2 = spec_redundant_1
+				special_slot_type_3 = empty
+				fixed_auxiliary_weapon_slot_1 = empty
+				fixed_auxiliary_weapon_slot_2 = empty
+			}
+			obsolete = yes
+			icon = "gfx/interface/technologies/SOV/AIR/an2.dds"
+		}
+		create_production_license = {
+			target = POL
+			equipment = {
+				type = large_plane_air_transport_airframe_1
+				version_name = "An-2"
+			}
+			cost_factor = 0
+		}
+		create_equipment_variant = { #Large Transport
+			name = "An-12"
+			type = large_plane_air_transport_airframe_1
+			parent_version = 1
+			modules = {
+				fixed_main_weapon_slot = weap_buff_transport
+				fixed_gun_slot = empty
+				engine_type_slot = engine_prop_quad_1
+				avionics_type_slot = avionics_manned_1
+				wingform_type_slot = wing_straight
+				special_slot_type_1 = empty
+				special_slot_type_2 = spec_redundant_2
+				special_slot_type_3 = empty
+				fixed_auxiliary_weapon_slot_1 = empty
+				fixed_auxiliary_weapon_slot_2 = empty
+			}
+			obsolete = yes
+			icon = "gfx/interface/technologies/SOV/AIR/An-12.dds"
+		}
+		create_equipment_variant = { #Large Transport
+			name = "An-22"
+			type = large_plane_air_transport_airframe_1
+			parent_version = 1
+			modules = {
+				fixed_main_weapon_slot = weap_buff_transport
+				fixed_gun_slot = empty
+				engine_type_slot = engine_prop_quad_1
+				avionics_type_slot = avionics_manned_1
+				wingform_type_slot = wing_straight
+				special_slot_type_1 = empty
+				special_slot_type_2 = spec_redundant_2
+				special_slot_type_3 = empty
+				fixed_auxiliary_weapon_slot_1 = weap_buff_transport
+				fixed_auxiliary_weapon_slot_2 = weap_buff_transport
+			}
+			upgrades = {
+				plane_bba_engine_upgrade = 8
+			}
+			obsolete = yes
+			icon = "gfx/interface/technologies/SOV/AIR/An-22.dds"
+		}
+		create_equipment_variant = { #Large Transport
+			name = "An-26"
+			type = large_plane_air_transport_airframe_1
+			parent_version = 1
+			modules = {
+				fixed_main_weapon_slot = weap_buff_transport
+				fixed_gun_slot = empty
+				engine_type_slot = engine_prop_double_1
+				avionics_type_slot = avionics_manned_1
+				wingform_type_slot = wing_straight
+				special_slot_type_1 = empty
+				special_slot_type_2 = empty
+				special_slot_type_3 = empty
+				fixed_auxiliary_weapon_slot_1 = empty
+				fixed_auxiliary_weapon_slot_2 = empty
+			}
+			obsolete = yes
+			icon = "gfx/interface/technologies/SOV/AIR/An-24.dds"
+		}
+		create_equipment_variant = { #Medium Transport
+			name = "An-32"
+			type = large_plane_air_transport_airframe_1
+			parent_version = 1
+			modules = {
+				fixed_main_weapon_slot = weap_buff_transport
+				fixed_gun_slot = empty
+				engine_type_slot = engine_prop_double_2
+				avionics_type_slot = avionics_manned_1
+				wingform_type_slot = wing_straight
+				special_slot_type_1 = empty
+				special_slot_type_2 = empty
+				fixed_auxiliary_weapon_slot_1 = empty
+			}
+			obsolete = yes
+			icon = "gfx/interface/technologies/SOV/AIR/C2_alt1.dds"
+		}
+		create_equipment_variant = { #Large Transport
+			name = "Il-76"
+			type = large_plane_air_transport_airframe_2
+			parent_version = 0
+			modules = {
+				fixed_main_weapon_slot = weap_buff_transport
+				fixed_gun_slot = empty
+				engine_type_slot = engine_jet_quad_2
+				avionics_type_slot = avionics_manned_1
+				wingform_type_slot = wing_swept
+				special_slot_type_1 = spec_countermeasures_1
+				special_slot_type_2 = empty
+				special_slot_type_3 = empty
+				fixed_auxiliary_weapon_slot_1 = empty
+				fixed_auxiliary_weapon_slot_2 = empty
+			}
+			upgrades = {
+				plane_bba_engine_upgrade = 1
+			}
+			icon = "gfx/interface/technologies/SOV/AIR/Il-76D.dds"
+		}
+		create_equipment_variant = { #Large Transport
+			name = "Il-76MD"
+			type = large_plane_air_transport_airframe_2
+			parent_version = 2
+			modules = {
+				fixed_main_weapon_slot = weap_buff_transport
+				fixed_gun_slot = empty
+				engine_type_slot = engine_jet_quad_3
+				avionics_type_slot = avionics_manned_1
+				wingform_type_slot = wing_swept
+				special_slot_type_1 = spec_countermeasures_1
+				special_slot_type_2 = spec_redundant_2
+				special_slot_type_3 = spec_refuel_2
+				fixed_auxiliary_weapon_slot_1 = empty
+				fixed_auxiliary_weapon_slot_2 = empty
+			}
+			upgrades = {
+				plane_bba_engine_upgrade = 1
+			}
+			icon = "gfx/interface/technologies/SOV/AIR/Il-76MD.dds"
+		}
+		create_equipment_variant = { #Large Transport
+			name = "An-124"
+			type = large_plane_air_transport_airframe_2
+			parent_version = 2
+			modules = {
+				fixed_main_weapon_slot = weap_buff_transport
+				fixed_gun_slot = empty
+				engine_type_slot = engine_jet_six_3
+				avionics_type_slot = avionics_manned_1
+				wingform_type_slot = wing_swept
+				special_slot_type_1 = spec_countermeasures_1
+				special_slot_type_2 = spec_redundant_2
+				special_slot_type_3 = empty
+				fixed_auxiliary_weapon_slot_1 = weap_buff_transport
+				fixed_auxiliary_weapon_slot_2 = weap_buff_transport
+			}
+			upgrades = {
+				plane_bba_engine_upgrade = 10
+			}
+			icon = "gfx/interface/technologies/SOV/AIR/An-124.dds"
+		}
+		create_equipment_variant = { #Large Transport
+			name = "Beriev A-50"
+			type = large_plane_awacs_airframe_2
+			parent_version = 0
+			modules = {
+				fixed_main_weapon_slot = weap_buff_awacs_1
+				fixed_gun_slot = empty
+				engine_type_slot = engine_jet_quad_2
+				avionics_type_slot = avionics_manned_1
+				wingform_type_slot = wing_swept
+				special_slot_type_1 = spec_countermeasures_1
+				special_slot_type_2 = spec_redundant_1
+				fixed_auxiliary_weapon_slot_1 = empty
+			}
+			icon = "gfx/interface/technologies/SOV/AIR/A-50.dds"
+		}
+		create_production_license = {
+			target = IRQ
+			equipment = {
+				type = large_plane_awacs_airframe_2
+				version_name = "Beriev A-50" #Il-76 Adnan, home made Il-76 Version creat with french radar and civilian Il-76
+			}
+			cost_factor = 0
+		}
 		else = {
 			set_air_oob = "SOV_2000_nonbba"
+			set_technology = {
+				early_fighter = 1
+				Strike_fighter1 = 1
+				Strike_fighter2 = 1
+				MR_Fighter1 = 1
+				MR_Fighter2 = 1
+				MR_upgrade_1 = 1
+				MR_Fighter3 = 1 #4.5gen
+				AS_Fighter1 = 1
+				AS_Fighter2 = 1
+				CV_MR_Fighter1 = 1
+				CV_MR_Fighter2 = 1
+				CV_MR_Fighter3 = 1 #4.5gen
+				L_Strike_fighter1 = 1
+				L_Strike_fighter2 = 1
+				early_bomber = 1
+				strategic_bomber1 = 1
+				strategic_bomber2 = 1
+				strategic_bomber3 = 1
+				transport_plane1 = 1
+				transport_plane2 = 1
+				transport_plane3 = 1
+				naval_plane1 = 1
+				naval_plane2 = 1
+				cas1 = 1
+				cas2 = 1
+				awacs_plane1 = 1
+			}
+			#### Air Variants ####
+			create_equipment_variant = {
+				name = "MiG-25 Foxbat"
+				type = AS_Fighter1
+				upgrades = {
+					plane_engine_upgrade = 3
+				}
+				obsolete = yes
+			}
+			create_equipment_variant = {
+				name = "Su-27M"
+				type = AS_Fighter2
+				parent_version = 1
+				upgrades = {
+					plane_range_upgrade = 2
+					plane_engine_upgrade = 1
+				}
+				#obsolete = yes
+			}
+			create_equipment_variant = {
+				name = "Su-24M"
+				type = Strike_fighter2
+				parent_version = 1
+				upgrades = {
+					strike_gun_upgrade = 1
+					plane_range_upgrade = 1
+					plane_engine_upgrade = 1
+					plane_reliability_upgrade = 0
+				}
+				#obsolete = yes
+			}
+			create_equipment_variant = {
+				name = "Su-27"
+				type = AS_Fighter2 #Su-30MK2
+				upgrades = {
+				}
+				obsolete = yes
+			}
+			create_equipment_variant = {
+				name = "Su-22 Fitter"
+				type = Strike_fighter1 #Su-22 Fitter
+				upgrades = {
+				}
+				obsolete = yes
+			}
 		}
 	}
 	if = { limit = { has_dlc = "Gotterdammerung" }
@@ -4157,6 +5100,7 @@ capital = 652
 
 		complete_special_project = sp:sp_space_program_gdm
 		complete_special_project = sp:sp_missile_project
+		complete_special_project = sp:sp_nuclear_energy
 
 		set_variable = { num_launchers_set = 9 }
 
@@ -4178,19 +5122,19 @@ capital = 652
 
 		armoured_mass_assault = 1
 
-		infantry_weapons = 1
-		infantry_weapons1 = 1
-		infantry_weapons2 = 1
-		infantry_weapons3 = 1
+		infantry_weapons_1 = 1
+		infantry_weapons_2 = 1
+		infantry_weapons_3 = 1
+		infantry_weapons_4 = 1
 		support_weapons = 1
 		support_weapons2 = 1
 		support_weapons3 = 1
 		tandem_charge_warheads = 1
 		squad_automatic_weapon = 1
-		special_forces = 1
-		special_forces2 = 1
-		special_forces3 = 1
-		special_forces4 = 1
+		special_forces_tech_1 = 1
+		special_forces_tech_2 = 1
+		special_forces_tech_3 = 1
+		special_forces_tech_4 = 1
 
 		#2005
 
@@ -4199,15 +5143,15 @@ capital = 652
 		night_vision_1 = 1
 		night_vision_2 = 1
 
-		command_control_equipment = 1
-		command_control_equipment1 = 1
+		cnc_equipment_1 = 1
+		cnc_equipment_2 = 1
 
-		land_Drone_equipment = 1
+		land_drone_equipment_type = 1
 
-		util_vehicle_0 = 1
 		util_vehicle_1 = 1
 		util_vehicle_2 = 1
 		util_vehicle_3 = 1
+		util_vehicle_4 = 1
 
 		Anti_tank_0 = 1
 		Heavy_Anti_tank_0 = 1
@@ -4216,16 +5160,12 @@ capital = 652
 		Heavy_Anti_tank_1 = 1
 
 
-		transport_helicopter1 = 1
-		nsb_transport_helicopter1 = 1
-		transport_helicopter2 = 1
-		nsb_transport_helicopter2 = 1
 
 
 
-		body_armor_1980 = 1
-		camouflage = 1
-		camouflage2 = 1
+		body_armor_1 = 1
+		camouflage_1 = 1
+		camouflage_2 = 1
 
 		basic_computing = 1
 		integrated_circuit = 1
@@ -4239,18 +5179,18 @@ capital = 652
 		computing3 = 1
 		decryption3 = 1
 		encryption3 = 1
-		DNA_fingerprinting = 1
+		genetics_1 = 1
 
 		radar = 1
 		internet1 = 1
 		internet2 = 1
 		fuel_silos = 1
 
-		industrial_electrospun_polymeric_nanofibers = 1
-		multiwalled_carbon_nanotubes = 1
-		stereolitography = 1
-		early_3D_printers = 1
-		DNA_fingerprinting = 1
+		nanofibers_1 = 1
+		nanofibers_2 = 1
+		printing_1 = 1
+		printing_2 = 1
+		genetics_1 = 1
 		fuel_refining = 1
 		early_renewables = 1
 		renewables = 1
@@ -4281,6 +5221,12 @@ capital = 652
 	complete_special_project = sp:sp_helicopter_project
 
 	add_ideas = {
+		partially_nationalized_healthcare
+		balanced_protections
+		standard_maintenance
+		russia_rouble
+		standard_regulations
+
 		russian_legacy
 		orthodox_christian
 		crippling_corruption
@@ -4374,17 +5320,10 @@ capital = 652
 	set_variable = { var = int_investments value = 12 }
 	set_variable = { var = npp_completed value = 0 }
 	set_variable = { var = from_center_completed value = 0 }
-	every_controlled_state = {
-		set_variable = { productivity_state_var = 570 }
-	}
 	set_variable = { overall_productivity = 570 }
 
 	set_variable = { enrichment_facilities = 7 }
 	add_to_array = { global.enrichment_countries = THIS.id }
-
-	#Moscow and Saint Petersburg
-	652 = { set_variable = { productivity_state_var = 850 } }
-	644 = { set_variable = { productivity_state_var = 670 } }
 
 	# Investment Targets
 	add_to_array = { SOV.investment_targets = KAZ } # Kazakhstan
@@ -4498,6 +5437,9 @@ capital = 652
 	reverse_add_opinion_modifier = { target = DEN modifier = maritime_border_dispute }
 	add_opinion_modifier = { target = NOR modifier = maritime_border_dispute }
 	reverse_add_opinion_modifier = { target = NOR modifier = maritime_border_dispute }
+
+	add_opinion_modifier = { target = JAP modifier = minor_border_dispute }
+	reverse_add_opinion_modifier = { target = JAP modifier = minor_border_dispute }
 
 	add_opinion_modifier = { target = GER modifier = large_commercial_relations }
 	reverse_add_opinion_modifier = { target = GER modifier = large_commercial_relations }
@@ -4692,976 +5634,21 @@ capital = 652
 	recruit_character = SOV_alexander_nosatov
 	recruit_character = SOV_viktor_petrovich_kravchuk
 
+	# Scientists
+	recruit_character = SOV_grigori_perelman
+
 	#intelligence agency advisors
 	recruit_character = SOV_alexander_bortnikov
 	recruit_character = SOV_sergey_naryshkin
 	recruit_character = SOV_igor_kostyukov
 	recruit_character = SOV_nikolai_patrushev
 
-	#### Air stuff (BBA/nonBBA) ####
+	#intelligence advisors activated via on_startup in 00_on_actions.txt
 
-	if = {
-		limit = { has_dlc = "By Blood Alone" }
-		set_technology = {
-			early_airframe_designs = 1
-			gen_3_light = 1
-			gen_4_light = 1
-			gen_3_medium = 1
-			gen_4_medium = 1
-			gen_3_large = 1
-			gen_4_large = 1
-
-			flying_wing_design = 1
-			variable_wing_design = 1
-			delta_wing_design = 1
-			fwdswept_wing_design = 1
-
-			avionics_1 = 1
-			avionics_2 = 1
-
-			drone_1 = 1
-
-			awacs_1 = 1
-
-			engines_2 = 1
-			engines_3 = 1
-
-			refueling_1 = 1
-
-			redundant_1 = 1
-
-			early_weapons = 1
-			air_weapons_1 = 1
-			air_weapons_2 = 1
-			countermeasures_1 = 1
-			countermeasures_2 = 1
-
-			ag_weapons_1 = 1
-
-			naval_weapons_1 = 1
-			naval_weapons_2 = 1
-			special_mad_1 = 1
-			special_mad_2 = 1
-
-			tgp_recon_1 = 1
-		}
-
-		##BBA designs ##
-
-		create_equipment_variant = {
-			name = "MiG-21 Bis"
-			type = small_plane_strike_airframe_1
-			parent_version = 0
-			modules = {
-				fixed_main_weapon_slot = weap_mp_light_hardpoint_1
-				fixed_gun_slot = weap_multi_gun_2
-				engine_type_slot = engine_light_single_2
-				avionics_type_slot = avionics_manned_1
-				wingform_type_slot = wing_delta
-				special_slot_type_1 = spec_countermeasures_1
-			}
-			obsolete = yes
-			model = "SOV_small_plane_airframe_1_entity"
-			icon = "gfx/interface/technologies/SOV/AIR/MR1.dds"
-		}
-		create_equipment_variant = {
-			name = "Su-7"
-			type = small_plane_strike_airframe_1
-			parent_version = 1
-			modules = {
-				fixed_main_weapon_slot = weap_mp_light_hardpoint_1
-				fixed_gun_slot = weap_multi_gun_1
-				engine_type_slot = engine_light_single_1
-				avionics_type_slot = avionics_manned_1
-				wingform_type_slot = wing_swept
-				special_slot_type_1 = empty
-			}
-			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/AIR/su7.dds"
-			model = "SOV_small_plane_cas_airframe_1_entity"
-		}
-		create_equipment_variant = {
-			name = "MiG-23"
-			type = medium_plane_airframe_1
-			parent_version = 0
-			modules = {
-				fixed_main_weapon_slot = weap_mp_med_hardpoint_1
-				fixed_gun_slot = weap_multi_gun_2
-				engine_type_slot = engine_jet_single_2
-				avionics_type_slot = avionics_manned_1
-				wingform_type_slot = wing_variable
-				special_slot_type_1 = spec_countermeasures_1
-				special_slot_type_2 = empty
-				special_slot_type_3 = empty
-				fixed_auxiliary_weapon_slot_1 = weap_mp_light_hardpoint_1
-			}
-			upgrades = {
-				plane_bba_radar_upgrade = 2
-				plane_bba_engine_upgrade = 4
-			}
-			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/AIR/mig23.dds"
-			model = "SOV_medium_plane_airframe_1_entity"
-		}
-		create_equipment_variant = {
-			name = "MiG-23 ML/MLD"
-			type = medium_plane_airframe_1
-			parent_version = 0
-			modules = {
-				fixed_main_weapon_slot = weap_mp_med_hardpoint_2
-				fixed_gun_slot = weap_multi_gun_2
-				engine_type_slot = engine_jet_single_2
-				avionics_type_slot = avionics_manned_2
-				wingform_type_slot = wing_variable
-				special_slot_type_1 = spec_countermeasures_2
-				special_slot_type_2 = empty
-				special_slot_type_3 = empty
-				fixed_auxiliary_weapon_slot_1 = weap_mp_light_hardpoint_1
-			}
-			upgrades = {
-				plane_bba_radar_upgrade = 2
-				plane_bba_engine_upgrade = 4
-			}
-			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/AIR/mig23.dds"
-			model = "SOV_medium_plane_airframe_1_entity"
-		}
-		create_equipment_variant = {
-			name = "Su-17M"
-			type = small_plane_cas_airframe_1
-			parent_version = 0
-			modules = {
-				fixed_main_weapon_slot = weap_ag_cas_hardpoint_1
-				fixed_gun_slot = weap_multi_gun_1
-				engine_type_slot = engine_light_single_2
-				avionics_type_slot = avionics_manned_1
-				wingform_type_slot = wing_variable
-				special_slot_type_1 = spec_countermeasures_1
-				special_slot_type_2 = empty
-			}
-			icon = "gfx/interface/technologies/SOV/AIR/STR1.dds"
-			obsolete = yes
-			model = "SOV_small_plane_cas_airframe_1_entity"
-		}
-		create_equipment_variant = {
-			name = "Su-17M4"
-			type = small_plane_cas_airframe_1
-			parent_version = 1
-			modules = {
-				fixed_main_weapon_slot = weap_ag_cas_hardpoint_1
-				fixed_gun_slot = weap_multi_gun_1
-				engine_type_slot = engine_light_single_2
-				avionics_type_slot = avionics_manned_1
-				wingform_type_slot = wing_variable
-				special_slot_type_1 = spec_countermeasures_1
-				special_slot_type_2 = spec_tgp_1
-			}
-			icon = "gfx/interface/technologies/SOV/AIR/STR1.dds"
-			model = "SOV_small_plane_cas_airframe_1_entity"
-		}
-		create_equipment_variant = {
-			name = "MiG-27"
-			type = medium_plane_cas_airframe_1
-			parent_version = 0
-			modules = {
-				fixed_main_weapon_slot = weap_ag_cas_hardpoint_1
-				fixed_gun_slot = weap_multi_at_2
-				fixed_auxiliary_weapon_slot_1 = weap_mp_med_hardpoint_1
-				engine_type_slot = engine_jet_single_2
-				avionics_type_slot = avionics_manned_1
-				wingform_type_slot = wing_variable
-				special_slot_type_1 = spec_countermeasures_1
-				special_slot_type_2 = spec_tgp_1
-			}
-			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/AIR/mig27.dds"
-			model = "SOV_medium_plane_airframe_1_entity"
-		}
-		create_equipment_variant = {
-			name = "MiG-25 Foxbat"
-			type = medium_plane_fighter_airframe_1
-			parent_version = 0
-			modules = {
-				fixed_main_weapon_slot = weap_a2a_hardpoint_1
-				fixed_gun_slot = empty
-				fixed_auxiliary_weapon_slot_1 = empty
-				engine_type_slot = engine_jet_double_2
-				avionics_type_slot = avionics_manned_1
-				wingform_type_slot = wing_delta
-				special_slot_type_1 = spec_countermeasures_1
-				special_slot_type_2 = empty
-			}
-			upgrades = {
-				plane_bba_radar_upgrade = 2
-				plane_bba_engine_upgrade = 6
-			}
-			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/AIR/mig25.dds"
-			model = "SOV_MIG31_entity"
-		}
-		create_equipment_variant = {
-			name = "MiG-25R Foxbat"
-			type = medium_plane_fighter_airframe_1
-			parent_version = 1
-			modules = {
-				fixed_main_weapon_slot = weap_a2a_hardpoint_1
-				fixed_gun_slot = empty
-				fixed_auxiliary_weapon_slot_1 = empty
-				engine_type_slot = engine_jet_double_2
-				avionics_type_slot = avionics_manned_1
-				wingform_type_slot = wing_delta
-				special_slot_type_1 = spec_countermeasures_1
-				special_slot_type_2 = spec_recon_1
-			}
-			upgrades = {
-				plane_bba_radar_upgrade = 2
-				plane_bba_engine_upgrade = 6
-			}
-			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/AIR/mig25.dds"
-			model = "SOV_MIG31_entity"
-		}
-		create_equipment_variant = {
-			name = "MiG-31 Foxhound"
-			type = medium_plane_fighter_airframe_2
-			parent_version = 0
-			modules = {
-				fixed_main_weapon_slot = weap_a2a_hardpoint_1
-				fixed_gun_slot = weap_multi_gun_2
-				fixed_auxiliary_weapon_slot_1 = weap_a2a_hardpoint_1
-				engine_type_slot = engine_jet_double_2
-				avionics_type_slot = avionics_manned_2
-				wingform_type_slot = wing_delta
-				special_slot_type_1 = spec_countermeasures_1
-				special_slot_type_2 = spec_refuel_2
-			}
-			upgrades = {
-				plane_bba_radar_upgrade = 3
-				plane_bba_engine_upgrade = 8
-			}
-			icon = "gfx/interface/technologies/SOV/AIR/INT.dds"
-			model = "SOV_MIG31_entity"
-		}
-
-		create_equipment_variant = {
-			name = "MiG-29 Fulcrum"
-			type = small_plane_airframe_2
-			parent_version = 0
-			modules = {
-				fixed_main_weapon_slot = weap_a2a_hardpoint_1
-				fixed_gun_slot = weap_multi_gun_3
-				fixed_auxiliary_weapon_slot_1 = weap_mp_light_hardpoint_1
-				engine_type_slot = engine_light_double_2
-				avionics_type_slot = avionics_manned_2
-				wingform_type_slot = wing_swept
-				special_slot_type_1 = spec_countermeasures_1
-			}
-			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/AIR/MR2.dds"
-			model = "SOV_small_plane_airframe_2_entity"
-		}
-		create_equipment_variant = {
-			name = "MiG-29S Fulcrum"
-			type = small_plane_strike_airframe_2
-			parent_version = 1
-			modules = {
-				fixed_main_weapon_slot = weap_mp_light_hardpoint_2
-				fixed_gun_slot = weap_multi_gun_3
-				fixed_auxiliary_weapon_slot_1 = weap_a2a_hardpoint_1
-				engine_type_slot = engine_light_double_2
-				avionics_type_slot = avionics_manned_2
-				wingform_type_slot = wing_swept
-				special_slot_type_1 = spec_countermeasures_1
-			}
-			icon = "gfx/interface/technologies/SOV/AIR/MR2.dds"
-			model = "SOV_small_plane_airframe_2_entity"
-		}
-
-		create_equipment_variant = {
-			name = "MiG-29K Fulcrum-D"
-			type = cv_small_plane_strike_airframe_2
-			parent_version = 0
-			modules = {
-				fixed_main_weapon_slot = weap_mp_light_hardpoint_2
-				fixed_gun_slot = weap_multi_gun_3
-				fixed_auxiliary_weapon_slot_1 = weap_a2a_hardpoint_1
-				engine_type_slot = engine_light_double_3
-				avionics_type_slot = avionics_manned_2
-				wingform_type_slot = wing_swept
-				special_slot_type_1 = spec_countermeasures_1
-			}
-			icon = "gfx/interface/technologies/SOV/AIR/CVMR3.dds"
-		}
-
-		create_equipment_variant = {
-			name = "Su-27M" #early version of the Su-35
-			type = medium_plane_fighter_airframe_2
-			parent_version = 1
-			modules = {
-				fixed_main_weapon_slot = weap_a2a_hardpoint_2
-				fixed_gun_slot = weap_multi_gun_3
-				fixed_auxiliary_weapon_slot_1 = weap_a2a_hardpoint_2
-				fixed_auxiliary_weapon_slot_2 = weap_mp_light_hardpoint_2 #R-73
-				engine_type_slot = engine_jet_double_2
-				avionics_type_slot = avionics_manned_3
-				wingform_type_slot = wing_swept
-				special_slot_type_1 = spec_countermeasures_1
-				special_slot_type_2 = spec_refuel_1
-			}
-			upgrades = {
-						plane_bba_radar_upgrade = 3
-						plane_bba_engine_upgrade = 8
-		  	}
-			icon = "gfx/interface/technologies/SOV/AIR/AS2.dds"
-			model = "SOV_medium_plane_fighter_airframe_2_entity"
-		}
-
-		create_equipment_variant = {
-			name = "Su-27S"
-			type = medium_plane_fighter_airframe_2
-			parent_version = 0
-			modules = {
-				fixed_main_weapon_slot = weap_a2a_hardpoint_1
-				fixed_gun_slot = weap_multi_gun_3
-				fixed_auxiliary_weapon_slot_1 = weap_a2a_hardpoint_1
-				fixed_auxiliary_weapon_slot_2 = weap_mp_light_hardpoint_2 #R-73
-				engine_type_slot = engine_jet_double_2
-				avionics_type_slot = avionics_manned_2
-				wingform_type_slot = wing_swept
-				special_slot_type_1 = spec_countermeasures_1
-				special_slot_type_2 = spec_refuel_1
-			}
-			icon = "gfx/interface/technologies/SOV/AIR/AS2.dds"
-			model = "SOV_medium_plane_fighter_airframe_2_entity"
-		}
-
-		create_equipment_variant = {
-			name = "Su-30"
-			type = medium_plane_airframe_2
-			parent_version = 0
-			modules = {
-				fixed_main_weapon_slot = weap_mp_med_hardpoint_1
-				fixed_gun_slot = weap_multi_gun_3
-				fixed_auxiliary_weapon_slot_1 = weap_a2a_hardpoint_1
-				fixed_auxiliary_weapon_slot_2 = weap_mp_light_hardpoint_2 #R-73
-				engine_type_slot = engine_jet_double_2
-				avionics_type_slot = avionics_manned_2
-				wingform_type_slot = wing_delta_canard
-				special_slot_type_1 = spec_countermeasures_1
-				special_slot_type_2 = spec_refuel_1
-			}
-			icon = "gfx/interface/technologies/SOV/AIR/MR3.dds"
-			model = "SOV_medium_plane_airframe_2_entity"
-		}
-		create_equipment_variant = {
-			name = "Su-30MKI"
-			type = medium_plane_airframe_2
-			parent_version = 0
-			modules = {
-				fixed_main_weapon_slot = weap_mp_med_hardpoint_1
-				fixed_gun_slot = weap_multi_gun_3
-				fixed_auxiliary_weapon_slot_1 = weap_a2a_hardpoint_1
-				fixed_auxiliary_weapon_slot_2 = weap_mp_light_hardpoint_2 #R-73
-				engine_type_slot = engine_jet_double_2
-				avionics_type_slot = avionics_manned_2
-				wingform_type_slot = wing_swept
-				special_slot_type_1 = spec_countermeasures_1
-				special_slot_type_2 = spec_refuel_1
-			}
-			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/AIR/MR3_alt1.dds"
-			model = "GEN_SU30_entity"
-		}
-		create_production_license = {
-			target = RAJ
-			equipment = {
-				type = medium_plane_airframe_2
-				version_name = "Su-30MKI"
-			}
-			cost_factor = 0
-		}
-
-		create_equipment_variant = {
-			name = "Su-34"
-			type = medium_plane_cas_airframe_2
-			parent_version = 0
-			modules = {
-				fixed_main_weapon_slot = weap_ag_cas_hardpoint_1
-				fixed_gun_slot = weap_multi_gun_3
-				fixed_auxiliary_weapon_slot_1 = weap_mp_med_hardpoint_1
-				fixed_auxiliary_weapon_slot_2 = weap_mp_light_hardpoint_2 #R-73
-				engine_type_slot = engine_jet_double_2
-				avionics_type_slot = avionics_manned_2
-				wingform_type_slot = wing_delta_canard
-				special_slot_type_1 = spec_countermeasures_1
-				special_slot_type_2 = spec_refuel_1
-			}
-			icon = "gfx/interface/technologies/SOV/AIR/STR3.dds"
-			model = "SOV_medium_plane_cas_airframe_2_entity"
-		}
-
-		create_equipment_variant = {
-			name = "Su-33"
-			type = cv_medium_plane_fighter_airframe_2
-			parent_version = 0
-			modules = {
-				fixed_main_weapon_slot = weap_a2a_hardpoint_1
-				fixed_gun_slot = weap_multi_gun_3
-				fixed_auxiliary_weapon_slot_1 = weap_a2a_hardpoint_1
-				fixed_auxiliary_weapon_slot_2 = weap_mp_light_hardpoint_2 #R-73
-				engine_type_slot = engine_jet_double_2
-				avionics_type_slot = avionics_manned_2
-				wingform_type_slot = wing_delta_canard
-				special_slot_type_1 = spec_countermeasures_1
-				special_slot_type_2 = spec_refuel_1
-			}
-			icon = "gfx/interface/technologies/SOV/AIR/CVMR2.dds"
-			model = "SOV_cv_medium_plane_airframe_2_entity"
-		}
-
-		create_equipment_variant = {
-			name = "Su-24"
-			type = medium_plane_cas_airframe_1
-			parent_version = 1
-			modules = {
-				fixed_main_weapon_slot = weap_ag_cas_hardpoint_1
-				fixed_gun_slot = weap_multi_gun_2
-				engine_type_slot = engine_jet_double_2
-				avionics_type_slot = avionics_manned_2
-				wingform_type_slot = wing_variable
-				special_slot_type_1 = spec_countermeasures_1
-				special_slot_type_2 = empty
-			}
-			icon = "gfx/interface/technologies/SOV/AIR/STR2.dds"
-			model = "SOV_medium_plane_cas_airframe_1_entity"
-			obsolete = yes
-		}
-		create_equipment_variant = {
-			name = "Su-24M"
-			type = medium_plane_cas_airframe_1
-			parent_version = 2
-			modules = {
-				fixed_main_weapon_slot = weap_ag_cas_hardpoint_1
-				fixed_gun_slot = weap_multi_gun_2
-				fixed_auxiliary_weapon_slot_1 = weap_ag_cas_hardpoint_1
-				engine_type_slot = engine_jet_double_2
-				avionics_type_slot = avionics_manned_2
-				wingform_type_slot = wing_variable
-				special_slot_type_1 = spec_countermeasures_1
-				special_slot_type_2 = spec_refuel_2
-			}
-			upgrades = {
-					plane_bba_engine_upgrade = 1
-				}
-			icon = "gfx/interface/technologies/SOV/AIR/STR2.dds"
-			model = "SOV_medium_plane_cas_airframe_1_entity"
-			obsolete = yes
-		}
-		create_equipment_variant = {
-			name = "Su-24MR"
-			type = medium_plane_airframe_1
-			parent_version = 2
-			modules = {
-				fixed_main_weapon_slot = weap_mp_heavy_hardpoint_1
-				fixed_gun_slot = empty
-				fixed_auxiliary_weapon_slot_1 = empty
-				engine_type_slot = engine_jet_double_2
-				avionics_type_slot = avionics_manned_2
-				wingform_type_slot = wing_variable
-				special_slot_type_1 = spec_countermeasures_1
-				special_slot_type_2 = spec_tgp_1
-			}
-			upgrades = {
-					plane_bba_engine_upgrade = 1
-				}
-			icon = "gfx/interface/technologies/SOV/AIR/STR2.dds"
-			model = "SOV_medium_plane_cas_airframe_1_entity"
-		}
-
-		create_equipment_variant = {
-			name = "Su-24M2"
-			type = medium_plane_cas_airframe_1
-			parent_version = 3
-			modules = {
-				fixed_main_weapon_slot = weap_ag_cas_hardpoint_1
-				fixed_gun_slot = weap_multi_gun_2
-				fixed_auxiliary_weapon_slot_1 = weap_mp_heavy_hardpoint_1
-				engine_type_slot = engine_jet_double_2
-				avionics_type_slot = avionics_manned_3
-				wingform_type_slot = wing_variable
-				special_slot_type_1 = spec_countermeasures_2
-				special_slot_type_2 = empty
-			}
-			upgrades = {
-					plane_bba_engine_upgrade = 1
-				}
-			icon = "gfx/interface/technologies/SOV/AIR/STR2.dds"
-			model = "SOV_medium_plane_cas_airframe_1_entity"
-		}
-
-		create_equipment_variant = {
-			name = "Su-25"
-			type = small_plane_cas_airframe_2
-			parent_version = 0
-			modules = {
-				fixed_main_weapon_slot = weap_ag_cas_hardpoint_1
-				fixed_gun_slot = weap_multi_gun_3
-				fixed_auxiliary_weapon_slot_1 = weap_mp_light_hardpoint_1
-				engine_type_slot = engine_light_double_2
-				avionics_type_slot = avionics_manned_1
-				wingform_type_slot = wing_straight
-				special_slot_type_1 = spec_countermeasures_1
-				special_slot_type_2 = spec_protection_1
-				special_slot_type_3 = spec_redundant_2
-			}
-			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/AIR/CAS1.dds"
-			model = "SOV_small_plane_cas_airframe_2_entity"
-		}
-		create_production_license = { #Tbilissi aircaft factory
-			target = GEO
-			equipment = {
-				type = small_plane_cas_airframe_2
-				version_name = "Su-25"
-			}
-			cost_factor = 0
-		}
-
-		create_equipment_variant = {
-			name = "Su-25T"
-			type = small_plane_cas_airframe_2
-			parent_version = 1
-			modules = {
-				fixed_main_weapon_slot = weap_ag_cas_hardpoint_1
-				fixed_gun_slot = weap_multi_gun_3
-				fixed_auxiliary_weapon_slot_1 = weap_mp_light_hardpoint_2
-				engine_type_slot = engine_light_double_2
-				avionics_type_slot = avionics_manned_2
-				wingform_type_slot = wing_straight
-				special_slot_type_1 = spec_countermeasures_1
-				special_slot_type_2 = spec_protection_1
-				special_slot_type_3 = spec_redundant_2
-			}
-			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/AIR/CAS2.dds"
-			model = "SOV_small_plane_cas_airframe_2_entity"
-		}
-		create_equipment_variant = {
-			name = "Su-25SM"
-			type = small_plane_cas_airframe_2
-			parent_version = 2
-			modules = {
-				fixed_main_weapon_slot = weap_ag_cas_hardpoint_1
-				fixed_gun_slot = weap_multi_gun_3
-				fixed_auxiliary_weapon_slot_1 = weap_mp_light_hardpoint_2
-				engine_type_slot = engine_light_double_2
-				avionics_type_slot = avionics_manned_2
-				wingform_type_slot = wing_straight
-				special_slot_type_1 = spec_countermeasures_1
-				special_slot_type_2 = spec_protection_1
-				special_slot_type_3 = spec_redundant_2
-			}
-			upgrades = {
-				plane_bba_engine_upgrade = 1
-			}
-			icon = "gfx/interface/technologies/SOV/AIR/CAS1.dds"
-			model = "SOV_small_plane_cas_airframe_2_entity"
-		}
-		create_equipment_variant = { #Strat Bombers
-			name = "Tu-95MS"
-			type = large_plane_airframe_1
-			parent_version = 0
-			modules = {
-				fixed_main_weapon_slot = weap_ag_strat_1
-				fixed_gun_slot = empty
-				engine_type_slot = engine_prop_quad_1
-				avionics_type_slot = avionics_manned_1
-				wingform_type_slot = wing_swept
-				special_slot_type_1 = spec_countermeasures_1
-				special_slot_type_2 = spec_refuel_1
-				special_slot_type_3 = spec_refuel_1
-				fixed_auxiliary_weapon_slot_1 = weap_ag_strat_1
-				fixed_auxiliary_weapon_slot_2 = weap_ag_cas_hardpoint_1
-			}
-			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/AIR/B1.dds"
-			model = "SOV_large_plane_airframe_1_entity"
-		}
-		create_equipment_variant = { #Strat Bombers
-			name = "Tu-22M3"
-			type = large_plane_airframe_1
-			parent_version = 0
-			modules = {
-				fixed_main_weapon_slot = weap_ag_strat_1
-				fixed_gun_slot = empty
-				engine_type_slot = engine_jet_double_3
-				avionics_type_slot = avionics_manned_2
-				wingform_type_slot = wing_variable
-				special_slot_type_1 = spec_countermeasures_1
-				special_slot_type_2 = spec_redundant_1
-				special_slot_type_3 = empty
-				fixed_auxiliary_weapon_slot_1 = weap_ag_strat_1
-				fixed_auxiliary_weapon_slot_2 = weap_mp_heavy_hardpoint_1
-
-			}
-			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/AIR/B2.dds"
-		}
-		create_equipment_variant = { #Strat Bombers
-			name = "Tu-142"
-			type = large_plane_maritime_patrol_airframe_1
-			parent_version = 2
-			modules = {
-				fixed_main_weapon_slot = weap_as_hardpoint_2
-				fixed_gun_slot = empty
-				engine_type_slot = engine_prop_quad_2
-				avionics_type_slot = avionics_manned_1
-				wingform_type_slot = wing_swept
-				special_slot_type_1 = spec_countermeasures_1
-				special_slot_type_2 = spec_mad_2
-				special_slot_type_3 = spec_refuel_1
-				fixed_auxiliary_weapon_slot_1 = weap_as_hardpoint_1
-				fixed_auxiliary_weapon_slot_2 = weap_ag_strat_1
-			}
-			icon = "gfx/interface/technologies/SOV/AIR/B1.dds"
-			model = "SOV_large_plane_airframe_1_entity"
-		}
-		create_equipment_variant = { #Strat Bombers
-			name = "Il-38"
-			type = large_plane_maritime_patrol_airframe_1
-			parent_version = 1
-			modules = {
-				fixed_main_weapon_slot = weap_as_hardpoint_1
-				fixed_gun_slot = empty
-				fixed_auxiliary_weapon_slot_1 = weap_as_hardpoint_1
-				engine_type_slot = engine_prop_quad_1
-				avionics_type_slot = avionics_manned_1
-				wingform_type_slot = wing_straight
-				special_slot_type_1 = spec_countermeasures_1
-				special_slot_type_2 = spec_mad_1
-				special_slot_type_3 = spec_refuel_1
-
-			}
-			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/AIR/NAV2.dds"
-			model = "SOV_large_plane_airframe_1_entity"
-		}
-		create_equipment_variant = { #Strat Bombers
-			name = "Be-12"
-			type = large_plane_maritime_patrol_airframe_1
-			parent_version = 0
-			modules = {
-				fixed_main_weapon_slot = weap_as_hardpoint_1
-				fixed_gun_slot = empty
-				fixed_auxiliary_weapon_slot_1 = weap_as_hardpoint_1
-				engine_type_slot = engine_prop_double_1
-				avionics_type_slot = avionics_manned_1
-				wingform_type_slot = wing_straight
-				special_slot_type_1 = empty
-				special_slot_type_2 = spec_mad_1
-				special_slot_type_3 = empty
-
-			}
-			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/AIR/NAV1.dds"
-			model = "SOV_large_plane_airframe_1_entity"
-		}
-		create_equipment_variant = { #Strat Bombers
-			name = "Tu-160"
-			type = large_plane_airframe_2
-			parent_version = 0
-			modules = {
-				fixed_main_weapon_slot = weap_ag_strat_2
-				fixed_gun_slot = empty
-				engine_type_slot = engine_jet_quad_2
-				avionics_type_slot = avionics_manned_2
-				wingform_type_slot = wing_variable
-				special_slot_type_1 = spec_countermeasures_1
-				special_slot_type_2 = empty
-				special_slot_type_3 = empty
-				fixed_auxiliary_weapon_slot_1 = weap_ag_strat_2
-				fixed_auxiliary_weapon_slot_2 = weap_ag_cas_hardpoint_1
-			}
-			icon = "gfx/interface/technologies/SOV/AIR/B3.dds"
-		}
-		create_equipment_variant = { #Large Transport
-			name = "An-2"
-			type = large_plane_air_transport_airframe_1
-			parent_version = 0
-			modules = {
-				fixed_main_weapon_slot = weap_buff_transport
-				fixed_gun_slot = empty
-				engine_type_slot = engine_prop_double_1
-				avionics_type_slot = avionics_manned_1
-				wingform_type_slot = wing_straight
-				special_slot_type_1 = empty
-				special_slot_type_2 = spec_redundant_1
-				special_slot_type_3 = empty
-				fixed_auxiliary_weapon_slot_1 = empty
-				fixed_auxiliary_weapon_slot_2 = empty
-			}
-			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/AIR/an2.dds"
-		}
-		create_production_license = {
-			target = POL
-			equipment = {
-				type = large_plane_air_transport_airframe_1
-				version_name = "An-2"
-			}
-			cost_factor = 0
-		}
-
-		create_equipment_variant = { #Large Transport
-			name = "An-12"
-			type = large_plane_air_transport_airframe_1
-			parent_version = 1
-			modules = {
-				fixed_main_weapon_slot = weap_buff_transport
-				fixed_gun_slot = empty
-				engine_type_slot = engine_prop_quad_1
-				avionics_type_slot = avionics_manned_1
-				wingform_type_slot = wing_straight
-				special_slot_type_1 = empty
-				special_slot_type_2 = spec_redundant_2
-				special_slot_type_3 = empty
-				fixed_auxiliary_weapon_slot_1 = empty
-				fixed_auxiliary_weapon_slot_2 = empty
-			}
-			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/AIR/C0.dds"
-		}
-		create_equipment_variant = { #Large Transport
-			name = "An-22"
-			type = large_plane_air_transport_airframe_1
-			parent_version = 1
-			modules = {
-				fixed_main_weapon_slot = weap_buff_transport
-				fixed_gun_slot = empty
-				engine_type_slot = engine_prop_quad_1
-				avionics_type_slot = avionics_manned_1
-				wingform_type_slot = wing_straight
-				special_slot_type_1 = empty
-				special_slot_type_2 = spec_redundant_2
-				special_slot_type_3 = empty
-				fixed_auxiliary_weapon_slot_1 = weap_buff_transport
-				fixed_auxiliary_weapon_slot_2 = weap_buff_transport
-			}
-			upgrades = {
-				plane_bba_engine_upgrade = 8
-			}
-			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/AIR/C1.dds"
-		}
-		create_equipment_variant = { #Large Transport
-			name = "An-26"
-			type = large_plane_air_transport_airframe_1
-			parent_version = 1
-			modules = {
-				fixed_main_weapon_slot = weap_buff_transport
-				fixed_gun_slot = empty
-				engine_type_slot = engine_prop_double_1
-				avionics_type_slot = avionics_manned_1
-				wingform_type_slot = wing_straight
-				special_slot_type_1 = empty
-				special_slot_type_2 = empty
-				special_slot_type_3 = empty
-				fixed_auxiliary_weapon_slot_1 = empty
-				fixed_auxiliary_weapon_slot_2 = empty
-			}
-			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/AIR/C0.dds"
-		}
-		create_equipment_variant = { #Medium Transport
-			name = "An-32"
-			type = large_plane_air_transport_airframe_1
-			parent_version = 1
-			modules = {
-				fixed_main_weapon_slot = weap_buff_transport
-				fixed_gun_slot = empty
-				engine_type_slot = engine_prop_double_2
-				avionics_type_slot = avionics_manned_1
-				wingform_type_slot = wing_straight
-				special_slot_type_1 = empty
-				special_slot_type_2 = empty
-				fixed_auxiliary_weapon_slot_1 = empty
-			}
-			obsolete = yes
-			icon = "gfx/interface/technologies/SOV/AIR/C2_alt1.dds"
-		}
-		create_equipment_variant = { #Large Transport
-			name = "Il-76"
-			type = large_plane_air_transport_airframe_2
-			parent_version = 0
-			modules = {
-				fixed_main_weapon_slot = weap_buff_transport
-				fixed_gun_slot = empty
-				engine_type_slot = engine_jet_quad_2
-				avionics_type_slot = avionics_manned_1
-				wingform_type_slot = wing_swept
-				special_slot_type_1 = spec_countermeasures_1
-				special_slot_type_2 = empty
-				special_slot_type_3 = empty
-				fixed_auxiliary_weapon_slot_1 = empty
-				fixed_auxiliary_weapon_slot_2 = empty
-			}
-			upgrades = {
-				plane_bba_engine_upgrade = 1
-			}
-			icon = "gfx/interface/technologies/SOV/AIR/C2.dds"
-		}
-		create_equipment_variant = { #Large Transport
-			name = "Il-76MD"
-			type = large_plane_air_transport_airframe_2
-			parent_version = 2
-			modules = {
-				fixed_main_weapon_slot = weap_buff_transport
-				fixed_gun_slot = empty
-				engine_type_slot = engine_jet_quad_3
-				avionics_type_slot = avionics_manned_1
-				wingform_type_slot = wing_swept
-				special_slot_type_1 = spec_countermeasures_1
-				special_slot_type_2 = spec_redundant_2
-				special_slot_type_3 = spec_refuel_2
-				fixed_auxiliary_weapon_slot_1 = empty
-				fixed_auxiliary_weapon_slot_2 = empty
-			}
-			upgrades = {
-				plane_bba_engine_upgrade = 1
-			}
-			icon = "gfx/interface/technologies/SOV/AIR/C2.dds"
-		}
-		create_equipment_variant = { #Large Transport
-			name = "An-124"
-			type = large_plane_air_transport_airframe_2
-			parent_version = 2
-			modules = {
-				fixed_main_weapon_slot = weap_buff_transport
-				fixed_gun_slot = empty
-				engine_type_slot = engine_jet_six_3
-				avionics_type_slot = avionics_manned_1
-				wingform_type_slot = wing_swept
-				special_slot_type_1 = spec_countermeasures_1
-				special_slot_type_2 = spec_redundant_2
-				special_slot_type_3 = empty
-				fixed_auxiliary_weapon_slot_1 = weap_buff_transport
-				fixed_auxiliary_weapon_slot_2 = weap_buff_transport
-			}
-			upgrades = {
-				plane_bba_engine_upgrade = 10
-			}
-			icon = "gfx/interface/technologies/SOV/AIR/C3.dds"
-		}
-		create_equipment_variant = { #Large Transport
-			name = "Beriev A-50"
-			type = large_plane_awacs_airframe_2
-			parent_version = 0
-			modules = {
-				fixed_main_weapon_slot = weap_buff_awacs_1
-				fixed_gun_slot = empty
-				engine_type_slot = engine_jet_quad_2
-				avionics_type_slot = avionics_manned_1
-				wingform_type_slot = wing_swept
-				special_slot_type_1 = spec_countermeasures_1
-				special_slot_type_2 = spec_redundant_1
-				fixed_auxiliary_weapon_slot_1 = empty
-			}
-			icon = "gfx/interface/technologies/SOV/AIR/A50.dds"
-		}
-		create_production_license = {
-			target = IRQ
-			equipment = {
-				type = large_plane_awacs_airframe_2
-				version_name = "Beriev A-50" #Il-76 Adnan, home made Il-76 Version creat with french radar and civilian Il-76
-			}
-			cost_factor = 0
-		}
-
-		else = {
-			set_technology = {
-				early_fighter = 1
-				Strike_fighter1 = 1
-				Strike_fighter2 = 1
-				MR_Fighter1 = 1
-				MR_Fighter2 = 1
-				MR_upgrade_1 = 1
-				MR_Fighter3 = 1 #4.5gen
-				AS_Fighter1 = 1
-				AS_Fighter2 = 1
-
-				CV_MR_Fighter1 = 1
-				CV_MR_Fighter2 = 1
-				CV_MR_Fighter3 = 1 #4.5gen
-
-				L_Strike_fighter1 = 1
-				L_Strike_fighter2 = 1
-
-				early_bomber = 1
-				strategic_bomber1 = 1
-				strategic_bomber2 = 1
-				strategic_bomber3 = 1
-
-				transport_plane1 = 1
-				transport_plane2 = 1
-				transport_plane3 = 1
-
-				naval_plane1 = 1
-				naval_plane2 = 1
-
-				cas1 = 1
-				cas2 = 1
-
-				awacs_plane1 = 1
-			}
-
-			#### Air Variants ####
-			create_equipment_variant = {
-				name = "MiG-25 Foxbat"
-				type = AS_Fighter1
-				upgrades = {
-					plane_engine_upgrade = 3
-				}
-				obsolete = yes
-			}
-
-			create_equipment_variant = {
-				name = "Su-27M"
-				type = AS_Fighter2
-				parent_version = 1
-				upgrades = {
-					plane_range_upgrade = 2
-					plane_engine_upgrade = 1
-				}
-				#obsolete = yes
-			}
-
-			create_equipment_variant = {
-				name = "Su-24M"
-				type = Strike_fighter2
-				parent_version = 1
-				upgrades = {
-					strike_gun_upgrade = 1
-					plane_range_upgrade = 1
-					plane_engine_upgrade = 1
-					plane_reliability_upgrade = 0
-				}
-				#obsolete = yes
-			}
-			create_equipment_variant = {
-				name = "Su-27"
-				type = AS_Fighter2 #Su-30MK2
-				upgrades = {
-				}
-				obsolete = yes
-			}
-			create_equipment_variant = {
-				name = "Su-22 Fitter"
-				type = Strike_fighter1 #Su-22 Fitter
-				upgrades = {
-
-				}
-				obsolete = yes
-			}
-		}
-	}
+	# Relation Starting Configuration (moved from on_startup)
+	add_opinion_modifier = { target = TTP modifier = AlQaida_Are_Terrorists }
+	add_opinion_modifier = { target = TTP modifier = AlQaida_Are_Terrorists_Trade }
+	add_opinion_modifier = { target = TAL modifier = Taliban_Are_Terrorists }
+	add_opinion_modifier = { target = TAL modifier = Taliban_Are_Terrorists_Trade }
+	reverse_add_opinion_modifier = { target = SOV modifier = RUS_OIL }
 }

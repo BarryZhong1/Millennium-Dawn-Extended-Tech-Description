@@ -545,6 +545,9 @@ country_event = {
 		ai_chance = {
 			factor = 100
 		}
+		set_temp_variable = { wargoal_on = KUR }
+		set_temp_variable = { wargoal_type = 2 }
+		add_threat_from_wargoal_effect = yes
 		create_wargoal = {
 			type = annex_everything
 			target = KUR
@@ -574,6 +577,9 @@ country_event = {
 		ai_chance = {
 			factor = 70
 		}
+		set_temp_variable = { wargoal_on = KUR }
+		set_temp_variable = { wargoal_type = 2 }
+		add_threat_from_wargoal_effect = yes
 		create_wargoal = {
 			type = annex_everything
 			target = KUR
@@ -619,10 +625,32 @@ country_event = { # KDP Proposes Re-Unification
 		}
 		ai_chance = {
 			base = 5
+			modifier = {
+				factor = 1.5
+				has_opinion = {
+					target = KUR
+					value > 100
+				}
+			}
+			modifier = {
+				factor = 1.5
+				has_opinion = {
+					target = KUR
+					value > 150
+				}
+			}
+			modifier = {
+				factor = 1.5
+				strength_ratio = {
+					tag = KUR
+					ratio < 0.50
+				}
+			}
 		}
 	}
 
-	option = { # No
+	# No
+	option = {
 		name = Kurdistan.18.b
 		log = "[GetDateText]: [This.GetName]: Kurdistan.18.b executed"
 		KUR = {
@@ -661,6 +689,9 @@ country_event = { # PUK Refuses Re-Unification Talks
 		name = Kurdistan.19.a
 		log = "[GetDateText]: [This.GetName]: Kurdistan.19.a executed"
 		drop_cosmetic_tag = yes
+		set_temp_variable = { wargoal_on = PUK }
+		set_temp_variable = { wargoal_type = 2 }
+		add_threat_from_wargoal_effect = yes
 		create_wargoal = {
 			target = PUK
 			type = annex_everything
@@ -705,7 +736,6 @@ news_event = {
 
 	option = {
 		name = KurdistanNews.1.a
-		log = "[GetDateText]: [This.GetName]: KurdistanNews.1.a executed"
 		ai_chance = { factor = 100 }
 	}
 
@@ -724,7 +754,6 @@ news_event = {
 
 	option = {
 		name = KurdistanNews.2.a
-		log = "[GetDateText]: [This.GetName]: KurdistanNews.2.a executed"
 		trigger = {
 			OR = {
 				tag = IRQ
@@ -738,7 +767,6 @@ news_event = {
 
 	option = {
 		name = KurdistanNews.2.b
-		log = "[GetDateText]: [This.GetName]: KurdistanNews.2.b executed"
 		trigger = {
 			NOT = {
 				tag = IRQ
@@ -765,7 +793,6 @@ news_event = {
 
 	option = {
 		name = KurdistanNews.3.a
-		log = "[GetDateText]: [This.GetName]: KurdistanNews.3.a executed"
 		trigger = {
 			OR = {
 				tag = IRQ
@@ -779,7 +806,6 @@ news_event = {
 
 	option = {
 		name = KurdistanNews.3.b
-		log = "[GetDateText]: [This.GetName]: KurdistanNews.3.b executed"
 		trigger = {
 			NOT = {
 				tag = IRQ
@@ -806,7 +832,6 @@ news_event = {
 
 	option = {
 		name = KurdistanNews.4.a
-		log = "[GetDateText]: [This.GetName]: KurdistanNews.4.a executed"
 		trigger = {
 			OR = {
 				tag = IRQ
@@ -820,7 +845,6 @@ news_event = {
 
 	option = {
 		name = KurdistanNews.4.b
-		log = "[GetDateText]: [This.GetName]: KurdistanNews.4.b executed"
 		trigger = {
 			NOT = {
 				tag = IRQ
@@ -920,7 +944,6 @@ news_event = {
 
 	option = {
 		name = KurdistanNews.8.a
-		log = "[GetDateText]: [This.GetName]: KurdistanNews.8.a executed"
 		ai_chance = { factor = 100 }
 	}
 
@@ -939,7 +962,6 @@ news_event = {
 
 	option = {
 		name = KurdistanNews.9.a
-		log = "[GetDateText]: [This.GetName]: KurdistanNews.9.a executed"
 		ai_chance = { factor = 100 }
 	}
 
@@ -958,7 +980,6 @@ news_event = {
 
 	option = {
 		name = KurdistanNews.10.a
-		log = "[GetDateText]: [This.GetName]: KurdistanNews.10.a executed"
 		ai_chance = { factor = 100 }
 	}
 
@@ -977,9 +998,7 @@ news_event = {
 
 	option = {
 		name = KurdistanNews.11.a
-		log = "[GetDateText]: [This.GetName]: KurdistanNews.11.a executed"
 		ai_chance = { factor = 100 }
 	}
 
 }
-

@@ -34,8 +34,8 @@ buildings = {
 	# 0 Civilian Industry
 	industrial_complex = {
 		show_on_map = 6
-		base_cost = 39000
-		base_cost_conversion = 28000
+		base_cost = 33150
+		base_cost_conversion = 24000
 		general_production = 1
 		icon_frame = 1
 		level_cap = {
@@ -65,18 +65,19 @@ buildings = {
 	}
 	# 2 Infrastructure
 	infrastructure = {
-		base_cost = 7500
+		base_cost = 10000
+		per_level_extra_cost = 1800
 		icon_frame = 3
 		infrastructure = yes
 		damage_factor = 1
 		value = 1
 		show_modifier = yes
 		level_cap = {
-			state_max = 5
+			state_max = 6
 		}
 		country_modifiers = {
 			modifiers = {
-				max_fuel_building = 1.5 #k
+				max_fuel_building = 2.5 #k
 			}
 		}
 	}
@@ -84,7 +85,7 @@ buildings = {
 	internet_station = {
 		show_on_map = 1
 		base_cost = 5000
-		per_level_extra_cost = 1250
+		per_level_extra_cost = 1450
 		icon_frame = 32
 		damage_factor = 1
 		value = 1
@@ -165,8 +166,8 @@ buildings = {
 		tags = { nuclear }
 		country_modifiers = {
 			modifiers = {
-				nuclear_energy_gain = 2 #in gigawatts
-				nuclear_fuel_consumption = 20 #weekly consumption
+				nuclear_energy_gain = 5 #in gigawatts
+				nuclear_fuel_consumption = 40 #weekly consumption
 			}
 		}
 		level_cap = {
@@ -180,7 +181,7 @@ buildings = {
 		base_cost = 32000
 		icon_frame = 38
 		#local_resources_oil = 1 # May use local_resources_ + any resource name
-		local_resources_rubber = 1 # May use local_resources_ + any resource name
+		local_resources_rubber = 3 # May use local_resources_ + any resource name
 		refinery = yes
 		value = 5
 		infrastructure_construction_effect = yes
@@ -217,7 +218,7 @@ buildings = {
 			state_max = 20
 		}
 	}
-	# 10 - Strategic Fuel Reserve
+	# 10 - Strategic Resource Reserve
 	fuel_silo = {
 		show_on_map = 1
 		base_cost = 4000
@@ -231,6 +232,7 @@ buildings = {
 		country_modifiers = {
 			modifiers = {
 				max_fuel_building = 200.0 #k
+				resource_storage_gain = 500
 			}
 		}
 		level_cap = {
@@ -320,7 +322,7 @@ buildings = {
 	# 16 Railways
 	rail_way = {
 		base_cost = 1000
-		per_level_extra_cost = 5000
+		per_level_extra_cost = 3750
 		disabled_in_dmz = yes
 		icon_frame = 16
 		allied_build = yes
@@ -332,14 +334,14 @@ buildings = {
 	# 17 Fossil Fuel Powerplant
 	fossil_powerplant = {
 		show_on_map = 1
-		base_cost = 10000
+		base_cost = 9500
 		icon_frame = 34
 		centered = yes
 		# Represents the Consumption of Fossil Fuels per Powerplant
 		# NOTE: This is an hourly rate so the building actually consumes (20*24) = 480 fuel a day
 		country_modifiers = {
 			modifiers = {
-				fossil_energy_gain = 1 #in gigawatts //this remains in place till I remove it please
+				fossil_energy_gain = 2 #in gigawatts //this remains in place till I remove it please
 				fossil_fuel_consumption = 20
 			}
 		}
@@ -514,17 +516,17 @@ buildings = {
 	microchip_plant = {
 		show_on_map = 0
 		base_cost = 45000
+		per_level_extra_cost = 2500
 		icon_frame = 36
-		tags = { microchip }
-		local_resources_microchips = 18
+		local_resources_microchips = 20
 		level_cap = {
 			shares_slots = yes
 			state_max = 5
 		}
 		country_modifiers = {
 			modifiers = {
-				country_resource_cost_tungsten = 2
-				country_resource_cost_chromium = 1
+				country_resource_cost_tungsten = 3
+				country_resource_cost_chromium = 2
 			}
 		}
 		damage_factor = 1
@@ -535,8 +537,8 @@ buildings = {
 	composite_plant = {
 		show_on_map = 0
 		base_cost = 45000
+		per_level_extra_cost = 2500
 		icon_frame = 37
-		tags = { composite }
 		local_resources_composites = 16
 		level_cap = {
 			shares_slots = yes
@@ -709,6 +711,7 @@ buildings = {
 			group_by = infrastructure_keystone
 		}
 		state_modifiers = {
+			local_building_slots_factor = 0.05
 			state_renewable_energy_generation_modifier = 0.10
 			state_production_speed_nuclear_reactor_factor = 0.10
 			state_repair_speed_arms_factory_factor = 0.10
@@ -717,7 +720,7 @@ buildings = {
 	}
 
 	industrial_infrastructure = {
-		base_cost = 33000
+		base_cost = 36000
 		icon_frame = 31
 		value = 1
 
@@ -730,8 +733,7 @@ buildings = {
 			group_by = infrastructure_keystone
 		}
 		state_modifiers = {
-			local_resource_gain_efficiency_per_infrastructure = 0.10
-			local_building_slots_factor = 0.05
+			local_resource_gain_efficiency_per_infrastructure = 0.15
 		}
 	}
 }

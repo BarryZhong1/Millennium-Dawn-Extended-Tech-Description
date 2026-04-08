@@ -14,13 +14,7 @@ subparty_policies_category = {
 		cost = 100
 
 		available = {
-			NOT = { has_decision = generic_initiate_secondary_sector_5_year_plan }
-			NOT = { has_decision = generic_initiate_tertiary_sector_5_year_plan }
-			NOT = { has_decision = generic_initiate_infrastructure_5_year_plan }
-			NOT = { has_decision = generic_initiate_military_5_year_plan }
-			NOT = { has_decision = generic_initiate_naval_5_year_plan }
-			NOT = { has_decision = generic_initiate_technology_5_year_plan }
-			NOT = { has_decision = generic_initiate_energy_5_year_plan }
+			currently_has_a_5_year_plan_selected = no
 		}
 
 		days_remove = 1825
@@ -34,12 +28,13 @@ subparty_policies_category = {
 			production_speed_agriculture_district_factor = 0.45
 			production_speed_naval_base_factor = 0.30
 			production_speed_rail_way_factor = 0.30
+			production_speed_synthetic_refinery_factor = 0.30
 			local_resources_oil_factor = 0.15
-local_resources_aluminium_factor = 0.15
-local_resources_rubber_factor = 0.15
-local_resources_tungsten_factor = 0.15
-local_resources_steel_factor = 0.15
-local_resources_chromium_factor = 0.15
+			local_resources_aluminium_factor = 0.15
+			local_resources_rubber_factor = 0.15
+			local_resources_tungsten_factor = 0.15
+			local_resources_steel_factor = 0.15
+			local_resources_chromium_factor = 0.15
 		}
 
 		complete_effect = {
@@ -49,6 +44,20 @@ local_resources_chromium_factor = 0.15
 			change_fossil_fuel_industry_opinion = yes
 			set_temp_variable = { temp_opinion = 10 }
 			change_farmers_opinion = yes
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 5
+				OR = {
+					check_variable = { resource_produced@oil > 15 }
+					check_variable = { resource_produced@steel > 15 }
+					check_variable = { resource_produced@tungsten > 15 }
+					check_variable = { resource_produced@chromium > 15 }
+					check_variable = { resource_produced@aluminium > 15 }
+				}
+			}
 		}
 	}
 	generic_initiate_secondary_sector_5_year_plan = {
@@ -64,13 +73,7 @@ local_resources_chromium_factor = 0.15
 		cost = 100
 
 		available = {
-			NOT = { has_decision = generic_initiate_primary_sector_5_year_plan }
-			NOT = { has_decision = generic_initiate_tertiary_sector_5_year_plan }
-			NOT = { has_decision = generic_initiate_infrastructure_5_year_plan }
-			NOT = { has_decision = generic_initiate_military_5_year_plan }
-			NOT = { has_decision = generic_initiate_naval_5_year_plan }
-			NOT = { has_decision = generic_initiate_technology_5_year_plan }
-			NOT = { has_decision = generic_initiate_energy_5_year_plan }
+			currently_has_a_5_year_plan_selected = no
 		}
 
 		days_remove = 1825
@@ -87,11 +90,11 @@ local_resources_chromium_factor = 0.15
 			production_speed_naval_base_factor = 0.30
 			production_speed_rail_way_factor = 0.30
 			local_resources_oil_factor = -0.075
-local_resources_aluminium_factor = -0.075
-local_resources_rubber_factor = -0.075
-local_resources_tungsten_factor = -0.075
-local_resources_steel_factor = -0.075
-local_resources_chromium_factor = -0.075
+			local_resources_aluminium_factor = -0.075
+			local_resources_rubber_factor = -0.075
+			local_resources_tungsten_factor = -0.075
+			local_resources_steel_factor = -0.075
+			local_resources_chromium_factor = -0.075
 		}
 
 		complete_effect = {
@@ -101,6 +104,15 @@ local_resources_chromium_factor = -0.075
 			change_labour_unions_opinion = yes
 			set_temp_variable = { temp_opinion = 10 }
 			change_industrial_conglomerates_opinion = yes
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 25
+				original_tag = CHI
+				num_of_civilian_factories < 150
+			}
 		}
 	}
 	generic_initiate_tertiary_sector_5_year_plan = {
@@ -116,13 +128,7 @@ local_resources_chromium_factor = -0.075
 		cost = 100
 
 		available = {
-			NOT = { has_decision = generic_initiate_primary_sector_5_year_plan }
-			NOT = { has_decision = generic_initiate_secondary_sector_5_year_plan }
-			NOT = { has_decision = generic_initiate_infrastructure_5_year_plan }
-			NOT = { has_decision = generic_initiate_military_5_year_plan }
-			NOT = { has_decision = generic_initiate_naval_5_year_plan }
-			NOT = { has_decision = generic_initiate_technology_5_year_plan }
-			NOT = { has_decision = generic_initiate_energy_5_year_plan }
+			currently_has_a_5_year_plan_selected = no
 		}
 
 		days_remove = 1825
@@ -136,11 +142,11 @@ local_resources_chromium_factor = -0.075
 			production_speed_offices_factor = 0.45
 			production_speed_naval_base_factor = 0.30
 			local_resources_oil_factor = -0.075
-local_resources_aluminium_factor = -0.075
-local_resources_rubber_factor = -0.075
-local_resources_tungsten_factor = -0.075
-local_resources_steel_factor = -0.075
-local_resources_chromium_factor = -0.075
+			local_resources_aluminium_factor = -0.075
+			local_resources_rubber_factor = -0.075
+			local_resources_tungsten_factor = -0.075
+			local_resources_steel_factor = -0.075
+			local_resources_chromium_factor = -0.075
 		}
 
 		complete_effect = {
@@ -152,6 +158,10 @@ local_resources_chromium_factor = -0.075
 			change_small_medium_business_owners_opinion = yes
 			set_temp_variable = { temp_opinion = 10 }
 			change_international_bankers_opinion = yes
+		}
+
+		ai_will_do = {
+			base = 0
 		}
 	}
 	generic_initiate_infrastructure_5_year_plan = {
@@ -167,13 +177,7 @@ local_resources_chromium_factor = -0.075
 		cost = 100
 
 		available = {
-			NOT = { has_decision = generic_initiate_primary_sector_5_year_plan }
-			NOT = { has_decision = generic_initiate_secondary_sector_5_year_plan }
-			NOT = { has_decision = generic_initiate_tertiary_sector_5_year_plan }
-			NOT = { has_decision = generic_initiate_military_5_year_plan }
-			NOT = { has_decision = generic_initiate_naval_5_year_plan }
-			NOT = { has_decision = generic_initiate_technology_5_year_plan }
-			NOT = { has_decision = generic_initiate_energy_5_year_plan }
+			currently_has_a_5_year_plan_selected = no
 		}
 
 		days_remove = 1825
@@ -188,12 +192,14 @@ local_resources_chromium_factor = -0.075
 			production_speed_naval_base_factor = 0.45
 			production_speed_supply_node_factor = 0.45
 			production_speed_rail_way_factor = 0.45
+			production_speed_energy_infrastructure_factor = 0.45
+			production_speed_industrial_infrastructure_factor = 0.45
 			local_resources_oil_factor = -0.075
-local_resources_aluminium_factor = -0.075
-local_resources_rubber_factor = -0.075
-local_resources_tungsten_factor = -0.075
-local_resources_steel_factor = -0.075
-local_resources_chromium_factor = -0.075
+			local_resources_aluminium_factor = -0.075
+			local_resources_rubber_factor = -0.075
+			local_resources_tungsten_factor = -0.075
+			local_resources_steel_factor = -0.075
+			local_resources_chromium_factor = -0.075
 		}
 
 		complete_effect = {
@@ -201,6 +207,16 @@ local_resources_chromium_factor = -0.075
 			change_communist_cadres_opinion = yes
 			set_temp_variable = { temp_opinion = 10 }
 			change_industrial_conglomerates_opinion = yes
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 15
+				any_owned_state = {
+					check_variable = { building_level@internet_station < 3 }
+				}
+			}
 		}
 	}
 	generic_initiate_military_5_year_plan = {
@@ -216,13 +232,7 @@ local_resources_chromium_factor = -0.075
 		cost = 100
 
 		available = {
-			NOT = { has_decision = generic_initiate_primary_sector_5_year_plan }
-			NOT = { has_decision = generic_initiate_secondary_sector_5_year_plan }
-			NOT = { has_decision = generic_initiate_tertiary_sector_5_year_plan }
-			NOT = { has_decision = generic_initiate_infrastructure_5_year_plan }
-			NOT = { has_decision = generic_initiate_naval_5_year_plan }
-			NOT = { has_decision = generic_initiate_technology_5_year_plan }
-			NOT = { has_decision = generic_initiate_energy_5_year_plan }
+			currently_has_a_5_year_plan_selected = no
 		}
 
 		days_remove = 1825
@@ -239,14 +249,15 @@ local_resources_chromium_factor = -0.075
 			production_speed_rocket_site_factor = 0.45
 			production_speed_arms_factory_factor = 0.45
 			production_speed_bunker_factor = 0.45
+			production_speed_stronghold_network_factor = 0.45
 			production_speed_supply_node_factor = 0.30
 			production_speed_rail_way_factor = 0.30
 			local_resources_oil_factor = -0.075
-local_resources_aluminium_factor = -0.075
-local_resources_rubber_factor = -0.075
-local_resources_tungsten_factor = -0.075
-local_resources_steel_factor = -0.075
-local_resources_chromium_factor = -0.075
+			local_resources_aluminium_factor = -0.075
+			local_resources_rubber_factor = -0.075
+			local_resources_tungsten_factor = -0.075
+			local_resources_steel_factor = -0.075
+			local_resources_chromium_factor = -0.075
 		}
 
 		complete_effect = {
@@ -256,6 +267,22 @@ local_resources_chromium_factor = -0.075
 			change_the_military_opinion = yes
 			set_temp_variable = { temp_opinion = 10 }
 			change_defense_industry_opinion = yes
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 10
+				threat > 0.49
+			}
+			modifier = {
+				add = 10
+				threat > 0.59
+			}
+			modifier = {
+				add = 10
+				threat > 0.74
+			}
 		}
 	}
 	generic_initiate_naval_5_year_plan = {
@@ -271,13 +298,7 @@ local_resources_chromium_factor = -0.075
 		cost = 100
 
 		available = {
-			NOT = { has_decision = generic_initiate_primary_sector_5_year_plan }
-			NOT = { has_decision = generic_initiate_secondary_sector_5_year_plan }
-			NOT = { has_decision = generic_initiate_tertiary_sector_5_year_plan }
-			NOT = { has_decision = generic_initiate_infrastructure_5_year_plan }
-			NOT = { has_decision = generic_initiate_military_5_year_plan }
-			NOT = { has_decision = generic_initiate_technology_5_year_plan }
-			NOT = { has_decision = generic_initiate_energy_5_year_plan }
+			currently_has_a_5_year_plan_selected = no
 		}
 
 		days_remove = 1825
@@ -290,11 +311,11 @@ local_resources_chromium_factor = -0.075
 			production_speed_naval_base_factor = 0.45
 			production_speed_coastal_bunker_factor = 0.45
 			local_resources_oil_factor = -0.075
-local_resources_aluminium_factor = -0.075
-local_resources_rubber_factor = -0.075
-local_resources_tungsten_factor = -0.075
-local_resources_steel_factor = -0.075
-local_resources_chromium_factor = -0.075
+			local_resources_aluminium_factor = -0.075
+			local_resources_rubber_factor = -0.075
+			local_resources_tungsten_factor = -0.075
+			local_resources_steel_factor = -0.075
+			local_resources_chromium_factor = -0.075
 		}
 
 		complete_effect = {
@@ -302,6 +323,17 @@ local_resources_chromium_factor = -0.075
 			change_communist_cadres_opinion = yes
 			set_temp_variable = { temp_opinion = 10 }
 			change_maritime_industry_opinion = yes
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 5
+				has_war = yes
+				any_owned_state = {
+					is_coastal = yes
+				}
+			}
 		}
 	}
 	generic_initiate_technology_5_year_plan = {
@@ -317,13 +349,7 @@ local_resources_chromium_factor = -0.075
 		cost = 100
 
 		available = {
-			NOT = { has_decision = generic_initiate_primary_sector_5_year_plan }
-			NOT = { has_decision = generic_initiate_secondary_sector_5_year_plan }
-			NOT = { has_decision = generic_initiate_tertiary_sector_5_year_plan }
-			NOT = { has_decision = generic_initiate_infrastructure_5_year_plan }
-			NOT = { has_decision = generic_initiate_military_5_year_plan }
-			NOT = { has_decision = generic_initiate_naval_5_year_plan }
-			NOT = { has_decision = generic_initiate_energy_5_year_plan }
+			currently_has_a_5_year_plan_selected = no
 		}
 
 		days_remove = 1825
@@ -337,16 +363,20 @@ local_resources_chromium_factor = -0.075
 			production_speed_air_facility_factor = 0.45
 			production_speed_nuclear_facility_factor = 0.45
 			local_resources_oil_factor = -0.075
-local_resources_aluminium_factor = -0.075
-local_resources_rubber_factor = -0.075
-local_resources_tungsten_factor = -0.075
-local_resources_steel_factor = -0.075
-local_resources_chromium_factor = -0.075
+			local_resources_aluminium_factor = -0.075
+			local_resources_rubber_factor = -0.075
+			local_resources_tungsten_factor = -0.075
+			local_resources_steel_factor = -0.075
+			local_resources_chromium_factor = -0.075
 		}
 
 		complete_effect = {
 			set_temp_variable = { temp_opinion = 10 }
 			change_communist_cadres_opinion = yes
+		}
+
+		ai_will_do = {
+			base = 0
 		}
 	}
 	generic_initiate_energy_5_year_plan = {
@@ -362,13 +392,7 @@ local_resources_chromium_factor = -0.075
 		cost = 100
 
 		available = {
-			NOT = { has_decision = generic_initiate_primary_sector_5_year_plan }
-			NOT = { has_decision = generic_initiate_secondary_sector_5_year_plan }
-			NOT = { has_decision = generic_initiate_tertiary_sector_5_year_plan }
-			NOT = { has_decision = generic_initiate_infrastructure_5_year_plan }
-			NOT = { has_decision = generic_initiate_military_5_year_plan }
-			NOT = { has_decision = generic_initiate_naval_5_year_plan }
-			NOT = { has_decision = generic_initiate_technology_5_year_plan }
+			currently_has_a_5_year_plan_selected = no
 		}
 
 		days_remove = 1825
@@ -381,17 +405,23 @@ local_resources_chromium_factor = -0.075
 			production_speed_fossil_powerplant_factor = 0.45
 			production_speed_fuel_silo_factor = 0.45
 			production_speed_renewable_energy_infra_factor = 0.45
+			production_speed_energy_infrastructure_factor = 0.45
+			production_speed_industrial_infrastructure_factor = 0.45
 			local_resources_oil_factor = -0.075
-local_resources_aluminium_factor = -0.075
-local_resources_rubber_factor = -0.075
-local_resources_tungsten_factor = -0.075
-local_resources_steel_factor = -0.075
-local_resources_chromium_factor = -0.075
+			local_resources_aluminium_factor = -0.075
+			local_resources_rubber_factor = -0.075
+			local_resources_tungsten_factor = -0.075
+			local_resources_steel_factor = -0.075
+			local_resources_chromium_factor = -0.075
 		}
 
 		complete_effect = {
 			set_temp_variable = { temp_opinion = 10 }
 			change_communist_cadres_opinion = yes
+		}
+
+		ai_will_do = {
+			base = 0
 		}
 	}
 
@@ -403,16 +433,7 @@ local_resources_chromium_factor = -0.075
 				emerging_communist_state_are_in_power = yes
 				neutrality_neutral_communism_are_in_power = yes
 			}
-			OR = {
-				has_decision = generic_initiate_primary_sector_5_year_plan
-				has_decision = generic_initiate_secondary_sector_5_year_plan
-				has_decision = generic_initiate_tertiary_sector_5_year_plan
-				has_decision = generic_initiate_infrastructure_5_year_plan
-				has_decision = generic_initiate_military_5_year_plan
-				has_decision = generic_initiate_naval_5_year_plan
-				has_decision = generic_initiate_technology_5_year_plan
-				has_decision = generic_initiate_energy_5_year_plan
-			}
+			currently_has_a_5_year_plan_selected = yes
 		}
 
 		cost = 100
@@ -462,6 +483,10 @@ local_resources_chromium_factor = -0.075
 			add_relative_party_popularity = yes
 			set_temp_variable = { temp_opinion = -10 }
 			change_communist_cadres_opinion = yes
+		}
+
+		ai_will_do = {
+			base = 0
 		}
 	}
 
@@ -575,6 +600,9 @@ local_resources_chromium_factor = -0.075
 			}
 		}
 
+		ai_will_do = {
+			base = 0
+		}
 	}
 
 	generic_nationalise_second_biggest_influencer_industries = {
@@ -685,6 +713,9 @@ local_resources_chromium_factor = -0.075
 			}
 		}
 
+		ai_will_do = {
+			base = 0
+		}
 	}
 
 	#For autocrats (Western autocrats pos. 0, Emerging autocrats pos. 7, Neutral autocrats pos. 13, oligarchs pos. 15, fascists pos. 21 military junta pos. 22)
@@ -707,6 +738,10 @@ local_resources_chromium_factor = -0.075
 			add_ideas = IP_paramilitary_units_formed
 			set_temp_variable = { temp_opinion = 5 }
 			change_the_military_opinion = yes
+		}
+
+		ai_will_do = {
+			base = 5
 		}
 	}
 }
