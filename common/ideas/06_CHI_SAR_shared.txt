@@ -1,76 +1,6 @@
 ideas = {
 
 	country = {
-		HKG_CHI_economic_support = {
-			picture = foreign_capital_influx
-
-			allowed_civil_war = { always = yes }
-
-			modifier = {
-				industrial_capacity_factory = 0.05
-				stability_factor = 0.02
-			}
-		}
-
-		HKG_under_press_controls = {
-			picture = political_censorship
-
-			allowed_civil_war = { always = yes }
-
-			modifier = {
-				stability_factor = -0.03
-				political_power_factor = -0.1
-			}
-		}
-
-		HKG_national_security_law_idea = {
-			picture = HKG_nsl
-
-			allowed_civil_war = { always = yes }
-
-			modifier = {
-				stability_factor = -0.05
-				resistance_target = 0.02
-				communism_drift = -0.03
-				democratic_drift = -0.04
-			}
-		}
-
-		HKG_brain_drain = {
-			picture = migration_wave
-
-			allowed_civil_war = { always = yes }
-
-			modifier = {
-				conscription_factor = 0.1
-				production_speed_buildings_factor = -0.05
-			}
-		}
-
-		HKG_bay_area_boom = {
-			picture = generic_infrastructure
-
-			allowed_civil_war = { always = yes }
-
-			modifier = {
-				industrial_capacity_factory = 0.05
-				consumer_goods_factor = -0.03
-			}
-		}
-
-		HKG_protest_movement = {
-			picture = protest
-
-			allowed_civil_war = { always = yes }
-
-			modifier = {
-				stability_factor = -0.05
-				political_power_factor = 0.1
-			}
-		}
-
-		### MAC ###
-
 		MAC_diversification_boom = {
 			picture = generic_foreign_investment
 
@@ -265,6 +195,209 @@ ideas = {
 			targeted_modifier = {
 				tag = OMG
 				foreign_influence_defense_modifier = -0.10
+			}
+		}
+
+		TIB_dalai_lama_governance = {
+			allowed_civil_war = { always = yes }
+			picture = generic_political_support
+			modifier = {
+				political_power_factor = 0.05
+				war_support_factor = -0.05
+			}
+		}
+
+		# Tier 1 (33–65): Cultural tension — protests and unrest suppress stability
+		TIB_cultural_tension = {
+			allowed_civil_war = { always = yes }
+			picture = generic_fortify_the_borders
+			modifier = {
+				stability_factor = -0.05
+				war_support_factor = -0.10
+				political_power_factor = -0.05
+			}
+		}
+
+		# Tier 2 (66–99): Forced integration — heavy repression, low morale
+		TIB_forced_integration = {
+			allowed_civil_war = { always = yes }
+			picture = generic_communism
+			modifier = {
+				stability_factor = -0.10
+				war_support_factor = -0.15
+				political_power_factor = -0.10
+			}
+		}
+
+		###############################################
+		### XINJIANG — Sinicization Tier Ideas ###
+		###############################################
+
+		# Tier 0 (0–32): Xinjiang autonomy framework
+		ETK_xinjiang_autonomy = {
+			allowed_civil_war = { always = yes }
+			picture = generic_political_support
+			modifier = {
+				political_power_factor = 0.05
+				war_support_factor = -0.05
+			}
+		}
+
+		# Tier 1 (33–65): Xinjiang tensions — terrorism risk, unrest
+		ETK_xinjiang_tensions = {
+			allowed_civil_war = { always = yes }
+			picture = generic_fortify_the_borders
+			modifier = {
+				stability_factor = -0.05
+				war_support_factor = -0.10
+				political_power_factor = -0.05
+			}
+		}
+
+		# Tier 2 (66–99): Mass security crackdown — heavy surveillance, suppressed population
+		ETK_xinjiang_crackdown = {
+			allowed_civil_war = { always = yes }
+			picture = generic_communism
+			modifier = {
+				stability_factor = -0.10
+				war_support_factor = -0.15
+				political_power_factor = -0.10
+			}
+		}
+
+		###############################################
+		### INNER MONGOLIA — Sinicization Tier Ideas ###
+		###############################################
+
+		# Tier 0 (0–32): Mongolian governance framework
+		OMG_mongol_governance = {
+			allowed_civil_war = { always = yes }
+			picture = generic_political_support
+			modifier = {
+				political_power_factor = 0.05
+				war_support_factor = -0.05
+			}
+		}
+
+		# Tier 1 (33–65): Inner Mongolia cultural tensions
+		OMG_inner_mongolia_tensions = {
+			allowed_civil_war = { always = yes }
+			picture = generic_fortify_the_borders
+			modifier = {
+				stability_factor = -0.05
+				war_support_factor = -0.10
+				political_power_factor = -0.05
+			}
+		}
+
+		# Tier 2 (66–99): Cultural erasure — repression of Mongolian language and identity
+		OMG_cultural_erasure = {
+			allowed_civil_war = { always = yes }
+			picture = generic_communism
+			modifier = {
+				stability_factor = -0.10
+				war_support_factor = -0.15
+				political_power_factor = -0.10
+			}
+		}
+
+		###############################################
+		### ETK TERRORISM IDEAS (applied to ETK) ###
+		###############################################
+
+		# Temporary aftermath idea after a terrorist attack (timed, 45–90 days)
+		ETK_terrorism_aftermath = {
+			allowed_civil_war = { always = yes }
+			picture = generic_fortify_the_borders
+			modifier = {
+				stability_factor = -0.05
+				war_support_factor = -0.05
+			}
+		}
+
+		# Applied by CHI focus CHI_ETK_education_centres
+		ETK_surveillance_state_idea = {
+			allowed_civil_war = { always = yes }
+			picture = generic_communism
+			modifier = {
+				stability_factor = -0.04
+				production_speed_buildings_factor = 0.03
+			}
+		}
+
+		# Applied by CHI focus CHI_ETK_reeducation_initiative
+		ETK_security_reinforcement_idea = {
+			allowed_civil_war = { always = yes }
+			picture = generic_fortify_the_borders
+			modifier = {
+				stability_factor = -0.03
+				production_speed_buildings_factor = 0.04
+			}
+		}
+
+		###############################################
+		### CHI IDEAS ###
+		###############################################
+
+		# Cross-strait military operations capability (from CHI_TAI_military_buildup)
+		CHI_crossstrait_operations = {
+			allowed_civil_war = { always = yes }
+			picture = generic_fortify_the_borders
+			modifier = {
+				amphibious_invasion = 0.15
+				amphibious_invasion_defence = 0.10
+			}
+		}
+
+		# Macao gaming and services diversification bonus (from CHI_MAC_lotus_flower_economy)
+		CHI_mac_consumer_goods_idea = {
+			allowed_civil_war = { always = yes }
+			picture = gold
+			modifier = {
+				consumer_goods_factor = -0.02
+				political_power_factor = 0.03
+			}
+		}
+
+		# Taiwan amphibious mastery (timed, from CHI_TAI_amphibious_doctrine)
+		CHI_TAI_amphibious_mastery = {
+			allowed_civil_war = { always = yes }
+			picture = generic_naval_exercises
+			modifier = {
+				special_forces_marines_mastery_gain_factor = 0.15
+				marine_massive_forces_track_mastery_gain_factor = 0.15
+			}
+		}
+
+		# Taiwan military buildup idea (from CHI_TAI_military_buildup)
+		CHI_TAI_military_buildup_idea = {
+			allowed_civil_war = { always = yes }
+			picture = generic_fortify_the_borders
+			modifier = {
+				production_speed_arms_factory_factor = 0.05
+				army_org_factor = 0.05
+				max_planning_factor = 0.10
+			}
+		}
+
+		# Taiwan — reduced US military support (timed, from chi_tai_pressure.4 success)
+		TAI_reduced_us_support = {
+			allowed_civil_war = { always = yes }
+			picture = generic_deal_with_the_devil
+			modifier = {
+				army_morale_factor = -0.05
+				air_superiority_bonus_in_combat = -0.05
+			}
+		}
+
+		# Taiwan — fully isolated from US support (timed, from chi_tai_pressure.6)
+		TAI_isolated_from_us = {
+			allowed_civil_war = { always = yes }
+			picture = generic_traitor
+			modifier = {
+				army_morale_factor = -0.08
+				war_support_factor = -0.05
+				consumer_goods_factor = 0.05
 			}
 		}
 

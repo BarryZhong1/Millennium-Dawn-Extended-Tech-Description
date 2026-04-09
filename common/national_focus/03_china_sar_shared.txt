@@ -734,28 +734,27 @@ joint_focus = {
 		FRA = { add_opinion_modifier = { target = CHI  modifier = hkg_press_freedom_guarantees } }
 		GER = { add_opinion_modifier = { target = CHI  modifier = hkg_press_freedom_guarantees } }
 		AUS = { add_opinion_modifier = { target = CHI  modifier = hkg_press_freedom_guarantees } }
-	}
-
-	completion_reward_joint_member = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_media_freedom (HKG)"
-		random_owned_state = {
-			add_extra_state_shared_building_slots = 1
-			add_building_construction = {
-				type = offices
-				level = 1
-				instant_build = yes
+		newline = yes
+		HKG = {
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = offices
+					level = 1
+					instant_build = yes
+				}
 			}
-		}
-		595 = {
-			custom_effect_tooltip = {
-				localization_key = modifies_dynamic_modifier_tt
-				MODIFIER = CHI_HKG_sinicization_modifier
+			595 = {
+				custom_effect_tooltip = {
+					localization_key = modifies_dynamic_modifier_tt
+					MODIFIER = CHI_HKG_sinicization_modifier
+				}
+				add_to_variable = { CHI_HKG_offices_productivity = 0.02  tooltip = offices_productivity_tt }
+				add_to_variable = { CHI_HKG_communism_drift = -0.05  tooltip = communism_drift_tt }
+				set_temp_variable = { sinofication_base_change = -5 }
+				CHI_update_sinofication = yes
+				add_to_variable = { HKG_sinofication_var = sinofication_base_change  tooltip = HKG_sinofication_tt }
 			}
-			add_to_variable = { CHI_HKG_offices_productivity = 0.02  tooltip = offices_productivity_tt }
-			add_to_variable = { CHI_HKG_communism_drift = -0.05  tooltip = communism_drift_tt }
-			set_temp_variable = { sinofication_base_change = -5 }
-			CHI_update_sinofication = yes
-			add_to_variable = { HKG_sinofication_var = sinofication_base_change  tooltip = HKG_sinofication_tt }
 		}
 	}
 
@@ -766,7 +765,7 @@ joint_focus = {
 
 joint_focus = {
 	id = CHI_HKG_electoral_reform
-	icon = peoples_republic_of_china
+	icon = elections_rigged
 	text_icon = JOINT_CHI_focus_style
 	overlay = GFX_focus_overlay_chinese_flag
 
@@ -822,13 +821,16 @@ joint_focus = {
 		USA = { add_opinion_modifier = { target = CHI  modifier = hkg_electoral_interference } }
 		ENG = { add_opinion_modifier = { target = CHI  modifier = hkg_electoral_interference } }
 		FRA = { add_opinion_modifier = { target = CHI  modifier = hkg_electoral_interference } }
-	}
-
-	completion_reward_joint_member = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_electoral_reform (HKG)"
-		set_temp_variable = { sinofication_base_change = 5 }
-		CHI_update_sinofication = yes
-		add_to_variable = { HKG_sinofication_var = sinofication_base_change  tooltip = HKG_sinofication_tt }
+		newline = yes
+		HKG = {
+			custom_effect_tooltip = {
+				localization_key = modifies_dynamic_modifier_tt
+				MODIFIER = CHI_HKG_sinicization_modifier
+			}
+			set_temp_variable = { sinofication_base_change = 5 }
+			CHI_update_sinofication = yes
+			add_to_variable = { HKG_sinofication_var = sinofication_base_change  tooltip = HKG_sinofication_tt }
+		}
 	}
 
 	ai_will_do = {
@@ -838,7 +840,7 @@ joint_focus = {
 
 joint_focus = {
 	id = CHI_HKG_censorship
-	icon = peoples_republic_of_china
+	icon = internet_censorship
 	text_icon = JOINT_CHI_focus_style
 
 	x = 0
@@ -855,26 +857,27 @@ joint_focus = {
 
 	completion_reward_joint_originator = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_censorship"
-		set_temp_variable = { percent_change = 5 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = HKG }
-		change_influence_percentage = yes
-		random_owned_state = {
-			add_extra_state_shared_building_slots = 1
-			add_building_construction = {
-				type = industrial_complex
-				level = 1
-				instant_build = yes
+		custom_effect_tooltip = {
+				localization_key = modifies_dynamic_modifier_tt
+				MODIFIER = CHI_SAR_network_modifier
 			}
-		}
+			add_to_variable = { CHI_network_bureaucracy_cost_multiplier_modifier = 0.05  tooltip = bureaucracy_cost_multiplier_modifier_tt }
+			add_to_variable = { CHI_network_police_cost_multiplier_modifier = 0.05  tooltip = police_cost_multiplier_modifier_tt }
 	}
 
 	completion_reward_joint_member = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_censorship (HKG)"
-		set_temp_variable = { sinofication_base_change = 10 }
-		CHI_update_sinofication = yes
-		add_to_variable = { HKG_sinofication_var = sinofication_base_change  tooltip = HKG_sinofication_tt }
-		add_ideas = HKG_under_press_controls
+		HKG = {
+			custom_effect_tooltip = {
+				localization_key = modifies_dynamic_modifier_tt
+				MODIFIER = CHI_HKG_sinicization_modifier
+			}
+			set_temp_variable = { sinofication_base_change = 10 }
+			CHI_update_sinofication = yes
+			add_to_variable = { HKG_sinofication_var = sinofication_base_change  tooltip = HKG_sinofication_tt }
+			add_to_variable = { CHI_HKG_communism_drift = 0.05  tooltip = communism_drift_tt }
+			add_to_variable = { CHI_HKG_stability_factor = -0.10  tooltip = stability_factor_tt }
+		}
 	}
 
 	ai_will_do = {
@@ -883,7 +886,7 @@ joint_focus = {
 }
 joint_focus = {
 	id = CHI_HKG_moral_national_education
-	icon = peoples_republic_of_china
+	icon = CHI_school
 	text_icon = JOINT_HKG_CHI_focus_style
 
 	x = 2
@@ -904,20 +907,18 @@ joint_focus = {
 		set_temp_variable = { tag_index = CHI }
 		set_temp_variable = { influence_target = HKG }
 		change_influence_percentage = yes
-		595 = {
-			add_building_construction = {
-				type = internet_station
-				level = 1
-				instant_build = yes
-			}
-		}
 	}
 
 	completion_reward_joint_member = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_moral_national_education (HKG)"
-		set_temp_variable = { sinofication_base_change = 15 }
-		CHI_update_sinofication = yes
-		add_to_variable = { HKG_sinofication_var = sinofication_base_change  tooltip = HKG_sinofication_tt }
+		HKG = {
+			custom_effect_tooltip = {
+				localization_key = modifies_dynamic_modifier_tt
+				MODIFIER = CHI_HKG_sinicization_modifier
+			}
+			set_temp_variable = { sinofication_base_change = 5 }
+			CHI_update_sinofication = yes
+		}
 	}
 
 	ai_will_do = {
@@ -927,7 +928,7 @@ joint_focus = {
 
 joint_focus = {
 	id = CHI_HKG_national_security_law
-	icon = peoples_republic_of_china
+	icon = colonial_crackdown
 	text_icon = JOINT_HKG_CHI_focus_style
 
 	x = 1
@@ -945,19 +946,19 @@ joint_focus = {
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_national_security_law"
-		if = {
-			limit = { original_tag = CHI }
+		CHI = {
 			set_temp_variable = { percent_change = 7 }
 			set_temp_variable = { tag_index = CHI }
 			set_temp_variable = { influence_target = HKG }
 			change_influence_percentage = yes
+			newline = yes
 			USA = { add_opinion_modifier = { target = CHI  modifier = hkg_nsl_imposed } }
 			ENG = { add_opinion_modifier = { target = CHI  modifier = hkg_nsl_imposed } }
 			FRA = { add_opinion_modifier = { target = CHI  modifier = hkg_nsl_imposed } }
 			GER = { add_opinion_modifier = { target = CHI  modifier = hkg_nsl_imposed } }
 		}
-		else_if = {
-			limit = { original_tag = HKG }
+		newline	= yes
+		HKG = {
 			set_temp_variable = { sinofication_base_change = 15 }
 			CHI_update_sinofication = yes
 			add_to_variable = { HKG_sinofication_var = sinofication_base_change  tooltip = HKG_sinofication_tt }
@@ -989,22 +990,28 @@ joint_focus = {
 	}
 
 	available = {
-		original_tag = CHI
-		country_exists = HKG
 		HKG = {
 			is_subject_of = CHI
 			influence_higher_80 = yes
+			check_variable = {
+				var = HKG_sinofication_var
+				value = 90
+				compare = greater_than_or_equals
+			}
 		}
 	}
 
-	completion_reward = {
+	completion_reward_joint_originator = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_SAR_integrate_HKG"
+		HKG = { every_unit_leader = { set_nationality = CHI } }
 		595 = {
 			add_core_of = CHI
 			remove_dynamic_modifier = { modifier = CHI_HKG_sinicization_modifier }
 			remove_core_of = HKG
 		}
+		newline = yes
 		annex_country = { target = HKG  transfer_troops = yes }
+		newline = yes
 		custom_effect_tooltip = {
 			localization_key = modifies_dynamic_modifier_tt
 			MODIFIER = CHI_SAR_network_modifier
@@ -1019,7 +1026,7 @@ joint_focus = {
 
 joint_focus = {
 	id = CHI_HKG_lok_ma_chau_loop
-	icon = peoples_republic_of_china
+	icon = goal_JAP_choose_research
 	text_icon = JOINT_HKG_focus_style
 
 	x = 0
@@ -1034,12 +1041,30 @@ joint_focus = {
 
 	joint_trigger = { original_tag = HKG }
 
+	completion_reward_joint_originator = {
+		add_tech_bonus = {
+			name = CHI_HKG_lok_ma_chau_loop
+			category = CAT_Civilian
+			uses = 3
+			bonus = 0.50
+		}
+	}
+
+	completion_reward_joint_member = {
+		add_tech_bonus = {
+			name = CHI_HKG_lok_ma_chau_loop
+			category = CAT_Civilian
+			uses = 1
+			bonus = 0.50
+		}
+	}
+
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_lok_ma_chau_loop"
 		random_owned_state = {
 			add_extra_state_shared_building_slots = 1
 			add_building_construction = {
-				type = industrial_complex
+				type = offices
 				level = 1
 				instant_build = yes
 			}
@@ -1052,7 +1077,7 @@ joint_focus = {
 }
 joint_focus = {
 	id = CHI_HKG_2030_study
-	icon = peoples_republic_of_china
+	icon = focus_JAP_a_functionalist_housing_policy
 	text_icon = JOINT_HKG_focus_style
 
 	x = -1
@@ -1067,15 +1092,22 @@ joint_focus = {
 
 	joint_trigger = { original_tag = HKG }
 
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_2030_study"
-		random_owned_state = {
-			add_extra_state_shared_building_slots = 2
-			add_building_construction = {
-				type = industrial_complex
-				level = 1
-				instant_build = yes
+	completion_reward_joint_originator = {
+		595 = {
+			custom_effect_tooltip = {
+				localization_key = modifies_dynamic_modifier_tt
+				MODIFIER = CHI_HKG_sinicization_modifier
 			}
+			add_to_variable = { CHI_HKG_global_building_slots_factor = 0.10  tooltip = global_building_slots_factor_tt }
+		}
+	}
+
+	completion_reward_joint_member = {
+		add_tech_bonus = {
+			name = CHI_HKG_2030_study
+			uses = 1
+			ahead_reduction = 5
+			category = CAT_construction_tech
 		}
 	}
 
@@ -1085,7 +1117,7 @@ joint_focus = {
 }
 joint_focus = {
 	id = CHI_HKG_palace_museum
-	icon = peoples_republic_of_china
+	icon = focus_PER_national_museum
 	text_icon = JOINT_HKG_CHI_focus_style
 
 	x = 2
@@ -1110,9 +1142,6 @@ joint_focus = {
 	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 	joint_trigger = { CHI_HKG_joint_trigger = yes }
-
-	completion_reward_joint_originator = {
-	}
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_palace_museum"
@@ -1142,7 +1171,7 @@ joint_focus = {
 }
 joint_focus = {
 	id = CHI_HKG_zhuhai_macau_bridge
-	icon = peoples_republic_of_china
+	icon = strait_messina_bridge
 	text_icon = JOINT_HKG_CHI_focus_style
 
 	x = -1
@@ -1159,19 +1188,28 @@ joint_focus = {
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_zhuhai_macau_bridge"
-		if = {
-			limit = { original_tag = CHI }
+		CHI = {
 			custom_effect_tooltip = {
 				localization_key = modifies_dynamic_modifier_tt
 				MODIFIER = CHI_SAR_network_modifier
 			}
 			add_to_variable = { CHI_network_civilian_factories_productivity = 0.02  tooltip = civilian_factories_productivity_tt }
 		}
-		every_owned_state = {
-			add_building_construction = {
-				type = infrastructure
-				level = 1
-				instant_build = yes
+		HKG = {
+			custom_effect_tooltip = {
+				localization_key = modifies_dynamic_modifier_tt
+				MODIFIER = CHI_HKG_sinicization_modifier
+			}
+			set_temp_variable = { sinofication_base_change = 15 }
+			CHI_update_sinofication = yes
+			add_to_variable = { HKG_sinofication_var = sinofication_base_change  tooltip = HKG_sinofication_tt }
+			add_to_variable = { CHI_HKG_state_productivity_growth_modifier = 0.10  tooltip = state_productivity_growth_modifier_tt }
+			every_owned_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
 			}
 		}
 	}
@@ -1182,7 +1220,7 @@ joint_focus = {
 }
 joint_focus = {
 	id = CHI_HKG_lok_ma_chau_station
-	icon = peoples_republic_of_china
+	icon = ENG_scotland_train
 	text_icon = JOINT_HKG_CHI_focus_style
 
 	x = 1
@@ -1197,22 +1235,25 @@ joint_focus = {
 
 	joint_trigger = { CHI_HKG_joint_trigger = yes }
 
+	completion_reward_joint_originator = {
+		if = {
+			limit = { has_dlc = "Arms Against Tyranny" }
+			mio:CHI_crrc_manufacturer = {
+				add_mio_task_capacity = 1
+			}
+		}
+		two_random_industrial_complex = yes
+	}
+
+
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_HKG_lok_ma_chau_station"
-		if = {
-			limit = { original_tag = CHI }
+		CHI = {
 			custom_effect_tooltip = {
 				localization_key = modifies_dynamic_modifier_tt
 				MODIFIER = CHI_SAR_network_modifier
 			}
-			add_to_variable = { CHI_network_production_speed_industrial_complex_factor = 0.03  tooltip = production_speed_industrial_complex_factor_tt }
-		}
-		every_owned_state = {
-			add_building_construction = {
-				type = infrastructure
-				level = 1
-				instant_build = yes
-			}
+			add_to_variable = { CHI_network_production_speed_infrastructure_factor = 0.05  tooltip = production_speed_infrastructure_factor_tt }
 		}
 	}
 
@@ -1223,7 +1264,7 @@ joint_focus = {
 ##### Macau Branch
 joint_focus = {
 	id = CHI_MAC_pearl_river_delta
-	icon = peoples_republic_of_china
+	icon = CHI_MAC_focus
 	text_icon = JOINT_MAC_CHI_focus_style
 
 	x = 9
@@ -1266,20 +1307,42 @@ joint_focus = {
 
 	completion_reward_joint_originator = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_pearl_river_delta"
-		custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_SAR_network_modifier }
-		add_to_variable = { CHI_network_trade_opinion_factor = 0.03  tooltip = trade_opinion_factor_tt }
-		update_CHI_SAR_network_modifiers = yes
+		if = {
+			limit = { original_tag = CHI }
+			CHI = {
+				custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_SAR_network_modifier }
+				add_to_variable = { CHI_network_trade_opinion_factor = 0.05  tooltip = trade_opinion_factor_tt }
+				add_to_variable = { CHI_network_civilian_factories_productivity = 0.02  tooltip = civilian_factories_productivity_tt }
+			}
+		}
+		else = {
+			MAC = {
+				custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_MAC_sinicization_modifier }
+				add_to_variable = { CHI_MAC_trade_opinion_factor = 0.05  tooltip = trade_opinion_factor_tt }
+				add_to_variable = { CHI_MAC_civilian_factories_productivity = 0.02  tooltip = civilian_factories_productivity_tt }
+			}
+		}
 	}
 
-	completion_reward_joint_member = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_pearl_river_delta (MAC)"
+	completion_reward = {
 		random_owned_state = {
-			add_extra_state_shared_building_slots = 1
+			add_extra_state_shared_building_slots = 2
 			add_building_construction = {
 				type = industrial_complex
-				level = 2
+				level = 1
 				instant_build = yes
 			}
+			add_building_construction = {
+				type = microchip_plant
+				level = 1
+				instant_build = yes
+			}
+		}
+		newline = yes
+		MAC = {
+			set_temp_variable = { sinofication_base_change = 5 }
+			CHI_update_sinofication = yes
+			add_to_variable = { MAC_sinofication_var = sinofication_base_change  tooltip = MAC_sinofication_tt }
 		}
 	}
 
@@ -1290,7 +1353,7 @@ joint_focus = {
 
 joint_focus = {
 	id = CHI_MAC_lotus_flower_economy
-	icon = peoples_republic_of_china
+	icon = generic_office_construct
 	text_icon = JOINT_MAC_CHI_focus_style
 
 	x = -1
@@ -1318,11 +1381,39 @@ joint_focus = {
 
 	completion_reward_joint_originator = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_lotus_flower_economy"
-		add_ideas = CHI_mac_consumer_goods_idea
+		random_owned_state = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = offices
+				level = 2
+				instant_build = yes
+			}
+		}
 	}
 
 	completion_reward_joint_member = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_lotus_flower_economy (MAC)"
+		random_owned_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = offices
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+
+	completion_reward = {
+		MAC = {
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_MAC_sinicization_modifier }
+			add_to_variable = { CHI_MAC_consumer_goods_factor = -0.05  tooltip = consumer_goods_factor_tt }
+			add_to_variable = { CHI_MAC_political_power_factor = 0.025  tooltip = political_power_factor_tt }
+		}
+		newline	= yes
+		CHI = {
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_SAR_network_modifier }
+			add_to_variable = { CHI_network_office_park_income_tax_modifier = 0.02  tooltip = office_park_income_tax_modifier_tt }
+		}
 	}
 
 	ai_will_do = {
@@ -1331,7 +1422,7 @@ joint_focus = {
 }
 joint_focus = {
 	id = CHI_MAC_gaming_diversification
-	icon = peoples_republic_of_china
+	icon = JAP_game_tech
 	text_icon = JOINT_MAC_CHI_focus_style
 	overlay = GFX_focus_overlay_sar_flags
 
@@ -1379,18 +1470,59 @@ joint_focus = {
 
 	completion_reward_joint_originator = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_gaming_diversification"
-		add_ideas = CHI_MAC_tech_diversification
+		if = {
+			limit = { original_tag = CHI }
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_SAR_network_modifier }
+			add_to_variable = { CHI_network_corporate_tax_income_multiplier_modifier = 0.06  tooltip = corporate_tax_income_multiplier_modifier_tt }
+		}
+		else = {
+			MAC = {
+				custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_MAC_sinicization_modifier }
+				add_to_variable = { CHI_MAC_consumer_goods_factor = -0.03  tooltip = consumer_goods_factor_tt }
+				add_to_variable = { CHI_MAC_office_park_income_tax_modifier = 0.03  tooltip = office_park_income_tax_modifier_tt }
+				add_to_variable = { CHI_MAC_corporate_tax_income_multiplier_modifier = 0.025  tooltip = corporate_tax_income_multiplier_modifier_tt }
+				add_to_variable = { CHI_MAC_research_speed_factor = 0.05  tooltip = research_speed_factor_tt }
+				add_to_variable = { CHI_MAC_production_speed_internet_station_factor = 0.10  tooltip = production_speed_internet_station_factor_tt }
+			}
+		}
+		random_owned_state = {
+			add_building_construction = {
+				type = internet_station
+				level = 2
+				instant_build = yes
+			}
+		}
 	}
 
 	completion_reward_joint_member = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_gaming_diversification (MAC)"
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_gaming_diversification (member)"
+		if = {
+			limit = { original_tag = MAC }
+			MAC = {
+				custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_MAC_sinicization_modifier }
+				add_to_variable = { CHI_MAC_consumer_goods_factor = -0.05  tooltip = consumer_goods_factor_tt }
+			}
+		}
+		else = {
+			CHI = {
+				custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_SAR_network_modifier }
+				add_to_variable = { CHI_network_corporate_tax_income_multiplier_modifier = 0.025  tooltip = corporate_tax_income_multiplier_modifier_tt }
+			}
+		}
 		random_owned_state = {
-			add_extra_state_shared_building_slots = 1
 			add_building_construction = {
 				type = internet_station
 				level = 1
 				instant_build = yes
 			}
+		}
+	}
+
+	completion_reward = {
+		MAC = {
+			set_temp_variable = { sinofication_base_change = -5 }
+			CHI_update_sinofication = yes
+			add_to_variable = { MAC_sinofication_var = sinofication_base_change  tooltip = MAC_sinofication_tt }
 		}
 	}
 
@@ -1401,7 +1533,7 @@ joint_focus = {
 
 joint_focus = {
 	id = CHI_MAC_cultural_autonomy_push
-	icon = peoples_republic_of_china
+	icon = customs_union
 	text_icon = JOINT_MAC_CHI_focus_style
 	overlay = GFX_focus_overlay_sar_flags
 
@@ -1447,10 +1579,37 @@ joint_focus = {
 
 	joint_trigger = { CHI_MAC_joint_trigger = yes }
 
-	completion_reward = {
+	completion_reward_joint_originator = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_cultural_autonomy_push"
-		POR = { add_opinion_modifier = { target = MAC  modifier = mutual_trade_agreement } }
-		BRA = { add_opinion_modifier = { target = MAC  modifier = mutual_trade_agreement } }
+		if = {
+			limit = { original_tag = MAC }
+			MAC = {
+				custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_MAC_sinicization_modifier }
+				add_to_variable = { CHI_MAC_trade_opinion_factor = 0.04  tooltip = trade_opinion_factor_tt }
+				add_to_variable = { CHI_MAC_civilian_factories_productivity = 0.03  tooltip = civilian_factories_productivity_tt }
+				add_to_variable = { CHI_MAC_consumer_goods_factor = -0.04  tooltip = consumer_goods_factor_tt }
+			}
+			POR = { add_opinion_modifier = { target = MAC  modifier = mutual_trade_agreement } }
+			BRA = { add_opinion_modifier = { target = MAC  modifier = mutual_trade_agreement } }
+		}
+		else = {
+			CHI = {
+				custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_SAR_network_modifier }
+				add_to_variable = { CHI_network_trade_opinion_factor = 0.02  tooltip = trade_opinion_factor_tt }
+			}
+		}
+		random_owned_state = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+
+	completion_reward_joint_member = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_cultural_autonomy_push (member)"
 		random_owned_state = {
 			add_extra_state_shared_building_slots = 1
 			add_building_construction = {
@@ -1461,6 +1620,14 @@ joint_focus = {
 		}
 	}
 
+	completion_reward = {
+		MAC = {
+			set_temp_variable = { sinofication_base_change = -5 }
+			CHI_update_sinofication = yes
+			add_to_variable = { MAC_sinofication_var = sinofication_base_change  tooltip = MAC_sinofication_tt }
+		}
+	}
+
 	ai_will_do = {
 		base = 3
 	}
@@ -1468,8 +1635,8 @@ joint_focus = {
 
 joint_focus = {
 	id = MAC_lusophone_connections
-	icon = peoples_republic_of_china
-	text_icon = JOINT_MAC_CHI_focus_style
+	icon = prioritize_the_four_year_plan
+	text_icon = JOINT_MAC_focus_style
 
 	x = 0
 	y = 2
@@ -1483,12 +1650,57 @@ joint_focus = {
 
 	joint_trigger = { CHI_MAC_joint_trigger = yes }
 
-	completion_reward = {
+	completion_reward_joint_originator = {
 		log = "[GetDateText]: [Root.GetName]: Focus MAC_lusophone_connections"
-		POR = { add_opinion_modifier = { target = MAC  modifier = mutual_trade_agreement } }
-		BRA = { add_opinion_modifier = { target = MAC  modifier = mutual_trade_agreement } }
-		custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_SAR_network_modifier }
-		add_to_variable = { CHI_network_trade_opinion_factor = 0.02  tooltip = trade_opinion_factor_tt }
+		if = {
+			limit = { original_tag = MAC }
+			POR = { add_opinion_modifier = { target = MAC  modifier = mutual_trade_agreement } }
+			BRA = { add_opinion_modifier = { target = MAC  modifier = mutual_trade_agreement } }
+			AGL = { add_opinion_modifier = { target = MAC  modifier = mutual_trade_agreement } }
+			MOZ = { add_opinion_modifier = { target = MAC  modifier = mutual_trade_agreement } }
+			newline = yes
+			MAC = {
+				custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_MAC_sinicization_modifier }
+				add_to_variable = { CHI_MAC_trade_opinion_factor = 0.05  tooltip = trade_opinion_factor_tt }
+			}
+			CHI = {
+				custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_SAR_network_modifier }
+				add_to_variable = { CHI_network_trade_opinion_factor = 0.03  tooltip = trade_opinion_factor_tt }
+			}
+		}
+		else = {
+			POR = { add_opinion_modifier = { target = MAC  modifier = mutual_trade_agreement } }
+			BRA = { add_opinion_modifier = { target = MAC  modifier = mutual_trade_agreement } }
+			newline = yes
+			CHI = {
+				custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_SAR_network_modifier }
+				add_to_variable = { CHI_network_trade_opinion_factor = 0.05  tooltip = trade_opinion_factor_tt }
+				add_to_variable = { CHI_network_civilian_factories_productivity = 0.02  tooltip = civilian_factories_productivity_tt }
+			}
+		}
+	}
+
+	completion_reward_joint_member = {
+		log = "[GetDateText]: [Root.GetName]: Focus MAC_lusophone_connections (member)"
+		if = {
+			limit = { original_tag = MAC }
+			POR = { add_opinion_modifier = { target = MAC  modifier = mutual_trade_agreement } }
+			BRA = { add_opinion_modifier = { target = MAC  modifier = mutual_trade_agreement } }
+		}
+		else = {
+			CHI = {
+				custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_SAR_network_modifier }
+				add_to_variable = { CHI_network_trade_opinion_factor = 0.03  tooltip = trade_opinion_factor_tt }
+			}
+		}
+	}
+
+	completion_reward = {
+		MAC = {
+			set_temp_variable = { sinofication_base_change = -5 }
+			CHI_update_sinofication = yes
+			add_to_variable = { MAC_sinofication_var = sinofication_base_change  tooltip = MAC_sinofication_tt }
+		}
 	}
 
 	ai_will_do = {
@@ -1498,7 +1710,7 @@ joint_focus = {
 
 joint_focus = {
 	id = CHI_MAC_financial_services
-	icon = peoples_republic_of_china
+	icon = generic_bank
 	text_icon = JOINT_MAC_CHI_focus_style
 
 	x = 1
@@ -1526,19 +1738,61 @@ joint_focus = {
 
 	completion_reward_joint_originator = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_financial_services"
-		custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_SAR_network_modifier }
-		add_to_variable = { CHI_network_office_park_income_tax_modifier = 0.03  tooltip = office_park_income_tax_modifier_tt }
+		if = {
+			limit = { original_tag = CHI }
+			CHI = {
+				custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_SAR_network_modifier }
+				add_to_variable = { CHI_network_office_park_income_tax_modifier = 0.04  tooltip = office_park_income_tax_modifier_tt }
+				add_to_variable = { CHI_network_interest_rate_multiplier_modifier = 0.02  tooltip = interest_rate_multiplier_modifier_tt }
+			}
+		}
+		else = {
+			MAC = {
+				custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_MAC_sinicization_modifier }
+				add_to_variable = { CHI_MAC_civilian_factories_productivity = 0.04  tooltip = civilian_factories_productivity_tt }
+				add_to_variable = { CHI_MAC_consumer_goods_factor = -0.04  tooltip = consumer_goods_factor_tt }
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = offices
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
 	}
 
 	completion_reward_joint_member = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_financial_services (MAC)"
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_financial_services (member)"
+		if = {
+			limit = { original_tag = MAC }
+			MAC = {
+				custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_MAC_sinicization_modifier }
+				add_to_variable = { CHI_MAC_civilian_factories_productivity = 0.02  tooltip = civilian_factories_productivity_tt }
+			}
+		}
+		else = {
+			CHI = {
+				custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_SAR_network_modifier }
+				add_to_variable = { CHI_network_office_park_income_tax_modifier = 0.02  tooltip = office_park_income_tax_modifier_tt }
+			}
+		}
 		random_owned_state = {
 			add_extra_state_shared_building_slots = 1
 			add_building_construction = {
-				type = industrial_complex
+				type = offices
 				level = 1
 				instant_build = yes
 			}
+		}
+	}
+
+	completion_reward = {
+		MAC = {
+			set_temp_variable = { sinofication_base_change = 5 }
+			CHI_update_sinofication = yes
+			add_to_variable = { MAC_sinofication_var = sinofication_base_change  tooltip = MAC_sinofication_tt }
 		}
 	}
 
@@ -1549,7 +1803,7 @@ joint_focus = {
 
 joint_focus = {
 	id = CHI_MAC_infrastructure_link
-	icon = peoples_republic_of_china
+	icon = support_rail
 	text_icon = JOINT_MAC_CHI_focus_style
 	overlay = GFX_focus_overlay_chinese_flag
 
@@ -1598,22 +1852,56 @@ joint_focus = {
 
 	completion_reward_joint_originator = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_infrastructure_link"
-		set_temp_variable = { percent_change = 2 }
-		set_temp_variable = { tag_index = CHI }
-		set_temp_variable = { influence_target = MAC }
-		change_influence_percentage = yes
-		custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_SAR_network_modifier }
-		add_to_variable = { CHI_network_civilian_factories_productivity = 0.02  tooltip = civilian_factories_productivity_tt }
+		if = {
+			limit = { original_tag = CHI }
+			set_temp_variable = { percent_change = 4 }
+			set_temp_variable = { tag_index = CHI }
+			set_temp_variable = { influence_target = MAC }
+			change_influence_percentage = yes
+			CHI = {
+				custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_SAR_network_modifier }
+				add_to_variable = { CHI_network_civilian_factories_productivity = 0.03  tooltip = civilian_factories_productivity_tt }
+			}
+		}
+		else = {
+			MAC = {
+				custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_MAC_sinicization_modifier }
+				add_to_variable = { CHI_MAC_civilian_factories_productivity = 0.04  tooltip = civilian_factories_productivity_tt }
+				add_to_variable = { CHI_MAC_consumer_goods_factor = -0.03  tooltip = consumer_goods_factor_tt }
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
 	}
 
 	completion_reward_joint_member = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_infrastructure_link (MAC)"
-		every_owned_state = {
+		random_owned_state = {
+			add_extra_state_shared_building_slots = 1
 			add_building_construction = {
 				type = infrastructure
 				level = 1
 				instant_build = yes
 			}
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+
+	completion_reward = {
+		MAC = {
+			set_temp_variable = { sinofication_base_change = 15 }
+			CHI_update_sinofication = yes
+			add_to_variable = { MAC_sinofication_var = sinofication_base_change  tooltip = MAC_sinofication_tt }
 		}
 	}
 
@@ -1624,7 +1912,7 @@ joint_focus = {
 
 joint_focus = {
 	id = CHI_MAC_guangdong_integration
-	icon = peoples_republic_of_china
+	icon = integrated_economies
 	text_icon = JOINT_CHI_focus_style
 
 	x = 2
@@ -1649,18 +1937,41 @@ joint_focus = {
 
 	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INFLUENCE }
 
-	joint_trigger = { original_tag = CHI }
+	joint_trigger = { CHI_MAC_joint_trigger = yes }
 
 	completion_reward_joint_originator = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_guangdong_integration"
-		custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_SAR_network_modifier }
-		add_to_variable = { CHI_network_population_tax_income_multiplier_modifier = 0.03  tooltip = population_tax_income_multiplier_modifier_tt }
-		update_CHI_SAR_network_modifiers = yes
+		if = {
+			limit = { original_tag = CHI }
+			CHI = {
+				custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_SAR_network_modifier }
+				add_to_variable = { CHI_network_population_tax_income_multiplier_modifier = 0.04  tooltip = population_tax_income_multiplier_modifier_tt }
+				add_to_variable = { CHI_network_border_control_multiplier_modifier = 0.03  tooltip = border_control_multiplier_modifier_tt }
+			}
+		}
+		else = {
+			MAC = {
+				custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_MAC_sinicization_modifier }
+				add_to_variable = { CHI_MAC_civilian_factories_productivity = 0.04  tooltip = civilian_factories_productivity_tt }
+				add_to_variable = { CHI_MAC_consumer_goods_factor = -0.03  tooltip = consumer_goods_factor_tt }
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
 	}
 
 	completion_reward_joint_member = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_guangdong_integration (MAC)"
-		add_opinion_modifier = { target = CHI  modifier = mutual_trade_agreement }
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_MAC_guangdong_integration (member)"
+		if = {
+			limit = { original_tag = MAC }
+			add_opinion_modifier = { target = CHI  modifier = mutual_trade_agreement }
+		}
 		random_owned_state = {
 			add_extra_state_shared_building_slots = 1
 			add_building_construction = {
@@ -1668,6 +1979,14 @@ joint_focus = {
 				level = 1
 				instant_build = yes
 			}
+		}
+	}
+
+	completion_reward = {
+		MAC = {
+			set_temp_variable = { sinofication_base_change = 10 }
+			CHI_update_sinofication = yes
+			add_to_variable = { MAC_sinofication_var = sinofication_base_change  tooltip = MAC_sinofication_tt }
 		}
 	}
 
@@ -1706,24 +2025,26 @@ joint_focus = {
 	joint_trigger = { original_tag = CHI }
 
 	available = {
-		original_tag = CHI
-		country_exists = MAC
 		MAC = {
 			is_subject_of = CHI
 			influence_higher_80 = yes
+			check_variable = {
+				var = MAC_sinofication_var
+				value = 90
+				compare = greater_than_or_equals
+			}
 		}
 	}
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_SAR_integrate_MAC"
+		MAC = { every_unit_leader = { set_nationality = CHI } }
 		1106 = {
 			add_core_of = CHI
-			remove_dynamic_modifier = { modifier = CHI_macau }
-			add_dynamic_modifier = { modifier = CHI_special_economic_zone }
+			remove_dynamic_modifier = { modifier = CHI_MAC_sinicization_modifier }
 			remove_core_of = MAC
 		}
 		annex_country = { target = MAC  transfer_troops = yes }
-		update_CHI_SAR_network_modifiers = yes
 	}
 
 	ai_will_do = {
@@ -3081,10 +3402,6 @@ joint_focus = {
 		}
 	}
 
-	completion_reward_joint_member = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_ETK_islamic_governance_framework (ETK)"
-	}
-
 	ai_will_do = {
 		base = 3
 	}
@@ -3184,7 +3501,7 @@ joint_focus = {
 ########### Taiwan
 joint_focus = {
 	id = CHI_TAI_cross_strait_policy
-	icon = peoples_republic_of_china
+	icon = CHI_TAI_focus
 	text_icon = JOINT_CHI_focus_style
 	overlay = GFX_focus_overlay_sar_flags
 
@@ -3227,7 +3544,6 @@ joint_focus = {
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_cross_strait_policy"
-		set_country_flag = CHI_TAI_diplomatic_route_active
 		add_opinion_modifier = { target = TAI  modifier = mutual_trade_agreement }
 		TAI = { add_opinion_modifier = { target = CHI  modifier = mutual_trade_agreement } }
 	}

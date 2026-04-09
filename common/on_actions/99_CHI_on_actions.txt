@@ -30,6 +30,30 @@ on_actions = {
 							set_country_flag = CHI_cnc_general_quote_used
 						}
 					}
+					else_if = {
+						limit = { ROOT = { has_trait = CHI_infantry_general } }
+						FROM = {
+							scoped_sound_effect = "CHI_general_fai_shout"
+							clr_country_flag = CHI_cnc_general_quote_used
+							set_country_flag = CHI_cnc_general_quote_used
+						}
+					}
+					else_if = {
+						limit = { ROOT = { has_trait = CHI_tank_general } }
+						FROM = {
+							scoped_sound_effect = "CHI_general_kwai_shout"
+							clr_country_flag = CHI_cnc_general_quote_used
+							set_country_flag = CHI_cnc_general_quote_used
+						}
+					}
+					else_if = {
+						limit = { ROOT = { has_trait = CHI_nuke_general } }
+						FROM = {
+							scoped_sound_effect = "CHI_general_tao_shout"
+							clr_country_flag = CHI_cnc_general_quote_used
+							set_country_flag = CHI_cnc_general_quote_used
+						}
+					}
 				}
 			}
 		}
@@ -53,25 +77,26 @@ on_actions = {
 							set_country_flag = CHI_cnc_general_quote_used
 						}
 					}
-				}
-			}
-		}
-	}
-	on_unit_leader_created = {
-		effect = {
-			if = {
-				limit = {
-					has_game_rule = {
-						rule = allow_easter_eggs
-						option = yes
-					}
-				}
-				if = {
-					limit = { FROM = { original_tag = CHI } }
-					if = {
-						limit = { ROOT = { has_trait = CHI_special_weapons_general } }
+					else_if = {
+						limit = { ROOT = { has_trait = CHI_infantry_general } }
 						FROM = {
-							scoped_sound_effect = "CHI_general_leang_shout"
+							scoped_sound_effect = "CHI_general_fai_shout"
+							clr_country_flag = CHI_cnc_general_quote_used
+							set_country_flag = CHI_cnc_general_quote_used
+						}
+					}
+					else_if = {
+						limit = { ROOT = { has_trait = CHI_tank_general } }
+						FROM = {
+							scoped_sound_effect = "CHI_general_kwai_shout"
+							clr_country_flag = CHI_cnc_general_quote_used
+							set_country_flag = CHI_cnc_general_quote_used
+						}
+					}
+					else_if = {
+						limit = { ROOT = { has_trait = CHI_nuke_general } }
+						FROM = {
+							scoped_sound_effect = "CHI_general_tao_shout"
 							clr_country_flag = CHI_cnc_general_quote_used
 							set_country_flag = CHI_cnc_general_quote_used
 						}
