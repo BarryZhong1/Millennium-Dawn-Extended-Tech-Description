@@ -5334,6 +5334,16 @@ scripted_gui = {
 
 			antarctica_station_send_supplies_button_click_enabled = {
 				check_variable = { global.selected_antarctica_station > 0 }
+				custom_trigger_tooltip = {
+					tooltip = ANTARCTICA_STATION_SEND_SUPPLIES_QUEUE_TT
+					meta_trigger = {
+						text = {
+							check_variable = { global.research_station_[ID]_delivery_days_remaining < 1 }
+							check_variable = { global.research_station_[ID]_delivery_fuel_pending < 1 }
+						}
+						ID = "[?global.selected_antarctica_station]"
+					}
+				}
 				original_tag = var:global.selected_antarctica_station_controller
 			}
 

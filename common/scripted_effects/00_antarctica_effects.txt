@@ -117,6 +117,7 @@ antarctica_initialize_station_display_arrays = {
 		set_variable = { global.selected_antarctica_station_output_fuel_capacity_days = 0 }
 		set_variable = { global.selected_antarctica_station_output_capacity = 0 }
 		set_variable = { global.selected_antarctica_station_output_staff_satisfaction = 0 }
+		set_variable = { global.selected_antarctica_station_output_iteration_speed_multiplier = 1 }
 		set_variable = { global.selected_antarctica_station_output_install_cost = 0 }
 		set_variable = { global.selected_antarctica_station_output_reliability = 0 }
 		set_variable = { global.selected_antarctica_station_output_construction_time = 0 }
@@ -139,6 +140,7 @@ antarctica_initialize_station_display_arrays = {
 		set_variable = { global.selected_antarctica_station_iteration_progress = 0 }
 		set_variable = { global.selected_antarctica_station_iterations = 0 }
 		set_variable = { global.selected_antarctica_station_iterations_until_next_tier = 0 }
+		set_variable = { global.selected_antarctica_station_iteration_speed_multiplier = 1 }
 		set_variable = { global.selected_antarctica_station_preview_output_power = 0 }
 		set_variable = { global.selected_antarctica_station_preview_output_required_staff = 0 }
 
@@ -264,6 +266,7 @@ antarctica_recalculate_station_module_outputs = {
 		set_temp_variable = { out_storage = 0 }
 		set_temp_variable = { out_capacity = 0 }
 		set_temp_variable = { out_install_cost = 0 }
+		set_temp_variable = { out_iteration_speed_multiplier = 1 }
 		# Reliability is module-specific and not aggregated into a station-wide value.
 		set_temp_variable = { out_reliability = 0 }
 		set_temp_variable = { out_construction_time = 0 }
@@ -468,6 +471,21 @@ antarctica_recalculate_station_module_outputs = {
 			set_temp_variable = { effective_storage = 0 }
 		}
 
+		# Fuel efficiency bonuses reduce effective fuel usage.
+		if = {
+			limit = {
+				check_variable = { out_fuel_usage_bonus > 0 }
+				check_variable = { out_fuel_usage > 0 }
+			}
+			set_temp_variable = { fuel_usage_multiplier = 1 }
+			subtract_from_temp_variable = { fuel_usage_multiplier = out_fuel_usage_bonus }
+			clamp_temp_variable = { var = fuel_usage_multiplier min = 0 }
+			multiply_temp_variable = { out_fuel_usage = fuel_usage_multiplier }
+		}
+
+		add_to_temp_variable = { out_iteration_speed_multiplier = out_staff_satisfaction }
+		clamp_temp_variable = { var = out_iteration_speed_multiplier min = 0 }
+
 		set_temp_variable = { out_fuel_capacity_days = 0 }
 		if = {
 			limit = { check_variable = { out_fuel_usage > 0 } }
@@ -484,6 +502,7 @@ antarctica_recalculate_station_module_outputs = {
 				set_variable = { global.research_station_[ID]_output_fuel_capacity_days = [FUEL_DAYS] }
 				set_variable = { global.research_station_[ID]_output_fuel_usage_bonus = [FUEL_BONUS] }
 				set_variable = { global.research_station_[ID]_output_staff_satisfaction = [SAT] }
+				set_variable = { global.research_station_[ID]_output_iteration_speed_multiplier = [ITER_MOD] }
 				set_variable = { global.research_station_[ID]_output_storage = [STO] }
 				set_variable = { global.research_station_[ID]_output_capacity = [CAP] }
 				set_variable = { global.research_station_[ID]_output_install_cost = [INS] }
@@ -500,6 +519,7 @@ antarctica_recalculate_station_module_outputs = {
 			FUEL_BONUS = "[?out_fuel_usage_bonus]"
 			TOTAL_PWR = "[?out_power_total]"
 			SAT = "[?out_staff_satisfaction]"
+			ITER_MOD = "[?out_iteration_speed_multiplier]"
 			STO = "[?effective_storage]"
 			CAP = "[?out_capacity]"
 			INS = "[?out_install_cost]"
@@ -1377,6 +1397,7 @@ antarctica_set_selected_station_controller = {
 				set_variable = { global.selected_antarctica_station_output_fuel_capacity_days = global.research_station_[ID]_output_fuel_capacity_days }
 				set_variable = { global.selected_antarctica_station_output_capacity = global.research_station_[ID]_output_capacity }
 				set_variable = { global.selected_antarctica_station_output_staff_satisfaction = global.research_station_[ID]_output_staff_satisfaction }
+				set_variable = { global.selected_antarctica_station_output_iteration_speed_multiplier = global.research_station_[ID]_output_iteration_speed_multiplier }
 				set_variable = { global.selected_antarctica_station_output_install_cost = global.research_station_[ID]_output_install_cost }
 				set_variable = { global.selected_antarctica_station_output_reliability = global.research_station_[ID]_output_reliability }
 				set_variable = { global.selected_antarctica_station_output_construction_time = global.research_station_[ID]_output_construction_time }
@@ -1388,6 +1409,8 @@ antarctica_set_selected_station_controller = {
 			}
 			ID = "[?global.selected_antarctica_station]"
 		}
+
+		set_variable = { global.selected_antarctica_station_iteration_speed_multiplier = global.selected_antarctica_station_output_iteration_speed_multiplier }
 
 		meta_effect = {
 			text = {
@@ -1683,6 +1706,7 @@ antarctica_set_selected_station_controller = {
 		set_variable = { global.selected_antarctica_station_output_fuel_capacity_days = 0 }
 		set_variable = { global.selected_antarctica_station_output_capacity = 0 }
 		set_variable = { global.selected_antarctica_station_output_staff_satisfaction = 0 }
+		set_variable = { global.selected_antarctica_station_output_iteration_speed_multiplier = 1 }
 		set_variable = { global.selected_antarctica_station_output_install_cost = 0 }
 		set_variable = { global.selected_antarctica_station_output_reliability = 0 }
 		set_variable = { global.selected_antarctica_station_output_construction_time = 0 }
@@ -1706,6 +1730,7 @@ antarctica_set_selected_station_controller = {
 		set_variable = { global.selected_antarctica_station_iteration_progress = 0 }
 		set_variable = { global.selected_antarctica_station_iterations = 0 }
 		set_variable = { global.selected_antarctica_station_iterations_until_next_tier = 0 }
+		set_variable = { global.selected_antarctica_station_iteration_speed_multiplier = 1 }
 	}
 }
 
@@ -1899,6 +1924,22 @@ antarctica_refresh_selected_station_iteration_values = {
 			limit = { check_variable = { global.selected_antarctica_station_iterations_until_next_tier < 0 } }
 			set_variable = { global.selected_antarctica_station_iterations_until_next_tier = 0 }
 		}
+
+		set_variable = { global.selected_antarctica_station_iteration_speed_multiplier = 1 }
+		if = {
+			limit = { check_variable = { global.selected_antarctica_station_controller > 0 } }
+			set_variable = { global.antarctica_temp_selected_station_iteration_modifier = 1 }
+			var:global.selected_antarctica_station_controller = {
+				multiply_variable = { global.antarctica_temp_selected_station_iteration_modifier = modifier@antarctica_lab_iteration_progress_modifier }
+			}
+			add_to_variable = { global.selected_antarctica_station_iteration_speed_multiplier = global.antarctica_temp_selected_station_iteration_modifier }
+			clamp_variable = { var = global.selected_antarctica_station_iteration_speed_multiplier min = 0 }
+
+			set_variable = { global.antarctica_temp_selected_station_iteration_modifier = 0 }
+		}
+	}
+	else = {
+		set_variable = { global.selected_antarctica_station_iteration_speed_multiplier = 1 }
 	}
 }
 
@@ -2603,7 +2644,9 @@ antarctica_process_station_research_progress = {
 
 			if = {
 				limit = { check_variable = { station_active_lab_slots > 0 } }
-				add_to_temp_variable = { station_iteration_progress = station_active_lab_slots }
+				set_temp_variable = { station_base_iteration_gain = station_active_lab_slots }
+				multiply_temp_variable = { station_base_iteration_gain = 0.75 }
+				add_to_temp_variable = { station_iteration_progress = station_base_iteration_gain }
 
 				# Controller-scoped iteration throughput bonus comes from a country modifier so spirits can tune it.
 				set_temp_variable = { station_iteration_speed_bonus = 0 }
@@ -2721,6 +2764,16 @@ antarctica_send_supplies_to_selected_station = {
 
 		set_temp_variable = { station_id = global.selected_antarctica_station }
 		antarctica_recalculate_station_module_outputs = yes
+		set_temp_variable = { delivery_days_remaining = 0 }
+		set_temp_variable = { delivery_fuel_pending = 0 }
+
+		meta_effect = {
+			text = {
+				set_temp_variable = { delivery_days_remaining = global.research_station_[ID]_delivery_days_remaining }
+				set_temp_variable = { delivery_fuel_pending = global.research_station_[ID]_delivery_fuel_pending }
+			}
+			ID = "[?station_id]"
+		}
 
 		# Get max capacity and determine delivery parameters
 		meta_effect = {
@@ -2731,7 +2784,11 @@ antarctica_send_supplies_to_selected_station = {
 		}
 
 		if = {
-			limit = { check_variable = { max_capacity > 0 } }
+			limit = {
+				check_variable = { max_capacity > 0 }
+				check_variable = { delivery_days_remaining < 1 }
+				check_variable = { delivery_fuel_pending < 1 }
+			}
 
 			# Determine delivery time and cost multiplier based on season (April-October = winter = 2x)
 			set_temp_variable = { delivery_days = 15 }
@@ -2768,6 +2825,15 @@ antarctica_send_supplies_to_selected_station = {
 
 			antarctica_set_selected_station_controller = yes
 			add_to_variable = { global.missile_ui_updated = 1 }
+		}
+		else_if = {
+			limit = {
+				OR = {
+					check_variable = { delivery_days_remaining > 0 }
+					check_variable = { delivery_fuel_pending > 0 }
+				}
+			}
+			log = "[GetDateText]: [Root.GetName]: Fuel delivery already in progress for Antarctica station [?global.selected_antarctica_station]."
 		}
 	}
 }
@@ -2892,6 +2958,7 @@ antarctica_clear_laboratory_country_effects = {
 	clear_variable = antarctica_lab_air_accidents_factor
 	clear_variable = antarctica_lab_airforce_intel_factor
 	clear_variable = antarctica_lab_productivity_growth_modifier
+	clear_variable = antarctica_lab_iteration_progress_modifier
 	clear_variable = antarctica_lab_effects_from_civ_satellites
 	clear_variable = antarctica_lab_effects_from_mil_satellites
 	clear_variable = antarctica_lab_ice_tech_boost
@@ -3069,7 +3136,7 @@ antarctica_apply_single_fuel_storage_station_output = {
 	}
 	else_if = {
 		limit = { check_variable = { fuel_module = 4 } }
-		add_to_temp_variable = { out_fuel_usage_bonus = 1.15 }
+		add_to_temp_variable = { out_fuel_usage_bonus = 0.15 }
 		add_to_temp_variable = { out_install_cost = -0.45 }
 		add_to_temp_variable = { out_construction_time = 20 }
 		add_to_temp_variable = { out_upkeep_cost = 0.04 }
@@ -3636,6 +3703,9 @@ antarctica_recalculate_country_laboratory_effects = {
 		if = {
 			limit = { has_country_flag = antarctica_has_active_station }
 
+			set_temp_variable = { country_staff_satisfaction_total = 0 }
+			set_temp_variable = { country_staff_satisfaction_count = 0 }
+
 			for_each_loop = {
 				array = global.antarctica_station_ids
 				value = current_station_id
@@ -3643,8 +3713,31 @@ antarctica_recalculate_country_laboratory_effects = {
 				if = {
 					limit = { check_variable = { current_station_id > 0 } }
 					set_temp_variable = { station_id = current_station_id }
+
+					meta_effect = {
+						text = {
+							set_temp_variable = { station_controller = global.research_station_[ID]_controller }
+							set_temp_variable = { station_staff_satisfaction = global.research_station_[ID]_output_staff_satisfaction }
+						}
+						ID = "[?station_id]"
+					}
+
+					if = {
+						limit = { check_variable = { station_controller = THIS.id } }
+						add_to_temp_variable = { country_staff_satisfaction_total = station_staff_satisfaction }
+						add_to_temp_variable = { country_staff_satisfaction_count = 1 }
+					}
+
 					antarctica_apply_station_laboratory_effects_to_controller = yes
 				}
+			}
+
+			if = {
+				limit = { check_variable = { country_staff_satisfaction_count > 0 } }
+				set_temp_variable = { country_staff_satisfaction_average = country_staff_satisfaction_total }
+				divide_temp_variable = { country_staff_satisfaction_average = country_staff_satisfaction_count }
+				clamp_temp_variable = { var = country_staff_satisfaction_average min = -1 max = 1 }
+				set_variable = { antarctica_lab_iteration_progress_modifier = country_staff_satisfaction_average }
 			}
 
 			antarctica_apply_laboratory_iteration_progression = yes
