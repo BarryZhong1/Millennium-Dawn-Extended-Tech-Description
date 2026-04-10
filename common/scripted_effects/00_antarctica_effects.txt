@@ -377,15 +377,45 @@ antarctica_recalculate_station_module_outputs = {
 		# Laboratory output stats aggregate all installed laboratory modules.
 		meta_effect = {
 			text = {
-				for_each_loop = {
-					array = global.research_station_[ID]_module_laboratories_list
-					value = current_lab_module
-					if = {
-						limit = { check_variable = { current_lab_module > 0 } }
-						set_temp_variable = { has_laboratory_modules = 1 }
-						set_temp_variable = { lab_module = current_lab_module }
-						antarctica_apply_single_laboratory_station_output = yes
+				if = {
+					limit = {
+						check_variable = { global.research_station_[ID]_module_slot_6 > 0 }
+						NOT = { check_variable = { global.research_station_[ID]_module_slot_6_blizzard_damaged > 0 } }
+						NOT = { check_variable = { global.research_station_[ID]_module_slot_6_repair_days_remaining > 0 } }
 					}
+					set_temp_variable = { has_laboratory_modules = 1 }
+					set_temp_variable = { lab_module = global.research_station_[ID]_module_slot_6 }
+					antarctica_apply_single_laboratory_station_output = yes
+				}
+				if = {
+					limit = {
+						check_variable = { global.research_station_[ID]_module_slot_7 > 0 }
+						NOT = { check_variable = { global.research_station_[ID]_module_slot_7_blizzard_damaged > 0 } }
+						NOT = { check_variable = { global.research_station_[ID]_module_slot_7_repair_days_remaining > 0 } }
+					}
+					set_temp_variable = { has_laboratory_modules = 1 }
+					set_temp_variable = { lab_module = global.research_station_[ID]_module_slot_7 }
+					antarctica_apply_single_laboratory_station_output = yes
+				}
+				if = {
+					limit = {
+						check_variable = { global.research_station_[ID]_module_slot_8 > 0 }
+						NOT = { check_variable = { global.research_station_[ID]_module_slot_8_blizzard_damaged > 0 } }
+						NOT = { check_variable = { global.research_station_[ID]_module_slot_8_repair_days_remaining > 0 } }
+					}
+					set_temp_variable = { has_laboratory_modules = 1 }
+					set_temp_variable = { lab_module = global.research_station_[ID]_module_slot_8 }
+					antarctica_apply_single_laboratory_station_output = yes
+				}
+				if = {
+					limit = {
+						check_variable = { global.research_station_[ID]_module_slot_9 > 0 }
+						NOT = { check_variable = { global.research_station_[ID]_module_slot_9_blizzard_damaged > 0 } }
+						NOT = { check_variable = { global.research_station_[ID]_module_slot_9_repair_days_remaining > 0 } }
+					}
+					set_temp_variable = { has_laboratory_modules = 1 }
+					set_temp_variable = { lab_module = global.research_station_[ID]_module_slot_9 }
+					antarctica_apply_single_laboratory_station_output = yes
 				}
 			}
 			ID = "[?station_id]"
@@ -2472,10 +2502,38 @@ antarctica_process_station_research_progress = {
 					set_temp_variable = { station_fuel_usage = global.research_station_[ID]_output_fuel_usage }
 					set_temp_variable = { station_fuel_storage = global.research_station_[ID]_output_storage }
 					set_temp_variable = { station_active_lab_slots = 0 }
-					if = { limit = { check_variable = { global.research_station_[ID]_module_slot_6 > 0 } } add_to_temp_variable = { station_active_lab_slots = 1 } }
-					if = { limit = { check_variable = { global.research_station_[ID]_module_slot_7 > 0 } } add_to_temp_variable = { station_active_lab_slots = 1 } }
-					if = { limit = { check_variable = { global.research_station_[ID]_module_slot_8 > 0 } } add_to_temp_variable = { station_active_lab_slots = 1 } }
-					if = { limit = { check_variable = { global.research_station_[ID]_module_slot_9 > 0 } } add_to_temp_variable = { station_active_lab_slots = 1 } }
+					if = {
+						limit = {
+							check_variable = { global.research_station_[ID]_module_slot_6 > 0 }
+							NOT = { check_variable = { global.research_station_[ID]_module_slot_6_blizzard_damaged > 0 } }
+							NOT = { check_variable = { global.research_station_[ID]_module_slot_6_repair_days_remaining > 0 } }
+						}
+						add_to_temp_variable = { station_active_lab_slots = 1 }
+					}
+					if = {
+						limit = {
+							check_variable = { global.research_station_[ID]_module_slot_7 > 0 }
+							NOT = { check_variable = { global.research_station_[ID]_module_slot_7_blizzard_damaged > 0 } }
+							NOT = { check_variable = { global.research_station_[ID]_module_slot_7_repair_days_remaining > 0 } }
+						}
+						add_to_temp_variable = { station_active_lab_slots = 1 }
+					}
+					if = {
+						limit = {
+							check_variable = { global.research_station_[ID]_module_slot_8 > 0 }
+							NOT = { check_variable = { global.research_station_[ID]_module_slot_8_blizzard_damaged > 0 } }
+							NOT = { check_variable = { global.research_station_[ID]_module_slot_8_repair_days_remaining > 0 } }
+						}
+						add_to_temp_variable = { station_active_lab_slots = 1 }
+					}
+					if = {
+						limit = {
+							check_variable = { global.research_station_[ID]_module_slot_9 > 0 }
+							NOT = { check_variable = { global.research_station_[ID]_module_slot_9_blizzard_damaged > 0 } }
+							NOT = { check_variable = { global.research_station_[ID]_module_slot_9_repair_days_remaining > 0 } }
+						}
+						add_to_temp_variable = { station_active_lab_slots = 1 }
+					}
 				}
 				ID = "[?process_station_id]"
 			}
@@ -3680,10 +3738,238 @@ antarctica_observer_detected_nukes_research_effect = {
 }
 
 antarctica_check_station_reports = {
-	# TODO, happens after too many breaches of Antarctic Treaty law.
 	if = {
 		limit = { check_variable = { antarctica_station_reports > 7 } }
 		news_event = MD_antarctica_news.8
 		country_event = MD_antarctica.6
+	}
+}
+# Blizzard System - Triggers blizzard event with 18-35 days duration
+# Weekly damage rolls on modules, 14-day auto-repair when blizzard ends
+antarctica_trigger_blizzard_event = {
+	set_variable_to_random = {
+        var = blizzard_duration
+        min = 18
+        max = 35
+        integer = yes
+    }
+
+	set_country_flag = antarctica_blizzard_active
+	set_variable = { antarctica_blizzard_duration_days = blizzard_duration }
+	set_variable = { antarctica_blizzard_days_remaining = blizzard_duration }
+	set_variable = { antarctica_blizzard_next_damage_check = 7 }
+
+	log = "[GetDateText]: [Root.GetName]: Antarctica blizzard started. Duration: [?blizzard_duration] days"
+}
+
+antarctica_process_blizzard_daily = {
+    add_to_variable = { antarctica_blizzard_days_remaining = -1 }
+	clamp_variable = { var = antarctica_blizzard_days_remaining min = 0 }
+    add_to_variable = { antarctica_blizzard_next_damage_check = -1 }
+
+    if = {
+        limit = { check_variable = { antarctica_blizzard_next_damage_check < 1 } }
+        antarctica_process_blizzard_weekly_damage = yes
+        set_variable = { antarctica_blizzard_next_damage_check = 7 }
+    }
+
+    if = {
+        limit = { check_variable = { antarctica_blizzard_days_remaining < 1 } }
+        clr_country_flag = antarctica_blizzard_active
+        antarctica_start_blizzard_repairs = yes
+        log = "[GetDateText]: [Root.GetName]: Antarctica blizzard ended. Starting module repairs."
+    }
+}
+
+antarctica_process_blizzard_weekly_damage = {
+	if = {
+		limit = {
+			has_country_flag = antarctica_has_active_station
+			check_variable = { global.selected_antarctica_station > 0 }
+		}
+
+		set_temp_variable = { station_id = global.selected_antarctica_station }
+
+		meta_effect = {
+			text = {
+				set_temp_variable = { station_lab_slot_6 = global.research_station_[ID]_module_slot_6 }
+				set_temp_variable = { station_lab_slot_7 = global.research_station_[ID]_module_slot_7 }
+				set_temp_variable = { station_lab_slot_8 = global.research_station_[ID]_module_slot_8 }
+				set_temp_variable = { station_lab_slot_9 = global.research_station_[ID]_module_slot_9 }
+			}
+			ID = "[?station_id]"
+		}
+
+		set_temp_variable = { blizzard_slot = 6 }
+		set_temp_variable = { station_lab_module = station_lab_slot_6 }
+		antarctica_roll_blizzard_damage_for_slot = yes
+
+		set_temp_variable = { blizzard_slot = 7 }
+		set_temp_variable = { station_lab_module = station_lab_slot_7 }
+		antarctica_roll_blizzard_damage_for_slot = yes
+
+		set_temp_variable = { blizzard_slot = 8 }
+		set_temp_variable = { station_lab_module = station_lab_slot_8 }
+		antarctica_roll_blizzard_damage_for_slot = yes
+
+		set_temp_variable = { blizzard_slot = 9 }
+		set_temp_variable = { station_lab_module = station_lab_slot_9 }
+		antarctica_roll_blizzard_damage_for_slot = yes
+	}
+}
+
+antarctica_roll_blizzard_damage_for_slot = {
+	if = {
+		limit = {
+			check_variable = { station_lab_module > 0 }
+			meta_trigger = {
+				text = {
+					NOT = { check_variable = { global.research_station_[ID]_module_slot_[SLOT]_blizzard_damaged > 0 } }
+					NOT = { check_variable = { global.research_station_[ID]_module_slot_[SLOT]_repair_days_remaining > 0 } }
+				}
+				ID = "[?station_id]"
+				SLOT = "[?blizzard_slot]"
+			}
+		}
+
+		# Reliability survival chance by module type (lab slots only)
+		if = {
+			limit = { check_variable = { station_lab_module = 1 } }
+			random_list = { 95 = { } 5 = { antarctica_mark_blizzard_slot_damaged = yes } }
+		}
+		else_if = {
+			limit = { check_variable = { station_lab_module = 2 } }
+			random_list = { 92 = { } 8 = { antarctica_mark_blizzard_slot_damaged = yes } }
+		}
+		else_if = {
+			limit = { check_variable = { station_lab_module = 3 } }
+			random_list = { 90 = { } 10 = { antarctica_mark_blizzard_slot_damaged = yes } }
+		}
+		else_if = {
+			limit = { check_variable = { station_lab_module = 4 } }
+			random_list = { 96 = { } 4 = { antarctica_mark_blizzard_slot_damaged = yes } }
+		}
+		else_if = {
+			limit = { check_variable = { station_lab_module = 5 } }
+			random_list = { 94 = { } 6 = { antarctica_mark_blizzard_slot_damaged = yes } }
+		}
+		else_if = {
+			limit = { check_variable = { station_lab_module = 6 } }
+			random_list = { 91 = { } 9 = { antarctica_mark_blizzard_slot_damaged = yes } }
+		}
+		else_if = {
+			limit = { check_variable = { station_lab_module = 7 } }
+			random_list = { 90 = { } 10 = { antarctica_mark_blizzard_slot_damaged = yes } }
+		}
+		else_if = {
+			limit = { check_variable = { station_lab_module = 8 } }
+			random_list = { 95 = { } 5 = { antarctica_mark_blizzard_slot_damaged = yes } }
+		}
+		else_if = {
+			limit = { check_variable = { station_lab_module = 9 } }
+			random_list = { 94 = { } 6 = { antarctica_mark_blizzard_slot_damaged = yes } }
+		}
+		else_if = {
+			limit = { check_variable = { station_lab_module = 10 } }
+			random_list = { 92 = { } 8 = { antarctica_mark_blizzard_slot_damaged = yes } }
+		}
+		else_if = {
+			limit = { check_variable = { station_lab_module = 11 } }
+			random_list = { 88 = { } 12 = { antarctica_mark_blizzard_slot_damaged = yes } }
+		}
+		else_if = {
+			limit = { check_variable = { station_lab_module = 12 } }
+			random_list = { 93 = { } 7 = { antarctica_mark_blizzard_slot_damaged = yes } }
+		}
+	}
+}
+
+antarctica_mark_blizzard_slot_damaged = {
+	meta_effect = {
+		text = {
+			set_variable = { global.research_station_[ID]_module_slot_[SLOT]_blizzard_damaged = 1 }
+		}
+		ID = "[?station_id]"
+		SLOT = "[?blizzard_slot]"
+	}
+	add_to_variable = { global.missile_ui_updated = 1 }
+}
+
+antarctica_start_blizzard_repairs = {
+	if = {
+		limit = { check_variable = { global.selected_antarctica_station > 0 } }
+		set_temp_variable = { station_id = global.selected_antarctica_station }
+
+		meta_effect = {
+			text = {
+				if = {
+					limit = { check_variable = { global.research_station_[ID]_module_slot_6_blizzard_damaged > 0 } }
+					set_variable = { global.research_station_[ID]_module_slot_6_repair_days_remaining = 14 }
+				}
+				if = {
+					limit = { check_variable = { global.research_station_[ID]_module_slot_7_blizzard_damaged > 0 } }
+					set_variable = { global.research_station_[ID]_module_slot_7_repair_days_remaining = 14 }
+				}
+				if = {
+					limit = { check_variable = { global.research_station_[ID]_module_slot_8_blizzard_damaged > 0 } }
+					set_variable = { global.research_station_[ID]_module_slot_8_repair_days_remaining = 14 }
+				}
+				if = {
+					limit = { check_variable = { global.research_station_[ID]_module_slot_9_blizzard_damaged > 0 } }
+					set_variable = { global.research_station_[ID]_module_slot_9_repair_days_remaining = 14 }
+				}
+			}
+			ID = "[?station_id]"
+		}
+	}
+}
+
+antarctica_process_blizzard_repairs_daily = {
+	if = {
+		limit = { check_variable = { global.selected_antarctica_station > 0 } }
+		set_temp_variable = { station_id = global.selected_antarctica_station }
+
+		meta_effect = {
+			text = {
+				if = {
+					limit = { check_variable = { global.research_station_[ID]_module_slot_6_repair_days_remaining > 0 } }
+					add_to_variable = { global.research_station_[ID]_module_slot_6_repair_days_remaining = -1 }
+					if = {
+						limit = { check_variable = { global.research_station_[ID]_module_slot_6_repair_days_remaining < 1 } }
+						clr_variable = global.research_station_[ID]_module_slot_6_repair_days_remaining
+						clr_variable = global.research_station_[ID]_module_slot_6_blizzard_damaged
+					}
+				}
+				if = {
+					limit = { check_variable = { global.research_station_[ID]_module_slot_7_repair_days_remaining > 0 } }
+					add_to_variable = { global.research_station_[ID]_module_slot_7_repair_days_remaining = -1 }
+					if = {
+						limit = { check_variable = { global.research_station_[ID]_module_slot_7_repair_days_remaining < 1 } }
+						clr_variable = global.research_station_[ID]_module_slot_7_repair_days_remaining
+						clr_variable = global.research_station_[ID]_module_slot_7_blizzard_damaged
+					}
+				}
+				if = {
+					limit = { check_variable = { global.research_station_[ID]_module_slot_8_repair_days_remaining > 0 } }
+					add_to_variable = { global.research_station_[ID]_module_slot_8_repair_days_remaining = -1 }
+					if = {
+						limit = { check_variable = { global.research_station_[ID]_module_slot_8_repair_days_remaining < 1 } }
+						clr_variable = global.research_station_[ID]_module_slot_8_repair_days_remaining
+						clr_variable = global.research_station_[ID]_module_slot_8_blizzard_damaged
+					}
+				}
+				if = {
+					limit = { check_variable = { global.research_station_[ID]_module_slot_9_repair_days_remaining > 0 } }
+					add_to_variable = { global.research_station_[ID]_module_slot_9_repair_days_remaining = -1 }
+					if = {
+						limit = { check_variable = { global.research_station_[ID]_module_slot_9_repair_days_remaining < 1 } }
+						clr_variable = global.research_station_[ID]_module_slot_9_repair_days_remaining
+						clr_variable = global.research_station_[ID]_module_slot_9_blizzard_damaged
+					}
+				}
+			}
+			ID = "[?station_id]"
+		}
+		add_to_variable = { global.missile_ui_updated = 1 }
 	}
 }

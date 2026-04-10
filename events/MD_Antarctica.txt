@@ -250,6 +250,20 @@ country_event = {
 	}
 }
 
+country_event = {
+	id = MD_antarctica.8
+	hidden = yes
+	is_triggered_only = yes
+
+	immediate = {
+		antarctica_trigger_blizzard_event = yes
+		hidden_effect = {
+			news_event = MD_antarctica_news.9
+			country_event = { id = MD_antarctica.8 days = 200 random_days = 100 }
+		}
+	}
+}
+
 ### News
 
 news_event = {
@@ -448,5 +462,21 @@ news_event = {
 		name = MD_antarctica_news.8.b
 		trigger = { original_tag = FROM }
 		ai_chance = { base = 100 }
+	}
+}
+
+news_event = {
+	id = MD_antarctica_news.9
+	title = MD_antarctica_news.9.t
+	desc = MD_antarctica_news.9.d
+
+	picture = GFX_antarctica_blizzard_news
+
+	is_triggered_only = yes
+
+	option = {
+		name = MD_antarctica_news.9.a
+		ai_chance = { base = 100 }
+		log = "[GetDateText]: [This.GetName]: MD_antarctica_news.9.a executed"
 	}
 }
