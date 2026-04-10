@@ -1,4 +1,38 @@
 guiTypes = {
+	extendedScrollbarType = {
+		name = "tutorial_sidebar_scrollbar"
+		position = { x = -6 y = 0 }
+		size = { width = 18 height = 18 }
+		startValue = 0
+		orientation = upper_right
+		origo = upper_right
+
+		slider = {
+			name = "Slider"
+			quadTextureSprite = "GFX_scroll_drager"
+			position = { x = -2 y = -2 }
+		}
+
+		track = {
+			name = "Track"
+			quadTextureSprite = "GFX_scroll_track"
+			position = { x = 3 y = 0 }
+			alwaystransparent = yes
+		}
+
+		decreaseButton = {
+			name = "Decrease"
+			quadTextureSprite = "GFX_scroll_up"
+			position = { x = 2 y = 3 }
+		}
+
+		increaseButton = {
+			name = "Increase"
+			quadTextureSprite = "GFX_scroll_down"
+			position = { x = -17 y = -19 }
+		}
+	}
+
 	containerWindowType = {
 		name = "tutorial_open_button_window"
 		position = { x = 205 y = -65 }
@@ -17,31 +51,54 @@ guiTypes = {
 
 	containerWindowType = {
 		name = "tutorial_main_background_window"
-		size = { width = 659 height = 665 }
+		size = { width = 1040 height = 620 }
 		position = { x = 0 y = 0 }
 		clipping = no
 		orientation = center
 		origo = center
 		moveable = yes
+		click_to_front = yes
 
 		background = {
 			name = "tutorial_main_background_window_screen"
-			quadTextureSprite = "GFX_euro_background_new"
+			quadTextureSprite = "GFX_md_tutorial_background"
+		}
+
+		containerWindowType = {
+			name = "tutorial_outer_frame"
+			position = { x = 0 y = 0 }
+			size = { width = 1040 height = 620 }
+			clipping = no
+
+			background = {
+				name = "tutorial_outer_frame_bg"
+				quadTextureSprite = "GFX_md_tutorial_outer_border"
+				alwaystransparent = yes
+			}
+		}
+
+		iconType = {
+			name = "tutorial_logo"
+			spriteType = "GFX_md_tutorial_logo"
+			position = { x = 520 y = 18 }
+			centerPosition = yes
+			scale = 0.86
+			alwaystransparent = yes
 		}
 
 		instantTextBoxType = {
-			name = "tutorial_main_background_window_inner_title"
-			position = { x = 180 y = 35 }
+			name = "tutorial_main_background_window_subtitle"
+			position = { x = 368 y = 103 }
 			font = "hoi_36header"
-			maxWidth = 300
-			maxHeight = 18
-			text = "tutorial_main_background_window_inner_title"
+			maxWidth = 320
+			maxHeight = 40
+			text = "MD_TUTORIAL_SUBTITLE"
 			format = center
 		}
 
 		buttonType = {
 			name = "tutorial_close_button"
-			position = { x = 610 y = 15 }
+			position = { x = 993 y = 15 }
 			spriteType = "GFX_closebutton"
 			font = "hoi_18mbs"
 			format = center
@@ -51,8 +108,8 @@ guiTypes = {
 
 		buttonType = {
 			name = "tutorial_tab_overview_button"
-			position = { x = 40 y = 86 }
-			quadTextureSprite = "GFX_button_148x34"
+			position = { x = 34 y = 138 }
+			quadTextureSprite = "GFX_md_tutorial_tab_button"
 			buttonFont = "hoi_16mbs"
 			text = "MD_TUTORIAL_TAB_OVERVIEW"
 			pdx_tooltip = "MD_TUTORIAL_TAB_OVERVIEW"
@@ -62,8 +119,8 @@ guiTypes = {
 
 		buttonType = {
 			name = "tutorial_tab_economy_button"
-			position = { x = 184 y = 86 }
-			quadTextureSprite = "GFX_button_148x34"
+			position = { x = 234 y = 138 }
+			quadTextureSprite = "GFX_md_tutorial_tab_button"
 			buttonFont = "hoi_16mbs"
 			text = "MD_TUTORIAL_TAB_ECONOMY"
 			pdx_tooltip = "MD_TUTORIAL_TAB_ECONOMY"
@@ -73,8 +130,8 @@ guiTypes = {
 
 		buttonType = {
 			name = "tutorial_tab_politics_button"
-			position = { x = 328 y = 86 }
-			quadTextureSprite = "GFX_button_148x34"
+			position = { x = 434 y = 138 }
+			quadTextureSprite = "GFX_md_tutorial_tab_button"
 			buttonFont = "hoi_16mbs"
 			text = "MD_TUTORIAL_TAB_POLITICS"
 			pdx_tooltip = "MD_TUTORIAL_TAB_POLITICS"
@@ -83,31 +140,9 @@ guiTypes = {
 		}
 
 		buttonType = {
-			name = "tutorial_tab_influence_button"
-			position = { x = 472 y = 86 }
-			quadTextureSprite = "GFX_button_148x34"
-			buttonFont = "hoi_16mbs"
-			text = "MD_TUTORIAL_TAB_INFLUENCE"
-			pdx_tooltip = "MD_TUTORIAL_TAB_INFLUENCE"
-			pdx_tooltip_delayed = "MD_TUTORIAL_TAB_INFLUENCE_TT"
-			clicksound = click_checkbox
-		}
-
-		buttonType = {
-			name = "tutorial_tab_research_button"
-			position = { x = 112 y = 124 }
-			quadTextureSprite = "GFX_button_148x34"
-			buttonFont = "hoi_16mbs"
-			text = "MD_TUTORIAL_TAB_RESEARCH"
-			pdx_tooltip = "MD_TUTORIAL_TAB_RESEARCH"
-			pdx_tooltip_delayed = "MD_TUTORIAL_TAB_RESEARCH_TT"
-			clicksound = click_checkbox
-		}
-
-		buttonType = {
 			name = "tutorial_tab_military_button"
-			position = { x = 256 y = 124 }
-			quadTextureSprite = "GFX_button_148x34"
+			position = { x = 634 y = 138 }
+			quadTextureSprite = "GFX_md_tutorial_tab_button"
 			buttonFont = "hoi_16mbs"
 			text = "MD_TUTORIAL_TAB_MILITARY"
 			pdx_tooltip = "MD_TUTORIAL_TAB_MILITARY"
@@ -116,54 +151,536 @@ guiTypes = {
 		}
 
 		buttonType = {
-			name = "tutorial_tab_advanced_button"
-			position = { x = 400 y = 124 }
-			quadTextureSprite = "GFX_button_148x34"
+			name = "tutorial_tab_diplomacy_button"
+			position = { x = 834 y = 138 }
+			quadTextureSprite = "GFX_md_tutorial_tab_button"
 			buttonFont = "hoi_16mbs"
-			text = "MD_TUTORIAL_TAB_ADVANCED"
-			pdx_tooltip = "MD_TUTORIAL_TAB_ADVANCED"
-			pdx_tooltip_delayed = "MD_TUTORIAL_TAB_ADVANCED_TT"
+			text = "MD_TUTORIAL_TAB_DIPLOMACY"
+			pdx_tooltip = "MD_TUTORIAL_TAB_DIPLOMACY"
+			pdx_tooltip_delayed = "MD_TUTORIAL_TAB_DIPLOMACY_TT"
 			clicksound = click_checkbox
 		}
 
-		instantTextBoxType = {
-			name = "tutorial_window_tab_header"
-			position = { x = 44 y = 178 }
-			font = "hoi_24header"
-			maxWidth = 570
-			maxHeight = 24
-			text = "[GetMDTutorialCurrentTitle]"
-			format = left
+		containerWindowType = {
+			name = "tutorial_sidebar_frame"
+			position = { x = 28 y = 186 }
+			size = { width = 196 height = 404 }
+			clipping = no
+
+			background = {
+				name = "tutorial_sidebar_frame_bg"
+				quadTextureSprite = "GFX_md_tutorial_panel_border"
+			}
+
+			containerWindowType = {
+				name = "tutorial_sidebar_frame_fill"
+				position = { x = 8 y = 8 }
+				size = { width = 180 height = 388 }
+				clipping = no
+
+				background = {
+					name = "tutorial_sidebar_frame_fill_bg"
+					quadTextureSprite = "GFX_md_tutorial_background_alt"
+					alwaystransparent = yes
+				}
+			}
+
+			instantTextBoxType = {
+				name = "tutorial_sidebar_frame_title"
+				position = { x = 14 y = 10 }
+				font = "hoi_18mbs"
+				maxWidth = 150
+				maxHeight = 20
+				text = "[GetMDTutorialCurrentCategory]"
+				format = left
+			}
 		}
 
-		instantTextBoxType = {
-			name = "tutorial_window_tab_body_left"
-			position = { x = 44 y = 220 }
-			font = "hoi_16mbs"
-			maxWidth = 260
-			maxHeight = 360
-			text = "[GetMDTutorialCurrentLeft]"
-			format = left
+		containerWindowType = {
+			name = "tutorial_sidebar_scroll"
+			position = { x = 36 y = 228 }
+			size = { width = 180 height = 350 }
+			verticalScrollbar = "tutorial_sidebar_scrollbar"
+			vertical_scroll_step = 40
+			scroll_wheel_factor = 40
+			smooth_scrolling = yes
+			margin = { top = 4 bottom = 8 right = 8 }
+
+			background = {
+				name = "tutorial_sidebar_scroll_bg"
+				quadTextureSprite = "GFX_md_tutorial_background_alt"
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_overview_intro_button"
+				position = { x = 0 y = 4 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_OVERVIEW_INTRO"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_overview_systems_button"
+				position = { x = 0 y = 48 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_OVERVIEW_SYSTEMS"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_overview_power_button"
+				position = { x = 0 y = 92 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_OVERVIEW_POWER"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_overview_playloop_button"
+				position = { x = 0 y = 136 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_OVERVIEW_PLAYLOOP"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_overview_ui_button"
+				position = { x = 0 y = 180 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_OVERVIEW_UI"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_overview_extra1_button"
+				position = { x = 0 y = 236 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_SCROLL_TEST_A"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_overview_extra2_button"
+				position = { x = 0 y = 292 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_SCROLL_TEST_B"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_overview_extra3_button"
+				position = { x = 0 y = 348 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_SCROLL_TEST_C"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_overview_extra4_button"
+				position = { x = 0 y = 404 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_SCROLL_TEST_D"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_economy_budget_button"
+				position = { x = 0 y = 4 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_ECONOMY_BUDGET"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_economy_gdp_button"
+				position = { x = 0 y = 48 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_ECONOMY_GDP"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_economy_taxation_button"
+				position = { x = 0 y = 92 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_ECONOMY_TAXATION"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_economy_debt_button"
+				position = { x = 0 y = 136 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_ECONOMY_DEBT"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_economy_energy_button"
+				position = { x = 0 y = 180 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_ECONOMY_ENERGY"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_economy_extra1_button"
+				position = { x = 0 y = 236 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_SCROLL_TEST_A"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_economy_extra2_button"
+				position = { x = 0 y = 292 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_SCROLL_TEST_B"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_economy_extra3_button"
+				position = { x = 0 y = 348 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_SCROLL_TEST_C"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_economy_extra4_button"
+				position = { x = 0 y = 404 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_SCROLL_TEST_D"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_politics_ideologies_button"
+				position = { x = 0 y = 4 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_POLITICS_IDEOLOGIES"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_politics_parties_button"
+				position = { x = 0 y = 48 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_POLITICS_PARTIES"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_politics_elections_button"
+				position = { x = 0 y = 92 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_POLITICS_ELECTIONS"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_politics_coalitions_button"
+				position = { x = 0 y = 136 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_POLITICS_COALITIONS"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_politics_laws_button"
+				position = { x = 0 y = 180 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_POLITICS_LAWS"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_politics_extra1_button"
+				position = { x = 0 y = 236 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_SCROLL_TEST_A"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_politics_extra2_button"
+				position = { x = 0 y = 292 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_SCROLL_TEST_B"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_politics_extra3_button"
+				position = { x = 0 y = 348 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_SCROLL_TEST_C"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_politics_extra4_button"
+				position = { x = 0 y = 404 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_SCROLL_TEST_D"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_military_modernization_button"
+				position = { x = 0 y = 4 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_MILITARY_MODERNIZATION"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_military_production_button"
+				position = { x = 0 y = 48 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_MILITARY_PRODUCTION"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_military_resources_button"
+				position = { x = 0 y = 92 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_MILITARY_RESOURCES"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_military_missiles_button"
+				position = { x = 0 y = 136 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_MILITARY_MISSILES"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_military_contractors_button"
+				position = { x = 0 y = 180 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_MILITARY_CONTRACTORS"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_military_extra1_button"
+				position = { x = 0 y = 236 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_SCROLL_TEST_A"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_military_extra2_button"
+				position = { x = 0 y = 292 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_SCROLL_TEST_B"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_military_extra3_button"
+				position = { x = 0 y = 348 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_SCROLL_TEST_C"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_military_extra4_button"
+				position = { x = 0 y = 404 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_SCROLL_TEST_D"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_diplomacy_influence_button"
+				position = { x = 0 y = 4 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_DIPLOMACY_INFLUENCE"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_diplomacy_relations_button"
+				position = { x = 0 y = 48 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_DIPLOMACY_RELATIONS"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_diplomacy_trade_button"
+				position = { x = 0 y = 92 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_DIPLOMACY_TRADE"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_diplomacy_organizations_button"
+				position = { x = 0 y = 136 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_DIPLOMACY_ORGANIZATIONS"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_diplomacy_satellites_button"
+				position = { x = 0 y = 180 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_DIPLOMACY_SATELLITES"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_diplomacy_extra1_button"
+				position = { x = 0 y = 236 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_SCROLL_TEST_A"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_diplomacy_extra2_button"
+				position = { x = 0 y = 292 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_SCROLL_TEST_B"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_diplomacy_extra3_button"
+				position = { x = 0 y = 348 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_SCROLL_TEST_C"
+				clicksound = click_checkbox
+			}
+
+			buttonType = {
+				name = "tutorial_sidebar_diplomacy_extra4_button"
+				position = { x = 0 y = 404 }
+				quadTextureSprite = "GFX_md_tutorial_tab_button"
+				buttonFont = "hoi_16mbs"
+				text = "MD_TUTORIAL_TOPIC_SCROLL_TEST_D"
+				clicksound = click_checkbox
+			}
 		}
 
-		instantTextBoxType = {
-			name = "tutorial_window_tab_body_right"
-			position = { x = 344 y = 220 }
-			font = "hoi_16mbs"
-			maxWidth = 270
-			maxHeight = 360
-			text = "[GetMDTutorialCurrentRight]"
-			format = left
+		containerWindowType = {
+			name = "tutorial_body_frame"
+			position = { x = 244 y = 186 }
+			size = { width = 768 height = 404 }
+			clipping = no
+
+			background = {
+				name = "tutorial_body_frame_bg"
+				quadTextureSprite = "GFX_md_tutorial_panel_border"
+			}
 		}
 
-		instantTextBoxType = {
-			name = "tutorial_window_note"
-			position = { x = 44 y = 603 }
-			font = "hoi_16mbs"
-			maxWidth = 570
-			maxHeight = 36
-			text = "MD_TUTORIAL_WINDOW_NOTE"
-			format = left
+		containerWindowType = {
+			name = "tutorial_body_scroll"
+			position = { x = 256 y = 198 }
+			size = { width = 744 height = 380 }
+			clipping = yes
+			verticalScrollbar = "right_vertical_slider"
+			vertical_scroll_step = 40
+			scroll_wheel_factor = 40
+			smooth_scrolling = yes
+			margin = { top = 12 bottom = 12 right = 10 left = 12 }
+
+			background = {
+				name = "tutorial_body_scroll_bg"
+				quadTextureSprite = "GFX_md_tutorial_background_alt"
+			}
+
+			instantTextBoxType = {
+				name = "tutorial_window_tab_header"
+				position = { x = 16 y = 12 }
+				font = "hoi_24header"
+				maxWidth = 700
+				maxHeight = 28
+				text = "[GetMDTutorialCurrentTitle]"
+				format = left
+			}
+
+			instantTextBoxType = {
+				name = "tutorial_window_tab_body"
+				position = { x = 16 y = 60 }
+				font = "hoi_16mbs"
+				maxWidth = 700
+				maxHeight = 2800
+				text = "[GetMDTutorialCurrentBody]"
+				format = left
+			}
+
+			containerWindowType = {
+				name = "tutorial_window_tab_bottom_anchor"
+				position = { x = 0 y = 2520 }
+				size = { width = 8 height = 8 }
+				clipping = no
+			}
+
+			instantTextBoxType = {
+				name = "tutorial_window_tab_bottom_marker"
+				position = { x = 16 y = 2550 }
+				font = "hoi_16mbs"
+				maxWidth = 700
+				maxHeight = 24
+				text = "MD_TUTORIAL_BODY_BOTTOM_MARKER"
+				format = left
+			}
 		}
 	}
 }

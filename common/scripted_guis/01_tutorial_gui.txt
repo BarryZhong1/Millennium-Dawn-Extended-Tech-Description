@@ -14,21 +14,73 @@ scripted_gui = {
 				if = {
 					limit = { NOT = { has_country_flag = open_tutorial_window } }
 					set_country_flag = open_tutorial_window
+
 					if = {
 						limit = {
 							NOT = {
 								OR = {
-									has_country_flag = tutorial_tab_overview
-									has_country_flag = tutorial_tab_economy
-									has_country_flag = tutorial_tab_politics
-									has_country_flag = tutorial_tab_influence
-									has_country_flag = tutorial_tab_research
-									has_country_flag = tutorial_tab_military
-									has_country_flag = tutorial_tab_advanced
+									has_country_flag = tutorial_cat_overview
+									has_country_flag = tutorial_cat_economy
+									has_country_flag = tutorial_cat_politics
+									has_country_flag = tutorial_cat_military
+									has_country_flag = tutorial_cat_diplomacy
 								}
 							}
 						}
-						set_country_flag = tutorial_tab_overview
+						set_md_tutorial_overview_default = yes
+					}
+
+					if = {
+						limit = {
+							NOT = {
+								OR = {
+									has_country_flag = tutorial_topic_overview_intro
+									has_country_flag = tutorial_topic_overview_systems
+									has_country_flag = tutorial_topic_overview_power
+									has_country_flag = tutorial_topic_overview_playloop
+									has_country_flag = tutorial_topic_overview_ui
+									has_country_flag = tutorial_topic_economy_budget
+									has_country_flag = tutorial_topic_economy_gdp
+									has_country_flag = tutorial_topic_economy_taxation
+									has_country_flag = tutorial_topic_economy_debt
+									has_country_flag = tutorial_topic_economy_energy
+									has_country_flag = tutorial_topic_politics_ideologies
+									has_country_flag = tutorial_topic_politics_parties
+									has_country_flag = tutorial_topic_politics_elections
+									has_country_flag = tutorial_topic_politics_coalitions
+									has_country_flag = tutorial_topic_politics_laws
+									has_country_flag = tutorial_topic_military_modernization
+									has_country_flag = tutorial_topic_military_production
+									has_country_flag = tutorial_topic_military_resources
+									has_country_flag = tutorial_topic_military_missiles
+									has_country_flag = tutorial_topic_military_contractors
+									has_country_flag = tutorial_topic_diplomacy_influence
+									has_country_flag = tutorial_topic_diplomacy_relations
+									has_country_flag = tutorial_topic_diplomacy_trade
+									has_country_flag = tutorial_topic_diplomacy_organizations
+									has_country_flag = tutorial_topic_diplomacy_satellites
+								}
+							}
+						}
+						if = {
+							limit = { has_country_flag = tutorial_cat_economy }
+							select_md_tutorial_economy_budget = yes
+						}
+						else_if = {
+							limit = { has_country_flag = tutorial_cat_politics }
+							select_md_tutorial_politics_ideologies = yes
+						}
+						else_if = {
+							limit = { has_country_flag = tutorial_cat_military }
+							select_md_tutorial_military_modernization = yes
+						}
+						else_if = {
+							limit = { has_country_flag = tutorial_cat_diplomacy }
+							select_md_tutorial_diplomacy_influence = yes
+						}
+						else = {
+							select_md_tutorial_overview_intro = yes
+						}
 					}
 				}
 				else = {
@@ -49,79 +101,313 @@ scripted_gui = {
 			has_country_flag = open_tutorial_window
 		}
 
+		triggers = {
+			tutorial_tab_overview_button_click_enabled = {
+				NOT = { has_country_flag = tutorial_cat_overview }
+			}
+			tutorial_tab_economy_button_click_enabled = {
+				NOT = { has_country_flag = tutorial_cat_economy }
+			}
+			tutorial_tab_politics_button_click_enabled = {
+				NOT = { has_country_flag = tutorial_cat_politics }
+			}
+			tutorial_tab_military_button_click_enabled = {
+				NOT = { has_country_flag = tutorial_cat_military }
+			}
+			tutorial_tab_diplomacy_button_click_enabled = {
+				NOT = { has_country_flag = tutorial_cat_diplomacy }
+			}
+
+			tutorial_sidebar_overview_intro_button_visible = { has_country_flag = tutorial_cat_overview }
+			tutorial_sidebar_overview_systems_button_visible = { has_country_flag = tutorial_cat_overview }
+			tutorial_sidebar_overview_power_button_visible = { has_country_flag = tutorial_cat_overview }
+			tutorial_sidebar_overview_playloop_button_visible = { has_country_flag = tutorial_cat_overview }
+			tutorial_sidebar_overview_ui_button_visible = { has_country_flag = tutorial_cat_overview }
+			tutorial_sidebar_overview_extra1_button_visible = { has_country_flag = tutorial_cat_overview }
+			tutorial_sidebar_overview_extra2_button_visible = { has_country_flag = tutorial_cat_overview }
+			tutorial_sidebar_overview_extra3_button_visible = { has_country_flag = tutorial_cat_overview }
+			tutorial_sidebar_overview_extra4_button_visible = { has_country_flag = tutorial_cat_overview }
+
+			tutorial_sidebar_economy_budget_button_visible = { has_country_flag = tutorial_cat_economy }
+			tutorial_sidebar_economy_gdp_button_visible = { has_country_flag = tutorial_cat_economy }
+			tutorial_sidebar_economy_taxation_button_visible = { has_country_flag = tutorial_cat_economy }
+			tutorial_sidebar_economy_debt_button_visible = { has_country_flag = tutorial_cat_economy }
+			tutorial_sidebar_economy_energy_button_visible = { has_country_flag = tutorial_cat_economy }
+			tutorial_sidebar_economy_extra1_button_visible = { has_country_flag = tutorial_cat_economy }
+			tutorial_sidebar_economy_extra2_button_visible = { has_country_flag = tutorial_cat_economy }
+			tutorial_sidebar_economy_extra3_button_visible = { has_country_flag = tutorial_cat_economy }
+			tutorial_sidebar_economy_extra4_button_visible = { has_country_flag = tutorial_cat_economy }
+
+			tutorial_sidebar_politics_ideologies_button_visible = { has_country_flag = tutorial_cat_politics }
+			tutorial_sidebar_politics_parties_button_visible = { has_country_flag = tutorial_cat_politics }
+			tutorial_sidebar_politics_elections_button_visible = { has_country_flag = tutorial_cat_politics }
+			tutorial_sidebar_politics_coalitions_button_visible = { has_country_flag = tutorial_cat_politics }
+			tutorial_sidebar_politics_laws_button_visible = { has_country_flag = tutorial_cat_politics }
+			tutorial_sidebar_politics_extra1_button_visible = { has_country_flag = tutorial_cat_politics }
+			tutorial_sidebar_politics_extra2_button_visible = { has_country_flag = tutorial_cat_politics }
+			tutorial_sidebar_politics_extra3_button_visible = { has_country_flag = tutorial_cat_politics }
+			tutorial_sidebar_politics_extra4_button_visible = { has_country_flag = tutorial_cat_politics }
+
+			tutorial_sidebar_military_modernization_button_visible = { has_country_flag = tutorial_cat_military }
+			tutorial_sidebar_military_production_button_visible = { has_country_flag = tutorial_cat_military }
+			tutorial_sidebar_military_resources_button_visible = { has_country_flag = tutorial_cat_military }
+			tutorial_sidebar_military_missiles_button_visible = { has_country_flag = tutorial_cat_military }
+			tutorial_sidebar_military_contractors_button_visible = { has_country_flag = tutorial_cat_military }
+			tutorial_sidebar_military_extra1_button_visible = { has_country_flag = tutorial_cat_military }
+			tutorial_sidebar_military_extra2_button_visible = { has_country_flag = tutorial_cat_military }
+			tutorial_sidebar_military_extra3_button_visible = { has_country_flag = tutorial_cat_military }
+			tutorial_sidebar_military_extra4_button_visible = { has_country_flag = tutorial_cat_military }
+
+			tutorial_sidebar_diplomacy_influence_button_visible = { has_country_flag = tutorial_cat_diplomacy }
+			tutorial_sidebar_diplomacy_relations_button_visible = { has_country_flag = tutorial_cat_diplomacy }
+			tutorial_sidebar_diplomacy_trade_button_visible = { has_country_flag = tutorial_cat_diplomacy }
+			tutorial_sidebar_diplomacy_organizations_button_visible = { has_country_flag = tutorial_cat_diplomacy }
+			tutorial_sidebar_diplomacy_satellites_button_visible = { has_country_flag = tutorial_cat_diplomacy }
+			tutorial_sidebar_diplomacy_extra1_button_visible = { has_country_flag = tutorial_cat_diplomacy }
+			tutorial_sidebar_diplomacy_extra2_button_visible = { has_country_flag = tutorial_cat_diplomacy }
+			tutorial_sidebar_diplomacy_extra3_button_visible = { has_country_flag = tutorial_cat_diplomacy }
+			tutorial_sidebar_diplomacy_extra4_button_visible = { has_country_flag = tutorial_cat_diplomacy }
+
+			tutorial_sidebar_overview_intro_button_click_enabled = { NOT = { has_country_flag = tutorial_topic_overview_intro } }
+			tutorial_sidebar_overview_systems_button_click_enabled = { NOT = { has_country_flag = tutorial_topic_overview_systems } }
+			tutorial_sidebar_overview_power_button_click_enabled = { NOT = { has_country_flag = tutorial_topic_overview_power } }
+			tutorial_sidebar_overview_playloop_button_click_enabled = { NOT = { has_country_flag = tutorial_topic_overview_playloop } }
+			tutorial_sidebar_overview_ui_button_click_enabled = { NOT = { has_country_flag = tutorial_topic_overview_ui } }
+
+			tutorial_sidebar_economy_budget_button_click_enabled = { NOT = { has_country_flag = tutorial_topic_economy_budget } }
+			tutorial_sidebar_economy_gdp_button_click_enabled = { NOT = { has_country_flag = tutorial_topic_economy_gdp } }
+			tutorial_sidebar_economy_taxation_button_click_enabled = { NOT = { has_country_flag = tutorial_topic_economy_taxation } }
+			tutorial_sidebar_economy_debt_button_click_enabled = { NOT = { has_country_flag = tutorial_topic_economy_debt } }
+			tutorial_sidebar_economy_energy_button_click_enabled = { NOT = { has_country_flag = tutorial_topic_economy_energy } }
+
+			tutorial_sidebar_politics_ideologies_button_click_enabled = { NOT = { has_country_flag = tutorial_topic_politics_ideologies } }
+			tutorial_sidebar_politics_parties_button_click_enabled = { NOT = { has_country_flag = tutorial_topic_politics_parties } }
+			tutorial_sidebar_politics_elections_button_click_enabled = { NOT = { has_country_flag = tutorial_topic_politics_elections } }
+			tutorial_sidebar_politics_coalitions_button_click_enabled = { NOT = { has_country_flag = tutorial_topic_politics_coalitions } }
+			tutorial_sidebar_politics_laws_button_click_enabled = { NOT = { has_country_flag = tutorial_topic_politics_laws } }
+
+			tutorial_sidebar_military_modernization_button_click_enabled = { NOT = { has_country_flag = tutorial_topic_military_modernization } }
+			tutorial_sidebar_military_production_button_click_enabled = { NOT = { has_country_flag = tutorial_topic_military_production } }
+			tutorial_sidebar_military_resources_button_click_enabled = { NOT = { has_country_flag = tutorial_topic_military_resources } }
+			tutorial_sidebar_military_missiles_button_click_enabled = { NOT = { has_country_flag = tutorial_topic_military_missiles } }
+			tutorial_sidebar_military_contractors_button_click_enabled = { NOT = { has_country_flag = tutorial_topic_military_contractors } }
+
+			tutorial_sidebar_diplomacy_influence_button_click_enabled = { NOT = { has_country_flag = tutorial_topic_diplomacy_influence } }
+			tutorial_sidebar_diplomacy_relations_button_click_enabled = { NOT = { has_country_flag = tutorial_topic_diplomacy_relations } }
+			tutorial_sidebar_diplomacy_trade_button_click_enabled = { NOT = { has_country_flag = tutorial_topic_diplomacy_trade } }
+			tutorial_sidebar_diplomacy_organizations_button_click_enabled = { NOT = { has_country_flag = tutorial_topic_diplomacy_organizations } }
+			tutorial_sidebar_diplomacy_satellites_button_click_enabled = { NOT = { has_country_flag = tutorial_topic_diplomacy_satellites } }
+		}
+
 		effects = {
 			tutorial_close_button_click = {
 				clr_country_flag = open_tutorial_window
 				add_to_variable = { tutorial_gui_dirty_var = 1 }
 			}
+
 			tutorial_tab_overview_button_click = {
-				set_country_flag = tutorial_tab_overview
-				clr_country_flag = tutorial_tab_economy
-				clr_country_flag = tutorial_tab_politics
-				clr_country_flag = tutorial_tab_influence
-				clr_country_flag = tutorial_tab_research
-				clr_country_flag = tutorial_tab_military
-				clr_country_flag = tutorial_tab_advanced
+				set_md_tutorial_overview_default = yes
 				add_to_variable = { tutorial_gui_dirty_var = 1 }
 			}
 			tutorial_tab_economy_button_click = {
-				clr_country_flag = tutorial_tab_overview
-				set_country_flag = tutorial_tab_economy
-				clr_country_flag = tutorial_tab_politics
-				clr_country_flag = tutorial_tab_influence
-				clr_country_flag = tutorial_tab_research
-				clr_country_flag = tutorial_tab_military
-				clr_country_flag = tutorial_tab_advanced
+				set_md_tutorial_economy_default = yes
 				add_to_variable = { tutorial_gui_dirty_var = 1 }
 			}
 			tutorial_tab_politics_button_click = {
-				clr_country_flag = tutorial_tab_overview
-				clr_country_flag = tutorial_tab_economy
-				set_country_flag = tutorial_tab_politics
-				clr_country_flag = tutorial_tab_influence
-				clr_country_flag = tutorial_tab_research
-				clr_country_flag = tutorial_tab_military
-				clr_country_flag = tutorial_tab_advanced
-				add_to_variable = { tutorial_gui_dirty_var = 1 }
-			}
-			tutorial_tab_influence_button_click = {
-				clr_country_flag = tutorial_tab_overview
-				clr_country_flag = tutorial_tab_economy
-				clr_country_flag = tutorial_tab_politics
-				set_country_flag = tutorial_tab_influence
-				clr_country_flag = tutorial_tab_research
-				clr_country_flag = tutorial_tab_military
-				clr_country_flag = tutorial_tab_advanced
-				add_to_variable = { tutorial_gui_dirty_var = 1 }
-			}
-			tutorial_tab_research_button_click = {
-				clr_country_flag = tutorial_tab_overview
-				clr_country_flag = tutorial_tab_economy
-				clr_country_flag = tutorial_tab_politics
-				clr_country_flag = tutorial_tab_influence
-				set_country_flag = tutorial_tab_research
-				clr_country_flag = tutorial_tab_military
-				clr_country_flag = tutorial_tab_advanced
+				set_md_tutorial_politics_default = yes
 				add_to_variable = { tutorial_gui_dirty_var = 1 }
 			}
 			tutorial_tab_military_button_click = {
-				clr_country_flag = tutorial_tab_overview
-				clr_country_flag = tutorial_tab_economy
-				clr_country_flag = tutorial_tab_politics
-				clr_country_flag = tutorial_tab_influence
-				clr_country_flag = tutorial_tab_research
-				set_country_flag = tutorial_tab_military
-				clr_country_flag = tutorial_tab_advanced
+				set_md_tutorial_military_default = yes
 				add_to_variable = { tutorial_gui_dirty_var = 1 }
 			}
-			tutorial_tab_advanced_button_click = {
-				clr_country_flag = tutorial_tab_overview
-				clr_country_flag = tutorial_tab_economy
-				clr_country_flag = tutorial_tab_politics
-				clr_country_flag = tutorial_tab_influence
-				clr_country_flag = tutorial_tab_research
-				clr_country_flag = tutorial_tab_military
-				set_country_flag = tutorial_tab_advanced
+			tutorial_tab_diplomacy_button_click = {
+				set_md_tutorial_diplomacy_default = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+
+			tutorial_sidebar_overview_intro_button_click = {
+				select_md_tutorial_overview_intro = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_overview_systems_button_click = {
+				select_md_tutorial_overview_systems = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_overview_power_button_click = {
+				select_md_tutorial_overview_power = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_overview_playloop_button_click = {
+				select_md_tutorial_overview_playloop = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_overview_ui_button_click = {
+				select_md_tutorial_overview_ui = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_overview_extra1_button_click = {
+				select_md_tutorial_overview_ui = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_overview_extra2_button_click = {
+				select_md_tutorial_overview_ui = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_overview_extra3_button_click = {
+				select_md_tutorial_overview_ui = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_overview_extra4_button_click = {
+				select_md_tutorial_overview_ui = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+
+			tutorial_sidebar_economy_budget_button_click = {
+				select_md_tutorial_economy_budget = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_economy_gdp_button_click = {
+				select_md_tutorial_economy_gdp = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_economy_taxation_button_click = {
+				select_md_tutorial_economy_taxation = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_economy_debt_button_click = {
+				select_md_tutorial_economy_debt = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_economy_energy_button_click = {
+				select_md_tutorial_economy_energy = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_economy_extra1_button_click = {
+				select_md_tutorial_economy_energy = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_economy_extra2_button_click = {
+				select_md_tutorial_economy_energy = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_economy_extra3_button_click = {
+				select_md_tutorial_economy_energy = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_economy_extra4_button_click = {
+				select_md_tutorial_economy_energy = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+
+			tutorial_sidebar_politics_ideologies_button_click = {
+				select_md_tutorial_politics_ideologies = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_politics_parties_button_click = {
+				select_md_tutorial_politics_parties = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_politics_elections_button_click = {
+				select_md_tutorial_politics_elections = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_politics_coalitions_button_click = {
+				select_md_tutorial_politics_coalitions = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_politics_laws_button_click = {
+				select_md_tutorial_politics_laws = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_politics_extra1_button_click = {
+				select_md_tutorial_politics_laws = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_politics_extra2_button_click = {
+				select_md_tutorial_politics_laws = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_politics_extra3_button_click = {
+				select_md_tutorial_politics_laws = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_politics_extra4_button_click = {
+				select_md_tutorial_politics_laws = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+
+			tutorial_sidebar_military_modernization_button_click = {
+				select_md_tutorial_military_modernization = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_military_production_button_click = {
+				select_md_tutorial_military_production = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_military_resources_button_click = {
+				select_md_tutorial_military_resources = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_military_missiles_button_click = {
+				select_md_tutorial_military_missiles = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_military_contractors_button_click = {
+				select_md_tutorial_military_contractors = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_military_extra1_button_click = {
+				select_md_tutorial_military_contractors = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_military_extra2_button_click = {
+				select_md_tutorial_military_contractors = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_military_extra3_button_click = {
+				select_md_tutorial_military_contractors = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_military_extra4_button_click = {
+				select_md_tutorial_military_contractors = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+
+			tutorial_sidebar_diplomacy_influence_button_click = {
+				select_md_tutorial_diplomacy_influence = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_diplomacy_relations_button_click = {
+				select_md_tutorial_diplomacy_relations = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_diplomacy_trade_button_click = {
+				select_md_tutorial_diplomacy_trade = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_diplomacy_organizations_button_click = {
+				select_md_tutorial_diplomacy_organizations = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_diplomacy_satellites_button_click = {
+				select_md_tutorial_diplomacy_satellites = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_diplomacy_extra1_button_click = {
+				select_md_tutorial_diplomacy_satellites = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_diplomacy_extra2_button_click = {
+				select_md_tutorial_diplomacy_satellites = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_diplomacy_extra3_button_click = {
+				select_md_tutorial_diplomacy_satellites = yes
+				add_to_variable = { tutorial_gui_dirty_var = 1 }
+			}
+			tutorial_sidebar_diplomacy_extra4_button_click = {
+				select_md_tutorial_diplomacy_satellites = yes
 				add_to_variable = { tutorial_gui_dirty_var = 1 }
 			}
 		}
