@@ -16,6 +16,10 @@ defined_text = {
 	name = MD_antarctica_fuel_capacity_or_renewable
 
 	text = {
+		trigger = { check_variable = { global.selected_antarctica_station_output_power < 0 } }
+		localization_key = ANTARCTICA_STATION_BLACKOUT_TEXT
+	}
+	text = {
 		trigger = { check_variable = { global.selected_antarctica_station_output_fuel_usage > 0 } }
 		localization_key = ANTARCTICA_STATION_FUEL_CAPACITY_DAYS_TEXT
 	}
@@ -28,7 +32,7 @@ defined_text = {
 	name = MD_antarctica_observer_blizzard_status
 
 	text = {
-		trigger = { has_country_flag = antarctica_blizzard_active }
+		trigger = { has_global_flag = antarctica_blizzard_active }
 		localization_key = ANTARCTICA_BLIZZARD_STATUS_ACTIVE
 	}
 	text = {
