@@ -1,6 +1,7 @@
 ﻿#Rework Author(s): TheGeneral
 add_namespace = china_national_committee
 add_namespace = china_sar
+add_namespace = chi_tai_aggression
 
 # National Congress Convened
 country_event = {
@@ -217,5 +218,602 @@ country_event = {
 		name = china_sar.28.a
 		log = "[GetDateText]: [This.GetName]: china_sar.28.a executed"
 		add_stability = -0.01
+	}
+}
+
+### Taiwan Strait Aggression Events ###
+
+# Level 1 Incident — Dangerous Approach
+country_event = {
+	id = chi_tai_aggression.1
+	title = chi_tai_aggression.1.t
+	desc = chi_tai_aggression.1.d
+
+	picture = GFX_news_event_generic_naval
+
+	is_triggered_only = yes
+
+	# Deny involvement — tension cools but future incidents escalate
+	option = {
+		name = chi_tai_aggression.1.a
+		log = "[GetDateText]: [This.GetName]: chi_tai_aggression.1.a executed"
+		set_temp_variable = { CHI_taiwan_strait_tension_change = -3 }
+		CHI_modify_taiwan_strait_tension = yes
+		set_country_flag = { flag = CHI_recent_provocation days = 30 value = 1 }
+		ai_chance = { base = 30 }
+	}
+	# Stay silent — no change
+	option = {
+		name = chi_tai_aggression.1.b
+		log = "[GetDateText]: [This.GetName]: chi_tai_aggression.1.b executed"
+		set_country_flag = { flag = CHI_recent_provocation days = 30 value = 1 }
+		ai_chance = { base = 50 }
+	}
+	# Publicly defend the action — tension rises, support drops
+	option = {
+		name = chi_tai_aggression.1.c
+		log = "[GetDateText]: [This.GetName]: chi_tai_aggression.1.c executed"
+		set_temp_variable = { CHI_taiwan_strait_tension_change = 3 }
+		CHI_modify_taiwan_strait_tension = yes
+		set_temp_variable = { CHI_taiwan_us_support_change = -2 }
+		CHI_modify_taiwan_us_support = yes
+		set_country_flag = { flag = CHI_recent_provocation days = 30 value = 1 }
+		ai_chance = { base = 20 }
+	}
+}
+
+# Level 2 Incident — Naval Collision
+country_event = {
+	id = chi_tai_aggression.2
+	title = chi_tai_aggression.2.t
+	desc = chi_tai_aggression.2.d
+
+	picture = GFX_news_event_generic_naval
+
+	is_triggered_only = yes
+
+	# Blame America — 50/50 escalation or deflection
+	option = {
+		name = chi_tai_aggression.2.a
+		log = "[GetDateText]: [This.GetName]: chi_tai_aggression.2.a executed"
+		random_list = {
+			50 = {
+				# US responds hard — support surges
+				set_temp_variable = { CHI_taiwan_us_support_change = 8 }
+				CHI_modify_taiwan_us_support = yes
+				set_temp_variable = { CHI_taiwan_strait_tension_change = 5 }
+				CHI_modify_taiwan_strait_tension = yes
+			}
+			50 = {
+				# Blows over — minor tension reduction
+				set_temp_variable = { CHI_taiwan_us_support_change = -3 }
+				CHI_modify_taiwan_us_support = yes
+			}
+		}
+		set_country_flag = { flag = CHI_recent_provocation days = 60 value = 1 }
+		ai_chance = { base = 30 }
+	}
+	# Stay silent — tension rises
+	option = {
+		name = chi_tai_aggression.2.b
+		log = "[GetDateText]: [This.GetName]: chi_tai_aggression.2.b executed"
+		set_temp_variable = { CHI_taiwan_strait_tension_change = 5 }
+		CHI_modify_taiwan_strait_tension = yes
+		set_country_flag = { flag = CHI_recent_provocation days = 60 value = 1 }
+		ai_chance = { base = 40 }
+	}
+	# Private apologies — de-escalation, but support rebounds
+	option = {
+		name = chi_tai_aggression.2.c
+		log = "[GetDateText]: [This.GetName]: chi_tai_aggression.2.c executed"
+		set_temp_variable = { CHI_taiwan_strait_tension_change = -6 }
+		CHI_modify_taiwan_strait_tension = yes
+		set_temp_variable = { CHI_taiwan_us_support_change = 3 }
+		CHI_modify_taiwan_us_support = yes
+		set_country_flag = { flag = CHI_recent_provocation days = 60 value = 1 }
+		ai_chance = { base = 30 }
+	}
+}
+
+# Rocket Test Success — America doesn't respond
+country_event = {
+	id = chi_tai_aggression.5
+	title = chi_tai_aggression.5.t
+	desc = chi_tai_aggression.5.d
+
+	picture = GFX_news_event_generic_military
+
+	is_triggered_only = yes
+
+	option = {
+		name = chi_tai_aggression.5.a
+		log = "[GetDateText]: [This.GetName]: chi_tai_aggression.5.a executed"
+		set_temp_variable = { CHI_taiwan_us_support_change = -5 }
+		CHI_modify_taiwan_us_support = yes
+		add_war_support = 0.03
+	}
+}
+
+# Rocket Test Backfire — America sends carrier, support surges
+country_event = {
+	id = chi_tai_aggression.6
+	title = chi_tai_aggression.6.t
+	desc = chi_tai_aggression.6.d
+
+	picture = GFX_news_event_generic_military
+
+	is_triggered_only = yes
+
+	option = {
+		name = chi_tai_aggression.6.a
+		log = "[GetDateText]: [This.GetName]: chi_tai_aggression.6.a executed"
+		set_temp_variable = { CHI_taiwan_us_support_change = 5 }
+		CHI_modify_taiwan_us_support = yes
+		add_stability = -0.02
+	}
+}
+
+# Taiwan Stands Diplomatically Alone (recognition < 5)
+country_event = {
+	id = chi_tai_aggression.12
+	title = chi_tai_aggression.12.t
+	desc = chi_tai_aggression.12.d
+
+	picture = GFX_news_event_generic_sign_treaty1
+
+	is_triggered_only = yes
+
+	option = {
+		name = chi_tai_aggression.12.a
+		log = "[GetDateText]: [This.GetName]: chi_tai_aggression.12.a executed"
+		set_temp_variable = { CHI_taiwan_us_support_change = -5 }
+		CHI_modify_taiwan_us_support = yes
+		TAI = {
+			add_ideas = CHI_TAI_intl_isolation
+		}
+	}
+}
+
+# Congress Arms Vote — Lobby opportunity
+country_event = {
+	id = chi_tai_aggression.15
+	title = chi_tai_aggression.15.t
+	desc = chi_tai_aggression.15.d
+
+	picture = GFX_news_event_generic_parliament
+
+	is_triggered_only = yes
+
+	# Activate lobby network — 70% block arms sale
+	option = {
+		name = chi_tai_aggression.15.a
+		log = "[GetDateText]: [This.GetName]: chi_tai_aggression.15.a executed"
+		add_political_power = -50
+		random_list = {
+			70 = {
+				set_temp_variable = { CHI_taiwan_us_support_change = -5 }
+				CHI_modify_taiwan_us_support = yes
+			}
+			30 = {
+				# Lobby fails — support rebounds
+				set_temp_variable = { CHI_taiwan_us_support_change = 3 }
+				CHI_modify_taiwan_us_support = yes
+			}
+		}
+		ai_chance = { base = 60 }
+	}
+	# Economic threats — minor support drop, tension rises
+	option = {
+		name = chi_tai_aggression.15.b
+		log = "[GetDateText]: [This.GetName]: chi_tai_aggression.15.b executed"
+		set_temp_variable = { CHI_taiwan_us_support_change = -3 }
+		CHI_modify_taiwan_us_support = yes
+		set_temp_variable = { CHI_taiwan_strait_tension_change = 2 }
+		CHI_modify_taiwan_strait_tension = yes
+		ai_chance = { base = 30 }
+	}
+	# Do nothing — Taiwan gets arms deal buff
+	option = {
+		name = chi_tai_aggression.15.c
+		log = "[GetDateText]: [This.GetName]: chi_tai_aggression.15.c executed"
+		TAI = {
+			add_timed_idea = {
+				idea = TAI_civil_defense_readiness
+				days = 365
+			}
+		}
+		ai_chance = { base = 10 }
+	}
+}
+
+# Business Council Advocates Detente
+country_event = {
+	id = chi_tai_aggression.16
+	title = chi_tai_aggression.16.t
+	desc = chi_tai_aggression.16.d
+
+	picture = GFX_news_event_generic_sign_treaty1
+
+	is_triggered_only = yes
+
+	option = {
+		name = chi_tai_aggression.16.a
+		log = "[GetDateText]: [This.GetName]: chi_tai_aggression.16.a executed"
+		set_temp_variable = { CHI_taiwan_us_support_change = -2 }
+		CHI_modify_taiwan_us_support = yes
+	}
+}
+
+# Election Interference Discovered — Massive Backlash
+country_event = {
+	id = chi_tai_aggression.17
+	title = chi_tai_aggression.17.t
+	desc = chi_tai_aggression.17.d
+
+	picture = GFX_news_event_generic_sign_treaty1
+
+	is_triggered_only = yes
+
+	option = {
+		name = chi_tai_aggression.17.a
+		log = "[GetDateText]: [This.GetName]: chi_tai_aggression.17.a executed"
+		set_temp_variable = { CHI_taiwan_us_support_change = 15 }
+		CHI_modify_taiwan_us_support = yes
+		add_stability = -0.05
+		USA = { add_opinion_modifier = { target = CHI modifier = chi_usa_sanctions_response } }
+	}
+}
+
+# Taiwan Emergency Meeting (after blockade simulation) — fires to TAI
+country_event = {
+	id = chi_tai_aggression.20
+	title = chi_tai_aggression.20.t
+	desc = chi_tai_aggression.20.d
+
+	picture = GFX_news_event_generic_parliament
+
+	is_triggered_only = yes
+
+	# Increase military readiness
+	option = {
+		name = chi_tai_aggression.20.a
+		log = "[GetDateText]: [This.GetName]: chi_tai_aggression.20.a executed"
+		add_timed_idea = {
+			idea = TAI_civil_defense_readiness
+			days = 365
+		}
+		add_war_support = 0.05
+	}
+	# Seek international support
+	option = {
+		name = chi_tai_aggression.20.b
+		log = "[GetDateText]: [This.GetName]: chi_tai_aggression.20.b executed"
+		add_political_power = 50
+		CHI = {
+			set_temp_variable = { CHI_taiwan_us_support_change = 3 }
+			CHI_modify_taiwan_us_support = yes
+		}
+	}
+}
+
+# Taiwan Emergency State (after 60 days partial blockade) — fires to TAI
+country_event = {
+	id = chi_tai_aggression.21
+	title = chi_tai_aggression.21.t
+	desc = chi_tai_aggression.21.d
+
+	picture = GFX_news_event_generic_parliament
+
+	is_triggered_only = yes
+
+	# Declare state of emergency
+	option = {
+		name = chi_tai_aggression.21.a
+		log = "[GetDateText]: [This.GetName]: chi_tai_aggression.21.a executed"
+		add_ideas = TAI_noodtoestand
+		add_war_support = 0.10
+		ai_chance = { base = 70 }
+	}
+	# Seek diplomatic resolution
+	option = {
+		name = chi_tai_aggression.21.b
+		log = "[GetDateText]: [This.GetName]: chi_tai_aggression.21.b executed"
+		add_stability = 0.03
+		CHI = {
+			set_temp_variable = { CHI_taiwan_strait_tension_change = -5 }
+			CHI_modify_taiwan_strait_tension = yes
+		}
+		ai_chance = { base = 30 }
+	}
+}
+
+# Taiwan Considers Capitulation (full blockade, low US support) — fires to TAI
+country_event = {
+	id = chi_tai_aggression.22
+	title = chi_tai_aggression.22.t
+	desc = chi_tai_aggression.22.d
+
+	picture = GFX_news_event_generic_parliament
+
+	is_triggered_only = yes
+
+	# Refuse to surrender — fight on
+	option = {
+		name = chi_tai_aggression.22.a
+		log = "[GetDateText]: [This.GetName]: chi_tai_aggression.22.a executed"
+		add_war_support = 0.15
+		add_stability = -0.10
+		CHI = {
+			set_temp_variable = { CHI_taiwan_strait_tension_change = 10 }
+			CHI_modify_taiwan_strait_tension = yes
+		}
+		ai_chance = {
+			base = 80
+			modifier = {
+				factor = 0.1
+				CHI = { check_variable = { CHI_taiwan_us_support < 15 } }
+			}
+		}
+	}
+	# Begin negotiations with Beijing
+	option = {
+		name = chi_tai_aggression.22.b
+		log = "[GetDateText]: [This.GetName]: chi_tai_aggression.22.b executed"
+		trigger = {
+			CHI = { check_variable = { CHI_taiwan_us_support < 20 } }
+		}
+		CHI = {
+			country_event = { id = chi_tai_aggression.23 days = 7 }
+		}
+		ai_chance = {
+			base = 5
+			modifier = {
+				add = 50
+				CHI = { check_variable = { CHI_taiwan_us_support < 15 } }
+			}
+		}
+	}
+}
+
+# Taiwan Enters Negotiations — fires to CHI after TAI accepts talks
+country_event = {
+	id = chi_tai_aggression.23
+	title = chi_tai_aggression.23.t
+	desc = chi_tai_aggression.23.d
+
+	picture = GFX_news_event_generic_sign_treaty1
+
+	is_triggered_only = yes
+
+	# Accept peaceful reunification
+	option = {
+		name = chi_tai_aggression.23.a
+		log = "[GetDateText]: [This.GetName]: chi_tai_aggression.23.a executed"
+		annex_country = { target = TAI transfer_troops = yes }
+		add_stability = 0.10
+		add_war_support = 0.10
+		add_political_power = 200
+		clr_country_flag = CHI_TAI_full_blockade_active
+		clr_country_flag = CHI_TAI_partial_blockade_active
+		clr_country_flag = CHI_TAI_maritime_zone_active
+	}
+}
+
+# Crisis Mode — Tension Hits 100
+country_event = {
+	id = chi_tai_aggression.25
+	title = chi_tai_aggression.25.t
+	desc = chi_tai_aggression.25.d
+
+	picture = GFX_news_event_generic_military
+
+	is_triggered_only = yes
+
+	# De-escalate — pull back from the brink
+	option = {
+		name = chi_tai_aggression.25.a
+		log = "[GetDateText]: [This.GetName]: chi_tai_aggression.25.a executed"
+		set_variable = { CHI_taiwan_strait_tension = 60 }
+		set_temp_variable = { CHI_taiwan_us_support_change = 5 }
+		CHI_modify_taiwan_us_support = yes
+		add_stability = -0.05
+		add_war_support = -0.05
+		ai_chance = {
+			base = 70
+			modifier = {
+				factor = 0.2
+				check_variable = { CHI_taiwan_us_support < 30 }
+			}
+		}
+	}
+	# Push through — wargoal with heavy international penalties
+	option = {
+		name = chi_tai_aggression.25.b
+		log = "[GetDateText]: [This.GetName]: chi_tai_aggression.25.b executed"
+		create_wargoal = {
+			type = annex_everything
+			target = TAI
+		}
+		add_ideas = CHI_TAI_intl_isolation
+		set_temp_variable = { CHI_taiwan_us_support_change = 10 }
+		CHI_modify_taiwan_us_support = yes
+		add_stability = -0.10
+		ai_chance = {
+			base = 10
+			modifier = {
+				add = 50
+				check_variable = { CHI_taiwan_us_support < 30 }
+			}
+		}
+	}
+}
+
+# Ultimatum to Taipei — from Operation Storm focus
+country_event = {
+	id = chi_tai_aggression.26
+	title = chi_tai_aggression.26.t
+	desc = chi_tai_aggression.26.d
+
+	picture = GFX_news_event_generic_military
+
+	is_triggered_only = yes
+
+	# Issue ultimatum — Taiwan must accept or face invasion
+	option = {
+		name = chi_tai_aggression.26.a
+		log = "[GetDateText]: [This.GetName]: chi_tai_aggression.26.a executed"
+		TAI = { country_event = { id = chi_tai_aggression.27 days = 7 } }
+		custom_effect_tooltip = TT_IF_THEY_REJECT
+		effect_tooltip = {
+			create_wargoal = {
+				type = annex_everything
+				target = TAI
+			}
+		}
+		custom_effect_tooltip = TT_IF_THEY_ACCEPT
+		effect_tooltip = {
+			annex_country = { target = TAI transfer_troops = yes }
+		}
+	}
+}
+
+# Taiwan Receives Ultimatum — fires to TAI
+country_event = {
+	id = chi_tai_aggression.27
+	title = chi_tai_aggression.27.t
+	desc = chi_tai_aggression.27.d
+
+	picture = GFX_news_event_generic_military
+
+	is_triggered_only = yes
+
+	# Refuse — China gets wargoal
+	option = {
+		name = chi_tai_aggression.27.a
+		log = "[GetDateText]: [This.GetName]: chi_tai_aggression.27.a executed"
+		add_war_support = 0.20
+		add_stability = -0.05
+		CHI = {
+			create_wargoal = {
+				type = annex_everything
+				target = TAI
+			}
+		}
+		ai_chance = {
+			base = 90
+			modifier = {
+				factor = 0.1
+				CHI = { check_variable = { CHI_taiwan_us_support < 10 } }
+			}
+		}
+	}
+	# Accept reunification (only if US support collapsed)
+	option = {
+		name = chi_tai_aggression.27.b
+		log = "[GetDateText]: [This.GetName]: chi_tai_aggression.27.b executed"
+		trigger = {
+			CHI = { check_variable = { CHI_taiwan_us_support < 20 } }
+		}
+		CHI = {
+			annex_country = { target = TAI transfer_troops = yes }
+			add_stability = 0.10
+			add_war_support = 0.10
+			add_political_power = 200
+		}
+		ai_chance = {
+			base = 5
+			modifier = {
+				add = 80
+				CHI = { check_variable = { CHI_taiwan_us_support < 10 } }
+			}
+		}
+	}
+}
+
+# Amphibious Exercise in the Taiwan Strait — from focus
+country_event = {
+	id = chi_tai_aggression.30
+	title = chi_tai_aggression.30.t
+	desc = chi_tai_aggression.30.d
+
+	picture = GFX_news_event_generic_naval
+
+	is_triggered_only = yes
+
+	option = {
+		name = chi_tai_aggression.30.a
+		log = "[GetDateText]: [This.GetName]: chi_tai_aggression.30.a executed"
+		set_temp_variable = { CHI_taiwan_strait_tension_change = 5 }
+		CHI_modify_taiwan_strait_tension = yes
+		set_temp_variable = { CHI_taiwan_us_support_change = -3 }
+		CHI_modify_taiwan_us_support = yes
+		set_country_flag = { flag = CHI_amphibious_exercise_active days = 90 value = 1 }
+	}
+}
+
+# FoN Confrontation — China must choose after US Freedom of Navigation
+country_event = {
+	id = chi_tai_aggression.31
+	title = chi_tai_aggression.31.t
+	desc = chi_tai_aggression.31.d
+
+	picture = GFX_news_event_generic_naval
+
+	is_triggered_only = yes
+
+	# Back down — lose face, de-escalate
+	option = {
+		name = chi_tai_aggression.31.a
+		log = "[GetDateText]: [This.GetName]: chi_tai_aggression.31.a executed"
+		set_temp_variable = { CHI_taiwan_strait_tension_change = -5 }
+		CHI_modify_taiwan_strait_tension = yes
+		add_stability = -0.02
+		ai_chance = {
+			base = 40
+			modifier = {
+				add = 30
+				check_variable = { CHI_taiwan_strait_tension > 70 }
+			}
+		}
+	}
+	# Stand firm — risk incident
+	option = {
+		name = chi_tai_aggression.31.b
+		log = "[GetDateText]: [This.GetName]: chi_tai_aggression.31.b executed"
+		set_temp_variable = { CHI_taiwan_strait_tension_change = 5 }
+		CHI_modify_taiwan_strait_tension = yes
+		random_list = {
+			60 = {
+				set_temp_variable = { CHI_taiwan_us_support_change = -2 }
+				CHI_modify_taiwan_us_support = yes
+			}
+			40 = {
+				# Incident escalates
+				country_event = { id = chi_tai_aggression.2 days = 3 }
+			}
+		}
+		ai_chance = {
+			base = 60
+			modifier = {
+				factor = 0.3
+				check_variable = { CHI_taiwan_strait_tension > 70 }
+			}
+		}
+	}
+}
+
+# US President Change — Support Shift Notification
+country_event = {
+	id = chi_tai_aggression.32
+	title = chi_tai_aggression.32.t
+	desc = chi_tai_aggression.32.d
+
+	picture = GFX_news_event_generic_parliament
+
+	is_triggered_only = yes
+
+	option = {
+		name = chi_tai_aggression.32.a
+		log = "[GetDateText]: [This.GetName]: chi_tai_aggression.32.a executed"
 	}
 }

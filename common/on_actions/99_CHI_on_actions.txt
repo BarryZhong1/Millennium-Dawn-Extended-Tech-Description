@@ -34,6 +34,233 @@ on_actions = {
 				}
 				CHI = { add_to_variable = { CHI_TAI_trust = 5 } }
 			}
+
+			### US president change — affects CHI_taiwan_us_support
+			if = {
+				limit = {
+					original_tag = USA
+					CHI = {
+						exists = yes
+						has_country_flag = CHI_TAI_diplomatic_route_active
+					}
+				}
+				# Clear previous president flags
+				CHI = { clr_country_flag = CHI_trump_is_president }
+				CHI = { clr_country_flag = CHI_harris_us_support_floor }
+
+				# Pro-Taiwan presidents — increase us_support
+				if = {
+					limit = { USA = { has_country_leader = { name = "John McCain" } } }
+					CHI = {
+						set_temp_variable = { CHI_taiwan_us_support_change = 10 }
+						CHI_modify_taiwan_us_support = yes
+						country_event = { id = chi_tai_aggression.32 days = 3 }
+					}
+				}
+				else_if = {
+					limit = { USA = { has_country_leader = { name = "Joe Biden" } } }
+					CHI = {
+						set_temp_variable = { CHI_taiwan_us_support_change = 8 }
+						CHI_modify_taiwan_us_support = yes
+						country_event = { id = chi_tai_aggression.32 days = 3 }
+					}
+				}
+				else_if = {
+					limit = { USA = { has_country_leader = { name = "Hillary Clinton" } } }
+					CHI = {
+						set_temp_variable = { CHI_taiwan_us_support_change = 6 }
+						CHI_modify_taiwan_us_support = yes
+						country_event = { id = chi_tai_aggression.32 days = 3 }
+					}
+				}
+				else_if = {
+					limit = { USA = { has_country_leader = { name = "Kamala Harris" } } }
+					CHI = {
+						set_temp_variable = { CHI_taiwan_us_support_change = 6 }
+						CHI_modify_taiwan_us_support = yes
+						set_country_flag = CHI_harris_us_support_floor
+						country_event = { id = chi_tai_aggression.32 days = 3 }
+					}
+				}
+				else_if = {
+					limit = { USA = { has_country_leader = { name = "George W. Bush" } } }
+					CHI = {
+						set_temp_variable = { CHI_taiwan_us_support_change = 5 }
+						CHI_modify_taiwan_us_support = yes
+						country_event = { id = chi_tai_aggression.32 days = 3 }
+					}
+				}
+				else_if = {
+					limit = { USA = { has_country_leader = { name = "Barack Obama" } } }
+					CHI = {
+						set_temp_variable = { CHI_taiwan_us_support_change = 5 }
+						CHI_modify_taiwan_us_support = yes
+						country_event = { id = chi_tai_aggression.32 days = 3 }
+					}
+				}
+				else_if = {
+					limit = { USA = { has_country_leader = { name = "Mitt Romney" } } }
+					CHI = {
+						set_temp_variable = { CHI_taiwan_us_support_change = 4 }
+						CHI_modify_taiwan_us_support = yes
+						country_event = { id = chi_tai_aggression.32 days = 3 }
+					}
+				}
+				else_if = {
+					limit = { USA = { has_country_leader = { name = "Al Gore" } } }
+					CHI = {
+						set_temp_variable = { CHI_taiwan_us_support_change = 3 }
+						CHI_modify_taiwan_us_support = yes
+						country_event = { id = chi_tai_aggression.32 days = 3 }
+					}
+				}
+				# Anti-Taiwan / manipuleerbare presidenten — decrease us_support
+				else_if = {
+					limit = { USA = { has_country_leader = { name = "John Kerry" } } }
+					CHI = {
+						set_temp_variable = { CHI_taiwan_us_support_change = -2 }
+						CHI_modify_taiwan_us_support = yes
+						country_event = { id = chi_tai_aggression.32 days = 3 }
+					}
+				}
+				else_if = {
+					limit = { USA = { has_country_leader = { name = "Donald Trump" } } }
+					CHI = {
+						set_temp_variable = { CHI_taiwan_us_support_change = -10 }
+						CHI_modify_taiwan_us_support = yes
+						set_country_flag = CHI_trump_is_president
+						country_event = { id = chi_tai_aggression.32 days = 3 }
+					}
+				}
+			}
+		}
+	}
+
+	### Taiwan Strait — monthly checks
+	on_monthly = {
+		effect = {
+			if = {
+				limit = {
+					original_tag = CHI
+					has_country_flag = CHI_TAI_diplomatic_route_active
+					country_exists = TAI
+					NOT = { has_war_with = TAI }
+				}
+
+				# Tension decay: -1 per month if no recent provocation
+				if = {
+					limit = {
+						NOT = { has_country_flag = CHI_recent_provocation }
+						check_variable = { CHI_taiwan_strait_tension > 0 }
+					}
+					add_to_variable = { CHI_taiwan_strait_tension = -1 }
+					clamp_variable = { var = CHI_taiwan_strait_tension min = 0 max = 100 }
+				}
+
+				# US support passive decay: -1 every other month if economic leverage active
+				if = {
+					limit = {
+						has_country_flag = CHI_economic_leverage_active
+						has_country_flag = { flag = CHI_us_support_decay_tick days > 60 }
+						check_variable = { CHI_taiwan_us_support > 0 }
+					}
+					add_to_variable = { CHI_taiwan_us_support = -1 }
+					clamp_variable = { var = CHI_taiwan_us_support min = 0 max = 100 }
+					clr_country_flag = CHI_us_support_decay_tick
+					set_country_flag = CHI_us_support_decay_tick
+				}
+				if = {
+					limit = {
+						has_country_flag = CHI_economic_leverage_active
+						NOT = { has_country_flag = CHI_us_support_decay_tick }
+					}
+					set_country_flag = CHI_us_support_decay_tick
+				}
+
+				# Harris floor: us_support cannot drop below 40 while Harris is president
+				if = {
+					limit = {
+						has_country_flag = CHI_harris_us_support_floor
+						check_variable = { CHI_taiwan_us_support < 40 }
+					}
+					set_variable = { CHI_taiwan_us_support = 40 }
+				}
+
+				# Crisis trigger: tension reaches 100
+				if = {
+					limit = {
+						check_variable = { CHI_taiwan_strait_tension > 99 }
+						NOT = { has_country_flag = CHI_taiwan_crisis_triggered }
+					}
+					set_country_flag = CHI_taiwan_crisis_triggered
+					country_event = { id = chi_tai_aggression.25 days = 1 }
+				}
+
+				# Diplomatic isolation milestone: recognition below 5
+				if = {
+					limit = {
+						check_variable = { CHI_taiwan_recognition_count < 5 }
+						NOT = { has_country_flag = CHI_taiwan_diplomatic_alone }
+					}
+					set_country_flag = CHI_taiwan_diplomatic_alone
+					country_event = { id = chi_tai_aggression.12 days = 1 }
+				}
+
+				# USA at war with multiple nations — us_support penalty
+				if = {
+					limit = {
+						NOT = { has_country_flag = CHI_usa_multiwar_penalty_applied }
+						USA = {
+							has_war = yes
+							num_of_factories > 0
+							count_triggers = {
+								amount = 2
+								has_war_with = JAP
+								has_war_with = SOV
+								has_war_with = CHI
+								has_war_with = NKO
+								has_war_with = PER
+								has_war_with = IRQ
+								has_war_with = AFG
+								has_war_with = SYR
+							}
+						}
+					}
+					set_country_flag = CHI_usa_multiwar_penalty_applied
+					set_temp_variable = { CHI_taiwan_us_support_change = -8 }
+					CHI_modify_taiwan_us_support = yes
+				}
+
+				# Lobby network periodic events
+				if = {
+					limit = {
+						has_completed_focus = CHI_TAI_lobby_network
+						has_country_flag = { flag = CHI_lobby_event_cooldown days > 180 }
+					}
+					clr_country_flag = CHI_lobby_event_cooldown
+					set_country_flag = CHI_lobby_event_cooldown
+					random_list = {
+						50 = { country_event = { id = chi_tai_aggression.15 days = 3 } }
+						50 = { country_event = { id = chi_tai_aggression.16 days = 3 } }
+					}
+				}
+				if = {
+					limit = {
+						has_completed_focus = CHI_TAI_lobby_network
+						NOT = { has_country_flag = CHI_lobby_event_cooldown }
+					}
+					set_country_flag = CHI_lobby_event_cooldown
+				}
+
+				# Blockade monthly effects
+				if = {
+					limit = { has_country_flag = CHI_TAI_full_blockade_active }
+					set_temp_variable = { CHI_taiwan_strait_tension_change = 2 }
+					CHI_modify_taiwan_strait_tension = yes
+					set_temp_variable = { CHI_taiwan_us_support_change = -3 }
+					CHI_modify_taiwan_us_support = yes
+				}
+			}
 		}
 	}
 

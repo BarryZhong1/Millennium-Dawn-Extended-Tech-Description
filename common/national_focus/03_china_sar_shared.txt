@@ -3587,7 +3587,7 @@ joint_focus = {
 }
 
 joint_focus = {
-	id = CHI_TAI_economic_track
+	id = CHI_TAI_economic_track   #### Localisation needs to be more immersive. Bonus should be a bit more interesting and unique for Taiwan/Chinese Economics. Also needs to be based on real life.
 	icon = peoples_republic_of_china
 	text_icon = JOINT_CHI_focus_style
 
@@ -4398,7 +4398,8 @@ joint_focus = {
 		base = 5
 	}
 }
-### Taiwan Agression
+### Taiwan Aggression — Expanded Branch
+### Root focus
 joint_focus = {
 	id = CHI_TAI_combat_the_traitors
 	icon = chinese_nationalism
@@ -4448,7 +4449,6 @@ joint_focus = {
 
 	cost = 7
 
-
 	search_filters = { FOCUS_FILTER_POLITICAL }
 	prerequisite = { focus = CHI_SAR_one_china_framework }
 	mutually_exclusive = {
@@ -4460,6 +4460,7 @@ joint_focus = {
 	completion_reward_joint_originator = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_combat_the_traitors"
 		set_country_flag = CHI_TAI_diplomatic_route_active
+		add_war_support = 0.05
 		592 = {
 			add_building_construction = {
 				type = arms_factory
@@ -4473,12 +4474,14 @@ joint_focus = {
 		base = 5
 	}
 }
+
+### LEFT BRANCH — Military Preparation
 joint_focus = {
-	id = CHI_TAI_recognition_blockades
+	id = CHI_TAI_fleet_modernization
 	icon = examine_foreign_small_arms
 	text_icon = JOINT_CHI_focus_style
 
-	x = -1
+	x = -2
 	y = 1
 	relative_position_id = CHI_TAI_combat_the_traitors
 
@@ -4486,84 +4489,52 @@ joint_focus = {
 
 	prerequisite = { focus = CHI_TAI_combat_the_traitors }
 
-	search_filters = { FOCUS_FILTER_MILITARY FOCUS_FILTER_WAR_SUPPORT }
+	search_filters = { FOCUS_FILTER_MILITARY }
 
 	joint_trigger = { original_tag = CHI }
 
 	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_recognition_blockades"
-		add_ideas = CHI_crossstrait_operations
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_fleet_modernization"
+		add_ideas = CHI_TAI_naval_modernization_idea
+		# Build dockyards in coastal provinces facing Taiwan
+		593 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = dockyard
+				level = 1
+				instant_build = yes
+			}
+		}
+		592 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = dockyard
+				level = 1
+				instant_build = yes
+			}
+		}
 	}
 
 	ai_will_do = {
-		base = 1
+		base = 3
+		modifier = {
+			add = 5
+			has_global_flag = CHI_ONE_SYSTEM_PATH
+		}
 	}
 }
-joint_focus = {
-	id = CHI_TAI_military_buildup
-	icon = examine_foreign_small_arms
-	text_icon = JOINT_CHI_focus_style
-
-	x = -1
-	y = 2
-	relative_position_id = CHI_TAI_combat_the_traitors
-
-	cost = 7
-
-	prerequisite = { focus = CHI_TAI_recognition_blockades }
-
-	search_filters = { FOCUS_FILTER_MILITARY FOCUS_FILTER_WAR_SUPPORT }
-
-	joint_trigger = { original_tag = CHI }
-
-	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_military_buildup"
-		add_ideas = CHI_TAI_military_buildup_idea
-	}
-
-	ai_will_do = {
-		base = 1
-	}
-}
-joint_focus = {
-	id = CHI_TAI_cut_us_support
-	icon = examine_foreign_small_arms
-	text_icon = JOINT_CHI_focus_style
-
-	x = 1
-	y = 1
-	relative_position_id = CHI_TAI_combat_the_traitors
-
-	cost = 7
-
-	prerequisite = { focus = CHI_TAI_combat_the_traitors }
-
-	search_filters = { FOCUS_FILTER_MILITARY FOCUS_FILTER_WAR_SUPPORT }
-
-	joint_trigger = { original_tag = CHI }
-
-	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_cut_us_support"
-		country_event = { id = chi_tai_pressure.1  days = 7 }
-	}
-
-	ai_will_do = {
-		base = 1
-	}
-}
-
 joint_focus = {
 	id = CHI_TAI_amphibious_doctrine
 	icon = examine_foreign_small_arms
 	text_icon = JOINT_CHI_focus_style
 
-	x = 1
-	y = 2
-	relative_position_id = CHI_TAI_combat_the_traitors
+	x = 0
+	y = 1
+	relative_position_id = CHI_TAI_fleet_modernization
 
 	cost = 7
 
-	prerequisite = { focus = CHI_TAI_cut_us_support }
+	prerequisite = { focus = CHI_TAI_fleet_modernization }
 
 	search_filters = { FOCUS_FILTER_MILITARY }
 
@@ -4575,36 +4546,122 @@ joint_focus = {
 			idea = CHI_TAI_amphibious_mastery
 			days = 730
 		}
+		add_ideas = CHI_crossstrait_operations
+		# Trigger exercise event
+		country_event = { id = chi_tai_aggression.30 days = 7 }
 	}
 
 	ai_will_do = {
-		base = 1
+		base = 3
 		modifier = {
 			add = 5
 			has_global_flag = CHI_ONE_SYSTEM_PATH
 		}
 	}
 }
-
 joint_focus = {
-	id = CHI_TAI_blockade_declaration
+	id = CHI_TAI_dongfeng_program
 	icon = examine_foreign_small_arms
 	text_icon = JOINT_CHI_focus_style
 
-	x = 3
+	x = 0
 	y = 2
+	relative_position_id = CHI_TAI_fleet_modernization
+
+	cost = 7
+
+	prerequisite = { focus = CHI_TAI_amphibious_doctrine }
+
+	search_filters = { FOCUS_FILTER_MILITARY }
+
+	joint_trigger = { original_tag = CHI }
+
+	completion_reward_joint_originator = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_dongfeng_program"
+		add_ideas = CHI_TAI_military_buildup_idea
+		add_war_support = 0.03
+	}
+
+	ai_will_do = {
+		base = 3
+	}
+}
+joint_focus = {
+	id = CHI_TAI_air_superiority
+	icon = examine_foreign_small_arms
+	text_icon = JOINT_CHI_focus_style
+
+	x = 0
+	y = 3
+	relative_position_id = CHI_TAI_fleet_modernization
+
+	cost = 5
+
+	prerequisite = { focus = CHI_TAI_dongfeng_program }
+
+	search_filters = { FOCUS_FILTER_MILITARY }
+
+	joint_trigger = { original_tag = CHI }
+
+	completion_reward_joint_originator = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_air_superiority"
+		add_timed_idea = {
+			idea = CHI_TAI_air_dominance
+			days = 730
+		}
+	}
+
+	ai_will_do = {
+		base = 3
+	}
+}
+joint_focus = {
+	id = CHI_TAI_cyber_warfare
+	icon = examine_foreign_small_arms
+	text_icon = JOINT_CHI_focus_style
+
+	x = -4
+	y = 5
 	relative_position_id = CHI_TAI_combat_the_traitors
 
 	cost = 7
 
-	prerequisite = { focus = CHI_TAI_cut_us_support }
+	prerequisite = { focus = CHI_TAI_air_superiority }
+
+	search_filters = { FOCUS_FILTER_MILITARY }
+
+	joint_trigger = { original_tag = CHI }
+
+	completion_reward_joint_originator = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_cyber_warfare"
+		add_war_support = 0.03
+	}
+
+	ai_will_do = {
+		base = 2
+	}
+}
+joint_focus = {
+	id = CHI_TAI_blockade_capability
+	icon = examine_foreign_small_arms
+	text_icon = JOINT_CHI_focus_style
+
+	x = -3
+	y = 6
+	relative_position_id = CHI_TAI_combat_the_traitors
+
+	cost = 7
+
+	prerequisite = { focus = CHI_TAI_cyber_warfare }
 
 	search_filters = { FOCUS_FILTER_MILITARY FOCUS_FILTER_WAR_SUPPORT }
 
 	joint_trigger = { original_tag = CHI }
 
 	completion_reward_joint_originator = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_blockade_declaration"
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_blockade_capability"
+		set_country_flag = CHI_TAI_blockade_unlocked
+		add_war_support = 0.05
 		every_country = {
 			limit = {
 				OR = {
@@ -4613,12 +4670,12 @@ joint_focus = {
 					original_tag = ENG
 				}
 			}
-			add_opinion_modifier = { target = CHI  modifier = sanctions }
+			add_opinion_modifier = { target = CHI modifier = sanctions }
 		}
 	}
 
 	ai_will_do = {
-		base = 1
+		base = 2
 		modifier = {
 			add = 5
 			has_global_flag = CHI_ONE_SYSTEM_PATH
@@ -4626,8 +4683,70 @@ joint_focus = {
 	}
 }
 
+### MIDDLE BRANCH — Diplomatic Isolation
 joint_focus = {
-	id = CHI_TAI_operation_storm
+	id = CHI_TAI_one_china_enforcement
+	icon = examine_foreign_small_arms
+	text_icon = JOINT_CHI_focus_style
+
+	x = 0
+	y = 1
+	relative_position_id = CHI_TAI_combat_the_traitors
+
+	cost = 7
+
+	prerequisite = { focus = CHI_TAI_combat_the_traitors }
+
+	search_filters = { FOCUS_FILTER_POLITICAL }
+
+	joint_trigger = { original_tag = CHI }
+
+	completion_reward_joint_originator = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_one_china_enforcement"
+		set_country_flag = CHI_TAI_recognition_campaign_active
+		set_temp_variable = { CHI_taiwan_us_support_change = -3 }
+		CHI_modify_taiwan_us_support = yes
+	}
+
+	ai_will_do = {
+		base = 3
+	}
+}
+joint_focus = {
+	id = CHI_TAI_intl_org_blockade
+	icon = examine_foreign_small_arms
+	text_icon = JOINT_CHI_focus_style
+
+	x = 0
+	y = 2
+	relative_position_id = CHI_TAI_combat_the_traitors
+
+	cost = 5
+
+	prerequisite = { focus = CHI_TAI_one_china_enforcement }
+
+	search_filters = { FOCUS_FILTER_POLITICAL }
+
+	joint_trigger = { original_tag = CHI }
+
+	completion_reward_joint_originator = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_intl_org_blockade"
+		set_temp_variable = { CHI_taiwan_us_support_change = -3 }
+		CHI_modify_taiwan_us_support = yes
+		TAI = {
+			add_timed_idea = {
+				idea = CHI_TAI_intl_isolation
+				days = 1095
+			}
+		}
+	}
+
+	ai_will_do = {
+		base = 3
+	}
+}
+joint_focus = {
+	id = CHI_TAI_reward_defectors
 	icon = examine_foreign_small_arms
 	text_icon = JOINT_CHI_focus_style
 
@@ -4635,10 +4754,169 @@ joint_focus = {
 	y = 3
 	relative_position_id = CHI_TAI_combat_the_traitors
 
+	cost = 5
+
+	prerequisite = { focus = CHI_TAI_intl_org_blockade }
+
+	search_filters = { FOCUS_FILTER_POLITICAL }
+
+	joint_trigger = { original_tag = CHI }
+
+	completion_reward_joint_originator = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_reward_defectors"
+		set_country_flag = CHI_TAI_cheaper_pressure
+		set_temp_variable = { CHI_taiwan_us_support_change = -2 }
+		CHI_modify_taiwan_us_support = yes
+	}
+
+	ai_will_do = {
+		base = 2
+	}
+}
+
+### RIGHT BRANCH — Political Subversion
+joint_focus = {
+	id = CHI_TAI_economic_leverage
+	icon = examine_foreign_small_arms
+	text_icon = JOINT_CHI_focus_style
+
+	x = 4
+	y = 1
+	relative_position_id = CHI_TAI_combat_the_traitors
+
+	cost = 7
+
+	prerequisite = { focus = CHI_TAI_combat_the_traitors }
+
+	search_filters = { FOCUS_FILTER_POLITICAL }
+
+	joint_trigger = { original_tag = CHI }
+
+	completion_reward_joint_originator = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_economic_leverage"
+		set_country_flag = CHI_economic_leverage_active
+		set_temp_variable = { CHI_taiwan_us_support_change = -3 }
+		CHI_modify_taiwan_us_support = yes
+		custom_effect_tooltip = {
+			localization_key = modifies_dynamic_modifier_tt
+			MODIFIER = CHI_SAR_network_modifier
+		}
+		add_to_variable = { CHI_network_trade_opinion_factor = 0.03 tooltip = trade_opinion_factor_tt }
+	}
+
+	ai_will_do = {
+		base = 3
+	}
+}
+joint_focus = {
+	id = CHI_TAI_lobby_network
+	icon = examine_foreign_small_arms
+	text_icon = JOINT_CHI_focus_style
+
+	x = 4
+	y = 2
+	relative_position_id = CHI_TAI_combat_the_traitors
+
+	cost = 5
+
+	prerequisite = { focus = CHI_TAI_economic_leverage }
+
+	search_filters = { FOCUS_FILTER_POLITICAL }
+
+	joint_trigger = { original_tag = CHI }
+
+	completion_reward_joint_originator = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_lobby_network"
+		set_temp_variable = { CHI_taiwan_us_support_change = -2 }
+		CHI_modify_taiwan_us_support = yes
+		country_event = { id = chi_tai_pressure.1 days = 7 }
+	}
+
+	ai_will_do = {
+		base = 3
+	}
+}
+joint_focus = {
+	id = CHI_TAI_proxy_strategy
+	icon = examine_foreign_small_arms
+	text_icon = JOINT_CHI_focus_style
+
+	x = 4
+	y = 3
+	relative_position_id = CHI_TAI_combat_the_traitors
+
+	cost = 7
+
+	prerequisite = { focus = CHI_TAI_lobby_network }
+
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_WAR_SUPPORT }
+
+	joint_trigger = { original_tag = CHI }
+
+	completion_reward_joint_originator = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_proxy_strategy"
+		set_country_flag = CHI_TAI_proxy_unlocked
+		add_war_support = 0.03
+	}
+
+	ai_will_do = {
+		base = 2
+	}
+}
+joint_focus = {
+	id = CHI_TAI_distract_america
+	icon = examine_foreign_small_arms
+	text_icon = JOINT_CHI_focus_style
+
+	x = 4
+	y = 4
+	relative_position_id = CHI_TAI_combat_the_traitors
+
+	cost = 5
+
+	prerequisite = { focus = CHI_TAI_proxy_strategy }
+
+	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_WAR_SUPPORT }
+
+	joint_trigger = { original_tag = CHI }
+
+	completion_reward_joint_originator = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_distract_america"
+		if = {
+			limit = { USA = { has_war = yes } }
+			set_temp_variable = { CHI_taiwan_us_support_change = -5 }
+			CHI_modify_taiwan_us_support = yes
+		}
+		else = {
+			set_temp_variable = { CHI_taiwan_us_support_change = -2 }
+			CHI_modify_taiwan_us_support = yes
+		}
+	}
+
+	ai_will_do = {
+		base = 2
+	}
+}
+
+### FINALE — Operation Storm and post-war
+joint_focus = {
+	id = CHI_TAI_operation_storm
+	icon = examine_foreign_small_arms
+	text_icon = JOINT_CHI_focus_style
+
+	x = 0
+	y = 7
+	relative_position_id = CHI_TAI_combat_the_traitors
+
 	cost = 10
 
-	prerequisite = { focus = CHI_TAI_amphibious_doctrine }
-	prerequisite = { focus = CHI_TAI_military_buildup }
+	prerequisite = { focus = CHI_TAI_blockade_capability }
+	prerequisite = { focus = CHI_TAI_reward_defectors }
+
+	available = {
+		check_variable = { CHI_taiwan_us_support < 50 }
+		NOT = { has_active_mission = bankruptcy_incoming_collapse }
+	}
 
 	search_filters = { FOCUS_FILTER_MILITARY FOCUS_FILTER_ANNEXATION }
 
@@ -4646,14 +4924,20 @@ joint_focus = {
 
 	completion_reward_joint_originator = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_TAI_operation_storm"
-		create_wargoal = {
-			type = annex_everything
-			target = TAI
-		}
+		# Trigger ultimatum event
+		country_event = { id = chi_tai_aggression.26 days = 1 }
 	}
 
 	ai_will_do = {
 		base = 1
+		modifier = {
+			add = 10
+			check_variable = { CHI_taiwan_us_support < 30 }
+		}
+		modifier = {
+			factor = 0
+			check_variable = { CHI_taiwan_us_support > 49 }
+		}
 	}
 }
 joint_focus = {
@@ -4662,12 +4946,14 @@ joint_focus = {
 	text_icon = JOINT_CHI_focus_style
 
 	x = 0
-	y = 4
+	y = 8
 	relative_position_id = CHI_TAI_combat_the_traitors
 
 	cost = 10
 
 	prerequisite = { focus = CHI_TAI_operation_storm }
+
+	available = { owns_state = 600 }
 
 	search_filters = { FOCUS_FILTER_MILITARY FOCUS_FILTER_ANNEXATION }
 
@@ -4700,7 +4986,7 @@ joint_focus = {
 			localization_key = modifies_dynamic_modifier_tt
 			MODIFIER = CHI_SAR_network_modifier
 		}
-		add_to_variable = { CHI_network_interest_rate_multiplier_modifier = 0.02  tooltip = interest_rate_multiplier_modifier_tt }
+		add_to_variable = { CHI_network_interest_rate_multiplier_modifier = 0.02 tooltip = interest_rate_multiplier_modifier_tt }
 	}
 
 	ai_will_do = {
