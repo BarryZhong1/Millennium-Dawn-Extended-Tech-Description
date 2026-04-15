@@ -390,4 +390,88 @@ on_actions = {
 			}
 		}
 	}
+
+	### SCO Yearly Cohesion Cap Reset ###
+	on_monthly = {
+		effect = {
+			if = {
+				limit = {
+					original_tag = CHI
+					has_completed_focus = CHI_Form_the_SCO
+					NOT = { has_country_flag = sco_yearly_cohesion_reset }
+				}
+				set_variable = { global.sco_cohesion_yearly_contribution = 0 }
+				set_country_flag = { flag = sco_yearly_cohesion_reset days = 350 value = 1 }
+			}
+		}
+	}
+
+	### SCO Variable Threshold Monitoring ###
+	on_monthly = {
+		effect = {
+			if = {
+				limit = {
+					original_tag = CHI
+					has_completed_focus = CHI_Form_the_SCO
+				}
+
+				# Low cohesion warning
+				if = {
+					limit = {
+						check_variable = { CHI_sco_cohesion < 2 }
+						NOT = { has_country_flag = sco_low_cohesion_fired }
+					}
+					set_country_flag = { flag = sco_low_cohesion_fired days = 365 value = 1 }
+					country_event = { id = CHI_sco.20 days = 1 }
+				}
+
+				# High cohesion milestone
+				if = {
+					limit = {
+						check_variable = { CHI_sco_cohesion > 8 }
+						NOT = { has_country_flag = sco_high_cohesion_fired }
+					}
+					set_country_flag = { flag = sco_high_cohesion_fired days = 365 value = 1 }
+					country_event = { id = CHI_sco.21 days = 1 }
+				}
+
+				# China dominant — balance > 5
+				if = {
+					limit = {
+						check_variable = { CHI_sco_balance > 5 }
+						NOT = { has_country_flag = sco_china_dominant_fired }
+					}
+					set_country_flag = { flag = sco_china_dominant_fired days = 365 value = 1 }
+					country_event = { id = CHI_sco.22 days = 1 }
+				}
+
+				# Russia dominant — balance < -5
+				if = {
+					limit = {
+						check_variable = { CHI_sco_balance < -5 }
+						NOT = { has_country_flag = sco_russia_dominant_fired }
+					}
+					set_country_flag = { flag = sco_russia_dominant_fired days = 365 value = 1 }
+					country_event = { id = CHI_sco.23 days = 1 }
+				}
+			}
+		}
+	}
+
+	### SCO Save Compatibility ###
+	on_startup = {
+		effect = {
+			CHI = {
+				if = {
+					limit = { NOT = { has_country_flag = sco_rework_v2_initialized } }
+					set_country_flag = sco_rework_v2_initialized
+					set_variable = { global.sco_megaproject_energy_grid_active = 0 }
+					set_variable = { global.sco_megaproject_railway_active = 0 }
+					set_variable = { global.sco_megaproject_dev_bank_active = 0 }
+					set_variable = { global.sco_megaproject_air_defense_active = 0 }
+					set_variable = { global.sco_cohesion_yearly_contribution = 0 }
+				}
+			}
+		}
+	}
 }

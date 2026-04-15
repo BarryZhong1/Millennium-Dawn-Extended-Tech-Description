@@ -1,6 +1,173 @@
 #Rework Author(s): TheGeneral
 
-sco_category = {
+CHI_sco_category = {
+
+	# Tier 1: Apply as Dialogue Partner
+	CHI_sco_apply_as_dialogue_partner = {
+		allowed = { NOT = { original_tag = CHI } NOT = { original_tag = SOV } }
+		icon = GFX_decision_sco_watch_button
+
+		visible = {
+			CHI = { has_completed_focus = CHI_Form_the_SCO }
+			CHI_sco_can_apply_to_join = yes
+			NOT = { CHI_sco_is_any = yes }
+			if = {
+				limit = {
+					OR = {
+						has_idea = ASEAN_Member
+						capital_scope = { is_on_continent = asia }
+					}
+					NOT = {
+						OR = {
+							capital_scope = { is_on_continent = europe }
+							capital_scope = { is_on_continent = asia }
+						}
+					}
+				}
+				has_global_flag = CHI_sco_asean_eligible
+			}
+		}
+
+		available = {
+			CHI_sco_can_apply_to_join = yes
+			CHI = {
+				check_variable = { CHI_sco_cohesion > 2 }
+			}
+			NOT = { has_war_with = CHI }
+			has_opinion = { target = CHI value > -25 }
+		}
+
+		cost = 50
+
+		complete_effect = {
+			CHI_sco_add_dialogue_partner = yes
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_sco_apply_as_dialogue_partner executed"
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 2
+				has_government = communism
+				CHI = { has_government = communism }
+			}
+			modifier = {
+				add = 1
+				CHI = { check_variable = { CHI_chinese_aggression < -9 } }
+			}
+			modifier = {
+				factor = 0
+				has_war = yes
+			}
+			modifier = {
+				factor = 0
+				has_opinion = { target = CHI value < -50 }
+			}
+		}
+	}
+
+	# Tier 2: Upgrade from Dialogue Partner to Observer
+	CHI_sco_upgrade_to_observer = {
+		allowed = { NOT = { original_tag = CHI } NOT = { original_tag = SOV } }
+		icon = GFX_decision_sco_watch_button
+
+		visible = {
+			CHI_sco_is_dialogue_partner = yes
+		}
+
+		available = {
+			CHI_sco_is_dialogue_partner = yes
+			CHI = { check_variable = { CHI_sco_cohesion > 3 } }
+			has_opinion = { target = CHI value > 0 }
+			NOT = { has_war_with = CHI }
+		}
+
+		cost = 75
+
+		complete_effect = {
+			CHI = { country_event = { id = CHI_sco.1 } }
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_sco_upgrade_to_observer executed"
+		}
+
+		days_remove = 90
+
+		remove_effect = {
+			if = {
+				limit = { NOT = { has_country_flag = CHI_sco_observer_status_rejected } }
+				CHI_sco_promote_to_observer = yes
+			}
+			clr_country_flag = CHI_sco_observer_status_rejected
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 2
+				has_government = communism
+				CHI = { has_government = communism }
+			}
+			modifier = {
+				add = 1
+				CHI = { check_variable = { CHI_chinese_aggression < -9 } }
+			}
+			modifier = {
+				factor = 0
+				has_war = yes
+			}
+		}
+	}
+
+	# Tier 3: Upgrade from Observer to Full Member
+	CHI_sco_upgrade_to_member = {
+		allowed = { NOT = { original_tag = CHI } NOT = { original_tag = SOV } }
+		icon = GFX_decision_sco_watch_button
+
+		visible = {
+			CHI_sco_is_observer = yes
+		}
+
+		available = {
+			CHI_sco_is_observer = yes
+			CHI = { check_variable = { CHI_sco_cohesion > 4 } }
+			has_opinion = { target = CHI value > 25 }
+			NOT = { has_war_with = CHI }
+		}
+
+		cost = 100
+
+		complete_effect = {
+			CHI = { country_event = { id = CHI_sco.2 } }
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_sco_upgrade_to_member executed"
+		}
+
+		days_remove = 90
+
+		remove_effect = {
+			if = {
+				limit = { NOT = { has_country_flag = CHI_sco_membership_rejected } }
+				CHI_sco_promote_to_member = yes
+				news_event = { id = CHI_sco.7 }
+			}
+			clr_country_flag = CHI_sco_membership_rejected
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 2
+				has_government = communism
+				CHI = { has_government = communism }
+			}
+			modifier = {
+				add = 1
+				CHI = { check_variable = { CHI_chinese_aggression < -19 } }
+			}
+			modifier = {
+				factor = 0
+				has_war = yes
+			}
+		}
+	}
 
 	provide_development_assistance = {
 		allowed = {
@@ -12,22 +179,14 @@ sco_category = {
 		icon = GFX_decision_sco_develp_button
 
 		visible = {
-			if = {
-				limit = { original_tag = CHI }
-				NOT = { has_completed_focus = CHI_Development_Assistance }
-			}
 			FROM = { is_sco = yes }
 			is_sco = yes
 		}
 
 		available = {
 			FROM = {
-				NOT = {
-					has_idea = SCO_development_assistance
-				}
-				NOT = {
-					has_idea = SCO_development_assistance_2
-				}
+				NOT = { has_idea = SCO_development_assistance }
+				NOT = { has_idea = SCO_development_assistance_2 }
 				has_war = no
 			}
 		}
@@ -36,14 +195,20 @@ sco_category = {
 
 		target_trigger = {
 			country_exists = FROM
-			ic_ratio = {
-				tag = FROM
-				ratio > 2
-			}
 			FROM = {
 				NOT = {
 					original_tag = CHI
 					original_tag = SOV
+				}
+			}
+			if = {
+				limit = { ROOT = { original_tag = CHI has_completed_focus = CHI_Development_Assistance } }
+				FROM = { check_variable = { gdp_per_capita < ROOT.gdp_per_capita } }
+			}
+			else = {
+				ic_ratio = {
+					tag = FROM
+					ratio > 2
 				}
 			}
 		}
@@ -59,17 +224,35 @@ sco_category = {
 		complete_effect = {
 			set_temp_variable = { treasury_change = -1.5 }
 			modify_treasury_effect = yes
-			FROM = {
-				add_timed_idea = {
-					idea = SCO_development_assistance
-					days = 90
+			if = {
+				limit = { original_tag = CHI has_completed_focus = CHI_Development_Assistance }
+				FROM = {
+					add_timed_idea = {
+						idea = SCO_development_assistance_2
+						days = 90
+					}
+					country_event = { id = CHI_sco.11 }
 				}
-				country_event = { id = sco.11 }
+			}
+			else = {
+				FROM = {
+					add_timed_idea = {
+						idea = SCO_development_assistance
+						days = 90
+					}
+					country_event = { id = CHI_sco.11 }
+				}
 			}
 		}
 
 		remove_effect = {
-			set_temp_variable = { percent_change = 1.5 }
+			if = {
+				limit = { original_tag = CHI has_completed_focus = CHI_Development_Assistance }
+				set_temp_variable = { percent_change = 2.25 }
+			}
+			else = {
+				set_temp_variable = { percent_change = 1.5 }
+			}
 			set_temp_variable = { tag_index = ROOT.id }
 			set_temp_variable = { influence_target = FROM.id }
 			change_influence_percentage = yes
@@ -82,69 +265,674 @@ sco_category = {
 		}
 	}
 
+	### SCO Bilateral Decisions ###
 
-	provide_development_assistance_CHI = {
-		allowed = { original_tag = CHI }
+	sco_bilateral_trade_agreement = {
 		icon = GFX_decision_sco_develp_button
 
 		visible = {
 			is_sco = yes
-			has_completed_focus = CHI_Development_Assistance
 			FROM = { is_sco = yes }
 		}
 
 		available = {
+			NOT = { has_war = yes }
+			FROM = { NOT = { has_war = yes } }
+		}
+
+		custom_cost_trigger = {
+			check_variable = { treasury > 0.5 }
+		}
+		custom_cost_text = cost_0_5
+
+		target_array = global.sco_members
+
+		target_trigger = {
+			country_exists = FROM
+			FROM = { NOT = { tag = ROOT } }
+		}
+
+		cost = 50
+
+		days_re_enable = 730
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision sco_bilateral_trade_agreement with [From.GetName]"
+			set_temp_variable = { treasury_change = -0.5 }
+			modify_treasury_effect = yes
 			FROM = {
-				NOT = {
-					has_idea = SCO_development_assistance
+				add_timed_idea = {
+					idea = SCO_trade_agreement_bonus
+					days = 365
 				}
-				NOT = {
-					has_idea = SCO_development_assistance_2
-				}
-				has_war = no
 			}
+			add_timed_idea = {
+				idea = SCO_trade_agreement_bonus
+				days = 365
+			}
+			set_temp_variable = { sco_cohesion_amount = 0.1 }
+			sco_bilateral_complete = yes
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				has_war = yes
+			}
+		}
+	}
+
+	sco_bilateral_border_patrol = {
+		icon = GFX_decision_sco_exersises_button
+
+		visible = {
+			is_sco = yes
+			FROM = { is_sco = yes }
+		}
+
+		available = {
+			NOT = { has_war = yes }
+			FROM = { NOT = { has_war = yes } }
+			command_power > 20
 		}
 
 		target_array = global.sco_members
 
 		target_trigger = {
 			country_exists = FROM
-			FROM = {
-				check_variable = { gdp_per_capita < ROOT.gdp_per_capita }
-			}
-			NOT = {
-				original_tag = CHI
-				original_tag = SOV
-			}
+			FROM = { NOT = { tag = ROOT } }
+			any_neighbor_country = { tag = FROM }
 		}
 
-		custom_cost_trigger = {
-			check_variable = { treasury > 1.4 }
-		}
-
-		custom_cost_text = cost_1_5
-
-		complete_effect = {
-			set_temp_variable = { treasury_change = -1.5 }
-			modify_treasury_effect = yes
-			FROM = {
-				add_timed_idea = {
-					idea = SCO_development_assistance_2
-					days = 90
-				}
-				country_event = { id = sco.11 }
-			}
-		}
-
-		days_remove = 90
+		cost = 25
 
 		days_re_enable = 365
 
-		remove_effect = {
-			set_temp_variable = { percent_change = 2.25 }
-			set_temp_variable = { tag_index = ROOT.id }
-			set_temp_variable = { influence_target = FROM.id }
-			change_influence_percentage = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision sco_bilateral_border_patrol with [From.GetName]"
+			add_command_power = -20
+			add_stability = 0.01
+			FROM = { add_stability = 0.01 }
+			set_temp_variable = { sco_cohesion_amount = 0.2 }
+			sco_bilateral_complete = yes
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				has_war = yes
+			}
+		}
+	}
+
+	sco_bilateral_cultural_exchange = {
+		icon = GFX_decision_sco_develp_button
+
+		visible = {
+			is_sco = yes
+			FROM = { is_sco = yes }
+		}
+
+		available = {
+			NOT = { has_war = yes }
+		}
+
+		target_array = global.sco_members
+
+		target_trigger = {
+			country_exists = FROM
+			FROM = { NOT = { tag = ROOT } }
+		}
+
+		cost = 30
+
+		days_re_enable = 1095
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision sco_bilateral_cultural_exchange with [From.GetName]"
+			FROM = {
+				add_timed_idea = {
+					idea = SCO_cultural_exchange_bonus
+					days = 180
+				}
+			}
+			add_timed_idea = {
+				idea = SCO_cultural_exchange_bonus
+				days = 180
+			}
+			set_temp_variable = { sco_cohesion_amount = 0.1 }
+			sco_bilateral_complete = yes
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				has_war = yes
+			}
+		}
+	}
+
+	sco_bilateral_intel_sharing = {
+		icon = GFX_decision_sco_exersises_button
+
+		visible = {
+			is_sco = yes
+			FROM = { is_sco = yes }
+			CHI = { has_completed_focus = CHI_Counter_Terrorism_Cooperation }
+		}
+
+		available = {
+			NOT = { has_war = yes }
+			FROM = { NOT = { has_war = yes } }
+		}
+
+		target_array = global.sco_members
+
+		target_trigger = {
+			country_exists = FROM
+			FROM = { NOT = { tag = ROOT } }
+		}
+
+		cost = 40
+
+		days_re_enable = 730
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision sco_bilateral_intel_sharing with [From.GetName]"
+			FROM = {
+				add_timed_idea = {
+					idea = SCO_intel_sharing_bonus
+					days = 365
+				}
+			}
+			add_timed_idea = {
+				idea = SCO_intel_sharing_bonus
+				days = 365
+			}
+			set_temp_variable = { sco_cohesion_amount = 0.2 }
+			sco_bilateral_complete = yes
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				has_war = yes
+			}
+		}
+	}
+
+	sco_bilateral_energy_deal = {
+		icon = GFX_decision_sco_develp_button
+
+		visible = {
+			is_sco = yes
+			FROM = { is_sco = yes }
+		}
+
+		available = {
+			NOT = { has_war = yes }
+			FROM = { NOT = { has_war = yes } }
+		}
+
+		custom_cost_trigger = {
+			check_variable = { treasury > 1.0 }
+		}
+		custom_cost_text = cost_1
+
+		target_array = global.sco_members
+
+		target_trigger = {
+			country_exists = FROM
+			FROM = { NOT = { tag = ROOT } }
+		}
+
+		cost = 75
+
+		days_re_enable = 730
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision sco_bilateral_energy_deal with [From.GetName]"
+			set_temp_variable = { treasury_change = -1.0 }
+			modify_treasury_effect = yes
+			FROM = {
+				add_timed_idea = {
+					idea = SCO_energy_deal_income
+					days = 365
+				}
+			}
+			add_stability = 0.01
+			FROM = { add_stability = 0.01 }
+			set_temp_variable = { sco_cohesion_amount = 0.3 }
+			sco_bilateral_complete = yes
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				has_war = yes
+			}
+			modifier = {
+				factor = 0
+				check_variable = { treasury < 2.0 }
+			}
+		}
+	}
+
+	### SCO Mega-Projects ###
+
+	# Energy Grid — propose
+	sco_megaproject_energy_grid_propose = {
+		icon = GFX_decision_sco_watch_button
+
+		visible = {
+			is_sco = yes
+			CHI = { has_completed_focus = CHI_Civilian_Technology_Sharing }
+			NOT = { check_variable = { var = global.sco_megaproject_energy_grid_active value = 0 compare = greater_than } }
+			NOT = { has_global_flag = sco_megaproject_energy_grid_completed }
+		}
+
+		available = {
+			NOT = { has_war_with = CHI }
+			check_variable = { treasury > 2.0 }
+		}
+
+		cost = 100
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision sco_megaproject_energy_grid_propose"
+			set_temp_variable = { treasury_change = -2.0 }
+			modify_treasury_effect = yes
+			set_global_flag = sco_megaproject_energy_grid_proposed
+			set_country_flag = sco_megaproject_energy_grid_initiator
+			if = {
+				limit = { CHI = { check_variable = { CHI_sco_balance > 5 } } }
+				# Auto-approve: China dominant
+				set_variable = { global.sco_megaproject_energy_grid_active = 1 }
+				set_country_flag = { flag = sco_megaproject_energy_grid_window days = 180 }
+			}
+			else_if = {
+				limit = { CHI = { check_variable = { CHI_sco_balance < -5 } } }
+				# SOV approves
+				SOV = { country_event = { id = CHI_sco.30 days = 3 } }
+			}
+			else = {
+				# CHI approves
+				CHI = { country_event = { id = CHI_sco.30 days = 3 } }
+			}
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				check_variable = { treasury < 5.0 }
+			}
+			modifier = {
+				factor = 0.5
+				CHI = { check_variable = { CHI_chinese_aggression > 10 } }
+			}
+		}
+	}
+
+	# Energy Grid — opt-in
+	sco_megaproject_energy_grid_optin = {
+		icon = GFX_decision_sco_watch_button
+
+		visible = {
+			is_sco = yes
+			check_variable = { var = global.sco_megaproject_energy_grid_active value = 0 compare = greater_than }
+			NOT = { has_idea = SCO_energy_grid_member }
+			NOT = { has_idea = SCO_energy_grid_initiator }
+		}
+
+		available = {
+			NOT = { has_war_with = CHI }
+			check_variable = { treasury > 1.5 }
+		}
+
+		cost = 50
+		days_remove = 180
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision sco_megaproject_energy_grid_optin"
+			set_temp_variable = { treasury_change = -1.5 }
+			modify_treasury_effect = yes
+			if = {
+				limit = { has_country_flag = sco_megaproject_energy_grid_initiator }
+				add_ideas = SCO_energy_grid_initiator
+			}
+			else = {
+				add_ideas = SCO_energy_grid_member
+			}
+			CHI = {
+				add_to_variable = { CHI_sco_cohesion = 0.5 }
+				clamp_variable = { var = CHI_sco_cohesion min = 0 max = 10 }
+			}
+		}
+
+		ai_will_do = {
+			base = 3
+			modifier = {
+				factor = 0
+				check_variable = { treasury < 3.0 }
+			}
+			modifier = {
+				factor = 0.3
+				CHI = { check_variable = { CHI_chinese_aggression > 15 } }
+			}
+		}
+	}
+
+	# Trans-Eurasian Railway — propose
+	sco_megaproject_railway_propose = {
+		icon = GFX_decision_sco_watch_button
+
+		visible = {
+			is_sco = yes
+			CHI = { has_completed_focus = CHI_Exploit_Economic_Clout }
+			NOT = { check_variable = { var = global.sco_megaproject_railway_active value = 0 compare = greater_than } }
+			NOT = { has_global_flag = sco_megaproject_railway_completed }
+		}
+
+		available = {
+			NOT = { has_war_with = CHI }
+			check_variable = { treasury > 3.0 }
+		}
+
+		cost = 150
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision sco_megaproject_railway_propose"
+			set_temp_variable = { treasury_change = -3.0 }
+			modify_treasury_effect = yes
+			set_global_flag = sco_megaproject_railway_proposed
+			set_country_flag = sco_megaproject_railway_initiator
+			if = {
+				limit = { CHI = { check_variable = { CHI_sco_balance > 5 } } }
+				set_variable = { global.sco_megaproject_railway_active = 1 }
+				set_country_flag = { flag = sco_megaproject_railway_window days = 180 }
+			}
+			else_if = {
+				limit = { CHI = { check_variable = { CHI_sco_balance < -5 } } }
+				SOV = { country_event = { id = CHI_sco.31 days = 3 } }
+			}
+			else = {
+				CHI = { country_event = { id = CHI_sco.31 days = 3 } }
+			}
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				check_variable = { treasury < 6.0 }
+			}
+			modifier = {
+				factor = 0.5
+				CHI = { check_variable = { CHI_chinese_aggression > 10 } }
+			}
+		}
+	}
+
+	# Trans-Eurasian Railway — opt-in
+	sco_megaproject_railway_optin = {
+		icon = GFX_decision_sco_watch_button
+
+		visible = {
+			is_sco = yes
+			check_variable = { var = global.sco_megaproject_railway_active value = 0 compare = greater_than }
+			NOT = { has_idea = SCO_railway_member }
+			NOT = { has_idea = SCO_railway_initiator }
+		}
+
+		available = {
+			NOT = { has_war_with = CHI }
+			check_variable = { treasury > 2.0 }
+		}
+
+		cost = 75
+		days_remove = 180
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision sco_megaproject_railway_optin"
+			set_temp_variable = { treasury_change = -2.0 }
+			modify_treasury_effect = yes
+			if = {
+				limit = { has_country_flag = sco_megaproject_railway_initiator }
+				add_ideas = SCO_railway_initiator
+			}
+			else = {
+				add_ideas = SCO_railway_member
+			}
+			CHI = {
+				add_to_variable = { CHI_sco_cohesion = 0.5 }
+				clamp_variable = { var = CHI_sco_cohesion min = 0 max = 10 }
+			}
+		}
+
+		ai_will_do = {
+			base = 3
+			modifier = {
+				factor = 0
+				check_variable = { treasury < 4.0 }
+			}
+			modifier = {
+				factor = 0.3
+				CHI = { check_variable = { CHI_chinese_aggression > 15 } }
+			}
+		}
+	}
+
+	# SCO Development Bank — propose
+	sco_megaproject_dev_bank_propose = {
+		icon = GFX_decision_sco_watch_button
+
+		visible = {
+			is_sco = yes
+			CHI = { has_completed_focus = CHI_Development_Assistance }
+			NOT = { check_variable = { var = global.sco_megaproject_dev_bank_active value = 0 compare = greater_than } }
+			NOT = { has_global_flag = sco_megaproject_dev_bank_completed }
+		}
+
+		available = {
+			NOT = { has_war_with = CHI }
+			check_variable = { treasury > 5.0 }
+		}
+
+		cost = 200
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision sco_megaproject_dev_bank_propose"
+			set_temp_variable = { treasury_change = -5.0 }
+			modify_treasury_effect = yes
+			set_global_flag = sco_megaproject_dev_bank_proposed
+			set_country_flag = sco_megaproject_dev_bank_initiator
+			if = {
+				limit = { CHI = { check_variable = { CHI_sco_balance > 5 } } }
+				set_variable = { global.sco_megaproject_dev_bank_active = 1 }
+				set_country_flag = { flag = sco_megaproject_dev_bank_window days = 180 }
+			}
+			else_if = {
+				limit = { CHI = { check_variable = { CHI_sco_balance < -5 } } }
+				SOV = { country_event = { id = CHI_sco.32 days = 3 } }
+			}
+			else = {
+				CHI = { country_event = { id = CHI_sco.32 days = 3 } }
+			}
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				check_variable = { treasury < 8.0 }
+			}
+			modifier = {
+				factor = 0.5
+				CHI = { check_variable = { CHI_chinese_aggression > 10 } }
+			}
+		}
+	}
+
+	# SCO Development Bank — opt-in
+	sco_megaproject_dev_bank_optin = {
+		icon = GFX_decision_sco_watch_button
+
+		visible = {
+			is_sco = yes
+			check_variable = { var = global.sco_megaproject_dev_bank_active value = 0 compare = greater_than }
+			NOT = { has_idea = SCO_dev_bank_member }
+			NOT = { has_idea = SCO_dev_bank_initiator }
+		}
+
+		available = {
+			NOT = { has_war_with = CHI }
+			check_variable = { treasury > 3.0 }
+		}
+
+		cost = 100
+		days_remove = 180
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision sco_megaproject_dev_bank_optin"
+			set_temp_variable = { treasury_change = -3.0 }
+			modify_treasury_effect = yes
+			if = {
+				limit = { has_country_flag = sco_megaproject_dev_bank_initiator }
+				add_ideas = SCO_dev_bank_initiator
+			}
+			else = {
+				add_ideas = SCO_dev_bank_member
+			}
+			CHI = {
+				add_to_variable = { CHI_sco_cohesion = 0.5 }
+				clamp_variable = { var = CHI_sco_cohesion min = 0 max = 10 }
+			}
+		}
+
+		ai_will_do = {
+			base = 3
+			modifier = {
+				factor = 0
+				check_variable = { treasury < 5.0 }
+			}
+			modifier = {
+				factor = 0.3
+				CHI = { check_variable = { CHI_chinese_aggression > 15 } }
+			}
+		}
+	}
+
+	# Joint Air Defense — propose
+	sco_megaproject_air_defense_propose = {
+		icon = GFX_decision_sco_watch_button
+
+		visible = {
+			is_sco = yes
+			CHI = { has_completed_focus = CHI_Strengthen_Security_Framework }
+			NOT = { check_variable = { var = global.sco_megaproject_air_defense_active value = 0 compare = greater_than } }
+			NOT = { has_global_flag = sco_megaproject_air_defense_completed }
+		}
+
+		available = {
+			NOT = { has_war_with = CHI }
+			check_variable = { treasury > 1.5 }
+		}
+
+		cost = 100
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision sco_megaproject_air_defense_propose"
+			set_temp_variable = { treasury_change = -1.5 }
+			modify_treasury_effect = yes
+			set_global_flag = sco_megaproject_air_defense_proposed
+			set_country_flag = sco_megaproject_air_defense_initiator
+			if = {
+				limit = { CHI = { check_variable = { CHI_sco_balance > 5 } } }
+				set_variable = { global.sco_megaproject_air_defense_active = 1 }
+				set_country_flag = { flag = sco_megaproject_air_defense_window days = 180 }
+			}
+			else_if = {
+				limit = { CHI = { check_variable = { CHI_sco_balance < -5 } } }
+				SOV = { country_event = { id = CHI_sco.33 days = 3 } }
+			}
+			else = {
+				CHI = { country_event = { id = CHI_sco.33 days = 3 } }
+			}
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				check_variable = { treasury < 3.0 }
+			}
+			modifier = {
+				factor = 0.5
+				CHI = { check_variable = { CHI_chinese_aggression > 10 } }
+			}
+		}
+	}
+
+	# Joint Air Defense — opt-in
+	sco_megaproject_air_defense_optin = {
+		icon = GFX_decision_sco_watch_button
+
+		visible = {
+			is_sco = yes
+			check_variable = { var = global.sco_megaproject_air_defense_active value = 0 compare = greater_than }
+			NOT = { has_idea = SCO_air_defense_member }
+			NOT = { has_idea = SCO_air_defense_initiator }
+		}
+
+		available = {
+			NOT = { has_war_with = CHI }
+			check_variable = { treasury > 1.0 }
+		}
+
+		cost = 50
+		days_remove = 180
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision sco_megaproject_air_defense_optin"
+			set_temp_variable = { treasury_change = -1.0 }
+			modify_treasury_effect = yes
+			if = {
+				limit = { has_country_flag = sco_megaproject_air_defense_initiator }
+				add_ideas = SCO_air_defense_initiator
+			}
+			else = {
+				add_ideas = SCO_air_defense_member
+			}
+			CHI = {
+				add_to_variable = { CHI_sco_cohesion = 0.5 }
+				clamp_variable = { var = CHI_sco_cohesion min = 0 max = 10 }
+			}
+		}
+
+		ai_will_do = {
+			base = 3
+			modifier = {
+				factor = 0
+				check_variable = { treasury < 2.0 }
+			}
+			modifier = {
+				factor = 0.3
+				CHI = { check_variable = { CHI_chinese_aggression > 15 } }
+			}
 		}
 	}
 
@@ -153,368 +941,9 @@ sco_category = {
 
 		visible = {
 			OR = {
-				AND = { #Italy
-					original_tag = ITA
-					is_subject = no
-					has_completed_focus = ITA_attempt_join_sco
-					CHI = {
-						has_country_flag = accepted_italy_as_sco_candidate
-					}
-					NOT = {
-						has_idea = CHI_sco_member
-						has_idea = CHI_sco_observer
-						has_idea = CHI_sco_member_econ
-						has_idea = CHI_sco_member_pol
-						has_idea = CHI_sco_member_mil
-						has_country_flag = SCO_observer_status_rejected
-					}
-				}
-				AND = {
-					original_tag = SWE
-					SWE = { has_completed_focus = SWE_SCO_observer_status }
-					NOT = {
-						has_idea = CHI_sco_member
-						has_idea = CHI_sco_observer
-						has_idea = CHI_sco_member_econ
-						has_idea = CHI_sco_member_pol
-						has_idea = CHI_sco_member_mil
-						has_country_flag = SCO_observer_status_rejected
-					}
-				}
-				AND = { #Ukraine
-					original_tag = UKR
-					is_subject = no
-					CHI = {
-						has_completed_focus = CHI_Form_the_SCO
-					}
-					OR = {
-						AND = {
-							emerging_communist_state_are_in_power = yes
-							has_completed_focus = UKR_commie_china_trade
-						}
-						AND = {
-							emerging_reactionaries_are_in_power = yes
-							has_completed_focus = UKR_party_regions_inaguration
-						}
-					}
-					NOT = {
-						has_idea = CHI_sco_member
-						has_idea = CHI_sco_observer
-						has_idea = CHI_sco_member_econ
-						has_idea = CHI_sco_member_pol
-						has_idea = CHI_sco_member_mil
-						has_country_flag = SCO_observer_status_rejected
-					}
-				}
-				AND = { #Libya
-					original_tag = LBA
-					is_subject = no
-					CHI = {
-						AND = {
-							has_completed_focus = CHI_Form_the_SCO
-							has_completed_focus = CHI_African_Railway_Projects
-						}
-					}
-					NOT = {
-						has_idea = CHI_sco_member
-						has_idea = CHI_sco_observer
-						has_idea = CHI_sco_member_econ
-						has_idea = CHI_sco_member_pol
-						has_idea = CHI_sco_member_mil
-						has_country_flag = SCO_observer_status_rejected
-					}
-					LBA = {
-						OR = {
-							NOT = {
-								OR = {
-									has_completed_focus = LBA_strive_for_african_union
-									has_completed_focus = LBA_approach_nato
-								}
-							}
-							NOT = {
-								salafist_caliphate_are_in_power = yes
-							}
-						}
-					}
-				}
-				AND = { #Asia, Middle East and Africa
-					is_subject = no
-					CHI = {
-						has_completed_focus = CHI_Form_the_SCO
-					}
-					NOT = {
-						has_idea = CHI_sco_member
-						has_idea = CHI_sco_observer
-						has_idea = CHI_sco_member_econ
-						has_idea = CHI_sco_member_pol
-						has_idea = CHI_sco_member_mil
-						has_country_flag = SCO_observer_status_rejected
-					}
-					if = { #ASEAN
-						limit = { has_idea = ASEAN_Member }
-						CHI = {
-							has_completed_focus = CHI_Undermine_ASEAN
-						}
-					}
-					if = { #Indian Subcontinent
-						limit = {
-							OR = {
-								original_tag = RAJ
-								original_tag = PAK
-							}
-						}
-						NOT = {
-							RAJ = {
-								has_war_with = PAK
-							}
-							PAK = {
-								has_war_with = RAJ
-							}
-						}
-					}
-					if = { #Korean Peninsula(North)
-						limit = {
-							original_tag = NKO
-						}
-						NOT = {
-							has_war_with = KOR
-						}
-					}
-					if = { #Korean Peninsula(South)
-						limit = {
-							original_tag = KOR
-						}
-						AND = {
-							NOT = {
-								has_war_with = NKO
-							}
-							OR = {
-								KOR_has_progressive_government = yes
-								KOR_has_liberal_government = yes
-							}
-						}
-					}
-					if = { #Middle East
-						limit = {
-							OR = {
-								original_tag = ALA
-								original_tag = AQY
-								original_tag = BHR
-								original_tag = DRU
-								original_tag = FSA
-								original_tag = HAM
-								original_tag = HEZ
-								original_tag = HOU
-								original_tag = IRQ
-								original_tag = ISI
-								original_tag = JOR
-								original_tag = KUR
-								original_tag = PUK
-								original_tag = KUW
-								original_tag = LEB
-								original_tag = NUS
-								original_tag = OMA
-								original_tag = PKK
-								original_tag = QAT
-								original_tag = ROJ
-								original_tag = SAU
-								original_tag = SYR
-								original_tag = UAE
-								original_tag = YEM
-							}
-						}
-						OR = {
-							PER = { is_sco = yes }
-							TUR = { is_sco = yes }
-							AND = {
-								ISI = { exists = no }
-								if = {
-									limit = {
-										OR = {
-											original_tag = SYR
-										}
-									}
-									has_completed_focus = SYR_russian_military_cooperation
-								}
-							}
-						}
-					}
-					if = { #Nigeria
-						limit = {
-							original_tag = NIG
-						}
-						AND = {
-							CHI = { has_completed_focus = CHI_African_Railway_Projects }
-							OR = {
-								AND = {
-									check_variable = { influence_array^0 = USA }
-									check_variable = { influence_array^1 = ROOT }
-								}
-								AND = {
-									OR = {
-										check_variable = { influence_array^0 = USA }
-										check_variable = { influence_array^1 = USA }
-									}
-									check_variable = { influence_array^2 = ROOT }
-								}
-								AND = {
-									OR = {
-										check_variable = { influence_array^0 = USA }
-										check_variable = { influence_array^1 = USA }
-										check_variable = { influence_array^2 = USA }
-									}
-									check_variable = { influence_array^3 = ROOT }
-								}
-								AND = {
-									OR = {
-										check_variable = { influence_array^0 = USA }
-										check_variable = { influence_array^1 = USA }
-										check_variable = { influence_array^2 = USA }
-										check_variable = { influence_array^3 = USA }
-									}
-									check_variable = { influence_array^4 = ROOT }
-								}
-								AND = {
-									OR = {
-										check_variable = { influence_array^0 = USA }
-										check_variable = { influence_array^1 = USA }
-										check_variable = { influence_array^2 = USA }
-										check_variable = { influence_array^3 = USA }
-										check_variable = { influence_array^4 = USA }
-									}
-									check_variable = { influence_array^5 = ROOT }
-								}
-								AND = {
-									OR = {
-										check_variable = { influence_array^0 = USA }
-										check_variable = { influence_array^1 = USA }
-										check_variable = { influence_array^2 = USA }
-										check_variable = { influence_array^3 = USA }
-										check_variable = { influence_array^4 = USA }
-										check_variable = { influence_array^5 = USA }
-									}
-									check_variable = { influence_array^6 = ROOT }
-								}
-								is_influencer = no
-							}
-						}
-					}
-					if = { #Cameroon
-						limit = {
-							original_tag = CAM
-						}
-						OR = {
-							AND = {
-								check_variable = { influence_array^0 = USA }
-								check_variable = { influence_array^1 = ROOT }
-							}
-							AND = {
-								OR = {
-									check_variable = { influence_array^0 = USA }
-									check_variable = { influence_array^1 = USA }
-								}
-								check_variable = { influence_array^2 = ROOT }
-							}
-							AND = {
-								OR = {
-									check_variable = { influence_array^0 = USA }
-									check_variable = { influence_array^1 = USA }
-									check_variable = { influence_array^2 = USA }
-								}
-								check_variable = { influence_array^3 = ROOT }
-							}
-							AND = {
-								OR = {
-									check_variable = { influence_array^0 = USA }
-									check_variable = { influence_array^1 = USA }
-									check_variable = { influence_array^2 = USA }
-									check_variable = { influence_array^3 = USA }
-								}
-								check_variable = { influence_array^4 = ROOT }
-							}
-							AND = {
-								OR = {
-									check_variable = { influence_array^0 = USA }
-									check_variable = { influence_array^1 = USA }
-									check_variable = { influence_array^2 = USA }
-									check_variable = { influence_array^3 = USA }
-									check_variable = { influence_array^4 = USA }
-								}
-								check_variable = { influence_array^5 = ROOT }
-							}
-							AND = {
-								OR = {
-									check_variable = { influence_array^0 = USA }
-									check_variable = { influence_array^1 = USA }
-									check_variable = { influence_array^2 = USA }
-									check_variable = { influence_array^3 = USA }
-									check_variable = { influence_array^4 = USA }
-									check_variable = { influence_array^5 = USA }
-								}
-								check_variable = { influence_array^6 = ROOT }
-							}
-							is_influencer = no
-						}
-					}
-					if = { #Other African Countries
-						limit = {
-							OR = {
-								original_tag = DRC
-								original_tag = EGY
-								original_tag = ETH
-								original_tag = SAF
-								original_tag = SUD
-							}
-						}
-						CHI = { has_completed_focus = CHI_African_Railway_Projects }
-					}
-				}
-				AND = { #Americas
-					is_subject = no
-					OR = {
-						original_tag = BRA
-						original_tag = CUB
-						original_tag = VEN
-					}
-					CHI = {
-						has_completed_focus = CHI_Form_the_SCO
-					}
-					NOT = {
-						has_idea = CHI_sco_member
-						has_idea = CHI_sco_observer
-						has_idea = CHI_sco_member_econ
-						has_idea = CHI_sco_member_pol
-						has_idea = CHI_sco_member_mil
-						has_country_flag = SCO_observer_status_rejected
-					}
-					if = { #BRAZIL!!!!!
-						limit = {
-							original_tag = BRA
-						}
-						has_opinion = {
-							target = CHI
-							value > 74
-						}
-					}
-					if = {
-						limit = {
-							original_tag = VEN
-						}
-						has_opinion = {
-							target = CHI
-							value > 99
-						}
-					}
-					if = { #Cuba
-						limit = {
-							original_tag = CUB
-						}
-						has_opinion = {
-							target = CHI
-							value > 49
-						}
-					}
-				}
+				CHI_sco_observer_eligible_special = yes
+				CHI_sco_observer_eligible_asia_me_africa = yes
+				CHI_sco_observer_eligible_americas = yes
 			}
 		}
 
@@ -548,7 +977,7 @@ sco_category = {
 
 		complete_effect = {
 			CHI = {
-				country_event = { id = sco.1 }
+				country_event = { id = CHI_sco.1 }
 			}
 			if = {
 				limit = {
@@ -557,7 +986,7 @@ sco_category = {
 					}
 				}
 				SOV = {
-					country_event = { id = sco.1 }
+					country_event = { id = CHI_sco.1 }
 				}
 			}
 		}
@@ -566,7 +995,7 @@ sco_category = {
 
 		remove_effect = {
 			if = {
-				limit = { NOT = { has_country_flag = SCO_observer_status_rejected } }
+				limit = { NOT = { has_country_flag = CHI_sco_observer_status_rejected } }
 				add_ideas = CHI_sco_observer
 			}
 		}
@@ -705,7 +1134,7 @@ sco_category = {
 			if = {
 				limit = { has_idea = ASEAN_Member }
 				CHI = {
-					has_completed_focus = CHI_Undermine_ASEAN
+					has_completed_focus = CHI_SCO_Exclusive_Core
 				}
 			}
 			if = {
@@ -732,7 +1161,7 @@ sco_category = {
 
 		complete_effect = {
 			CHI = {
-				country_event = { id = sco.2 }
+				country_event = { id = CHI_sco.2 }
 			}
 			if = {
 				limit = {
@@ -741,7 +1170,7 @@ sco_category = {
 					}
 				}
 				SOV = {
-					country_event = { id = sco.2 }
+					country_event = { id = CHI_sco.2 }
 				}
 			}
 		}
@@ -750,31 +1179,30 @@ sco_category = {
 
 		remove_effect = {
 			add_to_array = { global.sco_members = ROOT }
-			SCO_dirty_update = yes
 			if = {
 				limit = {
-					NOT = { has_country_flag = SCO_membership_rejected }
+					NOT = { has_country_flag = CHI_sco_membership_rejected }
 					CHI = { has_idea = CHI_sco_member_econ }
 				}
 				add_ideas = CHI_sco_member_econ
 			}
 			else_if = {
 				limit = {
-					NOT = { has_country_flag = SCO_membership_rejected }
+					NOT = { has_country_flag = CHI_sco_membership_rejected }
 					CHI = { has_idea = CHI_sco_member_pol }
 				}
 				add_ideas = CHI_sco_member_pol
 			}
 			else_if = {
 				limit = {
-					NOT = { has_country_flag = SCO_membership_rejected }
+					NOT = { has_country_flag = CHI_sco_membership_rejected }
 					CHI = { has_idea = CHI_sco_member_mil }
 				}
 				add_ideas = CHI_sco_member_mil
 			}
 			else_if = {
 				limit = {
-					NOT = { has_country_flag = SCO_membership_rejected }
+					NOT = { has_country_flag = CHI_sco_membership_rejected }
 					CHI = { has_idea = CHI_sco_member }
 				}
 				add_ideas = CHI_sco_member
@@ -794,7 +1222,7 @@ sco_category = {
 				limit = { has_idea = ASEAN_Member }
 				remove_ideas = ASEAN_Member
 			}
-			news_event = { id = sco.7 }
+			news_event = { id = CHI_sco.7 }
 			remove_ideas = CHI_sco_observer
 		}
 
@@ -838,28 +1266,13 @@ sco_category = {
 		cost = 50
 
 		complete_effect = {
-			remove_from_array = { global.sco_members = ROOT }
-			if = {
-				limit = { has_idea = CHI_sco_member }
-				remove_ideas = CHI_sco_member
-			}
-			else_if = {
-				limit = { has_idea = CHI_sco_member_econ }
-				remove_ideas = CHI_sco_member_econ
-			}
-			else_if = {
-				limit = { has_idea = CHI_sco_member_pol }
-				remove_ideas = CHI_sco_member_pol
-			}
-			else_if = {
-				limit = { has_idea = CHI_sco_member_mil }
-				remove_ideas = CHI_sco_member_mil
-			}
 			if = {
 				limit = { is_in_faction_with = CHI }
 				leave_faction = yes
 			}
-			news_event = { id = sco.8 }
+			CHI_sco_remove = yes
+			news_event = { id = CHI_sco.8 }
+			log = "[GetDateText]: [Root.GetName]: Decision give_up_membership_status executed"
 		}
 
 		ai_will_do = {
@@ -904,6 +1317,118 @@ sco_category = {
 		}
 	}
 
+	# Hidden decision: AI considers leaving the SCO
+	CHI_sco_consider_leaving = {
+		allowed = { NOT = { original_tag = CHI } NOT = { original_tag = SOV } }
+		icon = GFX_decision_sco_giveup_button
+
+		visible = { always = no }
+
+		available = {
+			CHI_sco_is_any = yes
+		}
+
+		days_re_enable = 180
+
+		complete_effect = {
+			if = {
+				limit = { is_sco = yes }
+				CHI_sco_demote_member = yes
+			}
+			else_if = {
+				limit = { CHI_sco_is_observer = yes }
+				CHI_sco_demote_observer = yes
+			}
+			else_if = {
+				limit = { CHI_sco_is_dialogue_partner = yes }
+				if = {
+					limit = { is_in_faction_with = CHI }
+					leave_faction = yes
+				}
+				CHI_sco_remove = yes
+				news_event = { id = CHI_sco.8 }
+			}
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_sco_consider_leaving executed"
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 1
+				CHI = { check_variable = { CHI_chinese_aggression > 15 } }
+			}
+			modifier = {
+				add = 1
+				CHI = { check_variable = { CHI_sco_cohesion < 2 } }
+			}
+			modifier = {
+				add = 2
+				has_opinion = { target = CHI value < -50 }
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					original_tag = CHI
+					original_tag = SOV
+					original_tag = KAZ
+					original_tag = KYR
+					original_tag = TAJ
+					original_tag = UZB
+				}
+			}
+		}
+	}
+
+	# Hidden decision: cohesion decay toward equilibrium (run by CHI AI)
+	CHI_sco_cohesion_decay = {
+		allowed = { original_tag = CHI }
+		icon = GFX_decision_sco_watch_button
+
+		visible = { always = no }
+
+		available = {
+			has_completed_focus = CHI_Form_the_SCO
+		}
+
+		days_re_enable = 365
+
+		complete_effect = {
+			# Compute equilibrium: 5 + 0.5 per active mega-project
+			set_temp_variable = { CHI_sco_equilibrium = 5 }
+			if = {
+				limit = { check_variable = { global.sco_megaproject_energy_grid_active > 0 } }
+				add_to_temp_variable = { CHI_sco_equilibrium = 0.5 }
+			}
+			if = {
+				limit = { check_variable = { global.sco_megaproject_railway_active > 0 } }
+				add_to_temp_variable = { CHI_sco_equilibrium = 0.5 }
+			}
+			if = {
+				limit = { check_variable = { global.sco_megaproject_dev_bank_active > 0 } }
+				add_to_temp_variable = { CHI_sco_equilibrium = 0.5 }
+			}
+			if = {
+				limit = { check_variable = { global.sco_megaproject_air_defense_active > 0 } }
+				add_to_temp_variable = { CHI_sco_equilibrium = 0.5 }
+			}
+			# Decay toward equilibrium
+			if = {
+				limit = { check_variable = { CHI_sco_cohesion > CHI_sco_equilibrium } }
+				add_to_variable = { CHI_sco_cohesion = -1 }
+			}
+			else_if = {
+				limit = { check_variable = { CHI_sco_cohesion < CHI_sco_equilibrium } }
+				add_to_variable = { CHI_sco_cohesion = 1 }
+			}
+			clamp_variable = { var = CHI_sco_cohesion min = 0 max = 10 }
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_sco_cohesion_decay executed"
+		}
+
+		ai_will_do = {
+			base = 1
+		}
+	}
+
 	host_joint_exercises = {
 		allowed = {
 			OR = {
@@ -944,8 +1469,8 @@ sco_category = {
 					any_of_scopes = {
 						array = global.sco_members
 						OR = {
-							has_country_flag = SCO_joint_exercises_accepted
-							has_country_flag = SCO_joint_exercises_offered
+							has_country_flag = CHI_sco_joint_exercises_accepted
+							has_country_flag = CHI_sco_joint_exercises_offered
 							has_idea = SCO_joint_drill
 							has_idea = SCO_joint_drill_1
 							has_idea = SCO_joint_drill_specific
@@ -982,7 +1507,7 @@ sco_category = {
 					}
 				}
 			}
-			news_event = { days = 1 id = sco.6 }
+			news_event = { days = 1 id = CHI_sco.6 }
 		}
 
 		days_remove = 14
@@ -1022,8 +1547,8 @@ sco_category = {
 			FROM = { has_war = no }
 			custom_trigger_tooltip = {
 				tooltip = SCO_drills_tt
-				NOT = { has_country_flag = SCO_joint_exercises_accepted }
-				NOT = { has_country_flag = SCO_joint_exercises_offered }
+				NOT = { has_country_flag = CHI_sco_joint_exercises_accepted }
+				NOT = { has_country_flag = CHI_sco_joint_exercises_offered }
 				NOT = { has_idea = SCO_joint_drill }
 				NOT = { has_idea = SCO_joint_drill_1 }
 				NOT = { has_idea = SCO_joint_drill_specific }
@@ -1031,8 +1556,8 @@ sco_category = {
 			FROM = {
 				custom_trigger_tooltip = {
 					tooltip = SCO_drills_tt
-					NOT = { has_country_flag = SCO_joint_exercises_accepted }
-					NOT = { has_country_flag = SCO_joint_exercises_offered }
+					NOT = { has_country_flag = CHI_sco_joint_exercises_accepted }
+					NOT = { has_country_flag = CHI_sco_joint_exercises_offered }
 					NOT = { has_idea = SCO_joint_drill }
 					NOT = { has_idea = SCO_joint_drill_1 }
 					NOT = { has_idea = SCO_joint_drill_specific }
@@ -1052,10 +1577,10 @@ sco_category = {
 		days_re_enable = 365
 
 		complete_effect = {
-			set_country_flag = SCO_joint_exercises_offered
+			set_country_flag = CHI_sco_joint_exercises_offered
 			FROM = {
 				country_event = {
-					id = sco.3
+					id = CHI_sco.3
 				}
 			}
 		}
@@ -1071,14 +1596,14 @@ sco_category = {
 
 		visible = {
 			is_sco = yes
-			has_country_flag = SCO_joint_exercises_offered
+			has_country_flag = CHI_sco_joint_exercises_offered
 		}
 
 		target_array = global.sco_members
 
 		target_trigger = {
 			country_exists = FROM
-			FROM = { has_country_flag = SCO_joint_exercises_accepted }
+			FROM = { has_country_flag = CHI_sco_joint_exercises_accepted }
 		}
 
 		available = {
@@ -1115,13 +1640,13 @@ sco_category = {
 				target = FROM
 				modifier = military_cooperation
 			}
-			clr_country_flag = SCO_joint_exercises_offered
+			clr_country_flag = CHI_sco_joint_exercises_offered
 			FROM = {
 				add_opinion_modifier = {
 					target = ROOT
 					modifier = military_cooperation
 				}
-				clr_country_flag = SCO_joint_exercises_accepted
+				clr_country_flag = CHI_sco_joint_exercises_accepted
 			}
 		}
 

@@ -1,13 +1,4 @@
 # Author(s): TheGeneral
-SCO_dirty_update = {
-	if = { limit = { check_variable = { SCO_dirty_update_var < 10000 } }
-		add_to_variable = { SCO_dirty_update_var = 1 }
-	}
-	else = {
-		set_variable = { SCO_dirty_update_var = 1 }
-	}
-}
-
 CHI_reset_ic_commissions = {
 	# Reset slot assignments
 	set_variable = { CHI_ic_slot_1 = 0 }
@@ -587,7 +578,6 @@ CHI_update_sinicization = {
 CHI_sco_add_dialogue_partner = {
 	add_ideas = CHI_sco_dialogue_partner
 	add_to_array = { global.CHI_sco_dialogue_partners = THIS }
-	SCO_dirty_update = yes
 }
 
 CHI_sco_promote_to_observer = {
@@ -598,7 +588,6 @@ CHI_sco_promote_to_observer = {
 	}
 	add_ideas = CHI_sco_observer
 	add_to_array = { global.CHI_sco_observers = THIS }
-	SCO_dirty_update = yes
 }
 
 CHI_sco_promote_to_member = {
@@ -614,7 +603,6 @@ CHI_sco_promote_to_member = {
 	}
 	add_ideas = CHI_sco_member
 	add_to_array = { global.sco_members = THIS }
-	SCO_dirty_update = yes
 }
 
 CHI_sco_remove = {
@@ -648,7 +636,6 @@ CHI_sco_remove = {
 		remove_ideas = CHI_sco_dialogue_partner
 		remove_from_array = { global.CHI_sco_dialogue_partners = THIS }
 	}
-	SCO_dirty_update = yes
 }
 
 CHI_sco_demote_member = {
@@ -671,7 +658,6 @@ CHI_sco_demote_member = {
 	remove_from_array = { global.sco_members = THIS }
 	add_ideas = CHI_sco_observer
 	add_to_array = { global.CHI_sco_observers = THIS }
-	SCO_dirty_update = yes
 }
 
 CHI_sco_demote_observer = {
@@ -679,5 +665,30 @@ CHI_sco_demote_observer = {
 	remove_from_array = { global.CHI_sco_observers = THIS }
 	add_ideas = CHI_sco_dialogue_partner
 	add_to_array = { global.CHI_sco_dialogue_partners = THIS }
-	SCO_dirty_update = yes
+}
+
+### SCO Bilateral Helper ###
+# Call with set_temp_variable = { sco_cohesion_amount = X } before invoking
+sco_bilateral_complete = {
+	# Cohesion increment (with yearly cap for non-CHI)
+	if = {
+		limit = {
+			NOT = { original_tag = CHI }
+			check_variable = { var = global.sco_cohesion_yearly_contribution value = 3 compare = greater_than_or_equals }
+		}
+		custom_effect_tooltip = SCO_bilateral_capped_tt
+	}
+	else = {
+		CHI = {
+			add_to_variable = { var = CHI_sco_cohesion value = PREV.sco_cohesion_amount }
+			clamp_variable = { var = CHI_sco_cohesion min = 0 max = 10 }
+		}
+		if = {
+			limit = { NOT = { original_tag = CHI } }
+			add_to_variable = { var = global.sco_cohesion_yearly_contribution value = sco_cohesion_amount }
+		}
+	}
+	# Mutual opinion
+	add_opinion_modifier = { target = FROM modifier = sco_cooperation }
+	FROM = { add_opinion_modifier = { target = ROOT modifier = sco_cooperation } }
 }

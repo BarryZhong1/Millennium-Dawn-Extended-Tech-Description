@@ -1268,3 +1268,590 @@ country_event = {
 		unlock_decision_tooltip = CHI_MON_reunification_retry
 	}
 }
+
+### Shanghai Cooperation Organization Events ###
+
+# [FROM.GetName] has submitted an application for SCO observer status
+country_event = {
+	id = CHI_sco.1
+	title = CHI_sco.1.t
+	desc = CHI_sco.1.d
+
+	picture = GFX_politics_negotiations
+
+	is_triggered_only = yes
+
+	option = {
+		name = CHI_sco.1.a
+		log = "[GetDateText]: [This.GetName]: CHI_sco.1.a executed"
+	}
+
+	option = {
+		name = CHI_sco.1.b
+		FROM = { set_country_flag = CHI_sco_observer_status_rejected }
+		log = "[GetDateText]: [This.GetName]: CHI_sco.1.b executed"
+		ai_chance = { base = 0 }
+	}
+}
+
+# [FROM.GetName] has submitted an application for SCO member status
+country_event = {
+	id = CHI_sco.2
+	title = CHI_sco.2.t
+	desc = CHI_sco.2.d
+
+	picture = GFX_politics_negotiations
+
+	is_triggered_only = yes
+
+	option = {
+		name = CHI_sco.2.a
+		log = "[GetDateText]: [This.GetName]: CHI_sco.2.a executed"
+	}
+
+	option = {
+		name = CHI_sco.2.b
+		FROM = { set_country_flag = CHI_sco_membership_rejected }
+		log = "[GetDateText]: [This.GetName]: CHI_sco.2.b executed"
+		ai_chance = { base = 0 }
+	}
+}
+
+# [FROM.GetName] is offering to conduct joint military exercises with us
+country_event = {
+	id = CHI_sco.3
+	title = CHI_sco.3.t
+	desc = CHI_sco.3.d
+
+	picture = GFX_politics_negotiations
+
+	is_triggered_only = yes
+
+	option = {
+		name = CHI_sco.3.a
+		set_country_flag = CHI_sco_joint_exercises_accepted
+		FROM = { country_event = { days = 1 id = CHI_sco.4 } }
+		log = "[GetDateText]: [This.GetName]: CHI_sco.3.a executed"
+		ai_chance = {
+			base = 40
+		}
+	}
+
+	option = {
+		name = CHI_sco.3.b
+		FROM = {
+			clr_country_flag = CHI_sco_joint_exercises_offered
+			country_event = { days = 1 id = CHI_sco.5 }
+		}
+		log = "[GetDateText]: [This.GetName]: CHI_sco.3.b executed"
+		ai_chance = {
+			base = 0
+			modifier = {
+				add = 40
+				has_opinion = { target = FROM value < 0 }
+			}
+			modifier = {
+				add = 40
+				has_opinion = { target = FROM value < -50 }
+			}
+		}
+	}
+}
+
+# [FROM.GetName] has accepted our offer for joint exercises!
+country_event = {
+	id = CHI_sco.4
+	title = CHI_sco.4.t
+	desc = CHI_sco.4.d
+
+	picture = GFX_politics_talks
+
+	is_triggered_only = yes
+
+	option = {
+		name = CHI_sco.4.a
+		log = "[GetDateText]: [This.GetName]: CHI_sco.4.a executed"
+	}
+}
+
+# [FROM.GetName] has rejected our offer for joint exercises!
+country_event = {
+	id = CHI_sco.5
+	title = CHI_sco.5.t
+	desc = CHI_sco.5.d
+
+	picture = GFX_treaty_rejected
+
+	is_triggered_only = yes
+
+	option = {
+		name = CHI_sco.5.a
+		log = "[GetDateText]: [This.GetName]: CHI_sco.5.a executed"
+	}
+}
+
+# SCO Launches Large-Scale Military Exercises
+news_event = {
+	id = CHI_sco.6
+	title = CHI_sco.6.t
+	desc = CHI_sco.6.d
+
+	picture = GFX_news_generic_soldiers
+
+	is_triggered_only = yes
+
+	option = {
+		trigger = { has_government = democratic }
+		name = CHI_sco.6.a
+		log = "[GetDateText]: [This.GetName]: CHI_sco.6.a executed"
+	}
+
+	option = {
+		trigger = { has_government = communism }
+		name = CHI_sco.6.b
+		log = "[GetDateText]: [This.GetName]: CHI_sco.6.b executed"
+	}
+
+	option = {
+		trigger = { NOT = { has_government = communism } NOT = { has_government = democratic } }
+		name = CHI_sco.6.c
+		log = "[GetDateText]: [This.GetName]: CHI_sco.6.c executed"
+	}
+}
+
+# [FROM.GetName] Gains SCO Membership
+news_event = {
+	id = CHI_sco.7
+	title = CHI_sco.7.t
+	desc = CHI_sco.7.d
+
+	picture = GFX_trade_agreement
+
+	is_triggered_only = yes
+
+	option = {
+		trigger = { has_government = democratic }
+		name = CHI_sco.7.a
+		log = "[GetDateText]: [This.GetName]: CHI_sco.7.a executed"
+	}
+
+	option = {
+		trigger = { NOT = { has_government = democratic } }
+		name = CHI_sco.7.b
+		log = "[GetDateText]: [This.GetName]: CHI_sco.7.b executed"
+	}
+}
+
+# [FROM.GetName] Leaves the SCO
+news_event = {
+	id = CHI_sco.8
+	title = CHI_sco.8.t
+	desc = CHI_sco.8.d
+
+	picture = GFX_news_press_conference
+
+	is_triggered_only = yes
+
+	option = {
+		trigger = { has_government = democratic }
+		name = CHI_sco.8.a
+		log = "[GetDateText]: [This.GetName]: CHI_sco.8.a executed"
+	}
+
+	option = {
+		trigger = { NOT = { has_government = democratic } }
+		name = CHI_sco.8.b
+		log = "[GetDateText]: [This.GetName]: CHI_sco.8.b executed"
+	}
+}
+
+# China Seizes the Reins of Power over the SCO from Russia
+news_event = {
+	id = CHI_sco.9
+	title = CHI_sco.9.t
+	desc = CHI_sco.9.d
+
+	picture = GFX_china_90th_pla_anniversary
+
+	is_triggered_only = yes
+
+	option = {
+		name = CHI_sco.9.a
+		log = "[GetDateText]: [This.GetName]: CHI_sco.9.a executed"
+	}
+}
+
+# China is demanding that we choose a side — CSTO split
+country_event = {
+	id = CHI_sco.10
+	title = CHI_sco.10.t
+	desc = CHI_sco.10.d
+
+	picture = GFX_CHI_generic
+
+	is_triggered_only = yes
+
+	# Join the SCO
+	option = {
+		name = CHI_sco.10.a
+		log = "[GetDateText]: [This.GetName]: CHI_sco.10.a executed"
+		if = {
+			limit = { is_in_faction = yes }
+			leave_faction = yes
+		}
+		CHI_sco_promote_to_member = yes
+		CHI = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = diplomatic_support
+			}
+		}
+		SOV = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = diplomatic_disloyalty
+			}
+		}
+		ai_chance = {
+			base = 10
+			modifier = {
+				add = 20
+				has_opinion = { target = CHI value > 50 }
+			}
+			modifier = {
+				add = 20
+				has_opinion = { target = CHI value > 100 }
+			}
+		}
+	}
+
+	# Stay loyal to Moscow
+	option = {
+		name = CHI_sco.10.b
+		log = "[GetDateText]: [This.GetName]: CHI_sco.10.b executed"
+		CHI_sco_remove = yes
+		SOV = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = has_expressed_loyalty
+			}
+		}
+		CHI = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = resisted_territorial_ambition
+			}
+		}
+		ai_chance = { base = 40 }
+	}
+
+	# Remain neutral
+	option = {
+		name = CHI_sco.10.c
+		trigger = {
+			has_opinion = { target = CHI value > 0 }
+			has_opinion = { target = SOV value > 0 }
+		}
+		log = "[GetDateText]: [This.GetName]: CHI_sco.10.c executed"
+		CHI_sco_remove = yes
+		if = {
+			limit = { is_in_faction = yes }
+			leave_faction = yes
+		}
+		set_country_flag = non_aligned_post_csto
+		ai_chance = { base = 5 }
+	}
+}
+
+# [FROM.GetName] is providing us with Development Assistance!
+country_event = {
+	id = CHI_sco.11
+	title = CHI_sco.11.t
+	desc = CHI_sco.11.d
+
+	picture = GFX_generic_factory
+
+	is_triggered_only = yes
+
+	option = {
+		name = CHI_sco.11.a
+		effect_tooltip = {
+			add_timed_idea = {
+				idea = SCO_development_assistance
+				days = 90
+			}
+		}
+		log = "[GetDateText]: [This.GetName]: CHI_sco.11.a executed"
+	}
+}
+
+# China invites [FROM.GetName] to the faction
+news_event = {
+	id = CHI_sco.12
+	title = CHI_sco.12.t
+	desc = CHI_sco.12.d
+	picture = GFX_china_19th_national_congress
+
+	is_triggered_only = yes
+
+	option = {
+		name = CHI_sco.12.a
+		log = "[GetDateText]: [This.GetName]: CHI_sco.12.a executed"
+		CHI = { add_to_faction = ROOT }
+	}
+}
+
+### SCO Mega-Project Approval Events ###
+
+# Energy Grid — approval request
+country_event = {
+	id = CHI_sco.30
+	title = CHI_sco.30.t
+	desc = CHI_sco.30.d
+	picture = GFX_china_19th_national_congress
+
+	is_triggered_only = yes
+
+	# Accept
+	option = {
+		name = CHI_sco.30.a
+		log = "[GetDateText]: [This.GetName]: CHI_sco.30.a executed"
+		set_variable = { global.sco_megaproject_energy_grid_active = 1 }
+		FROM = { set_country_flag = { flag = sco_megaproject_energy_grid_window days = 180 } }
+		ai_chance = {
+			base = 10
+			modifier = {
+				factor = 0.1
+				has_opinion = { target = FROM value < -50 }
+			}
+		}
+	}
+
+	# Reject
+	option = {
+		name = CHI_sco.30.b
+		log = "[GetDateText]: [This.GetName]: CHI_sco.30.b executed"
+		clr_global_flag = sco_megaproject_energy_grid_proposed
+		FROM = { clr_country_flag = sco_megaproject_energy_grid_initiator }
+		add_political_power = 25
+		ai_chance = { base = 1 }
+	}
+}
+
+# Trans-Eurasian Railway — approval request
+country_event = {
+	id = CHI_sco.31
+	title = CHI_sco.31.t
+	desc = CHI_sco.31.d
+	picture = GFX_china_19th_national_congress
+
+	is_triggered_only = yes
+
+	option = {
+		name = CHI_sco.31.a
+		log = "[GetDateText]: [This.GetName]: CHI_sco.31.a executed"
+		set_variable = { global.sco_megaproject_railway_active = 1 }
+		FROM = { set_country_flag = { flag = sco_megaproject_railway_window days = 180 } }
+		ai_chance = {
+			base = 10
+			modifier = {
+				factor = 0.1
+				has_opinion = { target = FROM value < -50 }
+			}
+		}
+	}
+
+	option = {
+		name = CHI_sco.31.b
+		log = "[GetDateText]: [This.GetName]: CHI_sco.31.b executed"
+		clr_global_flag = sco_megaproject_railway_proposed
+		FROM = { clr_country_flag = sco_megaproject_railway_initiator }
+		add_political_power = 25
+		ai_chance = { base = 1 }
+	}
+}
+
+# SCO Development Bank — approval request
+country_event = {
+	id = CHI_sco.32
+	title = CHI_sco.32.t
+	desc = CHI_sco.32.d
+	picture = GFX_china_19th_national_congress
+
+	is_triggered_only = yes
+
+	option = {
+		name = CHI_sco.32.a
+		log = "[GetDateText]: [This.GetName]: CHI_sco.32.a executed"
+		set_variable = { global.sco_megaproject_dev_bank_active = 1 }
+		FROM = { set_country_flag = { flag = sco_megaproject_dev_bank_window days = 180 } }
+		ai_chance = {
+			base = 10
+			modifier = {
+				factor = 0.1
+				has_opinion = { target = FROM value < -50 }
+			}
+		}
+	}
+
+	option = {
+		name = CHI_sco.32.b
+		log = "[GetDateText]: [This.GetName]: CHI_sco.32.b executed"
+		clr_global_flag = sco_megaproject_dev_bank_proposed
+		FROM = { clr_country_flag = sco_megaproject_dev_bank_initiator }
+		add_political_power = 25
+		ai_chance = { base = 1 }
+	}
+}
+
+# Joint Air Defense — approval request
+country_event = {
+	id = CHI_sco.33
+	title = CHI_sco.33.t
+	desc = CHI_sco.33.d
+	picture = GFX_china_19th_national_congress
+
+	is_triggered_only = yes
+
+	option = {
+		name = CHI_sco.33.a
+		log = "[GetDateText]: [This.GetName]: CHI_sco.33.a executed"
+		set_variable = { global.sco_megaproject_air_defense_active = 1 }
+		FROM = { set_country_flag = { flag = sco_megaproject_air_defense_window days = 180 } }
+		ai_chance = {
+			base = 10
+			modifier = {
+				factor = 0.1
+				has_opinion = { target = FROM value < -50 }
+			}
+		}
+	}
+
+	option = {
+		name = CHI_sco.33.b
+		log = "[GetDateText]: [This.GetName]: CHI_sco.33.b executed"
+		clr_global_flag = sco_megaproject_air_defense_proposed
+		FROM = { clr_country_flag = sco_megaproject_air_defense_initiator }
+		add_political_power = 25
+		ai_chance = { base = 1 }
+	}
+}
+
+### SCO Variable Threshold Events ###
+
+# Low cohesion — members question direction
+country_event = {
+	id = CHI_sco.20
+	title = CHI_sco.20.t
+	desc = CHI_sco.20.d
+	picture = GFX_china_19th_national_congress
+
+	is_triggered_only = yes
+
+	# Invest in cohesion
+	option = {
+		name = CHI_sco.20.a
+		log = "[GetDateText]: [This.GetName]: CHI_sco.20.a executed"
+		add_political_power = -50
+		add_to_variable = { CHI_sco_cohesion = 1 }
+		clamp_variable = { var = CHI_sco_cohesion min = 0 max = 10 }
+	}
+
+	# Accept the situation
+	option = {
+		name = CHI_sco.20.b
+		log = "[GetDateText]: [This.GetName]: CHI_sco.20.b executed"
+		add_stability = -0.02
+	}
+}
+
+# High cohesion — golden age of cooperation
+country_event = {
+	id = CHI_sco.21
+	title = CHI_sco.21.t
+	desc = CHI_sco.21.d
+	picture = GFX_china_19th_national_congress
+
+	is_triggered_only = yes
+
+	# Capitalize on momentum
+	option = {
+		name = CHI_sco.21.a
+		log = "[GetDateText]: [This.GetName]: CHI_sco.21.a executed"
+		add_political_power = 50
+		add_stability = 0.02
+		every_country = {
+			limit = {
+				is_sco = yes
+				NOT = { tag = ROOT }
+			}
+			add_opinion_modifier = { target = ROOT modifier = sco_cooperation }
+		}
+	}
+}
+
+# China dominant — Russia sidelined
+country_event = {
+	id = CHI_sco.22
+	title = CHI_sco.22.t
+	desc = CHI_sco.22.d
+	picture = GFX_china_19th_national_congress
+
+	is_triggered_only = yes
+
+	# Press our advantage
+	option = {
+		name = CHI_sco.22.a
+		log = "[GetDateText]: [This.GetName]: CHI_sco.22.a executed"
+		add_to_variable = { CHI_chinese_aggression = 2 tooltip = CHI_chinese_aggression_tt }
+		clamp_variable = { var = CHI_chinese_aggression min = -50 max = 50 }
+		SOV = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = diplomatic_distance
+			}
+		}
+	}
+
+	# Ease tensions with Russia
+	option = {
+		name = CHI_sco.22.b
+		log = "[GetDateText]: [This.GetName]: CHI_sco.22.b executed"
+		add_to_variable = { CHI_sco_balance = -2 }
+		clamp_variable = { var = CHI_sco_balance min = -10 max = 10 }
+		SOV = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = sco_cooperation
+			}
+		}
+	}
+}
+
+# Russia dominant — China loses initiative
+country_event = {
+	id = CHI_sco.23
+	title = CHI_sco.23.t
+	desc = CHI_sco.23.d
+	picture = GFX_china_19th_national_congress
+
+	is_triggered_only = yes
+
+	# Reassert our position
+	option = {
+		name = CHI_sco.23.a
+		log = "[GetDateText]: [This.GetName]: CHI_sco.23.a executed"
+		add_political_power = -75
+		add_to_variable = { CHI_sco_balance = 2 }
+		clamp_variable = { var = CHI_sco_balance min = -10 max = 10 }
+	}
+
+	# Concede to Russian leadership
+	option = {
+		name = CHI_sco.23.b
+		log = "[GetDateText]: [This.GetName]: CHI_sco.23.b executed"
+		add_stability = -0.03
+		add_to_variable = { CHI_chinese_aggression = -2 tooltip = CHI_chinese_aggression_tt }
+		clamp_variable = { var = CHI_chinese_aggression min = -50 max = 50 }
+	}
+}
