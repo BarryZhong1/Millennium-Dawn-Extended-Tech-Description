@@ -3423,7 +3423,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_Emphasize_Economic_Cooperation
-		icon = sco
+		icon = rally_the_industrialists
 
 		x = -2
 		y = 1
@@ -3441,12 +3441,12 @@ focus_tree = {
 			every_country = {
 				limit = { is_sco = yes }
 				if = {
-					limit = { NOT = { has_completed_focus = CHI_Form_the_SCO } }
+					limit = { NOT = { has_idea = CHI_sco_member } }
 					effect_tooltip = {
 						swap_ideas = {
-						remove_idea = CHI_sco_member
-						add_idea = CHI_sco_member_econ
-					}
+							remove_idea = CHI_sco_member
+							add_idea = CHI_sco_member_econ
+						}
 					}
 				}
 				else = {
@@ -3462,7 +3462,7 @@ focus_tree = {
 			newline = yes
 			CHI = {
 				add_to_variable = { CHI_sco_cohesion = 1 tooltip = CHI_sco_cohesion_tt }
-				clamp_variable = { var = CHI_sco_cohesion min = 0 max = 10 }
+				clamp_variable = { var = CHI_sco_cohesion min = 0 max = 100 }
 				newline = yes
 				add_to_variable = { CHI_chinese_aggression = -1 tooltip = CHI_chinese_aggression_tt }
 				clamp_variable = { var = CHI_chinese_aggression min = -50 max = 50 }
@@ -3476,7 +3476,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_Civilian_Technology_Sharing
-		icon = sco
+		icon = tech_sharing
 
 		x = -2
 		y = 2
@@ -3491,14 +3491,15 @@ focus_tree = {
 			log = "[GetDateText]: [This.GetName]: focus CHI_Civilian_Technology_Sharing executed"
 			add_tech_bonus = {
 				name = CHI_Civilian_Technology_Sharing
-				bonus = 0.1
+				bonus = 0.25
 				uses = 1
 				category = CAT_industry
 			}
-			every_country = {
+			add_to_tech_sharing_group = CHI_SCO_civilian_research
+			newline = yes
+			every_other_country = {
 				limit = {
 					is_sco = yes
-					NOT = { tag = ROOT }
 				}
 				add_tech_bonus = {
 					name = CHI_Civilian_Technology_Sharing
@@ -3506,9 +3507,11 @@ focus_tree = {
 					uses = 1
 					category = CAT_industry
 				}
+				add_to_tech_sharing_group = CHI_SCO_civilian_research
 			}
-			add_to_variable = { CHI_sco_cohesion = 0.5 }
-			clamp_variable = { var = CHI_sco_cohesion min = 0 max = 10 }
+			newline = yes
+			add_to_variable = { CHI_sco_cohesion = 5 }
+			clamp_variable = { var = CHI_sco_cohesion min = 0 max = 100 }
 			custom_effect_tooltip = CHI_civilian_tech_sharing_tt
 		}
 
@@ -3519,7 +3522,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_Development_Assistance
-		icon = sco
+		icon = economic_prosperity
 
 		x = -4
 		y = 3
@@ -3537,7 +3540,7 @@ focus_tree = {
 				add_to_variable = { CHI_chinese_aggression = -1 tooltip = CHI_chinese_aggression_tt }
 				clamp_variable = { var = CHI_chinese_aggression min = -50 max = 50 }
 			}
-			custom_effect_tooltip = CHI_dev_bank_unlock_tt
+			unlock_decision_tooltip = sco_megaproject_dev_bank_propose
 		}
 
 		ai_will_do = {
@@ -3547,7 +3550,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_Counter_Terrorism_Cooperation
-		icon = sco
+		icon = counter
 
 		x = -2
 		y = 3
@@ -3562,15 +3565,17 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus CHI_Counter_Terrorism_Cooperation executed"
 			add_to_variable = { CHI_sco_cohesion = 1 }
-			clamp_variable = { var = CHI_sco_cohesion min = 0 max = 10 }
+			clamp_variable = { var = CHI_sco_cohesion min = 0 max = 100 }
+			newline = yes
+			add_to_variable = { ct_defense_total = 10 tooltip = ct_defense_total_tt }
 			every_country = {
 				limit = {
 					is_sco = yes
 					NOT = { tag = ROOT }
 				}
-				add_stability = 0.02
+				add_to_variable = { ct_defense_total = 5 tooltip = ct_defense_total_tt }
 			}
-			custom_effect_tooltip = CHI_counter_terrorism_unlock_tt
+			unlock_decision_tooltip = sco_bilateral_intel_sharing
 		}
 
 		ai_will_do = {
@@ -3580,7 +3585,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_Emphasize_Political_Cooperation
-		icon = sco
+		icon = adopt_the_peoples_constitution
 
 		x = 0
 		y = 1
@@ -3597,9 +3602,20 @@ focus_tree = {
 			log = "[GetDateText]: [This.GetName]: focus CHI_Emphasize_Political_Cooperation executed"
 			every_country = {
 				limit = { is_sco = yes }
-				swap_ideas = {
-					remove_idea = CHI_sco_member
-					add_idea = CHI_sco_member_pol
+				if = {
+					limit = { NOT = { has_idea = CHI_sco_member } }
+					effect_tooltip = {
+						swap_ideas = {
+							remove_idea = CHI_sco_member
+							add_idea = CHI_sco_member_pol
+						}
+					}
+				}
+				else = {
+					swap_ideas = {
+						remove_idea = CHI_sco_member
+						add_idea = CHI_sco_member_pol
+					}
 				}
 			}
 			newline = yes
@@ -3608,7 +3624,7 @@ focus_tree = {
 			newline = yes
 			CHI = {
 				add_to_variable = { CHI_sco_cohesion = 1 tooltip = CHI_sco_cohesion_tt }
-				clamp_variable = { var = CHI_sco_cohesion min = 0 max = 10 }
+				clamp_variable = { var = CHI_sco_cohesion min = 0 max = 100 }
 			}
 		}
 
@@ -3631,18 +3647,6 @@ focus_tree = {
 
 		search_filters = { FOCUS_FILTER_INTERNAL_FACTION FOCUS_FILTER_POLITICAL }
 		completion_reward = {
-			set_temp_variable = { temp_opinion = 10 }
-			change_communist_cadres_opinion = yes
-			every_country = {
-				limit = { OR = { has_idea = CHI_sco_member has_idea = CHI_sco_member_pol } }
-				add_political_power = 100
-			}
-			if = {
-				limit = { NOT = { has_completed_focus = CHI_Form_the_SCO } }
-				effect_tooltip = {
-					add_political_power = 100
-				}
-			}
 			log = "[GetDateText]: [This.GetName]: focus CHI_Crack_Down_on_the_Three_Evils executed"
 		}
 
@@ -3653,7 +3657,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_Emphasize_Military_Cooperation
-		icon = sco
+		icon = entente
 
 		x = 2
 		y = 1
@@ -3673,6 +3677,13 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus CHI_Emphasize_Military_Cooperation executed"
+			add_to_variable = { CHI_sco_cohesion = -1 tooltip = CHI_sco_cohesion_tt }
+			clamp_variable = { var = CHI_sco_cohesion min = 0 max = 100 }
+			add_to_variable = { CHI_sco_balance = 1 tooltip = CHI_sco_balance_tt }
+			clamp_variable = { var = CHI_sco_balance min = -10 max = 10 }
+			add_to_variable = { CHI_chinese_aggression = 1 tooltip = CHI_chinese_aggression_tt }
+			clamp_variable = { var = CHI_chinese_aggression min = -50 max = 50 }
+			newline = yes
 			set_temp_variable = { temp_opinion = 15 }
 			change_the_military_opinion = yes
 			newline = yes
@@ -3683,15 +3694,6 @@ focus_tree = {
 					add_idea = CHI_sco_member_mil
 				}
 			}
-			newline = yes
-			CHI = {
-				add_to_variable = { CHI_sco_cohesion = -1 tooltip = CHI_sco_cohesion_tt }
-				clamp_variable = { var = CHI_sco_cohesion min = 0 max = 10 }
-				add_to_variable = { CHI_sco_balance = 1 tooltip = CHI_sco_balance_tt }
-				clamp_variable = { var = CHI_sco_balance min = -10 max = 10 }
-				add_to_variable = { CHI_chinese_aggression = 1 tooltip = CHI_chinese_aggression_tt }
-				clamp_variable = { var = CHI_chinese_aggression min = -50 max = 50 }
-			}
 		}
 
 		ai_will_do = {
@@ -3701,7 +3703,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_Military_Technology_Sharing
-		icon = sco
+		icon = research4
 
 		x = 2
 		y = 2
@@ -3718,27 +3720,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			every_country = {
-				limit = { OR = { has_idea = CHI_sco_member has_idea = CHI_sco_member_mil } }
-				add_tech_bonus = {
-					name = CHI_Military_Technology_Sharing
-					bonus = 0.1
-					uses = 1
-					category = CAT_armor
-				}
-				add_tech_bonus = {
-					name = CHI_Military_Technology_Sharing
-					bonus = 0.1
-					uses = 1
-					category = CAT_air_eqp
-				}
-				add_tech_bonus = {
-					name = CHI_Military_Technology_Sharing
-					bonus = 0.1
-					uses = 1
-					category = CAT_inf
-				}
-			}
+			log = "[GetDateText]: [This.GetName]: focus CHI_Military_Technology_Sharing executed"
 			if = {
 				limit = { NOT = { has_completed_focus = CHI_Form_the_SCO } }
 				effect_tooltip = {
@@ -3760,9 +3742,33 @@ focus_tree = {
 						uses = 1
 						category = CAT_inf
 					}
+					add_to_tech_sharing_group = CHI_SCO_military_research
 				}
 			}
-			log = "[GetDateText]: [This.GetName]: focus CHI_Military_Technology_Sharing executed"
+			else = {
+				every_country = {
+					limit = { has_idea = CHI_sco_member_mil }
+					add_tech_bonus = {
+						name = CHI_Military_Technology_Sharing
+						bonus = 0.1
+						uses = 1
+						category = CAT_armor
+					}
+					add_tech_bonus = {
+						name = CHI_Military_Technology_Sharing
+						bonus = 0.1
+						uses = 1
+						category = CAT_air_eqp
+					}
+					add_tech_bonus = {
+						name = CHI_Military_Technology_Sharing
+						bonus = 0.1
+						uses = 1
+						category = CAT_inf
+					}
+					add_to_tech_sharing_group = CHI_SCO_military_research
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -3772,7 +3778,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_Strengthen_Security_Framework
-		icon = sco
+		icon = air_training
 
 		x = 4
 		y = 3
@@ -3784,11 +3790,11 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus CHI_Strengthen_Security_Framework executed"
 			custom_effect_tooltip = SCO_drills_effective_tt
-			CHI = {
-				add_to_variable = { CHI_chinese_aggression = 1 tooltip = CHI_chinese_aggression_tt }
-				clamp_variable = { var = CHI_chinese_aggression min = -50 max = 50 }
-			}
-			custom_effect_tooltip = CHI_air_defense_unlock_tt
+			newline = yes
+			add_to_variable = { CHI_chinese_aggression = 1 tooltip = CHI_chinese_aggression_tt }
+			clamp_variable = { var = CHI_chinese_aggression min = -50 max = 50 }
+			newline = yes
+			unlock_decision_tooltip = sco_megaproject_air_defense_propose
 		}
 
 		ai_will_do = {
@@ -3798,7 +3804,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_Chinese_Dominance
-		icon = sco
+		icon = communist_china
 
 		x = 0
 		y = 3
@@ -3810,22 +3816,26 @@ focus_tree = {
 		mutually_exclusive = { focus = CHI_Equal_Partners }
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus CHI_Chinese_Dominance executed"
-			set_temp_variable = { temp_opinion = 10 }
-			change_communist_cadres_opinion = yes
-			SOV = {
-				add_opinion_modifier = {
-					target = CHI
-					modifier = diplomatic_distance
-				}
-				custom_effect_tooltip = CHI_SOV_decisions_locked_tt
-			}
-			news_event = { id = CHI_sco.9 }
 			CHI = {
 				add_to_variable = { CHI_sco_balance = 3 tooltip = CHI_sco_balance_tt }
 				clamp_variable = { var = CHI_sco_balance min = -10 max = 10 }
 				add_to_variable = { CHI_chinese_aggression = 2 tooltip = CHI_chinese_aggression_tt }
 				clamp_variable = { var = CHI_chinese_aggression min = -50 max = 50 }
 			}
+			newline	= yes
+			set_temp_variable = { temp_opinion = 10 }
+			change_communist_cadres_opinion = yes
+			newline = yes
+			SOV = {
+				add_opinion_modifier = {
+					target = CHI
+					modifier = diplomatic_distance
+				}
+				newline = yes
+				custom_effect_tooltip = CHI_SOV_decisions_locked_tt
+			}
+			newline = yes
+			news_event = { id = CHI_sco.9 }
 		}
 
 		ai_will_do = {
@@ -3839,7 +3849,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_Equal_Partners
-		icon = sco
+		icon = align_to_russia
 
 		x = 2
 		y = 3
@@ -3869,10 +3879,8 @@ focus_tree = {
 					modifier = diplomatic_support
 				}
 			}
-			CHI = {
-				add_to_variable = { CHI_sco_cohesion = 2 tooltip = CHI_sco_cohesion_tt }
-				clamp_variable = { var = CHI_sco_cohesion min = 0 max = 10 }
-			}
+			add_to_variable = { CHI_sco_cohesion = 2 tooltip = CHI_sco_cohesion_tt }
+			clamp_variable = { var = CHI_sco_cohesion min = 0 max = 100 }
 			log = "[GetDateText]: [This.GetName]: focus CHI_Equal_Partners executed"
 		}
 
@@ -3883,7 +3891,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_SCO_Plus_Expansion
-		icon = sco
+		icon = asean_mutual_trade
 
 		x = -3
 		y = 4
@@ -3899,13 +3907,14 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus CHI_SCO_Plus_Expansion executed"
-			set_global_flag = sco_open_door
-			set_global_flag = CHI_sco_asean_eligible
 			add_to_variable = { CHI_sco_cohesion = 2 }
-			clamp_variable = { var = CHI_sco_cohesion min = 0 max = 10 }
+			clamp_variable = { var = CHI_sco_cohesion min = 0 max = 100 }
 			add_to_variable = { CHI_sco_balance = 1 }
 			clamp_variable = { var = CHI_sco_balance min = -10 max = 10 }
-			custom_effect_tooltip = CHI_sco_plus_expansion_tt
+			every_other_country = {
+				limit = { has_idea = ASEAN_Member }
+				unlock_decision_tooltip = CHI_sco_apply_as_dialogue_partner
+			}
 		}
 
 		ai_will_do = {
@@ -3915,7 +3924,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_SCO_Exclusive_Core
-		icon = sco
+		icon = align_to_sco
 
 		x = -1
 		y = 4
@@ -3931,9 +3940,9 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus CHI_SCO_Exclusive_Core executed"
-			set_global_flag = sco_closed_door
-			add_to_variable = { CHI_sco_cohesion = 3 }
-			clamp_variable = { var = CHI_sco_cohesion min = 0 max = 10 }
+			add_to_variable = { CHI_sco_cohesion = 3 tooltip = CHI_sco_cohesion_tt }
+			clamp_variable = { var = CHI_sco_cohesion min = 0 max = 100 }
+			newline = yes
 			every_country = {
 				limit = {
 					is_sco = yes
@@ -3951,7 +3960,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_Exploit_Economic_Clout
-		icon = sco
+		icon = focus_CHI_the_greater_game
 
 		x = -2
 		y = 5
@@ -3989,7 +3998,8 @@ focus_tree = {
 				}
 			}
 			add_to_variable = { CHI_sco_cohesion = 1 }
-			clamp_variable = { var = CHI_sco_cohesion min = 0 max = 10 }
+			clamp_variable = { var = CHI_sco_cohesion min = 0 max = 100 }
+			unlock_decision_tooltip = sco_megaproject_railway_propose
 			custom_effect_tooltip = CHI_exploit_economic_clout_railway_tt
 		}
 
@@ -4023,14 +4033,11 @@ focus_tree = {
 
 		completion_reward = {
 			create_faction_from_template = faction_template_sco
-			every_country = {
-				limit = { is_sco = yes }
-				CHI = { add_to_faction = PREV }
-			}
+			add_to_variable = { CHI_chinese_aggression = 1 tooltip = CHI_chinese_aggression_tt }
+			clamp_variable = { var = CHI_chinese_aggression min = -50 max = 50 }
 			every_country = {
 				limit = {
 					is_sco = yes
-					is_guaranteed_by = SOV
 					OR = {
 						original_tag = KAZ
 						original_tag = KYR
@@ -4039,11 +4046,7 @@ focus_tree = {
 						original_tag = TAJ
 					}
 				}
-				country_event = { days = 2 id = CHI_sco.10 }
-			}
-			CHI = {
-				add_to_variable = { CHI_chinese_aggression = 1 tooltip = CHI_chinese_aggression_tt }
-				clamp_variable = { var = CHI_chinese_aggression min = -50 max = 50 }
+				country_event = CHI_sco.10
 			}
 			log = "[GetDateText]: [This.GetName]: focus CHI_Split_CSTO executed"
 		}
@@ -4100,34 +4103,15 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus CHI_Merge_with_CSTO executed"
 			create_faction_from_template = faction_template_sco
-			every_country = {
-				limit = { is_sco = yes }
-				CHI = { add_to_faction = PREV }
-			}
-			every_country = {
-				limit = { is_in_faction_with = SOV NOT = { original_tag = NKR } is_sco = no }
+			every_other_country = {
+				limit = { is_in_faction_with = SOV }
+				add_to_faction = CHI
 				CHI_sco_promote_to_member = yes
-				if = {
-					limit = { CHI = { has_idea = CHI_sco_member_pol } }
-					swap_ideas = {
-						remove_idea = CHI_sco_member
-						add_idea = CHI_sco_member_pol
-					}
-				}
-				else_if = {
-					limit = { CHI = { has_idea = CHI_sco_member_mil } }
-					swap_ideas = {
-						remove_idea = CHI_sco_member
-						add_idea = CHI_sco_member_mil
-					}
-				}
-				CHI = { add_to_faction = PREV }
-				army_experience = 25
 			}
+			newline = yes
 			add_to_variable = { CHI_sco_cohesion = 2 }
-			clamp_variable = { var = CHI_sco_cohesion min = 0 max = 10 }
+			clamp_variable = { var = CHI_sco_cohesion min = 0 max = 100 }
 			set_variable = { CHI_sco_balance = 0 }
-			set_global_flag = sco_merged_with_csto
 		}
 
 		ai_will_do = {
@@ -4137,7 +4121,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_An_Alliance_to_Rival_NATO
-		icon = renounce_nato
+		icon = sco
 
 		x = 2
 		y = 5
@@ -4162,31 +4146,6 @@ focus_tree = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus CHI_An_Alliance_to_Rival_NATO executed"
-			set_faction_name = SHANGHAI_PACT
-			set_faction_rule = call_to_war_rule_sco_military_only
-			every_country = {
-				limit = {
-					is_in_faction_with = ROOT
-					NOT = { tag = ROOT }
-				}
-				give_guarantee = ROOT
-				ROOT = { give_guarantee = PREV }
-			}
-			if = {
-				limit = { has_completed_focus = CHI_Split_CSTO }
-				add_to_variable = { CHI_chinese_aggression = 5 tooltip = CHI_chinese_aggression_tt }
-				clamp_variable = { var = CHI_chinese_aggression min = -50 max = 50 }
-				SOV = {
-					add_opinion_modifier = {
-						target = CHI
-						modifier = diplomatic_distance
-					}
-				}
-			}
-			else = {
-				add_to_variable = { CHI_sco_cohesion = 1 }
-				clamp_variable = { var = CHI_sco_cohesion min = 0 max = 10 }
-			}
 		}
 
 		ai_will_do = {
