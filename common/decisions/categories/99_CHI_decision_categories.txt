@@ -45,12 +45,24 @@ CHI_sco_category = {
 	visible = {
 		OR = {
 			is_debug = yes
-			AND = {
-				# This needs to be a check if the country is in the SCO collection
-			}
+			is_sco = yes
+			CHI_sco_is_dialogue_partner = yes
+			has_idea = CHI_sco_observer
 			AND = {
 				original_tag = ITA
 				has_completed_focus = ITA_attempt_join_sco
+			}
+			AND = {
+				original_tag = SWE
+				has_completed_focus = SWE_SCO_observer_status
+			}
+			AND = {
+				original_tag = UKR
+				CHI = { has_completed_focus = CHI_Form_the_SCO }
+				OR = {
+					has_completed_focus = UKR_commie_china_trade
+					has_completed_focus = UKR_party_regions_inaguration
+				}
 			}
 		}
 	}

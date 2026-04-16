@@ -523,6 +523,135 @@ CHI_sco_category = {
 		}
 	}
 
+	### Three Evils — Counter-Terror & Anti-Separatism ###
+
+	CHI_sco_anti_terror_crackdown = {
+		icon = GFX_decision_sco_exersises_button
+
+		visible = {
+			is_sco = yes
+			CHI = { has_completed_focus = CHI_Crack_Down_on_the_Three_Evils }
+		}
+
+		available = {
+			NOT = { has_war = yes }
+			has_political_power > 50
+			has_stability > 0.25
+		}
+
+		cost = 50
+
+		days_re_enable = 365
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_sco_anti_terror_crackdown"
+			add_stability = -0.02
+			add_to_variable = { ct_defense_total = 2 tooltip = ct_defense_total_tt }
+			add_timed_idea = {
+				idea = CHI_anti_terror_crackdown_idea
+				days = 365
+			}
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				has_stability < 0.4
+			}
+			modifier = {
+				factor = 0
+				has_war = yes
+			}
+		}
+	}
+
+	CHI_crack_down_xinjiang_separatism = {
+		icon = GFX_decision_sco_exersises_button
+
+		allowed = { original_tag = CHI }
+
+		visible = {
+			has_completed_focus = CHI_Crack_Down_on_the_Three_Evils
+			592 = { is_owned_by = CHI }
+		}
+
+		available = {
+			NOT = { has_war = yes }
+			592 = { is_controlled_by = CHI }
+			command_power > 15
+		}
+
+		cost = 40
+
+		days_re_enable = 730
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_crack_down_xinjiang_separatism"
+			add_command_power = -15
+			add_to_variable = { CHI_ETK_required_garrison_factor = -0.02 tooltip = required_garrison_factor_tt }
+			592 = {
+				add_compliance = 3
+				add_resistance = -2
+			}
+			add_timed_idea = {
+				idea = CHI_xinjiang_crackdown_idea
+				days = 365
+			}
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				has_war = yes
+			}
+		}
+	}
+
+	CHI_crack_down_tibet_separatism = {
+		icon = GFX_decision_sco_exersises_button
+
+		allowed = { original_tag = CHI }
+
+		visible = {
+			has_completed_focus = CHI_Crack_Down_on_the_Three_Evils
+			589 = { is_owned_by = CHI }
+		}
+
+		available = {
+			NOT = { has_war = yes }
+			589 = { is_controlled_by = CHI }
+			command_power > 15
+		}
+
+		cost = 40
+
+		days_re_enable = 730
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_crack_down_tibet_separatism"
+			add_command_power = -15
+			add_to_variable = { CHI_TIB_state_productivity_growth_modifier = 0.02 tooltip = state_productivity_growth_modifier_tt }
+			589 = {
+				add_compliance = 3
+				add_resistance = -2
+			}
+			add_timed_idea = {
+				idea = CHI_tibet_crackdown_idea
+				days = 365
+			}
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				has_war = yes
+			}
+		}
+	}
+
 	### SCO Mega-Projects ###
 
 	# Energy Grid — propose

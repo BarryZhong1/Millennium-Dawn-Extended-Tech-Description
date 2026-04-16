@@ -3408,7 +3408,7 @@ focus_tree = {
 				newline = yes
 				unlock_decision_category_tooltip = CHI_sco_category
 			}
-			add_to_array = { global.sco_members = CHI } #Move add to array system to collections
+			add_to_array = { global.sco_members = CHI }
 			add_to_array = { global.sco_members = KAZ }
 			add_to_array = { global.sco_members = KYR }
 			add_to_array = { global.sco_members = SOV }
@@ -3512,7 +3512,6 @@ focus_tree = {
 			newline = yes
 			add_to_variable = { CHI_sco_cohesion = 5 }
 			clamp_variable = { var = CHI_sco_cohesion min = 0 max = 100 }
-			custom_effect_tooltip = CHI_civilian_tech_sharing_tt
 		}
 
 		ai_will_do = {
@@ -3635,7 +3634,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_Crack_Down_on_the_Three_Evils
-		icon = sco
+		icon = colonial_crackdown
 
 		x = 0
 		y = 2
@@ -3645,9 +3644,15 @@ focus_tree = {
 
 		prerequisite = { focus = CHI_Emphasize_Political_Cooperation }
 
-		search_filters = { FOCUS_FILTER_INTERNAL_FACTION FOCUS_FILTER_POLITICAL }
+		search_filters = { FOCUS_FILTER_INTERNAL_FACTION FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus CHI_Crack_Down_on_the_Three_Evils executed"
+			add_to_variable = { CHI_sco_cohesion = 1 tooltip = CHI_sco_cohesion_tt }
+			clamp_variable = { var = CHI_sco_cohesion min = 0 max = 100 }
+			newline = yes
+			unlock_decision_tooltip = CHI_sco_anti_terror_crackdown
+			unlock_decision_tooltip = CHI_crack_down_xinjiang_separatism
+			unlock_decision_tooltip = CHI_crack_down_tibet_separatism
 		}
 
 		ai_will_do = {
@@ -4000,7 +4005,6 @@ focus_tree = {
 			add_to_variable = { CHI_sco_cohesion = 1 }
 			clamp_variable = { var = CHI_sco_cohesion min = 0 max = 100 }
 			unlock_decision_tooltip = sco_megaproject_railway_propose
-			custom_effect_tooltip = CHI_exploit_economic_clout_railway_tt
 		}
 
 		ai_will_do = {
@@ -4035,18 +4039,25 @@ focus_tree = {
 			create_faction_from_template = faction_template_sco
 			add_to_variable = { CHI_chinese_aggression = 1 tooltip = CHI_chinese_aggression_tt }
 			clamp_variable = { var = CHI_chinese_aggression min = -50 max = 50 }
-			every_country = {
-				limit = {
-					is_sco = yes
-					OR = {
-						original_tag = KAZ
-						original_tag = KYR
-						original_tag = ARM
-						original_tag = BLR
-						original_tag = TAJ
-					}
+			if = {
+				limit = { NOT = { has_completed_focus = CHI_Form_the_SCO } }
+				effect_tooltip = {
+					KAZ = { country_event = CHI_sco.10 }
+					KYR = { country_event = CHI_sco.10 }
+					ARM = { country_event = CHI_sco.10 }
+					BLR = { country_event = CHI_sco.10 }
+					TAJ = { country_event = CHI_sco.10 }
 				}
-				country_event = CHI_sco.10
+			}
+			else = {
+				every_other_country = {
+					limit = {
+						is_sco = yes
+						is_in_faction_with = SOV
+						NOT = { original_tag = SOV }
+					}
+					country_event = CHI_sco.10
+				}
 			}
 			log = "[GetDateText]: [This.GetName]: focus CHI_Split_CSTO executed"
 		}
@@ -4121,7 +4132,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_An_Alliance_to_Rival_NATO
-		icon = sco
+		icon = Strike_NATO_new6
 
 		x = 2
 		y = 5
@@ -4146,6 +4157,14 @@ focus_tree = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus CHI_An_Alliance_to_Rival_NATO executed"
+			if = {
+				limit = { is_faction_leader = yes }
+				set_faction_upgrade = faction_doctrine_sharing1
+				add_faction_goal = faction_goal_global_hegemony
+			}
+			else = {
+				custom_effect_tooltip = CHI_An_Alliance_to_Rival_NATO_tt
+			}
 		}
 
 		ai_will_do = {
