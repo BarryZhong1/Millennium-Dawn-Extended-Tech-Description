@@ -697,8 +697,6 @@ joint_focus = {
 	}
 }
 
-### MILITARY BRANCH ###
-
 joint_focus = {
 	id = CHI_NKO_defense_consultations
 	icon = prc_sign
@@ -983,8 +981,6 @@ joint_focus = {
 	}
 }
 
-### POLITICAL BRANCH ###
-
 joint_focus = {
 	id = CHI_NKO_party_to_party_dialogue
 	icon = generic_communism_focus
@@ -1250,14 +1246,15 @@ joint_focus = {
 	available = {
 		country_exists = NKO
 		NKO = { has_government = communism }
-		check_variable = { CHI_korea_alignment < 40 }
-		NKO = {
-			OR = {
-				check_variable = { influence_array^0 = CHI }
-				check_variable = { influence_array^1 = CHI }
-				check_variable = { influence_array^2 = CHI }
+		custom_trigger_tooltip = {
+			tooltip = {
+				localization_key = variable_below_tt
+				VAR_NAME = CHI_korea_alignment
+				THRESHOLD = "40"
 			}
+			check_variable = { CHI_korea_alignment < 40 }
 		}
+		NKO = { is_top3_influencer = yes }
 	}
 
 	joint_trigger = { original_tag = CHI }
@@ -1270,8 +1267,8 @@ joint_focus = {
 		reverse_add_opinion_modifier = { target = NKO modifier = lips_and_teeth_doctrine }
 		newline = yes
 		add_dynamic_modifier = { modifier = CHI_korea_peninsula_modifier }
-		set_variable = { CHI_korea_peninsula_tension = 0 }
-		add_to_variable = { CHI_kp_foreign_subversive_activites = -0.15 tooltip = CHI_kp_foreign_subversive_activites_tt }
+		add_to_variable = { CHI_kp_foreign_subversive_activites = -0.15 tooltip = foreign_subversive_activites_tt }
+		newline = yes
 		add_to_variable = { CHI_korea_peninsula_tension = 15 tooltip = CHI_korea_peninsula_tension_tt }
 		newline = yes
 		set_temp_variable = { percent_change = 10 }
@@ -1347,12 +1344,7 @@ joint_focus = {
 	}
 
 	available = {
-		NKO = {
-			OR = {
-				check_variable = { influence_array^0 = CHI }
-				check_variable = { influence_array^1 = CHI }
-			}
-		}
+		NKO = { is_top3_influencer = yes }
 	}
 
 	joint_trigger = { original_tag = CHI }
@@ -1371,7 +1363,7 @@ joint_focus = {
 		}
 		newline = yes
 		KOR = {
-			add_timed_idea = { idea = CHI_kor_beijing_pressure days = 1095 } ### Needs to become an event chain
+			country_event = { id = CHI_foreign.100 days = 1 }
 			add_to_variable = { SFR = -5 tooltip = SFR_tt }
 		}
 		newline = yes
@@ -1400,12 +1392,7 @@ joint_focus = {
 	search_filters = { FOCUS_FILTER_FOREIGN_POLICY FOCUS_FILTER_MILITARY }
 
 	available = {
-		NKO = {
-			OR = {
-				check_variable = { influence_array^0 = CHI }
-				check_variable = { influence_array^1 = CHI }
-			}
-		}
+		NKO = { is_top3_influencer = yes }
 	}
 
 	joint_trigger = { original_tag = CHI }
@@ -1435,12 +1422,7 @@ joint_focus = {
 		set_temp_variable = { influence_target = KOR }
 		change_influence_percentage = yes
 		newline = yes
-		KOR = { #Needs to be an event to Korea
-			add_timed_idea = {
-				idea = CHI_informal_sanctions
-				days = 1095
-			}
-		}
+		KOR = { country_event = { id = CHI_foreign.101 days = 1 } }
 		newline = yes
 		USA = { country_event = { id = CHI_foreign.030 days = 1 } }
 
@@ -1465,13 +1447,15 @@ joint_focus = {
 	mutually_exclusive = { focus = CHI_KPA_Offensive_Readiness }
 
 	available = {
-		check_variable = { CHI_korea_alignment > -20 }
-		NKO = {
-			OR = {
-				check_variable = { influence_array^0 = CHI }
-				check_variable = { influence_array^1 = CHI }
+		custom_trigger_tooltip = {
+			tooltip = {
+				localization_key = variable_above_tt
+				VAR_NAME = CHI_korea_alignment
+				THRESHOLD = "-20"
 			}
+			check_variable = { CHI_korea_alignment > -20 }
 		}
+		NKO = { is_top3_influencer = yes }
 	}
 
 	joint_trigger = { original_tag = CHI }
@@ -1501,7 +1485,7 @@ joint_focus = {
 }
 
 joint_focus = {
-	id = CHI_KPA_Offensive_Readiness ## Dit moet een bonus geven aan het CHinese leger en aan het NKO leger
+	id = CHI_KPA_Offensive_Readiness
 	icon = focus_PRC_peoples_liberation_army
 	text_icon = JOINT_CHI_focus_style
 
@@ -1516,12 +1500,7 @@ joint_focus = {
 	mutually_exclusive = { focus = CHI_Exercise_Paektu_Honor }
 
 	available = {
-		NKO = {
-			OR = {
-				check_variable = { influence_array^0 = CHI }
-				check_variable = { influence_array^1 = CHI }
-			}
-		}
+		NKO = { is_top3_influencer = yes }
 	}
 	joint_trigger = { original_tag = CHI }
 
@@ -1532,6 +1511,14 @@ joint_focus = {
 		newline = yes
 		USA = { country_event = { id = CHI_foreign.032 days = 1 } }
 		JAP = { country_event = { id = CHI_foreign.033 days = 2 } }
+		newline = yes
+		army_experience = 25
+		add_tech_bonus = {
+			name = CHI_KPA_Offensive_Readiness_bonus
+			bonus = 0.5
+			uses = 1
+			category = CAT_land_doctrine
+		}
 		newline = yes
 		add_to_variable = { CHI_korea_peninsula_tension = 20 tooltip = CHI_korea_peninsula_tension_tt }
 		if = {
@@ -1546,6 +1533,13 @@ joint_focus = {
 
 	completion_reward_joint_member = {
 		add_timed_idea = { idea = CHI_nko_offensive_readiness days = 1825 }
+		army_experience = 50
+		add_tech_bonus = {
+			name = CHI_KPA_Offensive_Readiness_bonus
+			bonus = 1.0
+			uses = 1
+			category = CAT_land_doctrine
+		}
 		every_owned_state = { add_manpower = 3000	}
 	}
 
@@ -1559,7 +1553,7 @@ joint_focus = {
 }
 
 joint_focus = {
-	id = CHI_The_2025_Blue_Sky_Operation ### This focus really needs some connection with the Korean Mechanic and supporting a war with NKO against KOR
+	id = CHI_The_2025_Blue_Sky_Operation
 	icon = x
 	text_icon = JOINT_CHI_focus_style
 
@@ -1572,7 +1566,7 @@ joint_focus = {
 	search_filters = { FOCUS_FILTER_MILITARY }
 
 	available = {
-		NKO = { check_variable = { influence_array^0 = CHI } }
+		NKO = { is_top3_influencer = yes }
 	}
 
 	joint_trigger = { original_tag = CHI }
@@ -1587,10 +1581,15 @@ joint_focus = {
 	completion_reward_joint_originator = {
 		USA = { country_event = { id = CHI_foreign.034 days = 1 } }
 		add_to_variable = { CHI_korea_peninsula_tension = 30 tooltip = CHI_korea_peninsula_tension_tt }
+		subtract_from_variable = { CHI_korea_alignment = 40 tooltip = CHI_korea_alignment_tt }
+		KOR = { support_for_reunification_5_less = yes }
 	}
 
 	completion_reward_joint_member = {
 		add_timed_idea = { idea = CHI_nko_blue_sky_mobilization days = 365 }
+		add_war_support = 0.15
+		add_stability = 0.05
+		army_experience = 50
 		create_wargoal = {
 			type = annex_everything
 			target = KOR
@@ -1634,15 +1633,16 @@ joint_focus = {
 		country_exists = NKO
 		OR = {
 			NOT = { NKO = { has_government = communism } }
-			check_variable = { CHI_chinese_aggression > 3 }
-		}
-		NKO = {
-			OR = {
-				check_variable = { influence_array^0 = CHI }
-				check_variable = { influence_array^1 = CHI }
-				check_variable = { influence_array^2 = CHI }
+			custom_trigger_tooltip = {
+				tooltip = {
+					localization_key = variable_above_tt
+					VAR_NAME = CHI_chinese_aggression
+					THRESHOLD = "3"
+				}
+				check_variable = { CHI_chinese_aggression > 3 }
 			}
 		}
+		NKO = { is_top3_influencer = yes }
 	}
 
 	joint_trigger = { original_tag = CHI }
@@ -1652,7 +1652,7 @@ joint_focus = {
 	completion_reward_joint_originator = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_The_Chinese_Correction"
 		add_dynamic_modifier = { modifier = CHI_korea_peninsula_modifier }
-		add_to_variable = { CHI_kp_operative_slot = 1 tooltip = CHI_kp_operative_slot_tt }
+		add_to_variable = { CHI_kp_operative_slot = 1 tooltip = operative_slot_tt }
 		add_to_variable = { CHI_korea_peninsula_tension = 5 tooltip = CHI_korea_peninsula_tension_tt }
 		newline = yes
 		set_temp_variable = { percent_change = 8 }
@@ -1686,12 +1686,7 @@ joint_focus = {
 	search_filters = { FOCUS_FILTER_POLITICAL }
 
 	available = {
-		NKO = {
-			OR = {
-				check_variable = { influence_array^0 = CHI }
-				check_variable = { influence_array^1 = CHI }
-			}
-		}
+		NKO = { is_top3_influencer = yes }
 	}
 
 	joint_trigger = { original_tag = CHI }
@@ -1705,7 +1700,7 @@ joint_focus = {
 			localization_key = modifies_dynamic_modifier_tt
 			MODIFIER = CHI_korea_peninsula_modifier
 		}
-		add_to_variable = { CHI_kp_foreign_subversive_activites = 0.15 tooltip = CHI_kp_foreign_subversive_activites_tt }
+		add_to_variable = { CHI_kp_foreign_subversive_activites = 0.15 tooltip = foreign_subversive_activites_tt }
 		unlock_decision_tooltip = {
 			decision = CHI_locate_jang_loyalists
 			show_effect_tooltip = yes
@@ -1724,7 +1719,7 @@ joint_focus = {
 }
 
 joint_focus = {
-	id = CHI_The_Princeling_Network #These should also unlock a decision(s) to get this much better
+	id = CHI_The_Princeling_Network
 	icon = maoism2
 	text_icon = JOINT_CHI_focus_style
 
@@ -1737,7 +1732,7 @@ joint_focus = {
 	search_filters = { FOCUS_FILTER_POLITICAL }
 
 	available = {
-		NKO = { check_variable = { influence_array^0 = CHI } }
+		NKO = { is_top3_influencer = yes }
 	}
 
 	joint_trigger = { original_tag = CHI }
@@ -1768,13 +1763,21 @@ joint_focus = {
 			decision = CHI_secure_kpa_general_staff
 			show_effect_tooltip = yes
 		}
+		unlock_decision_tooltip = {
+			decision = CHI_activate_princeling_network
+			show_effect_tooltip = yes
+		}
+		unlock_decision_tooltip = {
+			decision = CHI_princeling_intelligence_report
+			show_effect_tooltip = yes
+		}
 	}
 
 	ai_will_do = { base = 10 }
 }
 
 joint_focus = {
-	id = CHI_Operation_New_Dawn ### This needs a treshold or support variable so the player works to something. Maybe like vanilla Spanish Civil War with giving a general a trait if succeeded and those start a rebellion. Also this should actually unlock a raid. This Raid will capture the country leader of North Korea. Depending on the outcome and support of the army. China takes control, We get a civil war or NKO goes to war with CHI
+	id = CHI_Operation_New_Dawn
 	icon = x
 	text_icon = JOINT_CHI_focus_style
 
@@ -1787,8 +1790,17 @@ joint_focus = {
 	search_filters = { FOCUS_FILTER_MILITARY FOCUS_FILTER_POLITICAL }
 
 	available = {
-		NKO = { check_variable = { influence_array^0 = CHI } }
+		NKO = { is_top3_influencer = yes }
+		NKO = { influence_higher_50 = yes }
 		NKO = { has_stability < 0.40 }
+		custom_trigger_tooltip = {
+			tooltip = {
+				localization_key = variable_above_tt
+				VAR_NAME = CHI_nko_internal_influence
+				THRESHOLD = "30"
+			}
+			check_variable = { CHI_nko_internal_influence > 30 }
+		}
 	}
 
 	joint_trigger = { original_tag = CHI }
@@ -1800,6 +1812,8 @@ joint_focus = {
 		KOR = { country_event = { id = CHI_foreign.035 days = 1 } }
 		USA = { country_event = { id = CHI_foreign.036 days = 2 } }
 		JAP = { country_event = { id = CHI_foreign.037 days = 2 } }
+		newline = yes
+		custom_effect_tooltip = CHI_operation_new_dawn_raid_enabled_tt
 	}
 
 	completion_reward = {
@@ -1821,7 +1835,6 @@ joint_focus = {
 			set_country_flag = CHI_tension_60_fired
 			country_event = { id = CHI_foreign.051 days = 1 }
 		}
-		custom_effect_tooltip = CHI_operation_new_dawn_raid_enabled_tt
 	}
 
 	ai_will_do = {
@@ -1905,7 +1918,7 @@ joint_focus = {
 			localization_key = modifies_dynamic_modifier_tt
 			MODIFIER = CHI_korea_peninsula_modifier
 		}
-		add_to_variable = { CHI_kp_political_power_gain = 0.05 tooltip = CHI_kp_political_power_gain_tt }
+		add_to_variable = { CHI_kp_political_power_gain = 0.05 tooltip = political_power_gain_tt }
 	}
 
 	completion_reward_joint_member = {
@@ -1918,7 +1931,7 @@ joint_focus = {
 
 joint_focus = {
 	id = CHI_The_Seoul_Gambit
-	icon = korean_peninsula
+	icon = X
 	text_icon = JOINT_CHI_focus_style
 
 	relative_position_id = CHI_Peninsula_Strategy
@@ -1937,32 +1950,34 @@ joint_focus = {
 
 	available = {
 		country_exists = KOR
-		check_variable = { CHI_korea_alignment > -40 }
-		KOR = {
-			OR = {
-				check_variable = { influence_array^0 = CHI }
-				check_variable = { influence_array^1 = CHI }
-				check_variable = { influence_array^2 = CHI }
-				check_variable = { influence_array^3 = CHI }
+		custom_trigger_tooltip = {
+			tooltip = {
+				localization_key = variable_above_tt
+				VAR_NAME = CHI_korea_alignment
+				THRESHOLD = "-40"
 			}
+			check_variable = { CHI_korea_alignment > -40 }
 		}
+		KOR = { is_top5_influencer = yes }
 	}
 
 	joint_trigger = { original_tag = CHI }
 
 	prerequisite = { focus = CHI_Peninsula_Strategy }
 
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_The_Seoul_Gambit"
-		add_political_power = 50
+	completion_reward_joint_originator = {
 		add_opinion_modifier = { target = KOR modifier = back_channel_open }
 		reverse_add_opinion_modifier = { target = KOR modifier = back_channel_open }
+		newline = yes
 		country_event = { id = CHI_foreign.012 days = 1 }
+		newline = yes
 		add_dynamic_modifier = { modifier = CHI_korea_peninsula_modifier }
-		set_variable = { CHI_korea_peninsula_tension = 0 }
-		add_to_variable = { CHI_kp_political_power_gain = 0.05 tooltip = CHI_kp_political_power_gain_tt }
-		KOR = { add_to_variable = { SFR = 3 } }
+		add_to_variable = { CHI_kp_political_power_gain = 0.05 tooltip = political_power_gain_tt }
+		newline = yes
+		KOR = { add_to_variable = { SFR = 3 tooltip = SFR_tt } }
+		newline = yes
 		add_to_variable = { CHI_korea_peninsula_tension = -3 tooltip = CHI_korea_peninsula_tension_tt }
+		newline = yes
 		set_temp_variable = { percent_change = 8 }
 		set_temp_variable = { tag_index = CHI }
 		set_temp_variable = { influence_target = KOR }
@@ -1980,7 +1995,7 @@ joint_focus = {
 
 joint_focus = {
 	id = CHI_Back_Channel_to_Foggy_Bottom
-	icon = korean_peninsula
+	icon = align_to_america2
 	text_icon = JOINT_CHI_focus_style
 
 	relative_position_id = CHI_The_Seoul_Gambit
@@ -1992,27 +2007,25 @@ joint_focus = {
 	search_filters = { FOCUS_FILTER_FOREIGN_POLICY }
 
 	available = {
-		KOR = {
-			OR = {
-				check_variable = { influence_array^0 = CHI }
-				check_variable = { influence_array^1 = CHI }
-				check_variable = { influence_array^2 = CHI }
-				check_variable = { influence_array^3 = CHI }
-			}
-		}
+		KOR = { is_top5_influencer = yes }
 	}
 
 	joint_trigger = { original_tag = CHI }
 
 	prerequisite = { focus = CHI_The_Seoul_Gambit }
 
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_Back_Channel_to_Foggy_Bottom"
-		add_political_power = 25
-		USA = { add_opinion_modifier = { target = CHI modifier = back_channel_open } }
+	completion_reward_joint_originator = {
 		add_opinion_modifier = { target = USA modifier = back_channel_open }
-		add_to_variable = { CHI_kp_intel_network_gain_factor = 0.10 tooltip = CHI_kp_intel_network_gain_factor_tt }
-		USA = { add_timed_idea = { idea = CHI_usa_back_channel_open days = 1825 } }
+		reverse_add_opinion_modifier = { target = CHI modifier = back_channel_open }
+		newline = yes
+		custom_effect_tooltip = {
+			localization_key = modifies_dynamic_modifier_tt
+			MODIFIER = CHI_korea_peninsula_modifier
+		}
+		add_to_variable = { CHI_kp_intel_network_gain_factor = 0.10 tooltip = intel_network_gain_factor_tt }
+		newline = yes
+		USA = { country_event = { id = CHI_foreign.102 days = 1 } }
+		newline = yes
 		add_to_variable = { CHI_korea_peninsula_tension = -5 tooltip = CHI_korea_peninsula_tension_tt }
 	}
 
@@ -2021,7 +2034,7 @@ joint_focus = {
 
 joint_focus = {
 	id = CHI_The_2022_Reset
-	icon = korean_peninsula
+	icon = x
 	text_icon = JOINT_CHI_focus_style
 
 	relative_position_id = CHI_The_Seoul_Gambit
@@ -2033,40 +2046,37 @@ joint_focus = {
 	search_filters = { FOCUS_FILTER_FOREIGN_POLICY }
 
 	available = {
-		KOR = {
-			OR = {
-				check_variable = { influence_array^0 = CHI }
-				check_variable = { influence_array^1 = CHI }
-				check_variable = { influence_array^2 = CHI }
-			}
-		}
+		KOR = { is_top3_influencer = yes }
 	}
 
 	joint_trigger = { original_tag = CHI }
 
 	prerequisite = { focus = CHI_Back_Channel_to_Foggy_Bottom }
 
-	completion_reward = {
+	completion_reward_joint_originator = {
 		log = "[GetDateText]: [Root.GetName]: Focus CHI_The_2022_Reset"
-		add_political_power = 25
-		NKO = { add_opinion_modifier = { target = CHI modifier = diplomatic_opening } }
-		KOR = { add_opinion_modifier = { target = CHI modifier = diplomatic_opening } }
-		add_opinion_modifier = { target = NKO modifier = honest_broker }
-		add_opinion_modifier = { target = KOR modifier = honest_broker }
-		KOR = { add_to_variable = { SFR = 7 } }
-		NKO = { add_stability = 0.05 }
-		KOR = { add_timed_idea = { idea = CHI_kor_trilateral_opening days = 1825 } }
+		add_opinion_modifier = { target = KOR modifier = diplomatic_opening }
+		reverse_add_opinion_modifier = { target = CHI modifier = diplomatic_opening }
+		newline = yes
+		KOR = {
+			add_to_variable = { SFR = 7 tooltip = SFR_tt }
+			country_event = { id = CHI_foreign.103 days = 1 }
+		}
+		newline = yes
 		add_to_variable = { CHI_korea_peninsula_tension = -8 tooltip = CHI_korea_peninsula_tension_tt }
+	}
+
+	completion_reward_joint_member = {
+		add_opinion_modifier = { target = CHI modifier = diplomatic_opening }
+		reverse_add_opinion_modifier = { target = NKO modifier = diplomatic_opening }
 	}
 
 	ai_will_do = { base = 10 }
 }
 
-### PATH C1 - G2 PATHWAY ###
-
 joint_focus = {
 	id = CHI_Post_Armistice_Architecture
-	icon = korean_peninsula
+	icon = accept_treaty
 	text_icon = JOINT_CHI_focus_style
 
 	relative_position_id = CHI_The_Seoul_Gambit
@@ -2082,37 +2092,33 @@ joint_focus = {
 	available = {
 		country_exists = KOR
 		country_exists = USA
-		KOR = {
-			OR = {
-				check_variable = { influence_array^0 = CHI }
-				check_variable = { influence_array^1 = CHI }
-				check_variable = { influence_array^2 = CHI }
-			}
-		}
-		USA = {
-			OR = {
-				check_variable = { influence_array^0 = CHI }
-				check_variable = { influence_array^1 = CHI }
-			}
-		}
+		KOR = { is_top3_influencer = yes }
+		USA = { is_top3_influencer = yes }
 	}
 
 	joint_trigger = { original_tag = CHI }
 
 	prerequisite = { focus = CHI_The_2022_Reset }
 
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_Post_Armistice_Architecture"
+	completion_reward_joint_originator = {
 		add_opinion_modifier = { target = USA modifier = host_and_guarantor }
+		reverse_add_opinion_modifier = { target = CHI modifier = host_and_guarantor }
 		add_opinion_modifier = { target = KOR modifier = host_and_guarantor }
-		reverse_add_opinion_modifier = { target = KOR modifier = host_and_guarantor }
-		USA = { add_timed_idea = { idea = CHI_usa_g2_framework days = 3650 } }
-		add_to_variable = { CHI_kp_political_power_gain = 0.05 tooltip = CHI_kp_political_power_gain_tt }
+		reverse_add_opinion_modifier = { target = CHI modifier = host_and_guarantor }
+		newline = yes
+		USA = { country_event = { id = CHI_foreign.104 days = 1 } }
+		newline = yes
+		custom_effect_tooltip = {
+			localization_key = modifies_dynamic_modifier_tt
+			MODIFIER = CHI_korea_peninsula_modifier
+		}
+		add_to_variable = { CHI_kp_political_power_gain = 0.05 tooltip = political_power_gain_tt }
+		newline = yes
 		add_to_variable = { CHI_korea_peninsula_tension = -15 tooltip = CHI_korea_peninsula_tension_tt }
-		every_country = {
+		newline = yes
+		every_other_country = {
 			limit = {
 				is_major = yes
-				NOT = { tag = CHI }
 				NOT = { tag = USA }
 			}
 			add_opinion_modifier = { target = CHI modifier = CHI_co_responsibility }
@@ -2131,7 +2137,7 @@ joint_focus = {
 
 joint_focus = {
 	id = CHI_Economic_Framework_for_Unity
-	icon = korean_peninsula
+	icon = merge_plants
 	text_icon = JOINT_CHI_focus_style
 
 	relative_position_id = CHI_The_Seoul_Gambit
@@ -2143,29 +2149,31 @@ joint_focus = {
 	search_filters = { FOCUS_FILTER_ECONOMY FOCUS_FILTER_FOREIGN_POLICY }
 
 	available = {
-		KOR = {
-			OR = {
-				check_variable = { influence_array^0 = CHI }
-				check_variable = { influence_array^1 = CHI }
-			}
-		}
+		KOR = { is_top3_influencer = yes }
 	}
 
 	joint_trigger = { original_tag = CHI }
 
 	prerequisite = { focus = CHI_Post_Armistice_Architecture }
 
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_Economic_Framework_for_Unity"
-		add_political_power = 50
+	completion_reward_joint_originator = {
 		KOR = {
 			add_opinion_modifier = { target = CHI modifier = g2_era_power }
-			add_to_variable = { SFR = 10 }
+			add_to_variable = { SFR = 10 tooltip = SFR_tt }
+			country_event = { id = CHI_foreign.105 days = 1 }
 		}
-		NKO = { add_opinion_modifier = { target = CHI modifier = g2_era_power } }
-		KOR = { add_timed_idea = { idea = CHI_kor_g2_economic_platform days = 3650 } }
-		NKO = { add_timed_idea = { idea = CHI_nko_managed_reform_pilot days = 3650 } }
-		add_to_variable = { CHI_kp_political_power_gain = 0.05 tooltip = CHI_kp_political_power_gain_tt }
+		newline = yes
+		custom_effect_tooltip = {
+			localization_key = modifies_dynamic_modifier_tt
+			MODIFIER = CHI_korea_peninsula_modifier
+		}
+		add_to_variable = { CHI_kp_political_power_gain = 0.05 tooltip = political_power_gain_tt }
+	}
+
+	completion_reward_joint_member = {
+		add_opinion_modifier = { target = CHI modifier = g2_era_power }
+		newline = yes
+		add_timed_idea = { idea = CHI_nko_managed_reform_pilot days = 3650 }
 	}
 
 	ai_will_do = { base = 10 }
@@ -2173,7 +2181,7 @@ joint_focus = {
 
 joint_focus = {
 	id = CHI_The_G2_Declaration
-	icon = korean_peninsula
+	icon = x
 	text_icon = JOINT_CHI_focus_style
 
 	relative_position_id = CHI_The_Seoul_Gambit
@@ -2186,41 +2194,34 @@ joint_focus = {
 
 	available = {
 		KOR = { check_variable = { SFR > 40 } }
-		KOR = {
-			OR = {
-				check_variable = { influence_array^0 = CHI }
-				check_variable = { influence_array^1 = CHI }
-			}
-		}
-		USA = {
-			OR = {
-				check_variable = { influence_array^0 = CHI }
-				check_variable = { influence_array^1 = CHI }
-			}
-		}
+		KOR = { is_top3_influencer = yes }
+		USA = { is_top3_influencer = yes }
 	}
 
 	joint_trigger = { original_tag = CHI }
 
 	prerequisite = { focus = CHI_Economic_Framework_for_Unity }
 
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_The_G2_Declaration"
+	completion_reward_joint_originator = {
 		add_opinion_modifier = { target = USA modifier = g2_partners }
 		reverse_add_opinion_modifier = { target = USA modifier = g2_partners }
 		add_opinion_modifier = { target = KOR modifier = g2_triumph }
-		KOR = { add_to_variable = { SFR = 10 } }
-		add_to_variable = { CHI_kp_political_power_gain = 0.05 tooltip = CHI_kp_political_power_gain_tt }
-		add_to_variable = { CHI_kp_stability_factor = 0.05 tooltip = CHI_kp_stability_factor_tt }
-		every_country = {
+		newline = yes
+		KOR = { add_to_variable = { SFR = 10 tooltip = SFR_tt } }
+		custom_effect_tooltip = {
+			localization_key = modifies_dynamic_modifier_tt
+			MODIFIER = CHI_korea_peninsula_modifier
+		}
+		add_to_variable = { CHI_kp_political_power_gain = 0.05 tooltip = political_power_gain_tt }
+		add_to_variable = { CHI_kp_stability_factor = 0.05 tooltip = stability_factor_tt }
+		newline = yes
+		every_other_country = {
 			limit = {
 				is_major = yes
-				NOT = { tag = CHI }
 				NOT = { tag = USA }
 			}
 			add_opinion_modifier = { target = CHI modifier = CHI_g2_hegemony_accepted }
 		}
-		hidden_effect = { set_global_flag = CHI_g2_era_begun }
 	}
 
 	ai_will_do = { base = 10 }
@@ -2228,7 +2229,7 @@ joint_focus = {
 
 joint_focus = {
 	id = CHI_Let_Seoul_Lead
-	icon = korean_peninsula
+	icon = south_korea_authoritarnism
 	text_icon = JOINT_CHI_focus_style
 
 	relative_position_id = CHI_The_Seoul_Gambit
@@ -2247,24 +2248,80 @@ joint_focus = {
 
 	prerequisite = { focus = CHI_The_G2_Declaration }
 
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_Let_Seoul_Lead"
+	completion_reward_joint_originator = {
 		add_opinion_modifier = { target = KOR modifier = accepted_unity }
 		add_opinion_modifier = { target = NKO modifier = partner_in_unification }
-		KOR = { add_to_variable = { SFR = 20 } }
-		NKO = { add_timed_idea = { idea = CHI_nko_final_transition days = 1825 } }
-		add_to_variable = { CHI_kp_political_power_gain = 0.05 tooltip = CHI_kp_political_power_gain_tt }
-		hidden_effect = { set_global_flag = CHI_peaceful_korea_unification_triggered }
+		newline = yes
+		KOR = { add_to_variable = { SFR = 20 tooltip = SFR_tt } }
+		newline = yes
+		custom_effect_tooltip = {
+			localization_key = modifies_dynamic_modifier_tt
+			MODIFIER = CHI_korea_peninsula_modifier
+		}
+		add_to_variable = { CHI_kp_political_power_gain = 0.05 tooltip = political_power_gain_tt }
+	}
+
+	completion_reward_joint_member = {
+		add_timed_idea = { idea = CHI_nko_final_transition days = 1825 }
 	}
 
 	ai_will_do = { base = 10 }
 }
 
-### PATH C2 - WITHOUT WASHINGTON ###
+
+joint_focus = {
+	id = CHI_Unification_Ultimatum
+	icon = attack_north_korea
+	text_icon = JOINT_CHI_focus_style
+
+	relative_position_id = CHI_Let_Seoul_Lead
+	x = 0
+	y = 1
+
+	cost = 10
+
+	search_filters = { FOCUS_FILTER_FOREIGN_POLICY FOCUS_FILTER_POLITICAL }
+
+	available = {
+		country_exists = KOR
+		country_exists = NKO
+		country_exists = USA
+		NOT = { has_war_with = NKO }
+		KOR = { check_variable = { SFR > 80 } }
+	}
+
+	joint_trigger = { original_tag = CHI }
+
+	prerequisite = { focus = CHI_Let_Seoul_Lead }
+
+	completion_reward_joint_originator = {
+		KOR = { country_event = { id = CHI_foreign.107 days = 1 } }
+		custom_effect_tooltip = TT_IF_THEY_ACCEPT
+		effect_tooltip = {
+			custom_effect_tooltip = CHI_unification_ultimatum_accept_tt
+		}
+		custom_effect_tooltip = TT_IF_THEY_REJECT
+		effect_tooltip = {
+			custom_effect_tooltip = CHI_unification_ultimatum_reject_tt
+		}
+	}
+
+	ai_will_do = {
+		base = 2
+		modifier = {
+			factor = 4
+			check_variable = { CHI_korea_alignment > 50 }
+		}
+		modifier = {
+			factor = 0
+			NOT = { KOR = { check_variable = { SFR > 80 } } }
+		}
+	}
+}
 
 joint_focus = {
 	id = CHI_The_Pivot_Reversed
-	icon = korean_peninsula
+	icon = x
 	text_icon = JOINT_CHI_focus_style
 
 	relative_position_id = CHI_The_Seoul_Gambit
@@ -2279,19 +2336,9 @@ joint_focus = {
 
 	available = {
 		country_exists = KOR
-		KOR = {
-			OR = {
-				check_variable = { influence_array^0 = CHI }
-				check_variable = { influence_array^1 = CHI }
-			}
-		}
+		KOR = { is_top3_influencer = yes }
 		NOT = {
-			USA = {
-				OR = {
-					check_variable = { influence_array^0 = CHI }
-					check_variable = { influence_array^1 = CHI }
-				}
-			}
+			USA = { is_top3_influencer = yes }
 		}
 	}
 
@@ -2299,24 +2346,34 @@ joint_focus = {
 
 	prerequisite = { focus = CHI_The_2022_Reset }
 
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_The_Pivot_Reversed"
-		KOR = { add_timed_idea = { idea = CHI_kor_strategic_autonomy_doctrine days = 3650 } }
+	completion_reward_joint_originator = {
+		KOR = { country_event = { id = CHI_foreign.106 days = 1 } }
+		newline = yes
 		USA = { country_event = { id = CHI_foreign.040 days = 1 } }
-		NKO = { country_event = { id = CHI_foreign.041 days = 2 } }
+		newline = yes
 		add_opinion_modifier = { target = KOR modifier = CHI_replacement_partner }
 		add_opinion_modifier = { target = USA modifier = CHI_alliance_reconsidered }
-		USA = { add_timed_idea = { idea = CHI_usa_asia_pivot_collapse days = 1825 } }
+		newline = yes
+		custom_effect_tooltip = {
+			localization_key = modifies_dynamic_modifier_tt
+			MODIFIER = CHI_korea_peninsula_modifier
+		}
+		add_to_variable = { CHI_kp_foreign_subversive_activites = 0.20 tooltip = foreign_subversive_activites_tt }
+		newline = yes
 		add_to_variable = { CHI_korea_peninsula_tension = 20 tooltip = CHI_korea_peninsula_tension_tt }
-		add_to_variable = { CHI_kp_foreign_subversive_activites = 0.20 tooltip = CHI_kp_foreign_subversive_activites_tt }
 		if = {
 			limit = {
 				check_variable = { CHI_korea_peninsula_tension > 39 }
 				NOT = { has_country_flag = CHI_tension_40_fired }
 			}
+			newline = yes
 			set_country_flag = CHI_tension_40_fired
 			country_event = { id = CHI_foreign.050 days = 1 }
 		}
+	}
+
+	completion_reward_joint_member = {
+		country_event = { id = CHI_foreign.041 days = 2 }
 	}
 
 	ai_will_do = {
@@ -2330,7 +2387,7 @@ joint_focus = {
 
 joint_focus = {
 	id = CHI_Indo_Pacific_Strategy_Collapsed
-	icon = korean_peninsula
+	icon = focus_CHI_the_southern_mandate
 	text_icon = JOINT_CHI_focus_style
 
 	relative_position_id = CHI_The_Seoul_Gambit
@@ -2342,29 +2399,45 @@ joint_focus = {
 	search_filters = { FOCUS_FILTER_FOREIGN_POLICY }
 
 	available = {
-		KOR = {
-			OR = {
-				check_variable = { influence_array^0 = CHI }
-				check_variable = { influence_array^1 = CHI }
-			}
-		}
+		KOR = { is_top3_influencer = yes }
 	}
 
 	joint_trigger = { original_tag = CHI }
 
 	prerequisite = { focus = CHI_The_Pivot_Reversed }
 
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_Indo_Pacific_Strategy_Collapsed"
-		KOR = { add_timed_idea = { idea = CHI_kor_exit_trilateral days = 3650 } }
+	completion_reward_joint_originator = { #This focus needs optimisation and checks to not be duplicate and the countries receive an event for the timed idea
+		KOR = {
+			if = {
+				limit = { NOT = { has_idea = CHI_kor_exit_trilateral } }
+				add_timed_idea = { idea = CHI_kor_exit_trilateral days = 3650 }
+			}
+		}
 		JAP = { country_event = { id = CHI_foreign.042 days = 1 } }
 		PHI = { country_event = { id = CHI_foreign.043 days = 2 } }
 		USA = { country_event = { id = CHI_foreign.044 days = 2 } }
+		newline = yes
 		add_opinion_modifier = { target = JAP modifier = CHI_displaced_partner }
 		add_opinion_modifier = { target = USA modifier = CHI_displaced_partner }
-		JAP = { add_timed_idea = { idea = CHI_jap_strategic_isolation days = 3650 } }
-		PHI = { add_timed_idea = { idea = CHI_phi_abandonment_doctrine days = 3650 } }
-		add_timed_idea = { idea = CHI_south_china_sea_dominance_window days = 1825 }
+		newline = yes
+		JAP = {
+			if = {
+				limit = { NOT = { has_idea = CHI_jap_strategic_isolation } }
+				add_timed_idea = { idea = CHI_jap_strategic_isolation days = 3650 }
+			}
+		}
+		newline = yes
+		PHI = {
+			if = {
+				limit = { NOT = { has_idea = CHI_phi_abandonment_doctrine } }
+				add_timed_idea = { idea = CHI_phi_abandonment_doctrine days = 3650 }
+			}
+		}
+		newline = yes
+		if = {
+			limit = { NOT = { has_idea = CHI_south_china_sea_dominance_window } }
+			add_timed_idea = { idea = CHI_south_china_sea_dominance_window days = 1825 }
+		}
 	}
 
 	ai_will_do = { base = 10 }
@@ -2372,7 +2445,7 @@ joint_focus = {
 
 joint_focus = {
 	id = CHI_Seoul_Under_Our_Umbrella
-	icon = korean_peninsula
+	icon = x
 	text_icon = JOINT_CHI_focus_style
 
 	relative_position_id = CHI_The_Seoul_Gambit
@@ -2384,25 +2457,29 @@ joint_focus = {
 	search_filters = { FOCUS_FILTER_FOREIGN_POLICY FOCUS_FILTER_MILITARY }
 
 	available = {
-		KOR = { check_variable = { influence_array^0 = CHI } }
+		KOR = { is_top3_influencer = yes }
 	}
 
 	joint_trigger = { original_tag = CHI }
 
 	prerequisite = { focus = CHI_Indo_Pacific_Strategy_Collapsed }
 
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_Seoul_Under_Our_Umbrella"
+	completion_reward_joint_originator = { #This focus needs optimisation and checks to not be duplicate and the countries receive an event for the timed idea
 		USA = { country_event = { id = CHI_foreign.045 days = 1 } }
+		USA = { add_opinion_modifier = { target = CHI modifier = CHI_alliance_system_broken } }
 		JAP = { country_event = { id = CHI_foreign.046 days = 2 } }
+		KOR = {
+			if = {
+				limit = { NOT = { has_idea = CHI_kor_beijing_security_guarantee } }
+				add_timed_idea = { idea = CHI_kor_beijing_security_guarantee days = 3650 }
+			}
+		}
+		KOR = { add_to_variable = { SFR = 10 } }
+		newline = yes
 		add_opinion_modifier = { target = KOR modifier = CHI_the_new_normal }
 		reverse_add_opinion_modifier = { target = KOR modifier = CHI_the_new_normal }
 		add_opinion_modifier = { target = USA modifier = CHI_eclipsed_in_asia }
 		add_opinion_modifier = { target = JAP modifier = CHI_eclipsed_in_asia }
-		KOR = { add_timed_idea = { idea = CHI_kor_beijing_security_guarantee days = 3650 } }
-		KOR = { add_to_variable = { SFR = 10 } }
-		JAP = { add_threat = 0.15 }
-		USA = { add_opinion_modifier = { target = CHI modifier = CHI_alliance_system_broken } }
 	}
 
 	ai_will_do = { base = 10 }
@@ -2410,7 +2487,7 @@ joint_focus = {
 
 joint_focus = {
 	id = CHI_The_Beijing_Peace_Guarantee
-	icon = korean_peninsula
+	icon = communist_china
 	text_icon = JOINT_CHI_focus_style
 
 	relative_position_id = CHI_The_Seoul_Gambit
@@ -2429,31 +2506,35 @@ joint_focus = {
 
 	prerequisite = { focus = CHI_Seoul_Under_Our_Umbrella }
 
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_The_Beijing_Peace_Guarantee"
+	completion_reward_joint_originator = {
 		KOR = { country_event = { id = CHI_foreign.047 days = 1 } }
 		NKO = { country_event = { id = CHI_foreign.048 days = 2 } }
 		USA = { country_event = { id = CHI_foreign.049 days = 3 } }
+		newline = yes
 		add_opinion_modifier = { target = KOR modifier = accepted_unity }
 		add_opinion_modifier = { target = NKO modifier = partner_in_unification }
-		KOR = { add_to_variable = { SFR = 25 } }
-		add_to_variable = { CHI_kp_political_power_gain = 0.05 tooltip = CHI_kp_political_power_gain_tt }
-		add_to_variable = { CHI_kp_stability_factor = 0.03 tooltip = CHI_kp_stability_factor_tt }
-		every_country = {
-			limit = { is_major = yes }
-			add_opinion_modifier = { target = CHI modifier = CHI_peace_architect }
+		newline = yes
+		KOR = { add_to_variable = { SFR = 25 tooltip = SFR_tt } }
+		newline = yes
+		custom_effect_tooltip = {
+			localization_key = modifies_dynamic_modifier_tt
+			MODIFIER = CHI_korea_peninsula_modifier
 		}
-		hidden_effect = { set_global_flag = CHI_beijing_guaranteed_unification }
+		add_to_variable = { CHI_kp_political_power_gain = 0.05 tooltip = political_power_gain_tt }
+		add_to_variable = { CHI_kp_stability_factor = 0.03 tooltip = stability_factor_tt }
+		newline = yes
+		diplomatic_relation = {
+			country = KOR
+			relation = guarantee
+		}
 	}
 
 	ai_will_do = { base = 10 }
 }
 
-### PATH D - THE NINE DOTS CONSENSUS ###
-
 joint_focus = {
 	id = CHI_The_Nine_Dots_Consensus
-	icon = korean_peninsula
+	icon = x
 	text_icon = JOINT_CHI_focus_style
 
 	relative_position_id = CHI_Peninsula_Strategy
@@ -2473,39 +2554,43 @@ joint_focus = {
 	available = {
 		country_exists = KOR
 		country_exists = NKO
-		check_variable = { CHI_korea_peninsula_tension < 40 }
+		custom_trigger_tooltip = {
+			tooltip = {
+				localization_key = variable_below_tt
+				VAR_NAME = CHI_korea_peninsula_tension
+				THRESHOLD = "40"
+			}
+			check_variable = { CHI_korea_peninsula_tension < 40 }
+		}
 	}
 
 	joint_trigger = { original_tag = CHI }
 
 	prerequisite = { focus = CHI_Peninsula_Strategy }
 
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_The_Nine_Dots_Consensus"
-		add_political_power = 50
+	completion_reward_joint_originator = {
 		add_opinion_modifier = { target = KOR modifier = quiet_times }
 		add_opinion_modifier = { target = NKO modifier = quiet_times }
+		newline = yes
 		add_dynamic_modifier = { modifier = CHI_korea_peninsula_modifier }
-		set_variable = { CHI_korea_peninsula_tension = 0 }
-		add_to_variable = { CHI_kp_stability_factor = 0.03 tooltip = CHI_kp_stability_factor_tt }
-		add_to_variable = { CHI_kp_political_power_gain = 0.03 tooltip = CHI_kp_political_power_gain_tt }
-		KOR = { add_to_variable = { SFR = -5 tooltip = SFR_tt } }
-		add_to_variable = { CHI_korea_peninsula_tension = -20 tooltip = CHI_korea_peninsula_tension_tt }
+		add_to_variable = { CHI_kp_stability_factor = 0.03 tooltip = stability_factor_tt }
+		add_to_variable = { CHI_kp_political_power_gain = 0.03 tooltip = political_power_gain_tt }
+		newline = yes
 		add_timed_idea = { idea = CHI_neutral_interlocutor days = 1825 }
+		newline = yes
+		KOR = { add_to_variable = { SFR = -5 tooltip = SFR_tt } }
+		newline = yes
+		add_to_variable = { CHI_korea_peninsula_tension = -20 tooltip = CHI_korea_peninsula_tension_tt }
 	}
 
 	ai_will_do = {
 		base = 10
-		modifier = {
-			factor = 2
-			has_game_rule = { rule = CHI_ai_behavior option = CHI_AI_PEACEFUL }
-		}
 	}
 }
 
 joint_focus = {
 	id = CHI_Strengthen_Relations_with_the_South
-	icon = korean_peninsula
+	icon = align_to_south_korea
 	text_icon = JOINT_CHI_focus_style
 
 	relative_position_id = CHI_The_Nine_Dots_Consensus
@@ -2517,37 +2602,23 @@ joint_focus = {
 	search_filters = { FOCUS_FILTER_FOREIGN_POLICY }
 
 	available = {
-		KOR = {
-			OR = {
-				check_variable = { influence_array^0 = CHI }
-				check_variable = { influence_array^1 = CHI }
-				check_variable = { influence_array^2 = CHI }
-				check_variable = { influence_array^3 = CHI }
-			}
-		}
+		KOR = { is_top3_influencer = yes }
 	}
 
 	joint_trigger = { original_tag = CHI }
 
 	prerequisite = { focus = CHI_The_Nine_Dots_Consensus }
 
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_Strengthen_Relations_with_the_South"
-		add_opinion_modifier = { target = KOR modifier = diplomatic_charm }
-		reverse_add_opinion_modifier = { target = KOR modifier = diplomatic_charm }
-		KOR = { add_to_variable = { SFR = 3 } }
+	completion_reward_joint_originator = {
+		KOR = { add_to_variable = { SFR = 3 tooltip = SFR_tt } }
+		newline = yes
 		set_temp_variable = { percent_change = 5 }
 		set_temp_variable = { tag_index = CHI }
 		set_temp_variable = { influence_target = KOR }
 		change_influence_percentage = yes
-		unlock_decision_tooltip = {
-			decision = CHI_track_ii_academic_forum
-			show_effect_tooltip = yes
-		}
-		unlock_decision_tooltip = {
-			decision = CHI_rare_earth_supply_assurance
-			show_effect_tooltip = yes
-		}
+		newline = yes
+		unlock_decision_tooltip = CHI_track_ii_academic_forum
+		unlock_decision_tooltip = CHI_rare_earth_supply_assurance
 	}
 
 	ai_will_do = { base = 10 }
@@ -2555,7 +2626,7 @@ joint_focus = {
 
 joint_focus = {
 	id = CHI_Maintain_Commitment_to_Denuclearization
-	icon = korean_peninsula
+	icon = LIB_prohibit_nuclear
 	text_icon = JOINT_CHI_focus_style
 
 	relative_position_id = CHI_The_Nine_Dots_Consensus
@@ -2567,34 +2638,31 @@ joint_focus = {
 	search_filters = { FOCUS_FILTER_FOREIGN_POLICY }
 
 	available = {
-		NKO = {
-			OR = {
-				check_variable = { influence_array^0 = CHI }
-				check_variable = { influence_array^1 = CHI }
-				check_variable = { influence_array^2 = CHI }
-			}
-		}
+		NKO = { is_top3_influencer = yes }
 	}
 
 	joint_trigger = { original_tag = CHI }
 
 	prerequisite = { focus = CHI_The_Nine_Dots_Consensus }
 
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_Maintain_Commitment_to_Denuclearization"
+	completion_reward_joint_originator = {
 		add_opinion_modifier = { target = USA modifier = responsible_stakeholder }
-		add_opinion_modifier = { target = KOR modifier = nuclear_restraint }
-		NKO = { add_opinion_modifier = { target = CHI modifier = nuclear_restraint } }
-		add_to_variable = { CHI_kp_stability_factor = 0.02 tooltip = CHI_kp_stability_factor_tt }
+		add_opinion_modifier = { target = NKO modifier = nuclear_restraint }
+		newline = yes
+		custom_effect_tooltip = {
+			localization_key = modifies_dynamic_modifier_tt
+			MODIFIER = CHI_korea_peninsula_modifier
+		}
+		add_to_variable = { CHI_kp_stability_factor = 0.02 tooltip = stability_factor_tt }
+		newline = yes
 		add_to_variable = { CHI_korea_peninsula_tension = -10 tooltip = CHI_korea_peninsula_tension_tt }
-		unlock_decision_tooltip = {
-			decision = CHI_pressure_iaea_access
-			show_effect_tooltip = yes
-		}
-		unlock_decision_tooltip = {
-			decision = CHI_Press_NKO_on_Nuclear
-			show_effect_tooltip = yes
-		}
+		newline = yes
+		unlock_decision_tooltip = CHI_pressure_iaea_access
+		unlock_decision_tooltip = CHI_Press_NKO_on_Nuclear
+	}
+
+	completion_reward_joint_member = {
+		add_opinion_modifier = { target = CHI modifier = nuclear_restraint }
 	}
 
 	ai_will_do = { base = 10 }
@@ -2602,7 +2670,7 @@ joint_focus = {
 
 joint_focus = {
 	id = CHI_FTA_2015
-	icon = korean_peninsula
+	icon = trade_with_south_korea
 	text_icon = JOINT_CHI_focus_style
 
 	relative_position_id = CHI_The_Nine_Dots_Consensus
@@ -2614,11 +2682,15 @@ joint_focus = {
 	search_filters = { FOCUS_FILTER_ECONOMY FOCUS_FILTER_FOREIGN_POLICY }
 
 	available = {
+		KOR = { influence_higher_20 = yes }
 		KOR = {
-			OR = {
-				check_variable = { influence_array^0 = CHI }
-				check_variable = { influence_array^1 = CHI }
-				check_variable = { influence_array^2 = CHI }
+			custom_trigger_tooltip = {
+				tooltip = {
+					localization_key = variable_above_tt
+					VAR_NAME = SFR
+					THRESHOLD = "10"
+				}
+				check_variable = { SFR > 10 }
 			}
 		}
 	}
@@ -2627,20 +2699,24 @@ joint_focus = {
 
 	prerequisite = { focus = CHI_Strengthen_Relations_with_the_South }
 
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_FTA_2015"
+	completion_reward_joint_originator = {
 		add_opinion_modifier = { target = KOR modifier = three_links }
-		reverse_add_opinion_modifier = { target = KOR modifier = three_links }
-		KOR = { add_to_variable = { SFR = 5 } }
-		add_to_variable = { CHI_kp_intel_network_gain_factor = 0.05 tooltip = CHI_kp_intel_network_gain_factor_tt }
+		reverse_add_opinion_modifier = { target = CHI modifier = three_links }
+		newline = yes
+		KOR = { add_to_variable = { SFR = 5 tooltip = SFR_tt } }
+		newline = yes
+		custom_effect_tooltip = {
+			localization_key = modifies_dynamic_modifier_tt
+			MODIFIER = CHI_korea_peninsula_modifier
+		}
+		add_to_variable = { CHI_kp_intel_network_gain_factor = 0.05 tooltip = intel_network_gain_factor_tt }
+		newline = yes
 		set_temp_variable = { percent_change = 5 }
 		set_temp_variable = { tag_index = CHI }
 		set_temp_variable = { influence_target = KOR }
 		change_influence_percentage = yes
-		unlock_decision_tooltip = {
-			decision = CHI_trilateral_trade_forum
-			show_effect_tooltip = yes
-		}
+		newline = yes
+		unlock_decision_tooltip = CHI_trilateral_trade_forum
 	}
 
 	ai_will_do = { base = 10 }
@@ -2648,7 +2724,7 @@ joint_focus = {
 
 joint_focus = {
 	id = CHI_The_Roh_Moohyun_Framework
-	icon = korean_peninsula
+	icon = juche_market_economy
 	text_icon = JOINT_CHI_focus_style
 
 	relative_position_id = CHI_The_Nine_Dots_Consensus
@@ -2660,30 +2736,27 @@ joint_focus = {
 	search_filters = { FOCUS_FILTER_FOREIGN_POLICY }
 
 	available = {
-		NKO = {
-			OR = {
-				check_variable = { influence_array^0 = CHI }
-				check_variable = { influence_array^1 = CHI }
-				check_variable = { influence_array^2 = CHI }
-				check_variable = { influence_array^3 = CHI }
-			}
-		}
+		NKO = { influence_higher_20 = yes }
 	}
 
 	joint_trigger = { original_tag = CHI }
 
 	prerequisite = { focus = CHI_Maintain_Commitment_to_Denuclearization }
 
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_The_Roh_Moohyun_Framework"
+	completion_reward_joint_originator = {
 		add_opinion_modifier = { target = NKO modifier = fraternal_trade }
 		reverse_add_opinion_modifier = { target = NKO modifier = fraternal_trade }
-		add_to_variable = { CHI_kp_stability_factor = 0.02 tooltip = CHI_kp_stability_factor_tt }
-		add_to_variable = { CHI_korea_peninsula_tension = -5 tooltip = CHI_korea_peninsula_tension_tt }
-		unlock_decision_tooltip = {
-			decision = CHI_facilitate_family_reunions
-			show_effect_tooltip = yes
+		newline = yes
+		custom_effect_tooltip = {
+			localization_key = modifies_dynamic_modifier_tt
+			MODIFIER = CHI_korea_peninsula_modifier
 		}
+		add_to_variable = { CHI_kp_stability_factor = 0.02 tooltip = stability_factor_tt }
+		newline = yes
+		add_to_variable = { CHI_korea_peninsula_tension = -5 tooltip = CHI_korea_peninsula_tension_tt }
+		newline = yes
+		unlock_decision_tooltip = CHI_facilitate_family_reunions
+
 	}
 
 	ai_will_do = { base = 10 }
@@ -2691,7 +2764,7 @@ joint_focus = {
 
 joint_focus = {
 	id = CHI_Takeshima_Solidarity
-	icon = korean_peninsula
+	icon = KOR_propaganda
 	text_icon = JOINT_CHI_focus_style
 
 	relative_position_id = CHI_The_Nine_Dots_Consensus
@@ -2703,11 +2776,15 @@ joint_focus = {
 	search_filters = { FOCUS_FILTER_FOREIGN_POLICY }
 
 	available = {
+		KOR = { influence_higher_25 = yes }
 		KOR = {
-			OR = {
-				check_variable = { influence_array^0 = CHI }
-				check_variable = { influence_array^1 = CHI }
-				check_variable = { influence_array^2 = CHI }
+			custom_trigger_tooltip = {
+				tooltip = {
+					localization_key = variable_above_tt
+					VAR_NAME = SFR
+					THRESHOLD = "20"
+				}
+				check_variable = { SFR > 20 }
 			}
 		}
 	}
@@ -2716,12 +2793,11 @@ joint_focus = {
 
 	prerequisite = { focus = CHI_FTA_2015 }
 
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_Takeshima_Solidarity"
-		add_opinion_modifier = { target = KOR modifier = CHI_liancourt_wedge }
+	completion_reward_joint_originator = {
 		add_opinion_modifier = { target = JAP modifier = CHI_liancourt_wedge }
 		KOR = { add_opinion_modifier = { target = JAP modifier = CHI_liancourt_wedge } }
-		JAP = { add_threat = 0.10 }
+		USA = { add_opinion_modifier = { target = CHI modifier = CHI_anti_jap_wedge_driver } }
+		newline = yes
 		set_temp_variable = { percent_change = -5 }
 		set_temp_variable = { tag_index = USA }
 		set_temp_variable = { influence_target = KOR }
@@ -2730,8 +2806,12 @@ joint_focus = {
 		set_temp_variable = { tag_index = CHI }
 		set_temp_variable = { influence_target = KOR }
 		change_influence_percentage = yes
-		add_to_variable = { CHI_kp_political_power_gain = 0.02 tooltip = CHI_kp_political_power_gain_tt }
-		USA = { add_opinion_modifier = { target = CHI modifier = CHI_anti_jap_wedge_driver } }
+		newline = yes
+		custom_effect_tooltip = {
+			localization_key = modifies_dynamic_modifier_tt
+			MODIFIER = CHI_korea_peninsula_modifier
+		}
+		add_to_variable = { CHI_kp_political_power_gain = 0.02 tooltip = political_power_gain_tt }
 	}
 
 	ai_will_do = { base = 10 }
@@ -2739,7 +2819,7 @@ joint_focus = {
 
 joint_focus = {
 	id = CHI_Sunshine_Policy_Revival
-	icon = korean_peninsula
+	icon = DPRK-ROK_shake_flags
 	text_icon = JOINT_CHI_focus_style
 
 	relative_position_id = CHI_The_Nine_Dots_Consensus
@@ -2751,38 +2831,34 @@ joint_focus = {
 	search_filters = { FOCUS_FILTER_FOREIGN_POLICY }
 
 	available = {
-		NKO = {
-			OR = {
-				check_variable = { influence_array^0 = CHI }
-				check_variable = { influence_array^1 = CHI }
-			}
-		}
+		NKO = { influence_higher_25 = yes }
 	}
 
 	joint_trigger = { original_tag = CHI }
 
 	prerequisite = { focus = CHI_The_Roh_Moohyun_Framework }
 
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_Sunshine_Policy_Revival"
+	completion_reward_joint_originator = {
 		add_opinion_modifier = { target = NKO modifier = peace_is_possible }
+		newline = yes
 		KOR = {
 			add_opinion_modifier = { target = NKO modifier = peace_is_possible }
-			add_to_variable = { SFR = 5 }
+			add_to_variable = { SFR = 5 tooltip = SFR_tt }
 		}
-		add_to_variable = { CHI_kp_political_power_gain = 0.02 tooltip = CHI_kp_political_power_gain_tt }
+		newline = yes
+		custom_effect_tooltip = {
+			localization_key = modifies_dynamic_modifier_tt
+			MODIFIER = CHI_korea_peninsula_modifier
+		}
+		add_to_variable = { CHI_kp_political_power_gain = 0.02 tooltip = political_power_gain_tt }
+		newline = yes
 		set_temp_variable = { percent_change = 5 }
 		set_temp_variable = { tag_index = CHI }
 		set_temp_variable = { influence_target = NKO }
 		change_influence_percentage = yes
-		unlock_decision_tooltip = {
-			decision = CHI_beijing_hosted_talks
-			show_effect_tooltip = yes
-		}
-		unlock_decision_tooltip = {
-			decision = CHI_kaesong_expansion
-			show_effect_tooltip = yes
-		}
+		newline = yes
+		unlock_decision_tooltip = CHI_beijing_hosted_talks
+		unlock_decision_tooltip = CHI_kaesong_expansion
 	}
 
 	ai_will_do = { base = 10 }
@@ -2790,7 +2866,7 @@ joint_focus = {
 
 joint_focus = {
 	id = CHI_The_Panmunjom_Architecture
-	icon = korean_peninsula
+	icon = korea_reunification_flag
 	text_icon = JOINT_CHI_focus_style
 
 	relative_position_id = CHI_The_Nine_Dots_Consensus
@@ -2802,19 +2878,18 @@ joint_focus = {
 	search_filters = { FOCUS_FILTER_FOREIGN_POLICY }
 
 	available = {
+		KOR = { influence_higher_30 = yes }
 		KOR = {
-			OR = {
-				check_variable = { influence_array^0 = CHI }
-				check_variable = { influence_array^1 = CHI }
+			custom_trigger_tooltip = {
+				tooltip = {
+					localization_key = variable_above_tt
+					VAR_NAME = SFR
+					THRESHOLD = "35"
+				}
+				check_variable = { SFR > 35 }
 			}
 		}
-		NKO = {
-			OR = {
-				check_variable = { influence_array^0 = CHI }
-				check_variable = { influence_array^1 = CHI }
-			}
-		}
-		KOR = { check_variable = { SFR > 35 } }
+		NKO = { influence_higher_30 = yes }
 	}
 
 	joint_trigger = { original_tag = CHI }
@@ -2824,25 +2899,30 @@ joint_focus = {
 		focus = CHI_Sunshine_Policy_Revival
 	}
 
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_The_Panmunjom_Architecture"
+	completion_reward_joint_originator = {
 		add_opinion_modifier = { target = KOR modifier = peace_contributor }
 		add_opinion_modifier = { target = NKO modifier = peace_contributor }
+		newline = yes
 		KOR = {
 			add_opinion_modifier = { target = NKO modifier = peace_contributor }
-			add_to_variable = { SFR = 5 }
+			add_to_variable = { SFR = 5 tooltip = SFR_tt }
 		}
-		add_to_variable = { CHI_kp_political_power_gain = 0.05 tooltip = CHI_kp_political_power_gain_tt }
-		add_to_variable = { CHI_kp_stability_factor = 0.03 tooltip = CHI_kp_stability_factor_tt }
+		newline = yes
 		add_to_variable = { CHI_korea_peninsula_tension = -25 tooltip = CHI_korea_peninsula_tension_tt }
-		every_country = {
+		newline = yes
+		custom_effect_tooltip = {
+			localization_key = modifies_dynamic_modifier_tt
+			MODIFIER = CHI_korea_peninsula_modifier
+		}
+		add_to_variable = { CHI_kp_political_power_gain = 0.05 tooltip = political_power_gain_tt }
+		add_to_variable = { CHI_kp_stability_factor = 0.03 tooltip = stability_factor_tt }
+		newline = yes
+		every_other_country = {
 			limit = { is_major = yes }
 			add_opinion_modifier = { target = CHI modifier = CHI_peace_in_korea_delivered }
 		}
-		unlock_decision_tooltip = {
-			decision = CHI_propose_unity_government
-			show_effect_tooltip = yes
-		}
+		newline = yes
+		unlock_decision_tooltip = CHI_propose_unity_government
 	}
 
 	ai_will_do = { base = 10 }
@@ -2850,7 +2930,7 @@ joint_focus = {
 
 joint_focus = {
 	id = CHI_The_Final_Compromise
-	icon = korean_peninsula
+	icon = NKO_korea_peace
 	text_icon = JOINT_CHI_focus_style
 
 	relative_position_id = CHI_The_Nine_Dots_Consensus
@@ -2862,34 +2942,51 @@ joint_focus = {
 	search_filters = { FOCUS_FILTER_FOREIGN_POLICY }
 
 	available = {
-		KOR = { check_variable = { SFR > 60 } }
+		NKO = { influence_higher_30 = yes }
+		KOR = { influence_higher_40 = yes }
+		KOR = {
+			custom_trigger_tooltip = {
+				tooltip = {
+					localization_key = variable_above_tt
+					VAR_NAME = SFR
+					THRESHOLD = "60"
+				}
+				check_variable = { SFR > 60 }
+			}
+		}
+		KOR = {
+			custom_trigger_tooltip = {
+				tooltip = {
+					localization_key = variable_above_tt
+					VAR_NAME = reunification_chance
+					THRESHOLD = "6"
+				}
+				check_variable = { reunification_chance > 6 }
+			}
+		}
+		KOR = { has_country_flag = KOR_proposed_unity_reunification }
 	}
 
 	joint_trigger = { original_tag = CHI }
 
 	prerequisite = { focus = CHI_The_Panmunjom_Architecture }
 
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus CHI_The_Final_Compromise"
+	completion_reward_joint_originator = {
 		add_opinion_modifier = { target = KOR modifier = accepted_unity }
 		add_opinion_modifier = { target = NKO modifier = partner_in_unification }
-		NKO = { add_opinion_modifier = { target = CHI modifier = peace_is_possible } }
-		add_to_variable = { CHI_kp_political_power_gain = 0.05 tooltip = CHI_kp_political_power_gain_tt }
-		add_to_variable = { CHI_kp_stability_factor = 0.05 tooltip = CHI_kp_stability_factor_tt }
-		if = {
-			limit = { NOT = { KOR = { has_country_flag = KOR_proposed_unity_reunification } } }
-			KOR = {
-				set_country_flag = KOR_proposed_unity_reunification
-				country_event = { id = korea.26 }
-			}
+		newline = yes
+		custom_effect_tooltip = {
+			localization_key = modifies_dynamic_modifier_tt
+			MODIFIER = CHI_korea_peninsula_modifier
 		}
-		else = {
-			add_ideas = CHI_guarantor_of_korean_peace
-		}
-		hidden_effect = {
-			set_global_flag = CHI_path_d_final_compromise_reached
-			set_global_flag = CHI_peaceful_unity_korea
-		}
+		add_to_variable = { CHI_kp_political_power_gain = 0.05 tooltip = political_power_gain_tt }
+		add_to_variable = { CHI_kp_stability_factor = 0.05 tooltip = stability_factor_tt }
+		newline = yes
+		add_ideas = CHI_guarantor_of_korean_peace
+	}
+
+	completion_reward_joint_member = {
+		add_opinion_modifier = { target = CHI modifier = peace_is_possible }
 	}
 
 	ai_will_do = { base = 10 }

@@ -2714,6 +2714,7 @@ country_event = {
 	option = {
 		name = CHI_foreign.040.a
 		log = "[GetDateText]: [This.GetName]: CHI_foreign.040.a executed"
+		add_timed_idea = { idea = CHI_usa_asia_pivot_collapse days = 1825 }
 		add_opinion_modifier = { target = CHI modifier = CHI_displaced_partner }
 	}
 }
@@ -2959,6 +2960,259 @@ country_event = {
 	}
 }
 
+##############################################
+### CHI_foreign Phase II — Timed Idea Events ###
+##############################################
+
+# CHI_foreign.100 — KOR: Beijing Pressure Campaign
+country_event = {
+	id = CHI_foreign.100
+	title = CHI_foreign.100.t
+	desc = CHI_foreign.100.d
+	picture = GFX_report_event_korea_politics
+
+	is_triggered_only = yes
+
+	option = {
+		name = CHI_foreign.100.a
+		log = "[GetDateText]: [This.GetName]: CHI_foreign.100.a executed"
+		add_timed_idea = { idea = CHI_kor_beijing_pressure days = 1095 }
+	}
+}
+
+# CHI_foreign.101 — KOR: THAAD Retaliation (economic blowback)
+country_event = {
+	id = CHI_foreign.101
+	title = CHI_foreign.101.t
+	desc = CHI_foreign.101.d
+	picture = GFX_report_event_korea_politics
+
+	is_triggered_only = yes
+
+	option = {
+		name = CHI_foreign.101.a
+		log = "[GetDateText]: [This.GetName]: CHI_foreign.101.a executed"
+		add_timed_idea = { idea = CHI_informal_sanctions days = 1095 }
+	}
+}
+
+# CHI_foreign.102 — USA: Back Channel to Foggy Bottom
+country_event = {
+	id = CHI_foreign.102
+	title = CHI_foreign.102.t
+	desc = CHI_foreign.102.d
+	picture = GFX_report_event_usa_crisis
+
+	is_triggered_only = yes
+
+	option = {
+		name = CHI_foreign.102.a
+		log = "[GetDateText]: [This.GetName]: CHI_foreign.102.a executed"
+		add_timed_idea = { idea = CHI_usa_back_channel_open days = 1825 }
+	}
+}
+
+# CHI_foreign.103 — KOR: The 2022 Reset
+country_event = {
+	id = CHI_foreign.103
+	title = CHI_foreign.103.t
+	desc = CHI_foreign.103.d
+	picture = GFX_report_event_korea_politics
+
+	is_triggered_only = yes
+
+	option = {
+		name = CHI_foreign.103.a
+		log = "[GetDateText]: [This.GetName]: CHI_foreign.103.a executed"
+		add_timed_idea = { idea = CHI_kor_trilateral_opening days = 1825 }
+	}
+}
+
+# CHI_foreign.104 — USA: Post-Armistice Architecture
+country_event = {
+	id = CHI_foreign.104
+	title = CHI_foreign.104.t
+	desc = CHI_foreign.104.d
+	picture = GFX_report_event_usa_crisis
+
+	is_triggered_only = yes
+
+	option = {
+		name = CHI_foreign.104.a
+		log = "[GetDateText]: [This.GetName]: CHI_foreign.104.a executed"
+		add_timed_idea = { idea = CHI_usa_g2_framework days = 3650 }
+	}
+}
+
+# CHI_foreign.105 — KOR: Economic Framework for Unity
+country_event = {
+	id = CHI_foreign.105
+	title = CHI_foreign.105.t
+	desc = CHI_foreign.105.d
+	picture = GFX_report_event_korea_politics
+
+	is_triggered_only = yes
+
+	option = {
+		name = CHI_foreign.105.a
+		log = "[GetDateText]: [This.GetName]: CHI_foreign.105.a executed"
+		add_timed_idea = { idea = CHI_kor_g2_economic_platform days = 3650 }
+	}
+}
+
+# CHI_foreign.106 — KOR: The Pivot Reversed
+country_event = {
+	id = CHI_foreign.106
+	title = CHI_foreign.106.t
+	desc = CHI_foreign.106.d
+	picture = GFX_report_event_korea_politics
+
+	is_triggered_only = yes
+
+	option = {
+		name = CHI_foreign.106.a
+		log = "[GetDateText]: [This.GetName]: CHI_foreign.106.a executed"
+		add_timed_idea = { idea = CHI_kor_strategic_autonomy_doctrine days = 3650 }
+	}
+}
+
+##############################################
+### CHI/USA Unification Ultimatum chain    ###
+### .107 CHI->KOR heads-up (forwards)       ###
+### .108 KOR->NKO ultimatum                 ###
+### .109 NKO->CHI acceptance response       ###
+### .110 NKO->CHI refusal response          ###
+##############################################
+
+# CHI_foreign.107 — KOR is informed of the joint CHI/USA ultimatum
+country_event = {
+	id = CHI_foreign.107
+	title = CHI_foreign.107.t
+	desc = CHI_foreign.107.d
+	picture = GFX_report_event_korea_politics
+
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: Event CHI_foreign.107"
+	}
+
+	option = {
+		name = CHI_foreign.107.a
+		log = "[GetDateText]: [This.GetName]: CHI_foreign.107.a executed"
+		NKO = { country_event = { id = CHI_foreign.108 days = 2 } }
+		CHI = { add_opinion_modifier = { target = KOR modifier = accepted_unity } }
+		reverse_add_opinion_modifier = { target = CHI modifier = accepted_unity }
+	}
+
+	option = {
+		name = CHI_foreign.107.b
+		log = "[GetDateText]: [This.GetName]: CHI_foreign.107.b executed"
+		CHI = { add_opinion_modifier = { target = KOR modifier = CHI_replacement_partner } }
+		add_political_power = -50
+		ai_chance = { base = 10 }
+	}
+}
+
+# CHI_foreign.108 — NKO ultimatum: accept unification or face war
+country_event = {
+	id = CHI_foreign.108
+	title = CHI_foreign.108.t
+	desc = CHI_foreign.108.d
+	picture = GFX_report_event_north_korea_politics
+
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: Event CHI_foreign.108"
+	}
+
+	option = {
+		name = CHI_foreign.108.a
+		log = "[GetDateText]: [This.GetName]: CHI_foreign.108.a executed"
+		CHI = { country_event = { id = CHI_foreign.109 days = 2 } }
+		ai_chance = {
+			base = 10
+			modifier = {
+				factor = 3
+				has_stability < 0.30
+			}
+			modifier = {
+				factor = 0
+				has_war_support > 0.60
+			}
+		}
+	}
+
+	option = {
+		name = CHI_foreign.108.b
+		log = "[GetDateText]: [This.GetName]: CHI_foreign.108.b executed"
+		CHI = { country_event = { id = CHI_foreign.110 days = 2 } }
+		ai_chance = { base = 90 }
+	}
+}
+
+# CHI_foreign.109 — NKO accepted. CHI option triggers peaceful unification under Seoul.
+country_event = {
+	id = CHI_foreign.109
+	title = CHI_foreign.109.t
+	desc = CHI_foreign.109.d
+	picture = GFX_report_event_korea_politics
+
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: Event CHI_foreign.109"
+	}
+
+	option = {
+		name = CHI_foreign.109.a
+		log = "[GetDateText]: [This.GetName]: CHI_foreign.109.a executed"
+		add_political_power = 200
+		add_stability = 0.05
+		add_to_variable = { CHI_korea_peninsula_tension = -40 tooltip = CHI_korea_peninsula_tension_tt }
+		KOR = { add_to_variable = { SFR = 20 tooltip = SFR_tt } }
+		every_state = {
+			limit = { is_owned_by = NKO }
+			KOR = { transfer_state = PREV }
+		}
+		news_event = { id = china_news.44 days = 1 }
+		add_opinion_modifier = { target = KOR modifier = partner_in_unification }
+		reverse_add_opinion_modifier = { target = KOR modifier = partner_in_unification }
+	}
+}
+
+# CHI_foreign.110 — NKO refused. Tri-party war.
+country_event = {
+	id = CHI_foreign.110
+	title = CHI_foreign.110.t
+	desc = CHI_foreign.110.d
+	picture = GFX_report_event_generic_military_equipment
+
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: Event CHI_foreign.110"
+	}
+
+	option = {
+		name = CHI_foreign.110.a
+		log = "[GetDateText]: [This.GetName]: CHI_foreign.110.a executed"
+		add_to_variable = { CHI_korea_peninsula_tension = 40 tooltip = CHI_korea_peninsula_tension_tt }
+		create_wargoal = { type = annex_everything target = NKO }
+		declare_war_on = { target = NKO type = annex_everything }
+		USA = {
+			create_wargoal = { type = annex_everything target = NKO }
+			declare_war_on = { target = NKO type = annex_everything }
+		}
+		KOR = {
+			create_wargoal = { type = annex_everything target = NKO }
+			declare_war_on = { target = NKO type = annex_everything }
+		}
+		news_event = { id = china_news.45 days = 1 }
+	}
+}
+
 # CHI_foreign.55 — Beijing Summit Convenes
 # Fired by decision CHI_beijing_hosted_talks to CHI itself
 country_event = {
@@ -2978,6 +3232,36 @@ country_event = {
 	option = {
 		name = CHI_foreign.55.a
 		log = "[GetDateText]: [This.GetName]: CHI_foreign.55.a executed"
+		ai_chance = {
+			base = 5
+		}
+		KOR = {
+			add_to_variable = { SFR = 8 }
+			clamp_variable = {
+				var = SFR
+				min = 0
+				max = 100
+			}
+			add_opinion_modifier = { target = NKO modifier = KOR_beijing_mediated }
+		}
+		NKO = {
+			add_opinion_modifier = { target = KOR modifier = KOR_beijing_mediated }
+		}
+		set_temp_variable = { percent_change = 5 }
+		set_temp_variable = { tag_index = CHI }
+		set_temp_variable = { influence_target = KOR }
+		change_influence_percentage = yes
+		USA = { add_opinion_modifier = { target = CHI modifier = chi_usa_pressure_campaign } }
+		set_temp_variable = { BROKERAGE_AMOUNT = 5 }
+		CHI_add_brokerage = yes
+	}
+
+	option = {
+		name = CHI_foreign.55.b
+		log = "[GetDateText]: [This.GetName]: CHI_foreign.55.b executed"
+		ai_chance = {
+			base = 10
+		}
 		KOR = {
 			add_to_variable = { SFR = 5 }
 			clamp_variable = {
@@ -2990,6 +3274,29 @@ country_event = {
 		NKO = {
 			add_opinion_modifier = { target = KOR modifier = KOR_beijing_mediated }
 		}
+		USA = { add_opinion_modifier = { target = CHI modifier = responsible_stakeholder } }
+		set_temp_variable = { BROKERAGE_AMOUNT = 3 }
+		CHI_add_brokerage = yes
+	}
+
+	option = {
+		name = CHI_foreign.55.c
+		log = "[GetDateText]: [This.GetName]: CHI_foreign.55.c executed"
+		ai_chance = {
+			base = 3
+		}
+		KOR = {
+			add_to_variable = { SFR = 3 }
+			clamp_variable = {
+				var = SFR
+				min = 0
+				max = 100
+			}
+			add_opinion_modifier = { target = CHI modifier = peace_contributor }
+		}
+		add_stability = 0.02
+		set_temp_variable = { BROKERAGE_AMOUNT = 1 }
+		CHI_add_brokerage = yes
 	}
 }
 
@@ -3013,9 +3320,18 @@ country_event = {
 		if = {
 			limit = { original_tag = CHI }
 			set_country_flag = NKO_exposed_chinese_coup
-			add_political_power = -200
-			add_stability = -0.05
-			add_to_variable = { CHI_korea_peninsula_tension = 50 tooltip = CHI_korea_peninsula_tension_tt }
+			# Deep networks soften the fallout — assets go dark instead of being rolled up.
+			if = {
+				limit = { check_variable = { CHI_nko_internal_influence > 60 } }
+				add_political_power = -100
+				add_stability = -0.02
+				add_to_variable = { CHI_korea_peninsula_tension = 30 tooltip = CHI_korea_peninsula_tension_tt }
+			}
+			else = {
+				add_political_power = -200
+				add_stability = -0.05
+				add_to_variable = { CHI_korea_peninsula_tension = 50 tooltip = CHI_korea_peninsula_tension_tt }
+			}
 		}
 		else = {
 			# NKO scope
@@ -3045,13 +3361,28 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: CHI_foreign.67.a executed"
 		if = {
 			limit = { original_tag = CHI }
-			add_political_power = -100
-			add_command_power = -20
-			add_to_variable = { CHI_korea_peninsula_tension = 20 tooltip = CHI_korea_peninsula_tension_tt }
+			# With a strong internal network, enough operatives exfiltrate to preserve the position.
+			if = {
+				limit = { check_variable = { CHI_nko_internal_influence > 60 } }
+				add_political_power = -50
+				add_command_power = -10
+				add_to_variable = { CHI_korea_peninsula_tension = 10 tooltip = CHI_korea_peninsula_tension_tt }
+			}
+			else = {
+				add_political_power = -100
+				add_command_power = -20
+				add_to_variable = { CHI_korea_peninsula_tension = 20 tooltip = CHI_korea_peninsula_tension_tt }
+			}
 		}
 		else = {
 			# NKO scope
-			add_stability = -0.05
+			if = {
+				limit = { CHI = { check_variable = { CHI_nko_internal_influence > 60 } } }
+				add_stability = -0.10
+			}
+			else = {
+				add_stability = -0.05
+			}
 		}
 	}
 }
@@ -3080,9 +3411,16 @@ country_event = {
 			set_country_flag = CHI_nko_civil_war_sponsor
 		}
 		else = {
-			# NKO scope — check CHI flag to determine civil war size
+			# NKO scope — civil war size scales with CHI's internal influence
 			if = {
-				limit = { CHI = { has_country_flag = CHI_kpa_loyalty_secured } }
+				limit = { CHI = { check_variable = { CHI_nko_internal_influence > 80 } } }
+				start_civil_war = {
+					ideology = communism
+					size = 0.7
+				}
+			}
+			else_if = {
+				limit = { CHI = { check_variable = { CHI_nko_internal_influence > 60 } } }
 				start_civil_war = {
 					ideology = communism
 					size = 0.55
@@ -3121,15 +3459,28 @@ country_event = {
 			add_stability = 0.05
 			add_to_variable = { CHI_korea_peninsula_tension = -20 tooltip = CHI_korea_peninsula_tension_tt }
 			set_country_flag = CHI_coup_succeeded
-			set_autonomy = {
-				target = NKO
-				autonomy_state = autonomy_puppet_state
-				end_wars = no
+			# At overwhelming internal influence, CHI reabsorbs NKO directly rather than puppeting.
+			if = {
+				limit = { check_variable = { CHI_nko_internal_influence > 80 } }
+				every_state = {
+					limit = { is_owned_by = NKO }
+					CHI = { transfer_state = PREV }
+				}
+			}
+			else = {
+				set_autonomy = {
+					target = NKO
+					autonomy_state = autonomy_puppet_state
+					end_wars = no
+				}
 			}
 		}
 		else = {
-			# NKO scope
-			add_ideas = NKO_pro_beijing_regime
+			# NKO scope — skip regime idea if we're being annexed outright.
+			if = {
+				limit = { CHI = { NOT = { check_variable = { CHI_nko_internal_influence > 80 } } } }
+				add_ideas = NKO_pro_beijing_regime
+			}
 			if = {
 				limit = { country_exists = USA }
 				USA = { add_opinion_modifier = { target = NKO modifier = CHI_nko_regime_change_opinion } }
@@ -3216,6 +3567,38 @@ news_event = {
 	option = {
 		name = china_news.43.a
 		log = "[GetDateText]: [This.GetName]: china_news.43.a executed"
+	}
+}
+
+# china_news.44 — Korean Peninsula reunified under Seoul (NKO accepted ultimatum)
+news_event = {
+	id = china_news.44
+	title = china_news.44.t
+	desc = china_news.44.d
+	picture = GFX_report_event_korea_politics
+
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = china_news.44.a
+		log = "[GetDateText]: [This.GetName]: china_news.44.a executed"
+	}
+}
+
+# china_news.45 — CHI, USA, KOR declare war on NKO (ultimatum refused)
+news_event = {
+	id = china_news.45
+	title = china_news.45.t
+	desc = china_news.45.d
+	picture = GFX_report_event_generic_military_equipment
+
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = china_news.45.a
+		log = "[GetDateText]: [This.GetName]: china_news.45.a executed"
 	}
 }
 
