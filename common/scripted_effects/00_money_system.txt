@@ -47,8 +47,6 @@
 @refugee_percentage_adjuster = 0.005
 # Minimum workers per building
 @minimum_workers_per_building = 0.00001
-# Resource sale rate constant
-@resource_sale_rate_constant = 0.00298
 
 # ingame_update_setup
 # This function is used to update the economic setup mid game
@@ -320,7 +318,7 @@ calculate_tax_gain = {
 	# Microchip Plants
 	if = { limit = { check_variable = { microchip_plant_tax > 0 } }
 		set_temp_variable = { microchip_unified = unified_building_multiplier }
-		multiply_temp_variable = { microchip_unified = 3.6 }
+		multiply_temp_variable = { microchip_unified = 4 }
 
 		set_temp_variable = { building_final_modifier = 1 }
 		add_to_temp_variable = { building_final_modifier = modifier@microchip_plant_income_tax_modifier }
@@ -335,7 +333,7 @@ calculate_tax_gain = {
 	# Composite Plants
 	if = { limit = { check_variable = { composite_plant_tax > 0 } }
 		set_temp_variable = { composite_unified = unified_building_multiplier }
-		multiply_temp_variable = { composite_unified = 3.15 }
+		multiply_temp_variable = { composite_unified = 3.5 }
 
 		set_temp_variable = { building_final_modifier = 1 }
 		add_to_temp_variable = { building_final_modifier = modifier@composite_plant_income_tax_modifier }
@@ -350,7 +348,7 @@ calculate_tax_gain = {
 	# Synthetic Refineries
 	if = { limit = { check_variable = { synthetic_refinery_tax > 0 } }
 		set_temp_variable = { synthetic_unified = unified_building_multiplier }
-		multiply_temp_variable = { synthetic_unified = 2.7 }
+		multiply_temp_variable = { synthetic_unified = 3 }
 
 		set_temp_variable = { building_final_modifier = 1 }
 		add_to_temp_variable = { building_final_modifier = modifier@synthetic_refinery_income_tax_modifier }
@@ -2036,38 +2034,6 @@ calculate_interest_rate = {
 		set_temp_variable = { cb_rate_premium = cb_policy_rate }
 		multiply_temp_variable = { cb_rate_premium = 0.5 }
 		add_to_variable = { interest_rate = cb_rate_premium }
-
-		# Threat premium - current threat level raises borrowing costs; decays with world tension.
-		# as 1.825% per year. 80% (0.8) tensioon -> 4% interest rate (4.0).
-		set_variable = { threat_interest_premium = global.threat }
-		multiply_variable = { threat_interest_premium = 5 }
-		clamp_variable = { var = threat_interest_premium min = 0 max = 5 }
-		add_to_variable = { interest_rate = threat_interest_premium }
-		multiply_variable = { threat_interest_premium = 0.01 } # For localisation display.
-
-		# World tension cause premium - Countries which cause world tension are chaotic and less
-		# stable.
-		# Get tension created today.
-		if = {
-			limit = { not = { has_variable = tracked_threat } }
-			set_variable = { tracked_threat = 0 }
-		}
-		set_temp_variable = { recent_threat = has_added_tension_amount }
-		subtract_from_temp_variable = { recent_threat = tracked_threat }
-		# Get current country tension premium.
-		if = {
-			limit = { not = { has_variable = tension_premium } }
-			set_variable = { tension_premium = 0 }
-		}
-		# Decay by 0.5% each day, 140 days to decay 50%, 460 days to decay 90%
-		multiply_variable = { tension_premium = 0.995 }
-		add_to_variable = { tension_premium = recent_threat } # Add new tension
-		set_variable = { adjusted_tension_premium = tension_premium }
-		multiply_variable = { adjusted_tension_premium = 0.1 } # 100% tension -> 10% interest rate
-		add_to_variable = { interest_rate = adjusted_tension_premium }
-		set_variable = { tracked_threat = has_added_tension_amount }
-		multiply_variable = { adjusted_tension_premium = 0.01 } # For localisation display.
-
 
 		clamp_variable = { var = interest_rate min = 0.8 max = 50 } #Min is 0.8% on debt max is 50%
 
@@ -3866,14 +3832,6 @@ calculate_additional_expense_rate = {
 	set_temp_variable = { additional_expenses_inflation = 1 }
 	add_to_temp_variable = { additional_expenses_inflation = modifier@inflation_cost_multiplier_modifier }
 	multiply_variable = { additional_expenses_rate = additional_expenses_inflation }
-
-	# Event Horizon
-	if = {
-		limit = { has_idea = EH_intensive_research_effort_idea }
-		set_variable = { EH_intensive_research_effort_expenditure = gdp_total }
-		multiply_variable = { EH_intensive_research_effort_expenditure = EH_intensive_research_effort_expenditure_multiplier_var }
-		add_to_variable = { additional_expenses_rate = EH_intensive_research_effort_expenditure }
-	}
 }
 
 #Income Related Stuff --- International Investments and Calculated Resource Sale Rate
@@ -3884,7 +3842,6 @@ calculate_int_investments_rate = {
 
 	# Modifier for ROI
 	add_to_variable = { roi_rate = modifier@return_on_investment_modifier }
-	clamp_variable = { var = roi_rate min = 0 max = 0.20 }
 
 	#This is how much money we get back in a year
 	set_variable = { int_investments_rate = int_investments }
@@ -3896,6 +3853,16 @@ calculate_int_investments_rate = {
 
 #Calculates income from resources
 calculate_resource_sale_rate = {
+	#Set the base price for single unit of resource, this is the relative price between resources
+	# set_temp_variable = { oil_price = 6.8 } #Divided 50/50 based on oil/natural gas price #Limited to 5, was 28
+	# set_temp_variable = { steel_price = 0.024 } #Based on steel price
+	# set_temp_variable = { aluminium_price = 0.21 }	#Based on aluminium price
+	# set_temp_variable = { tungsten_price = 0.28 }	#Based on copper price
+	# set_temp_variable = { chromium_price = 0.18 }	#Based on gold price
+	# set_temp_variable = { rubber_price = 0.09 }	#Based on rubber price
+	# set_temp_variable = { microchip_price = 8 } #Based on Bird pulling a random number outta his head
+	# set_temp_variable = { composite_price = 7.4 } #Based on Doolittle saying composites have less value than microchips cause reasons
+
 	#resource_exported = total amount of resources put to market
 	set_variable = { oil_exports = resource_exported@oil }
 	set_variable = { steel_exports = resource_exported@steel }
@@ -3915,6 +3882,49 @@ calculate_resource_sale_rate = {
 	add_to_temp_variable = { resource_exports = rubber_exports }
 	add_to_temp_variable = { resource_exports = microchip_exports }
 	add_to_temp_variable = { resource_exports = composite_exports }
+
+	# Check if we have subjects
+	if = { limit = { check_variable = { num_subjects > 0 } }
+		set_temp_variable = { CIC_from_subjects = 0 }
+		for_each_scope_loop = {
+			array = subjects
+			set_temp_variable = { cic_to_overlord_modifier = 1 }
+			subtract_from_temp_variable = { cic_to_overlord_modifier = modifier@cic_to_overlord_factor }
+
+			set_temp_variable = { cic_subject_industry_lost_total = 0 }
+			add_to_temp_variable = { cic_subject_industry_lost_total = num_of_civilian_factories }
+			divide_temp_variable = { cic_subject_industry_lost_total = cic_to_overlord_modifier }
+			multiply_temp_variable = { cic_subject_industry_lost_total = modifier@cic_to_overlord_factor }
+			round_temp_variable = cic_subject_industry_lost_total
+			add_to_temp_variable = { PREV.CIC_from_subjects = cic_subject_industry_lost_total }
+		}
+		round_temp_variable = CIC_from_subjects
+	}
+
+	#Don't give money for resources that are bought, as they already give CIC
+	set_temp_variable = { CIC_from_trade = num_of_civilian_factories }
+	subtract_from_temp_variable = { CIC_from_trade = CIC_from_subjects }
+
+	# Prevents
+	if = { limit = { has_country_flag = lease_civilian_factories_flag }
+		subtract_from_temp_variable = { CIC_from_trade = leased_civilian_factories }
+	}
+	subtract_from_temp_variable = { CIC_from_trade = industrial_complex_total }
+	multiply_temp_variable = { CIC_from_trade = 8 }
+	divide_temp_variable = { CIC_from_trade = resource_exports }
+	subtract_from_temp_variable = { CIC_from_trade = 1 }
+	multiply_temp_variable = { CIC_from_trade = -1 }
+	clamp_temp_variable = { var = CIC_from_trade max = 1 min = 0 }
+
+	#Scale down everything based on above
+	multiply_variable = { oil_exports = CIC_from_trade }
+	multiply_variable = { steel_exports = CIC_from_trade }
+	multiply_variable = { aluminium_exports = CIC_from_trade }
+	multiply_variable = { tungsten_exports = CIC_from_trade }
+	multiply_variable = { chromium_exports = CIC_from_trade }
+	multiply_variable = { rubber_exports = CIC_from_trade }
+	multiply_variable = { microchip_exports = CIC_from_trade }
+	multiply_variable = { composite_exports = CIC_from_trade }
 
 	#Multiply with cost to get money generated
 	multiply_variable = { oil_exports = global.oil_price }
@@ -3959,14 +3969,15 @@ calculate_resource_sale_rate = {
 	set_variable = { resource_export_multiplier_display = resource_export_multiplier }
 	subtract_from_variable = { resource_export_multiplier_display = 1 }
 
-	multiply_variable = { oil_exports = @resource_sale_rate_constant }
-	multiply_variable = { steel_exports = @resource_sale_rate_constant }
-	multiply_variable = { aluminium_exports = @resource_sale_rate_constant }
-	multiply_variable = { tungsten_exports = @resource_sale_rate_constant }
-	multiply_variable = { chromium_exports = @resource_sale_rate_constant }
-	multiply_variable = { rubber_exports = @resource_sale_rate_constant }
-	multiply_variable = { microchip_exports = @resource_sale_rate_constant }
-	multiply_variable = { composite_exports = @resource_sale_rate_constant }
+	#Income for 7 days with scale factors (0.007 * 0.526 = 0.003682)
+	multiply_variable = { oil_exports = 0.00368 }
+	multiply_variable = { steel_exports = 0.00368 }
+	multiply_variable = { aluminium_exports = 0.00368 }
+	multiply_variable = { tungsten_exports = 0.00368 }
+	multiply_variable = { chromium_exports = 0.00368 }
+	multiply_variable = { rubber_exports = 0.00368 }
+	multiply_variable = { microchip_exports = 0.00368 }
+	multiply_variable = { composite_exports = 0.00368 }
 
 	# Clamp Export Values at 0 so Luigi's massive negatives don't break my shit
 	clamp_variable = { var = oil_exports min = 0 }
@@ -4210,7 +4221,6 @@ update_state_variables = {
 	set_variable = { var = internet_station_total value = 0 }
 	set_variable = { var = max_stored_energy value = 0 }
 	set_variable = { var = number_of_battery_parks value = 0 }
-	set_variable = { var = last_overall_productivity value = overall_productivity }
 	set_variable = { var = overall_productivity value = 0 }
 	set_variable = { var = nuclear_facility_total value = 0 }
 	set_variable = { var = air_facility_total value = 0 }
@@ -4324,13 +4334,6 @@ update_state_variables = {
 	multiply_variable = { overall_productivity = 0.1 }
 	divide_variable = { overall_productivity = population_total_m }
 	multiply_variable = { overall_productivity = 1000 }
-
-	# If no controlled states (capitulated/exiled), preserve last known productivity so the economy isn't permanently destroyed on liberation
-	if = {
-		limit = { check_variable = { overall_productivity < 1 } }
-		set_variable = { overall_productivity = last_overall_productivity }
-	}
-
 	clamp_variable = { var = overall_productivity min = 0 max = 1000000 } # INFO: This is a workaround to prevent the overflow of produtcivity to 424 million.
 
 	calculate_gdp = yes
@@ -5328,11 +5331,9 @@ productivity_growth_controlled_display_effect = {
 		limit = {
 			check_variable = { state_productivity_growth_scaled > 0 }
 		}
-		# Initial Calculation — guard against uninitialized (0) productivity_state_var causing div-by-zero overflow
-		set_temp_variable = { safe_productivity_state_var = productivity_state_var }
-		clamp_temp_variable = { var = safe_productivity_state_var min = 100 }
+		# Initial Calculation
 		set_temp_variable = { productivity_catch_up = global.average_world_productivity }
-		divide_temp_variable = { productivity_catch_up = safe_productivity_state_var }
+		divide_temp_variable = { productivity_catch_up = productivity_state_var }
 		add_to_temp_variable = { productivity_catch_up = -1 }
 		multiply_temp_variable = { productivity_catch_up = state_productivity_growth_scaled }
 		multiply_temp_variable = { productivity_catch_up = 0.5 } #control factor for the catch up effect
@@ -5370,9 +5371,7 @@ productivity_growth_controlled_display_effect = {
 	}
 	else = {
 		multiply_variable = { state_productivity_growth_scaled = productivity_state_var }
-		set_temp_variable = { safe_avg_world_prod = global.average_world_productivity }
-		clamp_temp_variable = { var = safe_avg_world_prod min = 100 }
-		divide_variable = { state_productivity_growth_scaled = safe_avg_world_prod }
+		divide_variable = { state_productivity_growth_scaled = global.average_world_productivity }
 	}
 }
 
@@ -5517,7 +5516,7 @@ productivity_growth_effect = {
 	every_controlled_state = {
 		productivity_growth_controlled_display_effect = yes
 		add_to_variable = { productivity_state_var = state_productivity_growth_scaled }
-		clamp_variable = { var = productivity_state_var min = 100 max = 100000 } # max cap prevents runaway overflow into overall_productivity
+		clamp_variable = { var = productivity_state_var min = 100 }
 	}
 	update_employment_productivity_output_dynamic_modifier = yes
 
@@ -5805,7 +5804,7 @@ set_initial_cost_resources = {
 	set_variable = { global.tungsten_price = 0.28 }	#Based on copper price
 	set_variable = { global.chromium_price = 0.18 }	#Based on gold price
 	set_variable = { global.rubber_price = 0.09 }	#Based on rubber price
-	set_variable = { global.microchip_price = 7.6 }
+	set_variable = { global.microchip_price = 8 }
 	set_variable = { global.composite_price = 7.4 }
 
 	set_variable = { global.starting_oil_price = 6.8 } #Divided 50/50 based on oil/natural gas price #Limited to 5, was 28
@@ -5814,7 +5813,7 @@ set_initial_cost_resources = {
 	set_variable = { global.starting_tungsten_price = 0.28 }	#Based on copper price
 	set_variable = { global.starting_chromium_price = 0.18 }	#Based on gold price
 	set_variable = { global.starting_rubber_price = 0.09 }	#Based on rubber price
-	set_variable = { global.starting_microchips_price = 7.6 }
+	set_variable = { global.starting_microchips_price = 8 }
 	set_variable = { global.starting_composites_price = 7.4 }
 
 	set_variable = { global.oil_export = 3381 }
@@ -5903,7 +5902,7 @@ recalculate_resources_price = {
 	divide_temp_variable = { sum_import_tungsten = sum_tungsten }
 	divide_temp_variable = { sum_import_chromium = sum_chromium }
 	divide_temp_variable = { sum_import_microchips = sum_microchips }
-	divide_temp_variable = { sum_import_composites = sum_composites }
+	divide_temp_variable = { sum_import_composites = sum_chromium }
 
 	multiply_temp_variable = { sum_import_steel = 2 }
 	multiply_temp_variable = { sum_import_rubber = 2 }
@@ -6249,8 +6248,6 @@ calcluate_program_distributions = {
 		var:v = {
 			set_variable = { un_esco_political_power_var = esco_political_budget }
 			set_variable = { un_esco_research_speed_var = esco_research_budget }
-			multiply_variable = { un_esco_research_speed_var = 0.002 }
-			clamp_variable = { var = un_esco_research_speed_var min = 0 max = 0.30 }
 		}
 	}
 
@@ -6275,8 +6272,6 @@ calcluate_program_distributions = {
 		var:v = {
 			set_variable = { un_ido_current_building_count = un_ido_building_count }
 			set_variable = { un_ido_construction_speed_var = construction_speed_buffs }
-			multiply_variable = { un_ido_construction_speed_var = 0.002 }
-			clamp_variable = { var = un_ido_construction_speed_var min = 0 max = 0.30 }
 			if = {
 				limit = {
 					NOT = { check_variable = { un_ido_old_building_count = un_ido_building_count } }
@@ -6307,8 +6302,6 @@ calcluate_program_distributions = {
 
 		var:v = {
 			set_variable = { un_cdf_productivity_var = prod_var }
-			multiply_variable = { un_cdf_productivity_var = 0.002 }
-			clamp_variable = { var = un_cdf_productivity_var min = 0 max = 0.30 }
 			set_variable = { un_cdf_construction_cost_var = cost_var }
 		}
 	}

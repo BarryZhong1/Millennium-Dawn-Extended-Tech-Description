@@ -73,22 +73,12 @@ class IdeaStandardizer(BaseStandardizer):
                 block_lines_block, next_i = self.extract_block(block_lines, i)
                 # Skip performance-hurting allowed = { always = no }
                 if not self.is_performance_hurting_block(block_lines_block, "allowed"):
-                    # Replace tag = TAG with original_tag = TAG (civil war safety)
-                    # Match tag = anywhere in the line (handles both single-line and multi-line blocks)
-                    block_lines_block = [
-                        re.sub(r"\btag\s*=\s*(\w+)", r"original_tag = \1", bl)
-                        for bl in block_lines_block
-                    ]
                     props["allowed"].append(block_lines_block)
                 i = next_i
                 continue
             elif line.startswith("allowed_civil_war ="):
                 block_lines_block, next_i = self.extract_block(block_lines, i)
-                # Skip meaningless allowed_civil_war = { always = no }
-                if not self.is_performance_hurting_block(
-                    block_lines_block, "allowed_civil_war"
-                ):
-                    props["allowed_civil_war"].append(block_lines_block)
+                props["allowed_civil_war"].append(block_lines_block)
                 i = next_i
                 continue
             elif line.startswith("cancel ="):
@@ -216,18 +206,28 @@ class IdeaStandardizer(BaseStandardizer):
 
         return False
 
-    _ALWAYS_NO_PROPERTIES = {"allowed", "allowed_civil_war", "cancel"}
-
     def is_performance_hurting_block(
         self, block_lines: List[str], property_name: str
     ) -> bool:
         """Check if a block matches performance-hurting patterns to be removed"""
-        if property_name not in self._ALWAYS_NO_PROPERTIES:
+        if not block_lines:
             return False
-        return any(
-            "always = no" in line.strip() or "always=no" in line.strip()
-            for line in block_lines
-        )
+
+        # Check for allowed = { always = no } (default, hurts performance)
+        if property_name == "allowed":
+            for line in block_lines:
+                stripped = line.strip()
+                if "always = no" in stripped or "always=no" in stripped:
+                    return True
+
+        # Check for cancel = { always = no } (checked hourly, never true)
+        if property_name == "cancel":
+            for line in block_lines:
+                stripped = line.strip()
+                if "always = no" in stripped or "always=no" in stripped:
+                    return True
+
+        return False
 
     def compact_block(
         self, block_lines: List[str], base_indent: str = "\t\t"
@@ -442,6 +442,7 @@ class IdeaStandardizer(BaseStandardizer):
     def standardize_file(self, input_file: str, output_file: str) -> bool:
         """Standardize ideas file by handling nested structure properly"""
         import os
+        import re
         import time
 
         from shared_utils import extract_block, log_message
@@ -492,6 +493,8 @@ class IdeaStandardizer(BaseStandardizer):
 
     def _process_lines(self, lines: List[str], depth: int) -> List[str]:
         """Recursively process lines, handling nested structures"""
+        import re
+
         from shared_utils import extract_block, log_message
 
         output_lines = []

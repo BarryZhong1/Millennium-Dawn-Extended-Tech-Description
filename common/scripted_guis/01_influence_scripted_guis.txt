@@ -113,6 +113,9 @@ scripted_gui = {
 					OR = {
 						has_civil_war = yes
 						has_war = yes
+						hidden_trigger = {
+							has_country_flag = ai_yes_unit_build
+						}
 						has_country_flag = AI_is_threatened
 						threat > 0.50
 					}
@@ -323,7 +326,7 @@ scripted_gui = {
 				ROOT = { # Player Nation
 					save_event_target_as = influence_sender
 					PREV = { # THIS Nation
-						country_event = influence.0
+						country_event = { id = influence.0 }
 						ROOT = {
 							set_country_flag = { flag = recently_sent_aid@PREV value = 1 days = 30 }
 						}
@@ -338,7 +341,7 @@ scripted_gui = {
 			opt_aid_military_button_click = {
 				ROOT = { #Uses the same as Economic AID to ensure the root is correct
 					PREV = {
-						country_event = influence.50
+						country_event = { id = influence.50 }
 						ROOT = {
 							set_country_flag = { flag = recently_sent_military_aid@PREV value = 1 days = 60 }
 						}
@@ -352,7 +355,7 @@ scripted_gui = {
 			opt_military_supply_button_click = {
 				ROOT = { # Player Nation
 					PREV = {
-						country_event = influence.55
+						country_event = { id = influence.55 }
 						ROOT = {
 							set_country_flag = { flag = recently_sent_military_aid@PREV value = 1 days = 60 }
 						}
@@ -367,7 +370,7 @@ scripted_gui = {
 				ROOT = {
 					save_event_target_as = influence_sender
 					PREV = {
-						country_event = influence.22
+						country_event = { id = influence.22 }
 					}
 				}
 				update_dirty_influence_var = yes
@@ -509,7 +512,7 @@ scripted_gui = {
 				ROOT = {
 					save_event_target_as = influence_sender
 					PREV = {
-						country_event = influence.44
+						country_event = { id = influence.44 }
 					}
 				}
 				update_dirty_influence_var = yes
