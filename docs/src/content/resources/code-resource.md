@@ -387,6 +387,8 @@ four_random_industrial_complex = yes
 
 ### Building Costs (State-Level)
 
+The cost implies the INCLUSION of a building slot. A single building slot is $1.00 so if you want to give a **Civilian Industry** it's $6.50 without a building slot.
+
 | Building                            | Cost   |
 | ----------------------------------- | ------ |
 | Civilian/Military Factory, Dockyard | $7.50  |
@@ -625,7 +627,7 @@ Consult the [Subideology Slots table](#subideology-slots) below to pick the subi
 
 ### Step 2 — Add Localisation
 
-In `localisation/english/MD_subideology_parties_l_english.yml`, add three entries for the party. Use the format from the [Subideology Localisation Format](../../CLAUDE.md#subideology-localization-format) section of CLAUDE.md:
+In `localisation/english/MD_subideology_parties_l_english.yml`, add three entries for the party using the format below:
 
 ```yaml
 TAG.subideology: "£TAG_icon_name (ABBRV) - Party Name"

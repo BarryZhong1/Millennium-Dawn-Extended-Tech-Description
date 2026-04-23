@@ -1,4 +1,4 @@
-﻿### By XCezor in cooperation with ZdendasgamingCZ and Erty02; Military tree skeleton by Strikeeagle; Extra credit for Terrarian9111; Monarchist branch in cooperation with JhonyGEM
+### By XCezor in cooperation with ZdendasgamingCZ and Erty02; Military tree skeleton by Strikeeagle; Extra credit for Terrarian9111; Monarchist branch in cooperation with JhonyGEM
 focus_tree = {
 	id = czech_focus
 	country = {
@@ -1380,6 +1380,8 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CZE_strike_at_hungary"
+			set_temp_variable = { wargoal_on = HUN }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = HUN
@@ -1503,6 +1505,8 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CZE_bulgaria_has_to_pay_for_their_crimes"
+			set_temp_variable = { wargoal_on = BUL }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = BUL
@@ -1568,6 +1572,8 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CZE_the_biggest_threat"
+			set_temp_variable = { wargoal_on = SOV }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = SOV
@@ -6029,9 +6035,12 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus CZE_refuse_the_eurozone"
 			if = {
 				limit = {
-					has_idea = the_euro
+					has_idea = euro
 				}
-				remove_ideas = the_euro
+				swap_ideas = {
+					remove_idea = euro
+					add_idea = no_foreign_reserve
+				}
 			}
 			else = {
 				custom_effect_tooltip = POL_eurozone_opposition_dec_TT
@@ -25269,7 +25278,10 @@ focus_tree = {
 		}
 
 		allow_branch = {
-			has_character = CZE_petr_pavel
+			OR = {
+				has_character = CZE_petr_pavel
+				has_completed_focus = CZE_military_pension
+			}
 		}
 
 		completion_reward = {
@@ -27646,7 +27658,7 @@ focus_tree = {
 				ruling_only = yes
 			}
 			NOT = {
-				has_idea = the_euro
+				has_idea = euro
 			}
 		}
 
@@ -27656,7 +27668,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CZE_join_the_eurozone"
-			add_ideas = the_euro
+			joining_the_euro = yes
 			add_stability = 0.03
 		}
 
@@ -29559,7 +29571,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			country_event = { id = CZE_SLO_monarchy_event.1 }
+			country_event = CZE_SLO_monarchy_event.1
 
 			log = "[GetDateText]: [Root.GetName]: CZE_two_nations_one_crown"
 		}
@@ -29600,7 +29612,7 @@ focus_tree = {
 				}
 			}
 			AUS = {
-				country_event = { id = CZE_AUS_monarchy_event.1 }
+				country_event = CZE_AUS_monarchy_event.1
 				add_timed_idea = {
 					idea = CZE_target_foreign_monarchy_intromision
 					days = 180
@@ -29645,7 +29657,7 @@ focus_tree = {
 				}
 			}
 			HUN = {
-				country_event = { id = CZE_HUN_monarchy_event.1 }
+				country_event = CZE_HUN_monarchy_event.1
 				add_timed_idea = {
 					idea = CZE_target_foreign_monarchy_intromision
 					days = 180
@@ -30034,7 +30046,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: CZE_kingdom_of_austria"
 
-			AUS = { country_event = { id = CZE_AUS_monarchy_event.9 } }
+			AUS = { country_event = CZE_AUS_monarchy_event.9 }
 
 			clr_country_flag = CZE_AUS_monarchy_intromision
 
@@ -30076,7 +30088,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			country_event = { id = CZE_HUN_monarchy_event.3 }
+			country_event = CZE_HUN_monarchy_event.3
 
 			log = "[GetDateText]: [Root.GetName]: CZE_the_problem_with_fidesz"
 		}
@@ -30115,7 +30127,7 @@ focus_tree = {
 
 		completion_reward = {
 			HUN = {
-				country_event = { id = CZE_HUN_monarchy_event.4 }
+				country_event = CZE_HUN_monarchy_event.4
 				add_timed_idea = {
 					idea = CZE_HUN_foreign_support_to_democratics
 					days = 365
@@ -30200,7 +30212,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			HUN = { country_event = { id = CZE_HUN_monarchy_event.24 } }
+			HUN = { country_event = CZE_HUN_monarchy_event.24 }
 			log = "[GetDateText]: [Root.GetName]: CZE_cooperate_with_the_habsburg_lotaringia_haz"
 		}
 
@@ -30233,7 +30245,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			ROM = { country_event = { id = CZE_HUN_monarchy_event.27 } }
+			ROM = { country_event = CZE_HUN_monarchy_event.27 }
 			log = "[GetDateText]: [Root.GetName]: CZE_meeting_with_romania"
 		}
 
@@ -30264,7 +30276,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			HUN = { country_event = { id = CZE_HUN_monarchy_event.37 } }
+			HUN = { country_event = CZE_HUN_monarchy_event.37 }
 			log = "[GetDateText]: [Root.GetName]: CZE_visit_archduke_joseph_arpad"
 		}
 
@@ -30297,7 +30309,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			HUN = { country_event = { id = CZE_HUN_monarchy_event.45 } }
+			HUN = { country_event = CZE_HUN_monarchy_event.45 }
 			log = "[GetDateText]: [Root.GetName]: CZE_kingdom_of_hungary"
 		}
 
@@ -30331,7 +30343,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			country_event = { id = CZE_HUN_monarchy_event.31 }
+			country_event = CZE_HUN_monarchy_event.31
 			log = "[GetDateText]: [Root.GetName]: CZE_manipulate_hungarian_trade_with_russia"
 		}
 
@@ -30781,6 +30793,8 @@ focus_tree = {
 			add_state_claim = 626
 			add_state_claim = 115
 			add_war_support = 0.05
+			set_temp_variable = { wargoal_on = POL }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = take_state_focus
 				target = POL

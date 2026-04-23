@@ -131,7 +131,7 @@ form_UAR_category = {
 
 		target_array = global.arabic_countries
 
-		visible = {
+		target_root_trigger = {
 			is_neo_baathist_uar = yes
 		}
 
@@ -291,7 +291,7 @@ form_UAR_category = {
 
 		target_array = global.arabic_countries
 
-		visible = {
+		target_root_trigger = {
 			is_baathist_uar = yes
 		}
 
@@ -902,7 +902,7 @@ form_UAR_category = {
 
 		target_array = global.arabic_countries
 
-		visible = {
+		target_root_trigger = {
 			OR = {
 				is_neo_baathist_uar = yes
 				is_baathist_uar = yes
@@ -911,9 +911,6 @@ form_UAR_category = {
 
 		target_trigger = {
 			FROM = { is_subject_of = ROOT }
-		}
-
-		available = {
 		}
 
 		days_remove = 90
@@ -1016,6 +1013,10 @@ form_UAR_category = {
 					}
 				}
 				ROOT = {
+					set_temp_variable = { wargoal_by = ROOT }
+					set_temp_variable = { wargoal_on = PREV }
+					set_temp_variable = { wargoal_type = 2 }
+					add_threat_from_wargoal_effect = yes
 					create_wargoal = {
 						target = PREV
 						type = annex_everything
@@ -1110,6 +1111,10 @@ form_UAR_category = {
 					}
 				}
 				ROOT = {
+					set_temp_variable = { wargoal_by = ROOT }
+					set_temp_variable = { wargoal_on = PREV }
+					set_temp_variable = { wargoal_type = 2 }
+					add_threat_from_wargoal_effect = yes
 					create_wargoal = {
 						target = PREV
 						type = annex_everything
@@ -1794,6 +1799,7 @@ form_UAR_category = {
 				}
 			}
 		}
+		ai_will_do = { base = 0 }
 	}
 
 	#Iraq, 26.14 million

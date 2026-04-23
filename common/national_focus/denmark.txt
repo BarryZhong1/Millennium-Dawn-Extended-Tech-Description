@@ -3480,7 +3480,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 5
+			base = 5
 		}
 	}
 
@@ -4691,7 +4691,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 10
+			base = 10
 		}
 	}
 
@@ -5024,7 +5024,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 10
+			base = 10
 		}
 	}
 
@@ -7352,7 +7352,7 @@ focus_tree = {
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = DEN_Culture_modifier }
 			add_to_variable = { DEN_Culture_nationalist_drift = 0.02 tooltip = nationalist_drift_tt }
 			add_to_variable = { DEN_Culture_resistance_growth = 0.04 tooltip = resistance_growth_tt }
-			country_event = { id = denmark.18 }
+			country_event = denmark.18
 		}
 
 		ai_will_do = {
@@ -7630,11 +7630,6 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus DEN_question_democratic_values"
 			decrease_corruption = yes
 			increase_military_spending = yes
-			if = {
-				limit = {
-					has_idea = defence_09
-				}
-			}
 		}
 
 		ai_will_do = {
@@ -7750,11 +7745,6 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus DEN_contact_the_army"
 			increase_conscription_effect = yes
-			if = {
-				limit = {
-					has_idea = draft_army
-				}
-			}
 		}
 
 		ai_will_do = {
@@ -7962,7 +7952,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus DEN_the_king_of_denmark"
 			add_political_power = 300
-			country_event = { id = denmark.20 }
+			country_event = denmark.20
 			set_temp_variable = { party_index = 23 }
 				set_temp_variable = { party_popularity_increase = 0.05 }
 				add_relative_party_popularity = yes
@@ -9057,7 +9047,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
@@ -10026,7 +10016,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 10
+			base = 10
 		}
 	}
 
@@ -10578,7 +10568,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
@@ -11103,14 +11093,20 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus DEN_remember_history"
+			set_temp_variable = { wargoal_on = SWE }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = SWE
 			}
+			set_temp_variable = { wargoal_on = NOR }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = NOR
 			}
+			set_temp_variable = { wargoal_on = ICE }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = ICE
@@ -11174,6 +11170,8 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus DEN_Hamburg_is_Danish"
 			1080 = { add_claim_by = DEN }
+			set_temp_variable = { wargoal_on = GER }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = take_state_focus
 				target = GER
@@ -11207,6 +11205,9 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus DEN_ancient_history"
+			set_temp_variable = { wargoal_on = EST }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = annex_everything
 				target = EST
@@ -11240,10 +11241,16 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus DEN_Baltic_Garrison"
+			set_temp_variable = { wargoal_on = LIT }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = annex_everything
 				target = LIT
 			}
+			set_temp_variable = { wargoal_on = LAT }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = annex_everything
 				target = LAT
@@ -11276,6 +11283,9 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus DEN_finlands_history"
+			set_temp_variable = { wargoal_on = FIN }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = annex_everything
 				target = FIN
@@ -11416,6 +11426,8 @@ focus_tree = {
 				add_claim_by = DEN
 			}
 			newline = yes
+			set_temp_variable = { wargoal_on = SOV }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = take_state_focus
 				target = SOV
@@ -11440,6 +11452,8 @@ focus_tree = {
 					656
 				}
 			}
+			set_temp_variable = { wargoal_on = UKR }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = take_state_focus
 				target = UKR
@@ -11457,6 +11471,8 @@ focus_tree = {
 					1088
 				}
 			}
+			set_temp_variable = { wargoal_on = BLR }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = take_state_focus
 				target = BLR
@@ -11557,6 +11573,8 @@ focus_tree = {
 				add_claim_by = DEN
 			}
 			newline = yes
+			set_temp_variable = { wargoal_on = ENG }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = take_state_focus
 				target = ENG
@@ -12998,7 +13016,7 @@ focus_tree = {
 				if = { limit = { has_intelligence_agency = no }
 					create_intelligence_agency = {
 						name = "Forsvarets Efterretningstjeneste"
-						icon = GFX_intelligence_agency_logo_DEN
+						icon = GFX_intelligence_agency_logo_generic_1
 					}
 				}
 			}

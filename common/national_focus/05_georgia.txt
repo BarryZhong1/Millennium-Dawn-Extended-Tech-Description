@@ -274,7 +274,6 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus GEO_red_bridge"
-			custom_effect_tooltip = ARM_red_bridge_TT
 			add_popularity = {
 				ideology = communism
 				popularity = 0.1
@@ -959,6 +958,9 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus GEO_intervene_in_azerbaijan"
+
+			set_temp_variable = { wargoal_on = AZE }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = AZE
@@ -1124,6 +1126,10 @@ focus_tree = {
 			modifier = {
 				factor = 0
 				check_variable = { interest_rate > 9 }
+			}
+			modifier = {
+				factor = 0
+				can_staff_an_industrial_complex = no
 			}
 		}
 	}
@@ -1365,10 +1371,10 @@ focus_tree = {
 			add_stability = -0.1
 			if = {
 				limit = {
-					has_idea = The_Clergy
+					has_idea = the_clergy
 				}
 				swap_ideas = {
-					remove_idea = The_Clergy
+					remove_idea = the_clergy
 					add_idea = intelligence_community
 				}
 			}
@@ -1435,6 +1441,10 @@ focus_tree = {
 			modifier = {
 				factor = 0
 				check_variable = { interest_rate > 9 }
+			}
+			modifier = {
+				factor = 0
+				can_staff_an_industrial_complex = no
 			}
 		}
 	}
@@ -1775,6 +1785,10 @@ focus_tree = {
 				factor = 0
 				check_variable = { interest_rate > 9 }
 			}
+			modifier = {
+				factor = 0
+				can_staff_an_arms_industry = no
+			}
 		}
 	}
 	focus = {
@@ -1862,6 +1876,10 @@ focus_tree = {
 			modifier = {
 				factor = 0
 				check_variable = { interest_rate > 9 }
+			}
+			modifier = {
+				factor = 0
+				can_staff_an_industrial_complex = no
 			}
 		}
 	}
@@ -2183,9 +2201,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus GEO_osset_abkhaz_priznat"
-			news_event = {
-				id = georgia_news.1
-			}
+			news_event = georgia_news.1
 		}
 
 		ai_will_do = {
@@ -4837,6 +4853,10 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus GEO_crush_nat_azeri"
+
+			set_temp_variable = { wargoal_on = AZE }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = annex_everything
 				target = AZE
@@ -4902,6 +4922,10 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus GEO_crush_turk"
+
+			set_temp_variable = { wargoal_on = TUR }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = annex_everything
 				target = TUR
@@ -4936,6 +4960,10 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus GEO_crush_nat_armeni"
+
+			set_temp_variable = { wargoal_on = ARM }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = annex_everything
 				target = ARM
@@ -5000,6 +5028,10 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus GEO_crush_northcauc"
+
+			set_temp_variable = { wargoal_on = SOV }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = annex_everything
 				target = SOV
@@ -5167,10 +5199,18 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus GEO_yos_warl_abk_oss"
 			add_state_core = 706
 			add_state_core = 705
+
+			set_temp_variable = { wargoal_on = SOO }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = annex_everything
 				target = SOO
 			}
+
+			set_temp_variable = { wargoal_on = ABK }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = annex_everything
 				target = ABK
@@ -5590,6 +5630,10 @@ focus_tree = {
 				factor = 0
 				check_variable = { interest_rate > 9 }
 			}
+			modifier = {
+				factor = 0
+				can_staff_an_arms_industry = no
+			}
 		}
 	}
 	focus = {
@@ -5651,7 +5695,6 @@ focus_tree = {
 				set_temp_variable = { rul_party_temp = 2 }
 				set_temp_variable = { col_one = 20 }
 				change_ruling_party_effect = yes
-				custom_effect_tooltip = ARM_com1_TT
 				set_temp_variable = {
 					current_cons_popularity = party_pop_array^2
 				}
@@ -8141,6 +8184,10 @@ focus_tree = {
 
 		ai_will_do = {
 			base = 15
+			modifier = {
+				factor = 0
+				can_staff_an_industrial_complex = no
+			}
 		}
 	}
 	#Georgian Economics
@@ -8713,6 +8760,10 @@ focus_tree = {
 			modifier = {
 				factor = 0
 				check_variable = { interest_rate > 9 }
+			}
+			modifier = {
+				factor = 0
+				can_staff_an_industrial_complex = no
 			}
 		}
 	}
@@ -9361,6 +9412,10 @@ focus_tree = {
 				factor = 0
 				check_variable = { interest_rate > 9 }
 			}
+			modifier = {
+				factor = 0
+				can_staff_an_industrial_complex = no
+			}
 		}
 	}
 	focus = {
@@ -9388,6 +9443,10 @@ focus_tree = {
 			modifier = {
 				factor = 0
 				check_variable = { interest_rate > 9 }
+			}
+			modifier = {
+				factor = 0
+				can_staff_an_industrial_complex = no
 			}
 		}
 	}
@@ -9485,6 +9544,10 @@ focus_tree = {
 
 		ai_will_do = {
 			base = 15
+			modifier = {
+				factor = 0
+				can_staff_an_offices = no
+			}
 		}
 	}
 	focus = {
@@ -9578,6 +9641,10 @@ focus_tree = {
 				factor = 0
 				check_variable = { interest_rate > 9 }
 			}
+			modifier = {
+				factor = 0
+				can_staff_an_industrial_complex = no
+			}
 		}
 	}
 	focus = {
@@ -9605,6 +9672,10 @@ focus_tree = {
 			modifier = {
 				factor = 0
 				check_variable = { interest_rate > 9 }
+			}
+			modifier = {
+				factor = 0
+				can_staff_an_arms_industry = no
 			}
 		}
 	}
@@ -10137,6 +10208,10 @@ focus_tree = {
 				factor = 0
 				check_variable = { interest_rate > 9 }
 			}
+			modifier = {
+				factor = 0
+				can_staff_an_industrial_complex = no
+			}
 		}
 	}
 	focus = {
@@ -10174,6 +10249,10 @@ focus_tree = {
 
 		ai_will_do = {
 			base = 15
+			modifier = {
+				factor = 0
+				can_staff_an_offices = no
+			}
 		}
 	}
 	focus = {
@@ -10201,6 +10280,10 @@ focus_tree = {
 			modifier = {
 				factor = 0
 				check_variable = { interest_rate > 9 }
+			}
+			modifier = {
+				factor = 0
+				can_staff_an_industrial_complex = no
 			}
 		}
 	}
@@ -10422,6 +10505,10 @@ focus_tree = {
 			modifier = {
 				factor = 0
 				check_variable = { interest_rate > 9 }
+			}
+			modifier = {
+				factor = 0
+				can_staff_an_dockyard = no
 			}
 		}
 	}
@@ -11156,6 +11243,10 @@ focus_tree = {
 			modifier = {
 				factor = 0
 				check_variable = { interest_rate > 9 }
+			}
+			modifier = {
+				factor = 0
+				can_staff_an_offices = no
 			}
 		}
 	}
@@ -13720,6 +13811,10 @@ focus_tree = {
 			modifier = {
 				factor = 0
 				check_variable = { interest_rate > 8 }
+			}
+			modifier = {
+				factor = 0
+				can_staff_an_dockyard = no
 			}
 		}
 	}
