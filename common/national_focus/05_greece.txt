@@ -8700,13 +8700,11 @@ focus_tree = {
 
 		ai_will_do = { base = 10 }
 	}
-
-	# Eastern Alignment Branch
 	focus = {
 		id = GRE_eastern_alignment
-		icon = focus_generic_befriend_greece
+		icon = eastern_alignment
 
-		x = -12
+		x = -10
 		y = 1
 		relative_position_id = GRE_foreign_relations
 
@@ -8715,34 +8713,78 @@ focus_tree = {
 		prerequisite = { focus = GRE_foreign_relations }
 		mutually_exclusive = { focus = GRE_western_alignment }
 
-		available = { has_idea = NATO_member }
-
-		bypass = {
-			OR = {
-				NOT = { has_idea = NATO_member }
-				has_global_flag = GAME_RULE_nato_disabled
-			}
-		}
-
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: GRE_eastern_alignment"
-			NATO_leave = yes
+			add_ideas = GRE_eastern_outreach
+			newline = yes
+			add_opinion_modifier = { target = USA modifier = small_decrease }
+			reverse_add_opinion_modifier = { target = USA modifier = small_decrease }
+			newline = yes
+			every_other_country = {
+				limit = { has_idea = EU_member }
+				add_opinion_modifier = { target = ROOT modifier = small_decrease }
+			}
 		}
 
 		ai_will_do = {
 			base = 1
-			modifier = {
-				factor = 0
-				has_country_flag = ai_historical
-			}
 		}
 	}
 
 	focus = {
-		id = GRE_russia_energy
-		icon = focus_generic_befriend_greece
+		id = GRE_russia_outreach
+		icon = align_to_russia
+
+		x = -3
+		y = 1
+		relative_position_id = GRE_eastern_alignment
+
+		cost = 6.8
+
+		prerequisite = { focus = GRE_eastern_alignment }
+
+		available = {
+			country_exists = SOV
+			OR = {
+				SOV = { is_subject = no }
+				SOV = { is_subject_of = GRE }
+			}
+		}
+
+		bypass = {
+			SOV = { exists = no }
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_TRADE }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: GRE_russia_outreach"
+			SOV = { country_event = { id = greece.530 days = 2 } }
+			newline = yes
+			custom_effect_tooltip = TT_IF_THEY_ACCEPT
+			effect_tooltip = {
+				add_opinion_modifier = { target = SOV modifier = declaration_of_friendship }
+				set_temp_variable = { receiver_nation = SOV }
+				set_temp_variable = { sender_nation = GRE }
+				set_improved_trade_agreement = yes
+				add_to_variable = { GRE_eastern_alignment_score = 1 tooltip = GRE_eastern_alignment_score_tt }
+			}
+			newline = yes
+			custom_effect_tooltip = TT_IF_THEY_REJECT
+			effect_tooltip = {
+				add_political_power = -25
+				add_opinion_modifier = { target = SOV modifier = small_decrease }
+			}
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = GRE_china_outreach
+		icon = align_to_china
 
 		x = -1
 		y = 1
@@ -8753,51 +8795,7 @@ focus_tree = {
 		prerequisite = { focus = GRE_eastern_alignment }
 
 		available = {
-			OR = {
-				SOV = { is_subject = no }
-				SOV = { is_subject_of = GRE }
-			}
-		}
-
-		bypass = {
-			OR = {
-				NOT = { country_exists = SOV }
-				AND = {
-					SOV = { is_subject = yes }
-					NOT = { SOV = { is_subject_of = GRE } }
-				}
-			}
-		}
-
-		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_TRADE }
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: GRE_russia_energy"
-			set_temp_variable = { receiver_nation = SOV }
-			set_temp_variable = { sender_nation = GRE }
-			set_improved_trade_agreement = yes
-			set_temp_variable = { percent_change = 4 }
-			set_temp_variable = { tag_index = GRE }
-			set_temp_variable = { influence_target = SOV }
-			change_influence_percentage = yes
-		}
-
-		ai_will_do = { base = 10 }
-	}
-
-	focus = {
-		id = GRE_china_investments
-		icon = focus_generic_befriend_greece
-
-		x = 1
-		y = 1
-		relative_position_id = GRE_eastern_alignment
-
-		cost = 6.8
-
-		prerequisite = { focus = GRE_eastern_alignment }
-
-		available = {
+			country_exists = CHI
 			OR = {
 				CHI = { is_subject = no }
 				CHI = { is_subject_of = GRE }
@@ -8817,33 +8815,147 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_TRADE }
 
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: GRE_china_investments"
-			set_temp_variable = { percent_change = 6 }
-			set_temp_variable = { tag_index = GRE }
-			set_temp_variable = { influence_target = CHI }
-			change_influence_percentage = yes
+			log = "[GetDateText]: [Root.GetName]: GRE_china_outreach"
+			CHI = { country_event = { id = greece.536 days = 2 } }
+			newline = yes
+			custom_effect_tooltip = TT_IF_THEY_ACCEPT
+			effect_tooltip = {
+				set_temp_variable = { percent_change = 5 }
+				set_temp_variable = { tag_index = GRE }
+				set_temp_variable = { influence_target = CHI }
+				change_influence_percentage = yes
+				add_to_variable = { GRE_eastern_alignment_score = 1 tooltip = GRE_eastern_alignment_score_tt }
+			}
+			custom_effect_tooltip = TT_IF_THEY_REJECT
+			effect_tooltip = {
+				add_political_power = -25
+				add_opinion_modifier = { target = CHI modifier = small_decrease }
+			}
 		}
 
 		ai_will_do = { base = 10 }
 	}
 
 	focus = {
-		id = GRE_russia_military
-		icon = focus_generic_befriend_greece
+		id = GRE_iran_outreach
+		icon = align_to_iran
 
-		x = -1
+		x = 1
+		y = 1
+		relative_position_id = GRE_eastern_alignment
+
+		cost = 6.8
+
+		prerequisite = { focus = GRE_eastern_alignment }
+
+		available = {
+			country_exists = PER
+			OR = {
+				PER = { is_subject = no }
+				PER = { is_subject_of = GRE }
+			}
+		}
+
+		bypass = {
+			OR = {
+				NOT = { country_exists = PER }
+				AND = {
+					PER = { is_subject = yes }
+					NOT = { PER = { is_subject_of = GRE } }
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_TRADE }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: GRE_iran_outreach"
+			PER = { country_event = { id = greece.542 days = 2 } }
+			newline = yes
+			custom_effect_tooltip = TT_IF_THEY_ACCEPT
+			effect_tooltip = {
+				add_opinion_modifier = { target = PER modifier = declaration_of_friendship }
+				add_timed_idea = { idea = GRE_iran_barter_framework days = 365 }
+				add_to_variable = { GRE_eastern_alignment_score = 1 tooltip = GRE_eastern_alignment_score_tt }
+			}
+			newline = yes
+			custom_effect_tooltip = TT_IF_THEY_REJECT
+			effect_tooltip = {
+				add_political_power = -25
+				add_opinion_modifier = { target = PER modifier = small_decrease }
+			}
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = GRE_orthodox_outreach
+		icon = align_to_serbia
+
+		x = 3
+		y = 1
+		relative_position_id = GRE_eastern_alignment
+
+		cost = 6.8
+
+		prerequisite = { focus = GRE_eastern_alignment }
+
+		available = {
+			country_exists = SER
+			SER = { is_subject = no }
+		}
+
+		bypass = {
+			NOT = { country_exists = SER }
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: GRE_orthodox_outreach"
+			SER = { country_event = { id = greece.548 days = 2 } }
+			newline = yes
+			custom_effect_tooltip = TT_IF_THEY_ACCEPT
+			effect_tooltip = {
+				add_opinion_modifier = { target = SER modifier = declaration_of_friendship }
+				if = {
+					limit = { country_exists = CYP }
+					add_opinion_modifier = { target = CYP modifier = declaration_of_friendship }
+					reverse_add_opinion_modifier = { target = CYP modifier = declaration_of_friendship }
+				}
+				add_to_variable = { GRE_eastern_alignment_score = 1 tooltip = GRE_eastern_alignment_score_tt }
+			}
+			newline = yes
+			custom_effect_tooltip = TT_IF_THEY_REJECT
+			effect_tooltip = {
+				add_political_power = -25
+				add_opinion_modifier = { target = SER modifier = small_decrease }
+			}
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = GRE_russia_milcoop
+		icon = RussianArms
+
+		x = -3
 		y = 2
 		relative_position_id = GRE_eastern_alignment
 
 		cost = 6.8
 
-		prerequisite = { focus = GRE_russia_energy }
+		prerequisite = { focus = GRE_russia_outreach }
 
 		available = {
+			country_exists = SOV
 			OR = {
 				SOV = { is_subject = no }
 				SOV = { is_subject_of = GRE }
 			}
+			has_opinion = { target = SOV value > 0 }
 		}
 
 		bypass = {
@@ -8859,38 +8971,52 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MILITARY }
 
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: GRE_russia_military"
-			add_opinion_modifier = { target = SOV modifier = military_cooperation }
-			reverse_add_opinion_modifier = { target = SOV modifier = military_cooperation }
-			add_tech_bonus = {
-				name = GRE_russia_military
-				bonus = 0.30
-				uses = 1
-				category = CAT_land_doctrine
+			log = "[GetDateText]: [Root.GetName]: GRE_russia_milcoop"
+			SOV = { country_event = { id = greece.533 days = 2 } }
+			newline = yes
+			custom_effect_tooltip = TT_IF_THEY_ACCEPT
+			effect_tooltip = {
+				add_opinion_modifier = { target = SOV modifier = military_cooperation }
+				reverse_add_opinion_modifier = { target = SOV modifier = military_cooperation }
+				add_tech_bonus = {
+					name = GRE_russia_milcoop
+					bonus = 0.30
+					uses = 1
+					category = CAT_land_doctrine
+				}
+				add_to_variable = { GRE_eastern_alignment_score = 2 tooltip = GRE_eastern_alignment_score_tt }
+				set_country_flag = GRE_completed_russia_deep
 			}
-			SOV = { country_event = { id = greece.520 } }
+			newline = yes
+			custom_effect_tooltip = TT_IF_THEY_REJECT
+			effect_tooltip = {
+				add_political_power = -50
+				add_opinion_modifier = { target = SOV modifier = small_decrease }
+			}
 		}
 
 		ai_will_do = { base = 10 }
 	}
 
 	focus = {
-		id = GRE_piraeus_cosco
-		icon = focus_generic_befriend_greece
+		id = GRE_china_bri_anchor
+		icon = blr_trade_agreement_china
 
-		x = 1
+		x = -1
 		y = 2
 		relative_position_id = GRE_eastern_alignment
 
 		cost = 6.8
 
-		prerequisite = { focus = GRE_china_investments }
+		prerequisite = { focus = GRE_china_outreach }
 
 		available = {
+			country_exists = CHI
 			OR = {
 				CHI = { is_subject = no }
 				CHI = { is_subject_of = GRE }
 			}
+			has_opinion = { target = CHI value > 0 }
 		}
 
 		bypass = {
@@ -8906,18 +9032,23 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_TRADE }
 
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: GRE_piraeus_cosco"
-			add_opinion_modifier = { target = CHI modifier = military_cooperation }
-			reverse_add_opinion_modifier = { target = CHI modifier = military_cooperation }
-			add_tech_bonus = {
-				name = GRE_piraeus_cosco
-				bonus = 0.40
-				uses = 1
-				category = CAT_armor
+			log = "[GetDateText]: [Root.GetName]: GRE_china_bri_anchor"
+			CHI = { country_event = { id = greece.539 days = 2 } }
+			newline = yes
+			custom_effect_tooltip = TT_IF_THEY_ACCEPT
+			effect_tooltip = {
+				add_opinion_modifier = { target = CHI modifier = military_cooperation }
+				reverse_add_opinion_modifier = { target = CHI modifier = military_cooperation }
+				add_timed_idea = { idea = GRE_chinese_investment days = 365 }
+				capital_scope = { add_extra_state_shared_building_slots = 1 }
+				add_to_variable = { GRE_eastern_alignment_score = 2 tooltip = GRE_eastern_alignment_score_tt }
+				set_country_flag = GRE_completed_china_deep
 			}
-			add_timed_idea = {
-				idea = GRE_chinese_investment
-				days = 180
+			newline = yes
+			custom_effect_tooltip = TT_IF_THEY_REJECT
+			effect_tooltip = {
+				add_political_power = -50
+				add_opinion_modifier = { target = CHI modifier = small_decrease }
 			}
 		}
 
@@ -8925,35 +9056,55 @@ focus_tree = {
 	}
 
 	focus = {
-		id = GRE_bri_membership
-		icon = focus_generic_befriend_greece
+		id = GRE_iran_med_corridor
+		icon = focus_PER_establish_opec
 
-		x = 0
-		y = 3
+		x = 1
+		y = 2
 		relative_position_id = GRE_eastern_alignment
 
-		cost = 7.62
+		cost = 6.8
 
-		prerequisite = { focus = GRE_russia_military }
-		prerequisite = { focus = GRE_piraeus_cosco }
+		prerequisite = { focus = GRE_iran_outreach }
 
-		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			country_exists = PER
+			OR = {
+				PER = { is_subject = no }
+				PER = { is_subject_of = GRE }
+			}
+			has_opinion = { target = PER value > 0 }
+		}
+
+		bypass = {
+			OR = {
+				NOT = { country_exists = PER }
+				AND = {
+					PER = { is_subject = yes }
+					NOT = { PER = { is_subject_of = GRE } }
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_TRADE }
 
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: GRE_bri_membership"
-			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = GRE }
-			set_temp_variable = { influence_target = CHI }
-			change_influence_percentage = yes
-			set_temp_variable = { influence_target = SOV }
-			change_influence_percentage = yes
-			every_country = {
-				limit = {
-					is_in_array = { array = global.nato_members value = THIS }
-					NOT = { tag = GRE }
-				}
-				add_opinion_modifier = { target = ROOT modifier = no_diplomatic_ties }
-				reverse_add_opinion_modifier = { target = ROOT modifier = no_diplomatic_ties }
+			log = "[GetDateText]: [Root.GetName]: GRE_iran_med_corridor"
+			PER = { country_event = { id = greece.545 days = 2 } }
+			newline = yes
+			custom_effect_tooltip = TT_IF_THEY_ACCEPT
+			effect_tooltip = {
+				add_opinion_modifier = { target = PER modifier = military_cooperation }
+				reverse_add_opinion_modifier = { target = PER modifier = military_cooperation }
+				add_timed_idea = { idea = GRE_iran_med_corridor_idea days = 365 }
+				add_to_variable = { GRE_eastern_alignment_score = 2 tooltip = GRE_eastern_alignment_score_tt }
+				set_country_flag = GRE_completed_iran_deep
+			}
+			newline = yes
+			custom_effect_tooltip = TT_IF_THEY_REJECT
+			effect_tooltip = {
+				add_political_power = -50
+				add_opinion_modifier = { target = PER modifier = small_decrease }
 			}
 		}
 
@@ -8961,42 +9112,173 @@ focus_tree = {
 	}
 
 	focus = {
-		id = GRE_denounce_west
-		icon = focus_generic_befriend_greece
+		id = GRE_orthodox_security
+		icon = an_orthodox_state
+
+		x = 3
+		y = 2
+		relative_position_id = GRE_eastern_alignment
+
+		cost = 6.8
+
+		prerequisite = { focus = GRE_orthodox_outreach }
+
+		available = {
+			country_exists = SER
+			SER = { is_subject = no }
+			has_opinion = { target = SER value > 0 }
+		}
+
+		bypass = {
+			NOT = { country_exists = SER }
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MILITARY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: GRE_orthodox_security"
+			SER = { country_event = { id = greece.551 days = 2 } }
+			newline = yes
+			custom_effect_tooltip = TT_IF_THEY_ACCEPT
+			effect_tooltip = {
+				add_opinion_modifier = { target = SER modifier = military_cooperation }
+				reverse_add_opinion_modifier = { target = SER modifier = military_cooperation }
+				if = {
+					limit = { country_exists = CYP }
+					add_opinion_modifier = { target = CYP modifier = military_cooperation }
+					reverse_add_opinion_modifier = { target = CYP modifier = military_cooperation }
+				}
+				if = {
+					limit = { country_exists = ARM }
+					add_opinion_modifier = { target = ARM modifier = declaration_of_friendship }
+				}
+				add_timed_idea = { idea = GRE_orthodox_defense_pact days = 730 }
+				add_to_variable = { GRE_eastern_alignment_score = 2 tooltip = GRE_eastern_alignment_score_tt }
+			}
+			newline = yes
+			custom_effect_tooltip = TT_IF_THEY_REJECT
+			effect_tooltip = {
+				add_political_power = -50
+				add_opinion_modifier = { target = SER modifier = small_decrease }
+			}
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = GRE_brics_membership
+		icon = GFX_brics
 
 		x = 0
 		y = 4
 		relative_position_id = GRE_eastern_alignment
 
-		cost = 6.8
+		cost = 7.62
 
-		prerequisite = { focus = GRE_bri_membership }
+		available = {
+			check_variable = { GRE_eastern_alignment_score > 7 }
+		}
+
+		prerequisite = { focus = GRE_russia_milcoop }
+		prerequisite = { focus = GRE_china_bri_anchor }
+		prerequisite = { focus = GRE_iran_med_corridor }
+		prerequisite = { focus = GRE_orthodox_security }
+
+		mutually_exclusive = {
+			focus = GRE_pillar_of_the_west
+		}
 
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: GRE_denounce_west"
-			add_opinion_modifier = { target = USA modifier = no_diplomatic_ties }
-			reverse_add_opinion_modifier = { target = USA modifier = no_diplomatic_ties }
-			every_country = {
-				limit = {
-					is_in_array = { array = global.nato_members value = THIS }
-					NOT = { tag = GRE }
-				}
-				add_opinion_modifier = { target = ROOT modifier = no_diplomatic_ties }
-				reverse_add_opinion_modifier = { target = ROOT modifier = no_diplomatic_ties }
+			log = "[GetDateText]: [Root.GetName]: GRE_brics_membership"
+			NATO_leave = yes
+			newline = yes
+			add_ideas = GRE_brics_anchor
+			newline = yes
+			add_ideas = RAJ_BRICS
+			newline = yes
+			if = {
+				limit = { RAJ = { has_idea = RAJ_BRICS_bank } }
+				add_ideas = RAJ_BRICS_bank
+			}
+			if = {
+				limit = { RAJ = { has_idea = RAJ_BRICS_cur } }
+				add_ideas = RAJ_BRICS_cur
+			}
+			add_to_variable = { GRE_eastern_alignment_score = 3 tooltip = GRE_eastern_alignment_score_tt }
+			if = {
+				limit = { country_exists = SOV }
+				add_opinion_modifier = { target = SOV modifier = large_increase }
+				reverse_add_opinion_modifier = { target = SOV modifier = large_increase }
+				newline = yes
+			}
+			if = {
+				limit = { country_exists = CHI }
+				add_opinion_modifier = { target = CHI modifier = large_increase }
+				reverse_add_opinion_modifier = { target = CHI modifier = large_increase }
+				newline = yes
+			}
+			if = {
+				limit = { country_exists = PER }
+				add_opinion_modifier = { target = PER modifier = large_increase }
+				reverse_add_opinion_modifier = { target = PER modifier = large_increase }
+				newline = yes
+			}
+			if = {
+				limit = { country_exists = SER }
+				add_opinion_modifier = { target = SER modifier = large_increase }
+				reverse_add_opinion_modifier = { target = SER modifier = large_increase }
+				newline = yes
+			}
+			if = {
+				limit = { country_exists = SOV }
+				SOV = { country_event = { id = greece.554 days = 3 } }
+			}
+			hidden_effect = {
+				remove_ideas = GRE_eastern_outreach
+				remove_ideas = GRE_eurasian_partner
 			}
 		}
 
 		ai_will_do = { base = 10 }
 	}
 
-	# Western Alignment Branch
+	focus = {
+		id = GRE_multipolar_anchor
+		icon = Greece_friend
+
+		x = 0
+		y = 5
+		relative_position_id = GRE_eastern_alignment
+
+		cost = 6.8
+
+		prerequisite = { focus = GRE_brics_membership }
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: GRE_multipolar_anchor"
+			if = {
+				limit = { has_idea = EU_member }
+				remove_ideas = EU_member
+			}
+			news_event = { id = greece.555 days = 1 }
+			newline = yes
+			add_to_variable = { GRE_eastern_alignment_score = 3 tooltip = GRE_eastern_alignment_score_tt }
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	# Western Alignment Branch — East-Med Hub & EU Anchor
 	focus = {
 		id = GRE_western_alignment
-		icon = focus_generic_befriend_greece
+		icon = nato_nation
 
-		x = -4
+		x = -3
 		y = 1
 		relative_position_id = GRE_foreign_relations
 
@@ -9009,22 +9291,26 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: GRE_western_alignment"
-			every_country = {
+			set_variable = { GRE_western_commitment = 0 tooltip = GRE_western_commitment_tt }
+			add_ideas = GRE_western_outreach
+			newline = yes
+			every_other_country = {
 				limit = {
 					is_in_array = { array = global.nato_members value = THIS }
-					NOT = { tag = GRE }
 				}
 				add_opinion_modifier = { target = ROOT modifier = declaration_of_friendship }
 				reverse_add_opinion_modifier = { target = ROOT modifier = declaration_of_friendship }
 			}
+			newline = yes
+			news_event = { id = greece.556 days = 1 }
 		}
 
 		ai_will_do = { base = 10 }
 	}
 
 	focus = {
-		id = GRE_nato_commitment
-		icon = focus_generic_befriend_greece
+		id = GRE_franco_hellenic_pact
+		icon = align_to_france
 
 		x = -2
 		y = 1
@@ -9034,64 +9320,38 @@ focus_tree = {
 
 		prerequisite = { focus = GRE_western_alignment }
 
-		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MILITARY }
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: GRE_nato_commitment"
-			army_experience = 75
-			add_war_support = 0.05
+		available = {
+			FRA = {
+				exists = yes
+				NOT = { has_war_with = GRE }
+			}
 		}
 
-		ai_will_do = { base = 10 }
-	}
-
-	focus = {
-		id = GRE_souda_bay_upgrade
-		icon = focus_generic_befriend_greece
-
-		x = -1
-		y = 1
-		relative_position_id = GRE_nato_commitment
-
-		cost = 6.8
-
-		prerequisite = { focus = GRE_nato_commitment }
-
-		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_NAVY }
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: GRE_souda_bay_upgrade"
-			add_opinion_modifier = { target = USA modifier = military_cooperation }
-			reverse_add_opinion_modifier = { target = USA modifier = military_cooperation }
-			navy_experience = 50
+		bypass = {
+			FRA = { exists = no }
 		}
-
-		ai_will_do = { base = 10 }
-	}
-
-	focus = {
-		id = GRE_us_defense_deal
-		icon = focus_generic_befriend_greece
-
-		x = 1
-		y = 1
-		relative_position_id = GRE_nato_commitment
-
-		cost = 6.8
-
-		prerequisite = { focus = GRE_nato_commitment }
 
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MILITARY }
 
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: GRE_us_defense_deal"
-			add_opinion_modifier = { target = USA modifier = military_cooperation }
-			reverse_add_opinion_modifier = { target = USA modifier = military_cooperation }
-			add_tech_bonus = {
-				name = GRE_us_defense_deal_air
-				bonus = 0.30
-				uses = 1
-				category = CAT_air_eqp
+			log = "[GetDateText]: [Root.GetName]: GRE_franco_hellenic_pact"
+			FRA = { country_event = { id = greece.557 days = 2 } }
+			newline = yes
+			custom_effect_tooltip = TT_IF_THEY_ACCEPT
+			effect_tooltip = {
+				add_opinion_modifier = { target = FRA modifier = declaration_of_friendship }
+				add_ideas = GRE_franco_hellenic_strategic_partnership
+				newline = yes
+				set_temp_variable = { receiver_nation = FRA }
+				set_temp_variable = { sender_nation = GRE }
+				set_improved_trade_agreement = yes
+				add_to_variable = { GRE_western_commitment = 2 tooltip = GRE_western_commitment_tt }
+			}
+			newline = yes
+			custom_effect_tooltip = TT_IF_THEY_REJECT
+			effect_tooltip = {
+				add_political_power = -25
+				add_opinion_modifier = { target = FRA modifier = small_decrease }
 			}
 		}
 
@@ -9099,36 +9359,98 @@ focus_tree = {
 	}
 
 	focus = {
-		id = GRE_nato_se_pillar
-		icon = focus_generic_befriend_greece
-
-		x = 0
-		y = 2
-		relative_position_id = GRE_nato_commitment
-
-		cost = 6.8
-
-		prerequisite = { focus = GRE_souda_bay_upgrade }
-		prerequisite = { focus = GRE_us_defense_deal }
-
-		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MILITARY }
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: GRE_nato_se_pillar"
-			add_timed_idea = {
-				idea = GRE_nato_reliability
-				days = 365
-			}
-		}
-
-		ai_will_do = { base = 10 }
-	}
-
-	focus = {
-		id = GRE_eu_deepening
-		icon = focus_generic_befriend_greece
+		id = GRE_eastmed_trilateral
+		icon = align_to_israel
 
 		x = 2
+		y = 1
+		relative_position_id = GRE_western_alignment
+
+		cost = 6.8
+
+		prerequisite = { focus = GRE_western_alignment }
+
+		available = {
+			OR = {
+				country_exists = ISR
+				country_exists = CYP
+			}
+		}
+
+		bypass = {
+			AND = {
+				NOT = { country_exists = ISR }
+				NOT = { country_exists = CYP }
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MILITARY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: GRE_eastmed_trilateral"
+			if = {
+				limit = { country_exists = ISR }
+				ISR = { country_event = { id = greece.560 days = 2 } }
+			}
+			if = {
+				limit = { country_exists = CYP }
+				CYP = { country_event = { id = greece.563 days = 2 } }
+			}
+			custom_effect_tooltip = TT_IF_THEY_ACCEPT
+			effect_tooltip = {
+				add_opinion_modifier = { target = ISR modifier = declaration_of_friendship }
+				add_opinion_modifier = { target = CYP modifier = declaration_of_friendship }
+				add_to_variable = { GRE_western_commitment = 2 tooltip = GRE_western_commitment_tt }
+				add_timed_idea = { idea = GRE_eastmed_trilateral_idea days = 180 }
+			}
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = GRE_eastmed_gas_forum
+		icon = align_to_egypt
+
+		x = 2
+		y = 4
+		relative_position_id = GRE_western_alignment
+
+		cost = 6.8
+
+		prerequisite = { focus = GRE_eastmed_trilateral }
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_TRADE }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: GRE_eastmed_gas_forum"
+			add_ideas = GRE_eastmed_gas_forum_idea
+			newline = yes
+			if = {
+				limit = { country_exists = EGY }
+				add_opinion_modifier = { target = EGY modifier = declaration_of_friendship }
+				reverse_add_opinion_modifier = { target = EGY modifier = declaration_of_friendship }
+				set_temp_variable = { receiver_nation = EGY }
+				set_temp_variable = { sender_nation = GRE }
+				set_improved_trade_agreement = yes
+			}
+			if = {
+				limit = { country_exists = ISR }
+				set_temp_variable = { receiver_nation = ISR }
+				set_temp_variable = { sender_nation = GRE }
+				set_improved_trade_agreement = yes
+			}
+			add_to_variable = { GRE_western_commitment = 1 tooltip = GRE_western_commitment_tt }
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = GRE_eu_political_anchor
+		icon = align_to_europe
+
+		x = 0
 		y = 1
 		relative_position_id = GRE_western_alignment
 
@@ -9139,15 +9461,15 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: GRE_eu_deepening"
-			every_country = {
-				limit = {
-					has_idea = EU_member
-					NOT = { tag = GRE }
-				}
+			log = "[GetDateText]: [Root.GetName]: GRE_eu_political_anchor"
+			add_ideas = GRE_eu_political_anchor_idea
+			newline = yes
+			every_other_country = {
+				limit = { has_idea = EU_member }
 				add_opinion_modifier = { target = ROOT modifier = declaration_of_friendship }
 				reverse_add_opinion_modifier = { target = ROOT modifier = declaration_of_friendship }
 			}
+			add_to_variable = { GRE_western_commitment = 1 tooltip = GRE_western_commitment_tt }
 			add_political_power = 50
 		}
 
@@ -9155,51 +9477,50 @@ focus_tree = {
 	}
 
 	focus = {
-		id = GRE_eu_recovery_funds
-		icon = focus_generic_befriend_greece
+		id = GRE_strategic_partnership_treaty
+		icon = french_policeman
 
-		x = -1
-		y = 1
-		relative_position_id = GRE_eu_deepening
+		x = -2
+		y = 3
+		relative_position_id = GRE_western_alignment
 
 		cost = 6.8
 
-		prerequisite = { focus = GRE_eu_deepening }
+		prerequisite = { focus = GRE_franco_hellenic_pact }
 
-		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: GRE_eu_recovery_funds"
-			capital_scope = { add_extra_state_shared_building_slots = 2 }
-			add_political_power = 75
+		available = {
+			country_exists = FRA
+			FRA = { is_subject = no }
+			has_idea = GRE_franco_hellenic_strategic_partnership
 		}
 
-		ai_will_do = { base = 10 }
-	}
-
-	focus = {
-		id = GRE_franco_greek_defense
-		icon = focus_generic_befriend_greece
-
-		x = 1
-		y = 1
-		relative_position_id = GRE_eu_deepening
-
-		cost = 6.8
-
-		prerequisite = { focus = GRE_eu_deepening }
+		bypass = {
+			OR = {
+				NOT = { country_exists = FRA }
+				FRA = { is_subject = yes }
+			}
+		}
 
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MILITARY }
 
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: GRE_franco_greek_defense"
-			add_opinion_modifier = { target = FRA modifier = military_cooperation }
-			reverse_add_opinion_modifier = { target = FRA modifier = military_cooperation }
-			add_tech_bonus = {
-				name = GRE_franco_greek_defense_doctrine
-				bonus = 0.25
-				uses = 1
-				category = CAT_land_doctrine
+			log = "[GetDateText]: [Root.GetName]: GRE_strategic_partnership_treaty"
+			FRA = { country_event = { id = greece.566 days = 2 } }
+			newline = yes
+			custom_effect_tooltip = TT_IF_THEY_ACCEPT
+			effect_tooltip = {
+				add_opinion_modifier = { target = FRA modifier = military_cooperation }
+				swap_ideas = {
+					remove_idea = GRE_franco_hellenic_strategic_partnership
+					add_idea = GRE_franco_greek_mutual_defense
+				}
+				add_to_variable = { GRE_western_commitment = 2 tooltip = GRE_western_commitment_tt }
+			}
+			newline	= yes
+			custom_effect_tooltip = TT_IF_THEY_REJECT
+			effect_tooltip = {
+				add_political_power = -50
+				add_opinion_modifier = { target = FRA modifier = small_decrease }
 			}
 		}
 
@@ -9207,33 +9528,125 @@ focus_tree = {
 	}
 
 	focus = {
-		id = GRE_eastern_med_hub
-		icon = focus_generic_befriend_greece
+		id = GRE_3plus1_dialogue
+		icon = align_to_america
 
-		x = 0
+		x = -1
 		y = 2
-		relative_position_id = GRE_eu_deepening
+		relative_position_id = GRE_western_alignment
 
 		cost = 6.8
 
-		prerequisite = { focus = GRE_eu_recovery_funds }
-		prerequisite = { focus = GRE_franco_greek_defense }
+		prerequisite = { focus = GRE_eastmed_trilateral }
+		prerequisite = { focus = GRE_franco_hellenic_pact }
 
-		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_TRADE }
+		available = {
+			country_exists = USA
+			USA = { is_subject = no }
+		}
+
+		bypass = {
+			OR = {
+				NOT = { country_exists = USA }
+				USA = { is_subject = yes }
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MILITARY }
 
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: GRE_eastern_med_hub"
-			add_opinion_modifier = { target = EGY modifier = declaration_of_friendship }
-			reverse_add_opinion_modifier = { target = EGY modifier = declaration_of_friendship }
-			add_opinion_modifier = { target = ISR modifier = declaration_of_friendship }
-			reverse_add_opinion_modifier = { target = ISR modifier = declaration_of_friendship }
-			set_temp_variable = { receiver_nation = EGY }
-			set_temp_variable = { sender_nation = GRE }
-			set_improved_trade_agreement = yes
-			add_timed_idea = {
-				idea = GRE_med_hub
-				days = 180
+			log = "[GetDateText]: [Root.GetName]: GRE_3plus1_dialogue"
+			USA = { country_event = { id = greece.569 days = 2 } }
+			newline = yes
+			custom_effect_tooltip = TT_IF_THEY_ACCEPT
+			effect_tooltip = {
+				add_opinion_modifier = { target = USA modifier = military_cooperation }
+				add_timed_idea = { idea = GRE_3plus1_pact days = 180 }
+				add_to_variable = { GRE_western_commitment = 2 tooltip = GRE_western_commitment_tt }
 			}
+			newline = yes
+			custom_effect_tooltip = TT_IF_THEY_REJECT
+			effect_tooltip = {
+				add_political_power = -25
+			}
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = GRE_eu_strategic_compass
+		icon = United_States_of_Europe
+
+		x = 1
+		y = 2
+		relative_position_id = GRE_western_alignment
+
+		cost = 6.8
+
+		prerequisite = { focus = GRE_eu_political_anchor }
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MILITARY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: GRE_eu_strategic_compass"
+			add_ideas = GRE_eu_strategic_compass_idea
+			newline = yes
+			if = {
+				limit = { country_exists = FRA }
+				add_opinion_modifier = { target = FRA modifier = declaration_of_friendship }
+				reverse_add_opinion_modifier = { target = FRA modifier = declaration_of_friendship }
+			}
+			if = {
+				limit = { country_exists = GER }
+				add_opinion_modifier = { target = GER modifier = declaration_of_friendship }
+				reverse_add_opinion_modifier = { target = GER modifier = declaration_of_friendship }
+			}
+			add_to_variable = { GRE_western_commitment = 1 tooltip = GRE_western_commitment_tt }
+		}
+
+		ai_will_do = { base = 10 }
+	}
+
+	focus = {
+		id = GRE_pillar_of_the_west
+		icon = megali_idea
+
+		x = 0
+		y = 4
+		relative_position_id = GRE_western_alignment
+
+		cost = 6.8
+
+		prerequisite = { focus = GRE_strategic_partnership_treaty }
+		prerequisite = { focus = GRE_3plus1_dialogue }
+		prerequisite = { focus = GRE_eu_strategic_compass }
+
+		available = {
+			check_variable = { GRE_western_commitment > 3 }
+		}
+
+		mutually_exclusive = {
+			focus = GRE_brics_membership
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: GRE_pillar_of_the_west"
+			remove_ideas = GRE_western_outreach
+			if = {
+				limit = { check_variable = { GRE_western_commitment > 9 } }
+				add_ideas = GRE_pillar_of_the_west_lvl3
+			}
+			else_if = {
+				limit = { check_variable = { GRE_western_commitment > 6 } }
+				add_ideas = GRE_pillar_of_the_west_lvl2
+			}
+			else = {
+				add_ideas = GRE_pillar_of_the_west_lvl1
+			}
+			news_event = { id = greece.572 days = 1 }
 		}
 
 		ai_will_do = { base = 10 }
@@ -9242,9 +9655,9 @@ focus_tree = {
 	# Regional Diplomacy Branch
 	focus = {
 		id = GRE_regional_diplomacy
-		icon = focus_generic_befriend_greece
+		icon = reform_the_balkan_pact
 
-		x = 4
+		x = 3
 		y = 1
 		relative_position_id = GRE_foreign_relations
 
@@ -9273,7 +9686,7 @@ focus_tree = {
 
 	focus = {
 		id = GRE_prespa_implementation
-		icon = focus_generic_befriend_greece
+		icon = deal_with_fyr
 
 		x = -1
 		y = 1
@@ -9287,12 +9700,22 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: GRE_prespa_implementation"
-			add_opinion_modifier = { target = FYR modifier = free_trade_agreement }
-			reverse_add_opinion_modifier = { target = FYR modifier = free_trade_agreement }
-			add_political_power = 75
-			add_timed_idea = {
-				idea = GRE_north_macedonian_ties
-				days = 180
+			FYR = { country_event = { id = greece.580 days = 2 } }
+			newline = yes
+			custom_effect_tooltip = TT_IF_THEY_ACCEPT
+			effect_tooltip = {
+				add_opinion_modifier = { target = FYR modifier = free_trade_agreement }
+				add_political_power = 75
+				add_timed_idea = { idea = GRE_north_macedonian_ties days = 180 }
+				set_temp_variable = { receiver_nation = FYR }
+				set_temp_variable = { sender_nation = GRE }
+				set_improved_trade_agreement = yes
+			}
+			newline = yes
+			custom_effect_tooltip = TT_IF_THEY_REJECT
+			effect_tooltip = {
+				add_political_power = -25
+				add_opinion_modifier = { target = FYR modifier = small_decrease }
 			}
 		}
 
@@ -9301,7 +9724,7 @@ focus_tree = {
 
 	focus = {
 		id = GRE_albania_minority
-		icon = focus_generic_befriend_greece
+		icon = align_to_albania
 
 		x = 1
 		y = 1
@@ -9315,9 +9738,20 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: GRE_albania_minority"
-			add_opinion_modifier = { target = ALB modifier = declaration_of_friendship }
-			reverse_add_opinion_modifier = { target = ALB modifier = declaration_of_friendship }
-			add_political_power = 50
+			ALB = { country_event = { id = greece.582 days = 2 } }
+			newline = yes
+			custom_effect_tooltip = TT_IF_THEY_ACCEPT
+			effect_tooltip = {
+				add_opinion_modifier = { target = ALB modifier = declaration_of_friendship }
+				add_ideas = GRE_epirus_cultural_ties
+				144 = { add_extra_state_shared_building_slots = 1 }
+			}
+			newline = yes
+			custom_effect_tooltip = TT_IF_THEY_REJECT
+			effect_tooltip = {
+				add_political_power = -25
+				add_opinion_modifier = { target = ALB modifier = small_decrease }
+			}
 		}
 
 		ai_will_do = { base = 10 }
@@ -9325,7 +9759,7 @@ focus_tree = {
 
 	focus = {
 		id = GRE_egypt_maritime
-		icon = focus_generic_befriend_greece
+		icon = egypt_navy
 
 		x = 0
 		y = 2
@@ -9342,13 +9776,23 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: GRE_egypt_maritime"
-			add_opinion_modifier = { target = EGY modifier = free_trade_agreement }
-			reverse_add_opinion_modifier = { target = EGY modifier = free_trade_agreement }
-			add_opinion_modifier = { target = EGY modifier = eased_border_tensions }
-			reverse_add_opinion_modifier = { target = EGY modifier = eased_border_tensions }
-			set_temp_variable = { receiver_nation = EGY }
-			set_temp_variable = { sender_nation = GRE }
-			set_improved_trade_agreement = yes
+			EGY = { country_event = { id = greece.584 days = 2 } }
+			newline = yes
+			custom_effect_tooltip = TT_IF_THEY_ACCEPT
+			effect_tooltip = {
+				add_opinion_modifier = { target = EGY modifier = free_trade_agreement }
+				add_opinion_modifier = { target = EGY modifier = eased_border_tensions }
+				set_temp_variable = { receiver_nation = EGY }
+				set_temp_variable = { sender_nation = GRE }
+				set_improved_trade_agreement = yes
+				add_timed_idea = { idea = GRE_eez_delimitation days = 180 }
+			}
+			newline = yes
+			custom_effect_tooltip = TT_IF_THEY_REJECT
+			effect_tooltip = {
+				add_political_power = -25
+				add_opinion_modifier = { target = EGY modifier = small_decrease }
+			}
 		}
 
 		ai_will_do = { base = 10 }
@@ -9356,7 +9800,7 @@ focus_tree = {
 
 	focus = {
 		id = GRE_italy_mediterranean_axis
-		icon = focus_generic_befriend_greece
+		icon = align_to_italy
 
 		x = -2
 		y = 2
@@ -9370,11 +9814,23 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: GRE_italy_mediterranean_axis"
-			add_opinion_modifier = { target = ITA modifier = declaration_of_friendship }
-			reverse_add_opinion_modifier = { target = ITA modifier = declaration_of_friendship }
-			add_opinion_modifier = { target = ITA modifier = free_trade_agreement }
-			reverse_add_opinion_modifier = { target = ITA modifier = free_trade_agreement }
-			add_political_power = 50
+			ITA = { country_event = { id = greece.586 days = 2 } }
+			newline = yes
+			custom_effect_tooltip = TT_IF_THEY_ACCEPT
+			effect_tooltip = {
+				add_opinion_modifier = { target = ITA modifier = declaration_of_friendship }
+				add_opinion_modifier = { target = ITA modifier = free_trade_agreement }
+				set_temp_variable = { receiver_nation = ITA }
+				set_temp_variable = { sender_nation = GRE }
+				set_improved_trade_agreement = yes
+				add_timed_idea = { idea = GRE_italo_hellenic_axis days = 270 }
+			}
+			newline = yes
+			custom_effect_tooltip = TT_IF_THEY_REJECT
+			effect_tooltip = {
+				add_political_power = -25
+				add_opinion_modifier = { target = ITA modifier = small_decrease }
+			}
 		}
 
 		ai_will_do = { base = 10 }
@@ -9382,7 +9838,7 @@ focus_tree = {
 
 	focus = {
 		id = GRE_balkan_energy_corridor
-		icon = focus_generic_befriend_greece
+		icon = focus_generic_electrification
 
 		x = -2
 		y = 3
@@ -9397,21 +9853,38 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: GRE_balkan_energy_corridor"
-			add_opinion_modifier = { target = BUL modifier = free_trade_agreement }
-			reverse_add_opinion_modifier = { target = BUL modifier = free_trade_agreement }
-			set_temp_variable = { receiver_nation = BUL }
-			set_temp_variable = { sender_nation = GRE }
-			set_improved_trade_agreement = yes
 			974 = {
 				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
-					type = infrastructure
+					type = energy_infrastructure
 					level = 1
 					instant_build = yes
 				}
 			}
 			140 = {
 				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = energy_infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			BUL = { country_event = { id = greece.588 days = 2 } }
+			newline = yes
+			custom_effect_tooltip = TT_IF_THEY_ACCEPT
+			effect_tooltip = {
+				add_opinion_modifier = { target = BUL modifier = free_trade_agreement }
+				set_temp_variable = { receiver_nation = BUL }
+				set_temp_variable = { sender_nation = GRE }
+				set_improved_trade_agreement = yes
+				add_ideas = GRE_balkan_gas_transit
+				add_resource = { type = oil amount = 5 state = 163 }
+			}
+			newline = yes
+			custom_effect_tooltip = TT_IF_THEY_REJECT
+			effect_tooltip = {
+				add_political_power = -25
+				add_opinion_modifier = { target = BUL modifier = small_decrease }
 			}
 		}
 
@@ -9420,7 +9893,7 @@ focus_tree = {
 
 	focus = {
 		id = GRE_mediterranean_energy_hub
-		icon = focus_generic_befriend_greece
+		icon = BRA_renewable_energy_funds
 
 		x = 0
 		y = 3
@@ -9434,11 +9907,25 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: GRE_mediterranean_energy_hub"
-			add_political_power = 25
-			add_timed_idea = {
-				idea = GRE_lng_gateway
-				days = 365
+			add_timed_idea = { idea = GRE_lng_gateway days = 365 }
+			newline = yes
+			163 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				newline = yes
+				add_resource = {
+					type = oil
+					amount = 8
+				}
 			}
+			newline = yes
+			news_event = { id = greece.575 days = 1 }
+			set_temp_variable = { treasury_change = -4 }
+			modify_treasury_effect = yes
 		}
 
 		ai_will_do = { base = 10 }
@@ -9446,7 +9933,7 @@ focus_tree = {
 
 	focus = {
 		id = GRE_gulf_strategic_partners
-		icon = focus_generic_befriend_greece
+		icon = focus_PER_persian_gulf_fleet
 
 		x = 2
 		y = 3
@@ -9460,13 +9947,23 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: GRE_gulf_strategic_partners"
-			add_opinion_modifier = { target = SAU modifier = declaration_of_friendship }
-			reverse_add_opinion_modifier = { target = SAU modifier = declaration_of_friendship }
-			add_opinion_modifier = { target = SAU modifier = military_cooperation }
-			reverse_add_opinion_modifier = { target = SAU modifier = military_cooperation }
-			add_opinion_modifier = { target = UAE modifier = declaration_of_friendship }
-			reverse_add_opinion_modifier = { target = UAE modifier = declaration_of_friendship }
-			add_political_power = 75
+			SAU = { country_event = { id = greece.590 days = 2 } }
+			UAE = { country_event = { id = greece.592 days = 2 } }
+			newline = yes
+			custom_effect_tooltip = TT_IF_THEY_ACCEPT
+			effect_tooltip = {
+				add_opinion_modifier = { target = SAU modifier = declaration_of_friendship }
+				add_opinion_modifier = { target = SAU modifier = military_cooperation }
+				add_opinion_modifier = { target = UAE modifier = declaration_of_friendship }
+				set_temp_variable = { treasury_change = 6 }
+				modify_treasury_effect = yes
+				add_timed_idea = { idea = GRE_gulf_capital_inflow days = 365 }
+			}
+			newline = yes
+			custom_effect_tooltip = TT_IF_THEY_REJECT
+			effect_tooltip = {
+				add_political_power = -25
+			}
 		}
 
 		ai_will_do = { base = 10 }
@@ -9474,7 +9971,7 @@ focus_tree = {
 
 	focus = {
 		id = GRE_balkans_eu_advocacy
-		icon = focus_generic_befriend_greece
+		icon = focus_GER_european_confederation
 
 		x = -2
 		y = 4
@@ -9492,17 +9989,23 @@ focus_tree = {
 			set_temp_variable = { tag_index = GRE }
 			set_temp_variable = { influence_target = SER }
 			change_influence_percentage = yes
+			newline = yes
 			set_temp_variable = { percent_change = 2 }
 			set_temp_variable = { tag_index = GRE }
 			set_temp_variable = { influence_target = ALB }
 			change_influence_percentage = yes
+			newline = yes
 			set_temp_variable = { percent_change = 3 }
 			set_temp_variable = { tag_index = GRE }
 			set_temp_variable = { influence_target = FYR }
 			change_influence_percentage = yes
-			add_timed_idea = {
-				idea = GRE_balkan_advocate
-				days = 365
+			newline = yes
+			add_timed_idea = { idea = GRE_balkan_advocate days = 365 }
+			newline	= yes
+			every_other_country = {
+				limit = { has_idea = EU_member }
+				add_opinion_modifier = { target = ROOT modifier = small_increase }
+				reverse_add_opinion_modifier = { target = ROOT modifier = small_increase }
 			}
 		}
 
@@ -9510,37 +10013,8 @@ focus_tree = {
 	}
 
 	focus = {
-		id = GRE_eastmed_gas_forum
-		icon = focus_generic_befriend_greece
-
-		x = 0
-		y = 4
-		relative_position_id = GRE_regional_diplomacy
-
-		cost = 7
-
-		prerequisite = { focus = GRE_mediterranean_energy_hub }
-
-		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_TRADE }
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: GRE_eastmed_gas_forum"
-			add_opinion_modifier = { target = JOR modifier = declaration_of_friendship }
-			reverse_add_opinion_modifier = { target = JOR modifier = declaration_of_friendship }
-			add_opinion_modifier = { target = EGY modifier = military_cooperation }
-			reverse_add_opinion_modifier = { target = EGY modifier = military_cooperation }
-			set_temp_variable = { receiver_nation = JOR }
-			set_temp_variable = { sender_nation = GRE }
-			set_improved_trade_agreement = yes
-			add_political_power = 50
-		}
-
-		ai_will_do = { base = 10 }
-	}
-
-	focus = {
 		id = GRE_imec_gateway
-		icon = focus_generic_befriend_greece
+		icon = civitavecchia_port
 
 		x = 2
 		y = 4
@@ -9562,11 +10036,12 @@ focus_tree = {
 					instant_build = yes
 				}
 			}
-			add_political_power = 50
-			add_timed_idea = {
-				idea = GRE_imec_terminus
-				days = 365
-			}
+			newline = yes
+			add_timed_idea = { idea = GRE_imec_terminus days = 365 }
+			news_event = { id = greece.577 days = 1 }
+			newline = yes
+			set_temp_variable = { treasury_change = -5 }
+			modify_treasury_effect = yes
 		}
 
 		ai_will_do = { base = 10 }
@@ -9574,7 +10049,7 @@ focus_tree = {
 
 	focus = {
 		id = GRE_se_european_pillar
-		icon = focus_generic_befriend_greece
+		icon = greek_thing
 
 		x = 0
 		y = 5
@@ -9593,8 +10068,6 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: GRE_se_european_pillar"
 			add_ideas = GRE_regional_pillar
-			add_political_power = 100
-			add_war_support = 0.05
 		}
 
 		ai_will_do = {
@@ -9681,10 +10154,7 @@ focus_tree = {
 
 		ai_will_do = {
 			base = 3
-			modifier = {
-				factor = 0
-				has_country_flag = ai_historical
-			}
+			
 		}
 	}
 

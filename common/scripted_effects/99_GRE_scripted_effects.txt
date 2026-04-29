@@ -237,3 +237,18 @@ GRE_startup_creditor_system = {
 	add_to_array = { GRE.potential_creditors = EGY.id }
 	add_to_array = { GRE.potential_creditors = BRA.id }
 }
+
+# Eastern Alignment Branch — promotes the spirit chain when score crosses thresholds.
+# Call AFTER any add_to_variable = { GRE_eastern_alignment_score = ... }.
+GRE_check_eastern_alignment_swap = {
+	if = {
+		limit = {
+			has_idea = GRE_eastern_outreach
+			check_variable = { GRE_eastern_alignment_score > 4 }
+		}
+		swap_ideas = {
+			remove_idea = GRE_eastern_outreach
+			add_idea = GRE_eurasian_partner
+		}
+	}
+}
