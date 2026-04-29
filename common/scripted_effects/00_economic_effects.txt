@@ -512,3 +512,63 @@ calculate_inflation_effects = {
 	# Currency can reduce inflation but must not cause deflation
 	clamp_variable = { var = inflation_cost_combined_var min = 0 }
 }
+
+update_dependents_modifier = {
+	# Health law reduces how many dependents are created per casualty (0% reduction → 50% at health_06)
+	set_temp_variable = { dependents_gain_factor = 1.0 }
+	if = { limit = { has_idea = health_06 } set_temp_variable = { dependents_gain_factor = 0.5 } }
+	else_if = { limit = { has_idea = health_05 } set_temp_variable = { dependents_gain_factor = 0.6 } }
+	else_if = { limit = { has_idea = health_04 } set_temp_variable = { dependents_gain_factor = 0.7 } }
+	else_if = { limit = { has_idea = health_03 } set_temp_variable = { dependents_gain_factor = 0.8 } }
+	else_if = { limit = { has_idea = health_02 } set_temp_variable = { dependents_gain_factor = 0.9 } }
+	# health_01 = 1.0 (same as default — no reduction)
+
+	# New casualties since last monthly tick (casualties_k is built-in, in thousands)
+	set_temp_variable = { dependents_new_cas = casualties_k }
+	subtract_temp_variable = { dependents_new_cas = processed_casualties }
+
+	if = {
+		limit = { check_variable = { dependents_new_cas > 0 } }
+		multiply_temp_variable = { dependents_new_cas = 3 }
+		multiply_temp_variable = { dependents_new_cas = dependents_gain_factor }
+		add_to_variable = { actual_dependents = dependents_new_cas }
+		set_variable = { processed_casualties = casualties_k }
+	}
+
+	# Social law increases monthly decay (base 0.5%, up to 1.5% at social_06)
+	# retain_factor = 1 - decay_rate; levels are evenly spaced between 0.5% and 1.5%
+	set_temp_variable = { dependents_retain = 0.995 }
+	if = { limit = { has_idea = social_06 } set_temp_variable = { dependents_retain = 0.985 } }
+	else_if = { limit = { has_idea = social_05 } set_temp_variable = { dependents_retain = 0.98667 } }
+	else_if = { limit = { has_idea = social_04 } set_temp_variable = { dependents_retain = 0.98833 } }
+	else_if = { limit = { has_idea = social_03 } set_temp_variable = { dependents_retain = 0.99 } }
+	else_if = { limit = { has_idea = social_02 } set_temp_variable = { dependents_retain = 0.99167 } }
+	else_if = { limit = { has_idea = social_01 } set_temp_variable = { dependents_retain = 0.99333 } }
+
+	multiply_variable = { actual_dependents = dependents_retain }
+	clamp_variable = { var = actual_dependents min = 0 }
+
+	# Ratio: dependents (thousands) / population (thousands); population_total is in hundreds of thousands
+	# ratio = actual_dependents * 0.01 / population_total; capped at 0.1 (10% of population)
+	if = {
+		limit = { check_variable = { population_total > 0 } }
+		set_variable = { dependents_ratio = actual_dependents }
+		multiply_variable = { dependents_ratio = 0.01 }
+		divide_variable = { dependents_ratio = population_total }
+		clamp_variable = { var = dependents_ratio min = 0 max = 0.1 }
+
+		set_variable = { dependents_stability_factor = dependents_ratio }
+		multiply_variable = { dependents_stability_factor = -2 }
+
+		set_variable = { dependents_war_support_factor = dependents_ratio }
+		multiply_variable = { dependents_war_support_factor = -2 }
+
+		set_variable = { dependents_population_tax_income_multiplier_modifier = dependents_ratio }
+		multiply_variable = { dependents_population_tax_income_multiplier_modifier = -1 }
+	}
+	else = {
+		set_variable = { dependents_stability_factor = 0 }
+		set_variable = { dependents_war_support_factor = 0 }
+		set_variable = { dependents_population_tax_income_multiplier_modifier = 0 }
+	}
+}
