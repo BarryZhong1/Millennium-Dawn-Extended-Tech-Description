@@ -233,14 +233,17 @@ on_actions = {
 						option = yes
 					}
 				}
-				every_country = {
-					limit = { OR = { has_idea = NATO_member has_idea = Major_Non_NATO_Ally } }
-					every_country = {
-						limit = { OR = { has_idea = NATO_member has_idea = Major_Non_NATO_Ally } }
+				for_each_scope_loop = {
+					array = global.nato_members
+					for_each_scope_loop = {
+						array = global.nato_members
 						remove_opinion_modifier = { target = PREV modifier = NATO_member_modifier }
 					}
 					remove_from_tech_sharing_group = NATO_Tech_Share
 					remove_ideas = NATO_member
+				}
+				every_country = {
+					limit = { has_idea = Major_Non_NATO_Ally }
 					remove_ideas = Major_Non_NATO_Ally
 				}
 				USA = {
@@ -258,8 +261,8 @@ on_actions = {
 						option = yes
 					}
 				}
-				every_country = {
-					limit = { has_idea = CSTO_member }
+				for_each_scope_loop = {
+					array = global.CSTO_member
 					remove_ideas = CSTO_member
 					remove_from_tech_sharing_group = CSTO_Tech_Share
 				}
@@ -1563,18 +1566,6 @@ on_actions = {
 				}
 			}
 
-			JAP = {
-				if = {
-					limit = {
-						has_game_rule = {
-							rule = JAP_ai_behavior
-							option = RETURN_OF_THE_EMPIRE
-						}
-					}
-					set_global_flag = JAP_RETURN_OF_THE_EMPIRE_FOCUS_PATH
-				}
-			}
-
 			SWE = {
 				if = {
 					limit = {
@@ -2115,15 +2106,6 @@ on_actions = {
 					limit = {
 						has_game_rule = {
 							rule = USA_ai_behavior
-							option = GREAT_COLLAPSE
-						}
-					}
-					set_global_flag = USA_THE_GREAT_COLLAPSE
-				}
-				if = {
-					limit = {
-						has_game_rule = {
-							rule = USA_ai_behavior
 							option = THE_GREAT_REBELLION
 						}
 					}
@@ -2142,7 +2124,6 @@ on_actions = {
 						20 = { set_global_flag = USA_REFORMED_REPUBLIC_PATH }
 						20 = { set_global_flag = USA_ALL_AHEAD_SLOW }
 						10 = { set_global_flag = USA_POST_UNITED_PATH }
-						10 = { set_global_flag = USA_THE_GREAT_COLLAPSE }
 						10 = { set_global_flag = USA_THE_GREAT_REBELLION }
 					}
 				}

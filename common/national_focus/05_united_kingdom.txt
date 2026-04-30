@@ -664,7 +664,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus ENG_continent_operational_considerations"
-			country_event = { id = ENG_military.039 }
+			country_event = ENG_military.039
 			set_temp_variable = { treasury_change = -5 }
 			modify_treasury_effect = yes
 		}
@@ -1038,9 +1038,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus ENG_dartmouth_naval_college_expansion"
-			country_event = {
-				id = ENG_military.038
-			}
+			country_event = ENG_military.038
 			set_temp_variable = { treasury_change = -10 }
 			modify_treasury_effect = yes
 			hidden_effect = {
@@ -3464,7 +3462,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus ENG_typhoon_tranche_debate"
-			country_event = { id = ENG_military.040 }
+			country_event = ENG_military.040
 		}
 
 		ai_will_do = {
@@ -9040,7 +9038,7 @@ focus_tree = {
 				localization_key = modifies_dynamic_modifier_tt
 				MODIFIER = ENG_political_modifier
 			}
-			add_to_variable = { ENG_monthly_population = -0.25 tooltip = monthly_population_tt }
+			add_to_variable = { ENG_monthly_population = -0.025 tooltip = monthly_population_tt }
 		}
 
 		ai_will_do = {
@@ -11395,14 +11393,17 @@ focus_tree = {
 			set_temp_variable = { modify_eurosceptic_target = ROOT }
 			eurosceptic_change = yes
 			newline = yes
-			every_country = {
-				limit = {
-					has_idea = EU_member
-					NOT = {
-						original_tag = ENG
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				if = {
+					limit = {
+						NOT = {
+							original_tag = ENG
+						}
 					}
+					add_opinion_modifier = { target = ENG modifier = recent_actions_negative }
 				}
-				add_opinion_modifier = { target = ENG modifier = recent_actions_negative }
 			}
 		}
 
@@ -11482,17 +11483,20 @@ focus_tree = {
 			}
 			add_to_variable = { ENG_trade_opinion_factor = 0.15 tooltip = trade_opinion_factor_tt }
 			newline = yes
-			every_country = {
-				limit = {
-					has_idea = NATO_member
-					NOT = {
-						original_tag = ENG
+			for_each_scope_loop = {
+				array = global.nato_members
+				tooltip = TT_ALL_NATO_MEMBER_NATIONS_GAIN
+				if = {
+					limit = {
+						NOT = {
+							original_tag = ENG
+						}
 					}
+					set_temp_variable = { percent_change = 2 }
+					set_temp_variable = { tag_index = ENG }
+					set_temp_variable = { influence_target = THIS }
+					change_influence_percentage = yes
 				}
-				set_temp_variable = { percent_change = 2 }
-				set_temp_variable = { tag_index = ENG }
-				set_temp_variable = { influence_target = THIS }
-				change_influence_percentage = yes
 			}
 		}
 
@@ -14494,15 +14498,18 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus ENG_secure_succession"
-			every_country = {
-				limit = {
-					has_idea = EU_member
-					NOT = {
-						original_tag = ENG
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				if = {
+					limit = {
+						NOT = {
+							original_tag = ENG
+						}
 					}
+					add_opinion_modifier = { target = ENG modifier = ENG_monarch_outreach }
+					reverse_add_opinion_modifier = { target = ENG modifier = ENG_monarch_outreach }
 				}
-				add_opinion_modifier = { target = ENG modifier = ENG_monarch_outreach }
-				reverse_add_opinion_modifier = { target = ENG modifier = ENG_monarch_outreach }
 			}
 		}
 
@@ -14759,7 +14766,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -14911,7 +14918,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -14988,7 +14995,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -15069,7 +15076,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -15156,7 +15163,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -15212,7 +15219,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -15355,7 +15362,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -15433,7 +15440,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -15508,7 +15515,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -15583,7 +15590,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -15652,7 +15659,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -15708,7 +15715,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -15848,7 +15855,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -15909,7 +15916,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -15988,7 +15995,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -16076,7 +16083,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -16163,7 +16170,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -16258,7 +16265,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -16396,7 +16403,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -16470,7 +16477,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -16542,7 +16549,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -16633,7 +16640,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -16707,7 +16714,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -16763,7 +16770,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -16902,7 +16909,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -16971,7 +16978,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -17045,7 +17052,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -17124,7 +17131,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -17198,7 +17205,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -17342,7 +17349,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -17426,7 +17433,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -17501,7 +17508,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -17576,7 +17583,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -17651,7 +17658,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -17707,7 +17714,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
