@@ -34,7 +34,7 @@ focus_tree = {
 			add_political_power = 75
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -58,18 +58,14 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HEZ_Our_own_state"
-			every_country = {
-				limit = {
-					OR = {
-						original_tag = LEB
-						original_tag = PER
-						original_tag = SYR
-					}
-				}
-				add_opinion_modifier = {
-					target = PER
-					modifier = medium_increase
-				}
+			LEB = {
+				add_opinion_modifier = { target = PER modifier = medium_increase }
+			}
+			PER = {
+				add_opinion_modifier = { target = PER modifier = medium_increase }
+			}
+			SYR = {
+				add_opinion_modifier = { target = PER modifier = medium_increase }
 			}
 			swap_ideas = {
 				remove_idea = HEZ_militant_group
@@ -80,7 +76,7 @@ focus_tree = {
 			remove_state_core = 203
 		}
 		ai_will_do = {
-			factor = 0
+			base = 0
 			modifier = {
 				factor = 1
 				date > 2012.1.1
@@ -129,7 +125,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 0
+			base = 0
 			modifier = {
 				factor = 1
 				date > 2012.1.1
@@ -185,7 +181,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -223,7 +219,7 @@ focus_tree = {
 			change_influence_percentage = yes
 		}
 
-		ai_will_do = { factor = 1
+		ai_will_do = { base = 1
 		modifier = {
 			factor = 0
 			is_historical_focus_on = yes
@@ -322,7 +318,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1
+		ai_will_do = { base = 1
 		modifier = {
 			factor = 0
 			is_historical_focus_on = yes
@@ -366,7 +362,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 	focus = {
 		id = HEZ_negotiations_in_the_south
@@ -400,7 +396,7 @@ focus_tree = {
 			change_influence_percentage = yes
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 	focus = {
 		id = HEZ_a_new_economy
@@ -423,7 +419,7 @@ focus_tree = {
 			increase_economic_growth = yes
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 	focus = {
 		id = HEZ_a_free_market
@@ -444,7 +440,7 @@ focus_tree = {
 			add_ideas = HEZ_liberization
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 	focus = {
 		id = HEZ_a_free_industry
@@ -465,7 +461,7 @@ focus_tree = {
 			add_ideas = HEZ_industrial_investments
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 
 	}
 	focus = {
@@ -497,7 +493,7 @@ focus_tree = {
 			modify_treasury_effect = yes
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 
 	}
 	focus = {
@@ -509,14 +505,14 @@ focus_tree = {
 
 		cost = 10
 
-		search_filters = { FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_MILITARY_LAWS }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HEZ_Armed_forces"
 			add_ideas = HEZ_hezbollah_armed_forces
 			army_experience = 25
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -548,7 +544,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -570,7 +566,7 @@ focus_tree = {
 			remove_ideas = Non_State_Actor
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -599,7 +595,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -617,11 +613,11 @@ focus_tree = {
 
 		bypass = {
 			NOT = {
-				any_country = {
+				any_of_scopes = {
+					array = global.majors
 					NOT = {
 						has_war_with = HEZ
 					}
-					is_major = yes
 					has_opinion = {
 						target = HEZ
 						value > -19
@@ -656,13 +652,11 @@ focus_tree = {
 						}
 					}
 				}
-				country_event = {
-					id = hezbollah_events.3
-				}
+				country_event = hezbollah_events.3
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -698,7 +692,7 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus HEZ_Improved_living"
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 	focus = {
 		id = HEZ_Independence
@@ -726,7 +720,7 @@ focus_tree = {
 			change_influence_percentage = yes
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -752,7 +746,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -772,7 +766,7 @@ focus_tree = {
 		}
 		cost = 10
 
-		search_filters = { FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_MILITARY_LAWS }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HEZ_Defence_force"
 			add_tech_bonus = {
@@ -787,7 +781,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1
+		ai_will_do = { base = 1
 		modifier = {
 			factor = 0
 			is_historical_focus_on = yes
@@ -809,7 +803,7 @@ focus_tree = {
 			custom_effect_tooltip = unlock_the_international_hezbollah_GUI
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -848,7 +842,7 @@ focus_tree = {
 			change_influence_percentage = yes
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -870,7 +864,7 @@ focus_tree = {
 			custom_effect_tooltip = HEZ_unlock_region_latin_america_TT
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -900,7 +894,7 @@ focus_tree = {
 			change_influence_percentage = yes
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 	focus = {
 		id = HEZ_last_effects_of_the_drugs
@@ -922,7 +916,7 @@ focus_tree = {
 			add_political_power = -150
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 	focus = {
 		id = HEZ_propaganda_for_north_america
@@ -957,7 +951,7 @@ focus_tree = {
 
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 	focus = {
 		id = HEZ_an_american_muslim_spring
@@ -989,7 +983,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -1028,7 +1022,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 	focus = {
 		id = HEZ_first_wave_of_protests
@@ -1066,7 +1060,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -1098,7 +1092,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 	focus = {
 		id = HEZ_the_muslim_spring
@@ -1110,7 +1104,7 @@ focus_tree = {
 		relative_position_id = HEZ_International_Hezbollah
 
 		prerequisite = { focus = HEZ_muslim_militias }
- 		prerequisite = { focus = HEZ_first_wave_of_protests }
+		 prerequisite = { focus = HEZ_first_wave_of_protests }
 		available = {
 			USA = {
 					influence_higher_10 = yes
@@ -1131,15 +1125,15 @@ focus_tree = {
 			add_manpower = -1000
 			add_political_power = 100
 			USA = {
-		   		add_war_support = -0.03
+				   add_war_support = -0.03
 				add_popularity = {
 					ideology = communism
-		   			popularity = 0.05
+					   popularity = 0.05
 				}
 			}
 			custom_effect_tooltip = rushdie_decision_unlock_TT
 		}
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -1177,7 +1171,7 @@ focus_tree = {
 			change_influence_percentage = yes
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -1202,7 +1196,7 @@ focus_tree = {
 			custom_effect_tooltip = HEZ_An_Inevitable_failure_TT
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -1243,7 +1237,7 @@ focus_tree = {
 
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -1263,7 +1257,7 @@ focus_tree = {
 		}
 		cost = 10
 
-		search_filters = { FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_MILITARY_LAWS }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HEZ_The_Army_We_Know"
 			swap_ideas = {
@@ -1272,7 +1266,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -1297,7 +1291,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -1340,12 +1334,12 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HEZ_Gathering_Equipment"
 			add_equipment_to_stockpile = {
-				type = Inf_equipment
+				type = infantry_weapons_type
 				amount = 5000
 				producer = PER
 			}
 			add_equipment_to_stockpile = {
-				type = cnc_equipment
+				type = cnc_equipment_type
 				amount = 2000
 				producer = PER
 			}
@@ -1361,7 +1355,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -1386,7 +1380,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -1408,7 +1402,7 @@ focus_tree = {
 			add_ideas = HEZ_wave_of_volunteers
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -1439,7 +1433,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -1462,7 +1456,7 @@ focus_tree = {
 			unlock_decision_category_tooltip = HEZ_border_skirmish_lebanon
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -1508,7 +1502,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 0
 				LEB = { is_subject_of = SYR }
@@ -1542,7 +1536,7 @@ focus_tree = {
 			unlock_decision_category_tooltip = HEZ_border_skirmish_israel
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -1563,13 +1557,16 @@ focus_tree = {
 		completion_reward = {
 			news_event = hezbollah_events.42
 			log = "[GetDateText]: [Root.GetName]: Focus HEZ_Neutralizing_the_Threat"
+			set_temp_variable = { wargoal_on = ISR }
+			set_temp_variable = { wargoal_type = 1 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = liberate_wargoal
 				target = ISR
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -1596,7 +1593,7 @@ focus_tree = {
 
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -1620,7 +1617,7 @@ focus_tree = {
 			add_ideas = { HEZ_council_of_12 }
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -1644,7 +1641,7 @@ focus_tree = {
 			add_ideas = HEZ_naim_qassim
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -1671,7 +1668,7 @@ focus_tree = {
 			add_ideas = HEZ_blue_shirt_kids
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -1687,7 +1684,7 @@ focus_tree = {
 
 		cost = 10
 
-		search_filters = { FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_MILITARY_LAWS }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HEZ_Taabia"
@@ -1713,7 +1710,7 @@ focus_tree = {
 			# }
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -1735,7 +1732,7 @@ focus_tree = {
 
 		cost = 10
 
-		search_filters = { FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_MILITARY_LAWS }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HEZ_Intervention_forces"
 			swap_ideas = {
@@ -1749,7 +1746,7 @@ focus_tree = {
 			army_experience = 50
 		}
 
-		ai_will_do = { factor = 1
+		ai_will_do = { base = 1
 		modifier = {
 			factor = 0
 			is_historical_focus_on = yes
@@ -1770,7 +1767,7 @@ focus_tree = {
 
 		cost = 10
 
-		search_filters = { FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_MILITARY_LAWS }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HEZ_Al-Radwan"
 			add_tech_bonus = {
@@ -1781,7 +1778,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -1797,7 +1794,7 @@ focus_tree = {
 
 		cost = 10
 
-		search_filters = { FOCUS_FILTER_MILITARY FOCUS_FILTER_EQUIPMENT }
+		search_filters = { FOCUS_FILTER_MILITARY_LAWS FOCUS_FILTER_EQUIPMENT }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HEZ_Specialized_Equipment"
 			add_tech_bonus = {
@@ -1813,7 +1810,7 @@ focus_tree = {
 				category = CAT_at
 			}
 		}
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -1836,7 +1833,7 @@ focus_tree = {
 				}
 			}
 		}
-		search_filters = { FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_MILITARY_LAWS }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HEZ_Iranian_Training_Camps"
 			if = {
@@ -1860,7 +1857,7 @@ focus_tree = {
 			# }
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -1876,7 +1873,7 @@ focus_tree = {
 
 		cost = 10
 
-		search_filters = { FOCUS_FILTER_MILITARY FOCUS_FILTER_EQUIPMENT }
+		search_filters = { FOCUS_FILTER_MILITARY_LAWS FOCUS_FILTER_EQUIPMENT }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HEZ_Support_for_our_Militia"
 			add_tech_bonus = {
@@ -1893,7 +1890,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -1916,7 +1913,7 @@ focus_tree = {
 				}
 			}
 		}
-		search_filters = { FOCUS_FILTER_MILITARY FOCUS_FILTER_EQUIPMENT }
+		search_filters = { FOCUS_FILTER_MILITARY_LAWS FOCUS_FILTER_EQUIPMENT }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HEZ_iranian_missiles"
 			add_ideas = HEZ_iranian_missile_aid
@@ -1927,7 +1924,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -1965,7 +1962,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -2018,7 +2015,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -2048,7 +2045,7 @@ focus_tree = {
 			add_ideas = HEZ_lujnat_imdad_al_khomeini
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -2063,7 +2060,7 @@ focus_tree = {
 		prerequisite = { focus = HEZ_Intervention_forces }
 
 		cost = 10
-		search_filters = { FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_MILITARY_LAWS }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HEZ_Increasing_our_presence_aboard"
 			swap_ideas = {
@@ -2076,7 +2073,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -2092,7 +2089,7 @@ focus_tree = {
 
 		cost = 10
 
-		search_filters = { FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_MILITARY_LAWS }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HEZ_Hezbollahs_International_recruitment"
 			if = {
@@ -2117,7 +2114,7 @@ focus_tree = {
 			# }
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -2133,7 +2130,7 @@ focus_tree = {
 
 		cost = 10
 
-		search_filters = { FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_MILITARY_LAWS }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HEZ_Militarizing_our_society"
 			if = {
@@ -2157,7 +2154,7 @@ focus_tree = {
 			# }
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -2174,7 +2171,7 @@ focus_tree = {
 
 		cost = 10
 
-		search_filters = { FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_MILITARY_LAWS }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HEZ_Expand_Hezbollahs_Secret_Service"
 			swap_ideas = {
@@ -2183,7 +2180,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -2199,13 +2196,13 @@ focus_tree = {
 
 		cost = 10
 
-		search_filters = { FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_MILITARY_LAWS }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HEZ_Specialized_Agents"
 			add_ideas = HEZ_secret_service
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -2221,7 +2218,7 @@ focus_tree = {
 
 		cost = 10
 
-		search_filters = { FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_MILITARY_LAWS }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HEZ_Proper_use_of_recon"
 			if = {
@@ -2241,7 +2238,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -2257,7 +2254,7 @@ focus_tree = {
 
 		cost = 10
 
-		search_filters = { FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_MILITARY_LAWS }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HEZ_Preparing_an_airforce"
 			201 = {
@@ -2276,7 +2273,7 @@ focus_tree = {
 			modify_treasury_effect = yes
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -2292,7 +2289,7 @@ focus_tree = {
 
 		cost = 10
 
-		search_filters = { FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_MILITARY_LAWS }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HEZ_Defending_Our_Shores"
 			201 = {
@@ -2313,7 +2310,7 @@ focus_tree = {
 			modify_treasury_effect = yes
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -2329,7 +2326,7 @@ focus_tree = {
 
 		cost = 10
 
-		search_filters = { FOCUS_FILTER_EQUIPMENT FOCUS_FILTER_MILITARY FOCUS_FILTER_INDUSTRY }
+		search_filters = { FOCUS_FILTER_EQUIPMENT FOCUS_FILTER_MILITARY_LAWS FOCUS_FILTER_INDUSTRY }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HEZ_Producing_Equipment"
 			201 = {
@@ -2344,7 +2341,7 @@ focus_tree = {
 			modify_treasury_effect = yes
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -2360,7 +2357,7 @@ focus_tree = {
 
 		cost = 10
 
-		search_filters = { FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_MILITARY_LAWS }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HEZ_Establish_a_Flight_School"
 			add_tech_bonus = {
@@ -2375,7 +2372,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -2393,7 +2390,7 @@ focus_tree = {
 
 		cost = 10
 
-		search_filters = { FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_MILITARY_LAWS }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HEZ_Protecting_our_Borders"
 			201 = {
@@ -2410,7 +2407,7 @@ focus_tree = {
 			modify_treasury_effect = yes
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -2442,7 +2439,7 @@ focus_tree = {
 			custom_effect_tooltip = HEZ_peoples_support
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -2470,7 +2467,7 @@ focus_tree = {
 			add_ideas = HEZ_volunteers_of_all_beliefs
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -2486,7 +2483,7 @@ focus_tree = {
 
 		cost = 10
 
-		search_filters = { FOCUS_FILTER_EQUIPMENT FOCUS_FILTER_MILITARY FOCUS_FILTER_INDUSTRY }
+		search_filters = { FOCUS_FILTER_EQUIPMENT FOCUS_FILTER_MILITARY_LAWS FOCUS_FILTER_INDUSTRY }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HEZ_Getting_off_our_shores"
 			add_tech_bonus = {
@@ -2506,7 +2503,7 @@ focus_tree = {
 			modify_treasury_effect = yes
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -2522,7 +2519,7 @@ focus_tree = {
 
 		cost = 10
 
-		search_filters = { FOCUS_FILTER_MILITARY }
+		search_filters = { FOCUS_FILTER_MILITARY_LAWS }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HEZ_Updating_our_Equipment"
 			add_tech_bonus = {
@@ -2545,7 +2542,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -2607,7 +2604,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 0
+			base = 0
 			modifier = {
 				factor = 1
 				date > 2012.1.1
@@ -2644,7 +2641,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -2661,6 +2658,7 @@ focus_tree = {
 		cost = 10
 		available = {
 			country_exists = PER
+			NOT = { has_war_with = PER }
 			PER = {
 				OR = {
 					emerging_hardline_shiite_are_in_power = yes
@@ -2687,7 +2685,7 @@ focus_tree = {
 			custom_effect_tooltip = HEZ_iranian_aid_income_based_on_influence_TT
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -2726,7 +2724,7 @@ focus_tree = {
 			add_ideas = HEZ_the_LAF
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -2748,7 +2746,7 @@ focus_tree = {
 			unlock_decision_category_tooltip = HEZ_our_step_in_latin_america_decisions
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -2780,7 +2778,7 @@ focus_tree = {
 			change_influence_percentage = yes
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -2810,7 +2808,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -2829,7 +2827,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_INFLUENCE }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HEZ_New_Contracts_with_Drug_Cartels"
- 			custom_effect_tooltip = HEZ_New_Contracts_with_Drug_Cartels_TT
+			 custom_effect_tooltip = HEZ_New_Contracts_with_Drug_Cartels_TT
 			set_temp_variable = { treasury_change = -10.00 }
 			modify_treasury_effect = yes
 			ARG = {
@@ -2842,7 +2840,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -2868,7 +2866,7 @@ focus_tree = {
 			change_influence_percentage = yes
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -2905,7 +2903,7 @@ focus_tree = {
 			modify_treasury_effect = yes
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -2934,7 +2932,7 @@ focus_tree = {
 			modify_treasury_effect = yes
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 	focus = {
 		id = HEZ_friends_in_outside
@@ -2956,7 +2954,7 @@ focus_tree = {
 			add_ideas = HEZ_foreign_economical_funds
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 	focus = {
 		id = HEZ_ready_for_construction
@@ -2988,7 +2986,7 @@ focus_tree = {
 			modify_treasury_effect = yes
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 	focus = {
 		id = HEZ_collaboration_in_the_civilian_industry
@@ -3020,7 +3018,7 @@ focus_tree = {
 			modify_treasury_effect = yes
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 	focus = {
 		id = HEZ_collaboration_in_the_military_industry
@@ -3084,7 +3082,7 @@ focus_tree = {
 			add_ideas = HEZ_the_second_khatam_al_anbia_construction_camp
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -3137,7 +3135,7 @@ focus_tree = {
 			add_ideas = HEZ_iranian_business
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -3200,7 +3198,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -3247,7 +3245,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -3309,7 +3307,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -3351,7 +3349,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -3393,7 +3391,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -3416,7 +3414,7 @@ focus_tree = {
 			custom_effect_tooltip = HEZ_Our_Gift_To_the_Great_Satan_TT
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -3460,7 +3458,7 @@ focus_tree = {
 			change_influence_percentage = yes
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -3482,7 +3480,7 @@ focus_tree = {
 			custom_effect_tooltip = Zakzaki_tt
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -3520,7 +3518,7 @@ focus_tree = {
 
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -3557,7 +3555,7 @@ focus_tree = {
 				HEZ = {
 					add_intel = {
 						target = PREV
- 						civilian_intel = 30
+						 civilian_intel = 30
 					}
 				}
 			}
@@ -3574,7 +3572,7 @@ focus_tree = {
 
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -3596,7 +3594,7 @@ focus_tree = {
 			custom_effect_tooltip = HEZ_how_little_they_know_TT
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -3610,6 +3608,10 @@ focus_tree = {
 
 		prerequisite = { focus = HEZ_Hezbollah_and_the_LAF }
 
+		available = {
+			country_exists = LEB
+			NOT = { has_war_with = LEB }
+		}
 		bypass = {
 			OR = {
 				NOT = { country_exists = LEB }
@@ -3625,7 +3627,7 @@ focus_tree = {
 			custom_effect_tooltip = HEZ_lebanese_aid_income_based_on_influence_TT
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -3649,7 +3651,7 @@ focus_tree = {
 			add_ideas = HEZ_public_support
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -3669,13 +3671,11 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HEZ_Request_Election_funds"
 			PER = {
-				country_event = {
-					id = hezbollah_events.2
-				}
+				country_event = hezbollah_events.2
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -3694,8 +3694,9 @@ focus_tree = {
 		}
 
 		available = {
-			LEB = {
-				influence_higher_50 = yes
+			OR = {
+				LEB = { is_subject_of = HEZ }
+				LEB = { influence_higher_50 = yes }
 			}
 		}
 
@@ -3721,7 +3722,7 @@ focus_tree = {
 			remove_ideas = iranian_aid
 		}
 
-		ai_will_do = { factor = 1
+		ai_will_do = { base = 1
 		modifier = {
 			factor = 0
 			is_historical_focus_on = yes
@@ -3744,8 +3745,9 @@ focus_tree = {
 		}
 
 		available = {
-			LEB = {
-				influence_higher_50 = yes
+			OR = {
+				LEB = { is_subject_of = HEZ }
+				LEB = { influence_higher_50 = yes }
 			}
 		}
 
@@ -3773,7 +3775,7 @@ focus_tree = {
 			change_influence_percentage = yes
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -3807,7 +3809,7 @@ focus_tree = {
 			modify_treasury_effect = yes
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -3901,7 +3903,7 @@ focus_tree = {
 
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 	focus = {
 		id = HEZ_Negotiations_for_Intervention
@@ -3917,10 +3919,10 @@ focus_tree = {
 
 		available = {
 			has_opinion = {
-	   			target = SYR
+				   target = SYR
 				value > 19
 			}
-	  		SYR = {
+			  SYR = {
 				has_opinion = {
 					target = HEZ
 					value > 19
@@ -3942,7 +3944,7 @@ focus_tree = {
 
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -3966,7 +3968,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -4013,7 +4015,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -4054,7 +4056,7 @@ focus_tree = {
 
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -4101,11 +4103,10 @@ focus_tree = {
 				set_temp_variable = { party_index = 9 }
 				set_temp_variable = { party_popularity_increase = 0.025 }
 				add_relative_party_popularity = yes
-				add_ideas = foreign_military_advisors2
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -4156,7 +4157,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -4208,7 +4209,7 @@ focus_tree = {
 				}
 			}
 		}
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -4257,7 +4258,7 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -4335,11 +4336,11 @@ focus_tree = {
 				set_temp_variable = { party_popularity_increase = 0.1 }
 				add_relative_party_popularity = yes
 			}
-			news_event = { id = hezbollah_events.4 }
+			news_event = hezbollah_events.4
 
 		}
 
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 	}
 
 }

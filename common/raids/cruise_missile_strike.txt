@@ -14,31 +14,7 @@ types = {
 
 		# Specific Target is visible
 		show_target = {
-			OR = {
-				has_war_with = FROM
-				AND = {
-					has_opinion = {
-						target = FROM
-						value < -50
-					}
-					if = {
-						limit = {
-							has_idea = intervention_limited_interventionism
-						}
-						is_neighbor_of = FROM
-					} else_if = {
-						limit = {
-							has_idea = intervention_regional_interventionism
-						}
-						custom_trigger_tooltip = {
-							tooltip = nation_on_same_continent
-							FROM = {
-								PREV_is_on_same_continent = yes
-							}
-						}
-					}
-				}
-			}
+			raid_show_target_opinion_hostile = yes
 			var:target_state = {
 				OR = {
 					air_base > 0
@@ -50,14 +26,7 @@ types = {
 
 		# Can prepare
 		available = {
-			FROM = {
-				NOT = {
-					is_subject_of = ROOT
-				}
-				NOT = {
-					has_non_aggression_pact_with = ROOT
-				}
-			}
+			raid_target_eligible = yes
 			OR = {
 				has_war_with = FROM
 				hidden_trigger = {
@@ -74,14 +43,8 @@ types = {
 		}
 		unit_requirements = {
 			equipment = {
-				type = { tactical_bomber cas strategic_bomber }
+				type = { tactical_bomber cas strategic_bomber guided_missile_equipment ballistic_missile_equipment hypersonic_missile_equipment }
 				amount = { min = 10 }
-			}
-		}
-		unit_requirements = {
-			equipment = {
-				type = { guided_missile_equipment }
-				amount = { min = 50 }
 			}
 		}
 
@@ -101,7 +64,7 @@ types = {
 		}
 
 		starting_point = {
-			types = { rocket_site submarine air_base carrier }
+			types = { rocket_site submarine carrier air_base }
 		}
 
 		success_factors = {
@@ -167,33 +130,7 @@ types = {
 						max = 8
 					}
 
-					var:target_state = {
-						set_temp_variable = { ROOT.aa_defense = THIS.non_damaged_building_level@anti_air_building }
-						set_temp_variable = { ROOT.radar_mult = THIS.non_damaged_building_level@radar_station }
-						set_temp_variable = { ROOT.rocket_mult = THIS.non_damaged_building_level@rocket_site }
-					}
-
-					add_to_temp_variable = { radar_mult = 0.5 }
-					multiply_temp_variable = { aa_defense = radar_mult }
-					multiply_temp_variable = { rocket_mult = radar_mult }
-
-					if = {
-						limit = {
-							NOT = { check_variable = { rocket_mult = 0 } }
-						}
-						multiply_temp_variable = { aa_defense = rocket_mult }
-
-						if = {
-							limit = {
-								check_variable = { aa_defense = 0 }
-							}
-							add_to_temp_variable = { aa_defense = rocket_mult }
-						}
-					}
-
-					if = { limit = { check_variable = { aa_defense = 0 } } add_to_temp_variable = { aa_defense = 1 } }
-
-					multiply_temp_variable = { raid_planes_lost = aa_defense }
+					calculate_raid_aa_defense = yes
 
 					#if at war, increase the losses, varying based on raid success
 					if = {
@@ -213,25 +150,7 @@ types = {
 						multiply_temp_variable = { raid_planes_lost = random_chance_on_dead_planes }
 					}
 
-					#clamp after round, just in case some black magic made this negative
-					clamp_temp_variable = {
-						var = raid_planes_lost
-						min = 0
-					}
-
-					round_temp_variable = raid_planes_lost
-
-					hidden_effect = {
-						raid_damage_units = {
-							plane_loss = raid_planes_lost
-							ratio = no
-						}
-					}
-
-					custom_effect_tooltip = {
-						localization_key = plane_raid_losses_tt
-						LOSSES = [?raid_planes_lost]
-					}
+					finalize_raid_plane_losses = yes
 					#remove political power if the nation is not a war with the target
 					var:actor_country = {
 						if = {
@@ -380,31 +299,7 @@ types = {
 						max = 5
 					}
 
-					var:target_state = {
-						set_temp_variable = { ROOT.aa_defense = THIS.non_damaged_building_level@anti_air_building }
-						set_temp_variable = { ROOT.radar_mult = THIS.non_damaged_building_level@radar_station }
-						set_temp_variable = { ROOT.rocket_mult = THIS.non_damaged_building_level@rocket_site }
-					}
-
-					add_to_temp_variable = { radar_mult = 0.5 }
-					multiply_temp_variable = { aa_defense = radar_mult }
-					multiply_temp_variable = { rocket_mult = radar_mult }
-
-					if = {
-						limit = {
-							NOT = { check_variable = { rocket_mult = 0 } }
-						}
-						multiply_temp_variable = { aa_defense = rocket_mult }
-
-						if = {
-							limit = {
-								check_variable = { aa_defense = 0 }
-							}
-							add_to_temp_variable = { aa_defense = rocket_mult }
-						}
-					}
-
-					multiply_temp_variable = { raid_planes_lost = aa_defense }
+					calculate_raid_aa_defense = yes
 
 					#if at war, increase the losses, varying based on raid success
 					if = {
@@ -422,25 +317,7 @@ types = {
 						multiply_temp_variable = { raid_planes_lost = random_chance_on_dead_planes }
 					}
 
-					#clamp after round, just in case some black magic made this negative
-					clamp_temp_variable = {
-						var = raid_planes_lost
-						min = 0
-					}
-
-					round_temp_variable = raid_planes_lost
-
-					hidden_effect = {
-						raid_damage_units = {
-							plane_loss = raid_planes_lost
-							ratio = no
-						}
-					}
-
-					custom_effect_tooltip = {
-						localization_key = plane_raid_losses_tt
-						LOSSES = [?raid_planes_lost]
-					}
+					finalize_raid_plane_losses = yes
 					#remove political power if the nation is not a war with the target
 					var:actor_country = {
 						if = {
@@ -586,31 +463,7 @@ types = {
 						max = 3
 					}
 
-					var:target_state = {
-						set_temp_variable = { ROOT.aa_defense = THIS.non_damaged_building_level@anti_air_building }
-						set_temp_variable = { ROOT.radar_mult = THIS.non_damaged_building_level@radar_station }
-						set_temp_variable = { ROOT.rocket_mult = THIS.non_damaged_building_level@rocket_site }
-					}
-
-					add_to_temp_variable = { radar_mult = 0.5 }
-					multiply_temp_variable = { aa_defense = radar_mult }
-					multiply_temp_variable = { rocket_mult = radar_mult }
-
-					if = {
-						limit = {
-							NOT = { check_variable = { rocket_mult = 0 } }
-						}
-						multiply_temp_variable = { aa_defense = rocket_mult }
-
-						if = {
-							limit = {
-								check_variable = { aa_defense = 0 }
-							}
-							add_to_temp_variable = { aa_defense = rocket_mult }
-						}
-					}
-
-					multiply_temp_variable = { raid_planes_lost = aa_defense }
+					calculate_raid_aa_defense = yes
 
 					#if at war, increase the losses, varying based on raid success
 					if = {
@@ -629,25 +482,7 @@ types = {
 						multiply_temp_variable = { raid_planes_lost = random_chance_on_dead_planes }
 					}
 
-					#clamp after round, just in case some black magic made this negative
-					clamp_temp_variable = {
-						var = raid_planes_lost
-						min = 0
-					}
-
-					round_temp_variable = raid_planes_lost
-
-					hidden_effect = {
-						raid_damage_units = {
-							plane_loss = raid_planes_lost
-							ratio = no
-						}
-					}
-
-					custom_effect_tooltip = {
-						localization_key = plane_raid_losses_tt
-						LOSSES = [?raid_planes_lost]
-					}
+					finalize_raid_plane_losses = yes
 					#remove political power if the nation is not a war with the target
 					var:actor_country = {
 						if = {
@@ -793,31 +628,7 @@ types = {
 						max = 2
 					}
 
-					var:target_state = {
-						set_temp_variable = { ROOT.aa_defense = THIS.non_damaged_building_level@anti_air_building }
-						set_temp_variable = { ROOT.radar_mult = THIS.non_damaged_building_level@radar_station }
-						set_temp_variable = { ROOT.rocket_mult = THIS.non_damaged_building_level@rocket_site }
-					}
-
-					add_to_temp_variable = { radar_mult = 0.5 }
-					multiply_temp_variable = { aa_defense = radar_mult }
-					multiply_temp_variable = { rocket_mult = radar_mult }
-
-					if = {
-						limit = {
-							NOT = { check_variable = { rocket_mult = 0 } }
-						}
-						multiply_temp_variable = { aa_defense = rocket_mult }
-
-						if = {
-							limit = {
-								check_variable = { aa_defense = 0 }
-							}
-							add_to_temp_variable = { aa_defense = rocket_mult }
-						}
-					}
-
-					multiply_temp_variable = { raid_planes_lost = aa_defense }
+					calculate_raid_aa_defense = yes
 
 					#if at war, reduce the losses cause critical success rewards you
 					if = {
@@ -834,25 +645,7 @@ types = {
 						multiply_temp_variable = { raid_planes_lost = random_chance_on_dead_planes }
 					}
 
-					#clamp after round, just in case some black magic made this negative
-					clamp_temp_variable = {
-						var = raid_planes_lost
-						min = 0
-					}
-
-					round_temp_variable = raid_planes_lost
-
-					hidden_effect = {
-						raid_damage_units = {
-							plane_loss = raid_planes_lost
-							ratio = no
-						}
-					}
-
-					custom_effect_tooltip = {
-						localization_key = plane_raid_losses_tt
-						LOSSES = [?raid_planes_lost]
-					}
+					finalize_raid_plane_losses = yes
 					#remove political power if the nation is not a war with the target
 					var:actor_country = {
 						if = {
@@ -914,7 +707,7 @@ types = {
 			modifier = {
 				factor = 2
 				OR = {
-					has_idea = superpower
+					has_idea = super_power
 					has_idea = great_power
 					has_idea = large_power
 				}
@@ -928,8 +721,12 @@ types = {
 				NOT = { has_war_with = FROM }
 			}
 			modifier = {
-				factor = 0.05
+				factor = 0
 				threat < 0.10
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
 			}
 			modifier = {
 				factor = 0
@@ -940,20 +737,32 @@ types = {
 				NOT = { has_war_with = FROM }
 			}
 			modifier = {
-			 	# Don't target anyone who is not a potential enemy
-			 	factor = 0
-			 	NOT = {
+				factor = 0.05
+				OR = {
+					has_government = democratic
+					has_government = neutrality
+					has_elections = yes
+				}
+				FROM = { has_added_tension_amount < 5 }
+			}
+			modifier = {
+				 # Don't target anyone who is not a potential enemy
+				 factor = 0
+				 NOT = {
 					has_country_flag = promised_retaliation_against@FROM
-			 		is_in_array = {
-			 			array = potential_and_current_enemies
-			 			value = FROM  # Target country
-			 		}
-			 	}
+					 is_in_array = {
+						 array = potential_and_current_enemies
+						 value = FROM  # Target country
+					 }
+				 }
 			}
 			modifier = {
 				factor = 0
-				date < 2002.1.1
-				NOT = { has_country_flag = promised_retaliation_against@FROM }
+				date < 2001.1.1
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
 			}
 			modifier = {
 				NOT = {
@@ -972,6 +781,45 @@ types = {
 				has_country_flag = conceded_to@FROM
 				factor = 0
 			}
+			modifier = {
+				factor = 0
+				is_ally_with = FROM
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
+			}
+			modifier = {
+				# Don't raid nations we have influence in
+				factor = 0
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
+				FROM = { is_influencer = yes }
+			}
+			modifier = {
+				# Don't raid if heavily in debt
+				factor = 0
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
+				check_variable = { debt_ratio > 0.25 }
+			}
+			modifier = {
+				# Less likely to raid if somewhat in debt
+				factor = 0.25
+				NOT = { has_war_with = FROM }
+				check_variable = { debt_ratio > 0.15 }
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					FROM = { is_subject_of = ROOT }
+					is_subject_of = FROM
+				}
+			}
 		}
 	}
 	#Anti-Missile Strikes
@@ -986,57 +834,18 @@ types = {
 		arrow = {
 			type = air
 		}
-		visible = {
-		}
 
-		allowed = {
-
-		}
 		# Specific Target is visible
 		show_target = {
-			OR = {
-				has_war_with = FROM
-				AND = {
-					has_opinion = {
-						target = FROM
-						value < -50
-					}
-					if = {
-						limit = {
-							has_idea = intervention_limited_interventionism
-						}
-						is_neighbor_of = FROM
-					}
-					else_if = {
-						limit = {
-							has_idea = intervention_regional_interventionism
-						}
-						custom_trigger_tooltip = {
-							tooltip = nation_on_same_continent
-							FROM = {
-								PREV_is_on_same_continent = yes
-							}
-						}
-					}
-				}
-			}
+			raid_show_target_opinion_hostile = yes
 			var:target_state = {
-				OR = {
-					rocket_site > 0
-				}
+				rocket_site > 0
 			}
 		}
 
 		# Can prepare
 		available = {
-			FROM = {
-				NOT = {
-					is_subject_of = ROOT
-				}
-				NOT = {
-					has_non_aggression_pact_with = ROOT
-				}
-			}
+			raid_target_eligible = yes
 			OR = {
 				has_war_with = FROM
 				hidden_trigger = {
@@ -1053,14 +862,8 @@ types = {
 		}
 		unit_requirements = {
 			equipment = {
-				type = { tactical_bomber cas strategic_bomber }
+				type = { tactical_bomber cas strategic_bomber guided_missile_equipment ballistic_missile_equipment hypersonic_missile_equipment }
 				amount = { min = 10 }
-			}
-		}
-		unit_requirements = {
-			equipment = {
-				type = { guided_missile_equipment }
-				amount = { min = 50 }
 			}
 		}
 
@@ -1074,7 +877,7 @@ types = {
 		}
 
 		starting_point = {
-			types = { rocket_site submarine air_base carrier }
+			types = { rocket_site submarine carrier air_base }
 		}
 
 		success_factors = {
@@ -1139,33 +942,7 @@ types = {
 						max = 8
 					}
 
-					var:target_state = {
-						set_temp_variable = { ROOT.aa_defense = THIS.non_damaged_building_level@anti_air_building }
-						set_temp_variable = { ROOT.radar_mult = THIS.non_damaged_building_level@radar_station }
-						set_temp_variable = { ROOT.rocket_mult = THIS.non_damaged_building_level@rocket_site }
-					}
-
-					add_to_temp_variable = { radar_mult = 0.5 }
-					multiply_temp_variable = { aa_defense = radar_mult }
-					multiply_temp_variable = { rocket_mult = radar_mult }
-
-					if = {
-						limit = {
-							NOT = { check_variable = { rocket_mult = 0 } }
-						}
-						multiply_temp_variable = { aa_defense = rocket_mult }
-
-						if = {
-							limit = {
-								check_variable = { aa_defense = 0 }
-							}
-							add_to_temp_variable = { aa_defense = rocket_mult }
-						}
-					}
-
-					if = { limit = { check_variable = { aa_defense = 0 } } add_to_temp_variable = { aa_defense = 1 } }
-
-					multiply_temp_variable = { raid_planes_lost = aa_defense }
+					calculate_raid_aa_defense = yes
 
 					#if at war, increase the losses, varying based on raid success
 					if = {
@@ -1184,25 +961,7 @@ types = {
 						multiply_temp_variable = { raid_planes_lost = random_chance_on_dead_planes }
 					}
 
-					#clamp after round, just in case some black magic made this negative
-					clamp_temp_variable = {
-						var = raid_planes_lost
-						min = 0
-					}
-
-					round_temp_variable = raid_planes_lost
-
-					hidden_effect = {
-						raid_damage_units = {
-							plane_loss = raid_planes_lost
-							ratio = no
-						}
-					}
-
-					custom_effect_tooltip = {
-						localization_key = plane_raid_losses_tt
-						LOSSES = [?raid_planes_lost]
-					}
+					finalize_raid_plane_losses = yes
 					#remove political power if the nation is not a war with the target
 					var:actor_country = {
 						if = {
@@ -1294,31 +1053,7 @@ types = {
 						max = 5
 					}
 
-					var:target_state = {
-						set_temp_variable = { ROOT.aa_defense = THIS.non_damaged_building_level@anti_air_building }
-						set_temp_variable = { ROOT.radar_mult = THIS.non_damaged_building_level@radar_station }
-						set_temp_variable = { ROOT.rocket_mult = THIS.non_damaged_building_level@rocket_site }
-					}
-
-					add_to_temp_variable = { radar_mult = 0.5 }
-					multiply_temp_variable = { aa_defense = radar_mult }
-					multiply_temp_variable = { rocket_mult = radar_mult }
-
-					if = {
-						limit = {
-							NOT = { check_variable = { rocket_mult = 0 } }
-						}
-						multiply_temp_variable = { aa_defense = rocket_mult }
-
-						if = {
-							limit = {
-								check_variable = { aa_defense = 0 }
-							}
-							add_to_temp_variable = { aa_defense = rocket_mult }
-						}
-					}
-
-					multiply_temp_variable = { raid_planes_lost = aa_defense }
+					calculate_raid_aa_defense = yes
 
 					#if at war, increase the losses, varying based on raid success
 					if = {
@@ -1336,25 +1071,7 @@ types = {
 						multiply_temp_variable = { raid_planes_lost = random_chance_on_dead_planes }
 					}
 
-					#clamp after round, just in case some black magic made this negative
-					clamp_temp_variable = {
-						var = raid_planes_lost
-						min = 0
-					}
-
-					round_temp_variable = raid_planes_lost
-
-					hidden_effect = {
-						raid_damage_units = {
-							plane_loss = raid_planes_lost
-							ratio = no
-						}
-					}
-
-					custom_effect_tooltip = {
-						localization_key = plane_raid_losses_tt
-						LOSSES = [?raid_planes_lost]
-					}
+					finalize_raid_plane_losses = yes
 					#remove political power if the nation is not a war with the target
 					var:actor_country = {
 						if = {
@@ -1441,31 +1158,7 @@ types = {
 						max = 3
 					}
 
-					var:target_state = {
-						set_temp_variable = { ROOT.aa_defense = THIS.non_damaged_building_level@anti_air_building }
-						set_temp_variable = { ROOT.radar_mult = THIS.non_damaged_building_level@radar_station }
-						set_temp_variable = { ROOT.rocket_mult = THIS.non_damaged_building_level@rocket_site }
-					}
-
-					add_to_temp_variable = { radar_mult = 0.5 }
-					multiply_temp_variable = { aa_defense = radar_mult }
-					multiply_temp_variable = { rocket_mult = radar_mult }
-
-					if = {
-						limit = {
-							NOT = { check_variable = { rocket_mult = 0 } }
-						}
-						multiply_temp_variable = { aa_defense = rocket_mult }
-
-						if = {
-							limit = {
-								check_variable = { aa_defense = 0 }
-							}
-							add_to_temp_variable = { aa_defense = rocket_mult }
-						}
-					}
-
-					multiply_temp_variable = { raid_planes_lost = aa_defense }
+					calculate_raid_aa_defense = yes
 
 					#if at war, increase the losses, varying based on raid success
 					if = {
@@ -1484,25 +1177,7 @@ types = {
 						multiply_temp_variable = { raid_planes_lost = random_chance_on_dead_planes }
 					}
 
-					#clamp after round, just in case some black magic made this negative
-					clamp_temp_variable = {
-						var = raid_planes_lost
-						min = 0
-					}
-
-					round_temp_variable = raid_planes_lost
-
-					hidden_effect = {
-						raid_damage_units = {
-							plane_loss = raid_planes_lost
-							ratio = no
-						}
-					}
-
-					custom_effect_tooltip = {
-						localization_key = plane_raid_losses_tt
-						LOSSES = [?raid_planes_lost]
-					}
+					finalize_raid_plane_losses = yes
 					#remove political power if the nation is not a war with the target
 					var:actor_country = {
 						if = {
@@ -1589,31 +1264,7 @@ types = {
 						max = 2
 					}
 
-					var:target_state = {
-						set_temp_variable = { ROOT.aa_defense = THIS.non_damaged_building_level@anti_air_building }
-						set_temp_variable = { ROOT.radar_mult = THIS.non_damaged_building_level@radar_station }
-						set_temp_variable = { ROOT.rocket_mult = THIS.non_damaged_building_level@rocket_site }
-					}
-
-					add_to_temp_variable = { radar_mult = 0.5 }
-					multiply_temp_variable = { aa_defense = radar_mult }
-					multiply_temp_variable = { rocket_mult = radar_mult }
-
-					if = {
-						limit = {
-							NOT = { check_variable = { rocket_mult = 0 } }
-						}
-						multiply_temp_variable = { aa_defense = rocket_mult }
-
-						if = {
-							limit = {
-								check_variable = { aa_defense = 0 }
-							}
-							add_to_temp_variable = { aa_defense = rocket_mult }
-						}
-					}
-
-					multiply_temp_variable = { raid_planes_lost = aa_defense }
+					calculate_raid_aa_defense = yes
 
 					#if at war, reduce the losses cause critical success rewards you
 					if = {
@@ -1630,25 +1281,7 @@ types = {
 						multiply_temp_variable = { raid_planes_lost = random_chance_on_dead_planes }
 					}
 
-					#clamp after round, just in case some black magic made this negative
-					clamp_temp_variable = {
-						var = raid_planes_lost
-						min = 0
-					}
-
-					round_temp_variable = raid_planes_lost
-
-					hidden_effect = {
-						raid_damage_units = {
-							plane_loss = raid_planes_lost
-							ratio = no
-						}
-					}
-
-					custom_effect_tooltip = {
-						localization_key = plane_raid_losses_tt
-						LOSSES = [?raid_planes_lost]
-					}
+					finalize_raid_plane_losses = yes
 					#remove political power if the nation is not a war with the target
 					var:actor_country = {
 						if = {
@@ -1710,7 +1343,7 @@ types = {
 			modifier = {
 				factor = 2
 				OR = {
-					has_idea = superpower
+					has_idea = super_power
 					has_idea = large_power
 					has_idea = great_power
 				}
@@ -1724,8 +1357,21 @@ types = {
 				NOT = { has_war_with = FROM }
 			}
 			modifier = {
-				factor = 0.05
+				factor = 0
 				threat < 0.10
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
+			}
+			modifier = {
+				factor = 0.05
+				OR = {
+					has_government = democratic
+					has_government = neutrality
+					has_elections = yes
+				}
+				FROM = { has_added_tension_amount < 5 }
 			}
 			modifier = {
 				factor = 0
@@ -1771,8 +1417,11 @@ types = {
 			}
 			modifier = {
 				factor = 0
-				date < 2002.1.1
-				NOT = { has_country_flag = promised_retaliation_against@FROM }
+				date < 2001.1.1
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
 			}
 			modifier = {
 				NOT = {
@@ -1791,6 +1440,45 @@ types = {
 				has_country_flag = conceded_to@FROM
 				factor = 0
 			}
+			modifier = {
+				factor = 0
+				is_ally_with = FROM
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
+			}
+			modifier = {
+				# Don't raid nations we have influence in
+				factor = 0
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
+				FROM = { is_influencer = yes }
+			}
+			modifier = {
+				# Don't raid if heavily in debt
+				factor = 0
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
+				check_variable = { debt_ratio > 0.25 }
+			}
+			modifier = {
+				# Less likely to raid if somewhat in debt
+				factor = 0.25
+				NOT = { has_war_with = FROM }
+				check_variable = { debt_ratio > 0.15 }
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					FROM = { is_subject_of = ROOT }
+					is_subject_of = FROM
+				}
+			}
 		}
 	}
 	#Dispersed strike on divisions in a single state
@@ -1808,14 +1496,7 @@ types = {
 		}
 
 		available = {
-			FROM = {
-				NOT = {
-					is_subject_of = ROOT
-				}
-				NOT = {
-					has_non_aggression_pact_with = ROOT
-				}
-			}
+			raid_target_eligible = yes
 		}
 
 		# Specific Target is visible
@@ -1842,7 +1523,7 @@ types = {
 						custom_trigger_tooltip = {
 							tooltip = nation_on_same_continent
 							FROM = {
-								PREV_is_on_same_continent = yes
+								is_on_same_continent_as = PREV
 							}
 						}
 					}
@@ -1863,19 +1544,19 @@ types = {
 			}
 		}
 
-		unit_requirements = {
-			equipment = {
-				type = { guided_missile_equipment }
-				amount = { min = 50 }
-			}
-		}
-
 		launch_sound = raid_launch_marine
 		target_icon = GFX_other_target_icon
 
 		target_type = {
 			state = {
 				always = yes
+			}
+		}
+
+		unit_requirements = {
+			equipment = {
+				type = { guided_missile_equipment ballistic_missile_equipment hypersonic_missile_equipment }
+				amount = { min = 10 }
 			}
 		}
 
@@ -2277,7 +1958,7 @@ types = {
 			modifier = {
 				factor = 2
 				OR = {
-					has_idea = superpower
+					has_idea = super_power
 					has_idea = large_power
 					has_idea = great_power
 				}
@@ -2291,8 +1972,12 @@ types = {
 				NOT = { has_war_with = FROM }
 			}
 			modifier = {
-				factor = 0.05
+				factor = 0
 				threat < 0.10
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
 			}
 			modifier = {
 				factor = 0
@@ -2341,8 +2026,20 @@ types = {
 			}
 			modifier = {
 				factor = 0
-				date < 2002.1.1
-				NOT = { has_country_flag = promised_retaliation_against@FROM }
+				date < 2001.1.1
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
+			}
+			modifier = {
+				factor = 0.05
+				OR = {
+					has_government = democratic
+					has_government = neutrality
+					has_elections = yes
+				}
+				FROM = { has_added_tension_amount < 5 }
 			}
 			modifier = {
 				NOT = {
@@ -2360,6 +2057,45 @@ types = {
 			modifier = {
 				has_country_flag = conceded_to@FROM
 				factor = 0
+			}
+			modifier = {
+				factor = 0
+				is_ally_with = FROM
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
+			}
+			modifier = {
+				# Don't raid nations we have influence in
+				factor = 0
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
+				FROM = { is_influencer = yes }
+			}
+			modifier = {
+				# Don't raid if heavily in debt
+				factor = 0
+				NOT = {
+					has_war_with = FROM
+					has_country_flag = promised_retaliation_against@FROM
+				}
+				check_variable = { debt_ratio > 0.25 }
+			}
+			modifier = {
+				# Less likely to raid if somewhat in debt
+				factor = 0.25
+				NOT = { has_war_with = FROM }
+				check_variable = { debt_ratio > 0.15 }
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					FROM = { is_subject_of = ROOT }
+					is_subject_of = FROM
+				}
 			}
 		}
 	}

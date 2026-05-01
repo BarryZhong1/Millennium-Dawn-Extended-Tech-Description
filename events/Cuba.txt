@@ -11,20 +11,24 @@ country_event = {
 	desc = cuba.3.d
 	picture = GFX_Army_reforms_event
 	is_triggered_only = yes
+
 	option = {
 		name = cuba.3.a
 		log = "[GetDateText]: [This.GetName]: cuba.3.a"
-		create_corps_commander = {
-			name = "Alvaro Lopez Miera"
-			portrait_path = "gfx/leaders/CUB/small"
-			traits = { panzer_leader }
-			skill = 2
-			attack_skill = 2
-			defense_skill = 2
-			planning_skill = 1
-			logistics_skill = 2
+		set_country_flag = CUB_unlock_alvaro_lopez_miera
+		effect_tooltip = {
+			create_corps_commander = {
+				name = "Alvaro Lopez Miera"
+				portrait_path = "gfx/leaders/CUB/Alvaro_Lopez_Miera.dds"
+				traits = { panzer_leader }
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 1
+				logistics_skill = 2
+			}
 		}
-	 }
+	}
 }
 
 #blockade
@@ -110,23 +114,15 @@ country_event = {
 		name = cuba.11.a
 		log = "[GetDateText]: [This.GetName]: cuba.11.a"
 		hidden_effect = {
-			clear_array = ruling_party
-			clear_array = gov_coalition_array
-			add_to_array = { ruling_party = 19 }
-			update_government_coalition_strength = yes
-			update_party_name = yes
-			set_coalition_drift = yes
-			set_ruling_leader = yes
+			set_temp_variable = { rul_party_temp = 19 }
+			set_temp_variable = { disable_elections = 1 }
+			change_ruling_party_effect = yes
 			set_temp_variable = { party_index = 0 }
 			set_temp_variable = { add_col_one = 0 }
 			add_coalition_members_effect = yes
 			set_temp_variable = { party_index = 4 }
 			set_temp_variable = { add_col_one = 4 }
 			add_coalition_members_effect = yes
-		}
-		set_politics = {
-			ruling_party = neutrality
-			elections_allowed = no
 		}
 		create_country_leader = {
 			name = "Raul Castro"
@@ -152,19 +148,12 @@ country_event = {
 		name = cuba.12.a
 		log = "[GetDateText]: [This.GetName]: cuba.11.a"
 		hidden_effect = {
-			clear_array = ruling_party
-			add_to_array = { ruling_party = 0 }
+			set_temp_variable = { rul_party_temp = 0 }
+			set_temp_variable = { disable_elections = 1 }
+			change_ruling_party_effect = yes
 			set_temp_variable = { current_cons_popularity = party_pop_array^0 }
 			multiply_temp_variable = { current_cons_popularity = 0.5 }
 			recalculate_party = yes
-			update_government_coalition_strength = yes
-			update_party_name = yes
-			set_coalition_drift = yes
-			set_ruling_leader = yes
-		}
-		set_politics = {
-			ruling_party = democratic
-			elections_allowed = no
 		}
 
 		create_country_leader = {
@@ -307,7 +296,6 @@ news_event = {
 		NOT = { original_tag = CUB }
 		}
 		name = cuba_news.20.a
-		log = "[GetDateText]: [This.GetName]: cuba_news.20.a"
 	 }
 }
 #Second expansion (need work)
@@ -345,7 +333,6 @@ news_event = {
 	is_triggered_only = yes
 	option = {
 		name = cuba_news.24.a
-		log = "[GetDateText]: [This.GetName]: cuba_news.24.a"
 	 }
 }
 
@@ -358,18 +345,22 @@ country_event = {
 	option = {
 		name = cuba.25.a
 		log = "[GetDateText]: [This.GetName]: cuba.25.a"
-		CHI = { diplomatic_relation = {
-			country = CUB
-			relation = guarantee
-			active = yes
-		} }
-	 }
-	 option = {
+		CHI = {
+			diplomatic_relation = {
+				country = CUB
+				relation = guarantee
+				active = yes
+			}
+		}
+	}
+
+	option = {
 		name = cuba.25.b
 		log = "[GetDateText]: [This.GetName]: cuba.25.b"
-	 }
+	}
 }
-#US will give us Guantanamo
+
+# US will give us Guantanamo
 country_event = {
 	id = cuba.26
 	title = cuba.26.t
@@ -387,13 +378,14 @@ country_event = {
 		transfer_state = 424
 	 }
 }
-#US wouldnt give us Guantanamo
+# US wouldnt give us Guantanamo
 country_event = {
 	id = cuba.27
 	title = cuba.27.t
 	desc = cuba.27.d
 	picture = GFX_declined_offer_no
 	is_triggered_only = yes
+
 	option = {
 		name = cuba.27.a
 		log = "[GetDateText]: [This.GetName]: cuba.27.a"
@@ -403,7 +395,7 @@ country_event = {
 				modifier = major_breach_of_trust
 			}
 		}
-	 }
+	}
 }
 #world event
 news_event = {
@@ -414,7 +406,6 @@ news_event = {
 	is_triggered_only = yes
 	option = {
 		name = cuba_news.29.a
-		log = "[GetDateText]: [This.GetName]: cuba_news.29.a"
 	 }
 }
 news_event = {
@@ -425,7 +416,6 @@ news_event = {
 	is_triggered_only = yes
 	option = {
 		name = cuba_news.30.a
-		log = "[GetDateText]: [This.GetName]: cuba_news.30.a"
 	 }
 }
 
@@ -461,7 +451,6 @@ news_event = {
 	is_triggered_only = yes
 	option = {
 		name = cuba_news.35.a
-		log = "[GetDateText]: [This.GetName]: cuba_news.35.a"
 	 }
 }
 country_event = {
@@ -505,6 +494,9 @@ country_event = {
 	picture = GFX_declined_offer_no
 	is_triggered_only = yes
 	option = {
+		set_temp_variable = { wargoal_on = DOM }
+		set_temp_variable = { wargoal_type = 2 }
+		add_threat_from_wargoal_effect = yes
 		create_wargoal = {
 			target = DOM
 			type = annex_everything
@@ -526,7 +518,7 @@ country_event = {
 		if = {
 			limit = { NOT = { is_in_array = { ruling_party = 2 } } }
 			set_temp_variable = { rul_party_temp = 2 }
-			set_temp_variable = { enable_elections = 0 }
+			set_temp_variable = { disable_elections = 0 }
 			change_ruling_party_effect = yes
 		}
 
@@ -545,7 +537,7 @@ country_event = {
 		if = {
 			limit = { NOT = { is_in_array = { ruling_party = 3 } } }
 			set_temp_variable = { rul_party_temp = 3 }
-			set_temp_variable = { enable_elections = 0 }
+			set_temp_variable = { disable_elections = 0 }
 			change_ruling_party_effect = yes
 		}
 
@@ -562,7 +554,7 @@ country_event = {
 		if = {
 			limit = { NOT = { is_in_array = { ruling_party = 1 } } }
 			set_temp_variable = { rul_party_temp = 1 }
-			set_temp_variable = { enable_elections = 0 }
+			set_temp_variable = { disable_elections = 0 }
 			change_ruling_party_effect = yes
 		}
 
@@ -572,8 +564,9 @@ country_event = {
 		add_relative_party_popularity = yes
 
 		custom_effect_tooltip = cub_christian_union_tt
-	 }
+	}
 }
+
 #PUERTO RICO
 country_event = {
 	id = cuba.40
@@ -581,26 +574,28 @@ country_event = {
 	desc = cuba.40.d
 	picture = GFX_puerto_rico_offer
 	is_triggered_only = yes
+
 	option = {
 		name = cuba.40.a
 		log = "[GetDateText]: [This.GetName]: cuba.40.a"
-		PTR = {
-		add_state_core = 815
-		transfer_state = 815
-		}
 		USA = {
-		set_temp_variable = { treasury_change = 10 }
-		modify_treasury_effect = yes
+			815 = { add_core_of = PTR }
+			release = PTR
+			set_temp_variable = { treasury_change = 10 }
+			modify_treasury_effect = yes
 		}
-		hidden_effect = {
-			CUB = {
-				set_temp_variable = { treasury_change = 10 }
-				modify_treasury_effect = yes
-			}
+		CUB = {
+			set_temp_variable = { treasury_change = -10 }
+			modify_treasury_effect = yes
+			country_event = { id = cuba.41 days = 1 }
 		}
-		CUB = { country_event = { id = cuba.41 days = 1 } }
-	 }
-	 option = {
+
+		ai_chance = {
+			base = 1
+		}
+	}
+
+	option = {
 		name = cuba.40.b
 		log = "[GetDateText]: [This.GetName]: cuba.40.b"
 		CUB = {
@@ -905,7 +900,6 @@ country_event = {
 			if = {
 				limit = { NOT = { is_in_array = { ruling_party = 3 } } }
 				set_temp_variable = { rul_party_temp = 3 }
-				set_temp_variable = { enable_elections = 0 }
 				change_ruling_party_effect = yes
 			}
 		}
@@ -916,18 +910,18 @@ country_event = {
 			if = {
 				limit = { NOT = { is_in_array = { ruling_party = 4 } } }
 				set_temp_variable = { rul_party_temp = 4 }
-				set_temp_variable = { enable_elections = 1 }
+				set_temp_variable = { disable_elections = 1 }
 				change_ruling_party_effect = yes
 			}
 		}
 		if = {
 			limit = {
-				has_global_flag = game_rule_CUB_Tesak
+				has_game_rule = { rule = CUB_Tesak option = yes }
 			}
 			if = {
 				limit = { NOT = { is_in_array = { ruling_party = 22 } } }
 				set_temp_variable = { rul_party_temp = 22 }
-				set_temp_variable = { enable_elections = 1 }
+				set_temp_variable = { disable_elections = 1 }
 				change_ruling_party_effect = yes
 
 				add_popularity = {
@@ -942,7 +936,7 @@ country_event = {
 			if = {
 				limit = { NOT = { is_in_array = { ruling_party = 21 } } }
 				set_temp_variable = { rul_party_temp = 21 }
-				set_temp_variable = { enable_elections = 1 }
+				set_temp_variable = { disable_elections = 1 }
 				change_ruling_party_effect = yes
 
 				}
@@ -997,6 +991,9 @@ country_event = {
 		name = cuba.55.a
 		log = "[GetDateText]: [This.GetName]: cuba.55.a"
 		CUB = {
+			set_temp_variable = { wargoal_on = JAM }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				target = JAM
 				type = annex_everything
@@ -1060,7 +1057,6 @@ news_event = {
 	is_triggered_only = yes
 	option = {
 		name = cuba_news.59.a
-		log = "[GetDateText]: [This.GetName]: cuba_news.59.a"
 	 }
 }
 country_event = {
@@ -1083,7 +1079,6 @@ news_event = {
 	is_triggered_only = yes
 	option = {
 		name = cuba_news.60.a
-		log = "[GetDateText]: [This.GetName]:cuba_news.60.a"
 	 }
 }
 news_event = {
@@ -1094,7 +1089,6 @@ news_event = {
 	is_triggered_only = yes
 	option = {
 		name = cuba_news.61.a
-		log = "[GetDateText]: [This.GetName]:cuba_news.61.a"
 	 }
 }
 news_event = {
@@ -1105,7 +1099,6 @@ news_event = {
 	is_triggered_only = yes
 	option = {
 		name = cuba_news.62.a
-		log = "[GetDateText]: [This.GetName]:cuba_news.62.a"
 	 }
 }
 country_event = {
@@ -1209,6 +1202,8 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: cuba.66.a executed"
 	}
 }
+
+# Cuba Asks for Protection
 country_event = {
 	id = cuba.72
 	title = cuba.72.t
@@ -1218,19 +1213,68 @@ country_event = {
 	option = {
 		name = cuba.72.a
 		log = "[GetDateText]: [This.GetName]: cuba.72.a"
-		give_military_access = SOV
-		SOV = { diplomatic_relation = {
-			country = CUB
-			relation = guarantee
-			active = yes
-		} }
+		give_military_access = CUB
+		SOV = {
+			diplomatic_relation = {
+				country = CUB
+				relation = guarantee
+				active = yes
+			}
+		}
 		CUB = { country_event = { id = cuba.73 days = 1 } }
-	 }
-	 option = {
+
+		ai_chance = {
+			base = 1
+			modifier = {
+				factor = 2
+				has_opinion = {
+					target = CUB
+					value > 50
+				}
+			}
+			modifier = {
+				factor = 2
+				CUB = {
+					OR = {
+						is_in_array = { influence_array^0 = SOV }
+						is_in_array = { influence_array^1 = SOV }
+						is_in_array = { influence_array^2 = SOV }
+						is_in_array = { influence_array^3 = SOV }
+						is_in_array = { influence_array^4 = SOV }
+						is_in_array = { influence_array^5 = SOV }
+						is_in_array = { influence_array^6 = SOV }
+					}
+				}
+			}
+		}
+	}
+
+	option = {
 		name = cuba.72.b
 		log = "[GetDateText]: [This.GetName]: cuba.72.b"
 		CUB = { country_event = { id = cuba.74 days = 1 } }
-	 }
+
+		ai_chance = {
+			base = 0
+			modifier = {
+				add = 5
+				OR = {
+					AND = {
+						SOV = { has_government = democratic }
+						NOT = { CUB = { has_government = democratic } }
+					}
+					AND = {
+						SOV = { has_government = neutrality }
+						NOT = { CUB = { has_government = neutrality } }
+					}
+					AND = {
+						SOV = { has_government = communism }
+						NOT = { CUB = { has_government = communism } }
+					}
+				}
+			}
+		}
+	}
 }
 country_event = {
 	id = cuba.73
@@ -1254,4 +1298,3 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: cuba.74.a"
 	 }
 }
-

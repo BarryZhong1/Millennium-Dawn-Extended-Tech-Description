@@ -1,15 +1,15 @@
 #Infantry Equipment Subdoctrines
 base_infantry_load = {
-	track = inf_equipment
+	track = infantry_weapons_type
 	name = SUBDOCTRINE_EQUIPMENT_BASE_INFANTRY
 	description = SUBDOCTRINE_EQUIPMENT_BASE_INFANTRY_DESC
-	icon = GFX_doctrine_mobile_infantry_medium
+	icon = GFX_doctrine_base_infantry_load
 
 	xp_cost = 75
 	xp_type = army
 
 	available = {
-		NOT = { has_country_flag = base_infantry_load }
+		NOT = { has_doctrine = base_infantry_load }
 	}
 
 	ai_will_do = {
@@ -24,7 +24,6 @@ base_infantry_load = {
 			category = CAT_inf_wep
 			name = SUBDOCTRINE_MOBILE_INFANTRY
 		}
-		set_country_flag = base_infantry_load
 	}
 
 	rewards = {
@@ -76,22 +75,22 @@ base_infantry_load = {
 		}
 	}
 	mastery = {
-		categories = {}
+		categories = { }
 		equipment = { infantry motorized mechanized }
 	}
 }
 
 light_infantry_load = {
-	track = inf_equipment
+	track = infantry_weapons_type
 	name = SUBDOCTRINE_EQUIPMENT_LIGHT_INFANTRY
 	description = SUBDOCTRINE_EQUIPMENT_LIGHT_INFANTRY_DESC
-	icon = GFX_doctrine_mobile_infantry_medium
+	icon = GFX_doctrine_light_infantry_load
 
 	xp_cost = 75
 	xp_type = army
 
 	available = {
-		NOT = { has_country_flag = light_infantry_load }
+		NOT = { has_doctrine = light_infantry_load }
 	}
 
 	ai_will_do = {
@@ -100,21 +99,18 @@ light_infantry_load = {
 
 	# EFFECTS
 	equipment_bonus = {
-		Inf_equipment = {
+		infantry_weapons_type = {
 			build_cost_ic = -0.15
 			maximum_speed = 0.5
 			instant = yes
 		}
 	}
 	equipment_bonus = {
-		cnc_equipment = {
+		cnc_equipment_type = {
 			build_cost_ic = -0.15
 			maximum_speed = 0.6
 			instant = yes
 		}
-	}
-	effect = {
-		set_country_flag = light_infantry_load
 	}
 
 	rewards = {
@@ -125,7 +121,7 @@ light_infantry_load = {
 		}
 		advanced_c2istar = {
 			equipment_bonus = {
-				cnc_equipment = {
+				cnc_equipment_type = {
 					max_organisation = 0.15
 					instant = yes
 				}
@@ -174,22 +170,22 @@ light_infantry_load = {
 		}
 	}
 	mastery = {
-		categories = {}
+		categories = { }
 		equipment = { infantry }
 	}
 }
 
 heavy_infantry_load = {
-	track = inf_equipment
+	track = infantry_weapons_type
 	name = SUBDOCTRINE_EQUIPMENT_HEAVY_INFANTRY
 	description = SUBDOCTRINE_EQUIPMENT_HEAVY_INFANTRY_DESC
-	icon = GFX_doctrine_mobile_infantry_medium
+	icon = GFX_doctrine_heavy_infantry_load
 
 	xp_cost = 75
 	xp_type = army
 
 	available = {
-		NOT = { has_country_flag = heavy_infantry_load }
+		NOT = { has_doctrine = heavy_infantry_load }
 	}
 
 	ai_will_do = {
@@ -204,7 +200,6 @@ heavy_infantry_load = {
 			category = CAT_l_at
 			name = SUBDOCTRINE_HEAVY_INF_EQP
 		}
-		set_country_flag = heavy_infantry_load
 	}
 
 	rewards = {
@@ -249,7 +244,7 @@ heavy_infantry_load = {
 		}
 		overmatch_rifles = {
 			equipment_bonus = {
-				Inf_equipment = {
+				infantry_weapons_type = {
 					soft_attack = 0.15
 					hard_attack = 0.05
 					instant = yes
@@ -258,7 +253,7 @@ heavy_infantry_load = {
 		}
 	}
 	mastery = {
-		categories = {}
+		categories = { }
 		equipment = { infantry }
 	}
 }
@@ -267,14 +262,13 @@ basic_motorized_equipment = {
 	track = motorized_equipment
 	name = SUBDOCTRINE_EQUIPMENT_BASE_MOTORIZED
 	description = SUBDOCTRINE_EQUIPMENT_BASE_MOTORIZED_DESC
-	icon = GFX_doctrine_mobile_infantry_medium
+	icon = GFX_doctrine_basic_motorized_equipment
 
 	xp_cost = 75
 	xp_type = army
 
 	available = {
-		NOT = { has_country_flag = basic_motorized_equipment }
-
+		NOT = { has_doctrine = basic_motorized_equipment }
 	}
 
 	ai_will_do = {
@@ -283,7 +277,7 @@ basic_motorized_equipment = {
 
 	# EFFECTS
 	equipment_bonus = {
-		util_vehicle_equipment = {
+		util_vehicle_type = {
 			defense = 0.25
 			instant = yes
 		}
@@ -295,14 +289,12 @@ basic_motorized_equipment = {
 			category = CAT_util
 			name = SUBDOCTRINE_BASE_MOTORIZED
 		}
-		set_country_flag = basic_motorized_equipment
-
 	}
 
 	rewards = {
 		mounted_weapon_systems = {
 			equipment_bonus = {
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					soft_attack = 0.25
 					breakthrough = 0.25
 					instant = yes
@@ -346,7 +338,7 @@ basic_motorized_equipment = {
 		}
 		improved_engines = {
 			equipment_bonus = {
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					fuel_consumption = -0.25
 					armor_value = 1
 					instant = yes
@@ -355,7 +347,7 @@ basic_motorized_equipment = {
 		}
 	}
 	mastery = {
-		categories = {}
+		categories = { }
 		equipment = { motorized }
 	}
 }
@@ -364,13 +356,13 @@ light_motorized_equipment = {
 	track = motorized_equipment
 	name = SUBDOCTRINE_EQUIPMENT_LIGHT_MOTORIZED
 	description = SUBDOCTRINE_EQUIPMENT_LIGHT_MOTORIZED_DESC
-	icon = GFX_doctrine_mobile_infantry_medium
+	icon = GFX_doctrine_light_motorized_equipment
 
 	xp_cost = 75
 	xp_type = army
 
 	available = {
-		NOT = { has_country_flag = light_motorized_equipment }
+		NOT = { has_doctrine = light_motorized_equipment }
 	}
 
 	ai_will_do = {
@@ -379,7 +371,7 @@ light_motorized_equipment = {
 
 	# EFFECTS
 	equipment_bonus = {
-		util_vehicle_equipment = {
+		util_vehicle_type = {
 			maximum_speed = 0.15
 			fuel_consumption_factor = -0.15
 			instant = yes
@@ -392,13 +384,12 @@ light_motorized_equipment = {
 			category = CAT_util
 			name = SUBDOCTRINE_BASE_MOTORIZED
 		}
-		set_country_flag = light_motorized_equipment
 	}
 
 	rewards = {
 		fuel_system_improvements = {
 			equipment_bonus = {
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					fuel_consumption = -0.3
 					instant = yes
 				}
@@ -406,7 +397,7 @@ light_motorized_equipment = {
 		}
 		light_chassis_design = {
 			equipment_bonus = {
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					hardness = -0.1
 					defense = 0.5
 					reliability = 0.05
@@ -438,14 +429,14 @@ light_motorized_equipment = {
 		}
 		lightweight_command_vehicles = {
 			equipment_bonus = {
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					max_organisation = 0.05
 					instant = yes
 				}
 			}
 			category_mot_inf = {
 				need = {
-					command_control_equipment = 10
+					cnc_equipment_1 = 10
 				}
 			}
 		}
@@ -456,7 +447,7 @@ light_motorized_equipment = {
 		}
 	}
 	mastery = {
-		categories = {}
+		categories = { }
 		equipment = { motorized }
 	}
 }
@@ -465,13 +456,13 @@ heavy_motorized_equipment = {
 	track = motorized_equipment
 	name = SUBDOCTRINE_EQUIPMENT_HEAVY_MOTORIZED
 	description = SUBDOCTRINE_EQUIPMENT_HEAVY_MOTORIZED_DESC
-	icon = GFX_doctrine_mobile_infantry_medium
+	icon = GFX_doctrine_heavy_motorized_equipment
 
 	xp_cost = 75
 	xp_type = army
 
 	available = {
-		NOT = { has_country_flag = heavy_motorized_equipment }
+		NOT = { has_doctrine = heavy_motorized_equipment }
 	}
 
 	ai_will_do = {
@@ -480,7 +471,7 @@ heavy_motorized_equipment = {
 
 	# EFFECTS
 	equipment_bonus = {
-		util_vehicle_equipment = {
+		util_vehicle_type = {
 			maximum_speed = -0.15
 			fuel_consumption = 0.2
 			defense = 0.15
@@ -495,13 +486,12 @@ heavy_motorized_equipment = {
 			category = CAT_util
 			name = SUBDOCTRINE_BASE_MOTORIZED
 		}
-		set_country_flag = heavy_motorized_equipment
 	}
 
 	rewards = {
 		heavy_weapon_systems = {
 			equipment_bonus = {
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					hard_attack = 1.2
 					instant = yes
 				}
@@ -509,7 +499,7 @@ heavy_motorized_equipment = {
 		}
 		uparmored_chassis = {
 			equipment_bonus = {
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					hardness = 0.1
 					defense = 0.15
 					reliability = 0.05
@@ -531,7 +521,7 @@ heavy_motorized_equipment = {
 				supply_consumption_factor = 0.1
 			}
 			equipment_bonus = {
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					soft_attack = 0.15
 					reliability = -0.05
 					instant = yes
@@ -552,7 +542,7 @@ heavy_motorized_equipment = {
 		}
 	}
 	mastery = {
-		categories = {}
+		categories = { }
 		equipment = { motorized }
 	}
 }
@@ -561,17 +551,21 @@ mixed_mechanized_equipment = {
 	track = mechanized_equipment
 	name = SUBDOCTRINE_EQUIPMENT_MIXED_MECHANIZED
 	description = SUBDOCTRINE_EQUIPMENT_MIXED_MECHANIZED_DESC
-	icon = GFX_doctrine_mobile_infantry_medium
+	icon = GFX_doctrine_mixed_mechanized_equipment
 
 	xp_cost = 75
 	xp_type = army
 
 	available = {
-		NOT = { has_country_flag = mixed_mechanized_equipment }
+		NOT = { has_doctrine = mixed_mechanized_equipment }
 	}
 
 	ai_will_do = {
-		base = 1
+		base = 3
+		modifier = {
+			add = 3
+			num_of_military_factories < 25
+		}
 	}
 
 	# EFFECTS
@@ -584,9 +578,6 @@ mixed_mechanized_equipment = {
 			build_cost_ic = -0.1
 			instant = yes
 		}
-	}
-	effect = {
-		set_country_flag = mixed_mechanized_equipment
 	}
 
 	rewards = {
@@ -617,7 +608,7 @@ mixed_mechanized_equipment = {
 			category_apc = {
 				experience_loss_factor = -0.015
 			}
-			category_ifv = {
+			category_IFV = {
 				experience_loss_factor = -0.015
 			}
 		}
@@ -651,8 +642,8 @@ mixed_mechanized_equipment = {
 		}
 	}
 	mastery = {
-		categories = {}
-		equipment = { mechanized }
+		categories = { category_apc category_IFV }
+		equipment = { amphibious flame }
 	}
 }
 
@@ -660,17 +651,29 @@ apc_mechanized_equipment = {
 	track = mechanized_equipment
 	name = SUBDOCTRINE_EQUIPMENT_APC_MECHANIZED
 	description = SUBDOCTRINE_EQUIPMENT_APC_MECHANIZED_DESC
-	icon = GFX_doctrine_mobile_infantry_medium
+	icon = GFX_doctrine_apc_mechanized_equipment
 
 	xp_cost = 75
 	xp_type = army
 
 	available = {
-		NOT = { has_country_flag = apc_mechanized_equipment }
+		NOT = { has_doctrine = apc_mechanized_equipment }
 	}
 
 	ai_will_do = {
 		base = 1
+		modifier = {
+			add = 8
+			has_government = communism
+		}
+		modifier = {
+			add = 5
+			num_of_military_factories < 30
+		}
+		modifier = {
+			factor = 0
+			is_non_power = yes
+		}
 	}
 
 	# EFFECTS
@@ -684,10 +687,6 @@ apc_mechanized_equipment = {
 			instant = yes
 		}
 	}
-	effect = {
-		set_country_flag = apc_mechanized_equipment
-	}
-
 
 	rewards = {
 		turbocharged_engines = {
@@ -728,15 +727,15 @@ apc_mechanized_equipment = {
 		enhanced_communications_equipment = {
 			category_apc = {
 				need = {
-					command_control_equipment = 10
+					cnc_equipment_1 = 10
 				}
 				max_organisation = 0.05
 			}
 		}
 	}
 	mastery = {
-		categories = {}
-		equipment = { mechanized }
+		categories = { category_apc }
+		equipment = { amphibious }
 	}
 }
 
@@ -744,18 +743,31 @@ ifv_mechanized_equipment = {
 	track = mechanized_equipment
 	name = SUBDOCTRINE_EQUIPMENT_IFV_MECHANIZED
 	description = SUBDOCTRINE_EQUIPMENT_IFV_MECHANIZED_DESC
-	icon = GFX_doctrine_mobile_infantry_medium
+	icon = GFX_doctrine_ifv_mechanized_equipment
 
 	xp_cost = 75
 	xp_type = army
 
 	available = {
-		NOT = { has_country_flag = ifv_mechanized_equipment }
-
+		NOT = { has_doctrine = ifv_mechanized_equipment }
 	}
 
 	ai_will_do = {
 		base = 1
+		modifier = {
+			add = 10
+			has_government = democratic
+			num_of_military_factories > 35
+		}
+		modifier = {
+			add = 5
+			has_expansionist_government = yes
+			num_of_military_factories > 35
+		}
+		modifier = {
+			factor = 0
+			num_of_military_factories < 25
+		}
 	}
 
 	# EFFECTS
@@ -768,9 +780,6 @@ ifv_mechanized_equipment = {
 			build_cost_ic = -0.15
 			instant = yes
 		}
-	}
-	effect = {
-		set_country_flag = ifv_mechanized_equipment
 	}
 
 	rewards = {
@@ -811,8 +820,8 @@ ifv_mechanized_equipment = {
 		}
 	}
 	mastery = {
-		categories = {}
-		equipment = { mechanized }
+		categories = { category_IFV }
+		equipment = { flame }
 	}
 }
 #Armored Equipment Subdoctrines
@@ -820,18 +829,22 @@ mbt_equipment = {
 	track = tank_equipment
 	name = SUBDOCTRINE_EQUIPMENT_MBT_TANK
 	description = SUBDOCTRINE_EQUIPMENT_MBT_TANK_DESC
-	icon = GFX_doctrine_mobile_infantry_medium
+	icon = GFX_doctrine_mbt_equipment
 
 	xp_cost = 75
 	xp_type = army
 
 	available = {
-		NOT = { has_country_flag = mbt_equipment }
+		NOT = { has_doctrine = mbt_equipment }
 
 	}
 
 	ai_will_do = {
-		base = 1
+		base = 3
+		modifier = {
+			add = 3
+			is_major_power = yes
+		}
 	}
 
 	# EFFECTS
@@ -840,9 +853,6 @@ mbt_equipment = {
 			build_cost_ic = -0.05
 			instant = yes
 		}
-	}
-	effect = {
-		set_country_flag = mbt_equipment
 	}
 
 	rewards = {
@@ -879,8 +889,8 @@ mbt_equipment = {
 		}
 	}
 	mastery = {
-		categories = {}
-		equipment = {}
+		categories = { }
+		equipment = { }
 		sub_units = { armor_Bat }
 	}
 }
@@ -889,18 +899,31 @@ light_tank_equipment = {
 	track = tank_equipment
 	name = SUBDOCTRINE_EQUIPMENT_LIGHT_TANK
 	description = SUBDOCTRINE_EQUIPMENT_LIGHT_TANK_DESC
-	icon = GFX_doctrine_mobile_infantry_medium
+	icon = GFX_doctrine_light_tank_equipment
 
 	xp_cost = 75
 	xp_type = army
 
 	available = {
-		NOT = { has_country_flag = light_tank_equipment }
+		NOT = { has_doctrine = light_tank_equipment }
 
 	}
 
 	ai_will_do = {
 		base = 1
+		modifier = {
+			add = 10
+			is_non_power = yes
+		}
+		modifier = {
+			add = 8
+			is_minor_power = yes
+			num_of_military_factories < 20
+		}
+		modifier = {
+			factor = 0
+			num_of_military_factories > 40
+		}
 	}
 
 	# EFFECTS
@@ -909,9 +932,6 @@ light_tank_equipment = {
 			build_cost_ic = -0.05
 			instant = yes
 		}
-	}
-	effect = {
-		set_country_flag = light_tank_equipment
 	}
 
 	rewards = {
@@ -967,8 +987,8 @@ light_tank_equipment = {
 		}
 	}
 	mastery = {
-		categories = {}
-		equipment = {}
+		categories = { }
+		equipment = { }
 		sub_units = { L_arm_Bat }
 	}
 }
@@ -977,32 +997,33 @@ superheavy_equipment = {
 	track = tank_equipment
 	name = SUBDOCTRINE_EQUIPMENT_SUPERHEAVY_TANK
 	description = SUBDOCTRINE_EQUIPMENT_SUPERHEAVY_TANK_DESC
-	icon = GFX_doctrine_mobile_infantry_medium
+	icon = GFX_doctrine_superheavy_equipment
 
 	xp_cost = 75
 	xp_type = army
 
 	available = {
-		NOT = { has_country_flag = superheavy_equipment }
+		NOT = { has_doctrine = superheavy_equipment }
 	}
 
 	ai_will_do = {
 		base = 1
+		modifier = {
+			factor = 0
+			NOT = { is_major_power = yes }
+		}
+		modifier = {
+			factor = 0
+			NOT = { num_of_military_factories > 50 }
+		}
 	}
 
 	# EFFECTS
-	equipment_bonus = {
-		medium_tank_chassis = {
-			build_cost_ic = 0.1
-			armor_value = 0.15
-			maximum_speed = -0.05
-			fuel_consumption_factor = 0.15
-			reliability = -0.15
-			instant = yes
-		}
-	}
-	effect = {
-		set_country_flag = superheavy_equipment
+	category_real_tanks = {
+		armor_value = 0.15
+		maximum_speed = -0.05
+		fuel_consumption_factor = 0.15
+		reliability = -0.15
 	}
 
 	rewards = {
@@ -1042,9 +1063,80 @@ superheavy_equipment = {
 		}
 	}
 	mastery = {
-		categories = {}
-		equipment = {}
+		categories = { category_tanks category_real_tanks }
+		equipment = { }
 		sub_units = { armor_Bat }
+	}
+}
+walker_tank_equipment = {
+	track = tank_equipment
+	name = SUBDOCTRINE_EQUIPMENT_WALKER_TANK
+	description = SUBDOCTRINE_EQUIPMENT_WALKER_TANK_DESC
+	icon = x
+
+	xp_cost = 75
+	xp_type = army
+
+	available = {
+		NOT = { has_doctrine = walker_tank_equipment }
+		is_special_project_completed = sp:sp_walker_tank_chassis
+
+	}
+
+	ai_will_do = {
+		base = 1
+	}
+
+	# EFFECTS
+	equipment_bonus = {
+		super_heavy_tank_chassis = {
+			build_cost_ic = -0.05
+			instant = yes
+		}
+	}
+
+	rewards = {
+		gait_optimization = {
+			category_walker_tanks = {
+				maximum_speed = 0.075
+				reliability = 0.05
+			}
+		}
+		stabilized_firing_windows = {
+			category_walker_tanks = {
+				soft_attack = 0.05
+				hard_attack = 0.05
+				breakthrough = 0.05
+			}
+		}
+		leg_damage_protocols = {
+			category_walker_tanks = {
+				armor_value = 0.05
+				hardness = 0.05
+			}
+
+		}
+		terrain_anchoring = {
+			category_walker_tanks = {
+				river = {
+					movement = 0.10
+				}
+				mountain = {
+					movement = 0.10
+				}
+			}
+		}
+		combined_arms_walker_screen = {
+			category_walker_tanks = {
+				max_organisation = 0.075
+				ap_attack = 0.05
+			}
+		}
+	}
+	mastery = {
+		categories = { category_walker_tanks }
+		equipment = { }
+		sub_units = { }
 	}
 }
 #Artillery Equipment Subdoctrines
@@ -1052,17 +1144,29 @@ towed_gun_equipment = {
 	track = arty_equipment
 	name = SUBDOCTRINE_EQUIPMENT_TOWED_ARTILLERY
 	description = SUBDOCTRINE_EQUIPMENT_TOWED_ARTILLERY_DESC
-	icon = GFX_doctrine_mobile_infantry_medium
+	icon = GFX_doctrine_towed_gun_equipment
 
 	xp_cost = 75
 	xp_type = army
 
 	available = {
-		NOT = { has_country_flag = towed_gun_equipment }
+		NOT = { has_doctrine = towed_gun_equipment }
 	}
 
 	ai_will_do = {
 		base = 1
+		modifier = {
+			add = 8
+			num_of_military_factories < 20
+		}
+		modifier = {
+			add = 6
+			is_non_power = yes
+		}
+		modifier = {
+			factor = 0
+			num_of_military_factories > 45
+		}
 	}
 
 	# EFFECTS
@@ -1079,7 +1183,6 @@ towed_gun_equipment = {
 			category = CAT_artillery
 			name = SUBDOCTRINE_ARTILLERY_EQP
 		}
-		set_country_flag = towed_gun_equipment
 	}
 
 	rewards = {
@@ -1134,9 +1237,9 @@ towed_gun_equipment = {
 		}
 	}
 	mastery = {
-		categories = {}
-		equipment = {}
-		sub_units = { Arty_Bat Arty_Battery air_assault_Arty_Battery }
+		categories = { category_artillery }
+		equipment = { }
+		sub_units = { Arty_Bat Arty_Battery }
 	}
 }
 
@@ -1144,17 +1247,27 @@ spart_equipment = {
 	track = arty_equipment
 	name = SUBDOCTRINE_EQUIPMENT_SP_ARTILLERY
 	description = SUBDOCTRINE_EQUIPMENT_SP_ARTILLERY_DESC
-	icon = GFX_doctrine_mobile_infantry_medium
+	icon = GFX_doctrine_spart_equipment
 
 	xp_cost = 75
 	xp_type = army
 
 	available = {
-		NOT = { has_country_flag = spart_equipment }
+		NOT = { has_doctrine = spart_equipment }
 	}
 
 	ai_will_do = {
 		base = 1
+		modifier = {
+			add = 8
+			has_government = democratic
+			num_of_military_factories > 30
+		}
+		modifier = {
+			add = 5
+			has_expansionist_government = yes
+			num_of_military_factories > 35
+		}
 	}
 
 	# EFFECTS
@@ -1163,9 +1276,6 @@ spart_equipment = {
 			build_cost_ic = -0.05
 			instant = yes
 		}
-	}
-	effect = {
-		set_country_flag = spart_equipment
 	}
 
 	rewards = {
@@ -1206,8 +1316,8 @@ spart_equipment = {
 		}
 	}
 	mastery = {
-		categories = {}
-		equipment = {}
+		categories = { category_spart }
+		equipment = { }
 		sub_units = { SP_Arty_Bat SP_Arty_Battery }
 	}
 }
@@ -1216,18 +1326,29 @@ mlrs_equipment = {
 	track = arty_equipment
 	name = SUBDOCTRINE_EQUIPMENT_ROCKET_ARTILLERY
 	description = SUBDOCTRINE_EQUIPMENT_ROCKET_ARTILLERY_DESC
-	icon = GFX_doctrine_mobile_infantry_medium
+	icon = GFX_doctrine_mlrs_equipment
 
 	xp_cost = 75
 	xp_type = army
 
 	available = {
-		NOT = { has_country_flag = mlrs_equipment }
+		NOT = { has_doctrine = mlrs_equipment }
 
 	}
 
 	ai_will_do = {
 		base = 1
+		modifier = {
+			add = 15
+			has_government = communism
+			is_major_power = yes
+			num_of_military_factories > 40
+		}
+		modifier = {
+			add = 8
+			has_expansionist_government = yes
+			has_government = communism
+		}
 	}
 
 	# EFFECTS
@@ -1236,9 +1357,6 @@ mlrs_equipment = {
 			build_cost_ic = -0.05
 			instant = yes
 		}
-	}
-	effect = {
-		set_country_flag = mlrs_equipment
 	}
 
 	rewards = {
@@ -1302,9 +1420,104 @@ mlrs_equipment = {
 		}
 	}
 	mastery = {
-		categories = {}
-		equipment = { rocket }
-		sub_units = {}
+		categories = { category_mlrs }
+		equipment = { }
+		sub_units = { SP_R_Arty_Bat SP_R_Arty_Battery }
+	}
+}
+drone_equipment = {
+	track = arty_equipment
+	name = SUBDOCTRINE_EQUIPMENT_DRONE
+	description = SUBDOCTRINE_EQUIPMENT_DRONE_DESC
+	icon = GFX_doctrine_mlrs_equipment
+
+	xp_cost = 75
+	xp_type = army
+
+	available = {
+		NOT = { has_doctrine = drone_equipment }
+		is_special_project_completed = sp:sp_recon_land_drone
+
+	}
+
+	ai_will_do = {
+		base = 1
+	}
+
+	# EFFECTS
+	equipment_bonus = {
+		land_drone_equipment_type = {
+			build_cost_ic = -0.05
+			instant = yes
+		}
+	}
+	Drone_Recce_Comp = {
+		max_organisation = 0.05
+	}
+	drone_tactical_company = {
+		max_organisation = 0.05
+	}
+
+	rewards = {
+		ew_resilient_link_discipline = {
+			equipment_bonus = {
+				land_drone_equipment_type = {
+					reliability = 0.05
+					instant = yes
+				}
+			}
+			Drone_Recce_Comp = {
+				recovery = 0.075
+			}
+			drone_tactical_company = {
+				recovery = 0.075
+			}
+		}
+		sensor_to_shooter = {
+			equipment_bonus = {
+				land_drone_equipment_type = {
+					breakthrough = 0.05
+					instant = yes
+				}
+			}
+			Drone_Recce_Comp = {
+				max_organisation = 0.075
+			}
+			drone_tactical_company = {
+				max_organisation = 0.075
+			}
+		}
+		swarm_deconfliction = {
+			Drone_Recce_Comp = {
+				soft_attack = 0.05
+			}
+			drone_tactical_company = {
+				soft_attack = 0.05
+			}
+		}
+		low_signature_patterns = {
+			Drone_Recce_Comp = {
+				entrenchment = 0.10
+				defense = 0.05
+			}
+			drone_tactical_company = {
+				entrenchment = 0.10
+				defense = 0.05
+			}
+		}
+		rapid_turnaround_ground_crew = {
+			equipment_bonus = {
+				land_drone_equipment_type = {
+					max_strength = 0.15
+					instant = yes
+				}
+			}
+		}
+	}
+	mastery = {
+		categories = { }
+		equipment = { }
+		sub_units = { Drone_Recce_Comp drone_tactical_company }
 	}
 }
 #Helicopter Equipment Subdoctrines
@@ -1312,13 +1525,13 @@ atk_helo_equipment = {
 	track = airmobile_equipment
 	name = SUBDOCTRINE_EQUIPMENT_ATK_HELICOPTER
 	description = SUBDOCTRINE_EQUIPMENT_ATK_HELICOPTER_DESC
-	icon = GFX_doctrine_mobile_infantry_medium
+	icon = GFX_doctrine_atk_helo_equipment
 
 	xp_cost = 75
 	xp_type = army
 
 	available = {
-		NOT = { has_country_flag = atk_helo_equipment }
+		NOT = { has_doctrine = atk_helo_equipment }
 
 	}
 
@@ -1332,9 +1545,6 @@ atk_helo_equipment = {
 			build_cost_ic = -0.05
 			instant = yes
 		}
-	}
-	effect = {
-		set_country_flag = atk_helo_equipment
 	}
 
 	rewards = {
@@ -1385,9 +1595,9 @@ atk_helo_equipment = {
 		}
 	}
 	mastery = {
-		categories = {}
-		equipment = {}
-		sub_units = {attack_helo_bat attack_helo_comp }
+		categories = { category_atk_helo }
+		equipment = { }
+		sub_units = { attack_helo_bat attack_helo_comp }
 	}
 }
 
@@ -1395,14 +1605,13 @@ transport_helo_equipment = {
 	track = airmobile_equipment
 	name = SUBDOCTRINE_EQUIPMENT_TRANS_HELICOPTER
 	description = SUBDOCTRINE_EQUIPMENT_TRANS_HELICOPTER_DESC
-	icon = GFX_doctrine_mobile_infantry_medium
+	icon = GFX_doctrine_transport_helo_equipment
 
 	xp_cost = 75
 	xp_type = army
 
 	available = {
-		NOT = { has_country_flag = transport_helo_equipment }
-
+		NOT = { has_doctrine = transport_helo_equipment }
 	}
 
 	ai_will_do = {
@@ -1415,9 +1624,6 @@ transport_helo_equipment = {
 			build_cost_ic = -0.05
 			instant = yes
 		}
-	}
-	effect = {
-		set_country_flag = transport_helo_equipment
 	}
 
 	rewards = {
@@ -1469,8 +1675,8 @@ transport_helo_equipment = {
 		}
 	}
 	mastery = {
-		categories = {}
-		equipment = {}
+		categories = { category_air_aslt }
+		equipment = { }
 		sub_units = { L_Air_assault_Bat }
 	}
 }

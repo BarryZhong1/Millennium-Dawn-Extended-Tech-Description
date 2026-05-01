@@ -11,7 +11,6 @@ ARM_party_change_effect = {
 			if = {
 				limit = { NOT = { is_in_array = { ruling_party = 15 } } }
 				set_temp_variable = { rul_party_temp = 15 }
-				set_temp_variable = { enable_elections = 0 }
 				change_ruling_party_effect = yes
 			}
 			set_temp_variable = { party_index = 15 }
@@ -29,7 +28,6 @@ ARM_party_change_effect = {
 			if = {
 				limit = { NOT = { is_in_array = { ruling_party = 23 } } }
 				set_temp_variable = { rul_party_temp = 23 }
-				set_temp_variable = { enable_elections = 0 }
 				change_ruling_party_effect = yes
 			}
 			set_temp_variable = { party_index = 23 }
@@ -47,7 +45,6 @@ ARM_party_change_effect = {
 			if = {
 				limit = { NOT = { is_in_array = { ruling_party = 0 } } }
 				set_temp_variable = { rul_party_temp = 0 }
-				set_temp_variable = { enable_elections = 0 }
 				change_ruling_party_effect = yes
 			}
 			set_temp_variable = { party_index = 0 }
@@ -65,7 +62,6 @@ ARM_party_change_effect = {
 			if = {
 				limit = { NOT = { is_in_array = { ruling_party = 1 } } }
 				set_temp_variable = { rul_party_temp = 1 }
-				set_temp_variable = { enable_elections = 0 }
 				change_ruling_party_effect = yes
 			}
 			set_temp_variable = { party_index = 1 }
@@ -83,7 +79,6 @@ ARM_party_change_effect = {
 			if = {
 				limit = { NOT = { is_in_array = { ruling_party = 5 } } }
 				set_temp_variable = { rul_party_temp = 5 }
-				set_temp_variable = { enable_elections = 0 }
 				change_ruling_party_effect = yes
 			}
 			set_temp_variable = { party_index = 5 }
@@ -101,7 +96,6 @@ ARM_party_change_effect = {
 			if = {
 				limit = { NOT = { is_in_array = { ruling_party = 21 } } }
 				set_temp_variable = { rul_party_temp = 21 }
-				set_temp_variable = { enable_elections = 0 }
 				change_ruling_party_effect = yes
 			}
 			set_temp_variable = { party_index = 21 }
@@ -224,8 +218,9 @@ ARM_tourism_calculate = {
 		limit = {
 			ARM = {
 				has_idea = ARM_tourism_idea
+
+				owns_state = 709
 			}
-			ARM = { owns_state = 709 }
 		}
 		ARM = {
 			random_list = {
@@ -400,8 +395,9 @@ ARM_tourism_calculate = {
 		limit = {
 			ARM = {
 				has_idea = ARM_tourism_idea
+
+				owns_state = 706
 			}
-			ARM = { owns_state = 706 }
 			has_country_flag = ARM_economy_tourism_abkhazia
 		}
 		ARM = {
@@ -549,8 +545,9 @@ ARM_tourism_calculate = {
 		limit = {
 			ARM = {
 				has_idea = ARM_tourism_idea
+
+				owns_state = 713
 			}
-			ARM = { owns_state = 713 }
 			has_country_flag = ARM_economy_tourism_azer
 		}
 		ARM = {
@@ -734,14 +731,6 @@ ARM_shadow_economy_bad_script = {
 			add_idea = ARM_economy_shady_idea
 		}
 		add_political_power = 100
-	}
-	else_if = {
-		limit = { has_idea = ARM_economy_shady_idea1 }
-		swap_ideas = {
-			remove_idea = ARM_economy_shady_idea1
-			add_idea = ARM_economy_shady_idea1
-		}
-		add_political_power = 85
 	}
 	else_if = {
 		limit = { has_idea = ARM_economy_shady_idea2 }
@@ -1200,10 +1189,10 @@ ARM_polish_revoult_script = {
 					set_temp_variable = { rul_party_temp = 23 }
 					if = {
 						limit = { has_elections = no }
-						set_temp_variable = { enable_elections = 1 }
+						set_temp_variable = { disable_elections = 1 }
 					}
 					else = {
-						set_temp_variable = { enable_elections = 0 }
+						set_temp_variable = { disable_elections = 0 }
 					}
 					change_ruling_party_effect = yes
 				}
@@ -1234,10 +1223,6 @@ ARM_polish_revoult_script = {
 					transfer_state = 474
 					transfer_state = 625
 					transfer_state = 626
-					set_politics = {
-						ruling_party = democratic
-						elections_allowed = no
-					}
 					set_popularities = {
 						democratic = 100
 						neutrality = 0
@@ -1246,11 +1231,9 @@ ARM_polish_revoult_script = {
 						nationalist = 0
 					}
 					inherit_technology = POL
-					clear_array = ruling_party
-					clear_array = gov_coalition_array
-					add_to_array = {
-						ruling_party = 2
-					}
+					set_temp_variable = { rul_party_temp = 2 }
+					set_temp_variable = { disable_elections = 1 }
+					change_ruling_party_effect = yes
 					set_temp_variable = {
 						current_cons_popularity = party_pop_array^2
 					}
@@ -1261,11 +1244,6 @@ ARM_polish_revoult_script = {
 						party_pop_array^2 = current_cons_popularity
 					}
 					recalculate_party = yes
-					update_government_coalition_strength = yes
-					update_party_name = yes
-					set_coalition_drift = yes
-					set_ruling_leader = yes
-					set_leader = yes
 					retire_country_leader = yes
 					POL = {
 						transfer_units_fraction = {
@@ -1356,10 +1334,6 @@ ARM_italian_revoult_script = {
 					transfer_state = 77
 					transfer_state = 1060
 					transfer_state = 265
-					set_politics = {
-						ruling_party = democratic
-						elections_allowed = no
-					}
 					set_popularities = {
 						democratic = 100
 						neutrality = 0
@@ -1368,11 +1342,9 @@ ARM_italian_revoult_script = {
 						nationalist = 0
 					}
 					inherit_technology = ITA
-					clear_array = ruling_party
-					clear_array = gov_coalition_array
-					add_to_array = {
-						ruling_party = 2
-					}
+					set_temp_variable = { rul_party_temp = 2 }
+					set_temp_variable = { disable_elections = 1 }
+					change_ruling_party_effect = yes
 					set_temp_variable = {
 						current_cons_popularity = party_pop_array^2
 					}
@@ -1383,11 +1355,6 @@ ARM_italian_revoult_script = {
 						party_pop_array^2 = current_cons_popularity
 					}
 					recalculate_party = yes
-					update_government_coalition_strength = yes
-					update_party_name = yes
-					set_coalition_drift = yes
-					set_ruling_leader = yes
-					set_leader = yes
 					retire_country_leader = yes
 					ITA = {
 						transfer_units_fraction = {
@@ -1473,46 +1440,30 @@ ARM_kob_russia_script = {
 	}
 	else_if = {
 		limit = {
-			SOV = {
-				has_idea = SOV_fsb_idea2
-				NOT = {
-					has_idea = SOV_omon_idea
-					OR = {
-						has_idea = SOV_inner_army_idea
-						has_idea = SOV_rosguard_idea
-						has_idea = SOV_rosguard_idea1
-					}
-				}
-			}
-		}
-		hidden_effect = {
-			SOV = {
-				country_event = {
-					id = arm_empire.33
-					days = 1
-				}
-			}
-			ARM = {
-				country_event = {
-					id = arm_empire.33
-					days = 1
-				}
-			}
-		}
-	}
-	else_if = {
-		limit = {
-			SOV = {
-				NOT = {
+			OR = {
+				SOV = {
 					has_idea = SOV_fsb_idea2
-					has_idea = SOV_omon_idea
-					OR = {
-						has_idea = SOV_inner_army_idea
-						has_idea = SOV_rosguard_idea
-						has_idea = SOV_rosguard_idea1
+					NOT = {
+						has_idea = SOV_omon_idea
+						OR = {
+							has_idea = SOV_inner_army_idea
+							has_idea = SOV_rosguard_idea
+							has_idea = SOV_rosguard_idea1
+						}
 					}
 				}
-				influence_higher_40 = yes
+				SOV = {
+					NOT = {
+						has_idea = SOV_fsb_idea2
+						has_idea = SOV_omon_idea
+						OR = {
+							has_idea = SOV_inner_army_idea
+							has_idea = SOV_rosguard_idea
+							has_idea = SOV_rosguard_idea1
+						}
+					}
+					influence_higher_40 = yes
+				}
 			}
 		}
 		hidden_effect = {
@@ -1572,10 +1523,6 @@ ARM_kob_russia_revoult_script = {
 				transfer_state = 681
 				transfer_state = 658
 				transfer_state = 656
-				set_politics = {
-					ruling_party = nationalist
-					elections_allowed = no
-				}
 				set_popularities = {
 					democratic = 0
 					neutrality = 0
@@ -1584,11 +1531,9 @@ ARM_kob_russia_revoult_script = {
 					nationalist = 100
 				}
 				inherit_technology = SOV
-				clear_array = ruling_party
-				clear_array = gov_coalition_array
-				add_to_array = {
-					ruling_party = 22
-				}
+				set_temp_variable = { rul_party_temp = 22 }
+				set_temp_variable = { disable_elections = 1 }
+				change_ruling_party_effect = yes
 				set_temp_variable = {
 					current_cons_popularity = party_pop_array^22
 				}
@@ -1599,11 +1544,6 @@ ARM_kob_russia_revoult_script = {
 					party_pop_array^22 = current_cons_popularity
 				}
 				recalculate_party = yes
-				update_government_coalition_strength = yes
-				update_party_name = yes
-				set_coalition_drift = yes
-				set_ruling_leader = yes
-				set_leader = yes
 				retire_country_leader = yes
 				SOV = {
 					transfer_units_fraction = {
@@ -1625,6 +1565,8 @@ ARM_kob_russia_revoult_script = {
 							nationalist_Nat_Autocracy
 						}
 					}
+					clr_country_flag = SOV_did_not_allow_duma_to_speak
+					mark_focus_tree_layout_dirty = yes
 				}
 				declare_war_on = {
 					target = SOV
@@ -1655,10 +1597,10 @@ ARM_lebanon_revoult_script = {
 					set_temp_variable = { rul_party_temp = 18 }
 					if = {
 						limit = { has_elections = no }
-						set_temp_variable = { enable_elections = 18 }
+						set_temp_variable = { disable_elections = 18 }
 					}
 					else = {
-						set_temp_variable = { enable_elections = 0 }
+						set_temp_variable = { disable_elections = 0 }
 					}
 					change_ruling_party_effect = yes
 				}
@@ -1865,16 +1807,12 @@ ARM_integration_lands_script = {
 				nationalist_fascist_are_in_power = yes
 			}
 			owns_state = 935
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			NOT = { has_country_flag = ARM_state_935 }
 		}
 		add_state_core = 935
@@ -1897,16 +1835,12 @@ ARM_integration_lands_script = {
 				nationalist_fascist_are_in_power = yes
 			}
 			owns_state = 163
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			NOT = { has_country_flag = ARM_state_163 }
 		}
 		add_state_core = 163
@@ -1924,16 +1858,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_true_urheimat
 			owns_state = 162
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_162 }
 		}
@@ -1952,16 +1882,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_true_urheimat
 			owns_state = 1032
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			NOT = { has_country_flag = ARM_state_1032 }
 		}
 		add_state_core = 1032
@@ -1982,16 +1908,12 @@ ARM_integration_lands_script = {
 				has_completed_focus = ARM_true_urheimat
 			}
 			owns_state = 161
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			NOT = { has_country_flag = ARM_state_161 }
 		}
 		add_state_core = 161
@@ -2012,16 +1934,12 @@ ARM_integration_lands_script = {
 				has_completed_focus = ARM_true_urheimat
 			}
 			owns_state = 992
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_992 }
 		}
@@ -2043,16 +1961,12 @@ ARM_integration_lands_script = {
 				has_completed_focus = ARM_true_urheimat
 			}
 			owns_state = 158
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_158 }
 		}
@@ -2074,16 +1988,12 @@ ARM_integration_lands_script = {
 				has_completed_focus = ARM_true_urheimat
 			}
 			owns_state = 189
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_189 }
 		}
@@ -2102,16 +2012,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_true_urheimat
 			owns_state = 190
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_190 }
 		}
@@ -2130,16 +2036,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_true_urheimat
 			owns_state = 575
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_575 }
 		}
@@ -2158,16 +2060,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_true_urheimat
 			owns_state = 566
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_566 }
 		}
@@ -2186,16 +2084,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_true_urheimat
 			owns_state = 191
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_191 }
 		}
@@ -2214,16 +2108,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_true_urheimat
 			owns_state = 193
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_193 }
 		}
@@ -2242,16 +2132,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_true_urheimat
 			owns_state = 995
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_995 }
 		}
@@ -2270,16 +2156,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_true_urheimat
 			owns_state = 994
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_994 }
 		}
@@ -2298,16 +2180,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_true_urheimat
 			owns_state = 192
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_192 }
 		}
@@ -2326,16 +2204,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_true_urheimat
 			owns_state = 561
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_561 }
 		}
@@ -2354,16 +2228,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_true_urheimat
 			owns_state = 188
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_188 }
 		}
@@ -2382,16 +2252,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_true_urheimat
 			owns_state = 186
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_186 }
 		}
@@ -2410,16 +2276,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_true_urheimat
 			owns_state = 184
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_184 }
 		}
@@ -2438,16 +2300,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_true_urheimat
 			owns_state = 185
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_185 }
 		}
@@ -2471,16 +2329,12 @@ ARM_integration_lands_script = {
 				nationalist_fascist_are_in_power = yes
 			}
 			owns_state = 203
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_203 }
 		}
@@ -2504,16 +2358,12 @@ ARM_integration_lands_script = {
 				nationalist_fascist_are_in_power = yes
 			}
 			owns_state = 553
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_553 }
 		}
@@ -2537,16 +2387,12 @@ ARM_integration_lands_script = {
 				nationalist_fascist_are_in_power = yes
 			}
 			owns_state = 202
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_202 }
 		}
@@ -2570,16 +2416,12 @@ ARM_integration_lands_script = {
 				nationalist_fascist_are_in_power = yes
 			}
 			owns_state = 201
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_201 }
 		}
@@ -2601,16 +2443,12 @@ ARM_integration_lands_script = {
 				has_completed_focus = ARM_true_urheimat
 			}
 			owns_state = 587
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_587 }
 		}
@@ -2632,16 +2470,12 @@ ARM_integration_lands_script = {
 				has_completed_focus = ARM_true_urheimat
 			}
 			owns_state = 205
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_205 }
 		}
@@ -2660,16 +2494,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_true_urheimat
 			owns_state = 166
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_166 }
 		}
@@ -2688,16 +2518,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_true_urheimat
 			owns_state = 641
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_641 }
 		}
@@ -2716,16 +2542,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_true_urheimat
 			owns_state = 167
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_167 }
 		}
@@ -2744,16 +2566,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_true_urheimat
 			owns_state = 165
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_165 }
 		}
@@ -2772,16 +2590,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_true_urheimat
 			owns_state = 633
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_633 }
 		}
@@ -2800,16 +2614,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_true_urheimat
 			owns_state = 164
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_164 }
 		}
@@ -2841,16 +2651,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_true_urheimat
 			owns_state = 630
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_630 }
 		}
@@ -2869,16 +2675,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_true_urheimat
 			owns_state = 979
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_979 }
 		}
@@ -2897,16 +2699,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_true_urheimat
 			owns_state = 407
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_407 }
 		}
@@ -2959,16 +2757,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_true_urheimat
 			owns_state = 713
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_713 }
 		}
@@ -3000,16 +2794,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_true_urheimat
 			owns_state = 1038
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_1038 }
 		}
@@ -3044,16 +2834,12 @@ ARM_integration_lands_script = {
 				has_completed_focus = ARM_pan_caucasianism
 			}
 			owns_state = 708
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_708 }
 		}
@@ -3097,16 +2883,12 @@ ARM_integration_lands_script = {
 				has_completed_focus = ARM_pan_caucasianism
 			}
 			owns_state = 707
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_707 }
 		}
@@ -3139,16 +2921,12 @@ ARM_integration_lands_script = {
 			has_completed_focus = ARM_true_urheimat
 			has_completed_focus = ARM_pan_caucasianism
 			owns_state = 466
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_466 }
 		}
@@ -3192,16 +2970,12 @@ ARM_integration_lands_script = {
 				has_completed_focus = ARM_pan_caucasianism
 			}
 			owns_state = 705
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_705 }
 		}
@@ -3228,16 +3002,12 @@ ARM_integration_lands_script = {
 				nationalist_fascist_are_in_power = yes
 			}
 			owns_state = 706
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_706 }
 		}
@@ -3269,16 +3039,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_true_urheimat
 			owns_state = 571
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_571 }
 		}
@@ -3300,16 +3066,12 @@ ARM_integration_lands_script = {
 				has_completed_focus = ARM_liberating_levant
 			}
 			owns_state = 204
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_204 }
 		}
@@ -3331,16 +3093,12 @@ ARM_integration_lands_script = {
 				has_completed_focus = ARM_liberating_levant
 			}
 			owns_state = 208
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_208 }
 		}
@@ -3362,16 +3120,12 @@ ARM_integration_lands_script = {
 				has_completed_focus = ARM_liberating_levant
 			}
 			owns_state = 207
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_207 }
 		}
@@ -3393,16 +3147,12 @@ ARM_integration_lands_script = {
 				has_completed_focus = ARM_liberating_levant
 			}
 			owns_state = 206
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_206 }
 		}
@@ -3424,16 +3174,12 @@ ARM_integration_lands_script = {
 				has_completed_focus = ARM_liberating_levant
 			}
 			owns_state = 209
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_209 }
 		}
@@ -3452,16 +3198,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_savoya
 			owns_state = 145
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_145 }
 		}
@@ -3480,16 +3222,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_savoya
 			owns_state = 812
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_812 }
 		}
@@ -3508,16 +3246,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_savoya
 			owns_state = 146
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_146 }
 		}
@@ -3536,16 +3270,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_pan_caucasianism
 			owns_state = 671
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_671 }
 		}
@@ -3577,16 +3307,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_pan_caucasianism
 			owns_state = 1126
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_1126 }
 		}
@@ -3605,16 +3331,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_pan_caucasianism
 			owns_state = 673
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_673 }
 		}
@@ -3633,16 +3355,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_pan_caucasianism
 			owns_state = 674
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_674 }
 		}
@@ -3661,16 +3379,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_pan_caucasianism
 			owns_state = 1125
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_1125 }
 		}
@@ -3689,16 +3403,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_pan_caucasianism
 			owns_state = 1140
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_1140 }
 		}
@@ -3717,16 +3427,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_pan_caucasianism
 			owns_state = 1127
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_1127 }
 		}
@@ -3745,16 +3451,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_pan_caucasianism
 			owns_state = 668
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_668 }
 		}
@@ -3786,16 +3488,12 @@ ARM_integration_lands_script = {
 		limit = {
 			has_completed_focus = ARM_pan_caucasianism
 			owns_state = 670
-			OR = {
-				NOT = {
-					has_idea = ARM_high_emigration_5
-					has_idea = ARM_high_emigration_4
-					has_idea = ARM_high_emigration_3
-					has_idea = ARM_high_emigration_2
-					has_idea = ARM_high_emigration_1
-					has_idea = ARM_high_emigration_0
-				}
-			}
+			NOT = { has_idea = ARM_high_emigration_5 }
+			NOT = { has_idea = ARM_high_emigration_4 }
+			NOT = { has_idea = ARM_high_emigration_3 }
+			NOT = { has_idea = ARM_high_emigration_2 }
+			NOT = { has_idea = ARM_high_emigration_1 }
+			NOT = { has_idea = ARM_high_emigration_0 }
 			has_idea = ARM_immigration
 			NOT = { has_country_flag = ARM_state_670 }
 		}
@@ -4047,9 +3745,6 @@ ARM_rebellion_in_kurdistan_brigades = {
 		}
 	}
 }
-
-
-
 
 ###########ARTSAKH - INTEGRATE IN ARMENIAN ARMY###########
 NKR_integrate_army_of_armenia = {
@@ -4325,10 +4020,6 @@ ARM_azer_commi_revoult_script = {
 					copy_tag = AZE
 					transfer_state = 1038
 					transfer_state = 711
-					set_politics = {
-						ruling_party = neutrality
-						elections_allowed = no
-					}
 					set_popularities = {
 						democratic = 0
 						neutrality = 100
@@ -4337,11 +4028,9 @@ ARM_azer_commi_revoult_script = {
 						nationalist = 0
 					}
 					inherit_technology = AZE
-					clear_array = ruling_party
-					clear_array = gov_coalition_array
-					add_to_array = {
-						ruling_party = 19
-					}
+					set_temp_variable = { rul_party_temp = 19 }
+					set_temp_variable = { disable_elections = 1 }
+					change_ruling_party_effect = yes
 					set_temp_variable = {
 						current_cons_popularity = party_pop_array^19
 					}
@@ -4352,11 +4041,6 @@ ARM_azer_commi_revoult_script = {
 						party_pop_array^5 = current_cons_popularity
 					}
 					recalculate_party = yes
-					update_government_coalition_strength = yes
-					update_party_name = yes
-					set_coalition_drift = yes
-					set_ruling_leader = yes
-					set_leader = yes
 					retire_country_leader = yes
 					AZE = {
 						transfer_units_fraction = {
@@ -4402,10 +4086,6 @@ ARM_georgia_commi_revoult_script = {
 					copy_tag = GEO
 					transfer_state = 1033
 					transfer_state = 466
-					set_politics = {
-						ruling_party = neutrality
-						elections_allowed = no
-					}
 					set_popularities = {
 						democratic = 0
 						neutrality = 100
@@ -4414,11 +4094,9 @@ ARM_georgia_commi_revoult_script = {
 						nationalist = 0
 					}
 					inherit_technology = GEO
-					clear_array = ruling_party
-					clear_array = gov_coalition_array
-					add_to_array = {
-						ruling_party = 19
-					}
+					set_temp_variable = { rul_party_temp = 19 }
+					set_temp_variable = { disable_elections = 1 }
+					change_ruling_party_effect = yes
 					set_temp_variable = {
 						current_cons_popularity = party_pop_array^19
 					}
@@ -4429,11 +4107,6 @@ ARM_georgia_commi_revoult_script = {
 						party_pop_array^5 = current_cons_popularity
 					}
 					recalculate_party = yes
-					update_government_coalition_strength = yes
-					update_party_name = yes
-					set_coalition_drift = yes
-					set_ruling_leader = yes
-					set_leader = yes
 					retire_country_leader = yes
 					GEO = {
 						transfer_units_fraction = {
@@ -4682,10 +4355,6 @@ ARM_russian_revoult_in_armenia_script = {
 					original_tag = ARM
 					copy_tag = ARM
 					transfer_state = 1034
-					set_politics = {
-						ruling_party = nationalist
-						elections_allowed = no
-					}
 					set_popularities = {
 						democratic = 0
 						neutrality = 0
@@ -4694,11 +4363,9 @@ ARM_russian_revoult_in_armenia_script = {
 						nationalist = 100
 					}
 					inherit_technology = ARM
-					clear_array = ruling_party
-					clear_array = gov_coalition_array
-					add_to_array = {
-						ruling_party = 22
-					}
+					set_temp_variable = { rul_party_temp = 22 }
+					set_temp_variable = { disable_elections = 1 }
+					change_ruling_party_effect = yes
 					set_temp_variable = {
 						current_cons_popularity = party_pop_array^22
 					}
@@ -4709,11 +4376,6 @@ ARM_russian_revoult_in_armenia_script = {
 						party_pop_array^22 = current_cons_popularity
 					}
 					recalculate_party = yes
-					update_government_coalition_strength = yes
-					update_party_name = yes
-					set_coalition_drift = yes
-					set_ruling_leader = yes
-					set_leader = yes
 					retire_country_leader = yes
 					country_event = sov_gru.1
 					load_focus_tree = armenia_focus
@@ -4831,7 +4493,6 @@ ARM_protests_subject_script = {
 		}
 	}
 }
-
 
 ###########CORED STATE - AZER REVOULT###########
 ARM_cored_state_azer_revoult_script = {
@@ -5099,10 +4760,6 @@ ARM_cored_state_djavakh_revoult_script = {
 		original_tag = ARM
 		copy_tag = ARM
 		transfer_state = 1033
-		set_politics = {
-			ruling_party = nationalist
-			elections_allowed = no
-		}
 		set_popularities = {
 			democratic = 0
 			neutrality = 0
@@ -5111,11 +4768,9 @@ ARM_cored_state_djavakh_revoult_script = {
 			nationalist = 100
 		}
 		inherit_technology = ARM
-		clear_array = ruling_party
-		clear_array = gov_coalition_array
-		add_to_array = {
-			ruling_party = 22
-		}
+		set_temp_variable = { rul_party_temp = 22 }
+		set_temp_variable = { disable_elections = 1 }
+		change_ruling_party_effect = yes
 		set_temp_variable = {
 			current_cons_popularity = party_pop_array^21
 		}
@@ -5126,11 +4781,6 @@ ARM_cored_state_djavakh_revoult_script = {
 			party_pop_array^21 = current_cons_popularity
 		}
 		recalculate_party = yes
-		update_government_coalition_strength = yes
-		update_party_name = yes
-		set_coalition_drift = yes
-		set_ruling_leader = yes
-		set_leader = yes
 		retire_country_leader = yes
 		set_cosmetic_tag = ARM_djavakhq
 		ARM = {

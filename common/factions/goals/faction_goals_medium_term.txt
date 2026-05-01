@@ -27,7 +27,7 @@ faction_goal_secure_european_continent = {
 	}
 	complete_effect = {
 		add_faction_power_projection = 100
-		custom_effect_tooltip = generic_skip_one_line_tt
+		newline = yes
 		every_faction_member = {
 			tooltip = INFLUENCE_ABOVE_30_PERCENT
 			visible_when_empty = yes
@@ -74,13 +74,13 @@ faction_goal_high_seas_fleet = {
 	}
 	complete_effect = {
 		add_faction_power_projection = 100
-		custom_effect_tooltip = generic_skip_one_line_tt
+		newline = yes
 		custom_effect_tooltip = THE_FACTION_LEADER
 		add_faction_initiative = 1
 		every_collection_element = {
 			input = {
 				input = game:scope
-				operators =  {
+				operators = {
 					faction_members
 				}
 				name = ALL_FACTION_MEMBERS
@@ -127,7 +127,7 @@ faction_goal_secure_the_oil_supply = {
 		every_collection_element = {
 			input = {
 				input = game:scope
-				operators =  {
+				operators = {
 					faction_members
 					limit = {
 						has_resources_in_country = {
@@ -175,7 +175,7 @@ faction_goal_nato_expansion = {
 	}
 	complete_effect = {
 		add_faction_power_projection = 100
-		custom_effect_tooltip = generic_skip_one_line_tt
+		newline = yes
 		custom_effect_tooltip = THE_FACTION_LEADER
 		add_faction_initiative = 1
 	}
@@ -203,7 +203,7 @@ faction_goal_nato_gdp_per_capita = {
 	}
 	complete_effect = {
 		add_faction_power_projection = 100
-		custom_effect_tooltip = generic_skip_one_line_tt
+		newline = yes
 		custom_effect_tooltip = THE_FACTION_LEADER
 		add_faction_initiative = 1
 	}
@@ -221,6 +221,7 @@ faction_goal_crush_the_democracy = {
 		any_country = {
 			has_government = communism
 		}
+		has_elections = no
 	}
 	completed = {
 		collection_size = {
@@ -239,16 +240,12 @@ faction_goal_crush_the_democracy = {
 	}
 	complete_effect = {
 		add_faction_power_projection = 200
-		custom_effect_tooltip = generic_skip_one_line_tt
+		newline = yes
 		custom_effect_tooltip = THE_FACTION_LEADER
 		add_faction_initiative = 1
-		custom_effect_tooltip = generic_skip_one_line_tt
+		newline = yes
 		custom_effect_tooltip = ALL_FACTION_MEMBERS
 		every_faction_member = {
-			set_temp_variable = { rad_change = -15 }
-			modify_radicalization_effect = yes
-			set_temp_variable = { threat_change = -15 }
-			modify_terror_threat_effect = yes
 			add_stability = 0.05
 			add_ideas = POL_communist_mindset_idea
 		}
@@ -282,7 +279,7 @@ faction_goal_secure_east_asia_continent = {
 	}
 	complete_effect = {
 		add_faction_power_projection = 100
-		custom_effect_tooltip = generic_skip_one_line_tt
+		newline = yes
 		every_faction_member = {
 			tooltip = INFLUENCE_ABOVE_30_PERCENT
 			visible_when_empty = yes
@@ -318,7 +315,7 @@ faction_goal_a_large_faction = {
 	}
 	complete_effect = {
 		add_faction_power_projection = 200
-		custom_effect_tooltip = generic_skip_one_line_tt
+		newline = yes
 		custom_effect_tooltip = THE_FACTION_LEADER
 		add_faction_initiative = 1
 	}
@@ -341,8 +338,9 @@ faction_goal_marine_corps = {
 				operators = { faction_members }
 				name = FACTION
 			}
-			unit = amphibious
-			size < 10
+			unit_category = { L_Marine_Bat L_Marine_Cdo_Bat Mot_Marine_Bat Mech_Marine_Bat Arm_Marine_Bat }
+			equipment_ratio = 0.9
+			size < 150
 		}
 	}
 	completed = {
@@ -352,24 +350,19 @@ faction_goal_marine_corps = {
 				operators = { faction_members }
 				name = FACTION
 			}
-			unit = amphibious
-			size > 9
+			unit_category = { L_Marine_Bat L_Marine_Cdo_Bat Mot_Marine_Bat Mech_Marine_Bat Arm_Marine_Bat }
+			equipment_ratio = 0.9
+			size > 149
 		}
 	}
 	complete_effect = {
 		add_faction_power_projection = 100
-		custom_effect_tooltip = generic_skip_one_line_tt
+		newline = yes
 		every_collection_element = {
 			input = {
 				input = game:scope
 				operators = {
 					faction_members
-					limit = {
-						has_army_size = {
-							size > 0
-							type = amphibious
-						}
-					}
 				}
 				name = ALL_FACTION_MEMBERS_WITH_1_AMPHIBIOUS
 			}
@@ -381,21 +374,109 @@ faction_goal_marine_corps = {
 					is_field_marshal = no
 					NOT = { has_trait = cavalry_officer }
 					NOT = { has_trait = panzer_leader }
-					NOT = { has_trait = invader }
+					NOT = { has_trait = naval_invader }
 				}
 				gain_xp = 400
 				add_attack = 1
-				add_trait = { trait = invader }
+				add_trait = { trait = naval_invader }
 			}
 		}
-		custom_effect_tooltip = generic_skip_one_line_tt
+		newline = yes
 		custom_effect_tooltip = ALL_FACTION_MEMBERS
 		every_faction_member = {
 			add_tech_bonus = {
 				name = marine_corps_tech_bonus
 				bonus = 0.5
 				uses = 1
-				category = CAT_naval_doctrine
+				category = CAT_landing_craft
+			}
+		}
+	}
+	ai_will_do = {
+		base = 0
+		modifier = {
+			add = 10
+			OR = {
+				controls_a_coastal_state = yes
+				any_allied_country = {
+					controls_a_coastal_state = yes
+				}
+			}
+		}
+		modifier = {
+			add = 5
+			controls_a_coastal_state = yes
+		}
+	}
+}
+
+faction_goal_airborne_corps = {
+	name = airborne_corps_goal_name
+	description = airborne_corps_goal_desc
+	category = medium_term
+	group = FOCUS_FILTER_AIR_XP
+	available = {
+		count_in_collection = {
+			collection = {
+				input = game:scope
+				operators = { faction_members }
+				name = FACTION
+			}
+			unit_category = { Arm_Air_Inf_Bat Mech_Air_Inf_Bat Mot_Air_Inf_Bat L_Air_Inf_Bat }
+			equipment_ratio = 0.9
+			size < 100
+		}
+	}
+	completed = {
+		count_in_collection = {
+			collection = {
+				input = game:scope
+				operators = { faction_members }
+				name = FACTION
+			}
+			unit_category = { Arm_Air_Inf_Bat Mech_Air_Inf_Bat Mot_Air_Inf_Bat L_Air_Inf_Bat }
+			equipment_ratio = 0.9
+			size > 99
+		}
+	}
+	complete_effect = {
+		add_faction_power_projection = 200
+		custom_effect_tooltip = THE_FACTION_LEADER
+		add_faction_initiative = 1
+		newline = yes
+		custom_effect_tooltip = ALL_FACTION_MEMBERS
+		effect_tooltip = {
+			random_character = {
+				tooltip = ONE_GENERAL
+				visible_when_empty = yes
+				limit = {
+					is_army_leader = yes
+					is_field_marshal = no
+					NOT = { has_trait = cavalry_officer }
+					NOT = { has_trait = panzer_leader }
+					NOT = { has_trait = commando }
+				}
+				gain_xp = 400
+				add_attack = 1
+				add_trait = { trait = commando }
+			}
+		}
+		hidden_effect = {
+			every_faction_member = {
+				random_character = {
+					tooltip = ONE_GENERAL
+					visible_when_empty = yes
+					limit = {
+						is_army_leader = yes
+						is_field_marshal = no
+						NOT = { has_trait = cavalry_officer }
+						NOT = { has_trait = panzer_leader }
+						NOT = { has_trait = commando }
+					}
+					gain_xp = 400
+					add_attack = 1
+					add_trait = { trait = commando }
+				}
 			}
 		}
 	}
@@ -403,16 +484,8 @@ faction_goal_marine_corps = {
 		base = 0
 		modifier = {
 			add = 1
-			any_state = {
-				is_controlled_by_ROOT_or_ally = yes
-				is_coastal = yes
-			}
-		}
-		modifier = {
-			add = 2
-			any_state = {
-				is_controlled_by = ROOT
-				is_coastal = yes
+			has_equipment = {
+				large_plane_air_transport_airframe > 0
 			}
 		}
 	}
@@ -447,7 +520,7 @@ faction_goal_submarine_force = {
 	}
 	complete_effect = {
 		add_faction_power_projection = 100
-		custom_effect_tooltip = generic_skip_one_line_tt
+		newline = yes
 		every_collection_element = {
 			input = {
 				input = game:scope
@@ -482,7 +555,7 @@ faction_goal_submarine_force = {
 				track = submarines
 			}
 		}
-		custom_effect_tooltip = generic_skip_one_line_tt
+		newline = yes
 		custom_effect_tooltip = ALL_FACTION_MEMBERS
 		every_faction_member = {
 			add_tech_bonus = {
@@ -543,7 +616,7 @@ faction_goal_convoy_escort_force = {
 	}
 	complete_effect = {
 		add_faction_power_projection = 100
-		custom_effect_tooltip = generic_skip_one_line_tt
+		newline = yes
 		every_collection_element = {
 			input = {
 				input = game:scope
@@ -575,7 +648,7 @@ faction_goal_convoy_escort_force = {
 				add_trait = { trait = fleet_protector }
 			}
 		}
-		custom_effect_tooltip = generic_skip_one_line_tt
+		newline = yes
 		custom_effect_tooltip = ALL_FACTION_MEMBERS
 		every_faction_member = {
 			add_tech_bonus = {
@@ -632,7 +705,7 @@ faction_goal_air_superiority = {
 	}
 	complete_effect = {
 		add_faction_power_projection = 100
-		custom_effect_tooltip = generic_skip_one_line_tt
+		newline = yes
 		every_collection_element = {
 			input = {
 				input = game:scope
@@ -653,7 +726,7 @@ faction_goal_air_superiority = {
 				track = fighter_aircraft
 			}
 		}
-		custom_effect_tooltip = generic_skip_one_line_tt
+		newline = yes
 		custom_effect_tooltip = ALL_FACTION_MEMBERS
 		every_faction_member = {
 			add_tech_bonus = {
@@ -716,7 +789,7 @@ faction_goal_industrial_expansion = {
 	}
 	complete_effect = {
 		add_faction_power_projection = 200
-		custom_effect_tooltip = generic_skip_one_line_tt
+		newline = yes
 		every_faction_member = {
 			tooltip = AT_LEAST_50_CIVS
 			visible_when_empty = yes
@@ -777,7 +850,7 @@ faction_goal_a_military_base = {
 	}
 	complete_effect = {
 		add_faction_power_projection = 200
-		custom_effect_tooltip = generic_skip_one_line_tt
+		newline = yes
 		every_faction_member = {
 			tooltip = AT_LEAST_50_MILS
 			visible_when_empty = yes
@@ -828,10 +901,10 @@ faction_goal_war_on_communism = {
 	}
 	complete_effect = {
 		add_faction_power_projection = 200
-		custom_effect_tooltip = generic_skip_one_line_tt
+		newline = yes
 		custom_effect_tooltip = THE_FACTION_LEADER
 		add_faction_initiative = 1
-		custom_effect_tooltip = generic_skip_one_line_tt
+		newline = yes
 		custom_effect_tooltip = ALL_FACTION_MEMBERS
 		every_faction_member = {
 			add_war_support = 0.05
@@ -885,7 +958,7 @@ faction_goal_war_on_communism = {
 # 	}
 # 	complete_effect = {
 # 		add_faction_power_projection = 100
-# 		custom_effect_tooltip = generic_skip_one_line_tt
+# 		newline = yes
 # 		custom_effect_tooltip = TARGET_STATE_CONTROLLERS
 # 		every_faction_member = {
 # 			visible_when_empty = yes
@@ -973,7 +1046,7 @@ faction_goal_control_panama_canal = {
 	}
 	complete_effect = {
 		add_faction_power_projection = 100
-		custom_effect_tooltip = generic_skip_one_line_tt
+		newline = yes
 		custom_effect_tooltip = TARGET_STATE_CONTROLLERS
 		every_faction_member = {
 			visible_when_empty = yes
@@ -1049,7 +1122,7 @@ faction_goal_control_gibraltar = {
 	}
 	complete_effect = {
 		add_faction_power_projection = 100
-		custom_effect_tooltip = generic_skip_one_line_tt
+		newline = yes
 		custom_effect_tooltip = TARGET_STATE_CONTROLLERS
 		every_faction_member = {
 			visible_when_empty = yes
@@ -1112,7 +1185,7 @@ faction_goal_control_bosporus = {
 	}
 	complete_effect = {
 		add_faction_power_projection = 100
-		custom_effect_tooltip = generic_skip_one_line_tt
+		newline = yes
 		custom_effect_tooltip = TARGET_STATE_CONTROLLERS
 		every_faction_member = {
 			visible_when_empty = yes
@@ -1191,7 +1264,7 @@ faction_goal_control_suez_canal = {
 	}
 	complete_effect = {
 		add_faction_power_projection = 100
-		custom_effect_tooltip = generic_skip_one_line_tt
+		newline = yes
 		custom_effect_tooltip = TARGET_STATE_CONTROLLERS
 		every_faction_member = {
 			visible_when_empty = yes
@@ -1266,7 +1339,7 @@ faction_goal_control_mandeb = {
 	}
 	complete_effect = {
 		add_faction_power_projection = 100
-		custom_effect_tooltip = generic_skip_one_line_tt
+		newline = yes
 		custom_effect_tooltip = TARGET_STATE_CONTROLLERS
 		every_faction_member = {
 			visible_when_empty = yes

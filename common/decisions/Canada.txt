@@ -219,26 +219,6 @@ CAN_election_2019 = {
 	}
 }
 
-CAN_keystone_pipeline = { ##No longer used
-	CAN_Begin_Planning = {
-		allowed = { always = no }
-		icon = decision
-
-		days_re_enable = 1
-		cost = 50
-
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision CAN_Begin_Planning"
-			add_stability = 0.01
-			country_event = { id = keystonepipeline_can.0 days = 5 }
-		}
-
-		ai_will_do = {
-			factor = 1
-		}
-	}
-}
-
 CAN_provincial_infrastructure = {
 	##Canada "Improve" Infrastructure decisions
 	CAN_improve_infrastructure_759 = {
@@ -277,7 +257,7 @@ CAN_provincial_infrastructure = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	CAN_improve_infrastructure_760 = {
@@ -316,7 +296,7 @@ CAN_provincial_infrastructure = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	CAN_improve_infrastructure_761 = {
@@ -355,7 +335,7 @@ CAN_provincial_infrastructure = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	CAN_improve_infrastructure_762 = {
@@ -394,7 +374,7 @@ CAN_provincial_infrastructure = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	CAN_improve_infrastructure_763 = {
@@ -433,7 +413,7 @@ CAN_provincial_infrastructure = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	CAN_improve_infrastructure_757 = {
@@ -472,7 +452,7 @@ CAN_provincial_infrastructure = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	CAN_improve_infrastructure_756 = {
@@ -510,7 +490,7 @@ CAN_provincial_infrastructure = {
 			}
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	CAN_improve_infrastructure_755 = {
@@ -549,7 +529,7 @@ CAN_provincial_infrastructure = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	CAN_improve_infrastructure_754 = {
@@ -588,7 +568,7 @@ CAN_provincial_infrastructure = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	CAN_improve_infrastructure_753 = {
@@ -627,7 +607,7 @@ CAN_provincial_infrastructure = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	CAN_improve_infrastructure_758 = {
@@ -666,7 +646,7 @@ CAN_provincial_infrastructure = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 }
@@ -687,12 +667,11 @@ CAN_canadian_subsidies_projects = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_subsidize_military_industry"
 			set_temp_variable = { subsidy_change_tmp = 0.2 }
 			CAN_modify_subsidy_changes = yes
-			custom_effect_tooltip = CAN_canadian_economy_dynamic_modifier_modify_tt
-			set_temp_variable = { CAN_value_change = 0.05 }
-			CAN_change_military_capacity_factory = yes
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CAN_canadian_economy_dynamic_modifier }
+			add_to_variable = { CAN_industrial_capacity_factory_var = 0.05 tooltip = industrial_capacity_factory_tt }
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -711,12 +690,11 @@ CAN_canadian_subsidies_projects = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_reduce_military_subsidies"
 			set_temp_variable = { subsidy_change_tmp = -0.2 }
 			CAN_modify_subsidy_changes = yes
-			custom_effect_tooltip = CAN_canadian_economy_dynamic_modifier_modify_tt
-			set_temp_variable = { CAN_value_change = -0.05 }
-			CAN_change_military_capacity_factory = yes
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CAN_canadian_economy_dynamic_modifier }
+			add_to_variable = { CAN_industrial_capacity_factory_var = -0.05 tooltip = industrial_capacity_factory_tt }
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -730,12 +708,11 @@ CAN_canadian_subsidies_projects = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_subsidize_military_industry"
 			set_temp_variable = { subsidy_change_tmp = 0.1 }
 			CAN_modify_subsidy_changes = yes
-			custom_effect_tooltip = CAN_canadian_economy_dynamic_modifier_modify_tt
-			set_temp_variable = { CAN_value_change = 0.05 }
-			CAN_change_building_speed_factor = yes
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CAN_canadian_economy_dynamic_modifier }
+			add_to_variable = { CAN_production_speed_buildings_var = 0.05 tooltip = production_speed_buildings_factor_tt }
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -753,12 +730,11 @@ CAN_canadian_subsidies_projects = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_subsidize_military_industry"
 			set_temp_variable = { subsidy_change_tmp = -0.1 }
 			CAN_modify_subsidy_changes = yes
-			custom_effect_tooltip = CAN_canadian_economy_dynamic_modifier_modify_tt
-			set_temp_variable = { CAN_value_change = -0.05 }
-			CAN_change_building_speed_factor = yes
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CAN_canadian_economy_dynamic_modifier }
+			add_to_variable = { CAN_production_speed_buildings_var = -0.05 tooltip = production_speed_buildings_factor_tt }
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -771,12 +747,11 @@ CAN_canadian_subsidies_projects = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_subsidize_military_industry"
 			set_temp_variable = { subsidy_change_tmp = 0.1 }
 			CAN_modify_subsidy_changes = yes
-			custom_effect_tooltip = CAN_canadian_economy_dynamic_modifier_modify_tt
-			set_temp_variable = { CAN_value_change = 0.05 }
-			CAN_change_infrastructure = yes
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CAN_canadian_economy_dynamic_modifier }
+			add_to_variable = { CAN_production_speed_infrastructure_factor_var = 0.05 tooltip = production_speed_infrastructure_factor_tt }
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -794,12 +769,11 @@ CAN_canadian_subsidies_projects = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_reduce_military_subsidies"
 			set_temp_variable = { subsidy_change_tmp = -0.1 }
 			CAN_modify_subsidy_changes = yes
-			custom_effect_tooltip = CAN_canadian_economy_dynamic_modifier_modify_tt
-			set_temp_variable = { CAN_value_change = -0.05 }
-			CAN_change_infrastructure = yes
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CAN_canadian_economy_dynamic_modifier }
+			add_to_variable = { CAN_production_speed_infrastructure_factor_var = -0.05 tooltip = production_speed_infrastructure_factor_tt }
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 }

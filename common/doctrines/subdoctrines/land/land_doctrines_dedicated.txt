@@ -4,13 +4,13 @@ dedicated_volunteer_fighting_force = {
 	track = dedicated_doctrine
 	name = SUBDOCTRINE_OPERATION_VOLUNTEER
 	description = SUBDOCTRINE_OPERATION_VOLUNTEER_DESC
-	icon = GFX_doctrine_mobile_infantry_medium
+	icon = GFX_doctrine_adedicated_volunteer_fighting_force
 
 	xp_cost = 75
 	xp_type = army
 
 	available = {
-		NOT = { has_country_flag = volunteer_fighting_force }
+		does_not_have_volunteer_force = yes
 	}
 
 	ai_will_do = {
@@ -19,10 +19,6 @@ dedicated_volunteer_fighting_force = {
 
 	# EFFECTS
 	send_volunteer_divisions_required = -0.5
-
-	effect = {
-		set_country_flag = volunteer_fighting_force
-	}
 
 	rewards = {
 		shield_the_innocent = {
@@ -51,35 +47,62 @@ dedicated_deep_battle = {
 	track = dedicated_doctrine
 	name = SUBDOCTRINE_OPERATION_DEEP_BATTLE
 	description = SUBDOCTRINE_OPERATION_DEEP_BATTLE_DESC
-	icon = GFX_doctrine_mobile_infantry_medium
+	icon = GFX_doctrine_dedicated_deep_battle
 
 	xp_cost = 75
 	xp_type = army
 
 	available = {
-		NOT = { has_country_flag = deep_battle }
+		does_not_have_deep_battle_doctrine = yes
 	}
 
 	ai_will_do = {
 		base = 1
-	}
-
-	effect = {
-		set_country_flag = deep_battle
+		modifier = {
+			add = 15
+			has_government = communism
+			is_major_power = yes
+			num_of_military_factories > 35
+		}
+		modifier = {
+			add = 8
+			has_government = communism
+			is_major_power = yes
+		}
+		modifier = {
+			add = 8
+			has_war = yes
+			has_government = communism
+			is_major_power = yes
+		}
+		modifier = {
+			add = 5
+			has_expansionist_government = yes
+			has_government = communism
+		}
+		modifier = {
+			factor = 0
+			has_government = democratic
+			is_in_faction_with = USA
+		}
+		modifier = {
+			factor = 0
+			is_non_power = yes
+		}
 	}
 
 	# EFFECTS
 	enable_tactic = tactic_deep_battle_push
- 	enable_tactic = tactic_deep_battle_assault
- 	enable_tactic = tactic_deep_battle_encirclement
+	 enable_tactic = tactic_deep_battle_assault
+	 enable_tactic = tactic_deep_battle_encirclement
 
- 	no_supply_grace = 196
- 	org_loss_when_moving = -0.05
+	 no_supply_grace = 196
+	 org_loss_when_moving = -0.05
 
 	rewards = {
 		massed_force_assaults = {
 			army_armor_attack_factor = 0.05
- 			army_armor_speed_factor = 0.05
+			 army_armor_speed_factor = 0.05
 			army_strength_factor = 0.15
 		}
 		probing_attacks = {
@@ -102,36 +125,74 @@ dedicated_thunder_run = {
 	track = dedicated_doctrine
 	name = SUBDOCTRINE_OPERATION_THUNDER_RUN
 	description = SUBDOCTRINE_OPERATION_THUNDER_RUN_DESC
-	icon = GFX_doctrine_mobile_infantry_medium
+	icon = GFX_doctrine_thunder_run
 
 	xp_cost = 75
 	xp_type = army
 
 	available = {
-		NOT = { has_country_flag = thunder_run }
+		does_not_have_thunder_run_doctrine = yes
 	}
 
 	ai_will_do = {
 		base = 1
+		modifier = {
+			add = 12
+			has_government = democratic
+			num_of_military_factories > 45
+			is_major_power = yes
+		}
+		modifier = {
+			add = 8
+			has_government = democratic
+			num_of_military_factories > 35
+		}
+		modifier = {
+			add = 6
+			has_government = fascism
+			is_major_power = yes
+		}
+		modifier = {
+			add = 10
+			has_expansionist_government = yes
+			is_major_power = yes
+			num_of_military_factories > 35
+		}
+		modifier = {
+			add = 8
+			has_war = yes
+			is_major_power = yes
+			num_of_military_factories > 30
+		}
+		modifier = {
+			factor = 0
+			has_government = communism
+		}
+		modifier = {
+			factor = 0
+			is_non_power = yes
+		}
+		modifier = {
+			factor = 0.3
+			NOT = { has_expansionist_government = yes }
+			NOT = { has_war = yes }
+		}
 	}
 
-	effect = {
-		set_country_flag = thunder_run
-	}
 	# EFFECTS
 	enable_tactic = tactic_thunder_run_breakthrough
 
- 	org_loss_when_moving = -0.15
+	 org_loss_when_moving = -0.15
 	army_fuel_consumption_factor = -0.15
 
 	rewards = {
 		rapid_attacks = {
 			army_speed_factor = 0.075
-	 		land_night_attack = 0.05
+			 land_night_attack = 0.05
 
-	 		enable_tactic = tactic_thunder_run
-	 		enable_tactic = tactic_thunder_run_push
-	 		enable_tactic = tactic_thunder_run_maneuver
+			 enable_tactic = tactic_thunder_run
+			 enable_tactic = tactic_thunder_run_push
+			 enable_tactic = tactic_thunder_run_maneuver
 		}
 		probing_attacks = {
 			initiative_factor = 0.10
@@ -154,22 +215,47 @@ dedicated_light_infantry_warfare = {
 	track = dedicated_doctrine
 	name = SUBDOCTRINE_OPERATION_LIGHT_INFANTRY
 	description = SUBDOCTRINE_OPERATION_LIGHT_INFANTRY_DESC
-	icon = GFX_doctrine_mobile_infantry_medium
+	icon = GFX_doctrine_light_infantry_warfare
 
 	xp_cost = 75
 	xp_type = army
 
 	available = {
-		NOT = { has_country_flag = light_infantry_warfare }
+		does_not_have_light_infantry_warfare_doctrine = yes
 	}
 
 	ai_will_do = {
 		base = 1
+		modifier = {
+			add = 10
+			is_non_power = yes
+		}
+		modifier = {
+			add = 8
+			num_of_military_factories < 12
+		}
+		modifier = {
+			add = 5
+			has_country_flag = asian_nation_flag
+			is_minor_power = yes
+		}
+		modifier = {
+			add = 5
+			has_country_flag = africa_nation_flag
+			NOT = { is_major_power = yes }
+		}
+		modifier = {
+			add = 5
+			has_country_flag = middle_east_flag
+			NOT = { is_major_power = yes }
+		}
+		modifier = {
+			factor = 0.4
+			is_major_power = yes
+			num_of_military_factories > 40
+		}
 	}
 
-	effect = {
-		set_country_flag = light_infantry_warfare
-	}
 	# EFFECTS
 	category_all_infantry = {
 		soft_attack = 0.15
@@ -202,7 +288,7 @@ dedicated_light_infantry_warfare = {
 		}
 		dedicated_tank_hunters = {
 			category_all_infantry = {
-				ap_attack = 0.35
+				ap_attack = 0.175
 				hard_attack = 0.1
 			}
 		}
@@ -265,23 +351,19 @@ dedicated_guerrilla_fighters = {
 	track = dedicated_doctrine
 	name = SUBDOCTRINE_OPERATION_GUERRILLA
 	description = SUBDOCTRINE_OPERATION_GUERRILLA_DESC
-	icon = GFX_doctrine_mobile_infantry_medium
+	icon = GFX_doctrine_guerrilla_fighters
 
 	xp_cost = 75
 	xp_type = army
 
 	available = {
-		NOT = { has_country_flag = guerrilla_fighters }
-		has_doctrine = guerrilla_warfare
+		does_not_have_guerrilla_fighters_doctrine = yes
 	}
 
 	ai_will_do = {
 		base = 1
 	}
 
-	effect = {
-		set_country_flag = guerrilla_fighters
-	}
 	# EFFECTS
 	army_infantry_attack_factor = 0.1
 
@@ -351,63 +433,94 @@ dedicated_static_defense = {
 	track = dedicated_doctrine
 	name = SUBDOCTRINE_OPERATION_STATIC_DEFENSE
 	description = SUBDOCTRINE_OPERATION_STATIC_DEFENSE_DESC
-	icon = GFX_doctrine_mobile_infantry_medium
+	icon = GFX_doctrine_static_defense
 
 	xp_cost = 75
 	xp_type = army
 
 	available = {
-		NOT = { has_country_flag = static_defense }
+		does_not_have_static_defense_doctrine = yes
 	}
 
 	ai_will_do = {
 		base = 1
+		modifier = {
+			add = 12
+			has_government = communism
+			NOT = { is_major_power = yes }
+			num_of_military_factories < 25
+		}
+		modifier = {
+			add = 8
+			has_government = neutrality
+			NOT = { is_major_power = yes }
+		}
+		modifier = {
+			add = 5
+			is_non_power = yes
+			has_country_flag = asian_nation_flag
+		}
+		modifier = {
+			factor = 0.2
+			has_expansionist_government = yes
+		}
+		modifier = {
+			factor = 0.2
+			has_war = yes
+			is_faction_leader = yes
+		}
+		modifier = {
+			factor = 0
+			has_government = democratic
+			is_in_faction_with = USA
+		}
+		modifier = {
+			factor = 0
+			num_of_military_factories > 50
+		}
 	}
 
-	effect = {
-		set_country_flag = static_defense
-	}
 	# EFFECTS
 	max_dig_in_factor = 0.25
- 	recon_factor_while_entrenched = 0.25
+	 recon_factor_while_entrenched = 0.25
 
 	rewards = {
 		forward_defensive_deployments = {
 			max_dig_in = 3
- 			dig_in_speed_factor = 0.15
+			 dig_in_speed_factor = 0.15
 		}
 		anti_tank_ambushes = {
 			category_front_line = {
-	 			hard_attack = 0.10
-	 			ap_attack = 0.10
-	 		}
+				 hard_attack = 0.10
+				 ap_attack = 0.10
+			 }
 
-	 		category_all_infantry = {
-	 			ap_attack = 0.25
-	 		}
+			 category_all_infantry = {
+				 ap_attack = 0.15
+			 }
 		}
 		defensive_position_exploitation = {
 			max_dig_in_factor = 0.05
-	 		L_Inf_Bat = {
-	 			fort = {
-	 				defence = 0.15
-	 			}
-	 		}
-	 		Mot_Inf_Bat = {
-	 			fort = {
-	 				defence = 0.15
-	 			}
-	 		}
-	 		Mech_Inf_Bat = {
-	 			fort = {
-	 				defence = 0.15
-	 			}
-	 		}
-	 		Arm_Inf_Bat = {
-	 			fort = {
-	 				defence = 0.15
-	 			}
-	 		}
+			 L_Inf_Bat = {
+				 fort = {
+					 defence = 0.15
+				 }
+			 }
+			 Mot_Inf_Bat = {
+				 fort = {
+					 defence = 0.15
+				 }
+			 }
+			 Mech_Inf_Bat = {
+				 fort = {
+					 defence = 0.15
+				 }
+			 }
+			 Arm_Inf_Bat = {
+				 fort = {
+					 defence = 0.15
+				 }
+			 }
 		}
 		minefield_defences = {
 			army_defence_factor = 0.10
@@ -423,31 +536,43 @@ dedicated_elastic_defense = {
 	track = dedicated_doctrine
 	name = SUBDOCTRINE_OPERATION_ELASTIC_DEFENSE
 	description = SUBDOCTRINE_OPERATION_ELASTIC_DEFENSE_DESC
-	icon = GFX_doctrine_mobile_infantry_medium
+	icon = GFX_doctrine_elastic_defense
 
 	xp_cost = 75
 	xp_type = army
 
 	available = {
-		NOT = { has_country_flag = elastic_defense }
+		does_not_have_elastic_defense_doctrine = yes
 	}
 
 	ai_will_do = {
 		base = 1
-	}
-
-	effect = {
-		set_country_flag = elastic_defense
+		modifier = {
+			add = 8
+			has_government = communism
+			is_major_power = yes
+		}
+		modifier = {
+			add = 6
+			has_government = democratic
+			is_major_power = yes
+			NOT = { is_in_faction_with = USA }
+		}
+		modifier = {
+			add = 5
+			is_minor_power = yes
+			num_of_military_factories > 15
+		}
 	}
 
 	# EFFECTS
 	max_dig_in_factor = 0.1
- 	dig_in_speed_factor = 0.1
+	 dig_in_speed_factor = 0.1
 
 	rewards = {
 		static_to_kinetic = {
 			max_dig_in_factor = 0.05
- 			org_loss_when_moving = -0.04
+			 org_loss_when_moving = -0.04
 		}
 		rapid_force_relocation = {
 			army_retreat_speed_factor = 0.15
@@ -457,11 +582,11 @@ dedicated_elastic_defense = {
 		}
 		kill_boxes = {
 			army_core_defence_factor = 0.05
- 			army_core_attack_factor = 0.10
+			 army_core_attack_factor = 0.10
 		}
 		flexible_defensive_lines = {
 			org_loss_at_low_org_factor = -0.15
- 			org_loss_when_moving = -0.15
+			 org_loss_when_moving = -0.15
 		}
 	}
 }
@@ -470,47 +595,79 @@ dedicated_mobile_defense = {
 	track = dedicated_doctrine
 	name = SUBDOCTRINE_OPERATION_MOBILE_DEFENSE
 	description = SUBDOCTRINE_OPERATION_MOBILE_DEFENSE_DESC
-	icon = GFX_doctrine_mobile_infantry_medium
+	icon = GFX_doctrine_mobile_defense
 
 	xp_cost = 75
 	xp_type = army
 
 	available = {
-		NOT = { has_country_flag = mobile_defense }
+		does_not_have_mobile_defense_doctrine = yes
 	}
 
 	ai_will_do = {
 		base = 1
-	}
-
-	effect = {
-		set_country_flag = mobile_defense
+		modifier = {
+			add = 10
+			has_government = democratic
+			num_of_military_factories > 40
+			is_major_power = yes
+		}
+		modifier = {
+			add = 8
+			is_in_faction_with = USA
+			is_major_power = yes
+		}
+		modifier = {
+			add = 5
+			has_country_flag = middle_east_flag
+			is_major_power = yes
+		}
+		modifier = {
+			add = 6
+			has_expansionist_government = yes
+			is_major_power = yes
+			num_of_military_factories > 35
+		}
+		modifier = {
+			add = 5
+			has_war = yes
+			is_major_power = yes
+			num_of_military_factories > 30
+		}
+		modifier = {
+			factor = 0
+			is_non_power = yes
+		}
+		modifier = {
+			factor = 0
+			num_of_military_factories < 15
+		}
 	}
 
 	# EFFECTS
 	dig_in_speed_factor = 0.25
- 	army_defence_factor = 0.025
+	 army_defence_factor = 0.025
 
 	rewards = {
 		fire_brigades = {
 			land_night_attack = 0.05
- 			org_loss_when_moving = -0.075
+			 org_loss_when_moving = -0.075
 		}
 		delay = {
 			cas_damage_reduction = 0.10
- 			coordination_bonus = 0.10
+			 coordination_bonus = 0.10
 		}
 		freedom_of_maneuver = {
 			army_speed_factor = 0.075
- 			initiative_factor = 0.05
+			 initiative_factor = 0.05
 		}
 		counter_punch = {
 			land_night_attack = 0.05
- 			army_core_attack_factor = 0.10
+			 army_core_attack_factor = 0.10
 		}
 		collapsing_defense = {
 			army_speed_factor = 0.05
- 			land_reinforce_rate = 0.05
+			 land_reinforce_rate = 0.05
 		}
 	}
 }
@@ -519,75 +676,71 @@ dedicated_insurgent_operations = {
 	track = dedicated_doctrine
 	name = SUBDOCTRINE_OPERATION_INSURGENT
 	description = SUBDOCTRINE_OPERATION_INSURGENT_DESC
-	icon = GFX_doctrine_mobile_infantry_medium
+	icon = GFX_doctrine_insurgent_operations
 
 	xp_cost = 75
 	xp_type = army
 
 	available = {
-		NOT = { has_country_flag = insurgent_operations }
-		has_doctrine = guerrilla_warfare
+		does_not_have_insurgent_operations_doctrine = yes
 	}
 
 	ai_will_do = {
 		base = 1
 	}
 
-	effect = {
-		set_country_flag = insurgent_operations
-	}
 	# EFFECTS
 	army_infantry_defence_factor = 0.1
 
 	rewards = {
 		urban_insurgent_ops = {
 			L_Inf_Bat = {
-	 			urban = {
+				 urban = {
 					movement = 0.2
-	 				defence = 0.25
-	 			}
-	 			supercity = {
-	 				movement = 0.15
-	 				defence = 0.25
-	 			}
-	 		}
+					 defence = 0.25
+				 }
+				 supercity = {
+					 movement = 0.15
+					 defence = 0.25
+				 }
+			 }
 
-	 		Militia_Bat = {
-	 			urban = {
-	 				movement = 0.2
-	 				defence = 0.3
-	 			}
-	 			supercity = {
-	 				movement = 0.2
-	 				defence = 0.3
-	 			}
-	 		}
+			 Militia_Bat = {
+				 urban = {
+					 movement = 0.2
+					 defence = 0.3
+				 }
+				 supercity = {
+					 movement = 0.2
+					 defence = 0.3
+				 }
+			 }
 
-	 		Mot_Inf_Bat = {
-	 			urban = {
-	 				movement = 0.1
-	 				defence = 0.15
-	 			}
-	 			supercity = {
-	 				movement = 0.1
-	 				defence = 0.15
-	 			}
-	 		}
+			 Mot_Inf_Bat = {
+				 urban = {
+					 movement = 0.1
+					 defence = 0.15
+				 }
+				 supercity = {
+					 movement = 0.1
+					 defence = 0.15
+				 }
+			 }
 
-	 		Mot_Militia_Bat = {
-	 			urban = {
-	 				movement = 0.15
-	 				defence = 0.2
-	 			}
-	 			supercity = {
-	 				movement = 0.15
-	 				defence = 0.2
-	 			}
-	 		}
+			 Mot_Militia_Bat = {
+				 urban = {
+					 movement = 0.15
+					 defence = 0.2
+				 }
+				 supercity = {
+					 movement = 0.15
+					 defence = 0.2
+				 }
+			 }
 		}
 		repair_and_replace = {
+			equipment_capture_factor = 0.4
 			category_militia = {
-				equipment_capture_factor = 0.4
 				recovery = 0.4
 			}
 		}

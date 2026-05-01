@@ -145,9 +145,15 @@ country_event = {
 	is_triggered_only = yes
 	option = {
 		name = transnistria.16.a
+		trigger = {
+			NOT = {
+				western_liberals_are_in_power = yes
+				western_conservatism_are_in_power = yes
+				western_social_democrats_are_in_power = yes
+			}
+		}
 		log = "[GetDateText]: [This.GetName]: transnistria.16.a executed"
 		PMR = {
-			set_country_flag = SOV_subject_agree
 			set_country_flag = SOV_subject_republic
 			set_country_flag = SUB_russ_polit
 			update_party_name = yes
@@ -421,9 +427,9 @@ country_event = {
 				if = {
 					limit = { NOT = { is_in_array = { ruling_party = 4 } } }
 					set_temp_variable = { rul_party_temp = 4 }
-					set_temp_variable = { enable_elections = 0 }
+					set_temp_variable = { disable_elections = 0 }
 					change_ruling_party_effect = yes
-		
+
 					set_temp_variable = { party_index = 4 }
 					set_temp_variable = { party_popularity_increase = 0.65 }
 					set_temp_variable = { temp_outlook_increase = 0.65 }
@@ -472,7 +478,7 @@ country_event = {
 		set_equipment_fraction = 0.25
 		997 = {
 			create_unit = {
-				division = "name = \"Gagauz Revolutionaries\" division_template = \"Gagauz Revolutionaries\" start_experience_base = 0.1"
+				division = "name = \"Gagauz Revolutionaries\" division_template = \"Gagauz Revolutionaries\" start_experience_factor = 0.1"
 				owner = GGZ
 				count = 1
 				prioritize_location = 13302
@@ -905,7 +911,6 @@ country_event = {
 	picture = GFX_transnistria_map
 	option = {
 		name = transnistria.43.a
-		log = "[GetDateText]: [This.GetName]: transnistria.43.a executed"
 	}
 }
 
@@ -922,7 +927,6 @@ news_event = {
 
 	option = {
 		name = transnistria_news.1.a
-		log = "[GetDateText]: [This.GetName]: transnistria_news.1.a executed"
 	}
 }
 
@@ -939,7 +943,6 @@ news_event = {
 
 	option = {
 		name = transnistria_news.2.a
-		log = "[GetDateText]: [This.GetName]: transnistria_news.2.a executed"
 	}
 }
 
@@ -951,12 +954,11 @@ news_event = {
 	picture = GFX_moldova_annexes_transnistria
 
 	major = yes
-	
+
 	is_triggered_only = yes
 
 	option = {
 		name = transnistria_news.3.a
-		log = "[GetDateText]: [This.GetName]: transnistria_news.3.a executed"
 	}
 }
 
@@ -968,17 +970,10 @@ news_event = {
 	picture = GFX_transnistria_annexes_moldova
 
 	major = yes
-	
+
 	is_triggered_only = yes
 
 	option = {
 		name = transnistria_news.4.a
-		log = "[GetDateText]: [This.GetName]: transnistria_news.4.a executed"
 	}
 }
-
-
-
-
-
-

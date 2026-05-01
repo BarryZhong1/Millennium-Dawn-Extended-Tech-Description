@@ -4,7 +4,7 @@ form_BLT_category = {
 	### Integrate ###
 	BLT_integrate_start = {
 		icon = GFX_decision_generic_form_nation
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		visible = {
 			NOT = { has_country_flag = is_BLT }
 		}
@@ -82,7 +82,7 @@ form_BLT_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 250
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = LIT } }
 		visible = {
 			has_country_flag = is_BLT
@@ -125,7 +125,7 @@ form_BLT_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 250
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = LAT } }
 		visible = {
 			has_country_flag = is_BLT
@@ -168,7 +168,7 @@ form_BLT_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 250
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = EST } }
 		visible = {
 			has_country_flag = is_BLT
@@ -212,50 +212,40 @@ form_BLT_category = {
 	BLT_update_flag = {
 		icon = GFX_decision_generic_form_nation
 		cost = 0
-		ai_will_do = { factor = 10000 }
+		ai_will_do = { base = 10000 }
 		visible = {
 			has_country_flag = is_BLT
 			has_country_flag = integrated_LIT
 			has_country_flag = integrated_LAT
 			has_country_flag = integrated_EST
 			NOT = {
-				AND = {
-					has_global_flag = european_federation
-					has_idea = EU_member
+				has_global_flag = european_federation
+				has_idea = EU_member
+				has_cosmetic_tag = BLT
+				has_elections = yes
+				has_cosmetic_tag = BLT_AUTH
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 0 }
+					is_in_array = { array = ruling_party  value = 7 }
+					is_in_array = { array = ruling_party  value = 13 }
+					is_in_array = { array = ruling_party  value = 22 }
 				}
-				AND = {
-					has_cosmetic_tag = BLT
-					has_elections = yes
+				has_cosmetic_tag = BLT_AUTH_S
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 10 }
+					is_in_array = { array = ruling_party  value = 23 }
+					is_in_array = { array = ruling_party  value = 4 }
+					is_in_array = { array = ruling_party  value = 19 }
 				}
-				AND = {
-					has_cosmetic_tag = BLT_AUTH
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 0 }
-						is_in_array = { array = ruling_party  value = 7 }
-						is_in_array = { array = ruling_party  value = 13 }
-						is_in_array = { array = ruling_party  value = 22 }
-					}
-				}
-				AND = {
-					has_cosmetic_tag = BLT_AUTH_S
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 10 }
-						is_in_array = { array = ruling_party  value = 23 }
-						is_in_array = { array = ruling_party  value = 4 }
-						is_in_array = { array = ruling_party  value = 19 }
-					}
-				}
-				AND = {
-					has_cosmetic_tag = BLT_AUTH_SS
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 21 }
-						is_in_array = { array = ruling_party  value = 8 }
-						is_in_array = { array = ruling_party  value = 9 }
-						is_in_array = { array = ruling_party  value = 11 }
-					}
+				has_cosmetic_tag = BLT_AUTH_SS
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 21 }
+					is_in_array = { array = ruling_party  value = 8 }
+					is_in_array = { array = ruling_party  value = 9 }
+					is_in_array = { array = ruling_party  value = 11 }
 				}
 			}
 		}
@@ -313,13 +303,13 @@ form_FCA_category = {
 	### Integrate ###
 	FCA_integrate_start = {
 		icon = GFX_decision_generic_form_nation
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		visible = {
 			NOT = { has_country_flag = is_FCA }
 		}
 		highlight_states = {
 			highlight_states_trigger = {
-				OR ={
+				OR = {
 					is_core_of = BLZ
 					is_core_of = GUA
 					is_core_of = ELS
@@ -428,7 +418,7 @@ form_FCA_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 100
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = BLZ } }
 		visible = {
 			has_country_flag = is_FCA
@@ -471,7 +461,7 @@ form_FCA_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 200
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = GUA } }
 		visible = {
 			has_country_flag = is_FCA
@@ -514,7 +504,7 @@ form_FCA_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 100
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = ELS } }
 		visible = {
 			has_country_flag = is_FCA
@@ -558,7 +548,7 @@ form_FCA_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 200
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = HON } }
 		visible = {
 			has_country_flag = is_FCA
@@ -601,7 +591,7 @@ form_FCA_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 200
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = NIC } }
 		visible = {
 			has_country_flag = is_FCA
@@ -645,7 +635,7 @@ form_FCA_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 100
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = COS } }
 		visible = {
 			has_country_flag = is_FCA
@@ -688,7 +678,7 @@ form_FCA_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 200
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = PAN } }
 		visible = {
 			has_country_flag = is_FCA
@@ -731,7 +721,7 @@ form_FCA_category = {
 	FCA_update_flag = {
 		icon = GFX_decision_generic_form_nation
 		cost = 0
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 		visible = {
 			has_country_flag = is_FCA
 			NOT = { has_cosmetic_tag = FCA }
@@ -791,13 +781,13 @@ form_FCA_category = {
 form_GCL_category = {
 	GCL_integrate_start = {
 		icon = GFX_decision_generic_form_nation
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		visible = {
 			NOT = { has_country_flag = is_GCL }
 		}
 		highlight_states = {
 			highlight_states_trigger = {
-				OR ={
+				OR = {
 					is_core_of = ECU
 					is_core_of = VEN
 					is_core_of = COL
@@ -859,7 +849,7 @@ form_GCL_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 400
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = COL } }
 		visible = {
 			has_country_flag = is_GCL
@@ -908,7 +898,7 @@ form_GCL_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 400
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = VEN } }
 		visible = {
 			has_country_flag = is_GCL
@@ -956,7 +946,7 @@ form_GCL_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 200
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = ECU } }
 		visible = {
 			has_country_flag = is_GCL
@@ -1001,43 +991,35 @@ form_GCL_category = {
 	GCL_update_flag = {
 		icon = GFX_decision_generic_form_nation
 		cost = 0
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 		visible = {
 			has_country_flag = is_GCL
 			NOT = {
-				AND = {
-					has_cosmetic_tag = GCL
-					has_elections = yes
+				has_cosmetic_tag = GCL
+				has_elections = yes
+				has_cosmetic_tag = GCL_AUTH
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 0 }
+					is_in_array = { array = ruling_party  value = 7 }
+					is_in_array = { array = ruling_party  value = 13 }
+					is_in_array = { array = ruling_party  value = 22 }
 				}
-				AND = {
-					has_cosmetic_tag = GCL_AUTH
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 0 }
-						is_in_array = { array = ruling_party  value = 7 }
-						is_in_array = { array = ruling_party  value = 13 }
-						is_in_array = { array = ruling_party  value = 22 }
-					}
+				has_cosmetic_tag = GCL_AUTH_S
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 10 }
+					is_in_array = { array = ruling_party  value = 23 }
+					is_in_array = { array = ruling_party  value = 4 }
+					is_in_array = { array = ruling_party  value = 19 }
 				}
-				AND = {
-					has_cosmetic_tag = GCL_AUTH_S
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 10 }
-						is_in_array = { array = ruling_party  value = 23 }
-						is_in_array = { array = ruling_party  value = 4 }
-						is_in_array = { array = ruling_party  value = 19 }
-					}
-				}
-				AND = {
-					has_cosmetic_tag = GCL_AUTH_SS
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 21 }
-						is_in_array = { array = ruling_party  value = 8 }
-						is_in_array = { array = ruling_party  value = 9 }
-						is_in_array = { array = ruling_party  value = 11 }
-					}
+				has_cosmetic_tag = GCL_AUTH_SS
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 21 }
+					is_in_array = { array = ruling_party  value = 8 }
+					is_in_array = { array = ruling_party  value = 9 }
+					is_in_array = { array = ruling_party  value = 11 }
 				}
 			}
 		}
@@ -1097,13 +1079,13 @@ form_SCA_category = {
 	# Start integrate
 	SCA_integrate_start = {
 		icon = GFX_decision_generic_form_nation
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		visible = {
 			NOT = { has_country_flag = is_SCA }
 		}
 		highlight_states = {
 			highlight_states_trigger = {
-				OR ={
+				OR = {
 					is_core_of = SWE
 					is_core_of = NOR
 					is_core_of = DEN
@@ -1119,9 +1101,7 @@ form_SCA_category = {
 						is_subject_of = ROOT
 						has_war = no
 					}
-					all_core_state = {
-						is_owned_and_controlled_by = ROOT
-					}
+					ROOT = { is_sweden_state_owned = yes }
 				}
 			}
 			NOR = {
@@ -1130,9 +1110,7 @@ form_SCA_category = {
 						is_subject_of = ROOT
 						has_war = no
 					}
-					all_core_state = {
-						is_owned_and_controlled_by = ROOT
-					}
+					ROOT = { is_norway_state_owned = yes }
 				}
 			}
 			DEN = {
@@ -1141,9 +1119,7 @@ form_SCA_category = {
 						is_subject_of = ROOT
 						has_war = no
 					}
-					all_core_state = {
-						is_owned_and_controlled_by = ROOT
-					}
+					ROOT = { is_denmark_state_owned = yes }
 				}
 			}
 			FIN = {
@@ -1152,12 +1128,19 @@ form_SCA_category = {
 						is_subject_of = ROOT
 						has_war = no
 					}
-					all_core_state = {
-						is_owned_and_controlled_by = ROOT
-					}
+					ROOT = { is_finland_state_owned = yes }
 				}
 			}
 			ICE = {
+				OR = {
+					AND = {
+						is_subject_of = ROOT
+						has_war = no
+					}
+					ROOT = { owns_state = 7 }
+				}
+			}
+			GRN = {
 				OR = {
 					AND = {
 						is_subject_of = ROOT
@@ -1188,7 +1171,7 @@ form_SCA_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 500
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = SWE } }
 		visible = {
 			has_country_flag = is_SCA
@@ -1227,7 +1210,7 @@ form_SCA_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 300
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = NOR } }
 		visible = {
 			has_country_flag = is_SCA
@@ -1266,7 +1249,7 @@ form_SCA_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 400
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = DEN } }
 		visible = {
 			has_country_flag = is_SCA
@@ -1306,7 +1289,7 @@ form_SCA_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 300
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = FIN } }
 		visible = {
 			has_country_flag = is_SCA
@@ -1345,7 +1328,7 @@ form_SCA_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 300
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = ICE } }
 		visible = {
 			has_country_flag = is_SCA
@@ -1376,33 +1359,34 @@ form_SCA_category = {
 		}
 	}
 
-	#GRL
-	SCA_integrate_GRL = {
+	#GRN
+	SCA_integrate_GRN = {
 		icon = GFX_decision_generic_form_nation
 		cost = 300
 		days_remove = 365
 		ai_will_do = { factor = 10 }
-		allowed = { NOT = { tag = GRL } }
+		allowed = { NOT = { tag = GRN } }
 		visible = {
 			has_country_flag = is_SCA
-			NOT = { has_country_flag = integrated_GRL }
+			NOT = { has_country_flag = integrated_GRN }
 		}
 		available = {
-			set_temp_variable = { tag_check = GRL.id }
+			set_temp_variable = { tag_check = GRN.id }
 			formable_nation_check = yes
 		}
 		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision SCA_integrate_GRL"
+			log = "[GetDateText]: [Root.GetName]: Decision SCA_integrate_GRN"
 			add_state_core = 1161
 			add_state_core = 1162
+			add_state_core = 1240
 			add_state_core = 1
 			if = {
-				limit = { country_exists = GRL }
+				limit = { country_exists = GRN }
 				annex_country = {
-					target = GRL
+					target = GRN
 					transfer_troops = yes
 				}
-				GRL = {
+				GRN = {
 					every_unit_leader = {
 						set_nationality = ROOT
 					}
@@ -1410,7 +1394,7 @@ form_SCA_category = {
 			}
 			clr_country_flag = dynamic_flag
 			clr_country_flag = dynamic_rebel_flag
-			set_country_flag = integrated_GRL
+			set_country_flag = integrated_GRN
 		}
 	}
 
@@ -1418,7 +1402,7 @@ form_SCA_category = {
 	SCA_update_flag = {
 		icon = GFX_decision_generic_form_nation
 		cost = 0
-		ai_will_do = { factor = 10000 }
+		ai_will_do = { base = 10000 }
 		visible = {
 			has_country_flag = is_SCA
 			has_country_flag = integrated_SWE
@@ -1426,44 +1410,34 @@ form_SCA_category = {
 			has_country_flag = integrated_DEN
 			has_country_flag = integrated_FIN
 			NOT = {
-				has_country_flag = is_NORD
-				AND = {
-					has_global_flag = european_federation
-					has_idea = EU_member
+				has_country_flag = is_NORDEM
+				has_global_flag = european_federation
+				has_idea = EU_member
+				has_cosmetic_tag = SCA
+				has_elections = yes
+				has_cosmetic_tag = SCA_AUTH
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 0 }
+					is_in_array = { array = ruling_party  value = 7 }
+					is_in_array = { array = ruling_party  value = 13 }
+					is_in_array = { array = ruling_party  value = 22 }
 				}
-				AND = {
-					has_cosmetic_tag = SCA
-					has_elections = yes
+				has_cosmetic_tag = SCA_AUTH_S
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 10 }
+					is_in_array = { array = ruling_party  value = 23 }
+					is_in_array = { array = ruling_party  value = 4 }
+					is_in_array = { array = ruling_party  value = 19 }
 				}
-				AND = {
-					has_cosmetic_tag = SCA_AUTH
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 0 }
-						is_in_array = { array = ruling_party  value = 7 }
-						is_in_array = { array = ruling_party  value = 13 }
-						is_in_array = { array = ruling_party  value = 22 }
-					}
-				}
-				AND = {
-					has_cosmetic_tag = SCA_AUTH_S
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 10 }
-						is_in_array = { array = ruling_party  value = 23 }
-						is_in_array = { array = ruling_party  value = 4 }
-						is_in_array = { array = ruling_party  value = 19 }
-					}
-				}
-				AND = {
-					has_cosmetic_tag = SCA_AUTH_SS
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 21 }
-						is_in_array = { array = ruling_party  value = 8 }
-						is_in_array = { array = ruling_party  value = 9 }
-						is_in_array = { array = ruling_party  value = 11 }
-					}
+				has_cosmetic_tag = SCA_AUTH_SS
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 21 }
+					is_in_array = { array = ruling_party  value = 8 }
+					is_in_array = { array = ruling_party  value = 9 }
+					is_in_array = { array = ruling_party  value = 11 }
 				}
 			}
 		}
@@ -1525,7 +1499,7 @@ form_IBR_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 550
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = SPR } }
 		visible = {
 			NOT = { has_country_flag = integrated_SPR }
@@ -1631,7 +1605,7 @@ form_IBR_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 400
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = POR } }
 		visible = {
 			NOT = { has_country_flag = integrated_POR }
@@ -1692,47 +1666,37 @@ form_IBR_category = {
 	IBR_update_flag = {
 		icon = GFX_decision_generic_form_nation
 		cost = 0
-		ai_will_do = { factor = 10000 }
+		ai_will_do = { base = 10000 }
 		visible = {
 			has_country_flag = is_IBR
 			NOT = {
-				AND = {
-					has_global_flag = european_federation
-					has_idea = EU_member
+				has_global_flag = european_federation
+				has_idea = EU_member
+				has_cosmetic_tag = IBR
+				has_elections = yes
+				has_cosmetic_tag = IBR_AUTH
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 0 }
+					is_in_array = { array = ruling_party  value = 7 }
+					is_in_array = { array = ruling_party  value = 13 }
+					is_in_array = { array = ruling_party  value = 22 }
 				}
-				AND = {
-					has_cosmetic_tag = IBR
-					has_elections = yes
+				has_cosmetic_tag = IBR_AUTH_S
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 10 }
+					is_in_array = { array = ruling_party  value = 23 }
+					is_in_array = { array = ruling_party  value = 4 }
+					is_in_array = { array = ruling_party  value = 19 }
 				}
-				AND = {
-					has_cosmetic_tag = IBR_AUTH
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 0 }
-						is_in_array = { array = ruling_party  value = 7 }
-						is_in_array = { array = ruling_party  value = 13 }
-						is_in_array = { array = ruling_party  value = 22 }
-					}
-				}
-				AND = {
-					has_cosmetic_tag = IBR_AUTH_S
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 10 }
-						is_in_array = { array = ruling_party  value = 23 }
-						is_in_array = { array = ruling_party  value = 4 }
-						is_in_array = { array = ruling_party  value = 19 }
-					}
-				}
-				AND = {
-					has_cosmetic_tag = IBR_AUTH_SS
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 21 }
-						is_in_array = { array = ruling_party  value = 8 }
-						is_in_array = { array = ruling_party  value = 9 }
-						is_in_array = { array = ruling_party  value = 11 }
-					}
+				has_cosmetic_tag = IBR_AUTH_SS
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 21 }
+					is_in_array = { array = ruling_party  value = 8 }
+					is_in_array = { array = ruling_party  value = 9 }
+					is_in_array = { array = ruling_party  value = 11 }
 				}
 			}
 		}
@@ -1791,7 +1755,7 @@ EFS_flag_category = {
 	EFS_flag_change = {
 		icon = GFX_decision_generic_form_nation
 		cost = 0
-		ai_will_do = { factor = 10000 }
+		ai_will_do = { base = 10000 }
 		visible = { NOT = { has_country_flag = EFS_flag_change } }
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision EFS_flag_change"
@@ -1868,10 +1832,6 @@ EFS_flag_category = {
 				if = {
 					limit = { has_cosmetic_tag = ENG_England }
 					set_cosmetic_tag = EFS_ENG_england
-				}
-				else_if = {
-					limit = { has_cosmetic_tag = ENG_britain }
-					set_cosmetic_tag = EFS_ENG_britain
 				}
 				else = {
 					set_cosmetic_tag = EFS_ENG
@@ -1986,7 +1946,7 @@ EFS_flag_category = {
 			else_if = {
 				limit = { tag = NOR }
 				if = {
- 					limit = { has_country_flag = is_SCA }
+					 limit = { has_country_flag = is_SCA }
 					set_cosmetic_tag = EFS_SCA
 				}
 				else = {
@@ -2013,7 +1973,7 @@ EFS_flag_category = {
 			}
 			else_if = {
 				limit = { tag = SCL }
-				set_cosmetic_tag = EFS_PAD
+				set_cosmetic_tag = EFS_SCL
 			}
 			else_if = {
 				limit = { tag = SCO }
@@ -2064,7 +2024,7 @@ EFS_flag_category = {
 				set_cosmetic_tag = EFS_UKR
 			}
 			else = {
-				set_cosmetic_tag = EFS_WAL
+				set_cosmetic_tag = EFS_WAS
 			}
 
 			set_country_flag = EFS_flag_change
@@ -2077,8 +2037,7 @@ USoE_Flag_Reset_Flag_category = {
 	USoE_reset_flag = {
 		icon = GFX_decision_generic_form_nation
 		cost = 0
-		ai_will_do = { factor = 0 }
-		allowed = { }
+		ai_will_do = { base = 0 }
 		visible = { NOT = { has_cosmetic_tag = USoE } }
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision USoE_reset_flag"
@@ -2090,8 +2049,7 @@ USoE_Flag_Reset_Flag_category = {
 	USoE_AI_reset_flag = {
 		icon = GFX_decision_generic_form_nation
 		cost = 0
-		ai_will_do = { factor = 1 }
-		allowed = { }
+		ai_will_do = { base = 1 }
 		visible = {
 			is_ai = yes
 			OR = {
@@ -2145,7 +2103,7 @@ form_ANZ_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 500
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = AST } }
 		visible = {
 			NOT = { has_country_flag = integrated_AST }
@@ -2188,7 +2146,7 @@ form_ANZ_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 300
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = NZL } }
 		visible = {
 			NOT = { has_country_flag = integrated_NZL }
@@ -2228,45 +2186,37 @@ form_ANZ_category = {
 	ANZ_update_flag = {
 		icon = GFX_decision_generic_form_nation
 		cost = 0
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 		visible = {
 			has_country_flag = is_ANZ
 			has_country_flag = integrated_AST
 			has_country_flag = integrated_NZL
 			NOT = {
-				AND = {
-					has_cosmetic_tag = ANZ
-					has_elections = yes
+				has_cosmetic_tag = ANZ
+				has_elections = yes
+				has_cosmetic_tag = ANZ_AUTH
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 0 }
+					is_in_array = { array = ruling_party  value = 7 }
+					is_in_array = { array = ruling_party  value = 13 }
+					is_in_array = { array = ruling_party  value = 22 }
 				}
-				AND = {
-					has_cosmetic_tag = ANZ_AUTH
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 0 }
-						is_in_array = { array = ruling_party  value = 7 }
-						is_in_array = { array = ruling_party  value = 13 }
-						is_in_array = { array = ruling_party  value = 22 }
-					}
+				has_cosmetic_tag = ANZ_AUTH_S
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 10 }
+					is_in_array = { array = ruling_party  value = 23 }
+					is_in_array = { array = ruling_party  value = 4 }
+					is_in_array = { array = ruling_party  value = 19 }
 				}
-				AND = {
-					has_cosmetic_tag = ANZ_AUTH_S
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 10 }
-						is_in_array = { array = ruling_party  value = 23 }
-						is_in_array = { array = ruling_party  value = 4 }
-						is_in_array = { array = ruling_party  value = 19 }
-					}
-				}
-				AND = {
-					has_cosmetic_tag = ANZ_AUTH_SS
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 21 }
-						is_in_array = { array = ruling_party  value = 8 }
-						is_in_array = { array = ruling_party  value = 9 }
-						is_in_array = { array = ruling_party  value = 11 }
-					}
+				has_cosmetic_tag = ANZ_AUTH_SS
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 21 }
+					is_in_array = { array = ruling_party  value = 8 }
+					is_in_array = { array = ruling_party  value = 9 }
+					is_in_array = { array = ruling_party  value = 11 }
 				}
 			}
 		}
@@ -2486,7 +2436,7 @@ form_SOU_category = {
 				state = 911
 				state = 872
 				state = 913
-				state = 40
+				state = 49
 				state = 874
 				state = 915
 				state = 875
@@ -2576,7 +2526,7 @@ form_SOU_category = {
 		}
 
 		ai_will_do = {
-			factor = 10
+			base = 10
 		}
 	}
 	#BRA
@@ -2584,7 +2534,7 @@ form_SOU_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 500
 		days_remove = 500
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = BRA } }
 		visible = {
 			has_country_flag = is_SOU
@@ -2625,7 +2575,7 @@ form_SOU_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 200
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = PAR } }
 		visible = {
 			has_country_flag = is_SOU
@@ -2661,7 +2611,7 @@ form_SOU_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 250
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = BOL } }
 		visible = {
 			has_country_flag = is_SOU
@@ -2699,7 +2649,7 @@ form_SOU_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 400
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = PRU } }
 		visible = {
 			has_country_flag = is_SOU
@@ -2737,7 +2687,7 @@ form_SOU_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 200
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = ECU } }
 		visible = {
 			has_country_flag = is_SOU
@@ -2776,7 +2726,7 @@ form_SOU_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 200
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = SUR } }
 		visible = {
 			has_country_flag = is_SOU
@@ -2812,7 +2762,7 @@ form_SOU_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 200
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = GUY } }
 		visible = {
 			has_country_flag = is_SOU
@@ -2848,7 +2798,7 @@ form_SOU_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 250
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = VEN } }
 		visible = {
 			has_country_flag = is_SOU
@@ -2886,7 +2836,7 @@ form_SOU_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 300
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = COL } }
 		visible = {
 			has_country_flag = is_SOU
@@ -2924,7 +2874,7 @@ form_SOU_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 350
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = CHL } }
 		visible = {
 			has_country_flag = is_SOU
@@ -2962,7 +2912,7 @@ form_SOU_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 200
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = URG } }
 		visible = {
 			has_country_flag = is_SOU
@@ -2998,7 +2948,7 @@ form_SOU_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 500
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = ARG } }
 		visible = {
 			has_country_flag = is_SOU
@@ -3036,7 +2986,7 @@ form_SOU_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 150
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = TRI } }
 		visible = {
 			has_country_flag = is_SOU
@@ -3071,7 +3021,7 @@ form_SOU_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 150
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { OR = { tag = FRA  tag = FGU } } }
 		visible = {
 			has_country_flag = is_SOU
@@ -3199,7 +3149,7 @@ form_SOU_category = {
 	SOU_update_flag = {
 		icon = GFX_decision_generic_form_nation
 		cost = 0
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 		visible = {
 			has_country_flag = is_SOU
 			has_country_flag = integrated_BRA
@@ -3297,13 +3247,13 @@ form_HBL_category = {
 	# Start integrate
 	HBL_integrate_start = {
 		icon = GFX_decision_generic_form_nation
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		visible = {
 			NOT = { has_country_flag = is_HBL }
 		}
 		highlight_states = {
 			highlight_states_trigger = {
-				OR ={
+				OR = {
 					is_core_of = BEL
 					is_core_of = LUX
 					is_core_of = HOL
@@ -3364,7 +3314,7 @@ form_HBL_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 300
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = BEL } }
 		visible = {
 			has_country_flag = is_HBL
@@ -3402,7 +3352,7 @@ form_HBL_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 150
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = LUX } }
 		visible = {
 			has_country_flag = is_HBL
@@ -3437,7 +3387,7 @@ form_HBL_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 300
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = HOL } }
 		visible = {
 			has_country_flag = is_HBL
@@ -3474,46 +3424,38 @@ form_HBL_category = {
 	HBL_update_flag = {
 		icon = GFX_decision_generic_form_nation
 		cost = 0
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 		visible = {
 			has_country_flag = is_HBL
 			has_country_flag = integrated_BEL
 			has_country_flag = integrated_LUX
 			has_country_flag = integrated_HOL
 			NOT = {
-				AND = {
-					has_cosmetic_tag = HBL
-					has_elections = yes
+				has_cosmetic_tag = HBL
+				has_elections = yes
+				has_cosmetic_tag = HBL_AUTH
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 0 }
+					is_in_array = { array = ruling_party  value = 7 }
+					is_in_array = { array = ruling_party  value = 13 }
+					is_in_array = { array = ruling_party  value = 22 }
 				}
-				AND = {
-					has_cosmetic_tag = HBL_AUTH
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 0 }
-						is_in_array = { array = ruling_party  value = 7 }
-						is_in_array = { array = ruling_party  value = 13 }
-						is_in_array = { array = ruling_party  value = 22 }
-					}
+				has_cosmetic_tag = HBL_AUTH_S
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 10 }
+					is_in_array = { array = ruling_party  value = 23 }
+					is_in_array = { array = ruling_party  value = 4 }
+					is_in_array = { array = ruling_party  value = 19 }
 				}
-				AND = {
-					has_cosmetic_tag = HBL_AUTH_S
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 10 }
-						is_in_array = { array = ruling_party  value = 23 }
-						is_in_array = { array = ruling_party  value = 4 }
-						is_in_array = { array = ruling_party  value = 19 }
-					}
-				}
-				AND = {
-					has_cosmetic_tag = HBL_AUTH_SS
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 21 }
-						is_in_array = { array = ruling_party  value = 8 }
-						is_in_array = { array = ruling_party  value = 9 }
-						is_in_array = { array = ruling_party  value = 11 }
-					}
+				has_cosmetic_tag = HBL_AUTH_SS
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 21 }
+					is_in_array = { array = ruling_party  value = 8 }
+					is_in_array = { array = ruling_party  value = 9 }
+					is_in_array = { array = ruling_party  value = 11 }
 				}
 			}
 		}
@@ -3572,7 +3514,7 @@ form_USNA_category = {
 	# Start integrate
 	USNA_integrate_start = {
 		icon = GFX_decision_generic_form_nation
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		visible = {
 			NOT = { has_country_flag = is_USNA }
 		}
@@ -3729,7 +3671,7 @@ form_USNA_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 500
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = CAN } }
 		visible = {
 			has_country_flag = is_USNA
@@ -3767,7 +3709,7 @@ form_USNA_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 500
 		days_remove = 730
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = USA } }
 		visible = {
 			has_country_flag = is_USNA
@@ -3856,7 +3798,7 @@ form_USNA_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 500
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = MEX } }
 		visible = {
 			has_country_flag = is_USNA
@@ -3893,92 +3835,19 @@ form_USNA_category = {
 	USNA_update_flag = {
 		icon = GFX_decision_generic_form_nation
 		cost = 0
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 		visible = {
 			has_country_flag = is_USNA
 			has_country_flag = integrated_CAN
 			has_country_flag = integrated_USA
 			has_country_flag = integrated_MEX
 			NOT = {
-				OR = {
-					has_cosmetic_tag = USNA
-					has_cosmetic_tag = USNA1
-					has_cosmetic_tag = USNA2
-					has_cosmetic_tag = USNA3
-					has_cosmetic_tag = USNA4
-					has_cosmetic_tag = USNA5
-				}
+				has_cosmetic_tag = USNA
 			}
 		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision USNA_update_flag"
-			#USNA
-			if = {
-				limit = {
-					OR = {
-						is_in_array = { array = ruling_party  value = 0 }
-						is_in_array = { array = ruling_party  value = 1 }
-						is_in_array = { array = ruling_party  value = 2 }
-						is_in_array = { array = ruling_party  value = 3 }
-						is_in_array = { array = ruling_party  value = 6 }
-						is_in_array = { array = ruling_party  value = 7 }
-						is_in_array = { array = ruling_party  value = 8 }
-						is_in_array = { array = ruling_party  value = 9 }
-						is_in_array = { array = ruling_party  value = 13 }
-						is_in_array = { array = ruling_party  value = 14 }
-						is_in_array = { array = ruling_party  value = 15 }
-						is_in_array = { array = ruling_party  value = 17 }
-						is_in_array = { array = ruling_party  value = 18 }
-						is_in_array = { array = ruling_party  value = 22 }
-					}
-				}
-				set_cosmetic_tag = USNA
-			}
-			#USNA1
-			else_if = {
-				limit = {
-					OR = {
-						is_in_array = { array = ruling_party  value = 4 }
-						is_in_array = { array = ruling_party  value = 5 }
-						is_in_array = { array = ruling_party  value = 19 }
-					}
-				}
-				set_cosmetic_tag = USNA
-			}
-			#USNA2
-			else_if = {
-				limit = {
-					OR = {
-						is_in_array = { array = ruling_party  value = 10 }
-						is_in_array = { array = ruling_party  value = 11 }
-					}
-				}
-				set_cosmetic_tag = USNA
-			}
-			#USNA3
-			else_if = {
-				limit = {
-					is_in_array = { array = ruling_party  value = 16 }
-				}
-				set_cosmetic_tag = USNA
-			}
-			#USNA4
-			else_if = {
-				limit = {
-					OR = {
-						is_in_array = { array = ruling_party  value = 20 }
-						is_in_array = { array = ruling_party  value = 21 }
-					}
-				}
-				set_cosmetic_tag = USNA
-			}
-			#USNA5
-			else_if = {
-				limit = {
-					is_in_array = { array = ruling_party  value = 23 }
-				}
-				set_cosmetic_tag = USNA
-			}
+			set_cosmetic_tag = USNA
 		}
 	}
 }
@@ -3988,13 +3857,13 @@ form_UTS_category = {
 	# Start integrate
 	UTS_integrate_start = {
 		icon = GFX_decision_generic_form_nation
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		visible = {
 			NOT = { has_country_flag = is_UTS }
 		}
 				highlight_states = {
 			highlight_states_trigger = {
-				OR ={
+				OR = {
 					is_core_of = KAZ
 					is_core_of = UZB
 					is_core_of = TRK
@@ -4067,7 +3936,7 @@ form_UTS_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 400
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = KAZ } }
 		visible = {
 			has_country_flag = is_UTS
@@ -4138,7 +4007,7 @@ form_UTS_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 400
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = UZB } }
 		visible = {
 			has_country_flag = is_UTS
@@ -4206,7 +4075,7 @@ form_UTS_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 300
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = TRK } }
 		visible = {
 			has_country_flag = is_UTS
@@ -4273,7 +4142,7 @@ form_UTS_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 200
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = KYR } }
 		visible = {
 			has_country_flag = is_UTS
@@ -4335,11 +4204,11 @@ form_UTS_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 600
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = TUR } }
 		visible = {
 			has_country_flag = is_UTS
-			NOT = { has_country_flag = integrated_KYR }
+			NOT = { has_country_flag = integrated_TUR }
 		}
 		available = {
 			TUR = {
@@ -4407,7 +4276,7 @@ form_UTS_category = {
 	UTS_update_flag = {
 		icon = GFX_decision_generic_form_nation
 		cost = 0
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 		visible = {
 			has_country_flag = is_UTS
 			has_country_flag = integrated_KAZ
@@ -4416,32 +4285,25 @@ form_UTS_category = {
 			has_country_flag = integrated_TAJ
 			has_country_flag = integrated_KYR
 			NOT = {
-				AND = {
-					has_cosmetic_tag = UTS
-					has_elections = yes
+				has_cosmetic_tag = UTS
+				has_elections = yes
+				has_cosmetic_tag = UTS_AUTH
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 0 }
+					is_in_array = { array = ruling_party  value = 7 }
+					is_in_array = { array = ruling_party  value = 13 }
+					is_in_array = { array = ruling_party  value = 22 }
 				}
-				AND = {
-					has_cosmetic_tag = UTS_AUTH
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 0 }
-						is_in_array = { array = ruling_party  value = 7 }
-						is_in_array = { array = ruling_party  value = 13 }
-						is_in_array = { array = ruling_party  value = 22 }
-					}
+				has_cosmetic_tag = UTS_AUTH_S
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 10 }
+					is_in_array = { array = ruling_party  value = 23 }
+					is_in_array = { array = ruling_party  value = 4 }
+					is_in_array = { array = ruling_party  value = 19 }
 				}
-				AND = {
-					has_cosmetic_tag = UTS_AUTH_S
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 10 }
-						is_in_array = { array = ruling_party  value = 23 }
-						is_in_array = { array = ruling_party  value = 4 }
-						is_in_array = { array = ruling_party  value = 19 }
-					}
-				}
-				AND = {
- 					has_cosmetic_tag = UTS_AUTH_SS
+				has_cosmetic_tag = UTS_AUTH_SS
 					has_elections = no
 					OR = {
 						is_in_array = { array = ruling_party  value = 21 }
@@ -4449,7 +4311,6 @@ form_UTS_category = {
 						is_in_array = { array = ruling_party  value = 9 }
 						is_in_array = { array = ruling_party  value = 11 }
 					}
-				}
 			}
 		}
 		complete_effect = {
@@ -4457,7 +4318,7 @@ form_UTS_category = {
 			#UTS
 			if = {
 				limit = { has_elections = yes }
- 				set_cosmetic_tag = UTS
+				 set_cosmetic_tag = UTS
 			}
 			#UTS_AUTH
 			else_if = {
@@ -4508,13 +4369,13 @@ form_MAPHI_category = {
 	# Start integrate
 	MAPHI_integrate_start = {
 		icon = GFX_decision_generic_form_nation
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		visible = {
 			NOT = { has_country_flag = is_MAPHI }
 		}
 		highlight_states = {
 			highlight_states_trigger = {
-				OR ={
+				OR = {
 					is_core_of = IND
 					is_core_of = ACE
 					is_core_of = MAY
@@ -4600,7 +4461,7 @@ form_MAPHI_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 750
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = IND } }
 		visible = {
 			has_country_flag = is_MAPHI
@@ -4626,6 +4487,7 @@ form_MAPHI_category = {
 			add_state_core = 936
 			add_state_core = 1113
 			add_state_core = 1114
+			add_state_core = 1226
 			if = {
 				limit = { country_exists = IND }
 				annex_country = {
@@ -4648,7 +4510,7 @@ form_MAPHI_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 500
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = PHI } }
 		visible = {
 			has_country_flag = is_MAPHI
@@ -4666,6 +4528,19 @@ form_MAPHI_category = {
 			add_state_core = 738
 			add_state_core = 739
 			add_state_core = 740
+			add_state_core = 1227
+			add_state_core = 1228
+			add_state_core = 1229
+			add_state_core = 1230
+			add_state_core = 1231
+			add_state_core = 1232
+			add_state_core = 1233
+			add_state_core = 1234
+			add_state_core = 1235
+			add_state_core = 1236
+			add_state_core = 1237
+			add_state_core = 1238
+			add_state_core = 1239
 			if = { limit = { country_exists = PHI }
 				annex_country = {
 					target = PHI
@@ -4687,7 +4562,7 @@ form_MAPHI_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 300
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = SIN } }
 		visible = {
 			has_country_flag = is_MAPHI
@@ -4722,7 +4597,7 @@ form_MAPHI_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 450
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = MAY } }
 		visible = {
 			has_country_flag = is_MAPHI
@@ -4761,7 +4636,7 @@ form_MAPHI_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 200
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = BRU } }
 		visible = {
 			has_country_flag = is_MAPHI
@@ -4793,7 +4668,7 @@ form_MAPHI_category = {
 	MAPHI_update_flag = {
 		icon = GFX_decision_generic_form_nation
 		cost = 0
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 		visible = {
 			has_country_flag = is_MAPHI
 			has_country_flag = integrated_IND
@@ -4802,32 +4677,25 @@ form_MAPHI_category = {
 			has_country_flag = integrated_MAY
 			has_country_flag = integrated_BRU
 			NOT = {
-				AND = {
-					has_cosmetic_tag = MAPHI
-					has_elections = yes
+				has_cosmetic_tag = MAPHI
+				has_elections = yes
+				has_cosmetic_tag = MAPHI_AUTH
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 0 }
+					is_in_array = { array = ruling_party  value = 7 }
+					is_in_array = { array = ruling_party  value = 13 }
+					is_in_array = { array = ruling_party  value = 22 }
 				}
-				AND = {
-					has_cosmetic_tag = MAPHI_AUTH
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 0 }
-						is_in_array = { array = ruling_party  value = 7 }
-						is_in_array = { array = ruling_party  value = 13 }
-						is_in_array = { array = ruling_party  value = 22 }
-					}
+				has_cosmetic_tag = MAPHI_AUTH_S
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 10 }
+					is_in_array = { array = ruling_party  value = 23 }
+					is_in_array = { array = ruling_party  value = 4 }
+					is_in_array = { array = ruling_party  value = 19 }
 				}
-				AND = {
-					has_cosmetic_tag = MAPHI_AUTH_S
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 10 }
-						is_in_array = { array = ruling_party  value = 23 }
-						is_in_array = { array = ruling_party  value = 4 }
-						is_in_array = { array = ruling_party  value = 19 }
-					}
-				}
-				AND = {
- 					has_cosmetic_tag = MAPHI_AUTH_SS
+				has_cosmetic_tag = MAPHI_AUTH_SS
 					has_elections = no
 					OR = {
 						is_in_array = { array = ruling_party  value = 21 }
@@ -4835,7 +4703,6 @@ form_MAPHI_category = {
 						is_in_array = { array = ruling_party  value = 9 }
 						is_in_array = { array = ruling_party  value = 11 }
 					}
-				}
 			}
 		}
 		complete_effect = {
@@ -4843,7 +4710,7 @@ form_MAPHI_category = {
 			#MAPHI
 			if = {
 				limit = { has_elections = yes }
- 				set_cosmetic_tag = MAPHI
+				 set_cosmetic_tag = MAPHI
 			}
 			#MAPHI_AUTH
 			else_if = {
@@ -4893,13 +4760,13 @@ form_INDOCHI_category = {
 	# Start integrate
 	INDOCHI_integrate_start = {
 		icon = GFX_decision_generic_form_nation
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		visible = {
 			NOT = { has_country_flag = is_INDOCHI }
 		}
 		highlight_states = {
 			highlight_states_trigger = {
-				OR ={
+				OR = {
 					is_core_of = VIE
 					is_core_of = LAO
 					is_core_of = CBD
@@ -4960,7 +4827,7 @@ form_INDOCHI_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 500
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = VIE } }
 		visible = {
 			has_country_flag = is_INDOCHI
@@ -5001,7 +4868,7 @@ form_INDOCHI_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 300
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = LAO } }
 		visible = {
 			has_country_flag = is_INDOCHI
@@ -5038,7 +4905,7 @@ form_INDOCHI_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 300
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = CBD } }
 		visible = {
 			has_country_flag = is_INDOCHI
@@ -5075,39 +4942,32 @@ form_INDOCHI_category = {
 	INDOCHI_update_flag = {
 		icon = GFX_decision_generic_form_nation
 		cost = 0
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 		visible = {
 			has_country_flag = is_INDOCHI
 			has_country_flag = integrated_VIE
 			has_country_flag = integrated_LAO
 			has_country_flag = integrated_CBD
 			NOT = {
-				AND = {
-					has_cosmetic_tag = INDOCHI
-					has_elections = yes
+				has_cosmetic_tag = INDOCHI
+				has_elections = yes
+				has_cosmetic_tag = INDOCHI_AUTH
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 0 }
+					is_in_array = { array = ruling_party  value = 7 }
+					is_in_array = { array = ruling_party  value = 13 }
+					is_in_array = { array = ruling_party  value = 22 }
 				}
-				AND = {
-					has_cosmetic_tag = INDOCHI_AUTH
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 0 }
-						is_in_array = { array = ruling_party  value = 7 }
-						is_in_array = { array = ruling_party  value = 13 }
-						is_in_array = { array = ruling_party  value = 22 }
-					}
+				has_cosmetic_tag = INDOCHI_AUTH_S
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 10 }
+					is_in_array = { array = ruling_party  value = 23 }
+					is_in_array = { array = ruling_party  value = 4 }
+					is_in_array = { array = ruling_party  value = 19 }
 				}
-				AND = {
-					has_cosmetic_tag = INDOCHI_AUTH_S
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 10 }
-						is_in_array = { array = ruling_party  value = 23 }
-						is_in_array = { array = ruling_party  value = 4 }
-						is_in_array = { array = ruling_party  value = 19 }
-					}
-				}
-				AND = {
- 					has_cosmetic_tag = INDOCHI_AUTH_SS
+				has_cosmetic_tag = INDOCHI_AUTH_SS
 					has_elections = no
 					OR = {
 						is_in_array = { array = ruling_party  value = 21 }
@@ -5115,7 +4975,6 @@ form_INDOCHI_category = {
 						is_in_array = { array = ruling_party  value = 9 }
 						is_in_array = { array = ruling_party  value = 11 }
 					}
-				}
 			}
 		}
 		complete_effect = {
@@ -5123,7 +4982,7 @@ form_INDOCHI_category = {
 			#INDOCHI
 			if = {
 				limit = { has_elections = yes }
- 				set_cosmetic_tag = INDOCHI
+				 set_cosmetic_tag = INDOCHI
 			}
 			#INDOCHI_AUTH
 			else_if = {
@@ -5173,13 +5032,13 @@ form_ANDES_category = {
 	# Start integrate
 	ANDES_integrate_start = {
 		icon = GFX_decision_generic_form_nation
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		visible = {
 			NOT = { has_country_flag = is_ANDES }
 		}
 		highlight_states = {
 			highlight_states_trigger = {
-				OR ={
+				OR = {
 					is_core_of = COL
 					is_core_of = PRU
 					is_core_of = BOL
@@ -5240,7 +5099,7 @@ form_ANDES_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 400
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = COL } }
 		visible = {
 			has_country_flag = is_ANDES
@@ -5278,7 +5137,7 @@ form_ANDES_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 350
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = PRU } }
 		visible = {
 			has_country_flag = is_ANDES
@@ -5319,7 +5178,7 @@ form_ANDES_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 250
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = BOL } }
 		visible = {
 			has_country_flag = is_ANDES
@@ -5355,39 +5214,32 @@ form_ANDES_category = {
 	ANDES_update_flag = {
 		icon = GFX_decision_generic_form_nation
 		cost = 0
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 		visible = {
 			has_country_flag = is_ANDES
 			has_country_flag = integrated_COL
 			has_country_flag = integrated_PRU
 			has_country_flag = integrated_BOL
 			NOT = {
-				AND = {
-					has_cosmetic_tag = ANDES
-					has_elections = yes
+				has_cosmetic_tag = ANDES
+				has_elections = yes
+				has_cosmetic_tag = ANDES_AUTH
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 0 }
+					is_in_array = { array = ruling_party  value = 7 }
+					is_in_array = { array = ruling_party  value = 13 }
+					is_in_array = { array = ruling_party  value = 22 }
 				}
-				AND = {
-					has_cosmetic_tag = ANDES_AUTH
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 0 }
-						is_in_array = { array = ruling_party  value = 7 }
-						is_in_array = { array = ruling_party  value = 13 }
-						is_in_array = { array = ruling_party  value = 22 }
-					}
+				has_cosmetic_tag = ANDES_AUTH_S
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 10 }
+					is_in_array = { array = ruling_party  value = 23 }
+					is_in_array = { array = ruling_party  value = 4 }
+					is_in_array = { array = ruling_party  value = 19 }
 				}
-				AND = {
-					has_cosmetic_tag = ANDES_AUTH_S
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 10 }
-						is_in_array = { array = ruling_party  value = 23 }
-						is_in_array = { array = ruling_party  value = 4 }
-						is_in_array = { array = ruling_party  value = 19 }
-					}
-				}
-				AND = {
- 					has_cosmetic_tag = ANDES_AUTH_SS
+				has_cosmetic_tag = ANDES_AUTH_SS
 					has_elections = no
 					OR = {
 						is_in_array = { array = ruling_party  value = 21 }
@@ -5395,7 +5247,6 @@ form_ANDES_category = {
 						is_in_array = { array = ruling_party  value = 9 }
 						is_in_array = { array = ruling_party  value = 11 }
 					}
-				}
 			}
 		}
 		complete_effect = {
@@ -5403,7 +5254,7 @@ form_ANDES_category = {
 			#ANDES
 			if = {
 				limit = { has_elections = yes }
- 				set_cosmetic_tag = ANDES
+				 set_cosmetic_tag = ANDES
 			}
 			#ANDES_AUTH
 			else_if = {
@@ -5453,13 +5304,13 @@ form_ANTCONF_category = {
 	# Start integrate
 	ANTCONF_integrate_start = {
 		icon = GFX_decision_generic_form_nation
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		visible = {
 			NOT = { has_country_flag = is_ANTCONF }
 		}
 		highlight_states = {
 			highlight_states_trigger = {
-				OR ={
+				OR = {
 					is_core_of = CUB
 					is_core_of = DOM
 					is_core_of = HAI
@@ -5525,7 +5376,7 @@ form_ANTCONF_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 300
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = CUB } }
 		visible = {
 			has_country_flag = is_ANTCONF
@@ -5562,7 +5413,7 @@ form_ANTCONF_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 250
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = DOM } }
 		visible = {
 			has_country_flag = is_ANTCONF
@@ -5598,7 +5449,7 @@ form_ANTCONF_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 250
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = HAI } }
 		visible = {
 			has_country_flag = is_ANTCONF
@@ -5635,7 +5486,7 @@ form_ANTCONF_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 250
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = PTR } }
 		visible = {
 			has_country_flag = is_ANTCONF
@@ -5670,39 +5521,32 @@ form_ANTCONF_category = {
 	ANTCONF_update_flag = {
 		icon = GFX_decision_generic_form_nation
 		cost = 0
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 		visible = {
 			has_country_flag = is_ANTCONF
 			has_country_flag = integrated_CUB
 			has_country_flag = integrated_DOM
 			has_country_flag = integrated_HAI
 			NOT = {
-				AND = {
-					has_cosmetic_tag = ANTCONF
-					has_elections = yes
+				has_cosmetic_tag = ANTCONF
+				has_elections = yes
+				has_cosmetic_tag = ANTCONF_AUTH
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 0 }
+					is_in_array = { array = ruling_party  value = 7 }
+					is_in_array = { array = ruling_party  value = 13 }
+					is_in_array = { array = ruling_party  value = 22 }
 				}
-				AND = {
-					has_cosmetic_tag = ANTCONF_AUTH
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 0 }
-						is_in_array = { array = ruling_party  value = 7 }
-						is_in_array = { array = ruling_party  value = 13 }
-						is_in_array = { array = ruling_party  value = 22 }
-					}
+				has_cosmetic_tag = ANTCONF_AUTH_S
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 10 }
+					is_in_array = { array = ruling_party  value = 23 }
+					is_in_array = { array = ruling_party  value = 4 }
+					is_in_array = { array = ruling_party  value = 19 }
 				}
-				AND = {
-					has_cosmetic_tag = ANTCONF_AUTH_S
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 10 }
-						is_in_array = { array = ruling_party  value = 23 }
-						is_in_array = { array = ruling_party  value = 4 }
-						is_in_array = { array = ruling_party  value = 19 }
-					}
-				}
-				AND = {
- 					has_cosmetic_tag = ANTCONF_AUTH_SS
+				has_cosmetic_tag = ANTCONF_AUTH_SS
 					has_elections = no
 					OR = {
 						is_in_array = { array = ruling_party  value = 21 }
@@ -5710,7 +5554,6 @@ form_ANTCONF_category = {
 						is_in_array = { array = ruling_party  value = 9 }
 						is_in_array = { array = ruling_party  value = 11 }
 					}
-				}
 			}
 		}
 		complete_effect = {
@@ -5718,7 +5561,7 @@ form_ANTCONF_category = {
 			#ANTCONF
 			if = {
 				limit = { has_elections = yes }
- 				set_cosmetic_tag = ANTCONF
+				 set_cosmetic_tag = ANTCONF
 			}
 			#ANTCONF_AUTH
 			else_if = {
@@ -5769,13 +5612,13 @@ form_CANZUK_category = {
 	# Start integrate
 	CANZUK_integrate_start = {
 		icon = GFX_decision_generic_form_nation
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		visible = {
 			NOT = { has_country_flag = is_CANZUK }
 		}
 		highlight_states = {
 			highlight_states_trigger = {
-				OR ={
+				OR = {
 					is_core_of = CAN
 					is_core_of = AST
 					is_core_of = NZL
@@ -5842,7 +5685,7 @@ form_CANZUK_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 500
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = CAN } }
 		visible = {
 			has_country_flag = is_CANZUK
@@ -5880,7 +5723,7 @@ form_CANZUK_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 500
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = AST } }
 		visible = {
 			has_country_flag = is_CANZUK
@@ -5918,7 +5761,7 @@ form_CANZUK_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 200
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = NZL } }
 		visible = {
 			has_country_flag = is_CANZUK
@@ -5956,7 +5799,7 @@ form_CANZUK_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 900
 		days_remove = 500
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = ENG } }
 		visible = {
 			has_country_flag = is_CANZUK
@@ -5993,7 +5836,7 @@ form_CANZUK_category = {
 	CANZUK_update_flag = {
 		icon = GFX_decision_generic_form_nation
 		cost = 0
-		ai_will_do = { factor = 10000 }
+		ai_will_do = { base = 10000 }
 		visible = {
 			has_country_flag = is_CANZUK
 			has_country_flag = integrated_CAN
@@ -6001,10 +5844,8 @@ form_CANZUK_category = {
 			has_country_flag = integrated_NZL
 			has_country_flag = integrated_ENG
 			NOT = {
-				AND = {
-					has_global_flag = european_federation
-					has_idea = EU_member
-				}
+				has_global_flag = european_federation
+				has_idea = EU_member
 				has_cosmetic_tag = CANZUK
 			}
 		}
@@ -6022,13 +5863,13 @@ form_RDLP_category = {
 	# Start integrate
 	RDLP_integrate_start = {
 		icon = GFX_decision_generic_form_nation
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		visible = {
 			NOT = { has_country_flag = is_RDLP }
 		}
 		highlight_states = {
 			highlight_states_trigger = {
-				OR ={
+				OR = {
 					is_core_of = PAR
 					is_core_of = BOL
 					is_core_of = CHL
@@ -6111,7 +5952,7 @@ form_RDLP_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 200
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = PAR } }
 		visible = {
 			has_country_flag = is_RDLP
@@ -6148,7 +5989,7 @@ form_RDLP_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 250
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = BOL } }
 		visible = {
 			has_country_flag = is_RDLP
@@ -6185,7 +6026,7 @@ form_RDLP_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 350
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = CHL } }
 		visible = {
 			has_country_flag = is_RDLP
@@ -6223,7 +6064,7 @@ form_RDLP_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 200
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = URG } }
 		visible = {
 			has_country_flag = is_RDLP
@@ -6259,7 +6100,7 @@ form_RDLP_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 500
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = ARG } }
 		visible = {
 			has_country_flag = is_RDLP
@@ -6300,7 +6141,7 @@ form_RDLP_category = {
 	RDLP_update_flag = {
 		icon = GFX_decision_generic_form_nation
 		cost = 0
-		ai_will_do = { factor = 1 }
+		ai_will_do = { base = 1 }
 		visible = {
 			has_country_flag = is_RDLP
 			has_country_flag = integrated_ARG
@@ -6309,39 +6150,31 @@ form_RDLP_category = {
 			has_country_flag = integrated_URG
 			has_country_flag = integrated_PAR
 			NOT = {
-				AND = {
-					has_cosmetic_tag = RDLP
-					has_elections = yes
+				has_cosmetic_tag = RDLP
+				has_elections = yes
+				has_cosmetic_tag = RDLP_AUTH
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 0 }
+					is_in_array = { array = ruling_party  value = 7 }
+					is_in_array = { array = ruling_party  value = 13 }
+					is_in_array = { array = ruling_party  value = 22 }
 				}
-				AND = {
-					has_cosmetic_tag = RDLP_AUTH
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 0 }
-						is_in_array = { array = ruling_party  value = 7 }
-						is_in_array = { array = ruling_party  value = 13 }
-						is_in_array = { array = ruling_party  value = 22 }
-					}
+				has_cosmetic_tag = RDLP_AUTH_S
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 10 }
+					is_in_array = { array = ruling_party  value = 23 }
+					is_in_array = { array = ruling_party  value = 4 }
+					is_in_array = { array = ruling_party  value = 19 }
 				}
-				AND = {
-					has_cosmetic_tag = RDLP_AUTH_S
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 10 }
-						is_in_array = { array = ruling_party  value = 23 }
-						is_in_array = { array = ruling_party  value = 4 }
-						is_in_array = { array = ruling_party  value = 19 }
-					}
-				}
-				AND = {
-					has_cosmetic_tag = RDLP_AUTH_SS
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 21 }
-						is_in_array = { array = ruling_party  value = 8 }
-						is_in_array = { array = ruling_party  value = 9 }
-						is_in_array = { array = ruling_party  value = 11 }
-					}
+				has_cosmetic_tag = RDLP_AUTH_SS
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 21 }
+					is_in_array = { array = ruling_party  value = 8 }
+					is_in_array = { array = ruling_party  value = 9 }
+					is_in_array = { array = ruling_party  value = 11 }
 				}
 			}
 		}
@@ -6401,10 +6234,10 @@ form_NORDEM_category = {
 	# Start integrate
 	NORDEM_integrate_start = {
 		icon = GFX_decision_generic_form_nation
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		highlight_states = {
 			highlight_states_trigger = {
-				OR ={
+				OR = {
 					is_core_of = SWE
 					is_core_of = DEN
 				}
@@ -6503,7 +6336,7 @@ form_NORDEM_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 500
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = SWE } }
 		visible = {
 			has_country_flag = is_NORDEM
@@ -6543,7 +6376,7 @@ form_NORDEM_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 300
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = NOR } }
 		visible = {
 			has_country_flag = is_NORDEM
@@ -6582,7 +6415,7 @@ form_NORDEM_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 400
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = DEN } }
 		visible = {
 			has_country_flag = is_NORDEM
@@ -6621,7 +6454,7 @@ form_NORDEM_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 800
 		days_remove = 500
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = ENG } }
 		visible = {
 			has_country_flag = is_NORDEM
@@ -6666,7 +6499,7 @@ form_NORDEM_category = {
 	NORDEM_update_flag = {
 		icon = GFX_decision_generic_form_nation
 		cost = 0
-		ai_will_do = { factor = 10000 }
+		ai_will_do = { base = 10000 }
 		visible = {
 			has_country_flag = is_NORDEM
 			has_country_flag = integrated_DEN
@@ -6674,43 +6507,33 @@ form_NORDEM_category = {
 			has_country_flag = integrated_NOR
 			has_country_flag = integrated_SWE
 			NOT = {
-				AND = {
-					has_global_flag = european_federation
-					has_idea = EU_member
+				has_global_flag = european_federation
+				has_idea = EU_member
+				has_cosmetic_tag = NORDEM
+				has_elections = yes
+				has_cosmetic_tag = NORDEM_AUTH
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 0 }
+					is_in_array = { array = ruling_party  value = 7 }
+					is_in_array = { array = ruling_party  value = 13 }
+					is_in_array = { array = ruling_party  value = 22 }
 				}
-				AND = {
-					has_cosmetic_tag = NORDEM
-					has_elections = yes
+				has_cosmetic_tag = NORDEM_AUTH_S
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 10 }
+					is_in_array = { array = ruling_party  value = 23 }
+					is_in_array = { array = ruling_party  value = 4 }
+					is_in_array = { array = ruling_party  value = 19 }
 				}
-				AND = {
-					has_cosmetic_tag = NORDEM_AUTH
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 0 }
-						is_in_array = { array = ruling_party  value = 7 }
-						is_in_array = { array = ruling_party  value = 13 }
-						is_in_array = { array = ruling_party  value = 22 }
-					}
-				}
-				AND = {
-					has_cosmetic_tag = NORDEM_AUTH_S
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 10 }
-						is_in_array = { array = ruling_party  value = 23 }
-						is_in_array = { array = ruling_party  value = 4 }
-						is_in_array = { array = ruling_party  value = 19 }
-					}
-				}
-				AND = {
-					has_cosmetic_tag = NORDEM_AUTH_SS
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 21 }
-						is_in_array = { array = ruling_party  value = 8 }
-						is_in_array = { array = ruling_party  value = 9 }
-						is_in_array = { array = ruling_party  value = 11 }
-					}
+				has_cosmetic_tag = NORDEM_AUTH_SS
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 21 }
+					is_in_array = { array = ruling_party  value = 8 }
+					is_in_array = { array = ruling_party  value = 9 }
+					is_in_array = { array = ruling_party  value = 11 }
 				}
 			}
 		}
@@ -6770,7 +6593,7 @@ form_MAGHREB_category = {
 	# Start integrate
 	MAGHREB_integrate_start = {
 		icon = GFX_decision_generic_form_nation
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		visible = {
 			NOT = { has_country_flag = is_MAGHREB }
 			NOT = { is_neo_baathist_uar = yes }
@@ -6939,6 +6762,7 @@ form_MAGHREB_category = {
 			set_country_flag = integrated_@ROOT
 			custom_effect_tooltip = MAGHREB_start_integrate_tt
 			custom_effect_tooltip = general_integrate_tt
+			hidden_effect = { set_cosmetic_tag = MAGHREB }
 		}
 	}
 	#ALG
@@ -6946,7 +6770,7 @@ form_MAGHREB_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 500
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = ALG } }
 		visible = {
 			has_country_flag = is_MAGHREB
@@ -6984,7 +6808,7 @@ form_MAGHREB_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 450
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = {
 			NOT = {
 				tag = LBA
@@ -7176,7 +7000,7 @@ form_MAGHREB_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 450
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = MOR } }
 		visible = {
 			has_country_flag = is_MAGHREB
@@ -7220,7 +7044,7 @@ form_MAGHREB_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 200
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = SHA } }
 		visible = {
 			has_country_flag = is_MAGHREB
@@ -7256,7 +7080,7 @@ form_MAGHREB_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 300
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = TUN } }
 		visible = {
 			has_country_flag = is_MAGHREB
@@ -7293,7 +7117,7 @@ form_MAGHREB_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 300
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = MAU } }
 		visible = {
 			has_country_flag = is_MAGHREB
@@ -7330,7 +7154,7 @@ form_MAGHREB_category = {
 	MAGHREB_update_flag = {
 		icon = GFX_decision_generic_form_nation
 		cost = 0
-		ai_will_do = { factor = 10000 }
+		ai_will_do = { base = 10000 }
 		visible = {
 			has_country_flag = is_MAGHREB
 			has_country_flag = integrated_ALG
@@ -7339,10 +7163,8 @@ form_MAGHREB_category = {
 			has_country_flag = integrated_SHA
 			has_country_flag = integrated_MAU
 			NOT = {
-				AND = {
-					has_global_flag = european_federation
-					has_idea = EU_member
-				}
+				has_global_flag = european_federation
+				has_idea = EU_member
 				has_cosmetic_tag = MAGHREB
 			}
 		}
@@ -7359,10 +7181,10 @@ form_WESTFED_category = {
 	# Start integrate
 	WESTFED_integrate_start = {
 		icon = GFX_decision_generic_form_nation
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		highlight_states = {
 			highlight_states_trigger = {
-				OR ={
+				OR = {
 					is_core_of = TRI
 					is_core_of = GRA
 					is_core_of = STL
@@ -7465,7 +7287,7 @@ form_WESTFED_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 250
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = TRI } }
 		visible = {
 			has_country_flag = is_WESTFED
@@ -7500,7 +7322,7 @@ form_WESTFED_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 150
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = GRA } }
 		visible = {
 			has_country_flag = is_WESTFED
@@ -7535,7 +7357,7 @@ form_WESTFED_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 150
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = STV } }
 		visible = {
 			has_country_flag = is_WESTFED
@@ -7570,7 +7392,7 @@ form_WESTFED_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 150
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = ANT } }
 		visible = {
 			has_country_flag = is_WESTFED
@@ -7605,7 +7427,7 @@ form_WESTFED_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 150
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = BAR } }
 		visible = {
 			has_country_flag = is_WESTFED
@@ -7640,7 +7462,7 @@ form_WESTFED_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 150
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = STL } }
 		visible = {
 			has_country_flag = is_WESTFED
@@ -7675,7 +7497,7 @@ form_WESTFED_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 150
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = STK } }
 		visible = {
 			has_country_flag = is_WESTFED
@@ -7710,7 +7532,7 @@ form_WESTFED_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 150
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = DMI } }
 		visible = {
 			has_country_flag = is_WESTFED
@@ -7745,7 +7567,7 @@ form_WESTFED_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 300
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = JAM } }
 		visible = {
 			has_country_flag = is_WESTFED
@@ -7780,7 +7602,7 @@ form_WESTFED_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 150
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = ENG } }
 		visible = {
 			has_country_flag = is_WESTFED
@@ -7832,7 +7654,7 @@ form_WESTFED_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 150
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = ENG } }
 		visible = {
 			has_country_flag = is_WESTFED
@@ -7884,7 +7706,7 @@ form_WESTFED_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 150
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = ENG } }
 		visible = {
 			has_country_flag = is_WESTFED
@@ -7936,7 +7758,7 @@ form_WESTFED_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 200
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = FRA } }
 		visible = {
 			has_country_flag = is_WESTFED
@@ -7987,7 +7809,7 @@ form_WESTFED_category = {
 	WESTFED_update_flag = {
 		icon = GFX_decision_generic_form_nation
 		cost = 0
-		ai_will_do = { factor = 10000 }
+		ai_will_do = { base = 10000 }
 		visible = {
 			has_country_flag = is_WESTFED
 			has_country_flag = integrated_DMI
@@ -8000,43 +7822,33 @@ form_WESTFED_category = {
 			has_country_flag = integrated_TRI
 			has_country_flag = integrated_JAM
 			NOT = {
-				AND = {
-					has_global_flag = european_federation
-					has_idea = EU_member
+				has_global_flag = european_federation
+				has_idea = EU_member
+				has_cosmetic_tag = WESTFED
+				has_elections = yes
+				has_cosmetic_tag = WESTFED_AUTH
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 0 }
+					is_in_array = { array = ruling_party  value = 7 }
+					is_in_array = { array = ruling_party  value = 13 }
+					is_in_array = { array = ruling_party  value = 22 }
 				}
-				AND = {
-					has_cosmetic_tag = WESTFED
-					has_elections = yes
+				has_cosmetic_tag = WESTFED_AUTH_S
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 10 }
+					is_in_array = { array = ruling_party  value = 23 }
+					is_in_array = { array = ruling_party  value = 4 }
+					is_in_array = { array = ruling_party  value = 19 }
 				}
-				AND = {
-					has_cosmetic_tag = WESTFED_AUTH
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 0 }
-						is_in_array = { array = ruling_party  value = 7 }
-						is_in_array = { array = ruling_party  value = 13 }
-						is_in_array = { array = ruling_party  value = 22 }
-					}
-				}
-				AND = {
-					has_cosmetic_tag = WESTFED_AUTH_S
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 10 }
-						is_in_array = { array = ruling_party  value = 23 }
-						is_in_array = { array = ruling_party  value = 4 }
-						is_in_array = { array = ruling_party  value = 19 }
-					}
-				}
-				AND = {
-					has_cosmetic_tag = WESTFED_AUTH_SS
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 21 }
-						is_in_array = { array = ruling_party  value = 8 }
-						is_in_array = { array = ruling_party  value = 9 }
-						is_in_array = { array = ruling_party  value = 11 }
-					}
+				has_cosmetic_tag = WESTFED_AUTH_SS
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 21 }
+					is_in_array = { array = ruling_party  value = 8 }
+					is_in_array = { array = ruling_party  value = 9 }
+					is_in_array = { array = ruling_party  value = 11 }
 				}
 			}
 		}
@@ -8090,16 +7902,16 @@ form_WESTFED_category = {
 	}
 }
 
-#Austria-Hungary
+# Austria-Hungary
 form_AUSHUN_category = {
 	### Integrate ###
 	# Start integrate
 	AUSHUN_integrate_start = {
 		icon = GFX_decision_generic_form_nation
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		highlight_states = {
 			highlight_states_trigger = {
-				OR ={
+				OR = {
 					is_core_of = AUS
 					is_core_of = HUN
 					is_core_of = SLV
@@ -8111,18 +7923,41 @@ form_AUSHUN_category = {
 				}
 			}
 			highlight_state_targets = {
+				state = 122
+				state = 121
+				state = 999
+				state = 123
+				state = 76
+				state = 75
+				state = 286
 				state = 285
+				state = 78
 				state = 1061
 				state = 126
 				state = 127
+				state = 119
+				state = 120
 				state = 151
 				state = 909
 				state = 910
-				state = 112
 				state = 628
 				state = 1098
 				state = 700
 				state = 701
+				state = 124
+				state = 125
+				state = 1017
+				state = 117
+				state = 118
+				state = 1018
+				state = 1051
+				state = 1054
+				state = 1053
+				state = 1052
+				state = 128
+				state = 129
+				state = 130
+				state = 998
 			}
 		}
 		visible = {
@@ -8131,132 +7966,208 @@ form_AUSHUN_category = {
 		available = {
 			custom_trigger_tooltip = {
 				tooltip = AUSHUN_integrate_trigger_tt
-				AUS = {
+				122 = {
 					OR = {
-						AND = {
-							is_subject_of = ROOT
-							has_war = no
-						}
-						all_core_state = {
-							is_owned_and_controlled_by = ROOT
-						}
+						OWNER = { is_subject_of = ROOT }
+						is_owned_by = ROOT
 					}
 				}
-				HUN = {
+				121 = {
 					OR = {
-						AND = {
-							is_subject_of = ROOT
-							has_war = no
-						}
-						all_core_state = {
-							is_owned_and_controlled_by = ROOT
-						}
+						OWNER = { is_subject_of = ROOT }
+						is_owned_by = ROOT
 					}
 				}
-				SLV = {
+				999 = {
 					OR = {
-						AND = {
-							is_subject_of = ROOT
-							has_war = no
-						}
-						all_core_state = {
-							is_owned_and_controlled_by = ROOT
-						}
+						OWNER = { is_subject_of = ROOT }
+						is_owned_by = ROOT
 					}
 				}
-				OR = {
-					ITA = {
-						is_subject_of = ROOT
-						has_war = no
-						owns_state = 285
-						owns_state = 1061
-					}
-					AND = {
-						owns_state = 285
-						owns_state = 1061
-					}
-				}
-				OR = {
-					CRO = {
-						is_subject_of = ROOT
-						has_war = no
-					}
-					AND = {
-						owns_state = 126
-						owns_state = 127
-					}
-				}
-				BOS = {
+				123 = {
 					OR = {
-						AND = {
-							is_subject_of = ROOT
-							has_war = no
-						}
-						all_core_state = {
-							is_owned_and_controlled_by = ROOT
-						}
+						OWNER = { is_subject_of = ROOT }
+						is_owned_by = ROOT
 					}
 				}
-				SLO = {
+				76 = {
 					OR = {
-						AND = {
-							is_subject_of = ROOT
-							has_war = no
-						}
-						all_core_state = {
-							is_owned_and_controlled_by = ROOT
-						}
+						OWNER = { is_subject_of = ROOT }
+						is_owned_by = ROOT
 					}
 				}
-				OR = {
-					ROM = {
-						is_subject_of = ROOT
-						has_war = no
-						owns_state = 151
-						owns_state = 909
-						owns_state = 910
-					}
-					AND = {
-						owns_state = 151
-						owns_state = 909
-						owns_state = 910
-					}
-				}
-				CZE = {
+				75 = {
 					OR = {
-						AND = {
-							is_subject_of = ROOT
-							has_war = no
-						}
-						all_core_state = {
-							is_owned_and_controlled_by = ROOT
-						}
+						OWNER = { is_subject_of = ROOT }
+						is_owned_by = ROOT
 					}
 				}
-				OR = {
-					POL = {
-						is_subject_of = ROOT
-						has_war = no
-						owns_state = 112
-						owns_state = 628
-						owns_state = 1098
-					}
-					AND = {
-						owns_state = 112
-						owns_state = 628
-						owns_state = 1098
+				286 = {
+					OR = {
+						OWNER = { is_subject_of = ROOT }
+						is_owned_by = ROOT
 					}
 				}
-				OR = {
-					UKR = {
-						is_subject_of = ROOT
-						has_war = no
-						owns_state = 700
-						owns_state = 701
+				285 = {
+					OR = {
+						OWNER = { is_subject_of = ROOT }
+						is_owned_by = ROOT
 					}
-					AND = {
-						owns_state = 700
-						owns_state = 701
+				}
+				78 = {
+					OR = {
+						OWNER = { is_subject_of = ROOT }
+						is_owned_by = ROOT
+					}
+				}
+				1061 = {
+					OR = {
+						OWNER = { is_subject_of = ROOT }
+						is_owned_by = ROOT
+					}
+				}
+				126 = {
+					OR = {
+						OWNER = { is_subject_of = ROOT }
+						is_owned_by = ROOT
+					}
+				}
+				127 = {
+					OR = {
+						OWNER = { is_subject_of = ROOT }
+						is_owned_by = ROOT
+					}
+				}
+				119 = {
+					OR = {
+						OWNER = { is_subject_of = ROOT }
+						is_owned_by = ROOT
+					}
+				}
+				120 = {
+					OR = {
+						OWNER = { is_subject_of = ROOT }
+						is_owned_by = ROOT
+					}
+				}
+				151 = {
+					OR = {
+						OWNER = { is_subject_of = ROOT }
+						is_owned_by = ROOT
+					}
+				}
+				909 = {
+					OR = {
+						OWNER = { is_subject_of = ROOT }
+						is_owned_by = ROOT
+					}
+				}
+				910 = {
+					OR = {
+						OWNER = { is_subject_of = ROOT }
+						is_owned_by = ROOT
+					}
+				}
+				628 = {
+					OR = {
+						OWNER = { is_subject_of = ROOT }
+						is_owned_by = ROOT
+					}
+				}
+				628 = {
+					OR = {
+						OWNER = { is_subject_of = ROOT }
+						is_owned_by = ROOT
+					}
+				}
+				1098 = {
+					OR = {
+						OWNER = { is_subject_of = ROOT }
+						is_owned_by = ROOT
+					}
+				}
+				700 = {
+					OR = {
+						OWNER = { is_subject_of = ROOT }
+						is_owned_by = ROOT
+					}
+				}
+				701 = {
+					OR = {
+						OWNER = { is_subject_of = ROOT }
+						is_owned_by = ROOT
+					}
+				}
+				124 = {
+					OR = {
+						OWNER = { is_subject_of = ROOT }
+						is_owned_by = ROOT
+					}
+				}
+				125 = {
+					OR = {
+						OWNER = { is_subject_of = ROOT }
+						is_owned_by = ROOT
+					}
+				}
+				1017 = {
+					OR = {
+						OWNER = { is_subject_of = ROOT }
+						is_owned_by = ROOT
+					}
+				}
+				117 = {
+					OR = {
+						OWNER = { is_subject_of = ROOT }
+						is_owned_by = ROOT
+					}
+				}
+				118 = {
+					OR = {
+						OWNER = { is_subject_of = ROOT }
+						is_owned_by = ROOT
+					}
+				}
+				1018 = {
+					OR = {
+						OWNER = { is_subject_of = ROOT }
+						is_owned_by = ROOT
+					}
+				}
+				1051 = {
+					OR = {
+						OWNER = { is_subject_of = ROOT }
+						is_owned_by = ROOT
+					}
+				}
+				1054 = {
+					OR = {
+						OWNER = { is_subject_of = ROOT }
+						is_owned_by = ROOT
+					}
+				}
+				1053 = {
+					OR = {
+						OWNER = { is_subject_of = ROOT }
+						is_owned_by = ROOT
+					}
+				}
+				1052 = {
+					OR = {
+						OWNER = { is_subject_of = ROOT }
+						is_owned_by = ROOT
+					}
+				}
+				128 = {
+					OR = {
+						OWNER = { is_subject_of = ROOT }
+						is_owned_by = ROOT
+					}
+				}
+				129 = {
+					OR = {
+						OWNER = { is_subject_of = ROOT }
+						is_owned_by = ROOT
 					}
 				}
 			}
@@ -8280,7 +8191,7 @@ form_AUSHUN_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 500
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = AUS } }
 		visible = {
 			has_country_flag = is_AUSHUN
@@ -8317,7 +8228,7 @@ form_AUSHUN_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 500
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = HUN } }
 		visible = {
 			has_country_flag = is_AUSHUN
@@ -8355,7 +8266,7 @@ form_AUSHUN_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 350
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = SLV } }
 		visible = {
 			has_country_flag = is_AUSHUN
@@ -8391,7 +8302,7 @@ form_AUSHUN_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 150
 		days_remove = 180
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = ITA } }
 		visible = {
 			has_country_flag = is_AUSHUN
@@ -8419,15 +8330,13 @@ form_AUSHUN_category = {
 						}
 					}
 				}
-				AND = {
-					285 = {
-						compliance > 50
-						resistance < 30
-					}
-					1061 = {
-						compliance > 50
-						resistance < 30
-					}
+				285 = {
+					compliance > 50
+					resistance < 30
+				}
+				1061 = {
+					compliance > 50
+					resistance < 30
 				}
 			}
 		}
@@ -8459,7 +8368,7 @@ form_AUSHUN_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 350
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = CRO } }
 		visible = {
 			has_country_flag = is_AUSHUN
@@ -8496,7 +8405,7 @@ form_AUSHUN_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 350
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = BOS } }
 		visible = {
 			has_country_flag = is_AUSHUN
@@ -8536,7 +8445,7 @@ form_AUSHUN_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 300
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = SLO } }
 		visible = {
 			has_country_flag = is_AUSHUN
@@ -8572,15 +8481,50 @@ form_AUSHUN_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 350
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = ROM } }
 		visible = {
 			has_country_flag = is_AUSHUN
 			NOT = { has_country_flag = integrated_AUSROM }
 		}
 		available = {
-			set_temp_variable = { tag_check = ROM.id }
-			formable_nation_check = yes
+			OR = {
+				ROM = {
+					is_subject_of = ROOT
+					has_war = no
+					owns_state = 151
+					owns_state = 909
+					owns_state = 910
+				}
+				AND = {
+					owns_state = 151
+					owns_state = 909
+					owns_state = 910
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						any_subject_country = {
+							owns_state = 151
+							owns_state = 909
+							owns_state = 910
+						}
+					}
+				}
+				151 = {
+					compliance > 50
+					resistance < 30
+				}
+				909 = {
+					compliance > 50
+					resistance < 30
+				}
+				910 = {
+					compliance > 50
+					resistance < 30
+				}
+			}
 		}
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision AUSHUN_integrate_AUSROM"
@@ -8613,7 +8557,7 @@ form_AUSHUN_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 500
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = CZE } }
 		visible = {
 			has_country_flag = is_AUSHUN
@@ -8651,7 +8595,7 @@ form_AUSHUN_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 300
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = POL } }
 		visible = {
 			has_country_flag = is_AUSHUN
@@ -8682,22 +8626,17 @@ form_AUSHUN_category = {
 						}
 					}
 				}
-				AND = {
-					112 = {
-						compliance > 50
-						resistance < 30
-					}
-
-					628 = {
-						compliance > 50
-						resistance < 30
-					}
-
-					1098 = {
-						compliance > 50
-						resistance < 30
-					}
-
+				112 = {
+					compliance > 50
+					resistance < 30
+				}
+				628 = {
+					compliance > 50
+					resistance < 30
+				}
+				1098 = {
+					compliance > 50
+					resistance < 30
 				}
 			}
 		}
@@ -8733,7 +8672,7 @@ form_AUSHUN_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 300
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = UKR } }
 		visible = {
 			has_country_flag = is_AUSHUN
@@ -8761,15 +8700,13 @@ form_AUSHUN_category = {
 						}
 					}
 				}
-				AND = {
-					700 = {
-						compliance > 50
-						resistance < 30
-					}
-					701 = {
-						compliance > 50
-						resistance < 30
-					}
+				700 = {
+					compliance > 50
+					resistance < 30
+				}
+				701 = {
+					compliance > 50
+					resistance < 30
 				}
 			}
 		}
@@ -8800,7 +8737,7 @@ form_AUSHUN_category = {
 	AUSHUN_update_flag = {
 		icon = GFX_decision_generic_form_nation
 		cost = 0
-		ai_will_do = { factor = 10000 }
+		ai_will_do = { base = 10000 }
 		visible = {
 			has_country_flag = is_AUSHUN
 			has_country_flag = integrated_AUS
@@ -8815,43 +8752,33 @@ form_AUSHUN_category = {
 			has_country_flag = integrated_AUSPOL
 			has_country_flag = integrated_WESTUKR
 			NOT = {
-				AND = {
-					has_global_flag = european_federation
-					has_idea = EU_member
+				has_global_flag = european_federation
+				has_idea = EU_member
+				has_cosmetic_tag = AUSHUN
+				has_elections = yes
+				has_cosmetic_tag = AUSHUN_AUTH
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 0 }
+					is_in_array = { array = ruling_party  value = 7 }
+					is_in_array = { array = ruling_party  value = 13 }
+					is_in_array = { array = ruling_party  value = 22 }
 				}
-				AND = {
-					has_cosmetic_tag = AUSHUN
-					has_elections = yes
+				has_cosmetic_tag = AUSHUN_AUTH_S
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 10 }
+					is_in_array = { array = ruling_party  value = 23 }
+					is_in_array = { array = ruling_party  value = 4 }
+					is_in_array = { array = ruling_party  value = 19 }
 				}
-				AND = {
-					has_cosmetic_tag = AUSHUN_AUTH
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 0 }
-						is_in_array = { array = ruling_party  value = 7 }
-						is_in_array = { array = ruling_party  value = 13 }
-						is_in_array = { array = ruling_party  value = 22 }
-					}
-				}
-				AND = {
-					has_cosmetic_tag = AUSHUN_AUTH_S
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 10 }
-						is_in_array = { array = ruling_party  value = 23 }
-						is_in_array = { array = ruling_party  value = 4 }
-						is_in_array = { array = ruling_party  value = 19 }
-					}
-				}
-				AND = {
-					has_cosmetic_tag = AUSHUN_AUTH_SS
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 21 }
-						is_in_array = { array = ruling_party  value = 8 }
-						is_in_array = { array = ruling_party  value = 9 }
-						is_in_array = { array = ruling_party  value = 11 }
-					}
+				has_cosmetic_tag = AUSHUN_AUTH_SS
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 21 }
+					is_in_array = { array = ruling_party  value = 8 }
+					is_in_array = { array = ruling_party  value = 9 }
+					is_in_array = { array = ruling_party  value = 11 }
 				}
 			}
 		}
@@ -8911,10 +8838,10 @@ form_PBL_category = {
 	# Start integrate
 	PBL_integrate_start = {
 		icon = GFX_decision_generic_form_nation
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		highlight_states = {
 			highlight_states_trigger = {
-				OR ={
+				OR = {
 					is_core_of = PRU
 					is_core_of = BOL
 				}
@@ -9000,7 +8927,7 @@ form_PBL_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 500
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = PRU } }
 		visible = {
 			has_country_flag = is_PBL
@@ -9039,7 +8966,7 @@ form_PBL_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 500
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = BOL } }
 		visible = {
 			has_country_flag = is_PBL
@@ -9076,7 +9003,7 @@ form_PBL_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 300
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = PAR } }
 		visible = {
 			has_country_flag = is_PBL
@@ -9130,7 +9057,7 @@ form_PBL_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 300
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = BRA } }
 		visible = {
 			has_country_flag = is_PBL
@@ -9184,7 +9111,7 @@ form_PBL_category = {
 		icon = GFX_decision_generic_form_nation
 		cost = 300
 		days_remove = 365
-		ai_will_do = { factor = 10 }
+		ai_will_do = { base = 10 }
 		allowed = { NOT = { tag = CHL } }
 		visible = {
 			has_country_flag = is_PBL
@@ -9249,7 +9176,7 @@ form_PBL_category = {
 	PBL_update_flag = {
 		icon = GFX_decision_generic_form_nation
 		cost = 0
-		ai_will_do = { factor = 10000 }
+		ai_will_do = { base = 10000 }
 		visible = {
 			has_country_flag = is_PBL
 			has_country_flag = integrated_PRU
@@ -9258,43 +9185,33 @@ form_PBL_category = {
 			has_country_flag = integrated_WESTBRA
 			has_country_flag = integrated_NORTHCHL
 			NOT = {
-				AND = {
-					has_global_flag = european_federation
-					has_idea = EU_member
+				has_global_flag = european_federation
+				has_idea = EU_member
+				has_cosmetic_tag = PBL
+				has_elections = yes
+				has_cosmetic_tag = PBL_AUTH
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 0 }
+					is_in_array = { array = ruling_party  value = 7 }
+					is_in_array = { array = ruling_party  value = 13 }
+					is_in_array = { array = ruling_party  value = 22 }
 				}
-				AND = {
-					has_cosmetic_tag = PBL
-					has_elections = yes
+				has_cosmetic_tag = PBL_AUTH_S
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 10 }
+					is_in_array = { array = ruling_party  value = 23 }
+					is_in_array = { array = ruling_party  value = 4 }
+					is_in_array = { array = ruling_party  value = 19 }
 				}
-				AND = {
-					has_cosmetic_tag = PBL_AUTH
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 0 }
-						is_in_array = { array = ruling_party  value = 7 }
-						is_in_array = { array = ruling_party  value = 13 }
-						is_in_array = { array = ruling_party  value = 22 }
-					}
-				}
-				AND = {
-					has_cosmetic_tag = PBL_AUTH_S
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 10 }
-						is_in_array = { array = ruling_party  value = 23 }
-						is_in_array = { array = ruling_party  value = 4 }
-						is_in_array = { array = ruling_party  value = 19 }
-					}
-				}
-				AND = {
-					has_cosmetic_tag = PBL_AUTH_SS
-					has_elections = no
-					OR = {
-						is_in_array = { array = ruling_party  value = 21 }
-						is_in_array = { array = ruling_party  value = 8 }
-						is_in_array = { array = ruling_party  value = 9 }
-						is_in_array = { array = ruling_party  value = 11 }
-					}
+				has_cosmetic_tag = PBL_AUTH_SS
+				has_elections = no
+				OR = {
+					is_in_array = { array = ruling_party  value = 21 }
+					is_in_array = { array = ruling_party  value = 8 }
+					is_in_array = { array = ruling_party  value = 9 }
+					is_in_array = { array = ruling_party  value = 11 }
 				}
 			}
 		}
@@ -9344,6 +9261,212 @@ form_PBL_category = {
 				}
 				set_cosmetic_tag = PBL_AUTH_SS
 			}
+		}
+	}
+}
+
+#Union of African States
+form_UAS_category = {
+	### Integrate ###
+	# Start integrate
+	UAS_integrate_start = {
+		icon = GFX_decision_generic_form_nation
+		ai_will_do = { base = 10 }
+		visible = {
+			NOT = { has_country_flag = is_UAS }
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 345 #Volta
+				state = 346 #Coastal Ghana
+				state = 347 #Ashanti
+				state = 348 #Upper Ghana
+				state = 359 #Haute-Guinee
+				state = 360 #Guinee-Maritime
+				state = 187 #Malian Sahara
+				state = 366 #Tombouctou
+				state = 367 #Sikasso
+				state = 368 #Koulikoro
+				state = 1163 #Kidal
+				state = 1164 #Gao
+				state = 1165 #Menaka
+				state = 1166 #Kayes
+				state = 1167 #Ansongo
+			}
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = UAS_integrate_trigger_tt
+				OR = {
+					GAH = {
+						is_subject_of = ROOT
+						has_war = no
+					}
+					is_ghana_states_owned = yes
+				}
+				OR = {
+					GUI = {
+						is_subject_of = ROOT
+						has_war = no
+					}
+					is_guinea_states_owned = yes
+				}
+				OR = {
+					MAL = {
+						is_subject_of = ROOT
+						has_war = no
+					}
+					is_malian_states_owned = yes
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision UAS_integrate_start"
+			if = {
+				limit = { NOT = { has_country_flag = is_UAS } }
+				set_country_flag = is_UAS
+				set_global_flag = UAS_exists
+				clr_country_flag = dynamic_flag
+				clr_country_flag = dynamic_rebel_flag
+			}
+			set_country_flag = integrated_@ROOT
+			custom_effect_tooltip = UAS_start_integrate_tt
+			custom_effect_tooltip = general_integrate_tt
+			hidden_effect = { set_cosmetic_tag = UAS }
+		}
+	}
+	#GAH
+	UAS_integrate_GAH = {
+		icon = GFX_decision_generic_form_nation
+		cost = 200
+		days_remove = 365
+		ai_will_do = { base = 10 }
+		allowed = { NOT = { tag = GAH } }
+		visible = {
+			has_country_flag = is_UAS
+			NOT = { has_country_flag = integrated_GAH }
+		}
+		available = {
+			set_temp_variable = { tag_check = GAH.id }
+			formable_nation_check = yes
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision UAS_integrate_GAH"
+			every_state = {
+				limit = { is_ghana_states = yes }
+				add_core_of = ROOT
+			}
+			if = {
+				limit = { country_exists = GAH }
+				annex_country = {
+					target = GAH
+					transfer_troops = yes
+				}
+				GAH = {
+					every_unit_leader = {
+						set_nationality = ROOT
+					}
+				}
+			}
+			clr_country_flag = dynamic_flag
+			clr_country_flag = dynamic_rebel_flag
+			set_country_flag = integrated_GAH
+		}
+	}
+	#GUI
+	UAS_integrate_GUI = {
+		icon = GFX_decision_generic_form_nation
+		cost = 200
+		days_remove = 365
+		ai_will_do = { base = 10 }
+		allowed = { NOT = { tag = GUI } }
+		visible = {
+			has_country_flag = is_UAS
+			NOT = { has_country_flag = integrated_GUI }
+		}
+		available = {
+			set_temp_variable = { tag_check = GUI.id }
+			formable_nation_check = yes
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision UAS_integrate_GUI"
+			every_state = {
+				limit = { is_guinea_states = yes }
+				add_core_of = ROOT
+			}
+			if = {
+				limit = { country_exists = GUI }
+				annex_country = {
+					target = GUI
+					transfer_troops = yes
+				}
+				GUI = {
+					every_unit_leader = {
+						set_nationality = ROOT
+					}
+				}
+			}
+			clr_country_flag = dynamic_flag
+			clr_country_flag = dynamic_rebel_flag
+			set_country_flag = integrated_GUI
+		}
+	}
+	#MAL
+	UAS_integrate_MAL = {
+		icon = GFX_decision_generic_form_nation
+		cost = 300
+		days_remove = 365
+		ai_will_do = { base = 10 }
+		allowed = { NOT = { tag = MAL } }
+		visible = {
+			has_country_flag = is_UAS
+			NOT = { has_country_flag = integrated_MAL }
+		}
+		available = {
+			set_temp_variable = { tag_check = MAL.id }
+			formable_nation_check = yes
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision UAS_integrate_MAL"
+			every_state = {
+				limit = { is_malian_states = yes }
+				add_core_of = ROOT
+			}
+			if = {
+				limit = { country_exists = MAL }
+				annex_country = {
+					target = MAL
+					transfer_troops = yes
+				}
+				MAL = {
+					every_unit_leader = {
+						set_nationality = ROOT
+					}
+				}
+			}
+			clr_country_flag = dynamic_flag
+			clr_country_flag = dynamic_rebel_flag
+			set_country_flag = integrated_MAL
+		}
+	}
+	# Update flag
+	UAS_update_flag = {
+		icon = GFX_decision_generic_form_nation
+		cost = 0
+		ai_will_do = { base = 10000 }
+		visible = {
+			has_country_flag = is_UAS
+			has_country_flag = integrated_GAH
+			has_country_flag = integrated_GUI
+			has_country_flag = integrated_MAL
+			NOT = {
+				has_cosmetic_tag = UAS
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision UAS_update_flag"
+			set_cosmetic_tag = UAS
 		}
 	}
 }
