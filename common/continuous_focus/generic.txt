@@ -168,7 +168,7 @@ continuous_focus_palette = {
 			modifier = {
 				add = -5
 				has_country_flag = overlord_subsidies
-				check_variable = { interest_rate > 7.99 }
+				has_at_least_eight_interest = yes
 			}
 			modifier = {
 				factor = 2.0
@@ -202,7 +202,7 @@ continuous_focus_palette = {
 			modifier = {
 				factor = 0.50
 				OVERLORD = {
-					is_same_government_THIS_ROOT = yes
+					is_same_government = yes
 				}
 			}
 			modifier = {
@@ -218,14 +218,14 @@ continuous_focus_palette = {
 			}
 			modifier = {
 				set_temp_variable = { domestic_influence_amount_tmp = domestic_influence_amount }
-				divide_temp_variable = { domestic_influence_amount_tmp = 10 }
+				multiply_temp_variable = { domestic_influence_amount_tmp = 0.1 }
 				factor = domestic_influence_amount_tmp
 			}
 			modifier = {
 				factor = 0
 				OR = {
 					is_autonomy_that_cannot_change_level = yes
-					has_global_flag = GAME_RULE_rule_disable_using_freedom_cont_focus
+					has_game_rule = { rule = rule_disable_AI_using_freedom_cont_focus option = no }
 					OVERLORD = {
 						ROOT = {
 							has_opinion = {
@@ -432,8 +432,11 @@ continuous_focus_palette = {
 			has_intelligence_agency = yes
 		}
 		modifier = {
-			tax_gain_multiplier_modifier = -0.10
-			operative_slot = 2
+			tax_gain_multiplier_modifier = -0.075
+			foreign_influence_modifier = 0.05
+			foreign_influence_monthly_domestic_independence_gain_factor = 0.04
+			intel_network_gain_factor = 0.05
+			operative_slot = 1
 		}
 
 		available_if_capitulated = yes
@@ -543,7 +546,7 @@ continuous_focus_palette = {
 			industrial_capacity_dockyard = 0.5
 			experience_gain_army = 0.07
 			experience_gain_navy = 0.07
-			experience_gain_air  = 0.07
+			experience_gain_air = 0.07
 
 		}
 

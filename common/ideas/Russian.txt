@@ -502,7 +502,6 @@ ideas = {
 		}
 		SOV_jirik_new_romanov_monarchy_idea = {
 
-			allowed = { always = no }
 			picture = sov_empire_policy_idea
 			modifier = {
 				nationalist_drift = 0.04
@@ -512,7 +511,6 @@ ideas = {
 		}
 		SOV_jirik_new_romanov_monarchy_idea1 = {
 
-			allowed = { always = no }
 			picture = sov_empire_policy_idea
 			name = SOV_jirik_new_romanov_monarchy_idea
 			modifier = {
@@ -523,7 +521,6 @@ ideas = {
 		}
 		SOV_jirik_new_conts_monarchy_idea = {
 
-			allowed = { always = no }
 			picture = sov_empire_policy_idea
 			modifier = {
 				nationalist_drift = 0.05
@@ -537,7 +534,6 @@ ideas = {
 		}
 		SOV_jirik_new_conts_monarchy_idea1 = {
 
-			allowed = { always = no }
 			picture = sov_empire_policy_idea
 			name = SOV_jirik_new_conts_monarchy_idea
 			modifier = {
@@ -842,7 +838,7 @@ ideas = {
 		SOV_military_exercises_anti_turkey_idea = {
 
 
-			removal_cost = -1
+
 			picture = russian_sphere
 			modifier = {
 				army_attack_factor = 0.04
@@ -855,7 +851,7 @@ ideas = {
 		SOV_military_exercises_anti_turkey1_idea = {
 
 
-			removal_cost = -1
+
 			picture = russian_sphere
 			modifier = {
 				army_attack_factor = 0.04
@@ -867,9 +863,7 @@ ideas = {
 		}
 		############LIMONOV IDEAS
 		SOV_nazbol_irgc_idea = {
-			allowed_civil_war = {
-				always = yes
-			}
+			allowed_civil_war = { always = yes }
 
 			cancel = {
 				NOT = {
@@ -896,9 +890,7 @@ ideas = {
 			}
 			cancel = {
 				NOT = {
-					OR = {
-						has_government = nationalist
-					}
+					has_government = nationalist
 				}
 			}
 
@@ -969,9 +961,7 @@ ideas = {
 			allowed = {
 				tag = SOV
 			}
-			allowed_civil_war = {
-				always = yes
-			}
+			allowed_civil_war = { always = yes }
 			cancel = {
 				NOT = {
 					is_ally_with = SOV
@@ -1015,7 +1005,6 @@ ideas = {
 		#Z Propaganda
 		SOV_z_propaganda = {
 
-			allowed = { always = no }
 			picture = sov_z_propaganda
 			cancel = {
 				OR = {
@@ -1036,7 +1025,6 @@ ideas = {
 		#Z Propaganda
 		SOV_z_propaganda1 = {
 
-			allowed = { always = no }
 			picture = sov_z_propaganda
 			cancel = {
 				OR = {
@@ -1057,7 +1045,6 @@ ideas = {
 		#Anti gays
 		SOV_anti_lgbtqa_stance_idea = {
 
-			allowed = { always = no }
 			picture = anti_lgbt
 
 			modifier = {
@@ -1168,7 +1155,7 @@ ideas = {
 		SOV_military_exercises_allied_resolve_idea = {
 
 
-			removal_cost = -1
+
 			picture = sov_blr_exercises
 			modifier = {
 				experience_gain_army_factor = 0.25
@@ -1240,9 +1227,9 @@ ideas = {
 			}
 			on_remove = {
 				increase_economic_growth = yes
-				random_list = {
-					50 = { }
-					50 = { increase_economic_growth = yes }
+				random = {
+					chance = 50
+					increase_economic_growth = yes
 				}
 			}
 			modifier = {
@@ -1253,6 +1240,14 @@ ideas = {
 		SOV_young_guard_idea = {
 			allowed_civil_war = { always = yes }
 			picture = sov_young_guard_idea
+			cancel = {
+				NOT = {
+					OR = {
+						emerging_reactionaries_are_in_power = yes
+						neutrality_neutral_oligarch_are_in_power = yes
+					}
+				}
+			}
 			modifier = {
 				monthly_population = 0.01
 				drift_defence_factor = 0.03
@@ -1950,7 +1945,12 @@ ideas = {
 			}
 
 			modifier = {
-				local_resources_factor = -0.05
+				local_resources_oil_factor = -0.05
+local_resources_aluminium_factor = -0.05
+local_resources_rubber_factor = -0.05
+local_resources_tungsten_factor = -0.05
+local_resources_steel_factor = -0.05
+local_resources_chromium_factor = -0.05
 				consumer_goods_factor = 0.03
 			}
 		}
@@ -2208,7 +2208,6 @@ ideas = {
 		}
 		SOV_eu_state = {
 
-			allowed = { always = no }
 			picture = EU_Roundel
 			cancel = {
 				NOT = {
@@ -2253,42 +2252,9 @@ ideas = {
 			}
 		}
 		############WARSAW PACT
-		#Warsaw Pact Idea
-		SOV_warsaw_pact_idea = {
-
-			allowed_civil_war = {
-				always = no
-			}
-			cancel = {
-				AND = {
-				NOT = { has_autonomy_state = autonomy_warsaw }
-				SOV = {
-					NOT = {
-						emerging_communist_state_are_in_power = yes
-						emerging_anarchist_communism_are_in_power = yes
-						emerging_reactionaries_are_in_power = yes
-					}
-				}
-				}
-			}
-			picture = warsaw_pact_idea
-			modifier = {
-				custom_modifier_tooltip = faction_warsaw_pact_member_tt
-				send_volunteer_size = 5
-				send_volunteer_divisions_required = -0.25
-				send_volunteers_tension = -0.15
-				air_volunteer_cap = 50
-				coordination_bonus = 0.08
-				army_org_factor = 0.10
-				communism_drift = 0.02
-			}
-		}
 		#Warsaw Pact Exercises
 		SOV_warsaw_pact_joint_exercises_idea = {
 
-			allowed_civil_war = {
-				always = no
-			}
 			picture = soviet_advisors
 			modifier = {
 				political_power_gain = 0.15
@@ -2302,9 +2268,6 @@ ideas = {
 		#Warsaw Pact Exercises South
 		SOV_warsaw_pact_exercises_south_idea1 = {
 
-			allowed_civil_war = {
-				always = no
-			}
 			picture = strategic_services
 			modifier = {
 				political_power_gain = 0.1
@@ -2318,9 +2281,6 @@ ideas = {
 		#Warsaw Pact Exercises North
 		SOV_warsaw_pact_exercises_north_idea = {
 
-			allowed_civil_war = {
-				always = no
-			}
 			picture = wargaming
 			modifier = {
 				political_power_gain = 0.13
@@ -2335,7 +2295,6 @@ ideas = {
 		SOV_Combating_illegal_migration_idea = {
 
 			allowed = { original_tag = SOV }
-			allowed_civil_war = { always = no }
 			picture = migrant_crisis_europe
 			modifier = {
 				migration_rate_value_factor = -0.05
@@ -2376,7 +2335,6 @@ ideas = {
 		SOV_protests_by_scientists_idea = {
 
 			allowed = { original_tag = SOV }
-			allowed_civil_war = { always = no }
 			picture = brain_negative
 			modifier = {
 				research_speed_factor = -0.05
@@ -2386,7 +2344,6 @@ ideas = {
 
 			picture = corrupt_mil
 			allowed = { original_tag = SOV }
-			allowed_civil_war = { always = no }
 
 			modifier = {
 				army_defence_factor = -0.05
@@ -2622,7 +2579,6 @@ ideas = {
 
 		SOV_democracy_in_kaz = {
 
-			allowed = { always = no }
 			picture = sov_democracy_kaz
 			targeted_modifier = {
 				tag = KAZ
@@ -2633,7 +2589,6 @@ ideas = {
 		}
 		SOV_democracy_in_kyr = {
 
-			allowed = { always = no }
 			picture = sov_democracy_kyr
 			targeted_modifier = {
 				tag = KYR
@@ -2644,7 +2599,6 @@ ideas = {
 		}
 		SOV_democracy_in_uzb = {
 
-			allowed = { always = no }
 			picture = sov_democracy_uzb
 			targeted_modifier = {
 				tag = UZB
@@ -2655,7 +2609,6 @@ ideas = {
 		}
 		SOV_democracy_in_trk = {
 
-			allowed = { always = no }
 			picture = sov_democracy_trk
 			targeted_modifier = {
 				tag = TRK
@@ -2666,7 +2619,6 @@ ideas = {
 		}
 		SOV_democracy_in_taj = {
 
-			allowed = { always = no }
 			picture = sov_democracy_taj
 			targeted_modifier = {
 				tag = TAJ
@@ -2963,7 +2915,6 @@ ideas = {
 		#Kasyanov - Happy Farmers
 		SOV_kasyanov_happy_farmers_idea = {
 
-			allowed = { always = no }
 			picture = sustainable_development
 			cancel = { NOT = { western_conservatism_are_in_power = yes } }
 			modifier = {
@@ -2975,7 +2926,6 @@ ideas = {
 		############NATIONAL BOLSHEVIKS IDEAS############
 		#Anti-west
 		SOV_anti_west_idea = {
-			allowed = { always = no }
 			picture = blr_nazbol_antiwest
 			cancel = {
 				NOT = {
@@ -3028,7 +2978,6 @@ ideas = {
 		}
 		#Free Weapon
 		SOV_free_weapon = {
-			allowed = { always = no }
 			picture = army_corruptions
 			cancel = {
 				OR = {
@@ -3147,7 +3096,7 @@ ideas = {
 				corporate_tax_income_multiplier_modifier = 0.01
 			}
 			equipment_bonus = {
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					instant = yes
 					reliability = 0.05
 					build_cost_ic = -0.1
@@ -3184,7 +3133,7 @@ ideas = {
 				corporate_tax_income_multiplier_modifier = 0.03
 			}
 			equipment_bonus = {
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					instant = yes
 					reliability = 0.07
 					build_cost_ic = -0.1
@@ -3221,7 +3170,7 @@ ideas = {
 				corporate_tax_income_multiplier_modifier = 0.04
 			}
 			equipment_bonus = {
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					instant = yes
 					reliability = 0.09
 					build_cost_ic = -0.1
@@ -3258,7 +3207,7 @@ ideas = {
 				corporate_tax_income_multiplier_modifier = 0.06
 			}
 			equipment_bonus = {
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					instant = yes
 					reliability = 0.09
 					build_cost_ic = -0.1
@@ -3295,7 +3244,7 @@ ideas = {
 				corporate_tax_income_multiplier_modifier = 0.08
 			}
 			equipment_bonus = {
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					instant = yes
 					reliability = 0.10
 					build_cost_ic = -0.1
@@ -3332,7 +3281,7 @@ ideas = {
 				corporate_tax_income_multiplier_modifier = 0.09
 			}
 			equipment_bonus = {
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					instant = yes
 					reliability = 0.12
 					build_cost_ic = -0.1
@@ -3369,7 +3318,7 @@ ideas = {
 				corporate_tax_income_multiplier_modifier = 0.11
 			}
 			equipment_bonus = {
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					instant = yes
 					reliability = 0.12
 					build_cost_ic = -0.1
@@ -3406,7 +3355,7 @@ ideas = {
 				corporate_tax_income_multiplier_modifier = 0.13
 			}
 			equipment_bonus = {
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					instant = yes
 					reliability = 0.14
 					build_cost_ic = -0.1
@@ -3433,7 +3382,7 @@ ideas = {
 				corporate_tax_income_multiplier_modifier = 0.01
 			}
 			equipment_bonus = {
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					instant = yes
 					reliability = 0.03
 					build_cost_ic = -0.1
@@ -3451,7 +3400,7 @@ ideas = {
 				corporate_tax_income_multiplier_modifier = 0.02
 			}
 			equipment_bonus = {
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					instant = yes
 					reliability = 0.04
 					build_cost_ic = -0.1
@@ -3469,7 +3418,7 @@ ideas = {
 				corporate_tax_income_multiplier_modifier = 0.04
 			}
 			equipment_bonus = {
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					instant = yes
 					reliability = 0.06
 					build_cost_ic = -0.1
@@ -3487,7 +3436,7 @@ ideas = {
 				corporate_tax_income_multiplier_modifier = 0.05
 			}
 			equipment_bonus = {
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					instant = yes
 					reliability = 0.08
 					build_cost_ic = -0.1
@@ -3505,7 +3454,7 @@ ideas = {
 				corporate_tax_income_multiplier_modifier = 0.07
 			}
 			equipment_bonus = {
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					instant = yes
 					reliability = 0.10
 					build_cost_ic = -0.1
@@ -3523,7 +3472,7 @@ ideas = {
 				corporate_tax_income_multiplier_modifier = 0.09
 			}
 			equipment_bonus = {
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					instant = yes
 					reliability = 0.12
 					build_cost_ic = -0.1
@@ -3541,7 +3490,7 @@ ideas = {
 				corporate_tax_income_multiplier_modifier = 0.11
 			}
 			equipment_bonus = {
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					instant = yes
 					reliability = 0.15
 					build_cost_ic = -0.1
@@ -3559,7 +3508,7 @@ ideas = {
 				corporate_tax_income_multiplier_modifier = 0.11
 			}
 			equipment_bonus = {
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					instant = yes
 					reliability = 0.15
 					build_cost_ic = -0.1
@@ -3580,7 +3529,7 @@ ideas = {
 				has_war_with = CHI
 			}
 			equipment_bonus = {
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					instant = yes
 					reliability = 0.05
 					build_cost_ic = -0.1
@@ -3602,7 +3551,7 @@ ideas = {
 				corporate_tax_income_multiplier_modifier = 0.03
 			}
 			equipment_bonus = {
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					instant = yes
 					reliability = 0.07
 					build_cost_ic = -0.1
@@ -3624,7 +3573,7 @@ ideas = {
 				corporate_tax_income_multiplier_modifier = 0.05
 			}
 			equipment_bonus = {
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					instant = yes
 					reliability = 0.08
 					build_cost_ic = -0.1
@@ -3632,7 +3581,6 @@ ideas = {
 			}
 		}
 		SOV_nord_stream_idea = {
-			allowed = { always = yes }
 			picture = sov_gas_streams_idea
 			cancel = {
 				OR = {
@@ -3652,7 +3600,6 @@ ideas = {
 			}
 		}
 		SOV_nord_stream2_idea = {
-			allowed = { always = yes }
 			picture = sov_gas_streams_idea
 			cancel = {
 				OR = {
@@ -3672,7 +3619,6 @@ ideas = {
 			}
 		}
 		SOV_blue_stream_idea = {
-			allowed = { always = yes }
 			picture = sov_gas_streams_idea
 			cancel = {
 				OR = {
@@ -3692,7 +3638,6 @@ ideas = {
 			}
 		}
 		SOV_turkey_stream_idea = {
-			allowed = { always = yes }
 			picture = sov_gas_streams_idea
 			cancel = {
 				OR = {
@@ -3731,7 +3676,6 @@ ideas = {
 			}
 		}
 		SOV_baikonur_sov_idea = {
-			allowed = { always = yes }
 			picture = sov_baikonur_idea
 			modifier = {
 				foreign_influence_defense_modifier = -0.05
@@ -3752,7 +3696,6 @@ ideas = {
 		}
 		SOV_baikonur_kaz_idea = {
 
-			allowed = { always = yes }
 			picture = sov_baikonur_idea
 			modifier = {
 				custom_modifier_tooltip = SOV_baikonur_gays_tt
@@ -3783,7 +3726,7 @@ ideas = {
 			picture = sov_kalashnikov_idea
 			allowed_civil_war = { always = yes }
 			equipment_bonus = {
-				Inf_equipment = {
+				infantry_weapons_type = {
 					build_cost_ic = -0.07
 					instant = yes
 				}
@@ -3878,7 +3821,7 @@ ideas = {
 				naval_bomber = {
 					build_cost_ic = -0.07
 				}
-				Inf_equipment = {
+				infantry_weapons_type = {
 					build_cost_ic = -0.07
 				}
 			}
@@ -3922,7 +3865,7 @@ ideas = {
 				naval_bomber = {
 					build_cost_ic = -0.07
 				}
-				Inf_equipment = {
+				infantry_weapons_type = {
 					build_cost_ic = -0.10
 					instant = yes
 				}
@@ -3967,7 +3910,7 @@ ideas = {
 				naval_bomber = {
 					build_cost_ic = -0.07
 				}
-				Inf_equipment = {
+				infantry_weapons_type = {
 					build_cost_ic = -0.15
 					instant = yes
 				}
@@ -4012,7 +3955,7 @@ ideas = {
 				naval_bomber = {
 					build_cost_ic = -0.07
 				}
-				Inf_equipment = {
+				infantry_weapons_type = {
 					build_cost_ic = -0.20
 					instant = yes
 				}
@@ -4057,7 +4000,7 @@ ideas = {
 				naval_bomber = {
 					build_cost_ic = -0.09
 				}
-				Inf_equipment = {
+				infantry_weapons_type = {
 					build_cost_ic = -0.23
 					instant = yes
 				}
@@ -4225,7 +4168,7 @@ ideas = {
 			picture = sov_russian_cosmodes_idea
 			allowed_civil_war = { always = yes }
 			equipment_bonus = {
-				transport_plane_equipment = {
+				large_plane_air_transport_airframe = {
 					air_range = 3
 					build_cost_ic = 3
 					instant = yes
@@ -4234,42 +4177,36 @@ ideas = {
 		}
 		#MAIN NATIONAL SPIRITS
 		SOV_russian_government_idea = {
-			allowed = { always = yes }
 			picture = sov_government_idea
 			modifier = {
 				custom_modifier_tooltip = SOV_russian_government_idea_tt
 			}
 		}
 		SOV_russian_kosmos_idea = {
-			allowed = { always = yes }
 			picture = sov_glonass_idea
 			modifier = {
 				custom_modifier_tooltip = SOV_russian_kosmos_idea_tt
 			}
 		}
 		SOV_russian_economy_idea = {
-			allowed = { always = yes }
 			picture = sov_economic_all_idea
 			modifier = {
 				custom_modifier_tooltip = SOV_russian_economy_idea_tt
 			}
 		}
 		SOV_russian_army_idea = {
-			allowed = { always = yes }
 			picture = sov_all_army_idea
 			modifier = {
 				custom_modifier_tooltip = SOV_russian_army_idea_tt
 			}
 		}
 		SOV_russian_security_idea = {
-			allowed = { always = yes }
 			picture = sov_special_servises_idea
 			modifier = {
 				custom_modifier_tooltip = SOV_russian_specialservices_idea_tt
 			}
 		}
 		SOV_russian_bad_economy_idea = {
-			allowed = { always = yes }
 			picture = sov_broken_economy_idea
 			modifier = {
 				custom_modifier_tooltip = SOV_russian_badeconomy_idea_tt
@@ -4396,7 +4333,6 @@ ideas = {
 		}
 		#Baikonur Sov
 		SOV_baikonur_sov_kaz_idea = {
-			allowed = { always = yes }
 			picture = sov_baikonur_idea
 			modifier = {
 				custom_modifier_tooltip = SOV_baikonur_pays_tt
@@ -4505,21 +4441,9 @@ ideas = {
 		#Aeroflot
 		SOV_aeroflot_idea = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				corporate_tax_income_multiplier_modifier = 0.03
@@ -4529,7 +4453,6 @@ ideas = {
 		#Aeroflot
 		SOV_aeroflot_idea1 = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			name = SOV_aeroflot_idea
 			modifier = {
@@ -4540,7 +4463,6 @@ ideas = {
 		#Aeroflot
 		SOV_aeroflot_idea2 = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			name = SOV_aeroflot_idea
 			modifier = {
@@ -4571,21 +4493,9 @@ ideas = {
 		#Rostelekom
 		SOV_rostelekom_idea = {
 
-			allowed = { always = no }
 			picture = sov_new_russia_economic_idea
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				research_speed_factor = 0.01
@@ -4596,7 +4506,6 @@ ideas = {
 		#GosUslugi
 		SOV_gosuslugi_idea = {
 
-			allowed = { always = no }
 			picture = sov_new_russia_economic_idea
 
 			modifier = {
@@ -4607,21 +4516,9 @@ ideas = {
 		#Megaphone
 		SOV_megaphon_idea = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				corporate_tax_income_multiplier_modifier = 0.01
@@ -4631,21 +4528,9 @@ ideas = {
 		#MTS
 		SOV_mts_idea = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				corporate_tax_income_multiplier_modifier = 0.01
@@ -4655,7 +4540,6 @@ ideas = {
 		#MTS
 		SOV_mts_idea1 = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			name = SOV_mts_idea
 			modifier = {
@@ -4666,7 +4550,6 @@ ideas = {
 		#MTS
 		SOV_mts_idea2 = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			name = SOV_mts_idea
 			modifier = {
@@ -4677,7 +4560,6 @@ ideas = {
 		#MTS
 		SOV_mts_idea3 = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			name = SOV_mts_idea
 			modifier = {
@@ -4688,21 +4570,9 @@ ideas = {
 		#RJD
 		SOV_rjd_idea = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				army_speed_factor = 0.01
@@ -4713,7 +4583,6 @@ ideas = {
 		}
 		#Yukos
 		SOV_yukos_idea = {
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			modifier = {
 				gdp_from_resource_sector_modifier = 0.01
@@ -4728,21 +4597,9 @@ ideas = {
 		#Gazprom
 		SOV_gazprom_idea = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				gdp_from_resource_sector_modifier = 0.01
@@ -4753,7 +4610,6 @@ ideas = {
 		#Gazprom
 		SOV_gazprom1_idea = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			name = SOV_gazprom_idea
 			modifier = {
@@ -4765,7 +4621,6 @@ ideas = {
 		#Gazprom
 		SOV_gazprom2_idea = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			name = SOV_gazprom_idea
 			modifier = {
@@ -4777,7 +4632,6 @@ ideas = {
 		#Gazprom
 		SOV_gazprom3_idea = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			name = SOV_gazprom_idea
 			modifier = {
@@ -4789,21 +4643,9 @@ ideas = {
 		#Gazprom Neft
 		SOV_gazprom_neft_idea = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				gdp_from_resource_sector_modifier = 0.01
@@ -4814,21 +4656,9 @@ ideas = {
 		#Rosneft
 		SOV_rosneft_idea = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				gdp_from_resource_sector_modifier = 0.01
@@ -4838,7 +4668,6 @@ ideas = {
 		}
 		SOV_rosneft_idea1 = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			name = SOV_rosneft_idea
 			modifier = {
@@ -4849,7 +4678,6 @@ ideas = {
 		}
 		SOV_rosneft_idea2 = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			name = SOV_rosneft_idea
 			modifier = {
@@ -4860,7 +4688,6 @@ ideas = {
 		}
 		SOV_rosneft_idea3 = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			name = SOV_rosneft_idea
 			modifier = {
@@ -4872,21 +4699,9 @@ ideas = {
 		#RusAgro
 		SOV_rusagro_idea = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				agriculture_district_income_tax_modifier = 0.01
@@ -4895,7 +4710,6 @@ ideas = {
 		}
 		SOV_rusagro_idea1 = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			name = SOV_rusagro_idea
 			modifier = {
@@ -4906,21 +4720,9 @@ ideas = {
 		#Efko
 		SOV_efko_idea = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				agricolture_productivity_modifier = 0.02
@@ -4928,7 +4730,6 @@ ideas = {
 		}
 		SOV_efko_idea1 = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			name = SOV_efko_idea
 			modifier = {
@@ -4938,21 +4739,9 @@ ideas = {
 		#Miratorg
 		SOV_miratorg_idea = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				agriculture_workers_modifier = 0.02
@@ -4961,7 +4750,6 @@ ideas = {
 		}
 		SOV_miratorg_idea1 = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			name = SOV_miratorg_idea
 			modifier = {
@@ -4986,21 +4774,9 @@ ideas = {
 		#Evraz
 		SOV_evraz_idea = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				steel_export_multiplier_modifier = 0.03
@@ -5009,7 +4785,6 @@ ideas = {
 		}
 		SOV_evraz_idea1 = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			name = SOV_evraz_idea
 			modifier = {
@@ -5019,7 +4794,6 @@ ideas = {
 		}
 		SOV_michelin_idea = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			cancel = {
 				OR = {
@@ -5053,7 +4827,6 @@ ideas = {
 		}
 		SOV_pirelly_idea = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			cancel = {
 				OR = {
@@ -5087,7 +4860,6 @@ ideas = {
 		}
 		SOV_continental_idea = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			cancel = {
 				OR = {
@@ -5121,7 +4893,6 @@ ideas = {
 		}
 		SOV_nokian_idea = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			cancel = {
 				OR = {
@@ -5155,7 +4926,6 @@ ideas = {
 		}
 		SOV_yokohama_idea = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			cancel = {
 				OR = {
@@ -5189,21 +4959,9 @@ ideas = {
 		}
 		#Alrosa
 		SOV_alrosa_idea = {
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				gdp_from_resource_sector_modifier = 0.01
@@ -5213,22 +4971,10 @@ ideas = {
 		}
 		#Alrosa
 		SOV_alrosa_idea1 = {
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			name = SOV_alrosa_idea
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				gdp_from_resource_sector_modifier = 0.01
@@ -5238,22 +4984,10 @@ ideas = {
 		}
 		#Alrosa
 		SOV_alrosa_idea2 = {
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			name = SOV_alrosa_idea
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				gdp_from_resource_sector_modifier = 0.01
@@ -5263,7 +4997,6 @@ ideas = {
 		}
 		SOV_asteroids_idea = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			modifier = {
 				country_resource_steel = 5
@@ -5271,7 +5004,6 @@ ideas = {
 		}
 		SOV_asteroids_idea1 = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			name = SOV_asteroids_idea
 			modifier = {
@@ -5281,7 +5013,6 @@ ideas = {
 		}
 		SOV_asteroids_idea2 = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			name = SOV_asteroids_idea
 			modifier = {
@@ -5292,7 +5023,6 @@ ideas = {
 		}
 		SOV_asteroids_idea3 = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			name = SOV_asteroids_idea
 			modifier = {
@@ -5304,7 +5034,6 @@ ideas = {
 		}
 		SOV_asteroids_idea4 = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			name = SOV_asteroids_idea
 			modifier = {
@@ -5316,7 +5045,6 @@ ideas = {
 		}
 		SOV_asteroids_idea5 = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			name = SOV_asteroids_idea
 			modifier = {
@@ -5328,7 +5056,6 @@ ideas = {
 		}
 		SOV_asteroids_idea6 = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			name = SOV_asteroids_idea
 			modifier = {
@@ -5340,7 +5067,6 @@ ideas = {
 		}
 		SOV_asteroids_idea7 = {
 
-			allowed = { always = yes }
 			picture = sov_new_russia_economic_idea
 			name = SOV_asteroids_idea
 			modifier = {
@@ -5384,18 +5110,7 @@ ideas = {
 
 			picture = sov_new_russia_economic_idea
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				crypto_strength = 1
@@ -5407,18 +5122,7 @@ ideas = {
 
 			picture = sov_new_russia_economic_idea
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				drift_defence_factor = 0.01
@@ -5432,18 +5136,7 @@ ideas = {
 
 			picture = sov_new_russia_economic_idea
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				corporate_tax_income_multiplier_modifier = 0.01
@@ -5454,18 +5147,7 @@ ideas = {
 
 			picture = sov_new_russia_economic_idea
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				corporate_tax_income_multiplier_modifier = 0.02
@@ -5477,18 +5159,7 @@ ideas = {
 			picture = sov_new_russia_economic_idea
 			name = SOV_vtb_idea
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				corporate_tax_income_multiplier_modifier = 0.03
@@ -5500,18 +5171,7 @@ ideas = {
 			picture = sov_new_russia_economic_idea
 			name = SOV_vtb_idea
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				corporate_tax_income_multiplier_modifier = 0.04
@@ -5523,18 +5183,7 @@ ideas = {
 			picture = sov_new_russia_economic_idea
 			name = SOV_vtb_idea
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				corporate_tax_income_multiplier_modifier = 0.05
@@ -5546,18 +5195,7 @@ ideas = {
 
 			picture = sov_new_russia_economic_idea
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				corporate_tax_income_multiplier_modifier = 0.01
@@ -5569,18 +5207,7 @@ ideas = {
 			picture = sov_new_russia_economic_idea
 			name = SOV_alphabank_idea
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				corporate_tax_income_multiplier_modifier = 0.02
@@ -5593,18 +5220,7 @@ ideas = {
 
 			picture = sov_new_russia_economic_idea
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				corporate_tax_income_multiplier_modifier = 0.01
@@ -5616,18 +5232,7 @@ ideas = {
 			picture = sov_new_russia_economic_idea
 			name = SOV_sberbank_idea
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				corporate_tax_income_multiplier_modifier = 0.02
@@ -5638,18 +5243,7 @@ ideas = {
 
 			picture = sov_new_russia_economic_idea
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				research_speed_factor = 0.02
@@ -5696,7 +5290,6 @@ ideas = {
 				SOV = { country_event = sov_economic.30 }
 				log = "[GetDateText]: [THIS.GetName]: add idea SOV_turkey_stream_sov_idea"
 			}
-			allowed = { always = yes }
 			picture = sov_gas_streams_idea
 			name = SOV_turkey_stream_idea
 			modifier = {
@@ -5718,7 +5311,6 @@ ideas = {
 				SOV = { country_event = sov_economic.30 }
 				log = "[GetDateText]: [THIS.GetName]: add idea SOV_blue_stream_sov_idea"
 			}
-			allowed = { always = yes }
 			picture = sov_gas_streams_idea
 			name = SOV_blue_stream_idea
 			modifier = {
@@ -5740,7 +5332,6 @@ ideas = {
 				SOV = { country_event = sov_economic.30 }
 				log = "[GetDateText]: [THIS.GetName]: add idea SOV_nord_stream2_sov_idea"
 			}
-			allowed = { always = yes }
 			picture = sov_gas_streams_idea
 			name = SOV_nord_stream2_idea
 			modifier = {
@@ -5762,7 +5353,6 @@ ideas = {
 				SOV = { country_event = sov_economic.30 }
 				log = "[GetDateText]: [THIS.GetName]: add idea SOV_nord_stream_sov_idea"
 			}
-			allowed = { always = yes }
 			picture = sov_gas_streams_idea
 			name = SOV_nord_stream_idea
 			modifier = {
@@ -5784,7 +5374,6 @@ ideas = {
 				SOV = { country_event = sov_economic.30 }
 				log = "[GetDateText]: [THIS.GetName]: add idea SOV_korean_stream_sov_idea"
 			}
-			allowed = { always = yes }
 			picture = sov_gas_streams_idea
 			name = SOV_korean_stream_idea
 			cancel = {
@@ -5874,7 +5463,6 @@ ideas = {
 		#RAO UES
 		SOV_rao_ues = {
 
-			allowed = { always = yes }
 			picture = pmr_interrao
 			modifier = {
 				energy_use_multiplier = 0.10
@@ -5883,21 +5471,9 @@ ideas = {
 		}
 		SOV_interrao = {
 
-			allowed = { always = no }
 			picture = pmr_interrao
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				energy_use_multiplier = -0.03
@@ -5907,7 +5483,6 @@ ideas = {
 		#InterRao in Transnstria
 		PMR_inter_rao = {
 
-			allowed = { always = yes }
 			picture = pmr_interrao
 			cancel = {
 				OR = {
@@ -5929,7 +5504,6 @@ ideas = {
 		#Gazprom in Transnstria
 		PMR_gazprom_gaz = {
 
-			allowed = { always = no }
 			picture = pmr_interrao
 			cancel = {
 				OR = {
@@ -5959,10 +5533,7 @@ ideas = {
 			allowed_civil_war = { always = yes }
 			cancel = {
 				NOT = {
-					OR = {
-						SUB_state_availables = yes
-						SUB_subjects_availables = yes
-					}
+					SUB_has_russian_special_autonomy = yes
 				}
 			}
 			modifier = {
@@ -6052,18 +5623,7 @@ ideas = {
 			allowed_civil_war = { always = yes }
 			picture = sov_spaceforce_idea
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				air_training_xp_gain_factor = 0.03
@@ -6086,52 +5646,28 @@ ideas = {
 		#Russian Far Aviation Force
 		SOV_far_aviation_idea = {
 
-			allowed = { always = no }
 			picture = national_mobilization
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				send_volunteer_divisions_required = -0.15
 				send_volunteer_size = 1
-				air_volunteer_cap = 25
+				air_volunteer_cap = 20
 			}
 		}
 		#Russian Far Aviation Force
 		SOV_far_aviation_idea1 = {
 			name = SOV_far_aviation_idea
 
-			allowed = { always = no }
 			picture = national_mobilization
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				send_volunteer_divisions_required = -0.20
 				send_volunteer_size = 2
-				air_volunteer_cap = 35
+				air_volunteer_cap = 25
 			}
 		}
 		#Russian Transport Aviation Force
@@ -6140,21 +5676,10 @@ ideas = {
 			picture = sov_russian_cosmodes_idea
 			allowed_civil_war = { always = yes }
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
-				air_volunteer_cap = 40
+				air_volunteer_cap = 35
 			}
 		}
 		#Russian Transport Aviation Force
@@ -6163,21 +5688,10 @@ ideas = {
 			picture = sov_russian_cosmodes_idea
 			allowed_civil_war = { always = yes }
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
-				air_volunteer_cap = 70
+				air_volunteer_cap = 50
 			}
 		}
 		#Air and Missile Defense Forces
@@ -6186,18 +5700,7 @@ ideas = {
 			picture = sov_russian_cosmodes_idea
 			allowed_civil_war = { always = yes }
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				air_defence_factor = 0.10
@@ -6207,21 +5710,9 @@ ideas = {
 		#Anti-Aircraft missile Forces
 		SOV_anti_aircraft_forces_idea = {
 
-			allowed = { always = no }
 			allowed_civil_war = { always = yes }
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			picture = generic_oppression
 			modifier = {
@@ -6234,23 +5725,11 @@ ideas = {
 		SOV_radio_technical_troops_idea = {
 
 			picture = spy_intel
-			allowed = { always = no }
 			allowed_civil_war = { always = yes }
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
-			removal_cost = -1
+
 			modifier = {
 				army_intel_factor = 0.10
 				airforce_intel_factor = 0.10
@@ -6260,23 +5739,11 @@ ideas = {
 		SOV_russian_satellite_idea = {
 
 			picture = spy_intel
-			allowed = { always = no }
 			allowed_civil_war = { always = yes }
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
-			removal_cost = -1
+
 			modifier = {
 				naval_coordination = 0.05
 				max_planning_factor = 0.05
@@ -6287,21 +5754,9 @@ ideas = {
 		#Strategic Rocket Forces
 		SOV_rocket_forces_idea = {
 
-			allowed = { always = no }
 			allowed_civil_war = { always = yes }
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			picture = air_support
 			modifier = {
@@ -6311,21 +5766,9 @@ ideas = {
 		#Strategic Rocket Forces
 		SOV_rocket_forces_idea1 = {
 			name = SOV_rocket_forces_idea
-			allowed = { always = no }
 			allowed_civil_war = { always = yes }
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			picture = air_support
 			modifier = {
@@ -6403,18 +5846,7 @@ ideas = {
 
 			picture = sov_ipso_idea
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				influence_coup_modifier = 0.20
@@ -6426,18 +5858,7 @@ ideas = {
 			name = SOV_army_ipso
 			picture = sov_ipso_idea
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				influence_coup_modifier = 0.25
@@ -6451,18 +5872,7 @@ ideas = {
 			allowed = { original_tag = SOV }
 			allowed_civil_war = { always = yes }
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				initiative_factor = 0.05
@@ -6476,18 +5886,7 @@ ideas = {
 			allowed = { original_tag = SOV }
 			allowed_civil_war = { always = yes }
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				initiative_factor = 0.10
@@ -6501,18 +5900,7 @@ ideas = {
 			allowed = { original_tag = SOV }
 			allowed_civil_war = { always = yes }
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				army_speed_factor = 0.05
@@ -6526,18 +5914,7 @@ ideas = {
 			allowed = { original_tag = SOV }
 			allowed_civil_war = { always = yes }
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				army_speed_factor = 0.10
@@ -6550,18 +5927,7 @@ ideas = {
 			allowed = { original_tag = SOV }
 			allowed_civil_war = { always = yes }
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				static_anti_air_damage_factor = 0.15
@@ -6576,18 +5942,7 @@ ideas = {
 			allowed = { original_tag = SOV }
 			allowed_civil_war = { always = yes }
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				static_anti_air_damage_factor = 0.20
@@ -6602,18 +5957,7 @@ ideas = {
 			allowed = { original_tag = SOV }
 			allowed_civil_war = { always = yes }
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				repair_speed_rail_way_factor = 0.10
@@ -6626,18 +5970,7 @@ ideas = {
 			allowed = { original_tag = SOV }
 			allowed_civil_war = { always = yes }
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				repair_speed_rail_way_factor = 0.15
@@ -6650,18 +5983,7 @@ ideas = {
 			allowed = { original_tag = SOV }
 			allowed_civil_war = { always = yes }
 			cancel = {
-				NOT = { original_tag = SOV }
-				NOT = {
-					OR = {
-						has_autonomy_state = autonomy_state_rf
-						has_autonomy_state = autonomy_republic_rf
-						has_autonomy_state = autonomy_kray_rf
-						has_autonomy_state = autonomy_oblast_rf
-						has_autonomy_state = autonomy_okrug_rf
-						has_autonomy_state = autonomy_state_cis
-						has_autonomy_state = autonomy_union_state
-					}
-				}
+				NOT = { SUB_is_soviet_sphere_member = yes }
 			}
 			modifier = {
 				air_defence_factor = 0.15
@@ -6670,7 +5992,6 @@ ideas = {
 		#Youth Army
 		SOV_youth_army = {
 
-			allowed = { always = no }
 			picture = sov_yound_army_idea
 
 			modifier = {
@@ -6680,7 +6001,6 @@ ideas = {
 		#Youth Army - Jirik
 		SOV_youth_army1 = {
 
-			allowed = { always = no }
 			picture = sov_yound_army_idea
 			name = SOV_youth_army
 
@@ -6695,7 +6015,7 @@ ideas = {
 			allowed_civil_war = { always = yes }
 			picture = ukr_dronearmy_idea
 			equipment_bonus = {
-				Kamikaze_drone_equipment = {
+				medium_plane_suicide_airframe = {
 					build_cost_ic = -0.21
 					instant = yes
 				}
@@ -6704,7 +6024,6 @@ ideas = {
 		#Oligarch Support Army
 		SOV_oligarch_supply_army_idea = {
 
-			allowed = { always = no }
 			picture = politicised_army2
 			cancel = {
 				NOT = {
@@ -6724,7 +6043,6 @@ ideas = {
 		#Morpehi
 		SOV_morpehi_idea = {
 
-			allowed = { always = no }
 			picture = escort_effort
 
 			modifier = {
@@ -6736,7 +6054,6 @@ ideas = {
 		#VDV
 		SOV_vdv_idea = {
 
-			allowed = { always = no }
 			picture = air_research
 
 			modifier = {
@@ -6894,9 +6211,7 @@ ideas = {
 		#Spetznaz O
 		SOV_spetznaz_o = {
 
-			allowed_civil_war = {
-				always = yes
-			}
+			allowed_civil_war = { always = yes }
 			picture = sov_o_idea
 			modifier = {
 				special_forces_attack_factor = 0.10
@@ -6907,7 +6222,6 @@ ideas = {
 		#Prepare For Worst
 		SOV_prepare_for_worst_idea = {
 
-			allowed = { always = no }
 
 			picture = tank_industry
 			modifier = {
@@ -6917,8 +6231,7 @@ ideas = {
 		}
 		#Otkos Army
 		SOV_otkos_army_idea = {
-			allowed = { always = no }
-			removal_cost = -1
+
 			picture = army_corruptions
 			cancel = {
 				OR = {
@@ -6935,7 +6248,7 @@ ideas = {
 		#Voennaya Kafedra
 		SOV_military_univer_idea = {
 
-			removal_cost = -1
+
 			picture = sov_military_departments
 			modifier = {
 				mobilization_speed = 0.05
@@ -6945,7 +6258,7 @@ ideas = {
 		#Voennaya Kafedra
 		SOV_military_univer_idea1 = {
 			name = SOV_military_univer_idea
-			removal_cost = -1
+
 			picture = sov_military_departments
 			modifier = {
 				mobilization_speed = 0.10
@@ -6967,9 +6280,7 @@ ideas = {
 		#Russian PMC
 		SOV_pmc_idea = {
 
-			allowed_civil_war = {
-				always = yes
-			}
+			allowed_civil_war = { always = yes }
 			picture = zombies
 			modifier = {
 				send_volunteer_size = 2
@@ -6981,9 +6292,7 @@ ideas = {
 		SOV_pmc_idea1 = {
 
 			name = SOV_pmc_idea
-			allowed_civil_war = {
-				always = yes
-			}
+			allowed_civil_war = { always = yes }
 			picture = zombies
 			modifier = {
 				send_volunteer_size = 3
@@ -6995,9 +6304,7 @@ ideas = {
 		SOV_volunteer_assault_coprs_idea = {
 
 			name = SOV_pmc_idea
-			allowed_civil_war = {
-				always = yes
-			}
+			allowed_civil_war = { always = yes }
 			picture = zombies
 			cancel = {
 				has_war = no
@@ -7013,9 +6320,7 @@ ideas = {
 		SOV_gazprom_pmc_idea = {
 
 			name = SOV_pmc_idea
-			allowed_civil_war = {
-				always = yes
-			}
+			allowed_civil_war = { always = yes }
 			picture = zombies
 			cancel = {
 				has_war = no
@@ -7030,9 +6335,7 @@ ideas = {
 		#Military Priestrs
 		SOV_military_priests = {
 
-			allowed_civil_war = {
-				always = yes
-			}
+			allowed_civil_war = { always = yes }
 			picture = zombies
 			cancel = {
 				NOT = {
@@ -7051,7 +6354,6 @@ ideas = {
 		SOV_russian_foreign_legion_idea = {
 
 			picture = french_foreign_legion
-			allowed = { always = no }
 
 			modifier = {
 				special_forces_training_time_factor = -0.15
@@ -7068,10 +6370,7 @@ ideas = {
 			picture = sov_fsb
 			cancel = {
 				NOT = {
-					OR = {
-						SUB_state_availables = yes
-						SUB_subjects_availables = yes
-					}
+					SUB_has_russian_special_autonomy = yes
 				}
 			}
 			modifier = {
@@ -7174,7 +6473,6 @@ ideas = {
 		#SVR
 		SOV_svr = {
 
-			allowed = { always = no }
 			picture = sov_svr_idea
 			modifier = {
 				intel_network_gain_factor = 0.15
@@ -7184,7 +6482,6 @@ ideas = {
 		#SVR
 		SOV_svr1 = {
 
-			allowed = { always = no }
 			picture = sov_svr_idea
 			name = SOV_svr
 			modifier = {
@@ -7207,7 +6504,6 @@ ideas = {
 		#Zaslon
 		SOV_zaslon = {
 
-			allowed = { always = no }
 			picture = sov_svr_idea
 			modifier = {
 				civilian_intel_factor = 0.10
@@ -7269,9 +6565,7 @@ ideas = {
 		}
 		#OMON
 		SOV_omon_idea = {
-			allowed_civil_war = {
-				always = yes
-			}
+			allowed_civil_war = { always = yes }
 
 			picture = sov_alpha_fsb
 
@@ -7283,9 +6577,7 @@ ideas = {
 		}
 		#OMON - Rosgvardia
 		SOV_omon_idea1 = {
-			allowed_civil_war = {
-				always = yes
-			}
+			allowed_civil_war = { always = yes }
 
 			picture = sov_alpha_fsb
 			name = SOV_omon_idea
@@ -7566,7 +6858,7 @@ ideas = {
 				OR = {
 					has_country_flag = SOV_subjects_good_federalism
 					NOT = {
-						SUB_subjects_availables = yes
+						SUB_has_russian_special_autonomy = yes
 					}
 				}
 			}
@@ -7590,7 +6882,7 @@ ideas = {
 			allowed_civil_war = { always = yes }
 			cancel = {
 				NOT = {
-					SUB_subjects_availables = yes
+					SUB_has_russian_special_autonomy = yes
 				}
 			}
 			modifier = {

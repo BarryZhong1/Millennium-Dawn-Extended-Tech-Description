@@ -4,7 +4,14 @@ call_to_war_rule_faction_leader_only = {
 		is_faction_leader = yes
 	}
 	available = {
-		not_locked_faction = no
+		is_locked_faction = no
+	}
+	can_remove = {
+		NOT = {
+			ROOT = {
+				is_locked_faction = yes
+			}
+		}
 	}
 	ai_will_do = {
 		base = 0
@@ -32,7 +39,14 @@ call_to_war_rule_major_only = {
 		is_major = yes
 	}
 	available = {
-		not_locked_faction = no
+		is_locked_faction = no
+	}
+	can_remove = {
+		NOT = {
+			ROOT = {
+				is_locked_faction = yes
+			}
+		}
 	}
 	ai_will_do = {
 		base = 0
@@ -49,7 +63,14 @@ call_to_war_rule_major_only = {
 call_to_war_rule_independent_only = {
 	type = call_to_war_rules
 	available = {
-		not_locked_faction = no
+		is_locked_faction = no
+	}
+	can_remove = {
+		NOT = {
+			ROOT = {
+				is_locked_faction = yes
+			}
+		}
 	}
 	trigger = {
 		is_subject = no
@@ -59,10 +80,44 @@ call_to_war_rule_independent_only = {
 call_to_war_rule_defensive_only = {
 	type = call_to_war_rules
 	available = {
-		not_locked_faction = no
+		is_locked_faction = no
+	}
+	can_remove = {
+		NOT = {
+			ROOT = {
+				is_locked_faction = yes
+			}
+		}
 	}
 	trigger = {
 		has_defensive_war = yes
+	}
+}
+
+call_to_war_rule_always = {
+	type = call_to_war_rules
+	available = {
+		is_locked_faction = no
+	}
+	can_remove = {
+		NOT = {
+			ROOT = {
+				is_locked_faction = yes
+			}
+		}
+	}
+	trigger = {
+		has_war = yes
+	}
+	ai_will_do = {
+		base = 0
+		modifier = {
+			add = 2
+			is_faction_leader = yes
+		}
+	}
+	modifier = {
+		political_power_factor = -0.05
 	}
 }
 call_to_war_rule_chinese_united_front = {
@@ -96,7 +151,14 @@ call_to_war_rule_chinese_indian_alliance = {
 call_to_war_rule_sco_military_only = {
 	type = call_to_war_rules
 	available = {
-		not_locked_faction = no
+		is_locked_faction = no
+	}
+	can_remove = {
+		NOT = {
+			ROOT = {
+				is_locked_faction = yes
+			}
+		}
 	}
 	trigger = {
 		has_defensive_war = yes

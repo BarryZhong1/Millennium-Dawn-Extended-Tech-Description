@@ -3,7 +3,7 @@ combined_arms = {
 
 	name = GRAND_DOCTRINE_COMBINED_ARMS
 	description = GRAND_DOCTRINE_COMBINED_ARMS_DESC
-	icon = GFX_doctrine_mobile_warfare_medium
+	icon = GFX_doctrine_combined_arms
 	available = {
 		always = yes
 	}
@@ -11,7 +11,37 @@ combined_arms = {
 	xp_cost = 100
 	xp_type = army
 
-	ai_will_do = { }
+	ai_will_do = {
+		base = 5
+		modifier = {
+			factor = 1.5
+			is_major_power = yes
+		}
+		modifier = {
+			factor = 1.5
+			is_minor_power = yes
+			num_of_military_factories > 15
+		}
+		modifier = {
+			factor = 0.6
+			has_government = democratic
+			is_major_power = yes
+		}
+		modifier = {
+			factor = 0.6
+			has_government = communism
+			is_major_power = yes
+		}
+		modifier = {
+			factor = 0.4
+			has_expansionist_government = yes
+			is_major_power = yes
+		}
+		modifier = {
+			factor = 0.3
+			is_non_power = yes
+		}
+	}
 
 	tracks = {
 		structure_doctrine
@@ -23,6 +53,8 @@ combined_arms = {
 	}
 
 	# EFFECTS
+
+
 	army_strength_factor = 0.05
 	army_org_factor = 0.05
 
@@ -46,7 +78,7 @@ combined_arms = {
 		}
 		{
 			army_org_regain = 0.025
-			breakthrough_factor =0.05
+			breakthrough_factor = 0.05
 		}
 		{
 			org_loss_when_moving = -0.10
@@ -60,7 +92,7 @@ shock_and_awe = {
 
 	name = GRAND_DOCTRINE_SHOCK_AND_AWE
 	description = GRAND_DOCTRINE_SHOCK_AND_AWE_DESC
-	icon = GFX_doctrine_mobile_warfare_medium
+	icon = GFX_doctrine_shock_and_awe
 	available = {
 		always = yes
 	}
@@ -68,18 +100,67 @@ shock_and_awe = {
 	xp_cost = 100
 	xp_type = army
 
-	ai_will_do = { }
+	ai_will_do = {
+		base = 1
+		modifier = {
+			factor = 0
+			NOT = { is_major_power = yes }
+		}
+		modifier = {
+			factor = 0
+			NOT = { num_of_military_factories > 30 }
+		}
+		modifier = {
+			add = 10
+			has_expansionist_government = yes
+			is_major_power = yes
+			num_of_military_factories > 35
+		}
+		modifier = {
+			add = 8
+			has_war = yes
+			is_major_power = yes
+			num_of_military_factories > 30
+		}
+		modifier = {
+			add = 6
+			is_faction_leader = yes
+			has_government = democratic
+		}
+		modifier = {
+			add = 8
+			has_government = democratic
+			is_in_faction_with = USA
+			num_of_military_factories > 35
+		}
+		modifier = {
+			add = 6
+			has_government = fascism
+			is_major_power = yes
+		}
+		modifier = {
+			factor = 0
+			has_government = communism
+		}
+		modifier = {
+			factor = 0.3
+			NOT = { has_expansionist_government = yes }
+			NOT = { has_war = yes }
+		}
+	}
 
 	tracks = {
 		structure_doctrine
-		dedicated_doctrine
 		operational_theory
+		dedicated_doctrine
 		training
 		leadership
 		technology
 	}
 
 	# EFFECTS
+
+
 	org_loss_when_moving = -0.15
 	army_speed_factor = 0.15
 
@@ -117,7 +198,7 @@ defence_in_depth = {
 
 	name = GRAND_DOCTRINE_DEFENCE_IN_DEPTH
 	description = GRAND_DOCTRINE_DEFENCE_IN_DEPTH_DESC
-	icon = GFX_doctrine_mobile_warfare_medium
+	icon = GFX_doctrine_defence_in_depth
 	available = {
 		always = yes
 	}
@@ -125,18 +206,56 @@ defence_in_depth = {
 	xp_cost = 100
 	xp_type = army
 
-	ai_will_do = { }
+	ai_will_do = {
+		base = 1
+		modifier = {
+			factor = 0
+			NOT = { is_major_power = yes }
+		}
+		modifier = {
+			add = 15
+			has_government = communism
+			is_major_power = yes
+		}
+		modifier = {
+			add = 8
+			has_government = neutrality
+			is_major_power = yes
+			num_of_military_factories > 35
+		}
+		modifier = {
+			factor = 0.3
+			has_expansionist_government = yes
+			is_in_faction_with = USA
+		}
+		modifier = {
+			factor = 0.5
+			has_war = yes
+			is_faction_leader = yes
+		}
+		modifier = {
+			factor = 0
+			has_government = democratic
+			is_in_faction_with = USA
+		}
+		modifier = {
+			factor = 0.5
+			has_government = fascism
+		}
+	}
 
 	tracks = {
 		structure_doctrine
-		dedicated_doctrine
 		operational_theory
+		dedicated_doctrine
 		training
 		leadership
 		technology
 	}
 
 	# EFFECTS
+
+
 	land_bunker_effectiveness_factor = 0.05
 	production_speed_bunker_factor = 0.15
 	state_production_speed_coastal_bunker_factor = 0.15
@@ -182,7 +301,7 @@ mission_command = {
 
 	name = GRAND_DOCTRINE_MISSION_COMMAND
 	description = GRAND_DOCTRINE_MISSION_COMMAND_DESC
-	icon = GFX_doctrine_mobile_warfare_medium
+	icon = GFX_doctrine_mission_command
 	available = {
 		always = yes
 	}
@@ -190,7 +309,51 @@ mission_command = {
 	xp_cost = 100
 	xp_type = army
 
-	ai_will_do = { }
+	ai_will_do = {
+		base = 1
+		modifier = {
+			factor = 0
+			NOT = { is_major_power = yes }
+		}
+		modifier = {
+			factor = 0
+			NOT = { num_of_military_factories > 30 }
+		}
+		modifier = {
+			add = 15
+			has_government = democratic
+			is_in_faction_with = USA
+		}
+		modifier = {
+			add = 10
+			has_government = democratic
+			num_of_military_factories > 45
+		}
+		modifier = {
+			add = 5
+			has_government = democratic
+			num_of_military_factories > 25
+		}
+		modifier = {
+			add = 5
+			is_faction_leader = yes
+			has_government = democratic
+		}
+		modifier = {
+			add = 5
+			has_war = yes
+			has_government = democratic
+			is_major_power = yes
+		}
+		modifier = {
+			factor = 0
+			has_government = communism
+		}
+		modifier = {
+			factor = 0.5
+			has_government = fascism
+		}
+	}
 
 	tracks = {
 		structure_doctrine
@@ -249,10 +412,10 @@ mission_command = {
 
 battlefield_support = {
 	folder = land
-
 	name = GRAND_DOCTRINE_BATTLEFIELD_SUPPORT
 	description = GRAND_DOCTRINE_MISSION_COMMAND_DESC
-	icon = GFX_doctrine_mobile_warfare_medium
+	icon = GFX_doctrine_battlefield_support
+
 	available = {
 		always = yes
 	}
@@ -260,7 +423,32 @@ battlefield_support = {
 	xp_cost = 125
 	xp_type = army
 
-	ai_will_do = { }
+	ai_will_do = {
+		base = 1
+		modifier = {
+			factor = 0
+			NOT = { is_major_power = yes }
+		}
+		modifier = {
+			add = 10
+			is_in_faction_with = USA
+			NOT = { num_of_military_factories > 45 }
+		}
+		modifier = {
+			add = 5
+			has_government = democratic
+			num_of_military_factories > 20
+			NOT = { num_of_military_factories > 40 }
+		}
+		modifier = {
+			factor = 0.5
+			has_expansionist_government = yes
+		}
+		modifier = {
+			factor = 0
+			has_government = communism
+		}
+	}
 
 	tracks = {
 		structure_doctrine
@@ -272,6 +460,7 @@ battlefield_support = {
 	}
 
 	# EFFECTS
+
 	army_fuel_capacity_factor = 0.15
 	army_fuel_consumption_factor = -0.05
 
@@ -318,7 +507,7 @@ guerrilla_warfare = {
 
 	name = GRAND_DOCTRINE_GUERRILLA_WARFARE
 	description = GRAND_DOCTRINE_GUERRILLA_WARFARE_DESC
-	icon = GFX_doctrine_mobile_warfare_medium
+	icon = GFX_doctrine_guerrilla_warfare
 	available = {
 		always = yes
 	}
@@ -326,7 +515,51 @@ guerrilla_warfare = {
 	xp_cost = 100
 	xp_type = army
 
-	ai_will_do = { }
+	ai_will_do = {
+		base = 1
+		modifier = {
+			add = 15
+			OR = {
+				original_tag = HEZ
+				original_tag = ISI
+				original_tag = TAL
+				original_tag = TTP
+				original_tag = AQY
+				original_tag = NUS
+				original_tag = WAA
+				original_tag = SHN
+				original_tag = NHN
+				original_tag = KAC
+				original_tag = KAR
+				original_tag = IEK
+
+				# Zombie
+				original_tag = ZOM
+			}
+		}
+		modifier = {
+			factor = 0
+			NOT = {
+				OR = {
+					original_tag = HEZ
+					original_tag = ISI
+					original_tag = TAL
+					original_tag = TTP
+					original_tag = AQY
+					original_tag = NUS
+					original_tag = WAA
+					original_tag = SHN
+					original_tag = NHN
+					original_tag = KAC
+					original_tag = KAR
+					original_tag = IEK
+
+					# Zombie
+					original_tag = ZOM
+				}
+			}
+		}
+	}
 
 	tracks = {
 		structure_doctrine
@@ -338,10 +571,11 @@ guerrilla_warfare = {
 	}
 
 	# EFFECTS
+
 	unit_Militia_Bat_design_cost_factor = -0.5
 	unit_Mot_Militia_Bat_design_cost_factor = -0.5
 	enable_tactic = tactic_recon_insurgency_attack
- 	enable_tactic = tactic_recon_insurgency_defender
+	 enable_tactic = tactic_recon_insurgency_defender
 	enable_tactic = tactic_insurgency_attacker
 	enable_tactic = tactic_insurgency_defender
 
@@ -358,10 +592,10 @@ guerrilla_warfare = {
 			enable_tactic = tactic_insurgent_ied_strike
 			enable_tactic = tactic_insurgent_vbied
 			category_militia = {
- 				hard_attack = 0.10
- 				soft_attack = 0.15
- 				ap_attack = 2.0
- 			}
+				 hard_attack = 0.10
+				 soft_attack = 0.15
+				 ap_attack = 0.75
+			 }
 		}
 		{
 			#3
@@ -391,7 +625,7 @@ guerrilla_warfare = {
 			enable_tactic = tactic_insurgent_sniper_ops
 			enable_tactic = tactic_insurgent_urban_hideouts
 			land_reinforce_rate = 0.10
-	 		unit_upkeep_attrition_factor = 0.10
+			 unit_upkeep_attrition_factor = 0.10
 		}
 	}
 }
