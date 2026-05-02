@@ -259,7 +259,7 @@ RAJ_Export_category = {
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision RAJ_eth_export"
 			ETH = {
-					country_event = { id = raj_exports.1 days = 1 }
+				country_event = { id = raj_exports.1 days = 1 }
 			}
 		}
 		ai_will_do = { base = 0 }
@@ -1339,12 +1339,7 @@ maoist_decision_category = {
 				has_country_flag = RAJ_development_in_progress
 			}
 			any_controlled_state = {
-				OR = {
-					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency }
-					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
-					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_2 }
-					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_3 }
-				}
+				RAJ_state_has_any_naxalite = yes
 			}
 		}
 
@@ -1357,7 +1352,6 @@ maoist_decision_category = {
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision RAJ_integrated_development_initiative"
 			set_country_flag = RAJ_development_in_progress
-			# Treasury cost for development program
 			set_temp_variable = { treasury_change = -5 }
 			modify_treasury_effect = yes
 		}
@@ -1368,15 +1362,9 @@ maoist_decision_category = {
 			add_to_variable = { maoist_political_influence = -3 }
 			random_controlled_state = {
 				limit = {
-					OR = {
-						has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency }
-						has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
-						has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_2 }
-						has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_3 }
-					}
+					RAJ_state_has_any_naxalite = yes
 				}
 				RAJ_downgrade_naxalite_level = yes
-				# Add temporary infrastructure building speed modifier instead of instant build
 				add_dynamic_modifier = {
 					modifier = RAJ_development_boost
 					days = 180
@@ -1495,7 +1483,6 @@ maoist_decision_category = {
 			remove_ideas = RAJ_operation_green_hunt_active
 			add_to_variable = { strength_of_maoists = -8 }
 			add_to_variable = { maoist_political_influence = -5 }
-			# Reduce all affected states by 1 level
 			every_controlled_state = {
 				limit = { RAJ_state_has_any_naxalite = yes }
 				RAJ_downgrade_naxalite_level = yes
@@ -1604,7 +1591,6 @@ maoist_decision_category = {
 		}
 	}
 
-	# Road Connectivity Program for Red Corridor
 	RAJ_road_connectivity_program = {
 		icon = GFX_decision_generic_construction
 
@@ -1617,18 +1603,12 @@ maoist_decision_category = {
 
 		visible = {
 			any_controlled_state = {
-				OR = {
-					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency }
-					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
-					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_2 }
-					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_3 }
-				}
+				RAJ_state_has_any_naxalite = yes
 			}
 		}
 
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision RAJ_road_connectivity_program"
-			# Treasury cost for road construction
 			set_temp_variable = { treasury_change = -8 }
 			modify_treasury_effect = yes
 		}
@@ -1637,14 +1617,8 @@ maoist_decision_category = {
 			subtract_from_variable = { maoist_political_influence = 3 }
 			random_controlled_state = {
 				limit = {
-					OR = {
-						has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency }
-						has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
-						has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_2 }
-						has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_3 }
-					}
+					RAJ_state_has_any_naxalite = yes
 				}
-				# Add temporary infrastructure building speed modifier
 				add_dynamic_modifier = {
 					modifier = RAJ_development_boost
 					days = 180
@@ -1672,38 +1646,7 @@ RAJ_central_asian_salaf_revolution = {
 			}
 			custom_trigger_tooltip = {
 				tooltip = is_top_influencer_kazaks
-				KAZ = {
-					OR = {
-						AND = {
-							check_variable = { influence_array^0 = ROOT }
-							check_variable = { influence_array_val^0 > 34.999 }
-						}
-						AND = {
-							check_variable = { influence_array^1 = ROOT }
-							check_variable = { influence_array_val^1 > 34.999 }
-						}
-						AND = {
-							check_variable = { influence_array^2 = ROOT }
-							check_variable = { influence_array_val^2 > 34.999 }
-						}
-						AND = {
-							check_variable = { influence_array^3 = ROOT }
-							check_variable = { influence_array_val^3 > 34.999 }
-						}
-						AND = {
-							check_variable = { influence_array^4 = ROOT }
-							check_variable = { influence_array_val^4 > 34.999 }
-						}
-						AND = {
-							check_variable = { influence_array^5 = ROOT }
-							check_variable = { influence_array_val^5 > 34.999 }
-						}
-						AND = {
-							check_variable = { influence_array^6 = ROOT }
-							check_variable = { influence_array_val^6 > 34.999 }
-						}
-					}
-				}
+				KAZ = { RAJ_is_top_influencer = yes }
 			}
 		}
 		cost = 200
@@ -1749,38 +1692,7 @@ RAJ_central_asian_salaf_revolution = {
 			}
 			custom_trigger_tooltip = {
 				tooltip = is_top_influencer_uzbeki
-				UZB = {
-					OR = {
-						AND = {
-							check_variable = { influence_array^0 = ROOT }
-							check_variable = { influence_array_val^0 > 34.999 }
-						}
-						AND = {
-							check_variable = { influence_array^1 = ROOT }
-							check_variable = { influence_array_val^1 > 34.999 }
-						}
-						AND = {
-							check_variable = { influence_array^2 = ROOT }
-							check_variable = { influence_array_val^2 > 34.999 }
-						}
-						AND = {
-							check_variable = { influence_array^3 = ROOT }
-							check_variable = { influence_array_val^3 > 34.999 }
-						}
-						AND = {
-							check_variable = { influence_array^4 = ROOT }
-							check_variable = { influence_array_val^4 > 34.999 }
-						}
-						AND = {
-							check_variable = { influence_array^5 = ROOT }
-							check_variable = { influence_array_val^5 > 34.999 }
-						}
-						AND = {
-							check_variable = { influence_array^6 = ROOT }
-							check_variable = { influence_array_val^6 > 34.999 }
-						}
-					}
-				}
+				UZB = { RAJ_is_top_influencer = yes }
 			}
 		}
 		cost = 200
@@ -1830,38 +1742,7 @@ RAJ_central_asian_salaf_revolution = {
 			}
 			custom_trigger_tooltip = {
 				tooltip = is_top_influencer_tajiks
-				TAJ = {
-					OR = {
-						AND = {
-							check_variable = { influence_array^0 = ROOT }
-							check_variable = { influence_array_val^0 > 34.999 }
-						}
-						AND = {
-							check_variable = { influence_array^1 = ROOT }
-							check_variable = { influence_array_val^1 > 34.999 }
-						}
-						AND = {
-							check_variable = { influence_array^2 = ROOT }
-							check_variable = { influence_array_val^2 > 34.999 }
-						}
-						AND = {
-							check_variable = { influence_array^3 = ROOT }
-							check_variable = { influence_array_val^3 > 34.999 }
-						}
-						AND = {
-							check_variable = { influence_array^4 = ROOT }
-							check_variable = { influence_array_val^4 > 34.999 }
-						}
-						AND = {
-							check_variable = { influence_array^5 = ROOT }
-							check_variable = { influence_array_val^5 > 34.999 }
-						}
-						AND = {
-							check_variable = { influence_array^6 = ROOT }
-							check_variable = { influence_array_val^6 > 34.999 }
-						}
-					}
-				}
+				TAJ = { RAJ_is_top_influencer = yes }
 			}
 		}
 		cost = 200
@@ -1911,38 +1792,7 @@ RAJ_central_asian_salaf_revolution = {
 			}
 			custom_trigger_tooltip = {
 				tooltip = is_top_influencer_kyrgyzian
-				KYR = {
-					OR = {
-						AND = {
-							check_variable = { influence_array^0 = ROOT }
-							check_variable = { influence_array_val^0 > 34.999 }
-						}
-						AND = {
-							check_variable = { influence_array^1 = ROOT }
-							check_variable = { influence_array_val^1 > 34.999 }
-						}
-						AND = {
-							check_variable = { influence_array^2 = ROOT }
-							check_variable = { influence_array_val^2 > 34.999 }
-						}
-						AND = {
-							check_variable = { influence_array^3 = ROOT }
-							check_variable = { influence_array_val^3 > 34.999 }
-						}
-						AND = {
-							check_variable = { influence_array^4 = ROOT }
-							check_variable = { influence_array_val^4 > 34.999 }
-						}
-						AND = {
-							check_variable = { influence_array^5 = ROOT }
-							check_variable = { influence_array_val^5 > 34.999 }
-						}
-						AND = {
-							check_variable = { influence_array^6 = ROOT }
-							check_variable = { influence_array_val^6 > 34.999 }
-						}
-					}
-				}
+				KYR = { RAJ_is_top_influencer = yes }
 			}
 		}
 		cost = 200
