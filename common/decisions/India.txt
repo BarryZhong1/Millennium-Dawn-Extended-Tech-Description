@@ -768,38 +768,28 @@ maoist_decision_category = {
 			add_stability = -0.05
 			activate_mission = RAJ_MAO_rebellion
 			if = {
+				limit = {
+					mao_pol_above_50 = yes
+					mao_str_above_50 = yes
+				}
+				RAJ = {
+					country_event = RAJ_mao_reb.4
+					country_event = RAJ_mao_reb.5
+					set_country_flag = mao_civvar_staret
+				}
+			}
+			else_if = {
 				limit = { mao_pol_above_50 = yes }
-				if = {
-					limit = { mao_pol_above_50 = yes }
-					RAJ = {
-						country_event = RAJ_mao_reb.4
-						set_country_flag = mao_civvar_staret
-					}
+				RAJ = {
+					country_event = RAJ_mao_reb.4
+					set_country_flag = mao_civvar_staret
 				}
 			}
 			else_if = {
 				limit = { mao_str_above_50 = yes }
-				if = {
-					limit = { mao_str_above_50 = yes }
-					RAJ = {
-						country_event = RAJ_mao_reb.5
-						set_country_flag = mao_civvar_staret
-					}
-				}
-			}
-			else_if = {
-				limit = {
-					mao_str_above_50 = yes
-					mao_pol_above_50 = yes
-				}
-				if = {
-					limit = {
-						mao_str_above_50 = yes
-						mao_pol_above_50 = yes
-					}
-					RAJ = { country_event = RAJ_mao_reb.5 }
-					RAJ = { country_event = RAJ_mao_reb.4 }
-					RAJ = { set_country_flag = mao_civvar_staret }
+				RAJ = {
+					country_event = RAJ_mao_reb.5
+					set_country_flag = mao_civvar_staret
 				}
 			}
 		}
@@ -2132,7 +2122,7 @@ RAJ_greater_hindustan_decisions_category = {
 				country_event = indian_event.33
 			}
 			# just do it collectively, I don't care
-			add_threat = 5
+			add_threat = 0.05
 			hidden_effect = {
 				create_wargoal = {
 					type = annex_everything

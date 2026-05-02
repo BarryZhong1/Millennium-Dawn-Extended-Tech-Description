@@ -1389,7 +1389,7 @@ country_event = {
 		RAJ = {
 			annex_country = { target = ROOT transfer_troops = yes }
 			every_owned_state = {
-				remove_core_of = RAJ
+				add_core_of = RAJ
 			}
 		}
 		ai_chance = {
@@ -1625,7 +1625,7 @@ country_event = {
 	is_triggered_only = yes
 	#PWO
 	option = {
-		name = raj_export.1.a
+		name = raj_exports.1.a
 		log = "[GetDateText]: [This.GetName]: raj_exports.1.a executed"
 		add_equipment_to_stockpile = {
 			type = Anti_Air_0
@@ -2405,8 +2405,6 @@ country_event = {
 		hidden_effect = {
 			remove_ideas = RAJ_BRICS
 		}
-		add_ai_strategy = { type = befriend id = RAJ value = 100 }
-		add_ai_strategy = { type = support id = RAJ value = 100 }
 		ai_chance = {
 			base = 0
 			modifier = {
@@ -2470,12 +2468,10 @@ country_event = {
 			CSTO_leave = yes
 		}
 		RAJ = { add_to_faction = ROOT }
-		add_ai_strategy = { type = befriend id = RAJ value = 100 }
-		add_ai_strategy = { type = support id = RAJ value = 100 }
 		ai_chance = {
 			base = 0
 			modifier = {
-				factor = 0
+				add = 100
 				has_opinion = { target = RAJ value > 50 }
 			}
 		}
