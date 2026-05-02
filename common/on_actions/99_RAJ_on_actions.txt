@@ -4,6 +4,7 @@ on_actions = {
 			if = {
 				limit = { country_exists = RAJ }
 				india_religious_events = yes
+				RAJ_check_religious_harmony = yes
 			}
 
 			random = {
@@ -96,91 +97,5 @@ on_actions = {
 			}
 		}
 	}
-	on_weekly_RAJ = {
-		effect = {
-			# Will either demilitarize, or make a state independent if the opinion is too low
-			# TODO: Convert this to missions so the player can see this and the issue is more visible - Bird 01AUG2025
-			if = {
-				limit = { check_variable = { RAJ_muslim_opinion < 10 } RAJ = { owns_state = 993 } }
-				993 = { set_demilitarized_zone = yes }
-			}
-			if = {
-				limit = { check_variable = { RAJ_muslim_opinion < 1 } RAJ = { owns_state = 993 } NOT = { has_country_flag = RAJ_ladakh_declared_independence } }
-				993 = {
-					set_demilitarized_zone = no
-					transfer_state_to = LAD
-				}
-				set_country_flag = RAJ_ladakh_declared_independence
-			}
-			if = {
-				limit = { check_variable = { RAJ_muslim_opinion > 10 } RAJ = { owns_state = 993 } }
-				993 = { set_demilitarized_zone = no }
-			}
-			if = {
-				limit = { check_variable = { RAJ_christians_opinion < 10 } RAJ = { owns_state = 980 } }
-				980 = { set_demilitarized_zone = yes }
-			}
-			if = {
-				limit = { check_variable = { RAJ_christians_opinion < 1 } RAJ = { owns_state = 980 } NOT = { has_country_flag = RAJ_meghalaya_declared_independence } }
-				980 = {
-					set_demilitarized_zone = no
-					transfer_state_to = MEG
-				}
-				set_country_flag = RAJ_meghalaya_declared_independence
-			}
-			if = {
-				limit = { check_variable = { RAJ_christians_opinion > 10 } RAJ = { owns_state = 980 } }
-				980 = { set_demilitarized_zone = no }
-			}
-			if = {
-				limit = { check_variable = { RAJ_christians_opinion < 10 } RAJ = { owns_state = 477 } }
-				477 = { set_demilitarized_zone = yes }
-			}
-			if = {
-				limit = { check_variable = { RAJ_christians_opinion < 1 } RAJ = { owns_state = 477 } NOT = { has_country_flag = RAJ_manipur_declared_independence } }
-				477 = {
-					set_demilitarized_zone = no
-					transfer_state_to = MAN
-				}
-				set_country_flag = RAJ_manipur_declared_independence
-			}
-			if = {
-				limit = { check_variable = { RAJ_christians_opinion > 10 } RAJ = { owns_state = 477 } }
-				477 = { set_demilitarized_zone = no }
-			}
-			if = {
-				limit = { check_variable = { RAJ_buddhist_opinion < 10 } RAJ = { owns_state = 982 } }
-				982 = { set_demilitarized_zone = yes }
-			}
-			if = {
-				limit = { check_variable = { RAJ_buddhist_opinion < 1 } RAJ = { owns_state = 982 } NOT = { has_country_flag = RAJ_sikkim_declared_independence } }
-				982 = {
-					set_demilitarized_zone = no
-					transfer_state_to = SIK
-				}
-				set_country_flag = RAJ_sikkim_declared_independence
-			}
-			if = {
-				limit = { check_variable = { RAJ_buddhist_opinion > 10 } RAJ = { owns_state = 982 } }
-				982 = { set_demilitarized_zone = no }
-			}
-			# Kashmir
-			if = {
-				limit = { check_variable = { RAJ_sikh_opinion < 10 } RAJ = { owns_state = 429 } }
-				429 = { set_demilitarized_zone = yes }
-			}
-			if = {
-				limit = { check_variable = { RAJ_sikh_opinion < 1 } RAJ = { owns_state = 429 } NOT = { has_country_flag = RAJ_kashmir_declared_independence } }
-				429 = {
-					set_demilitarized_zone = no
-					transfer_state_to = SIK
-				}
-				set_country_flag = RAJ_kashmir_declared_independence
-			}
-			if = {
-				limit = { check_variable = { RAJ_sikh_opinion > 10 } RAJ = { owns_state = 429 } }
-				429 = { set_demilitarized_zone = no }
-			}
-		}
-	}
+	# Religious breakaway mechanic moved to mission decisions in 99_RAJ_religious_missions.txt
 }
