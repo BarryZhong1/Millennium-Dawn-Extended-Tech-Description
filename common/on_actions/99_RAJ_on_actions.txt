@@ -1,12 +1,9 @@
 on_actions = {
 	on_monthly_RAJ = {
 		effect = {
-			if = {
-				limit = { country_exists = RAJ }
-				india_religious_events = yes
-				RAJ_check_religious_harmony = yes
-				add_to_variable = { RAJ_brics_gui_dirty = 1 }
-			}
+			india_religious_events = yes
+			RAJ_check_religious_harmony = yes
+			add_to_variable = { RAJ_brics_gui_dirty = 1 }
 
 			random = {
 				chance = 20
@@ -79,22 +76,30 @@ on_actions = {
 
 			# Random Recurring Events
 
-			# Major Maoist Attack (~17% monthly = ~6 months average)
-			random = {
-				chance = 17
-				RAJ = { country_event = RAJ_naxal.11 }
-			}
-
-			# Leadership Elimination (~8% monthly = ~12 months average, during Green Hunt)
-			random = {
-				chance = 8
-				RAJ = { country_event = RAJ_naxal.13 }
-			}
-
-			# Tribal Displacement Protests (~6% monthly = ~18 months average)
-			random = {
-				chance = 6
-				RAJ = { country_event = RAJ_naxal.14 }
+			if = {
+				limit = {
+					NOT = { has_country_flag = RAJ_naxal_free_achieved }
+					RAJ = {
+						any_controlled_state = {
+							RAJ_state_has_any_naxalite = yes
+						}
+					}
+				}
+				# Major Maoist Attack (~17% monthly = ~6 months average)
+				random = {
+					chance = 17
+					RAJ = { country_event = RAJ_naxal.11 }
+				}
+				# Leadership Elimination (~8% monthly = ~12 months average, during Green Hunt)
+				random = {
+					chance = 8
+					RAJ = { country_event = RAJ_naxal.13 }
+				}
+				# Tribal Displacement Protests (~6% monthly = ~18 months average)
+				random = {
+					chance = 6
+					RAJ = { country_event = RAJ_naxal.14 }
+				}
 			}
 		}
 	}
