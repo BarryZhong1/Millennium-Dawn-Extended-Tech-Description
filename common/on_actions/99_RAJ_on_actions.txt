@@ -33,40 +33,32 @@ on_actions = {
 				clamp_variable = { var = RAJ.arunachal_readiness min = 0 max = 100 }
 			}
 
-			# --------------------------------------------
-			# NAXALITE-MAOIST INSURGENCY EVENTS
-			# --------------------------------------------
-
-			# Historical Events (fire once when conditions are met)
-
-			# PWG-MCC Merger - September 21, 2004
+			# Pre-compute naxalite state flags for decision visible blocks (avoids per-frame any_controlled_state)
 			if = {
 				limit = {
-					date > 2004.9.21
-					NOT = { has_country_flag = RAJ_pwg_mcc_merger }
+					any_controlled_state = { RAJ_state_has_any_naxalite = yes }
 				}
-				RAJ = { country_event = RAJ_naxal.10 }
+				set_country_flag = RAJ_has_naxalite_states
 			}
-
-			# Dantewada Ambush - April 6, 2010
+			else = {
+				clr_country_flag = RAJ_has_naxalite_states
+			}
 			if = {
 				limit = {
-					date > 2010.4.1
-					NOT = { has_country_flag = RAJ_dantewada_ambush }
+					any_controlled_state = {
+						OR = {
+							has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency }
+							has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
+						}
+					}
 				}
-				RAJ = { country_event = RAJ_naxal.17 }
+				set_country_flag = RAJ_has_severe_naxalite_states
+			}
+			else = {
+				clr_country_flag = RAJ_has_severe_naxalite_states
 			}
 
-			# Sukma Attack - April 24, 2017
-			if = {
-				limit = {
-					date > 2017.4.1
-					NOT = { has_country_flag = RAJ_sukma_attack }
-				}
-				RAJ = { country_event = RAJ_naxal.18 }
-			}
-
-			# Naxal-Free Milestone (when all states cleared)
+			# Naxal-Free Milestone (fires when last naxalite state is cleared)
 			if = {
 				limit = {
 					NOT = { has_country_flag = RAJ_naxal_free_achieved }
@@ -74,28 +66,19 @@ on_actions = {
 				RAJ = { country_event = RAJ_naxal.16 }
 			}
 
-			# Random Recurring Events
-
 			if = {
 				limit = {
 					NOT = { has_country_flag = RAJ_naxal_free_achieved }
-					RAJ = {
-						any_controlled_state = {
-							RAJ_state_has_any_naxalite = yes
-						}
-					}
+					has_country_flag = RAJ_has_naxalite_states
 				}
-				# Major Maoist Attack (~17% monthly = ~6 months average)
 				random = {
 					chance = 17
 					RAJ = { country_event = RAJ_naxal.11 }
 				}
-				# Leadership Elimination (~8% monthly = ~12 months average, during Green Hunt)
 				random = {
 					chance = 8
 					RAJ = { country_event = RAJ_naxal.13 }
 				}
-				# Tribal Displacement Protests (~6% monthly = ~18 months average)
 				random = {
 					chance = 6
 					RAJ = { country_event = RAJ_naxal.14 }
