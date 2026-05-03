@@ -850,6 +850,10 @@ focus_tree = {
 		}
 		ai_will_do = {
 			base = 1
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
 		}
 	}
 	focus = {
@@ -872,6 +876,10 @@ focus_tree = {
 		}
 		ai_will_do = {
 			base = 1
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
 		}
 	}
 	focus = {
@@ -889,6 +897,10 @@ focus_tree = {
 		}
 		ai_will_do = {
 			base = 1
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
 		}
 	}
 	focus = {
@@ -908,6 +920,10 @@ focus_tree = {
 		}
 		ai_will_do = {
 			base = 1
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
 		}
 	}
 	focus = {
@@ -931,6 +947,10 @@ focus_tree = {
 		}
 		ai_will_do = {
 			base = 1
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
 		}
 	}
 	focus = {
@@ -2189,30 +2209,7 @@ focus_tree = {
 			}
 			set_temp_variable = { treasury_change = -9.00 }
 			modify_treasury_effect = yes
-			if = {
-				limit = {
-					NOT = {
-						has_idea = RAJ_energy1
-						has_idea = RAJ_energy2
-						has_idea = RAJ_energy3
-					}
-				}
-				add_ideas = RAJ_energy1
-			}
-			else_if = {
-				limit = { has_idea = RAJ_energy1 }
-				swap_ideas = {
-					remove_idea = RAJ_energy1
-					add_idea = RAJ_energy2
-				}
-			}
-			else_if = {
-				limit = { has_idea = RAJ_energy2 }
-				swap_ideas = {
-					remove_idea = RAJ_energy2
-					add_idea = RAJ_energy3
-				}
-			}
+			RAJ_upgrade_energy_idea = yes
 			set_temp_variable = {
 				temp_change = 1
 			}
@@ -2266,30 +2263,7 @@ focus_tree = {
 			}
 			set_temp_variable = { treasury_change = -9.00 }
 			modify_treasury_effect = yes
-			if = {
-				limit = {
-					NOT = {
-						has_idea = RAJ_energy1
-						has_idea = RAJ_energy2
-						has_idea = RAJ_energy3
-					}
-				}
-				add_ideas = RAJ_energy1
-			}
-			else_if = {
-				limit = { has_idea = RAJ_energy1 }
-				swap_ideas = {
-					remove_idea = RAJ_energy1
-					add_idea = RAJ_energy2
-				}
-			}
-			else_if = {
-				limit = { has_idea = RAJ_energy2 }
-				swap_ideas = {
-					remove_idea = RAJ_energy2
-					add_idea = RAJ_energy3
-				}
-			}
+			RAJ_upgrade_energy_idea = yes
 			set_temp_variable = {
 				temp_change = 1
 			}
@@ -3401,19 +3375,19 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MILITARY_LAWS }
 		prerequisite = { focus = RAJ_threat_of_terror_mil }
 		available = {
-			has_variable = strength_of_maoists
-			check_variable = { strength_of_maoists > 10 }
+			has_variable = RAJ_strength_of_maoists
+			check_variable = { RAJ_strength_of_maoists > 10 }
 		}
 		bypass = {
-			has_variable = strength_of_maoists
-			check_variable = { strength_of_maoists < 5 }
+			has_variable = RAJ_strength_of_maoists
+			check_variable = { RAJ_strength_of_maoists < 5 }
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_counter_insurgency_operations"
 			add_political_power = -50
 			add_stability = 0.03
-			subtract_from_variable = { strength_of_maoists = 10 }
-			subtract_from_variable = { maoist_political_influence = 5 }
+			subtract_from_variable = { RAJ_strength_of_maoists = 10 }
+			subtract_from_variable = { RAJ_maoist_political_influence = 5 }
 			add_timed_idea = {
 				idea = RAJ_operation_green_hunt_active
 				days = 365
@@ -3432,7 +3406,7 @@ focus_tree = {
 			base = 5
 			modifier = {
 				factor = 3
-				check_variable = { strength_of_maoists > 30 }
+				check_variable = { RAJ_strength_of_maoists > 30 }
 			}
 		}
 	}
@@ -6248,14 +6222,8 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_arms_exports_italy"
 			set_country_flag = RAJ_italy_export_weapon_flag
 			custom_effect_tooltip = RAJ_ind_export_weapon_tt
-			add_opinion_modifier = {
-				target = ITA
-				modifier = improve_trade
-			}
-			reverse_add_opinion_modifier = {
-				target = ITA
-				modifier = improve_trade
-			}
+			set_temp_variable = { temp_export_target = ITA }
+			RAJ_arms_export_reward = yes
 		}
 		ai_will_do = {
 			base = 1
@@ -6278,14 +6246,8 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_arms_exports_sri_lanka"
 			set_country_flag = RAJ_srilanka_export_weapon_flag
 			custom_effect_tooltip = RAJ_ind_export_weapon_tt
-			add_opinion_modifier = {
-				target = SRI
-				modifier = improve_trade
-			}
-			reverse_add_opinion_modifier = {
-				target = SRI
-				modifier = improve_trade
-			}
+			set_temp_variable = { temp_export_target = SRI }
+			RAJ_arms_export_reward = yes
 		}
 		ai_will_do = {
 			base = 1
@@ -6308,14 +6270,8 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_arms_exports_israel"
 			set_country_flag = RAJ_israeli_export_weapon_flag
 			custom_effect_tooltip = RAJ_ind_export_weapon_tt
-			add_opinion_modifier = {
-				target = ISR
-				modifier = improve_trade
-			}
-			reverse_add_opinion_modifier = {
-				target = ISR
-				modifier = improve_trade
-			}
+			set_temp_variable = { temp_export_target = ISR }
+			RAJ_arms_export_reward = yes
 		}
 		ai_will_do = {
 			base = 1
@@ -6338,14 +6294,8 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_arms_exports_saudi"
 			set_country_flag = RAJ_saudi_export_weapon_flag
 			custom_effect_tooltip = RAJ_ind_export_weapon_tt
-			add_opinion_modifier = {
-				target = SAU
-				modifier = improve_trade
-			}
-			reverse_add_opinion_modifier = {
-				target = SAU
-				modifier = improve_trade
-			}
+			set_temp_variable = { temp_export_target = SAU }
+			RAJ_arms_export_reward = yes
 		}
 		ai_will_do = {
 			base = 1
@@ -6368,14 +6318,8 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_arms_exports_maldives"
 			set_country_flag = RAJ_mld_export_weapon_flag
 			custom_effect_tooltip = RAJ_ind_export_weapon_tt
-			add_opinion_modifier = {
-				target = MLD
-				modifier = improve_trade
-			}
-			reverse_add_opinion_modifier = {
-				target = MLD
-				modifier = improve_trade
-			}
+			set_temp_variable = { temp_export_target = MLD }
+			RAJ_arms_export_reward = yes
 		}
 		ai_will_do = {
 			base = 1
@@ -6398,14 +6342,8 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_arms_exports_mauritius"
 			set_country_flag = RAJ_mrt_export_weapon_flag
 			custom_effect_tooltip = RAJ_ind_export_weapon_tt
-			add_opinion_modifier = {
-				target = MRT
-				modifier = improve_trade
-			}
-			reverse_add_opinion_modifier = {
-				target = MRT
-				modifier = improve_trade
-			}
+			set_temp_variable = { temp_export_target = MRT }
+			RAJ_arms_export_reward = yes
 		}
 		ai_will_do = {
 			base = 1
@@ -6428,14 +6366,8 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_arms_exports_uae"
 			set_country_flag = RAJ_uae_export_weapon_flag
 			custom_effect_tooltip = RAJ_ind_export_weapon_tt
-			add_opinion_modifier = {
-				target = UAE
-				modifier = improve_trade
-			}
-			reverse_add_opinion_modifier = {
-				target = UAE
-				modifier = improve_trade
-			}
+			set_temp_variable = { temp_export_target = UAE }
+			RAJ_arms_export_reward = yes
 		}
 		ai_will_do = {
 			base = 1
@@ -6453,19 +6385,13 @@ focus_tree = {
 			NOT = { has_war_with = BHU }
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
-		prerequisite = { focus = RAJ_arms_exports_uae focus = RAJ_arms_exports_mauritius focus = RAJ_arms_exports_maldives focus = RAJ_arms_exports_italy focus = RAJ_arms_exports_sri_lanka focus = RAJ_arms_exports_israel focus = RAJ_arms_exports_israel focus = RAJ_arms_exports_saudi }
+		prerequisite = { focus = RAJ_arms_exports_uae focus = RAJ_arms_exports_mauritius focus = RAJ_arms_exports_maldives focus = RAJ_arms_exports_italy focus = RAJ_arms_exports_sri_lanka focus = RAJ_arms_exports_israel focus = RAJ_arms_exports_saudi }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_arms_exports_bhutan"
 			set_country_flag = RAJ_bhu_export_weapon_flag
 			custom_effect_tooltip = RAJ_ind_export_weapon_tt
-			add_opinion_modifier = {
-				target = BHU
-				modifier = improve_trade
-			}
-			reverse_add_opinion_modifier = {
-				target = BHU
-				modifier = improve_trade
-			}
+			set_temp_variable = { temp_export_target = BHU }
+			RAJ_arms_export_reward = yes
 		}
 		ai_will_do = {
 			base = 1
@@ -6483,19 +6409,13 @@ focus_tree = {
 			NOT = { has_war_with = EGY }
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
-		prerequisite = { focus = RAJ_arms_exports_uae focus = RAJ_arms_exports_mauritius focus = RAJ_arms_exports_maldives focus = RAJ_arms_exports_italy focus = RAJ_arms_exports_sri_lanka focus = RAJ_arms_exports_israel focus = RAJ_arms_exports_israel focus = RAJ_arms_exports_saudi }
+		prerequisite = { focus = RAJ_arms_exports_uae focus = RAJ_arms_exports_mauritius focus = RAJ_arms_exports_maldives focus = RAJ_arms_exports_italy focus = RAJ_arms_exports_sri_lanka focus = RAJ_arms_exports_israel focus = RAJ_arms_exports_saudi }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_arms_exports_egypt"
 			set_country_flag = RAJ_egy_export_weapon_flag
 			custom_effect_tooltip = RAJ_ind_export_weapon_tt
-			add_opinion_modifier = {
-				target = EGY
-				modifier = improve_trade
-			}
-			reverse_add_opinion_modifier = {
-				target = EGY
-				modifier = improve_trade
-			}
+			set_temp_variable = { temp_export_target = EGY }
+			RAJ_arms_export_reward = yes
 		}
 		ai_will_do = {
 			base = 1
@@ -6513,19 +6433,13 @@ focus_tree = {
 			NOT = { has_war_with = SOV }
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
-		prerequisite = { focus = RAJ_arms_exports_uae focus = RAJ_arms_exports_mauritius focus = RAJ_arms_exports_maldives focus = RAJ_arms_exports_italy focus = RAJ_arms_exports_sri_lanka focus = RAJ_arms_exports_israel focus = RAJ_arms_exports_israel focus = RAJ_arms_exports_saudi }
+		prerequisite = { focus = RAJ_arms_exports_uae focus = RAJ_arms_exports_mauritius focus = RAJ_arms_exports_maldives focus = RAJ_arms_exports_italy focus = RAJ_arms_exports_sri_lanka focus = RAJ_arms_exports_israel focus = RAJ_arms_exports_saudi }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_arms_exports_russia"
 			set_country_flag = RAJ_russia_export_weapon_flag
 			custom_effect_tooltip = RAJ_ind_export_weapon_tt
-			add_opinion_modifier = {
-				target = SOV
-				modifier = improve_trade
-			}
-			reverse_add_opinion_modifier = {
-				target = SOV
-				modifier = improve_trade
-			}
+			set_temp_variable = { temp_export_target = SOV }
+			RAJ_arms_export_reward = yes
 		}
 		ai_will_do = {
 			base = 1
@@ -6543,19 +6457,13 @@ focus_tree = {
 			NOT = { has_war_with = FRA }
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
-		prerequisite = { focus = RAJ_arms_exports_uae focus = RAJ_arms_exports_mauritius focus = RAJ_arms_exports_maldives focus = RAJ_arms_exports_italy focus = RAJ_arms_exports_sri_lanka focus = RAJ_arms_exports_israel focus = RAJ_arms_exports_israel focus = RAJ_arms_exports_saudi }
+		prerequisite = { focus = RAJ_arms_exports_uae focus = RAJ_arms_exports_mauritius focus = RAJ_arms_exports_maldives focus = RAJ_arms_exports_italy focus = RAJ_arms_exports_sri_lanka focus = RAJ_arms_exports_israel focus = RAJ_arms_exports_saudi }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_arms_exports_france"
 			set_country_flag = RAJ_baguette_export_weapon_flag
 			custom_effect_tooltip = RAJ_ind_export_weapon_tt
-			add_opinion_modifier = {
-				target = FRA
-				modifier = improve_trade
-			}
-			reverse_add_opinion_modifier = {
-				target = FRA
-				modifier = improve_trade
-			}
+			set_temp_variable = { temp_export_target = FRA }
+			RAJ_arms_export_reward = yes
 		}
 		ai_will_do = {
 			base = 1
@@ -6573,19 +6481,13 @@ focus_tree = {
 			NOT = { has_war_with = NEP }
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
-		prerequisite = { focus = RAJ_arms_exports_uae focus = RAJ_arms_exports_mauritius focus = RAJ_arms_exports_maldives focus = RAJ_arms_exports_italy focus = RAJ_arms_exports_sri_lanka focus = RAJ_arms_exports_israel focus = RAJ_arms_exports_israel focus = RAJ_arms_exports_saudi }
+		prerequisite = { focus = RAJ_arms_exports_uae focus = RAJ_arms_exports_mauritius focus = RAJ_arms_exports_maldives focus = RAJ_arms_exports_italy focus = RAJ_arms_exports_sri_lanka focus = RAJ_arms_exports_israel focus = RAJ_arms_exports_saudi }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_arms_exports_nepal"
 			set_country_flag = RAJ_nepal_export_weapon_flag
 			custom_effect_tooltip = RAJ_ind_export_weapon_tt
-			add_opinion_modifier = {
-				target = NEP
-				modifier = improve_trade
-			}
-			reverse_add_opinion_modifier = {
-				target = NEP
-				modifier = improve_trade
-			}
+			set_temp_variable = { temp_export_target = NEP }
+			RAJ_arms_export_reward = yes
 		}
 		ai_will_do = {
 			base = 1
@@ -6603,19 +6505,13 @@ focus_tree = {
 			NOT = { has_war_with = ETH }
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
-		prerequisite = { focus = RAJ_arms_exports_uae focus = RAJ_arms_exports_mauritius focus = RAJ_arms_exports_maldives focus = RAJ_arms_exports_italy focus = RAJ_arms_exports_sri_lanka focus = RAJ_arms_exports_israel focus = RAJ_arms_exports_israel focus = RAJ_arms_exports_saudi }
+		prerequisite = { focus = RAJ_arms_exports_uae focus = RAJ_arms_exports_mauritius focus = RAJ_arms_exports_maldives focus = RAJ_arms_exports_italy focus = RAJ_arms_exports_sri_lanka focus = RAJ_arms_exports_israel focus = RAJ_arms_exports_saudi }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_arms_exports_ethiopia"
 			set_country_flag = RAJ_ethiopia_export_weapon_flag
 			custom_effect_tooltip = RAJ_ind_export_weapon_tt
-			add_opinion_modifier = {
-				target = ETH
-				modifier = improve_trade
-			}
-			reverse_add_opinion_modifier = {
-				target = ETH
-				modifier = improve_trade
-			}
+			set_temp_variable = { temp_export_target = ETH }
+			RAJ_arms_export_reward = yes
 		}
 		ai_will_do = {
 			base = 1
@@ -6633,19 +6529,13 @@ focus_tree = {
 			NOT = { has_war_with = ARM }
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
-		prerequisite = { focus = RAJ_arms_exports_uae focus = RAJ_arms_exports_mauritius focus = RAJ_arms_exports_maldives focus = RAJ_arms_exports_italy focus = RAJ_arms_exports_sri_lanka focus = RAJ_arms_exports_israel focus = RAJ_arms_exports_israel focus = RAJ_arms_exports_saudi }
+		prerequisite = { focus = RAJ_arms_exports_uae focus = RAJ_arms_exports_mauritius focus = RAJ_arms_exports_maldives focus = RAJ_arms_exports_italy focus = RAJ_arms_exports_sri_lanka focus = RAJ_arms_exports_israel focus = RAJ_arms_exports_saudi }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_arms_exports_armenia"
 			set_country_flag = RAJ_nardi_export_weapon_flag
 			custom_effect_tooltip = RAJ_ind_export_weapon_tt
-			add_opinion_modifier = {
-				target = ARM
-				modifier = improve_trade
-			}
-			reverse_add_opinion_modifier = {
-				target = ARM
-				modifier = improve_trade
-			}
+			set_temp_variable = { temp_export_target = ARM }
+			RAJ_arms_export_reward = yes
 		}
 		ai_will_do = {
 			base = 1
@@ -7007,14 +6897,8 @@ focus_tree = {
 			set_temp_variable = { tag_index = SOV }
 			set_temp_variable = { influence_target = RAJ }
 			change_influence_percentage = yes
-			add_opinion_modifier = {
-				target = SOV
-				modifier = improve_trade
-			}
-			reverse_add_opinion_modifier = {
-				target = SOV
-				modifier = improve_trade
-			}
+			set_temp_variable = { temp_export_target = SOV }
+			RAJ_arms_export_reward = yes
 			add_equipment_to_stockpile = {
 				type = infantry_weapons_type
 				amount = 2000
@@ -7705,34 +7589,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_check_MSF"
-			if = {
-				limit = {
-					NOT = {
-						has_idea = generic_non_aligned_boost_idea
-						has_idea = generic_non_aligned_boost_idea2
-					}
-				}
-				add_timed_idea = {
-					idea = generic_non_aligned_boost_idea
-					days = 365
-				}
-			}
-			else_if = {
-				limit = { has_idea = generic_non_aligned_boost_idea }
-				remove_ideas = generic_non_aligned_boost_idea
-				add_timed_idea = {
-					idea = generic_non_aligned_boost_idea2
-					days = 365
-				}
-			}
-			else_if = {
-				limit = { has_idea = generic_non_aligned_boost_idea2 }
-				remove_ideas = generic_non_aligned_boost_idea2
-				add_timed_idea = {
-					idea = generic_non_aligned_boost_idea2
-					days = 365
-				}
-			}
+			RAJ_upgrade_non_aligned_idea = yes
 		}
 
 		ai_will_do = {
@@ -8047,34 +7904,7 @@ focus_tree = {
 		relative_position_id = RAJ_bharatiya_janata_party
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_check_sierra_club"
-			if = {
-				limit = {
-					NOT = {
-						has_idea = generic_non_aligned_boost_idea
-						has_idea = generic_non_aligned_boost_idea2
-					}
-				}
-				add_timed_idea = {
-					idea = generic_non_aligned_boost_idea
-					days = 365
-				}
-			}
-			else_if = {
-				limit = { has_idea = generic_non_aligned_boost_idea }
-				remove_ideas = generic_non_aligned_boost_idea
-				add_timed_idea = {
-					idea = generic_non_aligned_boost_idea2
-					days = 365
-				}
-			}
-			else_if = {
-				limit = { has_idea = generic_non_aligned_boost_idea2 }
-				remove_ideas = generic_non_aligned_boost_idea2
-				add_timed_idea = {
-					idea = generic_non_aligned_boost_idea2
-					days = 365
-				}
-			}
+			RAJ_upgrade_non_aligned_idea = yes
 		}
 		ai_will_do = {
 			base = 1
@@ -8202,34 +8032,7 @@ focus_tree = {
 		relative_position_id = RAJ_bharatiya_janata_party
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_check_avaaz"
-			if = {
-				limit = {
-					NOT = {
-						has_idea = generic_non_aligned_boost_idea
-						has_idea = generic_non_aligned_boost_idea2
-					}
-				}
-				add_timed_idea = {
-					idea = generic_non_aligned_boost_idea
-					days = 365
-				}
-			}
-			else_if = {
-				limit = { has_idea = generic_non_aligned_boost_idea }
-				remove_ideas = generic_non_aligned_boost_idea
-				add_timed_idea = {
-					idea = generic_non_aligned_boost_idea2
-					days = 365
-				}
-			}
-			else_if = {
-				limit = { has_idea = generic_non_aligned_boost_idea2 }
-				remove_ideas = generic_non_aligned_boost_idea2
-				add_timed_idea = {
-					idea = generic_non_aligned_boost_idea2
-					days = 365
-				}
-			}
+			RAJ_upgrade_non_aligned_idea = yes
 		}
 		ai_will_do = {
 			base = 1
@@ -11181,7 +10984,6 @@ focus_tree = {
 		y = 5
 		cost = 6
 		available = { has_government = nationalist }
-		available = { has_government = nationalist }
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_FACTION FOCUS_FILTER_INFLUENCE FOCUS_FILTER_INSURGENCY }
 		prerequisite = { focus = RAJ_preserve_caste_system focus = RAJ_dharmic_alliance }
 		relative_position_id = RAJ_hindutva_front
@@ -11221,30 +11023,7 @@ focus_tree = {
 		relative_position_id = RAJ_hindutva_front
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_international_nationalism"
-			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = RAJ }
-			set_temp_variable = { influence_target = NPM }
-			change_influence_percentage = yes
-			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = RAJ }
-			set_temp_variable = { influence_target = NEP }
-			change_influence_percentage = yes
-			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = RAJ }
-			set_temp_variable = { influence_target = BHU }
-			change_influence_percentage = yes
-			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = RAJ }
-			set_temp_variable = { influence_target = BRM }
-			change_influence_percentage = yes
-			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = RAJ }
-			set_temp_variable = { influence_target = SRI }
-			change_influence_percentage = yes
-			set_temp_variable = { temp_opinion = 5 }
-			change_labour_unions_opinion = yes
-			set_temp_variable = { temp_opinion = 5 }
-			change_the_military_opinion = yes
+			RAJ_influence_south_asia = yes
 		}
 		ai_will_do = {
 			base = 1
@@ -11561,30 +11340,7 @@ focus_tree = {
 		relative_position_id = RAJ_hindutva_front
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_influence_indochina"
-			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = RAJ }
-			set_temp_variable = { influence_target = NPM }
-			change_influence_percentage = yes
-			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = RAJ }
-			set_temp_variable = { influence_target = NEP }
-			change_influence_percentage = yes
-			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = RAJ }
-			set_temp_variable = { influence_target = BHU }
-			change_influence_percentage = yes
-			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = RAJ }
-			set_temp_variable = { influence_target = BRM }
-			change_influence_percentage = yes
-			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = RAJ }
-			set_temp_variable = { influence_target = SRI }
-			change_influence_percentage = yes
-			set_temp_variable = { temp_opinion = 5 }
-			change_labour_unions_opinion = yes
-			set_temp_variable = { temp_opinion = 5 }
-			change_the_military_opinion = yes
+			RAJ_influence_south_asia = yes
 		}
 		ai_will_do = {
 			base = 1
@@ -12494,14 +12250,8 @@ focus_tree = {
 			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = ARM }
 			change_influence_percentage = yes
-			add_opinion_modifier = {
-				target = ARM
-				modifier = improve_trade
-			}
-			reverse_add_opinion_modifier = {
-				target = ARM
-				modifier = improve_trade
-			}
+			set_temp_variable = { temp_export_target = ARM }
+			RAJ_arms_export_reward = yes
 			give_guarantee = ARM
 		}
 		ai_will_do = {
@@ -12846,14 +12596,8 @@ focus_tree = {
 			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = BHU }
 			change_influence_percentage = yes
-			add_opinion_modifier = {
-				target = BHU
-				modifier = improve_trade
-			}
-			reverse_add_opinion_modifier = {
-				target = BHU
-				modifier = improve_trade
-			}
+			set_temp_variable = { temp_export_target = BHU }
+			RAJ_arms_export_reward = yes
 			set_temp_variable = { receiver_nation = RAJ.id }
 			set_temp_variable = { sender_nation = BHU.id }
 			set_improved_trade_agreement = yes
@@ -12941,14 +12685,8 @@ focus_tree = {
 			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = UAE }
 			change_influence_percentage = yes
-			add_opinion_modifier = {
-				target = UAE
-				modifier = improve_trade
-			}
-			reverse_add_opinion_modifier = {
-				target = UAE
-				modifier = improve_trade
-			}
+			set_temp_variable = { temp_export_target = UAE }
+			RAJ_arms_export_reward = yes
 			set_temp_variable = { receiver_nation = UAE.id }
 			set_temp_variable = { sender_nation = RAJ.id }
 			set_improved_trade_agreement = yes
@@ -13085,14 +12823,8 @@ focus_tree = {
 			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = SAU }
 			change_influence_percentage = yes
-			add_opinion_modifier = {
-				target = SAU
-				modifier = improve_trade
-			}
-			reverse_add_opinion_modifier = {
-				target = SAU
-				modifier = improve_trade
-			}
+			set_temp_variable = { temp_export_target = SAU }
+			RAJ_arms_export_reward = yes
 			set_temp_variable = { percent_change = 2 }
 			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = MAY }
@@ -13440,14 +13172,8 @@ focus_tree = {
 			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = FRA }
 			change_influence_percentage = yes
-			add_opinion_modifier = {
-				target = FRA
-				modifier = improve_trade
-			}
-			reverse_add_opinion_modifier = {
-				target = FRA
-				modifier = improve_trade
-			}
+			set_temp_variable = { temp_export_target = FRA }
+			RAJ_arms_export_reward = yes
 			set_temp_variable = { receiver_nation = FRA.id }
 			set_temp_variable = { sender_nation = RAJ.id }
 			set_improved_trade_agreement = yes
@@ -13935,62 +13661,14 @@ focus_tree = {
 		relative_position_id = RAJ_indian_minist_of_foreign_affairs
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_indian_autarky_effort"
-			if = {
-				limit = {
-					country_exists = BHU
-					NOT = { has_war_with = RAJ }
-				}
-				BHU = {
-					random_owned_controlled_state = { add_building_construction = { type = infrastructure level = 1 instant_build = yes } }
-					add_opinion_modifier = { target = RAJ modifier = declaration_of_friendship }
-					set_temp_variable = { percent_change = 2 }
-					set_temp_variable = { tag_index = ROOT.id }
-					set_temp_variable = { influence_target = THIS.id }
-					change_influence_percentage = yes
-				}
-			}
-			if = {
-				limit = {
-					country_exists = NEP
-					NOT = { has_war_with = RAJ }
-				}
-				NEP = {
-					random_owned_controlled_state = { add_building_construction = { type = infrastructure level = 1 instant_build = yes } }
-					add_opinion_modifier = { target = RAJ modifier = declaration_of_friendship }
-					set_temp_variable = { percent_change = 2 }
-					set_temp_variable = { tag_index = ROOT.id }
-					set_temp_variable = { influence_target = THIS.id }
-					change_influence_percentage = yes
-				}
-			}
-			if = {
-				limit = {
-					country_exists = BRM
-					NOT = { has_war_with = RAJ }
-				}
-				BRM = {
-					random_owned_controlled_state = { add_building_construction = { type = infrastructure level = 1 instant_build = yes } }
-					add_opinion_modifier = { target = RAJ modifier = declaration_of_friendship }
-					set_temp_variable = { percent_change = 2 }
-					set_temp_variable = { tag_index = ROOT.id }
-					set_temp_variable = { influence_target = THIS.id }
-					change_influence_percentage = yes
-				}
-			}
-			if = {
-				limit = {
-					country_exists = BAN
-					NOT = { has_war_with = RAJ }
-				}
-				BAN = {
-					random_owned_controlled_state = { add_building_construction = { type = infrastructure level = 1 instant_build = yes } }
-					add_opinion_modifier = { target = RAJ modifier = declaration_of_friendship }
-					set_temp_variable = { percent_change = 2 }
-					set_temp_variable = { tag_index = ROOT.id }
-					set_temp_variable = { influence_target = THIS.id }
-					change_influence_percentage = yes
-				}
-			}
+			set_temp_variable = { temp_neighbor = BHU }
+			RAJ_autarky_neighbor_boost = yes
+			set_temp_variable = { temp_neighbor = NEP }
+			RAJ_autarky_neighbor_boost = yes
+			set_temp_variable = { temp_neighbor = BRM }
+			RAJ_autarky_neighbor_boost = yes
+			set_temp_variable = { temp_neighbor = BAN }
+			RAJ_autarky_neighbor_boost = yes
 		}
 		ai_will_do = {
 			base = 1

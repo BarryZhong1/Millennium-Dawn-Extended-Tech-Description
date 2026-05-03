@@ -27,6 +27,124 @@ india_religious_events = {
 	}
 }
 
+RAJ_upgrade_energy_idea = {
+	if = {
+		limit = {
+			NOT = {
+				has_idea = RAJ_energy1
+				has_idea = RAJ_energy2
+				has_idea = RAJ_energy3
+			}
+		}
+		add_ideas = RAJ_energy1
+	}
+	else_if = {
+		limit = { has_idea = RAJ_energy1 }
+		swap_ideas = {
+			remove_idea = RAJ_energy1
+			add_idea = RAJ_energy2
+		}
+	}
+	else_if = {
+		limit = { has_idea = RAJ_energy2 }
+		swap_ideas = {
+			remove_idea = RAJ_energy2
+			add_idea = RAJ_energy3
+		}
+	}
+}
+
+RAJ_influence_south_asia = {
+	set_temp_variable = { percent_change = 5 }
+	set_temp_variable = { tag_index = RAJ }
+	set_temp_variable = { influence_target = NPM }
+	change_influence_percentage = yes
+	set_temp_variable = { percent_change = 5 }
+	set_temp_variable = { tag_index = RAJ }
+	set_temp_variable = { influence_target = NEP }
+	change_influence_percentage = yes
+	set_temp_variable = { percent_change = 5 }
+	set_temp_variable = { tag_index = RAJ }
+	set_temp_variable = { influence_target = BHU }
+	change_influence_percentage = yes
+	set_temp_variable = { percent_change = 5 }
+	set_temp_variable = { tag_index = RAJ }
+	set_temp_variable = { influence_target = BRM }
+	change_influence_percentage = yes
+	set_temp_variable = { percent_change = 5 }
+	set_temp_variable = { tag_index = RAJ }
+	set_temp_variable = { influence_target = SRI }
+	change_influence_percentage = yes
+	set_temp_variable = { temp_opinion = 5 }
+	change_labour_unions_opinion = yes
+	set_temp_variable = { temp_opinion = 5 }
+	change_the_military_opinion = yes
+}
+
+RAJ_upgrade_non_aligned_idea = {
+	if = {
+		limit = {
+			NOT = {
+				has_idea = generic_non_aligned_boost_idea
+				has_idea = generic_non_aligned_boost_idea2
+			}
+		}
+		add_timed_idea = {
+			idea = generic_non_aligned_boost_idea
+			days = 365
+		}
+	}
+	else_if = {
+		limit = { has_idea = generic_non_aligned_boost_idea }
+		remove_ideas = generic_non_aligned_boost_idea
+		add_timed_idea = {
+			idea = generic_non_aligned_boost_idea2
+			days = 365
+		}
+	}
+	else_if = {
+		limit = { has_idea = generic_non_aligned_boost_idea2 }
+		remove_ideas = generic_non_aligned_boost_idea2
+		add_timed_idea = {
+			idea = generic_non_aligned_boost_idea2
+			days = 365
+		}
+	}
+}
+
+RAJ_arms_export_reward = {
+	meta_effect = {
+		text = {
+			add_opinion_modifier = {
+				target = [TARGET]
+				modifier = improve_trade
+			}
+			reverse_add_opinion_modifier = {
+				target = [TARGET]
+				modifier = improve_trade
+			}
+		}
+		TARGET = "[?temp_export_target.GetTag]"
+	}
+}
+
+RAJ_afghan_wargoals = {
+	set_temp_variable = { wargoal_on = TAL }
+	set_temp_variable = { wargoal_type = 2 }
+	add_threat_from_wargoal_effect = yes
+	create_wargoal = {
+		type = annex_everything
+		target = TAL
+	}
+	set_temp_variable = { wargoal_on = AFG }
+	set_temp_variable = { wargoal_type = 2 }
+	add_threat_from_wargoal_effect = yes
+	create_wargoal = {
+		type = annex_everything
+		target = AFG
+	}
+}
+
 RAJ_change_muslim_opinion = {
 	custom_override_tooltip = {
 		tooltip = RAJ_change_muslim_opinion_tt
@@ -160,4 +278,21 @@ RAJ_remove_all_naxalite_modifiers = {
 	remove_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_2 }
 	remove_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_3 }
 	remove_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_4 }
+}
+
+RAJ_autarky_neighbor_boost = {
+	if = {
+		limit = {
+			country_exists = var:temp_neighbor
+			NOT = { has_war_with = var:temp_neighbor }
+		}
+		var:temp_neighbor = {
+			random_owned_controlled_state = { add_building_construction = { type = infrastructure level = 1 instant_build = yes } }
+			add_opinion_modifier = { target = RAJ modifier = declaration_of_friendship }
+			set_temp_variable = { percent_change = 2 }
+			set_temp_variable = { tag_index = ROOT.id }
+			set_temp_variable = { influence_target = THIS.id }
+			change_influence_percentage = yes
+		}
+	}
 }

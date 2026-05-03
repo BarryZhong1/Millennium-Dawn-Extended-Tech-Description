@@ -1531,11 +1531,11 @@ country_event = {
 		name = RAJ_mao_reb.1.a
 		log = "[GetDateText]: [This.GetName]: RAJ_mao_reb.1.a executed"
 		add_to_variable = {
-			var = strength_of_maoists
+			var = RAJ_strength_of_maoists
 			value = 2
 		}
 		add_to_variable = {
-			var = maoist_political_influence
+			var = RAJ_maoist_political_influence
 			value = 2
 		}
 		add_to_variable = { party_pop_array^19 = 0.05 }
@@ -1562,11 +1562,11 @@ country_event = {
 		name = RAJ_mao_reb.2.a
 		log = "[GetDateText]: [This.GetName]: RAJ_mao_reb.2.a executed"
 		add_to_variable = {
-			var = strength_of_maoists
+			var = RAJ_strength_of_maoists
 			value = 5
 		}
 		add_to_variable = {
-			var = maoist_political_influence
+			var = RAJ_maoist_political_influence
 			value = 5
 		}
 		add_to_variable = { party_pop_array^19 = 0.03 }
@@ -1592,11 +1592,11 @@ country_event = {
 	option = {
 		name = RAJ_mao_reb.3.a
 		add_to_variable = {
-			var = strength_of_maoists
+			var = RAJ_strength_of_maoists
 			value = -5
 		}
 		add_to_variable = {
-			var = maoist_political_influence
+			var = RAJ_maoist_political_influence
 			value = -5
 		}
 		log = "[GetDateText]: [This.GetName]: RAJ_mao_reb.3.a executed"
@@ -1700,11 +1700,11 @@ country_event = {
 		name = RAJ_mao_reb.4.a
 		log = "[GetDateText]: [This.GetName]: RAJ_mao_reb.4.a executed"
 		add_to_variable = {
-			var = strength_of_maoists
+			var = RAJ_strength_of_maoists
 			value = 1
 		}
 		add_to_variable = {
-			var = maoist_political_influence
+			var = RAJ_maoist_political_influence
 			value = 5
 		}
 		add_to_variable = { party_pop_array^19 = 0.1 }
@@ -1777,6 +1777,7 @@ country_event = {
 	fire_only_once = yes
 	trigger = {
 		original_tag = RAJ
+		has_country_flag = RAJ_has_naxalite_states
 		NOT = { has_country_flag = RAJ_pwg_mcc_merger }
 		any_controlled_state = {
 			OR = {
@@ -1793,8 +1794,8 @@ country_event = {
 		name = RAJ_naxal.10.a
 		log = "[GetDateText]: [This.GetName]: RAJ_naxal.10.a executed"
 		set_country_flag = RAJ_pwg_mcc_merger
-		add_to_variable = { strength_of_maoists = 10 }
-		add_to_variable = { maoist_political_influence = 10 }
+		add_to_variable = { RAJ_strength_of_maoists = 10 }
+		add_to_variable = { RAJ_maoist_political_influence = 10 }
 		add_stability = -0.05
 		# Escalate core states
 		456 = {
@@ -1824,7 +1825,8 @@ country_event = {
 	is_triggered_only = yes
 	trigger = {
 		original_tag = RAJ
-		check_variable = { strength_of_maoists > 30 }
+		has_country_flag = RAJ_has_naxalite_states
+		check_variable = { RAJ_strength_of_maoists > 30 }
 		NOT = { has_country_flag = RAJ_major_attack_cooldown }
 		NOT = { has_country_flag = RAJ_naxal_free_achieved }
 		any_controlled_state = {
@@ -1842,7 +1844,7 @@ country_event = {
 		add_stability = -0.03
 		add_war_support = -0.02
 		add_manpower = -500
-		add_to_variable = { strength_of_maoists = 3 }
+		add_to_variable = { RAJ_strength_of_maoists = 3 }
 		ai_chance = { base = 1 }
 	}
 }
@@ -1874,7 +1876,7 @@ country_event = {
 	is_triggered_only = yes
 	trigger = {
 		original_tag = RAJ
-		check_variable = { strength_of_maoists > 20 }
+		check_variable = { RAJ_strength_of_maoists > 20 }
 		NOT = { has_country_flag = RAJ_leadership_elimination_cooldown }
 		NOT = { has_country_flag = RAJ_naxal_free_achieved }
 		has_country_flag = RAJ_green_hunt_active
@@ -1884,7 +1886,7 @@ country_event = {
 		name = RAJ_naxal.13.a
 		log = "[GetDateText]: [This.GetName]: RAJ_naxal.13.a executed"
 		set_country_flag = { flag = RAJ_leadership_elimination_cooldown days = 365 value = 1 }
-		add_to_variable = { strength_of_maoists = -8 }
+		add_to_variable = { RAJ_strength_of_maoists = -8 }
 		add_stability = 0.03
 		add_war_support = 0.02
 		ai_chance = { base = 1 }
@@ -1900,6 +1902,7 @@ country_event = {
 	is_triggered_only = yes
 	trigger = {
 		original_tag = RAJ
+		has_country_flag = RAJ_has_naxalite_states
 		any_controlled_state = {
 			OR = {
 				has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency }
@@ -1916,7 +1919,7 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: RAJ_naxal.14.a executed"
 		set_country_flag = { flag = RAJ_tribal_protests_cooldown days = 365 value = 1 }
 		add_stability = -0.02
-		add_to_variable = { maoist_political_influence = 3 }
+		add_to_variable = { RAJ_maoist_political_influence = 3 }
 		ai_chance = { base = 30 }
 	}
 
@@ -1959,7 +1962,7 @@ country_event = {
 
 	trigger = {
 		original_tag = RAJ
-		check_variable = { strength_of_maoists < 5 }
+		check_variable = { RAJ_strength_of_maoists < 5 }
 		NOT = {
 			any_controlled_state = {
 				OR = {
@@ -1978,8 +1981,8 @@ country_event = {
 		add_ideas = RAJ_naxal_free_india
 		add_stability = 0.10
 		add_political_power = 100
-		set_variable = { strength_of_maoists = 0 }
-		set_variable = { maoist_political_influence = 0 }
+		set_variable = { RAJ_strength_of_maoists = 0 }
+		set_variable = { RAJ_maoist_political_influence = 0 }
 		every_controlled_state = {
 			remove_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_3 }
 			remove_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_4 }
@@ -2000,7 +2003,7 @@ country_event = {
 	trigger = {
 		original_tag = RAJ
 		date > 2010.4.1
-		check_variable = { strength_of_maoists > 25 }
+		check_variable = { RAJ_strength_of_maoists > 25 }
 		456 = { # Chhattisgarh
 			is_controlled_by = RAJ
 			OR = {
@@ -2016,7 +2019,7 @@ country_event = {
 		add_stability = -0.05
 		add_war_support = 0.03
 		add_manpower = -76
-		add_to_variable = { strength_of_maoists = 5 }
+		add_to_variable = { RAJ_strength_of_maoists = 5 }
 		set_country_flag = RAJ_dantewada_ambush
 		ai_chance = { base = 1 }
 	}
@@ -2034,7 +2037,7 @@ country_event = {
 	trigger = {
 		original_tag = RAJ
 		date > 2017.4.1
-		check_variable = { strength_of_maoists > 15 }
+		check_variable = { RAJ_strength_of_maoists > 15 }
 		456 = { # Chhattisgarh
 			is_controlled_by = RAJ
 			OR = {
@@ -2052,7 +2055,7 @@ country_event = {
 		add_stability = -0.03
 		add_war_support = 0.02
 		add_manpower = -25
-		add_to_variable = { strength_of_maoists = 3 }
+		add_to_variable = { RAJ_strength_of_maoists = 3 }
 		ai_chance = { base = 1 }
 	}
 }
@@ -2339,58 +2342,13 @@ country_event = {
 	option = {
 		name = indian_event.54.a
 		log = "[GetDateText]: [This.GetName]: indian_event.54.a executed"
-		TRK = {
-			set_temp_variable = { wargoal_on = TAL }
-			set_temp_variable = { wargoal_type = 2 }
-			add_threat_from_wargoal_effect = yes
-			create_wargoal = {
-			type = annex_everything
-			target = TAL
-		}
-		set_temp_variable = { wargoal_on = AFG }
-		set_temp_variable = { wargoal_type = 2 }
-		add_threat_from_wargoal_effect = yes
-		create_wargoal = {
-			type = annex_everything
-			target = AFG
-		}
-	}
-		RAJ = {
-			set_temp_variable = { wargoal_on = TAL }
-			set_temp_variable = { wargoal_type = 2 }
-			add_threat_from_wargoal_effect = yes
-			create_wargoal = {
-				type = annex_everything
-				target = TAL
-			}
-			set_temp_variable = { wargoal_on = AFG }
-			set_temp_variable = { wargoal_type = 2 }
-			add_threat_from_wargoal_effect = yes
-			create_wargoal = {
-				type = annex_everything
-				target = AFG
-			}
-		}
+		TRK = { RAJ_afghan_wargoals = yes }
+		RAJ = { RAJ_afghan_wargoals = yes }
 	}
 	option = {
 		name = indian_event.54.b
 		log = "[GetDateText]: [This.GetName]: indian_event.54.b executed"
-		RAJ = {
-			set_temp_variable = { wargoal_on = TAL }
-			set_temp_variable = { wargoal_type = 2 }
-			add_threat_from_wargoal_effect = yes
-			create_wargoal = {
-				type = annex_everything
-				target = TAL
-			}
-			set_temp_variable = { wargoal_on = AFG }
-			set_temp_variable = { wargoal_type = 2 }
-			add_threat_from_wargoal_effect = yes
-			create_wargoal = {
-				type = annex_everything
-				target = AFG
-			}
-		}
+		RAJ = { RAJ_afghan_wargoals = yes }
 	}
 }
 country_event = {
@@ -2572,7 +2530,7 @@ country_event = {
 	trigger = {
 		original_tag = RAJ
 		date > 2013.5.1
-		check_variable = { strength_of_maoists > 15 }
+		check_variable = { RAJ_strength_of_maoists > 15 }
 		456 = {
 			is_controlled_by = RAJ
 			RAJ_state_has_any_naxalite = yes
@@ -2584,7 +2542,7 @@ country_event = {
 		add_manpower = -27
 		add_stability = -0.04
 		add_war_support = 0.02
-		add_to_variable = { strength_of_maoists = 4 }
+		add_to_variable = { RAJ_strength_of_maoists = 4 }
 		set_country_flag = RAJ_darbha_attack
 		ai_chance = { base = 1 }
 	}
@@ -2768,7 +2726,7 @@ country_event = {
 	trigger = {
 		original_tag = RAJ
 		date > 2021.4.1
-		check_variable = { strength_of_maoists > 10 }
+		check_variable = { RAJ_strength_of_maoists > 10 }
 		456 = {
 			is_controlled_by = RAJ
 			RAJ_state_has_any_naxalite = yes
@@ -2780,7 +2738,7 @@ country_event = {
 		add_manpower = -22
 		add_stability = -0.03
 		add_war_support = 0.02
-		add_to_variable = { strength_of_maoists = 3 }
+		add_to_variable = { RAJ_strength_of_maoists = 3 }
 		set_country_flag = RAJ_bijapur_attack
 		ai_chance = { base = 1 }
 	}
