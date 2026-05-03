@@ -1,5 +1,13 @@
 on_actions = {
 	on_monthly_RAJ = {
+		random_events = {
+			1000 = 0
+
+			170 = RAJ_naxal.11
+			80 = RAJ_naxal.13
+			60 = RAJ_naxal.14
+		}
+
 		effect = {
 			india_religious_events = yes
 			RAJ_check_religious_harmony = yes
@@ -68,36 +76,10 @@ on_actions = {
 			if = {
 				limit = {
 					NOT = { has_country_flag = RAJ_naxal_free_achieved }
+					NOT = { has_country_flag = RAJ_has_naxalite_states }
+					check_variable = { strength_of_maoists < 5 }
 				}
-				if = {
-					limit = {
-						NOT = { has_country_flag = RAJ_has_naxalite_states }
-					}
-					RAJ = { country_event = RAJ_naxal.16 }
-				}
-				else = {
-					if = {
-						limit = { NOT = { has_country_flag = RAJ_major_attack_cooldown } }
-						random = {
-							chance = 17
-							RAJ = { country_event = RAJ_naxal.11 }
-						}
-					}
-					if = {
-						limit = { NOT = { has_country_flag = RAJ_leadership_elimination_cooldown } }
-						random = {
-							chance = 8
-							RAJ = { country_event = RAJ_naxal.13 }
-						}
-					}
-					if = {
-						limit = { NOT = { has_country_flag = RAJ_tribal_protests_cooldown } }
-						random = {
-							chance = 6
-							RAJ = { country_event = RAJ_naxal.14 }
-						}
-					}
-				}
+				RAJ = { country_event = RAJ_naxal.16 }
 			}
 		}
 	}
