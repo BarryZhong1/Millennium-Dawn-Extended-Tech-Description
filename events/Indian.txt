@@ -2537,3 +2537,276 @@ country_event = {
 		}
 	}
 }
+
+# 2006 Mumbai Train Bombings - July 11, 2006 - 209 killed
+country_event = {
+	id = indian_event.61
+	title = indian_event.61.t
+	desc = indian_event.61.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	picture = GFX_mumbai_attack_terror
+	trigger = {
+		original_tag = RAJ
+		date > 2006.7.1
+	}
+	option = {
+		name = indian_event.61.a
+		log = "[GetDateText]: [This.GetName]: indian_event.61.a executed"
+		add_manpower = -209
+		add_stability = -0.08
+		add_popularity = { ideology = fascism popularity = 0.05 }
+		set_country_flag = RAJ_mumbai_train_bombings
+		ai_chance = { base = 1 }
+	}
+}
+
+# 2013 Darbha Attack - May 25, 2013 - 27 killed in Naxalite ambush
+country_event = {
+	id = RAJ_naxal.19
+	title = RAJ_naxal.19.t
+	desc = RAJ_naxal.19.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	picture = GFX_event_generic_battle
+	trigger = {
+		original_tag = RAJ
+		date > 2013.5.1
+		check_variable = { strength_of_maoists > 15 }
+		456 = {
+			is_controlled_by = RAJ
+			RAJ_state_has_any_naxalite = yes
+		}
+	}
+	option = {
+		name = RAJ_naxal.19.a
+		log = "[GetDateText]: [This.GetName]: RAJ_naxal.19.a executed"
+		add_manpower = -27
+		add_stability = -0.04
+		add_war_support = 0.02
+		add_to_variable = { strength_of_maoists = 4 }
+		set_country_flag = RAJ_darbha_attack
+		ai_chance = { base = 1 }
+	}
+}
+
+# 2016 Uri Attack - September 18, 2016 - 19 soldiers killed
+country_event = {
+	id = indian_event.62
+	title = indian_event.62.t
+	desc = indian_event.62.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	picture = GFX_indian_soldiers2
+	trigger = {
+		original_tag = RAJ
+		date > 2016.9.1
+	}
+	option = {
+		name = indian_event.62.a
+		log = "[GetDateText]: [This.GetName]: indian_event.62.a executed"
+		add_manpower = -19
+		add_stability = -0.05
+		add_war_support = 0.03
+		add_popularity = { ideology = fascism popularity = 0.04 }
+		set_country_flag = RAJ_uri_attack
+		ai_chance = { base = 1 }
+	}
+}
+
+# 2016 Demonetization - November 8, 2016
+country_event = {
+	id = indian_event.63
+	title = indian_event.63.t
+	desc = indian_event.63.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	picture = GFX_indian_economy
+	trigger = {
+		original_tag = RAJ
+		date > 2016.11.1
+	}
+	option = {
+		name = indian_event.63.a
+		log = "[GetDateText]: [This.GetName]: indian_event.63.a executed"
+		add_stability = -0.05
+		add_political_power = -75
+		decrease_corruption = yes
+		set_country_flag = RAJ_demonetization
+		ai_chance = { base = 1 }
+	}
+}
+
+# 2017 Doklam Standoff - June 18, 2017
+country_event = {
+	id = RAJ_eastas.6
+	title = RAJ_eastas.6.t
+	desc = RAJ_eastas.6.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	picture = GFX_china_indian_border_skirmish
+	trigger = {
+		original_tag = RAJ
+		date > 2017.6.1
+		country_exists = CHI
+	}
+	option = {
+		name = RAJ_eastas.6.a
+		log = "[GetDateText]: [This.GetName]: RAJ_eastas.6.a executed"
+		add_stability = -0.02
+		add_opinion_modifier = { target = CHI modifier = border_tension }
+		reverse_add_opinion_modifier = { target = CHI modifier = border_tension }
+		set_country_flag = RAJ_doklam_standoff
+		ai_chance = { base = 1 }
+	}
+}
+
+# 2019 Pulwama Attack - February 14, 2019 - 40 CRPF killed
+country_event = {
+	id = indian_event.64
+	title = indian_event.64.t
+	desc = indian_event.64.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	picture = GFX_indian_soldiers2
+	trigger = {
+		original_tag = RAJ
+		date > 2019.2.1
+	}
+	option = {
+		name = indian_event.64.a
+		log = "[GetDateText]: [This.GetName]: indian_event.64.a executed"
+		add_manpower = -40
+		add_stability = -0.06
+		add_war_support = 0.05
+		add_popularity = { ideology = fascism popularity = 0.07 }
+		set_country_flag = RAJ_pulwama_attack
+		ai_chance = { base = 1 }
+	}
+}
+
+# 2019 Article 370 Revocation - August 5, 2019
+country_event = {
+	id = indian_event.65
+	title = indian_event.65.t
+	desc = indian_event.65.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	picture = GFX_delhi_metro
+	trigger = {
+		original_tag = RAJ
+		date > 2019.8.1
+	}
+	option = {
+		name = indian_event.65.a
+		log = "[GetDateText]: [This.GetName]: indian_event.65.a executed"
+		add_stability = -0.03
+		add_political_power = -25
+		add_popularity = { ideology = fascism popularity = 0.03 }
+		set_country_flag = RAJ_article_370_revoked
+		ai_chance = { base = 1 }
+	}
+}
+
+# 2019 Citizenship Amendment Act Protests - December 2019
+country_event = {
+	id = indian_event.66
+	title = indian_event.66.t
+	desc = indian_event.66.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	picture = GFX_event_generic_riot
+	trigger = {
+		original_tag = RAJ
+		date > 2019.12.1
+	}
+	option = {
+		name = indian_event.66.a
+		log = "[GetDateText]: [This.GetName]: indian_event.66.a executed"
+		add_stability = -0.04
+		add_political_power = -30
+		add_popularity = { ideology = democratic popularity = 0.03 }
+		set_country_flag = RAJ_caa_protests
+		ai_chance = { base = 1 }
+	}
+}
+
+# 2020 Galwan Valley Clash - June 15, 2020 - 20 Indian soldiers killed
+country_event = {
+	id = RAJ_eastas.7
+	title = RAJ_eastas.7.t
+	desc = RAJ_eastas.7.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	picture = GFX_event_generic_battle
+	trigger = {
+		original_tag = RAJ
+		date > 2020.6.1
+		country_exists = CHI
+	}
+	option = {
+		name = RAJ_eastas.7.a
+		log = "[GetDateText]: [This.GetName]: RAJ_eastas.7.a executed"
+		add_manpower = -20
+		add_stability = -0.03
+		add_war_support = 0.05
+		add_opinion_modifier = { target = CHI modifier = border_tension }
+		reverse_add_opinion_modifier = { target = CHI modifier = border_tension }
+		set_country_flag = RAJ_galwan_clash
+		ai_chance = { base = 1 }
+	}
+}
+
+# 2021 Bijapur Attack - April 3, 2021 - 22 security personnel killed
+country_event = {
+	id = RAJ_naxal.20
+	title = RAJ_naxal.20.t
+	desc = RAJ_naxal.20.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	picture = GFX_event_generic_battle
+	trigger = {
+		original_tag = RAJ
+		date > 2021.4.1
+		check_variable = { strength_of_maoists > 10 }
+		456 = {
+			is_controlled_by = RAJ
+			RAJ_state_has_any_naxalite = yes
+		}
+	}
+	option = {
+		name = RAJ_naxal.20.a
+		log = "[GetDateText]: [This.GetName]: RAJ_naxal.20.a executed"
+		add_manpower = -22
+		add_stability = -0.03
+		add_war_support = 0.02
+		add_to_variable = { strength_of_maoists = 3 }
+		set_country_flag = RAJ_bijapur_attack
+		ai_chance = { base = 1 }
+	}
+}
+
+# 2023 Manipur Ethnic Violence - May 3, 2023
+country_event = {
+	id = indian_event.67
+	title = indian_event.67.t
+	desc = indian_event.67.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	picture = GFX_event_generic_riot
+	trigger = {
+		original_tag = RAJ
+		date > 2023.5.1
+	}
+	option = {
+		name = indian_event.67.a
+		log = "[GetDateText]: [This.GetName]: indian_event.67.a executed"
+		add_stability = -0.05
+		set_temp_variable = { temp_change = -3 }
+		RAJ_change_hindu_opinion = yes
+		set_temp_variable = { temp_change = -3 }
+		RAJ_change_christian_opinion = yes
+		set_country_flag = RAJ_manipur_violence_2023
+		ai_chance = { base = 1 }
+	}
+}
