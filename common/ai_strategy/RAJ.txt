@@ -27,7 +27,6 @@ RAJ_china_is_a_threat = {
 			984
 			987
 			982
-			993
 		}
 		ratio = 0.60
 		subtract_fronts_from_need = no
@@ -278,7 +277,7 @@ RAJ_default_naval_breakdown = {
 }
 
 generic_india_industrial_construction = {
-	allowed = { tag = RAJ }
+	allowed = { original_tag = RAJ }
 	enable = {
 		check_variable = { unfulfilled_energy_demand_var > -0.05 }
 	}
@@ -292,7 +291,7 @@ generic_india_industrial_construction = {
 }
 
 RAJ_army_focus = {
-	allowed = { tag = RAJ }
+	allowed = { original_tag = RAJ }
 	enable = {
 		has_equipment = { infantry_weapons_type > 35000 }
 		has_equipment = { medium_tank_artillery_chassis > 1000 }
@@ -460,10 +459,8 @@ RAJ_pursue_friendly_relations_with_sri_lanka = {
 	allowed = { original_tag = RAJ }
 	enable = {
 		country_exists = SRI
-		NOT = {
-			has_government = nationalist
-			has_government = fascism
-		}
+		NOT = { has_government = nationalist }
+		NOT = { has_government = fascism }
 	}
 	abort_when_not_enabled = yes
 
@@ -476,10 +473,8 @@ RAJ_pursue_friendly_relations_with_nepal = {
 	allowed = { original_tag = RAJ }
 	enable = {
 		country_exists = NEP
-		NOT = {
-			has_government = nationalist
-			has_government = fascism
-		}
+		NOT = { has_government = nationalist }
+		NOT = { has_government = fascism }
 	}
 	abort_when_not_enabled = yes
 
@@ -492,10 +487,8 @@ RAJ_pursue_friendly_relations_with_bhutan = {
 	allowed = { original_tag = RAJ }
 	enable = {
 		country_exists = BHU
-		NOT = {
-			has_government = nationalist
-			has_government = fascism
-		}
+		NOT = { has_government = nationalist }
+		NOT = { has_government = fascism }
 	}
 	abort_when_not_enabled = yes
 
@@ -509,10 +502,8 @@ RAJ_threat_of_terror_mil = {
 	enable = {
 		has_completed_focus = RAJ_threat_of_terror_mil
 		NOT = { has_war_with = USA }
-		NOT = {
-			has_government = democratic
-			has_government = nationalist
-		}
+		NOT = { has_government = democratic }
+		NOT = { has_government = nationalist }
 	}
 	abort_when_not_enabled = yes
 
@@ -525,10 +516,8 @@ RAJ_USA_threat_of_terror_mil = {
 	enable = {
 		has_completed_focus = RAJ_threat_of_terror_mil
 		NOT = { has_war_with = RAJ }
-		NOT = {
-			has_government = democratic
-			has_government = nationalist
-		}
+		NOT = { has_government = democratic }
+		NOT = { has_government = nationalist }
 	}
 	abort_when_not_enabled = yes
 
@@ -569,15 +558,7 @@ RAJ_USA_strategic_assistance_to_us = {
 RAJ_handle_naxalite_insurgency = {
 	allowed = { original_tag = RAJ }
 	enable = {
-		any_controlled_state = {
-			OR = {
-				has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency }
-				has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
-				has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_2 }
-				has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_3 }
-				has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_4 }
-			}
-		}
+		has_country_flag = RAJ_has_naxalite_states
 	}
 	abort_when_not_enabled = yes
 
@@ -613,12 +594,7 @@ RAJ_operation_green_hunt_priority = {
 	enable = {
 		date > 2009.1.1
 		check_variable = { RAJ_strength_of_maoists > 30 }
-		any_controlled_state = {
-			OR = {
-				has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency }
-				has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
-			}
-		}
+		has_country_flag = RAJ_has_severe_naxalite_states
 	}
 	abort_when_not_enabled = yes
 

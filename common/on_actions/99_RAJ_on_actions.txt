@@ -6,12 +6,13 @@ on_actions = {
 			170 = RAJ_naxal.11
 			80 = RAJ_naxal.13
 			60 = RAJ_naxal.14
+			30 = RAJ_regional.9
+			30 = RAJ_regional.12
 		}
 
 		effect = {
 			india_religious_events = yes
 			RAJ_check_religious_harmony = yes
-			add_to_variable = { RAJ_brics_gui_dirty = 1 }
 
 			random = {
 				chance = 20
@@ -52,21 +53,16 @@ on_actions = {
 				clr_country_flag = RAJ_has_naxalite_states
 			}
 			if = {
-				limit = { has_country_flag = RAJ_has_naxalite_states }
-				if = {
-					limit = {
-						any_controlled_state = {
-							OR = {
-								has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency }
-								has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
-							}
+				limit = {
+					has_country_flag = RAJ_has_naxalite_states
+					any_controlled_state = {
+						OR = {
+							has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency }
+							has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
 						}
 					}
-					set_country_flag = RAJ_has_severe_naxalite_states
 				}
-				else = {
-					clr_country_flag = RAJ_has_severe_naxalite_states
-				}
+				set_country_flag = RAJ_has_severe_naxalite_states
 			}
 			else = {
 				clr_country_flag = RAJ_has_severe_naxalite_states

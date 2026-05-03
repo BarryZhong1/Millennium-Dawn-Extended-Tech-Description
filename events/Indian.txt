@@ -4,6 +4,8 @@ add_namespace = RAJ_religion
 add_namespace = RAJ_mao_reb
 add_namespace = raj_exports
 add_namespace = RAJ_naxal
+add_namespace = RAJ_regional
+add_namespace = RAJ_rebellion
 
 country_event = {
 	id = indian_event.1
@@ -2360,7 +2362,10 @@ country_event = {
 	option = {
 		name = indian_event.55.a
 		log = "[GetDateText]: [This.GetName]: indian_event.55.a executed"
-		FROM = { country_event = { id = md4.17 hours = 3 } }
+		FROM = {
+			country_event = { id = md4.17 hours = 3 }
+			add_to_variable = { RAJ_brics_gui_dirty = 1 }
+		}
 		hidden_effect = {
 			remove_ideas = RAJ_BRICS
 		}
@@ -2375,6 +2380,7 @@ country_event = {
 	option = {
 		name = indian_event.55.b
 		log = "[GetDateText]: [This.GetName]: indian_event.55.b executed"
+		FROM = { add_to_variable = { RAJ_brics_gui_dirty = 1 } }
 		remove_ideas = RAJ_BRICS
 		ai_chance = {
 			base = 0
@@ -2766,5 +2772,1338 @@ country_event = {
 		RAJ_change_christian_opinion = yes
 		set_country_flag = RAJ_manipur_violence_2023
 		ai_chance = { base = 1 }
+	}
+}
+
+country_event = {
+	id = RAJ_regional.1
+	title = RAJ_regional.1.t
+	desc = RAJ_regional.1.d
+	picture = GFX_indian_soldiers1
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = RAJ
+		date > 2015.6.1
+		owns_state = 477
+		country_exists = BRM
+	}
+
+	option = {
+		name = RAJ_regional.1.a
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.1.a executed"
+		add_war_support = 0.03
+		add_stability = 0.02
+		reverse_add_opinion_modifier = { target = BRM modifier = small_decrease }
+		set_temp_variable = { temp_change = 2 }
+		RAJ_change_christian_opinion = yes
+		set_country_flag = RAJ_operation_hot_pursuit
+
+		ai_chance = { base = 1 }
+	}
+}
+
+country_event = {
+	id = RAJ_regional.2
+	title = RAJ_regional.2.t
+	desc = RAJ_regional.2.d
+	picture = GFX_bangladeshi_genlemen
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = RAJ
+		date > 2015.6.1
+		country_exists = BAN
+		NOT = { has_war_with = BAN }
+	}
+
+	option = {
+		name = RAJ_regional.2.a
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.2.a executed"
+		add_stability = 0.02
+		add_opinion_modifier = { target = BAN modifier = declaration_of_friendship }
+		set_temp_variable = { temp_change = 1 }
+		RAJ_change_muslim_opinion = yes
+		set_country_flag = RAJ_lba_signed
+
+		ai_chance = { base = 1 }
+	}
+}
+
+country_event = {
+	id = RAJ_regional.3
+	title = RAJ_regional.3.t
+	desc = RAJ_regional.3.d
+	picture = GFX_musl_rally2
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = RAJ
+		date > 2017.8.1
+		country_exists = BRM
+		country_exists = BAN
+	}
+
+	option = {
+		name = RAJ_regional.3.a
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.3.a executed"
+		add_stability = 0.01
+		add_opinion_modifier = { target = BAN modifier = small_decrease }
+		reverse_add_opinion_modifier = { target = BRM modifier = improve_trade }
+		set_temp_variable = { temp_change = -2 }
+		RAJ_change_muslim_opinion = yes
+		set_country_flag = RAJ_rohingya_decision
+		hidden_effect = {
+			BAN = { country_event = { id = RAJ_regional.22 days = 7 } }
+		}
+
+		ai_chance = {
+			base = 60
+			modifier = {
+				add = 40
+				has_opinion = { target = BRM value > 0 }
+			}
+			modifier = {
+				add = 30
+				is_historical_focus_on = yes
+			}
+		}
+	}
+
+	option = {
+		name = RAJ_regional.3.b
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.3.b executed"
+		add_stability = -0.02
+		add_opinion_modifier = { target = BAN modifier = declaration_of_friendship }
+		reverse_add_opinion_modifier = { target = BRM modifier = small_decrease }
+		set_temp_variable = { temp_change = 2 }
+		RAJ_change_muslim_opinion = yes
+		hidden_effect = {
+			BAN = { country_event = { id = RAJ_regional.23 days = 7 } }
+		}
+
+		ai_chance = { base = 40 }
+	}
+}
+
+country_event = {
+	id = RAJ_regional.4
+	title = RAJ_regional.4.t
+	desc = RAJ_regional.4.d
+	picture = GFX_RAJ_generic
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = RAJ
+		date > 2017.4.1
+		country_exists = BAN
+		NOT = { has_war_with = BAN }
+	}
+
+	option = {
+		name = RAJ_regional.4.a
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.4.a executed"
+		add_political_power = -25
+		add_opinion_modifier = { target = BAN modifier = declaration_of_friendship }
+		add_stability = 0.01
+		hidden_effect = {
+			BAN = { country_event = { id = RAJ_regional.26 days = 3 } }
+		}
+
+		ai_chance = { base = 30 }
+	}
+
+	option = {
+		name = RAJ_regional.4.b
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.4.b executed"
+		reverse_add_opinion_modifier = { target = BAN modifier = small_decrease }
+		add_stability = -0.01
+
+		ai_chance = {
+			base = 70
+			modifier = {
+				add = 30
+				is_historical_focus_on = yes
+			}
+		}
+	}
+}
+
+country_event = {
+	id = RAJ_regional.5
+	title = RAJ_regional.5.t
+	desc = RAJ_regional.5.d
+	picture = GFX_musl_rally
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = RAJ
+		date > 2019.8.1
+		country_exists = BAN
+	}
+
+	option = {
+		name = RAJ_regional.5.a
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.5.a executed"
+		set_temp_variable = { temp_change = -3 }
+		RAJ_change_muslim_opinion = yes
+		add_stability = -0.02
+		reverse_add_opinion_modifier = { target = BAN modifier = small_decrease }
+		set_country_flag = RAJ_nrc_enacted
+
+		ai_chance = { base = 1 }
+	}
+}
+
+country_event = {
+	id = RAJ_regional.6
+	title = RAJ_regional.6.t
+	desc = RAJ_regional.6.d
+	picture = GFX_sikh_rally
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = RAJ
+		date > 2020.1.1
+	}
+
+	option = {
+		name = RAJ_regional.6.a
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.6.a executed"
+		set_temp_variable = { temp_change = -2 }
+		RAJ_change_sikh_opinion = yes
+		add_stability = -0.01
+		add_political_power = -15
+		set_country_flag = RAJ_khalistan_referendum
+
+		ai_chance = { base = 1 }
+	}
+}
+
+country_event = {
+	id = RAJ_regional.7
+	title = RAJ_regional.7.t
+	desc = RAJ_regional.7.d
+	picture = GFX_african_refugee_camp # TODO: replace with South/Southeast Asian refugee image
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = RAJ
+		date > 2021.2.1
+		country_exists = BRM
+		owns_state = 477
+	}
+
+	option = {
+		name = RAJ_regional.7.a
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.7.a executed"
+		add_stability = 0.01
+		reverse_add_opinion_modifier = { target = BRM modifier = improve_trade }
+		set_temp_variable = { temp_change = -1 }
+		RAJ_change_christian_opinion = yes
+
+		ai_chance = {
+			base = 50
+			modifier = {
+				add = 30
+				is_historical_focus_on = yes
+			}
+		}
+	}
+
+	option = {
+		name = RAJ_regional.7.b
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.7.b executed"
+		add_stability = -0.02
+		set_temp_variable = { temp_change = 2 }
+		RAJ_change_christian_opinion = yes
+		reverse_add_opinion_modifier = { target = BRM modifier = small_decrease }
+
+		ai_chance = { base = 50 }
+	}
+}
+
+country_event = {
+	id = RAJ_regional.8
+	title = RAJ_regional.8.t
+	desc = RAJ_regional.8.d
+	picture = GFX_RAJ_generic
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = RAJ
+		date > 2015.8.1
+	}
+
+	option = {
+		name = RAJ_regional.8.a
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.8.a executed"
+		add_stability = 0.02
+		set_temp_variable = { temp_change = 2 }
+		RAJ_change_christian_opinion = yes
+		add_to_variable = {
+			var = RAJ_strength_of_maoists
+			value = -2
+		}
+		set_country_flag = RAJ_nscn_framework
+
+		ai_chance = { base = 1 }
+	}
+}
+
+country_event = {
+	id = RAJ_regional.9
+	title = RAJ_regional.9.t
+	desc = RAJ_regional.9.d
+	picture = GFX_indian_soldiers2
+	is_triggered_only = yes
+
+	trigger = {
+		original_tag = RAJ
+		country_exists = BRM
+		has_country_flag = RAJ_has_naxalite_states
+	}
+
+	option = {
+		name = RAJ_regional.9.a
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.9.a executed"
+		add_to_variable = {
+			var = RAJ_strength_of_maoists
+			value = -2
+		}
+		add_opinion_modifier = { target = BRM modifier = small_increase }
+		add_political_power = -10
+
+		ai_chance = {
+			base = 80
+			modifier = {
+				add = 40
+				has_country_flag = RAJ_has_severe_naxalite_states
+			}
+		}
+	}
+
+	option = {
+		name = RAJ_regional.9.b
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.9.b executed"
+		add_to_variable = {
+			var = RAJ_strength_of_maoists
+			value = 1
+		}
+
+		ai_chance = { base = 20 }
+	}
+}
+
+country_event = {
+	id = RAJ_regional.10
+	title = RAJ_regional.10.t
+	desc = RAJ_regional.10.d
+	picture = GFX_india_flag
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = RAJ
+		date > 2023.6.1
+		country_exists = CAN
+	}
+
+	option = {
+		name = RAJ_regional.10.a
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.10.a executed"
+		reverse_add_opinion_modifier = { target = CAN modifier = embargo }
+		set_temp_variable = { temp_change = -1 }
+		RAJ_change_sikh_opinion = yes
+		add_stability = -0.01
+		set_country_flag = RAJ_nijjar_crisis
+		hidden_effect = {
+			CAN = { country_event = { id = RAJ_regional.21 days = 3 } }
+		}
+
+		ai_chance = { base = 1 }
+	}
+}
+
+country_event = {
+	id = RAJ_regional.11
+	title = RAJ_regional.11.t
+	desc = RAJ_regional.11.d
+	picture = GFX_cargo_ship
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = RAJ
+		date > 2014.1.1
+		country_exists = BAN
+		country_exists = BRM
+		NOT = { has_war_with = BAN }
+		NOT = { has_war_with = BRM }
+	}
+
+	option = {
+		name = RAJ_regional.11.a
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.11.a executed"
+		add_opinion_modifier = { target = BAN modifier = improve_trade }
+		add_opinion_modifier = { target = BRM modifier = improve_trade }
+		add_war_support = 0.01
+		set_country_flag = RAJ_bay_of_bengal_cooperation
+
+		ai_chance = { base = 1 }
+	}
+}
+
+country_event = {
+	id = RAJ_regional.12
+	title = RAJ_regional.12.t
+	desc = RAJ_regional.12.d
+	picture = GFX_musl_rally2
+	is_triggered_only = yes
+
+	trigger = {
+		original_tag = RAJ
+		country_exists = BAN
+		NOT = { has_war_with = BAN }
+	}
+
+	option = {
+		name = RAJ_regional.12.a
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.12.a executed"
+		set_temp_variable = { temp_change = 1 }
+		RAJ_change_muslim_opinion = yes
+		add_political_power = -10
+
+		ai_chance = {
+			base = 50
+			modifier = {
+				add = 30
+				has_opinion = { target = BAN value > 30 }
+			}
+		}
+	}
+
+	option = {
+		name = RAJ_regional.12.b
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.12.b executed"
+		reverse_add_opinion_modifier = { target = BAN modifier = small_decrease }
+		set_temp_variable = { temp_change = -1 }
+		RAJ_change_muslim_opinion = yes
+
+		ai_chance = {
+			base = 50
+			modifier = {
+				add = 30
+				has_opinion = { target = BAN value < -20 }
+			}
+		}
+	}
+}
+
+country_event = {
+	id = RAJ_regional.13
+	title = RAJ_regional.13.t
+	desc = RAJ_regional.13.d
+	picture = GFX_nepal_Narayanhiti_Palace
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = RAJ
+		date > 2015.9.1
+		country_exists = NEP
+		NOT = { has_war_with = NEP }
+	}
+
+	option = {
+		name = RAJ_regional.13.a
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.13.a executed"
+		add_stability = -0.03
+		reverse_add_opinion_modifier = { target = NEP modifier = border_tensions }
+		add_to_variable = { RAJ.kasmir_readiness = 5 }
+		clamp_variable = { var = RAJ.kasmir_readiness min = 0 max = 100 }
+		set_country_flag = RAJ_nepal_blockade
+		set_country_flag = RAJ_nepal_blockade_maintained
+		hidden_effect = {
+			country_event = { id = RAJ_regional.14 days = 120 }
+			NEP = { country_event = { id = RAJ_regional.20 days = 7 } }
+		}
+
+		ai_chance = {
+			base = 40
+			modifier = {
+				add = 30
+				is_historical_focus_on = yes
+			}
+			modifier = {
+				add = 20
+				OR = {
+					has_government = fascism
+					has_government = nationalist
+				}
+			}
+		}
+	}
+
+	option = {
+		name = RAJ_regional.13.b
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.13.b executed"
+		add_stability = -0.01
+		reverse_add_opinion_modifier = { target = NEP modifier = small_decrease }
+		add_political_power = -20
+
+		ai_chance = { base = 30 }
+	}
+
+	option = {
+		name = RAJ_regional.13.c
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.13.c executed"
+		add_political_power = -50
+		add_opinion_modifier = { target = NEP modifier = eased_border_tensions }
+
+		ai_chance = { base = 30 }
+	}
+}
+
+country_event = {
+	id = RAJ_regional.14
+	title = RAJ_regional.14.t
+	desc = RAJ_regional.14.d
+	picture = GFX_nepal_Narayanhiti_Palace
+	is_triggered_only = yes
+
+	trigger = {
+		original_tag = RAJ
+		country_exists = NEP
+	}
+
+	option = {
+		name = RAJ_regional.14.a
+		trigger = { has_country_flag = RAJ_nepal_blockade_maintained }
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.14.a executed"
+		add_stability = -0.02
+		NEP = {
+			add_opinion_modifier = { target = CHI modifier = declaration_of_friendship }
+		}
+		reverse_add_opinion_modifier = { target = NEP modifier = small_decrease }
+		clr_country_flag = RAJ_nepal_blockade_maintained
+
+		ai_chance = { base = 1 }
+	}
+
+	option = {
+		name = RAJ_regional.14.b
+		trigger = { has_country_flag = RAJ_nepal_blockade_maintained }
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.14.b executed"
+		add_political_power = -30
+		add_opinion_modifier = { target = NEP modifier = eased_border_tensions }
+		clr_country_flag = RAJ_nepal_blockade_maintained
+
+		ai_chance = { base = 1 }
+	}
+
+	option = {
+		name = RAJ_regional.14.c
+		trigger = {
+			NOT = { has_country_flag = RAJ_nepal_blockade_maintained }
+		}
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.14.c executed"
+		add_stability = 0.01
+		add_opinion_modifier = { target = NEP modifier = improve_trade }
+
+		ai_chance = { base = 1 }
+	}
+}
+
+country_event = {
+	id = RAJ_regional.15
+	title = RAJ_regional.15.t
+	desc = RAJ_regional.15.d
+	picture = GFX_indian_soldiers1
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = RAJ
+		date > 2020.5.1
+		country_exists = NEP
+		NOT = { has_war_with = NEP }
+	}
+
+	option = {
+		name = RAJ_regional.15.a
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.15.a executed"
+		add_to_variable = { RAJ.kasmir_china_readiness = 10 }
+		clamp_variable = { var = RAJ.kasmir_china_readiness min = 0 max = 100 }
+		add_to_variable = { GLOBAL.kasmir_tension_china = 5 }
+		clamp_variable = { var = GLOBAL.kasmir_tension_china min = 0 max = 100 }
+		reverse_add_opinion_modifier = { target = NEP modifier = border_tensions }
+		add_war_support = 0.02
+		set_country_flag = RAJ_kalapani_dispute
+		hidden_effect = {
+			NEP = { country_event = { id = RAJ_regional.24 days = 5 } }
+		}
+
+		ai_chance = {
+			base = 30
+			modifier = {
+				add = 20
+				OR = {
+					has_government = fascism
+					has_government = nationalist
+				}
+			}
+		}
+	}
+
+	option = {
+		name = RAJ_regional.15.b
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.15.b executed"
+		add_political_power = -25
+		reverse_add_opinion_modifier = { target = NEP modifier = small_decrease }
+
+		ai_chance = {
+			base = 40
+			modifier = {
+				add = 30
+				is_historical_focus_on = yes
+			}
+		}
+	}
+
+	option = {
+		name = RAJ_regional.15.c
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.15.c executed"
+		add_political_power = -50
+		add_opinion_modifier = { target = NEP modifier = eased_border_tensions }
+		add_stability = 0.01
+
+		ai_chance = {
+			base = 30
+			modifier = {
+				add = 20
+				has_opinion = { target = NEP value > 30 }
+			}
+		}
+	}
+}
+
+country_event = {
+	id = RAJ_regional.16
+	title = RAJ_regional.16.t
+	desc = RAJ_regional.16.d
+	picture = GFX_nepal_Narayanhiti_Palace
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = RAJ
+		date > 2014.1.1
+		country_exists = NEP
+		NOT = { has_war_with = NEP }
+	}
+
+	option = {
+		name = RAJ_regional.16.a
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.16.a executed"
+		add_political_power = -40
+		add_opinion_modifier = { target = NEP modifier = declaration_of_friendship }
+		add_stability = 0.01
+
+		ai_chance = { base = 40 }
+	}
+
+	option = {
+		name = RAJ_regional.16.b
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.16.b executed"
+		reverse_add_opinion_modifier = { target = NEP modifier = small_decrease }
+		add_stability = -0.01
+
+		ai_chance = { base = 60 }
+	}
+}
+
+country_event = {
+	id = RAJ_regional.17
+	title = RAJ_regional.17.t
+	desc = RAJ_regional.17.d
+	picture = GFX_china_indian_border_skirmish
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = RAJ
+		date > 2017.8.1
+		has_country_flag = RAJ_doklam_standoff
+		country_exists = BHU
+		NOT = { has_war_with = BHU }
+	}
+
+	option = {
+		name = RAJ_regional.17.a
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.17.a executed"
+		add_opinion_modifier = { target = BHU modifier = declaration_of_friendship }
+		reverse_add_opinion_modifier = { target = BHU modifier = declaration_of_friendship }
+		add_to_variable = { RAJ.kasmir_china_readiness = 5 }
+		clamp_variable = { var = RAJ.kasmir_china_readiness min = 0 max = 100 }
+		add_war_support = 0.01
+		set_country_flag = RAJ_doklam_bhutan_thanks
+		hidden_effect = {
+			BHU = { country_event = { id = RAJ_regional.25 days = 5 } }
+		}
+
+		ai_chance = {
+			base = 70
+			modifier = {
+				add = 30
+				is_historical_focus_on = yes
+			}
+		}
+	}
+
+	option = {
+		name = RAJ_regional.17.b
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.17.b executed"
+		add_opinion_modifier = { target = BHU modifier = improve_trade }
+
+		ai_chance = { base = 30 }
+	}
+}
+
+country_event = {
+	id = RAJ_regional.18
+	title = RAJ_regional.18.t
+	desc = RAJ_regional.18.d
+	picture = GFX_cargo_ship
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = RAJ
+		date > 2014.1.1
+		country_exists = BHU
+		NOT = { has_war_with = BHU }
+	}
+
+	option = {
+		name = RAJ_regional.18.a
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.18.a executed"
+		add_opinion_modifier = { target = BHU modifier = improve_trade }
+		reverse_add_opinion_modifier = { target = BHU modifier = improve_trade }
+		set_temp_variable = { percent_change = 3 }
+		set_temp_variable = { tag_index = RAJ }
+		set_temp_variable = { influence_target = BHU }
+		change_influence_percentage = yes
+		set_country_flag = RAJ_bhutan_hydropower
+
+		ai_chance = {
+			base = 80
+			modifier = {
+				add = 30
+				is_historical_focus_on = yes
+			}
+		}
+	}
+
+	option = {
+		name = RAJ_regional.18.b
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.18.b executed"
+		add_political_power = 15
+
+		ai_chance = { base = 20 }
+	}
+}
+
+country_event = {
+	id = RAJ_regional.19
+	title = RAJ_regional.19.t
+	desc = RAJ_regional.19.d
+	picture = GFX_RAJ_generic # TODO: replace with Bhutan-specific image
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = RAJ
+		date > 2008.3.1
+		country_exists = BHU
+	}
+
+	option = {
+		name = RAJ_regional.19.a
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.19.a executed"
+		add_opinion_modifier = { target = BHU modifier = declaration_of_friendship }
+		reverse_add_opinion_modifier = { target = BHU modifier = declaration_of_friendship }
+		add_stability = 0.01
+		set_temp_variable = { percent_change = 2 }
+		set_temp_variable = { tag_index = RAJ }
+		set_temp_variable = { influence_target = BHU }
+		change_influence_percentage = yes
+		set_country_flag = RAJ_bhutan_democracy
+
+		ai_chance = {
+			base = 70
+			modifier = {
+				add = 30
+				is_historical_focus_on = yes
+			}
+		}
+	}
+
+	option = {
+		name = RAJ_regional.19.b
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.19.b executed"
+		add_stability = -0.01
+		reverse_add_opinion_modifier = { target = BHU modifier = small_decrease }
+
+		ai_chance = { base = 30 }
+	}
+}
+
+country_event = {
+	id = RAJ_regional.20
+	title = RAJ_regional.20.t
+	desc = RAJ_regional.20.d
+	picture = GFX_nepal_Narayanhiti_Palace
+	is_triggered_only = yes
+
+	trigger = {
+		original_tag = NEP
+	}
+
+	option = {
+		name = RAJ_regional.20.a
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.20.a executed"
+		FROM = { add_stability = -0.01 }
+		add_opinion_modifier = { target = CHI modifier = declaration_of_friendship }
+		reverse_add_opinion_modifier = { target = FROM modifier = border_tensions }
+
+		ai_chance = {
+			base = 60
+			modifier = {
+				add = 40
+				has_opinion = { target = FROM value < 0 }
+			}
+		}
+	}
+
+	option = {
+		name = RAJ_regional.20.b
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.20.b executed"
+		add_stability = -0.03
+		add_opinion_modifier = { target = FROM modifier = small_decrease }
+
+		ai_chance = { base = 40 }
+	}
+}
+
+country_event = {
+	id = RAJ_regional.21
+	title = RAJ_regional.21.t
+	desc = RAJ_regional.21.d
+	picture = GFX_india_flag
+	is_triggered_only = yes
+
+	trigger = {
+		original_tag = CAN
+	}
+
+	option = {
+		name = RAJ_regional.21.a
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.21.a executed"
+		reverse_add_opinion_modifier = { target = FROM modifier = embargo }
+		add_stability = -0.01
+
+		ai_chance = {
+			base = 80
+			modifier = {
+				add = 20
+				is_historical_focus_on = yes
+			}
+		}
+	}
+
+	option = {
+		name = RAJ_regional.21.b
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.21.b executed"
+		add_opinion_modifier = { target = FROM modifier = small_decrease }
+		add_political_power = -20
+
+		ai_chance = { base = 20 }
+	}
+}
+
+country_event = {
+	id = RAJ_regional.22
+	title = RAJ_regional.22.t
+	desc = RAJ_regional.22.d
+	picture = GFX_bangladeshi_genlemen
+	is_triggered_only = yes
+
+	trigger = {
+		original_tag = BAN
+	}
+
+	option = {
+		name = RAJ_regional.22.a
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.22.a executed"
+		reverse_add_opinion_modifier = { target = FROM modifier = small_decrease }
+		add_stability = -0.02
+
+		ai_chance = { base = 1 }
+	}
+}
+
+country_event = {
+	id = RAJ_regional.23
+	title = RAJ_regional.23.t
+	desc = RAJ_regional.23.d
+	picture = GFX_bangladeshi_genlemen
+	is_triggered_only = yes
+
+	trigger = {
+		original_tag = BAN
+	}
+
+	option = {
+		name = RAJ_regional.23.a
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.23.a executed"
+		add_opinion_modifier = { target = FROM modifier = declaration_of_friendship }
+		add_stability = 0.01
+
+		ai_chance = { base = 1 }
+	}
+}
+
+country_event = {
+	id = RAJ_regional.24
+	title = RAJ_regional.24.t
+	desc = RAJ_regional.24.d
+	picture = GFX_nepal_Narayanhiti_Palace
+	is_triggered_only = yes
+
+	trigger = {
+		original_tag = NEP
+	}
+
+	option = {
+		name = RAJ_regional.24.a
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.24.a executed"
+		reverse_add_opinion_modifier = { target = FROM modifier = border_tensions }
+		add_war_support = 0.03
+
+		ai_chance = { base = 60 }
+	}
+
+	option = {
+		name = RAJ_regional.24.b
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.24.b executed"
+		add_opinion_modifier = { target = FROM modifier = small_decrease }
+		add_political_power = -10
+
+		ai_chance = { base = 40 }
+	}
+}
+
+country_event = {
+	id = RAJ_regional.25
+	title = RAJ_regional.25.t
+	desc = RAJ_regional.25.d
+	picture = GFX_RAJ_generic # TODO: replace with Bhutan-specific image
+	is_triggered_only = yes
+
+	trigger = {
+		original_tag = BHU
+	}
+
+	option = {
+		name = RAJ_regional.25.a
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.25.a executed"
+		add_opinion_modifier = { target = FROM modifier = declaration_of_friendship }
+		give_military_access = FROM
+
+		ai_chance = { base = 80 }
+	}
+
+	option = {
+		name = RAJ_regional.25.b
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.25.b executed"
+		add_opinion_modifier = { target = FROM modifier = small_increase }
+
+		ai_chance = {
+			base = 20
+			modifier = {
+				add = 30
+				CHI = { has_opinion = { target = BHU value < -20 } }
+			}
+		}
+	}
+}
+
+country_event = {
+	id = RAJ_regional.26
+	title = RAJ_regional.26.t
+	desc = RAJ_regional.26.d
+	picture = GFX_bangladeshi_genlemen
+	is_triggered_only = yes
+
+	trigger = {
+		original_tag = BAN
+	}
+
+	option = {
+		name = RAJ_regional.26.a
+		log = "[GetDateText]: [This.GetName]: RAJ_regional.26.a executed"
+		add_opinion_modifier = { target = FROM modifier = declaration_of_friendship }
+		add_stability = 0.02
+
+		ai_chance = { base = 1 }
+	}
+}
+
+# Ladakh Rebellion (Muslim opinion)
+country_event = {
+	id = RAJ_rebellion.1
+	title = RAJ_rebellion.1.t
+	desc = RAJ_rebellion.1.d
+	picture = GFX_musl_rally2
+	is_triggered_only = yes
+
+	option = {
+		name = RAJ_rebellion.1.a
+		trigger = {
+			owns_state = 993
+			check_variable = { RAJ_muslim_opinion < 5 }
+		}
+		log = "[GetDateText]: [Root.GetName]: RAJ_rebellion.1.a executed"
+		set_country_flag = RAJ_ladakh_rebellion_fired
+		hidden_effect = {
+			create_dynamic_country = {
+				original_tag = RAJ
+				set_country_flag = RAJ_ladakh_rebellion
+				copy_tag = RAJ
+				ingame_startup_nations_effect = yes
+				set_cosmetic_tag = LAD
+				set_country_flag = is_civil_war_faction
+				set_popularities = {
+					nationalist = 80
+					neutrality = 20
+				}
+				set_politics = {
+					ruling_party = nationalist
+					elections_allowed = no
+				}
+				create_country_leader = {
+					name = "Ladakh Separatist Council"
+					picture = "gfx/leaders/generic_politicians/black_001.dds"
+					ideology = Nat_Populism
+					traits = {
+						capable
+						political_dancer
+					}
+				}
+				993 = {
+					set_demilitarized_zone = no
+					transfer_state_to = PREV
+				}
+			}
+		}
+		add_stability = -0.10
+		add_war_support = -0.05
+	}
+
+	option = {
+		name = RAJ_rebellion.1.b
+		trigger = {
+			OR = {
+				NOT = { owns_state = 993 }
+				check_variable = { RAJ_muslim_opinion > 4 }
+			}
+		}
+		log = "[GetDateText]: [Root.GetName]: RAJ_rebellion.1.b executed (crisis averted)"
+		if = {
+			limit = { owns_state = 993 }
+			993 = { set_demilitarized_zone = no }
+		}
+		add_stability = 0.02
+	}
+}
+
+# Meghalaya Rebellion (Christian opinion)
+country_event = {
+	id = RAJ_rebellion.2
+	title = RAJ_rebellion.2.t
+	desc = RAJ_rebellion.2.d
+	picture = GFX_christ_rally2
+	is_triggered_only = yes
+
+	option = {
+		name = RAJ_rebellion.2.a
+		trigger = {
+			owns_state = 980
+			check_variable = { RAJ_christians_opinion < 5 }
+		}
+		log = "[GetDateText]: [Root.GetName]: RAJ_rebellion.2.a executed"
+		set_country_flag = RAJ_meghalaya_rebellion_fired
+		hidden_effect = {
+			create_dynamic_country = {
+				original_tag = RAJ
+				set_country_flag = RAJ_meghalaya_rebellion
+				copy_tag = RAJ
+				ingame_startup_nations_effect = yes
+				set_cosmetic_tag = MEG
+				set_country_flag = is_civil_war_faction
+				set_popularities = {
+					democratic = 60
+					neutrality = 40
+				}
+				set_politics = {
+					ruling_party = democratic
+					elections_allowed = no
+				}
+				create_country_leader = {
+					name = "Meghalaya Independence Council"
+					picture = "gfx/leaders/generic_politicians/black_002.dds"
+					ideology = conservatism
+					traits = {
+						capable
+						political_dancer
+					}
+				}
+				980 = {
+					set_demilitarized_zone = no
+					transfer_state_to = PREV
+				}
+			}
+		}
+		add_stability = -0.10
+		add_war_support = -0.05
+	}
+
+	option = {
+		name = RAJ_rebellion.2.b
+		trigger = {
+			OR = {
+				NOT = { owns_state = 980 }
+				check_variable = { RAJ_christians_opinion > 4 }
+			}
+		}
+		log = "[GetDateText]: [Root.GetName]: RAJ_rebellion.2.b executed (crisis averted)"
+		if = {
+			limit = { owns_state = 980 }
+			980 = { set_demilitarized_zone = no }
+		}
+		add_stability = 0.02
+	}
+}
+
+# Manipur Rebellion (Christian opinion)
+country_event = {
+	id = RAJ_rebellion.3
+	title = RAJ_rebellion.3.t
+	desc = RAJ_rebellion.3.d
+	picture = GFX_christ_rally1
+	is_triggered_only = yes
+
+	option = {
+		name = RAJ_rebellion.3.a
+		trigger = {
+			owns_state = 477
+			check_variable = { RAJ_christians_opinion < 5 }
+		}
+		log = "[GetDateText]: [Root.GetName]: RAJ_rebellion.3.a executed"
+		set_country_flag = RAJ_manipur_rebellion_fired
+		hidden_effect = {
+			create_dynamic_country = {
+				original_tag = RAJ
+				set_country_flag = RAJ_manipur_rebellion
+				copy_tag = RAJ
+				ingame_startup_nations_effect = yes
+				set_cosmetic_tag = MAN
+				set_country_flag = is_civil_war_faction
+				set_popularities = {
+					democratic = 60
+					neutrality = 40
+				}
+				set_politics = {
+					ruling_party = democratic
+					elections_allowed = no
+				}
+				create_country_leader = {
+					name = "Manipur Separatist Council"
+					picture = "gfx/leaders/generic_politicians/black_003.dds"
+					ideology = conservatism
+					traits = {
+						capable
+						political_dancer
+					}
+				}
+				477 = {
+					set_demilitarized_zone = no
+					transfer_state_to = PREV
+				}
+			}
+		}
+		add_stability = -0.10
+		add_war_support = -0.05
+	}
+
+	option = {
+		name = RAJ_rebellion.3.b
+		trigger = {
+			OR = {
+				NOT = { owns_state = 477 }
+				check_variable = { RAJ_christians_opinion > 4 }
+			}
+		}
+		log = "[GetDateText]: [Root.GetName]: RAJ_rebellion.3.b executed (crisis averted)"
+		if = {
+			limit = { owns_state = 477 }
+			477 = { set_demilitarized_zone = no }
+		}
+		add_stability = 0.02
+	}
+}
+
+# Sikkim Rebellion (Buddhist opinion)
+country_event = {
+	id = RAJ_rebellion.4
+	title = RAJ_rebellion.4.t
+	desc = RAJ_rebellion.4.d
+	picture = GFX_buddh_rally
+	is_triggered_only = yes
+
+	option = {
+		name = RAJ_rebellion.4.a
+		trigger = {
+			owns_state = 982
+			check_variable = { RAJ_buddhist_opinion < 5 }
+		}
+		log = "[GetDateText]: [Root.GetName]: RAJ_rebellion.4.a executed"
+		set_country_flag = RAJ_sikkim_rebellion_fired
+		hidden_effect = {
+			create_dynamic_country = {
+				original_tag = RAJ
+				set_country_flag = RAJ_sikkim_rebellion
+				copy_tag = RAJ
+				ingame_startup_nations_effect = yes
+				set_cosmetic_tag = SIK
+				set_country_flag = is_civil_war_faction
+				set_popularities = {
+					neutrality = 70
+					democratic = 30
+				}
+				set_politics = {
+					ruling_party = neutrality
+					elections_allowed = no
+				}
+				create_country_leader = {
+					name = "Sikkim Sovereignty Council"
+					picture = "gfx/leaders/generic_politicians/black_004.dds"
+					ideology = oligarchism
+					traits = {
+						capable
+						political_dancer
+					}
+				}
+				982 = {
+					set_demilitarized_zone = no
+					transfer_state_to = PREV
+				}
+			}
+		}
+		add_stability = -0.10
+		add_war_support = -0.05
+	}
+
+	option = {
+		name = RAJ_rebellion.4.b
+		trigger = {
+			OR = {
+				NOT = { owns_state = 982 }
+				check_variable = { RAJ_buddhist_opinion > 4 }
+			}
+		}
+		log = "[GetDateText]: [Root.GetName]: RAJ_rebellion.4.b executed (crisis averted)"
+		if = {
+			limit = { owns_state = 982 }
+			982 = { set_demilitarized_zone = no }
+		}
+		add_stability = 0.02
+	}
+}
+
+# Punjab Rebellion (Sikh opinion)
+country_event = {
+	id = RAJ_rebellion.5
+	title = RAJ_rebellion.5.t
+	desc = RAJ_rebellion.5.d
+	picture = GFX_sikh_rally
+	is_triggered_only = yes
+
+	option = {
+		name = RAJ_rebellion.5.a
+		trigger = {
+			owns_state = 429
+			check_variable = { RAJ_sikh_opinion < 5 }
+		}
+		log = "[GetDateText]: [Root.GetName]: RAJ_rebellion.5.a executed"
+		set_country_flag = RAJ_punjab_rebellion_fired
+		hidden_effect = {
+			create_dynamic_country = {
+				original_tag = RAJ
+				set_country_flag = RAJ_punjab_rebellion
+				copy_tag = RAJ
+				ingame_startup_nations_effect = yes
+				set_cosmetic_tag = KHL
+				set_country_flag = is_civil_war_faction
+				set_popularities = {
+					neutrality = 70
+					democratic = 30
+				}
+				set_politics = {
+					ruling_party = neutrality
+					elections_allowed = no
+				}
+				create_country_leader = {
+					name = "Khalistan Separatist Council"
+					picture = "gfx/leaders/generic_politicians/black_005.dds"
+					ideology = oligarchism
+					traits = {
+						capable
+						political_dancer
+					}
+				}
+				429 = {
+					set_demilitarized_zone = no
+					transfer_state_to = PREV
+				}
+			}
+		}
+		add_stability = -0.10
+		add_war_support = -0.05
+	}
+
+	option = {
+		name = RAJ_rebellion.5.b
+		trigger = {
+			OR = {
+				NOT = { owns_state = 429 }
+				check_variable = { RAJ_sikh_opinion > 4 }
+			}
+		}
+		log = "[GetDateText]: [Root.GetName]: RAJ_rebellion.5.b executed (crisis averted)"
+		if = {
+			limit = { owns_state = 429 }
+			429 = { set_demilitarized_zone = no }
+		}
+		add_stability = 0.02
 	}
 }
