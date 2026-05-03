@@ -44,15 +44,21 @@ on_actions = {
 				clr_country_flag = RAJ_has_naxalite_states
 			}
 			if = {
-				limit = {
-					any_controlled_state = {
-						OR = {
-							has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency }
-							has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
+				limit = { has_country_flag = RAJ_has_naxalite_states }
+				if = {
+					limit = {
+						any_controlled_state = {
+							OR = {
+								has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency }
+								has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
+							}
 						}
 					}
+					set_country_flag = RAJ_has_severe_naxalite_states
 				}
-				set_country_flag = RAJ_has_severe_naxalite_states
+				else = {
+					clr_country_flag = RAJ_has_severe_naxalite_states
+				}
 			}
 			else = {
 				clr_country_flag = RAJ_has_severe_naxalite_states
@@ -63,25 +69,34 @@ on_actions = {
 				limit = {
 					NOT = { has_country_flag = RAJ_naxal_free_achieved }
 				}
-				RAJ = { country_event = RAJ_naxal.16 }
-			}
-
-			if = {
-				limit = {
-					NOT = { has_country_flag = RAJ_naxal_free_achieved }
-					has_country_flag = RAJ_has_naxalite_states
+				if = {
+					limit = {
+						NOT = { has_country_flag = RAJ_has_naxalite_states }
+					}
+					RAJ = { country_event = RAJ_naxal.16 }
 				}
-				random = {
-					chance = 17
-					RAJ = { country_event = RAJ_naxal.11 }
-				}
-				random = {
-					chance = 8
-					RAJ = { country_event = RAJ_naxal.13 }
-				}
-				random = {
-					chance = 6
-					RAJ = { country_event = RAJ_naxal.14 }
+				else = {
+					if = {
+						limit = { NOT = { has_country_flag = RAJ_major_attack_cooldown } }
+						random = {
+							chance = 17
+							RAJ = { country_event = RAJ_naxal.11 }
+						}
+					}
+					if = {
+						limit = { NOT = { has_country_flag = RAJ_leadership_elimination_cooldown } }
+						random = {
+							chance = 8
+							RAJ = { country_event = RAJ_naxal.13 }
+						}
+					}
+					if = {
+						limit = { NOT = { has_country_flag = RAJ_tribal_protests_cooldown } }
+						random = {
+							chance = 6
+							RAJ = { country_event = RAJ_naxal.14 }
+						}
+					}
 				}
 			}
 		}

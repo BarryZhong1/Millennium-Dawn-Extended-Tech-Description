@@ -2,14 +2,14 @@ india_religious_events = {
 	#recurring mafia events
 	random_list = {
 		60 = {
-			add_to_variable = { event_counter_1_religious = 1 }
+			add_to_variable = { RAJ_religious_event_counter = 1 }
 		}
 		40 = {
 		}
 	}
 	if = {
-		limit = { check_variable = { event_counter_1_religious > 5 } }
-		set_variable = { event_counter_1_religious = 0 }
+		limit = { check_variable = { RAJ_religious_event_counter > 5 } }
+		set_variable = { RAJ_religious_event_counter = 0 }
 		random_list = {
 			25 = {
 				country_event = RAJ_religion.1
@@ -92,21 +92,21 @@ RAJ_downgrade_naxalite_level = {
 		limit = { has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_4 } }
 		remove_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_4 }
 	}
-	RAJ = { add_to_variable = { RAJ_mao_gui_dirty = 1 } }
+	ROOT = { add_to_variable = { RAJ_mao_gui_dirty = 1 } }
 }
 
 RAJ_suppression_equipment_reward = {
 	random_list = {
 		20 = {
-			add_equipment_to_stockpile = { type = infantry_weapons_2 amount = 1000 producer = SOV }
+			add_equipment_to_stockpile = { type = infantry_weapons_2 amount = 1000 producer = RAJ }
 			country_event = RAJ_mao_reb.1
 		}
 		40 = {
-			add_equipment_to_stockpile = { type = infantry_weapons_2 amount = 500 producer = SOV }
+			add_equipment_to_stockpile = { type = infantry_weapons_2 amount = 500 producer = RAJ }
 			country_event = RAJ_mao_reb.3
 		}
 		10 = {
-			add_equipment_to_stockpile = { type = infantry_weapons_2 amount = 250 producer = SOV }
+			add_equipment_to_stockpile = { type = infantry_weapons_2 amount = 250 producer = RAJ }
 			country_event = RAJ_mao_reb.2
 		}
 		30 = { }
@@ -152,4 +152,12 @@ RAJ_check_religious_harmony = {
 		}
 		remove_ideas = RAJ_religious_harmony
 	}
+}
+
+RAJ_remove_all_naxalite_modifiers = {
+	remove_dynamic_modifier = { modifier = RAJ_naxalite_insurgency }
+	remove_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
+	remove_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_2 }
+	remove_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_3 }
+	remove_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_4 }
 }
