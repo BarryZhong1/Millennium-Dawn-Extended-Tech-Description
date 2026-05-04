@@ -139,6 +139,22 @@ check_variable = {
 
 Valid `compare` values: `equals`, `greater_than`, `less_than`, `greater_than_or_equals`, `less_than_or_equals`, `not_equals`.
 
+## is_in_faction vs is_in_faction_with
+
+`is_in_faction` is a **boolean** trigger (`yes`/`no`). To check faction membership with a specific country, use `is_in_faction_with = TAG`. Using `is_in_faction = TAG` silently fails. **Caught by `check_common_mistakes.py`.**
+
+## add_to_faction scope
+
+`add_to_faction` adds a **country** to the **current scope's faction**. It takes a country tag or scope, not a faction name. `add_to_faction = BRICS` is wrong — use `add_to_faction = TAG`.
+
+## Trade agreement checks in MD
+
+`has_trade_agreement_with` is **not a valid HOI4 trigger** — compiles silently, always evaluates false. MD uses `has_country_flag = trade_agreement@TAG`. **Caught by `check_common_mistakes.py`.**
+
+## Decision allowed vs available
+
+`allowed` in decisions is evaluated **once at game start** and locked. Dynamic conditions (factory counts, opinion, date) must go in `available` or `visible`. **Caught by `check_common_mistakes.py`** for clearly-dynamic triggers.
+
 ## if/else over if/if
 
 When two consecutive `if` blocks cover complementary conditions, always use `if/else`:

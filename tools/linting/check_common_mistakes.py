@@ -18,6 +18,9 @@ Detects mechanically-checkable rule violations from CLAUDE.md:
   - divide_variable by a variable without a zero guard
   - Duplicate consecutive add_to_variable / add_to_temp_variable lines
   - every_country with has_idea = X_member when a pre-built array exists
+  - is_in_faction = TAG (boolean trigger misused with a tag; should be is_in_faction_with)
+  - has_trade_agreement_with (not a valid trigger; MD uses has_country_flag = trade_agreement@TAG)
+  - Dynamic triggers inside decision allowed blocks (allowed is evaluated once at game start)
 """
 
 import os
@@ -74,6 +77,12 @@ _RE_LOG_ONLY_EFFECT = re.compile(r"log\s*=\s*\"[^\"]+\"\s*$")
 _RE_OPTION_BLOCK_OPEN = re.compile(r"\boption\s*=\s*\{")
 _RE_COMPLETE_EFFECT_OPEN = re.compile(r"\bcomplete_effect\s*=\s*\{")
 _RE_REMOVE_EFFECT_OPEN = re.compile(r"\bremove_effect\s*=\s*\{")
+_RE_IS_IN_FACTION_TAG = re.compile(r"\bis_in_faction\s*=\s*(?!yes\b|no\b)(\w+)")
+_RE_TRADE_AGREEMENT_WITH = re.compile(r"\bhas_trade_agreement_with\s*=")
+_RE_DECISION_ALLOWED_DYNAMIC = re.compile(
+    r"\b(?:num_of_factories|has_opinion|strength_ratio|"
+    r"has_army_size|has_navy_size|has_political_power|date)\b"
+)
 
 # Single-valued country triggers. A country has exactly one government/tag/etc,
 # so two checks at the same AND depth can never both be true — caller almost
@@ -349,6 +358,73 @@ def _check_decision_available_always_no(lines):
                                     )
                                 )
                                 break
+                    k = next_k
+                else:
+                    k += 1
+        else:
+            i += 1
+    return issues
+
+
+def _check_decision_allowed_dynamic(lines):
+    """Flag dynamic triggers inside decision allowed blocks.
+
+    Decision `allowed` is evaluated once at game start and locked. Dynamic
+    game-state conditions (factory counts, opinion, government, flags, variables)
+    belong in `available` or `visible` instead.
+
+    Only checks files in common/decisions/.
+    """
+    issues = []
+    i = 0
+    n = len(lines)
+    while i < n:
+        code = lines[i].split("#")[0]
+        if (
+            _RE_TOPLEVEL_WORD.match(lines[i])
+            and "{" in code
+            and not lines[i].lstrip().startswith("#")
+        ):
+            cat_start = i
+            cat_block, i = _get_block(lines, cat_start)
+            k = 1
+            while k < len(cat_block) - 1:
+                bl = cat_block[k]
+                bl_code = bl.split("#")[0]
+                if _RE_INDENTED_WORD.match(bl) and "{" in bl_code:
+                    dec_block, next_k = _get_block(cat_block, k)
+                    norm = _RE_WHITESPACE_COLLAPSE.sub(" ", "".join(dec_block))
+                    if not _RE_DECISION_MARKER.search(norm):
+                        k = next_k
+                        continue
+                    in_allowed = False
+                    allowed_depth = 0
+                    for p, dbl in enumerate(dec_block):
+                        dbl_code = dbl.split("#")[0]
+                        if (
+                            not in_allowed
+                            and re.search(r"\ballowed\s*=\s*\{", dbl_code)
+                            and "allowed_civil_war" not in dbl_code
+                        ):
+                            in_allowed = True
+                            allowed_depth = dbl_code.count("{") - dbl_code.count("}")
+                        elif in_allowed:
+                            allowed_depth += dbl_code.count("{") - dbl_code.count("}")
+                            if _RE_DECISION_ALLOWED_DYNAMIC.search(dbl_code):
+                                trigger = _RE_DECISION_ALLOWED_DYNAMIC.search(
+                                    dbl_code
+                                ).group()
+                                if trigger == "original_tag" or trigger == "tag":
+                                    pass
+                                else:
+                                    issues.append(
+                                        (
+                                            cat_start + k + p + 1,
+                                            f"dynamic trigger '{trigger}' in decision allowed block -- allowed is evaluated once at game start; move to available",
+                                        )
+                                    )
+                            if allowed_depth <= 0:
+                                in_allowed = False
                     k = next_k
                 else:
                     k += 1
@@ -910,6 +986,24 @@ def check_file(filepath):
                 )
             )
 
+        faction_match = _RE_IS_IN_FACTION_TAG.search(code_part)
+        if faction_match:
+            tag = faction_match.group(1)
+            issues.append(
+                (
+                    line_num,
+                    f"is_in_faction = {tag} is invalid -- is_in_faction takes yes/no; use is_in_faction_with = {tag}",
+                )
+            )
+
+        if _RE_TRADE_AGREEMENT_WITH.search(code_part):
+            issues.append(
+                (
+                    line_num,
+                    "has_trade_agreement_with is not a valid trigger -- use has_country_flag = trade_agreement@TAG",
+                )
+            )
+
         div_match = _RE_DIVISION.search(code_part)
         if div_match:
             divisor = int(div_match.group(1))
@@ -936,6 +1030,7 @@ def check_file(filepath):
         issues.extend(_check_focus_available_always_no(lines))
     if is_decision_file:
         issues.extend(_check_decision_available_always_no(lines))
+        issues.extend(_check_decision_allowed_dynamic(lines))
 
     # Multi-line checks applicable to all script files
     issues.extend(_check_consecutive_scope_blocks(lines))
