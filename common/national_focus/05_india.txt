@@ -378,7 +378,7 @@ focus_tree = {
 		available = {
 			has_country_leader = { name = "Atal Bihari Vajpayee" }
 		}
-		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_FACTION FOCUS_FILTER_INTERNAL_FACTION FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT }
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_FACTION FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT }
 		prerequisite = { focus = RAJ_atal_bihari_vajpayee }
 		relative_position_id = RAJ_indias_politics
 		completion_reward = {
@@ -11159,6 +11159,19 @@ focus_tree = {
 				name = RAJ_demand_nepal_and_butan
 				threat = 3
 			}
+			custom_effect_tooltip = TT_IF_THEY_ACCEPT
+			effect_tooltip = {
+				RAJ = { annex_country = { target = ROOT transfer_troops = yes } }
+			}
+			custom_effect_tooltip = TT_IF_THEY_REJECT
+			effect_tooltip = {
+				RAJ = {
+					create_wargoal = {
+						type = annex_everything
+						target = ROOT
+					}
+				}
+			}
 		}
 		ai_will_do = {
 			base = 1
@@ -12291,6 +12304,17 @@ focus_tree = {
 			AFG = {
 				country_event = indian_event.3
 			}
+			custom_effect_tooltip = TT_IF_THEY_ACCEPT
+			effect_tooltip = {
+				add_ideas = RAJ_indian_saarc_idea
+			}
+			custom_effect_tooltip = TT_IF_THEY_REJECT
+			effect_tooltip = {
+				add_opinion_modifier = {
+					target = RAJ
+					modifier = drama
+				}
+			}
 		}
 		ai_will_do = {
 			base = 1
@@ -12375,6 +12399,17 @@ focus_tree = {
 			}
 			SRI = {
 				country_event = indian_event.4
+			}
+			custom_effect_tooltip = TT_IF_THEY_ACCEPT
+			effect_tooltip = {
+				add_ideas = RAJ_indian_bimstek_idea
+			}
+			custom_effect_tooltip = TT_IF_THEY_REJECT
+			effect_tooltip = {
+				add_opinion_modifier = {
+					target = RAJ
+					modifier = drama
+				}
 			}
 		}
 		ai_will_do = {
@@ -12627,6 +12662,21 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_border_agreements"
 			BAN = {
 				country_event = indian_event.5
+			}
+			custom_effect_tooltip = TT_IF_THEY_ACCEPT
+			effect_tooltip = {
+				add_political_power = 100
+				add_opinion_modifier = {
+					target = RAJ
+					modifier = diplomatic_support
+				}
+			}
+			custom_effect_tooltip = TT_IF_THEY_REJECT
+			effect_tooltip = {
+				add_opinion_modifier = {
+					target = RAJ
+					modifier = drama
+				}
 			}
 		}
 		ai_will_do = {
@@ -14801,6 +14851,19 @@ focus_tree = {
 				country = TRK
 				relation = non_aggression_pact
 				active = no
+			}
+			custom_effect_tooltip = TT_IF_THEY_ACCEPT
+			effect_tooltip = {
+				RAJ = { annex_country = { target = TRK transfer_troops = yes } }
+			}
+			custom_effect_tooltip = TT_IF_THEY_REJECT
+			effect_tooltip = {
+				RAJ = {
+					create_wargoal = {
+						type = annex_everything
+						target = TRK
+					}
+				}
 			}
 		}
 		ai_will_do = {

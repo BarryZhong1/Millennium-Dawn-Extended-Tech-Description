@@ -1011,7 +1011,11 @@ country_event = {
 			}
 		}
 		ai_chance = {
-			factor = 20
+			factor = 10
+			modifier = {
+				factor = 2
+				has_opinion = { target = RAJ value > 100 }
+			}
 		}
 	}
 	option = {
@@ -1029,7 +1033,7 @@ country_event = {
 			}
 		}
 		ai_chance = {
-			factor = 10
+			factor = 50
 		}
 	}
 }
@@ -1805,12 +1809,20 @@ country_event = {
 				add_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
 			}
 		}
+		if = {
+			limit = { 456 = { has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 } } }
+			set_variable = { RAJ_naxalite_456 = 2 }
+		}
 		451 = {
 			if = {
 				limit = { has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_2 } }
 				remove_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_2 }
 				add_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
 			}
+		}
+		if = {
+			limit = { 451 = { has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 } } }
+			set_variable = { RAJ_naxalite_451 = 2 }
 		}
 		ai_chance = { base = 1 }
 	}
