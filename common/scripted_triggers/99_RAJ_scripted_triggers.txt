@@ -15,22 +15,6 @@ mao_str_above_50 = {
 	}
 }
 
-mao_pol_below_10 = {
-	custom_trigger_tooltip = {
-		tooltip = RAJ_focus_mao_pol_below_ten_TT
-		check_variable = {
-			RAJ_maoist_political_influence < 10
-		}
-	}
-}
-mao_str_below_10 = {
-	custom_trigger_tooltip = {
-		tooltip = RAJ_focus_mao_str_below_ten_TT
-		check_variable = {
-			RAJ_strength_of_maoists < 10
-		}
-	}
-}
 
 RAJ_is_top_influencer = {
 	OR = {
@@ -93,12 +77,12 @@ RAJ_no_active_suppression = {
 #############################################
 
 # Tier 2: Full Member Requirements (2024 Expansion)
-# Iran, Saudi Arabia, UAE, Egypt, Ethiopia
-RAJ_can_brics_full_member = {
+# Evaluate in target country scope; ROOT = BRICS leader
+BRICS_can_full_member = {
 	custom_trigger_tooltip = {
 		tooltip = BRICS_full_member_requirements_tt
 		RAJ_influence_higher_than_50 = yes
-		has_opinion = { target = RAJ value > 100 }
+		has_opinion = { target = ROOT value > 100 }
 		OR = {
 			num_of_factories > 25
 			has_idea = economic_boom
@@ -108,28 +92,27 @@ RAJ_can_brics_full_member = {
 }
 
 # Tier 3: Associate Member Requirements
-# Argentina, Indonesia, Kazakhstan, Turkey, etc.
-RAJ_can_brics_associate_member = {
+# Evaluate in target country scope; ROOT = BRICS leader
+BRICS_can_associate_member = {
 	custom_trigger_tooltip = {
 		tooltip = BRICS_associate_member_requirements_tt
 		RAJ_influence_higher_than_40 = yes
-		has_opinion = { target = RAJ value > 50 }
+		has_opinion = { target = ROOT value > 50 }
 		OR = {
 			has_government = democratic
 			has_government = neutrality
 			has_government = communism
 		}
-		has_trade_agreement_with_major_brics = yes
 	}
 }
 
 # Tier 4: Observer State Requirements
-# Belarus, Venezuela, Myanmar, Pakistan, Bangladesh, Nigeria, Algeria
-RAJ_can_brics_observer = {
+# Evaluate in target country scope; ROOT = BRICS leader
+BRICS_can_observer = {
 	custom_trigger_tooltip = {
 		tooltip = BRICS_observer_requirements_tt
 		RAJ_influence_higher_than_25 = yes
-		has_opinion = { target = RAJ value > 0 }
+		has_opinion = { target = ROOT value > 0 }
 	}
 }
 
@@ -231,32 +214,6 @@ RAJ_influence_higher_than_25 = {
 		AND = {
 			check_variable = { influence_array^6 = ROOT }
 			check_variable = { influence_array_val^6 > 24.999 }
-		}
-	}
-}
-
-# Helper: Has trade agreement with at least 3 of 4 BRICS founders (BRA, SOV, CHI, SAF)
-has_trade_agreement_with_major_brics = {
-	OR = {
-		AND = {
-			has_country_flag = trade_agreement@BRA
-			has_country_flag = trade_agreement@SOV
-			has_country_flag = trade_agreement@CHI
-		}
-		AND = {
-			has_country_flag = trade_agreement@BRA
-			has_country_flag = trade_agreement@SOV
-			has_country_flag = trade_agreement@SAF
-		}
-		AND = {
-			has_country_flag = trade_agreement@BRA
-			has_country_flag = trade_agreement@CHI
-			has_country_flag = trade_agreement@SAF
-		}
-		AND = {
-			has_country_flag = trade_agreement@SOV
-			has_country_flag = trade_agreement@CHI
-			has_country_flag = trade_agreement@SAF
 		}
 	}
 }
