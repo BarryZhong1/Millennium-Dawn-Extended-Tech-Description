@@ -30,9 +30,13 @@ india_religious_events = {
 RAJ_upgrade_energy_idea = {
 	if = {
 		limit = {
-			NOT = { has_idea = RAJ_energy1 }
-			NOT = { has_idea = RAJ_energy2 }
-			NOT = { has_idea = RAJ_energy3 }
+			NOT = {
+				OR = {
+					has_idea = RAJ_energy1
+					has_idea = RAJ_energy2
+					has_idea = RAJ_energy3
+				}
+			}
 		}
 		add_ideas = RAJ_energy1
 	}
@@ -199,12 +203,11 @@ RAJ_check_religious_harmony = {
 		}
 		add_ideas = RAJ_hindu_discontent
 	}
-	else_if = {
-		limit = {
-			check_variable = { RAJ_hindus_opinion > 29 }
-			has_idea = RAJ_hindu_discontent
+	else = {
+		if = {
+			limit = { has_idea = RAJ_hindu_discontent }
+			remove_ideas = RAJ_hindu_discontent
 		}
-		remove_ideas = RAJ_hindu_discontent
 	}
 	if = {
 		limit = {

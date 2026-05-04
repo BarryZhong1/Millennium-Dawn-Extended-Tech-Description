@@ -362,6 +362,7 @@ news_event = {
 
 	option = {
 		name = RAJ_eastas.2.o1
+		log = "[GetDateText]: [This.GetName]: RAJ_eastas.2.o1 executed"
 	}
 }
 
@@ -470,6 +471,7 @@ news_event = {
 
 	option = {
 		name = RAJ_eastas.3.o1
+		log = "[GetDateText]: [This.GetName]: RAJ_eastas.3.o1 executed"
 	}
 }
 
@@ -507,6 +509,7 @@ news_event = {
 
 	option = {
 		name = RAJ_eastas.4.o1
+		log = "[GetDateText]: [This.GetName]: RAJ_eastas.4.o1 executed"
 	}
 }
 
@@ -522,6 +525,7 @@ news_event = {
 
 	option = {
 		name = RAJ_eastas.5.o1
+		log = "[GetDateText]: [This.GetName]: RAJ_eastas.5.o1 executed"
 	}
 }
 
@@ -1751,12 +1755,12 @@ country_event = {
 		name = RAJ_mao_reb.5.a
 		log = "[GetDateText]: [This.GetName]: RAJ_mao_reb.5.a executed"
 		hidden_effect = {
-			set_country_flag = mao_civvar_staret
+			set_country_flag = mao_civvar_start
 			start_civil_war = {
 				ideology = neutrality
 				size = 0.3
 				set_cosmetic_tag = RAJ_REB_S_communism
-				set_country_flag = mao_civvar_staret
+				set_country_flag = mao_civvar_start
 				set_temp_variable = { rul_party_temp = 19 }
 				change_ruling_party_effect = yes
 				every_controlled_state = {
@@ -4178,6 +4182,17 @@ country_event = {
 			RAJ = { add_to_faction = ROOT }
 			add_opinion_modifier = { target = RAJ modifier = RAJ_brics_member_opinion }
 		}
+		ai_chance = {
+			base = 60
+			modifier = {
+				add = 25
+				has_opinion = { target = FROM value > 50 }
+			}
+			modifier = {
+				add = -25
+				has_opinion = { target = FROM value < 0 }
+			}
+		}
 	}
 
 	option = {
@@ -4186,6 +4201,17 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: indian_event.70.b executed (declined - requirements not met)"
 		RAJ = {
 			country_event = { id = indian_event.72 days = 3 }
+		}
+		ai_chance = {
+			base = 40
+			modifier = {
+				add = 25
+				has_opinion = { target = FROM value < 0 }
+			}
+			modifier = {
+				add = -25
+				has_opinion = { target = FROM value > 50 }
+			}
 		}
 	}
 }
@@ -4202,6 +4228,7 @@ country_event = {
 	option = {
 		name = indian_event.71.a
 		log = "[GetDateText]: [This.GetName]: indian_event.71.a executed"
+		add_to_variable = { RAJ_brics_gui_dirty = 1 }
 		add_to_faction = FROM
 		add_opinion_modifier = { target = FROM modifier = RAJ_brics_member_opinion }
 		FROM = {
@@ -4226,6 +4253,7 @@ country_event = {
 	option = {
 		name = indian_event.72.a
 		log = "[GetDateText]: [This.GetName]: indian_event.72.a executed"
+		add_to_variable = { RAJ_brics_gui_dirty = 1 }
 		add_political_power = -25
 		custom_effect_tooltip = RAJ_brics_rejected_tt
 	}
@@ -4250,6 +4278,17 @@ country_event = {
 		effect_tooltip = {
 			add_opinion_modifier = { target = RAJ modifier = RAJ_brics_associate_opinion }
 		}
+		ai_chance = {
+			base = 60
+			modifier = {
+				add = 25
+				has_opinion = { target = FROM value > 50 }
+			}
+			modifier = {
+				add = -25
+				has_opinion = { target = FROM value < 0 }
+			}
+		}
 	}
 
 	option = {
@@ -4258,6 +4297,17 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: indian_event.73.b executed (declined - requirements not met)"
 		RAJ = {
 			country_event = { id = indian_event.75 days = 3 }
+		}
+		ai_chance = {
+			base = 40
+			modifier = {
+				add = 25
+				has_opinion = { target = FROM value < 0 }
+			}
+			modifier = {
+				add = -25
+				has_opinion = { target = FROM value > 50 }
+			}
 		}
 	}
 }
@@ -4274,6 +4324,7 @@ country_event = {
 	option = {
 		name = indian_event.74.a
 		log = "[GetDateText]: [This.GetName]: indian_event.74.a executed"
+		add_to_variable = { RAJ_brics_gui_dirty = 1 }
 		add_opinion_modifier = { target = FROM modifier = RAJ_brics_associate_opinion }
 		FROM = {
 			add_opinion_modifier = { target = RAJ modifier = RAJ_brics_associate_opinion }
@@ -4294,6 +4345,7 @@ country_event = {
 	option = {
 		name = indian_event.75.a
 		log = "[GetDateText]: [This.GetName]: indian_event.75.a executed"
+		add_to_variable = { RAJ_brics_gui_dirty = 1 }
 		add_political_power = -15
 		custom_effect_tooltip = RAJ_brics_rejected_tt
 	}
@@ -4318,12 +4370,34 @@ country_event = {
 		effect_tooltip = {
 			add_opinion_modifier = { target = RAJ modifier = RAJ_brics_observer_opinion }
 		}
+		ai_chance = {
+			base = 60
+			modifier = {
+				add = 25
+				has_opinion = { target = FROM value > 50 }
+			}
+			modifier = {
+				add = -25
+				has_opinion = { target = FROM value < 0 }
+			}
+		}
 	}
 
 	option = {
 		name = indian_event.76.b
 		trigger = { NOT = { RAJ_can_brics_observer = yes } }
 		log = "[GetDateText]: [This.GetName]: indian_event.76.b executed (declined - requirements not met)"
+		ai_chance = {
+			base = 40
+			modifier = {
+				add = 25
+				has_opinion = { target = FROM value < 0 }
+			}
+			modifier = {
+				add = -25
+				has_opinion = { target = FROM value > 50 }
+			}
+		}
 	}
 }
 
@@ -4339,6 +4413,7 @@ country_event = {
 	option = {
 		name = indian_event.77.a
 		log = "[GetDateText]: [This.GetName]: indian_event.77.a executed"
+		add_to_variable = { RAJ_brics_gui_dirty = 1 }
 		add_opinion_modifier = { target = FROM modifier = RAJ_brics_observer_opinion }
 		FROM = {
 			add_opinion_modifier = { target = RAJ modifier = RAJ_brics_observer_opinion }
@@ -4359,15 +4434,18 @@ news_event = {
 	option = {
 		name = indian_event.78.a
 		trigger = { original_tag = RAJ }
+		log = "[GetDateText]: [This.GetName]: indian_event.78.a executed"
 	}
 
 	option = {
 		name = indian_event.78.b
 		trigger = { is_major = yes }
+		log = "[GetDateText]: [This.GetName]: indian_event.78.b executed"
 	}
 
 	option = {
 		name = indian_event.78.c
 		trigger = { NOT = { original_tag = RAJ } NOT = { is_major = yes } }
+		log = "[GetDateText]: [This.GetName]: indian_event.78.c executed"
 	}
 }
