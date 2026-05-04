@@ -1551,20 +1551,16 @@ country_event = {
 	option = {
 		name = RAJ_mao_reb.1.a
 		log = "[GetDateText]: [This.GetName]: RAJ_mao_reb.1.a executed"
-		add_to_variable = {
-			var = RAJ_strength_of_maoists
-			value = 2
-		}
-		add_to_variable = {
-			var = RAJ_maoist_political_influence
-			value = 2
-		}
 		add_to_variable = { party_pop_array^19 = 0.05 }
 		recalculate_party = yes
 		add_stability = 0.05
 		add_manpower = -1000
 		add_days_mission_timeout = {
 			mission = RAJ_MAO_rebellion
+			days = 10
+		}
+		add_days_mission_timeout = {
+			mission = RAJ_MAO_rebellion_armed
 			days = 10
 		}
 		ai_chance = {
@@ -1583,20 +1579,16 @@ country_event = {
 	option = {
 		name = RAJ_mao_reb.2.a
 		log = "[GetDateText]: [This.GetName]: RAJ_mao_reb.2.a executed"
-		add_to_variable = {
-			var = RAJ_strength_of_maoists
-			value = 5
-		}
-		add_to_variable = {
-			var = RAJ_maoist_political_influence
-			value = 5
-		}
 		add_to_variable = { party_pop_array^19 = 0.03 }
 		recalculate_party = yes
 		add_stability = -0.1
 		add_manpower = -100
 		add_days_mission_timeout = {
 			mission = RAJ_MAO_rebellion
+			days = 5
+		}
+		add_days_mission_timeout = {
+			mission = RAJ_MAO_rebellion_armed
 			days = 5
 		}
 		ai_chance = {
@@ -1614,14 +1606,6 @@ country_event = {
 	picture = GFX_CAN_operation_medusa_commences
 	option = {
 		name = RAJ_mao_reb.3.a
-		add_to_variable = {
-			var = RAJ_strength_of_maoists
-			value = -5
-		}
-		add_to_variable = {
-			var = RAJ_maoist_political_influence
-			value = -5
-		}
 		log = "[GetDateText]: [This.GetName]: RAJ_mao_reb.3.a executed"
 		add_to_variable = { party_pop_array^19 = -0.03 }
 		recalculate_party = yes
@@ -1629,6 +1613,10 @@ country_event = {
 		add_manpower = -15
 		add_days_mission_timeout = {
 			mission = RAJ_MAO_rebellion
+			days = -30
+		}
+		add_days_mission_timeout = {
+			mission = RAJ_MAO_rebellion_armed
 			days = -30
 		}
 		ai_chance = {
@@ -1654,38 +1642,40 @@ country_event = {
 			producer = RAJ
 		}
 		RAJ = {
-				set_temp_variable = { treasury_change = 3 }
-				modify_treasury_effect = yes
-				add_equipment_to_stockpile = {
-					type = Anti_Air_0
-					amount = -40
-					producer = RAJ
-				}
-		}
-			set_temp_variable = { treasury_change = -3 }
-			modify_treasury_effect = yes
-	}
-	#AWTOMATS
-	option = {
-			name = raj_exports.1.c
-			log = "[GetDateText]: [This.GetName]: raj_exports.1.c executed"
-			set_temp_variable = { treasury_change = -2.25 }
+			set_temp_variable = { treasury_change = 3 }
 			modify_treasury_effect = yes
 			add_equipment_to_stockpile = {
-				type = infantry_weapons_2
-				amount = 900
+				type = Anti_Air_0
+				amount = -40
 				producer = RAJ
 			}
-			RAJ = {
-				add_equipment_to_stockpile = {
-					type = infantry_weapons_2
-					amount = -900
-					producer = RAJ
-				}
-				set_temp_variable = { treasury_change = 2.25 }
-				modify_treasury_effect = yes
-			}
+		}
+		set_temp_variable = { treasury_change = -3 }
+		modify_treasury_effect = yes
 	}
+
+	#AWTOMATS
+	option = {
+		name = raj_exports.1.c
+		log = "[GetDateText]: [This.GetName]: raj_exports.1.c executed"
+		set_temp_variable = { treasury_change = -2.25 }
+		modify_treasury_effect = yes
+		add_equipment_to_stockpile = {
+			type = infantry_weapons_2
+			amount = 900
+			producer = RAJ
+		}
+		RAJ = {
+			add_equipment_to_stockpile = {
+				type = infantry_weapons_2
+				amount = -900
+				producer = RAJ
+			}
+			set_temp_variable = { treasury_change = 2.25 }
+			modify_treasury_effect = yes
+		}
+	}
+
 	#PTRK
 	option = {
 		name = raj_exports.1.g
@@ -1707,6 +1697,7 @@ country_event = {
 			modify_treasury_effect = yes
 		}
 	}
+
 	option = {
 		name = raj_exports.1.e
 		log = "[GetDateText]: [This.GetName]: raj_exports.1.e executed"
@@ -1722,22 +1713,10 @@ country_event = {
 	option = {
 		name = RAJ_mao_reb.4.a
 		log = "[GetDateText]: [This.GetName]: RAJ_mao_reb.4.a executed"
-		add_to_variable = {
-			var = RAJ_strength_of_maoists
-			value = 1
-		}
-		add_to_variable = {
-			var = RAJ_maoist_political_influence
-			value = 5
-		}
 		add_to_variable = { party_pop_array^19 = 0.1 }
 		recalculate_party = yes
 		add_stability = -0.05
 		add_manpower = -5
-		add_days_mission_timeout = {
-			mission = RAJ_MAO_rebellion
-			days = 5
-		}
 		ai_chance = {
 			base = 80
 		}
@@ -1751,6 +1730,7 @@ country_event = {
 	is_triggered_only = yes
 	# TODO: Replace with Indian civil conflict picture
 	picture = GFX_iranian_civ_war_country
+
 	option = {
 		name = RAJ_mao_reb.5.a
 		log = "[GetDateText]: [This.GetName]: RAJ_mao_reb.5.a executed"
@@ -1819,8 +1799,6 @@ country_event = {
 		name = RAJ_naxal.10.a
 		log = "[GetDateText]: [This.GetName]: RAJ_naxal.10.a executed"
 		set_country_flag = RAJ_pwg_mcc_merger
-		add_to_variable = { RAJ_strength_of_maoists = 10 }
-		add_to_variable = { RAJ_maoist_political_influence = 10 }
 		add_stability = -0.05
 		# Escalate core states
 		456 = {
@@ -1860,7 +1838,6 @@ country_event = {
 	trigger = {
 		original_tag = RAJ
 		has_country_flag = RAJ_has_naxalite_states
-		check_variable = { RAJ_strength_of_maoists > 30 }
 		NOT = { has_country_flag = RAJ_major_attack_cooldown }
 		NOT = { has_country_flag = RAJ_naxal_free_achieved }
 		any_controlled_state = {
@@ -1878,7 +1855,6 @@ country_event = {
 		add_stability = -0.03
 		add_war_support = -0.02
 		add_manpower = -500
-		add_to_variable = { RAJ_strength_of_maoists = 3 }
 		ai_chance = { base = 1 }
 	}
 }
@@ -1912,7 +1888,6 @@ country_event = {
 	is_triggered_only = yes
 	trigger = {
 		original_tag = RAJ
-		check_variable = { RAJ_strength_of_maoists > 20 }
 		NOT = { has_country_flag = RAJ_leadership_elimination_cooldown }
 		NOT = { has_country_flag = RAJ_naxal_free_achieved }
 		has_country_flag = RAJ_green_hunt_active
@@ -1922,7 +1897,6 @@ country_event = {
 		name = RAJ_naxal.13.a
 		log = "[GetDateText]: [This.GetName]: RAJ_naxal.13.a executed"
 		set_country_flag = { flag = RAJ_leadership_elimination_cooldown days = 365 value = 1 }
-		add_to_variable = { RAJ_strength_of_maoists = -8 }
 		add_stability = 0.03
 		add_war_support = 0.02
 		ai_chance = { base = 1 }
@@ -1956,7 +1930,6 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: RAJ_naxal.14.a executed"
 		set_country_flag = { flag = RAJ_tribal_protests_cooldown days = 365 value = 1 }
 		add_stability = -0.02
-		add_to_variable = { RAJ_maoist_political_influence = 3 }
 		ai_chance = { base = 30 }
 	}
 
@@ -2001,7 +1974,6 @@ country_event = {
 
 	trigger = {
 		original_tag = RAJ
-		check_variable = { RAJ_strength_of_maoists < 5 }
 		NOT = {
 			any_controlled_state = {
 				OR = {
@@ -2022,8 +1994,6 @@ country_event = {
 		add_ideas = RAJ_naxal_free_india
 		add_stability = 0.10
 		add_political_power = 100
-		set_variable = { RAJ_strength_of_maoists = 0 }
-		set_variable = { RAJ_maoist_political_influence = 0 }
 		set_variable = { RAJ_naxalite_456 = 0 }
 		set_variable = { RAJ_naxalite_459 = 0 }
 		set_variable = { RAJ_naxalite_991 = 0 }
@@ -2056,7 +2026,6 @@ country_event = {
 	trigger = {
 		original_tag = RAJ
 		date > 2010.4.1
-		check_variable = { RAJ_strength_of_maoists > 25 }
 		456 = { # Chhattisgarh
 			is_controlled_by = RAJ
 			OR = {
@@ -2072,7 +2041,6 @@ country_event = {
 		add_stability = -0.05
 		add_war_support = 0.03
 		add_manpower = -76
-		add_to_variable = { RAJ_strength_of_maoists = 5 }
 		set_country_flag = RAJ_dantewada_ambush
 		ai_chance = { base = 1 }
 	}
@@ -2091,7 +2059,6 @@ country_event = {
 	trigger = {
 		original_tag = RAJ
 		date > 2017.4.1
-		check_variable = { RAJ_strength_of_maoists > 15 }
 		456 = { # Chhattisgarh
 			is_controlled_by = RAJ
 			OR = {
@@ -2109,7 +2076,6 @@ country_event = {
 		add_stability = -0.03
 		add_war_support = 0.02
 		add_manpower = -25
-		add_to_variable = { RAJ_strength_of_maoists = 3 }
 		ai_chance = { base = 1 }
 	}
 }
@@ -2593,7 +2559,6 @@ country_event = {
 	trigger = {
 		original_tag = RAJ
 		date > 2013.5.1
-		check_variable = { RAJ_strength_of_maoists > 15 }
 		456 = {
 			is_controlled_by = RAJ
 			RAJ_state_has_any_naxalite = yes
@@ -2605,7 +2570,6 @@ country_event = {
 		add_manpower = -27
 		add_stability = -0.04
 		add_war_support = 0.02
-		add_to_variable = { RAJ_strength_of_maoists = 4 }
 		set_country_flag = RAJ_darbha_attack
 		ai_chance = { base = 1 }
 	}
@@ -2790,7 +2754,6 @@ country_event = {
 	trigger = {
 		original_tag = RAJ
 		date > 2021.4.1
-		check_variable = { RAJ_strength_of_maoists > 10 }
 		456 = {
 			is_controlled_by = RAJ
 			RAJ_state_has_any_naxalite = yes
@@ -2802,7 +2765,6 @@ country_event = {
 		add_manpower = -22
 		add_stability = -0.03
 		add_war_support = 0.02
-		add_to_variable = { RAJ_strength_of_maoists = 3 }
 		set_country_flag = RAJ_bijapur_attack
 		ai_chance = { base = 1 }
 	}
@@ -3107,10 +3069,6 @@ country_event = {
 		add_stability = 0.02
 		set_temp_variable = { temp_change = 2 }
 		RAJ_change_christian_opinion = yes
-		add_to_variable = {
-			var = RAJ_strength_of_maoists
-			value = -2
-		}
 		set_country_flag = RAJ_nscn_framework
 
 		ai_chance = { base = 1 }
@@ -3133,10 +3091,6 @@ country_event = {
 	option = {
 		name = RAJ_regional.9.a
 		log = "[GetDateText]: [This.GetName]: RAJ_regional.9.a executed"
-		add_to_variable = {
-			var = RAJ_strength_of_maoists
-			value = -2
-		}
 		add_opinion_modifier = { target = BRM modifier = small_increase }
 		add_political_power = -10
 
@@ -3152,11 +3106,6 @@ country_event = {
 	option = {
 		name = RAJ_regional.9.b
 		log = "[GetDateText]: [This.GetName]: RAJ_regional.9.b executed"
-		add_to_variable = {
-			var = RAJ_strength_of_maoists
-			value = 1
-		}
-
 		ai_chance = { base = 20 }
 	}
 }
@@ -4253,8 +4202,10 @@ country_event = {
 		add_to_faction = FROM
 		add_opinion_modifier = { target = FROM modifier = RAJ_brics_member_opinion }
 		FROM = {
+			set_country_flag = BRICS_full_member_status
 			add_opinion_modifier = { target = ROOT modifier = RAJ_brics_member_opinion }
 		}
+		add_to_array = { global.BRICS_full_members = FROM }
 		custom_effect_tooltip = RAJ_brics_full_member_tt
 		hidden_effect = {
 			news_event = { id = indian_event.78 hours = 12 }
@@ -4366,8 +4317,10 @@ country_event = {
 		add_to_variable = { global.BRICS_gui_dirty = 1 }
 		add_opinion_modifier = { target = FROM modifier = RAJ_brics_associate_opinion }
 		FROM = {
+			set_country_flag = BRICS_associate_status
 			add_opinion_modifier = { target = ROOT modifier = RAJ_brics_associate_opinion }
 		}
+		add_to_array = { global.BRICS_associates = FROM }
 		custom_effect_tooltip = RAJ_brics_associate_member_tt
 	}
 }
@@ -4455,8 +4408,10 @@ country_event = {
 		add_to_variable = { global.BRICS_gui_dirty = 1 }
 		add_opinion_modifier = { target = FROM modifier = RAJ_brics_observer_opinion }
 		FROM = {
+			set_country_flag = BRICS_observer_status
 			add_opinion_modifier = { target = ROOT modifier = RAJ_brics_observer_opinion }
 		}
+		add_to_array = { global.BRICS_observers = FROM }
 		custom_effect_tooltip = RAJ_brics_observer_tt
 	}
 }

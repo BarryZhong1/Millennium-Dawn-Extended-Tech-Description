@@ -3802,20 +3802,10 @@ focus_tree = {
 		cost = 8
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MILITARY_LAWS }
 		prerequisite = { focus = RAJ_threat_of_terror_mil }
-		available = {
-			has_variable = RAJ_strength_of_maoists
-			check_variable = { RAJ_strength_of_maoists > 10 }
-		}
-		bypass = {
-			has_variable = RAJ_strength_of_maoists
-			check_variable = { RAJ_strength_of_maoists < 5 }
-		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_counter_insurgency_operations"
 			add_political_power = -50
 			add_stability = 0.03
-			subtract_from_variable = { RAJ_strength_of_maoists = 10 }
-			subtract_from_variable = { RAJ_maoist_political_influence = 5 }
 			add_timed_idea = {
 				idea = RAJ_operation_green_hunt_active
 				days = 365
@@ -3832,10 +3822,6 @@ focus_tree = {
 		}
 		ai_will_do = {
 			base = 5
-			modifier = {
-				factor = 3
-				check_variable = { RAJ_strength_of_maoists > 30 }
-			}
 			modifier = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
@@ -10008,10 +9994,7 @@ focus_tree = {
 		relative_position_id = RAJ_indias_elections
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_communist_party_of_india"
-			add_popularity = {
-				ideology = communism
-				popularity = 0.10
-			}
+			add_popularity = { ideology = communism popularity = 0.10 }
 			add_to_variable = { party_pop_array^4 = 0.12 }
 			recalculate_party = yes
 			add_to_variable = { party_pop_array^5 = 0.03 }
