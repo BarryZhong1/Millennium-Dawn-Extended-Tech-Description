@@ -646,3 +646,54 @@ RAJ_handle_religious_crisis_severe = {
 	abort_when_not_enabled = yes
 	ai_strategy = { type = pp_spend_priority id = decision value = 150 }
 }
+
+RAJ_brics_expansion_drive = {
+	allowed = { original_tag = RAJ }
+	enable = {
+		has_country_flag = RAJ_brics_created
+		is_faction_leader = yes
+		NOT = { has_war = yes }
+		num_of_factories > 30
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = { type = pp_spend_priority id = decision value = 50 }
+}
+
+RAJ_befriend_myanmar_buffer = {
+	allowed = { original_tag = RAJ }
+	enable = {
+		country_exists = BRM
+		NOT = { has_war_with = BRM }
+		BRM = {
+			NOT = { is_in_faction_with = CHI }
+		}
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = { type = befriend id = "BRM" value = 50 }
+	ai_strategy = { type = support  id = "BRM" value = 25 }
+	ai_strategy = { type = protect  id = "BRM" value = 25 }
+}
+
+RAJ_counter_chinese_influence_myanmar = {
+	allowed = { original_tag = RAJ }
+	enable = {
+		country_exists = BRM
+		BRM = {
+			is_in_faction_with = CHI
+		}
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = { type = antagonize id = "CHI" value = 25 }
+	ai_strategy = { type = contain    id = "CHI" value = 50 }
+}
+
+RAJ_weapons_export_priority = {
+	allowed = { original_tag = RAJ }
+	enable = {
+		has_completed_focus = RAJ_indian_arms_exports
+		NOT = { has_war = yes }
+		num_of_factories > 20
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = { type = pp_spend_priority id = decision value = 25 }
+}
