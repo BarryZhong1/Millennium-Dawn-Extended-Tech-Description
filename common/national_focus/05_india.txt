@@ -2259,7 +2259,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_building_industry_of_india"
 			add_political_power = 100
-			add_ideas = civilian_industry_project
+			improve_civilian_industrial_projects = yes
 			set_temp_variable = { temp_opinion = 5 }
 			change_industrial_conglomerates_opinion = yes
 			random_owned_state = { add_extra_state_shared_building_slots = 2 }
@@ -8301,7 +8301,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_check_MSF"
-			RAJ_upgrade_non_aligned_idea = yes
+			upgrade_non_aligned_boost_idea = yes
 		}
 
 		ai_will_do = {
@@ -8652,7 +8652,7 @@ focus_tree = {
 		relative_position_id = RAJ_bharatiya_janata_party
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_check_sierra_club"
-			RAJ_upgrade_non_aligned_idea = yes
+			upgrade_non_aligned_boost_idea = yes
 		}
 		ai_will_do = {
 			base = 1
@@ -8780,7 +8780,7 @@ focus_tree = {
 		relative_position_id = RAJ_bharatiya_janata_party
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_check_avaaz"
-			RAJ_upgrade_non_aligned_idea = yes
+			upgrade_non_aligned_boost_idea = yes
 		}
 		ai_will_do = {
 			base = 1
@@ -16371,12 +16371,12 @@ focus_tree = {
 					}
 				}
 			}
-			every_country = {
-				limit = {
-					NOT = { has_country_flag = trade_agreement@ROOT }
-				}
-				if = {
-					limit = { has_dlc = "By Blood Alone" }
+			if = {
+				limit = { has_dlc = "By Blood Alone" }
+				every_country = {
+					limit = {
+						NOT = { has_country_flag = trade_agreement@ROOT }
+					}
 					send_embargo = RAJ
 				}
 			}

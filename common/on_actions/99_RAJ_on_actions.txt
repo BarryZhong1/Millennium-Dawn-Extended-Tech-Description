@@ -56,6 +56,21 @@ on_actions = {
 			# Per-state level variables: 0 = none, 1 = insurgency, 2 = _1, 3 = _2, 4 = _3, 5 = _4
 			# Replaces per-frame state scope switches in decision visible and icon trigger blocks
 			if = {
+			limit = { NOT = { has_country_flag = RAJ_has_naxalite_states } }
+				set_variable = { RAJ_naxalite_456 = 0 }
+				set_variable = { RAJ_naxalite_459 = 0 }
+				set_variable = { RAJ_naxalite_991 = 0 }
+				set_variable = { RAJ_naxalite_989 = 0 }
+				set_variable = { RAJ_naxalite_451 = 0 }
+				set_variable = { RAJ_naxalite_452 = 0 }
+				set_variable = { RAJ_naxalite_447 = 0 }
+				set_variable = { RAJ_naxalite_458 = 0 }
+				set_variable = { RAJ_naxalite_988 = 0 }
+				set_variable = { RAJ_naxalite_470 = 0 }
+				clr_country_flag = RAJ_has_severe_naxalite_states
+			}
+			else = {
+			if = {
 				limit = { 456 = { has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency } } }
 				set_variable = { RAJ_naxalite_456 = 1 }
 			}
@@ -277,11 +292,27 @@ on_actions = {
 			if = {
 				limit = {
 					has_country_flag = RAJ_has_naxalite_states
-					any_controlled_state = {
-						OR = {
-							has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency }
-							has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
-						}
+					OR = {
+						check_variable = { RAJ_naxalite_456 = 1 }
+						check_variable = { RAJ_naxalite_456 = 2 }
+						check_variable = { RAJ_naxalite_459 = 1 }
+						check_variable = { RAJ_naxalite_459 = 2 }
+						check_variable = { RAJ_naxalite_991 = 1 }
+						check_variable = { RAJ_naxalite_991 = 2 }
+						check_variable = { RAJ_naxalite_989 = 1 }
+						check_variable = { RAJ_naxalite_989 = 2 }
+						check_variable = { RAJ_naxalite_451 = 1 }
+						check_variable = { RAJ_naxalite_451 = 2 }
+						check_variable = { RAJ_naxalite_452 = 1 }
+						check_variable = { RAJ_naxalite_452 = 2 }
+						check_variable = { RAJ_naxalite_447 = 1 }
+						check_variable = { RAJ_naxalite_447 = 2 }
+						check_variable = { RAJ_naxalite_458 = 1 }
+						check_variable = { RAJ_naxalite_458 = 2 }
+						check_variable = { RAJ_naxalite_988 = 1 }
+						check_variable = { RAJ_naxalite_988 = 2 }
+						check_variable = { RAJ_naxalite_470 = 1 }
+						check_variable = { RAJ_naxalite_470 = 2 }
 					}
 				}
 				set_country_flag = RAJ_has_severe_naxalite_states
@@ -289,6 +320,7 @@ on_actions = {
 			else = {
 				clr_country_flag = RAJ_has_severe_naxalite_states
 			}
+			} # end else (has naxalite states)
 
 			# Naxal-Free Milestone (fires when last naxalite state is cleared)
 			if = {
@@ -297,7 +329,7 @@ on_actions = {
 					NOT = { has_country_flag = RAJ_has_naxalite_states }
 					check_variable = { RAJ_strength_of_maoists < 5 }
 				}
-				RAJ = { country_event = RAJ_naxal.16 }
+				country_event = RAJ_naxal.16
 			}
 		}
 	}
