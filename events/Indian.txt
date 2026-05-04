@@ -2402,6 +2402,7 @@ country_event = {
 	}
 }
 
+# BRICS Expansion Events
 country_event = {
 	id = indian_event.56
 	title = indian_event.56.t
@@ -4115,5 +4116,214 @@ country_event = {
 			429 = { set_demilitarized_zone = no }
 		}
 		add_stability = 0.02
+	}
+}
+
+#############################################
+# BRICS Expansion Events
+#############################################
+
+# Full Member Invitation
+country_event = {
+	id = indian_event.70
+	title = indian_event.70.t
+	desc = indian_event.70.d
+	picture = GFX_diplomacy
+	is_triggered_only = yes
+
+	option = {
+		name = indian_event.70.a
+		trigger = { RAJ_can_brics_full_member = yes }
+		log = "[GetDateText]: [This.GetName]: indian_event.70.a executed"
+		RAJ = {
+			country_event = { id = indian_event.71 days = 3 }
+		}
+		effect_tooltip = {
+			add_to_faction = BRICS
+			add_opinion_modifier = { target = RAJ modifier = RAJ_brics_member_opinion }
+		}
+	}
+
+	option = {
+		name = indian_event.70.b
+		trigger = { NOT = { RAJ_can_brics_full_member = yes } }
+		log = "[GetDateText]: [This.GetName]: indian_event.70.b executed (declined - requirements not met)"
+		RAJ = {
+			country_event = { id = indian_event.72 days = 3 }
+		}
+	}
+}
+
+# Full Member Acceptance
+country_event = {
+	id = indian_event.71
+	title = indian_event.71.t
+	desc = indian_event.71.d
+	picture = GFX_diplomacy
+	is_triggered_only = yes
+
+	option = {
+		name = indian_event.71.a
+		log = "[GetDateText]: [This.GetName]: indian_event.71.a executed"
+		add_to_faction = FROM
+		add_opinion_modifier = { target = FROM modifier = RAJ_brics_member_opinion }
+		FROM = {
+			add_opinion_modifier = { target = RAJ modifier = RAJ_brics_member_opinion }
+		}
+		custom_effect_tooltip = RAJ_brics_full_member_tt
+		hidden_effect = {
+			news_event = { id = indian_event.78 hours = 12 }
+		}
+	}
+}
+
+# Full Member Rejection
+country_event = {
+	id = indian_event.72
+	title = indian_event.72.t
+	desc = indian_event.72.d
+	picture = GFX_diplomacy
+	is_triggered_only = yes
+
+	option = {
+		name = indian_event.72.a
+		log = "[GetDateText]: [This.GetName]: indian_event.72.a executed"
+		add_political_power = -25
+		custom_effect_tooltip = RAJ_brics_rejected_tt
+	}
+}
+
+# Associate Member Invitation
+country_event = {
+	id = indian_event.73
+	title = indian_event.73.t
+	desc = indian_event.73.d
+	picture = GFX_diplomacy
+	is_triggered_only = yes
+
+	option = {
+		name = indian_event.73.a
+		trigger = { RAJ_can_brics_associate_member = yes }
+		log = "[GetDateText]: [This.GetName]: indian_event.73.a executed"
+		RAJ = {
+			country_event = { id = indian_event.74 days = 3 }
+		}
+		effect_tooltip = {
+			add_opinion_modifier = { target = RAJ modifier = RAJ_brics_associate_opinion }
+		}
+	}
+
+	option = {
+		name = indian_event.73.b
+		trigger = { NOT = { RAJ_can_brics_associate_member = yes } }
+		log = "[GetDateText]: [This.GetName]: indian_event.73.b executed (declined - requirements not met)"
+		RAJ = {
+			country_event = { id = indian_event.75 days = 3 }
+		}
+	}
+}
+
+# Associate Member Acceptance
+country_event = {
+	id = indian_event.74
+	title = indian_event.74.t
+	desc = indian_event.74.d
+	picture = GFX_diplomacy
+	is_triggered_only = yes
+
+	option = {
+		name = indian_event.74.a
+		log = "[GetDateText]: [This.GetName]: indian_event.74.a executed"
+		add_opinion_modifier = { target = FROM modifier = RAJ_brics_associate_opinion }
+		FROM = {
+			add_opinion_modifier = { target = RAJ modifier = RAJ_brics_associate_opinion }
+		}
+		custom_effect_tooltip = RAJ_brics_associate_member_tt
+	}
+}
+
+# Associate Member Rejection
+country_event = {
+	id = indian_event.75
+	title = indian_event.75.t
+	desc = indian_event.75.d
+	picture = GFX_diplomacy
+	is_triggered_only = yes
+
+	option = {
+		name = indian_event.75.a
+		log = "[GetDateText]: [This.GetName]: indian_event.75.a executed"
+		add_political_power = -15
+		custom_effect_tooltip = RAJ_brics_rejected_tt
+	}
+}
+
+# Observer Invitation
+country_event = {
+	id = indian_event.76
+	title = indian_event.76.t
+	desc = indian_event.76.d
+	picture = GFX_diplomacy
+	is_triggered_only = yes
+
+	option = {
+		name = indian_event.76.a
+		trigger = { RAJ_can_brics_observer = yes }
+		log = "[GetDateText]: [This.GetName]: indian_event.76.a executed"
+		RAJ = {
+			country_event = { id = indian_event.77 days = 3 }
+		}
+		effect_tooltip = {
+			add_opinion_modifier = { target = RAJ modifier = RAJ_brics_observer_opinion }
+		}
+	}
+
+	option = {
+		name = indian_event.76.b
+		trigger = { NOT = { RAJ_can_brics_observer = yes } }
+		log = "[GetDateText]: [This.GetName]: indian_event.76.b executed (declined - requirements not met)"
+	}
+}
+
+# Observer Acceptance
+country_event = {
+	id = indian_event.77
+	title = indian_event.77.t
+	desc = indian_event.77.d
+	picture = GFX_diplomacy
+	is_triggered_only = yes
+
+	option = {
+		name = indian_event.77.a
+		log = "[GetDateText]: [This.GetName]: indian_event.77.a executed"
+		add_opinion_modifier = { target = FROM modifier = RAJ_brics_observer_opinion }
+		FROM = {
+			add_opinion_modifier = { target = RAJ modifier = RAJ_brics_observer_opinion }
+		}
+		custom_effect_tooltip = RAJ_brics_observer_tt
+	}
+}
+
+# BRICS Expansion News Event
+news_event = {
+	id = indian_event.78
+	title = indian_event.78.t
+	desc = indian_event.78.d
+	picture = GFX_diplomacy
+	mean_time_to_happen = { hours = 12 }
+
+	option = {
+		name = indian_event.78.a
+		trigger = { original_tag = RAJ }
+	}
+
+	option = {
+		name = indian_event.78.b
+		trigger = { is_major = yes }
+	}
+
+	option = {
+		name = indian_event.78.c
+		trigger = { NOT = { original_tag = RAJ } NOT = { is_major = yes } }
 	}
 }

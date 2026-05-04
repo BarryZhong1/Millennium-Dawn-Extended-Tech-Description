@@ -129,8 +129,6 @@ RAJ_religious_groups = {
 	}
 
 	RAJ_ladakh_crisis = {
-		allowed = { original_tag = RAJ }
-
 		activation = {
 			owns_state = 993
 			check_variable = { RAJ_muslim_opinion < 15 }
@@ -164,13 +162,9 @@ RAJ_religious_groups = {
 			add_stability = -0.05
 			country_event = { id = RAJ_rebellion.1 days = 90 }
 		}
-
-		ai_will_do = { base = 0 }
 	}
 
 	RAJ_meghalaya_crisis = {
-		allowed = { original_tag = RAJ }
-
 		activation = {
 			owns_state = 980
 			check_variable = { RAJ_christians_opinion < 15 }
@@ -204,13 +198,9 @@ RAJ_religious_groups = {
 			add_stability = -0.05
 			country_event = { id = RAJ_rebellion.2 days = 90 }
 		}
-
-		ai_will_do = { base = 0 }
 	}
 
 	RAJ_manipur_crisis = {
-		allowed = { original_tag = RAJ }
-
 		activation = {
 			owns_state = 477
 			check_variable = { RAJ_christians_opinion < 15 }
@@ -244,13 +234,9 @@ RAJ_religious_groups = {
 			add_stability = -0.05
 			country_event = { id = RAJ_rebellion.3 days = 90 }
 		}
-
-		ai_will_do = { base = 0 }
 	}
 
 	RAJ_sikkim_crisis = {
-		allowed = { original_tag = RAJ }
-
 		activation = {
 			owns_state = 982
 			check_variable = { RAJ_buddhist_opinion < 15 }
@@ -284,13 +270,9 @@ RAJ_religious_groups = {
 			add_stability = -0.05
 			country_event = { id = RAJ_rebellion.4 days = 90 }
 		}
-
-		ai_will_do = { base = 0 }
 	}
 
 	RAJ_punjab_crisis = {
-		allowed = { original_tag = RAJ }
-
 		activation = {
 			owns_state = 429
 			check_variable = { RAJ_sikh_opinion < 15 }
@@ -324,8 +306,6 @@ RAJ_religious_groups = {
 			add_stability = -0.05
 			country_event = { id = RAJ_rebellion.5 days = 90 }
 		}
-
-		ai_will_do = { base = 0 }
 	}
 }
 
@@ -753,403 +733,434 @@ RAJ_Export_category = {
 	}
 }
 
-# TODO: Refactor the BRICS decisions so they're more robust
+#############################################
+# BRICS Expansion Decisions (Tiered System)
+#############################################
 RAJ_brics_alliance_decisions = {
-	RAJ_invite_egypt = {
+	# Tier 2: Full Member Invites (2024 Expansion Nations)
+	RAJ_brics_invite_egypt_full = {
 		visible = {
 			has_country_flag = RAJ_brics_created
-			EGY = {
-				influence_higher_30 = yes
+			OR = {
+				original_tag = RAJ
+				original_tag = EGY
+				is_in_faction_with = RAJ
 			}
+			EGY = { NOT = { is_in_faction = RAJ } }
 		}
-		days_remove = 45
-		fire_only_once = no
-
-		cost = 50
+		allowed = {
+			RAJ_can_brics_full_member = yes
+		}
+		days_remove = 60
+		fire_only_once = yes
+		cost = 100
 
 		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision RAJ_invite_egypt"
+			log = "[GetDateText]: [Root.GetName]: Decision RAJ_brics_invite_egypt_full"
 			EGY = {
-				country_event = {
-					id = indian_event.55
-					days = 1
-				}
+				country_event = { id = indian_event.70 days = 1 }
 			}
 			custom_effect_tooltip = TT_IF_THEY_ACCEPT
 			effect_tooltip = {
 				add_to_faction = EGY
+				add_opinion_modifier = { target = EGY modifier = RAJ_brics_member_opinion }
 			}
 		}
 		ai_will_do = {
-			base = 10
+			base = 20
 			modifier = {
-				factor = 2
-				has_political_power > 200
+				factor = 1.5
+				EGY = { has_opinion = { target = ROOT value > 50 } }
 			}
 		}
 	}
-	RAJ_invite_ethiopia = {
+	RAJ_brics_invite_ethiopia_full = {
 		visible = {
 			has_country_flag = RAJ_brics_created
-			ETH = {
-				influence_higher_30 = yes
+			OR = {
+				original_tag = RAJ
+				original_tag = ETH
+				is_in_faction_with = RAJ
 			}
+			ETH = { NOT = { is_in_faction = RAJ } }
 		}
-		days_remove = 45
-		fire_only_once = no
-
-		cost = 50
+		allowed = {
+			RAJ_can_brics_full_member = yes
+		}
+		days_remove = 60
+		fire_only_once = yes
+		cost = 100
 
 		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision RAJ_invite_ethiopia"
+			log = "[GetDateText]: [Root.GetName]: Decision RAJ_brics_invite_ethiopia_full"
 			ETH = {
-				country_event = {
-					id = indian_event.55
-					days = 1
-				}
+				country_event = { id = indian_event.70 days = 1 }
 			}
 			custom_effect_tooltip = TT_IF_THEY_ACCEPT
 			effect_tooltip = {
 				add_to_faction = ETH
+				add_opinion_modifier = { target = ETH modifier = RAJ_brics_member_opinion }
 			}
 		}
 		ai_will_do = {
-			base = 10
+			base = 20
 			modifier = {
-				factor = 2
-				has_political_power > 200
+				factor = 1.5
+				ETH = { has_opinion = { target = ROOT value > 50 } }
 			}
 		}
 	}
-	RAJ_invite_saudi = {
+	RAJ_brics_invite_saudi_full = {
 		visible = {
 			has_country_flag = RAJ_brics_created
-			SAU = {
-				influence_higher_30 = yes
+			OR = {
+				original_tag = RAJ
+				original_tag = SAU
+				is_in_faction_with = RAJ
 			}
+			SAU = { NOT = { is_in_faction = RAJ } }
 		}
-		days_remove = 45
-		fire_only_once = no
-
-		cost = 50
+		allowed = {
+			RAJ_can_brics_full_member = yes
+		}
+		days_remove = 60
+		fire_only_once = yes
+		cost = 100
 
 		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision RAJ_invite_saudi"
+			log = "[GetDateText]: [Root.GetName]: Decision RAJ_brics_invite_saudi_full"
 			SAU = {
-				country_event = {
-					id = indian_event.55
-					days = 1
-				}
+				country_event = { id = indian_event.70 days = 1 }
 			}
 			custom_effect_tooltip = TT_IF_THEY_ACCEPT
 			effect_tooltip = {
 				add_to_faction = SAU
+				add_opinion_modifier = { target = SAU modifier = RAJ_brics_member_opinion }
 			}
 		}
 		ai_will_do = {
-			base = 10
+			base = 20
 			modifier = {
-				factor = 2
-				has_political_power > 200
+				factor = 1.5
+				SAU = { has_opinion = { target = ROOT value > 50 } }
 			}
 		}
 	}
-	RAJ_invite_uae = {
+	RAJ_brics_invite_uae_full = {
 		visible = {
 			has_country_flag = RAJ_brics_created
-			UAE = {
-				influence_higher_30 = yes
+			OR = {
+				original_tag = RAJ
+				original_tag = UAE
+				is_in_faction_with = RAJ
 			}
+			UAE = { NOT = { is_in_faction = RAJ } }
 		}
-		days_remove = 45
-		fire_only_once = no
-
-		cost = 50
+		allowed = {
+			RAJ_can_brics_full_member = yes
+		}
+		days_remove = 60
+		fire_only_once = yes
+		cost = 100
 
 		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision RAJ_invite_uae"
+			log = "[GetDateText]: [Root.GetName]: Decision RAJ_brics_invite_uae_full"
 			UAE = {
-				country_event = {
-					id = indian_event.55
-					days = 1
-				}
+				country_event = { id = indian_event.70 days = 1 }
 			}
 			custom_effect_tooltip = TT_IF_THEY_ACCEPT
 			effect_tooltip = {
 				add_to_faction = UAE
+				add_opinion_modifier = { target = UAE modifier = RAJ_brics_member_opinion }
 			}
 		}
 		ai_will_do = {
-			base = 10
+			base = 20
 			modifier = {
-				factor = 2
-				has_political_power > 200
+				factor = 1.5
+				UAE = { has_opinion = { target = ROOT value > 50 } }
 			}
 		}
 	}
-	RAJ_invite_argentina = {
+	# Tier 3: Associate Member Invites
+	RAJ_brics_invite_argentina_associate = {
 		visible = {
 			has_country_flag = RAJ_brics_created
+			OR = {
+				original_tag = RAJ
+				original_tag = ARG
+				is_in_faction_with = RAJ
+			}
+			ARG = { NOT = { is_in_faction = RAJ } }
+		}
+		allowed = {
+			RAJ_can_brics_associate_member = yes
+		}
+		days_remove = 45
+		fire_only_once = yes
+		cost = 75
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision RAJ_brics_invite_argentina_associate"
 			ARG = {
-				influence_higher_30 = yes
-			}
-		}
-		days_remove = 45
-		fire_only_once = no
-
-		cost = 50
-
-		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision RAJ_invite_argentina"
-			ARG = {
-				country_event = {
-					id = indian_event.55
-					days = 1
-				}
+				country_event = { id = indian_event.73 days = 1 }
 			}
 			custom_effect_tooltip = TT_IF_THEY_ACCEPT
 			effect_tooltip = {
-				add_to_faction = ARG
+				add_opinion_modifier = { target = ARG modifier = RAJ_brics_associate_opinion }
 			}
 		}
 		ai_will_do = {
-			base = 10
+			base = 15
 			modifier = {
-				factor = 2
-				has_political_power > 200
+				factor = 1.3
+				ARG = { has_opinion = { target = ROOT value > 30 } }
 			}
 		}
 	}
-	RAJ_invite_belarus = {
+	RAJ_brics_invite_indonesia_associate = {
 		visible = {
 			has_country_flag = RAJ_brics_created
-			BLR = {
-				influence_higher_30 = yes
+			OR = {
+				original_tag = RAJ
+				original_tag = IND
+				is_in_faction_with = RAJ
 			}
+			IND = { NOT = { is_in_faction = RAJ } }
+		}
+		allowed = {
+			RAJ_can_brics_associate_member = yes
 		}
 		days_remove = 45
-		fire_only_once = no
-
-		cost = 50
+		fire_only_once = yes
+		cost = 75
 
 		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision RAJ_invite_belarus"
-			BLR = {
-				country_event = {
-					id = indian_event.55
-					days = 1
-				}
-			}
-			custom_effect_tooltip = TT_IF_THEY_ACCEPT
-			effect_tooltip = {
-				add_to_faction = BLR
-			}
-		}
-		ai_will_do = {
-			base = 10
-			modifier = {
-				factor = 2
-				has_political_power > 200
-			}
-		}
-	}
-	RAJ_invite_indonesia = {
-		visible = {
-			has_country_flag = RAJ_brics_created
+			log = "[GetDateText]: [Root.GetName]: Decision RAJ_brics_invite_indonesia_associate"
 			IND = {
-				influence_higher_30 = yes
-			}
-		}
-		days_remove = 45
-		fire_only_once = no
-
-		cost = 50
-
-		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision RAJ_invite_indonesia"
-			IND = {
-				country_event = {
-					id = indian_event.55
-					days = 1
-				}
+				country_event = { id = indian_event.73 days = 1 }
 			}
 			custom_effect_tooltip = TT_IF_THEY_ACCEPT
 			effect_tooltip = {
-				add_to_faction = IND
+				add_opinion_modifier = { target = IND modifier = RAJ_brics_associate_opinion }
 			}
 		}
 		ai_will_do = {
-			base = 10
+			base = 15
 			modifier = {
-				factor = 2
-				has_political_power > 200
+				factor = 1.3
+				IND = { has_opinion = { target = ROOT value > 30 } }
 			}
 		}
 	}
-	RAJ_invite_australia = {
+	RAJ_brics_invite_kazakhstan_associate = {
 		visible = {
 			has_country_flag = RAJ_brics_created
-			AST = {
-				influence_higher_30 = yes
+			OR = {
+				original_tag = RAJ
+				original_tag = KAZ
+				is_in_faction_with = RAJ
 			}
+			KAZ = { NOT = { is_in_faction = RAJ } }
+		}
+		allowed = {
+			RAJ_can_brics_associate_member = yes
 		}
 		days_remove = 45
-		fire_only_once = no
-
-		cost = 50
+		fire_only_once = yes
+		cost = 75
 
 		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision RAJ_invite_australia"
-			AST = {
-				country_event = {
-					id = indian_event.55
-					days = 1
-				}
-			}
-			custom_effect_tooltip = TT_IF_THEY_ACCEPT
-			effect_tooltip = {
-				add_to_faction = AST
-			}
-		}
-		ai_will_do = {
-			base = 10
-			modifier = {
-				factor = 2
-				has_political_power > 200
-			}
-		}
-	}
-	RAJ_invite_kazakhstan = {
-		visible = {
-			has_country_flag = RAJ_brics_created
+			log = "[GetDateText]: [Root.GetName]: Decision RAJ_brics_invite_kazakhstan_associate"
 			KAZ = {
-				influence_higher_30 = yes
-			}
-		}
-		days_remove = 45
-		fire_only_once = no
-
-		cost = 50
-
-		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision RAJ_invite_kazakhstan"
-			KAZ = {
-				country_event = {
-					id = indian_event.55
-					days = 1
-				}
+				country_event = { id = indian_event.73 days = 1 }
 			}
 			custom_effect_tooltip = TT_IF_THEY_ACCEPT
 			effect_tooltip = {
-				add_to_faction = KAZ
+				add_opinion_modifier = { target = KAZ modifier = RAJ_brics_associate_opinion }
+			}
+		}
+		ai_will_do = {
+			base = 15
+			modifier = {
+				factor = 1.3
+				KAZ = { has_opinion = { target = ROOT value > 30 } }
+			}
+		}
+	}
+	RAJ_brics_invite_turkey_associate = {
+		visible = {
+			has_country_flag = RAJ_brics_created
+			OR = {
+				original_tag = RAJ
+				original_tag = TUR
+				is_in_faction_with = RAJ
+			}
+			TUR = { NOT = { is_in_faction = RAJ } }
+		}
+		allowed = {
+			RAJ_can_brics_associate_member = yes
+		}
+		days_remove = 45
+		fire_only_once = yes
+		cost = 75
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision RAJ_brics_invite_turkey_associate"
+			TUR = {
+				country_event = { id = indian_event.73 days = 1 }
+			}
+			custom_effect_tooltip = TT_IF_THEY_ACCEPT
+			effect_tooltip = {
+				add_opinion_modifier = { target = TUR modifier = RAJ_brics_associate_opinion }
+			}
+		}
+		ai_will_do = {
+			base = 15
+			modifier = {
+				factor = 1.3
+				TUR = { has_opinion = { target = ROOT value > 30 } }
+			}
+		}
+	}
+	# Tier 4: Observer State Invites
+	RAJ_brics_invite_belarus_observer = {
+		visible = {
+			has_country_flag = RAJ_brics_created
+			OR = {
+				original_tag = RAJ
+				original_tag = BLR
+				is_in_faction_with = RAJ
+			}
+			BLR = { NOT = { is_in_faction = RAJ } }
+		}
+		allowed = {
+			RAJ_can_brics_observer = yes
+		}
+		days_remove = 30
+		fire_only_once = yes
+		cost = 40
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision RAJ_brics_invite_belarus_observer"
+			BLR = {
+				country_event = { id = indian_event.76 days = 1 }
+			}
+			custom_effect_tooltip = TT_IF_THEY_ACCEPT
+			effect_tooltip = {
+				add_opinion_modifier = { target = BLR modifier = RAJ_brics_observer_opinion }
 			}
 		}
 		ai_will_do = {
 			base = 10
 			modifier = {
-				factor = 2
-				has_political_power > 200
+				factor = 1.2
+				BLR = { has_opinion = { target = ROOT value > 0 } }
 			}
 		}
 	}
-	RAJ_invite_uzbekistan = {
+	RAJ_brics_invite_uzbekistan_observer = {
 		visible = {
 			has_country_flag = RAJ_brics_created
+			OR = {
+				original_tag = RAJ
+				original_tag = UZB
+				is_in_faction_with = RAJ
+			}
+			UZB = { NOT = { is_in_faction = RAJ } }
+		}
+		allowed = {
+			RAJ_can_brics_observer = yes
+		}
+		days_remove = 30
+		fire_only_once = yes
+		cost = 40
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision RAJ_brics_invite_uzbekistan_observer"
 			UZB = {
-				influence_higher_30 = yes
-			}
-		}
-		days_remove = 45
-		fire_only_once = no
-
-		cost = 50
-
-		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision RAJ_invite_uzbekistan"
-			UZB = {
-				country_event = {
-					id = indian_event.55
-					days = 1
-				}
+				country_event = { id = indian_event.76 days = 1 }
 			}
 			custom_effect_tooltip = TT_IF_THEY_ACCEPT
 			effect_tooltip = {
-				add_to_faction = UZB
+				add_opinion_modifier = { target = UZB modifier = RAJ_brics_observer_opinion }
 			}
 		}
 		ai_will_do = {
 			base = 10
 			modifier = {
-				factor = 2
-				has_political_power > 200
+				factor = 1.2
+				UZB = { has_opinion = { target = ROOT value > 0 } }
 			}
 		}
 	}
-	RAJ_invite_tajikistan = {
+	RAJ_brics_invite_tajikistan_observer = {
 		visible = {
 			has_country_flag = RAJ_brics_created
-			TAJ = {
-				influence_higher_30 = yes
+			OR = {
+				original_tag = RAJ
+				original_tag = TAJ
+				is_in_faction_with = RAJ
 			}
+			TAJ = { NOT = { is_in_faction = RAJ } }
 		}
-		days_remove = 45
-		fire_only_once = no
-
-		cost = 50
+		allowed = {
+			RAJ_can_brics_observer = yes
+		}
+		days_remove = 30
+		fire_only_once = yes
+		cost = 40
 
 		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision RAJ_invite_tajikistan"
+			log = "[GetDateText]: [Root.GetName]: Decision RAJ_brics_invite_tajikistan_observer"
 			TAJ = {
-				country_event = {
-					id = indian_event.55
-					days = 1
-				}
+				country_event = { id = indian_event.76 days = 1 }
 			}
 			custom_effect_tooltip = TT_IF_THEY_ACCEPT
 			effect_tooltip = {
-				add_to_faction = TAJ
+				add_opinion_modifier = { target = TAJ modifier = RAJ_brics_observer_opinion }
 			}
 		}
 		ai_will_do = {
 			base = 10
 			modifier = {
-				factor = 2
-				has_political_power > 200
+				factor = 1.2
+				TAJ = { has_opinion = { target = ROOT value > 0 } }
 			}
 		}
 	}
-	RAJ_invite_turkmenistan = {
-		cost = 50
-
-		days_remove = 45
-
-		fire_only_once = no
-
+	RAJ_brics_invite_turkmenistan_observer = {
 		visible = {
 			has_country_flag = RAJ_brics_created
-			TRK = {
-				influence_higher_30 = yes
+			OR = {
+				original_tag = RAJ
+				original_tag = TRK
+				is_in_faction_with = RAJ
 			}
+			TRK = { NOT = { is_in_faction = RAJ } }
 		}
+		allowed = {
+			RAJ_can_brics_observer = yes
+		}
+		days_remove = 30
+		fire_only_once = yes
+		cost = 40
 
 		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision RAJ_invite_turkmenistan"
+			log = "[GetDateText]: [Root.GetName]: Decision RAJ_brics_invite_turkmenistan_observer"
 			TRK = {
-				country_event = {
-					id = indian_event.55
-					days = 1
-				}
+				country_event = { id = indian_event.76 days = 1 }
 			}
 			custom_effect_tooltip = TT_IF_THEY_ACCEPT
 			effect_tooltip = {
-				add_to_faction = TRK
+				add_opinion_modifier = { target = TRK modifier = RAJ_brics_observer_opinion }
 			}
 		}
 		ai_will_do = {
 			base = 10
 			modifier = {
-				factor = 2
-				has_political_power > 200
+				factor = 1.2
+				TRK = { has_opinion = { target = ROOT value > 0 } }
 			}
 		}
 	}

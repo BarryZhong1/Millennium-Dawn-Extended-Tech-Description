@@ -70,6 +70,10 @@ _RE_LIMIT_OPEN = re.compile(r"\blimit\s*=\s*\{")
 _RE_IF_ELSE_OPEN = re.compile(r"\b(if|else_if|else)\s*=\s*\{")
 _RE_HAS_IDEA = re.compile(r"has_idea\s*=\s*(\w+)")
 _RE_OR_CONTENT = re.compile(r"OR\s*=\s*\{([^}]*)\}")
+_RE_LOG_ONLY_EFFECT = re.compile(r"log\s*=\s*\"[^\"]+\"\s*$")
+_RE_OPTION_BLOCK_OPEN = re.compile(r"\boption\s*=\s*\{")
+_RE_COMPLETE_EFFECT_OPEN = re.compile(r"\bcomplete_effect\s*=\s*\{")
+_RE_REMOVE_EFFECT_OPEN = re.compile(r"\bremove_effect\s*=\s*\{")
 
 # Single-valued country triggers. A country has exactly one government/tag/etc,
 # so two checks at the same AND depth can never both be true — caller almost
@@ -634,6 +638,51 @@ def _check_duplicate_add_to_variable(lines):
     return issues
 
 
+def _check_empty_log_only_blocks(lines):
+    """Flag option/complete_effect blocks where log is the only content.
+
+    A log statement with no actual effects is pointless -- remove it.
+    Exception: remove_effect blocks in decisions should always have logs for debugging.
+    """
+    issues = []
+    i = 0
+    n = len(lines)
+    while i < n:
+        line = lines[i]
+        block_start = None
+        block_type = None
+
+        for pattern, btype in [
+            (_RE_OPTION_BLOCK_OPEN, "option"),
+            (_RE_COMPLETE_EFFECT_OPEN, "complete_effect"),
+        ]:
+            if pattern.search(line):
+                block_start = i
+                block_type = btype
+                break
+
+        if block_start is not None:
+            block_lines, next_i = _get_block(lines, block_start)
+            content_lines = [
+                l.strip()
+                for l in block_lines[1:-1]
+                if l.strip() and not l.strip().startswith("#")
+            ]
+
+            if len(content_lines) == 1 and _RE_LOG_ONLY_EFFECT.match(content_lines[0]):
+                issues.append(
+                    (
+                        block_start + 1,
+                        f'log = "..." is the only content in this {block_type} block -- '
+                        "remove it (logs should accompany effects, not replace them)",
+                    )
+                )
+            i = next_i
+        else:
+            i += 1
+    return issues
+
+
 def _check_every_country_member_array(lines):
     """Flag every_country { limit = { has_idea = X_member } } when a pre-built array exists.
 
@@ -894,6 +943,7 @@ def check_file(filepath):
     issues.extend(_check_divide_variable_zero_guard(lines))
     issues.extend(_check_duplicate_add_to_variable(lines))
     issues.extend(_check_every_country_member_array(lines))
+    issues.extend(_check_empty_log_only_blocks(lines))
 
     return [(filepath, ln, msg) for ln, msg in issues]
 
