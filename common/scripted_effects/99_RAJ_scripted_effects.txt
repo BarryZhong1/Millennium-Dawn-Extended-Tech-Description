@@ -112,6 +112,32 @@ RAJ_change_hindu_opinion = {
 	}
 }
 
+RAJ_downgrade_naxalite_var = {
+	var:RAJ_naxalite_target_state = { RAJ_downgrade_naxalite_level = yes }
+	meta_effect = {
+		text = {
+			if = {
+				limit = { var:RAJ_naxalite_target_state = { has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 } } }
+				set_variable = { RAJ_naxalite_[S] = 2 }
+			}
+			else_if = {
+				limit = { var:RAJ_naxalite_target_state = { has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_2 } } }
+				set_variable = { RAJ_naxalite_[S] = 3 }
+			}
+			else_if = {
+				limit = { var:RAJ_naxalite_target_state = { has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_3 } } }
+				set_variable = { RAJ_naxalite_[S] = 4 }
+			}
+			else_if = {
+				limit = { var:RAJ_naxalite_target_state = { has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_4 } } }
+				set_variable = { RAJ_naxalite_[S] = 5 }
+			}
+			else = { set_variable = { RAJ_naxalite_[S] = 0 } }
+		}
+		S = "[?RAJ_naxalite_target_state]"
+	}
+}
+
 RAJ_downgrade_naxalite_level = {
 	if = {
 		limit = { has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency } }

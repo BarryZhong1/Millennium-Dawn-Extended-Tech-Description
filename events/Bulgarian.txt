@@ -355,8 +355,9 @@ country_event = {
 			ideology = nationalist
 			popularity = 0.05
 		}
-		add_to_variable = { party_pop_array^23 = 0.075 }
-		recalculate_party = yes
+		set_temp_variable = { party_index = 23 }
+		set_temp_variable = { party_popularity_increase = 0.075 }
+		add_relative_party_popularity = yes
 	}
 	option = {
 		name = bulg.8.b
@@ -367,8 +368,9 @@ country_event = {
 			ideology = communism
 			popularity = 0.05
 		}
-		add_to_variable = { party_pop_array^4 = 0.075 }
-		recalculate_party = yes
+		set_temp_variable = { party_index = 4 }
+		set_temp_variable = { party_popularity_increase = 0.075 }
+		add_relative_party_popularity = yes
 	}
 }
 
@@ -388,8 +390,9 @@ country_event = {
 			ideology = nationalist
 			popularity = 0.05
 		}
-		add_to_variable = { party_pop_array^23 = 0.075 }
-		recalculate_party = yes
+		set_temp_variable = { party_index = 23 }
+		set_temp_variable = { party_popularity_increase = 0.075 }
+		add_relative_party_popularity = yes
 	}
 	option = {
 		name = bulg.9.b
@@ -400,8 +403,9 @@ country_event = {
 			ideology = communism
 			popularity = 0.05
 		}
-		add_to_variable = { party_pop_array^4 = 0.075 }
-		recalculate_party = yes
+		set_temp_variable = { party_index = 4 }
+		set_temp_variable = { party_popularity_increase = 0.075 }
+		add_relative_party_popularity = yes
 	}
 }
 
@@ -420,8 +424,9 @@ country_event = {
 			ideology = nationalist
 			popularity = -0.05
 		}
-		add_to_variable = { party_pop_array^23 = -0.075 }
-		recalculate_party = yes
+		set_temp_variable = { party_index = 23 }
+		set_temp_variable = { party_popularity_increase = -0.075 }
+		add_relative_party_popularity = yes
 	}
 	option = {
 		name = bulg.10.b
@@ -431,8 +436,9 @@ country_event = {
 			ideology = communism
 			popularity = -0.05
 		}
-		add_to_variable = { party_pop_array^4 = -0.075 }
-		recalculate_party = yes
+		set_temp_variable = { party_index = 4 }
+		set_temp_variable = { party_popularity_increase = -0.075 }
+		add_relative_party_popularity = yes
 	}
 }
 
@@ -498,9 +504,13 @@ country_event = {
 			set_temp_variable = { current_cons_popularity = party_pop_array^21 }
 			multiply_temp_variable = { current_cons_popularity = 0.5 }
 			# Remove most of support, retrack it to emerg communist party
-			subtract_from_variable = { party_pop_array^6 = current_cons_popularity }
-			add_to_variable = { party_pop_array^21 = current_cons_popularity }
-			recalculate_party = yes
+			set_temp_variable = { party_index = 6 }
+			set_temp_variable = { party_popularity_increase = current_cons_popularity }
+			multiply_temp_variable = { party_popularity_increase = -1 }
+			add_relative_party_popularity = yes
+			set_temp_variable = { party_index = 21 }
+			set_temp_variable = { party_popularity_increase = current_cons_popularity }
+			add_relative_party_popularity = yes
 		}
 		create_country_leader = {
 			name = "Krasimir Karakachanov"
@@ -523,9 +533,13 @@ country_event = {
 			set_temp_variable = { current_cons_popularity = party_pop_array^20 }
 			multiply_temp_variable = { current_cons_popularity = 0.5 }
 			# Remove most of support, retrack it to emerg communist party
-			subtract_from_variable = { party_pop_array^6 = current_cons_popularity }
-			add_to_variable = { party_pop_array^20 = current_cons_popularity }
-			recalculate_party = yes
+			set_temp_variable = { party_index = 6 }
+			set_temp_variable = { party_popularity_increase = current_cons_popularity }
+			multiply_temp_variable = { party_popularity_increase = -1 }
+			add_relative_party_popularity = yes
+			set_temp_variable = { party_index = 20 }
+			set_temp_variable = { party_popularity_increase = current_cons_popularity }
+			add_relative_party_popularity = yes
 		}
 	}
 }

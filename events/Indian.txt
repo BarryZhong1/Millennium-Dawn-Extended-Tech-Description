@@ -45,7 +45,13 @@ country_event = {
 	option = {
 		name = indian_event.3.a
 		log = "[GetDateText]: [This.GetName]: indian_event.3.a executed"
-		ai_chance = { base = 1 }
+		ai_chance = {
+			base = 0
+			modifier = {
+				factor = 100
+				has_opinion = { target = RAJ value > 50 }
+			}
+		}
 		add_ideas = RAJ_indian_saarc_idea
 		set_temp_variable = { percent_change = 3 }
 		set_temp_variable = { tag_index = RAJ }
@@ -109,7 +115,13 @@ country_event = {
 	option = {
 		name = indian_event.4.a
 		log = "[GetDateText]: [This.GetName]: indian_event.4.a executed"
-		ai_chance = { base = 1 }
+		ai_chance = {
+			base = 0
+			modifier = {
+				factor = 100
+				has_opinion = { target = RAJ value > 50 }
+			}
+		}
 		add_ideas = RAJ_indian_bimstek_idea
 		set_temp_variable = { percent_change = 3 }
 		set_temp_variable = { tag_index = RAJ }
@@ -681,7 +693,11 @@ country_event = {
 		}
 
 		ai_chance = {
-			base = 1
+			base = 0
+			modifier = {
+				factor = 100
+				has_opinion = { target = RAJ value > 50 }
+			}
 		}
 	}
 
@@ -696,10 +712,7 @@ country_event = {
 				}
 			}
 		}
-
-		ai_chance = {
-			base = 1
-		}
+		ai_chance = { base = 0 }
 	}
 }
 
@@ -1551,8 +1564,9 @@ country_event = {
 	option = {
 		name = RAJ_mao_reb.1.a
 		log = "[GetDateText]: [This.GetName]: RAJ_mao_reb.1.a executed"
-		add_to_variable = { party_pop_array^19 = 0.05 }
-		recalculate_party = yes
+		set_temp_variable = { party_index = 19 }
+		set_temp_variable = { party_popularity_increase = 0.05 }
+		add_relative_party_popularity = yes
 		add_stability = 0.05
 		add_manpower = -1000
 		add_days_mission_timeout = {
@@ -1579,8 +1593,9 @@ country_event = {
 	option = {
 		name = RAJ_mao_reb.2.a
 		log = "[GetDateText]: [This.GetName]: RAJ_mao_reb.2.a executed"
-		add_to_variable = { party_pop_array^19 = 0.03 }
-		recalculate_party = yes
+		set_temp_variable = { party_index = 19 }
+		set_temp_variable = { party_popularity_increase = 0.03 }
+		add_relative_party_popularity = yes
 		add_stability = -0.1
 		add_manpower = -100
 		add_days_mission_timeout = {
@@ -1607,8 +1622,9 @@ country_event = {
 	option = {
 		name = RAJ_mao_reb.3.a
 		log = "[GetDateText]: [This.GetName]: RAJ_mao_reb.3.a executed"
-		add_to_variable = { party_pop_array^19 = -0.03 }
-		recalculate_party = yes
+		set_temp_variable = { party_index = 19 }
+		set_temp_variable = { party_popularity_increase = -0.03 }
+		add_relative_party_popularity = yes
 		add_stability = 0.1
 		add_manpower = -15
 		add_days_mission_timeout = {
@@ -1713,8 +1729,9 @@ country_event = {
 	option = {
 		name = RAJ_mao_reb.4.a
 		log = "[GetDateText]: [This.GetName]: RAJ_mao_reb.4.a executed"
-		add_to_variable = { party_pop_array^19 = 0.1 }
-		recalculate_party = yes
+		set_temp_variable = { party_index = 19 }
+		set_temp_variable = { party_popularity_increase = 0.1 }
+		add_relative_party_popularity = yes
 		add_stability = -0.05
 		add_manpower = -5
 		ai_chance = {
