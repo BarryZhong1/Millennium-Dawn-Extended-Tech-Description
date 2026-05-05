@@ -147,6 +147,33 @@ Valid `compare` values: `equals`, `greater_than`, `less_than`, `greater_than_or_
 
 `add_to_faction` adds a **country** to the **current scope's faction**. It takes a country tag or scope, not a faction name. `add_to_faction = BRICS` is wrong — use `add_to_faction = TAG`.
 
+## Minimize scope expansion
+
+Avoid opening a scope just to check a single boolean or trigger when a flat equivalent exists. Every `TAG = { ... }` is a scope switch the engine must resolve.
+
+```
+# Wrong — unnecessary scope expansion
+NOT = { PAK = { exists = no } }
+PAK = { exists = yes }
+
+# Correct — flat trigger, no scope switch
+country_exists = PAK
+```
+
+Other common patterns:
+
+| Verbose (scope expansion)       | Flat equivalent        |
+| ------------------------------- | ---------------------- |
+| `TAG = { exists = yes }`        | `country_exists = TAG` |
+| `TAG = { is_puppet = yes }`     | `is_puppet_of = TAG`   |
+| `TAG = { has_war_with = ROOT }` | `has_war_with = TAG`   |
+
+Apply this principle everywhere — focuses, events, decisions, scripted triggers. If a flat trigger exists, prefer it.
+
+## Case sensitivity in references
+
+HOI4 on Linux is **case-sensitive** for all identifiers — ideas, events, decisions, focuses, variables, flags, GFX sprites, and scripted effects/triggers. `has_idea = The_Military` will NOT match a definition `the_military`. Always match the exact case of the definition. **Caught by `validate_ideas.py` for ideas.**
+
 ## Trade agreement checks in MD
 
 `has_trade_agreement_with` is **not a valid HOI4 trigger** — compiles silently, always evaluates false. MD uses `has_country_flag = trade_agreement@TAG`. **Caught by `check_common_mistakes.py`.**

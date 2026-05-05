@@ -61,7 +61,7 @@ country_event = {
 	option = {
 		name = indian_event.3.b
 		log = "[GetDateText]: [This.GetName]: indian_event.3.b executed"
-		ai_chance = { factor = 0 }
+		ai_chance = { base = 1 }
 		add_opinion_modifier = {
 			target = RAJ
 			modifier = drama
@@ -131,7 +131,7 @@ country_event = {
 	option = {
 		name = indian_event.4.b
 		log = "[GetDateText]: [This.GetName]: indian_event.4.b executed"
-		ai_chance = { factor = 0 }
+		ai_chance = { base = 1 }
 		add_opinion_modifier = {
 			target = RAJ
 			modifier = drama
@@ -1801,15 +1801,7 @@ country_event = {
 		original_tag = RAJ
 		has_country_flag = RAJ_has_naxalite_states
 		NOT = { has_country_flag = RAJ_pwg_mcc_merger }
-		any_controlled_state = {
-			OR = {
-				has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency }
-				has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
-				has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_2 }
-				has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_3 }
-				has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_4 }
-			}
-		}
+		any_controlled_state = { RAJ_state_has_any_naxalite = yes }
 	}
 
 	option = {
@@ -1840,6 +1832,7 @@ country_event = {
 			limit = { 451 = { has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 } } }
 			set_variable = { RAJ_naxalite_451 = 2 }
 		}
+		add_to_variable = { RAJ_mao_gui_dirty = 1 }
 		ai_chance = { base = 1 }
 	}
 }

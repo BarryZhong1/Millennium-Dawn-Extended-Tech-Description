@@ -826,22 +826,15 @@ RAJ_brics_alliance_decisions = {
 
 		target_root_trigger = {
 			has_global_flag = BRICS_created
-			is_in_faction_with = RAJ
+			has_idea = BRICS_leader
 		}
 
 		target_trigger = {
-			FROM = {
-				exists = yes
-				NOT = { tag = ROOT }
-				NOT = { is_in_faction_with = ROOT }
-				NOT = { has_country_flag = BRICS_full_member_status }
-				NOT = { has_country_flag = BRICS_associate_status }
-				NOT = { has_country_flag = BRICS_observer_status }
-			}
+			FROM = { BRICS_valid_invite_target = yes }
 		}
 
 		available = {
-			is_in_faction_with = RAJ
+			has_idea = BRICS_leader
 			FROM = { BRICS_can_full_member = yes }
 		}
 
@@ -878,22 +871,15 @@ RAJ_brics_alliance_decisions = {
 
 		target_root_trigger = {
 			has_global_flag = BRICS_created
-			is_in_faction_with = RAJ
+			has_idea = BRICS_leader
 		}
 
 		target_trigger = {
-			FROM = {
-				exists = yes
-				NOT = { tag = ROOT }
-				NOT = { is_in_faction_with = ROOT }
-				NOT = { has_country_flag = BRICS_full_member_status }
-				NOT = { has_country_flag = BRICS_associate_status }
-				NOT = { has_country_flag = BRICS_observer_status }
-			}
+			FROM = { BRICS_valid_invite_target = yes }
 		}
 
 		available = {
-			is_in_faction_with = RAJ
+			has_idea = BRICS_leader
 			FROM = { BRICS_can_associate_member = yes }
 		}
 
@@ -929,22 +915,15 @@ RAJ_brics_alliance_decisions = {
 
 		target_root_trigger = {
 			has_global_flag = BRICS_created
-			is_in_faction_with = RAJ
+			has_idea = BRICS_leader
 		}
 
 		target_trigger = {
-			FROM = {
-				exists = yes
-				NOT = { tag = ROOT }
-				NOT = { is_in_faction_with = ROOT }
-				NOT = { has_country_flag = BRICS_full_member_status }
-				NOT = { has_country_flag = BRICS_associate_status }
-				NOT = { has_country_flag = BRICS_observer_status }
-			}
+			FROM = { BRICS_valid_invite_target = yes }
 		}
 
 		available = {
-			is_in_faction_with = RAJ
+			has_idea = BRICS_leader
 			FROM = { BRICS_can_observer = yes }
 		}
 
@@ -980,7 +959,7 @@ RAJ_brics_alliance_decisions = {
 
 		target_root_trigger = {
 			has_global_flag = BRICS_created
-			is_in_faction_with = RAJ
+			has_idea = BRICS_leader
 		}
 
 		target_trigger = {
@@ -993,7 +972,7 @@ RAJ_brics_alliance_decisions = {
 		}
 
 		available = {
-			is_in_faction_with = RAJ
+			has_idea = BRICS_leader
 			FROM = { BRICS_can_associate_member = yes }
 		}
 
@@ -1028,7 +1007,7 @@ RAJ_brics_alliance_decisions = {
 
 		target_root_trigger = {
 			has_global_flag = BRICS_created
-			is_in_faction_with = RAJ
+			has_idea = BRICS_leader
 		}
 
 		target_trigger = {
@@ -1040,7 +1019,7 @@ RAJ_brics_alliance_decisions = {
 		}
 
 		available = {
-			is_in_faction_with = RAJ
+			has_idea = BRICS_leader
 			FROM = { BRICS_can_full_member = yes }
 		}
 
@@ -1150,26 +1129,38 @@ maoist_decision_category = {
 		}
 	}
 
-	RAJ_maoist_suppression_456 = {
+	RAJ_maoist_suppression = {
 		icon = {
 			key = GFX_decision_com_rebel_highest
-			trigger = { check_variable = { RAJ_naxalite_456 = 1 } }
+			trigger = { FROM = { has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency } } }
 		}
 		icon = {
 			key = GFX_decision_com_rebel_high
-			trigger = { check_variable = { RAJ_naxalite_456 = 2 } }
+			trigger = { FROM = { has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 } } }
 		}
 		icon = {
 			key = GFX_decision_com_rebel_medium
-			trigger = { check_variable = { RAJ_naxalite_456 = 3 } }
+			trigger = { FROM = { has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_2 } } }
 		}
 		icon = {
 			key = GFX_decision_com_rebel_moderat
-			trigger = { check_variable = { RAJ_naxalite_456 = 4 } }
+			trigger = { FROM = { has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_3 } } }
 		}
 		icon = {
 			key = GFX_decision_com_rebel_weak
-			trigger = { check_variable = { RAJ_naxalite_456 = 5 } }
+			trigger = { FROM = { has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_4 } } }
+		}
+
+		state_target = yes
+		on_map_mode = map_and_decisions_view
+		targets = { 456 459 991 989 451 452 447 458 988 470 }
+
+		target_trigger = {
+			FROM = { RAJ_state_has_any_naxalite = yes }
+		}
+
+		target_root_trigger = {
+			has_country_flag = RAJ_has_naxalite_states
 		}
 
 		cost = 60
@@ -1178,523 +1169,18 @@ maoist_decision_category = {
 		days_remove = 15
 
 		available = {
-			RAJ_no_active_suppression = yes
-		}
-
-		visible = {
-			has_country_flag = RAJ_has_naxalite_states
-			owns_state = 456
-			check_variable = { RAJ_naxalite_456 > 0 }
-		}
-
-		highlight_states = {
-			highlight_state_targets = { state = 456 }
+			NOT = { has_country_flag = RAJ_suppression_active }
 		}
 
 		complete_effect = {
-			set_country_flag = cleared_456
+			set_country_flag = RAJ_suppression_active
 		}
 
 		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision RAJ_maoist_suppression_456"
-			set_temp_variable = { RAJ_naxalite_target_state = 456 }
+			log = "[GetDateText]: [Root.GetName]: Decision RAJ_maoist_suppression"
+			set_temp_variable = { RAJ_naxalite_target_state = FROM }
 			RAJ_downgrade_naxalite_var = yes
-			clr_country_flag = cleared_456
-			RAJ_suppression_equipment_reward = yes
-		}
-
-		ai_will_do = { base = 25 }
-	}
-	RAJ_maoist_suppression_459 = {
-		icon = {
-			key = GFX_decision_com_rebel_highest
-			trigger = { check_variable = { RAJ_naxalite_459 = 1 } }
-		}
-		icon = {
-			key = GFX_decision_com_rebel_high
-			trigger = { check_variable = { RAJ_naxalite_459 = 2 } }
-		}
-		icon = {
-			key = GFX_decision_com_rebel_medium
-			trigger = { check_variable = { RAJ_naxalite_459 = 3 } }
-		}
-		icon = {
-			key = GFX_decision_com_rebel_moderat
-			trigger = { check_variable = { RAJ_naxalite_459 = 4 } }
-		}
-		icon = {
-			key = GFX_decision_com_rebel_weak
-			trigger = { check_variable = { RAJ_naxalite_459 = 5 } }
-		}
-
-		cost = 60
-		fixed_random_seed = no
-		fire_only_once = no
-		days_remove = 15
-
-		available = {
-			RAJ_no_active_suppression = yes
-		}
-
-		visible = {
-			has_country_flag = RAJ_has_naxalite_states
-			owns_state = 459
-			check_variable = { RAJ_naxalite_459 > 0 }
-		}
-
-		highlight_states = {
-			highlight_state_targets = { state = 459 }
-		}
-
-		complete_effect = {
-			set_country_flag = cleared_459
-		}
-
-		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision RAJ_maoist_suppression_459"
-			set_temp_variable = { RAJ_naxalite_target_state = 459 }
-			RAJ_downgrade_naxalite_var = yes
-			clr_country_flag = cleared_459
-			RAJ_suppression_equipment_reward = yes
-		}
-
-		ai_will_do = { base = 25 }
-	}
-	RAJ_maoist_suppression_991 = {
-		icon = {
-			key = GFX_decision_com_rebel_highest
-			trigger = { check_variable = { RAJ_naxalite_991 = 1 } }
-		}
-		icon = {
-			key = GFX_decision_com_rebel_high
-			trigger = { check_variable = { RAJ_naxalite_991 = 2 } }
-		}
-		icon = {
-			key = GFX_decision_com_rebel_medium
-			trigger = { check_variable = { RAJ_naxalite_991 = 3 } }
-		}
-		icon = {
-			key = GFX_decision_com_rebel_moderat
-			trigger = { check_variable = { RAJ_naxalite_991 = 4 } }
-		}
-		icon = {
-			key = GFX_decision_com_rebel_weak
-			trigger = { check_variable = { RAJ_naxalite_991 = 5 } }
-		}
-
-		cost = 60
-		fixed_random_seed = no
-		fire_only_once = no
-		days_remove = 15
-
-		available = {
-			RAJ_no_active_suppression = yes
-		}
-
-		visible = {
-			has_country_flag = RAJ_has_naxalite_states
-			owns_state = 991
-			check_variable = { RAJ_naxalite_991 > 0 }
-		}
-
-		highlight_states = {
-			highlight_state_targets = { state = 991 }
-		}
-
-		complete_effect = {
-			set_country_flag = cleared_991
-		}
-
-		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision RAJ_maoist_suppression_991"
-			set_temp_variable = { RAJ_naxalite_target_state = 991 }
-			RAJ_downgrade_naxalite_var = yes
-			clr_country_flag = cleared_991
-			RAJ_suppression_equipment_reward = yes
-		}
-
-		ai_will_do = { base = 25 }
-	}
-	RAJ_maoist_suppression_989 = {
-		icon = {
-			key = GFX_decision_com_rebel_highest
-			trigger = { check_variable = { RAJ_naxalite_989 = 1 } }
-		}
-		icon = {
-			key = GFX_decision_com_rebel_high
-			trigger = { check_variable = { RAJ_naxalite_989 = 2 } }
-		}
-		icon = {
-			key = GFX_decision_com_rebel_medium
-			trigger = { check_variable = { RAJ_naxalite_989 = 3 } }
-		}
-		icon = {
-			key = GFX_decision_com_rebel_moderat
-			trigger = { check_variable = { RAJ_naxalite_989 = 4 } }
-		}
-		icon = {
-			key = GFX_decision_com_rebel_weak
-			trigger = { check_variable = { RAJ_naxalite_989 = 5 } }
-		}
-
-		cost = 60
-		fixed_random_seed = no
-		fire_only_once = no
-		days_remove = 15
-
-		available = {
-			RAJ_no_active_suppression = yes
-		}
-
-		visible = {
-			has_country_flag = RAJ_has_naxalite_states
-			owns_state = 989
-			check_variable = { RAJ_naxalite_989 > 0 }
-		}
-
-		highlight_states = {
-			highlight_state_targets = { state = 989 }
-		}
-
-		complete_effect = {
-			set_country_flag = cleared_989
-		}
-
-		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision RAJ_maoist_suppression_989"
-			set_temp_variable = { RAJ_naxalite_target_state = 989 }
-			RAJ_downgrade_naxalite_var = yes
-			clr_country_flag = cleared_989
-			RAJ_suppression_equipment_reward = yes
-		}
-
-		ai_will_do = { base = 25 }
-	}
-	RAJ_maoist_suppression_451 = {
-		icon = {
-			key = GFX_decision_com_rebel_highest
-			trigger = { check_variable = { RAJ_naxalite_451 = 1 } }
-		}
-		icon = {
-			key = GFX_decision_com_rebel_high
-			trigger = { check_variable = { RAJ_naxalite_451 = 2 } }
-		}
-		icon = {
-			key = GFX_decision_com_rebel_medium
-			trigger = { check_variable = { RAJ_naxalite_451 = 3 } }
-		}
-		icon = {
-			key = GFX_decision_com_rebel_moderat
-			trigger = { check_variable = { RAJ_naxalite_451 = 4 } }
-		}
-		icon = {
-			key = GFX_decision_com_rebel_weak
-			trigger = { check_variable = { RAJ_naxalite_451 = 5 } }
-		}
-
-		cost = 60
-		fixed_random_seed = no
-		fire_only_once = no
-		days_remove = 15
-
-		available = {
-			RAJ_no_active_suppression = yes
-		}
-
-		visible = {
-			has_country_flag = RAJ_has_naxalite_states
-			owns_state = 451
-			check_variable = { RAJ_naxalite_451 > 0 }
-		}
-
-		highlight_states = {
-			highlight_state_targets = { state = 451 }
-		}
-
-		complete_effect = {
-			set_country_flag = cleared_451
-		}
-
-		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision RAJ_maoist_suppression_451"
-			set_temp_variable = { RAJ_naxalite_target_state = 451 }
-			RAJ_downgrade_naxalite_var = yes
-			clr_country_flag = cleared_451
-			RAJ_suppression_equipment_reward = yes
-		}
-
-		ai_will_do = { base = 25 }
-	}
-	RAJ_maoist_suppression_452 = {
-		icon = {
-			key = GFX_decision_com_rebel_highest
-			trigger = { check_variable = { RAJ_naxalite_452 = 1 } }
-		}
-		icon = {
-			key = GFX_decision_com_rebel_high
-			trigger = { check_variable = { RAJ_naxalite_452 = 2 } }
-		}
-		icon = {
-			key = GFX_decision_com_rebel_medium
-			trigger = { check_variable = { RAJ_naxalite_452 = 3 } }
-		}
-		icon = {
-			key = GFX_decision_com_rebel_moderat
-			trigger = { check_variable = { RAJ_naxalite_452 = 4 } }
-		}
-		icon = {
-			key = GFX_decision_com_rebel_weak
-			trigger = { check_variable = { RAJ_naxalite_452 = 5 } }
-		}
-
-		cost = 60
-		fixed_random_seed = no
-		fire_only_once = no
-		days_remove = 15
-
-		available = {
-			RAJ_no_active_suppression = yes
-		}
-
-		visible = {
-			has_country_flag = RAJ_has_naxalite_states
-			owns_state = 452
-			check_variable = { RAJ_naxalite_452 > 0 }
-		}
-
-		highlight_states = {
-			highlight_state_targets = { state = 452 }
-		}
-
-		complete_effect = {
-			set_country_flag = cleared_452
-		}
-
-		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision RAJ_maoist_suppression_452"
-			set_temp_variable = { RAJ_naxalite_target_state = 452 }
-			RAJ_downgrade_naxalite_var = yes
-			clr_country_flag = cleared_452
-			RAJ_suppression_equipment_reward = yes
-		}
-
-		ai_will_do = { base = 25 }
-	}
-	RAJ_maoist_suppression_447 = {
-		icon = {
-			key = GFX_decision_com_rebel_highest
-			trigger = { check_variable = { RAJ_naxalite_447 = 1 } }
-		}
-		icon = {
-			key = GFX_decision_com_rebel_high
-			trigger = { check_variable = { RAJ_naxalite_447 = 2 } }
-		}
-		icon = {
-			key = GFX_decision_com_rebel_medium
-			trigger = { check_variable = { RAJ_naxalite_447 = 3 } }
-		}
-		icon = {
-			key = GFX_decision_com_rebel_moderat
-			trigger = { check_variable = { RAJ_naxalite_447 = 4 } }
-		}
-		icon = {
-			key = GFX_decision_com_rebel_weak
-			trigger = { check_variable = { RAJ_naxalite_447 = 5 } }
-		}
-
-		cost = 60
-		fixed_random_seed = no
-		fire_only_once = no
-		days_remove = 15
-
-		available = {
-			RAJ_no_active_suppression = yes
-		}
-
-		visible = {
-			has_country_flag = RAJ_has_naxalite_states
-			owns_state = 447
-			check_variable = { RAJ_naxalite_447 > 0 }
-		}
-
-		highlight_states = {
-			highlight_state_targets = { state = 447 }
-		}
-
-		complete_effect = {
-			set_country_flag = cleared_447
-		}
-
-		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision RAJ_maoist_suppression_447"
-			set_temp_variable = { RAJ_naxalite_target_state = 447 }
-			RAJ_downgrade_naxalite_var = yes
-			clr_country_flag = cleared_447
-			RAJ_suppression_equipment_reward = yes
-		}
-
-		ai_will_do = { base = 25 }
-	}
-	RAJ_maoist_suppression_458 = {
-		icon = {
-			key = GFX_decision_com_rebel_highest
-			trigger = { check_variable = { RAJ_naxalite_458 = 1 } }
-		}
-		icon = {
-			key = GFX_decision_com_rebel_high
-			trigger = { check_variable = { RAJ_naxalite_458 = 2 } }
-		}
-		icon = {
-			key = GFX_decision_com_rebel_medium
-			trigger = { check_variable = { RAJ_naxalite_458 = 3 } }
-		}
-		icon = {
-			key = GFX_decision_com_rebel_moderat
-			trigger = { check_variable = { RAJ_naxalite_458 = 4 } }
-		}
-		icon = {
-			key = GFX_decision_com_rebel_weak
-			trigger = { check_variable = { RAJ_naxalite_458 = 5 } }
-		}
-
-		cost = 60
-		fixed_random_seed = no
-		fire_only_once = no
-		days_remove = 15
-
-		available = {
-			RAJ_no_active_suppression = yes
-		}
-
-		visible = {
-			has_country_flag = RAJ_has_naxalite_states
-			owns_state = 458
-			check_variable = { RAJ_naxalite_458 > 0 }
-		}
-
-		highlight_states = {
-			highlight_state_targets = { state = 458 }
-		}
-
-		complete_effect = {
-			set_country_flag = cleared_458
-		}
-
-		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision RAJ_maoist_suppression_458"
-			set_temp_variable = { RAJ_naxalite_target_state = 458 }
-			RAJ_downgrade_naxalite_var = yes
-			clr_country_flag = cleared_458
-			RAJ_suppression_equipment_reward = yes
-		}
-
-		ai_will_do = { base = 25 }
-	}
-	RAJ_maoist_suppression_988 = {
-		icon = {
-			key = GFX_decision_com_rebel_highest
-			trigger = { check_variable = { RAJ_naxalite_988 = 1 } }
-		}
-		icon = {
-			key = GFX_decision_com_rebel_high
-			trigger = { check_variable = { RAJ_naxalite_988 = 2 } }
-		}
-		icon = {
-			key = GFX_decision_com_rebel_medium
-			trigger = { check_variable = { RAJ_naxalite_988 = 3 } }
-		}
-		icon = {
-			key = GFX_decision_com_rebel_moderat
-			trigger = { check_variable = { RAJ_naxalite_988 = 4 } }
-		}
-		icon = {
-			key = GFX_decision_com_rebel_weak
-			trigger = { check_variable = { RAJ_naxalite_988 = 5 } }
-		}
-
-		cost = 60
-		fixed_random_seed = no
-		fire_only_once = no
-		days_remove = 15
-
-		available = {
-			RAJ_no_active_suppression = yes
-		}
-
-		visible = {
-			has_country_flag = RAJ_has_naxalite_states
-			owns_state = 988
-			check_variable = { RAJ_naxalite_988 > 0 }
-		}
-
-		highlight_states = {
-			highlight_state_targets = { state = 988 }
-		}
-
-		complete_effect = {
-			set_country_flag = cleared_988
-		}
-
-		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision RAJ_maoist_suppression_988"
-			set_temp_variable = { RAJ_naxalite_target_state = 988 }
-			RAJ_downgrade_naxalite_var = yes
-			clr_country_flag = cleared_988
-			RAJ_suppression_equipment_reward = yes
-		}
-
-		ai_will_do = { base = 25 }
-	}
-	RAJ_maoist_suppression_470 = {
-		icon = {
-			key = GFX_decision_com_rebel_highest
-			trigger = { check_variable = { RAJ_naxalite_470 = 1 } }
-		}
-		icon = {
-			key = GFX_decision_com_rebel_high
-			trigger = { check_variable = { RAJ_naxalite_470 = 2 } }
-		}
-		icon = {
-			key = GFX_decision_com_rebel_medium
-			trigger = { check_variable = { RAJ_naxalite_470 = 3 } }
-		}
-		icon = {
-			key = GFX_decision_com_rebel_moderat
-			trigger = { check_variable = { RAJ_naxalite_470 = 4 } }
-		}
-		icon = {
-			key = GFX_decision_com_rebel_weak
-			trigger = { check_variable = { RAJ_naxalite_470 = 5 } }
-		}
-
-		cost = 60
-		fixed_random_seed = no
-		fire_only_once = no
-		days_remove = 15
-
-		available = {
-			RAJ_no_active_suppression = yes
-		}
-
-		visible = {
-			has_country_flag = RAJ_has_naxalite_states
-			owns_state = 470
-			check_variable = { RAJ_naxalite_470 > 0 }
-		}
-
-		highlight_states = {
-			highlight_state_targets = { state = 470 }
-		}
-
-		complete_effect = {
-			set_country_flag = cleared_470
-		}
-
-		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision RAJ_maoist_suppression_470"
-			set_temp_variable = { RAJ_naxalite_target_state = 470 }
-			RAJ_downgrade_naxalite_var = yes
-			clr_country_flag = cleared_470
+			clr_country_flag = RAJ_suppression_active
 			RAJ_suppression_equipment_reward = yes
 		}
 
