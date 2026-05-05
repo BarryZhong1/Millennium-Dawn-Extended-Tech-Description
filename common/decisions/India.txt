@@ -1229,6 +1229,7 @@ maoist_decision_category = {
 		cost = 75
 		fire_only_once = no
 		days_remove = 60
+		fixed_random_seed = no
 
 		available = {
 			NOT = {
@@ -1251,15 +1252,26 @@ maoist_decision_category = {
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision RAJ_integrated_development_initiative removed"
 			clr_country_flag = RAJ_development_in_progress
-			add_stability = 0.02
-			random_controlled_state = {
-				limit = {
-					RAJ_state_has_any_naxalite = yes
+			random_list = {
+				70 = { # Success
+					add_stability = 0.02
+					random_controlled_state = {
+						limit = {
+							RAJ_state_has_any_naxalite = yes
+						}
+						RAJ_downgrade_naxalite_level = yes
+						add_dynamic_modifier = {
+							modifier = RAJ_development_boost
+							days = 180
+						}
+					}
 				}
-				RAJ_downgrade_naxalite_level = yes
-				add_dynamic_modifier = {
-					modifier = RAJ_development_boost
-					days = 180
+				30 = { # Failure - funds misappropriated
+					add_stability = -0.01
+					set_temp_variable = { party_index = 19 }
+					set_temp_variable = { party_popularity_increase = 0.02 }
+					add_relative_party_popularity = yes
+					custom_effect_tooltip = RAJ_suppression_failed_tt
 				}
 			}
 		}
@@ -1299,12 +1311,23 @@ maoist_decision_category = {
 		remove_effect = {
 			clr_country_flag = RAJ_rehabilitation_in_progress
 			random_list = {
-				40 = {
+				40 = { # Success - insurgents reintegrated
 					add_stability = 0.02
 					country_event = RAJ_naxal.12
 				}
-				25 = {
+				35 = { # Partial failure - limited uptake
 					add_stability = -0.01
+					set_temp_variable = { party_index = 19 }
+					set_temp_variable = { party_popularity_increase = 0.01 }
+					add_relative_party_popularity = yes
+					custom_effect_tooltip = RAJ_suppression_failed_tt
+				}
+				25 = { # Full failure - program exploited for regrouping
+					add_stability = -0.02
+					set_temp_variable = { party_index = 19 }
+					set_temp_variable = { party_popularity_increase = 0.02 }
+					add_relative_party_popularity = yes
+					custom_effect_tooltip = RAJ_suppression_failed_tt
 				}
 			}
 		}
@@ -1320,6 +1343,7 @@ maoist_decision_category = {
 		cost = 100
 		fire_only_once = no
 		days_remove = 90
+		fixed_random_seed = no
 
 		available = {
 			NOT = {
@@ -1344,11 +1368,25 @@ maoist_decision_category = {
 		remove_effect = {
 			clr_country_flag = RAJ_green_hunt_active
 			remove_ideas = RAJ_operation_green_hunt_active
-			every_controlled_state = {
-				limit = { RAJ_state_has_any_naxalite = yes }
-				RAJ_downgrade_naxalite_level = yes
+			random_list = {
+				75 = { # Success - major crackdown
+					log = "[GetDateText]: [Root.GetName]: Operation Green Hunt succeeded"
+					every_controlled_state = {
+						limit = { RAJ_state_has_any_naxalite = yes }
+						RAJ_downgrade_naxalite_level = yes
+					}
+					country_event = RAJ_naxal.15
+				}
+				25 = { # Failure - civilian casualties backfire
+					log = "[GetDateText]: [Root.GetName]: Operation Green Hunt failed"
+					add_stability = -0.03
+					add_political_power = -25
+					set_temp_variable = { party_index = 19 }
+					set_temp_variable = { party_popularity_increase = 0.03 }
+					add_relative_party_popularity = yes
+					custom_effect_tooltip = RAJ_suppression_failed_tt
+				}
 			}
-			country_event = RAJ_naxal.15
 		}
 
 		ai_will_do = {
@@ -1447,6 +1485,7 @@ maoist_decision_category = {
 
 		cost = 60
 		days_remove = 120
+		fixed_random_seed = no
 
 		available = {
 			num_of_civilian_factories > 30
@@ -1463,16 +1502,27 @@ maoist_decision_category = {
 		}
 
 		remove_effect = {
-			random_controlled_state = {
-				limit = {
-					RAJ_state_has_any_naxalite = yes
+			random_list = {
+				70 = { # Success - infrastructure completed
+					random_controlled_state = {
+						limit = {
+							RAJ_state_has_any_naxalite = yes
+						}
+						add_dynamic_modifier = {
+							modifier = RAJ_development_boost
+							days = 180
+						}
+					}
+					add_stability = 0.01
 				}
-				add_dynamic_modifier = {
-					modifier = RAJ_development_boost
-					days = 180
+				30 = { # Failure - funds embezzled, roads incomplete
+					add_stability = -0.01
+					set_temp_variable = { party_index = 19 }
+					set_temp_variable = { party_popularity_increase = 0.01 }
+					add_relative_party_popularity = yes
+					custom_effect_tooltip = RAJ_suppression_failed_tt
 				}
 			}
-			add_stability = 0.01
 		}
 
 		ai_will_do = {
