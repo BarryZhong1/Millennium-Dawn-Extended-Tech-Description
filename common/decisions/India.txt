@@ -1,5 +1,6 @@
 RAJ_religious_groups = {
 	RAJ_appease_hindus = {
+		icon = GFX_decision_generic_political_discourse
 		cost = 25
 
 		days_remove = 30
@@ -26,6 +27,7 @@ RAJ_religious_groups = {
 	}
 
 	RAJ_appease_sikhs = {
+		icon = GFX_decision_generic_political_discourse
 		cost = 25
 
 		days_remove = 30
@@ -52,6 +54,7 @@ RAJ_religious_groups = {
 	}
 
 	RAJ_appease_buddhists = {
+		icon = GFX_decision_generic_political_discourse
 		cost = 25
 		days_remove = 30
 
@@ -77,6 +80,7 @@ RAJ_religious_groups = {
 	}
 
 	RAJ_appease_christians = {
+		icon = GFX_decision_generic_political_discourse
 		cost = 25
 
 		days_remove = 30
@@ -103,6 +107,7 @@ RAJ_religious_groups = {
 	}
 
 	RAJ_appease_muslims = {
+		icon = GFX_decision_generic_political_discourse
 		cost = 25
 
 		days_remove = 30
@@ -129,6 +134,7 @@ RAJ_religious_groups = {
 	}
 
 	RAJ_ladakh_crisis = {
+		icon = GFX_decision_crisis
 		activation = {
 			owns_state = 993
 			check_variable = { RAJ_muslim_opinion < 15 }
@@ -165,6 +171,7 @@ RAJ_religious_groups = {
 	}
 
 	RAJ_meghalaya_crisis = {
+		icon = GFX_decision_crisis
 		activation = {
 			owns_state = 980
 			check_variable = { RAJ_christians_opinion < 15 }
@@ -201,6 +208,7 @@ RAJ_religious_groups = {
 	}
 
 	RAJ_manipur_crisis = {
+		icon = GFX_decision_crisis
 		activation = {
 			owns_state = 477
 			check_variable = { RAJ_christians_opinion < 15 }
@@ -237,6 +245,7 @@ RAJ_religious_groups = {
 	}
 
 	RAJ_sikkim_crisis = {
+		icon = GFX_decision_crisis
 		activation = {
 			owns_state = 982
 			check_variable = { RAJ_buddhist_opinion < 15 }
@@ -273,6 +282,7 @@ RAJ_religious_groups = {
 	}
 
 	RAJ_punjab_crisis = {
+		icon = GFX_decision_crisis
 		activation = {
 			owns_state = 429
 			check_variable = { RAJ_sikh_opinion < 15 }
@@ -1061,16 +1071,18 @@ maoist_decision_category = {
 			hidden_trigger = {
 				NOT = { has_country_flag = RAJ_naxalite_mission_active }
 				has_country_flag = RAJ_has_naxalite_states
+				has_country_flag = RAJ_has_severe_naxalite_states
+				check_variable = { party_pop_array^19 > 0.14 }
 			}
+		}
+
+		available = {
+			always = no
 		}
 
 		on_map_mode = map_only
 
 		selectable_mission = no
-
-		complete_effect = {
-			set_country_flag = RAJ_naxalite_mission_active
-		}
 
 		cancel_trigger = {
 			custom_trigger_tooltip = {
@@ -1086,6 +1098,7 @@ maoist_decision_category = {
 		is_good = no
 
 		timeout_effect = {
+			set_country_flag = RAJ_naxalite_mission_active
 			set_temp_variable = { party_index = 19 }
 			set_temp_variable = { party_popularity_increase = 0.05 }
 			add_relative_party_popularity = yes
@@ -1178,10 +1191,33 @@ maoist_decision_category = {
 
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision RAJ_maoist_suppression"
-			set_temp_variable = { RAJ_naxalite_target_state = FROM }
-			RAJ_downgrade_naxalite_var = yes
 			clr_country_flag = RAJ_suppression_active
-			RAJ_suppression_equipment_reward = yes
+			random_list = {
+				75 = {
+					set_temp_variable = { RAJ_naxalite_target_state = FROM }
+					RAJ_downgrade_naxalite_var = yes
+					RAJ_suppression_equipment_reward = yes
+				}
+				25 = {
+					modifier = {
+						factor = 1.5
+						check_variable = { party_pop_array^19 > 0.09 }
+					}
+					modifier = {
+						factor = 1.5
+						check_variable = { party_pop_array^19 > 0.14 }
+					}
+					modifier = {
+						factor = 1.5
+						check_variable = { party_pop_array^19 > 0.19 }
+					}
+					custom_effect_tooltip = RAJ_suppression_failed_tt
+					set_temp_variable = { party_index = 19 }
+					set_temp_variable = { party_popularity_increase = 0.01 }
+					add_relative_party_popularity = yes
+					add_stability = -0.01
+				}
+			}
 		}
 
 		ai_will_do = { base = 25 }
