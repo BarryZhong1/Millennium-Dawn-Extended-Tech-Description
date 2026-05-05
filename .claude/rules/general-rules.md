@@ -73,6 +73,26 @@ NOT = { has_idea = foo }
 NOT = { has_idea = bar }
 ```
 
+## Tautological OR in ai_will_do modifiers
+
+An `OR` block inside an `ai_will_do modifier` that covers all possible values of a trigger is always true and does nothing useful:
+
+```
+# Wrong — OR(yes, no) is always true; modifier fires unconditionally
+modifier = {
+    add = 1
+    OR = {
+        is_historical_focus_on = yes
+        is_historical_focus_on = no
+    }
+}
+
+# Correct — if you want an unconditional bonus, remove the OR entirely
+# and fold the value into base = N, or remove the modifier block
+```
+
+Remove the entire modifier block and increase `base` by the `add` amount instead. If a real condition was intended (e.g., add only when historical focus is on), write it without the tautological OR.
+
 ## Implicit AND in triggers
 
 Multiple conditions in a trigger block are implicitly AND-ed together. Never wrap conditions in redundant `AND = { }` blocks:
@@ -86,6 +106,16 @@ trigger = { A B C }
 ```
 
 This applies to `trigger`, `limit`, `visible`, `available`, `activation`, `cancel_trigger`, and all other trigger contexts.
+
+## Modifier names
+
+Invalid modifier names compile silently and do nothing — the game logs an "Unknown modifier" error but loads the idea/focus anyway. **Never guess a modifier name.** Always verify it exists first:
+
+```bash
+grep -r "modifier_name_here" common/ideas/*.txt common/national_focus/*.txt | head -3
+```
+
+If no results, the name is wrong. Check the wiki or find a similar modifier in the codebase and use the exact same spelling.
 
 ## threat scale
 
@@ -207,7 +237,12 @@ effect_tooltip = {
 }
 custom_effect_tooltip = TT_IF_THEY_ACCEPT
 effect_tooltip = {
-	# effects / tooltip keys summarising the acceptance outcome
+	# effects summarising the acceptance outcome
+}
+# Only add the reject block if rejection has actual consequences:
+custom_effect_tooltip = TT_IF_THEY_REJECT
+effect_tooltip = {
+	# effects summarising the rejection outcome (sanctions, opinion hit, etc.)
 }
 ```
 
