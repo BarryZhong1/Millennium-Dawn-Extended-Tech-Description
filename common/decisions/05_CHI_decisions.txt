@@ -5681,3 +5681,274 @@ CHI_south_china_sea_category = {
 		}
 	}
 }
+
+### Murree Track Two Diplomacy ###
+
+CHI_murree_track_two_diplomacy = {
+
+	CHI_mediate_taliban_factions = {
+		icon = GFX_decision_generic_political_actions
+
+		visible = {
+			has_country_flag = CHI_murree_process_active
+		}
+
+		available = {
+			country_exists = AFG
+			NOT = { has_war_with = AFG }
+		}
+
+		cost = 50
+		days_remove = 90
+		days_re_enable = 180
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_mediate_taliban_factions executed"
+			if = {
+				limit = { country_exists = AFG }
+				AFG = { add_stability = 0.03 }
+			}
+			random_list = {
+				25 = {
+					news_event = { id = sino_indian.30 days = 3 }
+				}
+				75 = {}
+			}
+			add_to_variable = { CHI_chinese_aggression = -1 tooltip = CHI_chinese_aggression_tt }
+			clamp_variable = { var = CHI_chinese_aggression min = -50 max = 50 }
+		}
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				factor = 0
+				has_war_with = AFG
+			}
+			modifier = {
+				add = 3
+				check_variable = { CHI_chinese_aggression > 9 }
+			}
+			modifier = {
+				factor = 0
+				NOT = { country_exists = AFG }
+			}
+		}
+	}
+
+	CHI_facilitate_prisoner_exchange = {
+		icon = GFX_decision_generic_political_actions
+
+		visible = {
+			has_country_flag = CHI_murree_process_active
+		}
+
+		available = {
+			country_exists = PAK
+		}
+
+		cost = 30
+		days_remove = 60
+		days_re_enable = 120
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_facilitate_prisoner_exchange executed"
+			add_to_variable = { var = uighur_threat value = -3 }
+			clamp_variable = { var = uighur_threat min = 0 max = 100 }
+			if = {
+				limit = { country_exists = PAK }
+				PAK = {
+					add_opinion_modifier = {
+						target = CHI
+						modifier = CHI_prisoner_exchange_goodwill
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 7
+			modifier = {
+				factor = 0
+				NOT = { country_exists = PAK }
+			}
+			modifier = {
+				add = 3
+				PAK = { has_opinion = { target = CHI value < 0 } }
+			}
+		}
+	}
+
+	CHI_host_intra_afghan_summit_beijing = {
+		icon = GFX_decision_generic_political_actions
+
+		visible = {
+			has_country_flag = CHI_murree_process_active
+		}
+
+		available = {
+			country_exists = AFG
+			NOT = { has_war_with = AFG }
+			AFG = { has_stability < 0.4 }
+		}
+
+		cost = 100
+		days_remove = 180
+		days_re_enable = 360
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_host_intra_afghan_summit_beijing executed"
+			if = {
+				limit = { country_exists = AFG }
+				AFG = { add_stability = 0.08 }
+			}
+			every_country = {
+				limit = {
+					OR = {
+						original_tag = AFG
+						original_tag = PAK
+						original_tag = TAJ
+					}
+					country_exists = yes
+				}
+				add_opinion_modifier = {
+					target = CHI
+					modifier = CHI_subcontinent_summit_goodwill
+				}
+			}
+			add_to_variable = { CHI_chinese_aggression = -2 tooltip = CHI_chinese_aggression_tt }
+			clamp_variable = { var = CHI_chinese_aggression min = -50 max = 50 }
+		}
+
+		ai_will_do = {
+			base = 3
+			modifier = {
+				factor = 0
+				NOT = { country_exists = AFG }
+			}
+			modifier = {
+				factor = 0
+				has_war_with = AFG
+			}
+			modifier = {
+				add = 5
+				check_variable = { CHI_chinese_aggression > 14 }
+			}
+		}
+	}
+
+	CHI_pressure_pakistan_on_haqqani_network = {
+		icon = GFX_decision_generic_political_actions
+
+		visible = {
+			has_country_flag = CHI_murree_process_active
+		}
+
+		available = {
+			country_exists = PAK
+			PAK = { influence_higher_40 = yes }
+			NOT = { has_war_with = PAK }
+		}
+
+		cost = 75
+		days_remove = 30
+		days_re_enable = 360
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_pressure_pakistan_on_haqqani_network executed"
+			if = {
+				limit = { country_exists = PAK }
+				PAK = {
+					add_opinion_modifier = {
+						target = CHI
+						modifier = CHI_haqqani_pressure_penalty
+					}
+				}
+			}
+			if = {
+				limit = { country_exists = AFG }
+				AFG = { add_stability = 0.05 }
+			}
+		}
+
+		ai_will_do = {
+			base = 4
+			modifier = {
+				factor = 0
+				NOT = { country_exists = PAK }
+			}
+			modifier = {
+				factor = 0
+				has_war_with = PAK
+			}
+			modifier = {
+				add = 4
+				check_variable = { CHI_chinese_aggression < 0 }
+			}
+		}
+	}
+}
+
+### LAC De-escalation ###
+
+CHI_subcontinent_diplomacy = {
+
+	CHI_de_escalate_at_LAC = {
+		icon = GFX_decision_generic_political_actions
+
+		visible = {
+			has_country_flag = CHI_border_personnel_meetings_active
+			custom_trigger_tooltip = {
+				tooltip = CHI_lac_deescalation_uses_remaining_tt
+				check_variable = {
+					var = CHI_lac_deescalation_uses
+					value = 5
+					compare = less_than
+				}
+			}
+		}
+
+		available = {
+			NOT = { has_war_with = RAJ }
+		}
+
+		cost = 25
+		days_remove = 30
+		days_re_enable = 90
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_de_escalate_at_LAC executed"
+			if = {
+				limit = { country_exists = RAJ }
+				RAJ = {
+					add_opinion_modifier = {
+						target = CHI
+						modifier = CHI_lac_deescalation_goodwill
+					}
+				}
+			}
+			add_to_variable = { CHI_chinese_aggression = -1 tooltip = CHI_chinese_aggression_tt }
+			clamp_variable = { var = CHI_chinese_aggression min = -50 max = 50 }
+			add_to_variable = { CHI_lac_deescalation_uses = 1 }
+		}
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				factor = 0
+				has_war_with = RAJ
+			}
+			modifier = {
+				add = 5
+				check_variable = { CHI_chinese_aggression > 9 }
+			}
+			modifier = {
+				factor = 0
+				check_variable = {
+					var = CHI_lac_deescalation_uses
+					value = 5
+					compare = greater_than_or_equals
+				}
+			}
+		}
+	}
+}

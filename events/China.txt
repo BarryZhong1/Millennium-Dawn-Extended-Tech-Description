@@ -4,6 +4,7 @@ add_namespace = china_sar
 add_namespace = CHI_sco
 add_namespace = CHI_foreign
 add_namespace = china_scs
+add_namespace = sino_indian
 
 
 # National Congress Convened
@@ -4836,21 +4837,6 @@ country_event = {
 	}
 }
 
-# china_scs.55 — Voices from the South Sea Fleet (cosmetic flavour, 1 option)
-country_event = {
-	id = china_scs.55
-	title = china_scs.55.t
-	desc = china_scs.55.d
-	picture = GFX_news_event_generic_naval
-	is_triggered_only = yes
-
-	option = {
-		name = china_scs.55.a
-		log = "[GetDateText]: [This.GetName]: china_scs.55.a executed"
-		ai_chance = { base = 1 }
-	}
-}
-
 # china_scs.56 — The Spratly Skirmish (news event, fires to CHI when CHI wins border war)
 # on_win hook from start_border_war in .52.b. ROOT = CHI, FROM = the defeated claimant.
 news_event = {
@@ -5354,3 +5340,545 @@ country_event = {
 	}
 }
 
+##############################################
+### sino_indian — Indian Subcontinent branch events ###
+##############################################
+
+# sino_indian.1 — Doklam Standoff reaction
+# Fired by CHI_Doklam_Road_Standoff to BHU (and RAJ when RAJ guarantees BHU).
+# Option layout: BHU gets a/b/e; RAJ gets c (defers to BHU) and d (own action).
+country_event = {
+	id = sino_indian.1
+	title = sino_indian.1.t
+	desc = sino_indian.1.d
+	picture = GFX_news_event_generic_military
+	is_triggered_only = yes
+
+	# BHU option A — send troops (resist)
+	option = {
+		name = sino_indian.1.a
+		trigger = { original_tag = BHU }
+		log = "[GetDateText]: [This.GetName]: sino_indian.1.a executed"
+		create_wargoal = {
+			type = annex_everything
+			target = CHI
+		}
+		add_war_support = 0.05
+		ai_chance = {
+			base = 30
+			modifier = {
+				add = 20
+				has_opinion = { target = CHI value < -25 }
+			}
+			modifier = {
+				add = 20
+				is_in_faction_with = RAJ
+			}
+		}
+	}
+
+	# BHU option B — do nothing
+	option = {
+		name = sino_indian.1.b
+		trigger = { original_tag = BHU }
+		log = "[GetDateText]: [This.GetName]: sino_indian.1.b executed"
+		add_opinion_modifier = { target = CHI modifier = CHI_doklam_concession }
+		ai_chance = {
+			base = 50
+			modifier = {
+				add = 30
+				NOT = { is_in_faction_with = RAJ }
+			}
+		}
+	}
+
+	# BHU option E — defend without allies
+	option = {
+		name = sino_indian.1.e
+		trigger = { original_tag = BHU }
+		log = "[GetDateText]: [This.GetName]: sino_indian.1.e executed"
+		create_wargoal = {
+			type = annex_everything
+			target = CHI
+		}
+		add_opinion_modifier = { target = RAJ modifier = territorial_integrity_violation }
+		ai_chance = {
+			base = 20
+		}
+	}
+
+	# RAJ option C — protectors rally
+	option = {
+		name = sino_indian.1.c
+		trigger = { original_tag = RAJ }
+		log = "[GetDateText]: [This.GetName]: sino_indian.1.c executed"
+		add_war_support = 0.05
+		give_guarantee = BHU
+		ai_chance = {
+			base = 60
+			modifier = {
+				add = 20
+				has_opinion = { target = CHI value < -10 }
+			}
+		}
+	}
+
+	# RAJ option D — cannot intervene
+	option = {
+		name = sino_indian.1.d
+		trigger = { original_tag = RAJ }
+		log = "[GetDateText]: [This.GetName]: sino_indian.1.d executed"
+		add_opinion_modifier = { target = BHU modifier = territorial_integrity_violation }
+		ai_chance = {
+			base = 40
+			modifier = {
+				factor = 0
+				has_opinion = { target = BHU value > 30 }
+			}
+		}
+	}
+}
+
+# sino_indian.11 — RAJ reacts to the Sino-Indian Treaty of Friendship
+# Fired by CHI_Sino_Indian_Treaty_of_Friendship to RAJ.
+country_event = {
+	id = sino_indian.11
+	title = sino_indian.11.t
+	desc = sino_indian.11.d
+	picture = GFX_news_event_generic_sign_treaty1
+	is_triggered_only = yes
+
+	option = {
+		name = sino_indian.11.a
+		log = "[GetDateText]: [This.GetName]: sino_indian.11.a executed"
+		add_opinion_modifier = { target = CHI modifier = diplomatic_opening }
+		CHI = {
+			add_opinion_modifier = { target = RAJ modifier = diplomatic_opening }
+			set_country_flag = CHI_sino_indian_treaty_signed
+		}
+		ai_chance = {
+			base = 60
+			modifier = {
+				add = 20
+				has_opinion = { target = CHI value > 25 }
+			}
+			modifier = {
+				add = -20
+				has_opinion = { target = CHI value < 0 }
+			}
+		}
+	}
+
+	option = {
+		name = sino_indian.11.b
+		log = "[GetDateText]: [This.GetName]: sino_indian.11.b executed"
+		add_opinion_modifier = { target = CHI modifier = territorial_integrity_violation }
+		CHI = {
+			add_opinion_modifier = { target = RAJ modifier = territorial_integrity_violation }
+			set_country_flag = CHI_sino_indian_treaty_rejected
+		}
+		ai_chance = {
+			base = 40
+			modifier = {
+				add = 20
+				has_opinion = { target = CHI value < -10 }
+			}
+			modifier = {
+				add = -20
+				has_opinion = { target = CHI value > 30 }
+			}
+		}
+	}
+}
+
+# sino_indian.13 — News: Beijing Distances Itself From Islamabad
+# Fired by CHI_Strategic_Realignment as news_event.
+news_event = {
+	id = sino_indian.13
+	title = sino_indian.13.t
+	desc = sino_indian.13.d
+	picture = GFX_news_event_generic_diplomacy
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = sino_indian.13.a
+		trigger = { original_tag = CHI }
+		log = "[GetDateText]: [This.GetName]: sino_indian.13.a executed"
+	}
+
+	option = {
+		name = sino_indian.13.b
+		trigger = {
+			NOT = { original_tag = CHI }
+		}
+	}
+}
+
+# sino_indian.20 — Operation Mountain Tiger framing
+# Fired by CHI_Joint_Operations to CHI.
+country_event = {
+	id = sino_indian.20
+	title = sino_indian.20.t
+	desc = sino_indian.20.d
+	picture = GFX_news_event_generic_military
+	is_triggered_only = yes
+
+	option = {
+		name = sino_indian.20.a
+		log = "[GetDateText]: [This.GetName]: sino_indian.20.a executed"
+		add_to_variable = { CHI_chinese_aggression = 1 tooltip = CHI_chinese_aggression_tt }
+		clamp_variable = { var = CHI_chinese_aggression min = -50 max = 50 }
+		set_country_flag = CHI_mountain_tiger_defensive
+		hidden_effect = {
+			every_country = {
+				limit = {
+					OR = {
+						original_tag = PAK
+						original_tag = TAJ
+						original_tag = AFG
+					}
+				}
+				add_war_support = 0.05
+			}
+		}
+		ai_chance = {
+			base = 20
+			modifier = {
+				add = 10
+				check_variable = {
+					var = CHI_chinese_aggression
+					value = 0
+					compare = less_than
+				}
+			}
+		}
+	}
+
+	option = {
+		name = sino_indian.20.b
+		log = "[GetDateText]: [This.GetName]: sino_indian.20.b executed"
+		add_to_variable = { CHI_chinese_aggression = 3 tooltip = CHI_chinese_aggression_tt }
+		clamp_variable = { var = CHI_chinese_aggression min = -50 max = 50 }
+		if = {
+			limit = { country_exists = TAL }
+			create_wargoal = {
+				type = topple_government
+				target = TAL
+			}
+		}
+		if = {
+			limit = { country_exists = TTP }
+			create_wargoal = {
+				type = topple_government
+				target = TTP
+			}
+		}
+		hidden_effect = {
+			every_country = {
+				limit = {
+					has_government = democratic
+					NOT = { original_tag = CHI }
+				}
+				add_opinion_modifier = { target = CHI modifier = aggressive_diplomacy_penalty }
+			}
+		}
+		ai_chance = {
+			base = 40
+			modifier = {
+				add = 20
+				check_variable = {
+					var = CHI_chinese_aggression
+					value = 5
+					compare = greater_than
+				}
+			}
+		}
+	}
+
+	option = {
+		name = sino_indian.20.c
+		log = "[GetDateText]: [This.GetName]: sino_indian.20.c executed"
+		add_to_variable = { CHI_chinese_aggression = 5 tooltip = CHI_chinese_aggression_tt }
+		clamp_variable = { var = CHI_chinese_aggression min = -50 max = 50 }
+		if = {
+			limit = { country_exists = TAL }
+			create_wargoal = {
+				type = topple_government
+				target = TAL
+			}
+		}
+		if = {
+			limit = { country_exists = TTP }
+			create_wargoal = {
+				type = topple_government
+				target = TTP
+			}
+		}
+		every_country = {
+			limit = {
+				OR = {
+					original_tag = CHI
+					original_tag = PAK
+					original_tag = TAJ
+					original_tag = AFG
+				}
+			}
+			add_timed_idea = {
+				idea = CHI_war_footing_central_asia
+				days = 730
+			}
+		}
+		hidden_effect = {
+			every_country = {
+				limit = {
+					has_government = democratic
+					NOT = { original_tag = CHI }
+				}
+				add_opinion_modifier = { target = CHI modifier = aggressive_diplomacy_penalty }
+			}
+			every_country = {
+				limit = {
+					OR = {
+						original_tag = TUR
+						original_tag = PER
+					}
+				}
+				country_event = { id = sino_indian.31 days = 30 }
+			}
+		}
+		ai_chance = {
+			base = 10
+			modifier = {
+				add = 20
+				check_variable = {
+					var = CHI_chinese_aggression
+					value = 10
+					compare = greater_than
+				}
+			}
+		}
+	}
+}
+
+# sino_indian.21 — Beijing Extends an Unexpected Hand
+# Fired by CHI_Strategic_Realignment to RAJ.
+country_event = {
+	id = sino_indian.21
+	title = sino_indian.21.t
+	desc = sino_indian.21.d
+	picture = GFX_news_event_generic_diplomacy
+	is_triggered_only = yes
+
+	option = {
+		name = sino_indian.21.a
+		log = "[GetDateText]: [This.GetName]: sino_indian.21.a executed"
+		add_opinion_modifier = { target = CHI modifier = diplomatic_opening }
+		add_opinion_modifier = { target = USA modifier = territorial_integrity_violation }
+		set_country_flag = CHI_bandung_dialogue_open
+		ai_chance = {
+			base = 30
+			modifier = {
+				add = 20
+				has_opinion = { target = CHI value > 10 }
+			}
+			modifier = {
+				add = -15
+				is_in_faction_with = USA
+			}
+		}
+	}
+
+	option = {
+		name = sino_indian.21.b
+		log = "[GetDateText]: [This.GetName]: sino_indian.21.b executed"
+		add_opinion_modifier = { target = CHI modifier = cautious_opening }
+		set_country_flag = CHI_bandung_dialogue_open
+		ai_chance = {
+			base = 40
+			modifier = {
+				add = 15
+				has_opinion = { target = CHI value > 0 }
+			}
+		}
+	}
+
+	option = {
+		name = sino_indian.21.c
+		log = "[GetDateText]: [This.GetName]: sino_indian.21.c executed"
+		add_opinion_modifier = { target = CHI modifier = territorial_integrity_violation }
+		add_opinion_modifier = { target = USA modifier = diplomatic_opening }
+		CHI = { set_country_flag = CHI_bandung_rejected }
+		ai_chance = {
+			base = 30
+			modifier = {
+				add = 20
+				has_opinion = { target = CHI value < -10 }
+			}
+			modifier = {
+				add = 20
+				is_in_faction_with = USA
+			}
+		}
+	}
+}
+
+# sino_indian.30 — Taliban Faction Split
+# News event, fired by CHI_mediate_taliban_factions decision.
+news_event = {
+	id = sino_indian.30
+	title = sino_indian.30.t
+	desc = sino_indian.30.d
+	picture = GFX_news_event_generic_military
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = sino_indian.30.a
+		trigger = { original_tag = CHI }
+		log = "[GetDateText]: [This.GetName]: sino_indian.30.a executed"
+	}
+
+	option = {
+		name = sino_indian.30.b
+		trigger = { NOT = { original_tag = CHI } }
+	}
+}
+
+# sino_indian.31 — Turkey and Iran react to Mountain Tiger coalition war footing
+# Fired by sino_indian.20 option C to TUR and PER.
+country_event = {
+	id = sino_indian.31
+	title = sino_indian.31.t
+	desc = sino_indian.31.d
+	picture = GFX_news_event_generic_diplomacy
+	is_triggered_only = yes
+
+	option = {
+		name = sino_indian.31.a
+		log = "[GetDateText]: [This.GetName]: sino_indian.31.a executed"
+		add_opinion_modifier = { target = CHI modifier = aggressive_diplomacy_penalty }
+		ai_chance = { base = 100 }
+	}
+}
+
+# sino_indian.32 — Washington Offers RAJ a Defense Pact
+# Fired by sino_indian.22 option C to RAJ.
+country_event = {
+	id = sino_indian.32
+	title = sino_indian.32.t
+	desc = sino_indian.32.d
+	picture = GFX_news_event_generic_sign_treaty1
+	is_triggered_only = yes
+
+	option = {
+		name = sino_indian.32.a
+		log = "[GetDateText]: [This.GetName]: sino_indian.32.a executed"
+		USA = {
+			add_opinion_modifier = { target = RAJ modifier = host_and_guarantor }
+		}
+		add_opinion_modifier = { target = CHI modifier = chinese_aggression_himalayan_front }
+		set_country_flag = RAJ_us_defense_pact
+		ai_chance = {
+			base = 60
+			modifier = {
+				add = 20
+				has_opinion = { target = CHI value < -20 }
+			}
+			modifier = {
+				add = 15
+				has_opinion = { target = USA value > 10 }
+			}
+		}
+	}
+
+	option = {
+		name = sino_indian.32.b
+		log = "[GetDateText]: [This.GetName]: sino_indian.32.b executed"
+		add_stability = -0.05
+		ai_chance = {
+			base = 40
+			modifier = {
+				add = 20
+				has_opinion = { target = USA value < 0 }
+			}
+			modifier = {
+				add = -20
+				has_opinion = { target = CHI value < -30 }
+			}
+		}
+	}
+}
+
+# sino_indian.22 — Galwan Reckoning
+# Fired by CHI_Strike_Across_the_Himalayas to CHI.
+country_event = {
+	id = sino_indian.22
+	title = sino_indian.22.t
+	desc = sino_indian.22.d
+	picture = GFX_news_event_generic_military
+	is_triggered_only = yes
+
+	option = {
+		name = sino_indian.22.a
+		log = "[GetDateText]: [This.GetName]: sino_indian.22.a executed"
+		add_to_variable = { CHI_chinese_aggression = 1 tooltip = CHI_chinese_aggression_tt }
+		clamp_variable = { var = CHI_chinese_aggression min = -50 max = 50 }
+		set_country_flag = CHI_galwan_defensive
+		ai_chance = {
+			base = 20
+			modifier = {
+				add = 10
+				check_variable = {
+					var = CHI_chinese_aggression
+					value = 0
+					compare = less_than
+				}
+			}
+		}
+	}
+
+	option = {
+		name = sino_indian.22.b
+		log = "[GetDateText]: [This.GetName]: sino_indian.22.b executed"
+		add_to_variable = { CHI_chinese_aggression = 3 tooltip = CHI_chinese_aggression_tt }
+		clamp_variable = { var = CHI_chinese_aggression min = -50 max = 50 }
+		RAJ = { add_war_support = 0.10 }
+		ai_chance = {
+			base = 50
+			modifier = {
+				add = 15
+				check_variable = {
+					var = CHI_chinese_aggression
+					value = 5
+					compare = greater_than
+				}
+			}
+		}
+	}
+
+	option = {
+		name = sino_indian.22.c
+		log = "[GetDateText]: [This.GetName]: sino_indian.22.c executed"
+		add_to_variable = { CHI_chinese_aggression = 5 tooltip = CHI_chinese_aggression_tt }
+		clamp_variable = { var = CHI_chinese_aggression min = -50 max = 50 }
+		add_timed_idea = {
+			idea = CHI_total_war_himalayan_front
+			days = 1095
+		}
+		hidden_effect = {
+			RAJ = { country_event = { id = sino_indian.32 days = 7 } }
+		}
+		ai_chance = {
+			base = 30
+			modifier = {
+				add = 20
+				check_variable = {
+					var = CHI_chinese_aggression
+					value = 10
+					compare = greater_than
+				}
+			}
+		}
+	}
+}
