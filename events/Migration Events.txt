@@ -21,6 +21,29 @@ country_event = {
 	}
 
 	# Breakup the Slums
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 1.15
+			has_idea = heavily_regulated_immigration
+		}
+		modifier = {
+			factor = 1.25
+			has_idea = regulated_immigration
+		}
+		modifier = {
+			factor = 1.5
+			has_idea = slightly_regulated_immigration
+		}
+		modifier = {
+			factor = 1.75
+			has_idea = open_borders
+		}
+		modifier = {
+			factor = months_at_open_borders
+			always = yes
+		}
+	}
 	option = {
 		name = migrant_event.1.a
 		log = "[GetDateText]: [ROOT.GetName]: event migrant_event.1.a executed"
@@ -121,6 +144,57 @@ country_event = {
 	}
 
 	# Allow the Demonstration
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 0.45
+			has_idea = heavily_regulated_immigration
+		}
+		modifier = {
+			factor = 0.75
+			has_idea = regulated_immigration
+		}
+		modifier = {
+			factor = 1.15
+			has_idea = slightly_regulated_immigration
+		}
+		modifier = {
+			factor = 1.5
+			has_idea = open_borders
+		}
+		modifier = {
+			factor = 1.05
+			check_variable = { net_immigration_rate > 0.05 }
+		}
+		modifier = {
+			factor = 1.15
+			check_variable = { net_immigration_rate > 0.10 }
+		}
+		modifier = {
+			factor = 1.25
+			check_variable = { net_immigration_rate > 0.15 }
+		}
+		modifier = {
+			factor = 1.35
+			check_variable = { net_immigration_rate > 0.20 }
+		}
+		modifier = {
+			factor = 1.5
+			check_variable = { net_immigration_rate > 0.25 }
+		}
+		modifier = {
+			factor = 1.2
+			nationalist > 0.1
+		}
+		modifier = {
+			factor = 1.2
+			nationalist > 0.2
+		}
+		modifier = {
+			factor = months_at_open_borders
+			always = yes
+		}
+	}
 	option = {
 		name = migrant_event.2.a
 		log = "[GetDateText]: [ROOT.GetName]: event migrant_event.2.a executed"
@@ -201,6 +275,41 @@ country_event = {
 	}
 
 	# They told us so!
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 0.5
+			has_idea = police_05
+		}
+		modifier = {
+			factor = 0.75
+			has_idea = police_04
+		}
+		modifier = {
+			factor = 1.15
+			has_idea = police_03
+		}
+		modifier = {
+			factor = 1.25
+			has_idea = police_02
+		}
+		modifier = {
+			factor = 1.50
+			has_idea = police_01
+		}
+		modifier = {
+			factor = 1.25
+			has_idea = open_borders
+		}
+		modifier = {
+			factor = 1.15
+			has_idea = slightly_regulated_immigration
+		}
+		modifier = {
+			factor = months_at_open_borders
+			always = yes
+		}
+	}
 	option = {
 		name = migrant_event.3.a
 		log = "[GetDateText]: [ROOT.GetName]: event migrant_event.3.a executed"

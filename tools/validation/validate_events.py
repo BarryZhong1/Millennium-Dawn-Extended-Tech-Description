@@ -38,6 +38,42 @@ _LONG_FORM_PATTERN = re.compile(
     r"\b((?:country|news|state|unit_leader|character|operative)_event)\s*=\s*\{\s*id\s*=\s*([^\s{}]+)\s*\}",
 )
 
+# Pattern for event IDs inside random_events blocks:  N = namespace.id
+_RANDOM_EVENT_ID_PATTERN = re.compile(
+    r"^\s*\d+\s*=\s*([A-Za-z0-9_]+\.[0-9]+)", re.MULTILINE
+)
+
+
+def _extract_random_event_ids(mod_path: str) -> set:
+    """Return all event IDs referenced inside random_events blocks in on_actions."""
+    ids: set = set()
+    on_actions_dir = Path(mod_path) / "common" / "on_actions"
+    if not on_actions_dir.exists():
+        return ids
+
+    for filepath in on_actions_dir.glob("*.txt"):
+        try:
+            text = filepath.read_text(encoding="utf-8-sig", errors="ignore")
+        except Exception:
+            continue
+        # Strip comments
+        cleaned = re.sub(r"#[^\n]*", "", text)
+        # Find all random_events = { ... } blocks
+        for m in re.finditer(r"random_events\s*=\s*\{", cleaned):
+            start = m.end()
+            depth = 1
+            i = start
+            while i < len(cleaned) and depth > 0:
+                if cleaned[i] == "{":
+                    depth += 1
+                elif cleaned[i] == "}":
+                    depth -= 1
+                i += 1
+            block = cleaned[start : i - 1]
+            for ev_match in _RANDOM_EVENT_ID_PATTERN.finditer(block):
+                ids.add(ev_match.group(1))
+    return ids
+
 
 def _should_skip(filename: str) -> bool:
     return should_skip_file(filename, extra_skip_patterns=EXTRA_SKIP_PATTERNS)
@@ -418,16 +454,23 @@ class Validator(BaseValidator):
 
         MTTH only applies to auto-firing events. On triggered-only events
         it does nothing and the engine logs a warning.
+
+        Exception: events called via random_events in on_actions. For those,
+        the engine uses MTTH as a weight modifier, so MTTH + triggered_only
+        is valid and required.
         """
         self._log_section(
             "Checking for mean_time_to_happen on triggered-only events..."
         )
 
         meta, _ = self._get_event_metadata()
+        random_ids = _extract_random_event_ids(self.mod_path)
         results = []
 
         for ev in meta:
             if ev["has_mtth"] and ev["is_triggered_only"]:
+                if ev["id"] in random_ids:
+                    continue  # MTTH is valid for random_events
                 results.append(f"{ev['id']} - {ev['file']}")
 
         self._report(

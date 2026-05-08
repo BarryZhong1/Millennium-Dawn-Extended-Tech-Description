@@ -28,6 +28,27 @@ country_event = {
 
 
 	#Take steps to avoid crisis
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 1.40
+			has_idea = economic_boom
+		}
+		modifier = {
+			factor = 1.25
+			has_idea = fast_growth
+		}
+		modifier = {
+			factor = 0
+			OR = {
+				has_idea = depression
+				has_idea = recession
+				has_idea = stagnation
+				has_country_flag = possible_housing_bubble
+				has_country_flag = housing_crash
+			}
+		}
+	}
 	option = {
 		name = econvent.1.a
 		log = "[GetDateText]: [This.GetName]: econvent.1.a executed"
@@ -100,6 +121,33 @@ country_event = {
 
 
 	#Lower interest-rates and demand banks increase lending
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 1.25
+			has_idea = economic_boom
+		}
+		modifier = {
+			factor = 1.1
+			has_idea = fast_growth
+		}
+		modifier = {
+			factor = 0.5
+			has_country_flag = consumption_slowdown
+		}
+		modifier = {
+			factor = 2.0
+			has_country_flag = possible_housing_bubble
+		}
+		modifier = {
+			factor = 0
+			OR = {
+				has_idea = depression
+				has_idea = recession
+				has_idea = stagnation
+			}
+		}
+	}
 	option = {
 		name = econvent.2.a
 		log = "[GetDateText]: [This.GetName]: econvent.2.a executed"
@@ -404,6 +452,48 @@ country_event = {
 
 
 	# Crash Effects
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 1.40
+			has_idea = economic_boom
+		}
+		modifier = {
+			factor = 1.25
+			has_idea = fast_growth
+		}
+		modifier = {
+			factor = 0.85
+			OR = {
+				has_country_flag = consumption_slowdown
+				has_country_flag = stock_market_boom
+				has_country_flag = voodoo_economics
+			}
+		}
+		modifier = {
+			factor = 1.15
+			has_country_flag = temp_increase_major_hike_in_corp_taxes
+		}
+		modifier = {
+			factor = 1.25
+			has_country_flag = stock_market_boom_accelerate
+		}
+		modifier = {
+			factor = 0
+			OR = {
+				has_idea = recession
+				has_idea = depression
+			}
+		}
+		modifier = {
+			factor = 0
+			NOT = {
+				has_country_flag = housing_crash
+				has_country_flag = stock_market_boom_accelerate
+				has_country_flag = stock_market_boom
+			}
+		}
+	}
 	option = {
 		name = econvent.3.a
 		log = "[GetDateText]: [This.GetName]: econvent.3.a executed"
@@ -548,6 +638,30 @@ country_event = {
 
 
 	#Bail them out!
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 1.25
+			has_idea = economic_boom
+		}
+		modifier = {
+			factor = 1.10
+			has_idea = fast_growth
+		}
+		modifier = {
+			factor = 0.5
+			has_country_flag = voodoo_economics
+		}
+		modifier = {
+			factor = 0.5
+			has_country_flag = consumption_slowdown
+		}
+
+		modifier = {
+			factor = 1.15
+			has_country_flag = temp_increase_major_hike_in_corp_taxes
+		}
+	}
 	option = {
 		name = econvent.4.a
 		log = "[GetDateText]: [This.GetName]: econvent.4.a executed"
@@ -850,6 +964,49 @@ country_event = {
 
 
 	#Transfer some shopping money
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 0.3
+			has_idea = economic_boom
+		}
+		modifier = {
+			factor = 0.6
+			has_idea = fast_growth
+		}
+		modifier = {
+			factor = 1.3
+			has_idea = recession
+		}
+		modifier = {
+			factor = 0.5
+			has_country_flag = voodoo_economics
+		}
+		modifier = {
+			factor = 0.5
+			has_country_flag = stock_market_crash
+		}
+		modifier = {
+			factor = 0.5
+			has_country_flag = housing_crash
+		}
+		modifier = {
+			factor = 1.15
+			has_country_flag = temp_increase_major_hike_in_corp_taxes
+		}
+		modifier = {
+			factor = 1.15
+			has_country_flag = temp_increase_major_hike_in_pop_taxes
+		}
+		modifier = {
+			factor = 1.25
+			check_variable = { population_tax_rate > 34 }
+		}
+		modifier = {
+			factor = 1.15
+			check_variable = { corporate_tax_rate > 29 }
+		}
+	}
 	option = {
 		name = econvent.5.a
 		log = "[GetDateText]: [This.GetName]: econvent.5.a executed"
@@ -1039,6 +1196,40 @@ country_event = {
 
 
 	#Not much to do about this
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 0.6
+			has_idea = economic_boom
+		}
+		modifier = {
+			factor = 0.8
+			has_idea = fast_growth
+		}
+		modifier = {
+			factor = 2.5
+			has_idea = recession
+		}
+		modifier = {
+			factor = 1.5
+			has_idea = export_economy
+		}
+		modifier = {
+			factor = 2.25
+			has_idea = globalized_trade_economy
+		}
+		modifier = {
+			factor = 1.5
+			OR = {
+				check_variable = { resource_exported@oil > 0 }
+				check_variable = { resource_exported@steel > 0 }
+				check_variable = { resource_exported@aluminium > 0 }
+				check_variable = { resource_exported@tungsten > 0 }
+				check_variable = { resource_exported@chromium > 0 }
+				check_variable = { resource_exported@rubber > 0 }
+			}
+		}
+	}
 	option = {
 		name = econvent.6.a
 		log = "[GetDateText]: [This.GetName]: econvent.6.a executed"
@@ -1144,6 +1335,26 @@ country_event = {
 
 
 	#Not much to do about this
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 1.4
+			is_in_array = { global.is_african_nation = THIS.id }
+		}
+		modifier = {
+			factor = 1.2
+			check_variable = { gdp_per_capita < 2.00 }
+		}
+		modifier = {
+			factor = 1.10
+			check_variable = { gdp_per_capita > 1.999 }
+			check_variable = { gdp_per_capita < 4.000 }
+		}
+		modifier = {
+			factor = 0.8
+			check_variable = { gdp_per_capita > 3.999 }
+		}
+	}
 	option = {
 		name = econvent.7.a
 		log = "[GetDateText]: [This.GetName]: econvent.7.a executed"
@@ -1246,6 +1457,22 @@ country_event = {
 
 
 	#Not much to do about this
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 1.3
+			check_variable = { gdp_per_capita < 2.00 }
+		}
+		modifier = {
+			factor = 1.10
+			check_variable = { gdp_per_capita > 1.999 }
+			check_variable = { gdp_per_capita < 4.000 }
+		}
+		modifier = {
+			factor = 0.8
+			check_variable = { gdp_per_capita > 3.999 }
+		}
+	}
 	option = {
 		name = econvent.8.a
 		log = "[GetDateText]: [This.GetName]: econvent.8.a executed"
@@ -1359,6 +1586,50 @@ country_event = {
 	}
 
 
+
+	mean_time_to_happen = {
+		# Economically Liberal trying to spurn economic growth
+		modifier = {
+			factor = 1.5
+			has_economically_liberal_government_or_in_coalition = yes
+		}
+		modifier = {
+			factor = 2
+			check_variable = { last_quarter_gdp_growth_rate > 0.10 }
+		}
+		modifier = {
+			factor = 1.75
+			check_variable = { last_quarter_gdp_growth_rate > 0.08 }
+		}
+		modifier = {
+			factor = 1.50
+			check_variable = { last_quarter_gdp_growth_rate > 0.04 }
+		}
+		modifier = {
+			factor = 1.25
+			check_variable = { last_quarter_gdp_growth_rate > 0.02 }
+		}
+		modifier = {
+			factor = 4
+			has_idea = depression
+		}
+		modifier = {
+			factor = 3
+			has_idea = recession
+		}
+		modifier = {
+			factor = 2
+			has_idea = stagnation
+		}
+		modifier = {
+			factor = 1.5
+			has_idea = stable_growth
+		}
+		modifier = {
+			factor = 1.5
+			check_variable = { population_tax_rate < 10 }
+		}
+	}
 	option = {
 		name = econvent.9.a
 		log = "[GetDateText]: [Root.GetName]: event econvent.9.a"
@@ -1406,6 +1677,52 @@ country_event = {
 
 
 
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 2
+			has_idea = international_bankers
+			check_variable = { international_bankers_opinion > 75 }
+		}
+		modifier = {
+			factor = 2
+			has_idea = wall_street
+			check_variable = { wall_street_opinion > 75 }
+		}
+		modifier = {
+			factor = 2
+			has_idea = small_medium_business_owners
+			check_variable = { small_medium_business_owners_opinion > 75 }
+		}
+		modifier = {
+			factor = 2
+			check_variable = { last_quarter_gdp_growth_rate > 0.10 }
+		}
+		modifier = {
+			factor = 1.75
+			check_variable = { last_quarter_gdp_growth_rate > 0.05 }
+		}
+		modifier = {
+			factor = 1.5
+			check_variable = { last_quarter_gdp_growth_rate > 0.02 }
+		}
+		modifier = {
+			has_idea = stagnation
+			factor = 1.25
+		}
+		modifier = {
+			has_idea = fast_growth
+			factor = 1.45
+		}
+		modifier = {
+			has_idea = stable_growth
+			factor = 1.75
+		}
+		modifier = {
+			factor = 1.5
+			check_variable = { corporate_tax_rate < 25 }
+		}
+	}
 	option = {
 		name = econvent.10.a
 		log = "[GetDateText]: [Root.GetName]: event econvent.10.a"
@@ -1465,6 +1782,31 @@ country_event = {
 
 
 	# Too Big to Fail
+
+	mean_time_to_happen = {
+		# Communists Lower Chances -- Sim more market economy control
+		modifier = {
+			factor = 0.50
+			has_communist_government_or_in_coalition = yes
+		}
+		# Socialism more regulation
+		modifier = {
+			factor = 0.95
+			has_socialist_government_or_in_coalition = yes
+		}
+		modifier = {
+			factor = 1.50
+			has_idea = economic_boom
+		}
+		modifier = {
+			factor = 1.35
+			has_idea = fast_growth
+		}
+		modifier = {
+			factor = 1.15
+			has_idea = stable_growth
+		}
+	}
 	option = {
 		name = econvent.11.a
 		log = "[GetDateText]: [Root.GetName]: event econvent.10.a"
@@ -1682,6 +2024,37 @@ country_event = {
 
 
 	# Allow the Loss
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 2
+			gdp_debt_ratio_higher_135 = yes
+		}
+		modifier = {
+			factor = 2
+			gdp_debt_ratio_higher_145 = yes
+		}
+		modifier = {
+			factor = 2
+			gdp_debt_ratio_higher_155 = yes
+		}
+		modifier = {
+			factor = 2
+			gdp_debt_ratio_higher_165 = yes
+		}
+		modifier = {
+			factor = 2
+			gdp_debt_ratio_higher_175 = yes
+		}
+		modifier = {
+			factor = 2
+			gdp_debt_ratio_higher_185 = yes
+		}
+		modifier = {
+			factor = 2
+			gdp_debt_ratio_higher_200 = yes
+		}
+	}
 	option = {
 		name = econvent.13.a
 		log = "[GetDateText]: [This.GetName]: econvent.13.a executed"
@@ -1767,6 +2140,55 @@ country_event = {
 	}
 
 
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 2
+			has_idea = international_bankers
+			check_variable = { international_bankers_opinion > 75 }
+		}
+		modifier = {
+			factor = 2
+			has_idea = wall_street
+			check_variable = { wall_street_opinion > 75 }
+		}
+		modifier = {
+			factor = 2
+			check_variable = { last_quarter_gdp_growth_rate > 0.10 }
+		}
+		modifier = {
+			factor = 1.75
+			check_variable = { last_quarter_gdp_growth_rate > 0.05 }
+		}
+		modifier = {
+			factor = 1.5
+			check_variable = { last_quarter_gdp_growth_rate > 0.02 }
+		}
+		modifier = {
+			factor = 2.00
+			has_idea = economic_boom
+		}
+		modifier = {
+			factor = 1.75
+			has_idea = fast_growth
+		}
+		modifier = {
+			factor = 1.5
+			has_idea = stable_growth
+		}
+		modifier = {
+			factor = 0.5
+			has_idea = stagnation
+		}
+		modifier = {
+			factor = 0.25
+			has_idea = recession
+		}
+		modifier = {
+			factor = 0.10
+			has_idea = depression
+		}
+	}
 	option = {
 		name = econvent.14.a
 		log = "[GetDateText]: [This.GetName]: econvent.14.a executed"
@@ -3542,6 +3964,21 @@ country_event = {
 	}
 
 
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 0.25
+			has_country_flag = party1_banned
+		}
+		modifier = {
+			factor = 2
+			has_active_mission = bankruptcy_incoming_collapse
+		}
+		modifier = {
+			factor = 0.25
+			check_variable = { party_pop_array^0 < 1 }
+		}
+	}
 	option = {
 		name = bankruptcy.200.a	#Do nothing
 		log = "[GetDateText]: [This.GetName]: bankruptcy.200.a executed"
@@ -3577,6 +4014,21 @@ country_event = {
 	}
 
 
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 0.25
+			has_country_flag = party2_banned
+		}
+		modifier = {
+			factor = 2
+			has_active_mission = bankruptcy_incoming_collapse
+		}
+		modifier = {
+			factor = 0.25
+			check_variable = { party_pop_array^1 < 0.01 }
+		}
+	}
 	option = {
 		name = bankruptcy.201.a	#Do nothing
 		log = "[GetDateText]: [This.GetName]: bankruptcy.201.a executed"
@@ -3612,6 +4064,21 @@ country_event = {
 	}
 
 
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 0.25
+			has_country_flag = party3_banned
+		}
+		modifier = {
+			factor = 2
+			has_active_mission = bankruptcy_incoming_collapse
+		}
+		modifier = {
+			factor = 0.25
+			check_variable = { party_pop_array^2 < 0.01 }
+		}
+	}
 	option = {
 		name = bankruptcy.202.a	#Do nothing
 		log = "[GetDateText]: [This.GetName]: bankruptcy.202.a executed"
@@ -3647,6 +4114,21 @@ country_event = {
 	}
 
 
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 0.25
+			has_country_flag = party4_banned
+		}
+		modifier = {
+			factor = 2
+			has_active_mission = bankruptcy_incoming_collapse
+		}
+		modifier = {
+			factor = 0.25
+			check_variable = { party_pop_array^3 < 0.01 }
+		}
+	}
 	option = {
 		name = bankruptcy.203.a	#Do nothing
 		log = "[GetDateText]: [This.GetName]: bankruptcy.203.a executed"
@@ -3682,6 +4164,21 @@ country_event = {
 	}
 
 
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 0.25
+			has_country_flag = party5_banned
+		}
+		modifier = {
+			factor = 2
+			has_active_mission = bankruptcy_incoming_collapse
+		}
+		modifier = {
+			factor = 0.25
+			check_variable = { party_pop_array^4 < 0.01 }
+		}
+	}
 	option = {
 		name = bankruptcy.204.a	#Do nothing
 		log = "[GetDateText]: [This.GetName]: bankruptcy.204.a executed"
@@ -3717,6 +4214,21 @@ country_event = {
 	}
 
 
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 0.25
+			has_country_flag = party6_banned
+		}
+		modifier = {
+			factor = 2
+			has_active_mission = bankruptcy_incoming_collapse
+		}
+		modifier = {
+			factor = 0.25
+			check_variable = { party_pop_array^5 < 0.01 }
+		}
+	}
 	option = {
 		name = bankruptcy.205.a	#Do nothing
 		log = "[GetDateText]: [This.GetName]: bankruptcy.205.a executed"
@@ -3752,6 +4264,21 @@ country_event = {
 	}
 
 
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 0.25
+			has_country_flag = party7_banned
+		}
+		modifier = {
+			factor = 2
+			has_active_mission = bankruptcy_incoming_collapse
+		}
+		modifier = {
+			factor = 0.25
+			check_variable = { party_pop_array^6 < 0.01 }
+		}
+	}
 	option = {
 		name = bankruptcy.206.a	#Do nothing
 		log = "[GetDateText]: [This.GetName]: bankruptcy.206.a executed"
@@ -3787,6 +4314,21 @@ country_event = {
 	}
 
 
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 0.25
+			has_country_flag = party8_banned
+		}
+		modifier = {
+			factor = 2
+			has_active_mission = bankruptcy_incoming_collapse
+		}
+		modifier = {
+			factor = 0.25
+			check_variable = { party_pop_array^7 < 0.01 }
+		}
+	}
 	option = {
 		name = bankruptcy.207.a	#Do nothing
 		log = "[GetDateText]: [This.GetName]: bankruptcy.207.a executed"
@@ -3846,6 +4388,21 @@ country_event = {
 	}
 
 
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 0.25
+			has_country_flag = party9_banned
+		}
+		modifier = {
+			factor = 2
+			has_active_mission = bankruptcy_incoming_collapse
+		}
+		modifier = {
+			factor = 0.25
+			check_variable = { party_pop_array^8 < 0.01 }
+		}
+	}
 	option = {
 		name = bankruptcy.208.a	#Do nothing
 		log = "[GetDateText]: [This.GetName]: bankruptcy.208.a executed"
@@ -3905,6 +4462,21 @@ country_event = {
 	}
 
 
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 0.25
+			has_country_flag = party10_banned
+		}
+		modifier = {
+			factor = 2
+			has_active_mission = bankruptcy_incoming_collapse
+		}
+		modifier = {
+			factor = 0.25
+			check_variable = { party_pop_array^9 < 0.01 }
+		}
+	}
 	option = {
 		name = bankruptcy.209.a	#Do nothing
 		log = "[GetDateText]: [This.GetName]: bankruptcy.209.a executed"
@@ -3947,6 +4519,21 @@ country_event = {
 	}
 
 
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 0.25
+			has_country_flag = party11_banned
+		}
+		modifier = {
+			factor = 2
+			has_active_mission = bankruptcy_incoming_collapse
+		}
+		modifier = {
+			factor = 0.25
+			check_variable = { party_pop_array^10 < 0.01 }
+		}
+	}
 	option = {
 		name = bankruptcy.210.a	#Do nothing
 		log = "[GetDateText]: [This.GetName]: bankruptcy.210.a executed"
@@ -3989,6 +4576,21 @@ country_event = {
 	}
 
 
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 0.25
+			has_country_flag = party12_banned
+		}
+		modifier = {
+			factor = 2
+			has_active_mission = bankruptcy_incoming_collapse
+		}
+		modifier = {
+			factor = 0.25
+			check_variable = { party_pop_array^11 < 0.01 }
+		}
+	}
 	option = {
 		name = bankruptcy.211.a	#Do nothing
 		log = "[GetDateText]: [This.GetName]: bankruptcy.211.a executed"
@@ -4031,6 +4633,21 @@ country_event = {
 	}
 
 
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 0.25
+			has_country_flag = party13_banned
+		}
+		modifier = {
+			factor = 2
+			has_active_mission = bankruptcy_incoming_collapse
+		}
+		modifier = {
+			factor = 0.25
+			check_variable = { party_pop_array^12 < 0.01 }
+		}
+	}
 	option = {
 		name = bankruptcy.212.a	#Do nothing
 		log = "[GetDateText]: [This.GetName]: bankruptcy.212.a executed"
@@ -4066,6 +4683,21 @@ country_event = {
 	}
 
 
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 0.25
+			has_country_flag = party14_banned
+		}
+		modifier = {
+			factor = 2
+			has_active_mission = bankruptcy_incoming_collapse
+		}
+		modifier = {
+			factor = 0.25
+			check_variable = { party_pop_array^13 < 0.01 }
+		}
+	}
 	option = {
 		name = bankruptcy.213.a	#Do nothing
 		log = "[GetDateText]: [This.GetName]: bankruptcy.213.a executed"
@@ -4101,6 +4733,21 @@ country_event = {
 	}
 
 
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 0.25
+			has_country_flag = party15_banned
+		}
+		modifier = {
+			factor = 2
+			has_active_mission = bankruptcy_incoming_collapse
+		}
+		modifier = {
+			factor = 0.25
+			check_variable = { party_pop_array^14 < 0.01 }
+		}
+	}
 	option = {
 		name = bankruptcy.214.a	#Do nothing
 		log = "[GetDateText]: [This.GetName]: bankruptcy.214.a executed"
@@ -4136,6 +4783,21 @@ country_event = {
 	}
 
 
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 0.25
+			has_country_flag = party16_banned
+		}
+		modifier = {
+			factor = 2
+			has_active_mission = bankruptcy_incoming_collapse
+		}
+		modifier = {
+			factor = 0.25
+			check_variable = { party_pop_array^15 < 0.01 }
+		}
+	}
 	option = {
 		name = bankruptcy.215.a	#Do nothing
 		log = "[GetDateText]: [This.GetName]: bankruptcy.215.a executed"
@@ -4171,6 +4833,21 @@ country_event = {
 	}
 
 
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 0.25
+			has_country_flag = party17_banned
+		}
+		modifier = {
+			factor = 2
+			has_active_mission = bankruptcy_incoming_collapse
+		}
+		modifier = {
+			factor = 0.25
+			check_variable = { party_pop_array^16 < 0.01 }
+		}
+	}
 	option = {
 		name = bankruptcy.216.a	#Do nothing
 		log = "[GetDateText]: [This.GetName]: bankruptcy.216.a executed"
@@ -4206,6 +4883,21 @@ country_event = {
 	}
 
 
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 0.25
+			has_country_flag = party18_banned
+		}
+		modifier = {
+			factor = 2
+			has_active_mission = bankruptcy_incoming_collapse
+		}
+		modifier = {
+			factor = 0.25
+			check_variable = { party_pop_array^17 < 0.01 }
+		}
+	}
 	option = {
 		name = bankruptcy.217.a	#Do nothing
 		log = "[GetDateText]: [This.GetName]: bankruptcy.217.a executed"
@@ -4241,6 +4933,21 @@ country_event = {
 	}
 
 
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 0.25
+			has_country_flag = party19_banned
+		}
+		modifier = {
+			factor = 2
+			has_active_mission = bankruptcy_incoming_collapse
+		}
+		modifier = {
+			factor = 0.25
+			check_variable = { party_pop_array^18 < 0.01 }
+		}
+	}
 	option = {
 		name = bankruptcy.218.a	#Do nothing
 		log = "[GetDateText]: [This.GetName]: bankruptcy.218.a executed"
@@ -4276,6 +4983,21 @@ country_event = {
 	}
 
 
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 0.25
+			has_country_flag = party20_banned
+		}
+		modifier = {
+			factor = 2
+			has_active_mission = bankruptcy_incoming_collapse
+		}
+		modifier = {
+			factor = 0.25
+			check_variable = { party_pop_array^19 < 0.01 }
+		}
+	}
 	option = {
 		name = bankruptcy.219.a	#Do nothing
 		log = "[GetDateText]: [This.GetName]: bankruptcy.219.a executed"
@@ -4311,6 +5033,21 @@ country_event = {
 	}
 
 
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 0.25
+			has_country_flag = party21_banned
+		}
+		modifier = {
+			factor = 2
+			has_active_mission = bankruptcy_incoming_collapse
+		}
+		modifier = {
+			factor = 0.25
+			check_variable = { party_pop_array^20 < 0.01 }
+		}
+	}
 	option = {
 		name = bankruptcy.220.a	#Do nothing
 		log = "[GetDateText]: [This.GetName]: bankruptcy.220.a executed"
@@ -4346,6 +5083,21 @@ country_event = {
 	}
 
 
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 0.25
+			has_country_flag = party22_banned
+		}
+		modifier = {
+			factor = 2
+			has_active_mission = bankruptcy_incoming_collapse
+		}
+		modifier = {
+			factor = 0.25
+			check_variable = { party_pop_array^21 < 0.01 }
+		}
+	}
 	option = {
 		name = bankruptcy.221.a	#Do nothing
 		log = "[GetDateText]: [This.GetName]: bankruptcy.221.a executed"
@@ -4382,6 +5134,21 @@ country_event = {
 	}
 
 
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 0.25
+			has_country_flag = party23_banned
+		}
+		modifier = {
+			factor = 2
+			has_active_mission = bankruptcy_incoming_collapse
+		}
+		modifier = {
+			factor = 0.25
+			check_variable = { party_pop_array^22 < 0.01 }
+		}
+	}
 	option = {
 		name = bankruptcy.222.a	#Do nothing
 		log = "[GetDateText]: [This.GetName]: bankruptcy.222.a executed"
@@ -4418,6 +5185,21 @@ country_event = {
 	}
 
 
+
+	mean_time_to_happen = {
+		modifier = {
+			factor = 0.25
+			has_country_flag = party24_banned
+		}
+		modifier = {
+			factor = 2
+			has_active_mission = bankruptcy_incoming_collapse
+		}
+		modifier = {
+			factor = 0.25
+			check_variable = { party_pop_array^23 < 0.01 }
+		}
+	}
 	option = {
 		name = bankruptcy.223.a	#Do nothing
 		log = "[GetDateText]: [This.GetName]: bankruptcy.223.a executed"
