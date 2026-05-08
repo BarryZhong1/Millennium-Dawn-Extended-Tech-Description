@@ -976,6 +976,7 @@ country_event = {
 				}
 				save_global_event_target_as = hideout_of_bin_laden
 				set_country_flag = hideout_of_bin_laden
+				set_global_flag = bin_laden_hideout_known
 			}
 		}
 		#If no Salafist countries, go to a random Sunni country, with priority on Pakistan
@@ -986,6 +987,7 @@ country_event = {
 					PAK = {
 						save_global_event_target_as = hideout_of_bin_laden
 						set_country_flag = hideout_of_bin_laden
+						set_global_flag = bin_laden_hideout_known
 					}
 				}
 				30 = {
@@ -998,6 +1000,7 @@ country_event = {
 						}
 						save_global_event_target_as = hideout_of_bin_laden
 						set_country_flag = hideout_of_bin_laden
+						set_global_flag = bin_laden_hideout_known
 					}
 				}
 			}
@@ -1013,6 +1016,7 @@ country_event = {
 				}
 				save_global_event_target_as = hideout_of_bin_laden
 				set_country_flag = hideout_of_bin_laden
+				set_global_flag = bin_laden_hideout_known
 			}
 		}
 	}
@@ -1072,10 +1076,7 @@ country_event = {
 	}
 	trigger = {
 		NOT = { has_country_flag = USA_bin_laden_found_by_security_services }
-		any_country = {
-			exists = yes
-			has_country_flag = hideout_of_bin_laden
-		}
+		has_global_flag = bin_laden_hideout_known
 	}
 
 
@@ -1498,6 +1499,7 @@ news_event = {
 			limit = { has_country_flag = hideout_of_bin_laden }
 			clear_global_event_target = hideout_of_bin_laden
 			clr_country_flag = hideout_of_bin_laden
+			clr_global_flag = bin_laden_hideout_known
 			add_popularity = { ideology = democratic popularity = -0.10 }
 		}
 	}

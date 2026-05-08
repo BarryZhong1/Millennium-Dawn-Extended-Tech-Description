@@ -1809,7 +1809,7 @@ country_event = {
 	}
 	option = {
 		name = econvent.11.a
-		log = "[GetDateText]: [Root.GetName]: event econvent.10.a"
+		log = "[GetDateText]: [Root.GetName]: econvent.11.a executed"
 
 		set_temp_variable = { treasury_change = gdp_total }
 		multiply_temp_variable = { treasury_change = -0.05 }
@@ -2252,6 +2252,57 @@ country_event = {
 		}
 	}
 
+	mean_time_to_happen = {
+		modifier = {
+			factor = 3
+			OR = {
+				AND = {
+					has_idea = international_bankers
+					check_variable = { international_bankers_opinion > 75 }
+				}
+				AND = {
+					has_idea = wall_street
+					check_variable = { wall_street_opinion > 75 }
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			check_variable = { last_quarter_gdp_growth_rate > 0.10 }
+		}
+		modifier = {
+			factor = 1.75
+			check_variable = { last_quarter_gdp_growth_rate > 0.05 }
+		}
+		modifier = {
+			factor = 1.5
+			check_variable = { last_quarter_gdp_growth_rate > 0.02 }
+		}
+		modifier = {
+			factor = 2.5
+			has_idea = economic_boom
+		}
+		modifier = {
+			factor = 2.
+			has_idea = fast_growth
+		}
+		modifier = {
+			factor = 1.75
+			has_idea = stable_growth
+		}
+		modifier = {
+			factor = 1.25
+			has_idea = stagnation
+		}
+		modifier = {
+			factor = 0.75
+			has_idea = recession
+		}
+		modifier = {
+			factor = 0.25
+			has_idea = depression
+		}
+	}
 
 	option = {
 		name = econvent.15.a
