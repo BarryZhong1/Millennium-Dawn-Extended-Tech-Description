@@ -63,7 +63,6 @@ country_event = {
 	option = {
 		name = bulg.3.a
 		log = "[GetDateText]: [This.GetName]: bulg.3.a executed"
-		set_country_flag = BUL_russia_agree_flag
 		set_temp_variable = { percent_change = 2 }
 		set_temp_variable = { tag_index = SOV }
 		set_temp_variable = { influence_target = BUL }
@@ -145,7 +144,7 @@ country_event = {
 		}
 		hidden_effect = {
 			BUL = {
-				country_event = { id = bul_ACDI.2 }
+				country_event = bul_ACDI.2
 			}
 		}
 	}
@@ -163,7 +162,7 @@ country_event = {
 		custom_effect_tooltip = bul_ACDI_Decline_tt
 		hidden_effect = {
 			BUL = {
-				country_event = { id = bul_ACDI.3 }
+				country_event = bul_ACDI.3
 			}
 		}
 	}
@@ -184,10 +183,10 @@ country_event = {
 		}
 		if = {
 			limit = {
-				has_equipment = { Inf_equipment > 4999 }
+				has_equipment = { infantry_weapons_type > 4999 }
 			}
 			send_equipment = {
-				type = Inf_equipment
+				type = infantry_weapons_type
 				amount = 5000
 				target = FROM
 			}
@@ -205,7 +204,7 @@ country_event = {
 		if = {
 			limit = {
 				is_major = yes
-				has_equipment = { Inf_equipment < 4999 }
+				has_equipment = { infantry_weapons_type < 4999 }
 				has_equipment = { MBT_Equipment < 499 }
 			}
 			ROOT = {
@@ -217,7 +216,7 @@ country_event = {
 		}
 		else_if = {
 			limit = {
-				has_equipment = { Inf_equipment < 4999 }
+				has_equipment = { infantry_weapons_type < 4999 }
 				has_equipment = { MBT_Equipment < 499 }
 			}
 			ROOT = {
@@ -229,7 +228,7 @@ country_event = {
 		}
 		hidden_effect = {
 			ARM = {
-				country_event = { id = bul_ACDI.4 }
+				country_event = bul_ACDI.4
 			}
 		}
 	}
@@ -493,22 +492,15 @@ country_event = {
 		name = bulg.12.b
 		log = "[GetDateText]: [This.GetName]: bulg.12.b executed"
 		hidden_effect = {
-			clear_array = ruling_party
-			clear_array = gov_coalition_array
-			add_to_array = { ruling_party = 21 }
-			add_to_array = { gov_coalition_array = 2 }
-			custom_effect_tooltip = ARM_com1_TT
+			set_temp_variable = { rul_party_temp = 21 }
+			set_temp_variable = { col_one = 2 }
+			change_ruling_party_effect = yes
 			set_temp_variable = { current_cons_popularity = party_pop_array^21 }
 			multiply_temp_variable = { current_cons_popularity = 0.5 }
 			# Remove most of support, retrack it to emerg communist party
 			subtract_from_variable = { party_pop_array^6 = current_cons_popularity }
 			add_to_variable = { party_pop_array^21 = current_cons_popularity }
 			recalculate_party = yes
-			update_government_coalition_strength = yes
-			update_party_name = yes
-			set_coalition_drift = yes
-			set_ruling_leader = yes
-			set_leader = yes
 		}
 		create_country_leader = {
 			name = "Krasimir Karakachanov"
@@ -525,22 +517,15 @@ country_event = {
 		name = bulg.12.c
 		log = "[GetDateText]: [This.GetName]: bulg.12.c executed"
 		hidden_effect = {
-			clear_array = ruling_party
-			clear_array = gov_coalition_array
-			add_to_array = { ruling_party = 20 }
-			add_to_array = { gov_coalition_array = 2 }
-			custom_effect_tooltip = ARM_com1_TT
+			set_temp_variable = { rul_party_temp = 20 }
+			set_temp_variable = { col_one = 2 }
+			change_ruling_party_effect = yes
 			set_temp_variable = { current_cons_popularity = party_pop_array^20 }
 			multiply_temp_variable = { current_cons_popularity = 0.5 }
 			# Remove most of support, retrack it to emerg communist party
 			subtract_from_variable = { party_pop_array^6 = current_cons_popularity }
 			add_to_variable = { party_pop_array^20 = current_cons_popularity }
 			recalculate_party = yes
-			update_government_coalition_strength = yes
-			update_party_name = yes
-			set_coalition_drift = yes
-			set_ruling_leader = yes
-			set_leader = yes
 		}
 	}
 }
@@ -684,7 +669,7 @@ country_event = {
 		name = bul_mech.16.a
 		log = "[GetDateText]: [This.GetName]: bul_mech.16.a executed"
 		trigger = {
-			tag = FYR
+			original_tag = FYR
 		}
 		set_temp_variable = {
 			percent_change = 2
@@ -703,7 +688,7 @@ country_event = {
 		name = bul_mech.16.b
 		log = "[GetDateText]: [This.GetName]: bul_mech.16.b executed"
 		trigger = {
-			tag = FYR
+			original_tag = FYR
 		}
 		add_opinion_modifier = {
 			target = BUL
@@ -718,7 +703,7 @@ country_event = {
 		name = bul_mech.16.c
 		log = "[GetDateText]: [This.GetName]: bul_mech.16.c executed"
 		trigger = {
-			tag = FYR
+			original_tag = FYR
 		}
 		BUL = {
 			country_event = bul_mech.12
@@ -728,7 +713,7 @@ country_event = {
 		name = bul_mech.16.a1
 		log = "[GetDateText]: [This.GetName]: bul_mech.16.a1 executed"
 		trigger = {
-			tag = BUL
+			original_tag = BUL
 		}
 		set_temp_variable = { percent_change = 2 }
 		set_temp_variable = { tag_index = BUL }
@@ -747,7 +732,7 @@ country_event = {
 		name = bul_mech.16.b2
 		log = "[GetDateText]: [This.GetName]: bul_mech.16.b2 executed"
 		trigger = {
-			tag = BUL
+			original_tag = BUL
 		}
 		add_opinion_modifier = {
 			target = FYR
@@ -1103,7 +1088,6 @@ country_event = {
 	}
 }
 
-
 #DIPLOMACY
 #Building Nuclear Plant
 country_event = {
@@ -1320,7 +1304,6 @@ country_event = {
 	}
 }
 
-
 #Army Exercises
 country_event = {
 	id = bulg.27
@@ -1386,10 +1369,10 @@ country_event = {
 		set_temp_variable = { tag_index = SOV }
 		set_temp_variable = { influence_target = BUL }
 		change_influence_percentage = yes
-		swap_ideas = {
-			remove_idea = BUL_army_force
-			add_idea = BUL_army_force1
-		}
+		custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = BUL_army_modifier }
+		add_to_variable = { BUL_army_army_attack_factor = 0.02 tooltip = army_attack_factor_tt }
+		add_to_variable = { BUL_army_army_defence_factor = 0.02 tooltip = army_defence_factor_tt }
+		add_to_variable = { BUL_army_army_org_factor = 0.02 tooltip = army_org_factor_tt }
 		add_opinion_modifier = {
 			modifier = recent_actions_positive
 			target = SOV
@@ -1421,7 +1404,6 @@ country_event = {
 		}
 	}
 }
-
 
 #Military Objects
 country_event = {
@@ -1520,4 +1502,3 @@ country_event = {
 		}
 	}
 }
-

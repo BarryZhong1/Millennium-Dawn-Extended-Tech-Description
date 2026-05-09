@@ -4,12 +4,10 @@ focus_tree = {
 		factor = 0
 		modifier = {
 			add = 10
-			AND = {
-				OR = {
-					original_tag = SYR
-					original_tag = FSA
-					original_tag = NUS
-				}
+			OR = {
+				original_tag = SYR
+				original_tag = FSA
+				original_tag = NUS
 			}
 		}
 	}
@@ -30,7 +28,7 @@ focus_tree = {
 		y = 0
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -65,7 +63,7 @@ focus_tree = {
 		y = 1
 
 		ai_will_do = {
-			factor = 1.9
+			base = 1.9
 			modifier = {
 				factor = 1.1
 				OR = {
@@ -91,13 +89,12 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SYR_bushra_al_assad"
 			hidden_effect = { kill_country_leader = yes }
-			clear_array = ruling_party
-			clear_array = gov_coalition_array
-			add_to_array = { ruling_party = 15 }
-			add_to_array = { gov_coalition_array = 7 }
-			add_to_array = { gov_coalition_array = 13 }
-			add_to_array = { gov_coalition_array = 18 }
-			add_to_array = { gov_coalition_array = 19 }
+			set_temp_variable = { rul_party_temp = 15 }
+			set_temp_variable = { col_one = 7 }
+			set_temp_variable = { col_two = 13 }
+			set_temp_variable = { col_three = 18 }
+			set_temp_variable = { col_four = 19 }
+			change_ruling_party_effect = yes
 			create_country_leader = {
 				name = "Bushra al-Assad"
 				picture = "Bushra_Al-Assad.dds"
@@ -127,7 +124,6 @@ focus_tree = {
 				ruling_party = neutrality
 			}
 			recalculate_party = yes
-			set_country_flag = Syria_successor_chosen
 		}
 
 	}
@@ -143,7 +139,7 @@ focus_tree = {
 		relative_position_id = SYR_bushra_al_assad
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -171,7 +167,7 @@ focus_tree = {
 		relative_position_id = SYR_bushra_al_assad
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -230,7 +226,7 @@ focus_tree = {
 		relative_position_id = SYR_bushra_al_assad
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -260,7 +256,7 @@ focus_tree = {
 		relative_position_id = SYR_bushra_al_assad
 
 		ai_will_do = {
-			factor = 0.95
+			base = 0.95
 		}
 
 		available = {
@@ -283,7 +279,7 @@ focus_tree = {
 			random_country = {
 				limit = {
 					OR = {
-						has_idea = superpower
+						has_idea = super_power
 						has_idea = great_power
 						has_idea = large_power
 						has_idea = regional_power
@@ -312,7 +308,7 @@ focus_tree = {
 		relative_position_id = SYR_bushra_al_assad
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -358,7 +354,7 @@ focus_tree = {
 		relative_position_id = SYR_bushra_al_assad
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -388,7 +384,7 @@ focus_tree = {
 		relative_position_id = SYR_bushra_al_assad
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -418,7 +414,7 @@ focus_tree = {
 		y = 1
 
 		ai_will_do = {
-			factor = 2
+			base = 2
 			modifier = {
 				factor = 1.05
 				OR = {
@@ -440,13 +436,12 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SYR_bashar_al_assad"
 			hidden_effect = { kill_country_leader = yes }
-			clear_array = ruling_party
-			clear_array = gov_coalition_array
-			add_to_array = { ruling_party = 7 }
-			add_to_array = { gov_coalition_array = 4 }
-			add_to_array = { gov_coalition_array = 13 }
-			add_to_array = { gov_coalition_array = 18 }
-			add_to_array = { gov_coalition_array = 20 }
+			set_temp_variable = { rul_party_temp = 7 }
+			set_temp_variable = { col_one = 4 }
+			set_temp_variable = { col_two = 13 }
+			set_temp_variable = { col_three = 18 }
+			set_temp_variable = { col_four = 20 }
+			change_ruling_party_effect = yes
 			add_to_array = { gov_coalition_array = 21 }
 			create_country_leader = {
 				name = "Bashar al-Assad"
@@ -482,7 +477,6 @@ focus_tree = {
 				ruling_party = communism
 			}
 			recalculate_party = yes
-			set_country_flag = Syria_successor_chosen
 			set_variable = { Autocracy_leader = 1 }
 			custom_effect_tooltip = available_military_high_command
 			show_ideas_tooltip = maher_assad
@@ -511,7 +505,7 @@ focus_tree = {
 		y = 2
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -543,20 +537,18 @@ focus_tree = {
 		relative_position_id = SYR_constitutional_amendment
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
 			has_country_leader = { name = "Bashar al-Assad" }
-			AND = {
-				OR = {
-					country_exists = PER
-					NOT = { has_war_with = PER }
-				}
-				OR = {
-					country_exists = HEZ
-					NOT = { has_war_with = HEZ }
-				}
+			OR = {
+				country_exists = PER
+				NOT = { has_war_with = PER }
+			}
+			OR = {
+				country_exists = HEZ
+				NOT = { has_war_with = HEZ }
 			}
 		}
 
@@ -670,7 +662,7 @@ focus_tree = {
 		relative_position_id = SYR_constitutional_amendment
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -696,7 +688,7 @@ focus_tree = {
 		relative_position_id = SYR_constitutional_amendment
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -725,7 +717,7 @@ focus_tree = {
 		relative_position_id = SYR_constitutional_amendment
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -764,13 +756,12 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SYR_maher_al_assad"
 			hidden_effect = { kill_country_leader = yes }
-			clear_array = ruling_party
-			clear_array = gov_coalition_array
-			add_to_array = { ruling_party = 22 }
-			add_to_array = { gov_coalition_array = 7 }
-			add_to_array = { gov_coalition_array = 13 }
-			add_to_array = { gov_coalition_array = 21 }
-			add_to_array = { gov_coalition_array = 20 }
+			set_temp_variable = { rul_party_temp = 22 }
+			set_temp_variable = { col_one = 7 }
+			set_temp_variable = { col_two = 13 }
+			set_temp_variable = { col_three = 21 }
+			set_temp_variable = { col_four = 20 }
+			change_ruling_party_effect = yes
 			create_country_leader = {
 				name = "Maher al-Assad"
 				desc = ""
@@ -803,11 +794,10 @@ focus_tree = {
 				ruling_party = nationalist
 			}
 			recalculate_party = yes
-			set_country_flag = Syria_successor_chosen
 		}
 
 		ai_will_do = {
-			factor = 1.9
+			base = 1.9
 			modifier = {
 				factor = 1.1
 				OR = {
@@ -864,7 +854,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -892,7 +882,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -927,7 +917,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -951,7 +941,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -978,7 +968,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
@@ -1004,14 +994,13 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SYR_rifaat_al_assad"
 			hidden_effect = { kill_country_leader = yes }
-			clear_array = ruling_party
-			clear_array = gov_coalition_array
 			if = {
 				limit = {
 					NOT = { has_country_flag = Rifaat_no_international_support }
 					NOT = { has_country_flag = Rifaat_international_support }
 				}
-				add_to_array = { ruling_party = 15 }
+				set_temp_variable = { rul_party_temp = 15 }
+				change_ruling_party_effect = yes
 				add_popularity = { ideology = neutrality popularity = 0.30 }
 				add_to_variable = { var = party_pop_array^15 value = 0.30 }
 				create_country_leader = {
@@ -1025,18 +1014,13 @@ focus_tree = {
 						pro_saudi
 					}
 				}
-				set_country_flag = no_leader_change
-				set_politics = {
-					ruling_party = neutrality
-					elections_allowed = yes
-				}
-				clr_country_flag = no_leader_change
 			}
 			if = {
 				limit = {
 					has_country_flag = Rifaat_western
 				}
-				add_to_array = { ruling_party = 0 }
+				set_temp_variable = { rul_party_temp = 0 }
+				change_ruling_party_effect = yes
 				add_popularity = { ideology = democratic popularity = 0.30 }
 				add_to_variable = { var = party_pop_array^0 value = 0.30 }
 				create_country_leader = {
@@ -1050,18 +1034,13 @@ focus_tree = {
 						pro_saudi
 					}
 				}
-				set_country_flag = no_leader_change
-				set_politics = {
-					ruling_party = democratic
-					elections_allowed = yes
-				}
-				clr_country_flag = no_leader_change
 			}
 			if = {
 				limit = {
 					has_country_flag = Rifaat_emerging
 				}
-				add_to_array = { ruling_party = 6 }
+				set_temp_variable = { rul_party_temp = 6 }
+				change_ruling_party_effect = yes
 				add_popularity = { ideology = communism popularity = 0.30 }
 				add_to_variable = { var = party_pop_array^6 value = 0.30 }
 				create_country_leader = {
@@ -1075,18 +1054,13 @@ focus_tree = {
 						pro_saudi
 					}
 				}
-				set_country_flag = no_leader_change
-				set_politics = {
-					ruling_party = communism
-					elections_allowed = yes
-				}
-				clr_country_flag = no_leader_change
 			}
 			if = {
 				limit = {
 					has_country_flag = Rifaat_nonaligned
 				}
-				add_to_array = { ruling_party = 15 }
+				set_temp_variable = { rul_party_temp = 15 }
+				change_ruling_party_effect = yes
 				add_popularity = { ideology = neutrality popularity = 0.30 }
 				add_to_variable = { var = party_pop_array^15 value = 0.30 }
 				create_country_leader = {
@@ -1100,18 +1074,13 @@ focus_tree = {
 						pro_saudi
 					}
 				}
-				set_country_flag = no_leader_change
-				set_politics = {
-					ruling_party = neutrality
-					elections_allowed = yes
-				}
-				clr_country_flag = no_leader_change
 			}
 			if = {
 				limit = {
 					has_country_flag = Rifaat_salafist
 				}
-				add_to_array = { ruling_party = 10 }
+				set_temp_variable = { rul_party_temp = 10 }
+				change_ruling_party_effect = yes
 				add_popularity = { ideology = fascism popularity = 0.30 }
 				add_to_variable = { var = party_pop_array^10 value = 0.30 }
 				create_country_leader = {
@@ -1125,18 +1094,13 @@ focus_tree = {
 						pro_saudi
 					}
 				}
-				set_country_flag = no_leader_change
-				set_politics = {
-					ruling_party = fascism
-					elections_allowed = yes
-				}
-				clr_country_flag = no_leader_change
 			}
 			if = {
 				limit = {
 					has_country_flag = Rifaat_nationalist
 				}
-				add_to_array = { ruling_party = 21 }
+				set_temp_variable = { rul_party_temp = 21 }
+				change_ruling_party_effect = yes
 				add_popularity = { ideology = nationalist popularity = 0.30 }
 				add_to_variable = { var = party_pop_array^21 value = 0.30 }
 				create_country_leader = {
@@ -1150,18 +1114,12 @@ focus_tree = {
 						pro_saudi
 					}
 				}
-				set_country_flag = no_leader_change
-				set_politics = {
-					ruling_party = nationalist
-					elections_allowed = yes
-				}
-				clr_country_flag = no_leader_change
 			}
 			recalculate_party = yes
 		}
 
 		ai_will_do = {
-			factor = 0.95
+			base = 0.95
 		}
 	}
 
@@ -1186,7 +1144,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -1240,7 +1198,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	focus = {
@@ -1252,7 +1210,6 @@ focus_tree = {
 		x = 1
 		y = 1
 		relative_position_id = SYR_flowers_of_damascus_spring
-
 
 		search_filters = { FOCUS_FILTER_POLITICAL }
 		completion_reward = {
@@ -1332,7 +1289,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	focus = {
@@ -1345,7 +1302,6 @@ focus_tree = {
 		x = 1
 		y = 2
 		relative_position_id = SYR_flowers_of_damascus_spring
-
 
 		search_filters = { FOCUS_FILTER_POLITICAL }
 		completion_reward = {
@@ -1409,7 +1365,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -1426,7 +1382,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SYR_free_elections"
-			country_event = { id = SyriaFocus.89 }
+			country_event = SyriaFocus.89
 			hidden_effect = {
 				set_country_flag = no_leader_change
 				set_temp_variable = { election_year = global.year }
@@ -1448,7 +1404,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -1461,7 +1417,7 @@ focus_tree = {
 		relative_position_id = SYR_flowers_of_damascus_spring
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -1483,7 +1439,7 @@ focus_tree = {
 		relative_position_id = SYR_flowers_of_damascus_spring
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -1508,7 +1464,7 @@ focus_tree = {
 		relative_position_id = SYR_islamist_opposition_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -1545,7 +1501,7 @@ focus_tree = {
 		relative_position_id = SYR_islamist_opposition_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -1583,7 +1539,7 @@ focus_tree = {
 		relative_position_id = SYR_islamist_opposition_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -1601,8 +1557,6 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus SYR_turkish_inspired_islamism"
 			add_popularity = { ideology = democratic popularity = 0.10 }
 			add_popularity = { ideology = neutrality popularity = 0.10 }
-			set_temp_variable = { rad_change = -15 }
-			modify_radicalization_effect = yes
 			set_temp_variable = { temp_opinion = 5 }
 			change_small_medium_business_owners_opinion = yes
 		}
@@ -1624,7 +1578,7 @@ focus_tree = {
 		relative_position_id = SYR_islamist_opposition_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -1658,7 +1612,7 @@ focus_tree = {
 		relative_position_id = SYR_islamist_opposition_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -1697,7 +1651,7 @@ focus_tree = {
 		relative_position_id = SYR_islamist_opposition_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -1717,9 +1671,6 @@ focus_tree = {
 			modify_social_conservatism_government = yes
 			add_popularity = { ideology = neutrality popularity = -0.10 }
 			add_popularity = { ideology = fascism popularity = 0.10 }
-			set_temp_variable = { rad_change = 30 }
-			modify_radicalization_effect = yes
-			clamp_radicalization = yes
 		}
 
 	}
@@ -1738,7 +1689,7 @@ focus_tree = {
 		relative_position_id = SYR_islamist_opposition_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -1756,9 +1707,6 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus SYR_religious_values"
 			set_temp_variable = { temp_modify_social_con_government = 5 }
 			modify_social_conservatism_government = yes
-			set_temp_variable = { rad_change = -30 }
-			modify_radicalization_effect = yes
-			clamp_radicalization = yes
 			custom_effect_tooltip = TT_SYR_ALA_DISCONTENT_MODIFIER
 			custom_effect_tooltip = TT_SYR_DRU_DISCONTENT_MODIFIER
 			set_temp_variable = { temp_opinion = 10 }
@@ -1779,7 +1727,7 @@ focus_tree = {
 		relative_position_id = SYR_islamist_opposition_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -1812,7 +1760,7 @@ focus_tree = {
 		relative_position_id = SYR_islamist_opposition_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -1862,7 +1810,7 @@ focus_tree = {
 		relative_position_id = SYR_islamist_opposition_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -1924,7 +1872,7 @@ focus_tree = {
 		relative_position_id = SYR_islamist_opposition_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -1971,7 +1919,7 @@ focus_tree = {
 		relative_position_id = SYR_islamist_opposition_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -2008,7 +1956,7 @@ focus_tree = {
 		relative_position_id = SYR_flowers_of_damascus_spring
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -2033,7 +1981,7 @@ focus_tree = {
 		relative_position_id = SYR_NPF_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -2065,7 +2013,7 @@ focus_tree = {
 		relative_position_id = SYR_NPF_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -2101,7 +2049,7 @@ focus_tree = {
 		relative_position_id = SYR_NPF_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -2141,7 +2089,7 @@ focus_tree = {
 		relative_position_id = SYR_NPF_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -2185,7 +2133,7 @@ focus_tree = {
 		relative_position_id = SYR_NPF_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -2217,7 +2165,7 @@ focus_tree = {
 		relative_position_id = SYR_NPF_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -2248,7 +2196,7 @@ focus_tree = {
 		relative_position_id = SYR_NPF_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -2287,7 +2235,7 @@ focus_tree = {
 		relative_position_id = SYR_NPF_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -2322,7 +2270,7 @@ focus_tree = {
 		relative_position_id = SYR_NPF_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -2359,7 +2307,7 @@ focus_tree = {
 		relative_position_id = SYR_NPF_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -2391,7 +2339,7 @@ focus_tree = {
 		relative_position_id = SYR_NPF_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -2426,7 +2374,7 @@ focus_tree = {
 		relative_position_id = SYR_NPF_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -2464,14 +2412,12 @@ focus_tree = {
 		relative_position_id = SYR_NPF_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		available = {
-			OR = {
-				has_government = nationalist
-			}
+			has_government = nationalist
 		}
 
 		completion_reward = {
@@ -2492,7 +2438,7 @@ focus_tree = {
 		relative_position_id = SYR_NPF_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -2506,8 +2452,6 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SYR_national_security_act"
 			add_ideas = subsidized_counter_terror_operations
-			custom_effect_tooltip = terror_threat_decrease_medium_tt
-			subtract_from_variable = { threat_level = 5 }
 		}
 	}
 	focus = {
@@ -2522,7 +2466,7 @@ focus_tree = {
 		relative_position_id = SYR_NPF_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -2555,7 +2499,7 @@ focus_tree = {
 		relative_position_id = SYR_NPF_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -2589,7 +2533,7 @@ focus_tree = {
 		relative_position_id = SYR_NPF_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -2617,7 +2561,7 @@ focus_tree = {
 		relative_position_id = SYR_NPF_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -2660,21 +2604,19 @@ focus_tree = {
 		relative_position_id = SYR_NPF_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		available = {
-			AND = {
-				owns_state = 995
-				controls_state = 995
-				owns_state = 191
-				controls_state = 191
-				owns_state = 192
-				controls_state = 192
-				owns_state = 193
-				controls_state = 193
-			}
+			owns_state = 995
+			controls_state = 995
+			owns_state = 191
+			controls_state = 191
+			owns_state = 192
+			controls_state = 192
+			owns_state = 193
+			controls_state = 193
 			OR = {
 				has_government = communism
 				has_government = nationalist
@@ -2733,7 +2675,7 @@ focus_tree = {
 		relative_position_id = SYR_NPF_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -2788,7 +2730,7 @@ focus_tree = {
 		relative_position_id = SYR_NPF_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -2816,7 +2758,7 @@ focus_tree = {
 		relative_position_id = SYR_NPF_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -2830,8 +2772,6 @@ focus_tree = {
 			modify_social_conservatism_government = yes
 			set_temp_variable = { temp_opinion = 5 }
 			change_labour_unions_opinion = yes
-			set_temp_variable = { rad_change = -10 }
-			modify_radicalization_effect = yes
 		}
 
 	}
@@ -2848,7 +2788,7 @@ focus_tree = {
 		relative_position_id = SYR_secular_opposition_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -2875,7 +2815,7 @@ focus_tree = {
 		relative_position_id = SYR_secular_opposition_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -2904,7 +2844,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SYR_the_coalition"
-			country_event = { id = SyriaFocus.91 }
+			country_event = SyriaFocus.91
 			custom_effect_tooltip = SYR_GOVERNMENT_EXPANSION_FOCUS_EFFECT
 		}
 
@@ -2921,7 +2861,7 @@ focus_tree = {
 		relative_position_id = SYR_secular_opposition_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -2968,7 +2908,7 @@ focus_tree = {
 		relative_position_id = SYR_secular_opposition_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -3016,7 +2956,7 @@ focus_tree = {
 		relative_position_id = SYR_secular_opposition_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -3064,31 +3004,17 @@ focus_tree = {
 			}
 			set_temp_variable = { temp_opinion = 15 }
 			change_international_bankers_opinion = yes
-			random_country = {
+			every_other_country = {
 				limit = {
 					has_government = democratic
 					OR = {
-						has_idea = superpower
+						has_idea = super_power
 						has_idea = great_power
 						has_idea = large_power
 						has_idea = regional_power
 					}
 				}
-				set_temp_variable = { percent_change = 5 }
-				set_temp_variable = { tag_index = THIS.id }
-				set_temp_variable = { influence_target = ROOT.id }
-				change_influence_percentage = yes
-			}
-			random_country = {
-				limit = {
-					has_government = democratic
-					OR = {
-						has_idea = superpower
-						has_idea = great_power
-						has_idea = large_power
-						has_idea = regional_power
-					}
-				}
+				random_select_amount = 2
 				set_temp_variable = { percent_change = 5 }
 				set_temp_variable = { tag_index = THIS.id }
 				set_temp_variable = { influence_target = ROOT.id }
@@ -3109,7 +3035,7 @@ focus_tree = {
 		relative_position_id = SYR_secular_opposition_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -3154,7 +3080,7 @@ focus_tree = {
 		relative_position_id = SYR_secular_opposition_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -3200,7 +3126,7 @@ focus_tree = {
 		relative_position_id = SYR_secular_opposition_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -3250,7 +3176,7 @@ focus_tree = {
 		relative_position_id = SYR_secular_opposition_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -3302,7 +3228,7 @@ focus_tree = {
 		relative_position_id = SYR_secular_opposition_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -3342,7 +3268,7 @@ focus_tree = {
 		relative_position_id = SYR_secular_opposition_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -3436,7 +3362,7 @@ focus_tree = {
 		relative_position_id = SYR_secular_opposition_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -3491,7 +3417,7 @@ focus_tree = {
 		relative_position_id = SYR_secular_opposition_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -3538,7 +3464,7 @@ focus_tree = {
 		relative_position_id = SYR_secular_opposition_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -3590,7 +3516,7 @@ focus_tree = {
 		relative_position_id = SYR_secular_opposition_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -3657,7 +3583,7 @@ focus_tree = {
 		relative_position_id = SYR_secular_opposition_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -3686,7 +3612,7 @@ focus_tree = {
 		relative_position_id = SYR_secular_opposition_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -3747,7 +3673,7 @@ focus_tree = {
 		relative_position_id = SYR_secular_opposition_victory
 
 		ai_will_do = {
-			factor = 50
+			base = 50
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -3818,7 +3744,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 5
+			base = 5
 			modifier = {
 				factor = 2.5
 				check_variable = { interest_rate > 8 }
@@ -3842,7 +3768,7 @@ focus_tree = {
 		relative_position_id = SYR_affirm_presence_in_lebanon
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				add = 15
 				has_completed_focus = SYR_loan_negotiations
@@ -3896,7 +3822,7 @@ focus_tree = {
 		relative_position_id = SYR_affirm_presence_in_lebanon
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				add = 15
 				has_completed_focus = SYR_loan_negotiations
@@ -3959,7 +3885,7 @@ focus_tree = {
 		relative_position_id = SYR_affirm_presence_in_lebanon
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				add = 15
 				has_completed_focus = SYR_loan_negotiations
@@ -4006,7 +3932,7 @@ focus_tree = {
 		relative_position_id = SYR_affirm_presence_in_lebanon
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				add = 15
 				has_completed_focus = SYR_loan_negotiations
@@ -4049,7 +3975,7 @@ focus_tree = {
 		relative_position_id = SYR_affirm_presence_in_lebanon
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				add = 15
 				has_completed_focus = SYR_loan_negotiations
@@ -4093,7 +4019,7 @@ focus_tree = {
 		relative_position_id = SYR_affirm_presence_in_lebanon
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				add = 15
 				has_completed_focus = SYR_loan_negotiations
@@ -4141,7 +4067,7 @@ focus_tree = {
 		relative_position_id = SYR_affirm_presence_in_lebanon
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				add = 15
 				has_completed_focus = SYR_loan_negotiations
@@ -4207,7 +4133,7 @@ focus_tree = {
 		relative_position_id = SYR_affirm_presence_in_lebanon
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				add = 15
 				has_completed_focus = SYR_loan_negotiations
@@ -4273,7 +4199,7 @@ focus_tree = {
 		relative_position_id = SYR_affirm_presence_in_lebanon
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				add = 15
 				has_completed_focus = SYR_loan_negotiations
@@ -4353,7 +4279,7 @@ focus_tree = {
 		relative_position_id = SYR_affirm_presence_in_lebanon
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				add = 15
 				has_completed_focus = SYR_loan_negotiations
@@ -4416,7 +4342,7 @@ focus_tree = {
 		relative_position_id = SYR_affirm_presence_in_lebanon
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				add = 25
 				LEB = {
@@ -4483,7 +4409,7 @@ focus_tree = {
 		relative_position_id = SYR_affirm_presence_in_lebanon
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				add = 15
 				has_completed_focus = SYR_loan_negotiations
@@ -4564,7 +4490,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 2.5
+			base = 2.5
 			modifier = {
 				factor = 2.5
 				check_variable = { interest_rate > 6 }
@@ -4594,15 +4520,12 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
-		#available = {}
 		search_filters = { FOCUS_FILTER_STABILITY }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SYR_increase_agricultural_subsidies"
-			set_temp_variable = { rad_change = -5 }
-			modify_radicalization_effect = yes
 			swap_ideas = {
 				add_idea = syria_increased_agricultural_subsidies
 				remove_idea = syria_agricultural_subsidies
@@ -4632,12 +4555,9 @@ focus_tree = {
 		y = 1
 		relative_position_id = SYR_economic_improvements
 
-		#available = {}
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SYR_decrease_agricultural_subsidies"
-			set_temp_variable = { rad_change = 5 }
-			modify_radicalization_effect = yes
 			swap_ideas = {
 				add_idea = syria_decreased_agricultural_subsidies
 				remove_idea = syria_agricultural_subsidies
@@ -4651,7 +4571,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 2.5
+			base = 2.5
 			modifier = {
 				factor = 2.5
 				check_variable = { interest_rate > 6 }
@@ -4682,7 +4602,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		#available = {}
@@ -4724,7 +4644,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
@@ -4754,7 +4674,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		#available = {}
@@ -4807,7 +4727,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
@@ -4842,7 +4762,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	focus = {
@@ -4858,7 +4778,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 5
 				check_variable = { interest_rate > 8 }
@@ -4893,7 +4813,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 5
 				check_variable = { interest_rate > 8 }
@@ -4918,7 +4838,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 5
 				check_variable = { interest_rate > 8 }
@@ -4956,7 +4876,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 5
 				check_variable = { interest_rate > 8 }
@@ -5008,7 +4928,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 5
 				check_variable = { interest_rate > 8 }
@@ -5053,7 +4973,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 5
 				check_variable = { interest_rate > 8 }
@@ -5082,7 +5002,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 5
 				check_variable = { interest_rate > 8 }
@@ -5114,7 +5034,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 5
 				check_variable = { interest_rate > 8 }
@@ -5157,7 +5077,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 5
 				check_variable = { interest_rate > 8 }
@@ -5194,7 +5114,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 5
 				check_variable = { interest_rate > 8 }
@@ -5228,7 +5148,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 5
 				check_variable = { interest_rate > 8 }
@@ -5268,7 +5188,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 5
 				check_variable = { interest_rate > 8 }
@@ -5297,7 +5217,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 5
 				check_variable = { interest_rate > 8 }
@@ -5322,7 +5242,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 5
 				check_variable = { interest_rate > 8 }
@@ -5362,7 +5282,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 5
 				check_variable = { interest_rate > 8 }
@@ -5382,7 +5302,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 5
 				check_variable = { interest_rate > 8 }
@@ -5410,7 +5330,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 5
 				check_variable = { interest_rate > 8 }
@@ -5447,7 +5367,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 5
 				check_variable = { interest_rate > 8 }
@@ -5479,7 +5399,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 5
 				check_variable = { interest_rate > 8 }
@@ -5504,7 +5424,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 5
 				check_variable = { interest_rate > 8 }
@@ -5534,7 +5454,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 5
 				check_variable = { interest_rate > 8 }
@@ -5559,7 +5479,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 5
 				check_variable = { interest_rate > 8 }
@@ -5596,7 +5516,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 5
 				check_variable = { interest_rate > 8 }
@@ -5646,7 +5566,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 5
 				check_variable = { interest_rate > 8 }
@@ -5680,7 +5600,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 5
 				check_variable = { interest_rate > 8 }
@@ -5705,7 +5625,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 5
 				check_variable = { interest_rate > 8 }
@@ -5739,7 +5659,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 5
 				check_variable = { interest_rate > 8 }
@@ -5772,7 +5692,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 5
 				check_variable = { interest_rate > 8 }
@@ -5813,7 +5733,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 5
 				check_variable = { interest_rate > 8 }
@@ -5846,7 +5766,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 5
 				check_variable = { interest_rate > 8 }
@@ -5877,7 +5797,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 5
 				check_variable = { interest_rate > 8 }
@@ -5910,13 +5830,12 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
 			}
 		}
-
 
 		search_filters = { FOCUS_FILTER_INDUSTRY  FOCUS_FILTER_RESEARCH FOCUS_FILTER_POLITICAL }
 		completion_reward = {
@@ -5947,7 +5866,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 8
 				check_variable = { interest_rate > 8 }
@@ -5997,7 +5916,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		#available = {}
@@ -6026,7 +5945,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
@@ -6053,7 +5972,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		#available = {}
@@ -6093,7 +6012,7 @@ focus_tree = {
 		relative_position_id = SYR_economic_improvements
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		#available = {}
@@ -6128,7 +6047,6 @@ focus_tree = {
 		y = 4
 		relative_position_id = SYR_economic_improvements
 
-
 		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_POLITICAL }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SYR_japanese_anime"
@@ -6161,7 +6079,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
@@ -6184,7 +6102,6 @@ focus_tree = {
 		x = 3
 		y = 4
 		relative_position_id = SYR_economic_improvements
-
 
 		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_POLITICAL }
 		completion_reward = {
@@ -6218,7 +6135,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
@@ -6242,7 +6159,6 @@ focus_tree = {
 		y = 4
 		relative_position_id = SYR_economic_improvements
 
-
 		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_POLITICAL }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SYR_domestic_anime"
@@ -6261,7 +6177,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
@@ -6288,7 +6204,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -6330,7 +6246,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -6347,7 +6263,7 @@ focus_tree = {
 		relative_position_id = SYR_civil_war_victory
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -6454,7 +6370,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 1.1
 				SOV = { has_country_flag = Opinion_On_SSNP_Keep }
@@ -6488,7 +6404,6 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SYR_ssnp_traitors"
 			remove_ideas = syrian_social_nationalists
-			set_country_flag = SSNP_Purged
 			SOV = {
 				if = {
 					limit = { has_country_flag = Opinion_On_SSNP_Keep }
@@ -6548,7 +6463,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				add = 1.1
 				SOV = { has_country_flag = Opinion_On_SSNP_Purge }
@@ -6576,7 +6491,6 @@ focus_tree = {
 		x = -6
 		y = 4
 		relative_position_id = SYR_civil_war_victory
-
 
 		available = {
 			has_global_flag = Syria_Civil_War_Over
@@ -6647,7 +6561,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 1.1
 				SOV = { has_country_flag = Opinion_On_Palestinian_Groups_Keep }
@@ -6691,7 +6605,7 @@ focus_tree = {
 			hidden_effect = {
 				#1/4 of starting equipment of above units
 				add_equipment_to_stockpile = {
-					type = command_control_equipment
+					type = cnc_equipment_1
 					amount = 20
 					producer = SOV
 				}
@@ -6721,12 +6635,12 @@ focus_tree = {
 					producer = FRA
 				}
 				add_equipment_to_stockpile = {
-					type = infantry_weapons			#AKM
+					type = infantry_weapons_1			#AKM
 					amount = 1080
 					producer = SOV
 				}
 				add_equipment_to_stockpile = {
-					type = infantry_weapons1			#AK-74
+					type = infantry_weapons_2			#AK-74
 					amount = 360
 					producer = SOV
 				}
@@ -6760,7 +6674,7 @@ focus_tree = {
 				}
 
 				add_equipment_to_stockpile = {
-					type = util_vehicle_1			#Safir
+					type = util_vehicle_2			#Safir
 					amount = 360
 					producer = PER
 				}
@@ -6820,7 +6734,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 1.1
 				SOV = { has_country_flag = Opinion_On_Palestinian_Groups_Purge }
@@ -6852,7 +6766,7 @@ focus_tree = {
 		relative_position_id = SYR_civil_war_victory
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 1.1
 				SOV = { has_country_flag = Opinion_On_Palestinian_Groups_Purge }
@@ -6957,7 +6871,7 @@ focus_tree = {
 		relative_position_id = SYR_civil_war_victory
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 1.1
 				SOV = { has_country_flag = Opinion_On_Palestinian_Groups_Purge }
@@ -6995,7 +6909,7 @@ focus_tree = {
 			hidden_effect = {
 				#1/4 of starting equipment of above units
 				add_equipment_to_stockpile = {
-					type = command_control_equipment
+					type = cnc_equipment_1
 					amount = 5
 					producer = SOV
 				}
@@ -7025,12 +6939,12 @@ focus_tree = {
 					producer = FRA
 				}
 				add_equipment_to_stockpile = {
-					type = infantry_weapons			#AKM
+					type = infantry_weapons_1			#AKM
 					amount = 840
 					producer = SOV
 				}
 				add_equipment_to_stockpile = {
-					type = infantry_weapons1			#AK-74
+					type = infantry_weapons_2			#AK-74
 					amount = 600
 					producer = SOV
 				}
@@ -7063,12 +6977,12 @@ focus_tree = {
 					}
 				}
 				add_equipment_to_stockpile = {
-					type = util_vehicle_1			#Safir
+					type = util_vehicle_2			#Safir
 					amount = 150
 					producer = PER
 				}
 				add_equipment_to_stockpile = {
-					type = util_vehicle_1			#UAZ-469
+					type = util_vehicle_2			#UAZ-469
 					amount = 120
 					producer = SOV
 				}
@@ -7165,16 +7079,9 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SYR_ssnp_coup"
 			if = { limit = { nationalist < 0.10 }
-				clear_array = ruling_party
-				clear_array = gov_coalition_array
-				add_to_array = { ruling_party = 20 }
-				set_ruling_leader = yes
-				set_leader = yes
-				set_politics = {
-					ruling_party = nationalist
-					elections_allowed = no
-				}
-				set_leader = yes
+				set_temp_variable = { rul_party_temp = 20 }
+				set_temp_variable = { disable_elections = 1 }
+				change_ruling_party_effect = yes
 				add_popularity = { ideology = nationalist popularity = 0.30 }
 				recalculate_party = yes
 				random = {
@@ -7190,15 +7097,9 @@ focus_tree = {
 					nationalist > 0.09
 					nationalist < 0.31
 				}
-				clear_array = ruling_party
-				clear_array = gov_coalition_array
-				add_to_array = { ruling_party = 20 }
-				set_ruling_leader = yes
-				set_leader = yes
-				set_politics = {
-					ruling_party = nationalist
-					elections_allowed = no
-				}
+				set_temp_variable = { rul_party_temp = 20 }
+				set_temp_variable = { disable_elections = 1 }
+				change_ruling_party_effect = yes
 				add_popularity = { ideology = nationalist popularity = 0.30 }
 				recalculate_party = yes
 				random = {
@@ -7210,15 +7111,9 @@ focus_tree = {
 				}
 			}
 			else = {
-				clear_array = ruling_party
-				clear_array = gov_coalition_array
-				add_to_array = { ruling_party = 20 }
-				set_ruling_leader = yes
-				set_leader = yes
-				set_politics = {
-					ruling_party = nationalist
-					elections_allowed = no
-				}
+				set_temp_variable = { rul_party_temp = 20 }
+				set_temp_variable = { disable_elections = 1 }
+				change_ruling_party_effect = yes
 				add_popularity = { ideology = nationalist popularity = 0.30 }
 				recalculate_party = yes
 			}
@@ -7231,7 +7126,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 0
+			base = 0
 			modifier = {
 				add = 1
 				has_country_flag = Go_full_SSNP
@@ -7273,7 +7168,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 0
 				has_country_flag = Go_full_SSNP
@@ -7314,7 +7209,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
@@ -7342,7 +7237,7 @@ focus_tree = {
 		relative_position_id = SYR_civil_war_victory
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
@@ -7397,7 +7292,7 @@ focus_tree = {
 		relative_position_id = SYR_civil_war_victory
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
@@ -7439,7 +7334,7 @@ focus_tree = {
 		relative_position_id = SYR_civil_war_victory
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -7474,7 +7369,7 @@ focus_tree = {
 		relative_position_id = SYR_civil_war_victory
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -7508,7 +7403,7 @@ focus_tree = {
 		relative_position_id = SYR_civil_war_victory
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 1.4
 				has_country_flag = Promised_Federated_Syria
@@ -7631,7 +7526,7 @@ focus_tree = {
 		relative_position_id = SYR_civil_war_victory
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -7666,7 +7561,7 @@ focus_tree = {
 		relative_position_id = SYR_civil_war_victory
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -7679,7 +7574,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SYR_elections"
-			country_event = { id = MD4_election_campaign.0 }
+			country_event = MD4_election_campaign.0
 			hidden_effect = {
 				set_country_flag = no_leader_change
 				set_temp_variable = { election_year = global.year }
@@ -7716,7 +7611,7 @@ focus_tree = {
 		relative_position_id = SYR_civil_war_victory
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
@@ -7753,7 +7648,7 @@ focus_tree = {
 		relative_position_id = SYR_civil_war_victory
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -7786,7 +7681,7 @@ focus_tree = {
 		relative_position_id = SYR_civil_war_victory
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 0
 				NOT = {
@@ -7878,7 +7773,7 @@ focus_tree = {
 		relative_position_id = SYR_civil_war_victory
 
 		ai_will_do = {
-			factor = 0.9
+			base = 0.9
 		}
 
 		available = {
@@ -7913,7 +7808,7 @@ focus_tree = {
 		relative_position_id = SYR_civil_war_victory
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -7940,7 +7835,7 @@ focus_tree = {
 		relative_position_id = SYR_civil_war_victory
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -7968,7 +7863,7 @@ focus_tree = {
 		relative_position_id = SYR_civil_war_victory
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -8013,7 +7908,7 @@ focus_tree = {
 		y = 0
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -8059,7 +7954,7 @@ focus_tree = {
 		relative_position_id = SYR_concentrate_on_lebanon
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 0
 				is_subject_of = PER
@@ -8105,7 +8000,7 @@ focus_tree = {
 		relative_position_id = SYR_concentrate_on_lebanon
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -8142,7 +8037,7 @@ focus_tree = {
 		relative_position_id = SYR_concentrate_on_lebanon
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 0
 				any_neighbor_country = {
@@ -8204,7 +8099,7 @@ focus_tree = {
 		relative_position_id = SYR_concentrate_on_lebanon
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -8214,7 +8109,7 @@ focus_tree = {
 			}
 			country_exists = LEB
 			LEB = { NOT = { is_subject_of = ROOT } }
-			HEZ = { exists = no }
+			NOT = { country_exists = HEZ }
 		}
 
 		bypass = {
@@ -8243,7 +8138,7 @@ focus_tree = {
 		relative_position_id = SYR_concentrate_on_lebanon
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 0.95
 				OR = {
@@ -8292,7 +8187,7 @@ focus_tree = {
 		relative_position_id = SYR_concentrate_on_lebanon
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -8329,7 +8224,7 @@ focus_tree = {
 		relative_position_id = SYR_concentrate_on_lebanon
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -8367,10 +8262,8 @@ focus_tree = {
 			if = {
 				limit = {
 					LEB = {
-						AND = {
-							communism > 0.3
-							communism < 0.4
-						}
+						communism > 0.3
+						communism < 0.4
 					}
 				}
 				random_list = {
@@ -8385,10 +8278,8 @@ focus_tree = {
 			if = {
 				limit = {
 					LEB = {
-						AND = {
-							communism > 0.4
-							communism < 0.5
-						}
+						communism > 0.4
+						communism < 0.5
 					}
 				}
 				random_list = {
@@ -8421,7 +8312,7 @@ focus_tree = {
 		relative_position_id = SYR_concentrate_on_lebanon
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -8432,7 +8323,7 @@ focus_tree = {
 			country_exists = HEZ
 			NOT = { is_subject_of = PER }
 			HEZ = { is_subject = no }
-			LEB = { exists = no }
+			NOT = { country_exists = LEB }
 		}
 		search_filters = { FOCUS_FILTER_ANNEXATION }
 		completion_reward = {
@@ -8458,7 +8349,7 @@ focus_tree = {
 		y = 7
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -8493,7 +8384,7 @@ focus_tree = {
 		relative_position_id = SYR_rebuild_economy
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -8541,7 +8432,7 @@ focus_tree = {
 		relative_position_id = SYR_rebuild_economy
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -8590,7 +8481,7 @@ focus_tree = {
 		relative_position_id = SYR_rebuild_economy
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -8640,7 +8531,7 @@ focus_tree = {
 		relative_position_id = SYR_rebuild_economy
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -8697,7 +8588,7 @@ focus_tree = {
 		relative_position_id = SYR_rebuild_economy
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -8746,7 +8637,7 @@ focus_tree = {
 		relative_position_id = SYR_rebuild_economy
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -8795,9 +8686,8 @@ focus_tree = {
 		relative_position_id = SYR_rebuild_economy
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
-
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SYR_renegotiate_loans"
@@ -8829,9 +8719,8 @@ focus_tree = {
 		relative_position_id = SYR_rebuild_economy
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
-
 
 		search_filters = { FOCUS_FILTER_MANPOWER }
 		completion_reward = {
@@ -8856,9 +8745,8 @@ focus_tree = {
 		relative_position_id = SYR_rebuild_economy
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
-
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SYR_fly_damas"
@@ -8892,9 +8780,8 @@ focus_tree = {
 		relative_position_id = SYR_rebuild_economy
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
-
 
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 		completion_reward = {
@@ -8933,9 +8820,8 @@ focus_tree = {
 		relative_position_id = SYR_rebuild_economy
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
-
 
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 		completion_reward = {
@@ -8958,9 +8844,8 @@ focus_tree = {
 		relative_position_id = SYR_rebuild_economy
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
-
 
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 		completion_reward = {
@@ -8986,9 +8871,8 @@ focus_tree = {
 		relative_position_id = SYR_rebuild_economy
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
-
 
 		search_filters = { FOCUS_FILTER_RESEARCH }
 		completion_reward = {
@@ -9023,9 +8907,8 @@ focus_tree = {
 		relative_position_id = SYR_rebuild_economy
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
-
 
 		search_filters = { FOCUS_FILTER_INFLUENCE FOCUS_FILTER_INTERNAL_FACTION }
 		completion_reward = {
@@ -9060,7 +8943,7 @@ focus_tree = {
 		relative_position_id = SYR_rebuild_economy
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -9152,9 +9035,8 @@ focus_tree = {
 		relative_position_id = SYR_rebuild_economy
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
-
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SYR_invest_in_financial"
@@ -9178,9 +9060,8 @@ focus_tree = {
 		relative_position_id = SYR_rebuild_economy
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
-
 
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 		completion_reward = {
@@ -9210,9 +9091,8 @@ focus_tree = {
 		relative_position_id = SYR_rebuild_economy
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
-
 
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 		completion_reward = {
@@ -9250,9 +9130,8 @@ focus_tree = {
 		relative_position_id = SYR_rebuild_economy
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
-
 
 		search_filters = { FOCUS_FILTER_RESOURCE FOCUS_FILTER_INFLUENCE }
 		completion_reward = {
@@ -9287,7 +9166,7 @@ focus_tree = {
 		relative_position_id = SYR_rebuild_economy
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -9378,9 +9257,8 @@ focus_tree = {
 		relative_position_id = SYR_rebuild_economy
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
-
 
 		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_INFLUENCE }
 		completion_reward = {
@@ -9416,7 +9294,7 @@ focus_tree = {
 		relative_position_id = SYR_rebuild_economy
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -9509,9 +9387,8 @@ focus_tree = {
 		relative_position_id = SYR_rebuild_economy
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
-
 
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 		completion_reward = {
@@ -9532,9 +9409,8 @@ focus_tree = {
 		relative_position_id = SYR_rebuild_economy
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
-
 
 		search_filters = { FOCUS_FILTER_MANPOWER }
 		completion_reward = {
@@ -9559,7 +9435,7 @@ focus_tree = {
 		relative_position_id = SYR_rebuild_economy
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -9595,7 +9471,7 @@ focus_tree = {
 		relative_position_id = SYR_rebuild_economy
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 
 		available = {
@@ -9631,9 +9507,8 @@ focus_tree = {
 		relative_position_id = SYR_rebuild_economy
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
-
 
 		search_filters = { FOCUS_FILTER_MANPOWER }
 		completion_reward = {
@@ -9658,9 +9533,8 @@ focus_tree = {
 		relative_position_id = SYR_rebuild_economy
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
-
 
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 		completion_reward = {
@@ -9690,9 +9564,8 @@ focus_tree = {
 		relative_position_id = SYR_rebuild_economy
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
-
 
 		search_filters = { FOCUS_FILTER_MANPOWER }
 		completion_reward = {
@@ -9717,27 +9590,21 @@ shared_focus = {
 	y = 7
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
 		has_government = nationalist
 		is_subject = no
-		OR = {
-			has_start_date < 2016.1.1
-			custom_trigger_tooltip = {
-				tooltip = TT_SYR_POST_WAR_FINISHED
-				has_country_flag = SYR_Post_War_Tree_Finished
-			}
+		custom_trigger_tooltip = {
+			tooltip = TT_SYR_POST_WAR_FINISHED
+			has_country_flag = SYR_Post_War_Tree_Finished
 		}
-	}
-
-	bypass = {
 	}
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_POLITICAL }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_greater_syria"
 		set_cosmetic_tag = SYR_AUTH_SS
@@ -9759,7 +9626,7 @@ shared_focus = {
 	relative_position_id = SYR_greater_syria
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -9775,7 +9642,6 @@ shared_focus = {
 	}
 
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_ANNEXATION }
 	completion_reward = {
@@ -9801,7 +9667,7 @@ shared_focus = {
 	relative_position_id = SYR_greater_syria
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 		modifier = {
 			factor = 0
 			any_neighbor_country = {
@@ -9831,7 +9697,6 @@ shared_focus = {
 	}
 
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_ANNEXATION }
 	completion_reward = {
@@ -9876,7 +9741,7 @@ shared_focus = {
 	relative_position_id = SYR_greater_syria
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 		modifier = {
 			factor = 0
 			any_neighbor_country = {
@@ -9902,7 +9767,6 @@ shared_focus = {
 	will_lead_to_war_with = JOR
 
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_ANNEXATION }
 	completion_reward = {
@@ -9966,7 +9830,7 @@ shared_focus = {
 	relative_position_id = SYR_greater_syria
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -9982,7 +9846,6 @@ shared_focus = {
 	}
 
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_INDUSTRY }
 	completion_reward = {
@@ -10014,7 +9877,7 @@ shared_focus = {
 	relative_position_id = SYR_greater_syria
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -10034,7 +9897,7 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_ARMY }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_arm_palestinians_to_fight"
 		division_template = {
@@ -10091,7 +9954,7 @@ shared_focus = {
 	relative_position_id = SYR_greater_syria
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 		modifier = {
 			factor = 0
 			any_neighbor_country = {
@@ -10116,7 +9979,6 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
 	search_filters = { FOCUS_FILTER_ANNEXATION }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_zionist_threat"
@@ -10134,6 +9996,9 @@ shared_focus = {
 				}
 				add_claim_by = ROOT
 			}
+			set_temp_variable = { wargoal_on = ISR }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = annex_everything
 				target = ISR
@@ -10161,7 +10026,7 @@ shared_focus = {
 	relative_position_id = SYR_greater_syria
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -10189,13 +10054,13 @@ shared_focus = {
 	bypass = {
 		OR = {
 			SUD = { is_in_faction_with = ROOT }
-			SUD = { exists = no }
+			NOT = { country_exists = SUD }
 		}
 	}
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_FOREIGN_POLICY }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_befriend_sudan"
 		SUD = { country_event = { id = SyriaFocus.63 hours = 6 } }
@@ -10217,7 +10082,7 @@ shared_focus = {
 	relative_position_id = SYR_greater_syria
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 		modifier = {
 			factor = 0
 			any_neighbor_country = {
@@ -10253,7 +10118,6 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
 	search_filters = { FOCUS_FILTER_ANNEXATION }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_demand_sinai"
@@ -10274,7 +10138,7 @@ shared_focus = {
 	relative_position_id = SYR_greater_syria
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -10293,7 +10157,6 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
 	search_filters = { FOCUS_FILTER_ANNEXATION }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_iraq_divisions"
@@ -10303,7 +10166,7 @@ shared_focus = {
 			}
 		}
 		if = {
-			limit = { KUR = { exists = yes } }
+			limit = { country_exists = KUR }
 			KUR = {
 				every_owned_state = {
 					add_claim_by = ROOT
@@ -10389,7 +10252,7 @@ shared_focus = {
 	relative_position_id = SYR_greater_syria
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 		modifier = {
 			factor = 0
 			any_neighbor_country = {
@@ -10421,15 +10284,17 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
 	search_filters = { FOCUS_FILTER_ANNEXATION }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_mop_up_iraq"
 		if = {
 			limit = {
 				IRQ = { has_civil_war = no }
-				IRQ = { exists = yes }
+				country_exists = IRQ
 			}
+			set_temp_variable = { wargoal_on = IRQ }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				target = IRQ
 				type = annex_everything
@@ -10439,9 +10304,12 @@ shared_focus = {
 			limit = {
 				IRQ = { has_civil_war = yes }
 			}
-			every_country = {
-				limit = { original_tag = IRQ }
+			every_country_with_original_tag = {
+				original_tag_to_check = IRQ
 				ROOT = {
+					set_temp_variable = { wargoal_on = PREV }
+					set_temp_variable = { wargoal_type = 2 }
+					add_threat_from_wargoal_effect = yes
 					create_wargoal = {
 						target = PREV
 						type = annex_everything
@@ -10451,9 +10319,12 @@ shared_focus = {
 		}
 		if = {
 			limit = {
-				KUR = { exists = yes }
+				country_exists = KUR
 				KUR = { NOT = { is_subject_of = ROOT } }
 			}
+			set_temp_variable = { wargoal_on = KUR }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				target = KUR
 				type = annex_everything
@@ -10475,7 +10346,7 @@ shared_focus = {
 	relative_position_id = SYR_greater_syria
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 		modifier = {
 			factor = 0
 			any_neighbor_country = {
@@ -10507,7 +10378,6 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
 	search_filters = { FOCUS_FILTER_ANNEXATION }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_submission_kuwait"
@@ -10533,7 +10403,7 @@ shared_focus = {
 	relative_position_id = SYR_greater_syria
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 		modifier = {
 			factor = 0
 			any_neighbor_country = {
@@ -10564,7 +10434,6 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
 	search_filters = { FOCUS_FILTER_ANNEXATION }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_crush_the_sauds"
@@ -10587,7 +10456,7 @@ shared_focus = {
 	relative_position_id = SYR_greater_syria
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -10602,7 +10471,6 @@ shared_focus = {
 	}
 
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_ANNEXATION }
 	completion_reward = {
@@ -10651,7 +10519,7 @@ shared_focus = {
 	relative_position_id = SYR_greater_syria
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -10666,7 +10534,7 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_ARMY }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_kurds_in_turkey"
 		custom_effect_tooltip = TT_NEW_OOB_SYRIA
@@ -10674,7 +10542,6 @@ shared_focus = {
 			load_oob = SYR_PKK_units
 		}
 	}
-
 
 }
 
@@ -10690,7 +10557,7 @@ shared_focus = {
 	relative_position_id = SYR_greater_syria
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -10712,7 +10579,7 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_ARMY }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_kurds_in_iran"
 		custom_effect_tooltip = TT_NEW_OOB_SYRIA
@@ -10738,7 +10605,7 @@ shared_focus = {
 	relative_position_id = SYR_greater_syria
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -10762,13 +10629,13 @@ shared_focus = {
 	bypass = {
 		OR = {
 			AZE = { is_in_faction_with = ROOT }
-			AZE = { exists = no }
+			NOT = { country_exists = AZE }
 		}
 	}
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_FOREIGN_POLICY }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_align_azerbaijan"
 		AZE = { country_event = { id = SyriaFocus.72 hours = 6 } }
@@ -10788,7 +10655,7 @@ shared_focus = {
 	relative_position_id = SYR_greater_syria
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -10803,7 +10670,6 @@ shared_focus = {
 	}
 
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_ANNEXATION }
 	completion_reward = {
@@ -10859,7 +10725,7 @@ shared_focus = {
 	relative_position_id = SYR_greater_syria
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -10874,7 +10740,7 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_ARMY }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_alawite_militias"
 		custom_effect_tooltip = TT_NEW_OOB_SYRIA
@@ -10900,7 +10766,7 @@ shared_focus = {
 	relative_position_id = SYR_greater_syria
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -10925,13 +10791,13 @@ shared_focus = {
 	bypass = {
 		OR = {
 			ARM = { is_in_faction_with = ROOT }
-			ARM = { exists = no }
+			NOT = { country_exists = ARM }
 		}
 	}
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_FOREIGN_POLICY }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_align_armenia"
 		ARM = { country_event = { id = SyriaFocus.73 hours = 6 } }
@@ -10954,7 +10820,7 @@ shared_focus = {
 	relative_position_id = SYR_greater_syria
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -10979,13 +10845,13 @@ shared_focus = {
 	bypass = {
 		OR = {
 			GRE = { is_in_faction_with = ROOT }
-			GRE = { exists = no }
+			NOT = { country_exists = GRE }
 		}
 	}
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_FOREIGN_POLICY }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_align_greece"
 		GRE = { country_event = { id = SyriaFocus.74 hours = 6 } }
@@ -11008,7 +10874,7 @@ shared_focus = {
 	relative_position_id = SYR_greater_syria
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 		modifier = {
 			factor = 0
 			any_neighbor_country = {
@@ -11038,7 +10904,6 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
 	search_filters = { FOCUS_FILTER_ANNEXATION }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_divide_turkey"
@@ -11059,7 +10924,7 @@ shared_focus = {
 	relative_position_id = SYR_greater_syria
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -11071,7 +10936,6 @@ shared_focus = {
 	}
 
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_ANNEXATION }
 	completion_reward = {
@@ -11104,7 +10968,7 @@ shared_focus = {
 	relative_position_id = SYR_greater_syria
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 		modifier = {
 			factor = 0
 			any_neighbor_country = {
@@ -11116,7 +10980,7 @@ shared_focus = {
 	available = {
 		has_government = nationalist
 		is_subject = no
-		CYP = { exists = yes }
+		country_exists = CYP
 		CYP = { is_subject = no }
 		NOT = { has_war_with = CYP }
 	}
@@ -11128,11 +10992,13 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
 	search_filters = { FOCUS_FILTER_ANNEXATION }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_align_cyprus"
 		CYP = { country_event = { id = md4.14 hours = 6 } }
+		set_temp_variable = { wargoal_on = NCY }
+		set_temp_variable = { wargoal_type = 2 }
+		add_threat_from_wargoal_effect = yes
 		create_wargoal = {
 			target = NCY
 			type = annex_everything
@@ -11158,7 +11024,7 @@ shared_focus = {
 	relative_position_id = SYR_greater_syria
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 		modifier = {
 			factor = 0
 			any_neighbor_country = {
@@ -11170,7 +11036,7 @@ shared_focus = {
 	available = {
 		has_government = nationalist
 		is_subject = no
-		NCY = { exists = yes }
+		country_exists = NCY
 		NCY = { is_subject = no }
 		NOT = { has_war_with = NCY }
 	}
@@ -11182,11 +11048,13 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
 	search_filters = { FOCUS_FILTER_ANNEXATION }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_align_northern_cyprus"
 		NCY = { country_event = { id = md4.14 hours = 6 } }
+		set_temp_variable = { wargoal_on = CYP }
+		set_temp_variable = { wargoal_type = 2 }
+		add_threat_from_wargoal_effect = yes
 		create_wargoal = {
 			target = CYP
 			type = annex_everything
@@ -11211,7 +11079,7 @@ shared_focus = {
 	relative_position_id = SYR_greater_syria
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 		modifier = {
 			factor = 0
 			any_neighbor_country = {
@@ -11233,14 +11101,19 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
 	search_filters = { FOCUS_FILTER_ANNEXATION }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_invade_cyprus"
+		set_temp_variable = { wargoal_on = CYP }
+		set_temp_variable = { wargoal_type = 2 }
+		add_threat_from_wargoal_effect = yes
 		create_wargoal = {
 			target = CYP
 			type = annex_everything
 		}
+		set_temp_variable = { wargoal_on = NCY }
+		set_temp_variable = { wargoal_type = 2 }
+		add_threat_from_wargoal_effect = yes
 		create_wargoal = {
 			target = NCY
 			type = annex_everything
@@ -11263,7 +11136,7 @@ shared_focus = {
 	relative_position_id = SYR_greater_syria
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 		modifier = {
 			factor = 0
 			any_neighbor_country = {
@@ -11292,7 +11165,6 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
 	search_filters = { FOCUS_FILTER_ANNEXATION }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_weaken_iran"
@@ -11310,23 +11182,20 @@ shared_focus = {
 	x = 33
 	y = 7
 
-
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
-		OR = {
-			has_start_date < 2016.1.1
-			custom_trigger_tooltip = {
-				tooltip = TT_SYR_POST_WAR_FINISHED
-				has_country_flag = SYR_Post_War_Tree_Finished
-			}
+		custom_trigger_tooltip = {
+			tooltip = TT_SYR_POST_WAR_FINISHED
+			has_country_flag = SYR_Post_War_Tree_Finished
 		}
 	}
 
 	cancel_if_invalid = yes
 
+	search_filters = { FOCUS_FILTER_MILITARY_LAWS }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_military_reform"
 		army_experience = 15
@@ -11351,10 +11220,9 @@ shared_focus = {
 	relative_position_id = SYR_military_reform
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_MILITARY_LAWS }
 	completion_reward = {
@@ -11378,14 +11246,13 @@ shared_focus = {
 	relative_position_id = SYR_military_reform
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 		modifier = {
 			factor = 0
 			is_historical_focus_on = yes
 		}
 	}
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_MILITARY_LAWS }
 	completion_reward = {
@@ -11417,7 +11284,7 @@ shared_focus = {
 	relative_position_id = SYR_military_reform
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 		modifier = {
 			factor = 0
 			is_historical_focus_on = yes
@@ -11425,7 +11292,7 @@ shared_focus = {
 	}
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_MILITARY_LAWS }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_peoples_army"
 		if = {
@@ -11460,11 +11327,11 @@ shared_focus = {
 	relative_position_id = SYR_military_reform
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_MILITARY_LAWS }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_loyal_elite"
 		if = {
@@ -11506,14 +11373,13 @@ shared_focus = {
 	relative_position_id = SYR_military_reform
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 		modifier = {
 			factor = 0
 			is_historical_focus_on = yes
 		}
 	}
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_RESEARCH }
 	completion_reward = {
@@ -11545,10 +11411,9 @@ shared_focus = {
 	relative_position_id = SYR_military_reform
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_RESEARCH }
 	completion_reward = {
@@ -11578,14 +11443,13 @@ shared_focus = {
 	relative_position_id = SYR_military_reform
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 		modifier = {
 			factor = 0
 			is_historical_focus_on = yes
 		}
 	}
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_RESEARCH }
 	completion_reward = {
@@ -11614,14 +11478,13 @@ shared_focus = {
 	relative_position_id = SYR_military_reform
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 		modifier = {
 			factor = 0
 			is_historical_focus_on = yes
 		}
 	}
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_MILITARY_LAWS }
 	completion_reward = {
@@ -11652,7 +11515,7 @@ shared_focus = {
 	relative_position_id = SYR_military_reform
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 		modifier = {
 			factor = 0
 			is_historical_focus_on = yes
@@ -11669,7 +11532,7 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_NAVY FOCUS_FILTER_ADD_BUILDING }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_expand_tartus_base"
 		set_temp_variable = { treasury_change = -1 }
@@ -11698,7 +11561,7 @@ shared_focus = {
 	relative_position_id = SYR_military_reform
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -11710,7 +11573,6 @@ shared_focus = {
 	}
 
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_INDUSTRY }
 	completion_reward = {
@@ -11743,7 +11605,7 @@ shared_focus = {
 	relative_position_id = SYR_military_reform
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 		modifier = {
 			factor = 0
 			is_historical_focus_on = yes
@@ -11760,7 +11622,7 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_AIRCRAFT FOCUS_FILTER_ADD_BUILDING }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_expand_tiyas_air_base"
 		set_temp_variable = { treasury_change = -2.25 }
@@ -11788,10 +11650,9 @@ shared_focus = {
 	relative_position_id = SYR_military_reform
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_RESOURCE }
 	completion_reward = {
@@ -11823,20 +11684,21 @@ shared_focus = {
 	relative_position_id = SYR_military_reform
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_RESEARCH }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_support_tactics"
 		add_doctrine_cost_reduction = {
+			name = SYR_support_tactics
 			category = CAT_naval_doctrine
 			uses = 1
 			cost_reduction = 0.5
 		}
 		add_doctrine_cost_reduction = {
+			name = SYR_support_tactics
 			category = CAT_air_doctrine
 			uses = 1
 			cost_reduction = 0.5
@@ -11856,10 +11718,9 @@ shared_focus = {
 	relative_position_id = SYR_military_reform
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_INDUSTRY }
 	completion_reward = {
@@ -11893,7 +11754,7 @@ shared_focus = {
 	relative_position_id = SYR_military_reform
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	cancel_if_invalid = yes
@@ -12127,7 +11988,7 @@ shared_focus = {
 	relative_position_id = SYR_military_reform
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 		modifier = {
 			factor = 0
 			is_historical_focus_on = yes
@@ -12169,7 +12030,7 @@ shared_focus = {
 					producer = FRA
 				}
 				add_equipment_to_stockpile = {
-					type = attack_helicopter2		#Eurocopter Panther
+					type = attack_helicopter_2		#Eurocopter Panther
 					amount = 24
 					producer = FRA
 				}
@@ -12203,7 +12064,7 @@ shared_focus = {
 					producer = SOV
 				}
 				add_equipment_to_stockpile = {
-					type = attack_helicopter2		#Mi-28
+					type = attack_helicopter_2		#Mi-28
 					amount = 24
 					producer = SOV
 				}
@@ -12237,7 +12098,7 @@ shared_focus = {
 					producer = CHI
 				}
 				add_equipment_to_stockpile = {
-					type = attack_helicopter1		#ZSL-92
+					type = attack_helicopter_1		#ZSL-92
 					amount = 24
 					producer = CHI
 				}
@@ -12271,7 +12132,7 @@ shared_focus = {
 					producer = FRA
 				}
 				add_equipment_to_stockpile = {
-					type = attack_helicopter2		#Eurocopter Panther
+					type = attack_helicopter_2		#Eurocopter Panther
 					amount = 24
 					producer = FRA
 				}
@@ -12305,7 +12166,7 @@ shared_focus = {
 					producer = SOV
 				}
 				add_equipment_to_stockpile = {
-					type = attack_helicopter2		#Mi-28
+					type = attack_helicopter_2		#Mi-28
 					amount = 24
 					producer = SOV
 				}
@@ -12326,7 +12187,7 @@ shared_focus = {
 	relative_position_id = SYR_military_reform
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 		modifier = {
 			factor = 0
 			is_historical_focus_on = yes
@@ -12363,7 +12224,7 @@ shared_focus = {
 	relative_position_id = SYR_military_reform
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	cancel_if_invalid = yes
@@ -12402,14 +12263,13 @@ shared_focus = {
 	relative_position_id = SYR_military_reform
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 		modifier = {
 			factor = 0
 			is_historical_focus_on = yes
 		}
 	}
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_INDUSTRY }
 	completion_reward = {
@@ -12442,11 +12302,11 @@ shared_focus = {
 	relative_position_id = SYR_military_reform
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_MILITARY_LAWS }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_electronic_army"
 		if = {
@@ -12475,10 +12335,9 @@ shared_focus = {
 	relative_position_id = SYR_military_reform
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_RESEARCH }
 	completion_reward = {
@@ -12503,10 +12362,9 @@ shared_focus = {
 	relative_position_id = SYR_military_reform
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_INDUSTRY }
 	completion_reward = {
@@ -12544,10 +12402,9 @@ shared_focus = {
 	relative_position_id = SYR_military_reform
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_RESOURCE FOCUS_FILTER_INTERNAL_FACTION }
 	completion_reward = {
@@ -12577,24 +12434,17 @@ shared_focus = {
 	y = 0
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
-		OR = {
-			has_start_date < 2016.1.1
-			custom_trigger_tooltip = {
-				tooltip = TT_SYR_POST_WAR_FINISHED
-				has_country_flag = SYR_Post_War_Tree_Finished
-			}
+		custom_trigger_tooltip = {
+			tooltip = TT_SYR_POST_WAR_FINISHED
+			has_country_flag = SYR_Post_War_Tree_Finished
 		}
 	}
 
-	bypass = {
-	}
-
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_POLITICAL }
 	completion_reward = {
@@ -12619,7 +12469,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -12634,7 +12484,6 @@ shared_focus = {
 	}
 
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_ANNEXATION }
 	completion_reward = {
@@ -12659,7 +12508,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 		modifier = {
 			factor = 0
 			OR = {
@@ -12679,7 +12528,7 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_FOREIGN_POLICY }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_renounce_claims_on_golan"
 		remove_state_core = 587
@@ -12711,7 +12560,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 		modifier = {
 			factor = 0
 			is_historical_focus_on = yes
@@ -12721,7 +12570,7 @@ shared_focus = {
 	available = {
 		HAM = {
 			NOT = { has_government = democratic }
-			neutrality_neutral_social_not_in_power_or_coalition = yes
+			neutrality_neutral_social_in_power_or_coalition = no
 		}
 		NOT = {
 			has_country_flag = syracc_negot
@@ -12740,7 +12589,6 @@ shared_focus = {
 	}
 
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_INFLUENCE }
 	completion_reward = {
@@ -12808,13 +12656,13 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
 		HAM = {
 			NOT = { has_government = democratic }
-			neutrality_neutral_social_not_in_power_or_coalition = yes
+			neutrality_neutral_social_in_power_or_coalition = no
 		}
 		NOT = {
 			has_country_flag = syracc_negot
@@ -12828,7 +12676,7 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_INSURGENCY }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_new_intifada"
 		HAM = { country_event = { id = SyriaFocus.77 hours = 6 } }
@@ -12853,7 +12701,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -12867,7 +12715,6 @@ shared_focus = {
 	}
 
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_POLITICAL }
 	completion_reward = {
@@ -12908,7 +12755,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 		modifier = {
 			factor = 0
 			is_historical_focus_on = yes
@@ -12924,12 +12771,12 @@ shared_focus = {
 	}
 
 	bypass = {
-		PAL = { exists = no }
+		NOT = { country_exists = PAL }
 	}
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_DIPLOMACY }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_diplomatic_pressure_on_israel"
 		give_guarantee = PAL
@@ -12949,11 +12796,15 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
+		modifier = {
+			factor = 0
+			is_historical_focus_on = yes
+		}
 	}
 
 	available = {
-		ISR = { exists = yes }
+		country_exists = ISR
 	}
 
 	bypass = {
@@ -12961,7 +12812,7 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_FOREIGN_POLICY }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_repair_relations_with_israel"
 		remove_opinion_modifier = {
@@ -12993,11 +12844,15 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
+		modifier = {
+			factor = 0
+			is_historical_focus_on = yes
+		}
 	}
 
 	available = {
-		ISR = { exists = yes }
+		country_exists = ISR
 	}
 
 	bypass = {
@@ -13005,11 +12860,9 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_FOREIGN_POLICY }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_one_state_solution"
-		set_temp_variable = { threat_change = 5 }
-		modify_terror_threat_effect = yes
 		remove_opinion_modifier = {
 			target = ISR
 			modifier = death_to_israel
@@ -13072,11 +12925,11 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
-		ISR = { exists = yes }
+		country_exists = ISR
 	}
 
 	bypass = {
@@ -13084,11 +12937,9 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_FOREIGN_POLICY }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_two_state_solution"
-		set_temp_variable = { threat_change = 2 }
-		modify_terror_threat_effect = yes
 		remove_opinion_modifier = {
 			target = ISR
 			modifier = death_to_israel
@@ -13146,7 +12997,11 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
+		modifier = {
+			factor = 0
+			is_historical_focus_on = yes
+		}
 	}
 
 	available = {
@@ -13169,7 +13024,7 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_DIPLOMACY }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_levant_defence_pact"
 		create_faction_from_template = faction_template_jerusalem_defence_pact
@@ -13205,13 +13060,15 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
-		JOR = { exists = yes }
-		JOR = { is_in_faction = no }
-		JOR = { is_subject = no }
+		country_exists = JOR
+		JOR = {
+			is_in_faction = no
+			is_subject = no
+		}
 		NOT = { has_war_with = JOR }
 		NOT = { is_in_faction_with = ISR }
 		is_in_faction = yes
@@ -13222,7 +13079,7 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_DIPLOMACY }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_invite_jordan"
 		JOR = { country_event = { id = SyriaFocus.79 hours = 6 } }
@@ -13243,13 +13100,15 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
-		EGY = { exists = yes }
-		EGY = { is_in_faction = no }
-		EGY = { is_subject = no }
+		country_exists = EGY
+		EGY = {
+			is_in_faction = no
+			is_subject = no
+		}
 		NOT = { has_war_with = EGY }
 		NOT = { is_in_faction_with = ISR }
 		is_in_faction = yes
@@ -13260,7 +13119,7 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_DIPLOMACY }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_invite_egypt"
 		EGY = { country_event = { id = SyriaFocus.79 hours = 6 } }
@@ -13281,7 +13140,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -13294,7 +13153,7 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_FOREIGN_POLICY }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_meeting_with_kings"
 		add_opinion_modifier = {
@@ -13321,7 +13180,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 		modifier = {
 			factor = 0
 			is_historical_focus_on = yes
@@ -13337,7 +13196,6 @@ shared_focus = {
 	}
 
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_INFLUENCE }
 	completion_reward = {
@@ -13365,7 +13223,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 		modifier = {
 			factor = 0
 			is_historical_focus_on = yes
@@ -13382,7 +13240,7 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_RESOURCE }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_saudi_oil_cooperation"
 		add_opinion_modifier = {
@@ -13414,7 +13272,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -13430,7 +13288,7 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_DIPLOMACY }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_join_peninsula_shield"
 		SAU = { country_event = { id = SyriaFocus.80 days = 3 } }
@@ -13451,7 +13309,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -13462,7 +13320,6 @@ shared_focus = {
 	}
 
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_RESEARCH }
 	completion_reward = {
@@ -13484,7 +13341,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -13498,7 +13355,6 @@ shared_focus = {
 	}
 
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_RESOURCE }
 	completion_reward = {
@@ -13527,7 +13383,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 		modifier = {
 			factor = 0
 			is_historical_focus_on = yes
@@ -13545,7 +13401,7 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_TRADE }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_trade_deal_with_egypt"
 		add_opinion_modifier = {
@@ -13575,7 +13431,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 		modifier = {
 			factor = 0
 			OR = {
@@ -13596,7 +13452,7 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_FOREIGN_POLICY }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_repair_relations_with_iraq"
 		add_opinion_modifier = {
@@ -13636,7 +13492,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -13648,7 +13504,7 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_INFLUENCE }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_revive_baathist_dream"
 		custom_effect_tooltip = TT_SYR_REVIVE_BAATHISM_COST
@@ -13702,7 +13558,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -13713,7 +13569,6 @@ shared_focus = {
 	}
 
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_INFLUENCE }
 	completion_reward = {
@@ -13786,11 +13641,9 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
 	search_filters = { FOCUS_FILTER_ANNEXATION }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_the_arab_union"
-		set_cosmetic_tag = UAR_2
 		clr_country_flag = dynamic_flag
 		set_country_flag = is_UAR
 		EGY = {
@@ -13801,91 +13654,7 @@ shared_focus = {
 	}
 
 	ai_will_do = {
-		factor = 1
-	}
-}
-
-shared_focus = {
-	id = SYR_integrate_the_union
-	icon = focus_CHL_union_of_hispanic_republics
-	cost = 20
-	prerequisite = {
-		focus = SYR_the_arab_union
-	}
-	prerequisite = {
-		focus = SYR_baathist_renaissance
-	}
-	x = 2
-	y = 5
-	relative_position_id = SYR_diplomatic_effort
-
-	ai_will_do = {
-		factor = 1
-	}
-
-	available = {
-		is_in_faction = no
-		has_government = communism
-		custom_trigger_tooltip = {
-			tooltip = TT_SYR_BAATHIST_IN_POWER
-			is_in_array = {
-				array = ruling_party
-				value = 7
-			}
-		}
-	}
-
-	bypass = {
-	}
-
-	cancel_if_invalid = yes
-
-
-	search_filters = { FOCUS_FILTER_ANNEXATION }
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus SYR_integrate_the_union"
-		if = {
-			limit = { EGY = { NOT = { is_subject_of = ROOT } } }
-			effect_tooltip = {
-				EGY = {
-					every_core_state = {
-						add_core_of = ROOT
-					}
-				}
-				annex_country = {
-					target = EGY
-					transfer_troops = yes
-				}
-			}
-		}
-		else = {
-			EGY = {
-				every_core_state = {
-					add_core_of = ROOT
-				}
-			}
-			annex_country = { target = EGY transfer_troops = yes }
-			every_country = {
-				limit = {
-					NOT = { original_tag = EGY }
-					is_arabic_nation = yes
-					is_subject_of = ROOT
-				}
-				every_owned_state = {
-					add_core_of = ROOT
-				}
-				ROOT = {
-					annex_country = {
-						target = PREV
-						transfer_troops = yes
-					}
-				}
-			}
-		}
-		custom_effect_tooltip = TT_SYR_INTEGRATE_THE_UNION
-		set_country_flag = leader_of_arab_union
-		set_variable = { global.leader_of_arab_union = THIS.id }
-		set_global_flag = arab_union_formed
+		base = 1
 	}
 }
 
@@ -13921,7 +13690,7 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_FOREIGN_POLICY }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_denounce_iraq"
 		add_opinion_modifier = {
@@ -13970,7 +13739,7 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_INFLUENCE }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_iranian_sponsorship"
 		add_ideas = iranian_aid
@@ -14014,7 +13783,6 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
 	search_filters = { FOCUS_FILTER_INFLUENCE }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_fund_hezbollah"
@@ -14044,7 +13812,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 0
+		base = 0
 		modifier = {
 			add = 1
 			OR = {
@@ -14070,7 +13838,6 @@ shared_focus = {
 	}
 
 	cancel_if_invalid = yes
-
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_the_resistance_axis"
@@ -14108,7 +13875,6 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
 	search_filters = { FOCUS_FILTER_INTERNAL_FACTION }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: focus SYR_iranian_quds"
@@ -14133,7 +13899,6 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
 	search_filters = { FOCUS_FILTER_RESEARCH }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_irgc_military_college"
@@ -14155,7 +13920,7 @@ shared_focus = {
 	}
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 		modifier = {
 			factor = 0
 			is_historical_focus_on = yes
@@ -14199,7 +13964,7 @@ shared_focus = {
 	}
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 
@@ -14225,7 +13990,7 @@ shared_focus = {
 	}
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 		modifier = {
 			factor = 0
 			is_historical_focus_on = yes
@@ -14245,7 +14010,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -14256,7 +14021,6 @@ shared_focus = {
 	}
 
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_MANPOWER }
 	completion_reward = {
@@ -14286,7 +14050,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -14298,12 +14062,11 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
 	search_filters = { FOCUS_FILTER_INFLUENCE }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_weapons_to_pkk"
 		send_equipment = {
-			equipment = Inf_equipment
+			equipment = infantry_weapons_type
 			amount = 1000
 			target = PKK
 		}
@@ -14329,7 +14092,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -14342,7 +14105,7 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_FOREIGN_POLICY }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_approach_armenia"
 		add_opinion_modifier = {
@@ -14369,7 +14132,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 		modifier = {
 			factor = 0
 			is_historical_focus_on = yes
@@ -14386,7 +14149,7 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_FOREIGN_POLICY }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_approach_greece"
 		add_opinion_modifier = {
@@ -14413,7 +14176,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -14425,7 +14188,6 @@ shared_focus = {
 	}
 
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_INFLUENCE }
 	completion_reward = {
@@ -14463,7 +14225,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 		modifier = {
 			factor = 0
 			is_historical_focus_on = yes
@@ -14480,7 +14242,7 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_FOREIGN_POLICY }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_renounce_claims_on_hatay"
 		remove_state_claim = 158
@@ -14501,7 +14263,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -14513,7 +14275,7 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_FOREIGN_POLICY }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_close_pkk_border"
 		custom_effect_tooltip = TT_SYR_CLOSE_PKK_BORDER
@@ -14544,7 +14306,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -14557,7 +14319,7 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_FOREIGN_POLICY }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_approach_azerbaijan"
 		add_opinion_modifier = {
@@ -14584,7 +14346,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -14598,7 +14360,7 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_TRADE }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_turkish_delights"
 		custom_effect_tooltip = TT_SYR_CLOSE_PKK_BORDER
@@ -14629,7 +14391,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -14641,7 +14403,6 @@ shared_focus = {
 	}
 
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_INFLUENCE }
 	completion_reward = {
@@ -14677,7 +14438,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -14690,7 +14451,7 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_FOREIGN_POLICY }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_approach_russia"
 		add_opinion_modifier = {
@@ -14717,7 +14478,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -14729,7 +14490,6 @@ shared_focus = {
 	}
 
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_INDUSTRY }
 	completion_reward = {
@@ -14754,7 +14514,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -14767,7 +14527,7 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_TRADE }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_russian_trade"
 		add_opinion_modifier = {
@@ -14797,7 +14557,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -14809,7 +14569,6 @@ shared_focus = {
 	}
 
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_INFLUENCE }
 	completion_reward = {
@@ -14849,7 +14608,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 		modifier = {
 			factor = 0
 			is_historical_focus_on = yes
@@ -14869,7 +14628,7 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_DIPLOMACY }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_russian_military_cooperation"
 		SOV = { country_event = { id = CSTO.1 days = 1 } }
@@ -14892,7 +14651,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 		modifier = {
 			factor = 0
 			is_historical_focus_on = yes
@@ -14907,7 +14666,6 @@ shared_focus = {
 		OR = {
 			has_government = democratic
 			has_government = neutrality
-			has_start_date < 2016.1.1
 		}
 		country_exists = USA
 		NOT = { has_war_with = USA }
@@ -14920,7 +14678,7 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_DIPLOMACY }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_join_war_on_terror"
 		add_ideas = USA_usaid
@@ -14940,7 +14698,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -14955,12 +14713,11 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_FOREIGN_POLICY }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_joint_us_operations"
-		set_temp_variable = { threat_change = -5 }
-		modify_terror_threat_effect = yes
-		add_ideas = Enduring_Freedom
+		# FIXME: Needs to be replaced with something actually substantial
+		# add_ideas = Enduring_Freedom
 		add_ai_strategy = {
 			type = befriend
 			id = "USA"
@@ -14999,7 +14756,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -15013,7 +14770,7 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_FOREIGN_POLICY }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_closer_ties_to_france"
 		add_opinion_modifier = {
@@ -15040,7 +14797,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -15057,7 +14814,7 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_FOREIGN_POLICY }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_condemn_taliban"
 		if = {
@@ -15114,7 +14871,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -15127,7 +14884,6 @@ shared_focus = {
 	}
 
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_RESEARCH }
 	completion_reward = {
@@ -15156,7 +14912,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -15169,7 +14925,6 @@ shared_focus = {
 	}
 
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_INFLUENCE }
 	completion_reward = {
@@ -15211,7 +14966,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -15224,7 +14979,6 @@ shared_focus = {
 	}
 
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_INFLUENCE FOCUS_FILTER_RESOURCE }
 	completion_reward = {
@@ -15264,7 +15018,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -15277,7 +15031,6 @@ shared_focus = {
 	}
 
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_INFLUENCE FOCUS_FILTER_INDUSTRY }
 	completion_reward = {
@@ -15322,7 +15075,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -15339,7 +15092,7 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_DIPLOMACY }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_major_nato_ally"
 		add_ideas = Major_Non_NATO_Ally
@@ -15364,7 +15117,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 		modifier = {
 			factor = 0
 			is_historical_focus_on = yes
@@ -15379,7 +15132,6 @@ shared_focus = {
 		OR = {
 			has_government = fascism
 			has_government = neutrality
-			has_start_date < 2016.1.1
 		}
 		is_subject = no
 	}
@@ -15390,7 +15142,7 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_POLITICAL }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_harbor_extremists"
 		set_temp_variable = { party_index = 11 }
@@ -15413,31 +15165,14 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_POLITICAL }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_release_extremists"
-		every_neighbor_country = {
-			limit = {
-				OR = {
-					AND = {
-						has_idea = shia
-						NOT = { original_tag = HEZ }
-					}
-					has_idea = sunni
-					original_tag = LEB
-					AND = {
-						original_tag = HEZ
-						NOT = { country_exists = LEB }
-					}
-				}
-			}
-			set_temp_variable = { threat_change = 5 }
-			modify_terror_threat_effect = yes
-		}
+		# TODO: needs to be replaced with something
 	}
 
 }
@@ -15454,7 +15189,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -15474,7 +15209,6 @@ shared_focus = {
 	}
 
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_INFLUENCE }
 	completion_reward = {
@@ -15506,7 +15240,7 @@ shared_focus = {
 			PAL = { country_event = { id = SyriaFocus.76 hours = 6 } }
 		}
 		send_equipment = {
-			equipment = Inf_equipment
+			equipment = infantry_weapons_type
 			amount = 1000
 			target = HAM
 		}
@@ -15532,7 +15266,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -15546,12 +15280,11 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
 	search_filters = { FOCUS_FILTER_INFLUENCE }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_supply_taliban"
 		send_equipment = {
-			equipment = Inf_equipment
+			equipment = infantry_weapons_type
 			amount = 1000
 			target = TAL
 		}
@@ -15577,7 +15310,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -15591,12 +15324,11 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
 	search_filters = { FOCUS_FILTER_INFLUENCE }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_supply_al_shabaab"
 		send_equipment = {
-			equipment = Inf_equipment
+			equipment = infantry_weapons_type
 			amount = 1000
 			target = SHB
 		}
@@ -15625,10 +15357,9 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 	cancel_if_invalid = yes
-
 
 	search_filters = { FOCUS_FILTER_MANPOWER }
 	completion_reward = {
@@ -15659,7 +15390,7 @@ shared_focus = {
 	relative_position_id = SYR_diplomatic_effort
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 
 	available = {
@@ -15671,7 +15402,7 @@ shared_focus = {
 
 	cancel_if_invalid = yes
 
-
+	search_filters = { FOCUS_FILTER_INFLUENCE }
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SYR_ally_alqaeda"
 		if = {

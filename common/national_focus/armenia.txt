@@ -3314,11 +3314,9 @@ focus_tree = {
 			}
 		}
 		bypass = {
-			AND = {
-				has_idea = edu_05
-				has_idea = health_06
-				has_idea = social_06
-			}
+			has_idea = edu_05
+			has_idea = health_06
+			has_idea = social_06
 		}
 
 		completion_reward = {
@@ -3330,49 +3328,45 @@ focus_tree = {
 			hidden_effect = {
 				if = {
 					limit = {
-						AND = {
-							NOT = {
-								has_idea = ARM_social_promises
-							}
-							OR = {
-								has_idea = edu_01
-								has_idea = edu_02
-							}
-							OR = {
-								has_idea = health_01
-								has_idea = health_02
-								has_idea = health_03
-							}
-							OR = {
-								has_idea = social_01
-								has_idea = social_02
-								has_idea = social_03
-							}
+						NOT = {
+							has_idea = ARM_social_promises
+						}
+						OR = {
+							has_idea = edu_01
+							has_idea = edu_02
+						}
+						OR = {
+							has_idea = health_01
+							has_idea = health_02
+							has_idea = health_03
+						}
+						OR = {
+							has_idea = social_01
+							has_idea = social_02
+							has_idea = social_03
 						}
 					}
 					country_event = arm_pashinyan.5
 				}
 				if = {
 					limit = {
-						AND = {
-							NOT = {
-								has_idea = ARM_social_promises
-							}
-							OR = {
-								has_idea = edu_03
-								has_idea = edu_04
-								has_idea = edu_05
-							}
-							OR = {
-								has_idea = health_04
-								has_idea = health_05
-								has_idea = health_06
-							}
-							OR = {
-								has_idea = social_04
-								has_idea = social_05
-								has_idea = social_06
-							}
+						NOT = {
+							has_idea = ARM_social_promises
+						}
+						OR = {
+							has_idea = edu_03
+							has_idea = edu_04
+							has_idea = edu_05
+						}
+						OR = {
+							has_idea = health_04
+							has_idea = health_05
+							has_idea = health_06
+						}
+						OR = {
+							has_idea = social_04
+							has_idea = social_05
+							has_idea = social_06
 						}
 					}
 					country_event = arm_pashinyan.6
@@ -3585,7 +3579,7 @@ focus_tree = {
 		}
 
 		bypass = {
-			BLR = { exists = no }
+			NOT = { country_exists = BLR }
 		}
 
 		completion_reward = {
@@ -4307,8 +4301,9 @@ focus_tree = {
 			add_state_claim = 935
 			add_state_claim = 1039
 			add_war_support = 0.07
-			every_country = {
-				limit = { has_idea = CSTO_member }
+			for_each_scope_loop = {
+				array = global.CSTO_member
+				tooltip = TT_ALL_CSTO_MEMBER_NATIONS_GAIN
 				add_opinion_modifier = { target = ROOT modifier = drama }
 			}
 		}
@@ -5270,19 +5265,20 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus ARM_against_euroscepticism executed"
-			every_country = {
-				limit = {
-					has_idea = EU_member
-				}
-				add_opinion_modifier = {
-					target = ROOT
-					modifier = recent_actions_positive
+			if = {
+				limit = { NOT = { has_global_flag = GAME_RULE_eu_disabled } }
+				set_temp_variable = { modify_eurosceptic = -0.09 }
+				set_temp_variable = { modify_eurosceptic_target = ROOT }
+				eurosceptic_change = yes
+				for_each_scope_loop = {
+					array = global.EU_member
+					tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+					if = {
+						limit = { NOT = { tag = ROOT } }
+						add_opinion_modifier = { target = ROOT modifier = recent_actions_positive }
+					}
 				}
 			}
-
-			set_temp_variable = { modify_eurosceptic = -0.09 }
-			set_temp_variable = { modify_eurosceptic_target = ROOT }
-			eurosceptic_change = yes
 			add_stability = 0.02
 		}
 		ai_will_do = {
@@ -5311,11 +5307,9 @@ focus_tree = {
 		}
 
 		bypass = {
-			OR = {
-				NOT = {
-					country_exists = BLR
-					country_exists = UKR
-				}
+			NOT = {
+				country_exists = BLR
+				country_exists = UKR
 			}
 		}
 
@@ -7664,7 +7658,7 @@ focus_tree = {
 				AND = {
 					PER = {
 						is_subject = no
-						nationalist_right_wing_populists_are_not_in_power = yes
+						nationalist_right_wing_populists_are_in_power = no
 						influence_higher_40 = yes
 					}
 				}
@@ -8893,7 +8887,7 @@ focus_tree = {
 				name = ARM_davisur_arm
 				uses = 1
 				bonus = 1
-				technology = camouflage3
+				technology = camouflage_3
 			}
 			custom_effect_tooltip = ARM_add_idea_to_army_idea_tt
 			add_ideas = ARM_davisur_arms
@@ -9315,8 +9309,8 @@ focus_tree = {
 				name = ARM_our_own_armor
 				uses = 2
 				bonus = 0.5
-				technology = body_armor_2010
-				technology = body_armor_2000
+				technology = body_armor_3
+				technology = body_armor_2
 			}
 			set_temp_variable = { treasury_change = -5.00 }
 			modify_treasury_effect = yes
@@ -9404,8 +9398,8 @@ focus_tree = {
 				name = ARM_new_unif_proj
 				uses = 2
 				bonus = 0.5
-				technology = camouflage2
-				technology = camouflage3
+				technology = camouflage_2
+				technology = camouflage_3
 			}
 			set_temp_variable = { treasury_change = -5.00 }
 			modify_treasury_effect = yes
@@ -10225,12 +10219,12 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus ARM_foreign_legion_france"
 			add_equipment_to_stockpile = {
-				type = infantry_weapons3
+				type = infantry_weapons_4
 				amount = 1500
 				producer = FRA
 			}
 			add_equipment_to_stockpile = {
-				type = command_control_equipment
+				type = cnc_equipment_1
 				amount = 800
 				producer = FRA
 			}
@@ -10282,12 +10276,12 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus ARM_foreign_legion_india"
 			add_equipment_to_stockpile = {
-				type = infantry_weapons3
+				type = infantry_weapons_4
 				amount = 1500
 				producer = RAJ
 			}
 			add_equipment_to_stockpile = {
-				type = command_control_equipment
+				type = cnc_equipment_1
 				amount = 800
 				producer = RAJ
 			}
@@ -12712,12 +12706,16 @@ focus_tree = {
 				log = "[GetDateText]: [This.GetName]: focus ARM_prop_against_west_values executed"
 				ARM_eu_ger_fra_check_negative_script = yes
 				remove_ideas = ARM_eu_lgbt
-				every_country = {
-					limit = {
-						has_idea = EU_member
-						NOT = { tag = ARM }
+				if = {
+					limit = { NOT = { has_global_flag = GAME_RULE_eu_disabled } }
+					for_each_scope_loop = {
+						array = global.EU_member
+						tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+						if = {
+							limit = { NOT = { tag = ROOT } }
+							add_opinion_modifier = { target = ARM modifier = drama }
+						}
 					}
-					add_opinion_modifier = { target = ARM modifier = drama }
 				}
 			}
 
@@ -12793,12 +12791,17 @@ focus_tree = {
 				log = "[GetDateText]: [This.GetName]: focus ARM_join_council_of_europe executed"
 				ARM_eu_ger_fra_check_script = yes
 				add_ideas = ARM_eu_council
-				every_country = {
-					limit = {
-						has_idea = EU_member
-						NOT = { tag = ARM }
+				if = {
+					limit = { NOT = { has_global_flag = GAME_RULE_eu_disabled } }
+					for_each_scope_loop = {
+						array = global.EU_member
+						tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+
+						if = {
+							limit = { NOT = { tag = ROOT } }
+							add_opinion_modifier = { target = ARM modifier = recent_actions_positive }
+						}
 					}
-					add_opinion_modifier = { target = ARM modifier = recent_actions_positive }
 				}
 			}
 
@@ -12832,12 +12835,16 @@ focus_tree = {
 					ideology = democratic
 					popularity = -0.20
 				}
-				every_country = {
-					limit = {
-						has_idea = EU_member
-						NOT = { tag = ARM }
+				if = {
+					limit = { NOT = { has_global_flag = GAME_RULE_eu_disabled } }
+					for_each_scope_loop = {
+						array = global.EU_member
+						tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+						if = {
+							limit = { NOT = { tag = ROOT } }
+							add_opinion_modifier = { target = ARM modifier = drama }
+						}
 					}
-					add_opinion_modifier = { target = ARM modifier = drama }
 				}
 			}
 
@@ -12868,12 +12875,16 @@ focus_tree = {
 			completion_reward = {
 				log = "[GetDateText]: [This.GetName]: focus ARM_diplomatic_distance_eu executed"
 				ARM_eu_ger_fra_check_negative_script = yes
-				every_country = {
-					limit = {
-						has_idea = EU_member
-						NOT = { tag = ARM }
+				if = {
+					limit = { NOT = { has_global_flag = GAME_RULE_eu_disabled } }
+					for_each_scope_loop = {
+						array = global.EU_member
+						tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+						if = {
+							limit = { NOT = { tag = ROOT } }
+							add_opinion_modifier = { target = ARM modifier = drama }
+						}
 					}
-					add_opinion_modifier = { target = ARM modifier = drama }
 				}
 			}
 
@@ -12905,12 +12916,16 @@ focus_tree = {
 				log = "[GetDateText]: [This.GetName]: focus ARM_seizing_eu_funds executed"
 				ARM_eu_seize_funds_script = yes
 				ARM_eu_ger_fra_check_negative_script = yes
-				every_country = {
-					limit = {
-						has_idea = EU_member
-						NOT = { tag = ARM }
+				if = {
+					limit = { NOT = { has_global_flag = GAME_RULE_eu_disabled } }
+					for_each_scope_loop = {
+						array = global.EU_member
+						tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+						if = {
+							limit = { NOT = { tag = ROOT } }
+							add_opinion_modifier = { target = ARM modifier = drama }
+						}
 					}
-					add_opinion_modifier = { target = ARM modifier = drama }
 				}
 			}
 
@@ -12988,12 +13003,16 @@ focus_tree = {
 				log = "[GetDateText]: [This.GetName]: focus ARM_standing_comitee_eu_integr executed"
 				add_ideas = ARM_eu_commitie
 				ARM_eu_ger_fra_check_script = yes
-				every_country = {
-					limit = {
-						has_idea = EU_member
-						NOT = { tag = ARM }
+				if = {
+					limit = { NOT = { has_global_flag = GAME_RULE_eu_disabled } }
+					for_each_scope_loop = {
+						array = global.EU_member
+						tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+						if = {
+							limit = { NOT = { tag = ROOT } }
+							add_opinion_modifier = { target = ARM modifier = recent_actions_positive }
+						}
 					}
-					add_opinion_modifier = { target = ARM modifier = recent_actions_positive }
 				}
 			}
 
@@ -13079,14 +13098,16 @@ focus_tree = {
 						country_event = arme.105
 					}
 				}
-				every_country = {
-					limit = {
-						has_idea = EU_member
-						NOT = { tag = ARM }
-						NOT = { tag = FRA }
-						NOT = { tag = GER }
+				if = {
+					limit = { NOT = { has_global_flag = GAME_RULE_eu_disabled } }
+					for_each_scope_loop = {
+						array = global.EU_member
+						tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+						if = {
+							limit = { NOT = { tag = ROOT } }
+							add_opinion_modifier = { target = ARM modifier = drama }
+						}
 					}
-					add_opinion_modifier = { target = ARM modifier = drama }
 				}
 			}
 
@@ -13119,12 +13140,16 @@ focus_tree = {
 				log = "[GetDateText]: [This.GetName]: focus ARM_close_integr_orgs executed"
 				ARM_eu_close_org_script = yes
 				ARM_eu_ger_fra_check_negative_script = yes
-				every_country = {
-					limit = {
-						has_idea = EU_member
-						NOT = { tag = ARM }
+				if = {
+					limit = { NOT = { has_global_flag = GAME_RULE_eu_disabled } }
+					for_each_scope_loop = {
+						array = global.EU_member
+						tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+						if = {
+							limit = { NOT = { tag = ROOT } }
+							add_opinion_modifier = { target = ARM modifier = drama }
+						}
 					}
-					add_opinion_modifier = { target = ARM modifier = drama }
 				}
 			}
 
@@ -13155,16 +13180,20 @@ focus_tree = {
 
 			completion_reward = {
 				log = "[GetDateText]: [This.GetName]: focus ARM_support_euroscept executed"
-				set_temp_variable = { modify_eurosceptic = 0.05 }
-				set_temp_variable = { modify_eurosceptic_target = ROOT }
-				eurosceptic_change = yes
 				ARM_eu_ger_fra_check_negative_script = yes
-				every_country = {
-					limit = {
-						has_idea = EU_member
-						NOT = { tag = ARM }
+				if = {
+					limit = { NOT = { has_global_flag = GAME_RULE_eu_disabled } }
+					set_temp_variable = { modify_eurosceptic = 0.05 }
+					set_temp_variable = { modify_eurosceptic_target = ROOT }
+					eurosceptic_change = yes
+					for_each_scope_loop = {
+						array = global.EU_member
+						tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+						if = {
+							limit = { NOT = { tag = ROOT } }
+							add_opinion_modifier = { target = ARM modifier = drama }
+						}
 					}
-					add_opinion_modifier = { target = ARM modifier = drama }
 				}
 			}
 
@@ -13208,33 +13237,21 @@ focus_tree = {
 				log = "[GetDateText]: [This.GetName]: focus ARM_arm_eu_compr_agre executed"
 				ARM_eu_cooperation_script = yes
 				ARM_eu_ger_fra_check_script = yes
-				every_country = {
-					limit = {
-						has_idea = EU_member
-						NOT = { tag = ARM }
-					}
-					add_opinion_modifier = { target = ARM modifier = recent_actions_positive }
-				}
-				GER = {
-					if = {
-						limit = { NOT = { is_in_array = { THIS.permanent_investment_targets = ROOT } } }
-						custom_effect_tooltip = add_to_investment_array_tooltip
-						add_to_array = { THIS.permanent_investment_targets = ROOT }
-					}
-					else = {
-						custom_effect_tooltip = add_to_investment_array_tooltip_already_in
+				if = {
+					limit = { NOT = { has_global_flag = GAME_RULE_eu_disabled } }
+					for_each_scope_loop = {
+						array = global.EU_member
+						tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+						if = {
+							limit = { NOT = { tag = ROOT } }
+							add_opinion_modifier = { target = ARM modifier = recent_actions_positive }
+						}
 					}
 				}
-				FRA = {
-					if = {
-						limit = { NOT = { is_in_array = { THIS.permanent_investment_targets = ROOT } } }
-						custom_effect_tooltip = add_to_investment_array_tooltip
-						add_to_array = { THIS.permanent_investment_targets = ROOT }
-					}
-					else = {
-						custom_effect_tooltip = add_to_investment_array_tooltip_already_in
-					}
-				}
+				set_temp_variable = { target_nation = GER }
+				change_permanent_investment_target = yes
+				set_temp_variable = { target_nation = FRA }
+				change_permanent_investment_target = yes
 				custom_effect_tooltip = ARM_armenia_eu_tt
 			}
 
@@ -13278,12 +13295,16 @@ focus_tree = {
 				log = "[GetDateText]: [This.GetName]: focus ARM_open_up_for_ngos executed"
 				add_ideas = ARM_eu_ngos
 				ARM_eu_ger_fra_check_script = yes
-				every_country = {
-					limit = {
-						has_idea = EU_member
-						NOT = { tag = ARM }
+				if = {
+					limit = { NOT = { has_global_flag = GAME_RULE_eu_disabled } }
+					for_each_scope_loop = {
+						array = global.EU_member
+						tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+						if = {
+							limit = { NOT = { tag = ROOT } }
+							add_opinion_modifier = { target = ARM modifier = recent_actions_positive }
+						}
 					}
-					add_opinion_modifier = { target = ARM modifier = recent_actions_positive }
 				}
 			}
 
@@ -13309,12 +13330,16 @@ focus_tree = {
 				log = "[GetDateText]: [This.GetName]: focus ARM_prep_article_fortynine executed"
 				add_ideas = ARM_eu_article_49
 				ARM_eu_ger_fra_check_script = yes
-				every_country = {
-					limit = {
-						has_idea = EU_member
-						NOT = { tag = ARM }
+				if = {
+					limit = { NOT = { has_global_flag = GAME_RULE_eu_disabled } }
+					for_each_scope_loop = {
+						array = global.EU_member
+						tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+						if = {
+							limit = { NOT = { tag = ROOT } }
+							add_opinion_modifier = { target = ARM modifier = recent_actions_positive }
+						}
 					}
-					add_opinion_modifier = { target = ARM modifier = recent_actions_positive }
 				}
 			}
 
@@ -14292,7 +14317,7 @@ focus_tree = {
 				custom_effect_tooltip = effect_if_they_rec_tt
 				effect_tooltip = {
 					add_equipment_to_stockpile = {
-						type = infantry_weapons3
+						type = infantry_weapons_4
 						amount = 6000
 						producer = SOV
 					}
@@ -14407,16 +14432,8 @@ focus_tree = {
 
 			completion_reward = {
 				log = "[GetDateText]: [This.GetName]: focus ARM_expand_us_embassy executed"
-				USA = {
-					if = {
-						limit = { NOT = { is_in_array = { THIS.permanent_investment_targets = ROOT } } }
-						custom_effect_tooltip = add_to_investment_array_tooltip
-						add_to_array = { THIS.permanent_investment_targets = ROOT }
-					}
-					else = {
-						custom_effect_tooltip = add_to_investment_array_tooltip_already_in
-					}
-				}
+				set_temp_variable = { target_nation = USA }
+				change_permanent_investment_target = yes
 				add_opinion_modifier = { target = USA modifier = recent_actions_positive }
 				reverse_add_opinion_modifier = { target = USA modifier = recent_actions_positive }
 				add_timed_idea = {
@@ -14952,12 +14969,16 @@ focus_tree = {
 
 			completion_reward = {
 				log = "[GetDateText]: [This.GetName]: focus ARM_anti_nato_propaganda executed"
-				every_country = {
-					limit = {
-						has_idea = NATO_member
-						NOT = { tag = ARM }
+				if = {
+					limit = { NOT = { has_global_flag = GAME_RULE_eu_disabled } }
+					for_each_scope_loop = {
+						array = global.EU_member
+						tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+						if = {
+							limit = { NOT = { tag = ROOT } }
+							add_opinion_modifier = { target = ARM modifier = drama }
+						}
 					}
-					add_opinion_modifier = { target = ARM modifier = drama }
 				}
 				add_war_support = -0.05
 				add_political_power = 75
@@ -15295,7 +15316,7 @@ focus_tree = {
 					set_temp_variable = { treasury_change = 20 }
 					modify_treasury_effect = yes
 					add_equipment_to_stockpile = {
-						type = infantry_weapons3
+						type = infantry_weapons_4
 						amount = -6000
 						producer = SOV
 					}
@@ -15801,14 +15822,8 @@ focus_tree = {
 
 			completion_reward = {
 				log = "[GetDateText]: [This.GetName]: focus ARM_capture_iranian_agents executed"
-				add_opinion_modifier = {
-					target = HEZ
-					modifier = terrorism_is_no_no
-				}
-				reverse_add_opinion_modifier = {
-					target = HEZ
-					modifier = terrorism_is_no_no
-				}
+				add_opinion_modifier = { target = HEZ modifier = terrorism_is_no_no }
+				reverse_add_opinion_modifier = { target = HEZ modifier = terrorism_is_no_no }
 				set_temp_variable = { percent_change = -10 }
 				set_temp_variable = { tag_index = HEZ }
 				set_temp_variable = { influence_target = ARM }
@@ -16043,13 +16058,16 @@ focus_tree = {
 						modifier = recent_actions_positive
 						target = GRE
 					}
-					every_country = {
-						limit = {
-							OR = {
-								has_idea = EU_member
+					if = {
+						limit = { NOT = { has_global_flag = GAME_RULE_eu_disabled } }
+						for_each_scope_loop = {
+							array = global.EU_member
+							tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+							if = {
+								limit = { NOT = { tag = ROOT } }
+								add_opinion_modifier = { target = ARM modifier = supports_us }
 							}
 						}
-						add_opinion_modifier = { target = ARM modifier = supports_us }
 					}
 				}
 			}
@@ -16446,12 +16464,10 @@ focus_tree = {
 				NOT = {
 					has_war_with = KAZ
 				}
-				OR = {
-					KAZ = {
-						has_opinion = {
-							target = ARM
-							value > 9
-						}
+				KAZ = {
+					has_opinion = {
+						target = ARM
+						value > 9
 					}
 				}
 			}
@@ -16639,12 +16655,10 @@ focus_tree = {
 				NOT = {
 					has_war_with = KAZ
 				}
-				OR = {
-					KAZ = {
-						has_opinion = {
-							target = ARM
-							value > 9
-						}
+				KAZ = {
+					has_opinion = {
+						target = ARM
+						value > 9
 					}
 				}
 			}
@@ -18024,12 +18038,12 @@ focus_tree = {
 					set_temp_variable = { treasury_change = -15 }
 					modify_treasury_effect = yes
 					add_equipment_to_stockpile = {
-						type = command_control_equipment2
+						type = cnc_equipment_3
 						amount = 2000
 						producer = POL
 					}
 					add_equipment_to_stockpile = {
-						type = infantry_weapons
+						type = infantry_weapons_1
 						amount = 4500
 						producer = POL
 					}
@@ -18469,10 +18483,7 @@ focus_tree = {
 
 			completion_reward = {
 				log = "[GetDateText]: [This.GetName]: focus ARM_crossroad_of_peace executed"
-				every_country = {
-					limit = {
-						has_idea = EU_president
-					}
+				var:global.eucomission = {
 					country_event = arm_expansion.7
 				}
 				CHI = {
@@ -18524,13 +18535,11 @@ focus_tree = {
 			}
 
 			bypass = {
-				AND = {
-					KUR = {
-						exists = no
-					}
-					PKK = {
-						exists = no
-					}
+				KUR = {
+					exists = no
+				}
+				PKK = {
+					exists = no
 				}
 			}
 

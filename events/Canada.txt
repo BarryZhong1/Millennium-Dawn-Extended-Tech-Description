@@ -24,7 +24,6 @@ country_event = {
 		add_political_power = -75
 
 		hidden_effect = {
-			set_country_flag = CAN_campaigning_early
 			country_event = { id = canada.3 days = 100 }
 		}
 	}
@@ -56,7 +55,6 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: canada.1.a executed"
 		add_political_power = -50
 		hidden_effect = {
-			set_country_flag = CAN_campaigning_normal
 			country_event = { id = canada.3 days = 50 }
 		}
 	}
@@ -91,7 +89,6 @@ country_event = {
 		add_political_power = -25
 
 		hidden_effect = {
-			set_country_flag = CAN_campaigning_late
 			country_event = { id = canada.3 days = 7 }
 		}
 	}
@@ -152,7 +149,6 @@ country_event = {
 			}
 		}
 		add_political_power = -20
-		set_country_flag = CAN_noonehelped
 		custom_effect_tooltip = CAN_helped_no_one_yet_tt
 	}
 }
@@ -181,7 +177,6 @@ country_event = {
 		add_stability = 0.03
 		custom_effect_tooltip = CAN_try_fix_happiness_tt
 		hidden_effect = {
-			set_country_flag = CAN_try_fix_happiness_flag
 			#country_event = { id = canada.x days = 7 }
 			random_list = {
 				5 = {
@@ -222,7 +217,6 @@ country_event = {
 		add_political_power = 20
 		custom_effect_tooltip = CAN_did_nothing_happiness_tt
 		hidden_effect = {
-			set_country_flag = CAN_did_nothing_happiness_flag
 			if = {
 				limit = {
 					check_variable = {
@@ -873,11 +867,9 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: canada.504.a executed"
 		set_temp_variable = { treasury_change = -15 }
 		modify_treasury_effect = yes
-		custom_effect_tooltip = CAN_canadian_economy_dynamic_modifier_modify_tt
-		set_temp_variable = { CAN_value_change = 0.15 }
-		CAN_change_infrastructure = yes
-		set_temp_variable = { CAN_value_change = -0.05 }
-		CAN_change_stability_factor = yes
+		custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CAN_canadian_economy_dynamic_modifier }
+		add_to_variable = { CAN_production_speed_infrastructure_factor_var = 0.15 tooltip = production_speed_infrastructure_factor_tt }
+		add_to_variable = { CAN_stability_factor_var = -0.05 tooltip = stability_factor_tt }
 
 		ai_chance = {
 			base = 100
@@ -890,11 +882,9 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: canada.504.b executed"
 		set_temp_variable = { treasury_change = -10 }
 		modify_treasury_effect = yes
-		custom_effect_tooltip = CAN_canadian_economy_dynamic_modifier_modify_tt
-		set_temp_variable = { CAN_value_change = 0.10 }
-		CAN_change_infrastructure = yes
-		set_temp_variable = { CAN_value_change = -0.03 }
-		CAN_change_stability_factor = yes
+		custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CAN_canadian_economy_dynamic_modifier }
+		add_to_variable = { CAN_production_speed_infrastructure_factor_var = 0.10 tooltip = production_speed_infrastructure_factor_tt }
+		add_to_variable = { CAN_stability_factor_var = -0.03 tooltip = stability_factor_tt }
 
 		ai_chance = {
 			base = 0
@@ -906,11 +896,9 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: canada.504.c executed"
 		set_temp_variable = { treasury_change = -5 }
 		modify_treasury_effect = yes
-		custom_effect_tooltip = CAN_canadian_economy_dynamic_modifier_modify_tt
-		set_temp_variable = { CAN_value_change = 0.05 }
-		CAN_change_infrastructure = yes
-		set_temp_variable = { CAN_value_change = -0.01 }
-		CAN_change_stability_factor = yes
+		custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CAN_canadian_economy_dynamic_modifier }
+		add_to_variable = { CAN_production_speed_infrastructure_factor_var = 0.05 tooltip = production_speed_infrastructure_factor_tt }
+		add_to_variable = { CAN_stability_factor_var = -0.01 tooltip = stability_factor_tt }
 
 		ai_chance = {
 			base = 0
@@ -933,6 +921,9 @@ country_event = {
 	option = {
 		name = canada.510.a
 		log = "[GetDateText]: [This.GetName]: canada.510.a executed"
+		set_temp_variable = { wargoal_on = DEN }
+		set_temp_variable = { wargoal_type = 2 }
+		add_threat_from_wargoal_effect = yes
 		create_wargoal = {
 			target = DEN
 			type = annex_everything

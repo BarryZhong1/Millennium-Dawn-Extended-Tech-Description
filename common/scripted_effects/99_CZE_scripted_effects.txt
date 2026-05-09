@@ -497,6 +497,7 @@ CZE_skoda_selling_all_cars = {
 		modify_treasury_effect = yes
 		add_to_variable = { CZE_skoda_superb_cars_treasury = CZE_sell_all_cars_profit }
 	}
+	CZE_gui_dirty_update = yes
 }
 
 CZE_volkswagen_group_civil_war_calculate_percentage_effect = {
@@ -688,27 +689,28 @@ CZE_calculate_political_parties_modifiers_effect = {
 	set_variable = { CZE_corruption_mod = 0 }
 	set_variable = { CZE_prod_speed_building_factor = 0 }
 	set_variable = { CZE_research_speed_mod = 0 }
+	set_variable = { CZE_foreign_influence_defense_modifier = 0 }
 	if = {
 		limit = {
 			check_variable = { THIS.party_pop_array^1 < 0.2 }
 		}
-		set_variable = { CZE_foreign_influence_defense_modifier = -0.07 }
-		set_variable = { CZE_prod_speed_building_factor = -0.03 }
+		set_variable = { CZE_ods_foreign_influence_defense_modifier = -0.07 }
+		set_variable = { CZE_ods_prod_speed_building_factor = -0.03 }
 	}
 	else_if = {
 		limit = {
 			check_variable = { THIS.party_pop_array^1 > 0.2 }
 			check_variable = { THIS.party_pop_array^1 < 0.5 }
 		}
-		set_variable = { CZE_foreign_influence_defense_modifier = 0.03 }
-		set_variable = { CZE_prod_speed_building_factor = 0.03 }
+		set_variable = { CZE_ods_foreign_influence_defense_modifier = 0.03 }
+		set_variable = { CZE_ods_prod_speed_building_factor = 0.03 }
 	}
 	else_if = {
 		limit = {
 			check_variable = { THIS.party_pop_array^1 > 0.5 }
 		}
-		set_variable = { CZE_foreign_influence_defense_modifier = 0.08 }
-		set_variable = { CZE_prod_speed_building_factor = 0.08 }
+		set_variable = { CZE_ods_foreign_influence_defense_modifier = 0.08 }
+		set_variable = { CZE_ods_prod_speed_building_factor = 0.08 }
 	}
 
 	if = {
@@ -743,7 +745,7 @@ CZE_calculate_political_parties_modifiers_effect = {
 			date < 2010.5.30
 		}
 		set_variable = { CZE_kscm_communist_drift_modifier = -0.04 }
-		set_variable = { CZE_prod_speed_building_factor = -0.04 }
+		set_variable = { CZE_kscm_prod_speed_building_factor = -0.04 }
 	}
 	else_if = {
 		limit = {
@@ -752,7 +754,7 @@ CZE_calculate_political_parties_modifiers_effect = {
 			date < 2010.5.30
 		}
 		set_variable = { CZE_kscm_communist_drift_modifier = 0.04 }
-		set_variable = { CZE_prod_speed_building_factor = 0.02 }
+		set_variable = { CZE_kscm_prod_speed_building_factor = 0.02 }
 	}
 	else_if = {
 		limit = {
@@ -760,7 +762,7 @@ CZE_calculate_political_parties_modifiers_effect = {
 			date < 2010.5.30
 		}
 		set_variable = { CZE_kscm_communist_drift_modifier = 0.1 }
-		set_variable = { CZE_prod_speed_building_factor = 0.08 }
+		set_variable = { CZE_kscm_prod_speed_building_factor = 0.08 }
 	}
 
 	if = {
@@ -768,7 +770,7 @@ CZE_calculate_political_parties_modifiers_effect = {
 			check_variable = { THIS.party_pop_array^14 < 0.2 }
 		}
 		set_variable = { CZE_kdu_agricolture_productivity_modifier = 0.04 }
-		set_variable = { CZE_foreign_influence_defense_modifier = -0.06 }
+		set_variable = { CZE_kdu_foreign_influence_defense_modifier = -0.06 }
 	}
 	else_if = {
 		limit = {
@@ -776,14 +778,14 @@ CZE_calculate_political_parties_modifiers_effect = {
 			check_variable = { THIS.party_pop_array^14 < 0.5 }
 		}
 		set_variable = { CZE_kdu_agricolture_productivity_modifier = 0.08 }
-		set_variable = { CZE_foreign_influence_defense_modifier = 0.01 }
+		set_variable = { CZE_kdu_foreign_influence_defense_modifier = 0.01 }
 	}
 	else_if = {
 		limit = {
 			check_variable = { THIS.party_pop_array^14 > 0.5 }
 		}
 		set_variable = { CZE_kdu_agricolture_productivity_modifier = 0.12 }
-		set_variable = { CZE_foreign_influence_defense_modifier = 0.05 }
+		set_variable = { CZE_kdu_foreign_influence_defense_modifier = 0.05 }
 	}
 
 	if = {
@@ -815,7 +817,7 @@ CZE_calculate_political_parties_modifiers_effect = {
 			date > 2011.4.11
 		}
 		set_variable = { CZE_ano_corporate_tax_income_multiplier_modifier = -0.05 }
-		set_variable = { CZE_prod_speed_building_factor = -0.07 }
+		set_variable = { CZE_ano_prod_speed_building_factor = -0.07 }
 	}
 	else_if = {
 		limit = {
@@ -824,7 +826,7 @@ CZE_calculate_political_parties_modifiers_effect = {
 			date > 2011.4.11
 		}
 		set_variable = { CZE_ano_corporate_tax_income_multiplier_modifier = 0.05 }
-		set_variable = { CZE_prod_speed_building_factor = 0.03 }
+		set_variable = { CZE_ano_prod_speed_building_factor = 0.03 }
 	}
 	else_if = {
 		limit = {
@@ -832,7 +834,7 @@ CZE_calculate_political_parties_modifiers_effect = {
 			date > 2011.4.11
 		}
 		set_variable = { CZE_ano_corporate_tax_income_multiplier_modifier = 0.12 }
-		set_variable = { CZE_prod_speed_building_factor = 0.07 }
+		set_variable = { CZE_ano_prod_speed_building_factor = 0.07 }
 	}
 
 	if = {
@@ -860,6 +862,12 @@ CZE_calculate_political_parties_modifiers_effect = {
 		set_variable = { CZE_top_health_cost_multiplier_modifier = 0.08 }
 		set_variable = { CZE_top_buildings_worker_requirement_modifier = -0.08 }
 	}
+
+	add_to_variable = { CZE_prod_speed_building_factor = CZE_ano_prod_speed_building_factor }
+	add_to_variable = { CZE_prod_speed_building_factor = CZE_kscm_prod_speed_building_factor }
+	add_to_variable = { CZE_prod_speed_building_factor = CZE_ods_prod_speed_building_factor }
+	add_to_variable = { CZE_foreign_influence_defense_modifier = CZE_ods_foreign_influence_defense_modifier }
+	add_to_variable = { CZE_foreign_influence_defense_modifier = CZE_kdu_foreign_influence_defense_modifier }
 
 	### LEADER EFFECTS ###
 	# ODS
@@ -2030,6 +2038,7 @@ CZE_SLO_add_people_acceptance_points = {
 			max = 100
 		}
 	}
+	CZE_gui_dirty_update = yes
 }
 
 CZE_SLO_add_law_similarity_points = {
@@ -2050,6 +2059,7 @@ CZE_SLO_add_law_similarity_points = {
 			max = 100
 		}
 	}
+	CZE_gui_dirty_update = yes
 }
 
 CZE_SLO_add_military_support_points = {
@@ -2070,6 +2080,7 @@ CZE_SLO_add_military_support_points = {
 			max = 100
 		}
 	}
+	CZE_gui_dirty_update = yes
 }
 
 CZE_SLO_post_unification_chaos_effect = {
@@ -2486,7 +2497,7 @@ CZE_bucarest_meeting_completed = {
 	if = {
 		limit = { check_variable = { CZE_ROM_decisions_completed > 9 } }
 
-		country_event = { id = CZE_HUN_monarchy_event.42 }
+		country_event = CZE_HUN_monarchy_event.42
 	}
 }
 
@@ -2925,6 +2936,7 @@ CZE_skoda_universal_export_button_click = {
 	else = {
 		country_event = czech_skoda.6
 	}
+	CZE_gui_dirty_update = yes
 }
 
 # Generic event option effect for all 4 car generations
@@ -3106,6 +3118,7 @@ CZE_skoda_purchase_cars_effect = {
 	}
 
 	clear_variable = bought_generation
+	CZE_gui_dirty_update = yes
 }
 
 # Get the demand for the purchasing country
@@ -3166,6 +3179,7 @@ CZE_skoda_get_country_demand_variable_effect = {
 		limit = { ROOT = { tag = HOL } }
 		set_temp_variable = { temp_demand_value = CZE_skoda_superb_netherlands_demand }
 	}
+	CZE_gui_dirty_update = yes
 }
 
 # Modify the demand for the purchasing country
@@ -3226,6 +3240,7 @@ CZE_skoda_modify_country_demand_effect = {
 		limit = { ROOT = { tag = HOL } }
 		add_to_variable = { CZE_skoda_superb_netherlands_demand = demand_reduction }
 	}
+	CZE_gui_dirty_update = yes
 }
 
 # Clear all export flags from the buyer country
@@ -3314,6 +3329,7 @@ CZE_skoda_clear_all_export_flags = {
 		clr_country_flag = CZE_skoda_export_netherlands_gen3_flag
 		clr_country_flag = CZE_skoda_export_netherlands_gen4_flag
 	}
+	CZE_gui_dirty_update = yes
 }
 
 CZE_skoda_bills_fail_effect = {
@@ -3386,27 +3402,36 @@ CZE_skoda_bills_success_effect = {
 CZE_HUN_gdp_stolen_calculation = {
 	if = {
 		limit = {
-			has_country_flag = CZE_HUN_receive_additional_income_from_hungary_1
+			has_idea = CZE_HUN_receive_additional_income_from_hungary_1
 		}
 		set_variable = { CZE_HUN_gain_income_trade = CZE_HUN_stolen_income }
 		multiply_variable = { CZE_HUN_gain_income_trade = 0.1 }
 	} else_if = {
 		limit = {
-			has_country_flag = CZE_HUN_receive_additional_income_from_hungary_2
+			has_idea = CZE_HUN_receive_additional_income_from_hungary_2
 		}
 		set_variable = { CZE_HUN_gain_income_trade = CZE_HUN_stolen_income }
 		multiply_variable = { CZE_HUN_gain_income_trade = 0.2 }
 	} else_if = {
 		limit = {
-			has_country_flag = CZE_HUN_receive_additional_income_from_hungary_3
+			has_idea = CZE_HUN_receive_additional_income_from_hungary_3
 		}
 		set_variable = { CZE_HUN_gain_income_trade = CZE_HUN_stolen_income }
 		multiply_variable = { CZE_HUN_gain_income_trade = 0.3 }
 	} else_if = {
 		limit = {
-			has_country_flag = CZE_HUN_receive_additional_income_from_hungary_5
+			has_idea = CZE_HUN_receive_additional_income_from_hungary_5
 		}
 		set_variable = { CZE_HUN_gain_income_trade = CZE_HUN_stolen_income }
 		multiply_variable = { CZE_HUN_gain_income_trade = 0.5 }
+	}
+}
+
+CZE_gui_dirty_update = {
+	if = { limit = { check_variable = { CZE_gui_dirty_var < 200 } }
+		add_to_variable = { CZE_gui_dirty_var = 1 }
+	}
+	else = {
+		set_variable = { CZE_gui_dirty_var = 1 }
 	}
 }

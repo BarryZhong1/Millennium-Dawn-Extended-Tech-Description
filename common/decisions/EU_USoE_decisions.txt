@@ -24,7 +24,7 @@ EU_USoE_category = {
 			set_capital = { state = 51 }
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -32,6 +32,7 @@ EU_USoE_category = {
 		allowed = {
 			is_EU_potential = yes
 		}
+		targets = { ALG BHR CHI EGY HKG IRQ JAP JOR KOR KUR KUW LBA MOR OMA PAK PER QAT RAJ SAU SIN TAI TUN UAE YEM }
 		target_root_trigger = {
 			has_country_flag = USoE
 		}
@@ -51,6 +52,9 @@ EU_USoE_category = {
 						}
 					}
 				}
+
+				set_temp_variable = { wargoal_on = FROM }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = {
 					type = puppet_wargoal_focus
 					target = FROM
@@ -62,12 +66,14 @@ EU_USoE_category = {
 					FROM = { has_government = democratic }
 				}
 				FROM = {
-					country_event = {
-						id = USoEevent.4
-					}
+					country_event = USoEevent.4
 				}
 			}
 			else = {
+
+				set_temp_variable = { wargoal_on = FROM }
+				set_temp_variable = { wargoal_type = 2 }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = {
 					type = annex_everything
 					target = FROM
@@ -75,27 +81,42 @@ EU_USoE_category = {
 			}
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
 	EU_USoE_create_eurosphere_decision = {
 		cost = 200
-		available = {
-			has_country_flag = USoE
-			has_country_flag = eurosphere
-		}
 
 		visible = {
 			has_country_flag = USoE
 			has_country_flag = eurosphere
 		}
+
 		days_remove = 7
+
 		complete_effect = {
-			create_eurosphere = yes
+			every_country = {
+				limit = {
+					capital_scope = {
+						OR = {
+							is_on_continent = europe
+							is_on_continent = africa
+							is_on_continent = middle_east
+						}
+					}
+					is_neighbor_of = PREV
+					influence_higher_50 = yes
+				}
+				custom_effect_tooltip = tooltip_create_eurosphere
+				set_temp_variable = { percent_change = 2 }
+				set_temp_variable = { tag_index = ROOT.id }
+				set_temp_variable = { influence_target = THIS.id }
+				change_influence_percentage = yes
+			}
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -120,8 +141,8 @@ EU_USoE_category = {
 		complete_effect = {
 			custom_effect_tooltip = tooltip_USoE_part_of_usoe
 			hidden_effect = {
-				every_country = {
-					limit = { has_idea = EU_member }
+				for_each_scope_loop = {
+					array = global.EU_member
 					EUU = { inherit_technology = PREV }
 				}
 				EUU = {
@@ -147,9 +168,9 @@ EU_USoE_category = {
 						TECH = "[?v.GetTokenKey]"
 					}
 				}
-				every_country = {
-					limit = { has_idea = EU_member }
-					#clr_country_flag = USoE_transfer_navy
+				for_each_scope_loop = {
+					array = global.EU_member
+					tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 					set_country_flag = USoE_member
 					every_unit_leader = {
 						set_unit_leader_flag = USoE_unit_leader
@@ -178,6 +199,7 @@ EU_USoE_category = {
 				}
 			}
 		}
+		ai_will_do = { base = 0 }
 	}
 }
 
@@ -199,13 +221,11 @@ EU_environmental_imperialism_category = {
 			set_country_flag = environmental_imperialism_europe
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	EU_USoE_environmental_imperialism_hide_europe = {
-		available = {
-			has_country_flag = environmental_imperialism_europe
-		}
+
 
 		visible = {
 			has_country_flag = environmental_imperialism_europe
@@ -215,6 +235,7 @@ EU_environmental_imperialism_category = {
 			clr_country_flag = environmental_imperialism_europe
 		}
 
+		ai_will_do = { base = 0 }
 	}
 
 	EU_USoE_environmental_imperialism_show_north_america = {
@@ -232,13 +253,11 @@ EU_environmental_imperialism_category = {
 			set_country_flag = environmental_imperialism_north_america
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	EU_USoE_environmental_imperialism_hide_north_america = {
-		available = {
-			has_country_flag = environmental_imperialism_north_america
-		}
+
 
 		visible = {
 			has_country_flag = environmental_imperialism_north_america
@@ -248,6 +267,7 @@ EU_environmental_imperialism_category = {
 			clr_country_flag = environmental_imperialism_north_america
 		}
 
+		ai_will_do = { base = 0 }
 	}
 
 	EU_USoE_environmental_imperialism_show_south_america = {
@@ -265,13 +285,11 @@ EU_environmental_imperialism_category = {
 			set_country_flag = environmental_imperialism_south_america
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	EU_USoE_environmental_imperialism_hide_south_america = {
-		available = {
-			has_country_flag = environmental_imperialism_south_america
-		}
+
 
 		visible = {
 			has_country_flag = environmental_imperialism_south_america
@@ -281,6 +299,7 @@ EU_environmental_imperialism_category = {
 			clr_country_flag = environmental_imperialism_south_america
 		}
 
+		ai_will_do = { base = 0 }
 	}
 
 	EU_USoE_environmental_imperialism_show_africa = {
@@ -298,13 +317,11 @@ EU_environmental_imperialism_category = {
 			set_country_flag = environmental_imperialism_africa
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	EU_USoE_environmental_imperialism_hide_africa = {
-		available = {
-			has_country_flag = environmental_imperialism_africa
-		}
+
 
 		visible = {
 			has_country_flag = environmental_imperialism_africa
@@ -314,6 +331,7 @@ EU_environmental_imperialism_category = {
 			clr_country_flag = environmental_imperialism_africa
 		}
 
+		ai_will_do = { base = 0 }
 	}
 
 	EU_USoE_environmental_imperialism_show_asia = {
@@ -331,13 +349,11 @@ EU_environmental_imperialism_category = {
 			set_country_flag = environmental_imperialism_asia
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	EU_USoE_environmental_imperialism_hide_asia = {
-		available = {
-			has_country_flag = environmental_imperialism_asia
-		}
+
 
 		visible = {
 			has_country_flag = environmental_imperialism_asia
@@ -347,6 +363,7 @@ EU_environmental_imperialism_category = {
 			clr_country_flag = environmental_imperialism_asia
 		}
 
+		ai_will_do = { base = 0 }
 	}
 
 	EU_USoE_environmental_imperialism_show_middle_east = {
@@ -364,13 +381,11 @@ EU_environmental_imperialism_category = {
 			set_country_flag = environmental_imperialism_middle_east
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	EU_USoE_environmental_imperialism_hide_middle_east = {
-		available = {
-			has_country_flag = environmental_imperialism_middle_east
-		}
+
 
 		visible = {
 			has_country_flag = environmental_imperialism_middle_east
@@ -380,6 +395,7 @@ EU_environmental_imperialism_category = {
 			clr_country_flag = environmental_imperialism_middle_east
 		}
 
+		ai_will_do = { base = 0 }
 	}
 
 	EU_USoE_environmental_imperialism_show_pacific = {
@@ -397,13 +413,11 @@ EU_environmental_imperialism_category = {
 			set_country_flag = environmental_imperialism_pacific
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	EU_USoE_environmental_imperialism_hide_pacific = {
-		available = {
-			has_country_flag = environmental_imperialism_pacific
-		}
+
 
 		visible = {
 			has_country_flag = environmental_imperialism_pacific
@@ -413,6 +427,7 @@ EU_environmental_imperialism_category = {
 			clr_country_flag = environmental_imperialism_pacific
 		}
 
+		ai_will_do = { base = 0 }
 	}
 
 	EU_USoE_environmental_imperialism_show_oceania = {
@@ -430,13 +445,11 @@ EU_environmental_imperialism_category = {
 			set_country_flag = environmental_imperialism_oceania
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	EU_USoE_environmental_imperialism_hide_oceania = {
-		available = {
-			has_country_flag = environmental_imperialism_oceania
-		}
+
 
 		visible = {
 			has_country_flag = environmental_imperialism_oceania
@@ -446,12 +459,14 @@ EU_environmental_imperialism_category = {
 			clr_country_flag = environmental_imperialism_oceania
 		}
 
+		ai_will_do = { base = 0 }
 	}
 
 	EU_USoE_environmental_imperialism_decision = {
 		allowed = {
 			is_EU_potential = yes
 		}
+		target_array = global.majors
 		target_root_trigger = {
 			has_country_flag = environmental_imperialism
 		}
@@ -464,7 +479,7 @@ EU_environmental_imperialism_category = {
 					has_idea = regional_power
 					has_idea = large_power
 					has_idea = great_power
-					has_idea = superpower
+					has_idea = super_power
 				}
 				renewable_energy_infra < num_owned_states
 				OR = {
@@ -529,7 +544,7 @@ EU_environmental_imperialism_category = {
 							has_country_flag = environmental_imperialism_oceania
 						}
 						capital_scope = {
-							is_on_continent = oceania
+							is_on_continent = australia
 						}
 					}
 				}
@@ -565,7 +580,7 @@ EU_environmental_imperialism_category = {
 			}
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -593,30 +608,20 @@ EU_environmental_imperialism_category = {
 			set_temp_variable = { party_popularity_increase = 0.05 }
 			set_temp_variable = { temp_outlook_increase = 0.05 }
 			add_relative_party_popularity = yes
-			every_country = {
-				limit = {
-					has_country_flag = USoE
-				}
-				country_event = {
-					id = USoEevent.5
-				}
+			var:global.united_states_of_europe = {
+				country_event = USoEevent.5
 			}
 			clr_country_flag = EU_USoE_environmental_imperialism_target
 		}
 		timeout_effect = {
 			add_ideas = USoE_environmental_sanctions
 			clr_country_flag = EU_USoE_environmental_imperialism_target
-			every_country = {
-				limit = {
-					has_country_flag = USoE
-				}
-				country_event = {
-					id = USoEevent.6
-				}
+			var:global.united_states_of_europe = {
+				country_event = USoEevent.6
 			}
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -668,7 +673,7 @@ EU_environmental_imperialism_category = {
 			}
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -681,7 +686,7 @@ EU_environmental_imperialism_category = {
 				has_country_flag = USoE
 			}
 		}
-		target_array = global.EU_potential
+		target_array = global.EU_member
 		cost = 100
 
 		complete_effect = {
@@ -698,15 +703,17 @@ EU_environmental_imperialism_category = {
 				}
 			}
 			FROM = {
+
+				set_temp_variable = { wargoal_on = ROOT }
+				set_temp_variable = { wargoal_type = 1 }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = {
 					type = topple_government
 					target = ROOT
 				}
 			}
 			FROM = {
-				country_event = {
-					id = USoEevent.7
-				}
+				country_event = USoEevent.7
 			}
 			if = {
 				limit = {
@@ -733,7 +740,7 @@ EU_environmental_imperialism_category = {
 			}
 		}
 		ai_will_do = {
-			factor = 0
+			base = 0
 			modifier = {
 				add = 1
 				strength_ratio = {
@@ -744,16 +751,9 @@ EU_environmental_imperialism_category = {
 			modifier = {
 				add = 1
 				any_country = {
-					if = {
-						limit = {
-							has_country_flag = fossil_energy_pact
-							is_faction_leader = yes
-						}
-						strength_ratio = {
-							tag = FROM
-							ratio > 0.5
-						}
-					}
+					has_country_flag = fossil_energy_pact
+					is_faction_leader = yes
+					strength_ratio = { tag = FROM ratio > 0.5 }
 				}
 				strength_ratio = {
 					tag = FROM
@@ -763,16 +763,9 @@ EU_environmental_imperialism_category = {
 			modifier = {
 				add = 1
 				any_country = {
-					if = {
-						limit = {
-							has_country_flag = fossil_energy_pact
-							is_faction_leader = yes
-						}
-						strength_ratio = {
-							tag = FROM
-							ratio > 0.7
-						}
-					}
+					has_country_flag = fossil_energy_pact
+					is_faction_leader = yes
+					strength_ratio = { tag = FROM ratio > 0.7 }
 				}
 			}
 			modifier = {

@@ -1,4 +1,4 @@
-﻿# Author(s): Manchu Yu
+# Author(s): Manchu Yu
 # Last Modified 14/02/2022 by Angriest Bird
 focus_tree = {
 	id = korea_south_focus
@@ -11,7 +11,7 @@ focus_tree = {
 		}
 	}
 	shared_focus = KOR_korea_reunified
-	shared_focus = KOR_joint_research
+	shared_focus = KOR_joint_peace
 
 	continuous_focus_position = { x = 0 y = 1000 }
 
@@ -420,15 +420,15 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_NAVY FOCUS_FILTER_RESEARCH }
 
 		completion_reward = {
+			log = "[GetDateText]: [This.GetName]: focus KOR_lpx_program executed"
 			set_temp_variable = { treasury_change = -20 }
 			modify_treasury_effect = yes
 			add_tech_bonus = {
 				name = KOR_lpx_program
 				bonus = 0.5
 				uses = 2
-				category = CAT_lpd
+				category = CAT_helicopter_operators
 			}
-			log = "[GetDateText]: [This.GetName]: focus KOR_lpx_program executed"
 		}
 
 		ai_will_do = {
@@ -837,8 +837,8 @@ focus_tree = {
 				name = KOR_warrior_platform
 				bonus = 0.25
 				uses = 3
-				technology = body_armor_2010
-				technology = body_armor_2030
+				technology = body_armor_3
+				technology = body_armor_4
 				category = CAT_l_drone
 				category = CAT_nvg
 			}
@@ -871,9 +871,9 @@ focus_tree = {
 				name = KOR_new_uniforms
 				bonus = 0.25
 				uses = 2
-				technology = camouflage3
-				technology = camouflage4
-				technology = camouflage5
+				technology = camouflage_3
+				technology = camouflage_4
+				technology = camouflage_5
 			}
 			log = "[GetDateText]: [This.GetName]: focus KOR_new_uniforms executed"
 		}
@@ -1672,8 +1672,6 @@ focus_tree = {
 				random_country_with_original_tag = {
 					original_tag_to_check = KOR
 					limit = { NOT = { has_government = communism } }
-					remove_ideas = { rival_government }
-					remove_from_array = { global.rival_governments = THIS }
 					add_opinion_modifier = {
 						target = NKO
 						modifier = imminent_danger_to_national_security
@@ -1686,13 +1684,8 @@ focus_tree = {
 				random_country_with_original_tag = {
 					original_tag_to_check = KOR
 					limit = { has_government = communism }
-					clear_array = ruling_party
-					clear_array = gov_coalition_array
-					add_to_array = { ruling_party = 4 }
-					update_government_coalition_strength = yes
-					update_party_name = yes
-					set_coalition_drift = yes
-					remove_from_array = { global.rival_governments = THIS }
+					set_temp_variable = { rul_party_temp = 4 }
+					change_ruling_party_effect = yes
 					load_oob = KOR_juche
 					add_named_threat = {
 						threat = 5
@@ -1820,7 +1813,7 @@ focus_tree = {
 				if = {
 					limit = { check_variable = { juche_arms > 0 } }
 					add_equipment_to_stockpile = {
-						type = infantry_weapons1
+						type = infantry_weapons_2
 						amount = 600
 						producer = USA
 					}
@@ -1838,7 +1831,7 @@ focus_tree = {
 				if = {
 					limit = { check_variable = { juche_arms > 1 } }
 					add_equipment_to_stockpile = {
-						type = infantry_weapons1
+						type = infantry_weapons_2
 						amount = 600
 						producer = USA
 					}
@@ -1856,7 +1849,7 @@ focus_tree = {
 				if = {
 					limit = { check_variable = { juche_arms > 2 } }
 					add_equipment_to_stockpile = {
-						type = infantry_weapons1
+						type = infantry_weapons_2
 						amount = 600
 						producer = USA
 					}
@@ -1874,7 +1867,7 @@ focus_tree = {
 				if = {
 					limit = { check_variable = { juche_arms > 3 } }
 					add_equipment_to_stockpile = {
-						type = infantry_weapons1
+						type = infantry_weapons_2
 						amount = 600
 						producer = USA
 					}
@@ -1892,7 +1885,7 @@ focus_tree = {
 				if = {
 					limit = { check_variable = { juche_arms > 4 } }
 					add_equipment_to_stockpile = {
-						type = infantry_weapons1
+						type = infantry_weapons_2
 						amount = 600
 						producer = USA
 					}
@@ -1910,7 +1903,7 @@ focus_tree = {
 				if = {
 					limit = { check_variable = { juche_arms > 5 } }
 					add_equipment_to_stockpile = {
-						type = infantry_weapons1
+						type = infantry_weapons_2
 						amount = 600
 						producer = USA
 					}
@@ -1928,7 +1921,7 @@ focus_tree = {
 				if = {
 					limit = { check_variable = { juche_arms > 6 } }
 					add_equipment_to_stockpile = {
-						type = infantry_weapons1
+						type = infantry_weapons_2
 						amount = 600
 						producer = USA
 					}
@@ -1946,7 +1939,7 @@ focus_tree = {
 				if = {
 					limit = { check_variable = { juche_arms > 7 } }
 					add_equipment_to_stockpile = {
-						type = infantry_weapons1
+						type = infantry_weapons_2
 						amount = 600
 						producer = USA
 					}
@@ -1964,7 +1957,7 @@ focus_tree = {
 				if = {
 					limit = { check_variable = { juche_arms > 8 } }
 					add_equipment_to_stockpile = {
-						type = infantry_weapons1
+						type = infantry_weapons_2
 						amount = 600
 						producer = USA
 					}
@@ -1982,7 +1975,7 @@ focus_tree = {
 				if = {
 					limit = { check_variable = { juche_arms > 9 } }
 					add_equipment_to_stockpile = {
-						type = infantry_weapons1
+						type = infantry_weapons_2
 						amount = 600
 						producer = USA
 					}
@@ -2000,7 +1993,7 @@ focus_tree = {
 				if = {
 					limit = { check_variable = { juche_arms > 10 } }
 					add_equipment_to_stockpile = {
-						type = infantry_weapons1
+						type = infantry_weapons_2
 						amount = 600
 						producer = USA
 					}
@@ -2018,7 +2011,7 @@ focus_tree = {
 				if = {
 					limit = { check_variable = { juche_arms > 11 } }
 					add_equipment_to_stockpile = {
-						type = infantry_weapons1
+						type = infantry_weapons_2
 						amount = 600
 						producer = USA
 					}
@@ -2036,7 +2029,7 @@ focus_tree = {
 				if = {
 					limit = { check_variable = { juche_arms > 12 } }
 					add_equipment_to_stockpile = {
-						type = infantry_weapons1
+						type = infantry_weapons_2
 						amount = 600
 						producer = USA
 					}
@@ -2054,7 +2047,7 @@ focus_tree = {
 				if = {
 					limit = { check_variable = { juche_arms > 13 } }
 					add_equipment_to_stockpile = {
-						type = infantry_weapons1
+						type = infantry_weapons_2
 						amount = 600
 						producer = USA
 					}
@@ -2072,7 +2065,7 @@ focus_tree = {
 				if = {
 					limit = { check_variable = { juche_arms1 > 0 } }
 					add_equipment_to_stockpile = {
-						type = infantry_weapons
+						type = infantry_weapons_1
 						amount = 600
 						producer = CHI
 					}
@@ -2090,7 +2083,7 @@ focus_tree = {
 				if = {
 					limit = { check_variable = { juche_arms1 > 1 } }
 					add_equipment_to_stockpile = {
-						type = infantry_weapons
+						type = infantry_weapons_1
 						amount = 600
 						producer = CHI
 					}
@@ -2108,7 +2101,7 @@ focus_tree = {
 				if = {
 					limit = { check_variable = { juche_arms1 > 2 } }
 					add_equipment_to_stockpile = {
-						type = infantry_weapons
+						type = infantry_weapons_1
 						amount = 600
 						producer = CHI
 					}
@@ -2126,7 +2119,7 @@ focus_tree = {
 				if = {
 					limit = { check_variable = { juche_arms1 > 3 } }
 					add_equipment_to_stockpile = {
-						type = infantry_weapons
+						type = infantry_weapons_1
 						amount = 600
 						producer = CHI
 					}
@@ -2144,7 +2137,7 @@ focus_tree = {
 				if = {
 					limit = { check_variable = { juche_arms1 > 4 } }
 					add_equipment_to_stockpile = {
-						type = infantry_weapons
+						type = infantry_weapons_1
 						amount = 600
 						producer = CHI
 					}
@@ -2162,7 +2155,7 @@ focus_tree = {
 				if = {
 					limit = { check_variable = { juche_arms1 > 5 } }
 					add_equipment_to_stockpile = {
-						type = infantry_weapons
+						type = infantry_weapons_1
 						amount = 600
 						producer = CHI
 					}
@@ -2180,7 +2173,7 @@ focus_tree = {
 				if = {
 					limit = { check_variable = { juche_arms1 > 6 } }
 					add_equipment_to_stockpile = {
-						type = infantry_weapons
+						type = infantry_weapons_1
 						amount = 600
 						producer = CHI
 					}
@@ -2198,7 +2191,7 @@ focus_tree = {
 				if = {
 					limit = { check_variable = { juche_arms1 > 7 } }
 					add_equipment_to_stockpile = {
-						type = infantry_weapons
+						type = infantry_weapons_1
 						amount = 600
 						producer = CHI
 					}
@@ -2216,7 +2209,7 @@ focus_tree = {
 				if = {
 					limit = { check_variable = { juche_arms1 > 8 } }
 					add_equipment_to_stockpile = {
-						type = infantry_weapons
+						type = infantry_weapons_1
 						amount = 600
 						producer = CHI
 					}
@@ -2234,7 +2227,7 @@ focus_tree = {
 				if = {
 					limit = { check_variable = { juche_arms1 > 9 } }
 					add_equipment_to_stockpile = {
-						type = infantry_weapons
+						type = infantry_weapons_1
 						amount = 600
 						producer = CHI
 					}
@@ -2252,7 +2245,7 @@ focus_tree = {
 				if = {
 					limit = { check_variable = { juche_arms1 > 10 } }
 					add_equipment_to_stockpile = {
-						type = infantry_weapons
+						type = infantry_weapons_1
 						amount = 600
 						producer = CHI
 					}
@@ -2270,7 +2263,7 @@ focus_tree = {
 				if = {
 					limit = { check_variable = { juche_arms1 > 11 } }
 					add_equipment_to_stockpile = {
-						type = infantry_weapons
+						type = infantry_weapons_1
 						amount = 600
 						producer = CHI
 					}
@@ -2288,7 +2281,7 @@ focus_tree = {
 				if = {
 					limit = { check_variable = { juche_arms1 > 12 } }
 					add_equipment_to_stockpile = {
-						type = infantry_weapons
+						type = infantry_weapons_1
 						amount = 600
 						producer = CHI
 					}
@@ -2306,7 +2299,7 @@ focus_tree = {
 				if = {
 					limit = { check_variable = { juche_arms1 > 13 } }
 					add_equipment_to_stockpile = {
-						type = infantry_weapons
+						type = infantry_weapons_1
 						amount = 600
 						producer = CHI
 					}
@@ -2925,573 +2918,6 @@ focus_tree = {
 	}
 
 	focus = {
-		id = KOR_sunshine_policy
-		icon = align_to_north_korea
-
-		x = -6
-		y = 2
-		relative_position_id = KOR_state_of_the_republic
-
-		cost = 10
-
-		prerequisite = { focus = KOR_the_korean_left }
-
-		search_filters = { FOCUS_FILTER_KOREAN_PENINSULA FOCUS_FILTER_POLITICAL }
-
-		available = {
-			OR = {
-				KOR_has_progressive_government = yes
-				custom_trigger_tooltip = {
-					tooltip = KOR_democratic_party_governing_tt
-					is_in_array = { ruling_party = 3 }
-				}
-				NKO = { has_government = democratic }
-				NKO = { has_government = neutrality }
-			}
-			country_exists = NKO
-			NKO = { has_war = no }
-		}
-
-		completion_reward = {
-			add_opinion_modifier = {
-				target = NKO
-				modifier = sunshine_policy
-			}
-			NKO = {
-				add_opinion_modifier = {
-					target = KOR
-					modifier = sunshine_policy
-				}
-			}
-			custom_effect_tooltip = KOR_negotiation_success_tt
-			add_to_variable = { reunification_chance = 1 }
-			set_temp_variable = { temp_opinion = -5 }
-			change_intelligence_community_opinion = yes
-			change_the_military_opinion = yes
-			liberal_policy_effect = yes
-			log = "[GetDateText]: [This.GetName]: focus KOR_sunshine_policy executed"
-		}
-
-		ai_will_do = {
-			base = 1
-		}
-	}
-
-	focus = {
-		id = KOR_joint_development
-		icon = construction4
-
-		x = -7
-		y = 3
-		relative_position_id = KOR_state_of_the_republic
-
-		cost = 10
-
-		prerequisite = { focus = KOR_sunshine_policy }
-
-		search_filters = { FOCUS_FILTER_KOREAN_PENINSULA FOCUS_FILTER_POLITICAL FOCUS_FILTER_WAR_SUPPORT }
-
-		available = {
-			OR = {
-				KOR_has_progressive_government = yes
-				custom_trigger_tooltip = {
-					tooltip = KOR_democratic_party_governing_tt
-					is_in_array = { ruling_party = 3 }
-				}
-				NKO = { has_government = democratic }
-				NKO = { has_government = neutrality }
-			}
-			country_exists = NKO
-			NKO = { has_war = no }
-			NKO = {
-				has_opinion = {
-					target = KOR
-					value > -101
-				}
-			}
-			NOT = { has_idea = KOR_national_assembly_conservative }
-		}
-
-		completion_reward = {
-			if = {
-				limit = {
-					has_idea = KOR_national_assembly_deadlocked
-				}
-				custom_effect_tooltip = KOR_deadlock_pp_tt
-				hidden_effect = {
-					add_political_power = -100
-				}
-			}
-			custom_effect_tooltip = KOR_negotiation_success_tt
-			add_to_variable = { reunification_chance = 1 }
-			support_for_reunification_2 = yes
-			add_war_support = -0.02
-			add_opinion_modifier = {
-				target = NKO
-				modifier = kaesong_industrial_park
-			}
-			add_ideas = KOR_kaesong_industrial_park
-			unlock_decision_tooltip = KOR_close_kaesong_industrial_park
-			NKO = {
-				add_opinion_modifier = {
-					target = KOR
-					modifier = kaesong_industrial_park
-				}
-				add_ideas = NKO_kaesong_industrial_park
-				unlock_decision_tooltip = KOR_close_kaesong_industrial_park
-			}
-			liberal_policy_effect = yes
-			log = "[GetDateText]: [This.GetName]: focus KOR_joint_development executed"
-		}
-
-		ai_will_do = {
-			base = 1
-		}
-	}
-
-	focus = {
-		id = KOR_sporting_events
-		icon = film_industry
-
-		x = -7
-		y = 4
-		relative_position_id = KOR_state_of_the_republic
-
-		cost = 10
-
-		prerequisite = { focus = KOR_joint_development }
-
-		search_filters = { FOCUS_FILTER_KOREAN_PENINSULA FOCUS_FILTER_POLITICAL }
-
-		available = {
-			OR = {
-				KOR_has_progressive_government = yes
-				custom_trigger_tooltip = {
-					tooltip = KOR_democratic_party_governing_tt
-					is_in_array = { ruling_party = 3 }
-				}
-				NKO = { has_government = democratic }
-				NKO = { has_government = neutrality }
-			}
-			country_exists = NKO
-			NKO = { has_war = no }
-			NKO = {
-				has_opinion = {
-					target = KOR
-					value > -76
-				}
-			}
-		}
-
-		completion_reward = {
-			custom_effect_tooltip = KOR_negotiation_success_tt
-			add_to_variable = { reunification_chance = 1 }
-			unlock_decision_tooltip = KOR_organize_joint_sporting_events
-			unlock_decision_tooltip = KOR_screen_north_korean_films
-			unlock_decision_tooltip = KOR_encourage_sympathetic_portrayals_of_the_north
-			log = "[GetDateText]: [This.GetName]: focus KOR_sporting_events executed"
-		}
-
-		ai_will_do = {
-			base = 1
-		}
-	}
-
-	focus = {
-		id = KOR_offer_talks
-		icon = peace
-
-		x = -7
-		y = 5
-		relative_position_id = KOR_state_of_the_republic
-
-		cost = 10
-
-		prerequisite = { focus = KOR_sporting_events }
-		prerequisite = { focus = KOR_wind_down_propaganda }
-
-		search_filters = { FOCUS_FILTER_KOREAN_PENINSULA FOCUS_FILTER_POLITICAL }
-
-		available = {
-			OR = {
-				KOR_has_progressive_government = yes
-				custom_trigger_tooltip = {
-					tooltip = KOR_democratic_party_governing_tt
-					is_in_array = { ruling_party = 3 }
-				}
-				NKO = { has_government = democratic }
-				NKO = { has_government = neutrality }
-			}
-			has_war_support < 0.6
-			custom_trigger_tooltip = {
-				tooltip = support_for_reunification_more_50_tt
-				check_variable = { KOR.SFR > 50 }
-			}
-			country_exists = NKO
-			NKO = { has_war = no }
-			NKO = {
-				has_opinion = {
-					target = KOR
-					value > -51
-				}
-			}
-		}
-
-		completion_reward = {
-			news_event = { id = korea.6 }
-			custom_effect_tooltip = negotiation_result_tt
-			hidden_effect = {
-				NKO = {
-					country_event = {
-						id = korea.23
-						days = 30
-					}
-				}
-			}
-			liberal_policy_effect = yes
-			log = "[GetDateText]: [This.GetName]: focus KOR_offer_talks executed"
-		}
-
-		ai_will_do = {
-			base = 1
-			modifier = {
-				add = 10
-				CHI = {
-					has_completed_focus = CHI_Mediate_Korean_Peace_Talks
-				}
-			}
-			modifier = {
-				add = 10
-				CHI = {
-					has_completed_focus = CHI_Back_Peaceful_Korean_Unification
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = KOR_propose_south_led_unification
-		icon = democracy2
-
-		x = -8
-		y = 6
-		relative_position_id = KOR_state_of_the_republic
-
-		cost = 10
-
-		prerequisite = { focus = KOR_offer_talks }
-		mutually_exclusive = { focus = KOR_propose_unity_government }
-
-		search_filters = { FOCUS_FILTER_KOREAN_PENINSULA }
-
-		available = {
-			OR = {
-				KOR_has_progressive_government = yes
-				custom_trigger_tooltip = {
-					tooltip = KOR_democratic_party_governing_tt
-					is_in_array = { ruling_party = 3 }
-				}
-				NKO = { has_government = democratic }
-				NKO = { has_government = neutrality }
-			}
-			has_war_support < 0.55
-			custom_trigger_tooltip = {
-				tooltip = support_for_reunification_more_50_tt
-				check_variable = { KOR.SFR > 50 }
-			}
-			country_exists = NKO
-			NKO = { has_war = no }
-			custom_trigger_tooltip = {
-				tooltip = NKO_KOR_Koren_War_Ceasefire_tt
-				NOT = { has_opinion_modifier = NKO_KOR_Koren_War_Ceasefire }
-			}
-			NKO = {
-				has_opinion = {
-					target = KOR
-					value > -26
-				}
-			}
-		}
-
-		completion_reward = {
-			set_country_flag = KOR_proposed_south_reunification
-			custom_effect_tooltip = negotiation_result_tt
-			hidden_effect = {
-				NKO = {
-					country_event = {
-						id = korea.26
-						days = 30
-					}
-				}
-			}
-			log = "[GetDateText]: [This.GetName]: focus KOR_propose_south_led_unification executed"
-		}
-
-		ai_will_do = {
-			base = 1
-			modifier = {
-				add = 10
-				CHI = {
-					has_completed_focus = CHI_Mediate_Korean_Peace_Talks
-				}
-			}
-			modifier = {
-				add = 10
-				CHI = {
-					has_completed_focus = CHI_Back_Peaceful_Korean_Unification
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = KOR_propose_unity_government
-		icon = neutrality
-
-		x = -6
-		y = 6
-		relative_position_id = KOR_state_of_the_republic
-
-		cost = 10
-
-		prerequisite = { focus = KOR_offer_talks }
-		mutually_exclusive = { focus = KOR_propose_south_led_unification }
-
-		search_filters = { FOCUS_FILTER_KOREAN_PENINSULA }
-
-		available = {
-			OR = {
-				KOR_has_progressive_government = yes
-				custom_trigger_tooltip = {
-					tooltip = KOR_democratic_party_governing_tt
-					is_in_array = { ruling_party = 3 }
-				}
-				NKO = { has_government = democratic }
-				NKO = { has_government = neutrality }
-			}
-			has_war_support < 0.55
-			custom_trigger_tooltip = {
-				tooltip = support_for_reunification_more_50_tt
-				check_variable = { KOR.SFR > 50 }
-			}
-			country_exists = NKO
-			NKO = { has_war = no }
-			custom_trigger_tooltip = {
-				tooltip = NKO_KOR_Koren_War_Ceasefire_tt
-				NOT = { has_opinion_modifier = NKO_KOR_Koren_War_Ceasefire }
-			}
-			NKO = {
-				has_opinion = {
-					target = KOR
-					value > -26
-				}
-			}
-		}
-
-		completion_reward = {
-			set_country_flag = KOR_proposed_unity_reunification
-			custom_effect_tooltip = negotiation_result_tt
-			hidden_effect = {
-				NKO = {
-					country_event = {
-						id = korea.26
-						days = 30
-					}
-				}
-			}
-			log = "[GetDateText]: [This.GetName]: focus KOR_propose_unity_government executed"
-		}
-
-		ai_will_do = {
-			base = 1
-			modifier = {
-				add = 10
-				CHI = {
-					has_completed_focus = CHI_Mediate_Korean_Peace_Talks
-				}
-			}
-			modifier = {
-				add = 10
-				CHI = {
-					has_completed_focus = CHI_Back_Peaceful_Korean_Unification
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = KOR_pave_the_way_for_reunification
-		icon = korean_peninsula
-
-		x = -7
-		y = 7
-		relative_position_id = KOR_state_of_the_republic
-
-		cost = 10
-
-		prerequisite = { focus = KOR_propose_unity_government focus = KOR_propose_south_led_unification }
-
-		search_filters = { FOCUS_FILTER_KOREAN_PENINSULA FOCUS_FILTER_ANNEXATION }
-
-		available = {
-			OR = {
-				KOR_has_progressive_government = yes
-				custom_trigger_tooltip = {
-					tooltip = KOR_democratic_party_governing_tt
-					is_in_array = { ruling_party = 3 }
-				}
-				NKO = { has_government = democratic }
-				NKO = { has_government = neutrality }
-			}
-			has_war_support < 0.5
-			custom_trigger_tooltip = {
-				tooltip = support_for_reunification_more_50_tt
-				check_variable = { KOR.SFR > 50 }
-			}
-			country_exists = NKO
-			NKO = { has_war = no }
-			NKO = {
-				has_opinion = {
-					target = KOR
-					value > -1
-				}
-			}
-			NKO = {
-				OR = {
-					custom_trigger_tooltip = {
-						tooltip = NKO_agreed_KOR_led_reunification_tt
-						has_country_flag = NKO_agreed_KOR_led_reunification
-					}
-					custom_trigger_tooltip = {
-						tooltip = NKO_agreed_neutral_reunification_tt
-						has_country_flag = NKO_agreed_neutral_reunification
-					}
-				}
-			}
-		}
-
-		completion_reward = {
-			annex_country = {
-				target = NKO
-				transfer_troops = yes
-			}
-			add_ideas = KOR_reunification_shocks
-			add_ideas = KOR_divided_military
-			add_ideas = KOR_mass_migration
-			add_ideas = KOR_fragmented_governance
-			add_ideas = KOR_uneven_economy1
-			decrease_economic_growth = yes
-			set_country_flag = korea_peninsula_reunited
-			log = "[GetDateText]: [This.GetName]: focus KOR_pave_the_way_for_reunification executed"
-		}
-
-		ai_will_do = {
-			base = 1
-			modifier = {
-				add = 10
-				CHI = {
-					has_completed_focus = CHI_Mediate_Korean_Peace_Talks
-				}
-			}
-			modifier = {
-				add = 10
-				CHI = {
-					has_completed_focus = CHI_Back_Peaceful_Korean_Unification
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = KOR_soften_rhetoric
-		icon = diplomacy
-
-		x = -5
-		y = 3
-		relative_position_id = KOR_state_of_the_republic
-
-		cost = 10
-
-		prerequisite = { focus = KOR_sunshine_policy }
-
-		search_filters = { FOCUS_FILTER_KOREAN_PENINSULA FOCUS_FILTER_POLITICAL FOCUS_FILTER_WAR_SUPPORT }
-
-		available = {
-			OR = {
-				KOR_has_progressive_government = yes
-				custom_trigger_tooltip = {
-					tooltip = KOR_democratic_party_governing_tt
-					is_in_array = { ruling_party = 3 }
-				}
-				NKO = { has_government = democratic }
-				NKO = { has_government = neutrality }
-			}
-			country_exists = NKO
-			NKO = { has_war = no }
-		}
-
-		completion_reward = {
-			custom_effect_tooltip = KOR_negotiation_success_tt
-			add_to_variable = { reunification_chance = 1 }
-			support_for_reunification_2 = yes
-			add_war_support = -0.02
-			NKO = {
-				add_opinion_modifier = {
-					target = KOR
-					modifier = diplomatic_proximity
-				}
-			}
-			liberal_policy_effect = yes
-			log = "[GetDateText]: [This.GetName]: focus KOR_soften_rhetoric executed"
-		}
-
-		ai_will_do = {
-			base = 1
-		}
-	}
-
-	focus = {
-		id = KOR_wind_down_propaganda
-		icon = propaganda
-
-		x = -5
-		y = 4
-		relative_position_id = KOR_state_of_the_republic
-
-		cost = 10
-
-		prerequisite = { focus = KOR_soften_rhetoric }
-
-		search_filters = { FOCUS_FILTER_KOREAN_PENINSULA FOCUS_FILTER_POLITICAL }
-
-		available = {
-			OR = {
-				KOR_has_progressive_government = yes
-				custom_trigger_tooltip = {
-					tooltip = KOR_democratic_party_governing_tt
-					is_in_array = { ruling_party = 3 }
-				}
-				NKO = { has_government = democratic }
-				NKO = { has_government = neutrality }
-			}
-			country_exists = NKO
-			NKO = { has_war = no }
-		}
-
-		completion_reward = {
-			custom_effect_tooltip = KOR_negotiation_success_tt
-			add_to_variable = { reunification_chance = 1 }
-			unlock_decision_tooltip = KOR_cease_propaganda_broadcasts
-			unlock_decision_tooltip = KOR_cease_propaganda_leaflets
-			log = "[GetDateText]: [This.GetName]: focus KOR_wind_down_propaganda executed"
-		}
-
-		ai_will_do = {
-			base = 1
-		}
-	}
-
-	focus = {
 		id = KOR_repeal_the_national_security_law
 		icon = renounce_treaty
 
@@ -3501,7 +2927,6 @@ focus_tree = {
 
 		cost = 10
 
-		prerequisite = { focus = KOR_wind_down_propaganda }
 		prerequisite = { focus = KOR_protect_whistle_blowers }
 
 		search_filters = { FOCUS_FILTER_POLITICAL }
@@ -4809,6 +4234,9 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus KOR_provoke_confrontation executed"
+			set_temp_variable = { wargoal_on = NKO }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = annex_everything
 				target = NKO
@@ -5446,16 +4874,9 @@ focus_tree = {
 
 		completion_reward = {
 			hidden_effect = {
-				clear_array = ruling_party
-				clear_array = gov_coalition_array
-				add_to_array = { ruling_party = 0 }
-				update_government_coalition_strength = yes
-				update_party_name = yes
-				set_coalition_drift = yes
-				set_politics = {
-					ruling_party = democratic
-					elections_allowed = no
-				}
+				set_temp_variable = { rul_party_temp = 0 }
+				set_temp_variable = { disable_elections = 1 }
+				change_ruling_party_effect = yes
 			}
 			custom_effect_tooltip = KOR_yusin_takes_power_tt
 			add_ideas = GCC_censored_nation_01
@@ -6806,6 +6227,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			log = "[GetDateText]: [This.GetName]: focus KOR_a_shared_history executed"
 			add_opinion_modifier = {
 				target = CHI
 				modifier = KOR_CHI_history
@@ -6826,13 +6248,7 @@ focus_tree = {
 					modifier = criticized_us
 				}
 			}
-			every_country = {
-				news_event = {
-					id = korea.13
-					days = 1
-				}
-			}
-			log = "[GetDateText]: [This.GetName]: focus KOR_a_shared_history executed"
+			news_event = { id = korea.13 days = 1 }
 		}
 
 		ai_will_do = {
@@ -6872,6 +6288,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			log = "[GetDateText]: [This.GetName]: focus KOR_china_supports_the_south executed"
 			if = {
 				limit = {
 					CHI = { is_ai = yes }
@@ -6903,12 +6320,7 @@ focus_tree = {
 						value = 200
 					}
 				}
-				every_country = {
-					news_event = {
-						id = korea.14
-						days = 1
-					}
-				}
+				news_event = { id = korea.14 days = 1 }
 			}
 			else = {
 				CHI = {
@@ -6918,7 +6330,6 @@ focus_tree = {
 					}
 				}
 			}
-			log = "[GetDateText]: [This.GetName]: focus KOR_china_supports_the_south executed"
 		}
 
 		ai_will_do = {
@@ -6961,6 +6372,10 @@ focus_tree = {
 
 		ai_will_do = {
 			base = 1
+			modifier = {
+				factor = 0
+				has_country_flag = KOR_jap_accept_intellectual_platform
+			}
 		}
 	}
 
@@ -6987,6 +6402,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			log = "[GetDateText]: [This.GetName]: focus KOR_demand_reparations executed"
 			add_political_power = 100
 			set_temp_variable = { arg_popularity = 0.02 }
 			add_ruling_outlook_popularity = yes
@@ -6996,17 +6412,15 @@ focus_tree = {
 					modifier = recent_actions_negative
 				}
 			}
-			every_country = {
-				news_event = {
-					id = korea.15
-					days = 1
-				}
-			}
-			log = "[GetDateText]: [This.GetName]: focus KOR_demand_reparations executed"
+			news_event = { id = korea.15 days = 1 }
 		}
 
 		ai_will_do = {
 			base = 1
+			modifier = {
+				factor = 0
+				has_country_flag = KOR_jap_accept_intellectual_platform
+			}
 		}
 	}
 
@@ -7033,17 +6447,11 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			log = "[GetDateText]: [This.GetName]: focus KOR_defend_our_claims executed"
 			add_political_power = 150
 			set_temp_variable = { arg_popularity = 0.02 }
 			add_ruling_outlook_popularity = yes
-			JAP = {
-				add_opinion_modifier = {
-					target = KOR
-					modifier = minor_border_dispute
-				}
-			}
 			add_ideas = KOR_dokdo_fortified
-			log = "[GetDateText]: [This.GetName]: focus KOR_defend_our_claims executed"
 		}
 
 		ai_will_do = {
@@ -7074,6 +6482,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			log = "[GetDateText]: [This.GetName]: focus KOR_economic_showdown executed"
 			add_political_power = 200
 			set_temp_variable = { arg_popularity = 0.05 }
 			add_ruling_outlook_popularity = yes
@@ -7099,7 +6508,6 @@ focus_tree = {
 				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 			}
-			log = "[GetDateText]: [This.GetName]: focus KOR_economic_showdown executed"
 		}
 
 		ai_will_do = {
@@ -7135,13 +6543,13 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			log = "[GetDateText]: [This.GetName]: focus KOR_eternal_allies executed"
 			USA = {
 				add_opinion_modifier = {
 					target = KOR
 					modifier = political_outreach
 				}
 			}
-			log = "[GetDateText]: [This.GetName]: focus KOR_eternal_allies executed"
 		}
 
 		ai_will_do = {
@@ -7173,13 +6581,13 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			log = "[GetDateText]: [This.GetName]: focus KOR_draw_closer_to_japan executed"
 			JAP = {
 				add_opinion_modifier = {
 					target = KOR
 					modifier = political_outreach
 				}
 			}
-			log = "[GetDateText]: [This.GetName]: focus KOR_draw_closer_to_japan executed"
 		}
 
 		ai_will_do = {
@@ -7213,6 +6621,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			log = "[GetDateText]: [This.GetName]: focus KOR_improve_economic_relations executed"
 			set_temp_variable = { temp_opinion = 5 }
 			change_chaebols_opinion = yes
 			set_temp_variable = { temp_opinion = -5 }
@@ -7243,7 +6652,6 @@ focus_tree = {
 				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 			}
-			log = "[GetDateText]: [This.GetName]: focus KOR_improve_economic_relations executed"
 		}
 
 		ai_will_do = {
@@ -7281,6 +6689,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			log = "[GetDateText]: [This.GetName]: focus KOR_step_up_military_exercises executed"
 			set_temp_variable = { percent_change = 2 }
 			set_temp_variable = { tag_index = USA.id }
 			set_temp_variable = { influence_target = THIS.id }
@@ -7323,7 +6732,6 @@ focus_tree = {
 				add_ideas = KOR_joint_us_exercises2
 			}
 			conservative_policy_effect = yes
-			log = "[GetDateText]: [This.GetName]: focus KOR_step_up_military_exercises executed"
 		}
 
 		ai_will_do = {
@@ -7357,6 +6765,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			log = "[GetDateText]: [This.GetName]: focus KOR_intelligence_cooperation executed"
 			set_temp_variable = { temp_opinion = 5 }
 			change_intelligence_community_opinion = yes
 			add_intel = {
@@ -7371,7 +6780,6 @@ focus_tree = {
 			}
 			set_temp_variable = { arg_popularity = -0.05 }
 			add_ruling_outlook_popularity = yes
-			log = "[GetDateText]: [This.GetName]: focus KOR_intelligence_cooperation executed"
 		}
 
 		ai_will_do = {
@@ -7413,11 +6821,14 @@ focus_tree = {
 					value > 49
 				}
 			}
-			USA = { has_guaranteed = KOR }
-			USA = { has_guaranteed = JAP }
+			USA = {
+				has_guaranteed = KOR
+				has_guaranteed = JAP
+			}
 		}
 
 		completion_reward = {
+			log = "[GetDateText]: [This.GetName]: focus KOR_strengthen_anti_northern_coalition executed"
 			set_temp_variable = { percent_change = 5 }
 			set_temp_variable = { tag_index = USA.id }
 			set_temp_variable = { influence_target = THIS.id }
@@ -7425,26 +6836,10 @@ focus_tree = {
 			custom_effect_tooltip = KOR_negotiation_failure_tt
 			subtract_from_variable = { reunification_chance = 1 }
 			support_for_reunification_2_less = yes
-			add_opinion_modifier = {
-				target = USA
-				modifier = military_cooperation
-			}
-			add_opinion_modifier = {
-				target = JAP
-				modifier = military_cooperation
-			}
-			every_country = {
-				limit = {
-					OR = {
-						original_tag = JAP
-						original_tag = USA
-					}
-				}
-				add_opinion_modifier = {
-					target = KOR
-					modifier = military_cooperation
-				}
-			}
+			add_opinion_modifier = { target = USA modifier = military_cooperation }
+			add_opinion_modifier = { target = JAP modifier = military_cooperation }
+			reverse_add_opinion_modifier = { target = USA modifier = military_cooperation }
+			reverse_add_opinion_modifier = { target = JAP modifier = military_cooperation }
 			NKO = {
 				add_opinion_modifier = {
 					target = KOR
@@ -7452,17 +6847,16 @@ focus_tree = {
 				}
 			}
 			conservative_policy_effect = yes
-			every_country = {
-				limit = {
-					OR = {
-						original_tag = JAP
-						original_tag = USA
-						original_tag = KOR
-					}
-				}
+			newline = yes
+			JAP = {
 				add_ideas = KOR_anti_dprk_coalition
 			}
-			log = "[GetDateText]: [This.GetName]: focus KOR_strengthen_anti_northern_coalition executed"
+			USA = {
+				add_ideas = KOR_anti_dprk_coalition
+			}
+			KOR = {
+				add_ideas = KOR_anti_dprk_coalition
+			}
 		}
 
 		ai_will_do = {
@@ -7501,16 +6895,16 @@ focus_tree = {
 
 		completion_reward = {
 			give_guarantee = JAP
-			JAP = { give_guarantee = KOR }
-			remove_opinion_modifier = {
-				target = JAP
-				modifier = strategic_rivals
-			}
 			JAP = {
+				give_guarantee = KOR
 				remove_opinion_modifier = {
 					target = KOR
 					modifier = strategic_rivals
 				}
+			}
+			remove_opinion_modifier = {
+				target = JAP
+				modifier = strategic_rivals
 			}
 			custom_effect_tooltip = KOR_negotiation_failure_tt
 			subtract_from_variable = { reunification_chance = 1 }
@@ -7756,7 +7150,7 @@ focus_tree = {
 			add_to_variable = { reunification_chance = 1 }
 			support_for_reunification_2 = yes
 			remove_ideas = KOR_joint_us_exercises2
-			remove_ideas = Major_Non_Nato_Ally
+			remove_ideas = Major_Non_NATO_Ally
 			every_other_country = {
 				limit = {
 					has_guaranteed = KOR
@@ -8533,9 +7927,7 @@ focus_tree = {
 
 		cost = 5
 
-
 		search_filters = { FOCUS_FILTER_INDUSTRY }
-
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KOR_economics_improvement "
@@ -8559,11 +7951,9 @@ focus_tree = {
 
 		cost = 10
 
-
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = KOR_economics_improvement }
-
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KOR_CELLTRION "
@@ -8588,11 +7978,9 @@ focus_tree = {
 
 		cost = 10
 
-
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = KOR_CELLTRION }
-
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KOR_establish_research_centers "
@@ -8623,11 +8011,9 @@ focus_tree = {
 
 		cost = 10
 
-
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = KOR_CELLTRION }
-
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KOR_army_support "
@@ -8654,12 +8040,10 @@ focus_tree = {
 
 		cost = 10
 
-
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = KOR_CELLTRION }
 		prerequisite = { focus = KOR_army_support }
-
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KOR_civilians_first "
@@ -8692,11 +8076,9 @@ focus_tree = {
 
 		cost = 10
 
-
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = KOR_establish_research_centers }
-
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KOR_biotechnology_focus "
@@ -8724,7 +8106,6 @@ focus_tree = {
 		relative_position_id = KOR_biotechnology_focus
 
 		cost = 10
-
 
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
@@ -8776,17 +8157,12 @@ focus_tree = {
 						owner = ROOT
 						count = 1
 					}
-				}
-				capital_scope = {
 					create_unit = {
 						division = "name = \"2nd. Marine Division \" division_template = \"Perfect Soldier\" start_experience_factor = 1.0"
 						owner = ROOT
 						count = 1
 					}
 				}
-
-
-
 
 		}
 
@@ -8804,7 +8180,6 @@ focus_tree = {
 		relative_position_id = KOR_civilians_first
 
 		cost = 10
-
 
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
@@ -8834,7 +8209,6 @@ focus_tree = {
 		relative_position_id = KOR_perfect_soldier
 
 		cost = 10
-
 
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
@@ -8873,11 +8247,9 @@ focus_tree = {
 
 		cost = 10
 
-
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = KOR_economics_improvement }
-
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KOR_posco "
@@ -8900,11 +8272,9 @@ focus_tree = {
 
 		cost = 10
 
-
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = KOR_posco }
-
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KOR_posco_india "
@@ -8932,11 +8302,9 @@ focus_tree = {
 
 		cost = 10
 
-
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = KOR_posco }
-
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KOR_production_in_mexico "
@@ -8963,20 +8331,15 @@ focus_tree = {
 
 		cost = 10
 
-
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = KOR_posco }
 
-
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KOR_develop_vietnam "
 			VIE = {
-			country_event = {
-					id = korea.62
-					days = 1
+				country_event = { id = korea.62 days = 1 }
 			}
-		}
 		}
 
 		ai_will_do = {
@@ -8994,11 +8357,9 @@ focus_tree = {
 
 		cost = 10
 
-
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = KOR_posco_india }
-
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KOR_gwangyang_galvanizing "
@@ -9029,21 +8390,16 @@ focus_tree = {
 
 		cost = 10
 
-
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = KOR_production_in_mexico }
 		prerequisite = { focus = KOR_develop_vietnam }
 
-
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KOR_argentina_facility "
 			ARG = {
-			country_event = {
-					id = korea.63
-					days = 1
+				country_event = { id = korea.63 days = 1 }
 			}
-		}
 		}
 
 		ai_will_do = {
@@ -9061,12 +8417,10 @@ focus_tree = {
 
 		cost = 10
 
-
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = KOR_gwangyang_galvanizing }
 		prerequisite = { focus = KOR_argentina_facility }
-
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KOR_local_production "
@@ -9102,12 +8456,10 @@ focus_tree = {
 
 		cost = 10
 
-
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = KOR_local_production }
 		prerequisite = { focus = KOR_argentina_facility }
-
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KOR_worlds_second "
@@ -9145,11 +8497,9 @@ focus_tree = {
 
 		cost = 10
 
-
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = KOR_economics_improvement }
-
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KOR_samsung "
@@ -9182,16 +8532,13 @@ focus_tree = {
 
 		cost = 10
 
-
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = KOR_samsung }
 
-
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KOR_samsung_galaxy_phones "
 			add_ideas = KOR_samsung_phone_sales
-
 
 		}
 
@@ -9210,11 +8557,9 @@ focus_tree = {
 
 		cost = 10
 
-
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = KOR_samsung }
-
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KOR_samsung_thunder "
@@ -9243,11 +8588,9 @@ focus_tree = {
 
 		cost = 10
 
-
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = KOR_samsung_thunder }
-
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KOR_samsung_thunder_upgrade "
@@ -9281,11 +8624,9 @@ focus_tree = {
 
 		cost = 10
 
-
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = KOR_samsung_thunder }
-
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KOR_samsung_thunder_tests "
@@ -9310,12 +8651,10 @@ focus_tree = {
 
 		cost = 10
 
-
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = KOR_samsung_thunder_tests }
 		prerequisite = { focus = KOR_samsung_thunder_upgrade }
-
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KOR_samsung_thunder_production "
@@ -9348,11 +8687,9 @@ focus_tree = {
 
 		cost = 10
 
-
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = KOR_economics_improvement }
-
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KOR_lg "
@@ -9375,11 +8712,9 @@ focus_tree = {
 
 		cost = 10
 
-
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = KOR_lg }
-
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KOR_lg_cns "
@@ -9407,11 +8742,9 @@ focus_tree = {
 
 		cost = 10
 
-
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = KOR_lg_cns }
-
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KOR_cloud_computing "
@@ -9438,11 +8771,9 @@ focus_tree = {
 
 		cost = 10
 
-
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = KOR_lg_cns }
-
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KOR_ai_focus "
@@ -9469,11 +8800,9 @@ focus_tree = {
 
 		cost = 10
 
-
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = KOR_lg }
-
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KOR_lg_chem "
@@ -9502,11 +8831,9 @@ focus_tree = {
 
 		cost = 10
 
-
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = KOR_lg_chem }
-
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KOR_ochang_plant "
@@ -9534,11 +8861,9 @@ focus_tree = {
 
 		cost = 10
 
-
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = KOR_lg_chem }
-
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KOR_sbl_plant "
@@ -9567,11 +8892,9 @@ focus_tree = {
 
 		cost = 10
 
-
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = KOR_economics_improvement }
-
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KOR_hyundai "
@@ -9596,11 +8919,9 @@ focus_tree = {
 
 		cost = 10
 
-
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = KOR_hyundai }
-
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KOR_offshore_industry "
@@ -9628,11 +8949,9 @@ focus_tree = {
 
 		cost = 10
 
-
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = KOR_offshore_industry }
-
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KOR_offshore_oil "
@@ -9673,11 +8992,9 @@ focus_tree = {
 
 		cost = 10
 
-
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = KOR_offshore_industry }
-
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KOR_offshore_natural_gas "
@@ -9711,11 +9028,9 @@ focus_tree = {
 
 		cost = 10
 
-
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = KOR_offshore_industry }
-
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KOR_offshore_barge "
@@ -9743,11 +9058,9 @@ focus_tree = {
 
 		cost = 10
 
-
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = KOR_economics_improvement }
-
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KOR_naver "
@@ -9770,11 +9083,9 @@ focus_tree = {
 
 		cost = 10
 
-
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = KOR_naver }
-
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KOR_webtoon "
@@ -9804,11 +9115,9 @@ focus_tree = {
 
 		cost = 10
 
-
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = KOR_naver }
-
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus KOR_naver_news "
@@ -9820,15 +9129,5 @@ focus_tree = {
 			base = 1
 		}
 	}
-
-
-
-
-
-
-
-
-
-
 
 }
