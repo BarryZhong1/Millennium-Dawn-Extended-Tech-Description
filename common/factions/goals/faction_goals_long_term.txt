@@ -628,31 +628,12 @@ faction_goal_defeating_our_enemies = {
 	description = defeating_our_enemies_goal_desc
 	category = long_term
 	group = FOCUS_FILTER_ANNEXATION
-	visible = {
-		NOT = { has_country_flag = peace_winner_flag }
-	}
-	completed = {
-		custom_trigger_tooltip = {
-			tooltip = is_victor_in_pc_tt
-			ROOT = { has_country_flag = peace_winner_flag }
-		}
-
-	}
 	complete_effect = {
 		add_faction_power_projection = 200
 		newline = yes
 		custom_effect_tooltip = ALL_FACTION_MEMBERS
 		every_faction_member = {
 			add_war_support = 0.1
-		}
-		newline = yes
-		custom_effect_tooltip = PEACE_CONFERENCE_WINNERS
-		every_faction_member = {
-			visible_when_empty = yes
-			limit = {
-				has_country_flag = peace_winner_flag
-			}
-			add_faction_initiative = 1
 		}
 	}
 }

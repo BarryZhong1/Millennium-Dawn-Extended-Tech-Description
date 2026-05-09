@@ -919,7 +919,6 @@ EU_voting_category = {
 			if = {
 				limit = { any_country = { has_idea = ECB_president } }
 				set_country_flag = focus_EU999_EP_agenda
-				set_country_flag = focus_on_EP_agenda
 				activate_mission = EU_parliament_focus_EUXXX_approve_timer
 			}
 			else = {
@@ -956,7 +955,6 @@ EU_voting_category = {
 			}
 			assess_MEP_support_party_x = yes
 			set_country_flag = focus_EU999_EP_agenda
-			set_country_flag = focus_on_EP_agenda
 			clr_country_flag = EU_budget_draft
 			activate_mission = EU_parliament_focus_EUXXX_approve
 			activate_mission = EU_budget_yearly_timer
@@ -1041,7 +1039,6 @@ EU_voting_category = {
 			if = {
 				limit = { any_country = { has_idea = ECB_president } }
 				set_country_flag = focus_EU998_EP_agenda
-				set_country_flag = focus_on_EP_agenda
 				activate_mission = EU_parliament_focus_EUXXX_approve_timer
 			}
 			else = {
@@ -1078,7 +1075,6 @@ EU_voting_category = {
 			}
 			assess_MEP_support_party_x = yes
 			set_country_flag = focus_EU998_EP_agenda
-			set_country_flag = focus_on_EP_agenda
 			clr_country_flag = EU_mff_draft
 			activate_mission = EU_mff_yearly_timer
 			activate_mission = EU_parliament_focus_EUXXX_approve
@@ -1408,26 +1404,13 @@ EU_exit_category = {
 		fire_only_once = yes
 
 		timeout_effect = {
-			# Unprepared No Deal Exit
-			if = { limit = { NOT = { ROOT = { has_country_flag = focus_EU703_completed } } }
-				add_timed_idea = {
-					idea = no_deal_exit
-					days = 1825 # five years # unprepared no deal exit # prepared no deal exit with two years with focus EU703
-				}
-				leaving_EU = yes
-				clr_country_flag = Article_50
+			# No Deal Exit
+			add_timed_idea = {
+				idea = no_deal_exit
+				days = 1825
 			}
-			else_if = {
-				limit = {
-					ROOT = { has_country_flag = focus_EU703_completed }
-				}
-				add_timed_idea = {
-					idea = no_deal_exit
-					days = 730 # five years # unprepared no deal exit # prepared no deal exit with two years with focus EU703
-				}
-				leaving_EU = yes
-				clr_country_flag = Article_50
-			}
+			leaving_EU = yes
+			clr_country_flag = Article_50
 
 			# One Member State Leaves
 			news_event = EU_news.21
