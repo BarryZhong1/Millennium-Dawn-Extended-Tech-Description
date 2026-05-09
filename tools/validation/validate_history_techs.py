@@ -14,7 +14,6 @@ import glob
 import os
 import re
 from collections import defaultdict
-from multiprocessing import Pool
 from pathlib import Path
 from typing import Dict, List, Optional, Set, Tuple
 
@@ -409,11 +408,7 @@ class Validator(BaseValidator):
 
     def _build_tech_graph(self):
         """Build the technology dependency graph from tech definition files."""
-        self.log(f"\n{'='*80}")
-        self.log(
-            f"{Colors.CYAN if self.use_colors else ''}Building technology dependency graph...{Colors.ENDC if self.use_colors else ''}"
-        )
-        self.log(f"{'='*80}")
+        self._log_section("Building technology dependency graph...")
 
         self.prerequisites, self.all_techs = parse_tech_dependencies(self.mod_path)
 
@@ -425,7 +420,9 @@ class Validator(BaseValidator):
     def _get_history_files(self) -> List[str]:
         """Get list of history country files to validate."""
         history_dir = os.path.join(self.mod_path, "history", "countries")
-        if self.staged_files:
+        if self.staged_only:
+            if not self.staged_files:
+                return []
             return [
                 f
                 for f in self.staged_files
@@ -435,19 +432,14 @@ class Validator(BaseValidator):
 
     def validate_tech_dependencies(self):
         """Validate that all history files have correct tech prerequisites."""
-        self.log(f"\n{'='*80}")
-        self.log(
-            f"{Colors.CYAN if self.use_colors else ''}Checking technology dependencies in history files...{Colors.ENDC if self.use_colors else ''}"
-        )
-        self.log(f"{'='*80}")
+        self._log_section("Checking technology dependencies in history files...")
 
         files = self._get_history_files()
         self.log(f"  Found {len(files)} history files to check")
 
         args_list = [(f, self.prerequisites, self.all_techs) for f in files]
 
-        with Pool(processes=self.workers) as pool:
-            all_results = pool.map(validate_country_file, args_list, chunksize=20)
+        all_results = self._pool_map(validate_country_file, args_list, chunksize=20)
 
         results = []
         for file_results in all_results:

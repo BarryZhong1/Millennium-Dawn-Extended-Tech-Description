@@ -5,7 +5,7 @@ description: Comprehensive guide to the economy system in Millennium Dawn
 
 Millennium Dawn includes a detailed modern economy system covering revenue, government expenditure, debt, employment, electricity, and more. This guide explains each element and how they interact.
 
-## Table of Contents
+**Table of Contents**
 
 - [UI](#ui)
 - [GDP and GDP per Capita](#gdp-and-gdp-per-capita)
@@ -61,7 +61,6 @@ Millennium Dawn includes a detailed modern economy system covering revenue, gove
   - [Agriculture Districts](#agriculture-districts)
   - [Energy Infrastructure](#energy-infrastructure)
   - [Industrial Infrastructure](#industrial-infrastructure)
-
 - [Advanced Industrial Buildings](#advanced-industrial-buildings)
   - [Microchip Plants](#microchip-plants)
   - [Composite Plants](#composite-plants)
@@ -70,12 +69,25 @@ Millennium Dawn includes a detailed modern economy system covering revenue, gove
   - [Civilian Microchip Consumption](#civilian-microchip-consumption)
   - [Military Equipment Requirements](#military-equipment-requirements)
   - [Building Employment Values](#building-employment-values)
+- [MD-Specific Buildings](#md-specific-buildings)
 - [Immigration](#immigration)
 - [International Investments](#international-investments)
+  - [International Market](#international-market)
 - [Internal Investment](#internal-investment)
 - [Agrarian Economy](#agrarian-economy)
+  - [Crop Allocation](#crop-allocation)
+  - [Agricultural Workers](#agricultural-workers)
+  - [Drought Events](#drought-events)
 - [IMF and Bailouts](#imf-and-bailouts)
+  - [Cheap Loans from the IMF](#cheap-loans-from-the-imf)
+  - [African Investment Fund Loans](#african-investment-fund-loans)
+  - [Bailout Requests](#bailout-requests)
 - [Strategic Tips](#strategic-tips)
+  - [Early Game](#early-game)
+  - [Mid Game](#mid-game)
+  - [Late Game](#late-game)
+  - [Common Mistakes to Avoid](#common-mistakes-to-avoid)
+- [Related Documentation](#related-documentation)
 
 ---
 
@@ -156,7 +168,7 @@ Higher population taxes apply a **stability penalty** (1% tax rate = -0.01% stab
 
 Countries earn income from exporting surplus resources on the international market. The following resources generate export revenue:
 
-- Oil, Steel, Aluminium, Tungsten, Chromium, Rubber, Microchips, and Composites
+- Fossil Fuels, Steel, Light Metals, Technology Metals, Precious Metals, Rubber, Microchips, and Advanced Composites
 
 Export income is affected by your trade law (which controls the minimum export percentage), mining policies, and currency strength. A weaker domestic currency makes resource exports more valuable in local terms, while a stronger currency reduces their local value.
 
@@ -170,23 +182,23 @@ Price = (Global Demand / Global Supply) × 2 × Starting Price
 
 When global demand exceeds half of global supply (demand/supply ratio > 0.5), prices rise above the starting price. When demand falls below that ratio, prices drop. Each resource has a hard floor and ceiling that prices cannot exceed:
 
-| Resource   | Starting Price | Price Floor | Price Ceiling |
-| ---------- | -------------- | ----------- | ------------- |
-| Oil        | 6.80           | 1.36        | 34.00         |
-| Steel      | 0.024          | 0.005       | 0.120         |
-| Aluminium  | 0.21           | 0.042       | 1.05          |
-| Tungsten   | 0.28           | 0.056       | 1.40          |
-| Chromium   | 0.18           | 0.036       | 0.90          |
-| Rubber     | 0.09           | 0.018       | 0.45          |
-| Microchips | 8.00           | 1.58        | 36.20         |
-| Composites | 7.40           | 1.42        | 35.40         |
+| Resource            | Starting Price | Price Floor | Price Ceiling |
+| ------------------- | -------------- | ----------- | ------------- |
+| Fossil Fuels        | 6.80           | 1.36        | 34.00         |
+| Steel               | 0.024          | 0.005       | 0.120         |
+| Light Metals        | 0.21           | 0.042       | 1.05          |
+| Technology Metals   | 0.28           | 0.056       | 1.40          |
+| Precious Metals     | 0.18           | 0.036       | 0.90          |
+| Rubber              | 0.09           | 0.018       | 0.45          |
+| Microchips          | 8.00           | 1.58        | 36.20         |
+| Advanced Composites | 7.40           | 1.42        | 35.40         |
 
 **Strategic implications:**
 
-- Countries that control large shares of a scarce resource (e.g., tungsten, chromium, microchips) can indirectly benefit from high prices if global supply is tight.
+- Countries that control large shares of a scarce resource (e.g., Technology Metals, Precious Metals, Microchips) can indirectly benefit from high prices if global supply is tight.
 - Building Microchip Plants and Composite Plants across many nations increases global supply of those resources, driving their prices down over the course of a game.
-- Microchips and composites have the highest price ceilings by far — a global shortage of either resource can make them extremely valuable exports.
-- Oil prices are the most volatile in practice, as fuel demand is high and supply is concentrated in relatively few states.
+- Microchips and Advanced Composites have the highest price ceilings by far — a global shortage of either resource can make them extremely valuable exports.
+- Fossil Fuel prices are the most volatile in practice, as fuel demand is high and supply is concentrated in relatively few states.
 
 ### Seigniorage Income
 
@@ -730,7 +742,22 @@ Countries must supply electricity as part of their infrastructure. Power is gene
 
 Reactor-Grade Material can be produced at Enrichment Facilities (built from the electricity panel) or purchased from other countries via decisions. States with Geothermal Infrastructure or Hydroelectric Infrastructure modifiers provide additional power.
 
-Electricity consumption is calculated from active buildings and population. Insufficient power generation triggers a dynamic modifier that scales with the size of the shortfall:
+Electricity consumption is calculated from active buildings and population. Each building type consumes energy per level:
+
+| Building              | Energy Consumption (GW per level) |
+| --------------------- | --------------------------------- |
+| Composite Plants      | 0.80                              |
+| Microchip Plants      | 0.75                              |
+| Civilian Factories    | 0.50                              |
+| Military Factories    | 0.50                              |
+| Dockyards             | 0.50                              |
+| Offices               | 0.25                              |
+| Synthetic Refineries  | 0.20                              |
+| Agriculture Districts | 0.10                              |
+
+Population energy consumption also scales with total population and GDP per capita — wealthier, larger nations consume significantly more electricity.
+
+Insufficient power generation triggers a dynamic modifier that scales with the size of the shortfall:
 
 | Penalty                 | Effect                                                  |
 | ----------------------- | ------------------------------------------------------- |
@@ -767,6 +794,7 @@ Offices are the backbone of a modern service economy. They employ the most worke
 | Max Per State          | 50                      |
 | Shares Building Slots  | Yes                     |
 | Corporate Tax Factor   | 5.0                     |
+| Energy Consumption     | 0.25 GW per level       |
 | Base Workers           | 0.473 million per level |
 
 Offices also drive civilian microchip consumption — each staffed office consumes microchips proportional to its worker fulfillment, so nations with many offices need corresponding microchip production.
@@ -792,6 +820,8 @@ Agriculture districts represent organized commercial farming. They produce **fue
 | Base Construction Cost | 15,000 (+1,250 per additional level) |
 | Max Per State          | 10                                   |
 | Shares Building Slots  | Yes                                  |
+| Corporate Tax Factor   | 2.6                                  |
+| Energy Consumption     | 0.10 GW per level                    |
 | Base Workers           | 0.188 million per level              |
 | Fuel Output            | 8 per hour per level                 |
 | Local Supply           | +0.015 per level                     |
@@ -828,35 +858,37 @@ Millennium Dawn introduces three advanced building types that produce strategic 
 
 ### Microchip Plants
 
-Microchip plants produce **microchips**, a strategic resource required for advanced electronics, guided munitions, and modern military systems.
+Microchip plants produce **Microchips**, a strategic resource required for advanced electronics, guided munitions, and modern military systems.
 
-| Property               | Value                                |
-| ---------------------- | ------------------------------------ |
-| Base Construction Cost | 45,000 (+2,500 per additional level) |
-| Resource Output        | 20 microchips per level              |
-| Resource Input         | 2 tungsten + 1 chromium per level    |
-| Max Per State          | 5                                    |
-| Shares Building Slots  | Yes                                  |
-| Corporate Tax Factor   | 4.0                                  |
-| Base Workers           | 0.0375 million per level             |
+| Property               | Value                                             |
+| ---------------------- | ------------------------------------------------- |
+| Base Construction Cost | 45,000 (+2,500 per additional level)              |
+| Resource Output        | 20 Microchips per level                           |
+| Resource Input         | 2 Technology Metals + 1 Precious Metals per level |
+| Max Per State          | 5                                                 |
+| Shares Building Slots  | Yes                                               |
+| Corporate Tax Factor   | 4.0                                               |
+| Energy Consumption     | 0.75 GW per level                                 |
+| Base Workers           | 0.0375 million per level                          |
 
-Microchip plants have the second-highest corporate tax factor in the game (behind offices), making them a strong source of tax revenue. However, they require a steady supply of tungsten and chromium to operate -- countries without domestic access to these resources will need to import them.
+Microchip plants have the second-highest corporate tax factor in the game (behind offices), making them a strong source of tax revenue. However, they require a steady supply of Technology Metals and Precious Metals to operate -- countries without domestic access to these resources will need to import them.
 
 ### Composite Plants
 
-Composite plants produce **composites**, a strategic resource used in advanced armor, aircraft construction, and modern naval vessels.
+Composite plants produce **Advanced Composites**, a strategic resource used in advanced armor, aircraft construction, and modern naval vessels.
 
-| Property               | Value                                   |
-| ---------------------- | --------------------------------------- |
-| Base Construction Cost | 45,000 (+2,500 per additional level)    |
-| Resource Output        | 16 composites per level                 |
-| Resource Input         | 1 rubber + 1 chromium + 1 oil per level |
-| Max Per State          | 5                                       |
-| Shares Building Slots  | Yes                                     |
-| Corporate Tax Factor   | 3.5                                     |
-| Base Workers           | 0.0375 million per level                |
+| Property               | Value                                                   |
+| ---------------------- | ------------------------------------------------------- |
+| Base Construction Cost | 45,000 (+2,500 per additional level)                    |
+| Resource Output        | 16 Advanced Composites per level                        |
+| Resource Input         | 1 Rubber + 1 Precious Metals + 1 Fossil Fuels per level |
+| Max Per State          | 5                                                       |
+| Shares Building Slots  | Yes                                                     |
+| Corporate Tax Factor   | 3.5                                                     |
+| Energy Consumption     | 0.80 GW per level                                       |
+| Base Workers           | 0.0375 million per level                                |
 
-Composite plants require three different input resources (rubber, chromium, and oil), making them the most resource-intensive building to sustain. Countries with limited resource access should secure trade agreements or invest in synthetic refineries to supply the rubber component.
+Composite plants require three different input resources (Rubber, Precious Metals, and Fossil Fuels), making them the most resource-intensive building to sustain. Countries with limited resource access should secure trade agreements or invest in synthetic refineries to supply the Rubber component.
 
 ### Synthetic Refineries
 
@@ -865,31 +897,32 @@ Synthetic refineries produce both **rubber** (3 per level) and **fuel** (2 per h
 | Property               | Value                                      |
 | ---------------------- | ------------------------------------------ |
 | Base Construction Cost | 32,000                                     |
-| Resource Output        | 3 rubber per level + 2 fuel/hour per level |
+| Resource Output        | 3 Rubber per level + 2 fuel/hour per level |
 | Max Per State          | 2                                          |
 | Shares Building Slots  | Yes                                        |
 | Corporate Tax Factor   | 3.0                                        |
+| Energy Consumption     | 0.20 GW per level                          |
 | Base Workers           | 0.184 million per level                    |
 
-Synthetic refineries are the most labor-intensive advanced building by far, employing nearly 5 times as many workers per level as microchip or composite plants. They are critical for resource-poor nations that need rubber for composite production and fuel for mechanized and naval operations. Researching advanced refinery technologies increases rubber output by +1 per level per tech tier.
+Synthetic refineries are the most labor-intensive advanced building by far, employing nearly 5 times as many workers per level as microchip or composite plants. They are critical for resource-poor nations that need Rubber for Advanced Composite production and fuel for mechanized and naval operations. Researching advanced refinery technologies increases Rubber output by +1 per level per tech tier.
 
 ### Input Resource Shortages
 
 Microchip and composite plants require input resources to operate. If you run short of these inputs, production is reduced proportionally -- up to a maximum penalty of -95%.
 
-**Microchip Plants** check tungsten and chromium supply weekly:
+**Microchip Plants** check Technology Metals and Precious Metals supply weekly:
 
-- Tungsten shortages are weighted 1.25x heavier than chromium shortages
+- Technology Metals shortages are weighted 1.25x heavier than Precious Metals shortages
 - If both inputs are completely exhausted, microchip output drops to 5% of normal
 
-**Composite Plants** check rubber, chromium, and oil supply weekly:
+**Composite Plants** check Rubber, Precious Metals, and Fossil Fuels supply weekly:
 
-- Rubber shortages are weighted 1.5x heavier than chromium shortages
+- Rubber shortages are weighted 1.5x heavier than Precious Metals shortages
 - All three inputs must be available for full production
 
 **Energy shortages** also reduce microchip and composite production. If your country has an electricity deficit, plant output is further penalized on top of any input resource shortages. Production line technology research reduces the energy demand of both plant types.
 
-Securing a stable supply of input resources -- through domestic mining, trade agreements, or synthetic refineries (for rubber) -- is essential before investing heavily in advanced plants.
+Securing a stable supply of input resources -- through domestic mining, trade agreements, or synthetic refineries (for Rubber) -- is essential before investing heavily in advanced plants.
 
 ### Civilian Microchip Consumption
 
@@ -907,7 +940,7 @@ This means rapidly industrializing nations that build many offices and grow thei
 
 ### Military Equipment Requirements
 
-Microchips and composites are required to produce modern military equipment. The main categories include:
+Microchips and Advanced Composites are required to produce modern military equipment. The main categories include:
 
 **Microchip-dependent equipment:**
 
@@ -925,15 +958,15 @@ Microchips and composites are required to produce modern military equipment. The
 | Advanced aircraft          | 1-2 per unit                          |
 | Ship combat modules        | 1-4 per module (scales with level)    |
 
-**Composite-dependent equipment:**
+**Advanced Composite-dependent equipment:**
 
-| Equipment Type       | Composites Required                  |
+| Equipment Type       | Advanced Composites Required         |
 | -------------------- | ------------------------------------ |
 | Advanced artillery   | 2 per unit                           |
 | Advanced aircraft    | 1-2 per unit                         |
 | Modern naval vessels | 1-6 per ship (scales with ship type) |
 
-Without sufficient microchip or composite stockpiles, production of these equipment types will stall or slow significantly. Nations planning a modern military buildup should establish microchip and composite production well before they need to ramp up equipment manufacturing.
+Without sufficient Microchip or Advanced Composite stockpiles, production of these equipment types will stall or slow significantly. Nations planning a modern military buildup should establish Microchip and Advanced Composite production well before they need to ramp up equipment manufacturing.
 
 ### Building Employment Values
 
@@ -960,6 +993,67 @@ If buildings cannot be fully staffed, their output is reduced proportionally to 
 
 ---
 
+## MD-Specific Buildings
+
+Millennium Dawn adds several building types beyond the base game. These buildings generate tax revenue, produce resources, and serve key roles in the economy.
+
+### Offices
+
+Offices are a purely economic building that generates corporate tax income. They have a high tax factor of 5.0 per level — the highest of any building — making them the most efficient source of corporate tax revenue. Build offices early to boost your income.
+
+- **Building Slots**: Shares building slots with other production buildings
+- **Max Level**: 50 per state
+
+### Internet Stations
+
+Internet stations represent a country's internet and telecommunications capacity. Each level provides a **+5% state productivity growth modifier**, making it one of the best long-term investments for increasing building output.
+
+- **Max Level**: 6 per state
+- **Upkeep**: Costs a small weekly infrastructure expense per level
+
+### Agriculture Districts
+
+Agriculture districts represent a country's farming sector. They produce fuel (representing ethanol/biofuel) and local supplies. They also generate corporate tax revenue with a factor of 2.6 per level.
+
+- **Max Level**: 10 per state
+- **Produces**: Fuel and local supplies per level
+- **Shares building slots** with other production buildings
+
+### Microchip Plants
+
+Microchip plants produce **microchips**, an advanced resource used in high-tech equipment. Each level produces 20 microchips but consumes tungsten and chromium. They have a tax factor of 4.0 per level.
+
+- **Max Level**: 5 per state
+- **Resource Cost**: Tungsten and chromium per level
+- **Shares building slots** with other production buildings
+
+### Composite Plants
+
+Composite plants produce **composites**, an advanced material used in modern military and civilian equipment. Each level produces 16 composites but consumes rubber, chromium, and oil. They have a tax factor of 3.5 per level.
+
+- **Max Level**: 5 per state
+- **Resource Cost**: Rubber, chromium, and oil per level
+- **Shares building slots** with other production buildings
+
+### Energy Buildings
+
+Three building types generate electricity (see the [Electricity](#electricity) section):
+
+| Building                        | Fuel Source            | Output (base) | Max Level |
+| ------------------------------- | ---------------------- | ------------- | --------- |
+| Fossil Fuel Powerplant          | Fuel                   | 2 GW          | 20        |
+| Nuclear Reactor                 | Reactor-Grade Material | 5 GW          | 20        |
+| Renewable Energy Infrastructure | None                   | 0.5 GW        | 20        |
+
+### Infrastructure Keystones
+
+Two mutually exclusive keystone buildings provide state-wide bonuses. Only one can be built per state.
+
+- **Energy Infrastructure**: Boosts renewable energy generation, nuclear reactor construction speed, and factory repair speed. Also adds building slots.
+- **Industrial Infrastructure**: Increases resource gain efficiency per infrastructure level in the state.
+
+---
+
 ## Immigration
 
 Immigration is one way to grow your population. Migration happens automatically, but you can adjust the acceptance level by changing the stage of **Migration Laws** (found at the far right of Policies in the Politics window).
@@ -970,28 +1064,21 @@ Immigration control costs money. Stricter restrictions cost more to enforce. The
 
 ## International Investments
 
-You can construct buildings in foreign countries through International Investments. This requires spending treasury funds and takes time, but provides:
+International investments let you fund construction projects in foreign states. Completed buildings permanently join the target state, and you earn passive income — approximately **6% annually** on your total invested value. You also gain influence over the target country with each accepted project. Up to 15 projects can run simultaneously.
 
-- **Investment returns**: approximately 6% annually, paid as weekly income, subject to modification by national spirits and currency strength
-- **Influence**: gaining leverage over the receiving country
+For a full breakdown of buildable types, costs, duration mechanics, ROI calculation, and influence gain, see the [Investments Guide](/player-tutorials/investments-guide).
 
-Some countries will refuse international investments. AI-controlled countries may also offer to invest in yours.
+### International Market
 
-To initiate an international investment, click on a foreign state, then click the arrow button to open the interface and proceed. Investment returns are denominated in the reserve currency, so a weak domestic currency increases the local value of returns.
+The International Market is a vanilla HOI4 mechanic that Millennium Dawn includes with modifications. It allows you to buy and sell **military equipment** (weapons, vehicles, aircraft, etc.) using civilian factories. In MD, it is limited to **1 civilian factory** allocated to the market. When you purchase equipment, the income is sent to the selling nation, which receives a proportional amount based on their corporate tax rate. Raw resources like oil, steel, and aluminium cannot be traded on the International Market — those are handled through the standard civilian factory trade system.
 
 ---
 
 ## Internal Investment
 
-Internal investments work like international investments but target your own states. Click on a domestic state, then click the arrow button to open the interface.
+Internal investments apply temporary modifiers to your own states — things like productivity growth bonuses, construction speed buffs, extra building slots, and resource output boosts. Each option costs **75 Political Power** plus a treasury payment scaled to your GDP and lasts 120–180 days. The number of concurrent investments you can run scales with your power rank (2 slots for minor powers, up to 6 for superpowers).
 
-Internal investments can:
-
-- Increase a state's productivity growth rate
-- Add building slots
-- Apply temporary modifiers for a limited period
-
-Each investment costs political power and treasury funds. Investment costs are increased by inflation.
+For the full list of options, costs, effects, and tips, see the [Investments Guide](/player-tutorials/investments-guide).
 
 ---
 
@@ -1102,6 +1189,9 @@ If interest exceeds 25% and the country is not at war, the AI will default on it
 
 ## Related Documentation
 
+- [Investments Guide](/player-tutorials/investments-guide) - Full detail on international and internal investment systems
 - [International Systems Guide](/player-tutorials/international-systems) - For PMCs, sanctions, and other international economic systems
 - [European Union Tutorial](/player-tutorials/eu-tutorial) - For EU-specific economic mechanics (Eurozone, ECB, single market)
 - [Game Rules](/player-tutorials/game-rules)
+- [Influence Guide](/player-tutorials/influence-guide)
+- [Mechanics Guide](/player-tutorials/mechanics-guide)
