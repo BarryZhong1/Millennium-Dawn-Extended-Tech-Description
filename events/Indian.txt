@@ -2781,6 +2781,38 @@ country_event = {
 	}
 }
 
+# 2011 Supreme Court Ruling on Salwa Judum - July 5, 2011
+# Disbands the militia and exposes the government to international scrutiny.
+country_event = {
+	id = RAJ_naxal.21
+	title = RAJ_naxal.21.t
+	desc = RAJ_naxal.21.d
+	picture = GFX_paris_convention
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = RAJ
+		date > 2011.7.1
+	}
+
+	option = {
+		name = RAJ_naxal.21.a
+		log = "[GetDateText]: [This.GetName]: RAJ_naxal.21.a executed"
+		if = {
+			limit = { has_idea = RAJ_salwa_judum_active }
+			remove_ideas = RAJ_salwa_judum_active
+			add_stability = 0.02
+		}
+		add_timed_idea = {
+			idea = RAJ_human_rights_scrutiny
+			days = 365
+		}
+		add_political_power = -50
+		ai_chance = { base = 1 }
+	}
+}
+
 # 2023 Manipur Ethnic Violence - May 3, 2023
 country_event = {
 	id = indian_event.67

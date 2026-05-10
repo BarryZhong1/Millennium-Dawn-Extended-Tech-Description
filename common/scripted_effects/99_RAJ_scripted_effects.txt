@@ -240,6 +240,120 @@ RAJ_remove_all_naxalite_modifiers = {
 	remove_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_4 }
 }
 
+# State scope: escalate to the next-higher severity tier.
+# Mirror of RAJ_downgrade_naxalite_level. Base RAJ_naxalite_insurgency is the cap.
+RAJ_upgrade_naxalite_level = {
+	if = {
+		limit = { has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_4 } }
+		remove_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_4 }
+		add_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_3 }
+	}
+	else_if = {
+		limit = { has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_3 } }
+		remove_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_3 }
+		add_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_2 }
+	}
+	else_if = {
+		limit = { has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_2 } }
+		remove_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_2 }
+		add_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
+	}
+	else_if = {
+		limit = { has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 } }
+		remove_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
+		add_dynamic_modifier = { modifier = RAJ_naxalite_insurgency }
+	}
+	ROOT = {
+		add_to_variable = { RAJ_mao_gui_dirty = 1 }
+		if = {
+			limit = { RAJ_has_severe_naxalite_states_trigger = yes }
+			set_country_flag = RAJ_has_severe_naxalite_states
+		}
+	}
+}
+
+# Country scope: pick target state, run the state-scope upgrade, then sync the var.
+RAJ_upgrade_naxalite_var = {
+	var:RAJ_naxalite_target_state = { RAJ_upgrade_naxalite_level = yes }
+	meta_effect = {
+		text = {
+			if = {
+				limit = { var:RAJ_naxalite_target_state = { has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency } } }
+				set_variable = { RAJ_naxalite_[S] = 1 }
+			}
+			else_if = {
+				limit = { var:RAJ_naxalite_target_state = { has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 } } }
+				set_variable = { RAJ_naxalite_[S] = 2 }
+			}
+			else_if = {
+				limit = { var:RAJ_naxalite_target_state = { has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_2 } } }
+				set_variable = { RAJ_naxalite_[S] = 3 }
+			}
+			else_if = {
+				limit = { var:RAJ_naxalite_target_state = { has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_3 } } }
+				set_variable = { RAJ_naxalite_[S] = 4 }
+			}
+		}
+		S = "[?RAJ_naxalite_target_state]"
+	}
+}
+
+# Country scope: roll a 5% chance to escalate the state pointed to by
+# RAJ_naxalite_target_state if it has insurgency below the cap (var > 1) and
+# RAJ controls it. Mirrors the meta_effect pattern used by RAJ_downgrade_naxalite_var.
+RAJ_try_escalate_state = {
+	meta_effect = {
+		text = {
+			if = {
+				limit = {
+					check_variable = { RAJ_naxalite_[S] > 1 }
+					[S] = { is_controlled_by = RAJ }
+				}
+				random = {
+					chance = 5
+					RAJ_upgrade_naxalite_var = yes
+				}
+			}
+		}
+		S = "[?RAJ_naxalite_target_state]"
+	}
+}
+
+# Country scope: monthly escalation pass. Each of the 10 Red Corridor states with
+# active insurgency rolls a chance to escalate one tier. Gated on Maoist popular
+# support; suppressed by any active counter-insurgency programme.
+RAJ_naxalite_monthly_escalation = {
+	if = {
+		limit = {
+			NOT = { has_country_flag = RAJ_naxal_free_achieved }
+			check_variable = { party_pop_array^19 > 0.10 }
+			NOT = { has_idea = RAJ_operation_green_hunt_active }
+			NOT = { has_idea = RAJ_samadhan_doctrine_idea }
+			NOT = { has_idea = RAJ_salwa_judum_active }
+		}
+		set_variable = { RAJ_naxalite_target_state = 456 }
+		RAJ_try_escalate_state = yes
+		set_variable = { RAJ_naxalite_target_state = 451 }
+		RAJ_try_escalate_state = yes
+		set_variable = { RAJ_naxalite_target_state = 459 }
+		RAJ_try_escalate_state = yes
+		set_variable = { RAJ_naxalite_target_state = 458 }
+		RAJ_try_escalate_state = yes
+		set_variable = { RAJ_naxalite_target_state = 991 }
+		RAJ_try_escalate_state = yes
+		set_variable = { RAJ_naxalite_target_state = 452 }
+		RAJ_try_escalate_state = yes
+		set_variable = { RAJ_naxalite_target_state = 470 }
+		RAJ_try_escalate_state = yes
+		set_variable = { RAJ_naxalite_target_state = 989 }
+		RAJ_try_escalate_state = yes
+		set_variable = { RAJ_naxalite_target_state = 447 }
+		RAJ_try_escalate_state = yes
+		set_variable = { RAJ_naxalite_target_state = 988 }
+		RAJ_try_escalate_state = yes
+	}
+}
+
 RAJ_autarky_neighbor_boost = {
 	if = {
 		limit = {
