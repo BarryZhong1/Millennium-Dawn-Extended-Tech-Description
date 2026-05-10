@@ -107,6 +107,16 @@ trigger = { A B C }
 
 This applies to `trigger`, `limit`, `visible`, `available`, `activation`, `cancel_trigger`, and all other trigger contexts.
 
+## Modifier names
+
+Invalid modifier names compile silently and do nothing — the game logs an "Unknown modifier" error but loads the idea/focus anyway. **Never guess a modifier name.** Always verify it exists first:
+
+```bash
+grep -r "modifier_name_here" common/ideas/*.txt common/national_focus/*.txt | head -3
+```
+
+If no results, the name is wrong. Check the wiki or find a similar modifier in the codebase and use the exact same spelling.
+
 ## threat scale
 
 `threat` is a decimal 0.0–1.0, never a percentage. Comparisons like `threat > 10` or `threat > 40` are always false. Use `threat > 0.10`, `threat > 0.40`, etc.
@@ -128,6 +138,49 @@ check_variable = {
 ```
 
 Valid `compare` values: `equals`, `greater_than`, `less_than`, `greater_than_or_equals`, `less_than_or_equals`, `not_equals`.
+
+## is_in_faction vs is_in_faction_with
+
+`is_in_faction` is a **boolean** trigger (`yes`/`no`). To check faction membership with a specific country, use `is_in_faction_with = TAG`. Using `is_in_faction = TAG` silently fails. **Caught by `check_common_mistakes.py`.**
+
+## add_to_faction scope
+
+`add_to_faction` adds a **country** to the **current scope's faction**. It takes a country tag or scope, not a faction name. `add_to_faction = BRICS` is wrong — use `add_to_faction = TAG`.
+
+## Minimize scope expansion
+
+Avoid opening a scope just to check a single boolean or trigger when a flat equivalent exists. Every `TAG = { ... }` is a scope switch the engine must resolve.
+
+```
+# Wrong — unnecessary scope expansion
+NOT = { PAK = { exists = no } }
+PAK = { exists = yes }
+
+# Correct — flat trigger, no scope switch
+country_exists = PAK
+```
+
+Other common patterns:
+
+| Verbose (scope expansion)       | Flat equivalent        |
+| ------------------------------- | ---------------------- |
+| `TAG = { exists = yes }`        | `country_exists = TAG` |
+| `TAG = { is_puppet = yes }`     | `is_puppet_of = TAG`   |
+| `TAG = { has_war_with = ROOT }` | `has_war_with = TAG`   |
+
+Apply this principle everywhere — focuses, events, decisions, scripted triggers. If a flat trigger exists, prefer it.
+
+## Case sensitivity in references
+
+HOI4 on Linux is **case-sensitive** for all identifiers — ideas, events, decisions, focuses, variables, flags, GFX sprites, and scripted effects/triggers. `has_idea = The_Military` will NOT match a definition `the_military`. Always match the exact case of the definition. **Caught by `validate_ideas.py` for ideas.**
+
+## Trade agreement checks in MD
+
+`has_trade_agreement_with` is **not a valid HOI4 trigger** — compiles silently, always evaluates false. MD uses `has_country_flag = trade_agreement@TAG`. **Caught by `check_common_mistakes.py`.**
+
+## Decision allowed vs available
+
+`allowed` in decisions is evaluated **once at game start** and locked. Dynamic conditions (factory counts, opinion, date) must go in `available` or `visible`. **Caught by `check_common_mistakes.py`** for clearly-dynamic triggers.
 
 ## if/else over if/if
 
