@@ -7174,7 +7174,7 @@ CHI_japan_industry_invitation_category = {
 
 ### Belt and Road Initiative ###
 
-CHI_BRI_treasury = {
+CHI_BRI_management = {
 
 	CHI_BRI_treasury_status = {
 		icon = GFX_decision_generic_independence
@@ -7193,88 +7193,6 @@ CHI_BRI_treasury = {
 
 		ai_will_do = { factor = 0 }
 	}
-}
-
-CHI_BRI_projects = {
-
-	CHI_BRI_master_tick = {
-		icon = GFX_decision_generic_industry
-		allowed = { original_tag = CHI }
-		fire_only_once = no
-		cost = 0
-		days_remove = 30
-
-		available = { always = yes }
-
-		visible = {
-			hidden_trigger = { always = no }
-		}
-
-		complete_effect = {
-			set_temp_variable = { treasury_change = CHI_bri_monthly_income }
-			add_to_temp_variable = { treasury_change = CHI_bri_monthly_returns }
-			modify_treasury_effect = yes
-			add_to_variable = { CHI_bri_treasury = CHI_bri_monthly_income }
-			add_to_variable = { CHI_bri_treasury = CHI_bri_monthly_returns }
-
-			every_country = {
-				limit = { check_variable = { bri_application_cooldown > 0 } }
-				subtract_from_variable = { bri_application_cooldown = 1 }
-			}
-
-			clear_array = global.bri_eligible_countries
-			every_country = {
-				limit = { bri_eligible_applicant = yes }
-				add_to_array = { array = global.bri_eligible_countries value = THIS.id }
-			}
-
-			if = {
-				limit = { check_variable = { CHI_bri_global_presence > 199 } }
-				if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_4 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_4 } }
-				if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_3 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_3 } }
-				if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_2 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_2 } }
-				if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_1 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_1 } }
-				if = { limit = { NOT = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_5 } } } add_dynamic_modifier = { modifier = CHI_BRI_presence_tier_5 } }
-			}
-			else_if = {
-				limit = { check_variable = { CHI_bri_global_presence > 149 } }
-				if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_5 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_5 } }
-				if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_3 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_3 } }
-				if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_2 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_2 } }
-				if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_1 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_1 } }
-				if = { limit = { NOT = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_4 } } } add_dynamic_modifier = { modifier = CHI_BRI_presence_tier_4 } }
-			}
-			else_if = {
-				limit = { check_variable = { CHI_bri_global_presence > 99 } }
-				if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_5 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_5 } }
-				if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_4 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_4 } }
-				if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_2 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_2 } }
-				if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_1 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_1 } }
-				if = { limit = { NOT = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_3 } } } add_dynamic_modifier = { modifier = CHI_BRI_presence_tier_3 } }
-			}
-			else_if = {
-				limit = { check_variable = { CHI_bri_global_presence > 49 } }
-				if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_5 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_5 } }
-				if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_4 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_4 } }
-				if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_3 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_3 } }
-				if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_1 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_1 } }
-				if = { limit = { NOT = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_2 } } } add_dynamic_modifier = { modifier = CHI_BRI_presence_tier_2 } }
-			}
-			else_if = {
-				limit = { check_variable = { CHI_bri_global_presence > 24 } }
-				if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_5 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_5 } }
-				if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_4 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_4 } }
-				if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_3 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_3 } }
-				if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_2 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_2 } }
-				if = { limit = { NOT = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_1 } } } add_dynamic_modifier = { modifier = CHI_BRI_presence_tier_1 } }
-			}
-		}
-
-		ai_will_do = { base = 100 }
-	}
-}
-
-CHI_BRI_diplomacy = {
 
 	CHI_FOCAC_Summit = {
 		icon = GFX_decision_generic_political_actions

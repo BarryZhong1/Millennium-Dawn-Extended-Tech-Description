@@ -970,6 +970,69 @@ BRI_handle_application = {
 	}
 }
 
+### BRI - monthly tick for CHI ###
+# Called from on_monthly when CHI has CHI_bri_active flag.
+# Adds monthly income/returns, decrements applicant cooldowns, refreshes eligible-applicants array, and swaps the global-presence tier modifier.
+CHI_BRI_monthly_tick = {
+	set_temp_variable = { treasury_change = CHI_bri_monthly_income }
+	add_to_temp_variable = { treasury_change = CHI_bri_monthly_returns }
+	modify_treasury_effect = yes
+	add_to_variable = { CHI_bri_treasury = CHI_bri_monthly_income }
+	add_to_variable = { CHI_bri_treasury = CHI_bri_monthly_returns }
+
+	every_country = {
+		limit = { check_variable = { bri_application_cooldown > 0 } }
+		subtract_from_variable = { bri_application_cooldown = 1 }
+	}
+
+	clear_array = global.bri_eligible_countries
+	every_country = {
+		limit = { bri_eligible_applicant = yes }
+		add_to_array = { array = global.bri_eligible_countries value = THIS.id }
+	}
+
+	if = {
+		limit = { check_variable = { CHI_bri_global_presence > 199 } }
+		if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_4 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_4 } }
+		if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_3 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_3 } }
+		if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_2 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_2 } }
+		if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_1 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_1 } }
+		if = { limit = { NOT = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_5 } } } add_dynamic_modifier = { modifier = CHI_BRI_presence_tier_5 } }
+	}
+	else_if = {
+		limit = { check_variable = { CHI_bri_global_presence > 149 } }
+		if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_5 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_5 } }
+		if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_3 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_3 } }
+		if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_2 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_2 } }
+		if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_1 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_1 } }
+		if = { limit = { NOT = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_4 } } } add_dynamic_modifier = { modifier = CHI_BRI_presence_tier_4 } }
+	}
+	else_if = {
+		limit = { check_variable = { CHI_bri_global_presence > 99 } }
+		if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_5 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_5 } }
+		if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_4 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_4 } }
+		if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_2 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_2 } }
+		if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_1 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_1 } }
+		if = { limit = { NOT = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_3 } } } add_dynamic_modifier = { modifier = CHI_BRI_presence_tier_3 } }
+	}
+	else_if = {
+		limit = { check_variable = { CHI_bri_global_presence > 49 } }
+		if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_5 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_5 } }
+		if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_4 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_4 } }
+		if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_3 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_3 } }
+		if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_1 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_1 } }
+		if = { limit = { NOT = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_2 } } } add_dynamic_modifier = { modifier = CHI_BRI_presence_tier_2 } }
+	}
+	else_if = {
+		limit = { check_variable = { CHI_bri_global_presence > 24 } }
+		if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_5 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_5 } }
+		if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_4 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_4 } }
+		if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_3 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_3 } }
+		if = { limit = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_2 } } remove_dynamic_modifier = { modifier = CHI_BRI_presence_tier_2 } }
+		if = { limit = { NOT = { has_dynamic_modifier = { modifier = CHI_BRI_presence_tier_1 } } } add_dynamic_modifier = { modifier = CHI_BRI_presence_tier_1 } }
+	}
+}
+
 ### Uyghur Threat: modifier + clamp ###
 # Caller sets: set_temp_variable = { modify_uighur_threat = N }
 # Tooltip rendered via the uighur_threat_tt loc triplet; no separate custom_effect_tooltip needed.

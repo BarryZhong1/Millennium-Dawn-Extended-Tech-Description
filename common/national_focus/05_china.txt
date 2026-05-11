@@ -56,26 +56,11 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			add_political_power = 125
-			swap_ideas = {
-					remove_idea = chastity_paifang
-					add_idea = state_system
-			}
 			add_dynamic_modifier = { modifier = CHI_diplomacy_modifier }
 			log = "[GetDateText]: [This.GetName]: focus CHI_Chinese_Diplomacy executed"
 		}
 
-		ai_will_do = {
-			base = 0
-			modifier = {
-				add = 1
-				date > 2003.1.1
-			}
-			modifier = {
-				add = 1
-				date > 2007.1.1
-			}
-		}
+		ai_will_do = { base = 1 }
 	}
 
 	focus = {
@@ -3744,50 +3729,27 @@ focus_tree = {
 
 
 	# Diplomatic Development Branch
-
 	focus = {
-		id = CHI_Diplomatic_Reform
-		icon = x
+		id = CHI_Expand_Foreign_Service
+		icon = molotov_ribbentrop_pact
 
-		x = 0
+		x = -2
 		y = 1
 		relative_position_id = CHI_Chinese_Diplomacy
 
-		cost = 5
+		cost = 10
 
 		prerequisite = { focus = CHI_Chinese_Diplomacy }
 
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			log = "[GetDateText]: [This.GetName]: focus CHI_Diplomatic_Reform executed"
-			add_political_power = 100
-		}
-
-		ai_will_do = { base = 1 }
-	}
-
-	focus = {
-		id = CHI_Expand_Foreign_Service
-		icon = x
-
-		x = -2
-		y = 1
-		relative_position_id = CHI_Diplomatic_Reform
-
-		cost = 10
-
-		prerequisite = { focus = CHI_Diplomatic_Reform }
-
-		search_filters = { FOCUS_FILTER_POLITICAL }
-
-		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus CHI_Expand_Foreign_Service executed"
-			add_political_power = 50
-			add_timed_idea = {
-				idea = CHI_expanded_foreign_service
-				days = 730
+			custom_effect_tooltip = {
+			localization_key = modifies_dynamic_modifier_tt
+			MODIFIER = CHI_diplomacy_modifier
 			}
+			add_to_variable = { CHI_improve_relations_maintain_cost_factor_diplomacy = -0.10 tooltip = improve_relations_maintain_cost_factor_tt }
 		}
 
 		ai_will_do = { base = 1 }
@@ -3795,78 +3757,47 @@ focus_tree = {
 
 	focus = {
 		id = CHI_Soft_Power_Projection
-		icon = x
+		icon = major_alliance
 
 		x = 0
 		y = 1
-		relative_position_id = CHI_Diplomatic_Reform
+		relative_position_id = CHI_Chinese_Diplomacy
 
 		cost = 10
 
-		prerequisite = { focus = CHI_Diplomatic_Reform }
+		prerequisite = { focus = CHI_Chinese_Diplomacy }
 
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus CHI_Soft_Power_Projection executed"
-			set_temp_variable = { treasury_change = -20 }
-			modify_treasury_effect = yes
-			set_temp_variable = { percent_change = 0.5 }
-			set_temp_variable = { tag_index = CHI }
-			set_temp_variable = { influence_target = USA }
-			change_influence_percentage = yes
-			set_temp_variable = { percent_change = 0.5 }
-			set_temp_variable = { tag_index = CHI }
-			set_temp_variable = { influence_target = ENG }
-			change_influence_percentage = yes
-			set_temp_variable = { percent_change = 0.5 }
-			set_temp_variable = { tag_index = CHI }
-			set_temp_variable = { influence_target = FRA }
-			change_influence_percentage = yes
-			set_temp_variable = { percent_change = 0.5 }
-			set_temp_variable = { tag_index = CHI }
-			set_temp_variable = { influence_target = GER }
-			change_influence_percentage = yes
-			set_temp_variable = { percent_change = 0.5 }
-			set_temp_variable = { tag_index = CHI }
-			set_temp_variable = { influence_target = JAP }
-			change_influence_percentage = yes
-			set_temp_variable = { percent_change = 0.5 }
-			set_temp_variable = { tag_index = CHI }
-			set_temp_variable = { influence_target = KOR }
-			change_influence_percentage = yes
-			set_temp_variable = { percent_change = 0.5 }
-			set_temp_variable = { tag_index = CHI }
-			set_temp_variable = { influence_target = BRA }
-			change_influence_percentage = yes
-			set_temp_variable = { percent_change = 0.5 }
-			set_temp_variable = { tag_index = CHI }
-			set_temp_variable = { influence_target = IND }
-			change_influence_percentage = yes
+			every_other_country = {
+				set_temp_variable = { percent_change = 5 }
+				set_temp_variable = { tag_index = CHI }
+				set_temp_variable = { influence_target = PREV }
+				change_influence_percentage = yes
+			}
 		}
 
 		ai_will_do = { base = 1 }
 	}
 
 	focus = {
-		id = CHI_Global_Ambitions
-		icon = x
+		id = CHI_Global_Ambitions #Should do something against USA and Russia to share the world stage at some point. maybe a mission for China aswell?
+		icon = focus_RAJ_to_shake_the_world
 
 		x = 2
 		y = 1
-		relative_position_id = CHI_Diplomatic_Reform
+		relative_position_id = CHI_Chinese_Diplomacy
 
 		cost = 10
 
-		prerequisite = { focus = CHI_Diplomatic_Reform }
+		prerequisite = { focus = CHI_Chinese_Diplomacy }
 
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus CHI_Global_Ambitions executed"
-			add_political_power = 75
-			set_country_flag = CHI_global_ambitions_flag
-			add_war_support = 0.05
 		}
 
 		ai_will_do = { base = 1 }
@@ -3874,11 +3805,11 @@ focus_tree = {
 
 	focus = {
 		id = CHI_Wolf_Warrior_Diplomacy
-		icon = x
+		icon = aggressive_diplomacy
 
 		x = -5
 		y = 2
-		relative_position_id = CHI_Diplomatic_Reform
+		relative_position_id = CHI_Chinese_Diplomacy
 
 		cost = 10
 
@@ -3891,12 +3822,17 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [This.GetName]: focus CHI_Wolf_Warrior_Diplomacy executed"
-			CHI = {
-				add_to_variable = { CHI_chinese_aggression = 3 tooltip = CHI_chinese_aggression_tt }
-				clamp_variable = { var = CHI_chinese_aggression min = -50 max = 50 }
+			add_to_variable = { CHI_chinese_aggression = 3 tooltip = CHI_chinese_aggression_tt }
+			clamp_variable = { var = CHI_chinese_aggression min = -50 max = 50 }
+			newline = yes
+			custom_effect_tooltip = {
+			localization_key = modifies_dynamic_modifier_tt
+			MODIFIER = CHI_diplomacy_modifier
 			}
-			add_war_support = 0.10
-			add_ideas = CHI_wolf_warrior_spirit
+			add_to_variable = { CHI_foreign_influence_modifier_diplomacy = 0.10 tooltip = foreign_influence_modifier_tt }
+			add_to_variable = { CHI_political_power_factor_diplomacy = 0.05 tooltip = political_power_factor_tt }
+			add_to_variable = { CHI_improve_relations_maintain_cost_factor_diplomacy = 0.10 tooltip = improve_relations_maintain_cost_factor_tt }
+			newline = yes
 			every_other_country = {
 				limit = {
 					has_government = democratic
@@ -3917,7 +3853,7 @@ focus_tree = {
 
 		x = 6
 		y = 2
-		relative_position_id = CHI_Diplomatic_Reform
+		relative_position_id = CHI_Chinese_Diplomacy
 
 		cost = 10
 
@@ -4339,10 +4275,10 @@ focus_tree = {
 
 	focus = {
 		id = CHI_Belt_and_Road_Launch
-		icon = x
+		icon = china_bri
 
 		x = 0
-		y = 4
+		y = 3
 		relative_position_id = CHI_Chinese_Diplomacy
 
 		cost = 10
@@ -4350,17 +4286,13 @@ focus_tree = {
 		prerequisite = { focus = CHI_Wolf_Warrior_Diplomacy focus = CHI_Bide_Your_Time }
 		search_filters = { FOCUS_FILTER_CHI_AGGRESSION FOCUS_FILTER_FOREIGN_POLICY FOCUS_FILTER_EXPENDITURE }
 
-		available = {
-			date > 2013.1.1
-		}
-
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_Belt_and_Road_Launch"
 			set_country_flag = CHI_bri_active
 			BRI_initialize = yes
 			set_variable = { CHI_bri_treasury = 200 }
-			activate_decision = CHI_BRI_master_tick
 			country_event = { id = chi_bri.1 days = 1 }
+			unlock_decision_category_tooltip = CHI_BRI_management
 		}
 
 		ai_will_do = {
@@ -4548,8 +4480,8 @@ focus_tree = {
 		id = CHI_Central_Asia_Connectivity
 		icon = stage_centralasia
 
-		x = 1
-		y = 2
+		x = -1
+		y = 1
 		relative_position_id = CHI_Silk_Road_Fund
 
 		cost = 10
@@ -4603,7 +4535,7 @@ focus_tree = {
 
 		cost = 10
 
-		prerequisite = { focus = CHI_Silk_Road_Fund }
+		prerequisite = { focus = CHI_Digital_Silk_Road_Initiative }
 		search_filters = { FOCUS_FILTER_CHI_AGGRESSION FOCUS_FILTER_FOREIGN_POLICY FOCUS_FILTER_EXPENDITURE }
 
 		completion_reward = {
@@ -4742,7 +4674,7 @@ focus_tree = {
 		id = CHI_China_Africa_Development_Fund
 		icon = x
 
-		x = 0
+		x = 1
 		y = 1
 		relative_position_id = CHI_Forum_on_China_African_Cooperation
 
@@ -4788,7 +4720,7 @@ focus_tree = {
 		id = CHI_Invest_in_Cheap_Energy
 		icon = x
 
-		x = -2
+		x = -1
 		y = 2
 		relative_position_id = CHI_Forum_on_China_African_Cooperation
 
@@ -4844,7 +4776,7 @@ focus_tree = {
 		id = CHI_Invest_in_Clean_Energy
 		icon = x
 
-		x = 0
+		x = 1
 		y = 2
 		relative_position_id = CHI_Forum_on_China_African_Cooperation
 
@@ -4904,7 +4836,7 @@ focus_tree = {
 		id = CHI_Outsource_Cheap_Labor
 		icon = x
 
-		x = -2
+		x = -1
 		y = 3
 		relative_position_id = CHI_Forum_on_China_African_Cooperation
 
@@ -4943,7 +4875,7 @@ focus_tree = {
 		id = CHI_Workers_Rights
 		icon = x
 
-		x = 0
+		x = 1
 		y = 3
 		relative_position_id = CHI_Forum_on_China_African_Cooperation
 
@@ -4986,7 +4918,7 @@ focus_tree = {
 		id = CHI_Agriculture
 		icon = x
 
-		x = 2
+		x = 3
 		y = 2
 		relative_position_id = CHI_Forum_on_China_African_Cooperation
 
@@ -5032,7 +4964,7 @@ focus_tree = {
 		id = CHI_Develop_Hospitals
 		icon = x
 
-		x = 2
+		x = 3
 		y = 3
 		relative_position_id = CHI_Forum_on_China_African_Cooperation
 
@@ -5076,8 +5008,8 @@ focus_tree = {
 		id = CHI_Leverage_Influence
 		icon = x
 
-		x = -1
-		y = 5
+		x = 0
+		y = 4
 		relative_position_id = CHI_Forum_on_China_African_Cooperation
 
 		cost = 10
@@ -5118,8 +5050,8 @@ focus_tree = {
 		id = CHI_Write_Off_Debts
 		icon = x
 
-		x = 1
-		y = 5
+		x = 2
+		y = 4
 		relative_position_id = CHI_Forum_on_China_African_Cooperation
 
 		cost = 10
@@ -5158,7 +5090,7 @@ focus_tree = {
 		icon = x
 
 		x = -3
-		y = 5
+		y = 2
 		relative_position_id = CHI_Forum_on_China_African_Cooperation
 
 		cost = 10
@@ -5251,6 +5183,7 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = CHI_Joint_Research }
+		prerequisite = { focus = CHI_African_Continental_Integration }
 		search_filters = { FOCUS_FILTER_CHI_AGGRESSION FOCUS_FILTER_FOREIGN_POLICY FOCUS_FILTER_EXPENDITURE }
 
 		completion_reward = {
@@ -5390,13 +5323,16 @@ focus_tree = {
 		id = CHI_Health_Silk_Road
 		icon = x
 
-		x = 3
+		x = 2
 		y = 2
 		relative_position_id = CHI_Project_Coordination_Cell
 
 		cost = 10
 
-		prerequisite = { focus = CHI_Project_Coordination_Cell }
+		prerequisite = {
+			focus = CHI_Digital_Silk_Road
+			focus = CHI_Silk_Road_Fund
+		}
 		search_filters = { FOCUS_FILTER_CHI_AGGRESSION FOCUS_FILTER_FOREIGN_POLICY FOCUS_FILTER_EXPENDITURE }
 
 		available = {
@@ -5429,8 +5365,8 @@ focus_tree = {
 		id = CHI_Petroyuan_Settlement
 		icon = goal_manchu_economy
 
-		x = -1
-		y = 4
+		x = -2
+		y = 2
 		relative_position_id = CHI_Project_Coordination_Cell
 
 		cost = 10
@@ -5475,7 +5411,7 @@ focus_tree = {
 
 		cost = 10
 
-		prerequisite = { focus = CHI_Project_Coordination_Cell }
+		prerequisite = { focus = CHI_Polar_Silk_Road }
 		search_filters = { FOCUS_FILTER_CHI_AGGRESSION FOCUS_FILTER_POLITICAL FOCUS_FILTER_INFLUENCE }
 
 		available = {
@@ -5510,8 +5446,8 @@ focus_tree = {
 		id = CHI_Renminbi_Internationalization
 		icon = x
 
-		x = -1
-		y = 5
+		x = -2
+		y = 3
 		relative_position_id = CHI_Project_Coordination_Cell
 
 		cost = 10
@@ -5555,7 +5491,7 @@ focus_tree = {
 
 		cost = 10
 
-		prerequisite = { focus = CHI_Project_Coordination_Cell }
+		prerequisite = { focus = CHI_Health_Silk_Road }
 		search_filters = { FOCUS_FILTER_CHI_AGGRESSION FOCUS_FILTER_FOREIGN_POLICY FOCUS_FILTER_EXPENDITURE }
 
 		available = {
@@ -5595,7 +5531,7 @@ focus_tree = {
 		icon = x
 
 		x = 0
-		y = 6
+		y = 4
 		relative_position_id = CHI_Project_Coordination_Cell
 
 		cost = 10
@@ -5639,13 +5575,16 @@ focus_tree = {
 		id = CHI_African_Continental_Integration
 		icon = x
 
-		x = 0
-		y = 6
+		x = 1
+		y = 5
 		relative_position_id = CHI_Forum_on_China_African_Cooperation
 
 		cost = 10
 
-		prerequisite = { focus = CHI_Leverage_Influence focus = CHI_Write_Off_Debts }
+		prerequisite = {
+			focus = CHI_Leverage_Influence
+			focus = CHI_Write_Off_Debts
+		}
 		prerequisite = { focus = CHI_TV_and_Internet_Access }
 		search_filters = { FOCUS_FILTER_CHI_AGGRESSION FOCUS_FILTER_INFLUENCE FOCUS_FILTER_FOREIGN_POLICY }
 
@@ -5687,7 +5626,7 @@ focus_tree = {
 		icon = x
 
 		x = 0
-		y = 7
+		y = 5
 		relative_position_id = CHI_Project_Coordination_Cell
 
 		cost = 10
