@@ -6,6 +6,7 @@ add_namespace = CHI_foreign
 add_namespace = china_scs
 add_namespace = sino_indian
 add_namespace = chi_bri
+add_namespace = chi_uighur
 
 
 # National Congress Convened
@@ -10352,6 +10353,250 @@ country_event = {
 		hidden_effect = {
 			country_event = { id = chi_bri.95 days = 30 }
 		}
+		ai_chance = { base = 1 }
+	}
+}
+
+### Uyghur Uprising Events ###
+
+# chi_uighur.1 - Street protests in Urumqi
+country_event = {
+	id = chi_uighur.1
+	title = chi_uighur.1.t
+	desc = chi_uighur.1.d
+	picture = GFX_CHI_xinjiang_sar
+	is_triggered_only = yes
+
+	option = {
+		name = chi_uighur.1.a
+		log = "[GetDateText]: [Root.GetName]: chi_uighur.1.a"
+		add_political_power = -10
+		592 = {
+			add_resistance = 2
+			add_compliance = -3
+		}
+		set_temp_variable = { modify_uighur_threat = 3 }
+		CHI_modify_uighur_threat = yes
+		ai_chance = { base = 60 }
+	}
+
+	option = {
+		name = chi_uighur.1.b
+		log = "[GetDateText]: [Root.GetName]: chi_uighur.1.b"
+		add_political_power = -25
+		592 = { add_compliance = 2 }
+		set_temp_variable = { modify_uighur_threat = -2 }
+		CHI_modify_uighur_threat = yes
+		ai_chance = { base = 25 }
+	}
+
+	option = {
+		name = chi_uighur.1.c
+		log = "[GetDateText]: [Root.GetName]: chi_uighur.1.c"
+		add_stability = -0.02
+		592 = {
+			add_resistance = 5
+			add_compliance = -2
+		}
+		set_temp_variable = { sinicization_base_change = 1 }
+		CHI_update_sinicization = yes
+		add_to_variable = { ETK_sinicization_var = sinicization_base_change }
+		set_temp_variable = { modify_uighur_threat = 5 }
+		CHI_modify_uighur_threat = yes
+		ai_chance = { base = 15 }
+	}
+}
+
+# chi_uighur.2 - ETIM bomb attack
+country_event = {
+	id = chi_uighur.2
+	title = chi_uighur.2.t
+	desc = chi_uighur.2.d
+	picture = GFX_CHI_xinjiang_sar
+	is_triggered_only = yes
+
+	option = {
+		name = chi_uighur.2.a
+		log = "[GetDateText]: [Root.GetName]: chi_uighur.2.a"
+		add_political_power = -40
+		add_timed_idea = { idea = ETK_surveillance_state_idea days = 365 }
+		592 = {
+			add_compliance = 4
+			add_resistance = -3
+		}
+		set_temp_variable = { modify_uighur_threat = -5 }
+		CHI_modify_uighur_threat = yes
+		ai_chance = { base = 50 }
+	}
+
+	option = {
+		name = chi_uighur.2.b
+		log = "[GetDateText]: [Root.GetName]: chi_uighur.2.b"
+		add_political_power = -25
+		add_timed_idea = { idea = ETK_terrorism_aftermath days = 60 }
+		592 = { add_compliance = 6 }
+		set_temp_variable = { modify_uighur_threat = -8 }
+		CHI_modify_uighur_threat = yes
+		ai_chance = { base = 20 }
+	}
+
+	option = {
+		name = chi_uighur.2.c
+		log = "[GetDateText]: [Root.GetName]: chi_uighur.2.c"
+		add_war_support = 0.02
+		add_timed_idea = { idea = ETK_terrorism_aftermath days = 120 }
+		592 = {
+			add_resistance = 8
+			add_compliance = -6
+		}
+		set_temp_variable = { modify_uighur_threat = 4 }
+		CHI_modify_uighur_threat = yes
+		ai_chance = { base = 30 }
+	}
+}
+
+# chi_uighur.3 - Large-scale Xinjiang riots
+country_event = {
+	id = chi_uighur.3
+	title = chi_uighur.3.t
+	desc = chi_uighur.3.d
+	picture = GFX_CHI_xinjiang_sar
+	is_triggered_only = yes
+
+	option = {
+		name = chi_uighur.3.a
+		log = "[GetDateText]: [Root.GetName]: chi_uighur.3.a"
+		add_stability = -0.05
+		add_war_support = 0.04
+		592 = {
+			add_resistance = 5
+			add_compliance = -3
+		}
+		add_timed_idea = { idea = ETK_security_reinforcement_idea days = 180 }
+		set_temp_variable = { modify_uighur_threat = -10 }
+		CHI_modify_uighur_threat = yes
+		hidden_effect = { news_event = { id = chi_uighur.6 days = 1 } }
+		ai_chance = { base = 45 }
+	}
+
+	option = {
+		name = chi_uighur.3.b
+		log = "[GetDateText]: [Root.GetName]: chi_uighur.3.b"
+		add_stability = -0.08
+		592 = {
+			add_compliance = 8
+			add_resistance = -5
+		}
+		set_temp_variable = { sinicization_base_change = 3 }
+		CHI_update_sinicization = yes
+		add_to_variable = { ETK_sinicization_var = sinicization_base_change }
+		set_temp_variable = { modify_uighur_threat = -15 }
+		CHI_modify_uighur_threat = yes
+		hidden_effect = {
+			news_event = { id = chi_uighur.6 days = 1 }
+			country_event = { id = chi_uighur.4 days = 30 }
+		}
+		ai_chance = { base = 40 }
+	}
+
+	option = {
+		name = chi_uighur.3.c
+		log = "[GetDateText]: [Root.GetName]: chi_uighur.3.c"
+		available = {
+			check_variable = {
+				var = ETK_sinicization_var
+				value = 30
+				compare = less_than
+			}
+		}
+		add_political_power = -75
+		add_stability = 0.02
+		592 = {
+			add_compliance = 10
+			add_resistance = -10
+		}
+		set_temp_variable = { modify_uighur_threat = -25 }
+		CHI_modify_uighur_threat = yes
+		hidden_effect = { news_event = { id = chi_uighur.6 days = 1 } }
+		ai_chance = { base = 15 }
+	}
+}
+
+# chi_uighur.4 - International condemnation
+country_event = {
+	id = chi_uighur.4
+	title = chi_uighur.4.t
+	desc = chi_uighur.4.d
+	picture = GFX_report_event_usa_military
+	is_triggered_only = yes
+
+	option = {
+		name = chi_uighur.4.a
+		log = "[GetDateText]: [Root.GetName]: chi_uighur.4.a"
+		add_political_power = 20
+		TUR = { add_opinion_modifier = { target = CHI modifier = chi_uyghur_repression } }
+		USA = { add_opinion_modifier = { target = CHI modifier = chi_uyghur_repression } }
+		every_country = {
+			limit = {
+				is_in_array = { CHI.influence_array = THIS.id }
+				has_government = democratic
+			}
+			add_opinion_modifier = { target = CHI modifier = chi_uyghur_repression }
+		}
+		set_country_flag = { flag = CHI_uighur_western_pressure days = 365 }
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = chi_uighur.4.b
+		log = "[GetDateText]: [Root.GetName]: chi_uighur.4.b"
+		add_political_power = -50
+		set_temp_variable = { modify_uighur_threat = -5 }
+		CHI_modify_uighur_threat = yes
+		592 = { add_compliance = -3 }
+		TUR = { add_opinion_modifier = { target = CHI modifier = peaceful_rise } }
+		USA = { add_opinion_modifier = { target = CHI modifier = peaceful_rise } }
+		ai_chance = { base = 30 }
+	}
+}
+
+# chi_uighur.5 - Counter-terrorism intelligence breakthrough
+country_event = {
+	id = chi_uighur.5
+	title = chi_uighur.5.t
+	desc = chi_uighur.5.d
+	picture = GFX_CHI_xinjiang_sar
+	is_triggered_only = yes
+
+	option = {
+		name = chi_uighur.5.a
+		log = "[GetDateText]: [Root.GetName]: chi_uighur.5.a"
+		add_political_power = 25
+		592 = { add_compliance = 4 }
+		set_temp_variable = { modify_uighur_threat = -8 }
+		CHI_modify_uighur_threat = yes
+		ai_chance = { base = 100 }
+	}
+}
+
+# chi_uighur.6 - News: Riots Rock Xinjiang
+news_event = {
+	id = chi_uighur.6
+	title = chi_uighur.6.t
+	desc = chi_uighur.6.d
+	picture = GFX_news_generic_soldiers
+	major = yes
+	is_triggered_only = yes
+
+	option = {
+		name = chi_uighur.6.a
+		trigger = { original_tag = CHI }
+		ai_chance = { base = 1 }
+	}
+
+	option = {
+		name = chi_uighur.6.b
+		trigger = { NOT = { original_tag = CHI } }
 		ai_chance = { base = 1 }
 	}
 }

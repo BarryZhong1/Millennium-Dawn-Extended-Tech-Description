@@ -969,3 +969,179 @@ BRI_handle_application = {
 		add_to_variable = { CHI_bri_active_projects = 1 }
 	}
 }
+
+### Uyghur Threat: modifier + clamp ###
+# Caller sets: set_temp_variable = { modify_uighur_threat = N }
+# Tooltip rendered via the uighur_threat_tt loc triplet; no separate custom_effect_tooltip needed.
+CHI_modify_uighur_threat = {
+	add_to_variable = { uighur_threat = modify_uighur_threat tooltip = uighur_threat_tt }
+	if = {
+		limit = {
+			check_variable = {
+				var = uighur_threat
+				value = 0
+				compare = less_than
+			}
+		}
+		set_variable = { uighur_threat = 0 }
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				var = uighur_threat
+				value = 100
+				compare = greater_than
+			}
+		}
+		set_variable = { uighur_threat = 100 }
+	}
+}
+
+### Uyghur Threat: monthly tick ###
+# Called from on_monthly when CHI controls state 592.
+# Drifts uighur_threat based on state 592 resistance, then rolls for uprising events.
+CHI_uighur_monthly_tick = {
+	# Guard: skip if ETK controls state 592
+	if = {
+		limit = {
+			NOT = { 592 = { is_controlled_by = ETK } }
+		}
+
+		### Drift step: resistance drives uighur_threat up or down ###
+		if = {
+			limit = { 592 = { resistance > 60 } }
+			set_temp_variable = { modify_uighur_threat = 2 }
+			CHI_modify_uighur_threat = yes
+		}
+		else_if = {
+			limit = { 592 = { resistance > 39 } }
+			set_temp_variable = { modify_uighur_threat = 1 }
+			CHI_modify_uighur_threat = yes
+		}
+		else_if = {
+			limit = { 592 = { NOT = { resistance > 14 } } }
+			set_temp_variable = { modify_uighur_threat = -1 }
+			CHI_modify_uighur_threat = yes
+		}
+
+		### Secondary push from sinicization ###
+		if = {
+			limit = {
+				check_variable = {
+					var = ETK_sinicization_var
+					value = 60
+					compare = greater_than
+				}
+			}
+			set_temp_variable = { modify_uighur_threat = 1 }
+			CHI_modify_uighur_threat = yes
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					var = ETK_sinicization_var
+					value = 20
+					compare = less_than
+				}
+			}
+			set_temp_variable = { modify_uighur_threat = -1 }
+			CHI_modify_uighur_threat = yes
+		}
+
+		### Event roll: gated by cooldown flag ###
+		if = {
+			limit = {
+				NOT = { has_country_flag = CHI_uighur_event_cd }
+			}
+
+			# Calm tier: uighur_threat 0..29
+			if = {
+				limit = {
+					check_variable = {
+						var = uighur_threat
+						value = 30
+						compare = less_than
+					}
+				}
+				random_list = {
+					92 = { }
+					8 = {
+						country_event = { id = chi_uighur.5 }
+						set_country_flag = { flag = CHI_uighur_event_cd days = 60 }
+					}
+				}
+			}
+			# Tense tier: uighur_threat 30..59
+			else_if = {
+				limit = {
+					check_variable = {
+						var = uighur_threat
+						value = 60
+						compare = less_than
+					}
+				}
+				random_list = {
+					60 = { }
+					30 = {
+						country_event = { id = chi_uighur.1 }
+						set_country_flag = { flag = CHI_uighur_event_cd days = 60 }
+					}
+					10 = {
+						country_event = { id = chi_uighur.2 }
+						set_country_flag = { flag = CHI_uighur_event_cd days = 60 }
+					}
+				}
+			}
+			# Volatile tier: uighur_threat 60..84
+			else_if = {
+				limit = {
+					check_variable = {
+						var = uighur_threat
+						value = 85
+						compare = less_than
+					}
+				}
+				random_list = {
+					35 = { }
+					25 = {
+						country_event = { id = chi_uighur.1 }
+						set_country_flag = { flag = CHI_uighur_event_cd days = 60 }
+					}
+					30 = {
+						country_event = { id = chi_uighur.2 }
+						set_country_flag = { flag = CHI_uighur_event_cd days = 60 }
+					}
+					10 = {
+						country_event = { id = chi_uighur.3 }
+						set_country_flag = { flag = CHI_uighur_event_cd days = 60 }
+					}
+				}
+			}
+			# Boiling tier: uighur_threat 85..100
+			else_if = {
+				limit = {
+					check_variable = {
+						var = uighur_threat
+						value = 85
+						compare = greater_than_or_equals
+					}
+				}
+				random_list = {
+					15 = { }
+					15 = {
+						country_event = { id = chi_uighur.1 }
+						set_country_flag = { flag = CHI_uighur_event_cd days = 60 }
+					}
+					35 = {
+						country_event = { id = chi_uighur.2 }
+						set_country_flag = { flag = CHI_uighur_event_cd days = 60 }
+					}
+					35 = {
+						country_event = { id = chi_uighur.3 }
+						set_country_flag = { flag = CHI_uighur_event_cd days = 60 }
+					}
+				}
+			}
+		}
+	}
+}
