@@ -3730,7 +3730,7 @@ focus_tree = {
 			log = "[GetDateText]: [This.GetName]: focus CHI_An_Alliance_to_Rival_NATO executed"
 			if = {
 				limit = { is_faction_leader = yes }
-				set_faction_upgrade = faction_doctrine_sharing1
+				set_faction_upgrade_min = { upgrade = faction_doctrine_sharing1 }
 				add_faction_goal = faction_goal_global_hegemony
 			}
 			else = {
@@ -3771,7 +3771,7 @@ focus_tree = {
 		id = CHI_Expand_Foreign_Service
 		icon = x
 
-		x = 0
+		x = -2
 		y = 1
 		relative_position_id = CHI_Diplomatic_Reform
 
@@ -3798,12 +3798,12 @@ focus_tree = {
 		icon = x
 
 		x = 0
-		y = 2
+		y = 1
 		relative_position_id = CHI_Diplomatic_Reform
 
 		cost = 10
 
-		prerequisite = { focus = CHI_Expand_Foreign_Service }
+		prerequisite = { focus = CHI_Diplomatic_Reform }
 
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -3852,13 +3852,13 @@ focus_tree = {
 		id = CHI_Global_Ambitions
 		icon = x
 
-		x = 0
-		y = 3
+		x = 2
+		y = 1
 		relative_position_id = CHI_Diplomatic_Reform
 
 		cost = 10
 
-		prerequisite = { focus = CHI_Soft_Power_Projection }
+		prerequisite = { focus = CHI_Diplomatic_Reform }
 
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -3876,12 +3876,14 @@ focus_tree = {
 		id = CHI_Wolf_Warrior_Diplomacy
 		icon = x
 
-		x = -6
-		y = 5
+		x = -5
+		y = 2
 		relative_position_id = CHI_Diplomatic_Reform
 
 		cost = 10
 
+		prerequisite = { focus = CHI_Expand_Foreign_Service }
+		prerequisite = { focus = CHI_Soft_Power_Projection }
 		prerequisite = { focus = CHI_Global_Ambitions }
 		mutually_exclusive = { focus = CHI_Bide_Your_Time }
 
@@ -3913,12 +3915,14 @@ focus_tree = {
 		id = CHI_Bide_Your_Time
 		icon = x
 
-		x = 5
-		y = 5
+		x = 6
+		y = 2
 		relative_position_id = CHI_Diplomatic_Reform
 
 		cost = 10
 
+		prerequisite = { focus = CHI_Expand_Foreign_Service }
+		prerequisite = { focus = CHI_Soft_Power_Projection }
 		prerequisite = { focus = CHI_Global_Ambitions }
 		mutually_exclusive = { focus = CHI_Wolf_Warrior_Diplomacy }
 
@@ -4337,9 +4341,9 @@ focus_tree = {
 		id = CHI_Belt_and_Road_Launch
 		icon = x
 
-		x = 3
-		y = 1
-		relative_position_id = CHI_Wolf_Warrior_Diplomacy
+		x = 0
+		y = 4
+		relative_position_id = CHI_Chinese_Diplomacy
 
 		cost = 10
 
@@ -4477,7 +4481,7 @@ focus_tree = {
 
 		cost = 10
 
-		prerequisite = { focus = CHI_AIIB_Founding }
+		prerequisite = { focus = CHI_Belt_and_Road_Launch }
 		search_filters = { FOCUS_FILTER_CHI_AGGRESSION FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
@@ -4496,8 +4500,8 @@ focus_tree = {
 		icon = stage_southasia
 
 		x = -3
-		y = 3
-		relative_position_id = CHI_Belt_and_Road_Launch
+		y = 1
+		relative_position_id = CHI_Silk_Road_Fund
 
 		cost = 10
 
@@ -4534,9 +4538,9 @@ focus_tree = {
 		id = CHI_Maritime_Silk_Road_Indian_Ocean
 		icon = stage_southasia
 
-		x = -1
-		y = 3
-		relative_position_id = CHI_Belt_and_Road_Launch
+		x = 8
+		y = 1
+		relative_position_id = CHI_Silk_Road_Fund
 
 		cost = 10
 
@@ -4584,8 +4588,8 @@ focus_tree = {
 		icon = stage_centralasia
 
 		x = 1
-		y = 3
-		relative_position_id = CHI_Belt_and_Road_Launch
+		y = 2
+		relative_position_id = CHI_Silk_Road_Fund
 
 		cost = 10
 
@@ -4633,8 +4637,8 @@ focus_tree = {
 		icon = stage_seasia
 
 		x = 3
-		y = 3
-		relative_position_id = CHI_Belt_and_Road_Launch
+		y = 2
+		relative_position_id = CHI_Silk_Road_Fund
 
 		cost = 10
 
@@ -4678,11 +4682,11 @@ focus_tree = {
 	}
 
 	focus = {
-		id = CHI_17plus1_Mechanism
+		id = CHI_seventeen_plus_one_mechanism
 		icon = x
 
-		x = -1
-		y = 4
+		x = 7
+		y = 5
 		relative_position_id = CHI_Belt_and_Road_Launch
 
 		cost = 10
@@ -4700,37 +4704,10 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus CHI_17plus1_Mechanism"
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_seventeen_plus_one_mechanism"
 			set_temp_variable = { treasury_change = -100 }
 			modify_treasury_effect = yes
 			add_to_variable = { CHI_bri_europe_engagement = 4 }
-			if = {
-				limit = { country_exists = HUN }
-				HUN = { add_opinion_modifier = { target = ROOT modifier = bri_17plus1_member } }
-			}
-			if = {
-				limit = { country_exists = SER }
-				SER = { add_opinion_modifier = { target = ROOT modifier = bri_17plus1_member } }
-			}
-			if = {
-				limit = { country_exists = CZE }
-				CZE = { add_opinion_modifier = { target = ROOT modifier = bri_17plus1_member } }
-			}
-			if = {
-				limit = { country_exists = GRE }
-				GRE = {
-					add_opinion_modifier = { target = ROOT modifier = bri_17plus1_member }
-					set_country_flag = CHI_bri_gre_mega_project
-				}
-			}
-			if = {
-				limit = { country_exists = POL }
-				POL = { add_opinion_modifier = { target = ROOT modifier = bri_17plus1_member } }
-			}
-			if = {
-				limit = { country_exists = CRO }
-				CRO = { add_opinion_modifier = { target = ROOT modifier = bri_17plus1_member } }
-			}
 		}
 
 		ai_will_do = {
@@ -4754,7 +4731,7 @@ focus_tree = {
 		id = CHI_Forum_on_China_African_Cooperation
 		icon = x
 
-		x = -5
+		x = -4
 		y = 4
 		relative_position_id = CHI_Belt_and_Road_Launch
 
@@ -4804,9 +4781,9 @@ focus_tree = {
 		id = CHI_China_Africa_Development_Fund
 		icon = x
 
-		x = -5
-		y = 5
-		relative_position_id = CHI_Belt_and_Road_Launch
+		x = 0
+		y = 1
+		relative_position_id = CHI_Forum_on_China_African_Cooperation
 
 		cost = 10
 
@@ -4826,7 +4803,7 @@ focus_tree = {
 			every_other_country = {
 				limit = {
 					is_african_nation = yes
-					has_opinion_modifier = { target = ROOT modifier = focac_member }
+					has_opinion_modifier = focac_member
 					NOT = { has_idea = Non_State_Actor }
 					NOT = { has_idea = Lacks_International_Recognition }
 				}
@@ -4850,9 +4827,9 @@ focus_tree = {
 		id = CHI_Invest_in_Cheap_Energy
 		icon = x
 
-		x = -6
-		y = 6
-		relative_position_id = CHI_Belt_and_Road_Launch
+		x = -2
+		y = 2
+		relative_position_id = CHI_Forum_on_China_African_Cooperation
 
 		cost = 10
 
@@ -4879,7 +4856,7 @@ focus_tree = {
 			every_other_country = {
 				limit = {
 					is_african_nation = yes
-					has_opinion_modifier = { target = ROOT modifier = focac_member }
+					has_opinion_modifier = focac_member
 					NOT = { has_idea = Non_State_Actor }
 					NOT = { has_idea = Lacks_International_Recognition }
 					influence_higher_20 = yes
@@ -4906,9 +4883,9 @@ focus_tree = {
 		id = CHI_Invest_in_Clean_Energy
 		icon = x
 
-		x = -4
-		y = 6
-		relative_position_id = CHI_Belt_and_Road_Launch
+		x = 0
+		y = 2
+		relative_position_id = CHI_Forum_on_China_African_Cooperation
 
 		cost = 10
 
@@ -4938,7 +4915,7 @@ focus_tree = {
 			every_other_country = {
 				limit = {
 					is_african_nation = yes
-					has_opinion_modifier = { target = ROOT modifier = focac_member }
+					has_opinion_modifier = focac_member
 					NOT = { has_idea = Non_State_Actor }
 					NOT = { has_idea = Lacks_International_Recognition }
 					influence_higher_20 = yes
@@ -4966,9 +4943,9 @@ focus_tree = {
 		id = CHI_Outsource_Cheap_Labor
 		icon = x
 
-		x = -6
-		y = 7
-		relative_position_id = CHI_Belt_and_Road_Launch
+		x = -2
+		y = 3
+		relative_position_id = CHI_Forum_on_China_African_Cooperation
 
 		cost = 10
 
@@ -4981,7 +4958,7 @@ focus_tree = {
 			every_other_country = {
 				limit = {
 					is_african_nation = yes
-					has_opinion_modifier = { target = ROOT modifier = focac_member }
+					has_opinion_modifier = focac_member
 					NOT = { has_idea = Non_State_Actor }
 					NOT = { has_idea = Lacks_International_Recognition }
 					influence_higher_20 = yes
@@ -5005,9 +4982,9 @@ focus_tree = {
 		id = CHI_Workers_Rights
 		icon = x
 
-		x = -4
-		y = 7
-		relative_position_id = CHI_Belt_and_Road_Launch
+		x = 0
+		y = 3
+		relative_position_id = CHI_Forum_on_China_African_Cooperation
 
 		cost = 10
 
@@ -5024,7 +5001,7 @@ focus_tree = {
 			every_other_country = {
 				limit = {
 					is_african_nation = yes
-					has_opinion_modifier = { target = ROOT modifier = focac_member }
+					has_opinion_modifier = focac_member
 					NOT = { has_idea = Non_State_Actor }
 					NOT = { has_idea = Lacks_International_Recognition }
 					influence_higher_20 = yes
@@ -5048,9 +5025,9 @@ focus_tree = {
 		id = CHI_Agriculture
 		icon = x
 
-		x = -2
-		y = 6
-		relative_position_id = CHI_Belt_and_Road_Launch
+		x = 2
+		y = 2
+		relative_position_id = CHI_Forum_on_China_African_Cooperation
 
 		cost = 10
 
@@ -5068,7 +5045,7 @@ focus_tree = {
 			every_other_country = {
 				limit = {
 					is_african_nation = yes
-					has_opinion_modifier = { target = ROOT modifier = focac_member }
+					has_opinion_modifier = focac_member
 					NOT = { has_idea = Non_State_Actor }
 					NOT = { has_idea = Lacks_International_Recognition }
 					influence_higher_10 = yes
@@ -5094,9 +5071,9 @@ focus_tree = {
 		id = CHI_Develop_Hospitals
 		icon = x
 
-		x = -2
-		y = 7
-		relative_position_id = CHI_Belt_and_Road_Launch
+		x = 2
+		y = 3
+		relative_position_id = CHI_Forum_on_China_African_Cooperation
 
 		cost = 10
 
@@ -5114,7 +5091,7 @@ focus_tree = {
 			every_other_country = {
 				limit = {
 					is_african_nation = yes
-					has_opinion_modifier = { target = ROOT modifier = focac_member }
+					has_opinion_modifier = focac_member
 					NOT = { has_idea = Non_State_Actor }
 					NOT = { has_idea = Lacks_International_Recognition }
 					influence_higher_10 = yes
@@ -5138,9 +5115,9 @@ focus_tree = {
 		id = CHI_Leverage_Influence
 		icon = x
 
-		x = -5
-		y = 8
-		relative_position_id = CHI_Belt_and_Road_Launch
+		x = -1
+		y = 5
+		relative_position_id = CHI_Forum_on_China_African_Cooperation
 
 		cost = 10
 
@@ -5158,7 +5135,7 @@ focus_tree = {
 			every_other_country = {
 				limit = {
 					is_african_nation = yes
-					has_opinion_modifier = { target = ROOT modifier = focac_member }
+					has_opinion_modifier = focac_member
 					NOT = { has_idea = Non_State_Actor }
 					NOT = { has_idea = Lacks_International_Recognition }
 					influence_higher_20 = yes
@@ -5180,9 +5157,9 @@ focus_tree = {
 		id = CHI_Write_Off_Debts
 		icon = x
 
-		x = -3
-		y = 8
-		relative_position_id = CHI_Belt_and_Road_Launch
+		x = 1
+		y = 5
+		relative_position_id = CHI_Forum_on_China_African_Cooperation
 
 		cost = 10
 
@@ -5200,7 +5177,7 @@ focus_tree = {
 			every_other_country = {
 				limit = {
 					is_african_nation = yes
-					has_opinion_modifier = { target = ROOT modifier = focac_member }
+					has_opinion_modifier = focac_member
 					NOT = { has_idea = Non_State_Actor }
 					NOT = { has_idea = Lacks_International_Recognition }
 					influence_higher_20 = yes
@@ -5219,7 +5196,7 @@ focus_tree = {
 		id = CHI_Friendship_Schools
 		icon = x
 
-		x = 0
+		x = -1
 		y = 5
 		relative_position_id = CHI_Belt_and_Road_Launch
 
@@ -5239,7 +5216,7 @@ focus_tree = {
 			every_other_country = {
 				limit = {
 					is_african_nation = yes
-					has_opinion_modifier = { target = ROOT modifier = focac_member }
+					has_opinion_modifier = focac_member
 					NOT = { has_idea = Non_State_Actor }
 					NOT = { has_idea = Lacks_International_Recognition }
 				}
@@ -5266,8 +5243,8 @@ focus_tree = {
 		icon = x
 
 		x = 0
-		y = 6
-		relative_position_id = CHI_Belt_and_Road_Launch
+		y = 1
+		relative_position_id = CHI_Friendship_Schools
 
 		cost = 10
 
@@ -5307,8 +5284,8 @@ focus_tree = {
 		icon = x
 
 		x = 0
-		y = 7
-		relative_position_id = CHI_Belt_and_Road_Launch
+		y = 2
+		relative_position_id = CHI_Friendship_Schools
 
 		cost = 10
 
@@ -5328,7 +5305,7 @@ focus_tree = {
 			every_other_country = {
 				limit = {
 					is_african_nation = yes
-					has_opinion_modifier = { target = ROOT modifier = focac_member }
+					has_opinion_modifier = focac_member
 					NOT = { has_idea = Non_State_Actor }
 					NOT = { has_idea = Lacks_International_Recognition }
 					influence_higher_10 = yes
@@ -5354,9 +5331,9 @@ focus_tree = {
 		id = CHI_Predatory_Lending_Doctrine
 		icon = financial_influence
 
-		x = 1
-		y = 2
-		relative_position_id = CHI_Belt_and_Road_Launch
+		x = -1
+		y = 1
+		relative_position_id = CHI_Project_Coordination_Cell
 
 		cost = 10
 
@@ -5388,9 +5365,9 @@ focus_tree = {
 		id = CHI_Win_Win_Cooperation
 		icon = x
 
-		x = 3
-		y = 2
-		relative_position_id = CHI_Belt_and_Road_Launch
+		x = 1
+		y = 1
+		relative_position_id = CHI_Project_Coordination_Cell
 
 		cost = 10
 
@@ -5417,9 +5394,9 @@ focus_tree = {
 		id = CHI_Digital_Silk_Road_Initiative
 		icon = x
 
-		x = 2
-		y = 3
-		relative_position_id = CHI_Belt_and_Road_Launch
+		x = 0
+		y = 2
+		relative_position_id = CHI_Project_Coordination_Cell
 
 		cost = 10
 
@@ -5452,9 +5429,9 @@ focus_tree = {
 		id = CHI_Health_Silk_Road
 		icon = x
 
-		x = 5
-		y = 3
-		relative_position_id = CHI_Belt_and_Road_Launch
+		x = 3
+		y = 2
+		relative_position_id = CHI_Project_Coordination_Cell
 
 		cost = 10
 
@@ -5491,9 +5468,9 @@ focus_tree = {
 		id = CHI_Petroyuan_Settlement
 		icon = goal_manchu_economy
 
-		x = 1
+		x = -1
 		y = 4
-		relative_position_id = CHI_Belt_and_Road_Launch
+		relative_position_id = CHI_Project_Coordination_Cell
 
 		cost = 10
 
@@ -5531,9 +5508,9 @@ focus_tree = {
 		id = CHI_BRI_Forum_Beijing
 		icon = x
 
-		x = 3
+		x = 1
 		y = 4
-		relative_position_id = CHI_Belt_and_Road_Launch
+		relative_position_id = CHI_Project_Coordination_Cell
 
 		cost = 10
 
@@ -5572,9 +5549,9 @@ focus_tree = {
 		id = CHI_Renminbi_Internationalization
 		icon = x
 
-		x = 1
+		x = -1
 		y = 5
-		relative_position_id = CHI_Belt_and_Road_Launch
+		relative_position_id = CHI_Project_Coordination_Cell
 
 		cost = 10
 
@@ -5611,9 +5588,9 @@ focus_tree = {
 		id = CHI_Polar_Silk_Road
 		icon = x
 
-		x = 5
+		x = 3
 		y = 4
-		relative_position_id = CHI_Belt_and_Road_Launch
+		relative_position_id = CHI_Project_Coordination_Cell
 
 		cost = 10
 
@@ -5656,9 +5633,9 @@ focus_tree = {
 		id = CHI_Eurasian_Land_Bridge
 		icon = x
 
-		x = 2
+		x = 0
 		y = 6
-		relative_position_id = CHI_Belt_and_Road_Launch
+		relative_position_id = CHI_Project_Coordination_Cell
 
 		cost = 10
 
@@ -5701,9 +5678,9 @@ focus_tree = {
 		id = CHI_African_Continental_Integration
 		icon = x
 
-		x = -3
-		y = 9
-		relative_position_id = CHI_Belt_and_Road_Launch
+		x = 0
+		y = 6
+		relative_position_id = CHI_Forum_on_China_African_Cooperation
 
 		cost = 10
 
@@ -5748,9 +5725,9 @@ focus_tree = {
 		id = CHI_Pax_Sinica
 		icon = x
 
-		x = 2
-		y = 8
-		relative_position_id = CHI_Belt_and_Road_Launch
+		x = 0
+		y = 7
+		relative_position_id = CHI_Project_Coordination_Cell
 
 		cost = 10
 
@@ -5793,7 +5770,7 @@ focus_tree = {
 		id = CHI_Forum_China_CELAC
 		icon = x
 
-		x = -7
+		x = -8
 		y = 3
 		relative_position_id = CHI_Belt_and_Road_Launch
 
@@ -5843,9 +5820,9 @@ focus_tree = {
 		id = CHI_Lithium_Triangle_Accord
 		icon = x
 
-		x = -9
-		y = 4
-		relative_position_id = CHI_Belt_and_Road_Launch
+		x = -1
+		y = 1
+		relative_position_id = CHI_Forum_China_CELAC
 
 		cost = 10
 
@@ -5890,9 +5867,9 @@ focus_tree = {
 		id = CHI_Petrocaribe_Successor
 		icon = x
 
-		x = -7
-		y = 4
-		relative_position_id = CHI_Belt_and_Road_Launch
+		x = 1
+		y = 1
+		relative_position_id = CHI_Forum_China_CELAC
 
 		cost = 10
 
@@ -5963,9 +5940,9 @@ focus_tree = {
 		id = CHI_Five_Stars_Highway
 		icon = x
 
-		x = -8
-		y = 5
-		relative_position_id = CHI_Belt_and_Road_Launch
+		x = 0
+		y = 2
+		relative_position_id = CHI_Forum_China_CELAC
 
 		cost = 12
 
@@ -6022,9 +5999,9 @@ focus_tree = {
 		id = CHI_Beidou_Latin_Constellation
 		icon = x
 
-		x = -8
-		y = 6
-		relative_position_id = CHI_Belt_and_Road_Launch
+		x = 0
+		y = 3
+		relative_position_id = CHI_Forum_China_CELAC
 
 		cost = 10
 
@@ -6093,14 +6070,13 @@ focus_tree = {
 		id = CHI_Monroe_Doctrine_Inverted
 		icon = x
 
-		x = -8
-		y = 8
-		relative_position_id = CHI_Belt_and_Road_Launch
+		x = 0
+		y = 4
+		relative_position_id = CHI_Forum_China_CELAC
 
 		cost = 12
 
 		prerequisite = { focus = CHI_Beidou_Latin_Constellation }
-		prerequisite = { focus = CHI_Five_Stars_Highway }
 		search_filters = { FOCUS_FILTER_CHI_AGGRESSION FOCUS_FILTER_FOREIGN_POLICY FOCUS_FILTER_INFLUENCE }
 
 		available = {
@@ -6152,8 +6128,8 @@ focus_tree = {
 		id = CHI_Arab_League_Cooperation_Forum
 		icon = x
 
-		x = -11
-		y = 4
+		x = -13
+		y = 3
 		relative_position_id = CHI_Belt_and_Road_Launch
 
 		cost = 7
@@ -6201,9 +6177,9 @@ focus_tree = {
 		id = CHI_Suez_Eastern_Bank
 		icon = x
 
-		x = -10
-		y = 4
-		relative_position_id = CHI_Belt_and_Road_Launch
+		x = 2
+		y = 1
+		relative_position_id = CHI_Arab_League_Cooperation_Forum
 
 		cost = 10
 
@@ -6242,9 +6218,9 @@ focus_tree = {
 		id = CHI_TwentyFive_Year_Iran_Accord
 		icon = x
 
-		x = -12
-		y = 5
-		relative_position_id = CHI_Belt_and_Road_Launch
+		x = -1
+		y = 2
+		relative_position_id = CHI_Arab_League_Cooperation_Forum
 
 		cost = 12
 
@@ -6310,9 +6286,9 @@ focus_tree = {
 		id = CHI_Vision_2030_Partnership
 		icon = x
 
-		x = -10
-		y = 5
-		relative_position_id = CHI_Belt_and_Road_Launch
+		x = 1
+		y = 2
+		relative_position_id = CHI_Arab_League_Cooperation_Forum
 
 		cost = 10
 
@@ -6360,9 +6336,9 @@ focus_tree = {
 		id = CHI_Beijing_Communique
 		icon = x
 
-		x = -11
-		y = 6
-		relative_position_id = CHI_Belt_and_Road_Launch
+		x = 0
+		y = 3
+		relative_position_id = CHI_Arab_League_Cooperation_Forum
 
 		cost = 10
 
@@ -6419,9 +6395,9 @@ focus_tree = {
 		id = CHI_Gulf_Yuan_Settlement
 		icon = x
 
-		x = -11
-		y = 8
-		relative_position_id = CHI_Belt_and_Road_Launch
+		x = 2
+		y = 4
+		relative_position_id = CHI_Arab_League_Cooperation_Forum
 
 		cost = 12
 
@@ -6468,12 +6444,12 @@ focus_tree = {
 		icon = x
 
 		x = 8
-		y = 3
+		y = 4
 		relative_position_id = CHI_Belt_and_Road_Launch
 
 		cost = 8
 
-		prerequisite = { focus = CHI_Maritime_Silk_Road_Indian_Ocean focus = CHI_Mekong_Riparian_Cooperation }
+		prerequisite = { focus = CHI_Maritime_Silk_Road_Indian_Ocean }
 		search_filters = { FOCUS_FILTER_CHI_AGGRESSION FOCUS_FILTER_FOREIGN_POLICY FOCUS_FILTER_EXPENDITURE }
 
 		available = {
@@ -6515,9 +6491,9 @@ focus_tree = {
 		id = CHI_Honiara_Security_Pact
 		icon = x
 
-		x = 7
-		y = 5
-		relative_position_id = CHI_Belt_and_Road_Launch
+		x = -1
+		y = 1
+		relative_position_id = CHI_Pacific_Island_Forum_Pivot
 
 		cost = 10
 
@@ -6528,10 +6504,7 @@ focus_tree = {
 			date > 2022.1.1
 			country_exists = SOL
 			SOL = {
-				has_opinion_modifier = {
-					target = ROOT
-					modifier = CHI_pacific_pivot_partner
-				}
+				has_opinion_modifier = CHI_pacific_pivot_partner
 			}
 		}
 
@@ -6581,9 +6554,9 @@ focus_tree = {
 		id = CHI_Tonga_Tuna_Concession
 		icon = x
 
-		x = 9
-		y = 5
-		relative_position_id = CHI_Belt_and_Road_Launch
+		x = 1
+		y = 1
+		relative_position_id = CHI_Pacific_Island_Forum_Pivot
 
 		cost = 8
 
@@ -6632,9 +6605,9 @@ focus_tree = {
 		id = CHI_Eight_Country_Initiative
 		icon = x
 
-		x = 8
-		y = 7
-		relative_position_id = CHI_Belt_and_Road_Launch
+		x = 0
+		y = 2
+		relative_position_id = CHI_Pacific_Island_Forum_Pivot
 
 		cost = 10
 
@@ -6684,9 +6657,9 @@ focus_tree = {
 		id = CHI_Second_Island_Chain_Reach
 		icon = x
 
-		x = 8
-		y = 9
-		relative_position_id = CHI_Belt_and_Road_Launch
+		x = 0
+		y = 4
+		relative_position_id = CHI_Pacific_Island_Forum_Pivot
 
 		cost = 12
 
@@ -6751,13 +6724,13 @@ focus_tree = {
 		id = CHI_Rome_Memorandum
 		icon = x
 
-		x = 5
-		y = 5
-		relative_position_id = CHI_Belt_and_Road_Launch
+		x = -1
+		y = 1
+		relative_position_id = CHI_seventeen_plus_one_mechanism
 
 		cost = 10
 
-		prerequisite = { focus = CHI_17plus1_Mechanism }
+		prerequisite = { focus = CHI_seventeen_plus_one_mechanism }
 		search_filters = { FOCUS_FILTER_CHI_AGGRESSION FOCUS_FILTER_FOREIGN_POLICY FOCUS_FILTER_EXPENDITURE }
 
 		available = {
@@ -6806,13 +6779,13 @@ focus_tree = {
 		id = CHI_Piraeus_Model
 		icon = x
 
-		x = 4
-		y = 6
-		relative_position_id = CHI_Belt_and_Road_Launch
+		x = -2
+		y = 2
+		relative_position_id = CHI_seventeen_plus_one_mechanism
 
 		cost = 10
 
-		prerequisite = { focus = CHI_17plus1_Mechanism }
+		prerequisite = { focus = CHI_seventeen_plus_one_mechanism }
 		search_filters = { FOCUS_FILTER_CHI_AGGRESSION FOCUS_FILTER_INFRASTRUCTURE FOCUS_FILTER_EXPENDITURE }
 
 		available = {
@@ -6857,13 +6830,13 @@ focus_tree = {
 		id = CHI_16plus1_Schism
 		icon = x
 
-		x = 6
-		y = 6
-		relative_position_id = CHI_Belt_and_Road_Launch
+		x = 0
+		y = 2
+		relative_position_id = CHI_seventeen_plus_one_mechanism
 
 		cost = 8
 
-		prerequisite = { focus = CHI_17plus1_Mechanism }
+		prerequisite = { focus = CHI_seventeen_plus_one_mechanism }
 		search_filters = { FOCUS_FILTER_CHI_AGGRESSION FOCUS_FILTER_FOREIGN_POLICY FOCUS_FILTER_POLITICAL }
 
 		available = {
@@ -6884,9 +6857,9 @@ focus_tree = {
 		id = CHI_Comprehensive_Agreement_Investment
 		icon = x
 
-		x = 5
-		y = 7
-		relative_position_id = CHI_Belt_and_Road_Launch
+		x = -1
+		y = 3
+		relative_position_id = CHI_seventeen_plus_one_mechanism
 
 		cost = 12
 
@@ -6962,9 +6935,9 @@ focus_tree = {
 		id = CHI_Geneva_Carve_Out
 		icon = x
 
-		x = 5
-		y = 9
-		relative_position_id = CHI_Belt_and_Road_Launch
+		x = -1
+		y = 4
+		relative_position_id = CHI_seventeen_plus_one_mechanism
 
 		cost = 10
 
