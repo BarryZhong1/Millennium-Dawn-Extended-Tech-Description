@@ -1,4 +1,4 @@
-﻿#Rework Author(s): TheGeneral
+#Rework Author(s): TheGeneral
 add_namespace = china_national_committee
 add_namespace = china_sar
 add_namespace = CHI_sco
@@ -9382,5 +9382,976 @@ country_event = {
 				has_country_flag = CHI_bri_predatory_path
 			}
 		}
+	}
+}
+
+# chi_bri.81 -- Petrocaribe Successor: USA Reaction (USA scope, FROM = CHI)
+country_event = {
+	id = chi_bri.81
+	title = chi_bri.81.t
+	desc = chi_bri.81.d
+	picture = GFX_report_event_usa_diplomacy
+	is_triggered_only = yes
+
+	trigger = {
+		original_tag = USA
+	}
+
+	option = {
+		name = chi_bri.81.a
+		log = "[GetDateText]: [This.GetName]: chi_bri.81.a executed"
+		add_stability = -0.02
+		add_to_variable = { CHI_chinese_aggression = 1 tooltip = CHI_chinese_aggression_tt }
+		clamp_variable = { var = CHI_chinese_aggression min = -50 max = 50 }
+		ai_chance = {
+			base = 6
+			modifier = {
+				add = 4
+				has_government = democratic
+			}
+		}
+	}
+
+	option = {
+		name = chi_bri.81.b
+		log = "[GetDateText]: [This.GetName]: chi_bri.81.b executed"
+		add_political_power = -25
+		every_country = {
+			limit = {
+				is_South_America = yes
+			}
+			add_opinion_modifier = {
+				target = USA
+				modifier = negative_small_commercial_relations
+			}
+		}
+		ai_chance = {
+			base = 3
+			modifier = {
+				add = 3
+				has_government = democratic
+			}
+		}
+	}
+
+	option = {
+		name = chi_bri.81.c
+		log = "[GetDateText]: [This.GetName]: chi_bri.81.c executed"
+		add_political_power = 10
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+# chi_bri.82 -- Venezuela Debt Crisis (CHI player scope, delayed 3-5 years after A.3)
+country_event = {
+	id = chi_bri.82
+	title = chi_bri.82.t
+	desc = chi_bri.82.d
+	picture = GFX_report_event_china_diplomacy
+	is_triggered_only = yes
+
+	trigger = {
+		original_tag = CHI
+		has_country_flag = CHI_bri_ven_oil_pledge
+	}
+
+	option = {
+		name = chi_bri.82.a
+		log = "[GetDateText]: [This.GetName]: chi_bri.82.a executed"
+		set_temp_variable = { treasury_change = -80 }
+		modify_treasury_effect = yes
+		add_to_variable = { CHI_bri_winwin_score = 2 }
+		VEN = {
+			add_opinion_modifier = {
+				target = CHI
+				modifier = CHI_beijing_brokered_peace
+			}
+		}
+		ai_chance = {
+			base = 4
+			modifier = {
+				add = 3
+				has_government = communism
+			}
+		}
+	}
+
+	option = {
+		name = chi_bri.82.b
+		log = "[GetDateText]: [This.GetName]: chi_bri.82.b executed"
+		set_temp_variable = { treasury_change = 40 }
+		modify_treasury_effect = yes
+		add_to_variable = { CHI_bri_predatory_score = 1 }
+		VEN = {
+			add_opinion_modifier = {
+				target = CHI
+				modifier = chinese_creditor_dependency
+			}
+		}
+		ai_chance = {
+			base = 5
+			modifier = {
+				add = 3
+				has_country_flag = CHI_bri_predatory_path
+			}
+		}
+	}
+
+	option = {
+		name = chi_bri.82.c
+		log = "[GetDateText]: [This.GetName]: chi_bri.82.c executed"
+		add_to_variable = { CHI_bri_latam_engagement = -2 }
+		VEN = {
+			add_opinion_modifier = {
+				target = CHI
+				modifier = predatory_lender
+			}
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+# chi_bri.83 -- Beidou Latin Constellation: USA Reaction (USA scope, FROM = CHI)
+country_event = {
+	id = chi_bri.83
+	title = chi_bri.83.t
+	desc = chi_bri.83.d
+	picture = GFX_report_event_usa_crisis
+	is_triggered_only = yes
+
+	trigger = {
+		original_tag = USA
+	}
+
+	option = {
+		name = chi_bri.83.a
+		log = "[GetDateText]: [This.GetName]: chi_bri.83.a executed"
+		add_political_power = -30
+		every_country = {
+			limit = {
+				is_South_America = yes
+			}
+			add_opinion_modifier = {
+				target = USA
+				modifier = negative_small_commercial_relations
+			}
+		}
+		ai_chance = {
+			base = 5
+			modifier = {
+				add = 4
+				has_government = democratic
+			}
+		}
+	}
+
+	option = {
+		name = chi_bri.83.b
+		log = "[GetDateText]: [This.GetName]: chi_bri.83.b executed"
+		set_temp_variable = { treasury_change = -120 }
+		modify_treasury_effect = yes
+		add_political_power = 20
+		ai_chance = {
+			base = 4
+			modifier = {
+				add = 2
+				has_government = democratic
+			}
+		}
+	}
+
+	option = {
+		name = chi_bri.83.c
+		log = "[GetDateText]: [This.GetName]: chi_bri.83.c executed"
+		add_political_power = 10
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+# chi_bri.84 -- Monroe Doctrine Inverted: Taiwan Recognition Switches (CHI player scope)
+country_event = {
+	id = chi_bri.84
+	title = chi_bri.84.t
+	desc = chi_bri.84.d
+	picture = GFX_report_event_china_diplomacy
+	is_triggered_only = yes
+
+	trigger = {
+		original_tag = CHI
+	}
+
+	option = {
+		name = chi_bri.84.a
+		log = "[GetDateText]: [This.GetName]: chi_bri.84.a executed"
+		add_to_variable = { CHI_bri_latam_engagement = 3 }
+		add_to_variable = { CHI_bri_global_presence = 10 }
+		PAR = {
+			add_opinion_modifier = {
+				target = CHI
+				modifier = CHI_celac_forum_member
+			}
+			set_country_flag = CHI_taiwan_recognition_dropped
+		}
+		GUA = {
+			add_opinion_modifier = {
+				target = CHI
+				modifier = CHI_celac_forum_member
+			}
+			set_country_flag = CHI_taiwan_recognition_dropped
+		}
+		BLZ = {
+			add_opinion_modifier = {
+				target = CHI
+				modifier = CHI_celac_forum_member
+			}
+			set_country_flag = CHI_taiwan_recognition_dropped
+		}
+		HAI = {
+			add_opinion_modifier = {
+				target = CHI
+				modifier = CHI_celac_forum_member
+			}
+			set_country_flag = CHI_taiwan_recognition_dropped
+		}
+		ai_chance = {
+			base = 8
+			modifier = {
+				add = 4
+				check_variable = {
+					var = CHI_bri_latam_engagement
+					value = 15
+					compare = greater_than_or_equals
+				}
+			}
+		}
+	}
+
+	option = {
+		name = chi_bri.84.b
+		log = "[GetDateText]: [This.GetName]: chi_bri.84.b executed"
+		add_to_variable = { CHI_bri_latam_engagement = 2 }
+		add_to_variable = { CHI_bri_global_presence = 6 }
+		PAR = {
+			add_opinion_modifier = {
+				target = CHI
+				modifier = CHI_celac_forum_member
+			}
+			set_country_flag = CHI_taiwan_recognition_dropped
+		}
+		GUA = {
+			add_opinion_modifier = {
+				target = CHI
+				modifier = CHI_celac_forum_member
+			}
+			set_country_flag = CHI_taiwan_recognition_dropped
+		}
+		BLZ = {
+			add_opinion_modifier = {
+				target = CHI
+				modifier = CHI_celac_forum_member
+			}
+			set_country_flag = CHI_taiwan_recognition_dropped
+		}
+		ai_chance = {
+			base = 5
+		}
+	}
+}
+
+# chi_bri.85 -- OAS Hollowed: Global Opinion Shifts (CHI scope)
+country_event = {
+	id = chi_bri.85
+	title = chi_bri.85.t
+	desc = chi_bri.85.d
+	picture = GFX_report_event_china_politics
+	is_triggered_only = yes
+
+	trigger = {
+		original_tag = CHI
+	}
+
+	option = {
+		name = chi_bri.85.a
+		log = "[GetDateText]: [This.GetName]: chi_bri.85.a executed"
+		every_country = {
+			limit = {
+				is_South_America = yes
+				NOT = { original_tag = CHI }
+				NOT = { has_idea = Non_State_Actor }
+				NOT = { has_idea = Lacks_International_Recognition }
+			}
+			add_opinion_modifier = {
+				target = CHI
+				modifier = CHI_celac_forum_member
+			}
+		}
+		USA = {
+			add_opinion_modifier = {
+				target = CHI
+				modifier = eu_unity_undermined
+			}
+		}
+		add_to_variable = { CHI_bri_global_presence = 8 }
+		ai_chance = {
+			base = 8
+			modifier = {
+				add = 4
+				check_variable = {
+					var = CHI_bri_latam_engagement
+					value = 18
+					compare = greater_than_or_equals
+				}
+			}
+		}
+	}
+
+	option = {
+		name = chi_bri.85.b
+		log = "[GetDateText]: [This.GetName]: chi_bri.85.b executed"
+		add_political_power = 50
+		USA = {
+			add_opinion_modifier = {
+				target = CHI
+				modifier = eu_unity_undermined
+			}
+		}
+		add_to_variable = { CHI_bri_global_presence = 4 }
+		ai_chance = {
+			base = 2
+		}
+	}
+}
+
+# chi_bri.86 -- 25-Year Iran Accord: Allied Alarm (USA, ISR, SAU, UAE scope)
+country_event = {
+	id = chi_bri.86
+	title = chi_bri.86.t
+	desc = chi_bri.86.d
+	picture = GFX_report_event_usa_crisis
+	is_triggered_only = yes
+
+	trigger = {
+		OR = {
+			original_tag = USA
+			original_tag = ISR
+			original_tag = SAU
+			original_tag = UAE
+		}
+	}
+
+	option = {
+		name = chi_bri.86.a
+		log = "[GetDateText]: [This.GetName]: chi_bri.86.a executed"
+		add_political_power = -25
+		CHI = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = eu_unity_undermined
+			}
+		}
+		ai_chance = {
+			base = 7
+			modifier = {
+				add = 5
+				OR = {
+					original_tag = USA
+					original_tag = ISR
+				}
+			}
+		}
+	}
+
+	option = {
+		name = chi_bri.86.b
+		log = "[GetDateText]: [This.GetName]: chi_bri.86.b executed"
+		add_political_power = 15
+		ai_chance = {
+			base = 3
+			modifier = {
+				add = 3
+				original_tag = UAE
+			}
+		}
+	}
+}
+
+# chi_bri.87 -- Beijing Communique Celebrated: Global Opinion Shifts (CHI scope)
+country_event = {
+	id = chi_bri.87
+	title = chi_bri.87.t
+	desc = chi_bri.87.d
+	picture = GFX_report_event_generic_sign_treaty1
+	is_triggered_only = yes
+
+	trigger = {
+		original_tag = CHI
+	}
+
+	option = {
+		name = chi_bri.87.a
+		log = "[GetDateText]: [This.GetName]: chi_bri.87.a executed"
+		every_country = {
+			limit = {
+				NOT = { original_tag = CHI }
+				NOT = { original_tag = USA }
+				NOT = { has_idea = Non_State_Actor }
+				NOT = { has_idea = Lacks_International_Recognition }
+				is_major = yes
+			}
+			add_opinion_modifier = {
+				target = CHI
+				modifier = CHI_beijing_brokered_peace
+			}
+		}
+		USA = {
+			add_opinion_modifier = {
+				target = CHI
+				modifier = eu_unity_undermined
+			}
+		}
+		add_to_variable = { CHI_bri_global_presence = 8 }
+		add_to_variable = { CHI_bri_winwin_score = 3 }
+		ai_chance = {
+			base = 10
+		}
+	}
+
+	option = {
+		name = chi_bri.87.b
+		log = "[GetDateText]: [This.GetName]: chi_bri.87.b executed"
+		add_political_power = 50
+		add_to_variable = { CHI_bri_global_presence = 4 }
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+
+# chi_bri.88 -- Gulf Yuan Settlement: Petrodollar Erosion (CHI scope, global effects)
+country_event = {
+	id = chi_bri.88
+	title = chi_bri.88.t
+	desc = chi_bri.88.d
+	picture = GFX_report_event_china_politics
+	is_triggered_only = yes
+
+	trigger = {
+		original_tag = CHI
+	}
+
+	option = {
+		name = chi_bri.88.a
+		log = "[GetDateText]: [This.GetName]: chi_bri.88.a executed"
+		add_ideas = CHI_petrodollar_breaks
+		USA = {
+			add_opinion_modifier = {
+				target = CHI
+				modifier = CHI_dollar_eroded
+			}
+		}
+		every_country = {
+			limit = {
+				is_major = yes
+				NOT = { original_tag = CHI }
+				NOT = { original_tag = USA }
+			}
+			add_opinion_modifier = {
+				target = CHI
+				modifier = CHI_celac_forum_member
+			}
+		}
+		add_to_variable = { CHI_bri_global_presence = 15 }
+		set_temp_variable = { treasury_change = 60 }
+		modify_treasury_effect = yes
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+
+# chi_bri.89 -- Pacific Island Forum Pivot: Recognition Sequence (CHI player scope)
+country_event = {
+	id = chi_bri.89
+	title = chi_bri.89.t
+	desc = chi_bri.89.d
+	picture = GFX_report_event_china_diplomacy
+	is_triggered_only = yes
+
+	trigger = {
+		original_tag = CHI
+	}
+
+	option = {
+		name = chi_bri.89.a
+		log = "[GetDateText]: [This.GetName]: chi_bri.89.a executed"
+		add_to_variable = { CHI_bri_pacific_engagement = 4 }
+		add_to_variable = { CHI_bri_global_presence = 6 }
+		SOL = {
+			add_opinion_modifier = {
+				target = CHI
+				modifier = CHI_pacific_pivot_partner
+			}
+			set_country_flag = CHI_taiwan_recognition_dropped
+		}
+		KIR = {
+			add_opinion_modifier = {
+				target = CHI
+				modifier = CHI_pacific_pivot_partner
+			}
+			set_country_flag = CHI_taiwan_recognition_dropped
+		}
+		ai_chance = {
+			base = 8
+		}
+	}
+
+	option = {
+		name = chi_bri.89.b
+		log = "[GetDateText]: [This.GetName]: chi_bri.89.b executed"
+		add_to_variable = { CHI_bri_pacific_engagement = 6 }
+		add_to_variable = { CHI_bri_global_presence = 10 }
+		SOL = {
+			add_opinion_modifier = {
+				target = CHI
+				modifier = CHI_pacific_pivot_partner
+			}
+			set_country_flag = CHI_taiwan_recognition_dropped
+		}
+		KIR = {
+			add_opinion_modifier = {
+				target = CHI
+				modifier = CHI_pacific_pivot_partner
+			}
+			set_country_flag = CHI_taiwan_recognition_dropped
+		}
+		TUL = {
+			add_opinion_modifier = {
+				target = CHI
+				modifier = CHI_pacific_pivot_partner
+			}
+		}
+		PAU = {
+			add_opinion_modifier = {
+				target = CHI
+				modifier = CHI_pacific_pivot_partner
+			}
+		}
+		set_temp_variable = { treasury_change = -40 }
+		modify_treasury_effect = yes
+		ai_chance = {
+			base = 6
+			modifier = {
+				add = 4
+				check_variable = {
+					var = CHI_bri_pacific_engagement
+					value = 4
+					compare = greater_than_or_equals
+				}
+			}
+		}
+	}
+}
+
+# chi_bri.90 -- Honiara Security Pact: AUSMIN Escalation (AUS, USA, NZL scope)
+country_event = {
+	id = chi_bri.90
+	title = chi_bri.90.t
+	desc = chi_bri.90.d
+	picture = GFX_report_event_usa_military
+	is_triggered_only = yes
+
+	trigger = {
+		OR = {
+			original_tag = AUS
+			original_tag = USA
+			original_tag = NZL
+		}
+	}
+
+	option = {
+		name = chi_bri.90.a
+		log = "[GetDateText]: [This.GetName]: chi_bri.90.a executed"
+		add_political_power = -30
+		CHI = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = eu_unity_undermined
+			}
+		}
+		if = {
+			limit = { original_tag = AUS }
+			add_timed_idea = {
+				idea = CHI_pacific_diplomatic_setback
+				days = 365
+			}
+		}
+		ai_chance = {
+			base = 8
+			modifier = {
+				add = 4
+				OR = {
+					original_tag = AUS
+					original_tag = USA
+				}
+			}
+		}
+	}
+
+	option = {
+		name = chi_bri.90.b
+		log = "[GetDateText]: [This.GetName]: chi_bri.90.b executed"
+		add_political_power = 15
+		ai_chance = {
+			base = 2
+			modifier = {
+				add = 2
+				original_tag = NZL
+			}
+		}
+	}
+}
+
+# chi_bri.91 -- Eight Country Initiative: Success/Failure Branch (CHI player scope)
+country_event = {
+	id = chi_bri.91
+	title = chi_bri.91.t
+	desc = chi_bri.91.d
+	picture = GFX_report_event_china_politics
+	is_triggered_only = yes
+
+	trigger = {
+		original_tag = CHI
+	}
+
+	option = {
+		name = chi_bri.91.a
+		log = "[GetDateText]: [This.GetName]: chi_bri.91.a executed"
+		trigger = {
+			check_variable = {
+				var = CHI_bri_pacific_engagement
+				value = 12
+				compare = greater_than_or_equals
+			}
+		}
+		add_ideas = CHI_pacific_security_lead
+		add_to_variable = { CHI_bri_global_presence = 12 }
+		add_to_variable = { CHI_bri_pacific_engagement = 3 }
+		ai_chance = {
+			base = 1
+		}
+	}
+
+	option = {
+		name = chi_bri.91.b
+		log = "[GetDateText]: [This.GetName]: chi_bri.91.b executed"
+		trigger = {
+			check_variable = {
+				var = CHI_bri_pacific_engagement
+				value = 12
+				compare = less_than
+			}
+		}
+		add_timed_idea = {
+			idea = CHI_pacific_diplomatic_setback
+			days = 730
+		}
+		add_to_variable = { CHI_bri_global_presence = 3 }
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+# chi_bri.92 -- Second Island Chain Reach: Hard Escalation (USA, AUS scope)
+country_event = {
+	id = chi_bri.92
+	title = chi_bri.92.t
+	desc = chi_bri.92.d
+	picture = GFX_report_event_usa_military
+	is_triggered_only = yes
+
+	trigger = {
+		OR = {
+			original_tag = USA
+			original_tag = AUS
+		}
+	}
+
+	option = {
+		name = chi_bri.92.a
+		log = "[GetDateText]: [This.GetName]: chi_bri.92.a executed"
+		add_political_power = -40
+		CHI = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = eu_unity_undermined
+			}
+		}
+		ai_chance = {
+			base = 7
+			modifier = {
+				add = 5
+				original_tag = USA
+			}
+		}
+	}
+
+	option = {
+		name = chi_bri.92.b
+		log = "[GetDateText]: [This.GetName]: chi_bri.92.b executed"
+		trigger = {
+			check_variable = {
+				var = CHI_chinese_aggression
+				value = 30
+				compare = greater_than_or_equals
+			}
+		}
+		add_political_power = 20
+		CHI = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = predatory_lender
+			}
+		}
+		ai_chance = {
+			base = 3
+			modifier = {
+				add = 4
+				check_variable = {
+					var = CHI_chinese_aggression
+					value = 30
+					compare = greater_than_or_equals
+				}
+			}
+		}
+	}
+
+	option = {
+		name = chi_bri.92.c
+		log = "[GetDateText]: [This.GetName]: chi_bri.92.c executed"
+		add_political_power = 10
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+
+# chi_bri.93 -- Rome Memorandum: G7 Shockwaves (G7 scope, FROM = CHI)
+country_event = {
+	id = chi_bri.93
+	title = chi_bri.93.t
+	desc = chi_bri.93.d
+	picture = GFX_report_event_generic_sign_treaty1
+	is_triggered_only = yes
+
+	trigger = {
+		OR = {
+			original_tag = USA
+			original_tag = GER
+			original_tag = FRA
+			original_tag = ENG
+			original_tag = JAP
+			original_tag = CAN
+		}
+	}
+
+	option = {
+		name = chi_bri.93.a
+		log = "[GetDateText]: [This.GetName]: chi_bri.93.a executed"
+		add_political_power = -20
+		ITA = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = eu_unity_undermined
+			}
+		}
+		ai_chance = {
+			base = 7
+			modifier = {
+				add = 5
+				original_tag = USA
+			}
+		}
+	}
+
+	option = {
+		name = chi_bri.93.b
+		log = "[GetDateText]: [This.GetName]: chi_bri.93.b executed"
+		add_political_power = 10
+		ai_chance = {
+			base = 3
+			modifier = {
+				add = 3
+				OR = {
+					original_tag = GER
+					original_tag = FRA
+				}
+			}
+		}
+	}
+}
+
+# chi_bri.94 -- 16+1 Schism: Tighten Core or Hold Frame (CHI player scope)
+country_event = {
+	id = chi_bri.94
+	title = chi_bri.94.t
+	desc = chi_bri.94.d
+	picture = GFX_report_event_china_diplomacy
+	is_triggered_only = yes
+
+	trigger = {
+		original_tag = CHI
+	}
+
+	option = {
+		name = chi_bri.94.a
+		log = "[GetDateText]: [This.GetName]: chi_bri.94.a executed"
+		add_to_variable = { CHI_bri_europe_engagement = 2 }
+		HUN = {
+			add_opinion_modifier = {
+				target = CHI
+				modifier = CHI_bri_core_partner
+			}
+		}
+		SER = {
+			add_opinion_modifier = {
+				target = CHI
+				modifier = CHI_bri_core_partner
+			}
+		}
+		GRE = {
+			add_opinion_modifier = {
+				target = CHI
+				modifier = CHI_bri_core_partner
+			}
+		}
+		LIT = {
+			add_opinion_modifier = {
+				target = CHI
+				modifier = eu_unity_undermined
+			}
+		}
+		EST = {
+			add_opinion_modifier = {
+				target = CHI
+				modifier = eu_unity_undermined
+			}
+		}
+		LAT = {
+			add_opinion_modifier = {
+				target = CHI
+				modifier = eu_unity_undermined
+			}
+		}
+		ai_chance = {
+			base = 6
+			modifier = {
+				add = 4
+				has_government = communism
+			}
+		}
+	}
+
+	option = {
+		name = chi_bri.94.b
+		log = "[GetDateText]: [This.GetName]: chi_bri.94.b executed"
+		set_temp_variable = { treasury_change = -100 }
+		modify_treasury_effect = yes
+		add_to_variable = { CHI_bri_europe_engagement = 2 }
+		every_country = {
+			limit = {
+				OR = {
+					original_tag = HUN
+					original_tag = SER
+					original_tag = GRE
+					original_tag = LIT
+					original_tag = EST
+					original_tag = LAT
+				}
+			}
+			add_opinion_modifier = {
+				target = CHI
+				modifier = cee_china_summit
+			}
+		}
+		ai_chance = {
+			base = 4
+			modifier = {
+				add = 3
+				has_government = democratic
+			}
+		}
+	}
+}
+
+# chi_bri.95 -- CAI Aggression Check: Hidden Monthly Cancellation (CHI scope)
+# Fired by D.4 focus completion (and re-fires itself every 30 days while CHI_eu_market_access is held).
+# Cancels the CAI idea and swaps signatory modifiers to suspended on the 6 EU majors when
+# CHI_chinese_aggression crosses 25. If the threshold is not met, schedules itself again.
+country_event = {
+	id = chi_bri.95
+	title = chi_bri.95.t
+	desc = chi_bri.95.d
+	is_triggered_only = yes
+	hidden = yes
+
+	option = {
+		name = chi_bri.95.a
+		trigger = {
+			has_idea = CHI_eu_market_access
+			check_variable = {
+				var = CHI_chinese_aggression
+				value = 25
+				compare = greater_than_or_equals
+			}
+		}
+		remove_ideas = CHI_eu_market_access
+		GER = {
+			remove_opinion_modifier = { target = CHI modifier = CHI_cai_signatory }
+			add_opinion_modifier = { target = CHI modifier = CHI_cai_suspended }
+		}
+		FRA = {
+			remove_opinion_modifier = { target = CHI modifier = CHI_cai_signatory }
+			add_opinion_modifier = { target = CHI modifier = CHI_cai_suspended }
+		}
+		HOL = {
+			remove_opinion_modifier = { target = CHI modifier = CHI_cai_signatory }
+			add_opinion_modifier = { target = CHI modifier = CHI_cai_suspended }
+		}
+		BEL = {
+			remove_opinion_modifier = { target = CHI modifier = CHI_cai_signatory }
+			add_opinion_modifier = { target = CHI modifier = CHI_cai_suspended }
+		}
+		ITA = {
+			remove_opinion_modifier = { target = CHI modifier = CHI_cai_signatory }
+			add_opinion_modifier = { target = CHI modifier = CHI_cai_suspended }
+		}
+		SPR = {
+			remove_opinion_modifier = { target = CHI modifier = CHI_cai_signatory }
+			add_opinion_modifier = { target = CHI modifier = CHI_cai_suspended }
+		}
+		ai_chance = { base = 1 }
+	}
+
+	option = {
+		name = chi_bri.95.b
+		trigger = {
+			has_idea = CHI_eu_market_access
+			check_variable = {
+				var = CHI_chinese_aggression
+				value = 25
+				compare = less_than
+			}
+		}
+		hidden_effect = {
+			country_event = { id = chi_bri.95 days = 30 }
+		}
+		ai_chance = { base = 1 }
 	}
 }
