@@ -71,36 +71,34 @@ CHI_sco_category = {
 	visible_when_empty = yes
 }
 
-
-arunachal_war_decisions_category = {
+CHI_subcontinent_strategy = {
 	allowed = {
 		OR = {
-			original_tag = RAJ
 			original_tag = CHI
+			original_tag = RAJ
 		}
 	}
-	icon = GFX_decision_generic_china
+	icon = x
 	picture = GFX_decision_indian_conflict
 	priority = 100
 
 	visible = {
-		475 = {
-			is_claimed_by = CHI
-			is_controlled_by = RAJ
+		CHI = { has_completed_focus = CHI_The_Indian_Subcontinent }
+	}
+}
+
+CHI_japan_strategy = {
+	allowed = {
+		OR = {
+			original_tag = CHI
+			original_tag = JAP
 		}
-		CHI = {
-			OR = {
-				has_completed_focus = CHI_Strike_Across_the_Himalayas
-				owns_state = 475
-			}
-		}
-		NOT = {
-			OR = {
-				CHI = { is_subject_of = RAJ }
-				RAJ = { is_subject_of = CHI }
-				RAJ = { is_in_faction_with = CHI }
-			}
-		}
+	}
+	icon = x
+	priority = 100
+
+	visible = {
+		CHI = { has_completed_focus = CHI_the_japan_question }
 	}
 }
 
@@ -131,130 +129,12 @@ CHI_south_china_sea_category = {
 	allowed = { original_tag = CHI }
 	icon = GFX_decision_generic_naval
 	priority = 100
-	visible_when_empty = no
 
 	visible = {
 		has_completed_focus = CHI_The_South_China_Sea
 	}
 }
 
-CHI_murree_track_two_diplomacy = {
-	allowed = { original_tag = CHI }
-	icon = GFX_decision_generic_political_actions
-	priority = 100
-	visible_when_empty = no
-
-	visible = {
-		has_country_flag = CHI_murree_process_active
-	}
-}
-
-CHI_subcontinent_diplomacy = {
-	allowed = { original_tag = CHI }
-	icon = GFX_decision_generic_political_actions
-	priority = 100
-	visible_when_empty = no
-}
-
-# Japan branch rework
-CHI_rare_earth_coercion = {
-	allowed = { original_tag = CHI }
-	icon = GFX_decision_generic_industry
-	priority = 100
-	visible_when_empty = no
-
-	visible = {
-		has_completed_focus = CHI_the_rare_earth_lever
-	}
-}
-
-CHI_rcep_negotiation_push = {
-	allowed = { original_tag = CHI }
-	icon = GFX_decision_generic_political_actions
-	priority = 100
-	visible_when_empty = no
-
-	visible = {
-		has_completed_focus = CHI_the_rcep_acceleration
-	}
-}
-
-CHI_self_restraint_signaling = {
-	allowed = { original_tag = CHI }
-	icon = GFX_decision_generic_political_actions
-	priority = 100
-	visible_when_empty = no
-
-	visible = {
-		has_completed_focus = CHI_assuage_japanese_concerns
-	}
-}
-
-CHI_japan_industry_invitation_category = {
-	allowed = { original_tag = CHI }
-	icon = GFX_decision_generic_industry
-	priority = 100
-	visible_when_empty = no
-
-	visible = {
-		has_completed_focus = CHI_assuage_japanese_concerns
-	}
-}
-
-CHI_bilateral_channel_tokyo = {
-	allowed = { original_tag = CHI }
-	icon = GFX_decision_generic_political_actions
-	priority = 100
-	visible_when_empty = no
-
-	visible = {
-		has_completed_focus = CHI_the_quad_wedge_strategy
-	}
-}
-
-CHI_maritime_pressure = {
-	allowed = { original_tag = CHI }
-	icon = GFX_decision_generic_naval
-	priority = 100
-	visible_when_empty = no
-
-	visible = {
-		OR = {
-			has_completed_focus = CHI_the_diaoyu_sovereignty_declaration
-			has_completed_focus = CHI_the_maritime_militia_initiative
-		}
-	}
-}
-
-JAP_rare_earth_response = {
-	allowed = { original_tag = JAP }
-	icon = GFX_decision_generic_industry
-	priority = 100
-	visible_when_empty = no
-
-	visible = {
-		CHI = { has_country_flag = CHI_rare_earth_embargo_active }
-		NOT = { has_country_flag = JAP_rare_earth_resilient }
-	}
-}
-
-JAP_senkaku_response = {
-	allowed = { original_tag = JAP }
-	icon = GFX_decision_generic_naval
-	priority = 100
-	visible_when_empty = no
-
-	visible = {
-		CHI = {
-			OR = {
-				has_country_flag = CHI_paf_militia_toggle_active
-				has_country_flag = senkaku_back_channel_open
-			}
-		}
-	}
-}
-
-# Belt and Road Initiative
 CHI_BRI_management = {
 	allowed = { original_tag = CHI }
 	icon = GFX_decision_generic_industry
@@ -267,13 +147,12 @@ CHI_BRI_management = {
 	}
 }
 
-BRI_recipient_actions = {
+CHI_BRI_recipient_actions = {
 	allowed = { NOT = { original_tag = CHI } NOT = { original_tag = IND } }
 	icon = GFX_decision_generic_independence
 	priority = 100
-	visible_when_empty = no
 
 	visible = {
-		bri_eligible_applicant = yes
+		CHI_bri_eligible_applicant = yes
 	}
 }

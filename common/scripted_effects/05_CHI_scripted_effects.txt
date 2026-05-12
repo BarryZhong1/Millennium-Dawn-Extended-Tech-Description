@@ -695,7 +695,7 @@ CHI_sco_demote_observer = {
 
 ### SCO Bilateral Helper ###
 # Call with set_temp_variable = { sco_cohesion_amount = X } before invoking
-sco_bilateral_complete = {
+CHI_sco_bilateral_complete = {
 	# Cohesion increment (with yearly cap for non-CHI)
 	if = {
 		limit = {
@@ -771,7 +771,7 @@ BRI_select_target_state = {
 		limit = { check_variable = { project_type = 1 } }
 		random_owned_controlled_state = {
 			limit = { is_coastal = yes }
-			add_dynamic_modifier = { modifier = bri_state_infrastructure }
+			add_dynamic_modifier = { modifier = CHI_bri_state_infrastructure }
 			set_state_flag = bri_port_built
 		}
 		CHI = { add_to_variable = { CHI_bri_ports_built = 1 } }
@@ -782,7 +782,7 @@ BRI_select_target_state = {
 			limit = {
 				any_neighbor_state = { CONTROLLER = { original_tag = CHI } }
 			}
-			add_dynamic_modifier = { modifier = bri_state_infrastructure }
+			add_dynamic_modifier = { modifier = CHI_bri_state_infrastructure }
 			set_state_flag = bri_railway_built
 		}
 		CHI = { add_to_variable = { CHI_bri_railways_built = 1 } }
@@ -797,7 +797,7 @@ BRI_select_target_state = {
 					has_resources_amount = { resource = chromium amount > 0 }
 				}
 			}
-			add_dynamic_modifier = { modifier = bri_state_infrastructure }
+			add_dynamic_modifier = { modifier = CHI_bri_state_infrastructure }
 			set_state_flag = bri_pipeline_built
 		}
 		CHI = { add_to_variable = { CHI_bri_pipelines_built = 1 } }
@@ -806,7 +806,7 @@ BRI_select_target_state = {
 		limit = { check_variable = { project_type = 4 } }
 		random_owned_controlled_state = {
 			limit = { industrial_complex > 0 }
-			add_dynamic_modifier = { modifier = bri_state_information }
+			add_dynamic_modifier = { modifier = CHI_bri_state_information }
 			set_state_flag = bri_telecom_built
 		}
 		CHI = { add_to_variable = { CHI_bri_telecom_built = 1 } }
@@ -820,7 +820,7 @@ BRI_select_target_state = {
 					infrastructure > 3
 				}
 			}
-			add_dynamic_modifier = { modifier = bri_state_industrial }
+			add_dynamic_modifier = { modifier = CHI_bri_state_industrial }
 			set_state_flag = bri_sez_built
 		}
 		CHI = { add_to_variable = { CHI_bri_industrial_zones = 1 } }
@@ -836,7 +836,7 @@ BRI_select_target_state = {
 					has_resources_amount = { resource = tungsten amount > 0 }
 				}
 			}
-			add_dynamic_modifier = { modifier = bri_state_industrial }
+			add_dynamic_modifier = { modifier = CHI_bri_state_industrial }
 			set_state_flag = bri_mine_built
 		}
 		CHI = { add_to_variable = { CHI_bri_mines_secured = 1 } }
@@ -845,7 +845,7 @@ BRI_select_target_state = {
 		limit = { check_variable = { project_type = 7 } }
 		random_owned_controlled_state = {
 			limit = { industrial_complex > 0 }
-			add_dynamic_modifier = { modifier = bri_state_industrial }
+			add_dynamic_modifier = { modifier = CHI_bri_state_industrial }
 			set_state_flag = bri_powerplant_built
 		}
 		CHI = { add_to_variable = { CHI_bri_powerplants_built = 1 } }
@@ -854,7 +854,7 @@ BRI_select_target_state = {
 		limit = { check_variable = { project_type = 8 } }
 		random_owned_controlled_state = {
 			limit = { is_capital = yes }
-			add_dynamic_modifier = { modifier = bri_state_industrial }
+			add_dynamic_modifier = { modifier = CHI_bri_state_industrial }
 			set_state_flag = bri_prestige_built
 		}
 		CHI = { add_to_variable = { CHI_bri_prestige_projects = 1 } }
@@ -915,27 +915,27 @@ BRI_register_and_recalc_partner = {
 #   resolve_mode = 1 -> asset seizure (strip regular, attach the chinese_controlled variant)
 BRI_resolve_state_change = {
 	if = {
-		limit = { has_dynamic_modifier = { modifier = bri_state_infrastructure } }
-		remove_dynamic_modifier = { modifier = bri_state_infrastructure }
+		limit = { has_dynamic_modifier = { modifier = CHI_bri_state_infrastructure } }
+		remove_dynamic_modifier = { modifier = CHI_bri_state_infrastructure }
 		if = {
 			limit = { check_variable = { resolve_mode = 1 } }
-			add_dynamic_modifier = { modifier = bri_state_infrastructure_controlled }
+			add_dynamic_modifier = { modifier = CHI_bri_state_infrastructure_controlled }
 		}
 	}
 	else_if = {
-		limit = { has_dynamic_modifier = { modifier = bri_state_industrial } }
-		remove_dynamic_modifier = { modifier = bri_state_industrial }
+		limit = { has_dynamic_modifier = { modifier = CHI_bri_state_industrial } }
+		remove_dynamic_modifier = { modifier = CHI_bri_state_industrial }
 		if = {
 			limit = { check_variable = { resolve_mode = 1 } }
-			add_dynamic_modifier = { modifier = bri_state_industrial_controlled }
+			add_dynamic_modifier = { modifier = CHI_bri_state_industrial_controlled }
 		}
 	}
 	else_if = {
-		limit = { has_dynamic_modifier = { modifier = bri_state_information } }
-		remove_dynamic_modifier = { modifier = bri_state_information }
+		limit = { has_dynamic_modifier = { modifier = CHI_bri_state_information } }
+		remove_dynamic_modifier = { modifier = CHI_bri_state_information }
 		if = {
 			limit = { check_variable = { resolve_mode = 1 } }
-			add_dynamic_modifier = { modifier = bri_state_information_controlled }
+			add_dynamic_modifier = { modifier = CHI_bri_state_information_controlled }
 		}
 	}
 }
@@ -962,8 +962,8 @@ BRI_grant_focac_project = {
 # project_type and application_terms (1=concessional, 2=commercial, 3=predatory) are set by caller.
 # Stamps recipient cooldowns and schedules the project completion event on CHI.
 BRI_handle_application = {
-	set_variable = { bri_active_application = 0 }
-	set_variable = { bri_application_cooldown = 540 }
+	set_variable = { CHI_bri_active_application = 0 }
+	set_variable = { CHI_bri_application_cooldown = 540 }
 	CHI = {
 		country_event = { id = chi_bri.11 days = 730 random = 365 }
 		add_to_variable = { CHI_bri_active_projects = 1 }
@@ -981,13 +981,13 @@ CHI_BRI_monthly_tick = {
 	add_to_variable = { CHI_bri_treasury = CHI_bri_monthly_returns }
 
 	every_country = {
-		limit = { check_variable = { bri_application_cooldown > 0 } }
-		subtract_from_variable = { bri_application_cooldown = 1 }
+		limit = { check_variable = { CHI_bri_application_cooldown > 0 } }
+		subtract_from_variable = { CHI_bri_application_cooldown = 1 }
 	}
 
 	clear_array = global.bri_eligible_countries
 	every_country = {
-		limit = { bri_eligible_applicant = yes }
+		limit = { CHI_bri_eligible_applicant = yes }
 		add_to_array = { array = global.bri_eligible_countries value = THIS.id }
 	}
 

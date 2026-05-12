@@ -311,7 +311,7 @@ CHI_sco_category = {
 				days = 365
 			}
 			set_temp_variable = { sco_cohesion_amount = 0.1 }
-			sco_bilateral_complete = yes
+			CHI_sco_bilateral_complete = yes
 		}
 
 		ai_will_do = {
@@ -355,7 +355,7 @@ CHI_sco_category = {
 			add_stability = 0.01
 			FROM = { add_stability = 0.01 }
 			set_temp_variable = { sco_cohesion_amount = 0.2 }
-			sco_bilateral_complete = yes
+			CHI_sco_bilateral_complete = yes
 		}
 
 		ai_will_do = {
@@ -403,7 +403,7 @@ CHI_sco_category = {
 				days = 180
 			}
 			set_temp_variable = { sco_cohesion_amount = 0.1 }
-			sco_bilateral_complete = yes
+			CHI_sco_bilateral_complete = yes
 		}
 
 		ai_will_do = {
@@ -453,7 +453,7 @@ CHI_sco_category = {
 				days = 365
 			}
 			set_temp_variable = { sco_cohesion_amount = 0.2 }
-			sco_bilateral_complete = yes
+			CHI_sco_bilateral_complete = yes
 		}
 
 		ai_will_do = {
@@ -507,7 +507,7 @@ CHI_sco_category = {
 			add_stability = 0.01
 			FROM = { add_stability = 0.01 }
 			set_temp_variable = { sco_cohesion_amount = 0.3 }
-			sco_bilateral_complete = yes
+			CHI_sco_bilateral_complete = yes
 		}
 
 		ai_will_do = {
@@ -1787,8 +1787,8 @@ CHI_sco_category = {
 }
 
 
-arunachal_war_decisions_category = {
-	prepare_army_training_arunachal = {
+CHI_subcontinent_strategy = {
+	CHI_arunachal_prepare_army_training = {
 		available = {
 			has_war = no
 			has_equipment = { infantry_weapons_type > 30 }
@@ -1804,9 +1804,9 @@ arunachal_war_decisions_category = {
 		}
 
 		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision prepare_army_training_arunachal"
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_arunachal_prepare_army_training"
 			add_command_power = -20
-			custom_effect_tooltip = arunachal_increase_readiness_TT
+			custom_effect_tooltip = CHI_arunachal_increase_readiness_TT
 
 			add_equipment_to_stockpile = {
 				type = infantry_weapons_type
@@ -1819,13 +1819,13 @@ arunachal_war_decisions_category = {
 
 			hidden_effect = {
 				random_list = {
-					10 = { add_to_variable = { THIS.arunachal_readiness = 5 } }
-					10 = { add_to_variable = { THIS.arunachal_readiness = 10 } }
-					10 = { add_to_variable = { THIS.arunachal_readiness = 20 } }
+					10 = { add_to_variable = { THIS.CHI_arunachal_readiness = 5 } }
+					10 = { add_to_variable = { THIS.CHI_arunachal_readiness = 10 } }
+					10 = { add_to_variable = { THIS.CHI_arunachal_readiness = 20 } }
 				}
 
 				clamp_variable = {
-					var = THIS.arunachal_readiness
+					var = THIS.CHI_arunachal_readiness
 					min = 0
 					max = 100
 				}
@@ -1846,12 +1846,12 @@ arunachal_war_decisions_category = {
 			}
 			modifier = {
 				factor = 0
-				check_variable = { THIS.arunachal_readiness > 80 }
+				check_variable = { THIS.CHI_arunachal_readiness > 80 }
 			}
 		}
 	}
 
-	prepare_mech_army_training_arunachal = {
+	CHI_arunachal_prepare_mech_training = {
 		available = {
 			has_war = no
 			has_equipment = { medium_tank_amphibious_chassis > 5 }
@@ -1867,9 +1867,9 @@ arunachal_war_decisions_category = {
 		}
 
 		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision prepare_mech_army_training_arunachal"
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_arunachal_prepare_mech_training"
 			add_command_power = -20
-			custom_effect_tooltip = arunachal_increase_readiness_TT
+			custom_effect_tooltip = CHI_arunachal_increase_readiness_TT
 
 			add_equipment_to_stockpile = {
 				type = medium_tank_amphibious_chassis
@@ -1882,13 +1882,13 @@ arunachal_war_decisions_category = {
 
 			hidden_effect = {
 				random_list = {
-					10 = { add_to_variable = { THIS.arunachal_readiness = 10 } }
-					10 = { add_to_variable = { THIS.arunachal_readiness = 20 } }
-					10 = { add_to_variable = { THIS.arunachal_readiness = 30 } }
+					10 = { add_to_variable = { THIS.CHI_arunachal_readiness = 10 } }
+					10 = { add_to_variable = { THIS.CHI_arunachal_readiness = 20 } }
+					10 = { add_to_variable = { THIS.CHI_arunachal_readiness = 30 } }
 				}
 
 				clamp_variable = {
-					var = THIS.arunachal_readiness
+					var = THIS.CHI_arunachal_readiness
 					min = 0
 					max = 100
 				}
@@ -1909,12 +1909,12 @@ arunachal_war_decisions_category = {
 			}
 			modifier = {
 				factor = 0
-				check_variable = { THIS.arunachal_readiness > 80 }
+				check_variable = { THIS.CHI_arunachal_readiness > 80 }
 			}
 		}
 	}
 
-	prepare_arty_army_training_arunachal = {
+	CHI_arunachal_prepare_arty_training = {
 		available = {
 			has_war = no
 			has_equipment = { artillery_equipment > 5 }
@@ -1929,9 +1929,9 @@ arunachal_war_decisions_category = {
 		}
 
 		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision prepare_arty_army_training_arunachal"
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_arunachal_prepare_arty_training"
 			add_command_power = -20
-			custom_effect_tooltip = arunachal_readiness_TT
+			custom_effect_tooltip = CHI_arunachal_readiness_TT
 
 			add_equipment_to_stockpile = {
 				type = artillery_equipment
@@ -1940,14 +1940,14 @@ arunachal_war_decisions_category = {
 
 			hidden_effect = {
 				random_list = {
-					10 = { add_to_variable = { THIS.arunachal_readiness = 5 } }
-					10 = { add_to_variable = { THIS.arunachal_readiness = 10 } }
-					10 = { add_to_variable = { THIS.arunachal_readiness = 15 } }
+					10 = { add_to_variable = { THIS.CHI_arunachal_readiness = 5 } }
+					10 = { add_to_variable = { THIS.CHI_arunachal_readiness = 10 } }
+					10 = { add_to_variable = { THIS.CHI_arunachal_readiness = 15 } }
 				}
 			}
 
 			clamp_variable = {
-				var = THIS.arunachal_readiness
+				var = THIS.CHI_arunachal_readiness
 				min = 0
 				max = 100
 			}
@@ -1961,12 +1961,12 @@ arunachal_war_decisions_category = {
 			}
 			modifier = {
 				factor = 0
-				check_variable = { THIS.arunachal_readiness > 80 }
+				check_variable = { THIS.CHI_arunachal_readiness > 80 }
 			}
 		}
 	}
 
-	prepare_attack_arunachal = {
+	CHI_arunachal_prepare_attack = {
 		available = {
 			has_war = no
 			NOT = {
@@ -1985,14 +1985,14 @@ arunachal_war_decisions_category = {
 		remove_effect = {
 			add_command_power = -20
 
-			custom_effect_tooltip = arunachal_increase_tension_TT
+			custom_effect_tooltip = CHI_arunachal_increase_tension_TT
 
 			hidden_effect = {
-				log = "[GetDateText]: [Root.GetName]: Decision prepare_attack_arunachal"
+				log = "[GetDateText]: [Root.GetName]: Decision CHI_arunachal_prepare_attack"
 				random_list = {
-					10 = { add_to_variable = { GLOBAL.arunachal_tension = 10 } }
-					10 = { add_to_variable = { GLOBAL.arunachal_tension = 20 } }
-					10 = { add_to_variable = { GLOBAL.arunachal_tension = 25 } }
+					10 = { add_to_variable = { GLOBAL.CHI_arunachal_tension = 10 } }
+					10 = { add_to_variable = { GLOBAL.CHI_arunachal_tension = 20 } }
+					10 = { add_to_variable = { GLOBAL.CHI_arunachal_tension = 25 } }
 				}
 
 				clamp_variable = {
@@ -2017,16 +2017,16 @@ arunachal_war_decisions_category = {
 			}
 			modifier = {
 				factor = 0
-				check_variable = { GLOBAL.arunachal_tension > 80 }
+				check_variable = { GLOBAL.CHI_arunachal_tension > 80 }
 			}
 		}
 	}
 
-	prepare_shelling_arunachal = {
+	CHI_arunachal_prepare_shelling = {
 		available = {
 			has_war = no
 			NOT = {
-				has_decision = prepare_attack_arunachal
+				has_decision = CHI_arunachal_prepare_attack
 			}
 		}
 
@@ -2039,20 +2039,20 @@ arunachal_war_decisions_category = {
 		}
 
 		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision prepare_shelling_arunachal"
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_arunachal_prepare_shelling"
 			add_command_power = -20
 
-			custom_effect_tooltip = arunachal_increase_tension_TT
+			custom_effect_tooltip = CHI_arunachal_increase_tension_TT
 
 			hidden_effect = {
 				random_list = {
-					10 = { add_to_variable = { GLOBAL.arunachal_tension = 10 } }
-					10 = { add_to_variable = { GLOBAL.arunachal_tension = 20 } }
-					10 = { add_to_variable = { GLOBAL.arunachal_tension = 25 } }
+					10 = { add_to_variable = { GLOBAL.CHI_arunachal_tension = 10 } }
+					10 = { add_to_variable = { GLOBAL.CHI_arunachal_tension = 20 } }
+					10 = { add_to_variable = { GLOBAL.CHI_arunachal_tension = 25 } }
 				}
 
 				clamp_variable = {
-					var = GLOBAL.arunachal_tension
+					var = GLOBAL.CHI_arunachal_tension
 					min = 0
 					max = 100
 				}
@@ -2073,12 +2073,12 @@ arunachal_war_decisions_category = {
 			}
 			modifier = {
 				factor = 0
-				check_variable = { GLOBAL.arunachal_tension > 80 }
+				check_variable = { GLOBAL.CHI_arunachal_tension > 80 }
 			}
 		}
 	}
 
-	attack_475_from_589 = {
+	CHI_arunachal_attack_475_from_589 = {
 		days_remove = 10
 		days_re_enable = 100
 		fire_only_once = no
@@ -2095,27 +2095,27 @@ arunachal_war_decisions_category = {
 		}
 
 		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision attack_475_from_589"
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_arunachal_attack_475_from_589"
 			set_country_flag = Attacking_in_Arunachal
 		}
 
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = not_attacking_on_arunachal_TT
+				tooltip = CHI_not_attacking_on_arunachal_TT
 				NOT = { has_country_flag = Attacking_in_Arunachal }
 			}
 			custom_trigger_tooltip = {
-				tooltip = arunachal_tension_TT
-				check_variable = { GLOBAL.arunachal_tension > 80 }
+				tooltip = CHI_arunachal_tension_TT
+				check_variable = { GLOBAL.CHI_arunachal_tension > 80 }
 			}
 			custom_trigger_tooltip = {
-				tooltip = arunachal_readiness_TT
-				check_variable = { arunachal_readiness > 60 }
+				tooltip = CHI_arunachal_readiness_TT
+				check_variable = { CHI_arunachal_readiness > 60 }
 			}
 		}
 
 		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Remove attack_475_from_589"
+			log = "[GetDateText]: [Root.GetName]: Remove CHI_arunachal_attack_475_from_589"
 			if = {
 				limit = {
 					has_border_war_between = {
@@ -2156,7 +2156,7 @@ arunachal_war_decisions_category = {
 		}
 	}
 
-	attack_589_from_475 = {
+	CHI_arunachal_attack_589_from_475 = {
 		days_remove = 10
 		days_re_enable = 100
 		fire_only_once = no
@@ -2173,27 +2173,27 @@ arunachal_war_decisions_category = {
 		}
 
 		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision attack_589_from_475"
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_arunachal_attack_589_from_475"
 			set_country_flag = Attacking_in_Arunachal
 		}
 
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = not_attacking_on_arunachal_TT
+				tooltip = CHI_not_attacking_on_arunachal_TT
 				NOT = { has_country_flag = Attacking_in_Arunachal }
 			}
 			custom_trigger_tooltip = {
-				tooltip = arunachal_tension_TT
-				check_variable = { GLOBAL.arunachal_tension > 80 }
+				tooltip = CHI_arunachal_tension_TT
+				check_variable = { GLOBAL.CHI_arunachal_tension > 80 }
 			}
 			custom_trigger_tooltip = {
-				tooltip = arunachal_readiness_TT
-				check_variable = { arunachal_readiness > 60 }
+				tooltip = CHI_arunachal_readiness_TT
+				check_variable = { CHI_arunachal_readiness > 60 }
 			}
 		}
 
 		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Remove attack_589_from_475"
+			log = "[GetDateText]: [Root.GetName]: Remove CHI_arunachal_attack_589_from_475"
 			if = {
 				limit = {
 					has_border_war_between = {
@@ -2234,7 +2234,7 @@ arunachal_war_decisions_category = {
 		}
 	}
 
-	attack_982_from_589 = {
+	CHI_arunachal_attack_982_from_589 = {
 		days_remove = 10
 		days_re_enable = 100
 		fire_only_once = no
@@ -2251,27 +2251,27 @@ arunachal_war_decisions_category = {
 		}
 
 		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision attack_475_from_589"
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_arunachal_attack_982_from_589"
 			set_country_flag = Attacking_in_Arunachal
 		}
 
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = not_attacking_on_arunachal_TT
+				tooltip = CHI_not_attacking_on_arunachal_TT
 				NOT = { has_country_flag = Attacking_in_Arunachal }
 			}
 			custom_trigger_tooltip = {
-				tooltip = arunachal_tension_TT
-				check_variable = { GLOBAL.arunachal_tension > 80 }
+				tooltip = CHI_arunachal_tension_TT
+				check_variable = { GLOBAL.CHI_arunachal_tension > 80 }
 			}
 			custom_trigger_tooltip = {
-				tooltip = arunachal_readiness_TT
-				check_variable = { arunachal_readiness > 60 }
+				tooltip = CHI_arunachal_readiness_TT
+				check_variable = { CHI_arunachal_readiness > 60 }
 			}
 		}
 
 		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Remove attack_475_from_589"
+			log = "[GetDateText]: [Root.GetName]: Remove CHI_arunachal_attack_982_from_589"
 			if = {
 				limit = {
 					has_border_war_between = {
@@ -2312,7 +2312,7 @@ arunachal_war_decisions_category = {
 		}
 	}
 
-	attack_589_from_982 = {
+	CHI_arunachal_attack_589_from_982 = {
 		days_remove = 10
 		days_re_enable = 100
 		fire_only_once = no
@@ -2329,27 +2329,27 @@ arunachal_war_decisions_category = {
 		}
 
 		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision attack_589_from_982"
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_arunachal_attack_589_from_982"
 			set_country_flag = Attacking_in_Arunachal
 		}
 
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = not_attacking_on_arunachal_TT
+				tooltip = CHI_not_attacking_on_arunachal_TT
 				NOT = { has_country_flag = Attacking_in_Arunachal }
 			}
 			custom_trigger_tooltip = {
-				tooltip = arunachal_tension_TT
-				check_variable = { GLOBAL.arunachal_tension > 80 }
+				tooltip = CHI_arunachal_tension_TT
+				check_variable = { GLOBAL.CHI_arunachal_tension > 80 }
 			}
 			custom_trigger_tooltip = {
-				tooltip = arunachal_readiness_TT
-				check_variable = { arunachal_readiness > 60 }
+				tooltip = CHI_arunachal_readiness_TT
+				check_variable = { CHI_arunachal_readiness > 60 }
 			}
 		}
 
 		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Remove attack_589_from_982"
+			log = "[GetDateText]: [Root.GetName]: Remove CHI_arunachal_attack_589_from_982"
 			if = {
 				limit = {
 					has_border_war_between = {
@@ -2390,7 +2390,7 @@ arunachal_war_decisions_category = {
 		}
 	}
 
-	grab_475 = {
+	CHI_arunachal_grab_475 = {
 		days_remove = 30
 		days_re_enable = 100
 		fire_only_once = no
@@ -2407,18 +2407,18 @@ arunachal_war_decisions_category = {
 
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = more_than_80_arunachal_progress_TT
-				check_variable = { THIS.Arunachal_war_progress > 79 }
+				tooltip = CHI_more_than_80_arunachal_progress_TT
+				check_variable = { THIS.CHI_arunachal_war_progress > 79 }
 			}
 		}
 
 		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision grab_475"
-			subtract_from_variable = { THIS.Arunachal_war_progress = 80 }
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_arunachal_grab_475"
+			subtract_from_variable = { THIS.CHI_arunachal_war_progress = 80 }
 		}
 
 		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Remove grab_475"
+			log = "[GetDateText]: [Root.GetName]: Remove CHI_arunachal_grab_475"
 			transfer_state = 475
 			if = {
 				limit = { tag = RAJ }
@@ -2432,7 +2432,7 @@ arunachal_war_decisions_category = {
 		ai_will_do = { factor = 10 }
 	}
 
-	grab_589 = {
+	CHI_arunachal_grab_589 = {
 		days_remove = 30
 		days_re_enable = 100
 		fire_only_once = no
@@ -2449,18 +2449,18 @@ arunachal_war_decisions_category = {
 
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = more_than_80_arunachal_progress_TT
-				check_variable = { THIS.Arunachal_war_progress > 79 }
+				tooltip = CHI_more_than_80_arunachal_progress_TT
+				check_variable = { THIS.CHI_arunachal_war_progress > 79 }
 			}
 		}
 
 		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision grab_589"
-			subtract_from_variable = { THIS.Arunachal_war_progress = 80 }
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_arunachal_grab_589"
+			subtract_from_variable = { THIS.CHI_arunachal_war_progress = 80 }
 		}
 
 		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Remove grab_589"
+			log = "[GetDateText]: [Root.GetName]: Remove CHI_arunachal_grab_589"
 			transfer_state = 589
 			if = {
 				limit = { tag = RAJ }
@@ -2474,7 +2474,7 @@ arunachal_war_decisions_category = {
 		ai_will_do = { factor = 10 }
 	}
 
-	grab_982 = {
+	CHI_arunachal_grab_982 = {
 		days_remove = 30
 		days_re_enable = 100
 		fire_only_once = no
@@ -2491,18 +2491,18 @@ arunachal_war_decisions_category = {
 
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = more_than_80_arunachal_progress_TT
-				check_variable = { THIS.Arunachal_war_progress > 79 }
+				tooltip = CHI_more_than_80_arunachal_progress_TT
+				check_variable = { THIS.CHI_arunachal_war_progress > 79 }
 			}
 		}
 
 		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision grab_982"
-			subtract_from_variable = { THIS.Arunachal_war_progress = 80 }
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_arunachal_grab_982"
+			subtract_from_variable = { THIS.CHI_arunachal_war_progress = 80 }
 		}
 
 		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Remove grab_982"
+			log = "[GetDateText]: [Root.GetName]: Remove CHI_arunachal_grab_982"
 			transfer_state = 982
 			if = {
 				limit = { tag = RAJ }
@@ -2516,25 +2516,25 @@ arunachal_war_decisions_category = {
 		ai_will_do = { factor = 10 }
 	}
 
-	extort_xp_arunachal = {
+	CHI_arunachal_extort_xp = {
 		days_remove = 30
 		days_re_enable = 100
 		fire_only_once = no
 
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = more_than_50_arunachal_progress_TT
-				check_variable = { THIS.Arunachal_war_progress > 49 }
+				tooltip = CHI_more_than_50_arunachal_progress_TT
+				check_variable = { THIS.CHI_arunachal_war_progress > 49 }
 			}
 		}
 
 		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision extort_xp_arunachal"
-			subtract_from_variable = { THIS.Arunachal_war_progress = 50 }
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_arunachal_extort_xp"
+			subtract_from_variable = { THIS.CHI_arunachal_war_progress = 50 }
 		}
 
 		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Remove decision extort_xp_arunachal"
+			log = "[GetDateText]: [Root.GetName]: Remove decision CHI_arunachal_extort_xp"
 			army_experience = 30
 		}
 
@@ -5684,7 +5684,7 @@ CHI_south_china_sea_category = {
 
 ### LAC De-escalation ###
 
-CHI_subcontinent_diplomacy = {
+CHI_subcontinent_strategy = {
 
 	CHI_de_escalate_at_LAC = {
 		icon = GFX_decision_generic_political_actions
@@ -5749,7 +5749,7 @@ CHI_subcontinent_diplomacy = {
 
 ### Indian Subcontinent rework - String of Pearls, Iron Brothers, Nepal backing, RAJ exercises ###
 
-CHI_subcontinent_diplomacy = {
+CHI_subcontinent_strategy = {
 
 	CHI_seek_basing_BAN = {
 		icon = GFX_decision_generic_naval
@@ -6005,7 +6005,7 @@ CHI_subcontinent_diplomacy = {
 }
 
 # Japan branch rework
-CHI_rare_earth_coercion = {
+CHI_japan_strategy = {
 
 	CHI_activate_rare_earth_embargo = {
 		icon = GFX_decision_generic_industry
@@ -6020,7 +6020,7 @@ CHI_rare_earth_coercion = {
 		available = {
 			country_exists = JAP
 			NOT = { has_war_with = JAP }
-			NOT = { JAP = { has_country_flag = JAP_rare_earth_resilient } }
+			NOT = { JAP = { has_country_flag = CHI_jap_rare_earth_resilient } }
 		}
 
 		cost = 100
@@ -6046,7 +6046,7 @@ CHI_rare_earth_coercion = {
 			}
 			modifier = {
 				factor = 0
-				JAP = { has_country_flag = JAP_rare_earth_resilient }
+				JAP = { has_country_flag = CHI_jap_rare_earth_resilient }
 			}
 		}
 	}
@@ -6082,7 +6082,7 @@ CHI_rare_earth_coercion = {
 			}
 			modifier = {
 				add = 3
-				JAP = { has_country_flag = JAP_rare_earth_resilient }
+				JAP = { has_country_flag = CHI_jap_rare_earth_resilient }
 			}
 			modifier = {
 				add = 3
@@ -6092,7 +6092,7 @@ CHI_rare_earth_coercion = {
 	}
 }
 
-CHI_maritime_pressure = {
+CHI_japan_strategy = {
 
 	CHI_patrol_diaoyu_fishing_grounds = {
 		icon = GFX_decision_generic_naval
@@ -6199,16 +6199,16 @@ CHI_maritime_pressure = {
 	}
 }
 
-JAP_rare_earth_response = {
+CHI_japan_strategy = {
 
-	JAP_capitulate_to_chinese_demands = {
+	CHI_jap_capitulate_to_demands = {
 		icon = GFX_decision_generic_political_actions
 
 		allowed = { original_tag = JAP }
 
 		visible = {
 			CHI = { has_country_flag = CHI_rare_earth_embargo_active }
-			NOT = { has_country_flag = JAP_rare_earth_resilient }
+			NOT = { has_country_flag = CHI_jap_rare_earth_resilient }
 		}
 
 		available = {
@@ -6218,7 +6218,7 @@ JAP_rare_earth_response = {
 		cost = 200
 
 		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision JAP_capitulate_to_chinese_demands executed"
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_jap_capitulate_to_demands executed"
 			set_country_flag = JAP_rare_earth_capitulated
 			capital_scope = {
 				remove_dynamic_modifier = { modifier = CHI_rare_earth_embargoed }
@@ -6235,7 +6235,7 @@ JAP_rare_earth_response = {
 			base = 1
 			modifier = {
 				factor = 0
-				has_country_flag = JAP_rare_earth_resilient
+				has_country_flag = CHI_jap_rare_earth_resilient
 			}
 			modifier = {
 				factor = 2
@@ -6244,14 +6244,14 @@ JAP_rare_earth_response = {
 		}
 	}
 
-	JAP_diversify_rare_earth_supply = {
+	CHI_jap_diversify_rare_earth = {
 		icon = GFX_decision_generic_industry
 
 		allowed = { original_tag = JAP }
 
 		visible = {
 			CHI = { has_country_flag = CHI_rare_earth_embargo_active }
-			NOT = { has_country_flag = JAP_rare_earth_resilient }
+			NOT = { has_country_flag = CHI_jap_rare_earth_resilient }
 		}
 
 		available = {
@@ -6269,13 +6269,13 @@ JAP_rare_earth_response = {
 		}
 
 		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision JAP_diversify_rare_earth_supply started"
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_jap_diversify_rare_earth started"
 			add_timed_idea = { idea = JAP_rare_earth_diversification days = 365 }
 		}
 
 		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision JAP_diversify_rare_earth_supply completed"
-			set_country_flag = JAP_rare_earth_resilient
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_jap_diversify_rare_earth completed"
+			set_country_flag = CHI_jap_rare_earth_resilient
 			capital_scope = {
 				remove_dynamic_modifier = { modifier = CHI_rare_earth_embargoed }
 			}
@@ -6292,9 +6292,9 @@ JAP_rare_earth_response = {
 	}
 }
 
-JAP_senkaku_response = {
+CHI_japan_strategy = {
 
-	JAP_reinforce_coast_guard = {
+	CHI_jap_reinforce_coast_guard = {
 		icon = GFX_decision_generic_naval
 
 		allowed = { original_tag = JAP }
@@ -6311,7 +6311,7 @@ JAP_senkaku_response = {
 		days_re_enable = 90
 
 		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision JAP_reinforce_coast_guard executed"
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_jap_reinforce_coast_guard executed"
 			navy_experience = 5
 			CHI = {
 				add_to_variable = { senkaku_pressure = 1 tooltip = senkaku_pressure_tt }
@@ -6328,13 +6328,13 @@ JAP_senkaku_response = {
 		}
 	}
 
-	JAP_open_back_channel_talks = {
+	CHI_jap_open_back_channel = {
 		icon = GFX_decision_generic_political_actions
 
 		allowed = { original_tag = JAP }
 
 		visible = {
-			CHI = { has_country_flag = senkaku_back_channel_open }
+			CHI = { has_country_flag = CHI_senkaku_back_channel_open }
 		}
 
 		available = {
@@ -6345,7 +6345,7 @@ JAP_senkaku_response = {
 		days_re_enable = 180
 
 		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision JAP_open_back_channel_talks executed"
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_jap_open_back_channel executed"
 			CHI = {
 				add_to_variable = { senkaku_pressure = -15 tooltip = senkaku_pressure_tt }
 				clamp_variable = { var = senkaku_pressure min = 0 max = 100 }
@@ -6368,7 +6368,7 @@ JAP_senkaku_response = {
 	}
 }
 
-CHI_rcep_negotiation_push = {
+CHI_japan_strategy = {
 
 	CHI_push_rcep_signing = {
 		icon = GFX_decision_generic_political_actions
@@ -6401,7 +6401,7 @@ CHI_rcep_negotiation_push = {
 	}
 }
 
-CHI_self_restraint_signaling = {
+CHI_japan_strategy = {
 
 	CHI_cancel_east_china_sea_exercise = {
 		icon = GFX_decision_generic_political_actions
@@ -6438,7 +6438,7 @@ CHI_self_restraint_signaling = {
 	}
 }
 
-CHI_bilateral_channel_tokyo = {
+CHI_japan_strategy = {
 
 	CHI_convene_bilateral_channel = {
 		icon = GFX_decision_generic_political_actions
@@ -6472,7 +6472,7 @@ CHI_bilateral_channel_tokyo = {
 	}
 }
 
-CHI_japan_industry_invitation_category = {
+CHI_japan_strategy = {
 
 	CHI_invite_JAP_mitsubishi_aerospace = {
 		icon = GFX_decision_generic_industry
@@ -7396,7 +7396,7 @@ CHI_BRI_management = {
 	}
 }
 
-BRI_recipient_actions = {
+CHI_BRI_recipient_actions = {
 
 	BRI_apply_for_port_project = {
 		icon = GFX_decision_generic_naval
@@ -7416,8 +7416,8 @@ BRI_recipient_actions = {
 		days_re_enable = 540
 
 		complete_effect = {
-			set_variable = { bri_active_application = 1 }
-			set_variable = { bri_application_cooldown = 540 }
+			set_variable = { CHI_bri_active_application = 1 }
+			set_variable = { CHI_bri_application_cooldown = 540 }
 			set_variable = { project_type = 1 }
 			CHI = {
 				set_temp_variable = { applicant_id = PREV.id }
@@ -7468,8 +7468,8 @@ BRI_recipient_actions = {
 		days_re_enable = 540
 
 		complete_effect = {
-			set_variable = { bri_active_application = 1 }
-			set_variable = { bri_application_cooldown = 540 }
+			set_variable = { CHI_bri_active_application = 1 }
+			set_variable = { CHI_bri_application_cooldown = 540 }
 			set_variable = { project_type = 2 }
 			CHI = {
 				set_temp_variable = { applicant_id = PREV.id }
@@ -7509,8 +7509,8 @@ BRI_recipient_actions = {
 		days_re_enable = 540
 
 		complete_effect = {
-			set_variable = { bri_active_application = 1 }
-			set_variable = { bri_application_cooldown = 540 }
+			set_variable = { CHI_bri_active_application = 1 }
+			set_variable = { CHI_bri_application_cooldown = 540 }
 			set_variable = { project_type = 3 }
 			CHI = {
 				set_temp_variable = { applicant_id = PREV.id }
@@ -7556,8 +7556,8 @@ BRI_recipient_actions = {
 		days_re_enable = 540
 
 		complete_effect = {
-			set_variable = { bri_active_application = 1 }
-			set_variable = { bri_application_cooldown = 540 }
+			set_variable = { CHI_bri_active_application = 1 }
+			set_variable = { CHI_bri_application_cooldown = 540 }
 			set_variable = { project_type = 4 }
 			CHI = {
 				set_temp_variable = { applicant_id = PREV.id }
@@ -7592,8 +7592,8 @@ BRI_recipient_actions = {
 		days_re_enable = 540
 
 		complete_effect = {
-			set_variable = { bri_active_application = 1 }
-			set_variable = { bri_application_cooldown = 540 }
+			set_variable = { CHI_bri_active_application = 1 }
+			set_variable = { CHI_bri_application_cooldown = 540 }
 			set_variable = { project_type = 5 }
 			CHI = {
 				set_temp_variable = { applicant_id = PREV.id }
@@ -7635,8 +7635,8 @@ BRI_recipient_actions = {
 		days_re_enable = 540
 
 		complete_effect = {
-			set_variable = { bri_active_application = 1 }
-			set_variable = { bri_application_cooldown = 540 }
+			set_variable = { CHI_bri_active_application = 1 }
+			set_variable = { CHI_bri_application_cooldown = 540 }
 			set_variable = { project_type = 6 }
 			CHI = {
 				set_temp_variable = { applicant_id = PREV.id }
@@ -7670,8 +7670,8 @@ BRI_recipient_actions = {
 		days_re_enable = 540
 
 		complete_effect = {
-			set_variable = { bri_active_application = 1 }
-			set_variable = { bri_application_cooldown = 540 }
+			set_variable = { CHI_bri_active_application = 1 }
+			set_variable = { CHI_bri_application_cooldown = 540 }
 			set_variable = { project_type = 7 }
 			CHI = {
 				set_temp_variable = { applicant_id = PREV.id }
@@ -7706,8 +7706,8 @@ BRI_recipient_actions = {
 		days_re_enable = 540
 
 		complete_effect = {
-			set_variable = { bri_active_application = 1 }
-			set_variable = { bri_application_cooldown = 540 }
+			set_variable = { CHI_bri_active_application = 1 }
+			set_variable = { CHI_bri_application_cooldown = 540 }
 			set_variable = { project_type = 8 }
 			CHI = {
 				set_temp_variable = { applicant_id = PREV.id }

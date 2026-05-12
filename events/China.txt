@@ -7208,7 +7208,7 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: CHI_foreign.212.b executed"
 		add_opinion_modifier = { target = CHI modifier = senkaku_back_channel }
 		CHI = {
-			set_country_flag = senkaku_back_channel_open
+			set_country_flag = CHI_senkaku_back_channel_open
 			add_opinion_modifier = { target = JAP modifier = senkaku_back_channel }
 			add_to_variable = { var = senkaku_pressure value = -10 tooltip = senkaku_pressure_tt }
 			clamp_variable = { var = senkaku_pressure min = 0 max = 100 }
@@ -8451,7 +8451,7 @@ country_event = {
 		name = chi_bri.10.d
 		log = "[GetDateText]: [This.GetName]: chi_bri.10.d executed"
 		FROM = {
-			set_variable = { bri_active_application = 0 }
+			set_variable = { CHI_bri_active_application = 0 }
 		}
 		ai_chance = {
 			base = 2
@@ -8590,7 +8590,7 @@ country_event = {
 		}
 		random_owned_state = {
 			limit = {
-				has_dynamic_modifier = { modifier = bri_state_infrastructure }
+				has_dynamic_modifier = { modifier = CHI_bri_state_infrastructure }
 			}
 			set_temp_variable = { resolve_mode = 1 }
 			BRI_resolve_state_change = yes
@@ -8710,7 +8710,7 @@ country_event = {
 		}
 		FROM = {
 			220 = {
-				add_dynamic_modifier = { modifier = bri_state_infrastructure_controlled }
+				add_dynamic_modifier = { modifier = CHI_bri_state_infrastructure_controlled }
 				set_state_flag = bri_port_220
 			}
 		}
@@ -8729,7 +8729,7 @@ country_event = {
 		}
 		FROM = {
 			419 = {
-				add_dynamic_modifier = { modifier = bri_state_industrial_controlled }
+				add_dynamic_modifier = { modifier = CHI_bri_state_industrial_controlled }
 				set_state_flag = bri_sez_419
 			}
 		}
@@ -8747,7 +8747,7 @@ country_event = {
 		}
 		FROM = {
 			250 = {
-				add_dynamic_modifier = { modifier = bri_state_infrastructure_controlled }
+				add_dynamic_modifier = { modifier = CHI_bri_state_infrastructure_controlled }
 				set_state_flag = bri_railway_250
 			}
 		}
@@ -8765,7 +8765,7 @@ country_event = {
 		}
 		FROM = {
 			413 = {
-				add_dynamic_modifier = { modifier = bri_state_infrastructure_controlled }
+				add_dynamic_modifier = { modifier = CHI_bri_state_infrastructure_controlled }
 				set_state_flag = bri_port_413
 			}
 		}
@@ -8784,7 +8784,7 @@ country_event = {
 		}
 		FROM = {
 			414 = {
-				add_dynamic_modifier = { modifier = bri_state_infrastructure_controlled }
+				add_dynamic_modifier = { modifier = CHI_bri_state_infrastructure_controlled }
 				set_state_flag = bri_port_414
 			}
 		}
@@ -8803,7 +8803,7 @@ country_event = {
 		FROM = {
 			random_owned_state = {
 				limit = { is_coastal = yes }
-				add_dynamic_modifier = { modifier = bri_state_infrastructure_controlled }
+				add_dynamic_modifier = { modifier = CHI_bri_state_infrastructure_controlled }
 				set_state_flag = bri_port_sgr
 			}
 		}
@@ -8826,7 +8826,7 @@ country_event = {
 		FROM = {
 			random_owned_state = {
 				limit = { is_coastal = yes }
-				add_dynamic_modifier = { modifier = bri_state_infrastructure_controlled }
+				add_dynamic_modifier = { modifier = CHI_bri_state_infrastructure_controlled }
 				set_state_flag = bri_port_mega
 			}
 		}
@@ -8855,11 +8855,11 @@ country_event = {
 		413 = {
 			if = {
 				limit = {
-					has_dynamic_modifier = { modifier = bri_state_infrastructure }
+					has_dynamic_modifier = { modifier = CHI_bri_state_infrastructure }
 				}
-				remove_dynamic_modifier = { modifier = bri_state_infrastructure }
+				remove_dynamic_modifier = { modifier = CHI_bri_state_infrastructure }
 			}
-			add_dynamic_modifier = { modifier = bri_state_infrastructure_controlled }
+			add_dynamic_modifier = { modifier = CHI_bri_state_infrastructure_controlled }
 			set_state_flag = bri_port_413
 		}
 		set_country_flag = bri_default_THIS
@@ -9268,20 +9268,56 @@ country_event = {
 	option = {
 		name = chi_bri.70.a
 		log = "[GetDateText]: [This.GetName]: chi_bri.70.a executed"
-		add_ideas = chinese_african_century
 		add_political_power = 100
 		add_to_variable = { CHI_bri_global_presence = 30 }
 		add_to_variable = { CHI_bri_africa_engagement = 10 }
-		every_country = {
-			limit = {
-				has_country_flag = bri_partner_CHI
-				capital_scope = { is_on_continent = africa }
+		if = {
+			limit = { has_completed_focus = CHI_Wolf_Warrior_Diplomacy }
+			every_country = {
+				limit = {
+					has_country_flag = bri_partner_CHI
+					capital_scope = { is_on_continent = africa }
+				}
+				remove_dynamic_modifier = { modifier = bri_partner_tier_1 }
+				add_dynamic_modifier = { modifier = bri_partner_tier_2 }
+				add_opinion_modifier = {
+					target = CHI
+					modifier = large_commercial_relations
+				}
 			}
-			remove_dynamic_modifier = { modifier = bri_partner_tier_1 }
-			add_dynamic_modifier = { modifier = bri_partner_tier_2 }
-			add_opinion_modifier = {
-				target = CHI
-				modifier = large_commercial_relations
+		}
+		else_if = {
+			limit = { has_completed_focus = CHI_Bide_Your_Time }
+			every_country = {
+				limit = {
+					has_country_flag = bri_partner_CHI
+					capital_scope = { is_on_continent = africa }
+				}
+				add_opinion_modifier = {
+					target = CHI
+					modifier = large_commercial_relations
+				}
+			}
+			every_country = {
+				limit = { has_opinion_modifier = focac_member }
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = diplomatic_charm
+				}
+			}
+		}
+		else = {
+			every_country = {
+				limit = {
+					has_country_flag = bri_partner_CHI
+					capital_scope = { is_on_continent = africa }
+				}
+				remove_dynamic_modifier = { modifier = bri_partner_tier_1 }
+				add_dynamic_modifier = { modifier = bri_partner_tier_2 }
+				add_opinion_modifier = {
+					target = CHI
+					modifier = large_commercial_relations
+				}
 			}
 		}
 		country_event = { id = chi_bri.71 days = 7 }
@@ -10353,6 +10389,69 @@ country_event = {
 		hidden_effect = {
 			country_event = { id = chi_bri.95 days = 30 }
 		}
+		ai_chance = { base = 1 }
+	}
+}
+
+# chi_bri.96 -- Bide endgame news event: The Centre Holds (fired by CHI_Tianxia_Realized focus)
+news_event = {
+	id = chi_bri.96
+	title = chi_bri.96.t
+	desc = chi_bri.96.d
+	picture = GFX_news_event_generic_sign_treaty1
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		original_tag = CHI
+	}
+
+	option = {
+		name = chi_bri.96.a
+		trigger = { original_tag = CHI }
+		log = "[GetDateText]: [This.GetName]: chi_bri.96.a executed"
+		ai_chance = { base = 1 }
+	}
+
+	option = {
+		name = chi_bri.96.b
+		trigger = {
+			NOT = { original_tag = CHI }
+			capital_scope = { is_on_continent = asia }
+		}
+		ai_chance = { base = 1 }
+	}
+
+	option = {
+		name = chi_bri.96.c
+		trigger = {
+			NOT = { original_tag = CHI }
+			NOT = { capital_scope = { is_on_continent = asia } }
+		}
+		ai_chance = { base = 1 }
+	}
+}
+
+# chi_bri.97 -- CPEC focus intermediary: re-route chi_bri.15 so CHI is scope and PAK is FROM
+# Fired in PAK scope by CHI_China_Pakistan_Economic_Corridor focus; immediately fires chi_bri.15
+# on CHI (ROOT of the event chain), making CHI the event scope and PAK the FROM scope as expected.
+country_event = {
+	id = chi_bri.97
+	title = chi_bri.97.t
+	desc = chi_bri.97.d
+	is_triggered_only = yes
+	hidden = yes
+
+	trigger = {
+		original_tag = PAK
+	}
+
+	immediate = {
+		ROOT = { country_event = { id = chi_bri.15 days = 1 } }
+	}
+
+	option = {
+		name = chi_bri.97.a
 		ai_chance = { base = 1 }
 	}
 }

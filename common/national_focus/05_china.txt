@@ -31,7 +31,7 @@ focus_tree = {
 
 	## Inlay Focusses
 	inlay_window = {
-		id = chi_national_comittee_inlay_window
+		id = CHI_national_committee_inlay_window
 		position = { x = 200 y = 700 }
 	}
 
@@ -905,6 +905,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_The_Indian_Subcontinent"
 			RAJ = { country_event = { id = sino_indian.33 days = 1 } }
+			unlock_decision_category_tooltip = CHI_subcontinent_strategy
 			effect_tooltip = {
 				RAJ = { add_ideas = CHI_raj_foreign_defense_pressure }
 			}
@@ -1118,8 +1119,8 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_to_variable = { arunachal_tension = 5 tooltip = arunachal_tension_change_tt }
-			add_to_variable = { arunachal_readiness = 15 tooltip = arunachal_readiness_change_tt }
+			add_to_variable = { CHI_arunachal_tension = 5 tooltip = CHI_arunachal_tension_change_tt }
+			add_to_variable = { CHI_arunachal_readiness = 15 tooltip = CHI_arunachal_readiness_change_tt }
 			newline = yes
 			BHU = { add_opinion_modifier = { target = CHI modifier = territorial_integrity_violation } }
 			every_other_country = {
@@ -1833,8 +1834,8 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_Strike_Across_the_Himalayas"
-			activate_decision = attack_982_from_589
-			activate_decision = attack_475_from_589
+			activate_decision = CHI_arunachal_attack_982_from_589
+			activate_decision = CHI_arunachal_attack_475_from_589
 			activate_decision = attack_993_from_589
 		}
 
@@ -2113,6 +2114,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_the_japan_question"
 			JAP = { country_event = { id = sino_indian.33 days = 1 } }
+			unlock_decision_category_tooltip = CHI_japan_strategy
 			effect_tooltip = {
 				JAP = { add_ideas = CHI_raj_foreign_defense_pressure }
 			}
@@ -2546,7 +2548,7 @@ focus_tree = {
 			}
 			newline = yes
 			unlock_decision_tooltip = CHI_cancel_east_china_sea_exercise
-			unlock_decision_category_tooltip = CHI_japan_industry_invitation_category
+			unlock_decision_category_tooltip = CHI_japan_strategy
 			newline = yes
 			add_to_variable = { CHI_chinese_aggression = -2 tooltip = CHI_chinese_aggression_tt }
 			clamp_variable = { var = CHI_chinese_aggression min = -50 max = 50 }
@@ -3829,9 +3831,12 @@ focus_tree = {
 			localization_key = modifies_dynamic_modifier_tt
 			MODIFIER = CHI_diplomacy_modifier
 			}
-			add_to_variable = { CHI_foreign_influence_modifier_diplomacy = 0.10 tooltip = foreign_influence_modifier_tt }
+			add_to_variable = { CHI_foreign_influence_modifier_diplomacy = 0.15 tooltip = foreign_influence_modifier_tt }
 			add_to_variable = { CHI_political_power_factor_diplomacy = 0.05 tooltip = political_power_factor_tt }
-			add_to_variable = { CHI_improve_relations_maintain_cost_factor_diplomacy = 0.10 tooltip = improve_relations_maintain_cost_factor_tt }
+			add_to_variable = { CHI_war_support_factor_diplomacy = 0.05 tooltip = war_support_factor_tt }
+			add_to_variable = { CHI_improve_relations_maintain_cost_factor_diplomacy = 0.30 tooltip = improve_relations_maintain_cost_factor_tt }
+			add_to_variable = { CHI_opinion_gain_monthly_factor_diplomacy = -0.15 tooltip = opinion_gain_monthly_factor_tt }
+			add_to_variable = { CHI_trade_opinion_factor_diplomacy = -0.10 tooltip = trade_opinion_factor_tt }
 			newline = yes
 			every_other_country = {
 				limit = {
@@ -3844,7 +3849,22 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 1
+				date > 2012.1.1
+			}
+			modifier = {
+				add = 2
+				date > 2017.1.1
+			}
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+				date < 2012.1.1
+			}
+		}
 	}
 
 	focus = {
@@ -3886,7 +3906,18 @@ focus_tree = {
 			}
 		}
 
-		ai_will_do = { base = 1 }
+		ai_will_do = {
+			base = 1
+			modifier = {
+				add = 2
+				date < 2012.1.1
+			}
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+				date > 2017.1.1
+			}
+		}
 	}
 
 	focus = {
@@ -4428,6 +4459,63 @@ focus_tree = {
 	}
 
 	focus = {
+		id = CHI_China_Pakistan_Economic_Corridor
+		icon = x
+
+		x = 5
+		y = 1
+		relative_position_id = CHI_Silk_Road_Fund
+
+		cost = 10
+
+		prerequisite = { focus = CHI_Silk_Road_Fund }
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INFLUENCE }
+
+		available = {
+			country_exists = PAK
+			NOT = { has_war_with = PAK }
+			PAK = { has_opinion = { target = ROOT value > -50 } }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_China_Pakistan_Economic_Corridor"
+			if = {
+				limit = { has_completed_focus = CHI_Wolf_Warrior_Diplomacy }
+				set_temp_variable = { treasury_change = -400 }
+				modify_treasury_effect = yes
+				add_to_variable = { CHI_bri_southasia_engagement = 7 }
+				add_to_variable = { CHI_bri_predatory_score = 3 }
+				PAK = { add_opinion_modifier = { target = ROOT modifier = bri_iron_brother_strained } }
+				PAK = { country_event = { id = chi_bri.97 days = 1 } }
+			}
+			else_if = {
+				limit = { has_completed_focus = CHI_Bide_Your_Time }
+				set_temp_variable = { treasury_change = -250 }
+				modify_treasury_effect = yes
+				add_to_variable = { CHI_bri_southasia_engagement = 4 }
+				add_to_variable = { CHI_bri_winwin_score = 3 }
+				PAK = { add_opinion_modifier = { target = ROOT modifier = bri_iron_brother } }
+				PAK = { country_event = { id = chi_bri.97 days = 1 } }
+			}
+			else = {
+				set_temp_variable = { treasury_change = -300 }
+				modify_treasury_effect = yes
+				add_to_variable = { CHI_bri_southasia_engagement = 5 }
+				PAK = { country_event = { id = chi_bri.97 days = 1 } }
+			}
+		}
+
+		ai_will_do = {
+			base = 4
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+		}
+	}
+
+	focus = {
 		id = CHI_Maritime_Silk_Road_Indian_Ocean
 		icon = stage_southasia
 
@@ -4442,28 +4530,84 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_Maritime_Silk_Road_Indian_Ocean"
-			set_temp_variable = { treasury_change = -200 }
-			modify_treasury_effect = yes
-			add_to_variable = { CHI_bri_southasia_engagement = 3 }
-			add_to_variable = { CHI_bri_africa_engagement = 2 }
 			if = {
-				limit = { country_exists = SRI }
-				SRI = { add_opinion_modifier = { target = ROOT modifier = bri_maritime_partner } }
-			}
-			if = {
-				limit = { country_exists = KEN }
-				KEN = { add_opinion_modifier = { target = ROOT modifier = bri_maritime_partner } }
-			}
-			if = {
-				limit = { country_exists = DJI }
-				DJI = {
-					add_opinion_modifier = { target = ROOT modifier = bri_maritime_partner }
-					set_country_flag = CHI_bri_dji_mega_project
+				limit = { has_completed_focus = CHI_Wolf_Warrior_Diplomacy }
+				set_temp_variable = { treasury_change = -250 }
+				modify_treasury_effect = yes
+				add_to_variable = { CHI_bri_southasia_engagement = 4 }
+				add_to_variable = { CHI_bri_africa_engagement = 3 }
+				add_to_variable = { CHI_bri_predatory_score = 3 }
+				if = {
+					limit = { country_exists = SRI }
+					SRI = { add_opinion_modifier = { target = ROOT modifier = bri_strategic_chokepoint } }
+				}
+				if = {
+					limit = { country_exists = KEN }
+					KEN = { add_opinion_modifier = { target = ROOT modifier = bri_maritime_partner } }
+				}
+				if = {
+					limit = { country_exists = DJI }
+					DJI = {
+						add_opinion_modifier = { target = ROOT modifier = bri_strategic_chokepoint }
+						set_country_flag = CHI_bri_dji_mega_project
+					}
+				}
+				if = {
+					limit = { country_exists = BAN }
+					BAN = { add_opinion_modifier = { target = ROOT modifier = bri_maritime_partner } }
 				}
 			}
-			if = {
-				limit = { country_exists = BAN }
-				BAN = { add_opinion_modifier = { target = ROOT modifier = bri_maritime_partner } }
+			else_if = {
+				limit = { has_completed_focus = CHI_Bide_Your_Time }
+				set_temp_variable = { treasury_change = -175 }
+				modify_treasury_effect = yes
+				add_to_variable = { CHI_bri_southasia_engagement = 3 }
+				add_to_variable = { CHI_bri_africa_engagement = 2 }
+				add_to_variable = { CHI_bri_winwin_score = 3 }
+				if = {
+					limit = { country_exists = SRI }
+					SRI = { add_opinion_modifier = { target = ROOT modifier = bri_maritime_partner_concessional } }
+				}
+				if = {
+					limit = { country_exists = KEN }
+					KEN = { add_opinion_modifier = { target = ROOT modifier = bri_maritime_partner_concessional } }
+				}
+				if = {
+					limit = { country_exists = DJI }
+					DJI = {
+						add_opinion_modifier = { target = ROOT modifier = bri_maritime_partner_concessional }
+						set_country_flag = CHI_bri_dji_mega_project
+					}
+				}
+				if = {
+					limit = { country_exists = BAN }
+					BAN = { add_opinion_modifier = { target = ROOT modifier = bri_maritime_partner_concessional } }
+				}
+			}
+			else = {
+				set_temp_variable = { treasury_change = -200 }
+				modify_treasury_effect = yes
+				add_to_variable = { CHI_bri_southasia_engagement = 3 }
+				add_to_variable = { CHI_bri_africa_engagement = 2 }
+				if = {
+					limit = { country_exists = SRI }
+					SRI = { add_opinion_modifier = { target = ROOT modifier = bri_maritime_partner } }
+				}
+				if = {
+					limit = { country_exists = KEN }
+					KEN = { add_opinion_modifier = { target = ROOT modifier = bri_maritime_partner } }
+				}
+				if = {
+					limit = { country_exists = DJI }
+					DJI = {
+						add_opinion_modifier = { target = ROOT modifier = bri_maritime_partner }
+						set_country_flag = CHI_bri_dji_mega_project
+					}
+				}
+				if = {
+					limit = { country_exists = BAN }
+					BAN = { add_opinion_modifier = { target = ROOT modifier = bri_maritime_partner } }
+				}
 			}
 		}
 
@@ -4491,28 +4635,107 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_Central_Asia_Connectivity"
-			set_temp_variable = { treasury_change = -150 }
-			modify_treasury_effect = yes
-			add_to_variable = { CHI_bri_centralasia_engagement = 5 }
 			if = {
-				limit = { country_exists = KAZ }
-				KAZ = { add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner } }
+				limit = { has_completed_focus = CHI_Wolf_Warrior_Diplomacy }
+				set_temp_variable = { treasury_change = -200 }
+				modify_treasury_effect = yes
+				add_to_variable = { CHI_bri_centralasia_engagement = 6 }
+				add_to_variable = { CHI_bri_predatory_score = 2 }
+				if = {
+					limit = { country_exists = KAZ }
+					KAZ = { add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner } }
+				}
+				if = {
+					limit = { country_exists = UZB }
+					UZB = { add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner } }
+				}
+				if = {
+					limit = { country_exists = TJK }
+					TJK = { add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner } }
+				}
+				if = {
+					limit = { country_exists = KYR }
+					KYR = { add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner } }
+				}
+				if = {
+					limit = { country_exists = TRK }
+					TRK = { add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner } }
+				}
+				if = {
+					limit = { country_exists = SOV }
+					SOV = { add_opinion_modifier = { target = ROOT modifier = chinese_backyard_pressure } }
+				}
 			}
-			if = {
-				limit = { country_exists = UZB }
-				UZB = { add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner } }
+			else_if = {
+				limit = { has_completed_focus = CHI_Bide_Your_Time }
+				set_temp_variable = { treasury_change = -125 }
+				modify_treasury_effect = yes
+				add_to_variable = { CHI_bri_centralasia_engagement = 4 }
+				add_to_variable = { CHI_bri_winwin_score = 2 }
+				if = {
+					limit = { country_exists = KAZ }
+					KAZ = {
+						add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner }
+						add_stability = 0.03
+					}
+				}
+				if = {
+					limit = { country_exists = UZB }
+					UZB = {
+						add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner }
+						add_stability = 0.03
+					}
+				}
+				if = {
+					limit = { country_exists = TJK }
+					TJK = {
+						add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner }
+						add_stability = 0.03
+					}
+				}
+				if = {
+					limit = { country_exists = KYR }
+					KYR = {
+						add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner }
+						add_stability = 0.03
+					}
+				}
+				if = {
+					limit = { country_exists = TRK }
+					TRK = {
+						add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner }
+						add_stability = 0.03
+					}
+				}
+				if = {
+					limit = { country_exists = SOV }
+					SOV = { add_opinion_modifier = { target = ROOT modifier = respectful_partnership_centralasia } }
+				}
 			}
-			if = {
-				limit = { country_exists = TJK }
-				TJK = { add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner } }
-			}
-			if = {
-				limit = { country_exists = KYR }
-				KYR = { add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner } }
-			}
-			if = {
-				limit = { country_exists = TRK }
-				TRK = { add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner } }
+			else = {
+				set_temp_variable = { treasury_change = -150 }
+				modify_treasury_effect = yes
+				add_to_variable = { CHI_bri_centralasia_engagement = 5 }
+				if = {
+					limit = { country_exists = KAZ }
+					KAZ = { add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner } }
+				}
+				if = {
+					limit = { country_exists = UZB }
+					UZB = { add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner } }
+				}
+				if = {
+					limit = { country_exists = TJK }
+					TJK = { add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner } }
+				}
+				if = {
+					limit = { country_exists = KYR }
+					KYR = { add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner } }
+				}
+				if = {
+					limit = { country_exists = TRK }
+					TRK = { add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner } }
+				}
 			}
 		}
 
@@ -4540,28 +4763,90 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_Mekong_Riparian_Cooperation"
-			set_temp_variable = { treasury_change = -130 }
-			modify_treasury_effect = yes
-			add_to_variable = { CHI_bri_seasia_engagement = 5 }
 			if = {
-				limit = { country_exists = LAO }
-				LAO = { add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner } }
+				limit = { has_completed_focus = CHI_Wolf_Warrior_Diplomacy }
+				set_temp_variable = { treasury_change = -160 }
+				modify_treasury_effect = yes
+				add_to_variable = { CHI_bri_seasia_engagement = 6 }
+				add_to_variable = { CHI_bri_predatory_score = 2 }
+				if = {
+					limit = { country_exists = LAO }
+					LAO = { add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner } }
+				}
+				if = {
+					limit = { country_exists = CAM }
+					CAM = { add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner } }
+				}
+				if = {
+					limit = { country_exists = BRM }
+					BRM = { add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner } }
+				}
+				if = {
+					limit = { country_exists = SIA }
+					SIA = { add_opinion_modifier = { target = ROOT modifier = mekong_water_pressure } }
+				}
+				if = {
+					limit = { country_exists = VIE }
+					VIE = { add_opinion_modifier = { target = ROOT modifier = mekong_water_pressure } }
+				}
 			}
-			if = {
-				limit = { country_exists = CAM }
-				CAM = { add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner } }
+			else_if = {
+				limit = { has_completed_focus = CHI_Bide_Your_Time }
+				set_temp_variable = { treasury_change = -110 }
+				modify_treasury_effect = yes
+				add_to_variable = { CHI_bri_seasia_engagement = 4 }
+				add_to_variable = { CHI_bri_winwin_score = 3 }
+				if = {
+					limit = { country_exists = LAO }
+					LAO = {
+						add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner }
+						add_stability = 0.03
+					}
+				}
+				if = {
+					limit = { country_exists = CAM }
+					CAM = {
+						add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner }
+						add_stability = 0.03
+					}
+				}
+				if = {
+					limit = { country_exists = BRM }
+					BRM = { add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner } }
+				}
+				if = {
+					limit = { country_exists = SIA }
+					SIA = { add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner } }
+				}
+				if = {
+					limit = { country_exists = VIE }
+					VIE = { add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner } }
+				}
 			}
-			if = {
-				limit = { country_exists = BRM }
-				BRM = { add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner } }
-			}
-			if = {
-				limit = { country_exists = SIA }
-				SIA = { add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner } }
-			}
-			if = {
-				limit = { country_exists = VIE }
-				VIE = { add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner } }
+			else = {
+				set_temp_variable = { treasury_change = -130 }
+				modify_treasury_effect = yes
+				add_to_variable = { CHI_bri_seasia_engagement = 5 }
+				if = {
+					limit = { country_exists = LAO }
+					LAO = { add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner } }
+				}
+				if = {
+					limit = { country_exists = CAM }
+					CAM = { add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner } }
+				}
+				if = {
+					limit = { country_exists = BRM }
+					BRM = { add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner } }
+				}
+				if = {
+					limit = { country_exists = SIA }
+					SIA = { add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner } }
+				}
+				if = {
+					limit = { country_exists = VIE }
+					VIE = { add_opinion_modifier = { target = ROOT modifier = bri_corridor_partner } }
+				}
 			}
 		}
 
@@ -4598,9 +4883,73 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_seventeen_plus_one_mechanism"
-			set_temp_variable = { treasury_change = -100 }
-			modify_treasury_effect = yes
-			add_to_variable = { CHI_bri_europe_engagement = 4 }
+			if = {
+				limit = { has_completed_focus = CHI_Wolf_Warrior_Diplomacy }
+				set_temp_variable = { treasury_change = -130 }
+				modify_treasury_effect = yes
+				add_to_variable = { CHI_bri_europe_engagement = 5 }
+				add_to_variable = { CHI_bri_predatory_score = 2 }
+				if = {
+					limit = { country_exists = HUN }
+					HUN = { add_opinion_modifier = { target = ROOT modifier = bri_17plus1_member } }
+				}
+				if = {
+					limit = { country_exists = SER }
+					SER = { add_opinion_modifier = { target = ROOT modifier = bri_17plus1_member } }
+				}
+				if = {
+					limit = { country_exists = GRE }
+					GRE = { add_opinion_modifier = { target = ROOT modifier = bri_17plus1_member } }
+				}
+				if = {
+					limit = { country_exists = CZE }
+					CZE = { add_opinion_modifier = { target = ROOT modifier = bri_17plus1_strained } }
+				}
+				if = {
+					limit = { country_exists = POL }
+					POL = { add_opinion_modifier = { target = ROOT modifier = bri_17plus1_strained } }
+				}
+				if = {
+					limit = { country_exists = CRO }
+					CRO = { add_opinion_modifier = { target = ROOT modifier = bri_17plus1_strained } }
+				}
+			}
+			else_if = {
+				limit = { has_completed_focus = CHI_Bide_Your_Time }
+				set_temp_variable = { treasury_change = -80 }
+				modify_treasury_effect = yes
+				add_to_variable = { CHI_bri_europe_engagement = 3 }
+				add_to_variable = { CHI_bri_winwin_score = 2 }
+				if = {
+					limit = { country_exists = HUN }
+					HUN = { add_opinion_modifier = { target = ROOT modifier = bri_17plus1_member } }
+				}
+				if = {
+					limit = { country_exists = SER }
+					SER = { add_opinion_modifier = { target = ROOT modifier = bri_17plus1_member } }
+				}
+				if = {
+					limit = { country_exists = GRE }
+					GRE = { add_opinion_modifier = { target = ROOT modifier = bri_17plus1_member } }
+				}
+				if = {
+					limit = { country_exists = CZE }
+					CZE = { add_opinion_modifier = { target = ROOT modifier = bri_17plus1_member } }
+				}
+				if = {
+					limit = { country_exists = POL }
+					POL = { add_opinion_modifier = { target = ROOT modifier = bri_17plus1_member } }
+				}
+				if = {
+					limit = { country_exists = CRO }
+					CRO = { add_opinion_modifier = { target = ROOT modifier = bri_17plus1_member } }
+				}
+			}
+			else = {
+				set_temp_variable = { treasury_change = -100 }
+				modify_treasury_effect = yes
+				add_to_variable = { CHI_bri_europe_engagement = 4 }
+			}
 		}
 
 		ai_will_do = {
@@ -4756,8 +5105,8 @@ focus_tree = {
 				}
 				random_owned_controlled_state = {
 					limit = { industrial_complex > 0 }
-					add_dynamic_modifier = { modifier = bri_state_industrial }
-					add_dynamic_modifier = { modifier = bri_state_energy_fossil }
+					add_dynamic_modifier = { modifier = CHI_bri_state_industrial }
+					add_dynamic_modifier = { modifier = CHI_bri_state_energy_fossil }
 					set_state_flag = bri_powerplant_built
 				}
 			}
@@ -4815,8 +5164,8 @@ focus_tree = {
 				}
 				random_owned_controlled_state = {
 					limit = { industrial_complex > 0 }
-					add_dynamic_modifier = { modifier = bri_state_industrial }
-					add_dynamic_modifier = { modifier = bri_state_energy_clean }
+					add_dynamic_modifier = { modifier = CHI_bri_state_industrial }
+					add_dynamic_modifier = { modifier = CHI_bri_state_energy_clean }
 					set_state_flag = bri_powerplant_built
 				}
 				add_to_variable = { CHI_bri_winwin_score = 3 }
@@ -4858,8 +5207,8 @@ focus_tree = {
 				}
 				random_owned_controlled_state = {
 					limit = { OR = { is_coastal = yes infrastructure > 3 } }
-					add_dynamic_modifier = { modifier = bri_state_industrial }
-					add_dynamic_modifier = { modifier = bri_state_workers_exploited }
+					add_dynamic_modifier = { modifier = CHI_bri_state_industrial }
+					add_dynamic_modifier = { modifier = CHI_bri_state_workers_exploited }
 					set_state_flag = bri_sez_built
 				}
 				add_to_variable = { CHI_bri_predatory_score = 3 }
@@ -4901,8 +5250,8 @@ focus_tree = {
 				}
 				random_owned_controlled_state = {
 					limit = { OR = { is_coastal = yes infrastructure > 3 } }
-					add_dynamic_modifier = { modifier = bri_state_industrial }
-					add_dynamic_modifier = { modifier = bri_state_workers_protected }
+					add_dynamic_modifier = { modifier = CHI_bri_state_industrial }
+					add_dynamic_modifier = { modifier = CHI_bri_state_workers_protected }
 					set_state_flag = bri_sez_built
 				}
 				add_to_variable = { CHI_bri_winwin_score = 3 }
@@ -5206,7 +5555,7 @@ focus_tree = {
 				}
 				random_owned_controlled_state = {
 					limit = { industrial_complex > 0 }
-					add_dynamic_modifier = { modifier = bri_state_information }
+					add_dynamic_modifier = { modifier = CHI_bri_state_information }
 					set_state_flag = bri_telecom_built
 				}
 			}
@@ -5603,9 +5952,25 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_African_Continental_Integration"
-			add_ideas = chinese_african_century
-			add_to_variable = { CHI_bri_global_presence = 25 }
-			country_event = { id = chi_bri.70 days = 1 }
+			if = {
+				limit = { has_completed_focus = CHI_Wolf_Warrior_Diplomacy }
+				add_ideas = chinese_african_century
+				add_to_variable = { CHI_bri_global_presence = 25 }
+				add_to_variable = { CHI_bri_predatory_score = 4 }
+				country_event = { id = chi_bri.70 days = 1 }
+			}
+			else_if = {
+				limit = { has_completed_focus = CHI_Bide_Your_Time }
+				add_ideas = chinese_african_century
+				add_to_variable = { CHI_bri_global_presence = 25 }
+				add_to_variable = { CHI_bri_winwin_score = 4 }
+				country_event = { id = chi_bri.70 days = 1 }
+			}
+			else = {
+				add_ideas = chinese_african_century
+				add_to_variable = { CHI_bri_global_presence = 25 }
+				country_event = { id = chi_bri.70 days = 1 }
+			}
 		}
 
 		ai_will_do = {
@@ -5635,6 +6000,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_CHI_AGGRESSION FOCUS_FILTER_POLITICAL FOCUS_FILTER_INFLUENCE }
 
 		available = {
+			has_completed_focus = CHI_Wolf_Warrior_Diplomacy
 			check_variable = {
 				var = CHI_bri_global_presence
 				value = 199
@@ -5666,6 +6032,64 @@ focus_tree = {
 			}
 		}
 	}
+	focus = {
+		id = CHI_Tianxia_Realized
+		icon = global_community
+
+		x = -3
+		y = 5
+		relative_position_id = CHI_Project_Coordination_Cell
+
+		cost = 10
+
+		prerequisite = { focus = CHI_African_Continental_Integration }
+
+		search_filters = { FOCUS_FILTER_CHI_AGGRESSION FOCUS_FILTER_POLITICAL FOCUS_FILTER_INFLUENCE }
+
+		available = {
+			has_completed_focus = CHI_Bide_Your_Time
+			check_variable = {
+				var = CHI_bri_global_presence
+				value = 174
+				compare = greater_than
+			}
+			check_variable = {
+				var = CHI_bri_completed_projects
+				value = 24
+				compare = greater_than
+			}
+			check_variable = {
+				var = CHI_bri_winwin_score
+				value = 20
+				compare = greater_than
+			}
+			check_variable = {
+				var = CHI_chinese_aggression
+				value = 10
+				compare = less_than
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_Tianxia_Realized"
+			set_global_flag = chinese_century_dawn
+			add_ideas = pax_sinica_consensus
+			country_event = { id = chi_bri.96 days = 1 }
+		}
+
+		ai_will_do = {
+			base = 3
+			modifier = {
+				factor = 0
+				check_variable = {
+					var = CHI_bri_global_presence
+					value = 175
+					compare = less_than
+				}
+			}
+		}
+	}
+
 	focus = {
 		id = CHI_Forum_China_CELAC
 		icon = x
