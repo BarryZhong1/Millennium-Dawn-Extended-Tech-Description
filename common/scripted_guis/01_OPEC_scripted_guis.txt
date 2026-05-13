@@ -1,0 +1,51 @@
+scripted_gui = {
+
+	OPEC_main_button = {
+		context_type = player_context
+		parent_window_token = top_bar
+		window_name = "OPEC_main_button"
+		dirty = global.update_opec_ui
+
+		visible = { is_ai = no }
+
+		effects = {
+			OPEC_main_button_bg_click = {
+				if = {
+					limit = { NOT = { has_country_flag = OPEC_window_open } }
+					set_country_flag = OPEC_window_open
+				}
+				else = {
+					clr_country_flag = OPEC_window_open
+				}
+				add_to_variable = { global.update_opec_ui = 1 }
+			}
+		}
+	}
+
+	OPEC_main_window = {
+		context_type = player_context
+		parent_window_token = top_bar
+		window_name = "OPEC_main_window"
+		dirty = global.update_opec_ui
+
+		visible = {
+			is_ai = no
+			has_country_flag = OPEC_window_open
+		}
+
+		dynamic_lists = {
+			OPEC_members_gridbox = {
+				array = global.opec_member_state
+				entry_container = OPEC_member_entry
+				change_scope = yes
+			}
+		}
+
+		effects = {
+			OPEC_main_window_close_button_click = {
+				clr_country_flag = OPEC_window_open
+				add_to_variable = { global.update_opec_ui = 1 }
+			}
+		}
+	}
+}
