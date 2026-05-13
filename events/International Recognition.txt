@@ -93,9 +93,13 @@ country_event = {
 	option = {
 		name = recognition.71.a
 		log = "[GetDateText]: [This.GetName]: recognition.71.a executed"
-		remove_ideas = Lacks_International_Recognition
+		remove_ideas = lacks_international_recognition
+		if = {
+			limit = { has_idea = non_state_actor }
+			remove_ideas = non_state_actor
+		}
 		add_to_array = { global.UN_general_assembly = THIS }
-		missile_ui_update = yes
+		international_systems_update = yes
 	}
 }
 
@@ -371,7 +375,7 @@ country_event = {
 		log = "[GetDateText]: [THIS.GetName] has voted yes"
 		add_to_array = { global.security_council_vote_yes = THIS }
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 1
@@ -409,7 +413,7 @@ country_event = {
 			set_global_flag = security_council_veto
 		}
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 1
@@ -441,7 +445,7 @@ country_event = {
 		add_to_array = { global.security_council_vote_abstain = THIS }
 		log = "[GetDateText]: [THIS.GetName] has abstained from voting"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 		ai_chance = {
 			base = 1
 			modifier = {
@@ -672,7 +676,7 @@ country_event = {
 			country_event = recognition.2
 			recognition_grant_increment = yes
 		}
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
@@ -899,6 +903,25 @@ news_event = {
 	}
 }
 
+# NSA shed status — fires once when an NSA with lacks_international_recognition
+# hits the 15-recognition mark. Removes non_state_actor, leaving them as a
+# breakaway state actor still pursuing UN ascension.
+country_event = {
+	id = recognition.43
+
+	title = recognition.43.t
+	desc = recognition.43.d
+	picture = GFX_news_crime_fighting
+
+	is_triggered_only = yes
+
+	option = {
+		name = recognition.43.a
+		remove_ideas = non_state_actor
+		log = "[GetDateText]: [This.GetName]: recognition.43.a executed"
+	}
+}
+
 country_event = {
 	id = recognition.14
 	is_triggered_only = yes
@@ -939,7 +962,7 @@ country_event = {
 		log = "[GetDateText]: [THIS.GetName] has voted yes"
 		add_to_array = { global.general_assembly_vote_yes = THIS }
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 1
@@ -971,7 +994,7 @@ country_event = {
 		add_to_array = { global.general_assembly_vote_no = THIS } #testing, vote no after test
 		log = "[GetDateText]: [THIS.GetName] has voted no"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 1
@@ -1003,7 +1026,7 @@ country_event = {
 		add_to_array = { global.general_assembly_vote_abstain = THIS }
 		log = "[GetDateText]: [THIS.GetName] has abstained from voting"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 		ai_chance = {
 			base = 1
 
