@@ -3704,17 +3704,19 @@ scripted_gui = {
 			pressure_countries_recog_button_click = {
 				meta_effect = {
 					text = {
-						every_country = {
-							limit = {
-								is_influencer = yes
-								is_in_array = { global.UN_general_assembly = THIS }
-								NOT = { has_country_flag = Recognised_[stname] }
-								NOT = { has_country_flag = pressured_to_recognize_[stname] }
-								NOT = { tag = ROOT }
-								is_full_state = yes
+						for_each_scope_loop = {
+							array = global.UN_general_assembly
+							if = {
+								limit = {
+									is_influencer = yes
+									NOT = { has_country_flag = Recognised_[stname] }
+									NOT = { has_country_flag = pressured_to_recognize_[stname] }
+									NOT = { tag = ROOT }
+									is_full_state = yes
+								}
+								set_country_flag = pressured_to_recognize_[stname]
+								country_event = recognition.8
 							}
-							set_country_flag = pressured_to_recognize_[stname]
-							country_event = recognition.8
 						}
 						set_country_flag = {
 							flag = pressure_timer_[stname]
@@ -3774,16 +3776,12 @@ scripted_gui = {
 					value = 1
 				}
 
-				custom_effect_tooltip = TT_ALL_UN_MEMBER_NATIONS_GAIN
-
-				for_each_loop = {
+				for_each_scope_loop = {
 					array = global.UN_general_assembly
-					value = v
-					var:v = {
-						add_opinion_modifier = {
-							target = ROOT
-							modifier = improving_un_relations
-						}
+					tooltip = TT_ALL_UN_MEMBER_NATIONS_GAIN
+					add_opinion_modifier = {
+						target = ROOT
+						modifier = improving_un_relations
 					}
 				}
 			}

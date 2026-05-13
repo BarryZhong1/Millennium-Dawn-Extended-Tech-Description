@@ -627,27 +627,27 @@ country_event = {
 		add_political_power = -25
 		set_country_flag = Recognised_@FROM
 
-		for_each_loop = {
+		for_each_scope_loop = {
 			array = global.UN_general_assembly
-			value = v
 			tooltip = TT_ALL_UN_MEMBERS
 
-			var:v = {
-				if = {
-					limit = { has_country_flag = Recognised_@FROM }
-					add_opinion_modifier = {
-						target = ROOT
-						modifier = supporting_recognized_ally
-					}
-				} else_if = {
-					limit = {
-						has_country_flag = supports_original_owner_@FROM
-						NOT = { has_country_flag = Recognised_@FROM }
-					}
-					add_opinion_modifier = {
-						target = ROOT
-						modifier = recognises_them
-					}
+			if = {
+				limit = {
+					NOT = { tag = ROOT }
+					has_country_flag = Recognised_@FROM
+				}
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = supporting_recognized_ally
+				}
+			} else_if = {
+				limit = {
+					NOT = { tag = ROOT }
+					has_country_flag = supports_original_owner_@FROM
+				}
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = recognises_them
 				}
 			}
 		}
@@ -730,18 +730,16 @@ country_event = {
 	is_triggered_only = yes
 	hidden = yes
 	immediate = {
-		for_each_loop = {
+		for_each_scope_loop = {
 			array = global.UN_general_assembly
-			value = v
 
-			var:v = {
-				if = {
-					limit = {
-						NOT = { has_country_flag = Recognised_@ROOT }
-						NOT = { has_country_flag = original_owner_@ROOT }
-					}
-					country_event = recognition.18
+			if = {
+				limit = {
+					NOT = { tag = ROOT }
+					NOT = { has_country_flag = Recognised_@ROOT }
+					NOT = { has_country_flag = original_owner_@ROOT }
 				}
+				country_event = recognition.18
 			}
 		}
 	}
