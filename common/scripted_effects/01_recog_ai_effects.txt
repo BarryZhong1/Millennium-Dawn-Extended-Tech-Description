@@ -18,7 +18,13 @@ recog_ai_monthly = {
 				has_idea = lacks_international_recognition
 				NOT = { has_country_flag = recog_ai_cooldown }
 			}
-			recog_ai_evaluate_actions = yes
+			# Per-month action probability — staggers NSAs so they don't all campaign on the
+			# same tick. With the 90-day post-action cooldown, this works out to ~3 actions/year
+			# per NSA, spread evenly instead of bunched on month 1.
+			random = {
+				chance = 30
+				recog_ai_evaluate_actions = yes
+			}
 		}
 
 		if = {

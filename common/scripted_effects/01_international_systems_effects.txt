@@ -115,6 +115,77 @@ on_startup_international = {
 	if = { limit = { country_exists = PER } PER = { set_country_flag = original_owner_KUR } }
 	if = { limit = { country_exists = TUR } TUR = { set_country_flag = original_owner_KUR } }
 	if = { limit = { country_exists = SYR } SYR = { set_country_flag = original_owner_KUR } }
+
+	# Pre-seeded recognitions reflecting real-world state at the 2000 game start.
+	# Each block sets the Recognised_<TAG> flag on the granter side AND bumps Granted_Recognition
+	# on the breakaway side so the variable stays consistent with the flag set.
+
+	# Taiwan (ROC) — 21 UN members recognised the ROC in 2000 (later defections happened post-2000)
+	if = { limit = { country_exists = TAI }
+		if = { limit = { country_exists = GUA } GUA = { set_country_flag = Recognised_TAI } }
+		if = { limit = { country_exists = HON } HON = { set_country_flag = Recognised_TAI } }
+		if = { limit = { country_exists = NIC } NIC = { set_country_flag = Recognised_TAI } }
+		if = { limit = { country_exists = PAN } PAN = { set_country_flag = Recognised_TAI } }
+		if = { limit = { country_exists = PAR } PAR = { set_country_flag = Recognised_TAI } }
+		if = { limit = { country_exists = DOM } DOM = { set_country_flag = Recognised_TAI } }
+		if = { limit = { country_exists = ELS } ELS = { set_country_flag = Recognised_TAI } }
+		if = { limit = { country_exists = BLZ } BLZ = { set_country_flag = Recognised_TAI } }
+		if = { limit = { country_exists = HAI } HAI = { set_country_flag = Recognised_TAI } }
+		if = { limit = { country_exists = SEN } SEN = { set_country_flag = Recognised_TAI } }
+		if = { limit = { country_exists = CHA } CHA = { set_country_flag = Recognised_TAI } }
+		if = { limit = { country_exists = GAM } GAM = { set_country_flag = Recognised_TAI } }
+		if = { limit = { country_exists = LIB } LIB = { set_country_flag = Recognised_TAI } }
+		if = { limit = { country_exists = MLW } MLW = { set_country_flag = Recognised_TAI } }
+		if = { limit = { country_exists = SAO } SAO = { set_country_flag = Recognised_TAI } }
+		if = { limit = { country_exists = SWA } SWA = { set_country_flag = Recognised_TAI } }
+		if = { limit = { country_exists = NAU } NAU = { set_country_flag = Recognised_TAI } }
+		if = { limit = { country_exists = PAU } PAU = { set_country_flag = Recognised_TAI } }
+		if = { limit = { country_exists = MAR } MAR = { set_country_flag = Recognised_TAI } }
+		if = { limit = { country_exists = SOL } SOL = { set_country_flag = Recognised_TAI } }
+		if = { limit = { country_exists = TUL } TUL = { set_country_flag = Recognised_TAI } }
+		TAI = { add_to_variable = { Granted_Recognition = 21 } }
+	}
+
+	# Taliban Afghanistan (TAL) — recognised by Pakistan, Saudi Arabia, UAE in 2000
+	if = { limit = { country_exists = TAL }
+		if = { limit = { country_exists = PAK } PAK = { set_country_flag = Recognised_TAL } }
+		if = { limit = { country_exists = SAU } SAU = { set_country_flag = Recognised_TAL } }
+		if = { limit = { country_exists = UAE } UAE = { set_country_flag = Recognised_TAL } }
+		TAL = { add_to_variable = { Granted_Recognition = 3 } }
+	}
+
+	# Abkhazia (ABK) — Russia formally recognised in 2008; pre-seeded for game start so the
+	# breakaway doesn't begin from absolute zero.
+	if = {
+		limit = {
+			country_exists = ABK
+			country_exists = SOV
+		}
+		SOV = { set_country_flag = Recognised_ABK }
+		ABK = { add_to_variable = { Granted_Recognition = 1 } }
+	}
+
+	# South Ossetia (SOO) — same as ABK, recognised by Russia.
+	if = {
+		limit = {
+			country_exists = SOO
+			country_exists = SOV
+		}
+		SOV = { set_country_flag = Recognised_SOO }
+		SOO = { add_to_variable = { Granted_Recognition = 1 } }
+	}
+
+	# Stagger initial AI campaign cooldowns so unrecognised states don't all fire on month 1.
+	# random_list spreads each NSA's first action across the opening 9 months.
+	for_each_scope_loop = {
+		array = global.Unrecognised_States
+		random_list = {
+			25 = { }
+			25 = { set_country_flag = { flag = recog_ai_cooldown days = 30 value = 1 } }
+			25 = { set_country_flag = { flag = recog_ai_cooldown days = 120 value = 1 } }
+			25 = { set_country_flag = { flag = recog_ai_cooldown days = 270 value = 1 } }
+		}
+	}
 }
 
 
