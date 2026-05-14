@@ -1,0 +1,162 @@
+Lebanese_resistance_decisions = {
+
+	fund_independent_media = {
+		icon = GFX_decision_generic_political_discourse
+		visible = {
+			original_tag = LEB
+			is_subject_of = SYR
+		}
+		available = {
+			is_subject_of = SYR
+		}
+		days_remove = 40
+		remove_effect = {
+			add_power_balance_value = {
+				id = Syrian_infiltration_balance_of_power_category
+				value = 0.05
+				tooltip_side = LEB_not_infiltrated_bop_right_side
+			}
+			add_to_variable = {
+				var = LEB_public_support
+				value = 0.1
+				tooltip = LEB_public_support_add_10_TT
+			}
+			subtract_from_variable = {
+				var = LEB_hariri_network_strength
+				value = 0.1
+				tooltip = LEB_hariri_network_sub_10_TT
+			}
+			log = "[GetDateText]: [Root.GetName]: Decision fund_independent_media"
+		}
+	}
+
+	bribe_pro_syrian_mps = {
+		icon = GFX_decision_generic_political_rally
+		visible = {
+			original_tag = LEB
+			is_subject_of = SYR
+		}
+		available = {
+			is_subject_of = SYR
+		}
+		days_remove = 30
+		complete_effect = {
+			add_political_power = -40
+			log = "[GetDateText]: [Root.GetName]: Decision bribe_pro_syrian_mps"
+		}
+		remove_effect = {
+			add_power_balance_value = {
+				id = Syrian_infiltration_balance_of_power_category
+				value = 0.05
+				tooltip_side = LEB_not_infiltrated_bop_right_side
+			}
+			add_to_variable = {
+				var = LEB_hariri_network_strength
+				value = 0.1
+				tooltip = LEB_hariri_network_add_10_TT
+			}
+		}
+	}
+
+	build_shadow_cabinet = {
+		fire_only_once = yes
+		icon = GFX_decision_generic_intelligence_operation
+		visible = {
+			original_tag = LEB
+			is_subject_of = SYR
+		}
+		available = {
+			is_subject_of = SYR
+		}
+		complete_effect = {
+			add_political_power = -75
+			add_to_variable = {
+				var = LEB_hariri_network_strength
+				value = 0.15
+				tooltip = LEB_hariri_network_add_15_TT
+			}
+			log = "[GetDateText]: [Root.GetName]: Decision build_shadow_cabinet"
+		}
+	}
+
+	meet_walid_jumblatt = {
+		fire_only_once = yes
+		icon = GFX_decision_generic_political_discourse
+		visible = {
+			original_tag = LEB
+			is_subject_of = SYR
+		}
+		available = {
+			is_subject_of = SYR
+		}
+		complete_effect = {
+			country_event = { id = Leb.decision.1 days = 1 }
+			log = "[GetDateText]: [Root.GetName]: Decision meet_walid_jumblatt"
+		}
+	}
+
+	meet_samir_geagea = {
+		fire_only_once = yes
+		icon = GFX_decision_generic_political_discourse
+		visible = {
+			original_tag = LEB
+			is_subject_of = SYR
+		}
+		available = {
+			is_subject_of = SYR
+		}
+		complete_effect = {
+			country_event = { id = Leb.decision.2 days = 1 }
+			log = "[GetDateText]: [Root.GetName]: Decision meet_samir_geagea"
+		}
+	}
+
+	meet_nabih_berri = {
+		fire_only_once = yes
+		icon = GFX_decision_generic_political_discourse
+		visible = {
+			original_tag = LEB
+			is_subject_of = SYR
+		}
+		available = {
+			is_subject_of = SYR
+		}
+		complete_effect = {
+			country_event = { id = Leb.decision.3 days = 1 }
+			log = "[GetDateText]: [Root.GetName]: Decision meet_nabih_berri"
+		}
+	}
+
+	divert_investments_to_periphery = {
+		icon = GFX_decision_generic_construction
+		visible = {
+			original_tag = LEB
+			is_subject_of = SYR
+		}
+		available = {
+			is_subject_of = SYR
+		}
+		days_remove = 40
+		remove_effect = {
+			add_power_balance_value = {
+				id = Syrian_infiltration_balance_of_power_category
+				value = 0.05
+				tooltip_side = LEB_not_infiltrated_bop_right_side
+			}
+			add_to_variable = {
+				var = LEB_public_support
+				value = 0.05
+				tooltip = LEB_public_support_add_5_TT
+			}
+			if = {
+				limit = { check_variable = { LEB_public_support < 0.5 } }
+				subtract_from_variable = {
+					var = LEB_hariri_network_strength
+					value = 0.1
+					tooltip = LEB_hariri_network_sub_10_TT
+				}
+			}
+			log = "[GetDateText]: [Root.GetName]: Decision divert_investments_to_periphery"
+		}
+	}
+}
