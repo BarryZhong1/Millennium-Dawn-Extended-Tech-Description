@@ -168,7 +168,7 @@ continuous_focus_palette = {
 			modifier = {
 				add = -5
 				has_country_flag = overlord_subsidies
-				check_variable = { interest_rate > 7.99 }
+				has_at_least_eight_interest = yes
 			}
 			modifier = {
 				factor = 2.0
@@ -202,7 +202,7 @@ continuous_focus_palette = {
 			modifier = {
 				factor = 0.50
 				OVERLORD = {
-					is_same_government_THIS_ROOT = yes
+					is_same_government = yes
 				}
 			}
 			modifier = {
@@ -218,14 +218,14 @@ continuous_focus_palette = {
 			}
 			modifier = {
 				set_temp_variable = { domestic_influence_amount_tmp = domestic_influence_amount }
-				divide_temp_variable = { domestic_influence_amount_tmp = 10 }
+				multiply_temp_variable = { domestic_influence_amount_tmp = 0.1 }
 				factor = domestic_influence_amount_tmp
 			}
 			modifier = {
 				factor = 0
 				OR = {
 					is_autonomy_that_cannot_change_level = yes
-					has_global_flag = GAME_RULE_rule_disable_using_freedom_cont_focus
+					has_game_rule = { rule = rule_disable_AI_using_freedom_cont_focus option = no }
 					OVERLORD = {
 						ROOT = {
 							has_opinion = {
@@ -432,8 +432,11 @@ continuous_focus_palette = {
 			has_intelligence_agency = yes
 		}
 		modifier = {
-			tax_gain_multiplier_modifier = -0.10
-			operative_slot = 2
+			tax_gain_multiplier_modifier = -0.075
+			foreign_influence_modifier = 0.05
+			foreign_influence_monthly_domestic_independence_gain_factor = 0.04
+			intel_network_gain_factor = 0.05
+			operative_slot = 1
 		}
 
 		available_if_capitulated = yes
@@ -468,6 +471,88 @@ continuous_focus_palette = {
 				add = 10
 				check_variable = { enrichment_facilities > 1 }
 			}
+		}
+	}
+	focus = {
+		id = continuous_economy_research
+		icon = construction_engineering
+		daily_cost = 0.5
+		supports_ai_strategy = ai_focus_peaceful
+		available = {
+			has_game_rule = {
+				rule = rule_allow_MP_enhancements
+				option = yes
+			}
+		}
+
+
+		modifier = {
+			production_speed_buildings_factor = 0.5
+			tax_gain_multiplier_modifier = 0.20
+			consumer_goods_factor = -0.15
+			research_speed_factor = 0.25
+		}
+
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+	}
+
+	focus = {
+		id = continuous_population_management
+		icon = focus_generic_industrialists
+		daily_cost = 0.5
+		supports_ai_strategy = ai_focus_peaceful
+		available = {
+			has_game_rule = {
+				rule = rule_allow_MP_enhancements
+				option = yes
+			}
+		}
+
+
+		modifier = {
+			monthly_population = 0.30
+			social_cost_multiplier_modifier = -0.10
+			health_cost_multiplier_modifier = -0.10
+			stability_weekly = 0.005
+			compliance_growth = 0.025
+		}
+
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+	}
+
+	focus = {
+		id = continuous_military_management
+		icon = explosion_with_badass_tank
+		daily_cost = 0.5
+		supports_ai_strategy = ai_focus_peaceful
+		available = {
+			has_game_rule = {
+				rule = rule_allow_MP_enhancements
+				option = yes
+			}
+		}
+
+
+		modifier = {
+			industrial_capacity_factory = 0.5
+			local_resources = 0.25
+			production_lack_of_resource_penalty_factor = -0.35
+			industrial_capacity_dockyard = 0.5
+			experience_gain_army = 0.07
+			experience_gain_navy = 0.07
+			experience_gain_air = 0.07
+
+		}
+
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
 		}
 	}
 }

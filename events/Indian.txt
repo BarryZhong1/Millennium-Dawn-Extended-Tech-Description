@@ -3,6 +3,7 @@ add_namespace = RAJ_eastas
 add_namespace = RAJ_religion
 add_namespace = RAJ_mao_reb
 add_namespace = raj_exports
+add_namespace = RAJ_naxal
 
 country_event = {
 	id = indian_event.1
@@ -84,7 +85,6 @@ news_event = {
 			has_war_with = LAO
 		}
 	}
-
 
 	option = {
 		name = RAJ_eastas.1.o1
@@ -353,7 +353,6 @@ news_event = {
 
 	option = {
 		name = RAJ_eastas.2.o1
-		log = "[GetDateText]: [This.GetName]: RAJ_eastas.2.o1 executed"
 	}
 }
 
@@ -373,28 +372,24 @@ country_event = {
 			add_offsite_building = { type = offices level = 1 }
 			set_temp_variable = { percent_change = 3 }
 			set_temp_variable = { tag_index = CHI }
-			set_temp_variable = { influence_target = RAJ }
 			change_influence_percentage = yes
 		}
 		SOV = {
 			add_offsite_building = { type = offices level = 1 }
 			set_temp_variable = { percent_change = 3 }
 			set_temp_variable = { tag_index = CHI }
-			set_temp_variable = { influence_target = SOV }
 			change_influence_percentage = yes
 		}
 		BRA = {
 			add_offsite_building = { type = offices level = 1 }
 			set_temp_variable = { percent_change = 3 }
 			set_temp_variable = { tag_index = CHI }
-			set_temp_variable = { influence_target = BRA }
 			change_influence_percentage = yes
 		}
 		SAF = {
 			add_offsite_building = { type = offices level = 1 }
 			set_temp_variable = { percent_change = 3 }
 			set_temp_variable = { tag_index = CHI }
-			set_temp_variable = { influence_target = SAF }
 			change_influence_percentage = yes
 		}
 	}
@@ -461,7 +456,6 @@ news_event = {
 
 	option = {
 		name = RAJ_eastas.3.o1
-		log = "[GetDateText]: [This.GetName]: RAJ_eastas.3.o1 executed"
 	}
 }
 
@@ -477,7 +471,7 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: indian_event.12.a executed"
 		ai_chance = { base = 1 }
 		add_ideas = RAJ_BRICS
-		news_event = { id = RAJ_eastas.4 }
+		news_event = RAJ_eastas.4
 	}
 	option = {
 		name = indian_event.12.b
@@ -499,7 +493,6 @@ news_event = {
 
 	option = {
 		name = RAJ_eastas.4.o1
-		log = "[GetDateText]: [This.GetName]: RAJ_eastas.4.o1 executed"
 	}
 }
 
@@ -515,7 +508,6 @@ news_event = {
 
 	option = {
 		name = RAJ_eastas.5.o1
-		log = "[GetDateText]: [This.GetName]: RAJ_eastas.5.o1 executed"
 	}
 }
 
@@ -767,7 +759,6 @@ country_event = {
 		every_other_country = {
 			set_temp_variable = { percent_change = 1 }
 			set_temp_variable = { tag_index = RAJ.id }
-			set_temp_variable = { influence_target = THIS.id }
 			change_influence_percentage = yes
 		}
 	}
@@ -844,13 +835,11 @@ country_event = {
 	option = {
 		name = indian_event.27.o1
 		log = "[GetDateText]: [This.GetName]: indian_event.27.o1 executed"
-		one_random_synthetic_refinery = yes
+		one_random_renewable_energy_infra = yes
 		RAJ = {
 			country_event = indian_event.59
-			one_random_synthetic_refinery = yes
+			one_random_renewable_energy_infra = yes
 			set_temp_variable = { percent_change = 2 }
-			set_temp_variable = { tag_index = ROOT }
-			set_temp_variable = { influence_target = RAJ }
 			change_influence_percentage = yes
 		}
 		add_opinion_modifier = {
@@ -858,7 +847,6 @@ country_event = {
 			modifier = improve_trade
 		}
 		set_temp_variable = { percent_change = 2 }
-		set_temp_variable = { tag_index = ROOT }
 		set_temp_variable = { influence_target = RAJ }
 		change_influence_percentage = yes
 		ai_chance = {
@@ -940,6 +928,9 @@ country_event = {
 		name = indian_event.30.b
 		log = "[GetDateText]: [This.GetName]: indian_event.30.b executed"
 		RAJ = {
+			set_temp_variable = { wargoal_on = BAN }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = annex_everything
 				target = BAN
@@ -979,7 +970,7 @@ country_event = {
 			RAJ = { add_to_faction = VIE }
 		}
 		else = {
-			create_faction = VIE_RAJPACT
+			create_faction_from_template = faction_template_rajpact
 			VIE = { add_to_faction = RAJ }
 		}
 		ai_chance = {
@@ -1020,6 +1011,9 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: indian_event.33.a executed"
 		ROOT = {
 			RAJ = {
+				set_temp_variable = { wargoal_on = ROOT }
+				set_temp_variable = { wargoal_type = 2 }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = {
 					type = annex_everything
 					target = ROOT
@@ -1043,6 +1037,9 @@ country_event = {
 		name = indian_event.34.a
 		log = "[GetDateText]: [This.GetName]: indian_event.34.a executed"
 		CHI = {
+			set_temp_variable = { wargoal_on = TIB }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = annex_everything
 				target = TIB
@@ -1286,6 +1283,9 @@ country_event = {
 		name = indian_event.35.a
 		log = "[GetDateText]: [This.GetName]: indian_event.35.a executed"
 		CHI = {
+			set_temp_variable = { wargoal_on = ETK }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = annex_everything
 				target = ETK
@@ -1339,6 +1339,9 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: indian_event.36.b executed"
 		ROOT = {
 			RAJ = {
+				set_temp_variable = { wargoal_on = ROOT }
+				set_temp_variable = { wargoal_type = 2 }
+				add_threat_from_wargoal_effect = yes
 				create_wargoal = {
 					type = annex_everything
 					target = ROOT
@@ -1444,6 +1447,9 @@ country_event = {
 			reverse_add_opinion_modifier = { target = FROM modifier = major_breach_of_trust }
 		}
 		RAJ = {
+			set_temp_variable = { wargoal_on = TAL }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = annex_everything
 				target = TAL
@@ -1583,13 +1589,13 @@ country_event = {
 			set_temp_variable = { treasury_change = -2.25 }
 			modify_treasury_effect = yes
 			add_equipment_to_stockpile = {
-				type = infantry_weapons1
+				type = infantry_weapons_2
 				amount = 900
 				producer = RAJ
 			}
 			RAJ = {
 				add_equipment_to_stockpile = {
-					type = infantry_weapons1
+					type = infantry_weapons_2
 					amount = -900
 					producer = RAJ
 				}
@@ -1671,31 +1677,320 @@ country_event = {
 				size = 0.3
 				set_cosmetic_tag = RAJ_REB_S_communism
 				set_country_flag = mao_civvar_staret
-				clear_array = ruling_party
-				clear_array = gov_coalition_array
-				add_to_array = { ruling_party = 19 }
-				update_government_coalition_strength = yes
-				update_party_name = yes
-				set_coalition_drift = yes
+				set_temp_variable = { rul_party_temp = 19 }
+				change_ruling_party_effect = yes
 				every_controlled_state = {
-					remove_dynamic_modifier = { modifier = RAJ_hoxaists_rebel }
-					remove_dynamic_modifier = { modifier = RAJ_hoxaists_rebel1 }
-					remove_dynamic_modifier = { modifier = RAJ_hoxaists_rebel2 }
-					remove_dynamic_modifier = { modifier = RAJ_hoxaists_rebel3 }
+					remove_dynamic_modifier = { modifier = RAJ_naxalite_insurgency }
+					remove_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
+					remove_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_2 }
+					remove_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_3 }
+					remove_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_4 }
 				}
 			}
 			RAJ = {
 				every_controlled_state = {
-					remove_dynamic_modifier = { modifier = RAJ_hoxaists_rebel }
-					remove_dynamic_modifier = { modifier = RAJ_hoxaists_rebel1 }
-					remove_dynamic_modifier = { modifier = RAJ_hoxaists_rebel2 }
-					remove_dynamic_modifier = { modifier = RAJ_hoxaists_rebel3 }
+					remove_dynamic_modifier = { modifier = RAJ_naxalite_insurgency }
+					remove_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
+					remove_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_2 }
+					remove_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_3 }
+					remove_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_4 }
 				}
 			}
 		}
 		ai_chance = {
 			base = 80
 		}
+	}
+}
+
+# --------------------------------------------
+# NEW NAXALITE-MAOIST INSURGENCY EVENTS
+# --------------------------------------------
+
+# PWG-MCC Merger Event (September 21, 2004)
+country_event = {
+	id = RAJ_naxal.10
+	title = RAJ_naxal.10.t
+	desc = RAJ_naxal.10.d
+	picture = GFX_event_generic_communist_uprising
+	is_triggered_only = yes
+	fire_only_once = yes
+	trigger = {
+		original_tag = RAJ
+		NOT = { has_country_flag = RAJ_pwg_mcc_merger }
+		any_controlled_state = {
+			OR = {
+				has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency }
+				has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
+				has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_2 }
+				has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_3 }
+				has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_4 }
+			}
+		}
+	}
+
+	option = {
+		name = RAJ_naxal.10.a
+		log = "[GetDateText]: [This.GetName]: RAJ_naxal.10.a executed"
+		set_country_flag = RAJ_pwg_mcc_merger
+		add_to_variable = { strength_of_maoists = 10 }
+		add_to_variable = { maoist_political_influence = 10 }
+		add_stability = -0.05
+		# Escalate core states
+		456 = {
+			if = {
+				limit = { has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_2 } }
+				remove_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_2 }
+				add_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
+			}
+		}
+		451 = {
+			if = {
+				limit = { has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_2 } }
+				remove_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_2 }
+				add_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
+			}
+		}
+		ai_chance = { base = 1 }
+	}
+}
+
+# Major Maoist Attack
+country_event = {
+	id = RAJ_naxal.11
+	title = RAJ_naxal.11.t
+	desc = RAJ_naxal.11.d
+	picture = GFX_event_generic_riot
+	is_triggered_only = yes
+	trigger = {
+		original_tag = RAJ
+		check_variable = { strength_of_maoists > 30 }
+		NOT = { has_country_flag = RAJ_major_attack_cooldown }
+		any_controlled_state = {
+			OR = {
+				has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency }
+				has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
+			}
+		}
+	}
+
+	option = {
+		name = RAJ_naxal.11.a
+		log = "[GetDateText]: [This.GetName]: RAJ_naxal.11.a executed"
+		set_country_flag = { flag = RAJ_major_attack_cooldown days = 180 value = 1 }
+		add_stability = -0.03
+		add_war_support = -0.02
+		add_manpower = -500
+		add_to_variable = { strength_of_maoists = 3 }
+		ai_chance = { base = 1 }
+	}
+}
+
+# Mass Surrender Event
+country_event = {
+	id = RAJ_naxal.12
+	title = RAJ_naxal.12.t
+	desc = RAJ_naxal.12.d
+	picture = GFX_event_generic_prisoners
+
+	is_triggered_only = yes
+
+	option = {
+		name = RAJ_naxal.12.a
+		log = "[GetDateText]: [This.GetName]: RAJ_naxal.12.a executed"
+		add_stability = 0.02
+		add_political_power = 25
+		ai_chance = { base = 1 }
+	}
+}
+
+# Leadership Elimination
+country_event = {
+	id = RAJ_naxal.13
+	title = RAJ_naxal.13.t
+	desc = RAJ_naxal.13.d
+	picture = GFX_event_generic_military_parade
+	is_triggered_only = yes
+	trigger = {
+		original_tag = RAJ
+		check_variable = { strength_of_maoists > 20 }
+		NOT = { has_country_flag = RAJ_leadership_elimination_cooldown }
+		has_country_flag = RAJ_green_hunt_active
+	}
+
+	option = {
+		name = RAJ_naxal.13.a
+		log = "[GetDateText]: [This.GetName]: RAJ_naxal.13.a executed"
+		set_country_flag = { flag = RAJ_leadership_elimination_cooldown days = 365 value = 1 }
+		add_to_variable = { strength_of_maoists = -8 }
+		add_stability = 0.03
+		add_war_support = 0.02
+		ai_chance = { base = 1 }
+	}
+}
+
+# Tribal Displacement Protests
+country_event = {
+	id = RAJ_naxal.14
+	title = RAJ_naxal.14.t
+	desc = RAJ_naxal.14.d
+	picture = GFX_event_generic_riot
+	is_triggered_only = yes
+	trigger = {
+		original_tag = RAJ
+		any_controlled_state = {
+			OR = {
+				has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency }
+				has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
+				has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_2 }
+			}
+		}
+		NOT = { has_country_flag = RAJ_tribal_protests_cooldown }
+	}
+
+	option = {
+		name = RAJ_naxal.14.a
+		log = "[GetDateText]: [This.GetName]: RAJ_naxal.14.a executed"
+		set_country_flag = { flag = RAJ_tribal_protests_cooldown days = 365 value = 1 }
+		add_stability = -0.02
+		add_to_variable = { maoist_political_influence = 3 }
+		ai_chance = { base = 30 }
+	}
+
+	option = {
+		name = RAJ_naxal.14.b
+		log = "[GetDateText]: [This.GetName]: RAJ_naxal.14.b executed"
+		set_country_flag = { flag = RAJ_tribal_protests_cooldown days = 365 value = 1 }
+		add_political_power = -25
+		add_stability = 0.01
+		ai_chance = { base = 70 }
+	}
+}
+
+# Operation Green Hunt Success
+country_event = {
+	id = RAJ_naxal.15
+	title = RAJ_naxal.15.t
+	desc = RAJ_naxal.15.d
+	picture = GFX_event_generic_military_march
+
+	is_triggered_only = yes
+
+	option = {
+		name = RAJ_naxal.15.a
+		log = "[GetDateText]: [This.GetName]: RAJ_naxal.15.a executed"
+		add_stability = 0.03
+		add_war_support = 0.02
+		ai_chance = { base = 1 }
+	}
+}
+
+# Naxal-Free Milestone
+country_event = {
+	id = RAJ_naxal.16
+	title = RAJ_naxal.16.t
+	desc = RAJ_naxal.16.d
+	picture = GFX_event_generic_military_parade
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = RAJ
+		check_variable = { strength_of_maoists < 5 }
+		NOT = {
+			any_controlled_state = {
+				OR = {
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
+					has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_2 }
+				}
+			}
+		}
+	}
+
+	option = {
+		name = RAJ_naxal.16.a
+		log = "[GetDateText]: [This.GetName]: RAJ_naxal.16.a executed"
+		set_country_flag = RAJ_naxal_free_achieved
+		add_ideas = RAJ_naxal_free_india
+		add_stability = 0.10
+		add_political_power = 100
+		set_variable = { strength_of_maoists = 0 }
+		set_variable = { maoist_political_influence = 0 }
+		every_controlled_state = {
+			remove_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_3 }
+			remove_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_4 }
+		}
+		ai_chance = { base = 1 }
+	}
+}
+
+# Dantewada Ambush - April 6, 2010 - 76 CRPF personnel killed
+country_event = {
+	id = RAJ_naxal.17
+	title = RAJ_naxal.17.t
+	desc = RAJ_naxal.17.d
+	picture = GFX_event_generic_battle
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = RAJ
+		date > 2010.4.1
+		check_variable = { strength_of_maoists > 25 }
+		456 = { # Chhattisgarh
+			is_controlled_by = RAJ
+			OR = {
+				has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency }
+				has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
+			}
+		}
+	}
+
+	option = {
+		name = RAJ_naxal.17.a
+		log = "[GetDateText]: [This.GetName]: RAJ_naxal.17.a executed"
+		add_stability = -0.05
+		add_war_support = 0.03
+		add_manpower = -76
+		add_to_variable = { strength_of_maoists = 5 }
+		set_country_flag = RAJ_dantewada_ambush
+		ai_chance = { base = 1 }
+	}
+}
+
+# Sukma Attack - April 24, 2017 - 25 CRPF personnel killed
+country_event = {
+	id = RAJ_naxal.18
+	title = RAJ_naxal.18.t
+	desc = RAJ_naxal.18.d
+	picture = GFX_event_generic_battle
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = RAJ
+		date > 2017.4.1
+		check_variable = { strength_of_maoists > 15 }
+		456 = { # Chhattisgarh
+			is_controlled_by = RAJ
+			OR = {
+				has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency }
+				has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_1 }
+				has_dynamic_modifier = { modifier = RAJ_naxalite_insurgency_2 }
+			}
+		}
+	}
+
+	option = {
+		name = RAJ_naxal.18.a
+		log = "[GetDateText]: [This.GetName]: RAJ_naxal.18.a executed"
+		set_country_flag = RAJ_sukma_attack
+		add_stability = -0.03
+		add_war_support = 0.02
+		add_manpower = -25
+		add_to_variable = { strength_of_maoists = 3 }
+		ai_chance = { base = 1 }
 	}
 }
 
@@ -1982,20 +2277,32 @@ country_event = {
 		name = indian_event.54.a
 		log = "[GetDateText]: [This.GetName]: indian_event.54.a executed"
 		TRK = {
+			set_temp_variable = { wargoal_on = TAL }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 			type = annex_everything
 			target = TAL
 		}
+		set_temp_variable = { wargoal_on = AFG }
+		set_temp_variable = { wargoal_type = 2 }
+		add_threat_from_wargoal_effect = yes
 		create_wargoal = {
 			type = annex_everything
 			target = AFG
 		}
 	}
 		RAJ = {
+			set_temp_variable = { wargoal_on = TAL }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = annex_everything
 				target = TAL
 			}
+			set_temp_variable = { wargoal_on = AFG }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = annex_everything
 				target = AFG
@@ -2006,10 +2313,16 @@ country_event = {
 		name = indian_event.54.b
 		log = "[GetDateText]: [This.GetName]: indian_event.54.b executed"
 		RAJ = {
+			set_temp_variable = { wargoal_on = TAL }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = annex_everything
 				target = TAL
 			}
+			set_temp_variable = { wargoal_on = AFG }
+			set_temp_variable = { wargoal_type = 2 }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = annex_everything
 				target = AFG
@@ -2030,16 +2343,8 @@ country_event = {
 		hidden_effect = {
 			remove_ideas = RAJ_BRICS
 		}
-		add_ai_strategy = {
-			type = befriend
-			id = RAJ
-			value = 100
-		}
-		add_ai_strategy = {
-			type = support
-			id = RAJ
-			value = 100
-		}
+		add_ai_strategy = { type = befriend id = RAJ value = 100 }
+		add_ai_strategy = { type = support id = RAJ value = 100 }
 		ai_chance = {
 			base = 0
 			modifier = {
@@ -2103,16 +2408,8 @@ country_event = {
 			CSTO_leave = yes
 		}
 		RAJ = { add_to_faction = ROOT }
-		add_ai_strategy = {
-			type = befriend
-			id = RAJ
-			value = 100
-		}
-		add_ai_strategy = {
-			type = support
-			id = RAJ
-			value = 100
-		}
+		add_ai_strategy = { type = befriend id = RAJ value = 100 }
+		add_ai_strategy = { type = support id = RAJ value = 100 }
 		ai_chance = {
 			base = 0
 			modifier = {

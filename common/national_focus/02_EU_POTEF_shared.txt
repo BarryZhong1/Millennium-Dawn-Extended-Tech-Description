@@ -1,9 +1,9 @@
-﻿### President of the European Federation ###
+### President of the European Federation ###
 shared_focus = {
 	id = POTEF001
 	icon = align_to_europe
 	relative_position_id = USoE001
-	x = 28
+	x = 27
 	y = 0
 	cost = 10
 	search_filters = { FOCUS_FILTER_EUROPEAN_UNION FOCUS_FILTER_POLITICAL }
@@ -16,6 +16,7 @@ shared_focus = {
 
 	# Allow to Make the Tree Visible
 	allow_branch = {
+		has_global_flag = european_federation
 		OR = {
 			original_tag = ADO
 			original_tag = ALB
@@ -43,7 +44,7 @@ shared_focus = {
 			original_tag = GEO
 			original_tag = GER
 			original_tag = GRE
-			original_tag = GRL
+			original_tag = GRN
 			original_tag = HLS
 			original_tag = HOL
 			original_tag = HUN
@@ -64,6 +65,7 @@ shared_focus = {
 			original_tag = POL
 			original_tag = POR
 			original_tag = ROM
+			original_tag = RUS
 			original_tag = SCL
 			original_tag = SCO
 			original_tag = SER
@@ -71,8 +73,13 @@ shared_focus = {
 			original_tag = SLO
 			original_tag = SLV
 			original_tag = SMA
+			AND = {
+				original_tag = SOV
+				has_idea = EU_member
+			}
 			original_tag = SPA
 			original_tag = SPR
+			original_tag = GRN
 			original_tag = SWE
 			original_tag = SWI
 			original_tag = TUR
@@ -89,7 +96,7 @@ shared_focus = {
 	}
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### Alpine Doctrine ###
@@ -110,32 +117,34 @@ shared_focus = {
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus POTEF100"
-		hidden_effect = {
-			if = { limit = { POTEF_is_alpine = yes }
-				every_country = {
-					limit = { has_idea = EU_member }
-					remove_ideas = EU_mountain_warfare
-					add_ideas = EU_extensive_mountain_warfare
-				}
+		if = {
+			limit = {
+				has_idea = EU_member
+				NOT = { has_dynamic_modifier = { modifier = POTEF_dynmod_army } }
+			}
+			add_dynamic_modifier = { modifier = POTEF_dynmod_army }
+		}
+		if = {
+			limit = { NOT = { POTEF_is_alpine = yes } }
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				add_to_variable = { POTEF_army_infantry_defence_factor = 0.20 tooltip = army_infantry_defence_factor_tt }
+				add_to_variable = { POTEF_terrain_penalty_reduction = 0.10 tooltip = terrain_penalty_reduction_tt }
 			}
 		}
-		every_country = {
-			limit = { has_idea = EU_member }
-			add_ideas = EU_mountain_warfare
-		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_alpine
-		effect_tooltip = {
-			every_country = {
-				limit = { has_idea = EU_member }
-				add_ideas = EU_extensive_mountain_warfare
-				remove_ideas = EU_mountain_warfare
+		else = {
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				add_to_variable = { POTEF_army_infantry_defence_factor = 0.30 tooltip = army_infantry_defence_factor_tt }
+				add_to_variable = { POTEF_terrain_penalty_reduction = 0.20 tooltip = terrain_penalty_reduction_tt }
 			}
 		}
 	}
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### The Integrity of Creation ###
@@ -157,54 +166,43 @@ shared_focus = {
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus POTEF101"
-		hidden_effect = {
-			if = { limit = { POTEF_is_alpine = yes }
-				every_country = {
-					limit = { has_idea = EU_member }
-					random_controlled_state = {
-						limit = {
-							free_building_slots = {
-								building = synthetic_refinery
-								size > 0
-							}
-						}
-						add_building_construction = {
-							type = synthetic_refinery
-							level = 1
-							instant_build = yes
-						}
-					}
-				}
-			}
-		}
-		every_country = {
-			limit = { has_idea = EU_member }
-			add_ideas = POTEF_integrity_of_creation
-		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_alpine
-		effect_tooltip = {
-			every_country = {
-				limit = { has_idea = EU_member }
+		if = { limit = { POTEF_is_alpine = yes }
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 				random_controlled_state = {
 					limit = {
 						free_building_slots = {
-							building = synthetic_refinery
+							building = renewable_energy_infra
 							size > 0
 						}
 					}
 					add_building_construction = {
-						type = synthetic_refinery
+						type = renewable_energy_infra
 						level = 1
 						instant_build = yes
 					}
 				}
 			}
 		}
+		if = {
+			limit = {
+				has_idea = EU_member
+				NOT = { has_dynamic_modifier = { modifier = POTEF_dynmod_adm } }
+			}
+			add_dynamic_modifier = { modifier = POTEF_dynmod_adm }
+		}
+		for_each_scope_loop = {
+			array = global.EU_member
+			tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+			add_to_variable = { POTEF_monthly_population = 0.05 tooltip = monthly_population_tt }
+			add_to_variable = { POTEF_stability_factor = 0.05 tooltip = stability_factor_tt }
+			add_to_variable = { POTEF_research_speed_factor = -0.05 tooltip = research_speed_factor_tt }
+		}
 	}
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 
@@ -225,13 +223,12 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus POTEF102"
 		set_country_flag = environmental_imperialism
-		custom_effect_tooltip = tooltip_POTEF_favor_farmer_banker
 		set_temp_variable = { temp_opinion = 5 }
 		change_farmers_opinion = yes
 		change_international_bankers_opinion = yes
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 
@@ -255,7 +252,7 @@ shared_focus = {
 		custom_effect_tooltip = tooltip_focus_USoE503
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 
@@ -280,7 +277,7 @@ shared_focus = {
 	}
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 
@@ -304,7 +301,7 @@ shared_focus = {
 		custom_effect_tooltip = tooltip_focus_USoE505
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 
@@ -329,7 +326,7 @@ shared_focus = {
 	}
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 
@@ -354,7 +351,7 @@ shared_focus = {
 	}
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 
@@ -379,7 +376,7 @@ shared_focus = {
 	}
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 
@@ -404,7 +401,7 @@ shared_focus = {
 	}
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 
@@ -429,7 +426,7 @@ shared_focus = {
 	}
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 
@@ -455,32 +452,34 @@ shared_focus = {
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus POTEF150"
-		hidden_effect = {
-			if = { limit = { POTEF_is_german = yes }
-				every_country = {
-					limit = { has_idea = EU_member }
-					add_ideas = POTEF_leopard_doctrine
-				}
-			}
-		}
-		every_country = {
+		if = {
 			limit = {
 				has_idea = EU_member
+				NOT = { has_dynamic_modifier = { modifier = POTEF_dynmod_army } }
 			}
-			add_ideas = POTEF_armoured_warfare
+			add_dynamic_modifier = { modifier = POTEF_dynmod_army }
 		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_german
-		effect_tooltip = {
-			every_country = {
-				limit = { has_idea = EU_member }
-				add_ideas = POTEF_leopard_doctrine
-				remove_ideas = POTEF_armoured_warfare
+		if = {
+			limit = { NOT = { POTEF_is_german = yes } }
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				add_to_variable = { POTEF_army_armor_attack_factor = 0.10 tooltip = army_armor_attack_factor_tt }
+				add_to_variable = { POTEF_army_armor_speed_factor = 0.15 tooltip = army_armor_speed_factor_tt }
+			}
+		}
+		else = {
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				add_to_variable = { POTEF_army_armor_attack_factor = 0.10 tooltip = army_armor_attack_factor_tt }
+				add_to_variable = { POTEF_army_armor_speed_factor = 0.20 tooltip = army_armor_speed_factor_tt }
+				add_to_variable = { POTEF_army_armor_defence_factor = 0.20 tooltip = army_armor_defence_factor_tt }
 			}
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### Empire of Trade ###
@@ -505,37 +504,33 @@ shared_focus = {
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus POTEF151"
-		hidden_effect = {
-			if = {
-				limit = {
-					has_idea = EU_president
-					OR = {
-						original_tag = GER
-						original_tag = BAY
-					}
-				}
-				every_country = {
-					limit = { has_idea = EU_member }
-					add_ideas = POTEF_empire_of_trade_2
-				}
+		if = {
+			limit = {
+				has_idea = EU_member
+				NOT = { has_dynamic_modifier = { modifier = POTEF_dynmod_adm } }
+			}
+			add_dynamic_modifier = { modifier = POTEF_dynmod_adm }
+		}
+		if = {
+			limit = { NOT = { POTEF_is_german = yes } }
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				add_to_variable = { POTEF_trade_opinion_factor = 0.05 tooltip = trade_opinion_factor_tt }
+				add_to_variable = { POTEF_opinion_gain_monthly_factor = 0.10 tooltip = opinion_gain_monthly_factor_tt }
 			}
 		}
-		every_country = {
-			limit = { has_idea = EU_member }
-			add_ideas = POTEF_empire_of_trade
-		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_german
-		effect_tooltip = {
-			every_country = {
-				limit = { has_idea = EU_member }
-				add_ideas = POTEF_empire_of_trade_2
-				remove_ideas = POTEF_empire_of_trade
+		else = {
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				add_to_variable = { POTEF_trade_opinion_factor = 0.10 tooltip = trade_opinion_factor_tt }
+				add_to_variable = { POTEF_opinion_gain_monthly_factor = 0.20 tooltip = opinion_gain_monthly_factor_tt }
 			}
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### French Doctrine ###
@@ -557,30 +552,37 @@ shared_focus = {
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus POTEF200"
-		hidden_effect = {
-			if = { limit = { POTEF_is_french = yes }
-				every_country = {
-					limit = { has_idea = EU_member }
-					add_ideas = EU_extensive_french_doctrine
-				}
+		if = {
+			limit = {
+				has_idea = EU_member
+				NOT = { has_dynamic_modifier = { modifier = POTEF_dynmod_army } }
+			}
+			add_dynamic_modifier = { modifier = POTEF_dynmod_army }
+		}
+		if = {
+			limit = { NOT = { POTEF_is_french = yes } }
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				add_to_variable = { POTEF_mechanized_attack_factor = 0.05 tooltip = mechanized_attack_factor_tt }
+				add_to_variable = { POTEF_mechanized_defence_factor = 0.05 tooltip = mechanized_defence_factor_tt }
+				add_to_variable = { POTEF_motorized_attack_factor = 0.10 tooltip = motorized_attack_factor_tt }
+				add_to_variable = { POTEF_motorized_defence_factor = 0.10 tooltip = motorized_defence_factor_tt }
 			}
 		}
-		every_country = {
-			limit = { has_idea = EU_member }
-			add_ideas = EU_french_doctrine
-		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_french
-		effect_tooltip = {
-			every_country = {
-				limit = { has_idea = EU_member }
-				add_ideas = EU_extensive_french_doctrine
-				remove_ideas = EU_french_doctrine
+		else = {
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				add_to_variable = { POTEF_mechanized_attack_factor = 0.10 tooltip = mechanized_attack_factor_tt }
+				add_to_variable = { POTEF_mechanized_defence_factor = 0.10 tooltip = mechanized_defence_factor_tt }
+				add_to_variable = { POTEF_motorized_attack_factor = 0.15 tooltip = motorized_attack_factor_tt }
+				add_to_variable = { POTEF_motorized_defence_factor = 0.15 tooltip = motorized_defence_factor_tt }
 			}
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### Imperial Power ###
@@ -602,48 +604,36 @@ shared_focus = {
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus POTEF201"
-		hidden_effect = {
-			if = { limit = { POTEF_is_french = yes }
-				every_country = {
-					limit = { has_idea = EU_member }
-					set_temp_variable = { percent_change = -3 }
-					set_temp_variable = { tag_index = CHI.id }
-					set_temp_variable = { influence_target = THIS.id }
-					change_influence_percentage = yes
-					set_temp_variable = { tag_index = SOV.id }
-					set_temp_variable = { influence_target = THIS.id }
-					change_influence_percentage = yes
-					set_temp_variable = { tag_index = USA.id }
-					set_temp_variable = { influence_target = THIS.id }
-					change_influence_percentage = yes
-				}
-			}
-		}
-		every_country = {
-			limit = { has_idea = EU_member }
-			add_ideas = POTEF_imperial_power
-		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_french
-		effect_tooltip = {
-			every_country = {
-				limit = { has_idea = EU_member }
+		if = { limit = { POTEF_is_french = yes }
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 				set_temp_variable = { percent_change = -3 }
 				set_temp_variable = { tag_index = CHI.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 				set_temp_variable = { tag_index = SOV.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 				set_temp_variable = { tag_index = USA.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 			}
+		}
+		if = {
+			limit = {
+				has_idea = EU_member
+				NOT = { has_dynamic_modifier = { modifier = POTEF_dynmod_adm } }
+			}
+			add_dynamic_modifier = { modifier = POTEF_dynmod_adm }
+		}
+		for_each_scope_loop = {
+			array = global.EU_member
+			tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+			add_to_variable = { POTEF_war_support_factor = 0.05 tooltip = war_support_factor_tt }
+			add_to_variable = { POTEF_command_power_gain = 0.5 tooltip = command_power_gain_tt }
 		}
 	}
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 
@@ -666,30 +656,22 @@ shared_focus = {
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus POTEF202"
-		hidden_effect = {
-			if = { limit = { POTEF_is_french = yes }
-				every_country = {
-					limit = { has_idea = EU_member }
-					add_ideas = POTEF_empire_of_freedom_2
-				}
+		if = {
+			limit = {
+				has_idea = EU_member
+				NOT = { has_dynamic_modifier = { modifier = POTEF_dynmod_adm } }
 			}
+			add_dynamic_modifier = { modifier = POTEF_dynmod_adm }
 		}
-		every_country = {
-			limit = { has_idea = EU_member }
-			add_ideas = POTEF_empire_of_freedom
-		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_french
-		effect_tooltip = {
-			every_country = {
-				limit = { has_idea = EU_member }
-				add_ideas = POTEF_empire_of_freedom_2
-				remove_ideas = POTEF_empire_of_freedom
-			}
+		for_each_scope_loop = {
+			array = global.EU_member
+			tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+			add_to_variable = { POTEF_intel_network_gain_factor = 0.05 tooltip = intel_network_gain_factor_tt }
+			add_to_variable = { POTEF_send_volunteer_size = 2 tooltip = send_volunteer_size_tt }
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 
@@ -716,27 +698,12 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus POTEF203"
 		set_temp_variable = { percent_change = 5 }
-		hidden_effect = {
-			if = { limit = { POTEF_is_french = yes }
-				set_temp_variable = { tag_index = ROOT.id }
-				set_temp_variable = { influence_target = USA }
-				change_influence_percentage = yes
-			}
-		}
-		set_temp_variable = { tag_index = ROOT.id }
 		set_temp_variable = { influence_target = USA }
 		change_influence_percentage = yes
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_french
-		effect_tooltip = {
-			set_temp_variable = { tag_index = ROOT.id }
-			set_temp_variable = { influence_target = USA }
-			change_influence_percentage = yes
-		}
 	}
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 
@@ -757,33 +724,22 @@ shared_focus = {
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus POTEF204"
-		hidden_effect = {
-			if = { limit = { POTEF_is_french = yes }
-				every_country = {
-					limit = { has_idea = EU_member }
-					add_opinion_modifier = { target = USA modifier = historic_friends }
-					reverse_add_opinion_modifier = { target = USA modifier = historic_friends }
-					add_ideas = EU_nato_legacy
-				}
-			}
-		}
-		USA = {
-			add_ideas = EDU_major_non_EU_ally
-		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_french
-		effect_tooltip = {
-			every_country = {
-				limit = { has_idea = EU_member }
+		if = { limit = { POTEF_is_french = yes }
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 				add_opinion_modifier = { target = USA modifier = historic_friends }
 				reverse_add_opinion_modifier = { target = USA modifier = historic_friends }
 				add_ideas = EU_nato_legacy
 			}
 		}
+		USA = {
+			add_ideas = EDU_major_non_EU_ally
+		}
 	}
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 
@@ -817,38 +773,21 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus POTEF205"
 		set_temp_variable = { percent_change = -5 }
-		hidden_effect = {
-			if = { limit = { POTEF_is_french = yes }
-				every_country = {
-					limit = { has_idea = EU_member }
-					set_temp_variable = { tag_index = USA.id }
-					set_temp_variable = { influence_target = THIS.id }
-					change_influence_percentage = yes
-				}
-			}
-		}
-		every_country = {
-			limit = { has_idea = EU_member }
+		for_each_scope_loop = {
+			array = global.EU_member
+			tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 			add_opinion_modifier = { target = USA modifier = strategic_rivals }
 			reverse_add_opinion_modifier = { target = USA modifier = strategic_rivals }
 			set_temp_variable = { tag_index = USA.id }
-			set_temp_variable = { influence_target = THIS.id }
 			change_influence_percentage = yes
-		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_french
-		effect_tooltip = {
-			every_country = {
-				limit = { has_idea = EU_member }
-				set_temp_variable = { tag_index = USA.id }
-				set_temp_variable = { influence_target = THIS.id }
+			if = { limit = { POTEF_is_french = yes }
 				change_influence_percentage = yes
 			}
 		}
 	}
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 
@@ -882,7 +821,6 @@ shared_focus = {
 		set_temp_variable = { percent_change = 10 }
 		hidden_effect = {
 			if = { limit = { POTEF_is_iberian = yes }
-				set_temp_variable = { tag_index = ROOT.id }
 				set_temp_variable = { influence_target = MEX }
 				change_influence_percentage = yes
 			}
@@ -890,21 +828,21 @@ shared_focus = {
 		MEX = {
 			add_ideas = EDU_major_non_EU_ally
 		}
+
+		set_temp_variable = { wargoal_on = USA }
+		add_threat_from_wargoal_effect = yes
 		create_wargoal = {
 			type = puppet_wargoal_focus
 			target = USA
 		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_iberian
 		effect_tooltip = {
-			set_temp_variable = { tag_index = ROOT.id }
 			set_temp_variable = { influence_target = MEX }
 			change_influence_percentage = yes
 		}
 	}
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 
@@ -978,12 +916,13 @@ shared_focus = {
 				}
 			}
 		}
+
+		set_temp_variable = { wargoal_on = USA }
+		add_threat_from_wargoal_effect = yes
 		create_wargoal = {
 			type = puppet_wargoal_focus
 			target = USA
 		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_british
 		effect_tooltip = {
 			CAN = {
 				random_controlled_state = {
@@ -1037,7 +976,7 @@ shared_focus = {
 	}
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 
@@ -1060,32 +999,42 @@ shared_focus = {
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus POTEF250"
-		hidden_effect = {
-			if = { limit = { POTEF_is_benelux = yes }
-				every_country = {
-					limit = {
-						has_idea = EU_member
-					}
-					add_ideas = POTEF_airborne_doctrine
-				}
+		if = {
+			limit = {
+				has_idea = EU_member
+				NOT = { has_dynamic_modifier = { modifier = POTEF_dynmod_army } }
+			}
+			add_dynamic_modifier = { modifier = POTEF_dynmod_army }
+		}
+		if = {
+			limit = {
+				has_idea = EU_member
+				NOT = { has_dynamic_modifier = { modifier = POTEF_dynmod_air } }
+			}
+			add_dynamic_modifier = { modifier = POTEF_dynmod_air }
+		}
+		if = {
+			limit = { NOT = { POTEF_is_benelux = yes } }
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				add_to_variable = { POTEF_recon_factor = 0.10 tooltip = recon_factor_tt }
+				add_to_variable = { POTEF_river_crossing_factor = -0.10 tooltip = river_crossing_factor_tt }
 			}
 		}
-		every_country = {
-			limit = { has_idea = EU_member }
-			add_ideas = POTEF_air_mobile_doctrine
-		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_benelux
-		effect_tooltip = {
-			every_country = {
-				limit = { has_idea = EU_member }
-				add_ideas = POTEF_airborne_doctrine
-				remove_ideas = POTEF_air_mobile_doctrine
+		else = {
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				add_to_variable = { POTEF_recon_factor = 0.15 tooltip = recon_factor_tt }
+				add_to_variable = { POTEF_river_crossing_factor = -0.10 tooltip = river_crossing_factor_tt }
+				add_to_variable = { POTEF_paradrop_organization_factor = 0.20 tooltip = paradrop_organization_factor_tt }
+				add_to_variable = { POTEF_extra_paratrooper_supply_grace = 0.20 tooltip = extra_paratrooper_supply_grace_tt }
 			}
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 
@@ -1107,33 +1056,22 @@ shared_focus = {
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus POTEF251"
-		hidden_effect = {
-			if = { limit = { POTEF_is_benelux = yes }
-				every_country = {
-					limit = {
-						has_idea = EU_member
-					}
-					add_ideas = POTEF_liberal_legacy_2
-				}
+		if = {
+			limit = {
+				has_idea = EU_member
+				NOT = { has_dynamic_modifier = { modifier = POTEF_dynmod_adm } }
 			}
+			add_dynamic_modifier = { modifier = POTEF_dynmod_adm }
 		}
-		every_country = {
-			limit = { has_idea = EU_member }
-			add_ideas = POTEF_liberal_legacy
-		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_benelux
-		effect_tooltip = {
-			every_country = {
-				limit = { has_idea = EU_member }
-				add_ideas = POTEF_liberal_legacy_2
-				remove_ideas = POTEF_liberal_legacy
-			}
+		for_each_scope_loop = {
+			array = global.EU_member
+			tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+			add_to_variable = { POTEF_consumer_goods_factor = -0.05 tooltip = consumer_goods_factor_tt }
 		}
 	}
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 
@@ -1332,8 +1270,6 @@ shared_focus = {
 				}
 			}
 		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_benelux
 		effect_tooltip = {
 			if = { limit = { HOL = { has_idea = EU_member } }
 				HOL = {
@@ -1424,7 +1360,7 @@ shared_focus = {
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### Indonesia ###
@@ -1548,16 +1484,15 @@ shared_focus = {
 				}
 			}
 		}
-		every_country = {
-			limit = { has_idea = EU_member }
+		for_each_scope_loop = {
+			array = global.EU_member
+			tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 			diplomatic_relation = {
 				country = IND
 				relation = docking_rights
 				active = yes
 			}
 		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_benelux
 		effect_tooltip = {
 			IND = {
 				random_controlled_state = {
@@ -1661,7 +1596,7 @@ shared_focus = {
 	}
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 
@@ -1684,31 +1619,36 @@ shared_focus = {
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus POTEF300"
-		hidden_effect = {
-			if = { limit = { POTEF_is_iberian = yes }
-				every_country = {
-					limit = { has_idea = EU_member }
-					add_ideas = POTEF_extensive_marine_doctrine
-				}
+		if = {
+			limit = {
+				has_idea = EU_member
+				NOT = { has_dynamic_modifier = { modifier = POTEF_dynmod_navy } }
+			}
+			add_dynamic_modifier = { modifier = POTEF_dynmod_navy }
+		}
+		if = {
+			limit = { POTEF_is_iberian = yes }
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				add_to_variable = { POTEF_amphibious_invasion = 0.30 tooltip = amphibious_invasion_tt }
+				add_to_variable = { POTEF_amphibious_invasion_defence = 0.20 tooltip = amphibious_invasion_defence_tt }
+				add_to_variable = { POTEF_naval_invasion_penalty = -0.20 tooltip = naval_invasion_penalty_tt }
 			}
 		}
-		every_country = {
-			limit = { has_idea = EU_member }
-			add_ideas = POTEF_marine_doctrine
-		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_iberian
-		effect_tooltip = {
-			every_country = {
-				limit = { has_idea = EU_member }
-				add_ideas = POTEF_extensive_marine_doctrine
-				remove_ideas = POTEF_marine_doctrine
+		else = {
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				add_to_variable = { POTEF_amphibious_invasion = 0.15 tooltip = amphibious_invasion_tt }
+				add_to_variable = { POTEF_amphibious_invasion_defence = 0.15 tooltip = amphibious_invasion_defence_tt }
+				add_to_variable = { POTEF_naval_invasion_penalty = -0.10 tooltip = naval_invasion_penalty_tt }
 			}
 		}
 	}
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 
@@ -1731,54 +1671,57 @@ shared_focus = {
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus POTEF301"
-		hidden_effect = {
-			if = { limit = { POTEF_is_iberian = yes }
-				every_country = {
-					limit = { has_idea = EU_member }
-					add_opinion_modifier = { target = MEX modifier = latin_cousins }
-					reverse_add_opinion_modifier = { target = MEX modifier = latin_cousins }
-					add_opinion_modifier = { target = VEN modifier = latin_cousins }
-					reverse_add_opinion_modifier = { target = VEN modifier = latin_cousins }
-					add_opinion_modifier = { target = COL modifier = latin_cousins }
-					reverse_add_opinion_modifier = { target = COL modifier = latin_cousins }
-					add_opinion_modifier = { target = GUY modifier = latin_cousins }
-					reverse_add_opinion_modifier = { target = GUY modifier = latin_cousins }
-					add_opinion_modifier = { target = SUR modifier = latin_cousins }
-					reverse_add_opinion_modifier = { target = SUR modifier = latin_cousins }
-					add_opinion_modifier = { target = ECU modifier = latin_cousins }
-					reverse_add_opinion_modifier = { target = ECU modifier = latin_cousins }
-					add_opinion_modifier = { target = GUA modifier = latin_cousins }
-					reverse_add_opinion_modifier = { target = GUA modifier = latin_cousins }
-					add_opinion_modifier = { target = BLZ modifier = latin_cousins }
-					reverse_add_opinion_modifier = { target = BLZ modifier = latin_cousins }
-					add_opinion_modifier = { target = HON modifier = latin_cousins }
-					reverse_add_opinion_modifier = { target = HON modifier = latin_cousins }
-					add_opinion_modifier = { target = ELS modifier = latin_cousins }
-					reverse_add_opinion_modifier = { target = ELS modifier = latin_cousins }
-					add_opinion_modifier = { target = NIC modifier = latin_cousins }
-					reverse_add_opinion_modifier = { target = NIC modifier = latin_cousins }
-					add_opinion_modifier = { target = COS modifier = latin_cousins }
-					reverse_add_opinion_modifier = { target = COS modifier = latin_cousins }
-					add_opinion_modifier = { target = PAN modifier = latin_cousins }
-					reverse_add_opinion_modifier = { target = PAN modifier = latin_cousins }
-					add_opinion_modifier = { target = PRU modifier = latin_cousins }
-					reverse_add_opinion_modifier = { target = PRU modifier = latin_cousins }
-					add_opinion_modifier = { target = BOL modifier = latin_cousins }
-					reverse_add_opinion_modifier = { target = BOL modifier = latin_cousins }
-					add_opinion_modifier = { target = PAR modifier = latin_cousins }
-					reverse_add_opinion_modifier = { target = PAR modifier = latin_cousins }
-					add_opinion_modifier = { target = ARG modifier = latin_cousins }
-					reverse_add_opinion_modifier = { target = ARG modifier = latin_cousins }
-					add_opinion_modifier = { target = CHL modifier = latin_cousins }
-					reverse_add_opinion_modifier = { target = CHL modifier = latin_cousins }
-					add_opinion_modifier = { target = URG modifier = latin_cousins }
-					reverse_add_opinion_modifier = { target = URG modifier = latin_cousins }
-					add_opinion_modifier = { target = BRA modifier = latin_cousins }
-					reverse_add_opinion_modifier = { target = BRA modifier = latin_cousins }
-				}
+		if = { limit = { POTEF_is_iberian = yes }
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				add_opinion_modifier = { target = MEX modifier = latin_cousins }
+				reverse_add_opinion_modifier = { target = MEX modifier = latin_cousins }
+				add_opinion_modifier = { target = VEN modifier = latin_cousins }
+				reverse_add_opinion_modifier = { target = VEN modifier = latin_cousins }
+				add_opinion_modifier = { target = COL modifier = latin_cousins }
+				reverse_add_opinion_modifier = { target = COL modifier = latin_cousins }
+				add_opinion_modifier = { target = GUY modifier = latin_cousins }
+				reverse_add_opinion_modifier = { target = GUY modifier = latin_cousins }
+				add_opinion_modifier = { target = SUR modifier = latin_cousins }
+				reverse_add_opinion_modifier = { target = SUR modifier = latin_cousins }
+				add_opinion_modifier = { target = ECU modifier = latin_cousins }
+				reverse_add_opinion_modifier = { target = ECU modifier = latin_cousins }
+				add_opinion_modifier = { target = GUA modifier = latin_cousins }
+				reverse_add_opinion_modifier = { target = GUA modifier = latin_cousins }
+				add_opinion_modifier = { target = BLZ modifier = latin_cousins }
+				reverse_add_opinion_modifier = { target = BLZ modifier = latin_cousins }
+				add_opinion_modifier = { target = HON modifier = latin_cousins }
+				reverse_add_opinion_modifier = { target = HON modifier = latin_cousins }
+				add_opinion_modifier = { target = ELS modifier = latin_cousins }
+				reverse_add_opinion_modifier = { target = ELS modifier = latin_cousins }
+				add_opinion_modifier = { target = NIC modifier = latin_cousins }
+				reverse_add_opinion_modifier = { target = NIC modifier = latin_cousins }
+				add_opinion_modifier = { target = COS modifier = latin_cousins }
+				reverse_add_opinion_modifier = { target = COS modifier = latin_cousins }
+				add_opinion_modifier = { target = PAN modifier = latin_cousins }
+				reverse_add_opinion_modifier = { target = PAN modifier = latin_cousins }
+				add_opinion_modifier = { target = PRU modifier = latin_cousins }
+				reverse_add_opinion_modifier = { target = PRU modifier = latin_cousins }
+				add_opinion_modifier = { target = BOL modifier = latin_cousins }
+				reverse_add_opinion_modifier = { target = BOL modifier = latin_cousins }
+				add_opinion_modifier = { target = PAR modifier = latin_cousins }
+				reverse_add_opinion_modifier = { target = PAR modifier = latin_cousins }
+				add_opinion_modifier = { target = ARG modifier = latin_cousins }
+				reverse_add_opinion_modifier = { target = ARG modifier = latin_cousins }
+				add_opinion_modifier = { target = CHL modifier = latin_cousins }
+				reverse_add_opinion_modifier = { target = CHL modifier = latin_cousins }
+				add_opinion_modifier = { target = URG modifier = latin_cousins }
+				reverse_add_opinion_modifier = { target = URG modifier = latin_cousins }
+				add_opinion_modifier = { target = BRA modifier = latin_cousins }
+				reverse_add_opinion_modifier = { target = BRA modifier = latin_cousins }
 			}
-			every_country = {
-				limit = { has_idea = EU_member }
+		}
+		for_each_scope_loop = {
+			array = global.EU_member
+			tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+			if = {
+				limit = { NOT = { tag = ROOT } }
 				add_opinion_modifier = { target = MEX modifier = declaration_of_friendship }
 				reverse_add_opinion_modifier = { target = MEX modifier = declaration_of_friendship }
 				add_opinion_modifier = { target = VEN modifier = declaration_of_friendship }
@@ -1821,13 +1764,11 @@ shared_focus = {
 				reverse_add_opinion_modifier = { target = BRA modifier = declaration_of_friendship }
 			}
 		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_iberian
 		custom_effect_tooltip = focus_POTEF301_effect_tt
 	}
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 
@@ -1906,8 +1847,9 @@ shared_focus = {
 				}
 			}
 		}
-		every_country = {
-			limit = { has_idea = EU_member }
+		for_each_scope_loop = {
+			array = global.EU_member
+			tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 			diplomatic_relation = {
 				country = MEX
 				relation = docking_rights
@@ -1919,8 +1861,6 @@ shared_focus = {
 				active = yes
 			}
 		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_iberian
 		effect_tooltip = {
 			MEX = {
 				random_controlled_state = {
@@ -1979,7 +1919,7 @@ shared_focus = {
 	}
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 
@@ -2042,23 +1982,20 @@ shared_focus = {
 					}
 				}
 				set_temp_variable = { percent_change = 5 }
-				set_temp_variable = { tag_index = ROOT.id }
 				set_temp_variable = { influence_target = VEN }
 				change_influence_percentage = yes
-				set_temp_variable = { tag_index = ROOT.id }
 				set_temp_variable = { influence_target = GUY }
 				change_influence_percentage = yes
-				set_temp_variable = { tag_index = ROOT.id }
 				set_temp_variable = { influence_target = SUR }
 				change_influence_percentage = yes
-				set_temp_variable = { tag_index = ROOT.id }
 				set_temp_variable = { influence_target = ECU }
 				change_influence_percentage = yes
 			}
 		}
 		#basic effect
-		every_country = {
-			limit = { has_idea = EU_member }
+		for_each_scope_loop = {
+			array = global.EU_member
+			tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 			diplomatic_relation = {
 				country = COL
 				relation = docking_rights
@@ -2071,20 +2008,14 @@ shared_focus = {
 			}
 		}
 		set_temp_variable = { percent_change = 3 }
-		set_temp_variable = { tag_index = ROOT.id }
 		set_temp_variable = { influence_target = VEN }
 		change_influence_percentage = yes
-		set_temp_variable = { tag_index = ROOT.id }
 		set_temp_variable = { influence_target = GUY }
 		change_influence_percentage = yes
-		set_temp_variable = { tag_index = ROOT.id }
 		set_temp_variable = { influence_target = SUR }
 		change_influence_percentage = yes
-		set_temp_variable = { tag_index = ROOT.id }
 		set_temp_variable = { influence_target = ECU }
 		change_influence_percentage = yes
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_iberian
 		effect_tooltip = {
 			COL = {
 				random_controlled_state = {
@@ -2124,22 +2055,18 @@ shared_focus = {
 				}
 			}
 			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = ROOT.id }
 			set_temp_variable = { influence_target = VEN }
 			change_influence_percentage = yes
-			set_temp_variable = { tag_index = ROOT.id }
 			set_temp_variable = { influence_target = GUY }
 			change_influence_percentage = yes
-			set_temp_variable = { tag_index = ROOT.id }
 			set_temp_variable = { influence_target = SUR }
 			change_influence_percentage = yes
-			set_temp_variable = { tag_index = ROOT.id }
 			set_temp_variable = { influence_target = ECU }
 			change_influence_percentage = yes
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### Central America ###
@@ -2189,28 +2116,23 @@ shared_focus = {
 					}
 				}
 				set_temp_variable = { percent_change = 5 }
-				set_temp_variable = { tag_index = ROOT.id }
 				set_temp_variable = { influence_target = GUA }
 				change_influence_percentage = yes
-				set_temp_variable = { tag_index = ROOT.id }
 				set_temp_variable = { influence_target = BLZ }
 				change_influence_percentage = yes
-				set_temp_variable = { tag_index = ROOT.id }
 				set_temp_variable = { influence_target = HON }
 				change_influence_percentage = yes
-				set_temp_variable = { tag_index = ROOT.id }
 				set_temp_variable = { influence_target = ELS }
 				change_influence_percentage = yes
-				set_temp_variable = { tag_index = ROOT.id }
 				set_temp_variable = { influence_target = NIC }
 				change_influence_percentage = yes
-				set_temp_variable = { tag_index = ROOT.id }
 				set_temp_variable = { influence_target = COS }
 				change_influence_percentage = yes
 			}
 		}
-		every_country = {
-			limit = { has_idea = EU_member }
+		for_each_scope_loop = {
+			array = global.EU_member
+			tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 			diplomatic_relation = {
 				country = PAN
 				relation = docking_rights
@@ -2223,26 +2145,18 @@ shared_focus = {
 			}
 		}
 		set_temp_variable = { percent_change = 3 }
-		set_temp_variable = { tag_index = ROOT.id }
 		set_temp_variable = { influence_target = GUA }
 		change_influence_percentage = yes
-		set_temp_variable = { tag_index = ROOT.id }
 		set_temp_variable = { influence_target = BLZ }
 		change_influence_percentage = yes
-		set_temp_variable = { tag_index = ROOT.id }
 		set_temp_variable = { influence_target = HON }
 		change_influence_percentage = yes
-		set_temp_variable = { tag_index = ROOT.id }
 		set_temp_variable = { influence_target = ELS }
 		change_influence_percentage = yes
-		set_temp_variable = { tag_index = ROOT.id }
 		set_temp_variable = { influence_target = NIC }
 		change_influence_percentage = yes
-		set_temp_variable = { tag_index = ROOT.id }
 		set_temp_variable = { influence_target = COS }
 		change_influence_percentage = yes
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_iberian
 		effect_tooltip = {
 			PAN = {
 				random_controlled_state = {
@@ -2271,29 +2185,23 @@ shared_focus = {
 				}
 			}
 			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = ROOT.id }
 			set_temp_variable = { influence_target = GUA }
 			change_influence_percentage = yes
-			set_temp_variable = { tag_index = ROOT.id }
 			set_temp_variable = { influence_target = BLZ }
 			change_influence_percentage = yes
-			set_temp_variable = { tag_index = ROOT.id }
 			set_temp_variable = { influence_target = HON }
 			change_influence_percentage = yes
-			set_temp_variable = { tag_index = ROOT.id }
 			set_temp_variable = { influence_target = ELS }
 			change_influence_percentage = yes
-			set_temp_variable = { tag_index = ROOT.id }
 			set_temp_variable = { influence_target = NIC }
 			change_influence_percentage = yes
-			set_temp_variable = { tag_index = ROOT.id }
 			set_temp_variable = { influence_target = COS }
 			change_influence_percentage = yes
 		}
 	}
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 
@@ -2397,19 +2305,17 @@ shared_focus = {
 					}
 				}
 				set_temp_variable = { percent_change = 5 }
-				set_temp_variable = { tag_index = ROOT.id }
 				set_temp_variable = { influence_target = PRU }
 				change_influence_percentage = yes
-				set_temp_variable = { tag_index = ROOT.id }
 				set_temp_variable = { influence_target = BOL }
 				change_influence_percentage = yes
-				set_temp_variable = { tag_index = ROOT.id }
 				set_temp_variable = { influence_target = PAR }
 				change_influence_percentage = yes
 			}
 		}
-		every_country = {
-			limit = { has_idea = EU_member }
+		for_each_scope_loop = {
+			array = global.EU_member
+			tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 			diplomatic_relation = {
 				country = URG
 				relation = docking_rights
@@ -2427,17 +2333,12 @@ shared_focus = {
 			}
 		}
 		set_temp_variable = { percent_change = 3 }
-		set_temp_variable = { tag_index = ROOT.id }
 		set_temp_variable = { influence_target = PRU }
 		change_influence_percentage = yes
-		set_temp_variable = { tag_index = ROOT.id }
 		set_temp_variable = { influence_target = BOL }
 		change_influence_percentage = yes
-		set_temp_variable = { tag_index = ROOT.id }
 		set_temp_variable = { influence_target = PAR }
 		change_influence_percentage = yes
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_iberian
 		effect_tooltip = {
 			URG = {
 				random_controlled_state = {
@@ -2518,20 +2419,17 @@ shared_focus = {
 				}
 			}
 			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = ROOT.id }
 			set_temp_variable = { influence_target = PRU }
 			change_influence_percentage = yes
-			set_temp_variable = { tag_index = ROOT.id }
 			set_temp_variable = { influence_target = BOL }
 			change_influence_percentage = yes
-			set_temp_variable = { tag_index = ROOT.id }
 			set_temp_variable = { influence_target = PAR }
 			change_influence_percentage = yes
 		}
 	}
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 
@@ -2608,8 +2506,9 @@ shared_focus = {
 				}
 			}
 		}
-		every_country = {
-			limit = { has_idea = EU_member }
+		for_each_scope_loop = {
+			array = global.EU_member
+			tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 			diplomatic_relation = {
 				country = BRA
 				relation = docking_rights
@@ -2621,8 +2520,6 @@ shared_focus = {
 				active = yes
 			}
 		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_iberian
 		effect_tooltip = {
 			BRA = {
 				random_controlled_state = {
@@ -2678,7 +2575,7 @@ shared_focus = {
 	}
 
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 
@@ -2700,33 +2597,35 @@ shared_focus = {
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus POTEF350"
-		hidden_effect = {
-			#POTEF bonus
-			if = { limit = { POTEF_is_british = yes }
-				#bonus effect
-				every_country = {
-					limit = { has_idea = EU_member }
-					add_ideas = EU_extensive_naval_doctrine
-				}
+		if = {
+			limit = {
+				has_idea = EU_member
+				NOT = { has_dynamic_modifier = { modifier = POTEF_dynmod_navy } }
+			}
+			add_dynamic_modifier = { modifier = POTEF_dynmod_navy }
+		}
+		if = {
+			limit = { NOT = { POTEF_is_british = yes } }
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				add_to_variable = { POTEF_experience_gain_navy = 0.05 tooltip = experience_gain_navy_tt }
+				add_to_variable = { POTEF_experience_gain_navy_factor = 0.10 tooltip = experience_gain_navy_factor_tt }
+				add_to_variable = { POTEF_navy_org_factor = 0.10 tooltip = navy_org_factor_tt }
 			}
 		}
-		#basic effect
-		every_country = {
-			limit = { has_idea = EU_member }
-			add_ideas = EU_naval_doctrine
-		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_british
-		effect_tooltip = {
-			#mockup bonus effect for tooltip
-			every_country = {
-				limit = { has_idea = EU_member }
-				add_ideas = EU_extensive_naval_doctrine
+		else = {
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				add_to_variable = { POTEF_experience_gain_navy = 0.10 tooltip = experience_gain_navy_tt }
+				add_to_variable = { POTEF_experience_gain_navy_factor = 0.25 tooltip = experience_gain_navy_factor_tt }
+				add_to_variable = { POTEF_navy_org_factor = 0.15 tooltip = navy_org_factor_tt }
 			}
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### Safeguard the North Atlantic ###
@@ -2910,8 +2809,6 @@ shared_focus = {
 				}
 			}
 		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_british
 		effect_tooltip = {
 			#mockup bonus effect for tooltip
 			if = {
@@ -2994,7 +2891,7 @@ shared_focus = {
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### Commonwealth Legacy ###
@@ -3021,20 +2918,18 @@ shared_focus = {
 			#POTEF bonus
 			if = { limit = { POTEF_is_british = yes }
 				#bonus effect
-				set_temp_variable = { tag_index = ROOT.id }
 				set_temp_variable = { influence_target = CAN }
 				change_influence_percentage = yes
-				set_temp_variable = { tag_index = ROOT.id }
 				set_temp_variable = { influence_target = AST }
 				change_influence_percentage = yes
-				set_temp_variable = { tag_index = ROOT.id }
 				set_temp_variable = { influence_target = NZL }
 				change_influence_percentage = yes
 			}
 		}
 		#basic effect
-		every_country = {
-			limit = { has_idea = EU_member }
+		for_each_scope_loop = {
+			array = global.EU_member
+			tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 			add_opinion_modifier = { target = CAN modifier = commonwealth_legacy }
 			reverse_add_opinion_modifier = { target = CAN modifier = commonwealth_legacy }
 			add_opinion_modifier = { target = AST modifier = commonwealth_legacy }
@@ -3042,23 +2937,18 @@ shared_focus = {
 			add_opinion_modifier = { target = NZL modifier = commonwealth_legacy }
 			reverse_add_opinion_modifier = { target = NZL modifier = commonwealth_legacy }
 		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_british
 		effect_tooltip = {
 			#mockup bonus effect for tooltip
-			set_temp_variable = { tag_index = ROOT.id }
 			set_temp_variable = { influence_target = CAN }
 			change_influence_percentage = yes
-			set_temp_variable = { tag_index = ROOT.id }
 			set_temp_variable = { influence_target = AST }
 			change_influence_percentage = yes
-			set_temp_variable = { tag_index = ROOT.id }
 			set_temp_variable = { influence_target = NZL }
 			change_influence_percentage = yes
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### Canada ###
@@ -3085,24 +2975,20 @@ shared_focus = {
 			#POTEF bonus
 			if = { limit = { POTEF_is_british = yes }
 				#bonus effect
-				set_temp_variable = { tag_index = ROOT.id }
 				set_temp_variable = { influence_target = CAN }
 				change_influence_percentage = yes
 			}
 		}
 		#basic effect
 		CAN = { add_ideas = EDU_major_non_EU_ally }
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_british
 		effect_tooltip = {
 			#mockup bonus effect for tooltip
-			set_temp_variable = { tag_index = ROOT.id }
 			set_temp_variable = { influence_target = CAN }
 			change_influence_percentage = yes
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### Australia ###
@@ -3129,7 +3015,6 @@ shared_focus = {
 			#POTEF bonus
 			if = { limit = { POTEF_is_british = yes }
 				#bonus effect
-				set_temp_variable = { tag_index = ROOT.id }
 				set_temp_variable = { influence_target = AST }
 				change_influence_percentage = yes
 			}
@@ -3138,17 +3023,14 @@ shared_focus = {
 		AST = {
 			add_ideas = EDU_major_non_EU_ally
 		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_british
 		effect_tooltip = {
 			#mockup bonus effect for tooltip
-			set_temp_variable = { tag_index = ROOT.id }
 			set_temp_variable = { influence_target = AST }
 			change_influence_percentage = yes
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### New Zealand ###
@@ -3175,7 +3057,6 @@ shared_focus = {
 			#POTEF bonus
 			if = { limit = { POTEF_is_british = yes }
 				#bonus effect
-				set_temp_variable = { tag_index = ROOT.id }
 				set_temp_variable = { influence_target = NZL }
 				change_influence_percentage = yes
 			}
@@ -3184,17 +3065,14 @@ shared_focus = {
 		NZL = {
 			add_ideas = EDU_major_non_EU_ally
 		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_british
 		effect_tooltip = {
 			#mockup bonus effect for tooltip
-			set_temp_variable = { tag_index = ROOT.id }
 			set_temp_variable = { influence_target = NZL }
 			change_influence_percentage = yes
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### Safeguard the North Sea ###
@@ -3403,8 +3281,6 @@ shared_focus = {
 				}
 			}
 		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_british
 		effect_tooltip = {
 			#mockup bonus effect for tooltip
 			if = { limit = { ENG = { has_idea = EU_member } }
@@ -3500,7 +3376,7 @@ shared_focus = {
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### Malaya Legacy ###
@@ -3522,35 +3398,16 @@ shared_focus = {
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus POTEF357"
-		hidden_effect = {
-			#POTEF bonus
-			if = { limit = { POTEF_is_british = yes }
-				#bonus effect
-				every_country = {
-					limit = { has_idea = EU_member }
-					diplomatic_relation = {
-						country = MAY
-						relation = military_access
-						active = yes
-					}
-				}
-			}
-		}
-		#basic effect
-		every_country = {
-			limit = { has_idea = EU_member }
+		#POTEF bonus
+		for_each_scope_loop = {
+			array = global.EU_member
+			tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 			diplomatic_relation = {
 				country = MAY
 				relation = docking_rights
 				active = yes
 			}
-		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_british
-		effect_tooltip = {
-			#mockup bonus effect for tooltip
-			every_country = {
-				limit = { has_idea = EU_member }
+			if = { limit = { POTEF_is_british = yes }
 				diplomatic_relation = {
 					country = MAY
 					relation = military_access
@@ -3560,7 +3417,7 @@ shared_focus = {
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### Malaysia ###
@@ -3587,7 +3444,6 @@ shared_focus = {
 			#POTEF bonus
 			if = { limit = { POTEF_is_british = yes }
 				#bonus effect
-				set_temp_variable = { tag_index = ROOT.id }
 				set_temp_variable = { influence_target = MAY }
 				change_influence_percentage = yes
 			}
@@ -3643,17 +3499,14 @@ shared_focus = {
 				}
 			}
 		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_british
 		effect_tooltip = {
 			#mockup bonus effect for tooltip
-			set_temp_variable = { tag_index = ROOT.id }
 			set_temp_variable = { influence_target = MAY }
 			change_influence_percentage = yes
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### Singapore ###
@@ -3680,14 +3533,14 @@ shared_focus = {
 			#POTEF bonus
 			if = { limit = { POTEF_is_british = yes }
 				#bonus effect
-				set_temp_variable = { tag_index = ROOT.id }
 				set_temp_variable = { influence_target = SIN }
 				change_influence_percentage = yes
 			}
 		}
 		#basic effect
-		every_country = {
-			limit = { has_idea = EU_member }
+		for_each_scope_loop = {
+			array = global.EU_member
+			tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 			diplomatic_relation = {
 				country = SIN
 				relation = docking_rights
@@ -3699,17 +3552,14 @@ shared_focus = {
 				active = yes
 			}
 		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_british
 		effect_tooltip = {
 			#mockup bonus effect for tooltip
-			set_temp_variable = { tag_index = ROOT.id }
 			set_temp_variable = { influence_target = SIN }
 			change_influence_percentage = yes
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### Guarantee Hong Kong ###
@@ -3731,19 +3581,18 @@ shared_focus = {
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus POTEF360"
-		hidden_effect = {
-			#POTEF bonus
-			if = { limit = { POTEF_is_british = yes }
-				#bonus effect
-				set_temp_variable = { percent_change = -5 }
-				set_temp_variable = { tag_index = CHI.id }
-				set_temp_variable = { influence_target = HKG }
-				change_influence_percentage = yes
-				every_country = {
-					limit = { has_idea = EU_member }
-					add_opinion_modifier = { target = HKG modifier = historical_friends_HKG }
-					reverse_add_opinion_modifier = { target = HKG modifier = historical_friends_HKG }
-				}
+		#POTEF bonus
+		if = { limit = { POTEF_is_british = yes }
+			#bonus effect
+			set_temp_variable = { percent_change = -5 }
+			set_temp_variable = { tag_index = CHI.id }
+			set_temp_variable = { influence_target = HKG }
+			change_influence_percentage = yes
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				add_opinion_modifier = { target = HKG modifier = historical_friends_HKG }
+				reverse_add_opinion_modifier = { target = HKG modifier = historical_friends_HKG }
 			}
 		}
 		#basic effect
@@ -3751,31 +3600,21 @@ shared_focus = {
 		set_temp_variable = { tag_index = CHI.id }
 		set_temp_variable = { influence_target = HKG }
 		change_influence_percentage = yes
-		every_country = {
-			limit = { has_idea = EU_member }
-			give_guarantee = HKG
-			add_opinion_modifier = { target = HKG modifier = declaration_of_friendship }
-			reverse_add_opinion_modifier = { target = HKG modifier = declaration_of_friendship }
-			add_opinion_modifier = { target = CHI modifier = breach_of_Sino_British_Joint_Declaration }
-			reverse_add_opinion_modifier = { target = CHI modifier = breach_of_Sino_British_Joint_Declaration }
-		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_british
-		effect_tooltip = {
-			#mockup bonus effect for tooltip
-			set_temp_variable = { percent_change = -5 }
-			set_temp_variable = { tag_index = CHI.id }
-			set_temp_variable = { influence_target = HKG }
-			change_influence_percentage = yes
-			every_country = {
-				limit = { has_idea = EU_member }
-				add_opinion_modifier = { target = HKG modifier = historical_friends_HKG }
-				reverse_add_opinion_modifier = { target = HKG modifier = historical_friends_HKG }
+		for_each_scope_loop = {
+			array = global.EU_member
+			tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+			if = {
+				limit = { NOT = { tag = ROOT } }
+				give_guarantee = HKG
+				add_opinion_modifier = { target = HKG modifier = declaration_of_friendship }
+				reverse_add_opinion_modifier = { target = HKG modifier = declaration_of_friendship }
+				add_opinion_modifier = { target = CHI modifier = breach_of_Sino_British_Joint_Declaration }
+				reverse_add_opinion_modifier = { target = CHI modifier = breach_of_Sino_British_Joint_Declaration }
 			}
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### Nordic Doctrine ###
@@ -3797,28 +3636,33 @@ shared_focus = {
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus POTEF400"
-		hidden_effect = {
-			#POTEF bonus
-			if = { limit = { POTEF_is_nordic = yes }
-				#bonus effect
-				add_ideas = EU_extensive_nordic_doctrine
+		if = {
+			limit = {
+				has_idea = EU_member
+				NOT = { has_dynamic_modifier = { modifier = POTEF_dynmod_army } }
+			}
+			add_dynamic_modifier = { modifier = POTEF_dynmod_army }
+		}
+		if = {
+			limit = { NOT = { POTEF_is_nordic = yes } }
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				add_to_variable = { POTEF_winter_attrition_factor = -0.25 tooltip = winter_attrition_factor_tt }
+				add_to_variable = { POTEF_acclimatization_cold_climate_gain_factor = 0.10 tooltip = acclimatization_cold_climate_gain_factor_tt }
 			}
 		}
-		#basic effect
-		add_ideas = EU_nordic_doctrine
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_nordic
-		effect_tooltip = {
-			#mockup bonus effect for tooltip
-			every_country = {
-				limit = { has_idea = EU_member }
-				add_ideas = EU_extensive_nordic_doctrine
-				remove_ideas = EU_nordic_doctrine
+		else = {
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				add_to_variable = { POTEF_experience_gain_navy = -0.50 tooltip = experience_gain_navy_tt }
+				add_to_variable = { POTEF_experience_gain_navy_factor = 0.25 tooltip = experience_gain_navy_factor_tt }
 			}
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### Safeguard the Arctic ###
@@ -3928,8 +3772,8 @@ shared_focus = {
 						}
 					}
 				}
-				if = { limit = { GRL = { has_idea = EU_member } }
-					GRL = {
+				if = { limit = { GRN = { has_idea = EU_member } }
+					GRN = {
 						random_controlled_state = {
 							limit = {
 								any_province_building_level = {
@@ -4073,8 +3917,8 @@ shared_focus = {
 				}
 			}
 		}
-		if = { limit = { GRL = { has_idea = EU_member } }
-			GRL = {
+		if = { limit = { GRN = { has_idea = EU_member } }
+			GRN = {
 				random_controlled_state = {
 					limit = {
 						any_province_building_level = {
@@ -4131,8 +3975,6 @@ shared_focus = {
 				}
 			}
 		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_nordic
 		effect_tooltip = {
 			#mockup bonus effect for tooltip
 			if = { limit = { DEN = { has_idea = EU_member } }
@@ -4219,8 +4061,8 @@ shared_focus = {
 					}
 				}
 			}
-			if = { limit = { GRL = { has_idea = EU_member } }
-				GRL = {
+			if = { limit = { GRN = { has_idea = EU_member } }
+				GRN = {
 					random_controlled_state = {
 						limit = {
 							any_province_building_level = {
@@ -4280,7 +4122,7 @@ shared_focus = {
 		}
 	 }
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### Mediterranean Doctrine ###
@@ -4302,34 +4144,35 @@ shared_focus = {
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus POTEF450"
-		hidden_effect = {
-			#POTEF bonus
-			if = { limit = { POTEF_is_mediterranean = yes }
-				#bonus effect
-				every_country = {
-					limit = { has_idea = EU_member }
-					add_ideas = POTEF_extensive_amphibious_doctrine
-				}
+		if = {
+			limit = {
+				has_idea = EU_member
+				NOT = { has_dynamic_modifier = { modifier = POTEF_dynmod_navy } }
+			}
+			add_dynamic_modifier = { modifier = POTEF_dynmod_navy }
+		}
+		if = {
+			limit = { NOT = { POTEF_is_mediterranean = yes } }
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				add_to_variable = { POTEF_naval_invasion_prep_speed = 0.15 tooltip = naval_invasion_prep_speed_tt }
+				add_to_variable = { POTEF_naval_invasion_capacity = 2 tooltip = naval_invasion_capacity_tt }
+				add_to_variable = { POTEF_invasion_preparation = -0.10 tooltip = invasion_preparation_tt }
 			}
 		}
-		#basic effect
-		every_country = {
-			limit = { has_idea = EU_member }
-			add_ideas = POTEF_amphibious_doctrine
-		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_mediterranean
-		effect_tooltip = {
-			#mockup bonus effect for tooltip
-			every_country = {
-				limit = { has_idea = EU_member }
-				add_ideas = POTEF_extensive_amphibious_doctrine
-				remove_ideas = POTEF_amphibious_doctrine
+		else = {
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				add_to_variable = { POTEF_naval_invasion_prep_speed = 0.30 tooltip = naval_invasion_prep_speed_tt }
+				add_to_variable = { POTEF_naval_invasion_capacity = 3 tooltip = naval_invasion_capacity_tt }
+				add_to_variable = { POTEF_invasion_preparation = -0.20 tooltip = invasion_preparation_tt }
 			}
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### Northern Africa ###
@@ -4479,10 +4322,9 @@ shared_focus = {
 				transfer_troops = no
 			}
 		}
-		every_country = {
-			limit = {
-				has_idea = EU_member
-			}
+		for_each_scope_loop = {
+			array = global.EU_member
+			tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 			diplomatic_relation = {
 				country = MOR
 				relation = docking_rights
@@ -4514,8 +4356,6 @@ shared_focus = {
 				active = yes
 			}
 		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_mediterranean
 		effect_tooltip = {
 			#mockup bonus effect for tooltip
 			MOR = {
@@ -4625,7 +4465,7 @@ shared_focus = {
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### Unite Cyprus ###
@@ -4714,8 +4554,6 @@ shared_focus = {
 				transfer_state = 812
 			}
 		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_mediterranean
 		effect_tooltip = {
 			#mockup bonus effect for tooltip
 			if = { limit = { CYP = { has_idea = EU_member } }
@@ -4771,7 +4609,7 @@ shared_focus = {
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### Balkan Doctrine ###
@@ -4793,36 +4631,35 @@ shared_focus = {
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus POTEF500"
-		hidden_effect = {
-			#POTEF bonus
-			if = { limit = { POTEF_is_balkan = yes }
-				#bonus effect
-				every_country = {
-					limit = {
-						has_idea = EU_member
-					}
-					add_ideas = POTEF_counter_insurgency_doctrine
-				}
+		if = {
+			limit = {
+				has_idea = EU_member
+				NOT = { has_dynamic_modifier = { modifier = POTEF_dynmod_adm } }
+			}
+			add_dynamic_modifier = { modifier = POTEF_dynmod_adm }
+		}
+		if = {
+			limit = { NOT = { POTEF_is_balkan = yes } }
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				add_to_variable = { POTEF_boost_resistance_factor = 0.15 tooltip = boost_resistance_factor_tt }
+				add_to_variable = { POTEF_root_out_resistance_effectiveness_factor = 0.15 tooltip = root_out_resistance_effectiveness_factor_tt }
 			}
 		}
-		#basic effect
-		every_country = {
-			limit = { has_idea = EU_member }
-			add_ideas = POTEF_partisan_doctrine
-		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_balkan
-		effect_tooltip = {
-			#mockup bonus effect for tooltip
-			every_country = {
-				limit = { has_idea = EU_member }
-				add_ideas = POTEF_counter_insurgency_doctrine
-				remove_ideas = POTEF_partisan_doctrine
+		else = {
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				add_to_variable = { POTEF_boost_resistance_factor = 0.15 tooltip = boost_resistance_factor_tt }
+				add_to_variable = { POTEF_root_out_resistance_effectiveness_factor = 0.15 tooltip = root_out_resistance_effectiveness_factor_tt }
+				add_to_variable = { POTEF_resistance_damage_to_garrison = -0.15 tooltip = resistance_damage_to_garrison_tt }
+				add_to_variable = { POTEF_resistance_target = -0.30 tooltip = resistance_target_tt }
 			}
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### Balkan Infrastructure ###
@@ -5091,8 +4928,6 @@ shared_focus = {
 				}
 			}
 		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_balkan
 		effect_tooltip = {
 			#mockup bonus effect for tooltip
 			if = { limit = { SLV = { has_idea = EU_member } }
@@ -5218,7 +5053,7 @@ shared_focus = {
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### Contest the Silk Road ###
@@ -5243,51 +5078,48 @@ shared_focus = {
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus POTEF502"
-		hidden_effect = {
-			#POTEF bonus
-			if = { limit = { POTEF_is_balkan = yes }
-				#bonus effect
-				every_country = {
-					limit = { has_idea = EU_member }
-					add_opinion_modifier = { target = KAZ modifier = contest_silk_road }
-					reverse_add_opinion_modifier = { target = KAZ modifier = contest_silk_road }
-					add_opinion_modifier = { target = KYR modifier = contest_silk_road }
-					reverse_add_opinion_modifier = { target = KYR modifier = contest_silk_road }
-					add_opinion_modifier = { target = TAJ modifier = contest_silk_road }
-					reverse_add_opinion_modifier = { target = TAJ modifier = contest_silk_road }
-					add_opinion_modifier = { target = UZB modifier = contest_silk_road }
-					reverse_add_opinion_modifier = { target = UZB modifier = contest_silk_road }
-					add_opinion_modifier = { target = TRK modifier = contest_silk_road }
-					reverse_add_opinion_modifier = { target = TRK modifier = contest_silk_road }
-					add_opinion_modifier = { target = PER modifier = contest_silk_road }
-					reverse_add_opinion_modifier = { target = PER modifier = contest_silk_road }
-				}
+		#POTEF bonus
+		if = { limit = { POTEF_is_balkan = yes }
+			#bonus effect
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				add_opinion_modifier = { target = KAZ modifier = contest_silk_road }
+				reverse_add_opinion_modifier = { target = KAZ modifier = contest_silk_road }
+				add_opinion_modifier = { target = KYR modifier = contest_silk_road }
+				reverse_add_opinion_modifier = { target = KYR modifier = contest_silk_road }
+				add_opinion_modifier = { target = TAJ modifier = contest_silk_road }
+				reverse_add_opinion_modifier = { target = TAJ modifier = contest_silk_road }
+				add_opinion_modifier = { target = UZB modifier = contest_silk_road }
+				reverse_add_opinion_modifier = { target = UZB modifier = contest_silk_road }
+				add_opinion_modifier = { target = TRK modifier = contest_silk_road }
+				reverse_add_opinion_modifier = { target = TRK modifier = contest_silk_road }
+				add_opinion_modifier = { target = PER modifier = contest_silk_road }
+				reverse_add_opinion_modifier = { target = PER modifier = contest_silk_road }
 			}
-			set_temp_variable = { percent_change = -2 }
-			set_temp_variable = { tag_index = CHI.id }
-			set_temp_variable = { influence_target = KAZ }
-			change_influence_percentage = yes
-			set_temp_variable = { influence_target = KYR }
-			change_influence_percentage = yes
-			set_temp_variable = { influence_target = TAJ }
-			change_influence_percentage = yes
-			set_temp_variable = { influence_target = UZB }
-			change_influence_percentage = yes
-			set_temp_variable = { influence_target = TRK }
-			change_influence_percentage = yes
-			set_temp_variable = { influence_target = PER }
-			change_influence_percentage = yes
-			set_temp_variable = { influence_target = TUR }
-			change_influence_percentage = yes
-			set_temp_variable = { influence_target = GRE }
-			change_influence_percentage = yes
 		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_balkan
+		set_temp_variable = { percent_change = -2 }
+		set_temp_variable = { tag_index = CHI.id }
+		set_temp_variable = { influence_target = KAZ }
+		change_influence_percentage = yes
+		set_temp_variable = { influence_target = KYR }
+		change_influence_percentage = yes
+		set_temp_variable = { influence_target = TAJ }
+		change_influence_percentage = yes
+		set_temp_variable = { influence_target = UZB }
+		change_influence_percentage = yes
+		set_temp_variable = { influence_target = TRK }
+		change_influence_percentage = yes
+		set_temp_variable = { influence_target = PER }
+		change_influence_percentage = yes
+		set_temp_variable = { influence_target = TUR }
+		change_influence_percentage = yes
+		set_temp_variable = { influence_target = GRE }
+		change_influence_percentage = yes
 		custom_effect_tooltip = focus_POTEF502_effect_tt
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### Competitor China ###
@@ -5306,16 +5138,19 @@ shared_focus = {
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus POTEF503"
-		every_country = {
-			limit = { has_idea = EU_member }
-			set_temp_variable = { percent_change = -5 }
-			set_temp_variable = { tag_index = CHI.id }
-			set_temp_variable = { influence_target = THIS.id }
-			change_influence_percentage = yes
+		for_each_scope_loop = {
+			array = global.EU_member
+			tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+			if = {
+				limit = { NOT = { tag = ROOT } }
+				set_temp_variable = { percent_change = -5 }
+				set_temp_variable = { tag_index = CHI.id }
+				change_influence_percentage = yes
+			}
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### Operation Arrow ###
@@ -5335,13 +5170,16 @@ shared_focus = {
 	will_lead_to_war_with = CHI
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus POTEF504"
+
+		set_temp_variable = { wargoal_on = CHI }
+		add_threat_from_wargoal_effect = yes
 		create_wargoal = {
 			type = puppet_wargoal_focus
 			target = CHI
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### Asian Allies ###
@@ -5360,16 +5198,20 @@ shared_focus = {
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus POTEF505"
-		every_country = {
-			limit = { has_idea = EU_member }
-			add_opinion_modifier = { target = JAP modifier = declaration_of_friendship }
-			reverse_add_opinion_modifier = { target = JAP modifier = declaration_of_friendship }
-			add_opinion_modifier = { target = KOR modifier = declaration_of_friendship }
-			reverse_add_opinion_modifier = { target = KOR modifier = declaration_of_friendship }
+		for_each_scope_loop = {
+			array = global.EU_member
+			tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+			if = {
+				limit = { NOT = { tag = ROOT } }
+				add_opinion_modifier = { target = JAP modifier = declaration_of_friendship }
+				reverse_add_opinion_modifier = { target = JAP modifier = declaration_of_friendship }
+				add_opinion_modifier = { target = KOR modifier = declaration_of_friendship }
+				reverse_add_opinion_modifier = { target = KOR modifier = declaration_of_friendship }
+			}
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### Republic of Korea ###
@@ -5389,16 +5231,19 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus POTEF506"
 		KOR = { add_ideas = EDU_major_non_EU_ally }
-		every_country = {
-			limit = { has_idea = EU_member }
-			set_temp_variable = { percent_change = 3 }
-			set_temp_variable = { tag_index = KOR.id }
-			set_temp_variable = { influence_target = THIS.id }
-			change_influence_percentage = yes
+		for_each_scope_loop = {
+			array = global.EU_member
+			tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+			if = {
+				limit = { NOT = { tag = ROOT } }
+				set_temp_variable = { percent_change = 3 }
+				set_temp_variable = { tag_index = KOR.id }
+				change_influence_percentage = yes
+			}
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### Japan ###
@@ -5418,16 +5263,19 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus POTEF507"
 		JAP = { add_ideas = EDU_major_non_EU_ally }
-		every_country = {
-			limit = { has_idea = EU_member }
-			set_temp_variable = { percent_change = 3 }
-			set_temp_variable = { tag_index = JAP.id }
-			set_temp_variable = { influence_target = THIS.id }
-			change_influence_percentage = yes
+		for_each_scope_loop = {
+			array = global.EU_member
+			tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+			if = {
+				limit = { NOT = { tag = ROOT } }
+				set_temp_variable = { percent_change = 3 }
+				set_temp_variable = { tag_index = JAP.id }
+				change_influence_percentage = yes
+			}
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### Black Sea Doctrine ###
@@ -5449,36 +5297,33 @@ shared_focus = {
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus POTEF550"
-		hidden_effect = {
-			#POTEF bonus
-			if = { limit = { POTEF_is_black_sea = yes }
-				#bonus effect
-				every_country = {
-					limit = {
-						has_idea = EU_member
-					}
-					add_ideas = POTEF_extensive_anti_air_doctrine
-				}
+		if = {
+			limit = {
+				has_idea = EU_member
+				NOT = { has_dynamic_modifier = { modifier = POTEF_dynmod_air } }
+			}
+			add_dynamic_modifier = { modifier = POTEF_dynmod_air }
+		}
+		if = {
+			limit = { NOT = { POTEF_is_black_sea = yes } }
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				add_to_variable = { POTEF_air_attack_factor = 0.15 tooltip = air_attack_factor_tt }
+				add_to_variable = { POTEF_cas_damage_reduction = 0.15 tooltip = cas_damage_reduction_tt }
 			}
 		}
-		#basic effect
-		every_country = {
-			limit = { has_idea = EU_member }
-			add_ideas = POTEF_anti_air_doctrine
-		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_black_sea
-		effect_tooltip = {
-			#mockup bonus effect for tooltip
-			every_country = {
-				limit = { has_idea = EU_member }
-				add_ideas = POTEF_extensive_anti_air_doctrine
-				remove_ideas = POTEF_anti_air_doctrine
+		else = {
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				add_to_variable = { POTEF_air_attack_factor = 0.20 tooltip = air_attack_factor_tt }
+				add_to_variable = { POTEF_cas_damage_reduction = 0.30 tooltip = cas_damage_reduction_tt }
 			}
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### Safeguard the Black Sea ###
@@ -5740,8 +5585,6 @@ shared_focus = {
 				}
 			}
 		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_black_sea
 		effect_tooltip = {
 			#mockup bonus effect for tooltip
 			if = { limit = { UKR = { has_idea = EU_member } }
@@ -5861,7 +5704,7 @@ shared_focus = {
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### Reintegrate the Breakaway Republics ###
@@ -5884,21 +5727,20 @@ shared_focus = {
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus POTEF552"
-		hidden_effect = {
-			#POTEF bonus
-			if = { limit = { POTEF_is_black_sea = yes }
-				#bonus effect
-				every_country = {
-					limit = {
-						has_idea = EU_member
-					}
-					add_opinion_modifier = { target = SOV modifier = CSCE_peace_talks }
-					reverse_add_opinion_modifier = { target = SOV modifier = CSCE_peace_talks }
-				}
+		#POTEF bonus
+		if = {
+			limit = { POTEF_is_black_sea = yes }
+			#bonus effect
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				add_opinion_modifier = { target = SOV modifier = CSCE_peace_talks }
+				reverse_add_opinion_modifier = { target = SOV modifier = CSCE_peace_talks }
 			}
 		}
 		#basic effect
-		if = { limit = { MLV = { has_idea = EU_member } }
+		if = {
+			limit = { MLV = { has_idea = EU_member } }
 			MLV = {
 				annex_country = {
 					target = PMR
@@ -5906,7 +5748,8 @@ shared_focus = {
 				}
 			}
 		}
-		if = { limit = { UKR = { has_idea = EU_member } }
+		if = {
+			limit = { UKR = { has_idea = EU_member } }
 			UKR = {
 				annex_country = {
 					target = NOV
@@ -5914,7 +5757,8 @@ shared_focus = {
 				}
 			}
 		}
-		if = { limit = { GEO = { has_idea = EU_member } }
+		if = {
+			limit = { GEO = { has_idea = EU_member } }
 			GEO = {
 				annex_country = {
 					target = ABK
@@ -5958,27 +5802,17 @@ shared_focus = {
 				}
 			}
 		}
-		every_country = {
-			limit = {
-				has_idea = EU_member
-			}
-			reverse_add_opinion_modifier = { target = SOV modifier = EU_annexed_SOV_minion }
-		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_black_sea
-		effect_tooltip = {
-			#mockup bonus effect for tooltip
-			every_country = {
-				limit = {
-					has_idea = EU_member
-				}
-				add_opinion_modifier = { target = SOV modifier = CSCE_peace_talks }
-				reverse_add_opinion_modifier = { target = SOV modifier = CSCE_peace_talks }
+		for_each_scope_loop = {
+			array = global.EU_member
+			tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+			if = {
+				limit = { NOT = { tag = ROOT } }
+				reverse_add_opinion_modifier = { target = SOV modifier = EU_annexed_SOV_minion }
 			}
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### Rival Russia ###
@@ -5987,31 +5821,37 @@ shared_focus = {
 	icon = attack_russia
 	#icon = POTEF553
 	relative_position_id = POTEF552
-	x = 2
+	x = 3
 	y = 1
 	cost = 10
 	search_filters = { FOCUS_FILTER_POLITICAL }
 	prerequisite = { focus = POTEF552 focus = POTEF652 }
 	bypass = { any_of_scopes = { array = global.EU_member has_completed_focus = POTEF553 } }
 	available = { has_idea = EU_president }
+	mutually_exclusive = { focus = POTEF753 }
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus POTEF553"
-		every_country = {
-			limit = {
-				has_idea = EU_member
-			}
-			SOV = {
-				set_country_flag = embargo@PREV
-				add_opinion_modifier = { target = PREV modifier = embargo }
-				reverse_add_opinion_modifier = { target = PREV modifier = embargo }
-				add_opinion_modifier = { target = PREV modifier = embargo_opinion }
-				reverse_add_opinion_modifier = { target = PREV modifier = embargo_opinion }
+		for_each_scope_loop = {
+			array = global.EU_member
+			tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+			if = {
+				limit = { NOT = { tag = ROOT } }
+				SOV = {
+					if = {
+						limit = { has_dlc = "By Blood Alone" }
+						send_embargo = PREV
+					}
+					add_opinion_modifier = { target = PREV modifier = embargo }
+					reverse_add_opinion_modifier = { target = PREV modifier = embargo }
+					add_opinion_modifier = { target = PREV modifier = embargo_opinion }
+					reverse_add_opinion_modifier = { target = PREV modifier = embargo_opinion }
+				}
 			}
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### Operation Charlemagne ###
@@ -6037,13 +5877,16 @@ shared_focus = {
 	will_lead_to_war_with = SOV
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus POTEF554"
+
+		set_temp_variable = { wargoal_on = SOV }
+		add_threat_from_wargoal_effect = yes
 		create_wargoal = {
 			type = puppet_wargoal_focus
 			target = SOV
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### Caucasus Doctrine ###
@@ -6065,43 +5908,44 @@ shared_focus = {
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus POTEF600"
-		hidden_effect = {
-			#POTEF bonus
-			if = {
-				limit = {
-					POTEF_is_caucasus = yes
-			}
-				#bonus effect
-				every_country = {
-					limit = {
-						has_idea = EU_member
-					}
-					add_ideas = POTEF_extensive_defense_doctrine
-				}
-			}
-		}
-		#basic effect
-		every_country = {
+		if = {
 			limit = {
 				has_idea = EU_member
+				NOT = { has_dynamic_modifier = { modifier = POTEF_dynmod_army } }
 			}
-			add_ideas = POTEF_defense_doctrine
+			add_dynamic_modifier = { modifier = POTEF_dynmod_army }
 		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_caucasus
-		effect_tooltip = {
-			#mockup bonus effect for tooltip
-			every_country = {
-				limit = {
-					has_idea = EU_member
-				}
-				add_ideas = POTEF_extensive_defense_doctrine
-				remove_ideas = POTEF_defense_doctrine
+		if = {
+			limit = {
+				has_idea = EU_member
+				NOT = { has_dynamic_modifier = { modifier = POTEF_dynmod_adm } }
+			}
+			add_dynamic_modifier = { modifier = POTEF_dynmod_adm }
+		}
+		if = {
+			limit = { NOT = { POTEF_is_caucasus = yes } }
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				add_to_variable = { POTEF_max_dig_in_factor = 0.15 tooltip = max_dig_in_factor_tt }
+				add_to_variable = { POTEF_dig_in_speed_factor = 0.15 tooltip = dig_in_speed_factor_tt }
+				add_to_variable = { POTEF_defence = 0.10 tooltip = defence_tt }
+				add_to_variable = { POTEF_production_speed_bunker_factor = 0.10 tooltip = production_speed_bunker_factor_tt }
+			}
+		}
+		else = {
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				add_to_variable = { POTEF_max_dig_in_factor = 0.30 tooltip = max_dig_in_factor_tt }
+				add_to_variable = { POTEF_dig_in_speed_factor = 0.30 tooltip = dig_in_speed_factor_tt }
+				add_to_variable = { POTEF_defence = 0.20 tooltip = defence_tt }
+				add_to_variable = { POTEF_production_speed_bunker_factor = 0.20 tooltip = production_speed_bunker_factor_tt }
 			}
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### European Access ###
@@ -6266,8 +6110,6 @@ shared_focus = {
 				}
 			}
 		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_caucasus
 		effect_tooltip = {
 			#mockup bonus effect for tooltip
 			if = {
@@ -6333,7 +6175,7 @@ shared_focus = {
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### Visegrad Doctrine ###
@@ -6355,34 +6197,33 @@ shared_focus = {
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus POTEF650"
-		hidden_effect = {
-			#POTEF bonus
-			if = { limit = { POTEF_is_visegrad = yes }
-				#bonus effect
-				every_country = {
-					limit = { has_idea = EU_member }
-					add_ideas = POTEF_extensive_artillery_doctrine
-				}
+		if = {
+			limit = {
+				has_idea = EU_member
+				NOT = { has_dynamic_modifier = { modifier = POTEF_dynmod_army } }
+			}
+			add_dynamic_modifier = { modifier = POTEF_dynmod_army }
+		}
+		if = {
+			limit = { NOT = { POTEF_is_visegrad = yes } }
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				add_to_variable = { POTEF_army_artillery_attack_factor = 0.15 tooltip = army_artillery_attack_factor_tt }
+				add_to_variable = { POTEF_army_artillery_defence_factor = 0.15 tooltip = army_artillery_defence_factor_tt }
 			}
 		}
-		#basic effect
-		every_country = {
-			limit = { has_idea = EU_member }
-			add_ideas = POTEF_artillery_doctrine
-		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_visegrad
-		effect_tooltip = {
-			#mockup bonus effect for tooltip
-			every_country = {
-				limit = { has_idea = EU_member }
-				add_ideas = POTEF_extensive_artillery_doctrine
-				remove_ideas = POTEF_artillery_doctrine
+		else = {
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				add_to_variable = { POTEF_army_artillery_attack_factor = 0.30 tooltip = army_artillery_attack_factor_tt }
+				add_to_variable = { POTEF_army_artillery_defence_factor = 0.20 tooltip = army_artillery_defence_factor_tt }
 			}
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### European Air Defense Network ###
@@ -6591,8 +6432,6 @@ shared_focus = {
 				}
 			}
 		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_visegrad
 		effect_tooltip = {
 			#mockup bonus effect for tooltip
 			if = { limit = { POL = { has_idea = EU_member } }
@@ -6688,7 +6527,7 @@ shared_focus = {
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### Eastern Firewall ###
@@ -6703,10 +6542,12 @@ shared_focus = {
 	search_filters = { FOCUS_FILTER_INFLUENCE }
 	prerequisite = { focus = POTEF651 }
 	prerequisite = { focus = POTEF701 }
+	mutually_exclusive = { focus = POTEF752 }
 	bypass = { any_of_scopes = { array = global.EU_member has_completed_focus = POTEF652 } }
 	available = {
 		has_idea = EU_president
 		EU_member_is_visegrad = yes
+		NOT = { SOV = { has_idea = EU_member } }
 	}
 
 	completion_reward = {
@@ -6809,8 +6650,6 @@ shared_focus = {
 			set_temp_variable = { influence_target = SIL }
 			change_influence_percentage = yes
 		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_visegrad
 		effect_tooltip = {
 			#mockup bonus effect for tooltip
 			if = { limit = { EST = { has_idea = EU_member } }
@@ -6861,7 +6700,7 @@ shared_focus = {
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### Baltic Doctrine ###
@@ -6883,41 +6722,37 @@ shared_focus = {
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus POTEF700"
-		hidden_effect = {
-			#POTEF bonus
-			if = {
-				limit = {
-					POTEF_is_baltic = yes
-				}
-				#bonus effect
-				every_country = {
-					limit = {
-						has_idea = EU_member
-					}
-					add_ideas = POTEF_extensive_special_forces_doctrine
-				}
+		if = {
+			limit = {
+				has_idea = EU_member
+				NOT = { has_dynamic_modifier = { modifier = POTEF_dynmod_army } }
+			}
+			add_dynamic_modifier = { modifier = POTEF_dynmod_army }
+		}
+		if = {
+			limit = { NOT = { POTEF_is_baltic = yes } }
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				add_to_variable = { POTEF_special_forces_attack_factor = 0.10 tooltip = special_forces_attack_factor_tt }
+				add_to_variable = { POTEF_special_forces_defence_factor = 0.10 tooltip = special_forces_defence_factor_tt }
+				add_to_variable = { POTEF_special_forces_min = 4 tooltip = special_forces_min_tt }
+				add_to_variable = { POTEF_special_forces_cap = 0.25 tooltip = special_forces_cap_tt }
 			}
 		}
-		#basic effect
-		every_country = {
-			limit = { has_idea = EU_member }
-			add_ideas = POTEF_special_forces_doctrine
-		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_baltic
-		effect_tooltip = {
-			#mockup bonus effect for tooltip
-			every_country = {
-				limit = {
-					has_idea = EU_member
-				}
-				add_ideas = POTEF_extensive_special_forces_doctrine
-				remove_ideas = POTEF_special_forces_doctrine
+		else = {
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				add_to_variable = { POTEF_special_forces_attack_factor = 0.20 tooltip = special_forces_attack_factor_tt }
+				add_to_variable = { POTEF_special_forces_defence_factor = 0.20 tooltip = special_forces_defence_factor_tt }
+				add_to_variable = { POTEF_special_forces_min = 6 tooltip = special_forces_min_tt }
+				add_to_variable = { POTEF_special_forces_cap = 0.5 tooltip = special_forces_cap_tt }
 			}
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }
 ### Safeguard the Baltic Sea ###
@@ -7147,8 +6982,6 @@ shared_focus = {
 				}
 			}
 		}
-		custom_effect_tooltip = tooltip_POTEF_bonus_effect
-		custom_effect_tooltip = tooltip_POTEF_is_baltic
 		effect_tooltip = {
 			#mockup bonus effect for tooltip
 			if = {
@@ -7254,7 +7087,183 @@ shared_focus = {
 	}
 
 	ai_will_do = {
-		factor = 1
+		base = 1
+	}
+}
+
+### Eastern Doctrine ###
+shared_focus = {
+	id = POTEF750
+	icon = POTEF750
+	relative_position_id = POTEF001
+	x = 23
+	y = 1
+	cost = 10
+	search_filters = { FOCUS_FILTER_MILITARY_LAWS }
+	prerequisite = { focus = POTEF001 }
+	bypass = { any_of_scopes = { array = global.EU_member has_completed_focus = POTEF750 } }
+	available = {
+		has_idea = EU_president
+		EU_member_is_eastern = yes
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus POTEF700"
+		if = {
+			limit = {
+				has_idea = EU_member
+				NOT = { has_dynamic_modifier = { modifier = POTEF_dynmod_army } }
+			}
+			add_dynamic_modifier = { modifier = POTEF_dynmod_army }
+		}
+		if = {
+			limit = { NOT = { POTEF_is_eastern = yes } }
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				add_to_variable = { POTEF_army_infantry_attack_factor = 0.10 tooltip = army_infantry_attack_factor_tt }
+				add_to_variable = { POTEF_army_speed_factor = 0.05 tooltip = army_speed_factor_tt }
+			}
+		}
+		else = {
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				add_to_variable = { POTEF_army_infantry_attack_factor = 0.20 tooltip = army_infantry_attack_factor_tt }
+				add_to_variable = { POTEF_army_speed_factor = 0.15 tooltip = army_speed_factor_tt }
+			}
+		}
+	}
+	ai_will_do = {
+		base = 1
+	}
+}
+
+shared_focus = {
+	id = POTEF751
+	icon = drone
+	relative_position_id = POTEF750
+	x = 0
+	y = 1
+	cost = 10
+	search_filters = { FOCUS_FILTER_MILITARY_LAWS }
+	prerequisite = { focus = POTEF750 }
+	bypass = { any_of_scopes = { array = global.EU_member has_completed_focus = POTEF751 } }
+	available = {
+		has_idea = EU_president
+		EU_member_is_eastern = yes
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus POTEF751"
+		for_each_scope_loop = {
+			array = global.EU_member
+			tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+			add_ideas = POTEF_mass_drone_production
+			if = { limit = { POTEF_is_eastern = yes }
+				add_ideas = POTEF_extensive_mass_drone_production
+			}
+		}
+	}
+	ai_will_do = {
+		base = 1
+	}
+}
+
+shared_focus = {
+	id = POTEF752
+	icon = inter_with_rus
+	relative_position_id = POTEF751
+	x = 0
+	y = 1
+	cost = 10
+	search_filters = { FOCUS_FILTER_MILITARY_LAWS }
+	prerequisite = { focus = POTEF751 }
+	mutually_exclusive = { focus = POTEF652 }
+	bypass = { any_of_scopes = { array = global.EU_member has_completed_focus = POTEF752 } }
+	available = {
+		has_idea = EU_president
+		EU_member_is_eastern = yes
+		SOV = { has_idea = EU_member }
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus POTEF751"
+		if = {
+			limit = {
+				POTEF_is_eastern = yes
+			}
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				every_owned_state = {
+					limit = {
+						any_neighbor_state = {
+							is_owned_by = CHI
+						}
+					}
+					add_building_construction = {
+						type = bunker
+						level = 3
+						instant_build = yes
+						province = {
+							all_provinces = yes
+							limit_to_border = yes
+						}
+					}
+				}
+			}
+		}
+	}
+	ai_will_do = {
+		base = 1
+	}
+}
+
+shared_focus = {
+	id = POTEF753
+	icon = rapprochement_with_russia
+	relative_position_id = POTEF752
+	x = 0
+	y = 1
+	cost = 15
+	search_filters = { FOCUS_FILTER_POLITICAL }
+	prerequisite = { focus = POTEF752 }
+	bypass = { any_of_scopes = { array = global.EU_member has_completed_focus = POTEF800 } }
+	available = {
+		has_idea = EU_president
+		SOV = { has_idea = EU_member }
+	}
+	mutually_exclusive = { focus = POTEF553 }
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus POTEF753"
+		SOV = {
+			every_controlled_state = {
+				limit = {
+					any_province_building_level = {
+						province = {
+							all_provinces = yes
+							limit_to_coastal = yes
+						}
+						building = coastal_bunker
+						level < 9
+					}
+				}
+				add_building_construction = {
+					type = coastal_bunker
+					level = 2
+					instant_build = yes
+					province = {
+						all_provinces = yes
+						limit_to_coastal = yes
+					}
+				}
+			}
+		}
+	}
+	ai_will_do = {
+		base = 1
 	}
 }
 
@@ -7262,7 +7271,6 @@ shared_focus = {
 shared_focus = {
 	id = POTEF800
 	icon = align_to_europe
-	#icon = POTEF800
 	relative_position_id = POTEF504
 	x = -2
 	y = 3
@@ -7275,14 +7283,13 @@ shared_focus = {
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus POTEF800"
-		every_country = {
-			limit = {
-				has_idea = EU_member
-			}
+		for_each_scope_loop = {
+			array = global.EU_member
+			tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 			add_ideas = POTEF_pax_europaea
 		}
 	}
 	ai_will_do = {
-		factor = 1
+		base = 1
 	}
 }

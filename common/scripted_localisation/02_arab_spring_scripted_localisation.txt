@@ -30,9 +30,6 @@ defined_text = {
 		trigger = { NOT = { has_country_flag = AS_hide_monthly_arab_spring_protest_change } }
 		localization_key = AS_factors_impacting_monthly_arab_spring_protest_strength
 	}
-	text = {
-		localization_key = ""
-	}
 }
 
 defined_text = {
@@ -55,8 +52,14 @@ defined_text = {
 	text = { trigger = { has_idea = widespread_corruption }
 		localization_key = AS_impact_of_corruption_widespread_tt
 	}
-	text = {
-		localization_key = ""
+	text = { trigger = { has_idea = modest_corruption }
+		localization_key = AS_impact_of_corruption_modest_tt
+	}
+	text = { trigger = { has_idea = slight_corruption }
+		localization_key = AS_impact_of_corruption_slight_tt
+	}
+	text = { trigger = { has_idea = negligible_corruption }
+		localization_key = AS_impact_of_corruption_negligible_tt
 	}
 }
 
@@ -73,9 +76,6 @@ defined_text = {
 	text = {
 		trigger = { has_idea = police_03 }
 		localization_key = AS_impact_of_current_internal_security_3_tt
-	}
-	text = {
-		localization_key = ""
 	}
 }
 
@@ -105,8 +105,21 @@ defined_text = {
 		trigger = { has_idea = social_06 }
 		localization_key = AS_impact_of_current_social_unrest_6_tt
 	}
+}
+
+defined_text = {
+	name = AS_impact_of_current_healthcare
 	text = {
-		localization_key = ""
+		trigger = { has_idea = health_04 }
+		localization_key = AS_impact_of_current_health_unrest_4_tt
+	}
+	text = {
+		trigger = { has_idea = health_05 }
+		localization_key = AS_impact_of_current_health_unrest_5_tt
+	}
+	text = {
+		trigger = { has_idea = health_06 }
+		localization_key = AS_impact_of_current_health_unrest_6_tt
 	}
 }
 
@@ -133,9 +146,6 @@ defined_text = {
 		}
 		localization_key = AS_impact_of_economic_situation_stagnation_tt
 	}
-	text = {
-		localization_key = ""
-	}
 }
 
 
@@ -146,9 +156,6 @@ defined_text = {
 			is_historical_focus_on = yes
 		}
 		localization_key = [AS_impact_of_historical_context]
-	}
-	text = {
-		localization_key = ""
 	}
 }
 defined_text = {
@@ -181,9 +188,6 @@ defined_text = {
 		}
 		localization_key = AS_impact_of_historical_context_libya_tt
 	}
-	text = {
-		localization_key = ""
-	}
 }
 
 defined_text = {
@@ -200,9 +204,6 @@ defined_text = {
 			}
 		}
 		localization_key = AS_impact_of_shia_resistance_tt
-	}
-	text = {
-		localization_key = ""
 	}
 }
 
@@ -223,9 +224,6 @@ defined_text = {
 		}
 		localization_key = AS_impact_of_current_government_structure_tt
 	}
-	text = {
-		localization_key = ""
-	}
 }
 
 defined_text = {
@@ -236,7 +234,48 @@ defined_text = {
 		}
 		localization_key = AS_lack_of_internet_access_tt
 	}
+}
+
+defined_text = {
+	name = AS_government_popularity
 	text = {
-		localization_key = ""
+		trigger = {
+			check_variable = { government_coalition_strength < 0.500 }
+		}
+		localization_key = AS_government_popularity_1_tt
+	}
+	text = {
+		trigger = {
+			check_variable = { government_coalition_strength > 0.499 }
+			check_variable = { government_coalition_strength < 0.599 }
+		}
+		localization_key = AS_government_popularity_2_tt
+	}
+	text = {
+		trigger = {
+			check_variable = { government_coalition_strength > 0.599 }
+			check_variable = { government_coalition_strength < 0.699 }
+		}
+		localization_key = AS_government_popularity_3_tt
+	}
+	text = {
+		trigger = {
+			check_variable = { government_coalition_strength > 0.699 }
+			check_variable = { government_coalition_strength < 0.799 }
+		}
+		localization_key = AS_government_popularity_4_tt
+	}
+	text = {
+		trigger = {
+			check_variable = { government_coalition_strength > 0.799 }
+			check_variable = { government_coalition_strength < 0.899 }
+		}
+		localization_key = AS_government_popularity_5_tt
+	}
+	text = {
+		trigger = {
+			check_variable = { government_coalition_strength > 0.899 }
+		}
+		localization_key = AS_government_popularity_6_tt
 	}
 }

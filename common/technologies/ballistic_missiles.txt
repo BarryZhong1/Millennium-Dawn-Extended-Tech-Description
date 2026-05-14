@@ -22,6 +22,12 @@ technologies = {
 	@2040 = 19
 	@2045 = 20
 	@2050 = 21
+	@2055 = 22
+	@2060 = 23
+	@2065 = 24
+	@2070 = 25
+	@2075 = 26
+	@2080 = 27
 
 	#Y Axis
 	@row1 = -4
@@ -43,7 +49,6 @@ technologies = {
 
 	ballistic_missile = {
 		on_research_complete = {
-			log = "[GetDateText]: [Root.GetName]: add tech ballistic_missile"
 			custom_effect_tooltip = {
 				localization_key = SP_UNLOCK_PROJECT
 				PROJECT = sp_nuclear_warhead_program
@@ -57,7 +62,7 @@ technologies = {
 				PROJECT = sp_missile_project
 			}
 		}
-		research_cost = 1
+		research_cost = 1.75
 		start_year = 1945
 		show_effect_as_desc = yes
 		folder = {
@@ -72,17 +77,12 @@ technologies = {
 			leads_to_tech = IRBM
 			research_cost_coeff = 1
 		}
-		path = {
-			leads_to_tech = SLBM
-			research_cost_coeff = 1
-		}
 
 		categories = {
 			CAT_missile
-			CAT_bm
+			CAT_OLV
 			CAT_icbm
 			CAT_irbm
-			CAT_slbm
 			CAT_Military
 		}
 		special_project_specialization = { specialization_air }
@@ -102,18 +102,15 @@ technologies = {
 			}
 			modifier = {
 				factor = 0
-				AND = {
-					NOT = {
-						unique_missile_model_names = yes
-					}
-					check_variable = { gdp_per_capita < 20 }
+				NOT = {
+					unique_missile_model_names = yes
 				}
+				check_variable = { gdp_per_capita < 20 }
 			}
 		}
 	}
 	ICBM = {
 		on_research_complete = {
-			log = "[GetDateText]: [Root.GetName]: add tech ICBM"
 			add_missile_building_level = yes
 		}
 
@@ -128,7 +125,7 @@ technologies = {
 			nuclear_missile_equipment
 		}
 
-		research_cost = 1
+		research_cost = 3
 		start_year = 1955
 		show_effect_as_desc = yes
 		folder = {
@@ -141,7 +138,7 @@ technologies = {
 		}
 		categories = {
 			CAT_missile
-			CAT_bm
+			CAT_OLV
 			CAT_icbm
 			CAT_Military
 		}
@@ -162,12 +159,10 @@ technologies = {
 			}
 			modifier = {
 				factor = 0
-				AND = {
-					NOT = {
-						unique_missile_model_names = yes
-					}
-					check_variable = { gdp_per_capita < 20 }
+				NOT = {
+					unique_missile_model_names = yes
 				}
+				check_variable = { gdp_per_capita < 20 }
 			}
 		}
 	}
@@ -179,7 +174,7 @@ technologies = {
 			}
 		}
 
-		research_cost = 1
+		research_cost = 2.5
 		start_year = 1965
 		show_equipment_icon = yes
 		enable_equipments = {
@@ -195,7 +190,7 @@ technologies = {
 		}
 		categories = {
 			CAT_missile
-			CAT_bm
+			CAT_OLV
 			CAT_icbm
 			CAT_Military
 		}
@@ -216,12 +211,10 @@ technologies = {
 			}
 			modifier = {
 				factor = 0
-				AND = {
-					NOT = {
-						unique_missile_model_names = yes
-					}
-					check_variable = { gdp_per_capita < 20 }
+				NOT = {
+					unique_missile_model_names = yes
 				}
+				check_variable = { gdp_per_capita < 20 }
 			}
 		}
 	}
@@ -233,7 +226,7 @@ technologies = {
 			}
 		}
 
-		research_cost = 1
+		research_cost = 2.5
 		start_year = 1975
 		show_equipment_icon = yes
 		enable_equipments = {
@@ -249,7 +242,7 @@ technologies = {
 		}
 		categories = {
 			CAT_missile
-			CAT_bm
+			CAT_OLV
 			CAT_icbm
 			CAT_Military
 		}
@@ -270,58 +263,13 @@ technologies = {
 			}
 			modifier = {
 				factor = 0
-				AND = {
-					NOT = {
-						unique_missile_model_names = yes
-					}
-					check_variable = { gdp_per_capita < 20 }
+				NOT = {
+					unique_missile_model_names = yes
 				}
+				check_variable = { gdp_per_capita < 20 }
 			}
 		}
 	}
-	# ICBM2_MIRV = {
-	# 	research_cost = 1
-	# 	start_year = 1980
-	# 	show_effect_as_desc = yes
-	# 	folder = {
-	# 		name = cruise_missiles_folder
-	# 		position = { x = -6 y = @1980 }
-	# 	}
-	# 	path = {
-	# 		leads_to_tech = ICBM3_MIRV
-	# 		research_cost_coeff = 1
-	# 	}
-	# 	categories = {
-	# 		CAT_missile
-	# 		CAT_bm
-	# 		CAT_icbm
-	# 		CAT_Military
-	# 	}
-	# 	ai_will_do = {
-	# 		factor = 1
-	# 		modifier = {
-	# 			factor = 0.5
-	# 			date < 2015.01.01
-	# 		}
-	# 		modifier = {
-	# 			factor = 0.2
-	# 			date < 2010.01.01
-	# 		}
-	# 		modifier = {
-	# 			factor = 2
-	# 			check_variable = { gdp_per_capita > 19.999 }
-	# 		}
-	# 		modifier = {
-	# 			factor = 0
-	# 			AND = {
-	# 				NOT = {
-	# 					unique_missile_model_names = yes
-	# 				}
-	# 				check_variable = { gdp_per_capita < 20 }
-	# 			}
-	# 		}
-	# 	}
-	# }
 	ICBM3 = {
 
 		allow = {
@@ -330,7 +278,7 @@ technologies = {
 			}
 		}
 
-		research_cost = 1
+		research_cost = 2.5
 		start_year = 1985
 		show_equipment_icon = yes
 		enable_equipments = {
@@ -344,13 +292,9 @@ technologies = {
 			leads_to_tech = ICBM4
 			research_cost_coeff = 1
 		}
-		# path = {
-		# 	leads_to_tech = ICBM3_MARV
-		# 	research_cost_coeff = 1
-		# }
 		categories = {
 			CAT_missile
-			CAT_bm
+			CAT_OLV
 			CAT_icbm
 			CAT_Military
 		}
@@ -371,97 +315,13 @@ technologies = {
 			}
 			modifier = {
 				factor = 0
-				AND = {
-					NOT = {
-						unique_missile_model_names = yes
-					}
-					check_variable = { gdp_per_capita < 20 }
+				NOT = {
+					unique_missile_model_names = yes
 				}
+				check_variable = { gdp_per_capita < 20 }
 			}
 		}
 	}
-	# ICBM3_MIRV = {
-	# 	research_cost = 1
-	# 	start_year = 1990
-	# 	show_effect_as_desc = yes
-	# 	folder = {
-	# 		name = cruise_missiles_folder
-	# 		position = { x = -6 y = @1990 }
-	# 	}
-	# 	path = {
-	# 		leads_to_tech = ICBM4_MIRV
-	# 		research_cost_coeff = 1
-	# 	}
-	# 	categories = {
-	# 		CAT_missile
-	# 		CAT_bm
-	# 		CAT_icbm
-	# 		CAT_Military
-	# 	}
-	# 	ai_will_do = {
-	# 		factor = 1
-	# 		modifier = {
-	# 			factor = 0.5
-	# 			date < 2015.01.01
-	# 		}
-	# 		modifier = {
-	# 			factor = 0.2
-	# 			date < 2010.01.01
-	# 		}
-	# 		modifier = {
-	# 			factor = 2
-	# 			check_variable = { gdp_per_capita > 19.999 }
-	# 		}
-	# 		modifier = {
-	# 			factor = 0
-	# 			AND = {
-	# 				NOT = {
-	# 					unique_missile_model_names = yes
-	# 				}
-	# 				check_variable = { gdp_per_capita < 20 }
-	# 			}
-	# 		}
-	# 	}
-	# }
-	# ICBM3_MARV = {
-	# 	research_cost = 1
-	# 	start_year = 1990
-	# 	show_effect_as_desc = yes
-	# 	folder = {
-	# 		name = cruise_missiles_folder
-	# 		position = { x = -2 y = @1990 }
-	# 	}
-	# 	categories = {
-	# 		CAT_missile
-	# 		CAT_bm
-	# 		CAT_icbm
-	# 		CAT_Military
-	# 	}
-	# 	ai_will_do = {
-	# 		factor = 1
-	# 		modifier = {
-	# 			factor = 0.5
-	# 			date < 2015.01.01
-	# 		}
-	# 		modifier = {
-	# 			factor = 0.2
-	# 			date < 2010.01.01
-	# 		}
-	# 		modifier = {
-	# 			factor = 2
-	# 			check_variable = { gdp_per_capita > 19.999 }
-	# 		}
-	# 		modifier = {
-	# 			factor = 0
-	# 			AND = {
-	# 				NOT = {
-	# 					unique_missile_model_names = yes
-	# 				}
-	# 				check_variable = { gdp_per_capita < 20 }
-	# 			}
-	# 		}
-	# 	}
-	# }
 	ICBM4 = {
 
 		allow = {
@@ -470,7 +330,7 @@ technologies = {
 			}
 		}
 
-		research_cost = 1
+		research_cost = 2.5
 		start_year = 1995
 		show_equipment_icon = yes
 		enable_equipments = {
@@ -484,13 +344,9 @@ technologies = {
 			leads_to_tech = ICBM5
 			research_cost_coeff = 1
 		}
-		# path = {
-		# 	leads_to_tech = ICBM4_MARV
-		# 	research_cost_coeff = 1
-		# }
 		categories = {
 			CAT_missile
-			CAT_bm
+			CAT_OLV
 			CAT_icbm
 			CAT_Military
 		}
@@ -511,101 +367,14 @@ technologies = {
 			}
 			modifier = {
 				factor = 0
-				AND = {
-					NOT = {
-						unique_missile_model_names = yes
-					}
-					check_variable = { gdp_per_capita < 20 }
+				NOT = {
+					unique_missile_model_names = yes
 				}
+				check_variable = { gdp_per_capita < 20 }
 			}
 		}
 	}
-	# ICBM4_MIRV = {
-	# 	research_cost = 1
-	# 	start_year = 2000
-	# 	show_effect_as_desc = yes
-	# 	folder = {
-	# 		name = cruise_missiles_folder
-	# 		position = { x = -6 y = @2000 }
-	# 	}
 
-	# 	path = {
-	# 		leads_to_tech = ICBM5_MIRV
-	# 		research_cost_coeff = 1
-	# 	}
-	# 	categories = {
-	# 		CAT_missile
-	# 		CAT_bm
-	# 		CAT_icbm
-	# 		CAT_Military
-	# 	}
-	# 	ai_will_do = {
-	# 		factor = 1
-	# 		modifier = {
-	# 			factor = 0.5
-	# 			date < 2015.01.01
-	# 		}
-	# 		modifier = {
-	# 			factor = 0.2
-	# 			date < 2010.01.01
-	# 		}
-	# 		modifier = {
-	# 			factor = 2
-	# 			check_variable = { gdp_per_capita > 19.999 }
-	# 		}
-	# 		modifier = {
-	# 			factor = 0
-	# 			AND = {
-	# 				NOT = {
-	# 					unique_missile_model_names = yes
-	# 				}
-	# 				check_variable = { gdp_per_capita < 20 }
-	# 			}
-	# 		}
-	# 	}
-	# }
-	# ICBM4_MARV = {
-	# 	research_cost = 1
-	# 	start_year = 2000
-	# 	show_effect_as_desc = yes
-	# 	folder = {
-	# 		name = cruise_missiles_folder
-	# 		position = { x = -2 y = @2000 }
-	# 	}
-	# 	dependencies = {
-	# 		ICBM3_MARV = 1
-	# 	}
-	# 	categories = {
-	# 		CAT_missile
-	# 		CAT_bm
-	# 		CAT_icbm
-	# 		CAT_Military
-	# 	}
-	# 	ai_will_do = {
-	# 		factor = 1
-	# 		modifier = {
-	# 			factor = 0.5
-	# 			date < 2015.01.01
-	# 		}
-	# 		modifier = {
-	# 			factor = 0.2
-	# 			date < 2010.01.01
-	# 		}
-	# 		modifier = {
-	# 			factor = 2
-	# 			check_variable = { gdp_per_capita > 19.999 }
-	# 		}
-	# 		modifier = {
-	# 			factor = 0
-	# 			AND = {
-	# 				NOT = {
-	# 					unique_missile_model_names = yes
-	# 				}
-	# 				check_variable = { gdp_per_capita < 20 }
-	# 			}
-	# 		}
-	# 	}
-	# }
 	ICBM5 = {
 
 		allow = {
@@ -614,7 +383,7 @@ technologies = {
 			}
 		}
 
-		research_cost = 1
+		research_cost = 2.5
 		start_year = 2005
 		show_equipment_icon = yes
 		enable_equipments = {
@@ -628,13 +397,9 @@ technologies = {
 			leads_to_tech = ICBM6
 			research_cost_coeff = 1
 		}
-		# path = {
-		# 	leads_to_tech = ICBM5_MARV
-		# 	research_cost_coeff = 1
-		# }
 		categories = {
 			CAT_missile
-			CAT_bm
+			CAT_OLV
 			CAT_icbm
 			CAT_Military
 		}
@@ -655,100 +420,13 @@ technologies = {
 			}
 			modifier = {
 				factor = 0
-				AND = {
-					NOT = {
-						unique_missile_model_names = yes
-					}
-					check_variable = { gdp_per_capita < 20 }
+				NOT = {
+					unique_missile_model_names = yes
 				}
+				check_variable = { gdp_per_capita < 20 }
 			}
 		}
 	}
-	# ICBM5_MIRV = {
-	# 	research_cost = 1
-	# 	start_year = 2010
-	# 	show_effect_as_desc = yes
-	# 	folder = {
-	# 		name = cruise_missiles_folder
-	# 		position = { x = -6 y = @2010 }
-	# 	}
-	# 	path = {
-	# 		leads_to_tech = ICBM6_MIRV
-	# 		research_cost_coeff = 1
-	# 	}
-	# 	categories = {
-	# 		CAT_missile
-	# 		CAT_bm
-	# 		CAT_icbm
-	# 		CAT_Military
-	# 	}
-	# 	ai_will_do = {
-	# 		factor = 1
-	# 		modifier = {
-	# 			factor = 0.5
-	# 			date < 2015.01.01
-	# 		}
-	# 		modifier = {
-	# 			factor = 0.2
-	# 			date < 2010.01.01
-	# 		}
-	# 		modifier = {
-	# 			factor = 2
-	# 			check_variable = { gdp_per_capita > 19.999 }
-	# 		}
-	# 		modifier = {
-	# 			factor = 0
-	# 			AND = {
-	# 				NOT = {
-	# 					unique_missile_model_names = yes
-	# 				}
-	# 				check_variable = { gdp_per_capita < 20 }
-	# 			}
-	# 		}
-	# 	}
-	# }
-	# ICBM5_MARV = {
-	# 	research_cost = 1
-	# 	start_year = 2010
-	# 	show_effect_as_desc = yes
-	# 	folder = {
-	# 		name = cruise_missiles_folder
-	# 		position = { x = -2 y = @2010 }
-	# 	}
-	# 	dependencies = {
-	# 		ICBM4_MARV = 1
-	# 	}
-	# 	categories = {
-	# 		CAT_missile
-	# 		CAT_bm
-	# 		CAT_icbm
-	# 		CAT_Military
-	# 	}
-	# 	ai_will_do = {
-	# 		factor = 1
-	# 		modifier = {
-	# 			factor = 0.5
-	# 			date < 2015.01.01
-	# 		}
-	# 		modifier = {
-	# 			factor = 0.2
-	# 			date < 2010.01.01
-	# 		}
-	# 		modifier = {
-	# 			factor = 2
-	# 			check_variable = { gdp_per_capita > 19.999 }
-	# 		}
-	# 		modifier = {
-	# 			factor = 0
-	# 			AND = {
-	# 				NOT = {
-	# 					unique_missile_model_names = yes
-	# 				}
-	# 				check_variable = { gdp_per_capita < 20 }
-	# 			}
-	# 		}
-	# 	}
-	# }
 	ICBM6 = {
 
 		allow = {
@@ -757,7 +435,7 @@ technologies = {
 			}
 		}
 
-		research_cost = 1
+		research_cost = 2.5
 		start_year = 2015
 		show_equipment_icon = yes
 		enable_equipments = {
@@ -771,13 +449,9 @@ technologies = {
 			leads_to_tech = ICBM7
 			research_cost_coeff = 1
 		}
-		# path = {
-		# 	leads_to_tech = ICBM6_HGV
-		# 	research_cost_coeff = 1
-		# }
 		categories = {
 			CAT_missile
-			CAT_bm
+			CAT_OLV
 			CAT_icbm
 			CAT_Military
 		}
@@ -798,97 +472,13 @@ technologies = {
 			}
 			modifier = {
 				factor = 0
-				AND = {
-					NOT = {
-						unique_missile_model_names = yes
-					}
-					check_variable = { gdp_per_capita < 20 }
+				NOT = {
+					unique_missile_model_names = yes
 				}
+				check_variable = { gdp_per_capita < 20 }
 			}
 		}
 	}
-	# ICBM6_MIRV = {
-	# 	research_cost = 1
-	# 	start_year = 2020
-	# 	show_effect_as_desc = yes
-	# 	folder = {
-	# 		name = cruise_missiles_folder
-	# 		position = { x = -6 y = @2020 }
-	# 	}
-	# 	path = {
-	# 		leads_to_tech = ICBM7_MIRV
-	# 		research_cost_coeff = 1
-	# 	}
-	# 	categories = {
-	# 		CAT_missile
-	# 		CAT_bm
-	# 		CAT_icbm
-	# 		CAT_Military
-	# 	}
-	# 	ai_will_do = {
-	# 		factor = 1
-	# 		modifier = {
-	# 			factor = 0.5
-	# 			date < 2015.01.01
-	# 		}
-	# 		modifier = {
-	# 			factor = 0.2
-	# 			date < 2010.01.01
-	# 		}
-	# 		modifier = {
-	# 			factor = 2
-	# 			check_variable = { gdp_per_capita > 19.999 }
-	# 		}
-	# 		modifier = {
-	# 			factor = 0
-	# 			AND = {
-	# 				NOT = {
-	# 					unique_missile_model_names = yes
-	# 				}
-	# 				check_variable = { gdp_per_capita < 20 }
-	# 			}
-	# 		}
-	# 	}
-	# }
-	# ICBM6_HGV = {
-	# 	research_cost = 1
-	# 	start_year = 2020
-	# 	show_effect_as_desc = yes
-	# 	folder = {
-	# 		name = cruise_missiles_folder
-	# 		position = { x = -2 y = @2020 }
-	# 	}
-	# 	categories = {
-	# 		CAT_missile
-	# 		CAT_bm
-	# 		CAT_icbm
-	# 		CAT_Military
-	# 	}
-	# 	ai_will_do = {
-	# 		factor = 1
-	# 		modifier = {
-	# 			factor = 0.5
-	# 			date < 2015.01.01
-	# 		}
-	# 		modifier = {
-	# 			factor = 0.2
-	# 			date < 2010.01.01
-	# 		}
-	# 		modifier = {
-	# 			factor = 2
-	# 			check_variable = { gdp_per_capita > 19.999 }
-	# 		}
-	# 		modifier = {
-	# 			factor = 0
-	# 			AND = {
-	# 				NOT = {
-	# 					unique_missile_model_names = yes
-	# 				}
-	# 				check_variable = { gdp_per_capita < 20 }
-	# 			}
-	# 		}
-	# 	}
-	# }
 	ICBM7 = {
 
 		allow = {
@@ -897,7 +487,7 @@ technologies = {
 			}
 		}
 
-		research_cost = 1
+		research_cost = 2.5
 		start_year = 2025
 		show_equipment_icon = yes
 		enable_equipments = {
@@ -911,13 +501,9 @@ technologies = {
 			leads_to_tech = ICBM8
 			research_cost_coeff = 1
 		}
-		# path = {
-		# 	leads_to_tech = ICBM7_HGV
-		# 	research_cost_coeff = 1
-		# }
 		categories = {
 			CAT_missile
-			CAT_bm
+			CAT_OLV
 			CAT_icbm
 			CAT_Military
 		}
@@ -938,100 +524,13 @@ technologies = {
 			}
 			modifier = {
 				factor = 0
-				AND = {
-					NOT = {
-						unique_missile_model_names = yes
-					}
-					check_variable = { gdp_per_capita < 20 }
+				NOT = {
+					unique_missile_model_names = yes
 				}
+				check_variable = { gdp_per_capita < 20 }
 			}
 		}
 	}
-	# ICBM7_MIRV = {
-	# 	research_cost = 1
-	# 	start_year = 2030
-	# 	show_effect_as_desc = yes
-	# 	folder = {
-	# 		name = cruise_missiles_folder
-	# 		position = { x = -6 y = @2030 }
-	# 	}
-	# 	path = {
-	# 		leads_to_tech = ICBM8_MIRV
-	# 		research_cost_coeff = 1
-	# 	}
-	# 	categories = {
-	# 		CAT_missile
-	# 		CAT_bm
-	# 		CAT_icbm
-	# 		CAT_Military
-	# 	}
-	# 	ai_will_do = {
-	# 		factor = 1
-	# 		modifier = {
-	# 			factor = 0.5
-	# 			date < 2015.01.01
-	# 		}
-	# 		modifier = {
-	# 			factor = 0.2
-	# 			date < 2010.01.01
-	# 		}
-	# 		modifier = {
-	# 			factor = 2
-	# 			check_variable = { gdp_per_capita > 19.999 }
-	# 		}
-	# 		modifier = {
-	# 			factor = 0
-	# 			AND = {
-	# 				NOT = {
-	# 					unique_missile_model_names = yes
-	# 				}
-	# 				check_variable = { gdp_per_capita < 20 }
-	# 			}
-	# 		}
-	# 	}
-	# }
-	# ICBM7_HGV = {
-	# 	research_cost = 1
-	# 	start_year = 2030
-	# 	show_effect_as_desc = yes
-	# 	folder = {
-	# 		name = cruise_missiles_folder
-	# 		position = { x = -2 y = @2030 }
-	# 	}
-	# 	dependencies = {
-	# 		ICBM6_HGV = 1
-	# 	}
-	# 	categories = {
-	# 		CAT_missile
-	# 		CAT_bm
-	# 		CAT_icbm
-	# 		CAT_Military
-	# 	}
-	# 	ai_will_do = {
-	# 		factor = 1
-	# 		modifier = {
-	# 			factor = 0.5
-	# 			date < 2015.01.01
-	# 		}
-	# 		modifier = {
-	# 			factor = 0.2
-	# 			date < 2010.01.01
-	# 		}
-	# 		modifier = {
-	# 			factor = 2
-	# 			check_variable = { gdp_per_capita > 19.999 }
-	# 		}
-	# 		modifier = {
-	# 			factor = 0
-	# 			AND = {
-	# 				NOT = {
-	# 					unique_missile_model_names = yes
-	# 				}
-	# 				check_variable = { gdp_per_capita < 20 }
-	# 			}
-	# 		}
-	# 	}
-	# }
 	ICBM8 = {
 
 		allow = {
@@ -1040,7 +539,7 @@ technologies = {
 			}
 		}
 
-		research_cost = 1
+		research_cost = 2.5
 		start_year = 2035
 		show_equipment_icon = yes
 		enable_equipments = {
@@ -1050,13 +549,13 @@ technologies = {
 			name = cruise_missiles_folder
 			position = { x = -4 y = @2035 }
 		}
-		# path = {
-		# 	leads_to_tech = ICBM8_HGV
-		# 	research_cost_coeff = 1
-		# }
+		path = {
+			leads_to_tech = ICBM9
+			research_cost_coeff = 1
+		}
 		categories = {
 			CAT_missile
-			CAT_bm
+			CAT_OLV
 			CAT_icbm
 			CAT_Military
 		}
@@ -1077,99 +576,219 @@ technologies = {
 			}
 			modifier = {
 				factor = 0
-				AND = {
-					NOT = {
-						unique_missile_model_names = yes
-					}
-					check_variable = { gdp_per_capita < 20 }
+				NOT = {
+					unique_missile_model_names = yes
 				}
+				check_variable = { gdp_per_capita < 20 }
 			}
 		}
 	}
-	# ICBM8_MIRV = {
-	# 	research_cost = 1
-	# 	start_year = 2040
-	# 	show_effect_as_desc = yes
-	# 	folder = {
-	# 		name = cruise_missiles_folder
-	# 		position = { x = -6 y = @2040 }
-	# 	}
-	# 	categories = {
-	# 		CAT_missile
-	# 		CAT_bm
-	# 		CAT_icbm
-	# 		CAT_Military
-	# 	}
-	# 	ai_will_do = {
-	# 		factor = 1
-	# 		modifier = {
-	# 			factor = 0.5
-	# 			date < 2015.01.01
-	# 		}
-	# 		modifier = {
-	# 			factor = 0.2
-	# 			date < 2010.01.01
-	# 		}
-	# 		modifier = {
-	# 			factor = 2
-	# 			check_variable = { gdp_per_capita > 19.999 }
-	# 		}
-	# 		modifier = {
-	# 			factor = 0
-	# 			AND = {
-	# 				NOT = {
-	# 					unique_missile_model_names = yes
-	# 				}
-	# 				check_variable = { gdp_per_capita < 20 }
-	# 			}
-	# 		}
-	# 	}
-	# }
-	# ICBM8_HGV = {
-	# 	research_cost = 1
-	# 	start_year = 2040
-	# 	show_effect_as_desc = yes
-	# 	folder = {
-	# 		name = cruise_missiles_folder
-	# 		position = { x = -2 y = @2040 }
-	# 	}
-	# 	dependencies = {
-	# 		ICBM7_HGV = 1
-	# 	}
-	# 	categories = {
-	# 		CAT_missile
-	# 		CAT_bm
-	# 		CAT_icbm
-	# 		CAT_Military
-	# 	}
-	# 	ai_will_do = {
-	# 		factor = 1
-	# 		modifier = {
-	# 			factor = 0.5
-	# 			date < 2015.01.01
-	# 		}
-	# 		modifier = {
-	# 			factor = 0.2
-	# 			date < 2010.01.01
-	# 		}
-	# 		modifier = {
-	# 			factor = 2
-	# 			check_variable = { gdp_per_capita > 19.999 }
-	# 		}
-	# 		modifier = {
-	# 			factor = 0
-	# 			AND = {
-	# 				NOT = {
-	# 					unique_missile_model_names = yes
-	# 				}
-	# 				check_variable = { gdp_per_capita < 20 }
-	# 			}
-	# 		}
-	# 	}
-	# }
+	ICBM9 = {
+
+		allow = {
+			ROOT = {
+				is_special_project_completed = sp:sp_nuclear_warhead_program
+			}
+		}
+
+		research_cost = 2.5
+		start_year = 2045
+		show_equipment_icon = yes
+		enable_equipments = {
+			nuclear_missile_equipment_9
+		}
+		folder = {
+			name = cruise_missiles_folder
+			position = { x = -4 y = @2045 }
+		}
+		path = {
+			leads_to_tech = ICBM10
+			research_cost_coeff = 1
+		}
+		categories = {
+			CAT_missile
+			CAT_OLV
+			CAT_icbm
+			CAT_Military
+		}
+		special_project_specialization = { specialization_air }
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.5
+				date < 2045.01.01
+			}
+			modifier = {
+				factor = 0.2
+				date < 2040.01.01
+			}
+			modifier = {
+				factor = 2
+				check_variable = { gdp_per_capita > 19.999 }
+			}
+			modifier = {
+				factor = 0
+				NOT = {
+					unique_missile_model_names = yes
+				}
+				check_variable = { gdp_per_capita < 20 }
+			}
+		}
+	}
+	ICBM10 = {
+
+		allow = {
+			ROOT = {
+				is_special_project_completed = sp:sp_nuclear_warhead_program
+			}
+		}
+
+		research_cost = 2.5
+		start_year = 2055
+		show_equipment_icon = yes
+		enable_equipments = {
+			nuclear_missile_equipment_10
+		}
+		folder = {
+			name = cruise_missiles_folder
+			position = { x = -4 y = @2055 }
+		}
+		path = {
+			leads_to_tech = ICBM11
+			research_cost_coeff = 1
+		}
+		categories = {
+			CAT_missile
+			CAT_OLV
+			CAT_icbm
+			CAT_Military
+		}
+		special_project_specialization = { specialization_air }
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.5
+				date < 2055.01.01
+			}
+			modifier = {
+				factor = 0.2
+				date < 2050.01.01
+			}
+			modifier = {
+				factor = 2
+				check_variable = { gdp_per_capita > 19.999 }
+			}
+			modifier = {
+				factor = 0
+				NOT = {
+					unique_missile_model_names = yes
+				}
+				check_variable = { gdp_per_capita < 20 }
+			}
+		}
+	}
+	ICBM11 = {
+
+		allow = {
+			ROOT = {
+				is_special_project_completed = sp:sp_nuclear_warhead_program
+			}
+		}
+
+		research_cost = 2.5
+		start_year = 2065
+		show_equipment_icon = yes
+		enable_equipments = {
+			nuclear_missile_equipment_11
+		}
+		folder = {
+			name = cruise_missiles_folder
+			position = { x = -4 y = @2065 }
+		}
+		path = {
+			leads_to_tech = ICBM12
+			research_cost_coeff = 1
+		}
+		categories = {
+			CAT_missile
+			CAT_OLV
+			CAT_icbm
+			CAT_Military
+		}
+		special_project_specialization = { specialization_air }
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.5
+				date < 2065.01.01
+			}
+			modifier = {
+				factor = 0.2
+				date < 2060.01.01
+			}
+			modifier = {
+				factor = 2
+				check_variable = { gdp_per_capita > 19.999 }
+			}
+			modifier = {
+				factor = 0
+				NOT = {
+					unique_missile_model_names = yes
+				}
+				check_variable = { gdp_per_capita < 20 }
+			}
+		}
+	}
+	ICBM12 = {
+
+		allow = {
+			ROOT = {
+				is_special_project_completed = sp:sp_nuclear_warhead_program
+			}
+		}
+
+		research_cost = 2.5
+		start_year = 2075
+		show_equipment_icon = yes
+		enable_equipments = {
+			nuclear_missile_equipment_12
+		}
+		folder = {
+			name = cruise_missiles_folder
+			position = { x = -4 y = @2075 }
+		}
+		categories = {
+			CAT_missile
+			CAT_OLV
+			CAT_icbm
+			CAT_Military
+		}
+		special_project_specialization = { specialization_air }
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.5
+				date < 2075.01.01
+			}
+			modifier = {
+				factor = 0.2
+				date < 2070.01.01
+			}
+			modifier = {
+				factor = 2
+				check_variable = { gdp_per_capita > 19.999 }
+			}
+			modifier = {
+				factor = 0
+				NOT = {
+					unique_missile_model_names = yes
+				}
+				check_variable = { gdp_per_capita < 20 }
+			}
+		}
+	}
 	IRBM = {
 		on_research_complete = {
-			log = "[GetDateText]: [Root.GetName]: add tech IRBM"
 			add_missile_building_level = yes
 		}
 
@@ -1179,7 +798,7 @@ technologies = {
 			}
 		}
 
-		research_cost = 1
+		research_cost = 1.75
 		start_year = 1955
 		enable_equipments = {
 			ballistic_missile_equipment
@@ -1195,7 +814,7 @@ technologies = {
 		}
 		categories = {
 			CAT_missile
-			CAT_bm
+			CAT_OLV
 			CAT_irbm
 			CAT_Military
 		}
@@ -1216,12 +835,10 @@ technologies = {
 			}
 			modifier = {
 				factor = 0
-				AND = {
-					NOT = {
-						unique_missile_model_names = yes
-					}
-					check_variable = { gdp_per_capita < 20 }
+				NOT = {
+					unique_missile_model_names = yes
 				}
+				check_variable = { gdp_per_capita < 20 }
 			}
 		}
 	}
@@ -1233,7 +850,7 @@ technologies = {
 			}
 		}
 
-		research_cost = 1
+		research_cost = 1.75
 		start_year = 1965
 		show_equipment_icon = yes
 		enable_equipments = {
@@ -1249,7 +866,7 @@ technologies = {
 		}
 		categories = {
 			CAT_missile
-			CAT_bm
+			CAT_OLV
 			CAT_irbm
 			CAT_Military
 		}
@@ -1270,12 +887,10 @@ technologies = {
 			}
 			modifier = {
 				factor = 0
-				AND = {
-					NOT = {
-						unique_missile_model_names = yes
-					}
-					check_variable = { gdp_per_capita < 20 }
+				NOT = {
+					unique_missile_model_names = yes
 				}
+				check_variable = { gdp_per_capita < 20 }
 			}
 		}
 	}
@@ -1287,7 +902,7 @@ technologies = {
 			}
 		}
 
-		research_cost = 1
+		research_cost = 1.75
 		start_year = 1975
 		show_equipment_icon = yes
 		enable_equipments = {
@@ -1307,7 +922,7 @@ technologies = {
 		}
 		categories = {
 			CAT_missile
-			CAT_bm
+			CAT_OLV
 			CAT_irbm
 			CAT_Military
 		}
@@ -1328,12 +943,10 @@ technologies = {
 			}
 			modifier = {
 				factor = 0
-				AND = {
-					NOT = {
-						unique_missile_model_names = yes
-					}
-					check_variable = { gdp_per_capita < 20 }
+				NOT = {
+					unique_missile_model_names = yes
 				}
+				check_variable = { gdp_per_capita < 20 }
 			}
 		}
 	}
@@ -1345,7 +958,7 @@ technologies = {
 			}
 		}
 
-		research_cost = 1
+		research_cost = 1.75
 		start_year = 1985
 		show_equipment_icon = yes
 		enable_equipments = {
@@ -1361,7 +974,7 @@ technologies = {
 		}
 		categories = {
 			CAT_missile
-			CAT_bm
+			CAT_OLV
 			CAT_irbm
 			CAT_Military
 		}
@@ -1382,12 +995,10 @@ technologies = {
 			}
 			modifier = {
 				factor = 0
-				AND = {
-					NOT = {
-						unique_missile_model_names = yes
-					}
-					check_variable = { gdp_per_capita < 20 }
+				NOT = {
+					unique_missile_model_names = yes
 				}
+				check_variable = { gdp_per_capita < 20 }
 			}
 		}
 	}
@@ -1399,7 +1010,7 @@ technologies = {
 			}
 		}
 
-		research_cost = 1
+		research_cost = 1.75
 		start_year = 1995
 		show_equipment_icon = yes
 		enable_equipments = {
@@ -1413,13 +1024,9 @@ technologies = {
 			leads_to_tech = IRBM5
 			research_cost_coeff = 1
 		}
-		# path = {
-		# 	leads_to_tech = IRBM4_MARV
-		# 	research_cost_coeff = 1
-		# }
 		categories = {
 			CAT_missile
-			CAT_bm
+			CAT_OLV
 			CAT_irbm
 			CAT_Military
 		}
@@ -1440,54 +1047,13 @@ technologies = {
 			}
 			modifier = {
 				factor = 0
-				AND = {
-					NOT = {
-						unique_missile_model_names = yes
-					}
-					check_variable = { gdp_per_capita < 20 }
+				NOT = {
+					unique_missile_model_names = yes
 				}
+				check_variable = { gdp_per_capita < 20 }
 			}
 		}
 	}
-	# IRBM4_MARV = {
-	# 	research_cost = 1
-	# 	start_year = 2000
-	# 	show_effect_as_desc = yes
-	# 	folder = {
-	# 		name = cruise_missiles_folder
-	# 		position = { x = 0 y = @2000 }
-	# 	}
-	# 	categories = {
-	# 		CAT_missile
-	# 		CAT_bm
-	# 		CAT_irbm
-	# 		CAT_Military
-	# 	}
-	# 	ai_will_do = {
-	# 		factor = 1
-	# 		modifier = {
-	# 			factor = 0.5
-	# 			date < 2015.01.01
-	# 		}
-	# 		modifier = {
-	# 			factor = 0.2
-	# 			date < 2010.01.01
-	# 		}
-	# 		modifier = {
-	# 			factor = 2
-	# 			check_variable = { gdp_per_capita > 19.999 }
-	# 		}
-	# 		modifier = {
-	# 			factor = 0
-	# 			AND = {
-	# 				NOT = {
-	# 					unique_missile_model_names = yes
-	# 				}
-	# 				check_variable = { gdp_per_capita < 20 }
-	# 			}
-	# 		}
-	# 	}
-	# }
 	IRBM5 = {
 
 		allow = {
@@ -1496,7 +1062,7 @@ technologies = {
 			}
 		}
 
-		research_cost = 1
+		research_cost = 1.75
 		start_year = 2005
 		show_equipment_icon = yes
 		enable_equipments = {
@@ -1510,13 +1076,9 @@ technologies = {
 			leads_to_tech = IRBM6
 			research_cost_coeff = 1
 		}
-		# path = {
-		# 	leads_to_tech = IRBM5_MARV
-		# 	research_cost_coeff = 1
-		# }
 		categories = {
 			CAT_missile
-			CAT_bm
+			CAT_OLV
 			CAT_irbm
 			CAT_Military
 		}
@@ -1537,57 +1099,13 @@ technologies = {
 			}
 			modifier = {
 				factor = 0
-				AND = {
-					NOT = {
-						unique_missile_model_names = yes
-					}
-					check_variable = { gdp_per_capita < 20 }
+				NOT = {
+					unique_missile_model_names = yes
 				}
+				check_variable = { gdp_per_capita < 20 }
 			}
 		}
 	}
-	# IRBM5_MARV = {
-	# 	research_cost = 1
-	# 	start_year = 2010
-	# 	show_effect_as_desc = yes
-	# 	folder = {
-	# 		name = cruise_missiles_folder
-	# 		position = { x = 0 y = @2010 }
-	# 	}
-	# 	dependencies = {
-	# 		IRBM4_MARV = 1
-	# 	}
-	# 	categories = {
-	# 		CAT_missile
-	# 		CAT_bm
-	# 		CAT_irbm
-	# 		CAT_Military
-	# 	}
-	# 	ai_will_do = {
-	# 		factor = 1
-	# 		modifier = {
-	# 			factor = 0.5
-	# 			date < 2015.01.01
-	# 		}
-	# 		modifier = {
-	# 			factor = 0.2
-	# 			date < 2010.01.01
-	# 		}
-	# 		modifier = {
-	# 			factor = 2
-	# 			check_variable = { gdp_per_capita > 19.999 }
-	# 		}
-	# 		modifier = {
-	# 			factor = 0
-	# 			AND = {
-	# 				NOT = {
-	# 					unique_missile_model_names = yes
-	# 				}
-	# 				check_variable = { gdp_per_capita < 20 }
-	# 			}
-	# 		}
-	# 	}
-	# }
 	IRBM6 = {
 
 		allow = {
@@ -1596,7 +1114,7 @@ technologies = {
 			}
 		}
 
-		research_cost = 1
+		research_cost = 1.75
 		start_year = 2015
 		show_equipment_icon = yes
 		enable_equipments = {
@@ -1610,13 +1128,9 @@ technologies = {
 			leads_to_tech = IRBM7
 			research_cost_coeff = 1
 		}
-		# path = {
-		# 	leads_to_tech = IRBM6_MARV
-		# 	research_cost_coeff = 1
-		# }
 		categories = {
 			CAT_missile
-			CAT_bm
+			CAT_OLV
 			CAT_irbm
 			CAT_Military
 		}
@@ -1637,57 +1151,13 @@ technologies = {
 			}
 			modifier = {
 				factor = 0
-				AND = {
-					NOT = {
-						unique_missile_model_names = yes
-					}
-					check_variable = { gdp_per_capita < 20 }
+				NOT = {
+					unique_missile_model_names = yes
 				}
+				check_variable = { gdp_per_capita < 20 }
 			}
 		}
 	}
-	# IRBM6_MARV = {
-	# 	research_cost = 1
-	# 	start_year = 2020
-	# 	show_effect_as_desc = yes
-	# 	folder = {
-	# 		name = cruise_missiles_folder
-	# 		position = { x = 0 y = @2020 }
-	# 	}
-	# 	dependencies = {
-	# 		IRBM5_MARV = 1
-	# 	}
-	# 	categories = {
-	# 		CAT_missile
-	# 		CAT_bm
-	# 		CAT_irbm
-	# 		CAT_Military
-	# 	}
-	# 	ai_will_do = {
-	# 		factor = 1
-	# 		modifier = {
-	# 			factor = 0.5
-	# 			date < 2015.01.01
-	# 		}
-	# 		modifier = {
-	# 			factor = 0.2
-	# 			date < 2010.01.01
-	# 		}
-	# 		modifier = {
-	# 			factor = 2
-	# 			check_variable = { gdp_per_capita > 19.999 }
-	# 		}
-	# 		modifier = {
-	# 			factor = 0
-	# 			AND = {
-	# 				NOT = {
-	# 					unique_missile_model_names = yes
-	# 				}
-	# 				check_variable = { gdp_per_capita < 20 }
-	# 			}
-	# 		}
-	# 	}
-	# }
 	IRBM7 = {
 
 		allow = {
@@ -1696,7 +1166,7 @@ technologies = {
 			}
 		}
 
-		research_cost = 1
+		research_cost = 1.75
 		start_year = 2025
 		show_equipment_icon = yes
 		enable_equipments = {
@@ -1710,13 +1180,9 @@ technologies = {
 			leads_to_tech = IRBM8
 			research_cost_coeff = 1
 		}
-		# path = {
-		# 	leads_to_tech = IRBM7_MARV
-		# 	research_cost_coeff = 1
-		# }
 		categories = {
 			CAT_missile
-			CAT_bm
+			CAT_OLV
 			CAT_irbm
 			CAT_Military
 		}
@@ -1737,56 +1203,13 @@ technologies = {
 			}
 			modifier = {
 				factor = 0
-				AND = {
-					NOT = {
-						unique_missile_model_names = yes
-					}
-					check_variable = { gdp_per_capita < 20 }
+				NOT = {
+					unique_missile_model_names = yes
 				}
+				check_variable = { gdp_per_capita < 20 }
 			}
 		}
 	}
-	# IRBM7_MARV = {
-	# 	research_cost = 1
-	# 	start_year = 2030
-	# 	folder = {
-	# 		name = cruise_missiles_folder
-	# 		position = { x = 0 y = @2030 }
-	# 	}
-	# 	dependencies = {
-	# 		IRBM6_MARV = 1
-	# 	}
-	# 	categories = {
-	# 		CAT_missile
-	# 		CAT_bm
-	# 		CAT_irbm
-	# 		CAT_Military
-	# 	}
-	# 	ai_will_do = {
-	# 		factor = 1
-	# 		modifier = {
-	# 			factor = 0.5
-	# 			date < 2015.01.01
-	# 		}
-	# 		modifier = {
-	# 			factor = 0.2
-	# 			date < 2010.01.01
-	# 		}
-	# 		modifier = {
-	# 			factor = 2
-	# 			check_variable = { gdp_per_capita > 19.999 }
-	# 		}
-	# 		modifier = {
-	# 			factor = 0
-	# 			AND = {
-	# 				NOT = {
-	# 					unique_missile_model_names = yes
-	# 				}
-	# 				check_variable = { gdp_per_capita < 20 }
-	# 			}
-	# 		}
-	# 	}
-	# }
 	IRBM8 = {
 
 		allow = {
@@ -1795,7 +1218,7 @@ technologies = {
 			}
 		}
 
-		research_cost = 1
+		research_cost = 1.75
 		start_year = 2035
 		show_equipment_icon = yes
 		enable_equipments = {
@@ -1805,13 +1228,13 @@ technologies = {
 			name = cruise_missiles_folder
 			position = { x = 2 y = @2035 }
 		}
-		# path = {
-		# 	leads_to_tech = IRBM8_MARV
-		# 	research_cost_coeff = 1
-		# }
+		path = {
+			leads_to_tech = IRBM9
+			research_cost_coeff = 1
+		}
 		categories = {
 			CAT_missile
-			CAT_bm
+			CAT_OLV
 			CAT_irbm
 			CAT_Military
 		}
@@ -1832,57 +1255,217 @@ technologies = {
 			}
 			modifier = {
 				factor = 0
-				AND = {
-					NOT = {
-						unique_missile_model_names = yes
-					}
-					check_variable = { gdp_per_capita < 20 }
+				NOT = {
+					unique_missile_model_names = yes
 				}
+				check_variable = { gdp_per_capita < 20 }
 			}
 		}
 	}
-	# IRBM8_MARV = {
-	# 	research_cost = 1
-	# 	start_year = 2040
-	# 	show_effect_as_desc = yes
-	# 	folder = {
-	# 		name = cruise_missiles_folder
-	# 		position = { x = 0 y = @2040 }
-	# 	}
-	# 	dependencies = {
-	# 		IRBM7_MARV = 1
-	# 	}
-	# 	categories = {
-	# 		CAT_missile
-	# 		CAT_bm
-	# 		CAT_slbm
-	# 		CAT_Military
-	# 	}
-	# 	ai_will_do = {
-	# 		factor = 1
-	# 		modifier = {
-	# 			factor = 0.5
-	# 			date < 2015.01.01
-	# 		}
-	# 		modifier = {
-	# 			factor = 0.2
-	# 			date < 2010.01.01
-	# 		}
-	# 		modifier = {
-	# 			factor = 2
-	# 			check_variable = { gdp_per_capita > 19.999 }
-	# 		}
-	# 		modifier = {
-	# 			factor = 0
-	# 			AND = {
-	# 				NOT = {
-	# 					unique_missile_model_names = yes
-	# 				}
-	# 				check_variable = { gdp_per_capita < 20 }
-	# 			}
-	# 		}
-	# 	}
-	# }
+	IRBM9 = {
+
+		allow = {
+			ROOT = {
+				is_special_project_completed = sp:sp_missile_project
+			}
+		}
+
+		research_cost = 1.75
+		start_year = 2045
+		show_equipment_icon = yes
+		enable_equipments = {
+			ballistic_missile_equipment_9
+		}
+		folder = {
+			name = cruise_missiles_folder
+			position = { x = 2 y = @2045 }
+		}
+		path = {
+			leads_to_tech = IRBM10
+			research_cost_coeff = 1
+		}
+		categories = {
+			CAT_missile
+			CAT_OLV
+			CAT_irbm
+			CAT_Military
+		}
+		special_project_specialization = { specialization_air }
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.5
+				date < 2045.01.01
+			}
+			modifier = {
+				factor = 0.2
+				date < 2040.01.01
+			}
+			modifier = {
+				factor = 2
+				check_variable = { gdp_per_capita > 19.999 }
+			}
+			modifier = {
+				factor = 0
+				NOT = {
+					unique_missile_model_names = yes
+				}
+				check_variable = { gdp_per_capita < 20 }
+			}
+		}
+	}
+	IRBM10 = {
+
+		allow = {
+			ROOT = {
+				is_special_project_completed = sp:sp_missile_project
+			}
+		}
+
+		research_cost = 1.75
+		start_year = 2055
+		show_equipment_icon = yes
+		enable_equipments = {
+			ballistic_missile_equipment_10
+		}
+		folder = {
+			name = cruise_missiles_folder
+			position = { x = 2 y = @2055 }
+		}
+		path = {
+			leads_to_tech = IRBM11
+			research_cost_coeff = 1
+		}
+		categories = {
+			CAT_missile
+			CAT_OLV
+			CAT_irbm
+			CAT_Military
+		}
+		special_project_specialization = { specialization_air }
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.5
+				date < 2055.01.01
+			}
+			modifier = {
+				factor = 0.2
+				date < 2050.01.01
+			}
+			modifier = {
+				factor = 2
+				check_variable = { gdp_per_capita > 19.999 }
+			}
+			modifier = {
+				factor = 0
+				NOT = {
+					unique_missile_model_names = yes
+				}
+				check_variable = { gdp_per_capita < 20 }
+			}
+		}
+	}
+	IRBM11 = {
+
+		allow = {
+			ROOT = {
+				is_special_project_completed = sp:sp_missile_project
+			}
+		}
+
+		research_cost = 1.75
+		start_year = 2065
+		show_equipment_icon = yes
+		enable_equipments = {
+			ballistic_missile_equipment_11
+		}
+		folder = {
+			name = cruise_missiles_folder
+			position = { x = 2 y = @2065 }
+		}
+		path = {
+			leads_to_tech = IRBM12
+			research_cost_coeff = 1
+		}
+		categories = {
+			CAT_missile
+			CAT_OLV
+			CAT_irbm
+			CAT_Military
+		}
+		special_project_specialization = { specialization_air }
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.5
+				date < 2065.01.01
+			}
+			modifier = {
+				factor = 0.2
+				date < 2060.01.01
+			}
+			modifier = {
+				factor = 2
+				check_variable = { gdp_per_capita > 19.999 }
+			}
+			modifier = {
+				factor = 0
+				NOT = {
+					unique_missile_model_names = yes
+				}
+				check_variable = { gdp_per_capita < 20 }
+			}
+		}
+	}
+	IRBM12 = {
+
+		allow = {
+			ROOT = {
+				is_special_project_completed = sp:sp_missile_project
+			}
+		}
+
+		research_cost = 1.75
+		start_year = 2075
+		show_equipment_icon = yes
+		enable_equipments = {
+			ballistic_missile_equipment_12
+		}
+		folder = {
+			name = cruise_missiles_folder
+			position = { x = 2 y = @2075 }
+		}
+		categories = {
+			CAT_missile
+			CAT_OLV
+			CAT_irbm
+			CAT_Military
+		}
+		special_project_specialization = { specialization_air }
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.5
+				date < 2075.01.01
+			}
+			modifier = {
+				factor = 0.2
+				date < 2070.01.01
+			}
+			modifier = {
+				factor = 2
+				check_variable = { gdp_per_capita > 19.999 }
+			}
+			modifier = {
+				factor = 0
+				NOT = {
+					unique_missile_model_names = yes
+				}
+				check_variable = { gdp_per_capita < 20 }
+			}
+		}
+	}
 	NIRBM1 = {
 
 		allow = {
@@ -1891,7 +1474,7 @@ technologies = {
 			}
 		}
 
-		research_cost = 1
+		research_cost = 2.5
 		start_year = 1975
 		show_equipment_icon = yes
 		enable_equipments = {
@@ -1908,7 +1491,7 @@ technologies = {
 		}
 		categories = {
 			CAT_missile
-			CAT_bm
+			CAT_OLV
 			CAT_irbm
 			CAT_Military
 		}
@@ -1929,12 +1512,10 @@ technologies = {
 			}
 			modifier = {
 				factor = 0
-				AND = {
-					NOT = {
-						unique_missile_model_names = yes
-					}
-					check_variable = { gdp_per_capita < 20 }
+				NOT = {
+					unique_missile_model_names = yes
 				}
+				check_variable = { gdp_per_capita < 20 }
 			}
 		}
 	}
@@ -1946,7 +1527,7 @@ technologies = {
 			}
 		}
 
-		research_cost = 1
+		research_cost = 2.5
 		start_year = 1985
 		show_equipment_icon = yes
 		enable_equipments = {
@@ -1963,7 +1544,7 @@ technologies = {
 		}
 		categories = {
 			CAT_missile
-			CAT_bm
+			CAT_OLV
 			CAT_irbm
 			CAT_Military
 		}
@@ -1984,12 +1565,10 @@ technologies = {
 			}
 			modifier = {
 				factor = 0
-				AND = {
-					NOT = {
-						unique_missile_model_names = yes
-					}
-					check_variable = { gdp_per_capita < 20 }
+				NOT = {
+					unique_missile_model_names = yes
 				}
+				check_variable = { gdp_per_capita < 20 }
 			}
 		}
 	}
@@ -2001,7 +1580,7 @@ technologies = {
 			}
 		}
 
-		research_cost = 1
+		research_cost = 2.5
 		start_year = 1995
 		show_equipment_icon = yes
 		enable_equipments = {
@@ -2018,7 +1597,7 @@ technologies = {
 		}
 		categories = {
 			CAT_missile
-			CAT_bm
+			CAT_OLV
 			CAT_irbm
 			CAT_Military
 		}
@@ -2039,12 +1618,10 @@ technologies = {
 			}
 			modifier = {
 				factor = 0
-				AND = {
-					NOT = {
-						unique_missile_model_names = yes
-					}
-					check_variable = { gdp_per_capita < 20 }
+				NOT = {
+					unique_missile_model_names = yes
 				}
+				check_variable = { gdp_per_capita < 20 }
 			}
 		}
 	}
@@ -2056,7 +1633,7 @@ technologies = {
 			}
 		}
 
-		research_cost = 1
+		research_cost = 2.5
 		start_year = 2005
 		show_equipment_icon = yes
 		enable_equipments = {
@@ -2073,7 +1650,7 @@ technologies = {
 		}
 		categories = {
 			CAT_missile
-			CAT_bm
+			CAT_OLV
 			CAT_irbm
 			CAT_Military
 		}
@@ -2094,12 +1671,10 @@ technologies = {
 			}
 			modifier = {
 				factor = 0
-				AND = {
-					NOT = {
-						unique_missile_model_names = yes
-					}
-					check_variable = { gdp_per_capita < 20 }
+				NOT = {
+					unique_missile_model_names = yes
 				}
+				check_variable = { gdp_per_capita < 20 }
 			}
 		}
 	}
@@ -2111,7 +1686,7 @@ technologies = {
 			}
 		}
 
-		research_cost = 1
+		research_cost = 2.5
 		start_year = 2015
 		show_equipment_icon = yes
 		enable_equipments = {
@@ -2128,7 +1703,7 @@ technologies = {
 		}
 		categories = {
 			CAT_missile
-			CAT_bm
+			CAT_OLV
 			CAT_irbm
 			CAT_Military
 		}
@@ -2149,12 +1724,10 @@ technologies = {
 			}
 			modifier = {
 				factor = 0
-				AND = {
-					NOT = {
-						unique_missile_model_names = yes
-					}
-					check_variable = { gdp_per_capita < 20 }
+				NOT = {
+					unique_missile_model_names = yes
 				}
+				check_variable = { gdp_per_capita < 20 }
 			}
 		}
 	}
@@ -2166,7 +1739,7 @@ technologies = {
 			}
 		}
 
-		research_cost = 1
+		research_cost = 2.5
 		start_year = 2025
 		show_equipment_icon = yes
 		enable_equipments = {
@@ -2176,14 +1749,13 @@ technologies = {
 			name = cruise_missiles_folder
 			position = { x = 5 y = @2025 }
 		}
-
 		path = {
 			leads_to_tech = NIRBM7
 			research_cost_coeff = 1
 		}
 		categories = {
 			CAT_missile
-			CAT_bm
+			CAT_OLV
 			CAT_irbm
 			CAT_Military
 		}
@@ -2204,12 +1776,10 @@ technologies = {
 			}
 			modifier = {
 				factor = 0
-				AND = {
-					NOT = {
-						unique_missile_model_names = yes
-					}
-					check_variable = { gdp_per_capita < 20 }
+				NOT = {
+					unique_missile_model_names = yes
 				}
+				check_variable = { gdp_per_capita < 20 }
 			}
 		}
 	}
@@ -2221,7 +1791,7 @@ technologies = {
 			}
 		}
 
-		research_cost = 1
+		research_cost = 2.5
 		start_year = 2035
 		show_equipment_icon = yes
 		enable_equipments = {
@@ -2231,10 +1801,13 @@ technologies = {
 			name = cruise_missiles_folder
 			position = { x = 5 y = @2035 }
 		}
-
+		path = {
+			leads_to_tech = NIRBM8
+			research_cost_coeff = 1
+		}
 		categories = {
 			CAT_missile
-			CAT_bm
+			CAT_OLV
 			CAT_irbm
 			CAT_Military
 		}
@@ -2255,12 +1828,215 @@ technologies = {
 			}
 			modifier = {
 				factor = 0
-				AND = {
-					NOT = {
-						unique_missile_model_names = yes
-					}
-					check_variable = { gdp_per_capita < 20 }
+				NOT = {
+					unique_missile_model_names = yes
 				}
+				check_variable = { gdp_per_capita < 20 }
+			}
+		}
+	}
+	NIRBM8 = {
+
+		allow = {
+			ROOT = {
+				is_special_project_completed = sp:sp_nuclear_warhead_program
+			}
+		}
+
+		research_cost = 2.5
+		start_year = 2045
+		show_equipment_icon = yes
+		enable_equipments = {
+			nuclear_ballistic_missile_equipment_8
+		}
+		folder = {
+			name = cruise_missiles_folder
+			position = { x = 5 y = @2045 }
+		}
+		path = {
+			leads_to_tech = NIRBM9
+			research_cost_coeff = 1
+		}
+		categories = {
+			CAT_missile
+			CAT_OLV
+			CAT_irbm
+			CAT_Military
+		}
+		special_project_specialization = { specialization_air }
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.5
+				date < 2045.01.01
+			}
+			modifier = {
+				factor = 0.2
+				date < 2040.01.01
+			}
+			modifier = {
+				factor = 2
+				check_variable = { gdp_per_capita > 19.999 }
+			}
+			modifier = {
+				factor = 0
+				NOT = {
+					unique_missile_model_names = yes
+				}
+				check_variable = { gdp_per_capita < 20 }
+			}
+		}
+	}
+	NIRBM9 = {
+
+		allow = {
+			ROOT = {
+				is_special_project_completed = sp:sp_nuclear_warhead_program
+			}
+		}
+
+		research_cost = 2.5
+		start_year = 2055
+		show_equipment_icon = yes
+		enable_equipments = {
+			nuclear_ballistic_missile_equipment_9
+		}
+		folder = {
+			name = cruise_missiles_folder
+			position = { x = 5 y = @2055 }
+		}
+		path = {
+			leads_to_tech = NIRBM10
+			research_cost_coeff = 1
+		}
+		categories = {
+			CAT_missile
+			CAT_OLV
+			CAT_irbm
+			CAT_Military
+		}
+		special_project_specialization = { specialization_air }
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.5
+				date < 2055.01.01
+			}
+			modifier = {
+				factor = 0.2
+				date < 2050.01.01
+			}
+			modifier = {
+				factor = 2
+				check_variable = { gdp_per_capita > 19.999 }
+			}
+			modifier = {
+				factor = 0
+				NOT = {
+					unique_missile_model_names = yes
+				}
+				check_variable = { gdp_per_capita < 20 }
+			}
+		}
+	}
+	NIRBM10 = {
+
+		allow = {
+			ROOT = {
+				is_special_project_completed = sp:sp_nuclear_warhead_program
+			}
+		}
+
+		research_cost = 2.5
+		start_year = 2065
+		show_equipment_icon = yes
+		enable_equipments = {
+			nuclear_ballistic_missile_equipment_10
+		}
+		folder = {
+			name = cruise_missiles_folder
+			position = { x = 5 y = @2065 }
+		}
+		path = {
+			leads_to_tech = NIRBM11
+			research_cost_coeff = 1
+		}
+		categories = {
+			CAT_missile
+			CAT_OLV
+			CAT_irbm
+			CAT_Military
+		}
+		special_project_specialization = { specialization_air }
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.5
+				date < 2065.01.01
+			}
+			modifier = {
+				factor = 0.2
+				date < 2060.01.01
+			}
+			modifier = {
+				factor = 2
+				check_variable = { gdp_per_capita > 19.999 }
+			}
+			modifier = {
+				factor = 0
+				NOT = {
+					unique_missile_model_names = yes
+				}
+				check_variable = { gdp_per_capita < 20 }
+			}
+		}
+	}
+	NIRBM11 = {
+
+		allow = {
+			ROOT = {
+				is_special_project_completed = sp:sp_nuclear_warhead_program
+			}
+		}
+
+		research_cost = 2.5
+		start_year = 2075
+		show_equipment_icon = yes
+		enable_equipments = {
+			nuclear_ballistic_missile_equipment_11
+		}
+		folder = {
+			name = cruise_missiles_folder
+			position = { x = 5 y = @2075 }
+		}
+
+		categories = {
+			CAT_missile
+			CAT_OLV
+			CAT_irbm
+			CAT_Military
+		}
+		special_project_specialization = { specialization_air }
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.5
+				date < 2075.01.01
+			}
+			modifier = {
+				factor = 0.2
+				date < 2070.01.01
+			}
+			modifier = {
+				factor = 2
+				check_variable = { gdp_per_capita > 19.999 }
+			}
+			modifier = {
+				factor = 0
+				NOT = {
+					unique_missile_model_names = yes
+				}
+				check_variable = { gdp_per_capita < 20 }
 			}
 		}
 	}

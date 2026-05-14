@@ -42,11 +42,8 @@ country_event = {
 		log = "[GetDateText]: [THIS.GetName]: event singapore.3.a"
 		add_political_power = -75
 		set_temp_variable = { rul_party_temp = 22 }
+		set_temp_variable = { disable_elections = 1 }
 		change_ruling_party_effect = yes
-		set_politics = {
-			ruling_party = nationalist
-			elections_allowed = no
-		}
 		set_country_flag = SIN_nationalist_march
 
 		news_event = singapore.4
@@ -58,11 +55,8 @@ country_event = {
 		log = "[GetDateText]: [THIS.GetName]: event singapore.3.a"
 		set_temp_variable = { rul_party_temp = 22 }
 		set_temp_variable = { rul_party_temp = 7 }
+		set_temp_variable = { disable_elections = 1 }
 		change_ruling_party_effect = yes
-		set_politics = {
-			ruling_party = nationalist
-			elections_allowed = no
-		}
 		set_country_flag = SIN_collusion_pap_march
 
 		news_event = singapore.4
@@ -121,7 +115,6 @@ country_event = {
 		add_war_support = -0.10
 		SIN = {
 			country_event = { id = singapore.6 days = 2 random_days = 4 }
-			set_country_flag = SIN_indonesia_backsdown_on_riau
 		}
 
 		ai_chance = {
@@ -157,7 +150,6 @@ country_event = {
 
 		SIN = {
 			country_event = { id = singapore.7 days = 2 random_days = 4 }
-			set_country_flag = SIN_indonesia_denies_the_demand
 		}
 
 		ai_chance = {
@@ -219,7 +211,6 @@ news_event = {
 
 	option = {
 		name = singapore.8.a
-		log = "[GetDateText]: [THIS.GetName]: event singapore.8.a"
 	}
 }
 
@@ -234,7 +225,122 @@ news_event = {
 
 	option = {
 		name = singapore.9.a
-		log = "[GetDateText]: [THIS.GetName]: event singapore.9.a"
+	}
+}
+
+# Buy American Aircraft
+country_event = {
+	id = singapore.76
+	title = singapore.76.t
+	desc = singapore.76.d
+	picture = GFX_fighter_jet
+
+	is_triggered_only = yes
+
+	option = {
+		name = singapore.76.a # Buy American Aircraft
+		log = "[GetDateText]: [THIS.GetName]: event singapore.76.a"
+		USA = {
+			add_opinion_modifier = { target = SIN modifier = medium_increase }
+		}
+		SIN = {
+			if = {
+				limit = {
+					has_dlc = "By Blood Alone"
+				}
+				add_equipment_to_stockpile = {
+					type = small_plane_strike_airframe_2
+					variant_name = "F-16D Blk 50/52"
+					amount = 55
+					producer = USA
+				}
+				add_equipment_to_stockpile = {
+					type = large_plane_awacs_airframe_2
+					variant_name = "E-3 Sentry"
+					amount = 3
+					producer = USA
+				}
+				add_equipment_to_stockpile = {
+					type = large_plane_air_transport_airframe_2
+					variant_name = "C-17 Globemaster III"
+					amount = 5
+					producer = USA
+				}
+			}
+			else = {
+				add_equipment_to_stockpile = {
+					type = MR_Fighter3
+					amount = 55
+					producer = USA
+				}
+				add_equipment_to_stockpile = {
+					type = strategic_bomber3
+					amount = 3
+					producer = USA
+				}
+				add_equipment_to_stockpile = {
+					type = transport_plane3
+					amount = 5
+					producer = USA
+				}
+				set_temp_variable = { treasury_change = -56.5 }
+				modify_treasury_effect = yes
+			}
+		}
+	}
+
+	# No
+	option = {
+		name = singapore.76.b
+	}
+}
+
+# Buy American Weapon
+country_event = {
+	id = singapore.77
+	title = singapore.77.t
+	desc = singapore.77.d
+	picture = GFX_weapons_arms1
+
+	is_triggered_only = yes
+
+	option = {
+		name = singapore.77.a # Buy American Weapon
+		log = "[GetDateText]: [THIS.GetName]: event singapore.77.a"
+		USA = {
+			add_opinion_modifier = { target = SIN modifier = medium_increase }
+			set_temp_variable = { treasury_change = 16 }
+			modify_treasury_effect = yes
+		}
+		SIN = {
+			add_equipment_to_stockpile = {
+				type = infantry_weapons_4
+				amount = 7500
+				producer = USA
+			}
+			add_equipment_to_stockpile = {
+				type = cnc_equipment_4
+				amount = 1500
+				producer = USA
+			}
+			add_equipment_to_stockpile = {
+				type = util_vehicle_4
+				amount = 200
+				producer = USA
+			}
+			add_equipment_to_stockpile = {
+				type = Anti_Air_2
+				amount = 150
+				producer = USA
+			}
+			set_temp_variable = { treasury_change = -6.5 }
+			modify_treasury_effect = yes
+		}
+	}
+
+	# No
+	option = {
+		name = singapore.77.b
 	}
 }
 
@@ -361,7 +467,6 @@ country_event = {
 	}
 }
 
-
 # Hidden Trigger Event for 104
 country_event = {
 	id = singapore.10000
@@ -426,7 +531,7 @@ country_event = {
 country_event = {
 	id = singapore.105
 	title = singapore.105.t
-	desc = singapore.106.d
+	desc = singapore.105.d
 	picture = GFX_esplanade_theatre
 	is_triggered_only = yes
 
@@ -539,31 +644,29 @@ country_event = {
 			set_temp_variable = { rul_party_temp = 1 }
 			set_temp_variable = { col_one = 7 }
 			set_temp_variable = { col_two = 13 }
+			set_temp_variable = { col_three = 20 }
 			change_ruling_party_effect = yes
-			set_politics = {
-				ruling_party = democratic
-				elections_allowed = yes
-			}
 		}
 		else_if = { limit = { is_in_array = { ruling_party = 7 } }
 			set_temp_variable = { rul_party_temp = 7 }
 			set_temp_variable = { col_one = 1 }
 			set_temp_variable = { col_two = 13 }
+			set_temp_variable = { col_three = 20 }
 			change_ruling_party_effect = yes
-			set_politics = {
-				ruling_party = communism
-				elections_allowed = yes
-			}
 		}
 		else_if = { limit = { is_in_array = { ruling_party = 13 } }
 			set_temp_variable = { rul_party_temp = 13 }
 			set_temp_variable = { col_one = 1 }
 			set_temp_variable = { col_two = 7 }
+			set_temp_variable = { col_three = 20 }
 			change_ruling_party_effect = yes
-			set_politics = {
-				ruling_party = neutrality
-				elections_allowed = yes
-			}
+		}
+		else_if = { limit = { is_in_array = { ruling_party = 20 } }
+			set_temp_variable = { rul_party_temp = 20 }
+			set_temp_variable = { col_one = 1 }
+			set_temp_variable = { col_two = 7 }
+			set_temp_variable = { col_three = 13 }
+			change_ruling_party_effect = yes
 		}
 	}
 }
@@ -643,10 +746,6 @@ country_event = {
 				modifier = SIN_provided_clemency_to_african_men
 			}
 		}
-
-		ai_chance = {
-			base = 1
-		}
 	}
 
 	option = {
@@ -659,14 +758,6 @@ country_event = {
 			}
 		}
 		add_stability = 0.01
-
-		ai_chance = {
-			base = 1
-			modifier = {
-				factor = 1.5
-				has_stability < 0.5
-			}
-		}
 	}
 }
 
@@ -762,7 +853,7 @@ country_event = {
 		}
 
 		ai_chance = {
-			factor = 0
+			base = 0
 		}
 	}
 
@@ -772,7 +863,7 @@ country_event = {
 		add_political_power = 50
 
 		ai_chance = {
-			factor = 1
+			base = 1
 		}
 	}
 }
@@ -1198,31 +1289,29 @@ country_event = {
 			set_temp_variable = { rul_party_temp = 1 }
 			set_temp_variable = { col_one = 7 }
 			set_temp_variable = { col_two = 13 }
+			set_temp_variable = { col_three = 20 }
 			change_ruling_party_effect = yes
-			set_politics = {
-				ruling_party = democratic
-				elections_allowed = yes
-			}
 		}
 		else_if = { limit = { is_in_array = { ruling_party = 7 } }
 			set_temp_variable = { rul_party_temp = 7 }
 			set_temp_variable = { col_one = 1 }
 			set_temp_variable = { col_two = 13 }
+			set_temp_variable = { col_three = 20 }
 			change_ruling_party_effect = yes
-			set_politics = {
-				ruling_party = communism
-				elections_allowed = yes
-			}
 		}
 		else_if = { limit = { is_in_array = { ruling_party = 13 } }
 			set_temp_variable = { rul_party_temp = 13 }
 			set_temp_variable = { col_one = 1 }
 			set_temp_variable = { col_two = 7 }
+			set_temp_variable = { col_three = 20 }
 			change_ruling_party_effect = yes
-			set_politics = {
-				ruling_party = neutrality
-				elections_allowed = yes
-			}
+		}
+		else_if = { limit = { is_in_array = { ruling_party = 20 } }
+			set_temp_variable = { rul_party_temp = 20 }
+			set_temp_variable = { col_one = 1 }
+			set_temp_variable = { col_two = 7 }
+			set_temp_variable = { col_three = 13 }
+			change_ruling_party_effect = yes
 		}
 	}
 }
@@ -1276,13 +1365,9 @@ country_event = {
 			set_temp_variable = { rul_party_temp = 1 }
 			set_temp_variable = { col_one = 7 }
 			set_temp_variable = { col_two = 13 }
-			set_temp_variable = { col_two = 22 }
+			set_temp_variable = { col_three = 20 }
 			set_temp_variable = { change_leader_temp = 1 }
 			change_ruling_party_effect = yes
-			set_politics = {
-				ruling_party = democratic
-				elections_allowed = yes
-			}
 		}
 
 		if = { limit = { NOT = { has_country_leader_with_trait = pro_western_clique } }
@@ -1306,19 +1391,14 @@ country_event = {
 			set_temp_variable = { rul_party_temp = 7 }
 			set_temp_variable = { col_one = 1 }
 			set_temp_variable = { col_two = 13 }
-			set_temp_variable = { col_two = 22 }
+			set_temp_variable = { col_three = 20 }
 			set_temp_variable = { change_leader_temp = 1 }
 			change_ruling_party_effect = yes
-			set_politics = {
-				ruling_party = communism
-				elections_allowed = yes
-			}
 		}
 
 		if = { limit = { NOT = { has_country_leader_with_trait = emerging_clique } }
 			add_country_leader_trait = emerging_clique
 		}
-
 
 		# Clearing Shit
 		clear_variable = largest_party
@@ -1337,13 +1417,9 @@ country_event = {
 			set_temp_variable = { rul_party_temp = 13 }
 			set_temp_variable = { col_one = 1 }
 			set_temp_variable = { col_two = 7 }
-			set_temp_variable = { col_two = 22 }
+			set_temp_variable = { col_three = 20 }
 			set_temp_variable = { change_leader_temp = 1 }
 			change_ruling_party_effect = yes
-			set_politics = {
-				ruling_party = neutrality
-				elections_allowed = yes
-			}
 		}
 
 		if = { limit = { NOT = { has_country_leader_with_trait = neutrality_clique } }
@@ -1358,22 +1434,18 @@ country_event = {
 	option = {
 		name = singapore_elections.0.d
 		log = "[GetDateText]: [THIS.GetName]: event singapore_elections.0.d"
-		trigger = { check_variable = { largest_party = 13 } }
+		trigger = { check_variable = { largest_party = 20 } }
 
-		if = { limit = { is_in_array = { ruling_party = 13 } }
+		if = { limit = { is_in_array = { ruling_party = 20 } }
 			add_political_power = 150
 		}
 		else = {
-			set_temp_variable = { rul_party_temp = 22 }
+			set_temp_variable = { rul_party_temp = 20 }
 			set_temp_variable = { col_one = 1 }
 			set_temp_variable = { col_two = 7 }
-			set_temp_variable = { col_one = 13 }
+			set_temp_variable = { col_three = 13 }
 			set_temp_variable = { change_leader_temp = 1 }
 			change_ruling_party_effect = yes
-			set_politics = {
-				ruling_party = neutrality
-				elections_allowed = yes
-			}
 		}
 
 		if = { limit = { NOT = { has_country_leader_with_trait = neutrality_clique } }
@@ -1393,37 +1465,15 @@ country_event = {
 				check_variable = { largest_party = 1 }
 				check_variable = { largest_party = 7 }
 				check_variable = { largest_party = 13 }
-				check_variable = { largest_party = 22 }
+				check_variable = { largest_party = 20 }
 			}
 		}
 
 		hidden_effect = {
-			clear_array = ruling_party
-			clear_array = gov_coalition_array
-			add_to_array = { ruling_party = largest_party }
-			update_government_coalition_strength = yes
-			update_party_name = yes
-			set_coalition_drift = yes
-			set_ruling_leader = yes
-			set_leader = yes
+			set_temp_variable = { rul_party_temp = largest_party }
+			change_ruling_party_effect = yes
 		}
-		if = { limit = { check_variable = { largest_party < 4 } }
-			set_politics = {
-				ruling_party = democratic
-				elections_allowed = yes
-			}
-		}
-		else_if = {
-			limit = {
-				check_variable = { largest_party > 3 }
-				check_variable = { largest_party < 11 }
-			}
-			set_politics = {
-				ruling_party = communism
-				elections_allowed = yes
-			}
-		}
-		else_if = {
+		if = {
 			limit = {
 				check_variable = { largest_party > 9 }
 				check_variable = { largest_party < 12 }

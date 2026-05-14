@@ -9,6 +9,8 @@ arab_spring_category = {
 		complete_effect = {
 			set_country_flag = AS_hide_monthly_arab_spring_protest_change
 		}
+
+		ai_will_do = { base = 0 }
 	}
 
 	show_arab_spring_monthly_change_factors = {
@@ -21,6 +23,8 @@ arab_spring_category = {
 		complete_effect = {
 			clr_country_flag = AS_hide_monthly_arab_spring_protest_change
 		}
+
+		ai_will_do = { base = 0 }
 	}
 
 	arab_spring_encourage_supporters = {
@@ -60,14 +64,14 @@ arab_spring_category = {
 					}
 				}
 			}
-			country_event = { id = arab_spring.6 }
+			country_event = arab_spring.6
 			set_temp_variable = { temp_strength = -40 }
 			change_arab_spring_strength = yes
 			custom_effect_tooltip = clashes_fatalities_tt
 		}
 
 		ai_will_do = {
-			factor = 10
+			base = 10
 		}
 	}
 
@@ -85,9 +89,11 @@ arab_spring_category = {
 
 		remove_effect = {
 			log = "[GetDateText]: [This.GetName]: decision arab_spring_request_crackdown executed"
-			random_country = {
+			# FIXME: Tooltip here
+			random_scope_in_array = {
+				array = global.gcc_member_state
 				limit = { has_country_flag = gcc_dominant_member }
-				country_event = { id = arab_spring.19 }
+				country_event = arab_spring.19
 			}
 		}
 
@@ -153,6 +159,7 @@ arab_spring_category = {
 			clr_country_flag = arab_spring_military_deployed
 			custom_effect_tooltip = arab_spring_return_to_barracks_tt
 		}
+		ai_will_do = { base = 0 }
 	}
 
 	arab_spring_reshuffle_government = {
@@ -176,10 +183,10 @@ arab_spring_category = {
 				limit = { check_variable = { arab_spring < 26 } }
 				random_list = {
 					60 = {
-						country_event = { id = arab_spring.9 }
+						country_event = arab_spring.9
 					}
 					40 = {
-						country_event = { id = arab_spring.10 }
+						country_event = arab_spring.10
 					}
 				}
 			}
@@ -190,10 +197,10 @@ arab_spring_category = {
 				}
 				random_list = {
 					50 = {
-						country_event = { id = arab_spring.9 }
+						country_event = arab_spring.9
 					}
 					50 = {
-						country_event = { id = arab_spring.10 }
+						country_event = arab_spring.10
 					}
 				}
 			}
@@ -201,17 +208,17 @@ arab_spring_category = {
 				limit = { check_variable = { arab_spring > 65 } }
 				random_list = {
 					40 = {
-						country_event = { id = arab_spring.9 }
+						country_event = arab_spring.9
 					}
 					60 = {
-						country_event = { id = arab_spring.10 }
+						country_event = arab_spring.10
 					}
 				}
 			}
 		}
 
 		ai_will_do = {
-			factor = 10
+			base = 10
 		}
 	}
 
@@ -239,10 +246,10 @@ arab_spring_category = {
 				limit = { check_variable = { arab_spring < 26 } }
 				random_list = {
 					75 = {
-						country_event = { id = arab_spring.9 }
+						country_event = arab_spring.9
 					}
 					25 = {
-						country_event = { id = arab_spring.10 }
+						country_event = arab_spring.10
 					}
 				}
 			}
@@ -253,10 +260,10 @@ arab_spring_category = {
 				}
 				random_list = {
 					60 = {
-						country_event = { id = arab_spring.9 }
+						country_event = arab_spring.9
 					}
 					40 = {
-						country_event = { id = arab_spring.10 }
+						country_event = arab_spring.10
 					}
 				}
 			}
@@ -264,10 +271,10 @@ arab_spring_category = {
 				limit = { check_variable = { arab_spring > 65 } }
 				random_list = {
 					50 = {
-						country_event = { id = arab_spring.9 }
+						country_event = arab_spring.9
 					}
 					50 = {
-						country_event = { id = arab_spring.10 }
+						country_event = arab_spring.10
 					}
 				}
 			}
@@ -359,7 +366,7 @@ arab_spring_category = {
 		complete_effect = {
 			log = "[GetDateText]: [This.GetName]: decision arab_spring_protests_2 complete executed"
 			clr_country_flag = arab_spring_active
-			country_event = { id = arab_spring.18 }
+			country_event = arab_spring.18
 		}
 	}
 }

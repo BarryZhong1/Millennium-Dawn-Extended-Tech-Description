@@ -10,6 +10,48 @@ ideas = {
 				army_attack_factor = -0.05
 				army_defence_factor = -0.10
 				max_planning = -0.25
+				custom_modifier_tooltip = CHI_PLA_Business_Ventures_tt
+			}
+			on_remove = {
+				mio:CHI_norinco_manufacturer = {
+					set_mio_task_capacity = 15
+				}
+				mio:CHI_caic_manufacturer = {
+					set_mio_task_capacity = 5
+				}
+				mio:CHI_avic_manufacturer = {
+					set_mio_task_capacity = 10
+				}
+				mio:CHI_cetc_manufacturer = {
+					set_mio_task_capacity = 15
+				}
+				mio:CHI_casic_manufacturer = {
+					set_mio_task_capacity = 5
+				}
+				mio:CHI_casc_manufacturer = {
+					set_mio_task_capacity = 5
+				}
+				mio:CHI_haig_manufacturer = {
+					set_mio_task_capacity = 10
+				}
+				mio:CHI_sac_manufacturer = {
+					set_mio_task_capacity = 5
+				}
+				mio:CHI_cssc_manufacturer = {
+					set_mio_task_capacity = 5
+				}
+				mio:CHI_csic_manufacturer = {
+					set_mio_task_capacity = 5
+				}
+				mio:CHI_csgc_manufacturer = {
+					set_mio_task_capacity = 5
+				}
+				mio:CHI_poly_manufacturer = {
+					set_mio_task_capacity = 15
+				}
+				mio:CHI_inner_mongolia_first_machinery_tank_manufacturer = {
+					set_mio_task_capacity = 5
+				}
 			}
 		}
 
@@ -27,25 +69,9 @@ ideas = {
 		CHI_Invigorate_Country_Through_STE1 = {
 			picture = research_bonus
 			modifier = {
-				research_speed_factor = 0.02
-			}
-		}
-
-		CHI_Invigorate_Country_Through_STE2 = {
-			picture = research_bonus
-			modifier = {
-				research_speed_factor = 0.03
-				democratic_drift = 0.02
-				neutrality_drift = 0.02
-				stability_factor = -0.02
-			}
-		}
-
-		CHI_Invigorate_Country_Through_STE3 = {
-			picture = research_bonus
-			modifier = {
-				research_speed_factor = 0.03
-				foreign_subversive_activites = -0.5
+				research_speed_factor = 0.07
+				education_cost_multiplier_modifier = 0.05
+				custom_modifier_tooltip = CHI_Invigorate_Country_Through_STE1_tt
 			}
 		}
 
@@ -138,7 +164,7 @@ ideas = {
 			picture = air_support_focus
 			allowed_civil_war = { always = yes }
 			equipment_bonus = {
-				transport_plane_equipment = {
+				large_plane_air_transport_airframe = {
 					air_range = 4
 					build_cost_ic = 4
 					instant = yes
@@ -264,11 +290,9 @@ ideas = {
 		}
 
 		chastity_paifang = {
-
 			allowed = { original_tag = CHI }
 			picture = emblem_of_china
 			modifier = {
-				#political_power_gain = 0.5
 				stability_factor = 0.05
 				foreign_subversive_activites = -0.5
 				join_faction_tension = 0.75
@@ -278,38 +302,49 @@ ideas = {
 		}
 
 		CHI_low_end_manufacturing = {
+			name = CHI_low_end_manufacturing
 			picture = china_factory
 
-			allowed = { original_tag = CHI }
 			modifier = {
-				productivity_growth_modifier = -1
+				productivity_growth_modifier = -1.50
 				buildings_worker_requirement_modifier = 0.45
 				production_speed_buildings_factor = 0.2
 				industry_free_repair_factor = -0.75
 				industry_repair_factor = -0.75
-				local_resources_factor = -0.10
+				civilian_factories_productivity = -0.20
+				local_resources_oil_factor = -0.10
+				local_resources_aluminium_factor = -0.10
+				local_resources_rubber_factor = -0.10
+				local_resources_tungsten_factor = -0.10
+				local_resources_steel_factor = -0.10
+				local_resources_chromium_factor = -0.10
 			}
 		}
 
 		CHI_low_end_manufacturing_2 = {
+			name = CHI_low_end_manufacturing
 			picture = china_factory
 
-			allowed = { original_tag = CHI }
 			modifier = {
-				productivity_growth_modifier = -2
-				buildings_worker_requirement_modifier = 0.55
-				production_speed_buildings_factor = 0.30
+				productivity_growth_modifier = -2.5
+				buildings_worker_requirement_modifier = 0.60
+				production_speed_buildings_factor = 0.40
 				industry_free_repair_factor = -0.75
 				industry_repair_factor = -0.75
-				local_resources_factor = -0.10
+				civilian_factories_productivity = -0.35
+				local_resources_oil_factor = -0.10
+				local_resources_aluminium_factor = -0.10
+				local_resources_rubber_factor = -0.10
+				local_resources_tungsten_factor = -0.10
+				local_resources_steel_factor = -0.10
+				local_resources_chromium_factor = -0.10
 			}
 		}
 
 		CHI_highspeed_railway_construction = {
-
 			picture = generic_train_tracks
-			allowed = { always = no }
 			allowed_civil_war = { always = yes }
+
 			modifier = {
 				production_speed_infrastructure_factor = 0.20
 			}
@@ -320,8 +355,8 @@ ideas = {
 			allowed = { original_tag = CHI }
 			picture = one_child_policy
 			modifier = {
-				MONTHLY_POPULATION = -0.90
-				migration_rate_value_factor = -0.50
+				MONTHLY_POPULATION = -1.25
+				migration_rate_value_factor = -0.75
 			}
 		}
 
@@ -330,7 +365,7 @@ ideas = {
 			allowed = { original_tag = CHI }
 			picture = one_child_policy
 			modifier = {
-				MONTHLY_POPULATION = -0.50
+				MONTHLY_POPULATION = -0.75
 			}
 		}
 
@@ -523,6 +558,15 @@ ideas = {
 			}
 		}
 
+		the_great_chip_empire = {
+			allowed = { original_tag = TAI }
+			picture = digitalize_idea
+			modifier = {
+				local_resources_microchips_factor = 0.05
+				production_speed_microchip_plant_factor = 0.05
+			}
+		}
+
 		fate_of_mongolian_area = {
 			allowed = { original_tag = TAI }
 			picture = chinese_mongolia
@@ -546,6 +590,15 @@ ideas = {
 		Lacks_International_Recognition_Taiwan = {
 
 			picture = disjointed_government
+
+			on_add = {
+				remove_from_array = { global.security_council_members = THIS }
+				remove_from_array = { global.confirmed_new_council_members = THIS }
+				remove_from_array = { global.new_council_members = THIS }
+				remove_from_array = { global.UN_general_assembly = THIS }
+				remove_dynamic_modifier = { modifier = united_nations_member }
+			}
+
 			modifier = {
 				political_power_factor = -0.15
 				Foreign_Intervention_Law_cost_factor = 0.25
@@ -966,7 +1019,12 @@ ideas = {
 				stability_factor = -0.05
 				political_power_factor = -0.05
 				production_speed_buildings_factor = 0.10
-				local_resources_factor = 0.05
+				local_resources_oil_factor = 0.05
+				local_resources_aluminium_factor = 0.05
+				local_resources_rubber_factor = 0.05
+				local_resources_tungsten_factor = 0.05
+				local_resources_steel_factor = 0.05
+				local_resources_chromium_factor = 0.05
 			}
 		}
 
@@ -977,7 +1035,12 @@ ideas = {
 				stability_factor = -0.075
 				political_power_factor = -0.025
 				production_speed_buildings_factor = 0.125
-				local_resources_factor = 0.075
+				local_resources_oil_factor = 0.075
+				local_resources_aluminium_factor = 0.075
+				local_resources_rubber_factor = 0.075
+				local_resources_tungsten_factor = 0.075
+				local_resources_steel_factor = 0.075
+				local_resources_chromium_factor = 0.075
 			}
 		}
 
@@ -1014,7 +1077,7 @@ ideas = {
 		CHI_Hyundai_Partnership = {
 			picture = motorized_focus
 			equipment_bonus = {
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					instant = yes
 					maximum_speed = 0.1
 				}
@@ -1026,11 +1089,11 @@ ideas = {
 			picture = motorized_focus
 			name = CHI_Hyundai_Partnership
 			equipment_bonus = {
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					instant = yes
 					maximum_speed = 0.1
 				}
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					instant = yes
 					build_cost_ic = -0.1
 				}
@@ -1041,7 +1104,7 @@ ideas = {
 		CHI_Volkswagen_Partnership = {
 			picture = motorized_focus
 			equipment_bonus = {
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					instant = yes
 					reliability = 0.1
 				}
@@ -1053,11 +1116,11 @@ ideas = {
 			picture = motorized_focus
 			name = CHI_Volkswagen_Partnership
 			equipment_bonus = {
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					instant = yes
 					reliability = 0.1
 				}
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					instant = yes
 					build_cost_ic = -0.1
 				}
@@ -1068,7 +1131,7 @@ ideas = {
 		CHI_Toyota_Partnership = {
 			picture = motorized_focus
 			equipment_bonus = {
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					instant = yes
 					build_cost_ic = -0.1
 				}
@@ -1080,7 +1143,7 @@ ideas = {
 			picture = motorized_focus
 			name = CHI_Toyota_Partnership
 			equipment_bonus = {
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					instant = yes
 					build_cost_ic = -0.2
 				}
@@ -1091,7 +1154,7 @@ ideas = {
 		CHI_GM_Partnership = {
 			picture = motorized_focus
 			equipment_bonus = {
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					instant = yes
 					armor_value = 0.1
 				}
@@ -1103,11 +1166,11 @@ ideas = {
 			picture = motorized_focus
 			name = CHI_GM_Partnership
 			equipment_bonus = {
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					instant = yes
 					armor_value = 0.1
 				}
-				util_vehicle_equipment = {
+				util_vehicle_type = {
 					instant = yes
 					build_cost_ic = -0.1
 				}
@@ -1259,8 +1322,8 @@ ideas = {
 			picture = un_intervention2
 			cancel = {
 				NOT = {
-					any_country = {
-						is_african_nation = yes
+					any_of_scopes = {
+						array = global.is_african_nation
 						has_war = yes
 					}
 				}
@@ -1377,7 +1440,7 @@ ideas = {
 		}
 
 		CHI_electric_car_project_idea = {
-			picture = blr_auto_industry_economic
+			picture = car_lux_idea
 			modifier = {
 				stability_factor = 0.05
 				pop_energy_use_multiplier = 0.1
@@ -1388,7 +1451,7 @@ ideas = {
 		}
 
 		CHI_electric_car_project_idea_1 = {
-			picture = blr_auto_industry_economic
+			picture = car_lux_idea
 			modifier = {
 				stability_factor = 0.1
 				pop_energy_use_multiplier = 0.15
@@ -1402,6 +1465,80 @@ ideas = {
 		picture = matignon_agreements
 			modifier = {
 				consumer_goods_factor = 0.05
+			}
+		}
+	}
+	hidden_ideas = {
+		CHI_crrc_idea1 = {
+			modifier = {
+				production_speed_infrastructure_factor = 0.05
+			}
+		}
+		CHI_crrc_idea2 = {
+			name = CHI_crrc_idea1
+			modifier = {
+				production_speed_infrastructure_factor = 0.05
+				international_market_income_modifier = 0.10
+				return_on_investment_modifier = 0.02
+			}
+		}
+		CHI_crrc_idea3 = {
+			name = CHI_crrc_idea1
+			modifier = {
+				production_speed_infrastructure_factor = 0.05
+				international_market_income_modifier = 0.10
+				return_on_investment_modifier = 0.02
+				army_fuel_consumption_factor = -0.02
+			}
+		}
+		CHI_crrc_idea4 = {
+			name = CHI_crrc_idea1
+			modifier = {
+				production_speed_infrastructure_factor = 0.05
+				international_market_income_modifier = 0.10
+				return_on_investment_modifier = 0.02
+				army_fuel_consumption_factor = -0.02
+				local_resources_oil_factor = 0.05
+				local_resources_aluminium_factor = 0.05
+				local_resources_rubber_factor = 0.05
+				local_resources_tungsten_factor = 0.05
+				local_resources_steel_factor = 0.05
+				local_resources_chromium_factor = 0.05
+			}
+		}
+		CHI_crrc_idea5 = {
+			name = CHI_crrc_idea1
+			modifier = {
+				production_speed_infrastructure_factor = 0.05
+				international_market_income_modifier = 0.10
+				return_on_investment_modifier = 0.02
+				army_fuel_consumption_factor = -0.02
+				local_resources_oil_factor = 0.05
+				local_resources_aluminium_factor = 0.05
+				local_resources_rubber_factor = 0.05
+				local_resources_tungsten_factor = 0.05
+				local_resources_steel_factor = 0.05
+				local_resources_chromium_factor = 0.05
+				production_speed_rail_way_factor = 0.15
+				production_speed_supply_node_factor = 0.05
+			}
+		}
+		CHI_crrc_idea6 = {
+			name = CHI_crrc_idea1
+			modifier = {
+				production_speed_infrastructure_factor = 0.05
+				international_market_income_modifier = 0.10
+				return_on_investment_modifier = 0.02
+				army_fuel_consumption_factor = -0.02
+				local_resources_oil_factor = 0.05
+				local_resources_aluminium_factor = 0.05
+				local_resources_rubber_factor = 0.05
+				local_resources_tungsten_factor = 0.05
+				local_resources_steel_factor = 0.05
+				local_resources_chromium_factor = 0.05
+				production_speed_rail_way_factor = 0.15
+				production_speed_supply_node_factor = 0.05
+				fossil_pp_fuel_consumption_modifier = -0.05
 			}
 		}
 	}

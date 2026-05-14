@@ -35,7 +35,7 @@
 # This specifically overrides the rule check as to whether or not you can guarantee other ideologies
 DIPLOMACY_GUARANTEE_ENABLE_TRIGGER_OVERRIDES_GAME = {
 	NOT = {
-		has_global_flag = GAME_RULE_limited_guarantees
+		has_game_rule = { rule = allow_guarantees option = LIMITED }
 	}
 }
 
@@ -43,7 +43,7 @@ DIPLOMACY_GUARANTEE_ENABLE_TRIGGER = {
 	#With free guarantees, all in-game rules are disalbed
 	if = {
 		limit = {
-			has_global_flag = GAME_RULE_always_free_guarantees
+			has_game_rule = { rule = allow_guarantees option = ALWAYS_FREE }
 		}
 		always = yes
 	}
@@ -51,13 +51,13 @@ DIPLOMACY_GUARANTEE_ENABLE_TRIGGER = {
 	else_if = {
 		limit = {
 			OR = {
-				has_global_flag = GAME_RULE_limited_guarantees
-				has_global_flag = GAME_RULE_same_ideology_guarantees
+				has_game_rule = { rule = allow_guarantees option = LIMITED }
+				has_game_rule = { rule = allow_guarantees option = SAME_IDEOLOGY }
 			}
 		}
 		if = {
 			limit = {
-				has_global_flag = GAME_RULE_same_ideology_guarantees
+				has_game_rule = { rule = allow_guarantees option = SAME_IDEOLOGY }
 			}
 			custom_trigger_tooltip = {
 				tooltip = RULE_ALLOW_GUARANTEES_SAME_IDEOLOGY_TOOLTIP
@@ -77,7 +77,7 @@ DIPLOMACY_GUARANTEE_ENABLE_TRIGGER = {
 	}
 	else_if = {
 		limit = {
-			has_global_flag = GAME_RULE_blocked_guarantees
+			has_game_rule = { rule = allow_guarantees option = BLOCKED }
 		}
 		custom_trigger_tooltip = {
 			tooltip = RULE_ALLOW_GUARANTEES_BLOCKED_TOOLTIP
@@ -371,13 +371,10 @@ DIPLOMACY_REQUEST_LICENSED_PRODUCTION_ENABLE_TRIGGER = {
 DIPLOMACY_GENERATE_WARGOAL_ENABLE_TRIGGER = {
 	if = {
 		limit = {
-			has_global_flag = GAME_RULE_allow_wargoals_free
-		}
-		always = yes
-	}
-	else_if = {
-		limit = {
-			has_global_flag = GAME_RULE_allow_wargoals_limited
+			OR = {
+				has_global_flag = GAME_RULE_allow_wargoals_free
+				has_global_flag = GAME_RULE_allow_wargoals_limited
+			}
 		}
 		always = yes
 	}
@@ -496,12 +493,9 @@ DIPLOMACY_LEAVE_FACTION_ENABLE_TRIGGER = {
 		}
 	}
 	else_if = {
-		limit = {
-			original_tag = CHI
-			is_sco = yes
-		}
+		limit = { has_idea = UNASUL_member }
 		custom_trigger_tooltip = {
-			tooltip = sco_member_leave_faction_rule_tt
+			tooltip = UNASUL_leave_faction_rule_tt
 			always = no
 		}
 	}
@@ -536,14 +530,26 @@ DIPLOMACY_KICK_FROM_FACTION_ENABLE_TRIGGER = {
 			always = no
 		}
 	}
+	else_if = {
+		limit = { has_idea = UNASUL_member }
+		custom_trigger_tooltip = {
+			tooltip = UNASUL_kick_from_faction_rule_tt
+			always = no
+		}
+	}
 }
 DIPLOMACY_DISMANTLE_FACTION_ENABLE_TRIGGER = {
 	if = {
-		limit = {
-			has_idea = NATO_member
-		}
+		limit = { has_idea = NATO_member }
 		custom_trigger_tooltip = {
 			tooltip = NATO_dismantle_faction_rule_tt
+			always = no
+		}
+	}
+	if = {
+		limit = { has_idea = UNASUL_member }
+		custom_trigger_tooltip = {
+			tooltip = UNASUL_dismantle_faction_rule_tt
 			always = no
 		}
 	}
@@ -624,21 +630,16 @@ DIPLOMACY_CALL_ALLY_ENABLE_TRIGGER = {
 			has_defensive_war = yes
 		}
 	}
-	#Black Sea Union is a defensive alliance
 	if = {
-		limit = {
-			has_idea = faction_baltic_black_sea_union_member
-		}
+		limit = { has_idea = UNASUL_member }
 		custom_trigger_tooltip = {
-			tooltip = faction_baltic_black_sea_union_member_call_ally_rule_tt
+			tooltip = UNASUL_call_ally_rule_tt
 			has_defensive_war = yes
 		}
 	}
 	#CENTO Alliance is a defensive alliance
 	if = {
-		limit = {
-			has_idea = faction_cento_alliance
-		}
+		limit = { has_idea = faction_cento_alliance }
 		custom_trigger_tooltip = {
 			tooltip = faction_cento_alliance_call_ally_rule_tt
 			has_defensive_war = yes
@@ -651,16 +652,6 @@ DIPLOMACY_CALL_ALLY_ENABLE_TRIGGER = {
 		}
 		custom_trigger_tooltip = {
 			tooltip = faction_seato_alliance_call_ally_rule_tt
-			has_defensive_war = yes
-		}
-	}
-	#GCA is a defensive alliance
-	if = {
-		limit = {
-			has_idea = faction_gca_alliance
-		}
-		custom_trigger_tooltip = {
-			tooltip = faction_gca_alliance_call_ally_rule_tt
 			has_defensive_war = yes
 		}
 	}
@@ -694,16 +685,6 @@ DIPLOMACY_CALL_ALLY_ENABLE_TRIGGER = {
 			has_defensive_war = yes
 		}
 	}
-	# FAO Alliance is a defensive alliance
-	if = {
-		limit = {
-			has_idea = faction_fao_alliance
-		}
-		custom_trigger_tooltip = {
-			tooltip = faction_fao_alliance_call_ally_rule_tt
-			has_defensive_war = yes
-		}
-	}
 }
 
 DIPLOMACY_JOIN_ALLY_ENABLE_TRIGGER = {
@@ -727,26 +708,10 @@ DIPLOMACY_JOIN_ALLY_ENABLE_TRIGGER = {
 			FROM = { has_defensive_war = yes }
 		}
 	}
-	#Black Sea Union is a defensive alliance
 	if = {
-		limit = {
-			has_idea = faction_baltic_black_sea_union_member
-		}
+		limit = { has_idea = UNASUL_member }
 		custom_trigger_tooltip = {
-			tooltip = faction_baltic_black_sea_union_member_join_ally_rule_tt
-			FROM = { has_defensive_war = yes }
-		}
-	}
-	#Monroe Alliance is defensive
-	if = {
-		limit = {
-			OR = {
-				FROM = { has_idea = faction_monroe_alliance }
-				has_idea = faction_monroe_alliance
-			}
-		}
-		custom_trigger_tooltip = {
-			tooltip = faction_monroe_alliance_join_ally_rule_tt
+			tooltip = UNASUL_join_ally_rule_tt
 			FROM = { has_defensive_war = yes }
 		}
 	}
@@ -773,19 +738,6 @@ DIPLOMACY_JOIN_ALLY_ENABLE_TRIGGER = {
 		}
 		custom_trigger_tooltip = {
 			tooltip = faction_seato_alliance_join_ally_rule_tt
-			FROM = { has_defensive_war = yes }
-		}
-	}
-	#gca is defensive
-	if = {
-		limit = {
-			OR = {
-				FROM = { has_idea = faction_gca_alliance }
-				has_idea = faction_gca_alliance
-			}
-		}
-		custom_trigger_tooltip = {
-			tooltip = faction_gca_alliance_join_ally_rule_tt
 			FROM = { has_defensive_war = yes }
 		}
 	}
@@ -830,20 +782,6 @@ DIPLOMACY_JOIN_ALLY_ENABLE_TRIGGER = {
 			FROM = { has_defensive_war = yes }
 		}
 	}
-	#FAO Is defensive
-	if = {
-		limit = {
-			OR = {
-				FROM = { has_idea = faction_fao_alliance }
-				has_idea = faction_fao_alliance
-			}
-		}
-		custom_trigger_tooltip = {
-			tooltip = faction_fao_alliance_join_ally_rule_tt
-
-			FROM = { has_defensive_war = yes }
-		}
-	}
 }
 
 DIPLOMACY_JOIN_FACTION_ENABLE_TRIGGER = {
@@ -868,10 +806,7 @@ DIPLOMACY_JOIN_FACTION_ENABLE_TRIGGER = {
 		}
 	}
 	#Can only invite post-Soviet states into faction
-	if = {
-		limit = {
-			FROM = { has_idea = CSTO_member }
-		}
+	if = { limit = { FROM = { has_idea = CSTO_member } }
 		custom_trigger_tooltip = {
 			tooltip = CSTO_join_faction_rule_tt
 			OR = {
@@ -898,42 +833,8 @@ DIPLOMACY_JOIN_FACTION_ENABLE_TRIGGER = {
 			}
 		}
 	}
-	#Can only invite post-Soviet states into faction
-	if = {
-		limit = {
-			FROM = { has_idea = faction_fia_alliance }
-		}
-		custom_trigger_tooltip = {
-			tooltip = fia_join_faction_rule_tt
-			OR = {
-				original_tag = SOV
-				original_tag = EST
-				original_tag = LAT
-				original_tag = LIT
-				original_tag = BLR
-				original_tag = UKR
-				original_tag = NOV
-				original_tag = MLV
-				original_tag = PMR
-				original_tag = GEO
-				original_tag = ABK
-				original_tag = SOO
-				original_tag = AZE
-				original_tag = ARM
-				original_tag = NKR
-				original_tag = KAZ
-				original_tag = UZB
-				original_tag = TRK
-				original_tag = TAJ
-				original_tag = KYR
-			}
-		}
-	}
 	#Can only invite post-Warsaw Pact
-	if = {
-		limit = {
-			FROM = { has_idea = SOV_warsaw_pact_idea }
-		}
+	if = { limit = { FROM = { has_idea = faction_warsaw_pact_idea } }
 		custom_trigger_tooltip = {
 			tooltip = warsaw_pact_join_faction_rule_tt
 			OR = {
@@ -945,61 +846,19 @@ DIPLOMACY_JOIN_FACTION_ENABLE_TRIGGER = {
 				original_tag = ROM
 				original_tag = BUL
 				original_tag = GER
-
+				is_subject_of = SOV
+				any_neighbor_country = {
+					has_idea = faction_warsaw_pact_idea
+				}
 			}
+			emerging_communist_state_are_in_power = yes
 		}
 	}
 	#Only nationalist allowed in the Moscow Pact
-	if = {
-		limit = {
-			FROM = { has_idea = S0V_russian_sphere_idea }
-		}
+	if = { limit = { FROM = { has_idea = S0V_russian_sphere_idea } }
 		custom_trigger_tooltip = {
 			tooltip = faction_moscow_pact_member_join_faction_rule_tt
 			has_government = nationalist
-		}
-	}
-	#Only communists allowed in the 5th internatioanl
-	if = {
-		limit = {
-			FROM = { has_idea = faction_fifth_international_member }
-		}
-		custom_trigger_tooltip = {
-			tooltip = faction_fifth_international_member_join_faction_rule_tt
-			OR = {
-				is_in_array = { ruling_party = 4 }
-				is_in_array = { ruling_party = 19 }
-			}
-		}
-	}
-	#Only certain countries allowd in the Black Sea Union
-	if = {
-		limit = {
-			FROM = { has_idea = faction_baltic_black_sea_union_member }
-		}
-		custom_trigger_tooltip = {
-			tooltip = faction_baltic_black_sea_union_member_join_faction_rule_tt
-			original_tag = EST
-			original_tag = LAT
-			original_tag = LIT
-			original_tag = BLR
-			original_tag = UKR
-			original_tag = POL
-			original_tag = MLV
-			original_tag = ROM
-		}
-	}
-	#Israel and neighbours are allowed in the Jerusalem Defence Pact
-	if = {
-		limit = {
-			FROM = { has_idea = faction_jerusalem_defence_pact_member }
-		}
-		custom_trigger_tooltip = {
-			tooltip = faction_jerusalem_defence_pact_member_join_faction_rule_tt
-			OR = {
-				original_tag = ISR
-				is_neighbor_of = ISR
-			}
 		}
 	}
 	#GCC is limited to GCC members
@@ -1010,31 +869,6 @@ DIPLOMACY_JOIN_FACTION_ENABLE_TRIGGER = {
 		custom_trigger_tooltip = {
 			tooltip = gcc_member_state_join_faction_rule_tt
 			has_idea = idea_gcc_member_state
-		}
-	}
-	#British Commonwealth only accepts Commonwealth members
-	if = {
-		limit = {
-			FROM = { has_idea = faction_british_commonwealth }
-		}
-		custom_trigger_tooltip = {
-			tooltip = faction_british_commonwealth_join_faction_rule_tt
-			has_idea = commonwealth_of_nations_member
-		}
-	}
-	#Monroe Alliance only for North and South America
-	if = {
-		limit = {
-			FROM = { has_idea = faction_monroe_alliance }
-		}
-		custom_trigger_tooltip = {
-			tooltip = faction_monroe_alliance_join_faction_rule_tt
-			capital_scope = {
-				OR = {
-					is_on_continent = north_america
-					is_on_continent = south_america
-				}
-			}
 		}
 	}
 	#Only Middle Eastern Countries can join CENTO
@@ -1076,20 +910,6 @@ DIPLOMACY_JOIN_FACTION_ENABLE_TRIGGER = {
 			tooltip = faction_imperial_bloc_join_faction_rule_tt
 			capital_scope = {
 				is_on_continent = europe
-			}
-		}
-	}
-	if = {
-		limit = {
-			FROM = { has_idea = faction_gca_alliance }
-		}
-		custom_trigger_tooltip = {
-			tooltip = faction_gca_alliance_join_faction_rule_tt
-			capital_scope = {
-				OR = {
-					is_on_continent = south_america
-					is_on_continent = north_america
-				}
 			}
 		}
 	}
@@ -1142,46 +962,6 @@ DIPLOMACY_JOIN_FACTION_ENABLE_TRIGGER = {
 				}
 
 			}
-		}
-	}
-	#Only Shia countries can join FAO
-	if = {
-		limit = {
-			FROM = { has_idea = faction_fao_alliance }
-		}
-		custom_trigger_tooltip = {
-			tooltip = faction_fao_alliance_join_faction_rule_tt
-			has_idea = shia
-		}
-	}
-	#Chinese United Front only for certain countries
-	if = {
-		limit = {
-			FROM = { has_idea = faction_chinese_united_front }
-		}
-		custom_trigger_tooltip = {
-			tooltip = faction_chinese_united_front_join_faction_rule_tt
-			OR = {
-				original_tag = CHI
-				original_tag = TAI
-				original_tag = TIB
-				original_tag = ETK
-				original_tag = MON
-				original_tag = HKG
-				original_tag = MAC
-			}
-		}
-	}
-	if = {
-		limit = {
-			FROM = {
-				original_tag = CHI
-				is_sco = yes
-			}
-		}
-		custom_trigger_tooltip = {
-			tooltip = sco_member_join_faction_rule_tt
-			is_sco = yes
 		}
 	}
 }
@@ -1240,71 +1020,25 @@ DIPLOMACY_OFFER_JOIN_FACTION_ENABLE_TRIGGER = {
 			}
 		}
 	}
-	#Can only invite post-Soviet states into faction
-	if = {
-		limit = {
-			has_idea = faction_fia_alliance
-		}
+	if = { limit = { FROM = { has_idea = faction_warsaw_pact_idea } }
 		custom_trigger_tooltip = {
-			tooltip = fia_offer_join_faction_rule_tt
+			tooltip = warsaw_pact_join_faction_rule_tt
 			FROM = {
 				OR = {
 					original_tag = SOV
-					original_tag = EST
-					original_tag = LAT
-					original_tag = LIT
-					original_tag = BLR
-					original_tag = UKR
-					original_tag = NOV
-					original_tag = MLV
-					original_tag = PMR
-					original_tag = GEO
-					original_tag = ABK
-					original_tag = SOO
-					original_tag = AZE
-					original_tag = ARM
-					original_tag = NKR
-					original_tag = KAZ
-					original_tag = UZB
-					original_tag = TRK
-					original_tag = TAJ
-					original_tag = KYR
+					original_tag = POL
+					original_tag = HUN
+					original_tag = CZE
+					original_tag = SLO
+					original_tag = ROM
+					original_tag = BUL
+					original_tag = GER
+					is_subject_of = SOV
+					any_neighbor_country = {
+						has_idea = faction_warsaw_pact_idea
+					}
 				}
-			}
-		}
-	}
-	#Can only invite post-Warsaw Pact
-	if = {
-		limit = {
-			FROM = { has_idea = SOV_warsaw_pact_idea }
-		}
-		custom_trigger_tooltip = {
-			tooltip = warsaw_pact_join_faction_rule_tt
-			OR = {
-				original_tag = SOV
-				original_tag = POL
-				original_tag = HUN
-				original_tag = CZE
-				original_tag = SLO
-				original_tag = ROM
-				original_tag = BUL
-				original_tag = GER
-
-			}
-		}
-	}
-	#Only communists allowed in the 5th internatioanl
-	if = {
-		limit = {
-			has_idea = faction_fifth_international_member
-		}
-		custom_trigger_tooltip = {
-			tooltip = faction_fifth_international_member_offer_join_faction_rule_tt
-			FROM = {
-				OR = {
-					is_in_array = { ruling_party = 4 }
-					is_in_array = { ruling_party = 19 }
-				}
+				emerging_communist_state_are_in_power = yes
 			}
 		}
 	}
@@ -1318,40 +1052,6 @@ DIPLOMACY_OFFER_JOIN_FACTION_ENABLE_TRIGGER = {
 			has_government = nationalist
 		}
 	}
-	#Only certain countries allowd in the Black Sea Union
-	if = {
-		limit = {
-			has_idea = faction_baltic_black_sea_union_member
-		}
-		custom_trigger_tooltip = {
-			tooltip = faction_baltic_black_sea_union_member_offer_join_faction_rule_tt
-			FROM = {
-				original_tag = EST
-				original_tag = LAT
-				original_tag = LIT
-				original_tag = BLR
-				original_tag = UKR
-				original_tag = POL
-				original_tag = MLV
-				original_tag = ROM
-			}
-		}
-	}
-	#Israel and neighbours are allowed in the Jerusalem Defence Pact
-	if = {
-		limit = {
-			has_idea = faction_jerusalem_defence_pact_member
-		}
-		custom_trigger_tooltip = {
-			tooltip = faction_jerusalem_defence_pact_member_offer_join_faction_rule_tt
-			FROM = {
-				OR = {
-					original_tag = ISR
-					is_neighbor_of = ISR
-				}
-			}
-		}
-	}
 	#GCC is limited to GCC members
 	if = {
 		limit = {
@@ -1361,33 +1061,6 @@ DIPLOMACY_OFFER_JOIN_FACTION_ENABLE_TRIGGER = {
 			tooltip = gcc_member_state_offer_join_faction_rule_tt
 			FROM = {
 				has_idea = idea_gcc_member_state
-			}
-		}
-	}
-	#British Commonwealth only accepts Commonwealth members
-	if = {
-		limit = {
-			has_idea = faction_british_commonwealth
-		}
-		custom_trigger_tooltip = {
-			tooltip = faction_british_commonwealth_offer_join_faction_rule_tt
-			FROM = { has_idea = commonwealth_of_nations_member }
-		}
-	}
-	#Monroe Alliance only for North and South America
-	if = {
-		limit = {
-			has_idea = faction_monroe_alliance
-		}
-		custom_trigger_tooltip = {
-			tooltip = faction_monroe_alliance_offer_join_faction_rule_tt
-			FROM = {
-				capital_scope = {
-					OR = {
-						is_on_continent = north_america
-						is_on_continent = south_america
-					}
-				}
 			}
 		}
 	}
@@ -1429,6 +1102,33 @@ DIPLOMACY_OFFER_JOIN_FACTION_ENABLE_TRIGGER = {
 			}
 		}
 	}
+	if = {
+		limit = {
+			has_idea = faction_aso_alliance
+		}
+		custom_trigger_tooltip = {
+			tooltip = faction_aso_alliance_offer_join_faction_rule_tt
+			FROM = {
+				original_tag = FRA
+				original_tag = BEL
+				original_tag = HOL
+				original_tag = GER
+				original_tag = ITA
+				original_tag = DEN
+				original_tag = SWE
+				original_tag = NOR
+				original_tag = FIN
+				original_tag = SPR
+				original_tag = POL
+				original_tag = SWI
+				original_tag = AUS
+				original_tag = POR
+				original_tag = TUR
+				original_tag = UKR
+				original_tag = ADS
+			}
+		}
+	}
 	#Only Certain countries can join SEATO
 	if = {
 		limit = {
@@ -1464,31 +1164,6 @@ DIPLOMACY_OFFER_JOIN_FACTION_ENABLE_TRIGGER = {
 				original_tag = FRA
 				original_tag = SPR
 				original_tag = FIN
-			}
-		}
-	}
-	#Only certain countires can join GCA
-	if = {
-		limit = {
-			has_idea = faction_gca_alliance
-		}
-		custom_trigger_tooltip = {
-			tooltip = faction_gca_alliance_offer_join_faction_rule_tt
-			FROM = {
-				original_tag = ECU
-				original_tag = PRU
-				original_tag = GUY
-				original_tag = PAN
-				original_tag = BOL
-				original_tag = COL
-				original_tag = MEX
-				original_tag = CHL
-				original_tag = COS
-				original_tag = NIC
-				original_tag = HON
-				original_tag = ELS
-				original_tag = GUA
-				original_tag = BLZ
 			}
 		}
 	}
@@ -1529,38 +1204,6 @@ DIPLOMACY_OFFER_JOIN_FACTION_ENABLE_TRIGGER = {
 				original_tag = TRK
 				original_tag = KUR
 				original_tag = SOO
-			}
-		}
-	}
-	#Chinese United Front only for certain countries
-	if = {
-		limit = {
-			has_idea = faction_chinese_united_front
-		}
-		custom_trigger_tooltip = {
-			tooltip = faction_chinese_united_front_offer_join_faction_rule_tt
-			FROM = {
-				OR = {
-					original_tag = CHI
-					original_tag = TAI
-					original_tag = TIB
-					original_tag = ETK
-					original_tag = MON
-					original_tag = HKG
-					original_tag = MAC
-				}
-			}
-		}
-	}
-	if = {
-		limit = {
-			original_tag = CHI
-			is_sco = yes
-		}
-		custom_trigger_tooltip = {
-			tooltip = sco_member_offer_join_faction_rule_tt
-			FROM = {
-				is_sco = yes
 			}
 		}
 	}
@@ -2617,6 +2260,19 @@ DIPLOMACY_PEACE_PROPOSAL_ENABLE_TRIGGER = {
 		custom_trigger_tooltip = {
 			tooltip = RULE_PEACE_PROPOSAL_BLOCKED_TT
 			always = no
+		}
+	}
+}
+
+DIPLOMACY_EMBARGO_ENABLE_TRIGGER = {
+	NOT = {
+		custom_trigger_tooltip = {
+			tooltip = CANCEL_MUTUAL_INVESTMENT_TOOLTIP
+			THIS = { has_country_flag = mutual_investment_treaty_@FROM }
+		}
+		custom_trigger_tooltip = {
+			tooltip = CANCEL_TRADE_AGREEMENT_TOOLTIP
+			THIS = { has_country_flag = trade_agreement@FROM }
 		}
 	}
 }

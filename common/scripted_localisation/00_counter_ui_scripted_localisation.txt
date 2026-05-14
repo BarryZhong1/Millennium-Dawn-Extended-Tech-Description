@@ -18,7 +18,7 @@ defined_text = {
 		trigger = {
 			casualties > 1000000
 			set_temp_variable = { casualties_k_k = casualties_k }
-			divide_temp_variable = { casualties_k_k = 1000 }
+			multiply_temp_variable = { casualties_k_k = 0.001 }
 		}
 		localization_key = TOPBAR_casualties_m
 	}
@@ -152,6 +152,20 @@ defined_text = {
 			check_variable = { ROOT.topbar_option_one^i = 5 }
 		}
 		localization_key = "GFX_topbar_precious_metals"
+	}
+	text = {
+		trigger = {
+			check_variable = { ROOT.topbar_selected_container^i = 5 }
+			check_variable = { ROOT.topbar_option_one^i = 6 }
+		}
+		localization_key = "GFX_topbar_microchips"
+	}
+	text = {
+		trigger = {
+			check_variable = { ROOT.topbar_selected_container^i = 5 }
+			check_variable = { ROOT.topbar_option_one^i = 7 }
+		}
+		localization_key = "GFX_topbar_composites"
 	}
 	text = {
 		trigger = {
@@ -510,6 +524,7 @@ defined_text = {
 	}
 }
 # 5
+# Note: "resource@TYPE" returns net balance (available resources after all calculations)
 defined_text = {
 	name = GetTopbarSelectedResourceVariable
 	text = {
@@ -550,36 +565,37 @@ defined_text = {
 		trigger = {
 			check_variable = { ROOT.topbar_option_two^topbar_container_index = 0 }
 		}
-		localization_key = "Net Resource" #was Total Resource
+		localization_key = TOPBAR_net_resource #was Total Resource
 	}
 	text = {
 		trigger = {
 			check_variable = { ROOT.topbar_option_two^topbar_container_index = 1 }
 		}
-		localization_key = "Consumed Resource"
+		localization_key = TOPBAR_consumed_resource
 	}
 	text = {
 		trigger = {
 			check_variable = { ROOT.topbar_option_two^topbar_container_index = 2 }
 		}
-		localization_key = "Exported Resource"
+		localization_key = TOPBAR_exported_resource
 	}
 	text = {
 		trigger = {
 			check_variable = { ROOT.topbar_option_two^topbar_container_index = 3 }
 		}
-		localization_key = "Imported Resource"
+		localization_key = TOPBAR_imported_resource
 	}
 	text = {
 		trigger = {
 			check_variable = { ROOT.topbar_option_two^topbar_container_index = 4 }
 		}
-		localization_key = "Produced Resource"
+		localization_key = TOPBAR_produced_resource
 	}
 }
 # 5
 defined_text = {
 	name = GetTopbarSelectedResource
+	# Oil
 	text = {
 		trigger = {
 			check_variable = { ROOT.topbar_option_one^i = 0 }
@@ -592,8 +608,7 @@ defined_text = {
 		}
 		localization_key = TOPBAR_LIST_RESOURCE_TT
 	}
-
-	#rubber
+	# Rubber
 	text = {
 		trigger = {
 			check_variable = { ROOT.topbar_option_one^i = 1 }
@@ -606,7 +621,7 @@ defined_text = {
 		}
 		localization_key = TOPBAR_LIST_RESOURCE_TT
 	}
-	#aluminium
+	# Aluminium
 	text = {
 		trigger = {
 			check_variable = { ROOT.topbar_option_one^i = 2 }
@@ -619,7 +634,7 @@ defined_text = {
 		}
 		localization_key = TOPBAR_LIST_RESOURCE_TT
 	}
-	#steel
+	# Steel
 	text = {
 		trigger = {
 			check_variable = { ROOT.topbar_option_one^i = 3 }
@@ -632,7 +647,7 @@ defined_text = {
 		}
 		localization_key = TOPBAR_LIST_RESOURCE_TT
 	}
-	#tungsten
+	# Tungsten
 	text = {
 		trigger = {
 			check_variable = { ROOT.topbar_option_one^i = 4 }
@@ -645,7 +660,7 @@ defined_text = {
 		}
 		localization_key = TOPBAR_LIST_RESOURCE_TT
 	}
-	#chromium
+	# Chromium
 	text = {
 		trigger = {
 			check_variable = { ROOT.topbar_option_one^i = 5 }
@@ -658,30 +673,62 @@ defined_text = {
 		}
 		localization_key = TOPBAR_LIST_RESOURCE_TT
 	}
+	# Microchips
 	text = {
-		localization_key = "test test "
+		trigger = {
+			check_variable = { ROOT.topbar_option_one^i = 6 }
+			meta_trigger = {
+				text = {
+					set_temp_variable = { resource_temp = Root.[VARIABLE]@microchips }
+				}
+				VARIABLE = "[This.GetTopbarSelectedResourceVariable]"
+			}
+		}
+		localization_key = TOPBAR_LIST_RESOURCE_TT
+	}
+	# Advanced Composites
+	text = {
+		trigger = {
+			check_variable = { ROOT.topbar_option_one^i = 7 }
+			meta_trigger = {
+				text = {
+					set_temp_variable = { resource_temp = Root.[VARIABLE]@composites }
+				}
+				VARIABLE = "[This.GetTopbarSelectedResourceVariable]"
+			}
+		}
+		localization_key = TOPBAR_LIST_RESOURCE_TT
+	}
+	text = {
+		localization_key = "- "
 	}
 }
 # 5
 defined_text = {
 	name = GetTopbarSelectedResourceTooltip
 	text = { trigger = { check_variable = { ROOT.topbar_option_one^topbar_container_index = 0 } }
-		localization_key = "Fossil Fuels"
+		localization_key = country_resource_oil
 	}
 	text = { trigger = { check_variable = { ROOT.topbar_option_one^topbar_container_index = 1 } }
-		localization_key = "Rubber"
+		localization_key = country_resource_rubber
 	}
 	text = { trigger = { check_variable = { ROOT.topbar_option_one^topbar_container_index = 2 } }
-		localization_key = "Light Metals" #was Aluminum
+		localization_key = country_resource_aluminium #was Aluminum
 	}
 	text = { trigger = { check_variable = { ROOT.topbar_option_one^topbar_container_index = 3 } }
-		localization_key = "Steel"
+		localization_key = country_resource_steel
 	}
 	text = { trigger = { check_variable = { ROOT.topbar_option_one^topbar_container_index = 4 } }
-		localization_key = "Technology Metals"
+		localization_key = country_resource_tungsten #was Tungsten
 	}
 	text = { trigger = { check_variable = { ROOT.topbar_option_one^topbar_container_index = 5 } }
-		localization_key = "Precious Metals"
+		localization_key = country_resource_chromium #was Chromium
+	}
+	text = { trigger = { check_variable = { ROOT.topbar_option_one^topbar_container_index = 6 } }
+		localization_key = country_resource_microchips
+	}
+	text = { trigger = { check_variable = { ROOT.topbar_option_one^topbar_container_index = 7 } }
+		localization_key = country_resource_composites
 	}
 	text = {
 		localization_key = "No Trigger"
@@ -697,6 +744,9 @@ defined_text = {
 	text = { trigger = { check_variable = { ROOT.topbar_option_one^i = 1 } }
 		localization_key = TOPBAR_energy_total_percentage
 	}
+	text = { trigger = { check_variable = { ROOT.topbar_option_one^i = 2 } }
+		localization_key = TOPBAR_stored_energy_balance
+	}
 }
 
 defined_text = {
@@ -706,6 +756,9 @@ defined_text = {
 	}
 	text = { trigger = { check_variable = { ROOT.topbar_option_one^topbar_container_index = 1 } }
 		localization_key = TOPBAR_ENERGY_BALANCE_PERCENTAGE_TOOLTIP
+	}
+	text = { trigger = { check_variable = { ROOT.topbar_option_one^topbar_container_index = 2 } }
+		localization_key = TOPBAR_ENERGY_STORED_ENERGY_TOOLTIP
 	}
 }
 
@@ -718,6 +771,9 @@ defined_text = {
 	text = { trigger = { check_variable = { ROOT.topbar_option_one^i = 1 } }
 		localization_key = TOPBAR_economy_interest_rate
 	}
+	text = { trigger = { check_variable = { ROOT.topbar_option_one^i = 2 } }
+		localization_key = TOPBAR_economy_inflation_rate
+	}
 }
 
 defined_text = {
@@ -727,6 +783,9 @@ defined_text = {
 	}
 	text = { trigger = { check_variable = { ROOT.topbar_option_one^topbar_container_index = 1 } }
 		localization_key = TOPBAR_INTEREST_RATE_TOOLTIP
+	}
+	text = { trigger = { check_variable = { ROOT.topbar_option_one^topbar_container_index = 2 } }
+		localization_key = TOPBAR_INFLATION_RATE_TOOLTIP
 	}
 }
 
@@ -757,22 +816,22 @@ defined_text = {
 defined_text = {
 	name = GetTopbarSelectedPopularityTooltip
 	text = { trigger = { check_variable = { ROOT.topbar_option_one^topbar_container_index = 0 } }
-		localization_key = "Ruling Coalition"
+		localization_key = TOPBAR_ruling_coalition
 	}
 	text = { trigger = { check_variable = { ROOT.topbar_option_one^topbar_container_index = 1 } }
-		localization_key = "Pro-Western Outlook"
+		localization_key = TOPBAR_pro_western_outlook
 	}
 	text = { trigger = { check_variable = { ROOT.topbar_option_one^topbar_container_index = 2 } }
-		localization_key = "Emerging Outlook"
+		localization_key = TOPBAR_emerging_outlook
 	}
 	text = { trigger = { check_variable = { ROOT.topbar_option_one^topbar_container_index = 3 } }
-		localization_key = "Salafist Outlook"
+		localization_key = TOPBAR_salafist_outlook
 	}
 	text = { trigger = { check_variable = { ROOT.topbar_option_one^topbar_container_index = 4 } }
-		localization_key = "Non-Aligned Outlook"
+		localization_key = TOPBAR_non_aligned_outlook
 	}
 	text = { trigger = { check_variable = { ROOT.topbar_option_one^topbar_container_index = 5 } }
-		localization_key = "Nationalist Outlook"
+		localization_key = TOPBAR_nationalist_outlook
 	}
 }
 
@@ -796,16 +855,16 @@ defined_text = {
 defined_text = {
 	name = GetTopbarSelectedBuildingTooltip
 	text = { trigger = { check_variable = { ROOT.topbar_option_one^topbar_container_index = 0 } }
-		localization_key = "Civilian Factories"
+		localization_key = industrial_complex
 	}
 	text = { trigger = { check_variable = { ROOT.topbar_option_one^topbar_container_index = 1 } }
-		localization_key = "Military Factories"
+		localization_key = arms_factory
 	}
 	text = { trigger = { check_variable = { ROOT.topbar_option_one^topbar_container_index = 2 } }
-		localization_key = "Naval Dockyards"
+		localization_key = dockyard_plural
 	}
 	text = { trigger = { check_variable = { ROOT.topbar_option_one^topbar_container_index = 3 } }
-		localization_key = "Offices"
+		localization_key = offices_plural
 	}
 }
 
@@ -827,13 +886,13 @@ defined_text = {
 defined_text = {
 	name = GetTopbarSelectedInfluenceTooltip
 	text = { trigger = { check_variable = { ROOT.topbar_option_one^topbar_container_index = 0 } }
-		localization_key = "Foreign Influencing Current/Cap"
+		localization_key = TOPBAR_foreign_investment_cap
 	}
 	text = { trigger = { check_variable = { ROOT.topbar_option_one^topbar_container_index = 1 } }
-		localization_key = "Foreign Influence Modifier"
+		localization_key = TOPBAR_foreign_investment_modifier
 	}
 	text = { trigger = { check_variable = { ROOT.topbar_option_one^topbar_container_index = 2 } }
-		localization_key = "Foreign Influence Defense Modifier"
+		localization_key = TOPBAR_foreign_investment_defens_modifier
 	}
 }
 
@@ -858,16 +917,16 @@ defined_text = {
 defined_text = {
 	name = GetTopbarSelectedEuroscepticsmTooltip
 	text = { trigger = { check_variable = { ROOT.topbar_option_one^topbar_container_index = 0 } }
-		localization_key = "[ROOT.GetNameWithFlag] Euroscepticism"
+		localization_key = TOPBAR_root_euroscepticism
 	}
 	text = { trigger = { check_variable = { ROOT.topbar_option_one^topbar_container_index = 1 } }
-		localization_key = "[EUU.GetNameWithFlag] Europeanism"
+		localization_key = TOPBAR_eu_europeanism
 	}
 	text = { trigger = { check_variable = { ROOT.topbar_option_one^topbar_container_index = 2 } }
-		localization_key = "[EUU.GetNameWithFlag] European Parliament Vote Cooldown"
+		localization_key = TOPBAR_eu_parliament_vote_cooldown
 	}
 	text = { trigger = { check_variable = { ROOT.topbar_option_one^topbar_container_index = 3 } }
-		localization_key = "[EUU.GetNameWithFlag] European Council Vote Cooldown"
+		localization_key = TOPBAR_eu_council_vote_cooldown
 	}
 }
 
@@ -885,10 +944,10 @@ defined_text = {
 defined_text = {
 	name = GetTopbarSelectedInvestmentTooltip
 	text = { trigger = { check_variable = { ROOT.topbar_option_one^topbar_container_index = 0 } }
-		localization_key = "[ROOT.GetNameWithFlag] Active Foreign Investment Projects"
+		localization_key = TOPBAR_root_active_foreign_investment_projects
 	}
 	text = { trigger = { check_variable = { ROOT.topbar_option_one^topbar_container_index = 1 } }
-		localization_key = "[ROOT.GetNameWithFlag] Active Internal Investment Projects"
+		localization_key = TOPBAR_root_active_internal_investment_projects
 	}
 }
 
@@ -921,12 +980,6 @@ defined_text = {
 	text = { trigger = { check_variable = { ROOT.topbar_selected_container^i = 15 } }
 		localization_key = TOPBAR_CONS_GOODS_TOOLTIP
 	}
-	text = { trigger = { check_variable = { ROOT.topbar_selected_container^i = 17 } }
-		localization_key = TOPBAR_RESEARCH_TOOLTIP
-	}
-	text = { trigger = { check_variable = { ROOT.topbar_selected_container^i = 18 } }
-		localization_key = TOPBAR_CONSCRIPTION_TOOLTIP
-	}
 	text = { trigger = { check_variable = { ROOT.topbar_selected_container^i = 20 } }
 		localization_key = TOPBAR_PROTESTS_TOOLTIP
 	}
@@ -937,7 +990,7 @@ defined_text = {
 			check_variable = { ROOT.topbar_option_one^i = 0 }
 			check_variable = { ROOT.topbar_option_two^i = 0 }
 		}
-		localization_key = "Net Fossil Fuels" #was Total_Oil
+		localization_key = TOPBAR_net_fossil_fuels #was Total_Oil
 	}
 	text = {
 		trigger = {
@@ -945,7 +998,7 @@ defined_text = {
 			check_variable = { ROOT.topbar_option_one^i = 0 }
 			check_variable = { ROOT.topbar_option_two^i = 1 }
 		}
-		localization_key = "Consumed Fossil Fuels" #was Consumed_Oil
+		localization_key = TOPBAR_consumed_fossil_fuels #was Consumed_Oil
 	}
 	text = {
 		trigger = {
@@ -953,7 +1006,7 @@ defined_text = {
 			check_variable = { ROOT.topbar_option_one^i = 0 }
 			check_variable = { ROOT.topbar_option_two^i = 2 }
 		}
-		localization_key = "Exported Fossil Fuels" #was Exported_Oil
+		localization_key = TOPBAR_exported_fossil_fuels #was Exported_Oil
 	}
 	text = {
 		trigger = {
@@ -961,7 +1014,7 @@ defined_text = {
 			check_variable = { ROOT.topbar_option_one^i = 0 }
 			check_variable = { ROOT.topbar_option_two^i = 3 }
 		}
-		localization_key = "Imported Fossil Fuels" #was Imported_Oil
+		localization_key = TOPBAR_imported_fossil_fuels #was Imported_Oil
 	}
 	text = {
 		trigger = {
@@ -969,7 +1022,7 @@ defined_text = {
 			check_variable = { ROOT.topbar_option_one^i = 0 }
 			check_variable = { ROOT.topbar_option_two^i = 4 }
 		}
-		localization_key = "Produced Fossil Fuels" #was Produced_Oil
+		localization_key = TOPBAR_produced_fossil_fuels #was Produced_Oil
 	}
 	text = {
 		trigger = {
@@ -977,7 +1030,7 @@ defined_text = {
 			check_variable = { ROOT.topbar_option_one^i = 1 }
 			check_variable = { ROOT.topbar_option_two^i = 0 }
 		}
-		localization_key = "Net Rubber" #was Total_Rubber
+		localization_key = TOPBAR_net_rubber #was Total_Rubber
 	}
 	text = {
 		trigger = {
@@ -985,7 +1038,7 @@ defined_text = {
 			check_variable = { ROOT.topbar_option_one^i = 1 }
 			check_variable = { ROOT.topbar_option_two^i = 1 }
 		}
-		localization_key = "Consumed Rubber" #was Consumed_Rubber
+		localization_key = TOPBAR_consumed_rubber #was Consumed_Rubber
 	}
 	text = {
 		trigger = {
@@ -993,7 +1046,7 @@ defined_text = {
 			check_variable = { ROOT.topbar_option_one^i = 1 }
 			check_variable = { ROOT.topbar_option_two^i = 2 }
 		}
-		localization_key = "Exported Rubber" #was Exported_Rubber
+		localization_key = TOPBAR_exported_rubber #was Exported_Rubber
 	}
 	text = {
 		trigger = {
@@ -1001,7 +1054,7 @@ defined_text = {
 			check_variable = { ROOT.topbar_option_one^i = 1 }
 			check_variable = { ROOT.topbar_option_two^i = 3 }
 		}
-		localization_key = "Imported Rubber" #was Imported_Rubber
+		localization_key = TOPBAR_imported_rubber #was Imported_Rubber
 	}
 	text = {
 		trigger = {
@@ -1009,7 +1062,7 @@ defined_text = {
 			check_variable = { ROOT.topbar_option_one^i = 1 }
 			check_variable = { ROOT.topbar_option_two^i = 4 }
 		}
-		localization_key = "Produced Rubber" #was Produced_Rubber
+		localization_key = TOPBAR_produced_rubber #was Produced_Rubber
 	}
 	text = {
 		trigger = {
@@ -1017,7 +1070,7 @@ defined_text = {
 			check_variable = { ROOT.topbar_option_one^i = 2 }
 			check_variable = { ROOT.topbar_option_two^i = 0 }
 		}
-		localization_key = "Net Light Metals" #was Aluminium_Total
+		localization_key = TOPBAR_net_light_metals #was Aluminium_Total
 	}
 	text = {
 		trigger = {
@@ -1025,7 +1078,7 @@ defined_text = {
 			check_variable = { ROOT.topbar_option_one^i = 2 }
 			check_variable = { ROOT.topbar_option_two^i = 1 }
 		}
-		localization_key = "Consumed Light Metals" #was Aluminium_Consumed
+		localization_key = TOPBAR_consumed_light_metals #was Aluminium_Consumed
 	}
 	text = {
 		trigger = {
@@ -1033,7 +1086,7 @@ defined_text = {
 			check_variable = { ROOT.topbar_option_one^i = 2 }
 			check_variable = { ROOT.topbar_option_two^i = 2 }
 		}
-		localization_key = "Exported Light Metals" #was Exported_Aluminum
+		localization_key = TOPBAR_exported_light_metals #was Exported_Aluminum
 	}
 	text = {
 		trigger = {
@@ -1041,7 +1094,7 @@ defined_text = {
 			check_variable = { ROOT.topbar_option_one^i = 2 }
 			check_variable = { ROOT.topbar_option_two^i = 3 }
 		}
-		localization_key = "Imported Light Metals" #was Imported_Aluminum
+		localization_key = TOPBAR_imported_light_metals #was Imported_Aluminum
 	}
 	text = {
 		trigger = {
@@ -1049,7 +1102,7 @@ defined_text = {
 			check_variable = { ROOT.topbar_option_one^i = 2 }
 			check_variable = { ROOT.topbar_option_two^i = 4 }
 		}
-		localization_key = "Produced Light Metals" #was Produced_Aluminum
+		localization_key = TOPBAR_produced_light_metals #was Produced_Aluminum
 	}
 	text = {
 		trigger = {
@@ -1057,7 +1110,7 @@ defined_text = {
 			check_variable = { ROOT.topbar_option_one^i = 3 }
 			check_variable = { ROOT.topbar_option_two^i = 0	 }
 		}
-		localization_key = "Net Steel" #was Total_Steel
+		localization_key = TOPBAR_net_steel #was Total_Steel
 	}
 	text = {
 		trigger = {
@@ -1065,7 +1118,7 @@ defined_text = {
 			check_variable = { ROOT.topbar_option_one^i = 3 }
 			check_variable = { ROOT.topbar_option_two^i = 1 }
 		}
-		localization_key = "Consumed Steel" #was Consumed_Steel
+		localization_key = TOPBAR_consumed_steel #was Consumed_Steel
 	}
 	text = {
 		trigger = {
@@ -1073,7 +1126,7 @@ defined_text = {
 			check_variable = { ROOT.topbar_option_one^i = 3 }
 			check_variable = { ROOT.topbar_option_two^i = 2 }
 		}
-		localization_key = "Exported Steel" #was Exported_Steel
+		localization_key = TOPBAR_exported_steel #was Exported_Steel
 	}
 	text = {
 		trigger = {
@@ -1081,7 +1134,7 @@ defined_text = {
 			check_variable = { ROOT.topbar_option_one^i = 3 }
 			check_variable = { ROOT.topbar_option_two^i = 3 }
 		}
-		localization_key = "Imported Steel" #was Imported_Steel
+		localization_key = TOPBAR_imported_steel #was Imported_Steel
 	}
 	text = {
 		trigger = {
@@ -1089,7 +1142,7 @@ defined_text = {
 			check_variable = { ROOT.topbar_option_one^i = 3 }
 			check_variable = { ROOT.topbar_option_two^i = 4 }
 		}
-		localization_key = "Produced Steel" #was Produced_Steel
+		localization_key = TOPBAR_produced_steel #was Produced_Steel
 	}
 	text = {
 		trigger = {
@@ -1097,7 +1150,7 @@ defined_text = {
 			check_variable = { ROOT.topbar_option_one^i = 4 }
 			check_variable = { ROOT.topbar_option_two^i = 0 }
 		}
-		localization_key = "Net Technology Metals" #was Total_Tungsten
+		localization_key = TOPBAR_net_technology_metals #was Total_Tungsten
 	}
 
 	text = {
@@ -1106,7 +1159,7 @@ defined_text = {
 			check_variable = { ROOT.topbar_option_one^i = 4 }
 			check_variable = { ROOT.topbar_option_two^i = 1 }
 		}
-		localization_key = "Consumed Technology Metals" #was Consumed_Tungsten
+		localization_key = TOPBAR_consumed_technology_metals #was Consumed_Tungsten
 	}
 	text = {
 		trigger = {
@@ -1114,7 +1167,7 @@ defined_text = {
 			check_variable = { ROOT.topbar_option_one^i = 4 }
 			check_variable = { ROOT.topbar_option_two^i = 2 }
 		}
-		localization_key = "Exported Technology Metals" #was Exported_Tungsten
+		localization_key = TOPBAR_exported_technology_metals #was Exported_Tungsten
 	}
 	text = {
 		trigger = {
@@ -1122,7 +1175,7 @@ defined_text = {
 			check_variable = { ROOT.topbar_option_one^i = 4 }
 			check_variable = { ROOT.topbar_option_two^i = 3 }
 		}
-		localization_key = "Imported Technology Metals" #was Imported_Tungsten
+		localization_key = TOPBAR_imported_technology_metals #was Imported_Tungsten
 	}
 	text = {
 		trigger = {
@@ -1130,7 +1183,7 @@ defined_text = {
 			check_variable = { ROOT.topbar_option_one^i = 4 }
 			check_variable = { ROOT.topbar_option_two^i = 4 }
 		}
-		localization_key = "Produced Technology Metals" #was Produced_Tungsten
+		localization_key = TOPBAR_produced_technology_metals #was Produced_Tungsten
 	}
 	text = {
 		trigger = {
@@ -1138,7 +1191,7 @@ defined_text = {
 			check_variable = { ROOT.topbar_option_one^i = 5 }
 			check_variable = { ROOT.topbar_option_two^i = 0 }
 		}
-		localization_key = "Net Precious Metals" #was Total_Raw_Materials
+		localization_key = TOPBAR_net_precious_metals #was Total_Raw_Materials
 	}
 	text = {
 		trigger = {
@@ -1146,7 +1199,7 @@ defined_text = {
 			check_variable = { ROOT.topbar_option_one^i = 5 }
 			check_variable = { ROOT.topbar_option_two^i = 1 }
 		}
-		localization_key = "Consumed Precious Metals" #was Consumed_Raw_Materials
+		localization_key = TOPBAR_consumed_precious_metals #was Consumed_Raw_Materials
 	}
 	text = {
 		trigger = {
@@ -1154,7 +1207,7 @@ defined_text = {
 			check_variable = { ROOT.topbar_option_one^i = 5 }
 			check_variable = { ROOT.topbar_option_two^i = 2 }
 		}
-		localization_key = "Exported Precious Metals" #was Exported_Raw_Materials
+		localization_key = TOPBAR_exported_precious_metals #was Exported_Raw_Materials
 	}
 	text = {
 		trigger = {
@@ -1162,7 +1215,7 @@ defined_text = {
 			check_variable = { ROOT.topbar_option_one^i = 5 }
 			check_variable = { ROOT.topbar_option_two^i = 3 }
 		}
-		localization_key = "Imported Precious Metals" #was Imported_Raw_Materials
+		localization_key = TOPBAR_imported_precious_metals #was Imported_Raw_Materials
 	}
 	text = {
 		trigger = {
@@ -1170,7 +1223,89 @@ defined_text = {
 			check_variable = { ROOT.topbar_option_one^i = 5 }
 			check_variable = { ROOT.topbar_option_two^i = 4 }
 		}
-		localization_key = "Produced Precious Metals" #was Produced_Raw_Materials
+		localization_key = TOPBAR_produced_precious_metals #was Produced_Raw_Materials
+	}
+	# Microchips
+	text = {
+		trigger = {
+			check_variable = { ROOT.topbar_selected_container^i = 5 }
+			check_variable = { ROOT.topbar_option_one^i = 6 }
+			check_variable = { ROOT.topbar_option_two^i = 0 }
+		}
+		localization_key = TOPBAR_net_microchips
+	}
+	text = {
+		trigger = {
+			check_variable = { ROOT.topbar_selected_container^i = 5 }
+			check_variable = { ROOT.topbar_option_one^i = 6 }
+			check_variable = { ROOT.topbar_option_two^i = 1 }
+		}
+		localization_key = TOPBAR_consumed_microchips
+	}
+	text = {
+		trigger = {
+			check_variable = { ROOT.topbar_selected_container^i = 5 }
+			check_variable = { ROOT.topbar_option_one^i = 6 }
+			check_variable = { ROOT.topbar_option_two^i = 2 }
+		}
+		localization_key = TOPBAR_exported_microchips
+	}
+	text = {
+		trigger = {
+			check_variable = { ROOT.topbar_selected_container^i = 5 }
+			check_variable = { ROOT.topbar_option_one^i = 6 }
+			check_variable = { ROOT.topbar_option_two^i = 3 }
+		}
+		localization_key = TOPBAR_imported_microchips
+	}
+	text = {
+		trigger = {
+			check_variable = { ROOT.topbar_selected_container^i = 5 }
+			check_variable = { ROOT.topbar_option_one^i = 6 }
+			check_variable = { ROOT.topbar_option_two^i = 4 }
+		}
+		localization_key = TOPBAR_produced_microchips
+	}
+	# Advanced Composites
+	text = {
+		trigger = {
+			check_variable = { ROOT.topbar_selected_container^i = 5 }
+			check_variable = { ROOT.topbar_option_one^i = 7 }
+			check_variable = { ROOT.topbar_option_two^i = 0 }
+		}
+		localization_key = TOPBAR_net_composites
+	}
+	text = {
+		trigger = {
+			check_variable = { ROOT.topbar_selected_container^i = 5 }
+			check_variable = { ROOT.topbar_option_one^i = 7 }
+			check_variable = { ROOT.topbar_option_two^i = 1 }
+		}
+		localization_key = TOPBAR_consumed_composites
+	}
+	text = {
+		trigger = {
+			check_variable = { ROOT.topbar_selected_container^i = 5 }
+			check_variable = { ROOT.topbar_option_one^i = 7 }
+			check_variable = { ROOT.topbar_option_two^i = 2 }
+		}
+		localization_key = TOPBAR_exported_composites
+	}
+	text = {
+		trigger = {
+			check_variable = { ROOT.topbar_selected_container^i = 5 }
+			check_variable = { ROOT.topbar_option_one^i = 7 }
+			check_variable = { ROOT.topbar_option_two^i = 3 }
+		}
+		localization_key = TOPBAR_imported_composites
+	}
+	text = {
+		trigger = {
+			check_variable = { ROOT.topbar_selected_container^i = 5 }
+			check_variable = { ROOT.topbar_option_one^i = 7 }
+			check_variable = { ROOT.topbar_option_two^i = 4 }
+		}
+		localization_key = TOPBAR_produced_composites
 	}
 	# Govt. Popularity
 	text = {
@@ -1178,14 +1313,14 @@ defined_text = {
 			check_variable = { ROOT.topbar_selected_container^i = 6 }
 			check_variable = { ROOT.topbar_option_one^i = 0 }
 		}
-		localization_key = "Ruling Coalition"
+		localization_key = TOPBAR_ruling_coalition
 	}
 	text = {
 		trigger = {
 			check_variable = { ROOT.topbar_selected_container^i = 6 }
 			check_variable = { ROOT.topbar_option_one^i = 1 }
 		}
-		localization_key = "Pro-Western Outlook"
+		localization_key = TOPBAR_pro_western_outlook
 	}
 	text = {
 		trigger = {
@@ -1193,7 +1328,7 @@ defined_text = {
 			check_variable = { ROOT.topbar_option_one^i = 2 }
 		}
 
-		localization_key = "Emerging Outlook"
+		localization_key = TOPBAR_emerging_outlook
 
 	}
 	text = {
@@ -1201,7 +1336,7 @@ defined_text = {
 			check_variable = { ROOT.topbar_selected_container^i = 6 }
 			check_variable = { ROOT.topbar_option_one^i = 3 }
 		}
-		localization_key = "Salafist Outlook"
+		localization_key = TOPBAR_salafist_outlook
 
 	}
 	text = {
@@ -1209,14 +1344,14 @@ defined_text = {
 			check_variable = { ROOT.topbar_selected_container^i = 6 }
 			check_variable = { ROOT.topbar_option_one^i = 4 }
 		}
-		localization_key = "Non-Aligned Outlook"
+		localization_key = TOPBAR_non_aligned_outlook
 	}
 	text = {
 		trigger = {
 			check_variable = { ROOT.topbar_selected_container^i = 6 }
 			check_variable = { ROOT.topbar_option_one^i = 5 }
 		}
-		localization_key = "Nationalist Outlook"
+		localization_key = TOPBAR_nationalist_outlook
 	}
 	# Factories
 	text = {
@@ -1330,6 +1465,13 @@ defined_text = {
 	}
 	text = {
 		trigger = {
+			check_variable = { ROOT.topbar_selected_container^i = 10 }
+			check_variable = { ROOT.topbar_option_one^i = 2 }
+		}
+		localization_key = TOPBAR_ENERGY_STORED_ENERGY_TOOLTIP
+	}
+	text = {
+		trigger = {
 			check_variable = { ROOT.topbar_selected_container^i = 11 }
 			check_variable = { ROOT.topbar_option_one^i = 0 }
 		}
@@ -1341,6 +1483,13 @@ defined_text = {
 			check_variable = { ROOT.topbar_option_one^i = 1 }
 		}
 		localization_key = TOPBAR_INTEREST_RATE_TOOLTIP
+	}
+	text = {
+		trigger = {
+			check_variable = { ROOT.topbar_selected_container^i = 11 }
+			check_variable = { ROOT.topbar_option_one^i = 2 }
+		}
+		localization_key = TOPBAR_INFLATION_RATE_TOOLTIP
 	}
 	text = {
 		localization_key = "NO_INFO_SELECTED"
