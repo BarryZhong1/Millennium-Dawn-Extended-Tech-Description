@@ -1,0 +1,446 @@
+# Author(s): AngriestBird, Chrisonbikyu
+add_namespace = PHI_corruption_event
+
+# ============================================================
+# TIER CHANGE NOTIFICATIONS
+# ============================================================
+country_event = {
+	id = PHI_corruption_event.1
+	title = PHI_corruption_event.1.t
+	desc = PHI_corruption_event.1.d
+	picture = GFX_report_event_generic_sign_treaty3
+	is_triggered_only = yes
+	option = {
+		name = PHI_corruption_event.1.a
+		log = "[GetDateText]: [This.GetName]: PHI_corruption_event.1.a executed"
+		add_stability = 0.02
+		add_political_power = 25
+	}
+}
+country_event = {
+	id = PHI_corruption_event.2
+	title = PHI_corruption_event.2.t
+	desc = PHI_corruption_event.2.d
+	picture = GFX_report_event_generic_corruption
+	is_triggered_only = yes
+	option = {
+		name = PHI_corruption_event.2.a
+		log = "[GetDateText]: [This.GetName]: PHI_corruption_event.2.a executed"
+		add_stability = -0.03
+		add_political_power = -25
+	}
+}
+
+# ============================================================
+# INVESTIGATE CORPORATIONS
+# ============================================================
+country_event = {
+	id = PHI_corruption_event.10
+	title = PHI_corruption_event.10.t
+	desc = PHI_corruption_event.10.d
+	picture = GFX_report_event_business_suits
+	is_triggered_only = yes
+	option = {
+		name = PHI_corruption_event.10.a
+		log = "[GetDateText]: [This.GetName]: PHI_corruption_event.10.a executed"
+	}
+}
+country_event = {
+	id = PHI_corruption_event.11
+	title = PHI_corruption_event.11.t
+	desc = PHI_corruption_event.11.d
+	picture = GFX_report_event_business_suits
+	is_triggered_only = yes
+	option = {
+		name = PHI_corruption_event.11.a
+		log = "[GetDateText]: [This.GetName]: PHI_corruption_event.11.a executed"
+		set_temp_variable = { temp_change = -5 }
+		PHI_change_the_strength_of_corruption = yes
+		set_temp_variable = { treasury_change = gdp_total }
+		multiply_temp_variable = { treasury_change = 0.005 }
+		modify_treasury_effect = yes
+	}
+}
+country_event = {
+	id = PHI_corruption_event.12
+	title = PHI_corruption_event.12.t
+	desc = PHI_corruption_event.12.d
+	picture = GFX_report_event_business_suits
+	is_triggered_only = yes
+	option = {
+		name = PHI_corruption_event.12.a
+		log = "[GetDateText]: [This.GetName]: PHI_corruption_event.12.a executed"
+		set_temp_variable = { temp_change = -10 }
+		PHI_change_the_strength_of_corruption = yes
+		add_stability = -0.02
+		set_temp_variable = { treasury_change = gdp_total }
+		multiply_temp_variable = { treasury_change = 0.015 }
+		modify_treasury_effect = yes
+		add_timed_idea = { idea = PHI_corporate_scandal_industry days = 180 }
+	}
+}
+country_event = {
+	id = PHI_corruption_event.13
+	title = PHI_corruption_event.13.t
+	desc = PHI_corruption_event.13.d
+	picture = GFX_report_event_business_suits
+	is_triggered_only = yes
+	option = {
+		name = PHI_corruption_event.13.a
+		log = "[GetDateText]: [This.GetName]: PHI_corruption_event.13.a executed"
+		set_temp_variable = { temp_change = -20 }
+		PHI_change_the_strength_of_corruption = yes
+		set_temp_variable = { treasury_change = gdp_total }
+		multiply_temp_variable = { treasury_change = 0.03 }
+		modify_treasury_effect = yes
+		add_timed_idea = { idea = PHI_corporate_scandal_industry days = 180 }
+	}
+}
+
+# ============================================================
+# AUDIT GOVERNMENT CONTRACTS
+# ============================================================
+country_event = {
+	id = PHI_corruption_event.20
+	title = PHI_corruption_event.20.t
+	desc = PHI_corruption_event.20.d
+	picture = GFX_report_event_generic_read_write
+	is_triggered_only = yes
+	option = {
+		name = PHI_corruption_event.20.a
+		log = "[GetDateText]: [This.GetName]: PHI_corruption_event.20.a executed"
+	}
+}
+country_event = {
+	id = PHI_corruption_event.21
+	title = PHI_corruption_event.21.t
+	desc = PHI_corruption_event.21.d
+	picture = GFX_report_event_generic_read_write
+	is_triggered_only = yes
+	option = {
+		name = PHI_corruption_event.21.a
+		log = "[GetDateText]: [This.GetName]: PHI_corruption_event.21.a executed"
+		set_temp_variable = { temp_change = -5 }
+		PHI_change_the_strength_of_corruption = yes
+		set_temp_variable = { treasury_change = gdp_total }
+		multiply_temp_variable = { treasury_change = 0.005 }
+		modify_treasury_effect = yes
+	}
+}
+country_event = {
+	id = PHI_corruption_event.22
+	title = PHI_corruption_event.22.t
+	desc = PHI_corruption_event.22.d
+	picture = GFX_report_event_generic_read_write
+	is_triggered_only = yes
+	option = {
+		name = PHI_corruption_event.22.a
+		log = "[GetDateText]: [This.GetName]: PHI_corruption_event.22.a executed"
+		set_temp_variable = { temp_change = -10 }
+		PHI_change_the_strength_of_corruption = yes
+		set_temp_variable = { treasury_change = gdp_total }
+		multiply_temp_variable = { treasury_change = 0.015 }
+		modify_treasury_effect = yes
+		add_timed_idea = { idea = PHI_procurement_scandal_construction days = 90 }
+	}
+}
+country_event = {
+	id = PHI_corruption_event.23
+	title = PHI_corruption_event.23.t
+	desc = PHI_corruption_event.23.d
+	picture = GFX_report_event_generic_read_write
+	is_triggered_only = yes
+	option = {
+		name = PHI_corruption_event.23.a
+		log = "[GetDateText]: [This.GetName]: PHI_corruption_event.23.a executed"
+		set_temp_variable = { temp_change = -20 }
+		PHI_change_the_strength_of_corruption = yes
+		add_stability = -0.02
+		set_temp_variable = { treasury_change = gdp_total }
+		multiply_temp_variable = { treasury_change = 0.025 }
+		modify_treasury_effect = yes
+	}
+}
+
+# ============================================================
+# INSPECT TAX BUREAU
+# ============================================================
+country_event = {
+	id = PHI_corruption_event.30
+	title = PHI_corruption_event.30.t
+	desc = PHI_corruption_event.30.d
+	picture = GFX_report_event_generic_read_write
+	is_triggered_only = yes
+	option = {
+		name = PHI_corruption_event.30.a
+		log = "[GetDateText]: [This.GetName]: PHI_corruption_event.30.a executed"
+	}
+}
+country_event = {
+	id = PHI_corruption_event.31
+	title = PHI_corruption_event.31.t
+	desc = PHI_corruption_event.31.d
+	picture = GFX_report_event_generic_read_write
+	is_triggered_only = yes
+	option = {
+		name = PHI_corruption_event.31.a
+		log = "[GetDateText]: [This.GetName]: PHI_corruption_event.31.a executed"
+		set_temp_variable = { temp_change = -5 }
+		PHI_change_the_strength_of_corruption = yes
+		set_temp_variable = { treasury_change = gdp_total }
+		multiply_temp_variable = { treasury_change = 0.0075 }
+		modify_treasury_effect = yes
+	}
+}
+country_event = {
+	id = PHI_corruption_event.32
+	title = PHI_corruption_event.32.t
+	desc = PHI_corruption_event.32.d
+	picture = GFX_report_event_generic_read_write
+	is_triggered_only = yes
+	option = {
+		name = PHI_corruption_event.32.a
+		log = "[GetDateText]: [This.GetName]: PHI_corruption_event.32.a executed"
+		set_temp_variable = { temp_change = -10 }
+		PHI_change_the_strength_of_corruption = yes
+		set_temp_variable = { treasury_change = gdp_total }
+		multiply_temp_variable = { treasury_change = 0.02 }
+		modify_treasury_effect = yes
+		add_timed_idea = { idea = PHI_customs_fraud_tax days = 60 }
+	}
+}
+country_event = {
+	id = PHI_corruption_event.33
+	title = PHI_corruption_event.33.t
+	desc = PHI_corruption_event.33.d
+	picture = GFX_report_event_generic_read_write
+	is_triggered_only = yes
+	option = {
+		name = PHI_corruption_event.33.a
+		log = "[GetDateText]: [This.GetName]: PHI_corruption_event.33.a executed"
+		set_temp_variable = { temp_change = -25 }
+		PHI_change_the_strength_of_corruption = yes
+		set_temp_variable = { treasury_change = gdp_total }
+		multiply_temp_variable = { treasury_change = 0.04 }
+		modify_treasury_effect = yes
+		add_timed_idea = { idea = PHI_tax_scandal_investment days = 180 }
+	}
+}
+
+# ============================================================
+# INVESTIGATE THE MILITARY
+# ============================================================
+country_event = {
+	id = PHI_corruption_event.40
+	title = PHI_corruption_event.40.t
+	desc = PHI_corruption_event.40.d
+	picture = GFX_report_event_generic_military
+	is_triggered_only = yes
+	option = {
+		name = PHI_corruption_event.40.a
+		log = "[GetDateText]: [This.GetName]: PHI_corruption_event.40.a executed"
+	}
+}
+country_event = {
+	id = PHI_corruption_event.41
+	title = PHI_corruption_event.41.t
+	desc = PHI_corruption_event.41.d
+	picture = GFX_report_event_generic_military
+	is_triggered_only = yes
+	option = {
+		name = PHI_corruption_event.41.a
+		log = "[GetDateText]: [This.GetName]: PHI_corruption_event.41.a executed"
+		set_temp_variable = { temp_change = -5 }
+		PHI_change_the_strength_of_corruption = yes
+		set_temp_variable = { treasury_change = gdp_total }
+		multiply_temp_variable = { treasury_change = 0.005 }
+		modify_treasury_effect = yes
+	}
+}
+country_event = {
+	id = PHI_corruption_event.42
+	title = PHI_corruption_event.42.t
+	desc = PHI_corruption_event.42.d
+	picture = GFX_report_event_generic_military
+	is_triggered_only = yes
+	option = {
+		name = PHI_corruption_event.42.a
+		log = "[GetDateText]: [This.GetName]: PHI_corruption_event.42.a executed"
+		set_temp_variable = { temp_change = -10 }
+		PHI_change_the_strength_of_corruption = yes
+		set_temp_variable = { treasury_change = gdp_total }
+		multiply_temp_variable = { treasury_change = 0.015 }
+		modify_treasury_effect = yes
+		add_timed_idea = { idea = PHI_military_scandal_org days = 90 }
+	}
+}
+country_event = {
+	id = PHI_corruption_event.43
+	title = PHI_corruption_event.43.t
+	desc = PHI_corruption_event.43.d
+	picture = GFX_report_event_generic_military
+	is_triggered_only = yes
+	option = {
+		name = PHI_corruption_event.43.a
+		log = "[GetDateText]: [This.GetName]: PHI_corruption_event.43.a executed"
+		set_temp_variable = { temp_change = -20 }
+		PHI_change_the_strength_of_corruption = yes
+		add_stability = -0.05
+		army_experience = -5
+		set_temp_variable = { treasury_change = gdp_total }
+		multiply_temp_variable = { treasury_change = 0.025 }
+		modify_treasury_effect = yes
+	}
+}
+
+# ============================================================
+# PURGE LOCAL OFFICIALS
+# ============================================================
+country_event = {
+	id = PHI_corruption_event.50
+	title = PHI_corruption_event.50.t
+	desc = PHI_corruption_event.50.d
+	picture = GFX_report_event_Arrest_3
+	is_triggered_only = yes
+	option = {
+		name = PHI_corruption_event.50.a
+		log = "[GetDateText]: [This.GetName]: PHI_corruption_event.50.a executed"
+	}
+}
+country_event = {
+	id = PHI_corruption_event.51
+	title = PHI_corruption_event.51.t
+	desc = PHI_corruption_event.51.d
+	picture = GFX_report_event_Arrest_3
+	is_triggered_only = yes
+	option = {
+		name = PHI_corruption_event.51.a
+		log = "[GetDateText]: [This.GetName]: PHI_corruption_event.51.a executed"
+		set_temp_variable = { temp_change = -5 }
+		PHI_change_the_strength_of_corruption = yes
+		set_temp_variable = { treasury_change = gdp_total }
+		multiply_temp_variable = { treasury_change = 0.005 }
+		modify_treasury_effect = yes
+	}
+}
+country_event = {
+	id = PHI_corruption_event.52
+	title = PHI_corruption_event.52.t
+	desc = PHI_corruption_event.52.d
+	picture = GFX_report_event_Arrest_3
+	is_triggered_only = yes
+	option = {
+		name = PHI_corruption_event.52.a
+		log = "[GetDateText]: [This.GetName]: PHI_corruption_event.52.a executed"
+		set_temp_variable = { temp_change = -10 }
+		PHI_change_the_strength_of_corruption = yes
+		set_temp_variable = { treasury_change = gdp_total }
+		multiply_temp_variable = { treasury_change = 0.015 }
+		modify_treasury_effect = yes
+		every_owned_state = {
+			limit = { is_capital = no }
+			add_resistance_target = { amount = 1 days = 180 }
+		}
+	}
+}
+country_event = {
+	id = PHI_corruption_event.53
+	title = PHI_corruption_event.53.t
+	desc = PHI_corruption_event.53.d
+	picture = GFX_report_event_Arrest_3
+	is_triggered_only = yes
+	option = {
+		name = PHI_corruption_event.53.a
+		log = "[GetDateText]: [This.GetName]: PHI_corruption_event.53.a executed"
+		set_temp_variable = { temp_change = -20 }
+		PHI_change_the_strength_of_corruption = yes
+		set_temp_variable = { treasury_change = gdp_total }
+		multiply_temp_variable = { treasury_change = 0.03 }
+		modify_treasury_effect = yes
+		every_owned_state = {
+			limit = { is_capital = no }
+			add_resistance_target = { amount = 2 days = 180 }
+		}
+		country_event = { id = PHI_corruption_event.99 days = 90 }
+	}
+}
+
+# ============================================================
+# TRACE OFFSHORE ACCOUNTS
+# ============================================================
+country_event = {
+	id = PHI_corruption_event.60
+	title = PHI_corruption_event.60.t
+	desc = PHI_corruption_event.60.d
+	picture = GFX_report_event_generic_spy
+	is_triggered_only = yes
+	option = {
+		name = PHI_corruption_event.60.a
+		log = "[GetDateText]: [This.GetName]: PHI_corruption_event.60.a executed"
+	}
+}
+country_event = {
+	id = PHI_corruption_event.61
+	title = PHI_corruption_event.61.t
+	desc = PHI_corruption_event.61.d
+	picture = GFX_report_event_generic_spy
+	is_triggered_only = yes
+	option = {
+		name = PHI_corruption_event.61.a
+		log = "[GetDateText]: [This.GetName]: PHI_corruption_event.61.a executed"
+		set_temp_variable = { temp_change = -5 }
+		PHI_change_the_strength_of_corruption = yes
+		set_temp_variable = { treasury_change = gdp_total }
+		multiply_temp_variable = { treasury_change = 0.01 }
+		modify_treasury_effect = yes
+	}
+}
+country_event = {
+	id = PHI_corruption_event.62
+	title = PHI_corruption_event.62.t
+	desc = PHI_corruption_event.62.d
+	picture = GFX_report_event_generic_spy
+	is_triggered_only = yes
+	option = {
+		name = PHI_corruption_event.62.a
+		log = "[GetDateText]: [This.GetName]: PHI_corruption_event.62.a executed"
+		set_temp_variable = { temp_change = -25 }
+		PHI_change_the_strength_of_corruption = yes
+		set_temp_variable = { treasury_change = gdp_total }
+		multiply_temp_variable = { treasury_change = 0.03 }
+		modify_treasury_effect = yes
+	}
+}
+country_event = {
+	id = PHI_corruption_event.63
+	title = PHI_corruption_event.63.t
+	desc = PHI_corruption_event.63.d
+	picture = GFX_report_event_generic_spy
+	is_triggered_only = yes
+	option = {
+		name = PHI_corruption_event.63.a
+		log = "[GetDateText]: [This.GetName]: PHI_corruption_event.63.a executed"
+		set_temp_variable = { temp_change = -40 }
+		PHI_change_the_strength_of_corruption = yes
+		set_temp_variable = { treasury_change = gdp_total }
+		multiply_temp_variable = { treasury_change = 0.06 }
+		modify_treasury_effect = yes
+		add_timed_idea = { idea = PHI_offshore_fortune_investment days = 180 }
+	}
+}
+
+# ============================================================
+# DELAYED STABILITY — Dynasty toppled
+# ============================================================
+country_event = {
+	id = PHI_corruption_event.99
+	title = PHI_corruption_event.99.t
+	desc = PHI_corruption_event.99.d
+	picture = GFX_report_event_gathering_protests
+	is_triggered_only = yes
+	option = {
+		name = PHI_corruption_event.99.a
+		log = "[GetDateText]: [This.GetName]: PHI_corruption_event.99.a executed"
+		add_stability = 0.03
+	}
+}
