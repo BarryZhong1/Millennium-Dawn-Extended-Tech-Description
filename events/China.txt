@@ -7,6 +7,7 @@ add_namespace = china_scs
 add_namespace = sino_indian
 add_namespace = chi_bri
 add_namespace = chi_uighur
+add_namespace = arunachal_war
 
 
 # National Congress Convened
@@ -2131,10 +2132,6 @@ country_event = {
 		}
 		ai_chance = {
 			base = 3
-			modifier = {
-				factor = 0
-				has_country_leader_with_trait = hawk
-			}
 		}
 	}
 
@@ -2183,10 +2180,6 @@ country_event = {
 		add_opinion_modifier = { target = CHI modifier = rebuffed_diplomacy }
 		ai_chance = {
 			base = 1
-			modifier = {
-				factor = 3
-				has_country_leader_with_trait = hawk
-			}
 		}
 	}
 
@@ -2331,10 +2324,6 @@ country_event = {
 		}
 		ai_chance = {
 			base = 2
-			modifier = {
-				factor = 0
-				has_country_leader_with_trait = hawk
-			}
 		}
 	}
 
@@ -5930,7 +5919,7 @@ country_event = {
 			CHI = {
 				send_equipment = {
 					target = NPM
-					equipment = infantry_equipment
+					type = infantry_equipment_type
 					amount = 2000
 				}
 			}
@@ -10670,7 +10659,7 @@ country_event = {
 	option = {
 		name = chi_uighur.3.c
 		log = "[GetDateText]: [Root.GetName]: chi_uighur.3.c"
-		available = {
+		trigger = {
 			check_variable = {
 				var = ETK_sinicization_var
 				value = 30
@@ -10963,5 +10952,217 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: chi_bri.135.a executed"
 		add_opinion_modifier = { target = FROM modifier = chinese_pact_honored }
 		ai_chance = { base = 1 }
+	}
+}
+
+###################################
+# Arunachal Border Conflicts
+###################################
+
+country_event = {
+	id = arunachal_war.1
+	title = arunachal_war.1.t
+	desc = arunachal_war.1.d
+	picture = GFX_terrorist_attack
+
+	is_triggered_only = yes
+
+	option = {
+		name = arunachal_war.1.a
+		log = "[GetDateText]: [This.GetName]: arunachal_war.1.a executed"
+		add_war_support = -0.01
+		add_manpower = -20
+	}
+}
+
+country_event = {
+	id = arunachal_war.2
+	title = arunachal_war.2.t
+	desc = arunachal_war.2.d
+	picture = GFX_terrorist_attack
+
+	is_triggered_only = yes
+
+	option = {
+		name = arunachal_war.2.a
+		log = "[GetDateText]: [This.GetName]: arunachal_war.2.a executed"
+		add_war_support = -0.02
+		add_manpower = -10
+	}
+}
+
+country_event = {
+	id = arunachal_war.3
+	title = arunachal_war.3.t
+	desc = arunachal_war.3.d
+	picture = GFX_terrorist_attack
+
+	is_triggered_only = yes
+
+	option = {
+		name = arunachal_war.3.a
+		log = "[GetDateText]: [This.GetName]: arunachal_war.3.a executed"
+		custom_effect_tooltip = arunachal_readiness_minus_10_TT
+		subtract_from_variable = { arunachal_readiness = 10 }
+		clamp_variable = {
+			var = THIS.arunachal_readiness
+			min = 0
+			max = 100
+		}
+	}
+}
+
+country_event = {
+	id = arunachal_war.4
+	title = arunachal_war.4.t
+	desc = arunachal_war.4.d
+	picture = GFX_CHI_counter_terrorist
+
+	is_triggered_only = yes
+
+	option = {
+		name = arunachal_war.4.a
+		log = "[GetDateText]: [This.GetName]: arunachal_war.4.a"
+		ai_chance = { base = 10 }
+	}
+}
+
+country_event = {
+	id = arunachal_war.20
+	title = arunachal_war.20.t
+	desc = arunachal_war.20.d
+	picture = GFX_CHI_counter_terrorist
+
+	is_triggered_only = yes
+
+	option = {
+		name = arunachal_war.20.a
+		log = "[GetDateText]: [This.GetName]: arunachal_war.20.a"
+		add_to_variable = { THIS.Arunachal_war_progress = 10 }
+		clamp_variable = { var = THIS.Arunachal_war_progress min = 0 max = 100 }
+		custom_effect_tooltip = Arunachal_war_increase_progress_10_TT
+		clr_country_flag = Attacking_in_Arunachal
+		ai_chance = { base = 10 }
+	}
+}
+
+country_event = {
+	id = arunachal_war.21
+	title = arunachal_war.21.t
+	desc = arunachal_war.21.d
+	picture = GFX_CHI_counter_terrorist
+
+	is_triggered_only = yes
+
+	option = {
+		name = arunachal_war.21.a
+		log = "[GetDateText]: [This.GetName]: arunachal_war.21.a"
+		subtract_from_variable = { THIS.Arunachal_war_progress = 5 }
+		clamp_variable = { var = THIS.Arunachal_war_progress min = 0 max = 100 }
+		custom_effect_tooltip = Arunachal_war_decrease_progress_5_TT
+		clr_country_flag = Attacking_in_Arunachal
+		ai_chance = { base = 10 }
+	}
+}
+
+country_event = {
+	id = arunachal_war.22
+	title = arunachal_war.22.t
+	desc = arunachal_war.22.d
+	picture = GFX_CHI_counter_terrorist
+
+	is_triggered_only = yes
+
+	option = {
+		name = arunachal_war.22.a
+		log = "[GetDateText]: [This.GetName]: arunachal_war.22.a"
+		subtract_from_variable = { THIS.Arunachal_war_progress = 3 }
+		clamp_variable = { var = THIS.Arunachal_war_progress min = 0 max = 100 }
+		custom_effect_tooltip = Arunachal_war_decrease_progress_3_TT
+		clr_country_flag = Attacking_in_Arunachal
+		ai_chance = { base = 10 }
+	}
+}
+
+country_event = {
+	id = arunachal_war.23
+	title = arunachal_war.23.t
+	desc = arunachal_war.23.d
+	picture = GFX_CHI_counter_terrorist
+
+	is_triggered_only = yes
+
+	option = {
+		name = arunachal_war.23.a
+		log = "[GetDateText]: [This.GetName]: arunachal_war.23.a"
+		subtract_from_variable = { THIS.Arunachal_war_progress = 10 }
+		clamp_variable = { var = THIS.Arunachal_war_progress min = 0 max = 100 }
+		custom_effect_tooltip = Arunachal_war_decrease_progress_10_TT
+		ai_chance = { base = 10 }
+	}
+}
+
+country_event = {
+	id = arunachal_war.24
+	title = arunachal_war.24.t
+	desc = arunachal_war.24.d
+	picture = GFX_CHI_counter_terrorist
+
+	is_triggered_only = yes
+
+	option = {
+		name = arunachal_war.24.a
+		log = "[GetDateText]: [This.GetName]: arunachal_war.24.a"
+		add_to_variable = { THIS.Arunachal_war_progress = 5 }
+		clamp_variable = { var = THIS.Arunachal_war_progress min = 0 max = 100 }
+		custom_effect_tooltip = Arunachal_war_increase_progress_5_TT
+		ai_chance = { base = 10 }
+	}
+}
+
+country_event = {
+	id = arunachal_war.25
+	title = arunachal_war.25.t
+	desc = arunachal_war.25.d
+	picture = GFX_CHI_counter_terrorist
+
+	is_triggered_only = yes
+
+	option = {
+		name = arunachal_war.25.a
+		log = "[GetDateText]: [This.GetName]: arunachal_war.25.a"
+		subtract_from_variable = { THIS.Arunachal_war_progress = 3 }
+		clamp_variable = { var = THIS.Arunachal_war_progress min = 0 max = 100 }
+		custom_effect_tooltip = Arunachal_war_decrease_progress_3_TT
+		ai_chance = { base = 10 }
+	}
+}
+
+country_event = {
+	id = arunachal_war.30
+	title = arunachal_war.30.t
+	desc = arunachal_war.30.d
+	picture = GFX_CHI_counter_terrorist
+
+	is_triggered_only = yes
+
+	option = {
+		name = arunachal_war.30.a
+		log = "[GetDateText]: [This.GetName]: arunachal_war.30.a"
+		add_war_support = 0.1
+		add_stability = -0.1
+		ai_chance = { base = 5 }
+	}
+	option = {
+		name = arunachal_war.30.b
+		log = "[GetDateText]: [This.GetName]: arunachal_war.30.b"
+		set_temp_variable = { wargoal_on = PREV }
+		set_temp_variable = { wargoal_type = 2 }
+		add_threat_from_wargoal_effect = yes
+		create_wargoal = {
+			type = annex_everything
+			target = PREV
+			expire = 120
+		}
 	}
 }

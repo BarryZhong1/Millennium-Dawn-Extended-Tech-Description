@@ -39,17 +39,14 @@ focus_tree = {
 	# Political
 
 	focus = {
-		id = CHI_provincial_youth_league_cohort
+		id = CHI_the_three_represents
 		icon = peoples_republic_of_china
 
-		x = 0
-		y = 2
-		relative_position_id = CHI_scientific_development_outlook_foreshadowed
+		x = 10
+		y = 0
 
-		cost = 7
+		cost = 10
 		search_filters = { FOCUS_FILTER_POLITICAL }
-
-		prerequisite = { focus = CHI_scientific_development_outlook_foreshadowed }
 
 		available = {
 			has_country_leader = { name =  "Jiang Zemin" }
@@ -59,12 +56,16 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus CHI_provincial_youth_league_cohort"
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_the_three_represents"
+			add_political_power = 25
+			add_ideas = CHI_three_represents_debate
+			add_dynamic_modifier = { modifier = CHI_political_system }
 			add_power_balance_value = {
 				id = CHI_factional_balance
-				value = 0.06
-				tooltip_side = CHI_tuanpai_youth_league
+				value = -0.08
+				tooltip_side = CHI_princeling_shanghai
 			}
+			set_country_flag = CHI_three_represents_doctrine_active
 		}
 
 		ai_will_do = {
@@ -108,6 +109,40 @@ focus_tree = {
 	}
 
 	focus = {
+		id = CHI_provincial_youth_league_cohort
+		icon = peoples_republic_of_china
+
+		x = 0
+		y = 2
+		relative_position_id = CHI_scientific_development_outlook_foreshadowed
+
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		prerequisite = { focus = CHI_scientific_development_outlook_foreshadowed }
+
+		available = {
+			has_country_leader = { name =  "Jiang Zemin" }
+		}
+		bypass = {
+			NOT = { has_country_leader = { name =  "Jiang Zemin" } }
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_provincial_youth_league_cohort"
+			add_power_balance_value = {
+				id = CHI_factional_balance
+				value = 0.06
+				tooltip_side = CHI_tuanpai_youth_league
+			}
+		}
+
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	focus = {
 		id = CHI_three_represents_codified
 		icon = peoples_republic_of_china
 
@@ -140,41 +175,6 @@ focus_tree = {
 
 		ai_will_do = {
 			base = 4
-		}
-	}
-
-	focus = {
-		id = CHI_the_three_represents
-		icon = peoples_republic_of_china
-
-		x = 10
-		y = 0
-
-		cost = 10
-		search_filters = { FOCUS_FILTER_POLITICAL }
-
-		available = {
-			has_country_leader = { name =  "Jiang Zemin" }
-		}
-		bypass = {
-			NOT = { has_country_leader = { name =  "Jiang Zemin" } }
-		}
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus CHI_the_three_represents"
-			add_political_power = 25
-			add_ideas = CHI_three_represents_debate
-			add_dynamic_modifier = { modifier = CHI_political_system }
-			add_power_balance_value = {
-				id = CHI_factional_balance
-				value = -0.08
-				tooltip_side = CHI_princeling_shanghai
-			}
-			set_country_flag = CHI_three_represents_doctrine_active
-		}
-
-		ai_will_do = {
-			base = 5
 		}
 	}
 
@@ -4404,7 +4404,6 @@ focus_tree = {
 			log = "[GetDateText]: [This.GetName]: focus CHI_An_Alliance_to_Rival_NATO executed"
 			if = {
 				limit = { is_faction_leader = yes }
-				set_faction_upgrade_min = { upgrade = faction_doctrine_sharing1 }
 				add_faction_goal = faction_goal_global_hegemony
 			}
 			else = {
@@ -7772,7 +7771,7 @@ focus_tree = {
 
 		cost = 10
 
-		prerequisite = { focus = CHI_Comprehensive_Agreement_Investment focus = CHI_16plus1_Schism }
+		prerequisite = { focus = CHI_Comprehensive_Agreement_Investment }
 		search_filters = { FOCUS_FILTER_CHI_AGGRESSION FOCUS_FILTER_ECONOMY FOCUS_FILTER_EXPENDITURE }
 
 		available = {
