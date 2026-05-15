@@ -1,0 +1,36 @@
+CHI_solomon_intervention_category = {
+	CHI_solomon_intervention = {
+		icon = generic_political_actions
+		priority = 25
+
+		allowed = {
+			original_tag = CHI
+		}
+
+		available = {
+			has_country_flag = SOL_CHI_operation_RAMSI
+			SOL = { exists = yes }
+		}
+
+		visible = {
+			has_country_flag = SOL_CHI_operation_RAMSI
+		}
+
+		fire_only_once = yes
+		cost = 25
+
+		complete_effect = {
+			set_temp_variable = { treasury_change = -1 }
+			modify_treasury_effect = yes
+			add_manpower = -2000
+			country_event = { id = solomon_competition.30 days = 5 }
+			SOL = {
+				country_event = { id = solomon_competition.30 days = 5 }
+			}
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+	}
+}

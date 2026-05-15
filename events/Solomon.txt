@@ -491,16 +491,21 @@ country_event = { # Operation RAMSI - Initial request
 	id = solomon_competition.27
 	title = solomon_competition.27.t
 	desc = {
-		text = solomon_competition.27.d2 # China gets request
+		text = solomon_competition.27.d2
 		trigger = {
-			tag = CHI
+			original_tag = CHI
+			NOT = { SOL = { has_country_flag = SOL_AST_declined_RAMSI } }
 		}
 	}
-	desc = solomon_competition.27.d1 # Australia gets request
-	picture = GFX_2003_solomon_unrest
-	trigger = {
-		tag = AST
+	desc = {
+		text = solomon_competition.27.d3
+		trigger = {
+			original_tag = CHI
+			SOL = { has_country_flag = SOL_AST_declined_RAMSI }
+		}
 	}
+	desc = solomon_competition.27.d1
+	picture = GFX_2003_solomon_unrest
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -511,24 +516,13 @@ country_event = { # Operation RAMSI - Initial request
 
 		if = {
 			limit = { original_tag = AST }
-			set_country_flag = SOL_AST_operation_RAMSI # Progression occurs through focus tree
-
-			mark_focus_tree_layout_dirty = yes # Refresh the focus tree to show the RAMSI branch
-
+			set_country_flag = SOL_AST_operation_RAMSI
+			mark_focus_tree_layout_dirty = yes
 			log = "[GetDateText]: Australia has agreed to help the Solomon Islands with Operation RAMSI (Competition Score [?SOL.SOL_AST_support])"
 		}
 		else = {
 			add_to_variable = { SOL.SOL_CHI_support = 4 }
-			add_manpower = -2000
-			set_temp_variable = { treasury_change = -1 }
-       		modify_treasury_effect = yes
 			set_country_flag = SOL_CHI_operation_RAMSI
-			CHI = { # Since we can't add content to China for now, we just automatically progress China's participation.
-				country_event = { id = solomon_competition.30 days = 100 }
-			}
-			SOL = {
-				country_event = { id = solomon_competition.30 days = 100 }
-			}
 			log = "[GetDateText]: China has agreed to help the Solomon Islands with Operation RAMSI (Competition Score [?SOL.SOL_CHI_support])"
 		}
 
@@ -548,8 +542,19 @@ country_event = { # Operation RAMSI - Initial request
 		name = solomon_competition.27.o2 # Let's see how this plays out
 		log = "[GetDateText]: [This.GetName]: solomon_competition.27.o2 executed"
 
-		SOL = {
-			country_event = { id = solomon_competition.29 days = 1 }
+		if = {
+			limit = { original_tag = AST }
+			SOL = {
+				set_country_flag = SOL_AST_declined_RAMSI
+			}
+			CHI = {
+				country_event = { id = solomon_competition.27 days = 30 }
+			}
+		}
+		else = {
+			SOL = {
+				country_event = { id = solomon_competition.29 days = 1 }
+			}
 		}
 
 		ai_chance = {
@@ -707,7 +712,7 @@ country_event = {
 			SOL = {
 				add_to_variable = { SOL.SOL_CHI_support = 2 }
 				add_ideas = SOL_CHI_idea_reformed_government
-				remove_ideas = SOL_idea_contained_ethnic_violence
+				remove_ideas = SOL_CHI_idea_contained_ethnic_violence
 				country_event = { id = solomon_competition.33 days = 100 }
 			}
 		}
@@ -753,5 +758,402 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: solomon_competition.33.o1 executed"
 
 		add_manpower = 2000
+	}
+}
+
+country_event = { # Solomon Islands Connectivity Request - Initial choice
+	id = solomon_competition.11
+	title = solomon_competition.11.t
+	desc = solomon_competition.11.d
+	picture = GFX_report_event_generic_1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = solomon_competition.11.o1 # We'll help out
+		log = "[GetDateText]: [This.GetName]: solomon_competition.11.o1 executed"
+
+		if = {
+			limit = { original_tag = AST }
+			add_to_variable = { SOL.SOL_AST_support = 3 }
+			log = "[GetDateText]: Australia has agreed to help the Solomon Islands (Competition Score [?SOL.SOL_AST_support])"
+		}
+		else = {
+			add_to_variable = { SOL.SOL_CHI_support = 3 }
+			log = "[GetDateText]: China has agreed to help the Solomon Islands (Competition Score [?SOL.SOL_CHI_support])"
+		}
+
+		# Build a radar station in Solomon Islands at cost
+		set_temp_variable = { treasury_change = -8 }
+		modify_treasury_effect = yes
+		SOL = {
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = radar_station
+					level = 1
+					instant_build = yes
+				}
+			}
+			country_event = { id = solomon_competition.13 days = 1 }
+			set_country_flag = SOL_connectivity_construction_built
+		}
+
+		# Give influence to investor
+		set_temp_variable = { percent_change = 2 }
+		set_temp_variable = { tag_index = ROOT.id }
+		set_temp_variable = { influence_target = SOL.id }
+		change_influence_percentage = yes
+
+		ai_chance = {
+			base = 1
+
+			modifier = {
+				check_variable = { treasury < 7.99 }
+				factor = 0
+			}
+		}
+	}
+
+	option = {
+		name = solomon_competition.11.o2 # We're not interested
+		log = "[GetDateText]: [This.GetName]: solomon_competition.11.o2 executed"
+
+		if = {
+			limit = { original_tag = AST }
+			CHI = {
+				country_event = { id = solomon_competition.12 days = 1 }
+			}
+		}
+		else = {
+			AST = {
+				country_event = { id = solomon_competition.12 days = 1 }
+			}
+		}
+
+		set_temp_variable = { percent_change = -3 }
+		set_temp_variable = { tag_index = ROOT.id }
+		set_temp_variable = { influence_target = SOL.id }
+		change_influence_percentage = yes
+
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+country_event = { # Solomon Islands Connectivity Request - Ask the other guys
+	id = solomon_competition.12
+	title = solomon_competition.12.t
+	desc = solomon_competition.12.d
+	picture = GFX_report_event_generic_1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = solomon_competition.12.o1 # We'll help out
+		log = "[GetDateText]: [This.GetName]: solomon_competition.12.o1 executed"
+
+		if = {
+			limit = { original_tag = AST }
+			add_to_variable = { SOL.SOL_AST_support = 3 }
+			log = "[GetDateText]: Australia has agreed to help the Solomon Islands (Competition Score [?SOL.SOL_AST_support])"
+		}
+		else = {
+			add_to_variable = { SOL.SOL_CHI_support = 3 }
+			log = "[GetDateText]: China has agreed to help the Solomon Islands (Competition Score [?SOL.SOL_CHI_support])"
+		}
+
+		set_temp_variable = { treasury_change = -8 }
+		modify_treasury_effect = yes
+		SOL = {
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = radar_station
+					level = 1
+					instant_build = yes
+				}
+			}
+			country_event = { id = solomon_competition.13 days = 1 }
+			set_country_flag = SOL_connectivity_construction_built
+		}
+
+		set_temp_variable = { percent_change = 10 } # Extra grateful
+		set_temp_variable = { tag_index = ROOT.id }
+		set_temp_variable = { influence_target = SOL.id }
+		change_influence_percentage = yes
+
+		ai_chance = {
+			base = 2
+
+			modifier = {
+				check_variable = { treasury < 8 }
+				factor = 0
+			}
+		}
+	}
+
+	option = {
+		name = solomon_competition.12.o2 # We're not interested
+		log = "[GetDateText]: [This.GetName]: solomon_competition.12.o2 executed"
+
+		SOL = {
+			country_event = { id = solomon_competition.14 days = 1 }
+		}
+
+		set_temp_variable = { percent_change = -5 }
+		set_temp_variable = { tag_index = ROOT.id }
+		set_temp_variable = { influence_target = SOL.id }
+		change_influence_percentage = yes
+
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+country_event = { # Solomon Islands Connectivity Request - Someone agreed to help
+	id = solomon_competition.13
+	title = solomon_competition.13.t
+	desc = solomon_competition.13.d
+	picture = GFX_report_event_generic_1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = solomon_competition.13.o1 # Great news!
+		log = "[GetDateText]: [This.GetName]: solomon_competition.13.o1 executed"
+
+		country_event = { id = solomon_competition.15 days = 250 random_days = 100 }
+
+		add_opinion_modifier = {
+			target = ROOT
+			modifier = recently_invest
+		}
+	}
+}
+
+country_event = { # Solomon Islands Connectivity Request - Nobody wants to help
+	id = solomon_competition.14
+	title = solomon_competition.14.t
+	desc = solomon_competition.14.d
+	picture = GFX_report_event_generic_1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = solomon_competition.14.o1 # We'll need to make our own way
+		log = "[GetDateText]: [This.GetName]: solomon_competition.14.o1 executed"
+
+		country_event = { id = solomon_competition.15 days = 250 random_days = 100 }
+	}
+}
+
+country_event = { # The connectivity stage of the Solomon Competition concludes.
+	id = solomon_competition.15
+	title = solomon_competition.15.t
+	desc = solomon_competition.15.d
+	picture = GFX_report_event_generic_1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = solomon_competition.15.o1 # The future is bright
+		log = "[GetDateText]: [This.GetName]: solomon_competition.15 executed"
+	}
+}
+
+country_event = { # Solomon Competition - Resolution
+	id = solomon_competition.40
+	title = solomon_competition.40.t
+	desc = solomon_competition.40.d
+	picture = GFX_political_deal
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		set_country_flag = SOL_finished_solomon_competition
+		log = "[GetDateText]: Solomon Competition resolved. AST score [?SOL.SOL_AST_support], CHI score [?SOL.SOL_CHI_support]."
+	}
+
+	option = {
+		name = solomon_competition.40.o1 # Acknowledge
+		log = "[GetDateText]: [This.GetName]: solomon_competition.40.o1 executed"
+
+		set_temp_variable = { competition_delta = SOL_AST_support }
+		subtract_from_temp_variable = { competition_delta = SOL_CHI_support }
+
+		if = {
+			limit = { check_variable = { competition_delta > 0 } }
+			AST = { country_event = { id = solomon_competition.41 days = 1 } }
+			CHI = { country_event = { id = solomon_competition.41 days = 1 } }
+		}
+		else_if = {
+			limit = { check_variable = { competition_delta < 0 } }
+			CHI = { country_event = { id = solomon_competition.42 days = 1 } }
+			AST = { country_event = { id = solomon_competition.42 days = 1 } }
+		}
+		else = {
+			AST = { country_event = { id = solomon_competition.43 days = 1 } }
+			CHI = { country_event = { id = solomon_competition.43 days = 1 } }
+		}
+	}
+}
+
+country_event = { # Solomon Competition - Australia wins
+	id = solomon_competition.41
+	title = solomon_competition.41.t
+	desc = {
+		text = solomon_competition.41.d1
+		trigger = { original_tag = AST }
+	}
+	desc = {
+		text = solomon_competition.41.d2
+		trigger = { original_tag = CHI }
+	}
+	picture = GFX_political_deal
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = solomon_competition.41.o1 # A partner secured
+		log = "[GetDateText]: [This.GetName]: solomon_competition.41.o1 executed"
+		trigger = { original_tag = AST }
+
+		if = {
+			limit = { has_global_flag = GAME_RULE_allow_colored_puppets }
+			set_autonomy = {
+				target = SOL
+				autonomy_state = autonomy_associated_state_colored
+				end_wars = no
+				end_civil_wars = no
+			}
+		}
+		else = {
+			set_autonomy = {
+				target = SOL
+				autonomy_state = autonomy_associated_state
+				end_wars = no
+				end_civil_wars = no
+			}
+		}
+
+		add_ideas = SOL_AST_pacific_security_partner
+
+		add_opinion_modifier = {
+			target = SOL
+			modifier = SOL_pacific_partner
+		}
+		SOL = {
+			add_opinion_modifier = {
+				target = AST
+				modifier = SOL_pacific_partner
+			}
+			add_opinion_modifier = {
+				target = CHI
+				modifier = SOL_abandoned_us
+			}
+		}
+	}
+
+	option = {
+		name = solomon_competition.41.o2 # A diplomatic loss
+		log = "[GetDateText]: [This.GetName]: solomon_competition.41.o2 executed"
+		trigger = { original_tag = CHI }
+
+		add_opinion_modifier = {
+			target = SOL
+			modifier = SOL_abandoned_us
+		}
+	}
+}
+
+country_event = { # Solomon Competition - China wins
+	id = solomon_competition.42
+	title = solomon_competition.42.t
+	desc = {
+		text = solomon_competition.42.d1
+		trigger = { original_tag = CHI }
+	}
+	desc = {
+		text = solomon_competition.42.d2
+		trigger = { original_tag = AST }
+	}
+	picture = GFX_political_deal
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = solomon_competition.42.o1 # A partner secured
+		log = "[GetDateText]: [This.GetName]: solomon_competition.42.o1 executed"
+		trigger = { original_tag = CHI }
+
+		if = {
+			limit = { has_global_flag = GAME_RULE_allow_colored_puppets }
+			set_autonomy = {
+				target = SOL
+				autonomy_state = autonomy_associated_state_colored
+				end_wars = no
+				end_civil_wars = no
+			}
+		}
+		else = {
+			set_autonomy = {
+				target = SOL
+				autonomy_state = autonomy_associated_state
+				end_wars = no
+				end_civil_wars = no
+			}
+		}
+
+		add_ideas = SOL_CHI_pacific_security_partner
+
+		add_opinion_modifier = {
+			target = SOL
+			modifier = SOL_pacific_partner
+		}
+		SOL = {
+			add_opinion_modifier = {
+				target = CHI
+				modifier = SOL_pacific_partner
+			}
+			add_opinion_modifier = {
+				target = AST
+				modifier = SOL_abandoned_us
+			}
+		}
+	}
+
+	option = {
+		name = solomon_competition.42.o2 # A diplomatic loss
+		log = "[GetDateText]: [This.GetName]: solomon_competition.42.o2 executed"
+		trigger = { original_tag = AST }
+
+		add_opinion_modifier = {
+			target = SOL
+			modifier = SOL_abandoned_us
+		}
+	}
+}
+
+country_event = { # Solomon Competition - Neither wins
+	id = solomon_competition.43
+	title = solomon_competition.43.t
+	desc = solomon_competition.43.d
+	picture = GFX_report_event_generic_1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = solomon_competition.43.o1 # The moment passed
+		log = "[GetDateText]: [This.GetName]: solomon_competition.43.o1 executed"
 	}
 }

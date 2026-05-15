@@ -15,10 +15,8 @@ SOL_developing_nation_category = {
 		}
 
 		available = {
-			AND = {
-				NOT = { has_country_flag = SOL_CHI_requested_industry_construction }
-				NOT = { has_country_flag = SOL_industry_construction_built }
-			}
+			NOT = { has_country_flag = SOL_CHI_requested_industry_construction }
+			NOT = { has_country_flag = SOL_industry_construction_built }
 		}
 
 		visible = {
@@ -55,10 +53,8 @@ SOL_developing_nation_category = {
 		}
 
 		available = {
-			AND = {
-				NOT = { has_country_flag = SOL_AST_requested_industry_construction }
-				NOT = { has_country_flag = SOL_industry_construction_built }
-			}
+			NOT = { has_country_flag = SOL_AST_requested_industry_construction }
+			NOT = { has_country_flag = SOL_industry_construction_built }
 		}
 
 		visible = {
@@ -94,10 +90,8 @@ SOL_developing_nation_category = {
 		}
 
 		available = {
-			AND = {
-				NOT = { has_country_flag = SOL_CHI_requested_infrastructure_construction }
-				NOT = { has_country_flag = SOL_infrastructure_construction_built }
-			}
+			NOT = { has_country_flag = SOL_CHI_requested_infrastructure_construction }
+			NOT = { has_country_flag = SOL_infrastructure_construction_built }
 		}
 
 		visible = {
@@ -135,10 +129,8 @@ SOL_developing_nation_category = {
 		}
 
 		available = {
-			AND = {
-				NOT = { has_country_flag = SOL_AST_requested_infrastructure_construction }
-				NOT = { has_country_flag = SOL_infrastructure_construction_built }
-			}
+			NOT = { has_country_flag = SOL_AST_requested_infrastructure_construction }
+			NOT = { has_country_flag = SOL_infrastructure_construction_built }
 		}
 
 		visible = {
@@ -161,6 +153,83 @@ SOL_developing_nation_category = {
 
 			modifier = {
 				has_country_flag = solomon_competition_CHI_influence # Set in 99_AST_on_actions.txt
+				factor = 2
+			}
+		}
+	}
+	# Requesting connectivity investment - Approach Australia first
+	SOL_AST_request_connectivity_investment = {
+		icon = generic_construction
+		priority = 20
+
+		allowed = {
+			original_tag = SOL
+		}
+
+		available = {
+			NOT = { has_country_flag = SOL_CHI_requested_connectivity_construction }
+			NOT = { has_country_flag = SOL_connectivity_construction_built }
+		}
+
+		visible = {
+			NOT = { has_country_flag = SOL_connectivity_construction_built }
+			has_country_flag = SOL_solomon_competition_third_stage
+		}
+
+		fire_only_once = yes
+		cost = 50
+
+		complete_effect = {
+			set_country_flag = SOL_AST_requested_connectivity_construction
+			AST = {
+				country_event = { id = solomon_competition.11 days = 5 }
+			}
+		}
+
+		ai_will_do = {
+			base = 5
+
+			modifier = {
+				has_country_flag = solomon_competition_AST_influence
+				factor = 2
+			}
+		}
+	}
+
+	# Requesting connectivity investment - Approach China first
+	SOL_CHI_request_connectivity_investment = {
+		icon = generic_construction
+		priority = 20
+
+		allowed = {
+			original_tag = SOL
+		}
+
+		available = {
+			NOT = { has_country_flag = SOL_AST_requested_connectivity_construction }
+			NOT = { has_country_flag = SOL_connectivity_construction_built }
+		}
+
+		visible = {
+			NOT = { has_country_flag = SOL_connectivity_construction_built }
+			has_country_flag = SOL_solomon_competition_third_stage
+		}
+
+		fire_only_once = yes
+		cost = 50
+
+		complete_effect = {
+			set_country_flag = SOL_CHI_requested_connectivity_construction
+			CHI = {
+				country_event = { id = solomon_competition.11 days = 5 }
+			}
+		}
+
+		ai_will_do = {
+			base = 5
+
+			modifier = {
+				has_country_flag = solomon_competition_CHI_influence
 				factor = 2
 			}
 		}
