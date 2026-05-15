@@ -80,6 +80,12 @@ _SUFFIXES = ("_desc", "_tt", "_name", "_short", "_loc", "_choice_tt")
 SEPARATOR = " # =============================="
 
 
+def _extract_tag(stem: str) -> Optional[str]:
+    """Return the TAG from 'MD_focus_TAG_l_english', or None."""
+    m = re.match(r"MD_focus_([A-Z]+)_l_english", stem)
+    return m.group(1) if m else None
+
+
 @dataclass
 class LocEntry:
     leading_comments: List[str]
@@ -200,33 +206,40 @@ def _format_section_header(category: str) -> List[str]:
 
 
 def _format_output(
-    header: str, entries: List[LocEntry], index: Dict[str, Set[str]]
+    header: str, entries: List[LocEntry], index: Dict[str, Set[str]], file_stem: str = ""
 ) -> str:
-    # Group entries by category (preserve original order within each bucket)
     buckets: Dict[str, List[LocEntry]] = {cat: [] for cat in SECTION_ORDER}
 
     for entry in entries:
         if not entry.key:
-            # Trailing comments with no key go to Overig
-            buckets["Overig"].append(entry)
             continue
         category = _find_category(entry.key, index)
         buckets[category].append(entry)
 
     output_lines: List[str] = [header]
 
+    tag = _extract_tag(file_stem)
+
     for category in SECTION_ORDER:
         bucket = buckets[category]
         if not bucket:
             continue
 
+        bucket.sort(key=lambda e: e.key.lower())
+
+        if category == "National Focus" and tag:
+            anchor_key = f"{tag}_focus_tree"
+            existing = next((e for e in bucket if e.key == anchor_key), None)
+            if existing:
+                bucket.remove(existing)
+            else:
+                existing = LocEntry([], anchor_key, ' ""')
+            bucket.insert(0, existing)
+
         output_lines.extend(_format_section_header(category))
 
         for entry in bucket:
-            for comment in entry.leading_comments:
-                output_lines.append(f" {comment.lstrip()}")
-            if entry.key:
-                output_lines.append(f" {entry.key}:{entry.value}")
+            output_lines.append(f" {entry.key}:{entry.value}")
 
     output_lines.append("")  # trailing newline
     return "\n".join(output_lines)
@@ -269,7 +282,7 @@ class LocalisationStandardizer:
 
         log_message("INFO", f"Parsed {len(entries)} entries", self.verbose)
 
-        output = _format_output(header, entries, self.index)
+        output = _format_output(header, entries, self.index, output_file.stem)
 
         try:
             output_file.write_text(output, encoding="utf-8-sig")
