@@ -174,6 +174,11 @@ Apply this principle everywhere — focuses, events, decisions, scripted trigger
 
 HOI4 on Linux is **case-sensitive** for all identifiers — ideas, events, decisions, focuses, variables, flags, GFX sprites, and scripted effects/triggers. `has_idea = The_Military` will NOT match a definition `the_military`. Always match the exact case of the definition. **Caught by `validate_ideas.py` for ideas.**
 
+This also applies inside namelist files:
+
+- `division_types = { ... }` in `common/units/names_divisions/*.txt` must match the canonical sub-unit names in `common/units/MD_land_units.txt` exactly. Real bugs in repo: `arm_inf_bat` should be `Arm_Inf_Bat`; `mech_inf_Bat` should be `Mech_Inf_Bat`; `L_Air_Assault_Bat` should be `L_Air_assault_Bat` (lowercase `a`). When the case is wrong the namelist silently never matches the template.
+- `ship_types = { ... }` in `common/units/names_ships/*.txt` must match `common/units/MD_naval_units.txt`. Watch for legacy vanilla tokens like `submarine`, `light_cruiser`, `ship_hull_*`, `battleship_hull_0` — those types were removed by MD and the entries are dead. See `.claude/docs/namelist-reference.md` for the canonical lists.
+
 ## Trade agreement checks in MD
 
 `has_trade_agreement_with` is **not a valid HOI4 trigger** — compiles silently, always evaluates false. MD uses `has_country_flag = trade_agreement@TAG`. **Caught by `check_common_mistakes.py`.**
@@ -195,6 +200,46 @@ if = { limit = { check_variable = { X < 7 } } ... }
 if = { limit = { check_variable = { X > 7 } } ... }
 else = { ... }
 ```
+
+## change_influence_percentage
+
+The scripted effect uses temp-variable arguments with these defaults:
+
+| Temp variable      | Required | Default   |
+| ------------------ | -------- | --------- |
+| `percent_change`   | yes      | —         |
+| `tag_index`        | no       | `ROOT.id` |
+| `influence_target` | no       | `THIS.id` |
+
+Three pitfalls to avoid:
+
+1. **Don't write redundant defaults.** `set_temp_variable = { tag_index = ROOT.id }` and `set_temp_variable = { influence_target = THIS.id }` are no-ops — the call already uses those defaults. Leave them out.
+
+2. **Orphan setters are silent bugs.** A `percent_change` / `tag_index` / `influence_target` triple with no following `change_influence_percentage = yes` does nothing — the temp vars get set and discarded. When auditing influence code, grep for `percent_change` setters and confirm each has a matching invocation in the same scope.
+
+3. **Loop-local temp vars need the call inside the loop.** Setting temp vars inside `random_other_country` / `random_country` / `every_country` and then calling `change_influence_percentage = yes` outside the block runs the effect once with stale or undefined values. The invocation must live in the same scope as the temp-var writes.
+
+```
+# Wrong — call runs outside the loop; tag_index/influence_target resolve to outer scope
+random_other_country = {
+    limit = { ... }
+    set_temp_variable = { percent_change = 3 }
+    set_temp_variable = { tag_index = THIS.id }
+    set_temp_variable = { influence_target = PREV.id }
+}
+change_influence_percentage = yes
+
+# Correct — call inside the loop with the loop-local scopes
+random_other_country = {
+    limit = { ... }
+    set_temp_variable = { percent_change = 3 }
+    set_temp_variable = { tag_index = THIS.id }
+    set_temp_variable = { influence_target = PREV.id }
+    change_influence_percentage = yes
+}
+```
+
+Also watch for typos in the temp-var name itself (e.g., `influence_tBRAet` from a botched search-and-replace) — the engine accepts any name, so a typo silently sets a never-read variable and the influence change uses the default `THIS.id` target.
 
 # Array Index Semantics
 
