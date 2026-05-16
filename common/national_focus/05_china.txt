@@ -1444,7 +1444,7 @@ focus_tree = {
 	}
 	focus = {
 		id = CHI_coastal_acceleration_doctrine
-		icon = x
+		icon = focus_JAP_further_urban_investments
 
 		x = -1
 		y = 3
@@ -1475,7 +1475,7 @@ focus_tree = {
 	}
 	focus = {
 		id = CHI_defence_industry_consolidation
-		icon = x
+		icon = focus_generic_communist_industry
 
 		x = 0
 		y = 4
@@ -1491,10 +1491,6 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_defence_industry_consolidation"
-			set_temp_variable = { treasury_change = -20 }
-			modify_treasury_effect = yes
-			newline = yes
-			army_experience = 25
 			add_tech_bonus = {
 				name = CHI_defence_industry_consolidation
 				bonus = 0.50
@@ -1508,14 +1504,38 @@ focus_tree = {
 				category = CAT_naval_air
 			}
 			newline = yes
-			586 = { add_building_construction = { type = arms_factory level = 1 instant_build = yes } }
-			534 = { add_building_construction = { type = arms_factory level = 1 instant_build = yes } }
-			540 = { add_building_construction = { type = dockyard level = 1 instant_build = yes } }
+			586 = {
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			534 = {
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			540 = {
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
 			newline = yes
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
 			add_to_variable = { CHI_economy_production_factory_max_efficiency_factor = 0.03 tooltip = production_factory_max_efficiency_factor_tt }
 			add_to_variable = { CHI_economy_dockyard_output_factor = 0.05 tooltip = industrial_capacity_dockyard_tt }
 			add_power_balance_value = { id = CHI_factional_balance value = -0.05 tooltip_side = CHI_princeling_shanghai }
+			newline = yes
+			set_temp_variable = { treasury_change = -23 }
+			modify_treasury_effect = yes
 		}
 
 		ai_will_do = {
@@ -1523,7 +1543,7 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = CHI_china_among_the_starts
+		id = CHI_china_among_the_starts #Will make some space focusses cheaper
 		icon = x
 
 		x = 0
@@ -1547,7 +1567,7 @@ focus_tree = {
 	}
 	focus = {
 		id = CHI_western_institutional_engagement
-		icon = x
+		icon = focus_generic_democratic_asia
 
 		x = 1
 		y = 3
@@ -1573,7 +1593,7 @@ focus_tree = {
 	}
 	focus = {
 		id = CHI_selective_anti_corruption
-		icon = x
+		icon = focus_generic_infiltration
 
 		x = 0
 		y = 2
@@ -1589,6 +1609,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_selective_anti_corruption"
 			add_timed_idea = { idea = CHI_selective_anti_corruption_campaign_idea years = 2 }
+			newline	= yes
 			add_power_balance_value = { id = CHI_factional_balance value = -0.06 tooltip_side = CHI_princeling_shanghai }
 		}
 
@@ -1597,7 +1618,7 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = CHI_quiet_succession_engineering
+		id = CHI_quiet_succession_engineering #Should give a trait to Zeng which improves the daily balance to his side
 		icon = x
 
 		x = 2
