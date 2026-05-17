@@ -9,8 +9,8 @@
 
 ## File Naming
 
-- Country-specific localisation (events, focuses, decisions for a single country): `MD_focus_TAG_l_english.yml`
-- System-wide or multi-country localisation: descriptive prefix, e.g., `MD_NATO_events_l_english.yml`
+- **All country-specific localisation** (events, focuses, decisions, ideas, missions for a single country) goes in the **single unified file**: `MD_focus_TAG_l_english.yml`. Do **not** create separate files per subsystem (e.g., `MD_TAG_rebellion_l_english.yml`, `MD_TAG_events_l_english.yml`). One country, one loc file.
+- Only create a **separate** loc file for a standalone cross-country mechanic or system that is not owned by any single country (e.g., `MD_NATO_events_l_english.yml`, `MD_tooltips_l_english.yml`).
 - Check existing files in `localisation/english/` for the naming pattern before creating new ones.
 
 ## Key Formatting
@@ -76,6 +76,27 @@ HOI4 localisation files are checked by `check-yaml` in the pre-commit hook. The 
 - **Embedded double quotes**: `"He called it "important""` is invalid. Use `\"important\"` for emphasis, or rephrase to remove the inner quotes entirely.
 - **Mixed indentation**: All keys in a file must be consistently indented (all with 1 leading space, or all without). Mixing indented and non-indented keys in the same file causes YAML to see two separate mappings. Remove stray spaces to make indentation uniform.
 - **Colons in values**: A bare colon followed by a space inside a quoted string can confuse some parsers — wrap the value in quotes as usual and this is safe, but watch for unquoted values.
+
+## Loc Key Collisions Between Game Objects
+
+An idea's `name = X` field redirects **both** the displayed name and the tooltip description: the game looks up `X` for the name and `X_desc` for the description. The idea's own ID is no longer used for loc.
+
+This creates a collision risk when an idea shares a name with a focus, decision, event, or other idea:
+
+- A focus `id = ENG_british_commercial_spaceport` and an idea `name = ENG_british_commercial_spaceport` will both read from the same `ENG_british_commercial_spaceport` / `_desc` loc keys.
+- If both define those keys in the same `.yml`, YAML treats it as a duplicate and the later definition wins — the focus name silently changes to the idea's text (or vice versa).
+- Even if only one side defines the keys, the other game object will display whatever text happens to be there — usually wrong.
+
+**Rule:** When picking a `name = X` for an idea, choose a key that no focus, decision, or other idea uses. If the idea's display text matches the focus's display text intentionally (e.g., the focus awards the idea and they share branding), still use a distinct key — they may need to diverge later, and identical text in two keys is cheap.
+
+Quick check before merging:
+
+```bash
+# Replace KEY with the value of your `name = ` field
+grep -rn "id = KEY\b\|^\s*KEY:\s*\"" common/ localisation/english/
+```
+
+If you see hits in both `common/national_focus/` and `common/ideas/` for the same KEY, rename one side.
 
 ## Common Mistakes to Avoid
 

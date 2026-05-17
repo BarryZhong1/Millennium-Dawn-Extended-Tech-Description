@@ -9,9 +9,10 @@ import logging
 import os
 import re
 import sys
+import time
 from dataclasses import dataclass, field
 from multiprocessing import Pool, cpu_count
-from typing import Callable, Dict, List, Optional, Set
+from typing import Callable, Dict, List, Optional, Set, Tuple
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 from shared_utils import (
@@ -21,12 +22,77 @@ from shared_utils import (
     find_line_number,
     get_staged_files,
     log_message,
+    print_timing_summary,
     run_validator_main,
     should_skip_file,
     strip_comments,
+    timing_enabled,
 )
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
+
+
+# Regex for meta_effect/meta_trigger template substitution patterns.
+# Matches identifiers containing at least one [VAR] placeholder with a non-empty
+# constant prefix (e.g. "set_leader_[IDEOLOGY]", "tooltip_EU_[EUXXX]_approve").
+_META_TEMPLATE_RE = re.compile(
+    r"(?<![/\"])\b([A-Za-z_][A-Za-z0-9_.]*(?:\[[A-Za-z_][A-Za-z0-9_]*\][A-Za-z0-9_.]*)+)"
+)
+
+
+def scan_meta_constructed_names(files, defined_names):
+    """Return the subset of *defined_names* called via meta_effect/meta_trigger
+    template substitution (e.g. ``set_leader_[IDEOLOGY] = yes``).
+
+    For every file containing ``meta_effect`` or ``meta_trigger``, extracts
+    identifier templates of the form ``prefix_[VAR]_suffix``, splits on ``[VAR]``
+    segments, and matches any defined name whose lower-cased form starts with
+    *prefix* and ends with *suffix*.
+    """
+    defined_lower = {n.lower(): n for n in defined_names}
+    used = set()
+
+    for filepath in files:
+        try:
+            with open(filepath, "r", encoding="utf-8-sig") as fh:
+                content = fh.read()
+        except Exception:
+            continue
+
+        if "meta_effect" not in content and "meta_trigger" not in content:
+            continue
+
+        content_clean = strip_comments(content)
+
+        for m in _META_TEMPLATE_RE.finditer(content_clean):
+            template = m.group(1)
+            parts = re.split(r"\[[^\]]+\]", template)
+            prefix = parts[0].lower()
+            suffix = parts[-1].lower() if len(parts) > 1 else ""
+
+            if not prefix and not suffix:
+                continue
+
+            for name_lower, name_orig in defined_lower.items():
+                if name_orig in used:
+                    continue
+                if name_lower.startswith(prefix) and name_lower.endswith(suffix):
+                    if len(name_lower) > len(prefix) + len(suffix):
+                        used.add(name_orig)
+
+    return used
+
+
+# Log level from environment — controls output verbosity across all validators.
+# Set MD_LOG_LEVEL=ERROR to see only errors, WARNING (default) for errors+Warnings,
+# or INFO for full output (equivalent to the pre-MD_LOG_LEVEL behaviour).
+_LOG_LEVEL = os.environ.get("MD_LOG_LEVEL", "WARNING").upper()
+if _LOG_LEVEL == "ERROR":
+    logging.basicConfig(level=logging.ERROR, format="%(levelname)s: %(message)s")
+elif _LOG_LEVEL == "INFO":
+    logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
+else:
+    logging.basicConfig(level=logging.WARNING, format="%(levelname)s: %(message)s")
 
 
 class Colors:
@@ -174,6 +240,10 @@ class BaseValidator:
         self._pool: Optional[Pool] = None
         self._regex_cache: Dict[str, re.Pattern] = {}
         self._issues: List[Issue] = []
+        self._section_timings: List[Tuple[str, float]] = []
+        self._section_start: Optional[float] = None
+        self._section_title: str = ""
+        self._show_timing = timing_enabled()
 
         if staged_only:
             self.staged_files = (
@@ -190,6 +260,12 @@ class BaseValidator:
         return self._regex_cache[key]
 
     def log(self, message: str, level: str = "info"):
+        # Respect MD_LOG_LEVEL — skip messages below the configured threshold.
+        if level == "info" and _LOG_LEVEL != "INFO":
+            return
+        if level == "warning" and _LOG_LEVEL == "ERROR":
+            return
+
         display_msg = (
             message if self.use_colors else re.sub(r"\033\[[0-9;]+m", "", message)
         )
@@ -201,6 +277,34 @@ class BaseValidator:
             logging.error(display_msg)
         file_msg = re.sub(r"\033\[[0-9;]+m", "", message)
         self.output_lines.append(file_msg)
+
+    def _log_section(self, title: str):
+        """Emit the standard section header and start timing this section.
+
+        Each call closes the previous section's timer (if any) and starts a
+        new one.  Call ``_finish_sections`` after all checks to close the last
+        section and (when ``MD_TIMING`` is enabled) print a per-check timing
+        summary to stderr.
+        """
+        if self._section_start is not None:
+            elapsed = time.perf_counter() - self._section_start
+            self._section_timings.append((self._section_title, elapsed))
+        self._section_title = title
+        self._section_start = time.perf_counter()
+        self.log(f"\n{'='*80}")
+        self.log(
+            f"{Colors.CYAN if self.use_colors else ''}{title}{Colors.ENDC if self.use_colors else ''}"
+        )
+        self.log(f"{'='*80}")
+
+    def _finish_sections(self):
+        """Close the last section timer and print a timing summary."""
+        if self._section_start is not None:
+            elapsed = time.perf_counter() - self._section_start
+            self._section_timings.append((self._section_title, elapsed))
+            self._section_start = None
+        if self._show_timing and self._section_timings:
+            print_timing_summary(self._section_timings)
 
     def save_output(self):
         if self.output_file and self.output_lines:
@@ -419,6 +523,7 @@ class BaseValidator:
         self,
         patterns: List[str],
         extra_skip: Optional[Callable[[str], bool]] = None,
+        ignore_staged: bool = False,
     ) -> List[str]:
         """Collect mod files matching glob patterns, with staged-file support.
 
@@ -426,12 +531,17 @@ class BaseValidator:
         directory hint derived from each pattern's first non-wildcard segment.
         In full mode, expands each pattern via glob.iglob relative to mod_path.
         Always applies should_skip_file; extra_skip adds validator-local filtering.
+
+        Pass ``ignore_staged=True`` for cross-reference resolution passes that
+        must always scan the entire repo regardless of staged mode — e.g.
+        confirming a tag/idea/effect is defined somewhere even if its
+        definition file isn't part of the current change set.
         """
         extensions = list(
             {os.path.splitext(p)[1] for p in patterns if os.path.splitext(p)[1]}
         ) or [".txt"]
 
-        if self.staged_only:
+        if self.staged_only and not ignore_staged:
             if not self.staged_files:
                 return []
 
@@ -492,7 +602,7 @@ class BaseValidator:
     def _load_localisation_keys(self) -> frozenset:
         """Load all defined keys from English localisation yml files."""
         yml_files = self._collect_files(["localisation/english/**/*.yml"])
-        key_pattern = re.compile(r"^\s+([\w.]+)\s*:", re.MULTILINE)
+        key_pattern = re.compile(r"^[ \t]*([\w.]+)\s*:", re.MULTILINE)
         all_keys: set = set()
         for filepath in yml_files:
             try:
@@ -526,6 +636,7 @@ class BaseValidator:
         try:
             self.run_validations()
         finally:
+            self._finish_sections()
             if self._pool is not None:
                 self._pool.terminate()
                 self._pool.join()
