@@ -1544,7 +1544,7 @@ focus_tree = {
 	}
 	focus = {
 		id = CHI_china_among_the_starts #Will make some space focusses cheaper
-		icon = x
+		icon = focus_CHI_china_among_the_starts
 
 		x = 0
 		y = 5
@@ -1644,10 +1644,10 @@ focus_tree = {
 			base = 4
 		}
 	}
-
+	#Begin XI Jingping Branch
 	focus = {
 		id = CHI_the_chinese_dream
-		icon = x
+		icon = focus_xi_jinping
 
 		x = -6
 		y = 6
@@ -1658,10 +1658,13 @@ focus_tree = {
 
 		prerequisite = { focus = CHI_state_council_information_office }
 
-		available = { emerging_communist_state_are_in_power = yes }
+		available = { has_country_leader = { name =  "Xi Jinping" } }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_the_chinese_dream"
+			add_power_balance_value = { id = CHI_factional_balance value = 0.08 tooltip_side = CHI_princeling_shanghai }
+			add_timed_idea = { idea = CHI_chinese_dream_momentum years = 3 }
+			set_country_flag = CHI_xi_era_begun
 		}
 
 		ai_will_do = {
@@ -1681,10 +1684,13 @@ focus_tree = {
 
 		prerequisite = { focus = CHI_the_chinese_dream }
 
-		available = { emerging_communist_state_are_in_power = yes }
+		available = { has_country_leader = { name =  "Xi Jinping" } }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_document_nine"
+			add_timed_idea = { idea = CHI_ideological_rectification years = 2 }
+			add_power_balance_value = { id = CHI_factional_balance value = 0.05 tooltip_side = CHI_princeling_shanghai }
+			set_country_flag = CHI_document_nine_enforced
 		}
 
 		ai_will_do = {
@@ -1704,10 +1710,13 @@ focus_tree = {
 
 		prerequisite = { focus = CHI_the_chinese_dream }
 
-		available = { emerging_communist_state_are_in_power = yes }
+		available = { has_country_leader = { name =  "Xi Jinping" } }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_tiger_and_flies"
+			add_power_balance_value = { id = CHI_factional_balance value = 0.15 tooltip_side = CHI_princeling_shanghai }
+			add_timed_idea = { idea = CHI_anti_corruption_purge years = 3 }
+			set_country_flag = CHI_tigers_and_flies_active
 		}
 
 		ai_will_do = {
@@ -1728,10 +1737,12 @@ focus_tree = {
 		prerequisite = { focus = CHI_document_nine }
 		prerequisite = { focus = CHI_tiger_and_flies }
 
-		available = { emerging_communist_state_are_in_power = yes }
+		available = { has_country_leader = { name =  "Xi Jinping" } }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_leading_small_group_doctrine"
+			add_ideas = CHI_leading_small_groups_spirit
+			add_power_balance_value = { id = CHI_factional_balance value = 0.05 tooltip_side = CHI_princeling_shanghai }
 		}
 
 		ai_will_do = {
@@ -1751,10 +1762,12 @@ focus_tree = {
 
 		prerequisite = { focus = CHI_leading_small_group_doctrine }
 
-		available = { emerging_communist_state_are_in_power = yes }
+		available = { has_country_leader = { name =  "Xi Jinping" } }
 
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus CHI_leading_small_group_doctrine"
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_mass_line_education"
+			add_timed_idea = { idea = CHI_mass_line_campaign years = 2 }
+			add_power_balance_value = { id = CHI_factional_balance value = 0.03 tooltip_side = CHI_princeling_shanghai }
 		}
 
 		ai_will_do = {
@@ -1774,10 +1787,14 @@ focus_tree = {
 
 		prerequisite = { focus = CHI_leading_small_group_doctrine }
 
-		available = { emerging_communist_state_are_in_power = yes }
+		available = { has_country_leader = { name =  "Xi Jinping" } }
 
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus CHI_leading_small_group_doctrine"
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_astana_speech"
+			add_tech_bonus = { name = CHI_astana_bri_infra_1 bonus = 0.50 uses = 2 category = CAT_infrastructure }
+			add_tech_bonus = { name = CHI_astana_bri_infra_2 bonus = 0.25 uses = 1 category = CAT_construction_tech }
+			KAZ = { add_opinion_modifier = { target = ROOT modifier = shared_future_community } }
+			PAK = { add_opinion_modifier = { target = ROOT modifier = shared_future_community } }
 		}
 
 		ai_will_do = {
@@ -1797,10 +1814,13 @@ focus_tree = {
 
 		prerequisite = { focus = CHI_leading_small_group_doctrine }
 
-		available = { emerging_communist_state_are_in_power = yes }
+		available = { has_country_leader = { name =  "Xi Jinping" } }
 
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus CHI_leading_small_group_doctrine"
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_made_in_china_2025"
+			add_tech_bonus = { name = CHI_mic2025_industry bonus = 0.50 uses = 2 category = CAT_industry }
+			add_tech_bonus = { name = CHI_mic2025_construction bonus = 0.25 uses = 1 category = CAT_construction_tech }
+			set_country_flag = CHI_mic_2025_launched
 		}
 
 		ai_will_do = {
@@ -1820,10 +1840,13 @@ focus_tree = {
 
 		prerequisite = { focus = CHI_leading_small_group_doctrine }
 
-		available = { emerging_communist_state_are_in_power = yes }
+		available = { has_country_leader = { name =  "Xi Jinping" } }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_two_centeraries"
+			set_country_flag = CHI_19th_congress_milestone
+			add_power_balance_value = { id = CHI_factional_balance value = 0.05 tooltip_side = CHI_princeling_shanghai }
+			add_timed_idea = { idea = CHI_two_centenary_resolve years = 5 }
 		}
 
 		ai_will_do = {
@@ -1846,11 +1869,14 @@ focus_tree = {
 		prerequisite = { focus = CHI_made_in_china_2025 }
 		prerequisite = { focus = CHI_two_centeraries }
 
-		available = { emerging_communist_state_are_in_power = yes }
+		available = { has_country_leader = { name =  "Xi Jinping" } }
 		mutually_exclusive = { focus = CHI_two_establishments }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_xi_jinping_thought_enshrined"
+			add_ideas = CHI_xi_thought_spirit
+			set_country_flag = CHI_xi_cult_path
+			add_power_balance_value = { id = CHI_factional_balance value = 0.18 tooltip_side = CHI_princeling_shanghai }
 		}
 
 		ai_will_do = {
@@ -1870,10 +1896,13 @@ focus_tree = {
 
 		prerequisite = { focus = CHI_xi_jinping_thought_enshrined }
 
-		available = { emerging_communist_state_are_in_power = yes }
+		available = { has_country_leader = { name =  "Xi Jinping" } }
 
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus CHI_xi_jinping_thought_enshrined"
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_abolish_term_limits"
+			set_country_flag = CHI_term_limits_abolished
+			add_ideas = CHI_personal_rule_mandate
+			add_power_balance_value = { id = CHI_factional_balance value = 0.10 tooltip_side = CHI_princeling_shanghai }
 		}
 
 		ai_will_do = {
@@ -1893,10 +1922,13 @@ focus_tree = {
 
 		prerequisite = { focus = CHI_abolish_term_limits }
 
-		available = { emerging_communist_state_are_in_power = yes }
+		available = { has_country_leader = { name =  "Xi Jinping" } }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_leader_of_the_people"
+			add_ideas = CHI_renmin_lingxiu_spirit
+			set_country_flag = CHI_personalist_rule_complete
+			add_power_balance_value = { id = CHI_factional_balance value = 0.20 tooltip_side = CHI_princeling_shanghai }
 		}
 
 		ai_will_do = {
@@ -1904,7 +1936,7 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = CHI_taiwan_strait_imperative
+		id = CHI_cross_strait_military_posture
 		icon = x
 
 		x = -3
@@ -1919,7 +1951,9 @@ focus_tree = {
 		available = { emerging_communist_state_are_in_power = yes }
 
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus CHI_taiwan_strait_imperative"
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_cross_strait_military_posture"
+			add_ideas = CHI_taiwan_strait_pressure_spirit
+			set_country_flag = CHI_taiwan_military_pressure
 		}
 
 		ai_will_do = {
@@ -1939,10 +1973,14 @@ focus_tree = {
 
 		prerequisite = { focus = CHI_wolf_warrior_doctrine }
 
-		available = { emerging_communist_state_are_in_power = yes }
+		available = { has_country_leader = { name =  "Xi Jinping" } }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_taiwan_strait_imperative"
+			if = { limit = { has_idea = CHI_eight_points_doctrine } remove_ideas = CHI_eight_points_doctrine }
+			add_ideas = CHI_taiwan_strait_pressure_spirit
+			unlock_decision_category_tooltip = CHI_south_china_sea_category
+			set_country_flag = CHI_taiwan_military_pressure
 		}
 
 		ai_will_do = {
@@ -1962,10 +2000,12 @@ focus_tree = {
 
 		prerequisite = { focus = CHI_xi_jinping_thought_enshrined }
 
-		available = { emerging_communist_state_are_in_power = yes }
+		available = { has_country_leader = { name =  "Xi Jinping" } }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_wolf_warrior_doctrine"
+			add_ideas = CHI_wolf_warrior_spirit
+			set_country_flag = CHI_wolf_warrior_active
 		}
 
 		ai_will_do = {
@@ -1989,10 +2029,13 @@ focus_tree = {
 		prerequisite = { focus = CHI_made_in_china_2025 }
 		prerequisite = { focus = CHI_two_centeraries }
 
-		available = { emerging_communist_state_are_in_power = yes }
+		available = { has_country_leader = { name =  "Xi Jinping" } }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_two_establishments"
+			add_ideas = CHI_institutional_xi_legacy
+			set_country_flag = CHI_xi_collective_path
+			add_power_balance_value = { id = CHI_factional_balance value = 0.08 tooltip_side = CHI_princeling_shanghai }
 		}
 
 		ai_will_do = {
@@ -2012,10 +2055,13 @@ focus_tree = {
 
 		prerequisite = { focus = CHI_two_establishments }
 
-		available = { emerging_communist_state_are_in_power = yes }
+		available = { has_country_leader = { name =  "Xi Jinping" } }
 
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus CHI_two_establishments"
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_common_prosperity"
+			add_ideas = CHI_common_prosperity_framework
+			unlock_decision_category_tooltip = CHI_factional_balance_category
+			set_country_flag = CHI_common_prosperity_enacted
 		}
 
 		ai_will_do = {
@@ -2035,10 +2081,12 @@ focus_tree = {
 
 		prerequisite = { focus = CHI_common_prosperity }
 
-		available = { emerging_communist_state_are_in_power = yes }
+		available = { has_country_leader = { name =  "Xi Jinping" } }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_governance_moderenisation"
+			add_ideas = CHI_digital_governance_spirit
+			unlock_decision_category_tooltip = CHI_SAR_decisions_category
 		}
 
 		ai_will_do = {
@@ -2058,10 +2106,13 @@ focus_tree = {
 
 		prerequisite = { focus = CHI_common_prosperity }
 
-		available = { emerging_communist_state_are_in_power = yes }
+		available = { has_country_leader = { name =  "Xi Jinping" } }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_designated_succesor"
+			set_country_flag = CHI_designated_successor_chosen
+			add_power_balance_value = { id = CHI_factional_balance value = -0.03 tooltip_side = CHI_tuanpai_youth_league }
+			add_timed_idea = { idea = CHI_succession_roadmap years = 3 }
 		}
 
 		ai_will_do = {
@@ -2082,16 +2133,301 @@ focus_tree = {
 		prerequisite = { focus = CHI_designated_succesor }
 		prerequisite = { focus = CHI_governance_moderenisation }
 
-		available = { emerging_communist_state_are_in_power = yes }
+		available = { has_country_leader = { name =  "Xi Jinping" } }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_the_party_that_lasts"
+			add_ideas = CHI_party_century_endures
+			set_country_flag = CHI_collective_capstone_complete
+			add_power_balance_value = { id = CHI_factional_balance value = 0.05 tooltip_side = CHI_princeling_shanghai }
 		}
 
 		ai_will_do = {
 			base = 4
 		}
 	}
+	# End XI Jingping Branch
+
+	#Start Bo Xilai Branch
+	focus = {
+		id = CHI_chongqing_model_nationalisation
+		icon = focus_bo_xilai
+
+		x = 6
+		y = 6
+		relative_position_id = CHI_eleventh_five_year_plan
+
+		cost = 10
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		prerequisite = { focus = CHI_state_council_information_office }
+
+		available = { has_country_leader = { name =  "Bo Xilai" } }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_chongqing_model_nationalisation"
+			add_ideas = CHI_chongqing_model_idea
+			add_power_balance_value = { id = CHI_factional_balance value = -0.05 tooltip_side = CHI_princeling_shanghai }
+			set_country_flag = CHI_bo_xilai_path
+		}
+
+		ai_will_do = {
+			base = 4
+		}
+	}
+	focus = {
+		id = CHI_public_rental_housing_drive
+		icon = x
+
+		x = -2
+		y = 1
+		relative_position_id = CHI_chongqing_model_nationalisation
+
+		cost = 10
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		prerequisite = { focus = CHI_chongqing_model_nationalisation }
+
+		available = { has_country_leader = { name =  "Bo Xilai" } }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_public_rental_housing_drive"
+			add_timed_idea = { idea = CHI_public_housing_drive_idea years = 4 }
+			add_tech_bonus = { name = CHI_housing_construction_bonus bonus = 0.50 uses = 2 category = CAT_construction_tech }
+		}
+
+		ai_will_do = {
+			base = 4
+		}
+	}
+	focus = {
+		id = CHI_strike_black_sing_red
+		icon = x
+
+		x = 0
+		y = 1
+		relative_position_id = CHI_chongqing_model_nationalisation
+
+		cost = 10
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		prerequisite = { focus = CHI_chongqing_model_nationalisation }
+
+		available = { has_country_leader = { name =  "Bo Xilai" } }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_strike_black_sing_red"
+			add_timed_idea = { idea = CHI_strike_black_sing_red_idea years = 3 }
+			add_power_balance_value = { id = CHI_factional_balance value = -0.05 tooltip_side = CHI_princeling_shanghai }
+		}
+
+		ai_will_do = {
+			base = 4
+		}
+	}
+	focus = {
+		id = CHI_mass_line_renewed
+		icon = x
+
+		x = 2
+		y = 1
+		relative_position_id = CHI_chongqing_model_nationalisation
+
+		cost = 10
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		prerequisite = { focus = CHI_chongqing_model_nationalisation }
+
+		available = { has_country_leader = { name =  "Bo Xilai" } }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_mass_line_renewed"
+			add_timed_idea = { idea = CHI_mass_line_bo_campaign years = 3 }
+			add_power_balance_value = { id = CHI_factional_balance value = 0.03 tooltip_side = CHI_tuanpai_youth_league }
+		}
+
+		ai_will_do = {
+			base = 4
+		}
+	}
+	focus = {
+		id = CHI_politics_law_commision_realigned
+		icon = x
+
+		x = 1
+		y = 2
+		relative_position_id = CHI_chongqing_model_nationalisation
+
+		cost = 10
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		prerequisite = { focus = CHI_strike_black_sing_red }
+		prerequisite = { focus = CHI_mass_line_renewed }
+
+		available = { has_country_leader = { name =  "Bo Xilai" } }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_politics_law_commision_realigned"
+			add_ideas = CHI_chongqing_security_state
+			add_power_balance_value = { id = CHI_factional_balance value = -0.08 tooltip_side = CHI_princeling_shanghai }
+		}
+
+		ai_will_do = {
+			base = 4
+		}
+	}
+	focus = {
+		id = CHI_cadre_rotation
+		icon = x
+
+		x = -1
+		y = 2
+		relative_position_id = CHI_chongqing_model_nationalisation
+
+		cost = 10
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		prerequisite = { focus = CHI_strike_black_sing_red }
+		prerequisite = { focus = CHI_public_rental_housing_drive }
+
+		available = { has_country_leader = { name =  "Bo Xilai" } }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_cadre_rotation"
+			add_ideas = CHI_cadre_rotation_system
+		}
+
+		ai_will_do = {
+			base = 4
+		}
+	}
+	focus = {
+		id = CHI_davos_boycott
+		icon = x
+
+		x = -1
+		y = 3
+		relative_position_id = CHI_chongqing_model_nationalisation
+
+		cost = 10
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		prerequisite = { focus = CHI_cadre_rotation focus = CHI_politics_law_commision_realigned }
+
+		available = { has_country_leader = { name =  "Bo Xilai" } }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_davos_boycott"
+			add_ideas = CHI_chongqing_anti_davos
+			add_power_balance_value = { id = CHI_factional_balance value = -0.05 tooltip_side = CHI_princeling_shanghai }
+		}
+
+		ai_will_do = {
+			base = 4
+		}
+	}
+	focus = {
+		id = CHI_two_reaffirmations
+		icon = x
+
+		x = 1
+		y = 3
+		relative_position_id = CHI_chongqing_model_nationalisation
+
+		cost = 10
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		prerequisite = { focus = CHI_cadre_rotation focus = CHI_politics_law_commision_realigned }
+
+		available = { has_country_leader = { name =  "Bo Xilai" } }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_two_reaffirmations"
+			add_timed_idea = { idea = CHI_bo_ideological_consolidation years = 3 }
+			add_power_balance_value = { id = CHI_factional_balance value = -0.05 tooltip_side = CHI_princeling_shanghai }
+		}
+
+		ai_will_do = {
+			base = 4
+		}
+	}
+	focus = {
+		id = CHI_common_prosperity_original
+		icon = x
+
+		x = 0
+		y = 4
+		relative_position_id = CHI_chongqing_model_nationalisation
+
+		cost = 10
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		prerequisite = { focus = CHI_two_reaffirmations }
+		prerequisite = { focus = CHI_davos_boycott }
+
+		available = { has_country_leader = { name =  "Bo Xilai" } }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_common_prosperity_original"
+			add_ideas = CHI_bo_common_prosperity_idea
+			set_country_flag = CHI_common_prosperity_bo_origin
+			add_power_balance_value = { id = CHI_factional_balance value = 0.05 tooltip_side = CHI_tuanpai_youth_league }
+		}
+
+		ai_will_do = {
+			base = 4
+		}
+	}
+	focus = {
+		id = CHI_the_securitate_restructured
+		icon = x
+
+		x = -1
+		y = 5
+		relative_position_id = CHI_chongqing_model_nationalisation
+
+		cost = 10
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		prerequisite = { focus = CHI_common_prosperity_original }
+
+		available = { has_country_leader = { name =  "Bo Xilai" } }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_the_securitate_restructured"
+			add_ideas = CHI_bo_internal_securitate
+		}
+
+		ai_will_do = {
+			base = 4
+		}
+	}
+	focus = {
+		id = CHI_Yangtze_confederation
+		icon = x
+
+		x = 1
+		y = 5
+		relative_position_id = CHI_chongqing_model_nationalisation
+
+		cost = 10
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		prerequisite = { focus = CHI_common_prosperity_original }
+
+		available = { has_country_leader = { name =  "Bo Xilai" } }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_Yangtze_confederation"
+			add_ideas = CHI_yangtze_economic_bloc
+			add_tech_bonus = { name = CHI_yangtze_industry_bonus bonus = 0.50 uses = 2 category = CAT_industry }
+		}
+
+		ai_will_do = {
+			base = 4
+		}
+	}
+	#End Bo Xilai Branch
 
 
 	# Economy
