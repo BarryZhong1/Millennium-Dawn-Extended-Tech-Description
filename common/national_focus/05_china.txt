@@ -11072,6 +11072,8 @@ focus_tree = {
 		cost = 10
 		search_filters = { FOCUS_FILTER_ECONOMY }
 
+		prerequisite = { focus = CHI_soe_reform_complete }
+
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_agricultural_tax_abolition"
 			set_temp_variable = { treasury_change = -14 }
@@ -11396,6 +11398,9 @@ focus_tree = {
 
 		cost = 14
 		search_filters = { FOCUS_FILTER_ECONOMY }
+
+		prerequisite = { focus = CHI_western_energy_strategy }
+		prerequisite = { focus = CHI_soe_reform_complete }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_three_gorges_completion"
@@ -11722,6 +11727,9 @@ focus_tree = {
 		cost = 14
 		search_filters = { FOCUS_FILTER_ECONOMY }
 
+		prerequisite = { focus = CHI_anshan_steel_modernization }
+		prerequisite = { focus = CHI_soe_reform_complete }
+
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_baosteel_ipo"
 			set_temp_variable = { treasury_change = -80 }
@@ -11988,6 +11996,10 @@ focus_tree = {
 
 		cost = 10
 		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_ECONOMY }
+
+		prerequisite = { focus = CHI_northeast_revitalization_plan }
+		prerequisite = { focus = CHI_central_china_development }
+		prerequisite = { focus = CHI_soe_reform_complete }
 
 		available = { original_tag = CHI }
 
@@ -12402,6 +12414,10 @@ focus_tree = {
 		cost = 14
 		search_filters = { FOCUS_FILTER_ECONOMY }
 
+		prerequisite = { focus = CHI_mfn_consolidation }
+		prerequisite = { focus = CHI_asean_fta_initiative }
+		prerequisite = { focus = CHI_domestic_consumption_drive }
+
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_wto_jv_system"
 			set_temp_variable = { treasury_change = -100 }
@@ -12691,18 +12707,53 @@ focus_tree = {
 		}
 	}
 
+	focus = {
+		id = CHI_863_ic_preparatory_research
+		icon = x
+
+		x = 14
+		y = 7
+		relative_position_id = CHI_tenth_five_year_plan
+
+		cost = 10
+		search_filters = { FOCUS_FILTER_ECONOMY FOCUS_FILTER_INDUSTRY }
+
+		prerequisite = { focus = CHI_pearl_river_delta_tech_cluster }
+		prerequisite = { focus = CHI_bilateral_trade_strategy }
+		prerequisite = { focus = CHI_domestic_consumption_drive }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_863_ic_preparatory_research"
+			add_political_power = 25
+			newline = yes
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
+			add_to_variable = { CHI_economy_research_speed_factor = 0.02 tooltip = research_speed_factor_tt }
+			add_to_variable = { CHI_economy_production_speed_microchip_plant_factor = 0.03 tooltip = production_speed_microchip_plant_factor_tt }
+		}
+
+		ai_will_do = {
+			base = 7
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+		}
+	}
+
 	## Semiconductor Industry Sector
 
 	focus = {
 		id = CHI_big_fund_phase_1
 		icon = x
 
-		x = 20
+		x = 17
 		y = 9
 		relative_position_id = CHI_tenth_five_year_plan
 
 		cost = 14
 		search_filters = { FOCUS_FILTER_ECONOMY FOCUS_FILTER_INDUSTRY }
+
+		prerequisite = { focus = CHI_863_ic_preparatory_research }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_big_fund_phase_1"
@@ -13278,18 +13329,50 @@ focus_tree = {
 		}
 	}
 
+	focus = {
+		id = CHI_miit_licensing_framework
+		icon = x
+
+		x = -12
+		y = 7
+		relative_position_id = CHI_tenth_five_year_plan
+
+		cost = 10
+		search_filters = { FOCUS_FILTER_ECONOMY FOCUS_FILTER_INDUSTRY }
+
+		prerequisite = { focus = CHI_soe_reform_complete }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_miit_licensing_framework"
+			add_political_power = 25
+			newline = yes
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
+			add_to_variable = { CHI_economy_production_speed_internet_station_factor = 0.03 tooltip = production_speed_internet_station_factor_tt }
+		}
+
+		ai_will_do = {
+			base = 7
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+		}
+	}
+
 	## Services, Tech, Telecom & Logistics Sector
 
 	focus = {
 		id = CHI_telecom_reorganization
 		icon = x
 
-		x = -16
+		x = -12
 		y = 9
 		relative_position_id = CHI_tenth_five_year_plan
 
 		cost = 14
 		search_filters = { FOCUS_FILTER_ECONOMY FOCUS_FILTER_INDUSTRY }
+
+		prerequisite = { focus = CHI_miit_licensing_framework }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_telecom_reorganization"
@@ -14042,18 +14125,52 @@ focus_tree = {
 		}
 	}
 
+	focus = {
+		id = CHI_basle_capital_adequacy
+		icon = x
+
+		x = 21
+		y = 7
+		relative_position_id = CHI_tenth_five_year_plan
+
+		cost = 10
+		search_filters = { FOCUS_FILTER_ECONOMY FOCUS_FILTER_POLITICAL }
+
+		prerequisite = { focus = CHI_mfn_consolidation }
+		prerequisite = { focus = CHI_bilateral_trade_strategy }
+		prerequisite = { focus = CHI_domestic_consumption_drive }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_basle_capital_adequacy"
+			add_political_power = 25
+			newline = yes
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
+			add_to_variable = { CHI_economy_interest_rate_multiplier_modifier = -0.03 tooltip = interest_rate_multiplier_modifier_tt }
+		}
+
+		ai_will_do = {
+			base = 7
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+		}
+	}
+
 	## Banking & Finance Sector
 
 	focus = {
 		id = CHI_wto_commercial_bank_reform
 		icon = x
 
-		x = 30
+		x = 24
 		y = 9
 		relative_position_id = CHI_tenth_five_year_plan
 
 		cost = 10
 		search_filters = { FOCUS_FILTER_ECONOMY FOCUS_FILTER_POLITICAL }
+
+		prerequisite = { focus = CHI_basle_capital_adequacy }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_wto_commercial_bank_reform"
