@@ -10345,7 +10345,7 @@ focus_tree = {
 		id = CHI_coastal_sez_2nd_generation
 		icon = x
 
-		x = -10
+		x = -9
 		y = 5
 		relative_position_id = CHI_tenth_five_year_plan
 
@@ -11048,6 +11048,333 @@ focus_tree = {
 			572 = { add_extra_state_shared_building_slots = 1 }
 			583 = { add_extra_state_shared_building_slots = 1 }
 			add_ideas = CHI_central_urbanization_idea
+		}
+
+		ai_will_do = {
+			base = 7
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+		}
+	}
+
+	## Agriculture Sector
+
+	focus = {
+		id = CHI_agricultural_tax_abolition
+		icon = x
+
+		x = -7
+		y = 9
+		relative_position_id = CHI_tenth_five_year_plan
+
+		cost = 10
+		search_filters = { FOCUS_FILTER_ECONOMY }
+
+		prerequisite = { focus = CHI_hukou_reform_partial }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_agricultural_tax_abolition"
+			set_temp_variable = { treasury_change = -14 }
+			modify_treasury_effect = yes
+			set_temp_variable = { temp_opinion = 15 }
+			change_farmers_opinion = yes
+			567 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = { type = agriculture_district level = 1 instant_build = yes }
+			}
+			572 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = { type = agriculture_district level = 1 instant_build = yes }
+			}
+			586 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = { type = agriculture_district level = 1 instant_build = yes }
+			}
+			add_ideas = CHI_agricultural_tax_abolished
+		}
+
+		ai_will_do = {
+			base = 7
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+		}
+	}
+
+	focus = {
+		id = CHI_hybrid_rice_super_program
+		icon = x
+
+		x = -2
+		y = 1
+		relative_position_id = CHI_agricultural_tax_abolition
+
+		cost = 14
+		search_filters = { FOCUS_FILTER_ECONOMY }
+
+		prerequisite = { focus = CHI_agricultural_tax_abolition }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_hybrid_rice_super_program"
+			set_temp_variable = { treasury_change = -14 }
+			modify_treasury_effect = yes
+			set_temp_variable = { temp_opinion = 10 }
+			change_farmers_opinion = yes
+			572 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = { type = agriculture_district level = 2 instant_build = yes }
+			}
+			531 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = { type = agriculture_district level = 1 instant_build = yes }
+			}
+			add_tech_bonus = { name = CHI_hybrid_rice_tech bonus = 0.15 uses = 1 category = CAT_industry }
+			add_ideas = CHI_hybrid_rice_program
+		}
+
+		ai_will_do = {
+			base = 7
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+		}
+	}
+
+	focus = {
+		id = CHI_sinograin_strategic_reserve
+		icon = x
+
+		x = 0
+		y = 1
+		relative_position_id = CHI_agricultural_tax_abolition
+
+		cost = 10
+		search_filters = { FOCUS_FILTER_ECONOMY }
+
+		prerequisite = { focus = CHI_agricultural_tax_abolition }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_sinograin_strategic_reserve"
+			set_temp_variable = { treasury_change = -19 }
+			modify_treasury_effect = yes
+			set_temp_variable = { temp_opinion = 10 }
+			change_farmers_opinion = yes
+			555 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = { type = agriculture_district level = 2 instant_build = yes }
+			}
+			554 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = { type = agriculture_district level = 1 instant_build = yes }
+			}
+			567 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = { type = agriculture_district level = 1 instant_build = yes }
+			}
+			add_ideas = CHI_sinograin_reserves
+		}
+
+		ai_will_do = {
+			base = 7
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+		}
+	}
+
+	focus = {
+		id = CHI_grain_for_green_program
+		icon = x
+
+		x = 2
+		y = 1
+		relative_position_id = CHI_agricultural_tax_abolition
+
+		cost = 14
+		search_filters = { FOCUS_FILTER_ECONOMY }
+
+		prerequisite = { focus = CHI_agricultural_tax_abolition }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_grain_for_green_program"
+			set_temp_variable = { treasury_change = -60 }
+			modify_treasury_effect = yes
+			set_temp_variable = { temp_opinion = 10 }
+			change_farmers_opinion = yes
+			559 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = { type = agriculture_district level = 1 instant_build = yes }
+				add_state_modifier = { modifier = { state_productivity_growth_modifier = 0.05 } }
+			}
+			560 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = { type = agriculture_district level = 1 instant_build = yes }
+				add_state_modifier = { modifier = { state_productivity_growth_modifier = 0.04 } }
+			}
+			add_ideas = CHI_grain_for_green
+		}
+
+		ai_will_do = {
+			base = 7
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+		}
+	}
+
+	focus = {
+		id = CHI_distant_water_fishing_strategy
+		icon = x
+
+		x = -1
+		y = 2
+		relative_position_id = CHI_agricultural_tax_abolition
+
+		cost = 10
+		search_filters = { FOCUS_FILTER_ECONOMY }
+
+		prerequisite = { focus = CHI_hybrid_rice_super_program }
+		prerequisite = { focus = CHI_sinograin_strategic_reserve }
+		prerequisite = { focus = CHI_grain_for_green_program }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_distant_water_fishing_strategy"
+			set_temp_variable = { treasury_change = -14 }
+			modify_treasury_effect = yes
+			set_temp_variable = { temp_opinion = 10 }
+			change_farmers_opinion = yes
+			537 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = { type = agriculture_district level = 2 instant_build = yes }
+			}
+			538 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = { type = agriculture_district level = 1 instant_build = yes }
+			}
+			add_tech_bonus = { name = CHI_distant_fishing_tech bonus = 0.15 uses = 1 category = CAT_naval_doctrine }
+			add_ideas = CHI_distant_water_fishing_fleets
+		}
+
+		ai_will_do = {
+			base = 7
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+		}
+	}
+
+	focus = {
+		id = CHI_blue_granary_aquaculture
+		icon = x
+
+		x = 1
+		y = 2
+		relative_position_id = CHI_agricultural_tax_abolition
+
+		cost = 10
+		search_filters = { FOCUS_FILTER_ECONOMY }
+
+		prerequisite = { focus = CHI_hybrid_rice_super_program }
+		prerequisite = { focus = CHI_sinograin_strategic_reserve }
+		prerequisite = { focus = CHI_grain_for_green_program }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_blue_granary_aquaculture"
+			set_temp_variable = { treasury_change = -14 }
+			modify_treasury_effect = yes
+			set_temp_variable = { temp_opinion = 10 }
+			change_farmers_opinion = yes
+			534 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = { type = agriculture_district level = 2 instant_build = yes }
+			}
+			538 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = { type = agriculture_district level = 1 instant_build = yes }
+			}
+			add_ideas = CHI_blue_granary_aquaculture_idea
+		}
+
+		ai_will_do = {
+			base = 7
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+		}
+	}
+
+	focus = {
+		id = CHI_seed_security_campaign
+		icon = x
+
+		x = 0
+		y = 3
+		relative_position_id = CHI_agricultural_tax_abolition
+
+		cost = 14
+		search_filters = { FOCUS_FILTER_ECONOMY }
+
+		prerequisite = { focus = CHI_distant_water_fishing_strategy focus = CHI_blue_granary_aquaculture }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_seed_security_campaign"
+			set_temp_variable = { treasury_change = -110 }
+			modify_treasury_effect = yes
+			set_temp_variable = { temp_opinion = 5 }
+			change_farmers_opinion = yes
+			531 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = { type = agriculture_district level = 2 instant_build = yes }
+			}
+			add_tech_bonus = { name = CHI_seed_security_tech bonus = 0.10 uses = 2 category = CAT_industry }
+			add_ideas = CHI_seed_sovereignty
+		}
+
+		ai_will_do = {
+			base = 7
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+		}
+	}
+
+	focus = {
+		id = CHI_asf_response_industrialization
+		icon = x
+
+		x = 0
+		y = 4
+		relative_position_id = CHI_agricultural_tax_abolition
+
+		cost = 10
+		search_filters = { FOCUS_FILTER_ECONOMY }
+
+		prerequisite = { focus = CHI_seed_security_campaign }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_asf_response_industrialization"
+			set_temp_variable = { treasury_change = -64 }
+			modify_treasury_effect = yes
+			set_temp_variable = { temp_opinion = 5 }
+			change_farmers_opinion = yes
+			552 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = { type = agriculture_district level = 1 instant_build = yes }
+			}
+			570 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = { type = agriculture_district level = 2 instant_build = yes }
+			}
+			add_ideas = CHI_industrialized_livestock
 		}
 
 		ai_will_do = {
