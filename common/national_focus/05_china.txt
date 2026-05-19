@@ -11065,14 +11065,12 @@ focus_tree = {
 		id = CHI_agricultural_tax_abolition
 		icon = x
 
-		x = -7
+		x = -8
 		y = 9
 		relative_position_id = CHI_tenth_five_year_plan
 
 		cost = 10
 		search_filters = { FOCUS_FILTER_ECONOMY }
-
-		prerequisite = { focus = CHI_hukou_reform_partial }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_agricultural_tax_abolition"
@@ -11399,8 +11397,6 @@ focus_tree = {
 		cost = 14
 		search_filters = { FOCUS_FILTER_ECONOMY }
 
-		prerequisite = { focus = CHI_hukou_reform_partial }
-
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_three_gorges_completion"
 			set_temp_variable = { treasury_change = -80 }
@@ -11719,14 +11715,12 @@ focus_tree = {
 		id = CHI_baosteel_ipo
 		icon = x
 
-		x = 0
+		x = 1
 		y = 9
 		relative_position_id = CHI_tenth_five_year_plan
 
 		cost = 14
 		search_filters = { FOCUS_FILTER_ECONOMY }
-
-		prerequisite = { focus = CHI_hukou_reform_partial }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_baosteel_ipo"
@@ -11972,6 +11966,719 @@ focus_tree = {
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
 			add_to_variable = { CHI_economy_country_resource_cost_steel = -0.05 tooltip = country_resource_cost_steel_tt }
 			add_to_variable = { CHI_economy_research_speed_factor = 0.03 tooltip = research_speed_factor_tt }
+			add_to_variable = { CHI_economy_production_factory_max_efficiency_factor = 0.04 tooltip = production_factory_max_efficiency_factor_tt }
+		}
+
+		ai_will_do = {
+			base = 7
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+		}
+	}
+
+	focus = {
+		id = CHI_energy_sector_anchor
+		icon = x
+
+		x = 6
+		y = 9
+		relative_position_id = CHI_tenth_five_year_plan
+
+		cost = 10
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_ECONOMY }
+
+		available = { original_tag = CHI }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_energy_sector_anchor"
+			add_political_power = 25
+		}
+
+		ai_will_do = {
+			base = 10
+		}
+	}
+
+	focus = {
+		id = CHI_weqi_pipeline_lines
+		icon = x
+
+		x = -1
+		y = 1
+		relative_position_id = CHI_energy_sector_anchor
+
+		cost = 14
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_RESOURCE FOCUS_FILTER_EXPENDITURE }
+
+		prerequisite = { focus = CHI_energy_sector_anchor }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_weqi_pipeline_lines"
+			set_temp_variable = { treasury_change = -150 }
+			modify_treasury_effect = yes
+			592 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = { type = infrastructure level = 1 instant_build = yes }
+				add_resource = { type = oil amount = 2 }
+			}
+			588 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = { type = infrastructure level = 1 instant_build = yes }
+			}
+			add_tech_bonus = {
+				name = CHI_weqi_pipeline_lines
+				bonus = 0.25
+				uses = 1
+				category = CAT_fuel_oil
+			}
+			if = {
+				limit = { country_exists = KAZ }
+				KAZ = { add_opinion_modifier = { target = ROOT modifier = CHI_bri_resource_concession } }
+			}
+			if = {
+				limit = { country_exists = RUS }
+				RUS = { add_opinion_modifier = { target = ROOT modifier = CHI_bri_resource_concession } }
+			}
+			newline = yes
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
+			add_to_variable = { CHI_economy_production_speed_renewable_energy_infra_factor = 0.04 tooltip = production_speed_renewable_energy_infra_factor_tt }
+			add_to_variable = { CHI_economy_production_speed_buildings_factor = 0.03 tooltip = production_speed_buildings_factor_tt }
+		}
+
+		ai_will_do = {
+			base = 8
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+		}
+	}
+
+	focus = {
+		id = CHI_three_noc_overseas
+		icon = x
+
+		x = 1
+		y = 1
+		relative_position_id = CHI_energy_sector_anchor
+
+		cost = 14
+		search_filters = { FOCUS_FILTER_RESOURCE FOCUS_FILTER_ECONOMY FOCUS_FILTER_EXPENDITURE FOCUS_FILTER_FOREIGN_POLICY }
+
+		prerequisite = { focus = CHI_energy_sector_anchor }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_three_noc_overseas"
+			set_temp_variable = { treasury_change = -120 }
+			modify_treasury_effect = yes
+			add_tech_bonus = {
+				name = CHI_three_noc_overseas
+				bonus = 0.20
+				uses = 1
+				category = CAT_fuel_oil
+			}
+			if = {
+				limit = { country_exists = VEN }
+				VEN = { add_opinion_modifier = { target = ROOT modifier = CHI_bri_resource_concession } }
+			}
+			if = {
+				limit = { country_exists = KAZ }
+				KAZ = { add_opinion_modifier = { target = ROOT modifier = CHI_bri_resource_concession } }
+			}
+			if = {
+				limit = { country_exists = AGL }
+				AGL = { add_opinion_modifier = { target = ROOT modifier = CHI_bri_resource_concession } }
+			}
+			if = {
+				limit = { country_exists = USA }
+				USA = { add_opinion_modifier = { target = ROOT modifier = CHI_noc_market_rival } }
+			}
+			if = {
+				limit = { country_exists = IND }
+				IND = { add_opinion_modifier = { target = ROOT modifier = CHI_noc_market_rival } }
+			}
+			newline = yes
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
+			add_to_variable = { CHI_economy_production_factory_max_efficiency_factor = 0.02 tooltip = production_factory_max_efficiency_factor_tt }
+			add_to_variable = { CHI_economy_research_speed_factor = 0.02 tooltip = research_speed_factor_tt }
+		}
+
+		ai_will_do = {
+			base = 8
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+		}
+	}
+
+	focus = {
+		id = CHI_pipechina_gas_reform
+		icon = x
+
+		x = -2
+		y = 2
+		relative_position_id = CHI_energy_sector_anchor
+
+		cost = 10
+		search_filters = { FOCUS_FILTER_ECONOMY FOCUS_FILTER_INDUSTRY FOCUS_FILTER_EXPENDITURE }
+
+		prerequisite = { focus = CHI_weqi_pipeline_lines }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_pipechina_gas_reform"
+			set_temp_variable = { treasury_change = -100 }
+			modify_treasury_effect = yes
+			add_stability = 0.02
+			newline = yes
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
+			add_to_variable = { CHI_economy_production_factory_max_efficiency_factor = 0.03 tooltip = production_factory_max_efficiency_factor_tt }
+			add_to_variable = { CHI_economy_production_speed_buildings_factor = 0.03 tooltip = production_speed_buildings_factor_tt }
+		}
+
+		ai_will_do = {
+			base = 7
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+		}
+	}
+
+	focus = {
+		id = CHI_hualong_nuclear_batch
+		icon = x
+
+		x = 0
+		y = 2
+		relative_position_id = CHI_energy_sector_anchor
+
+		cost = 14
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_EXPENDITURE FOCUS_FILTER_RESOURCE }
+
+		prerequisite = { focus = CHI_weqi_pipeline_lines focus = CHI_three_noc_overseas }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_hualong_nuclear_batch"
+			set_temp_variable = { treasury_change = -200 }
+			modify_treasury_effect = yes
+			534 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+			}
+			538 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+			}
+			add_tech_bonus = {
+				name = CHI_hualong_nuclear_batch
+				bonus = 0.25
+				uses = 1
+				category = CAT_industry
+			}
+			if = {
+				limit = { country_exists = PAK }
+				PAK = { add_opinion_modifier = { target = ROOT modifier = CHI_nuclear_export_partner } }
+			}
+			if = {
+				limit = { country_exists = ARG }
+				ARG = { add_opinion_modifier = { target = ROOT modifier = CHI_nuclear_export_partner } }
+			}
+			newline = yes
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
+			add_to_variable = { CHI_economy_production_speed_renewable_energy_infra_factor = 0.06 tooltip = production_speed_renewable_energy_infra_factor_tt }
+			add_to_variable = { CHI_economy_research_speed_factor = 0.03 tooltip = research_speed_factor_tt }
+		}
+
+		ai_will_do = {
+			base = 7
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+		}
+	}
+
+	focus = {
+		id = CHI_gobi_solar_offshore_wind
+		icon = x
+
+		x = 2
+		y = 2
+		relative_position_id = CHI_energy_sector_anchor
+
+		cost = 10
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_RESOURCE FOCUS_FILTER_EXPENDITURE }
+
+		prerequisite = { focus = CHI_three_noc_overseas }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_gobi_solar_offshore_wind"
+			set_temp_variable = { treasury_change = -150 }
+			modify_treasury_effect = yes
+			592 = { add_building_construction = { type = infrastructure level = 1 instant_build = yes } }
+			556 = { add_building_construction = { type = infrastructure level = 1 instant_build = yes } }
+			if = {
+				limit = { country_exists = USA }
+				USA = { add_opinion_modifier = { target = ROOT modifier = CHI_made_in_china_opinion } }
+			}
+			if = {
+				limit = { country_exists = GER }
+				GER = { add_opinion_modifier = { target = ROOT modifier = CHI_made_in_china_opinion } }
+			}
+			newline = yes
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
+			add_to_variable = { CHI_economy_production_speed_renewable_energy_infra_factor = 0.10 tooltip = production_speed_renewable_energy_infra_factor_tt }
+			add_to_variable = { CHI_economy_production_factory_max_efficiency_factor = 0.02 tooltip = production_factory_max_efficiency_factor_tt }
+		}
+
+		ai_will_do = {
+			base = 7
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+		}
+	}
+
+	focus = {
+		id = CHI_caojing_seven_chem_bases
+		icon = x
+
+		x = -1
+		y = 3
+		relative_position_id = CHI_energy_sector_anchor
+
+		cost = 10
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_ECONOMY FOCUS_FILTER_EXPENDITURE }
+
+		prerequisite = { focus = CHI_pipechina_gas_reform }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_caojing_seven_chem_bases"
+			set_temp_variable = { treasury_change = -150 }
+			modify_treasury_effect = yes
+			540 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+			}
+			534 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+			}
+			538 = { add_extra_state_shared_building_slots = 1 }
+			if = {
+				limit = { country_exists = GER }
+				GER = { add_opinion_modifier = { target = ROOT modifier = CHI_bri_resource_concession } }
+			}
+			if = {
+				limit = { country_exists = SAU }
+				SAU = { add_opinion_modifier = { target = ROOT modifier = CHI_bri_resource_concession } }
+			}
+			newline = yes
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
+			add_to_variable = { CHI_economy_production_speed_buildings_factor = 0.06 tooltip = production_speed_buildings_factor_tt }
+			add_to_variable = { CHI_economy_production_factory_max_efficiency_factor = 0.03 tooltip = production_factory_max_efficiency_factor_tt }
+		}
+
+		ai_will_do = {
+			base = 7
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+		}
+	}
+
+	focus = {
+		id = CHI_bayan_obo_ree_group
+		icon = x
+
+		x = 1
+		y = 3
+		relative_position_id = CHI_energy_sector_anchor
+
+		cost = 14
+		search_filters = { FOCUS_FILTER_RESOURCE FOCUS_FILTER_INDUSTRY FOCUS_FILTER_EXPENDITURE }
+
+		prerequisite = { focus = CHI_three_noc_overseas }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_bayan_obo_ree_group"
+			set_temp_variable = { treasury_change = -80 }
+			modify_treasury_effect = yes
+			556 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = { type = arms_factory level = 1 instant_build = yes }
+			}
+			if = {
+				limit = { country_exists = DRC }
+				DRC = { add_opinion_modifier = { target = ROOT modifier = CHI_bri_resource_concession } }
+			}
+			if = {
+				limit = { country_exists = ARG }
+				ARG = { add_opinion_modifier = { target = ROOT modifier = CHI_bri_resource_concession } }
+			}
+			if = {
+				limit = { country_exists = CHL }
+				CHL = { add_opinion_modifier = { target = ROOT modifier = CHI_bri_resource_concession } }
+			}
+			if = {
+				limit = { country_exists = USA }
+				USA = { add_opinion_modifier = { target = ROOT modifier = CHI_ree_strategic_leverage } }
+			}
+			if = {
+				limit = { country_exists = JAP }
+				JAP = { add_opinion_modifier = { target = ROOT modifier = CHI_ree_strategic_leverage } }
+			}
+			newline = yes
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
+			add_to_variable = { CHI_economy_country_resource_cost_steel = -0.04 tooltip = country_resource_cost_steel_tt }
+			add_to_variable = { CHI_economy_research_speed_factor = 0.03 tooltip = research_speed_factor_tt }
+		}
+
+		ai_will_do = {
+			base = 7
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+		}
+	}
+
+	focus = {
+		id = CHI_wanhua_strategic_materials
+		icon = x
+
+		x = 0
+		y = 4
+		relative_position_id = CHI_energy_sector_anchor
+
+		cost = 14
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_ECONOMY FOCUS_FILTER_EXPENDITURE }
+
+		prerequisite = { focus = CHI_caojing_seven_chem_bases }
+		prerequisite = { focus = CHI_bayan_obo_ree_group }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_wanhua_strategic_materials"
+			set_temp_variable = { treasury_change = -120 }
+			modify_treasury_effect = yes
+			570 = { add_building_construction = { type = arms_factory level = 1 instant_build = yes } }
+			add_tech_bonus = {
+				name = CHI_wanhua_strategic_materials
+				bonus = 0.25
+				uses = 2
+				category = CAT_industry
+			}
+			newline = yes
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
+			add_to_variable = { CHI_economy_research_speed_factor = 0.05 tooltip = research_speed_factor_tt }
+			add_to_variable = { CHI_economy_production_factory_max_efficiency_factor = 0.04 tooltip = production_factory_max_efficiency_factor_tt }
+			add_to_variable = { CHI_economy_industry_repair_factor = 0.03 tooltip = industry_repair_factor_tt }
+		}
+
+		ai_will_do = {
+			base = 6
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+		}
+	}
+
+	## Automotive Industry Sector
+
+	focus = {
+		id = CHI_wto_jv_system
+		icon = x
+
+		x = 12
+		y = 9
+		relative_position_id = CHI_tenth_five_year_plan
+
+		cost = 14
+		search_filters = { FOCUS_FILTER_ECONOMY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_wto_jv_system"
+			set_temp_variable = { treasury_change = -100 }
+			modify_treasury_effect = yes
+			540 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+			}
+			534 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+			}
+			newline = yes
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
+			add_to_variable = { CHI_economy_trade_opinion_factor = 0.10 tooltip = trade_opinion_factor_tt }
+			add_to_variable = { CHI_economy_production_factory_max_efficiency_factor = 0.04 tooltip = production_factory_max_efficiency_factor_tt }
+		}
+
+		ai_will_do = {
+			base = 7
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+		}
+	}
+
+	focus = {
+		id = CHI_private_oem_rise
+		icon = x
+
+		x = -2
+		y = 1
+		relative_position_id = CHI_wto_jv_system
+
+		cost = 10
+		search_filters = { FOCUS_FILTER_ECONOMY }
+
+		prerequisite = { focus = CHI_wto_jv_system }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_private_oem_rise"
+			set_temp_variable = { treasury_change = -40 }
+			modify_treasury_effect = yes
+			567 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+			}
+			549 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+			}
+			newline = yes
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
+			add_to_variable = { CHI_economy_production_factory_max_efficiency_factor = 0.04 tooltip = production_factory_max_efficiency_factor_tt }
+			add_to_variable = { CHI_economy_research_speed_factor = 0.02 tooltip = research_speed_factor_tt }
+		}
+
+		ai_will_do = {
+			base = 7
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+		}
+	}
+
+	focus = {
+		id = CHI_863_nev_program
+		icon = x
+
+		x = 0
+		y = 1
+		relative_position_id = CHI_wto_jv_system
+
+		cost = 14
+		search_filters = { FOCUS_FILTER_ECONOMY }
+
+		prerequisite = { focus = CHI_wto_jv_system }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_863_nev_program"
+			set_temp_variable = { treasury_change = -80 }
+			modify_treasury_effect = yes
+			540 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+			}
+			534 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+			}
+			newline = yes
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
+			add_to_variable = { CHI_economy_research_speed_factor = 0.06 tooltip = research_speed_factor_tt }
+			add_to_variable = { CHI_economy_production_speed_renewable_energy_infra_factor = 0.05 tooltip = production_speed_renewable_energy_infra_factor_tt }
+		}
+
+		ai_will_do = {
+			base = 7
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+		}
+	}
+
+	focus = {
+		id = CHI_geely_volvo_acquisition
+		icon = x
+
+		x = 2
+		y = 1
+		relative_position_id = CHI_wto_jv_system
+
+		cost = 10
+		search_filters = { FOCUS_FILTER_ECONOMY }
+
+		prerequisite = { focus = CHI_wto_jv_system }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_geely_volvo_acquisition"
+			set_temp_variable = { treasury_change = -80 }
+			modify_treasury_effect = yes
+			add_political_power = 25
+			newline = yes
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
+			add_to_variable = { CHI_economy_research_speed_factor = 0.05 tooltip = research_speed_factor_tt }
+			add_to_variable = { CHI_economy_trade_opinion_factor = 0.05 tooltip = trade_opinion_factor_tt }
+		}
+
+		ai_will_do = {
+			base = 7
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+		}
+	}
+
+	focus = {
+		id = CHI_great_wall_suv_dominance
+		icon = x
+
+		x = -2
+		y = 2
+		relative_position_id = CHI_wto_jv_system
+
+		cost = 10
+		search_filters = { FOCUS_FILTER_ECONOMY }
+
+		prerequisite = { focus = CHI_private_oem_rise }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_great_wall_suv_dominance"
+			set_temp_variable = { treasury_change = -60 }
+			modify_treasury_effect = yes
+			549 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+			}
+			newline = yes
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
+			add_to_variable = { CHI_economy_trade_opinion_factor = 0.08 tooltip = trade_opinion_factor_tt }
+			add_to_variable = { CHI_economy_production_factory_max_efficiency_factor = 0.03 tooltip = production_factory_max_efficiency_factor_tt }
+		}
+
+		ai_will_do = {
+			base = 7
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+		}
+	}
+
+	focus = {
+		id = CHI_byd_catl_integration
+		icon = x
+
+		x = 1
+		y = 2
+		relative_position_id = CHI_wto_jv_system
+
+		cost = 14
+		search_filters = { FOCUS_FILTER_ECONOMY }
+
+		prerequisite = { focus = CHI_863_nev_program }
+		prerequisite = { focus = CHI_geely_volvo_acquisition }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_byd_catl_integration"
+			set_temp_variable = { treasury_change = -100 }
+			modify_treasury_effect = yes
+			534 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = { type = industrial_complex level = 2 instant_build = yes }
+			}
+			537 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+			}
+			newline = yes
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
+			add_to_variable = { CHI_economy_production_factory_max_efficiency_factor = 0.06 tooltip = production_factory_max_efficiency_factor_tt }
+			add_to_variable = { CHI_economy_research_speed_factor = 0.04 tooltip = research_speed_factor_tt }
+		}
+
+		ai_will_do = {
+			base = 7
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+		}
+	}
+
+	focus = {
+		id = CHI_new_energy_vehicles_startups
+		icon = x
+
+		x = 1
+		y = 3
+		relative_position_id = CHI_wto_jv_system
+
+		cost = 10
+		search_filters = { FOCUS_FILTER_ECONOMY }
+
+		prerequisite = { focus = CHI_byd_catl_integration }
+		mutually_exclusive = { focus = CHI_dual_credit_auto_export }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_new_energy_vehicles_startups"
+			set_temp_variable = { treasury_change = -60 }
+			modify_treasury_effect = yes
+			540 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+			}
+			newline = yes
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
+			add_to_variable = { CHI_economy_research_speed_factor = 0.07 tooltip = research_speed_factor_tt }
+			add_to_variable = { CHI_economy_production_factory_max_efficiency_factor = 0.04 tooltip = production_factory_max_efficiency_factor_tt }
+		}
+
+		ai_will_do = {
+			base = 7
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+		}
+	}
+
+	focus = {
+		id = CHI_dual_credit_auto_export
+		icon = x
+
+		x = -1
+		y = 3
+		relative_position_id = CHI_wto_jv_system
+
+		cost = 10
+		search_filters = { FOCUS_FILTER_ECONOMY }
+
+		prerequisite = { focus = CHI_great_wall_suv_dominance }
+		prerequisite = { focus = CHI_byd_catl_integration }
+		mutually_exclusive = { focus = CHI_new_energy_vehicles_startups }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus CHI_dual_credit_auto_export"
+			set_temp_variable = { treasury_change = -60 }
+			modify_treasury_effect = yes
+			add_stability = 0.03
+			newline = yes
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
+			add_to_variable = { CHI_economy_trade_opinion_factor = 0.12 tooltip = trade_opinion_factor_tt }
 			add_to_variable = { CHI_economy_production_factory_max_efficiency_factor = 0.04 tooltip = production_factory_max_efficiency_factor_tt }
 		}
 
