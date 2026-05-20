@@ -2590,6 +2590,7 @@ generic_coalition_politics_decisions = {
 				OR = {
 					has_idea = cfa_franc
 					has_idea = cfa_franc_2
+					has_idea = the_eco
 				}
 			}
 			if = {
@@ -2622,7 +2623,7 @@ generic_coalition_politics_decisions = {
 				limit = {
 					FRA = { has_completed_focus = FRA_introduce_the_eco }
 				}
-				add_ideas = cfa_franc_2
+				add_ideas = the_eco
 			}
 			else = {
 				add_ideas = cfa_franc
@@ -2688,6 +2689,7 @@ generic_coalition_politics_decisions = {
 			OR = {
 				has_idea = cfa_franc
 				has_idea = cfa_franc_2
+				has_idea = the_eco
 			}
 		}
 
@@ -2719,8 +2721,12 @@ generic_coalition_politics_decisions = {
 				limit = { has_idea = cfa_franc }
 				remove_ideas = cfa_franc
 			}
-			else = {
+			else_if = {
+				limit = { has_idea = cfa_franc_2 }
 				remove_ideas = cfa_franc_2
+			}
+			else = {
+				remove_ideas = the_eco
 			}
 		}
 
