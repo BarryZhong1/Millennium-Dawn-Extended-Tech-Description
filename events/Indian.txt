@@ -3835,12 +3835,12 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: RAJ_rebellion.1.a executed"
 		set_country_flag = RAJ_ladakh_rebellion_fired
 		hidden_effect = {
-			create_dynamic_country = {
-				original_tag = RAJ
+			if = {
+				limit = { NOT = { country_exists = LAD } }
+				release = LAD
+			}
+			LAD = {
 				set_country_flag = RAJ_ladakh_rebellion
-				copy_tag = RAJ
-				ingame_startup_nations_effect = yes
-				set_cosmetic_tag = LAD
 				set_country_flag = is_civil_war_faction
 				set_popularities = {
 					nationalist = 80
@@ -3860,10 +3860,10 @@ country_event = {
 						political_dancer
 					}
 				}
-				993 = {
-					set_demilitarized_zone = no
-					transfer_state_to = PREV
-				}
+			}
+			993 = {
+				set_demilitarized_zone = no
+				transfer_state_to = LAD
 			}
 		}
 		add_stability = -0.10
@@ -3904,12 +3904,12 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: RAJ_rebellion.2.a executed"
 		set_country_flag = RAJ_meghalaya_rebellion_fired
 		hidden_effect = {
-			create_dynamic_country = {
-				original_tag = RAJ
+			if = {
+				limit = { NOT = { country_exists = MEG } }
+				release = MEG
+			}
+			MEG = {
 				set_country_flag = RAJ_meghalaya_rebellion
-				copy_tag = RAJ
-				ingame_startup_nations_effect = yes
-				set_cosmetic_tag = MEG
 				set_country_flag = is_civil_war_faction
 				set_popularities = {
 					democratic = 60
@@ -3929,10 +3929,10 @@ country_event = {
 						political_dancer
 					}
 				}
-				980 = {
-					set_demilitarized_zone = no
-					transfer_state_to = PREV
-				}
+			}
+			980 = {
+				set_demilitarized_zone = no
+				transfer_state_to = MEG
 			}
 		}
 		add_stability = -0.10
@@ -3973,12 +3973,12 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: RAJ_rebellion.3.a executed"
 		set_country_flag = RAJ_manipur_rebellion_fired
 		hidden_effect = {
-			create_dynamic_country = {
-				original_tag = RAJ
+			if = {
+				limit = { NOT = { country_exists = MAN } }
+				release = MAN
+			}
+			MAN = {
 				set_country_flag = RAJ_manipur_rebellion
-				copy_tag = RAJ
-				ingame_startup_nations_effect = yes
-				set_cosmetic_tag = MAN
 				set_country_flag = is_civil_war_faction
 				set_popularities = {
 					democratic = 60
@@ -3998,10 +3998,10 @@ country_event = {
 						political_dancer
 					}
 				}
-				477 = {
-					set_demilitarized_zone = no
-					transfer_state_to = PREV
-				}
+			}
+			477 = {
+				set_demilitarized_zone = no
+				transfer_state_to = MAN
 			}
 		}
 		add_stability = -0.10
@@ -4042,12 +4042,12 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: RAJ_rebellion.4.a executed"
 		set_country_flag = RAJ_sikkim_rebellion_fired
 		hidden_effect = {
-			create_dynamic_country = {
-				original_tag = RAJ
+			if = {
+				limit = { NOT = { country_exists = SIK } }
+				release = SIK
+			}
+			SIK = {
 				set_country_flag = RAJ_sikkim_rebellion
-				copy_tag = RAJ
-				ingame_startup_nations_effect = yes
-				set_cosmetic_tag = SIK
 				set_country_flag = is_civil_war_faction
 				set_popularities = {
 					neutrality = 70
@@ -4067,10 +4067,10 @@ country_event = {
 						political_dancer
 					}
 				}
-				982 = {
-					set_demilitarized_zone = no
-					transfer_state_to = PREV
-				}
+			}
+			982 = {
+				set_demilitarized_zone = no
+				transfer_state_to = SIK
 			}
 		}
 		add_stability = -0.10
