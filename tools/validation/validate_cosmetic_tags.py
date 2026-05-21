@@ -45,7 +45,7 @@ def _should_skip(filename: str) -> bool:
 
 
 def process_file_for_has_cosmetic_tag(
-    args: Tuple[str, bool]
+    args: Tuple[str, bool],
 ) -> Tuple[Dict[str, int], Dict[str, str]]:
     filename, lowercase = args
     text_file = FileOpener.open_text_file(
@@ -114,7 +114,7 @@ def process_file_for_cosmetic_tag_in_loc(args: Tuple[str, frozenset]) -> Dict[st
 
 
 def process_file_for_set_cosmetic_tag_defined(
-    args: Tuple[str, bool]
+    args: Tuple[str, bool],
 ) -> Tuple[Dict[str, int], Dict[str, str]]:
     filename, lowercase = args
     text_file = FileOpener.open_text_file(
@@ -135,11 +135,9 @@ class Validator(BaseValidator):
     STAGED_EXTENSIONS = [".txt", ".yml"]
 
     def validate_missing_cosmetic_tags(self, false_positives: list):
-        self.log(f"\n{'='*80}")
-        self.log(
-            f"{Colors.CYAN if self.use_colors else ''}Checking missing cosmetic tags (has_cosmetic_tag but never set)...{Colors.ENDC if self.use_colors else ''}"
+        self._log_section(
+            "Checking missing cosmetic tags (has_cosmetic_tag but never set)..."
         )
-        self.log(f"{'='*80}")
 
         files = self._collect_files(["**/*.txt"], extra_skip=_should_skip)
 
@@ -160,8 +158,15 @@ class Validator(BaseValidator):
             )
             return
 
+        # Cross-reference resolution: a tag set in any file in the repo counts,
+        # not just in the staged subset. Without ignore_staged here, a staged
+        # change adding `has_cosmetic_tag = X` would false-positive whenever
+        # the `set_cosmetic_tag = X` definition lives in an unmodified file.
+        all_files = self._collect_files(
+            ["**/*.txt"], extra_skip=_should_skip, ignore_staged=True
+        )
         remaining_tags = list(cosmetic_tags.keys())
-        args_list = [(f, False, remaining_tags) for f in files]
+        args_list = [(f, False, remaining_tags) for f in all_files]
         results = self._pool_map(process_file_for_set_cosmetic_tag, args_list)
 
         for counts in results:
@@ -184,11 +189,7 @@ class Validator(BaseValidator):
             )
 
     def validate_unused_cosmetic_tags(self, false_positives: list):
-        self.log(f"\n{'='*80}")
-        self.log(
-            f"{Colors.CYAN if self.use_colors else ''}Checking unused cosmetic tags (set but never referenced)...{Colors.ENDC if self.use_colors else ''}"
-        )
-        self.log(f"{'='*80}")
+        self._log_section("Checking unused cosmetic tags (set but never referenced)...")
 
         files = self._collect_files(["**/*.txt"], extra_skip=_should_skip)
 
@@ -280,11 +281,9 @@ class Validator(BaseValidator):
             )
 
     def validate_unused_cosmetic_tag_colors(self, false_positives: list):
-        self.log(f"\n{'='*80}")
-        self.log(
-            f"{Colors.CYAN if self.use_colors else ''}Checking unused cosmetic tag colors (defined in cosmetic.txt but never set)...{Colors.ENDC if self.use_colors else ''}"
+        self._log_section(
+            "Checking unused cosmetic tag colors (defined in cosmetic.txt but never set)..."
         )
-        self.log(f"{'='*80}")
 
         cosmetic_file = Path(self.mod_path) / "common" / "countries" / "cosmetic.txt"
         if not cosmetic_file.exists():

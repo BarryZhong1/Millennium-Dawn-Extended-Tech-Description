@@ -28,7 +28,7 @@ from validator_common import (
 
 # Multiprocessing helper functions
 def process_file_for_defined_localisations(
-    args: Tuple[str, bool]
+    args: Tuple[str, bool],
 ) -> Tuple[List[str], Dict[str, str]]:
     filename, lowercase = args
 
@@ -59,7 +59,7 @@ def process_file_for_defined_localisations(
 
 
 def process_file_for_used_localisations(
-    args: Tuple[str, Set[str], bool]
+    args: Tuple[str, Set[str], bool],
 ) -> Tuple[List[str], Dict[str, str]]:
     filename, search_names, lowercase = args
 
@@ -222,11 +222,9 @@ class Validator(BaseValidator):
         used_locs: List[str],
         used_paths: Dict[str, str],
     ):
-        self.log(f"\n{'='*80}")
-        self.log(
-            f"{Colors.CYAN if self.use_colors else ''}Checking missing scripted localisations (used but not defined)...{Colors.ENDC if self.use_colors else ''}"
+        self._log_section(
+            "Checking missing scripted localisations (used but not defined)..."
         )
-        self.log(f"{'='*80}")
 
         defined_locs_lower = [loc.lower() for loc in defined_locs]
         used_locs_lower_raw = [loc.lower() for loc in used_locs]
@@ -271,11 +269,9 @@ class Validator(BaseValidator):
         defined_paths: Dict[str, str],
         used_locs: List[str],
     ):
-        self.log(f"\n{'='*80}")
-        self.log(
-            f"{Colors.CYAN if self.use_colors else ''}Checking unused scripted localisations (defined but not used)...{Colors.ENDC if self.use_colors else ''}"
+        self._log_section(
+            "Checking unused scripted localisations (defined but not used)..."
         )
-        self.log(f"{'='*80}")
 
         # Preemptive slot libraries — defined for all possible slots even if only a
         # subset are active.  Suppress unused warnings for the unoccupied slots rather
@@ -337,11 +333,9 @@ class Validator(BaseValidator):
         )
 
     def validate_gfx_icons(self):
-        self.log(f"\n{'='*80}")
-        self.log(
-            f"{Colors.CYAN if self.use_colors else ''}Checking GFX_ icon references in scripted localisation against .gfx definitions...{Colors.ENDC if self.use_colors else ''}"
+        self._log_section(
+            "Checking GFX_ icon references in scripted localisation against .gfx definitions..."
         )
-        self.log(f"{'='*80}")
 
         # Collect all GFX_ names defined in interface/*.gfx
         gfx_path = str(Path(self.mod_path) / "interface") + "/"

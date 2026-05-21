@@ -254,7 +254,7 @@ Syria_decisions = {
 				has_war_with = FSA
 				has_war_with = NUS
 			}
-			ROJ = { exists = yes }
+			country_exists = ROJ
 			NOT = { has_country_flag = Rojava_Negotiations }
 		}
 
@@ -865,10 +865,12 @@ Syria_greater_syria_decisions = {
 		}
 
 		available = {
-			HOU = { is_subject = no }
-			HOU = { is_in_faction = no }
 			has_idea = shia
-			HOU = { has_idea = shia }
+			HOU = {
+				is_subject = no
+				is_in_faction = no
+				has_idea = shia
+			}
 		}
 
 		cost = 150
@@ -1314,7 +1316,7 @@ Syria_damascus_spring_organization = {
 			log = "[GetDateText]: [Root.GetName]: Mission timeout sectarian_groups_start_to_seek_independence"
 			country_event = SyriaFocus.97
 			if = {
-				limit = { has_idea = citizenship_denied_kurds }
+				limit = { has_idea = idea_syrian_kurds_without_citizenships }
 				country_event = SyriaFocus.111
 			}
 		}
