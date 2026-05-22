@@ -23,7 +23,7 @@ capital = 91
 	complete_special_project = sp:sp_naval_vessel_project
 
 	complete_special_project = sp:sp_composite_production
-	#This needs to be one less than the starting number to work properly
+	# Consumed by tools/analysis/pre_place_power_plants.py — re-run the bake after editing
 	set_variable = { startup_composite_fac_needed = 1 }
 
 	set_naval_oob = "SPR_2000_naval_mtg"
@@ -96,6 +96,8 @@ capital = 91
 
 		tech_torpedoes_1 = 1
 		tech_torpedoes_2 = 1
+
+		tech_diesel_power_systems_1 = 1
 
 		tech_landing_craft_1 = 1
 	}
@@ -345,7 +347,7 @@ capital = 91
 		set_technology = {
 			mbt_tech_ops = 1
 			mbt_tech = 1
-			early_cold_war_ammo = 1
+			tank_ammo_1 = 1
 			defensive_systems = 1
 			nsb_gun_technology_1 = 1
 			nsb_artillery_ammo_1 = 1
@@ -359,6 +361,8 @@ capital = 91
 			nsb_special_ammo_1 = 1
 			nsb_AA_autocannon_1 = 1
 			nsb_SHORAD_missile_1 = 1
+			mbt_tech_2 = 1
+			tank_ammo_2 = 1
 			tank_components_tech = 1
 			tank_components_tech_2 = 1
 			small_medium_gun_tech = 1
@@ -598,9 +602,11 @@ capital = 91
 			gen_4_light = 1
 			gen_3_medium = 1
 			gen_4_medium = 1
+			gen_3_large = 1
 
 			flying_wing_design = 1
 			variable_wing_design = 1
+			delta_wing_design = 1
 
 			engines_2 = 1
 			engines_3 = 1
@@ -608,6 +614,7 @@ capital = 91
 			refueling_1 = 1
 
 			avionics_1 = 1
+			avionics_2 = 1
 
 			awacs_1 = 1
 
@@ -871,14 +878,14 @@ capital = 91
 		gprs = 1
 		fuel_silos = 1
 
-		industrial_electrospun_polymeric_nanofibers = 1
-		multiwalled_carbon_nanotubes = 1
-		modern_electrospinning = 1
-		stereolitography = 1
-		early_3D_printers = 1
-		t3D_wax_printer = 1
-		DNA_fingerprinting = 1
-		modern_gmo = 1
+		nanofibers_1 = 1
+		nanofibers_2 = 1
+		nanofibers_3 = 1
+		printing_1 = 1
+		printing_2 = 1
+		printing_3 = 1
+		genetics_1 = 1
+		genetics_2 = 1
 		fuel_refining = 1
 		fuel_refining2 = 1
 		energy_efficiency = 1
@@ -984,7 +991,7 @@ capital = 91
 	add_to_array = { influence_array_val = 10 }
 	add_to_array = { influence_array = CHI.id }
 	add_to_array = { influence_array_val = 2 }
-	startup_influence = yes
+	sort_influence = yes
 
 	# Economy
 	set_variable = { var = debt value = 687.378 }
@@ -993,6 +1000,7 @@ capital = 91
 	set_variable = { var = population_tax_rate value = 18 }
 	set_variable = { var = int_investments value = 98 }
 	set_variable = { overall_productivity = 1019 }
+	set_variable = { var_reactor_material_stockpile = 7500 }
 
 	# Spanish System
 	add_to_array = { SPR_culture_opinion = 60 } # Catalonia = 0
@@ -1172,8 +1180,10 @@ capital = 91
 			name = "National Intelligence Centre (CNI)"
 			icon = GFX_intelligence_agency_logo_generic_1
 		}
+		set_country_flag = MD_skip_treasury_cost
 		upgrade_intelligence_agency = upgrade_form_department
 		upgrade_intelligence_agency = upgrade_establish_cyber_operations_division
+		clr_country_flag = MD_skip_treasury_cost
 	}
 
 

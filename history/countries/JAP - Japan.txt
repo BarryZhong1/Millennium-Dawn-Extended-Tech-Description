@@ -5,7 +5,12 @@ capital = 615
 	set_country_flag = dynamic_flag
 	set_country_flag = dynamic_rebel_flag
 	set_variable = { gdp_per_capita = 36.323 }
-	set_country_flag = JAP_COALITION_KOMEITO
+
+	set_variable = { JAP_demand_recovery_progress = 20 }
+	set_variable = { JAP_dangerous_npl_stock = 5 }
+	set_variable = { JAP_banking_confidence = 20 }
+	set_variable = { JAP_corporate_restructuring_progress = 15 }
+	set_variable = { JAP_business_care = 0 }
 
 	# DEFENSE BUDGET LIMITATIONS
 	set_variable = { jap_defenselimit_equipment_cost_multiplier_modifier = -0.20 }
@@ -62,7 +67,7 @@ capital = 615
 
 
 	complete_special_project = sp:sp_composite_production
-	#This needs to be one less than the starting number to work properly
+	# Consumed by tools/analysis/pre_place_power_plants.py — re-run the bake after editing
 	set_variable = { startup_composite_fac_needed = 5 }
 	complete_special_project = sp:sp_aircraft_project
 
@@ -73,7 +78,7 @@ capital = 615
 		set_technology = {
 			mbt_tech_ops = 1
 			mbt_tech = 1
-			early_cold_war_ammo = 1
+			tank_ammo_1 = 1
 			defensive_systems = 1
 			nsb_gun_technology_1 = 1
 			nsb_artillery_ammo_1 = 1
@@ -88,7 +93,7 @@ capital = 615
 			nsb_AA_autocannon_1 = 1
 			nsb_SHORAD_missile_1 = 1
 			mbt_tech_2 = 1
-			cold_war_ammo = 1
+			tank_ammo_2 = 1
 			defensive_systems_3 = 1
 			nsb_gun_technology_3 = 1
 			nsb_AA_autocannon_2 = 1
@@ -105,10 +110,13 @@ capital = 615
 			diesel_engine_tech = 1
 			diesel_engine_tech_2 = 1
 			diesel_engine_tech_3 = 1
+			electric_engine_tech_1 = 1
 			turbine_engine_tech = 1
 			turbine_engine_tech_2 = 1
 			small_autocannon_tech = 1
 			small_autocannon_tech_2 = 1
+			big_autocannon_tech_2 = 1
+			big_autocannon_tech = 1
 			nsb_artillery_0 = 1
 			nsb_Arty_upgrade_1 = 1
 			nsb_Arty_upgrade_2 = 1
@@ -126,13 +134,17 @@ capital = 615
 			nsb_light_nose_gun_tech_1 = 1
 			nsb_defense_tech_1 = 1
 			nsb_attack_helicopter_tech_2 = 1
+			nsb_attack_helicopter_tech_3 = 1
 			nsb_engine_tech_2 = 1
 			nsb_atgm_tech_2 = 1
 			nsb_multiple_atgm_tech_2 = 1
 			nsb_heavy_atgm_tech_2 = 1
+			nsb_atgm_tech_3 = 1
+			nsb_multiple_atgm_tech_3 = 1
 			nsb_rocket_pods_tech_2 = 1
 			nsb_gun_pods_tech_2 = 1
 			nsb_light_nose_gun_tech_2 = 1
+			nsb_defense_tech_2 = 1
 			nsb_transport_helicopter_1 = 1
 			nsb_transport_helicopter_2 = 1
 			nsb_artillery_1 = 1
@@ -157,6 +169,7 @@ capital = 615
 			}
 			obsolete = yes
 			icon = "gfx/interface/technologies/JAP/LAND/APC1.dds"
+			design_team = mio:JAP_mitsubishi_heavy_industries_tank_manufacturer
 		}
 		create_equipment_variant = {
 			name = "Type 73"
@@ -179,6 +192,7 @@ capital = 615
 			}
 			obsolete = yes
 			icon = "gfx/interface/technologies/JAP/LAND/APC2.dds"
+			design_team = mio:JAP_mitsubishi_heavy_industries_tank_manufacturer
 		}
 		create_equipment_variant = {
 			name = "Type 82"
@@ -202,6 +216,7 @@ capital = 615
 			}
 			obsolete = yes
 			icon = "gfx/interface/technologies/JAP/LAND/APC3.dds"
+			design_team = mio:JAP_komatsu_tank_manufacturer
 		}
 		create_equipment_variant = {
 			name = "Type 96"
@@ -224,6 +239,7 @@ capital = 615
 				tank_nsb_armor_upgrade = 3
 			}
 			icon = "gfx/interface/technologies/JAP/LAND/APC4.dds"
+			design_team = mio:JAP_komatsu_tank_manufacturer
 		}
 		create_equipment_variant = {
 			name = "Type 89"
@@ -246,6 +262,7 @@ capital = 615
 				tank_nsb_armor_upgrade = 3
 			}
 			icon = "gfx/interface/technologies/JAP/LAND/IFV3.dds"
+			design_team = mio:JAP_mitsubishi_heavy_industries_tank_manufacturer
 		}
 		create_equipment_variant = {
 			name = "Type 74E"
@@ -269,6 +286,7 @@ capital = 615
 			obsolete = yes
 			icon = "gfx/interface/technologies/JAP/LAND/MBT2.dds"
 			model = "JAP_Type74_entity"
+			design_team = mio:JAP_mitsubishi_heavy_industries_tank_manufacturer
 		}
 		create_equipment_variant = {
 			name = "Type 74F"
@@ -292,6 +310,7 @@ capital = 615
 			obsolete = yes
 			icon = "gfx/interface/technologies/JAP/LAND/MBT2.dds"
 			model = "JAP_Type74_entity"
+			design_team = mio:JAP_mitsubishi_heavy_industries_tank_manufacturer
 		}
 		create_equipment_variant = {
 			name = "Type 74G"
@@ -314,6 +333,7 @@ capital = 615
 			}
 			icon = "gfx/interface/technologies/JAP/LAND/MBT3.dds"
 			model = "JAP_Type74_entity"
+			design_team = mio:JAP_mitsubishi_heavy_industries_tank_manufacturer
 		}
 		create_equipment_variant = {
 			name = "Type 90"
@@ -337,7 +357,53 @@ capital = 615
 			}
 			icon = "gfx/interface/technologies/JAP/LAND/MBT4.dds"
 			model = "JAP_MD4_medium_armor_entity"
+			design_team = mio:JAP_mitsubishi_heavy_industries_tank_manufacturer
 		}
+		create_equipment_variant = {
+			name = "Type 75"
+			type = medium_tank_rocket_chassis_0
+			parent_version = 0
+			modules = {
+				main_armament_slot = art_med_rocket_gen1
+				turret_type_slot = tank_no_turret
+				reload_type_slot = thirty_two_missile_pack
+				ammunition_load_slot = artillery_light_ammo_1
+				suspension_type_slot = tank_torsion_bar_suspension_medium
+				armor_type_slot = tank_steel_armor_gen1
+				engine_type_slot = tank_diesel_engine_gen2
+				special_type_slot_1 = fire_ammo_1
+				special_type_slot_4 = tank_battlestation_1
+			}
+			upgrades = {
+				tank_nsb_armor_upgrade = 2
+			}
+		obsolete = yes
+		icon = "gfx/interface/technologies/JAP/LAND/SPR1.dds"
+		design_team = mio:JAP_komatsu_tank_manufacturer
+		}
+		create_equipment_variant = {
+		   name = "M110A2"
+		   type = medium_tank_artillery_chassis_0
+		   parent_version = 3
+		   modules = {
+			   main_armament_slot = art_med_gun_gen2
+				reload_type_slot = manual_loading
+				ammunition_load_slot = artillery_heavy_ammo_2
+				turret_type_slot = tank_base_tank_turret
+			   suspension_type_slot = tank_pneumatic_suspension_medium
+			   engine_type_slot = tank_diesel_engine_gen2
+			   special_type_slot_1 = empty
+			   special_type_slot_2 = empty
+			   special_type_slot_3 = cluster_ammo_1
+			   special_type_slot_4 = tank_battlestation_1
+		 }
+		   upgrades = {
+			   tank_nsb_fire_upgrade = 2
+		 }
+		   obsolete = yes
+		   icon = "gfx/interface/technologies/JAP/LAND/SPG1.dds"
+		   design_team = mio:JAP_mitsubishi_heavy_industries_tank_manufacturer
+	 }
 		 create_equipment_variant = {
 			 name = "Type 75"
 			 type = medium_tank_artillery_chassis_1
@@ -359,6 +425,7 @@ capital = 615
 			 }
 			 obsolete = yes
 			 icon = "gfx/interface/technologies/JAP/LAND/SPG2.dds"
+			 design_team = mio:JAP_mitsubishi_heavy_industries_tank_manufacturer
 		 }
 		 create_equipment_variant = {
 			 name = "Type 99"
@@ -380,6 +447,7 @@ capital = 615
 				 tank_nsb_fire_upgrade = 3
 			 }
 			 icon = "gfx/interface/technologies/JAP/LAND/SPG3.dds"
+			 design_team = mio:JAP_mitsubishi_heavy_industries_tank_manufacturer
 		 }
 		create_equipment_variant = {
 			name = "Type 93"
@@ -391,7 +459,7 @@ capital = 615
 				ammunition_load_slot = spaa_short_range_missiles_2
 				turret_type_slot = tank_base_tank_turret
 				suspension_type_slot = tank_wheeled_suspension_medium
-				engine_type_slot = tank_diesel_engine_gen4
+				engine_type_slot = tank_diesel_engine_gen3
 				secondary_armament_slot = empty
 				special_type_slot_1 = empty
 				special_type_slot_2 = empty
@@ -401,6 +469,7 @@ capital = 615
 			upgrades = {
 				tank_nsb_fire_upgrade = 1
 			}
+			icon = "gfx/interface/technologies/JAP/LAND/SPA2.dds"
 		}
 		create_equipment_variant = {
 			name = "Type 81"
@@ -411,7 +480,7 @@ capital = 615
 				reload_type_slot = eight_missile_pack
 				ammunition_load_slot = spaa_short_range_missiles_2
 				suspension_type_slot = tank_wheeled_suspension_medium
-				engine_type_slot = tank_diesel_engine_gen4
+				engine_type_slot = tank_diesel_engine_gen3
 				secondary_armament_slot = empty
 				special_type_slot_1 = empty
 				special_type_slot_2 = empty
@@ -421,6 +490,7 @@ capital = 615
 			upgrades = {
 				tank_nsb_fire_upgrade = 5
 			}
+			icon = "gfx/interface/technologies/JAP/LAND/SPA2_alt1.dds"
 			obsolete = yes
 		}
 		create_equipment_variant = {
@@ -444,6 +514,7 @@ capital = 615
 				tank_nsb_armor_upgrade = 0
 			}
 			icon = "gfx/interface/technologies/JAP/LAND/REC3.dds"
+			design_team = mio:JAP_komatsu_tank_manufacturer
 		}
 		create_equipment_variant = {
 			name = "Type 87 SPAAG"
@@ -466,6 +537,7 @@ capital = 615
 				tank_nsb_fire_upgrade = 2
 			}
 			icon = "gfx/interface/technologies/JAP/LAND/SPA1.dds"
+			design_team = mio:JAP_mitsubishi_heavy_industries_tank_manufacturer
 		}
 		create_equipment_variant = {
 			name = "AH-1S Cobra"
@@ -487,6 +559,29 @@ capital = 615
 				helicopter_nsb_upgrade = 3
 			}
 			icon = "gfx/interface/technologies/JAP/AIR/AH2.dds"
+			model = "USA_attack_helo_bat_entity"
+		}
+		create_equipment_variant = {
+			name = "OH-1 Ninja"
+			type = heavy_tank_chassis_1
+			parent_version = 3
+			modules = {
+				chassis_type_slot = helicopter_medium_chassis
+				helicopter_body_layout = gunship_layout
+				top_mount_type_slot = mast_mounted_radar
+				helicopter_body_mount_1 = helicopter_rocket_pod_gen2
+				nose_gun_type_slot = empty
+				armor_type_slot = helicopter_armor_gen2
+				engine_type_slot = helicopter_turbine_engine_gen2
+				defence_type_slot = flare_launchers
+				sensor_and_avionics_slot = sensors_and_avionics_gen_3
+				helicopter_body_mount_2 = helicopter_multiple_atgm_gen2
+				defence_type_slot_2 = em_lock_detection_system_gen2
+			}
+			upgrades = {
+				helicopter_nsb_upgrade = 4
+			}
+			icon = "gfx/interface/technologies/JAP/AIR/AH3.dds"
 			model = "USA_attack_helo_bat_entity"
 		}
 		complete_special_project = sp:sp_armoured_vehicle_project
@@ -557,11 +652,13 @@ capital = 615
 				countermeasures_1 = 1
 				countermeasures_2 = 1
 				ag_weapons_1 = 1
+				ag_weapons_2 = 1
 				naval_weapons_1 = 1
 				naval_weapons_2 = 1
 				special_mad_1 = 1
 				special_mad_2 = 1
 				tgp_recon_1 = 1
+				tgp_recon_2 = 1
 			}
 			##BBA Designs##
 		create_equipment_variant = { #Med Fighter
@@ -579,6 +676,7 @@ capital = 615
 			obsolete = yes
 			icon = "gfx/interface/technologies/JAP/AIR/STR1.dds"
 			model = "JAP_small_plane_airframe_1_entity"
+			design_team = mio:JAP_mitsubishi_aerospace_aircraft_manufacturer
 		}
 		create_equipment_variant = {
 			name = "T-2"
@@ -593,7 +691,8 @@ capital = 615
 				special_slot_type_1 = spec_countermeasures_1
 			}
 			obsolete = yes
-						icon = "gfx/interface/technologies/JAP/AIR/STR1.dds"
+			icon = "gfx/interface/technologies/JAP/AIR/T2.dds"
+			design_team = mio:JAP_mitsubishi_aerospace_aircraft_manufacturer
 		}
 		create_equipment_variant = { #Large Transport
 			name = "YS-11M"
@@ -610,6 +709,8 @@ capital = 615
 				fixed_auxiliary_weapon_slot_1 = empty
 				fixed_auxiliary_weapon_slot_2 = empty
 			}
+			obsolete = yes
+			icon = "gfx/interface/technologies/JAP/AIR/C1_alt2.dds"
 		}
 		create_equipment_variant = {
 				name = "Mitsubishi MU-2"
@@ -625,6 +726,9 @@ capital = 615
 					special_slot_type_2 = empty
 					fixed_auxiliary_weapon_slot_1 = empty
 				}
+				obsolete = yes
+				icon = "gfx/interface/technologies/JAP/AIR/C1_alt.dds"
+				design_team = mio:JAP_mitsubishi_aerospace_aircraft_manufacturer
 			}
 		# STUB
 		create_equipment_variant = { #Large Transport
@@ -643,6 +747,9 @@ capital = 615
 				fixed_auxiliary_weapon_slot_1 = empty
 				fixed_auxiliary_weapon_slot_2 = empty
 			}
+			obsolete = yes
+			icon = "gfx/interface/technologies/JAP/AIR/C2.dds"
+			design_team = mio:JAP_kawasaki_aerospace_company_aircraft_manufacturer
 		}
 		create_equipment_variant = { #Med Fighter BRUH BRUH BRUH
 			name = "F-4EJ Phantom"
@@ -664,6 +771,7 @@ capital = 615
 			obsolete = yes
 			icon = "gfx/interface/technologies/JAP/AIR/MR2.dds"
 			model = "JAP_medium_plane_airframe_1_entity"
+			design_team = mio:JAP_mitsubishi_aerospace_aircraft_manufacturer
 		}
 		create_equipment_variant = { #Med Fighter BRUH BRUH BRUH
 			name = "F-4EJ Kai Phantom"
@@ -684,6 +792,7 @@ capital = 615
 			}
 			icon = "gfx/interface/technologies/JAP/AIR/MR2.dds"
 			model = "JAP_medium_plane_airframe_1_entity"
+			design_team = mio:JAP_mitsubishi_aerospace_aircraft_manufacturer
 		}
 		create_equipment_variant = { #Med Fighter
 			name = "F-15J Eagle"
@@ -707,6 +816,7 @@ capital = 615
 			obsolete = yes
 			icon = "gfx/interface/technologies/JAP/AIR/AS2.dds"
 			model = "JAP_medium_plane_airframe_2_entity"
+			design_team = mio:JAP_mitsubishi_aerospace_aircraft_manufacturer
 		}
 		create_equipment_variant = { #Med Fighter
 			name = "F-15J-MSIP Eagle"
@@ -729,6 +839,7 @@ capital = 615
 			}
 			icon = "gfx/interface/technologies/JAP/AIR/AS2.dds"
 			model = "JAP_medium_plane_airframe_2_entity"
+			design_team = mio:JAP_mitsubishi_aerospace_aircraft_manufacturer
 		}
 		create_equipment_variant = { #Light Fighter
 			name = "F-2 Viper Zero"
@@ -751,6 +862,7 @@ capital = 615
 			}
 			icon = "gfx/interface/technologies/JAP/AIR/MR3.dds"
 			model = "JAP_small_plane_airframe_2_entity"
+			design_team = mio:JAP_mitsubishi_aerospace_aircraft_manufacturer
 		}
 		create_equipment_variant = { #ASW/ASuW Large
 			name = "P-3C Orion"
@@ -770,7 +882,25 @@ capital = 615
 			}
 			icon = "gfx/interface/technologies/JAP/AIR/P3.dds"
 			model = "JAP_large_plane_maritime_patrol_airframe_1_entity"
+			design_team = mio:JAP_kawasaki_aerospace_company_aircraft_manufacturer
 		}
+		#create_equipment_variant = {
+		#		name = "E-767"
+		#		type = large_plane_awacs_airframe_2
+		#		parent_version = 0
+		#		modules = {
+		#			fixed_main_weapon_slot = weap_buff_awacs_2
+		#			fixed_gun_slot = empty
+		#			engine_type_slot = engine_jet_quad_2
+		#			avionics_type_slot = avionics_manned_2
+		#			wingform_type_slot = wing_swept
+		#			special_slot_type_1 = spec_countermeasures_2
+		##			special_slot_type_2 = spec_redundant_2
+		#			fixed_auxiliary_weapon_slot_1 = empty
+		#		}
+		#		icon = "gfx/interface/technologies/JAP/AIR/E-767.dds"
+		#		model = "USA_large_plane_awacs_airframe_2_entity"
+		#	}
 		else = {
 			set_air_oob = "JAP_2000_nonbba"
 			set_technology = {
@@ -831,9 +961,8 @@ capital = 615
 		idea_JAP_emperor_akihito
 		JAP_depopulation_1
 		JAP_entrenched_demand_shortfall_idea_1
-		JAP_banks_non_performing_loans_idea
-		JAP_corporate_excess_debt_idea
-		JAP_declining_economic_competitiveness_idea
+		JAP_banks_non_performing_loans_idea_1
+		JAP_corporate_excess_debt_idea_1
 		JAP_long_working_idea
 		JAP_ice_age_generation_idea
 		#other
@@ -881,7 +1010,7 @@ capital = 615
 	add_to_array = { influence_array_val = 32 }
 	add_to_array = { influence_array = KOR.id }
 	add_to_array = { influence_array_val = 22 }
-	startup_influence = yes
+	sort_influence = yes
 
 	set_variable = { maritime_industry_opinion = 60 }
 	set_variable = { industrial_conglomerates_opinion = 60 }
@@ -934,7 +1063,6 @@ capital = 615
 	add_to_array = { JAP.investment_targets = RAJ }
 	add_to_array = { JAP.investment_targets = MLD }
 
-	set_country_flag = investment_targets_are_set_up
 
 	add_opinion_modifier = { target = EGY modifier = diplomatic_support }
 	reverse_add_opinion_modifier = { target = EGY modifier = diplomatic_support }
@@ -1051,14 +1179,14 @@ capital = 615
 		gprs = 1
 		fuel_silos = 1
 
-		industrial_electrospun_polymeric_nanofibers = 1
-		multiwalled_carbon_nanotubes = 1
-		modern_electrospinning = 1
-		stereolitography = 1
-		early_3D_printers = 1
-		t3D_wax_printer = 1
-		DNA_fingerprinting = 1
-		modern_gmo = 1
+		nanofibers_1 = 1
+		nanofibers_2 = 1
+		nanofibers_3 = 1
+		printing_1 = 1
+		printing_2 = 1
+		printing_3 = 1
+		genetics_1 = 1
+		genetics_2 = 1
 		fuel_refining = 1
 		fuel_refining2 = 1
 		energy_efficiency = 1
@@ -1154,6 +1282,7 @@ capital = 615
 			tech_naval_systems_engineering = 1
 			tech_power_systems_1 = 1
 			tech_power_systems_2 = 1
+			tech_diesel_power_systems_1 = 1
 
 			tech_combat_support_systems = 1
 			tech_fire_control_1 = 1
@@ -1179,13 +1308,16 @@ capital = 615
 			tech_turret_missiles_surface_2 = 1
 			tech_turret_missiles_aa_1 = 1
 			tech_turret_missiles_aa_2 = 1
+			tech_turret_missiles_aa_3 = 1
 			tech_vls_surface_1 = 1
 			tech_vls_surface_2 = 1
+			tech_vls_surface_3 = 1
 			tech_vls_aa_1 = 1
 			tech_vls_aa_2 = 1
 
 			tech_torpedoes_1 = 1
 			tech_torpedoes_2 = 1
+			tech_torpedoes_3 = 1
 
 			tech_landing_craft_1 = 1
 		}
@@ -1515,7 +1647,7 @@ capital = 615
 		create_equipment_variant = {
 			name = "Uraga Class"
 			type = corvette_hull_2
-			name_group = JAP_CORV_MODERN
+			name_group = JAP_MINE_MODERN
 			parent_version = 0
 			modules = {
 				fixed_ship_engine_slot = module_light_surface_diesel_power_1
@@ -1526,7 +1658,22 @@ capital = 615
 				front_1_custom_slot = module_chain_gun
 				rear_1_custom_slot = module_light_helipad_1
 			}
+			#Need GFX
 		}
+		#Sugashima - Mine Countermeasures
+		#create_equipment_variant = {
+		#	name = "Sugashima Class"
+		#	type = corvette_hull_2
+		#	name_group = JAP_MINE_MODERN
+		#	parent_version = 0
+		#	modules = {
+		#		fixed_ship_engine_slot = module_light_surface_diesel_power_1
+		#		fixed_ship_fire_control_system_slot = module_digital_integrated_fire_control
+		#		fixed_ship_radar_slot = module_radar_3
+		#		fixed_ship_auxillary_slot = module_mineclearing
+		#		fixed_ship_battery_slot = module_chain_gun
+		#	}
+		#}
 
 	#Carriers
 
@@ -1707,6 +1854,7 @@ capital = 615
 	recruit_character = JAP_yusuke_tahara
 
 	set_variable = { overall_productivity = 985 }
+	set_variable = { var_reactor_material_stockpile = 35000 }
 	add_to_variable = { JAP_war_support_factor_monarchist = 0.05 }
 	add_to_variable = { JAP_monthly_population_monarchist = 0.05 }
 	add_to_variable = { JAP_foreign_influence_defense_modifier_monarchist = 0.05 }
@@ -1719,8 +1867,10 @@ capital = 615
 			name = "Cabinet Intelligence and Research Office (CIRO)"
 			icon = GFX_intelligence_agency_logo_generic_1
 		}
+		set_country_flag = MD_skip_treasury_cost
 		upgrade_intelligence_agency = upgrade_form_department
 		upgrade_intelligence_agency = upgrade_establish_cyber_operations_division
+		clr_country_flag = MD_skip_treasury_cost
 	}
 
 

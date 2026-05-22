@@ -26,11 +26,29 @@ country_event = {
 			value = v
 
 			var:v = {
-				meta_effect = {
-					text = {
-						country_event = UNSC.[ID]
+				if = {
+					limit = {
+						NOT = { has_country_flag = auto_accept_all_sc_votes }
+						NOT = { has_country_flag = auto_reject_all_sc_votes }
+						NOT = { has_country_flag = auto_abstain_all_sc_votes }
 					}
-					ID = "[?global.current_sc_vote_type]"
+					meta_effect = {
+						text = {
+							country_event = UNSC.[ID]
+						}
+						ID = "[?global.current_sc_vote_type]"
+					}
+				} else = {
+					if = {
+						limit = { has_country_flag = auto_accept_all_sc_votes }
+						add_to_array = { global.security_council_vote_yes = THIS }
+					} else_if = {
+						limit = { has_country_flag = auto_reject_all_sc_votes }
+						add_to_array = { global.security_council_vote_no = THIS }
+					} else_if = {
+						limit = { has_country_flag = auto_abstain_all_sc_votes }
+						add_to_array = { global.security_council_vote_abstain = THIS }
+					}
 				}
 				if = {
 					limit = {
@@ -59,7 +77,7 @@ country_event = {
 		add_to_array = { global.security_council_vote_abstain = THIS }
 		log = "[GetDateText]: [THIS.GetName] has abstained from voting"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 		ai_chance = {
 			base = 0
 			modifier = {
@@ -77,6 +95,11 @@ country_event = {
 				add = 1000
 				has_war_with = FROM
 			}
+
+			modifier = {
+				add = -10000
+				has_war_with = ALN
+			}
 		}
 	}
 	#Yes
@@ -85,7 +108,7 @@ country_event = {
 		log = "[GetDateText]: [THIS.GetName] has voted yes"
 		add_to_array = { global.security_council_vote_yes = THIS }
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
@@ -108,6 +131,11 @@ country_event = {
 				add = 50
 				is_in_array = { potential_and_current_enemies = FROM }
 			}
+
+			modifier = {
+				add = -10000
+				has_war_with = ALN
+			}
 		}
 	}
 	#No
@@ -122,28 +150,28 @@ country_event = {
 			set_global_flag = security_council_veto
 		}
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
-
+			modifier = {
+				add = 1000
+				tag = FROM
+			}
 			modifier = {
 				add = 10
 				is_ally_with = FROM
 			}
-
 			modifier = {
 				add = 10
 				is_in_faction_with = FROM
 			}
-
 			modifier = {
 				add = 10
 				FROM = {
 					has_same_ideology = yes
 				}
 			}
-
 			modifier = {
 				add = 20
 				has_opinion = {
@@ -151,30 +179,30 @@ country_event = {
 					value > 5
 				}
 			}
-
 			modifier = {
 				add = 20
 				has_war = yes
 			}
-
 			modifier = {
 				add = 200
 				is_puppet_of = FROM
 			}
-
 			modifier = {
 				add = 20
 				is_guaranteed_by = FROM
 			}
-
 			modifier = {
 				add = 10
 				has_non_aggression_pact_with = FROM
 			}
-
 			modifier = {
 				add = 10
 				has_guaranteed = FROM
+			}
+
+			modifier = {
+				add = 10000
+				has_war_with = ALN
 			}
 		}
 	}
@@ -195,7 +223,7 @@ country_event = {
 		add_to_array = { global.security_council_vote_abstain = THIS }
 		log = "[GetDateText]: [THIS.GetName] has abstained from voting"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 		ai_chance = {
 			base = 0
 			modifier = {
@@ -221,7 +249,7 @@ country_event = {
 		log = "[GetDateText]: [THIS.GetName] has voted yes"
 		add_to_array = { global.security_council_vote_yes = THIS }
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
@@ -258,28 +286,28 @@ country_event = {
 			set_global_flag = security_council_veto
 		}
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
-
+			modifier = {
+				add = 1000
+				tag = FROM
+			}
 			modifier = {
 				add = 10
 				is_ally_with = FROM
 			}
-
 			modifier = {
 				add = 10
 				is_in_faction_with = FROM
 			}
-
 			modifier = {
 				add = 10
 				FROM = {
 					has_same_ideology = yes
 				}
 			}
-
 			modifier = {
 				add = 20
 				has_opinion = {
@@ -287,27 +315,22 @@ country_event = {
 					value > 20
 				}
 			}
-
 			modifier = {
 				add = 20
 				has_war = yes
 			}
-
 			modifier = {
 				add = 200
 				is_puppet_of = FROM
 			}
-
 			modifier = {
 				add = 20
 				is_guaranteed_by = FROM
 			}
-
 			modifier = {
 				add = 10
 				has_non_aggression_pact_with = FROM
 			}
-
 			modifier = {
 				add = 10
 				has_guaranteed = FROM
@@ -331,7 +354,7 @@ country_event = {
 		add_to_array = { global.security_council_vote_abstain = THIS }
 		log = "[GetDateText]: [THIS.GetName] has abstained from voting"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 		ai_chance = {
 			base = 0
 			modifier = {
@@ -357,7 +380,7 @@ country_event = {
 		log = "[GetDateText]: [THIS.GetName] has voted yes"
 		add_to_array = { global.security_council_vote_yes = THIS }
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
@@ -394,28 +417,28 @@ country_event = {
 			set_global_flag = security_council_veto
 		}
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
-
+			modifier = {
+				add = 1000
+				tag = FROM
+			}
 			modifier = {
 				add = 10
 				is_ally_with = FROM
 			}
-
 			modifier = {
 				add = 10
 				is_in_faction_with = FROM
 			}
-
 			modifier = {
 				add = 10
 				FROM = {
 					has_same_ideology = yes
 				}
 			}
-
 			modifier = {
 				add = 20
 				has_opinion = {
@@ -423,27 +446,22 @@ country_event = {
 					value > 20
 				}
 			}
-
 			modifier = {
 				add = 20
 				has_war = yes
 			}
-
 			modifier = {
 				add = 200
 				is_puppet_of = FROM
 			}
-
 			modifier = {
 				add = 20
 				is_guaranteed_by = FROM
 			}
-
 			modifier = {
 				add = 10
 				has_non_aggression_pact_with = FROM
 			}
-
 			modifier = {
 				add = 10
 				has_guaranteed = FROM
@@ -467,7 +485,7 @@ country_event = {
 		add_to_array = { global.security_council_vote_abstain = THIS }
 		log = "[GetDateText]: [THIS.GetName] has abstained from voting"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 		ai_chance = {
 			base = 0
 			modifier = {
@@ -493,7 +511,7 @@ country_event = {
 		log = "[GetDateText]: [THIS.GetName] has voted yes"
 		add_to_array = { global.security_council_vote_yes = THIS }
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
@@ -530,28 +548,28 @@ country_event = {
 			set_global_flag = security_council_veto
 		}
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
-
+			modifier = {
+				add = 1000
+				tag = FROM
+			}
 			modifier = {
 				add = 10
 				is_ally_with = FROM
 			}
-
 			modifier = {
 				add = 10
 				is_in_faction_with = FROM
 			}
-
 			modifier = {
 				add = 10
 				FROM = {
 					has_same_ideology = yes
 				}
 			}
-
 			modifier = {
 				add = 20
 				has_opinion = {
@@ -559,27 +577,22 @@ country_event = {
 					value > 20
 				}
 			}
-
 			modifier = {
 				add = 20
 				has_war = yes
 			}
-
 			modifier = {
 				add = 200
 				is_puppet_of = FROM
 			}
-
 			modifier = {
 				add = 20
 				is_guaranteed_by = FROM
 			}
-
 			modifier = {
 				add = 10
 				has_non_aggression_pact_with = FROM
 			}
-
 			modifier = {
 				add = 10
 				has_guaranteed = FROM
@@ -639,10 +652,9 @@ country_event = {
 			var:v = {
 				if = {
 					limit = {
-						NOT = {
-							has_country_flag = auto_accept_all_ga_votes
-							has_country_flag = auto_reject_all_ga_votes
-						}
+						NOT = { has_country_flag = auto_accept_all_ga_votes }
+						NOT = { has_country_flag = auto_reject_all_ga_votes }
+						NOT = { has_country_flag = auto_abstain_all_ga_votes }
 					}
 					meta_effect = {
 						text = {
@@ -652,15 +664,14 @@ country_event = {
 					}
 				} else = {
 					if = {
-						limit = {
-							has_country_flag = auto_accept_all_ga_votes
-						}
+						limit = { has_country_flag = auto_accept_all_ga_votes }
 						add_to_array = { global.general_assembly_vote_yes = THIS }
 					} else_if = {
-						limit = {
-							has_country_flag = auto_reject_all_ga_votes
-						}
+						limit = { has_country_flag = auto_reject_all_ga_votes }
 						add_to_array = { global.general_assembly_vote_no = THIS }
+					} else_if = {
+						limit = { has_country_flag = auto_abstain_all_ga_votes }
+						add_to_array = { global.general_assembly_vote_abstain = THIS }
 					}
 				}
 				if = {
@@ -692,7 +703,7 @@ country_event = {
 		add_to_array = { global.general_assembly_vote_abstain = THIS }
 		log = "[GetDateText]: [THIS.GetName] has abstained from voting"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 		ai_chance = {
 			base = 0
 			modifier = {
@@ -707,7 +718,7 @@ country_event = {
 		log = "[GetDateText]: [THIS.GetName] has voted yes"
 		add_to_array = { global.general_assembly_vote_yes = THIS }
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 1
@@ -750,7 +761,7 @@ country_event = {
 		add_to_array = { global.general_assembly_vote_no = THIS } #testing, vote no after test
 		log = "[GetDateText]: [THIS.GetName] has voted no"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
@@ -828,7 +839,7 @@ country_event = {
 		add_to_array = { global.general_assembly_vote_abstain = THIS }
 		log = "[GetDateText]: [THIS.GetName] has abstained from voting"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 		ai_chance = {
 			base = 0
 		}
@@ -839,7 +850,7 @@ country_event = {
 		log = "[GetDateText]: [THIS.GetName] has voted yes"
 		add_to_array = { global.general_assembly_vote_yes = THIS }
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
@@ -876,7 +887,7 @@ country_event = {
 		add_to_array = { global.general_assembly_vote_no = THIS } #testing, vote no after test
 		log = "[GetDateText]: [THIS.GetName] has voted no"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
@@ -920,7 +931,7 @@ country_event = {
 		add_to_array = { global.general_assembly_vote_abstain = THIS }
 		log = "[GetDateText]: [THIS.GetName] has abstained from voting"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 		ai_chance = {
 			base = 0
 		}
@@ -931,7 +942,7 @@ country_event = {
 		log = "[GetDateText]: [THIS.GetName] has voted yes"
 		add_to_array = { global.general_assembly_vote_yes = THIS }
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
@@ -968,7 +979,7 @@ country_event = {
 		add_to_array = { global.general_assembly_vote_no = THIS } #testing, vote no after test
 		log = "[GetDateText]: [THIS.GetName] has voted no"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
@@ -1012,7 +1023,7 @@ country_event = {
 		add_to_array = { global.general_assembly_vote_abstain = THIS }
 		log = "[GetDateText]: [THIS.GetName] has abstained from voting"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 		ai_chance = {
 			base = 0
 		}
@@ -1023,7 +1034,7 @@ country_event = {
 		log = "[GetDateText]: [THIS.GetName] has voted yes"
 		add_to_array = { global.general_assembly_vote_yes = THIS }
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
@@ -1060,7 +1071,7 @@ country_event = {
 		add_to_array = { global.general_assembly_vote_no = THIS } #testing, vote no after test
 		log = "[GetDateText]: [THIS.GetName] has voted no"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
@@ -1109,7 +1120,7 @@ country_event = {
 		add_to_array = { global.general_assembly_vote_abstain = THIS }
 		log = "[GetDateText]: [THIS.GetName] has abstained from voting"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 		ai_chance = {
 			base = 0
 		}
@@ -1120,7 +1131,7 @@ country_event = {
 		log = "[GetDateText]: [THIS.GetName] has voted yes"
 		add_to_array = { global.general_assembly_vote_yes = THIS }
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
@@ -1155,7 +1166,7 @@ country_event = {
 		add_to_array = { global.general_assembly_vote_no = THIS }
 		log = "[GetDateText]: [THIS.GetName] has voted no"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
@@ -1198,7 +1209,7 @@ country_event = {
 		add_to_array = { global.general_assembly_vote_abstain = THIS }
 		log = "[GetDateText]: [THIS.GetName] has abstained from voting"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 		ai_chance = {
 			base = 0
 		}
@@ -1209,7 +1220,7 @@ country_event = {
 		log = "[GetDateText]: [THIS.GetName] has voted yes"
 		add_to_array = { global.general_assembly_vote_yes = THIS }
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
@@ -1244,7 +1255,7 @@ country_event = {
 		add_to_array = { global.general_assembly_vote_no = THIS }
 		log = "[GetDateText]: [THIS.GetName] has voted no"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
@@ -1287,7 +1298,7 @@ country_event = {
 		add_to_array = { global.general_assembly_vote_abstain = THIS }
 		log = "[GetDateText]: [THIS.GetName] has abstained from voting"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 		ai_chance = {
 			base = 0
 		}
@@ -1298,7 +1309,7 @@ country_event = {
 		log = "[GetDateText]: [THIS.GetName] has voted yes"
 		add_to_array = { global.general_assembly_vote_yes = THIS }
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
@@ -1333,7 +1344,7 @@ country_event = {
 		add_to_array = { global.general_assembly_vote_no = THIS }
 		log = "[GetDateText]: [THIS.GetName] has voted no"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
@@ -1376,7 +1387,7 @@ country_event = {
 		add_to_array = { global.general_assembly_vote_abstain = THIS }
 		log = "[GetDateText]: [THIS.GetName] has abstained from voting"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 		ai_chance = {
 			base = 0
 		}
@@ -1387,7 +1398,7 @@ country_event = {
 		log = "[GetDateText]: [THIS.GetName] has voted yes"
 		add_to_array = { global.general_assembly_vote_yes = THIS }
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
@@ -1422,7 +1433,7 @@ country_event = {
 		add_to_array = { global.general_assembly_vote_no = THIS }
 		log = "[GetDateText]: [THIS.GetName] has voted no"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
@@ -1465,7 +1476,7 @@ country_event = {
 		add_to_array = { global.general_assembly_vote_abstain = THIS }
 		log = "[GetDateText]: [THIS.GetName] has abstained from voting"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 		ai_chance = {
 			base = 0
 		}
@@ -1476,7 +1487,7 @@ country_event = {
 		log = "[GetDateText]: [THIS.GetName] has voted yes"
 		add_to_array = { global.general_assembly_vote_yes = THIS }
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
@@ -1511,7 +1522,7 @@ country_event = {
 		add_to_array = { global.general_assembly_vote_no = THIS }
 		log = "[GetDateText]: [THIS.GetName] has voted no"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
@@ -1558,7 +1569,7 @@ country_event = {
 		add_to_array = { global.general_assembly_vote_abstain = THIS }
 		log = "[GetDateText]: [THIS.GetName] has abstained from voting"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 		ai_chance = {
 			base = 0
 		}
@@ -1569,7 +1580,7 @@ country_event = {
 		log = "[GetDateText]: [THIS.GetName] has voted yes"
 		add_to_array = { global.general_assembly_vote_yes = THIS }
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
@@ -1604,7 +1615,7 @@ country_event = {
 		add_to_array = { global.general_assembly_vote_no = THIS }
 		log = "[GetDateText]: [THIS.GetName] has voted no"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
@@ -1647,7 +1658,7 @@ country_event = {
 		add_to_array = { global.general_assembly_vote_abstain = THIS }
 		log = "[GetDateText]: [THIS.GetName] has abstained from voting"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 		ai_chance = {
 			base = 0
 		}
@@ -1658,7 +1669,7 @@ country_event = {
 		log = "[GetDateText]: [THIS.GetName] has voted yes"
 		add_to_array = { global.general_assembly_vote_yes = THIS }
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
@@ -1693,7 +1704,7 @@ country_event = {
 		add_to_array = { global.general_assembly_vote_no = THIS }
 		log = "[GetDateText]: [THIS.GetName] has voted no"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
@@ -1740,7 +1751,7 @@ country_event = {
 		add_to_array = { global.general_assembly_vote_abstain = THIS }
 		log = "[GetDateText]: [THIS.GetName] has abstained from voting"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 		ai_chance = {
 			base = 0
 		}
@@ -1751,7 +1762,7 @@ country_event = {
 		log = "[GetDateText]: [THIS.GetName] has voted yes"
 		add_to_array = { global.general_assembly_vote_yes = THIS }
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
@@ -1786,7 +1797,7 @@ country_event = {
 		add_to_array = { global.general_assembly_vote_no = THIS }
 		log = "[GetDateText]: [THIS.GetName] has voted no"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
@@ -1833,7 +1844,7 @@ country_event = {
 		add_to_array = { global.general_assembly_vote_abstain = THIS }
 		log = "[GetDateText]: [THIS.GetName] has abstained from voting"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 		ai_chance = {
 			base = 0
 		}
@@ -1844,7 +1855,7 @@ country_event = {
 		log = "[GetDateText]: [THIS.GetName] has voted yes"
 		add_to_array = { global.general_assembly_vote_yes = THIS }
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
@@ -1879,7 +1890,7 @@ country_event = {
 		add_to_array = { global.general_assembly_vote_no = THIS }
 		log = "[GetDateText]: [THIS.GetName] has voted no"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
@@ -1930,7 +1941,7 @@ country_event = {
 		add_to_array = { global.general_assembly_vote_abstain = THIS }
 		log = "[GetDateText]: [THIS.GetName] has abstained from voting"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 		ai_chance = {
 			base = 0
 		}
@@ -1941,7 +1952,7 @@ country_event = {
 		log = "[GetDateText]: [THIS.GetName] has voted yes"
 		add_to_array = { global.general_assembly_vote_yes = THIS }
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
@@ -1976,7 +1987,7 @@ country_event = {
 		add_to_array = { global.general_assembly_vote_no = THIS }
 		log = "[GetDateText]: [THIS.GetName] has voted no"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
@@ -2023,7 +2034,7 @@ country_event = {
 		add_to_array = { global.general_assembly_vote_abstain = THIS }
 		log = "[GetDateText]: [THIS.GetName] has abstained from voting"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 		ai_chance = {
 			base = 0
 		}
@@ -2034,7 +2045,7 @@ country_event = {
 		log = "[GetDateText]: [THIS.GetName] has voted yes"
 		add_to_array = { global.general_assembly_vote_yes = THIS }
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
@@ -2069,7 +2080,7 @@ country_event = {
 		add_to_array = { global.general_assembly_vote_no = THIS }
 		log = "[GetDateText]: [THIS.GetName] has voted no"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
@@ -2112,7 +2123,7 @@ country_event = {
 		add_to_array = { global.general_assembly_vote_abstain = THIS }
 		log = "[GetDateText]: [THIS.GetName] has abstained from voting"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 		ai_chance = {
 			base = 0
 		}
@@ -2123,7 +2134,7 @@ country_event = {
 		log = "[GetDateText]: [THIS.GetName] has voted yes"
 		add_to_array = { global.general_assembly_vote_yes = THIS }
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
@@ -2162,7 +2173,7 @@ country_event = {
 		add_to_array = { global.general_assembly_vote_no = THIS }
 		log = "[GetDateText]: [THIS.GetName] has voted no"
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		ai_chance = {
 			base = 0
@@ -2968,6 +2979,7 @@ country_event = {
 
 	option = {
 		name = UNSC.200.a
+		log = "[GetDateText]: [This.GetName]: UNSC.200.a"
 		var:sway_target = {
 			country_event = UNSC.201
 			set_variable = { current_sway_direction = ROOT.current_vote_sway }
@@ -2981,6 +2993,7 @@ country_event = {
 	}
 	option = {
 		name = UNSC.200.b
+		log = "[GetDateText]: [This.GetName]: UNSC.200.b"
 		var:sway_target = {
 			country_event = UNSC.202
 			set_variable = { current_sway_direction = ROOT.current_vote_sway }
@@ -2994,6 +3007,7 @@ country_event = {
 	}
 	option = {
 		name = UNSC.200.c
+		log = "[GetDateText]: [This.GetName]: UNSC.200.c"
 		var:sway_target = {
 			country_event = UNSC.203
 			set_variable = { current_sway_direction = ROOT.current_vote_sway }
@@ -3007,6 +3021,7 @@ country_event = {
 	}
 	option = {
 		name = UNSC.200.e
+		log = "[GetDateText]: [This.GetName]: UNSC.200.e"
 
 		trigger = {
 			NOT = { has_idea = un_vote_sway_cost }
@@ -3045,6 +3060,7 @@ country_event = {
 
 	option = {
 		name = UNSC.201.b
+		log = "[GetDateText]: [This.GetName]: UNSC.201.b"
 
 		clear_variable = current_sway_direction
 
@@ -3099,6 +3115,7 @@ country_event = {
 
 	option = {
 		name = UNSC.201.a
+		log = "[GetDateText]: [This.GetName]: UNSC.201.a"
 
 		set_country_flag = has_had_current_un_sc_vote_swayed
 
@@ -3145,7 +3162,6 @@ country_event = {
 
 				set_temp_variable = { percent_change = 1 }
 				set_temp_variable = { tag_index = PREV.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 				add_to_variable = { signed_trade_agreements = 1 }
 			}
@@ -3171,7 +3187,6 @@ country_event = {
 
 				set_temp_variable = { percent_change = 1 }
 				set_temp_variable = { tag_index = PREV.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 
 				# Permanent Investment Targets
@@ -3199,7 +3214,7 @@ country_event = {
 
 		clear_variable = current_sway_direction
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		#Apply the agreed upon deal here
 		ai_chance = {
@@ -3246,6 +3261,7 @@ country_event = {
 
 	option = {
 		name = UNSC.202.b
+		log = "[GetDateText]: [This.GetName]: UNSC.202.b"
 
 		clear_variable = current_sway_direction
 
@@ -3292,6 +3308,7 @@ country_event = {
 
 	option = {
 		name = UNSC.202.a
+		log = "[GetDateText]: [This.GetName]: UNSC.202.a"
 
 		set_country_flag = has_had_current_un_sc_vote_swayed
 
@@ -3328,7 +3345,7 @@ country_event = {
 
 		clear_variable = current_sway_direction
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		#Apply the agreed upon deal here
 		ai_chance = {
@@ -3367,6 +3384,7 @@ country_event = {
 
 	option = {
 		name = UNSC.203.b
+		log = "[GetDateText]: [This.GetName]: UNSC.203.b"
 
 		clear_variable = current_sway_direction
 
@@ -3429,6 +3447,7 @@ country_event = {
 
 	option = {
 		name = UNSC.203.a
+		log = "[GetDateText]: [This.GetName]: UNSC.203.a"
 
 		set_country_flag = has_had_current_un_sc_vote_swayed
 
@@ -3454,7 +3473,7 @@ country_event = {
 
 		clear_variable = current_sway_direction
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		if = {
 			limit = {
@@ -3530,6 +3549,7 @@ country_event = {
 
 	option = {
 		name = UNSC.204.b
+		log = "[GetDateText]: [This.GetName]: UNSC.204.b"
 
 		clear_variable = current_sway_direction
 
@@ -3576,6 +3596,7 @@ country_event = {
 
 	option = {
 		name = UNSC.204.a
+		log = "[GetDateText]: [This.GetName]: UNSC.204.a"
 
 		set_country_flag = has_had_current_un_sc_vote_swayed
 
@@ -3623,7 +3644,7 @@ country_event = {
 			}
 		}
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		#Apply the agreed upon deal here
 		ai_chance = {
@@ -3662,6 +3683,7 @@ country_event = {
 
 	option = {
 		name = UN.200.a
+		log = "[GetDateText]: [This.GetName]: UN.200.a"
 		var:sway_target = {
 			country_event = UN.201
 			set_variable = { current_sway_direction = ROOT.current_vote_sway }
@@ -3675,6 +3697,7 @@ country_event = {
 	}
 	option = {
 		name = UN.200.b
+		log = "[GetDateText]: [This.GetName]: UN.200.b"
 		var:sway_target = {
 			country_event = UN.202
 			set_variable = { current_sway_direction = ROOT.current_vote_sway }
@@ -3688,6 +3711,7 @@ country_event = {
 	}
 	option = {
 		name = UN.200.c
+		log = "[GetDateText]: [This.GetName]: UN.200.c"
 		var:sway_target = {
 			country_event = UN.203
 			set_variable = { current_sway_direction = ROOT.current_vote_sway }
@@ -3701,6 +3725,7 @@ country_event = {
 	}
 	option = {
 		name = UN.200.e
+		log = "[GetDateText]: [This.GetName]: UN.200.e"
 
 		trigger = {
 			NOT = { has_idea = un_vote_sway_cost }
@@ -3739,6 +3764,7 @@ country_event = {
 
 	option = {
 		name = UN.201.b
+		log = "[GetDateText]: [This.GetName]: UN.201.b"
 
 		clear_variable = current_sway_direction
 
@@ -3793,8 +3819,7 @@ country_event = {
 
 	option = {
 		name = UN.201.a
-
-		set_country_flag = has_had_current_un_ga_vote_swayed
+		log = "[GetDateText]: [This.GetName]: UN.201.a"
 
 		un_sway_direction_effect = yes
 
@@ -3821,7 +3846,6 @@ country_event = {
 
 				set_temp_variable = { percent_change = 1 }
 				set_temp_variable = { tag_index = PREV.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 				add_to_variable = { signed_trade_agreements = 1 }
 			}
@@ -3847,7 +3871,6 @@ country_event = {
 
 				set_temp_variable = { percent_change = 1 }
 				set_temp_variable = { tag_index = PREV.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 
 				# Permanent Investment Targets
@@ -3875,7 +3898,7 @@ country_event = {
 
 		clear_variable = current_sway_direction
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		#Apply the agreed upon deal here
 		ai_chance = {
@@ -3922,6 +3945,7 @@ country_event = {
 
 	option = {
 		name = UN.202.b
+		log = "[GetDateText]: [This.GetName]: UN.202.b"
 
 		clear_variable = current_sway_direction
 
@@ -3968,8 +3992,7 @@ country_event = {
 
 	option = {
 		name = UN.202.a
-
-		set_country_flag = has_had_current_un_ga_vote_swayed
+		log = "[GetDateText]: [This.GetName]: UN.202.a"
 
 		un_sway_direction_effect = yes
 
@@ -3986,7 +4009,7 @@ country_event = {
 
 		clear_variable = current_sway_direction
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		#Apply the agreed upon deal here
 		ai_chance = {
@@ -4025,6 +4048,7 @@ country_event = {
 
 	option = {
 		name = UN.203.b
+		log = "[GetDateText]: [This.GetName]: UN.203.b"
 
 		clear_variable = current_sway_direction
 
@@ -4087,14 +4111,13 @@ country_event = {
 
 	option = {
 		name = UN.203.a
-
-		set_country_flag = has_had_current_un_ga_vote_swayed
+		log = "[GetDateText]: [This.GetName]: UN.203.a"
 
 		un_sway_direction_effect = yes
 
 		clear_variable = current_sway_direction
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		if = {
 			limit = {
@@ -4170,6 +4193,7 @@ country_event = {
 
 	option = {
 		name = UN.204.b
+		log = "[GetDateText]: [This.GetName]: UN.204.b"
 
 		clear_variable = current_sway_direction
 
@@ -4216,8 +4240,7 @@ country_event = {
 
 	option = {
 		name = UN.204.a
-
-		set_country_flag = has_had_current_un_ga_vote_swayed
+		log = "[GetDateText]: [This.GetName]: UN.204.a"
 
 		un_sway_direction_effect = yes
 
@@ -4245,7 +4268,7 @@ country_event = {
 			}
 		}
 
-		missile_ui_update = yes
+		international_systems_update = yes
 
 		#Apply the agreed upon deal here
 		ai_chance = {
@@ -4277,7 +4300,7 @@ country_event = {
 country_event = {
 	id = UN.300
 	is_triggered_only = yes
-
+	trigger = { date > 2000.1.1 }
 	title = UN.300.t
 	desc = UN.300.d
 
@@ -4289,7 +4312,7 @@ country_event = {
 country_event = {
 	id = UN.301
 	is_triggered_only = yes
-
+	trigger = { date > 2000.1.1 }
 	title = UN.301.t
 	desc = UN.301.d
 
@@ -4301,7 +4324,7 @@ country_event = {
 country_event = {
 	id = UN.302
 	is_triggered_only = yes
-
+	trigger = { date > 2000.1.1 }
 	title = UN.302.t
 	desc = UN.302.d
 

@@ -16,7 +16,7 @@ capital = 604
 	complete_special_project = sp:sp_aircraft_project
 
 	complete_special_project = sp:sp_composite_production
-	#This needs to be one less than the starting number to work properly
+	# Consumed by tools/analysis/pre_place_power_plants.py — re-run the bake after editing
 	set_variable = { startup_composite_fac_needed = 2 }
 
 	if = {
@@ -35,7 +35,7 @@ capital = 604
 		set_technology = {
 			mbt_tech_ops = 1
 			mbt_tech = 1
-			early_cold_war_ammo = 1
+			tank_ammo_1 = 1
 			defensive_systems = 1
 			nsb_gun_technology_1 = 1
 			nsb_artillery_ammo_1 = 1
@@ -50,7 +50,7 @@ capital = 604
 			nsb_AA_autocannon_1 = 1
 			nsb_SHORAD_missile_1 = 1
 			mbt_tech_2 = 1
-			cold_war_ammo = 1
+			tank_ammo_2 = 1
 			defensive_systems_3 = 1
 			nsb_gun_technology_3 = 1
 			nsb_artillery_ammo_3 = 1
@@ -486,6 +486,7 @@ capital = 604
 				engines_3 = 1
 				refueling_1 = 1
 				avionics_1 = 1
+				avionics_2 = 1
 				awacs_1 = 1
 				redundant_1 = 1
 				early_weapons = 1
@@ -676,9 +677,9 @@ capital = 604
 	reverse_add_opinion_modifier = { target = PHI modifier = large_commercial_relations }
 	add_opinion_modifier = { target = BRU modifier = large_commercial_relations }
 	reverse_add_opinion_modifier = { target = BRU modifier = large_commercial_relations }
-	add_opinion_modifier = { target = NKO modifier = NKO_KOR_Koren_War_Ceasefire }
+	add_opinion_modifier = { target = NKO modifier = NKO_KOR_Korean_War_Ceasefire }
 	add_opinion_modifier = { target = NKO modifier = propaganda_broadcasts }
-	reverse_add_opinion_modifier = { target = NKO modifier = NKO_KOR_Koren_War_Ceasefire }
+	reverse_add_opinion_modifier = { target = NKO modifier = NKO_KOR_Korean_War_Ceasefire }
 	add_opinion_modifier = { target = USA modifier = diplomatic_proximity }
 	reverse_add_opinion_modifier = { target = USA modifier = diplomatic_proximity }
 
@@ -704,7 +705,7 @@ capital = 604
 	add_to_array = { influence_array_val = 70 }
 	add_to_array = { influence_array = GER.id }
 	add_to_array = { influence_array_val = 5 }
-	startup_influence = yes
+	sort_influence = yes
 
 	set_variable = { var = debt value = 167.842 }
 	set_variable = { var = treasury value = 141 }
@@ -753,7 +754,6 @@ capital = 604
 	add_to_array = { KOR.investment_targets = NZL }
 	add_to_array = { KOR.investment_targets = SOL }
 
-	set_country_flag = investment_targets_are_set_up
 
 	# Influence system
 	add_to_array = { KOR.influence_targets = CAM }
@@ -842,7 +842,7 @@ capital = 604
 		computing3 = 1
 		decryption3 = 1
 		encryption3 = 1
-		DNA_fingerprinting = 1
+		genetics_1 = 1
 
 		radar = 1
 		internet1 = 1
@@ -850,11 +850,11 @@ capital = 604
 		gprs = 1
 		fuel_silos = 1
 
-		industrial_electrospun_polymeric_nanofibers = 1
-		multiwalled_carbon_nanotubes = 1
-		stereolitography = 1
-		early_3D_printers = 1
-		DNA_fingerprinting = 1
+		nanofibers_1 = 1
+		nanofibers_2 = 1
+		printing_1 = 1
+		printing_2 = 1
+		genetics_1 = 1
 		fuel_refining = 1
 		fuel_refining2 = 1
 		energy_efficiency = 1
@@ -958,6 +958,7 @@ capital = 604
 			tech_naval_systems_engineering = 1
 			tech_power_systems_1 = 1
 			tech_power_systems_2 = 1
+			tech_diesel_power_systems_1 = 1
 
 			tech_combat_support_systems = 1
 			tech_fire_control_1 = 1
@@ -1171,6 +1172,7 @@ capital = 604
 	recruit_character = KOR_sim_seungseop
 
 	set_variable = { overall_productivity = 900 }
+	set_variable = { var_reactor_material_stockpile = 12500 }
 
 
 	# Relation Starting Configuration (moved from on_startup)
