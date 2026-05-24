@@ -680,6 +680,11 @@ focus_tree = {
 				has_idea = FRA_sixth_republic_idea
 			}
 		}
+		bypass = {
+			NOT = {
+				has_idea = NATO_member
+			}
+		}
 
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus FRA_atlantist_drift"
@@ -2734,6 +2739,11 @@ focus_tree = {
 				has_idea = FRA_sixth_republic_idea
 			}
 		}
+		bypass = {
+			NOT = {
+				has_idea = NATO_member
+			}
+		}
 		search_filters = { FOCUS_FILTER_INTERNAL_FACTION FOCUS_FILTER_MILITARY_LAWS }
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus FRA_nato_integration"
@@ -3876,6 +3886,11 @@ focus_tree = {
 				has_idea = FRA_sixth_republic_idea
 			}
 		}
+		bypass = {
+			NOT = {
+				has_idea = NATO_member
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -4336,7 +4351,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 5
+			factor = 3
 		}
 	}
 	focus = {#change icon for something about rural industry
@@ -4382,7 +4397,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 5
+			factor = 3
 		}
 	}
 	focus = {
@@ -4416,7 +4431,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 5
+			factor = 4
 		}
 	}
 	focus = {
@@ -4683,6 +4698,11 @@ focus_tree = {
 			OR = {
 				has_idea = FRA_5th_republic
 				has_idea = FRA_sixth_republic_idea
+			}
+		}
+		bypass = {
+			NOT = {
+				has_idea = NATO_member
 			}
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
@@ -5515,6 +5535,11 @@ focus_tree = {
 			OR = {
 				has_idea = FRA_5th_republic
 				has_idea = FRA_sixth_republic_idea
+			}
+		}
+		bypass = {
+			NOT = {
+				has_idea = NATO_member
 			}
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
@@ -6831,8 +6856,8 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus id = FRA_help_transi"
 			every_other_country = {
-				limit = { has_idea = EU_member }
 				limit = {
+					has_idea = EU_member
 					OR  = {
 						has_idea = minor_power
 						has_idea = non_power
@@ -7119,8 +7144,8 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus id = FRA_reduce_extraction"
 			every_other_country = {
-				limit = { has_idea = EU_member }
 				limit = {
+					has_idea = EU_member
 					OR  = {
 						has_idea = minor_power
 						has_idea = non_power
@@ -7385,6 +7410,11 @@ focus_tree = {
 			OR = {
 				has_idea = FRA_5th_republic
 				has_idea = FRA_sixth_republic_idea
+			}
+		}
+		bypass = {
+			NOT = {
+				has_idea = NATO_member
 			}
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
@@ -7796,7 +7826,7 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = FRA_clash_green
+		id = FRA_green_communism
 		icon = war2_green
 
 		x = -36
@@ -7816,10 +7846,10 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
-			log = "[GetDateText]: [THIS.GetName]: Focus id = FRA_clash_green"
+			log = "[GetDateText]: [THIS.GetName]: Focus id = FRA_green_communism"
 			set_temp_variable = { party_index = 4 }
-			set_temp_variable = { party_popularity_increase =-0.075 }
-			set_temp_variable = { temp_outlook_increase = -0.075 }
+			set_temp_variable = { party_popularity_increase =0.075 }
+			set_temp_variable = { temp_outlook_increase = 0.075 }
 			add_relative_party_popularity = yes
 			set_temp_variable = { party_index = 17 }
 			set_temp_variable = { party_popularity_increase = -0.05 }
@@ -7971,7 +8001,7 @@ focus_tree = {
 
 		cost = 10
 
-		prerequisite = { focus = FRA_clash_green }
+		prerequisite = { focus = FRA_green_communism }
 		available = {
 			emerging_communist_state_are_in_power = yes
 			OR = {
@@ -8293,51 +8323,7 @@ focus_tree = {
 			factor = 2
 		}
 	}
-
-	#civil war ending common path to monarchy
-	focus = {
-		id = FRA_civil_war_end
-		icon = FRA_army
-
-		x = -17
-		y = 13
-		relative_position_id = FRA_state_of_french_politics
-
-		cost = 10
-
-
-		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
-
-		completion_reward = {
-			log = "[GetDateText]: [THIS.GetName]: Focus id = FRA_civil_war_end"
-		}
-
-		ai_will_do = {
-			factor = 1
-		}
-	}
-	focus = {
-		id = FRA_ghost_past
-		icon = french_monarchy
-
-		x = -10
-		y = 15
-		relative_position_id = FRA_state_of_french_politics
-
-		cost = 10
-
-		prerequisite = { focus = FRA_civil_war_end }
-		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
-
-		completion_reward = {
-			log = "[GetDateText]: [THIS.GetName]: Focus id = FRA_ghost_past"
-		}
-
-		ai_will_do = {
-			factor = 1
-		}
-	}
-	focus = {
+	focus = {#TODO EVENEMENT SI LE JOUEUR SWITCH TT SEUL POUR EMPECHER
 		id = FRA_new_18th_brumaire
 		icon = Generic_Coup02
 
@@ -8348,6 +8334,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_coronation }
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_empire_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -8366,7 +8362,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 5
 		}
 	}
 	focus = {
@@ -8380,7 +8376,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_coronation }
-		available = {nationalist_monarchists_are_in_power = yes}
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_kingdom_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -8399,30 +8404,10 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 5
 		}
 	}
-	focus = {
-		id = FRA_coronation
-		icon = monarchism
 
-		x = -10
-		y = 16
-		relative_position_id = FRA_state_of_french_politics
-
-		cost = 10
-
-		prerequisite = { focus = FRA_ghost_past }
-		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
-
-		completion_reward = {
-			log = "[GetDateText]: [THIS.GetName]: Focus id = FRA_coronation"
-		}
-
-		ai_will_do = {
-			factor = 1
-		}
-	}
 	focus = {
 		id = FRA_camelot
 		icon = secret_police
@@ -8434,7 +8419,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_kingdom_history }
-		available = {nationalist_monarchists_are_in_power = yes}
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_kingdom_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -8467,7 +8461,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 2
 		}
 	}
 	focus = {
@@ -8481,7 +8475,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_kingdom_history }
-		available = {nationalist_monarchists_are_in_power = yes}
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_kingdom_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -8495,7 +8498,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 3
 		}
 	}
 	focus = {
@@ -8509,7 +8512,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_kingdom_history }
-		available = {nationalist_monarchists_are_in_power = yes}
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_kingdom_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -8521,7 +8533,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 3
 		}
 	}
 	focus = {
@@ -8536,7 +8548,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_kingdom_history }
-		available = {nationalist_monarchists_are_in_power = yes}
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_kingdom_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -8559,7 +8580,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 2
 		}
 	}
 	focus = {
@@ -8573,7 +8594,19 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_kingdom_history }
-		available = {nationalist_monarchists_are_in_power = yes}
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_kingdom_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
+		bypass = {
+			NOT= {has_idea = the_euro}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -8587,7 +8620,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 2
 		}
 	}
 	focus = {
@@ -8602,7 +8635,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_kingdom_history }
-		available = {nationalist_monarchists_are_in_power = yes}
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_kingdom_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {#all notable monarchy in EU get natio boost
@@ -8638,7 +8680,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 2
 		}
 	}
 	focus = {
@@ -8652,7 +8694,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_camelot }
-		available = {nationalist_monarchists_are_in_power = yes}
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_kingdom_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -8661,7 +8712,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 2
 		}
 	}
 	focus = {
@@ -8675,7 +8726,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_decentralisation_king }
-		available = {nationalist_monarchists_are_in_power = yes}
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_kingdom_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -8693,7 +8753,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 2
 		}
 	}
 	focus = {#ban all parties
@@ -8708,7 +8768,16 @@ focus_tree = {
 
 		prerequisite = { focus = FRA_frankish_ancestor }
 		prerequisite = { focus = FRA_against_liberalism }
-		available = {nationalist_monarchists_are_in_power = yes}
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_kingdom_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -8744,7 +8813,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 3
 		}
 	}
 	focus = {
@@ -8758,7 +8827,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_national_integralism }
-		available = {nationalist_monarchists_are_in_power = yes}
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_kingdom_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -8775,7 +8853,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 2
 		}
 	}
 	focus = {
@@ -8790,8 +8868,15 @@ focus_tree = {
 
 		prerequisite = { focus = FRA_historical_ennemy }
 		available = {
-			has_completed_focus = FRA_friend_pope
 			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_kingdom_restored_idea
+			has_completed_focus = FRA_friend_pope
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
@@ -8801,7 +8886,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 3
 		}
 	}
 	focus = {
@@ -8817,8 +8902,15 @@ focus_tree = {
 		prerequisite = { focus = FRA_eu_kingdom }
 		prerequisite = {nationalist_monarchists_are_in_power = yes}
 		available = {
-			has_completed_focus = FRA_elder_daughter
 			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_kingdom_restored_idea
+			has_completed_focus = FRA_elder_daughter
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
 		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
@@ -8827,7 +8919,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 2
 		}
 	}
 	focus = {
@@ -8841,7 +8933,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_king_modern_chivalry }
-		available = {nationalist_monarchists_are_in_power = yes}
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_kingdom_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -8850,7 +8951,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 3
 		}
 	}
 	focus = {
@@ -8864,7 +8965,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_no_deceit }
-		available = {nationalist_monarchists_are_in_power = yes}
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_kingdom_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -8884,7 +8994,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 2
 		}
 	}
 	focus = {
@@ -8898,7 +9008,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_king_rule }
-		available = {nationalist_monarchists_are_in_power = yes}
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_kingdom_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -8912,7 +9031,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 2
 		}
 	}
 	focus = {#threathen uk and germany
@@ -8926,7 +9045,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_no_more_eu }
-		available = {nationalist_monarchists_are_in_power = yes}
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_kingdom_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -8934,7 +9062,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 2
 		}
 	}
 	focus = {
@@ -8948,7 +9076,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_friend_pope }
-		available = {nationalist_monarchists_are_in_power = yes}
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_kingdom_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {#holy league against ottoman
@@ -8979,7 +9116,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 4
 		}
 	}
 	focus = {
@@ -9011,7 +9148,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 4
 		}
 	}
 	focus = {
@@ -9049,7 +9186,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 4
 		}
 	}
 	focus = {
@@ -9064,7 +9201,16 @@ focus_tree = {
 
 		prerequisite = { focus = FRA_prepare_crusade }
 		prerequisite = { focus = FRA_catholic_league }
-		available = {nationalist_monarchists_are_in_power = yes}
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_kingdom_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -9073,7 +9219,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 5
 		}
 	}
 	focus = {
@@ -9089,7 +9235,16 @@ focus_tree = {
 		prerequisite = { focus = FRA_burry_revolution }
 		prerequisite = { focus = FRA_elder_daughter }
 		prerequisite = { focus = FRA_republican_cancer }
-		available = {nationalist_monarchists_are_in_power = yes}
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_kingdom_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -9098,7 +9253,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 8
 		}
 	}
 	#Napoleon branch
@@ -9113,6 +9268,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_new_18th_brumaire }
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_empire_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -9130,7 +9295,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 2
 		}
 	}
 	focus = {
@@ -9144,6 +9309,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_new_18th_brumaire }
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_empire_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -9181,7 +9356,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 2
 		}
 	}
 	focus = {
@@ -9195,6 +9370,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_new_18th_brumaire }
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_empire_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -9206,7 +9391,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 2
 		}
 	}
 	focus = {
@@ -9220,6 +9405,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_new_18th_brumaire }
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_empire_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -9228,7 +9423,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 3
 		}
 	}
 	focus = {
@@ -9238,10 +9433,21 @@ focus_tree = {
 		x = -17
 		y = 19
 		relative_position_id = FRA_state_of_french_politics
-
 		cost = 10
-
 		prerequisite = { focus = FRA_new_18th_brumaire }
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_empire_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
+		bypass = {
+			NOT= {has_idea = the_euro}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -9250,7 +9456,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 2
 		}
 	}
 	focus = {
@@ -9264,6 +9470,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_revolution_bonapart }
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_empire_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -9277,7 +9493,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 2
 		}
 	}
 	focus = {
@@ -9291,6 +9507,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_despotism }
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_empire_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -9306,7 +9532,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 3
 		}
 	}
 	focus = {
@@ -9320,6 +9546,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_napoleon_constitution }
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_empire_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -9328,7 +9564,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 3
 		}
 	}
 	focus = {
@@ -9342,12 +9578,18 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_reform_military_napoleon }
-		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_empire_restored_idea
 			NOT = {
 				has_country_flag = FRA_bonapart_military_reform
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
 			}
 		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus id = FRA_queen_battlefield"
@@ -9355,7 +9597,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 3
 		}
 	}
 	#befriend nationalist
@@ -9370,6 +9612,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_question_eu }
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_empire_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -9405,6 +9657,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_centralised_admin }
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_empire_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -9420,7 +9682,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 3
 		}
 	}
 	focus = {
@@ -9434,6 +9696,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_la_grande_armee }
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_empire_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -9442,10 +9714,9 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 3
 		}
 	}
-	#require having form the empire, make uk propose coalition
 	focus = {
 		id = FRA_8th_coalition
 		icon = peaceduuude
@@ -9457,6 +9728,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_europe_nationalism }
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_empire_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {#an idea that goes once UK doesnt exist or ally
@@ -9465,7 +9746,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 2
 		}
 	}
 	focus = {
@@ -9479,6 +9760,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_plebiscites }
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_empire_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -9494,7 +9785,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 2
 		}
 	}
 	focus = {
@@ -9509,6 +9800,16 @@ focus_tree = {
 
 		prerequisite = { focus = FRA_proclaim_empire }
 		prerequisite = { focus = FRA_firepower }
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_empire_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -9547,7 +9848,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 5
 		}
 	}
 	focus = {
@@ -9562,6 +9863,16 @@ focus_tree = {
 
 		prerequisite = { focus = FRA_8th_coalition }
 		mutually_exclusive = { focus = FRA_our_own_system }
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_empire_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {#threatened uk make them create faction
@@ -9570,7 +9881,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 2
 		}
 	}
 	focus = {
@@ -9585,6 +9896,16 @@ focus_tree = {
 
 		prerequisite = { focus = FRA_8th_coalition }
 		mutually_exclusive = { focus = FRA_declare_hostile }
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_empire_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -9613,7 +9934,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 3
 		}
 	}
 	focus = {
@@ -9628,6 +9949,16 @@ focus_tree = {
 
 		prerequisite = { focus = FRA_renew_meritocracy }
 		prerequisite = { focus = FRA_blame_ennemy }
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_empire_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -9641,7 +9972,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 4
 		}
 	}
 	focus = {#train our spies by harrassing neightbor
@@ -9655,6 +9986,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_declare_hostile }
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_empire_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -9713,7 +10054,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 3
 		}
 	}
 	focus = {#if faction leader invite poland sweden USA and napoleon ally if they are not democratic
@@ -9727,6 +10068,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_our_own_system }
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_empire_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -9755,7 +10106,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 3
 		}
 	}
 	focus = {
@@ -9770,8 +10121,17 @@ focus_tree = {
 
 		prerequisite = { focus = FRA_imperial_pride }
 		prerequisite = { focus = FRA_last_deluge }
-		prerequisite = { focus = FRA_ennemy_isolate }
-		prerequisite = { focus = FRA_history_allies }
+		prerequisite = { focus = FRA_ennemy_isolate focus = FRA_history_allies}
+		available = {
+			nationalist_monarchists_are_in_power = yes
+			has_idea = FRA_empire_restored_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -9780,7 +10140,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 8
 		}
 	}
 	#communist victory in trouble election (WIP)
@@ -9797,6 +10157,16 @@ focus_tree = {
 
 		prerequisite = { focus = FRA_civil_war_end }
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+		available = {
+			emerging_communist_state_are_in_power = yes
+			has_idea = FRA_commune_reborn_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus id = FRA_french_commune"
@@ -9812,7 +10182,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 5
 		}
 	}
 	focus = {
@@ -9826,6 +10196,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_french_commune }
+		available = {
+			emerging_communist_state_are_in_power = yes
+			has_idea = FRA_commune_reborn_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -9837,7 +10217,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 2
 		}
 	}
 	focus = {
@@ -9852,7 +10232,16 @@ focus_tree = {
 
 		prerequisite = { focus = FRA_french_commune }
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
-
+		available = {
+			emerging_communist_state_are_in_power = yes
+			has_idea = FRA_commune_reborn_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus id = FRA_worker_right_comm"
 			set_temp_variable = { temp_change = -0.15 }
@@ -9866,7 +10255,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 3
 		}
 	}
 	focus = {
@@ -9880,6 +10269,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_french_commune }
+		available = {
+			emerging_communist_state_are_in_power = yes
+			has_idea = FRA_commune_reborn_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -9891,7 +10290,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 3
 		}
 	}
 	focus = {
@@ -9906,6 +10305,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_french_commune }
+		available = {
+			emerging_communist_state_are_in_power = yes
+			has_idea = FRA_commune_reborn_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -9921,7 +10330,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 2
 		}
 	}
 	focus = {
@@ -9935,6 +10344,21 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_french_commune }
+		available = {
+			emerging_communist_state_are_in_power = yes
+			has_idea = FRA_commune_reborn_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
+		bypass = {
+			NOT = {
+				has_idea = NATO_member
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -9956,7 +10380,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 2
 		}
 	}
 	focus = {
@@ -9970,8 +10394,20 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_french_commune }
+		available = {
+			emerging_communist_state_are_in_power = yes
+			has_idea = FRA_commune_reborn_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
+		bypass = {
+			NOT= {has_idea = the_euro}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
-
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus id = FRA_fate_eurocommunism"
 			add_ideas = withdrawal_treaty
@@ -9983,7 +10419,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 2
 		}
 	}
 	focus = {
@@ -9997,6 +10433,17 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_purge_military }
+		available = {
+			emerging_communist_state_are_in_power = yes
+			has_idea = FRA_commune_reborn_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+					has_idea = FRA_red_purges
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -10005,7 +10452,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 3
 		}
 	}
 	focus = {
@@ -10019,6 +10466,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_worker_right_comm }
+		available = {
+			emerging_communist_state_are_in_power = yes
+			has_idea = FRA_commune_reborn_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -10030,7 +10487,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 2
 		}
 	}
 	focus = {
@@ -10044,6 +10501,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_people_constitution_comm }
+		available = {
+			emerging_communist_state_are_in_power = yes
+			has_idea = FRA_commune_reborn_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -10063,7 +10530,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 3
 		}
 	}
 	focus = {
@@ -10077,6 +10544,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_revolution_soil }
+		available = {
+			emerging_communist_state_are_in_power = yes
+			has_idea = FRA_commune_reborn_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -10090,7 +10567,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 3
 		}
 	}
 	focus = {
@@ -10104,6 +10581,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_hostile_nato_comm }
+		available = {
+			emerging_communist_state_are_in_power = yes
+			has_idea = FRA_commune_reborn_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -10137,7 +10624,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 3
 		}
 	}
 	focus = {
@@ -10151,6 +10638,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_fate_eurocommunism }
+		available = {
+			emerging_communist_state_are_in_power = yes
+			has_idea = FRA_commune_reborn_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -10169,7 +10666,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 3
 		}
 	}
 	focus = {
@@ -10183,6 +10680,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_legacy_patriwar }
+		available = {
+			emerging_communist_state_are_in_power = yes
+			has_idea = FRA_commune_reborn_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -10194,7 +10701,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 3
 		}
 	}
 	focus = {
@@ -10208,6 +10715,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_focus_education }
+		available = {
+			emerging_communist_state_are_in_power = yes
+			has_idea = FRA_commune_reborn_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -10223,7 +10740,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 3
 		}
 	}
 	focus = {
@@ -10237,6 +10754,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_loyalty_cause }
+		available = {
+			emerging_communist_state_are_in_power = yes
+			has_idea = FRA_commune_reborn_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -10259,7 +10786,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 3
 		}
 	}
 	focus = {
@@ -10273,6 +10800,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_unleash_agent }
+		available = {
+			emerging_communist_state_are_in_power = yes
+			has_idea = FRA_commune_reborn_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -10286,7 +10823,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 3
 		}
 	}
 	focus = {
@@ -10300,6 +10837,16 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = FRA_spread_communism_eu }
+		available = {
+			emerging_communist_state_are_in_power = yes
+			has_idea = FRA_commune_reborn_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -10317,7 +10864,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 3
 		}
 	}
 	focus = {
@@ -10332,6 +10879,16 @@ focus_tree = {
 
 		prerequisite = { focus = FRA_red_army_comm }
 		prerequisite = { focus = FRA_collectivisation }
+		available = {
+			emerging_communist_state_are_in_power = yes
+			has_idea = FRA_commune_reborn_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -10345,7 +10902,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 5
 		}
 	}
 	focus = {
@@ -10361,6 +10918,16 @@ focus_tree = {
 
 		prerequisite = { focus = FRA_enforce_unions }
 		prerequisite = { focus = FRA_paris_commune }
+		available = {
+			emerging_communist_state_are_in_power = yes
+			has_idea = FRA_commune_reborn_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -10374,7 +10941,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 5
 		}
 	}
 	focus = {#TODO faction and inviting
@@ -10389,6 +10956,16 @@ focus_tree = {
 
 		prerequisite = { focus = FRA_glorious_past_comm }
 		prerequisite = { focus = FRA_befriend_comm }
+		available = {
+			emerging_communist_state_are_in_power = yes
+			has_idea = FRA_commune_reborn_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {#TODO add idea to faction
@@ -10409,7 +10986,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 5
 		}
 	}
 	focus = {#decision to attack europe get another idea with bonuses scalling with conquest called world revolution
@@ -10425,6 +11002,16 @@ focus_tree = {
 		prerequisite = { focus = FRA_final_struggle }
 		prerequisite = { focus = FRA_UFSR_born }
 		prerequisite = { focus = FRA_new_kommintern }
+		available = {
+			emerging_communist_state_are_in_power = yes
+			has_idea = FRA_commune_reborn_idea
+			NOT = {
+				OR = {
+					has_idea = FRA_5th_republic
+					has_idea = FRA_sixth_republic_idea
+				}
+			}
+		}
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = {
@@ -10440,7 +11027,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 8
 		}
 	}
 	#yellow jacket democracy

@@ -900,45 +900,36 @@ local_resources_chromium_factor = 0.15
 				gdp_from_resource_sector_modifier = 0.08
 			}
 		}
-		FRA_political_balance = {
-			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_political_balance" }
-			picture = resource_production
-			allowed = { always = no }
-
-			modifier = {
-				drift_defence_factor = 0.1
-				nationalist_drift = 0
-				democratic_drift = 0
-				neutrality_drift = 0
-				communism_drift = 0
-			}
-		}
 		FRA_Macron_eco = {
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_Macron_eco" }
 			picture = resource_production
 			allowed = { always = no }
-
+			cancel {
+				NOT = {has_government = democratic}
+			}
 			modifier = {
-				stability_weekly = -0.005
 				police_cost_multiplier_modifier = -0.1
 				education_cost_multiplier_modifier = -0.1
 				health_cost_multiplier_modifier = -0.1
 				bureaucracy_cost_multiplier_modifier = -0.1
 				social_cost_multiplier_modifier = -0.1
+				stability_factor = -0.05
 			}
 		}
 		FRA_Ferrand_eco = {
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_Ferrand_eco" }
 			picture = resource_production
 			allowed = { always = no }
-
+			cancel {
+				NOT = {has_government = democratic}
+			}
 			modifier = {
-				stability_weekly = -0.0025
 				police_cost_multiplier_modifier = -0.05
 				education_cost_multiplier_modifier = -0.05
 				health_cost_multiplier_modifier = -0.05
 				bureaucracy_cost_multiplier_modifier = -0.05
 				social_cost_multiplier_modifier = -0.05
+				stability_factor = -0.075
 			}
 		}
 		FRA_vigipirate_surveillance_lar = {
@@ -968,7 +959,7 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_ineluctable_collapse" }
 			picture = resource_production
 			allowed = { always = no }
-
+			
 			modifier = {
 				stability_factor = -0.25
 				political_power_factor = -0.2
@@ -982,7 +973,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_ineluctable_collapse" }
 			picture = resource_production
 			allowed = { always = no }
-
+			cancel {
+				NOT = {western_social_democrats_are_in_power = yes}
+			}
 			modifier = {
 				stability_factor = 0.1
 				drift_defence_factor = 0.05
@@ -992,7 +985,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_ineluctable_collapse2" }
 			picture = resource_production
 			allowed = { always = no }
-
+			cancel {
+				NOT = {western_social_democrats_are_in_power = yes}
+			}
 			modifier = {
 				stability_factor = 0.1
 				drift_defence_factor = 0.05
@@ -1005,7 +1000,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_ineluctable_collapse3" }
 			picture = resource_production
 			allowed = { always = no }
-
+			cancel {
+				NOT = {western_social_democrats_are_in_power = yes}
+			}
 			modifier = {
 				monthly_population = -0.05
 				stability_factor = 0.15
@@ -1019,9 +1016,12 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: FRA_socialism_renew" }
 			picture = resource_production
 			allowed = { always = no }
+			cancel {
+				NOT = {western_social_democrats_are_in_power = yes}
+			}
 			modifier = {
-				stability_factor = 0.1
-				drift_defence_factor = 0.15
+				stability_factor = 0.15
+				drift_defence_factor = 0.1
 				production_speed_buildings_factor = 0.10
 				tax_gain_multiplier_modifier = 0.07
 				industrial_capacity_factory = 0.05
@@ -1031,6 +1031,13 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_pension_reform" }
 			picture = resource_production
 			allowed = { always = no }
+			cancel {
+				OR = {
+					NOT = {western_social_democrats_are_in_power = yes}
+					NOT = {western_liberals_are_in_power=yes}
+					NOT = {western_conservatism_are_in_power = yes}
+				}
+			}
 			modifier = {
 				productivity_growth_modifier = -0.15
 				health_cost_multiplier_modifier = 0.05
@@ -1042,6 +1049,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_french_rearmament" }
 			picture = resource_production
 			allowed = { always = no }
+			cancel = {
+				has_idea = no_military
+			}
 			modifier = {
 				training_time_factor = -0.1
 				recruitable_population_factor = 0.1
@@ -1054,6 +1064,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_french_rearmament2" }
 			picture = resource_production
 			allowed = { always = no }
+			cancel = {
+				has_idea = no_military
+			}
 			modifier = {
 				training_time_factor = -0.1
 				recruitable_population_factor = 0.1
@@ -1069,6 +1082,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_french_rearmament3" }
 			picture = resource_production
 			allowed = { always = no }
+			cancel = {
+				has_idea = no_military
+			}
 			modifier = {
 				training_time_factor = -0.1
 				recruitable_population_factor = 0.1
@@ -1110,7 +1126,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add_ideas FRA_Our_project" }
 			picture = tower_investment
 			allowed = { always = no }
-
+			cancel {
+				NOT = {western_liberals_are_in_power=yes}
+			}
 			modifier = {
 				democratic_drift = 0.05
 				productivity_growth_modifier = 0.1
@@ -1123,7 +1141,12 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add_ideas FRA_french_independant1" }
 			picture = tower_investment
 			allowed = { always = no }
-
+			cancel = {
+				OR = {
+					NOT = {has_idea = non_power}
+					is_subject = yes
+				}
+			}
 			modifier = {
 				political_power_factor = 0.1
 				neutrality_drift = 0.025
@@ -1134,7 +1157,12 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add_ideas FRA_french_independant2" }
 			picture = tower_investment
 			allowed = { always = no }
-
+			cancel = {
+				OR = {
+					NOT = {has_idea = non_power}
+					is_subject = yes
+				}
+			}
 			modifier = {
 				political_power_factor = 0.1
 				neutrality_drift = 0.025
@@ -1147,7 +1175,12 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add_ideas FRA_french_independant3" }
 			picture = tower_investment
 			allowed = { always = no }
-
+			cancel = {
+				OR = {
+					NOT = {has_idea = non_power}
+					is_subject = yes
+				}
+			}
 			modifier = {
 				political_power_factor = 0.1
 				neutrality_drift = 0.025
@@ -1162,6 +1195,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add_ideas FRA_NATO_support" }
 			picture = tower_investment
 			allowed = { always = no }
+			cancel = {
+				has_idea = NATO_member
+			}
 
 			modifier = {
 				max_planning = 0.1
@@ -1176,7 +1212,13 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add_ideas FRA_entente_china" }
 			picture = tower_investment
 			allowed = { always = no }
-
+			cancel {
+				OR = {
+					NOT = {western_social_democrats_are_in_power = yes}
+					NOT = {western_liberals_are_in_power=yes}
+					NOT = {western_conservatism_are_in_power = yes}
+				}
+			}
 			modifier = {
 				gdp_from_resource_sector_modifier = 0.1
 				resource_export_multiplier_modifier = -0.05
@@ -1186,6 +1228,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add_ideas FRA_regulation" }
 			picture = tower_investment
 			allowed = { always = no }
+			cancel {
+				western_liberals_are_in_power=yes
+			}
 
 			modifier = {
 				economic_cycles_cost_factor = 0.5
@@ -1198,13 +1243,15 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add_ideas FRA_eternal_fra" }
 			picture = tower_investment
 			allowed = { always = no }
-
+			cancel {
+				NOT = {western_conservatism_are_in_power = yes}
+			}
 			modifier = {
 				defensive_war_stability_factor = 0.3
 				offensive_war_stability_factor = 0.15
-				war_support_factor = 0.1
+				war_support_factor = 0.15
 				foreign_influence_defense_modifier = 0.1
-				surrender_limit = 0.1
+				surrender_limit = 0.2
 			}
 		}
 		FRA_europhile_anger_idea = {
@@ -1222,7 +1269,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_EU_Retaliate" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel = {
+				has_idea = EU_member
+			}
 			modifier = {
 				stability_factor = -0.2
 				political_power_factor = -0.25
@@ -1235,7 +1284,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_EU_Retaliate2" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel = {
+				has_idea = EU_member
+			}
 			modifier = {
 				stability_factor = -0.1
 				political_power_factor = -0.15
@@ -1248,7 +1299,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_left_nato" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel = {
+				has_idea = NATO_member
+			}
 			modifier = {
 				experience_gain_army = -0.05
 				army_org_factor = -0.15
@@ -1271,7 +1324,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_russian_cooperation1" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel = {
+				has_war_with = SOV
+			}
 			modifier = {
 				production_speed_offices_factor = 0.15
 				production_factory_max_efficiency_factor = 0.1
@@ -1283,12 +1338,14 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_a_certain_idea" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel {
+				NOT = {neutrality_neutral_conservatism_are_in_power = yes}
+			}
 			modifier = {
 				army_attack_factor = 0.1
 				army_defence_against_major_factor = 0.15
-				compliance_growth_on_our_occupied_states = -0.15
-				foreign_influence_defense_modifier = 0.15
+				compliance_growth_on_our_occupied_states = -0.1
+				foreign_influence_defense_modifier = 0.1
 				foreign_influence_modifier = 0.075
 			}
 		}
@@ -1296,7 +1353,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_russian_cooperation2" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel = {
+				has_war_with = SOV
+			}
 			modifier = {
 				production_speed_offices_factor = 0.15
 				production_factory_max_efficiency_factor = 0.1
@@ -1308,30 +1367,13 @@ local_resources_chromium_factor = 0.15
 				personnel_cost_multiplier_modifier = 0.1
 			}
 		}
-		FRA_Paris_Moscow_Axis= {
-			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_Paris_Moscow_Axis" }
-			picture = low_popular_support3
-			allowed = { always = no }
-
-			modifier = {
-				justify_war_goal_time = -0.075
-				production_speed_offices_factor = 0.15
-				production_factory_max_efficiency_factor = 0.1
-				production_speed_nuclear_reactor_factor = 0.2
-				fuel_gain_factor = 0.15
-				experience_gain_army = 0.075
-				experience_gain_air = 0.075
-				training_time_factor = -0.05
-				army_armor_attack_factor = 0.1
-				ground_attack_factor = 0.1
-				special_forces_cap = 0.075
-				personnel_cost_multiplier_modifier = 0.15
-			}
-		}
 		FRA_blocade= {
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_blocade" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				FRA ={has_idea = EU_member}
+			}
 
 			modifier = {
 				consumer_goods_factor = 0.1
@@ -1343,7 +1385,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_shocking" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel {
+				NOT = {neutrality_neutral_social_in_power =yes}
+			}
 			modifier = {
 				stability_factor = -0.30
 				war_support_factor = -0.15
@@ -1368,11 +1412,13 @@ local_resources_chromium_factor = 0.15
 				communism_drift = 0.05
 			}
 		}
-		FRA_fail6threp= { #stay has long as you are in power
+		FRA_fail6threp= {
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_fail6threp" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel {
+				NOT = {neutrality_neutral_social_in_power =yes}
+			}
 			modifier = {
 				stability_factor = -0.15
 				war_support_factor = -0.1
@@ -1387,6 +1433,10 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_ecological_transition" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel {
+				NOT = {neutrality_neutral_social_in_power =yes}
+				NOT = {neutrality_neutral_green_in_power=yes}
+			}
 
 			modifier = {
 				neutrality_drift = 0.025
@@ -1401,11 +1451,13 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_insoumission" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel {
+				NOT = {neutrality_neutral_social_in_power =yes}
+			}
 			modifier = {
 				neutrality_drift = 0.05
 				army_breakthrough_against_major_factor = 0.05
-				army_defence_against_major_factor = 0.1
+				army_defence_against_major_factor = 0.15
 				foreign_influence_defense_modifier = 0.075
 				stability_factor = -0.1
 			}
@@ -1414,7 +1466,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_eu_social_climate=" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel = {
+				NOT = {has_idea = EU_member}
+			}
 			modifier = {
 				neutrality_drift = 0.015
 				production_speed_synthetic_refinery_factor = 0.05
@@ -1431,7 +1485,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_distance_nato" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel {
+				NOT = {has_idea = NATO_member}
+			}
 			modifier = {
 				experience_gain_army = -0.05
 				army_org_factor = -0.15
@@ -1443,6 +1499,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_research_boost" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel {
+				NOT = {neutrality_neutral_green_in_power=yes}
+			}
 
 			modifier = {
 				research_speed_factor = 0.25
@@ -1453,7 +1512,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_refit_network" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel {
+				NOT = {neutrality_neutral_green_in_power=yes}
+			}
 			modifier = {
 				production_speed_infrastructure_factor = 0.2
 				production_speed_rail_way_factor = 0.3
@@ -1463,7 +1524,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_eden_garden" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel {
+				NOT = {neutrality_neutral_green_in_power=yes}
+			}
 			modifier = {
 				army_core_defence_factor = 0.1
 				stability_factor = 0.15
@@ -1475,7 +1538,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_eu_green_reform=" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel = {
+				NOT = {has_idea = EU_member}
+			}
 			modifier = {
 				neutrality_drift = 0.015
 				agriculture_tax_modifier = 0.025
@@ -1491,6 +1556,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_EU_transit=" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				NOT = {has_idea = EU_member}
+			}
 
 			modifier = {
 				production_speed_synthetic_refinery_factor = 0.15
@@ -1502,7 +1570,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_eu_ban_fossile=" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel = {
+				NOT = {has_idea = EU_member}
+			}
 			modifier = {
 				energy_use_multiplier = 0.5
 				renewable_energy_gain_multiplier = 0.5
@@ -1516,7 +1586,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_regulation_agra=" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel = {
+				has_government = nationalist
+			}
 			modifier = {
 				agriculture_workers_modifier = 0.075
 				agriculture_tax_modifier = 0.1
@@ -1527,7 +1599,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_regulation_indus=" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel = {
+				has_government = nationalist
+			}
 			modifier = {
 				stability_factor = 0.05
 				energy_use_multiplier = -0.05
@@ -1541,7 +1615,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_regulation_fuel=" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel = {
+				has_government = nationalist
+			}
 			modifier = {
 				stability_factor = 0.05
 				monthly_population = 0.025
@@ -1553,7 +1629,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_regulation_fuel=" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel = {
+				NOT = {has_idea = EU_member}
+			}
 			modifier = {
 				production_speed_infrastructure_factor = 0.05
 				production_speed_rail_way_factor = 0.20
@@ -1565,6 +1643,12 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_eu_pcf_reform=" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				OR = {
+					NOT = {has_idea = EU_member}
+					has_government = nationalist
+				}
+			}
 
 			modifier = {
 				communism_drift = 0.002
@@ -1578,7 +1662,12 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_fr_military_assistance=" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel = {
+				OR = {
+					is_subject = yes
+					is_in_faction_with = SOV
+				}
+			}
 			modifier = {
 				special_forces_training_time_factor = -0.05
 				training_time_factor = -0.1
@@ -1592,6 +1681,12 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_european_internationale" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				OR = {
+					FRA = {has_war_with = SOV}
+					is_subject = yes
+				}
+			}
 
 			modifier = {
 				civilian_industry_tax_modifier = 0.05
@@ -1607,7 +1702,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_international_will_be_humankind" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel {
+				NOT = {emerging_communist_state_are_in_power = yes}
+			}
 			modifier = {
 				justify_war_goal_time = -0.15
 				war_support_factor = 0.1
@@ -1620,6 +1717,12 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_eu_FN_reform" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				OR = {
+					NOT = {has_idea = EU_member}
+					has_government = communism
+				}
+			}
 
 			modifier = {
 				nationalist_drift = 0.02
@@ -1636,7 +1739,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_nuke_boost" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel {
+				NOT = {nationalist_right_wing_populists_are_in_power=yes}
+			}
 			modifier = {
 				production_speed_nuclear_reactor_factor = 0.25
 				production_speed_synthetic_refinery_factor = -0.15
@@ -1647,7 +1752,12 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_Boreal_Space" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel = {
+				OR = {
+					FRA = {has_war_with = SOV}
+					is_subject = yes
+				}
+			}
 			modifier = {
 				justify_war_goal_time = -0.15
 				army_core_defence_factor = 0.15
@@ -1662,7 +1772,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_france_for_french" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel {
+				NOT = {nationalist_right_wing_populists_are_in_power=yes}
+			}
 			modifier = {
 				foreign_influence_defense_modifier = 0.15
 				surrender_limit = 0.2
@@ -1676,7 +1788,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_red_purges" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel {
+				NOT = {has_idea = FRA_commune_reborn_idea}
+			}
 			modifier = {
 				training_time_factor = -0.25
 				army_leader_cost_factor = -0.15
@@ -1692,7 +1806,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_people_constitution" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel {
+				NOT = {has_idea = FRA_commune_reborn_idea}
+			}
 			modifier = {
 				communism_drift = 0.05
 				stability_weekly = 0.02
@@ -1703,7 +1819,12 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_commies_redarmy1" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel {
+				OR = {
+					NOT = {has_idea = FRA_commune_reborn_idea}
+					has_idea = no_military
+				}
+			}
 			modifier = {
 				recruitable_population_factor = 0.15
 				army_morale_factor = 0.1
@@ -1715,7 +1836,12 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_commies_redarmy2" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel {
+				OR = {
+					NOT = {has_idea = FRA_commune_reborn_idea}
+					has_idea = no_military
+				}
+			}
 			modifier = {
 				recruitable_population_factor = 0.15
 				army_morale_factor = 0.1
@@ -1731,7 +1857,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_red_agent_lar" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel {
+				NOT = {has_idea = FRA_commune_reborn_idea}
+			}
 			modifier = {
 				operative_slot = 2
 				own_operative_capture_chance_factor = -0.15
@@ -1742,9 +1870,10 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_red_agent_non_lar" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel {
+				NOT = {has_idea = FRA_commune_reborn_idea}
+			}
 			modifier = {
-
 				influence_coup_modifier = -0.15
 				foreign_influence_modifier = 0.15
 			}
@@ -1753,6 +1882,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_monarchist_anger" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel {
+				NOT = {has_idea = FRA_empire_restored_idea}
+			}
 
 			modifier = {
 				foreign_influence_defense_modifier = -0.2
@@ -1766,6 +1898,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_bonapart_constitution" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel {
+				NOT = {has_idea = FRA_empire_restored_idea}
+			}
 
 			modifier = {
 				nationalist_drift = 0.05
@@ -1777,6 +1912,12 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_bonapart_military_reform" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel {
+				OR = {
+					NOT = {has_idea = FRA_empire_restored_idea}
+					has_idea = no_military
+				}
+			}
 
 			modifier = {
 				training_time_factor = 0.5
@@ -1791,7 +1932,12 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_army_reformed_1" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel {
+				OR = {
+					NOT = {has_idea = FRA_empire_restored_idea}
+					has_idea = no_military
+				}
+			}
 			modifier = {
 				max_planning = 0.1
 				planning_speed = 0.15
@@ -1805,7 +1951,12 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_army_reformed_infantry" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel {
+				OR = {
+					NOT = {has_idea = FRA_empire_restored_idea}
+					has_idea = no_military
+				}
+			}
 			modifier = {
 				max_planning = 0.1
 				planning_speed = 0.15
@@ -1822,6 +1973,12 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_army_reformed_cavalry" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel {
+				OR = {
+					NOT = {has_idea = FRA_empire_restored_idea}
+					has_idea = no_military
+				}
+			}
 
 			modifier = {
 				max_planning = 0.1
@@ -1840,6 +1997,12 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_army_reformed_artillery_infantry" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel {
+				OR = {
+					NOT = {has_idea = FRA_empire_restored_idea}
+					has_idea = no_military
+				}
+			}
 
 			modifier = {
 				max_planning = 0.1
@@ -1860,6 +2023,12 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_army_reformed_artillery_cavalry" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel {
+				OR = {
+					NOT = {has_idea = FRA_empire_restored_idea}
+					has_idea = no_military
+				}
+			}
 
 			modifier = {
 				max_planning = 0.1
@@ -1881,6 +2050,12 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_army_reformed_air_infantry" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel {
+				OR = {
+					NOT = {has_idea = FRA_empire_restored_idea}
+					has_idea = no_military
+				}
+			}
 
 			modifier = {
 				max_planning = 0.1
@@ -1901,6 +2076,12 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_army_reformed_air_cavalry" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel {
+				OR = {
+					NOT = {has_idea = FRA_empire_restored_idea}
+					has_idea = no_military
+				}
+			}
 
 			modifier = {
 				max_planning = 0.1
@@ -1922,6 +2103,12 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_BCE_money" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel {
+				OR = {
+					NOT = {has_idea = FRA_empire_restored_idea}
+					NOT = {has_idea = EU_member}
+				}
+			}
 
 			modifier = {
 				interest_rate_multiplier_modifier = -4
@@ -1934,6 +2121,12 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_4th_empire" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel {
+				OR = {
+					NOT = {has_idea = FRA_empire_restored_idea}
+					is_subject = yes
+				}
+			}
 
 			modifier = {
 				army_core_attack_factor = 0.15
@@ -1942,7 +2135,7 @@ local_resources_chromium_factor = 0.15
 				war_support_weekly = 0.002
 				compliance_growth_on_our_occupied_states = -0.10
 				generate_wargoal_tension = 0.10
-				trade_opinion_factor = -0.20
+				trade_opinion_factor = -0.15
 				improve_relations_maintain_cost_factor = -0.1
 				opinion_gain_monthly_factor = -0.05
 
@@ -1952,6 +2145,12 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_grande_arme_art_inf" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel {
+				OR = {
+					NOT = {has_idea = FRA_empire_restored_idea}
+					has_idea = no_military
+				}
+			}
 
 			modifier = {
 				max_planning = 0.1
@@ -1975,6 +2174,12 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_grande_arme_art_cav" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel {
+				OR = {
+					NOT = {has_idea = FRA_empire_restored_idea}
+					has_idea = no_military
+				}
+			}
 
 			modifier = {
 				max_planning = 0.1
@@ -1998,6 +2203,12 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_grande_arme_air_inf" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel {
+				OR = {
+					NOT = {has_idea = FRA_empire_restored_idea}
+					has_idea = no_military
+				}
+			}
 
 			modifier = {
 				max_planning = 0.1
@@ -2022,6 +2233,12 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_grande_arme_air_cav" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel {
+				OR = {
+					NOT = {has_idea = FRA_empire_restored_idea}
+					has_idea = no_military
+				}
+			}
 
 			modifier = {
 				max_planning = 0.1
@@ -2052,14 +2269,19 @@ local_resources_chromium_factor = 0.15
 				surrender_limit = 0.2
 				stability_factor = -0.15
 				party_popularity_stability_factor = 0.15
-
 			}
 		}
 		FRA_surrounded= {#remove when killed uk
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_surrounded" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel = {
+				OR = {
+					NOT = {has_government = nationalist}
+					NOT = {country_exists = ENG}
+					ENG = { is_subject_of = FRA }
+				}
+			}
 			modifier = {
 				nationalist_drift = 0.2
 				stability_factor = -0.1
@@ -2067,12 +2289,12 @@ local_resources_chromium_factor = 0.15
 				foreign_influence_defense_modifier = 0.15
 				army_core_defence_factor = 0.15
 				compliance_growth_on_our_occupied_states = -0.10
-				defensive_war_stability_factor = 0.15
+				defensive_war_stability_factor = 0.30
 				political_power_gain = -0.1
-				resource_export_multiplier_modifier = -0.2
+				resource_export_multiplier_modifier = -0.15
 				opinion_gain_monthly_same_ideology_factor = -0.15
-				foreign_influence_modifier = -0.15
-				trade_opinion_factor = -0.15
+				foreign_influence_modifier = -0.1
+				trade_opinion_factor = -0.1
 
 			}
 		}
@@ -2080,6 +2302,12 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_Sachons_vaincre" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel {
+				OR = {
+					NOT = {has_idea = FRA_empire_restored_idea}
+					is_subject = yes
+				}
+			}
 
 			modifier = {
 				war_support_weekly = 0.05
@@ -2104,6 +2332,12 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_prepare_to_fight" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel {
+				OR = {
+					NOT = {has_idea = FRA_empire_restored_idea}
+					is_subject = yes
+				}
+			}
 
 			modifier = {
 				war_support_weekly = 0.01
@@ -2122,6 +2356,12 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_defense_napoleon" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				OR = {
+					NOT = {country_exists = FRA}
+					FRA = { is_subject_of = ENG }
+				}
+			}
 
 			modifier = {
 				war_support_weekly = 0.001
@@ -2141,6 +2381,14 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_thousands_planes" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				OR = {
+					NOT = {has_idea = FRA_empire_restored_idea}
+					NOT = {country_exists = USA}
+					USA = { is_subject_of = FRA }
+					FRA = { is_subject_of = USA }
+				}
+			}
 
 			modifier = {
 				air_mission_efficiency = 0.1
@@ -2179,6 +2427,12 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_trade_USA" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				OR = {
+					NOT = {has_idea = FRA_empire_restored_idea}
+					NOT = {country_exists = USA}
+				}
+			}
 
 			modifier = {
 				trade_opinion_factor = 0.1
@@ -2192,6 +2446,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_king_camelot_lar" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				NOT = {has_idea = FRA_kingdom_restored_idea}
+			}
 
 			modifier = {
 				operative_slot = 2
@@ -2205,6 +2462,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_king_camelot_non_lar" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				NOT = {has_idea = FRA_kingdom_restored_idea}
+			}
 
 			modifier = {
 				nationalist_drift = 0.5
@@ -2217,6 +2477,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_king_constitution" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				NOT = {has_idea = FRA_kingdom_restored_idea}
+			}
 
 			modifier = {
 				nationalist_drift = 0.05
@@ -2228,6 +2491,12 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_chivalry" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				OR = {
+					NOT = {has_idea = FRA_kingdom_restored_idea}
+					has_idea = no_military
+				}
+			}
 
 			modifier = {
 				army_armor_attack_factor = 0.15
@@ -2242,6 +2511,12 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_elite_army" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				OR = {
+					NOT = {has_idea = FRA_kingdom_restored_idea}
+					has_idea = no_military
+				}
+			}
 
 			modifier = {
 				special_forces_attack_factor = 0.2
@@ -2257,7 +2532,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_prepare_crusade" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel = {
+				NOT = {has_idea = FRA_kingdom_restored_idea}
+			}
 			modifier = {
 				acclimatization_hot_climate_gain_factor = 0.2
 				supply_node_range = 0.1
@@ -2270,6 +2547,21 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_political_preassure" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				OR = {
+					NOT = {has_idea = FRA_kingdom_restored_idea}
+					AND = {
+						OR = {
+							NOT = {country_exists = LEB}
+							LEB = { is_subject_of = FRA }
+						}
+						OR = {
+							NOT = {country_exists = SYR}
+							SYR = { is_subject_of = FRA }
+						}
+					}
+				}
+			}
 
 			modifier = {
 				foreign_influence_modifier = 0.15
@@ -2283,6 +2575,22 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_navy_crusade" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				OR = {
+					NOT = {has_idea = FRA_kingdom_restored_idea}
+					owns_state = 1086
+					AND = {
+						OR = {
+							NOT = {country_exists = ISR}
+							ISR = { is_subject_of = FRA }
+						}
+						OR = {
+							NOT = {country_exists = PAL}
+							PAL = { is_subject_of = FRA }
+						}
+					}
+				}
+			}
 
 			modifier = {
 				navy_fuel_consumption_factor = -0.15
@@ -2296,6 +2604,12 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_commie_europe_integration" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				OR = {
+					NOT = {has_idea = FRA_commune_reborn_idea}
+					is_subject = no
+				}
+			}
 
 			modifier = {
 				subjects_autonomy_gain = -0.75
@@ -2306,10 +2620,14 @@ local_resources_chromium_factor = 0.15
 				stability_weekly = 0.002
 			}
 		}
-		FRA_strategic_independance= {
+		FRA_strategic_independance = {
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_strategic_independance" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				NOT = {neutrality_neutral_conservatism_are_in_power = yes}
+				is_subject = yes
+			}
 
 			modifier = {
 				neutrality_drift = 0.05
