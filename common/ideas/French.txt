@@ -2642,18 +2642,38 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_counter_insurgency" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel = {
+				NOT = {has_idea = FRA_empire_restored_idea}
+			}
 			modifier = {
-				resistance_growth = -0.05
+				resistance_growth = 0.05
 				root_out_resistance_effectiveness_factor = 0.2
 				resistance_damage_to_garrison = -0.15
-				police_cost_multiplier_modifier = -0.1
+				police_cost_multiplier_modifier = 0.1
 			}
 		}
 		FRA_attack_benelux= {
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_attack_benelux" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				NOT = {has_idea = FRA_empire_restored_idea}
+				OR = {
+					NOT = {country_exists = BEL}
+					BEL = { is_subject_of = FRA }
+					BEL = {is_in_faction_with = FRA}
+				}
+				OR = {
+					NOT = {country_exists = HOL}
+					HOL = { is_subject_of = FRA }
+					HOL = {is_in_faction_with = FRA}
+				}
+				OR = {
+					NOT = {country_exists = LUX}
+					LUX = { is_subject_of = FRA }
+					LUX = {is_in_faction_with = FRA}
+				}
+			}
 
 			modifier = {
 				planning_speed = 0.2
@@ -2668,6 +2688,19 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_attack_iberia" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				NOT = {has_idea = FRA_empire_restored_idea}
+				OR = {
+					NOT = {country_exists = SPR}
+					SPR = { is_subject_of = FRA }
+					SPR = {is_in_faction_with = FRA}
+				}
+				OR = {
+					NOT = {country_exists = POR}
+					POR = { is_subject_of = FRA }
+					POR = {is_in_faction_with = FRA}
+				}
+			}
 
 			modifier = {
 				planning_speed = 0.15
@@ -2680,6 +2713,13 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_attack_germany" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				NOT = {has_idea = FRA_empire_restored_idea}
+				OR = {
+					NOT = {country_exists = GER}
+					GER = { is_subject_of = FRA }
+				}
+			}
 
 			modifier = {
 				max_planning = 0.1
@@ -2694,6 +2734,44 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_attack_holy_roman" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				NOT = {has_idea = FRA_empire_restored_idea}
+				OR = {
+					NOT = {country_exists = AUS}
+					AUS = { is_subject_of = FRA }
+					AUS = {is_in_faction_with = FRA}
+				}
+				OR = {
+					NOT = {country_exists = HUN}
+					HUN = { is_subject_of = FRA }
+					HUN = {is_in_faction_with = FRA}
+				}
+				OR = {
+					NOT = {country_exists = ITA}
+					ITA = { is_subject_of = FRA }
+					ITA = {is_in_faction_with = FRA}
+				}
+				OR = {
+					NOT = {country_exists = SLO}
+					SLO = { is_subject_of = FRA }
+					SLO = {is_in_faction_with = FRA}
+				}
+				OR = {
+					NOT = {country_exists = CZE}
+					CZE = { is_subject_of = FRA }
+					CZE = {is_in_faction_with = FRA}
+				}
+				OR = {
+					NOT = {country_exists = SLV}
+					SLV = { is_subject_of = FRA }
+					SLV = {is_in_faction_with = FRA}
+				}
+				OR = {
+					NOT = {country_exists = CRO}
+					CRO = { is_subject_of = FRA }
+					CRO = {is_in_faction_with = FRA}
+				}
+			}
 
 			modifier = {
 				army_org_factor = 0.1
@@ -2706,7 +2784,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_BON_support_allies" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel = {
+				NOT = {is_in_faction_with = FRA}
+			}
 			modifier = {
 				industrial_capacity_factory = 0.2
 				industrial_capacity_dockyard = 0.2
@@ -2718,7 +2798,34 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_attack_east" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel = {
+				NOT = {has_idea = FRA_empire_restored_idea}
+				OR = {
+					NOT = {country_exists = POL}
+					POL = { is_subject_of = FRA }
+					POL = {is_in_faction_with = FRA}
+				}
+				OR = {
+					NOT = {country_exists = ROM}
+					ROM = { is_subject_of = FRA }
+					ROM = {is_in_faction_with = FRA}
+				}
+				OR = {
+					NOT = {country_exists = LAT}
+					LAT = { is_subject_of = FRA }
+					LAT = {is_in_faction_with = FRA}
+				}
+				OR = {
+					NOT = {country_exists = EST}
+					EST = { is_subject_of = FRA }
+					EST = {is_in_faction_with = FRA}
+				}
+				OR = {
+					NOT = {country_exists = LIT}
+					LIT = { is_subject_of = FRA }
+					LIT = {is_in_faction_with = FRA}
+				}
+			}
 			modifier = {
 				army_artillery_attack_factor = 0.1
 				terrain_penalty_reduction = 0.1
@@ -2731,6 +2838,23 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_attack_russia_fast" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				NOT = {has_idea = FRA_empire_restored_idea}
+				OR = {
+					NOT = {country_exists = SOV}
+					SOV = { is_subject_of = FRA }
+				}
+				OR = {
+					NOT = {country_exists = UKR}
+					UKR = { is_subject_of = FRA }
+					UKR = {is_in_faction_with = FRA}
+				}
+				OR = {
+					NOT = {country_exists = BLR}
+					BLR = { is_subject_of = FRA }
+					BLR = {is_in_faction_with = FRA}
+				}
+			}
 
 			modifier = {
 				planning_speed = 0.25
@@ -2744,6 +2868,23 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_attack_russia_slow" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				NOT = {has_idea = FRA_empire_restored_idea}
+				OR = {
+					NOT = {country_exists = SOV}
+					SOV = { is_subject_of = FRA }
+				}
+				OR = {
+					NOT = {country_exists = UKR}
+					UKR = { is_subject_of = FRA }
+					UKR = {is_in_faction_with = FRA}
+				}
+				OR = {
+					NOT = {country_exists = BLR}
+					BLR = { is_subject_of = FRA }
+					BLR = {is_in_faction_with = FRA}
+				}
+			}
 
 			modifier = {
 				max_planning = 0.1
@@ -2758,6 +2899,13 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_attack_UK_naval" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				NOT = {has_idea = FRA_empire_restored_idea}
+				OR = {
+					NOT = {country_exists = ENG}
+					ENG = { is_subject_of = FRA }
+				}
+			}
 
 			modifier = {
 				amphibious_invasion = 0.2
@@ -2772,6 +2920,13 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_attack_UK_air" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				NOT = {has_idea = FRA_empire_restored_idea}
+				OR = {
+					NOT = {country_exists = ENG}
+					ENG = { is_subject_of = FRA }
+				}
+			}
 
 			modifier = {
 				air_accidents_factor = -0.15
@@ -2787,6 +2942,10 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_BON_victory" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				NOT = {has_idea = FRA_empire_restored_idea}
+				is_subject = no
+			}
 
 			modifier = {
 				political_power_factor = 0.15
@@ -2801,6 +2960,10 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_exploitation" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				NOT = {has_idea = FRA_empire_restored_idea}
+				is_subject = no
+			}
 
 			modifier = {
 				political_power_factor = -0.2
@@ -2818,6 +2981,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_expansion_europe" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				NOT = {has_idea = FRA_kingdom_restored_idea}
+			}
 
 			modifier = {
 				war_support_factor = 0.15
@@ -2832,6 +2998,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_expansion_crusades" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				NOT = {has_idea = FRA_kingdom_restored_idea}
+			}
 
 			modifier = {
 				war_support_factor = 0.25
@@ -2847,6 +3016,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_EMPIRE_occident" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				NOT = {has_idea = FRA_kingdom_restored_idea}
+			}
 
 			modifier = {
 				political_power_factor = 0.1
@@ -2863,6 +3035,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_crusade_done_jerusalem" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				NOT = {has_idea = FRA_kingdom_restored_idea}
+			}
 
 			modifier = {
 				political_power_factor = 0.1
@@ -2879,6 +3054,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_expansion_crusades_plus" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				NOT = {has_idea = FRA_kingdom_restored_idea}
+			}
 
 			modifier = {
 				war_support_factor = 0.35
@@ -2907,6 +3085,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_harsh_subjugation" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				NOT = {is_subject_of = FRA}
+			}
 
 			modifier = {
 				stability_factor = -0.15
@@ -2928,6 +3109,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_victory_crusade_2_conversion" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				NOT = {has_idea = FRA_kingdom_restored_idea}
+			}
 
 			modifier = {
 				political_power_factor = 0.15
@@ -2946,6 +3130,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_enlightment" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				NOT = {is_subject_of = FRA}
+			}
 
 			modifier = {
 				stability_factor = 0.15
@@ -2963,6 +3150,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_victory_crusade_2_freedom_light" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				NOT = {has_idea = FRA_kingdom_restored_idea}
+			}
 
 			modifier = {
 				political_power_factor = 0.15
@@ -2981,6 +3171,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_attack_colonies" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				NOT = {has_idea = FRA_empire_restored_idea}
+			}
 
 			modifier = {
 				amphibious_invasion = 0.2
@@ -3078,7 +3271,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_commune_reborn_idea" }
 			picture = red_star
 			allowed = { always = no }
-
+			cancel = {
+				NOT = {has_government = communism}
+			}
 			modifier = {
 				war_support_factor = 0.15
 				army_morale_factor = 0.1
@@ -3093,6 +3288,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_kingdom_restored_idea" }
 			picture = french_monarchy
 			allowed = { always = no }
+			cancel = {
+				NOT = {has_government = nationalist}
+			}
 
 			modifier = {
 				stability_factor = 0.1
@@ -3106,6 +3304,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_empire_restored_idea" }
 			picture = napoleon_dream
 			allowed = { always = no }
+			cancel = {
+				NOT = {has_government = nationalist}
+			}
 
 			modifier = {
 				war_support_factor = 0.1
@@ -3879,6 +4080,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_spy_napoleon_lar" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				NOT = {has_idea = FRA_empire_restored_idea}
+			}
 
 			modifier = {
 				operative_slot = 2
@@ -3893,9 +4097,11 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_spy_napoleon_non_lar" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				NOT = {has_idea = FRA_empire_restored_idea}
+			}
 
 			modifier = {
-
 				influence_coup_modifier = -0.2
 				foreign_influence_modifier = 0.05
 				decryption_factor = 0.15
@@ -3916,6 +4122,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_war_against_republic" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel = {
+				NOT = {has_idea = FRA_kingdom_restored_idea}
+			}
 
 			modifier = {
 				army_core_defence_factor = 0.2
@@ -3928,7 +4137,12 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_EU_strong" }
 			picture = low_popular_support3
 			allowed = { always = no }
-
+			cancel {
+				OR = {
+					NOT = {has_idea = EU_member}
+					NOT = {western_social_democrats_are_in_power = yes}
+				}
+			}
 			modifier = {
 				democratic_drift = 0.05
 				stability_factor = 0.1
@@ -3940,6 +4154,9 @@ local_resources_chromium_factor = 0.15
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_NOTRe_law" }
 			picture = low_popular_support3
 			allowed = { always = no }
+			cancel {
+				NOT = {western_social_democrats_are_in_power = yes}
+			}
 
 			modifier = {
 				democratic_drift = 0.05
