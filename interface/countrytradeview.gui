@@ -8,6 +8,7 @@ guiTypes = {
 		animation_time = 300
 		clipping = no
 		size = { width=720 height=100%% }
+		margin = { left=10 right=5 }
 
 		#hide_sound = menu_close_window
 		show_sound = menu_open_window
@@ -17,17 +18,22 @@ guiTypes = {
 			quadTextureSprite ="GFX_tiled_window_1b_border"
 		}
 
+		background = {
+			name = "Background"
+			position = { x= -2 y = 305 }
+			quadTextureSprite ="GFX_tiled_generic_overlay_bg1_small"
+		}
+
 		iconType ={
 			name ="production_header_bg"
-			spriteType = "GFX_header_bg_trade"
-			position = { x= -3 y = 07 }
+			spriteType = "GFX_trade_header_bg"
+			position = { x= -16 y = 05 }
 			Orientation = "UPPER_LEFT"
 		}
 
 		instantTextboxType = {
 			name = "trade_title"
 			position = { x = 45 y = 8 }
-
 			font = "hoi_36header"
 			borderSize = {x = 0 y = 0}
 			text = "TRADE_TRADE"
@@ -38,7 +44,7 @@ guiTypes = {
 
 		iconType = {
 			name = "trade_header"
-			position = { x = 12 y = 43 }
+			position = { x = 2 y = 43 }
 			quadTextureSprite = "GFX_trade_header"
 		}
 
@@ -93,7 +99,7 @@ guiTypes = {
 
 		containerWindowType = {
 			name = "resources"
-			position = { x = 11 y = 75 }
+			position = { x = -3 y = 75 }
 			size = { width = 618 height = 156 }
 			verticalScrollbar = "right_vertical_slider"
 
@@ -181,28 +187,21 @@ guiTypes = {
 
 		iconType ={
 			name ="trade_divider"
-			spriteType = "GFX_divider"
-			position = { x= 90 y = 300 }
-			Orientation = "UPPER_LEFT"
-		}
-
-		iconType ={
-			name ="trade_filter_bg"
-			spriteType = "GFX_trade_filter_bg"
-			position = { x= 90 y = 318 }
+			spriteType = "GFX_trade_divider"
+			position = { x=1 y = 310 }
 			Orientation = "UPPER_LEFT"
 		}
 
 		buttonType = {
 			name = "sort_country"
-			position = {x=90 y=440}
+			position = {x=3 y=440}
 			quadTextureSprite ="GFX_trade_filter_btn_country"
 			clicksound = click_scroll
 		}
 
 		instantTextboxType = {
 			name = "name"
-			position = { x = 95 y = 447 }
+			position = { x = 8 y = 447 }
 			font = "hoi_16mbs"
 			text = "TRADE_SORT_COUNTRY"
 			maxWidth = 160
@@ -214,14 +213,14 @@ guiTypes = {
 
 		buttonType = {
 			name = "sort_export"
-			position = {x=258 y=440}
+			position = {x=170 y=440}
 			quadTextureSprite ="GFX_trade_filter_btn_export"
 			clicksound = click_scroll
 		}
 
 		instantTextboxType = {
 			name = "export_label"
-			position = { x = 264 y = 447 }
+			position = { x = 173 y = 447 }
 			font = "hoi_16mbs"
 			text = "TRADE_SORT_EXPORT"
 			maxWidth = 90
@@ -288,7 +287,7 @@ guiTypes = {
 		containerWindowType = {
 			name = "country_filters"
 			position = { x = 86 y = 318 }
-			size = { width = 520 height = 50 }
+			size = { width = 800 height = 50 }
 			verticalScrollbar = "right_vertical_slider"
 
 			gridBoxType = {
@@ -303,8 +302,8 @@ guiTypes = {
 
 		containerWindowType = {
 			name = "trade"
-			position = { x = 86 y = 467 }
-			size = { width = 530 height = 100%% }
+			position = { x = 0 y = 467 }
+			size = { width = 100% height = 100%% }
 			verticalScrollbar = "right_vertical_slider"
 			scroll_wheel_factor = 45
 			smooth_scrolling = yes
@@ -318,8 +317,8 @@ guiTypes = {
 			gridBoxType = {
 				name = "trade_grid"
 				position = { x = 0 y = 0 }
-				size = { width = 100%% height = 100%% }
-				slotsize = { width = 670 height = 45 }
+				size = { width = 100% height = 100%% }
+				slotsize = { width = 100% height = 45 }
 				max_slots_horizontal = 1
 				format = "UPPER_LEFT"
 			}
@@ -327,7 +326,7 @@ guiTypes = {
 
 		buttonType = {
 			name = "close_button"
-			position = { x = -43 y = 9 }
+			position = { x = -39 y = 9 }
 			quadTextureSprite ="GFX_closebutton"
 			buttonFont = "Main_14_black"
 			shortcut = "ESCAPE"
@@ -673,21 +672,21 @@ guiTypes = {
 
 	containerWindowType = {
 		name = "resources_filter_entry"
-		position = { x = 0 y = 1 }
+		position = { x = -3 y = 5 }
 		size = { width = 75 height = 50 }
 		clipping = no
 
 		buttonType = {
 			name = "background"
-			position = {x=0 y=0}
-			quadTextureSprite ="GFX_TRADE_resource_btn"
+			position = {x=-8 y=0}
+			quadTextureSprite ="GFX_missiles_gui_ledger_btn"
 			clicksound = click_checkbox
 		}
 
 		iconType = {
 			name ="icon"
 			spriteType = "GFX_resources_strip"
-			position = { x= 25 y = 3 }
+			position = { x = 25 y = 12 }
 			alwaystransparent = yes
 		}
 	}
@@ -720,12 +719,12 @@ guiTypes = {
 	containerWindowType = {
 		name = "country_trade_entry"
 		position = { x = 0 y = 0 }
-		size = { width = 670 height = 45 }
+		size = { width = 1000 height = 45 }
 		clipping = no
 
 		background = {
 			name = "Background"
-			quadTextureSprite ="GFX_country_trade_entry_bg"
+			quadTextureSprite ="GFX_country_trade_entry_bg_wide"
 			clicksound = click_action
 		}
 
