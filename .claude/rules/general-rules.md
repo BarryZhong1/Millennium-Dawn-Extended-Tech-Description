@@ -306,6 +306,30 @@ When a function uses `^index` array subscripts, the **meaning of the index varia
 
 ---
 
+## unlock_decision_tooltip
+
+When informing the player that a decision has become available, do **not** use `custom_effect_tooltip`. Use the dedicated engine keyword instead:
+
+```
+unlock_decision_tooltip = my_decision_id
+```
+
+This renders the correct "Decision unlocked" UI feedback and links directly to the decision panel. A bare `custom_effect_tooltip` with a hand-written loc key produces an inferior tooltip and can drift out of sync with the decision's own name.
+
+---
+
+## has_completed_focus over country flags
+
+To check whether a focus has been completed, use the built-in trigger:
+
+```
+has_completed_focus = my_focus_id
+```
+
+Never use a manually set `country_flag` as a proxy for focus completion. The engine sets the completion state automatically, and a flag requires extra scripting to set, maintain, and clean up.
+
+---
+
 ## Simplification & Performance Patterns
 
 These have dedicated catalogs — both are required reading whenever you touch hot-path code or a file with copy-paste branching:
@@ -386,3 +410,30 @@ option = {
 ```
 
 Copy-pasting from option A and forgetting to update to `.b` is a common source of misleading logs.
+
+## Three-event pattern for cooperative requests
+
+Any event chain modelling a bilateral request (joint project, alliance proposal, trade agreement, cooperation offer, etc.) requires **exactly three events**:
+
+| # | Direction | Purpose |
+| - | --------- | ------- |
+| 1 | Sender → Receiver | The request. Receiver sees Yes / No options. |
+| 2 | Receiver → Sender | Acceptance reply — fires when receiver chooses Yes. |
+| 3 | Receiver → Sender | Rejection reply — fires when receiver chooses No. |
+
+Do not merge acceptance and rejection into one return event with conditional text. Separate events allow distinct titles, descriptions, and option-level effects on both sides.
+
+Minimum skeleton:
+
+```
+# Event 1 — request (fires on receiver)
+option = { name = foo.1.a   # Yes
+	ROOT = { country_event = { id = foo.2 } }
+}
+option = { name = foo.1.b   # No
+	ROOT = { country_event = { id = foo.3 } }
+}
+
+# Event 2 — acceptance (fires on sender)
+# Event 3 — rejection  (fires on sender)
+```

@@ -11495,3 +11495,224 @@ country_event = {
 		}
 	}
 }
+
+# ===== CHI_three_noc_overseas — NOC Overseas Investment Events =====
+# Fired by the CHI_three_noc_overseas focus completion.
+
+# KAZ block — CNPC / PetroKazakhstan ($4.18B)
+
+# CHI_foreign.054 — KAZ receives CNPC acquisition proposal
+country_event = {
+	id = CHI_foreign.054
+	title = CHI_foreign.054.t
+	desc = CHI_foreign.054.d
+	picture = GFX_news_event_generic_diplomacy
+	is_triggered_only = yes
+
+	trigger = {
+		original_tag = KAZ
+	}
+
+	option = {
+		name = CHI_foreign.054.a
+		log = "[GetDateText]: [This.GetName]: CHI_foreign.054.a executed"
+		add_political_power = 100
+		CHI = { country_event = { id = CHI_foreign.055 days = 1 } }
+		ai_chance = { base = 9 }
+	}
+
+	option = {
+		name = CHI_foreign.054.b
+		log = "[GetDateText]: [This.GetName]: CHI_foreign.054.b executed"
+		CHI = { country_event = { id = CHI_foreign.056 days = 1 } }
+		ai_chance = { base = 1 }
+	}
+}
+
+# CHI_foreign.055 — CHI notified: KAZ approved CNPC acquisition
+country_event = {
+	id = CHI_foreign.055
+	title = CHI_foreign.055.t
+	desc = CHI_foreign.055.d
+	picture = GFX_news_event_generic_diplomacy
+	is_triggered_only = yes
+
+	trigger = {
+		original_tag = CHI
+	}
+
+	option = {
+		name = CHI_foreign.055.a
+		log = "[GetDateText]: [This.GetName]: CHI_foreign.055.a executed"
+		custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
+		add_to_variable = { CHI_economy_local_resources_oil_factor = 0.04 tooltip = local_resources_oil_factor_tt }
+		FROM = { add_opinion_modifier = { target = ROOT modifier = CHI_bri_resource_concession } }
+		ai_chance = { base = 1 }
+	}
+}
+
+# CHI_foreign.056 — CHI notified: KAZ rejected CNPC acquisition
+country_event = {
+	id = CHI_foreign.056
+	title = CHI_foreign.056.t
+	desc = CHI_foreign.056.d
+	picture = GFX_news_event_generic_diplomacy
+	is_triggered_only = yes
+
+	trigger = {
+		original_tag = CHI
+	}
+
+	option = {
+		name = CHI_foreign.056.a
+		log = "[GetDateText]: [This.GetName]: CHI_foreign.056.a executed"
+		ai_chance = { base = 1 }
+	}
+}
+
+# AGL block — Sinopec / Addax Petroleum ($7.2B)
+
+# CHI_foreign.057 — AGL receives Sinopec acquisition proposal
+country_event = {
+	id = CHI_foreign.057
+	title = CHI_foreign.057.t
+	desc = CHI_foreign.057.d
+	picture = GFX_news_event_generic_diplomacy
+	is_triggered_only = yes
+
+	trigger = {
+		original_tag = AGL
+	}
+
+	option = {
+		name = CHI_foreign.057.a
+		log = "[GetDateText]: [This.GetName]: CHI_foreign.057.a executed"
+		add_political_power = 75
+		CAPITAL = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+		}
+		CHI = { country_event = { id = CHI_foreign.058 days = 1 } }
+		ai_chance = { base = 9 }
+	}
+
+	option = {
+		name = CHI_foreign.057.b
+		log = "[GetDateText]: [This.GetName]: CHI_foreign.057.b executed"
+		CHI = { country_event = { id = CHI_foreign.059 days = 1 } }
+		ai_chance = { base = 1 }
+	}
+}
+
+# CHI_foreign.058 — CHI notified: AGL approved Sinopec acquisition
+country_event = {
+	id = CHI_foreign.058
+	title = CHI_foreign.058.t
+	desc = CHI_foreign.058.d
+	picture = GFX_news_event_generic_diplomacy
+	is_triggered_only = yes
+
+	trigger = {
+		original_tag = CHI
+	}
+
+	option = {
+		name = CHI_foreign.058.a
+		log = "[GetDateText]: [This.GetName]: CHI_foreign.058.a executed"
+		custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
+		add_to_variable = { CHI_economy_local_resources_oil_factor = 0.03 tooltip = local_resources_oil_factor_tt }
+		FROM = { add_opinion_modifier = { target = ROOT modifier = CHI_bri_resource_concession } }
+		ai_chance = { base = 1 }
+	}
+}
+
+# CHI_foreign.059 — CHI notified: AGL rejected Sinopec acquisition
+country_event = {
+	id = CHI_foreign.059
+	title = CHI_foreign.059.t
+	desc = CHI_foreign.059.d
+	picture = GFX_news_event_generic_diplomacy
+	is_triggered_only = yes
+
+	trigger = {
+		original_tag = CHI
+	}
+
+	option = {
+		name = CHI_foreign.059.a
+		log = "[GetDateText]: [This.GetName]: CHI_foreign.059.a executed"
+		ai_chance = { base = 1 }
+	}
+}
+
+# VEN block — CNOOC / Orinoco Belt joint venture
+
+# CHI_foreign.060 — VEN receives CNOOC joint venture proposal
+country_event = {
+	id = CHI_foreign.060
+	title = CHI_foreign.060.t
+	desc = CHI_foreign.060.d
+	picture = GFX_news_event_generic_diplomacy
+	is_triggered_only = yes
+
+	trigger = {
+		original_tag = VEN
+	}
+
+	option = {
+		name = CHI_foreign.060.a
+		log = "[GetDateText]: [This.GetName]: CHI_foreign.060.a executed"
+		add_political_power = 50
+		add_stability = 0.01
+		CHI = { country_event = { id = CHI_foreign.061 days = 1 } }
+		ai_chance = { base = 9 }
+	}
+
+	option = {
+		name = CHI_foreign.060.b
+		log = "[GetDateText]: [This.GetName]: CHI_foreign.060.b executed"
+		CHI = { country_event = { id = CHI_foreign.062 days = 1 } }
+		ai_chance = { base = 1 }
+	}
+}
+
+# CHI_foreign.061 — CHI notified: VEN approved CNOOC joint venture
+country_event = {
+	id = CHI_foreign.061
+	title = CHI_foreign.061.t
+	desc = CHI_foreign.061.d
+	picture = GFX_news_event_generic_diplomacy
+	is_triggered_only = yes
+
+	trigger = {
+		original_tag = CHI
+	}
+
+	option = {
+		name = CHI_foreign.061.a
+		log = "[GetDateText]: [This.GetName]: CHI_foreign.061.a executed"
+		custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
+		add_to_variable = { CHI_economy_local_resources_oil_factor = 0.03 tooltip = local_resources_oil_factor_tt }
+		FROM = { add_opinion_modifier = { target = ROOT modifier = CHI_bri_resource_concession } }
+		ai_chance = { base = 1 }
+	}
+}
+
+# CHI_foreign.062 — CHI notified: VEN rejected CNOOC joint venture
+country_event = {
+	id = CHI_foreign.062
+	title = CHI_foreign.062.t
+	desc = CHI_foreign.062.d
+	picture = GFX_news_event_generic_diplomacy
+	is_triggered_only = yes
+
+	trigger = {
+		original_tag = CHI
+	}
+
+	option = {
+		name = CHI_foreign.062.a
+		log = "[GetDateText]: [This.GetName]: CHI_foreign.062.a executed"
+		ai_chance = { base = 1 }
+	}
+}
