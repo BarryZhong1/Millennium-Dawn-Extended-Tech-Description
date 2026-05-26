@@ -1,10 +1,8 @@
 NEN_decisions_war_time_mobilization_category = {
 	NEN_letting_loose_the_dogs = {
 		icon = GFX_decision_military_plan
-		available = { NEN = { always = yes } }
 		visible = { NEN = { always = yes } }
 		fire_only_once = yes
-		cost = 0
 		days_remove = 5
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision NEN_letting_loose_the_dogs"
@@ -25,9 +23,16 @@ NEN_decisions_war_time_mobilization_category = {
 				}
 				priority = 0
 			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"Bulldog Brigade\" division_template = \"Bulldog Brigade\" start_experience_factor = 0.5"
+					owner = ROOT
+					count = 1
+				}
+			}
 		}
 
-		ai_will_do = { factor = 9000 }
+		ai_will_do = { base = 9000 }
 	}
 	NEN_war_time_mobilization = {
 		icon = GFX_decision_military_plan
@@ -40,62 +45,33 @@ NEN_decisions_war_time_mobilization_category = {
 			log = "[GetDateText]: [Root.GetName]: Decision NEN_war_time_mobilization"
 			add_stability = -0.04
 			add_war_support = -0.04
-			if = {
-				limit = { has_template = "Bulldog Brigade" }
-				division_template = {
-					name = "Bulldog Brigade"
-					support = {
-						L_Engi_Comp = { x = 0 y = 0 }
-						Mot_Recce_Comp = { x = 0 y = 1 }
-						combat_service_support_company = { x = 0 y = 2 }
-					}
-					regiments = {
-						L_Inf_Bat = { x = 0 y = 0 }
-						L_Inf_Bat = { x = 1 y = 0 }
-						L_Inf_Bat = { x = 2 y = 0 }
-						L_Inf_Bat = { x = 3 y = 0 }
-						L_Inf_Bat = { x = 1 y = 1 }
-						L_Inf_Bat = { x = 2 y = 1 }
-					}
-					priority = 0
+			division_template = {
+				name = "Bulldog Brigade"
+				support = {
+					L_Engi_Comp = { x = 0 y = 0 }
+					Mot_Recce_Comp = { x = 0 y = 1 }
+					combat_service_support_company = { x = 0 y = 2 }
 				}
-				capital_scope = {
-					create_unit = {
-						division = "name = \"Bulldog Brigade\" division_template = \"Bulldog Brigade\" start_experience_factor = 0.5"
-						owner = ROOT
-						count = 6
-					}
+				regiments = {
+					L_Inf_Bat = { x = 0 y = 0 }
+					L_Inf_Bat = { x = 1 y = 0 }
+					L_Inf_Bat = { x = 2 y = 0 }
+					L_Inf_Bat = { x = 3 y = 0 }
+					L_Inf_Bat = { x = 1 y = 1 }
+					L_Inf_Bat = { x = 2 y = 1 }
 				}
+				priority = 0
 			}
-			else = {
-				division_template = {
-					name = "Bulldog Brigade"
-					support = {
-						L_Engi_Comp = { x = 0 y = 0 }
-						Mot_Recce_Comp = { x = 0 y = 1 }
-						combat_service_support_company = { x = 0 y = 2 }
-					}
-					regiments = {
-						L_Inf_Bat = { x = 0 y = 0 }
-						L_Inf_Bat = { x = 1 y = 0 }
-						L_Inf_Bat = { x = 2 y = 0 }
-						L_Inf_Bat = { x = 3 y = 0 }
-						L_Inf_Bat = { x = 1 y = 1 }
-						L_Inf_Bat = { x = 2 y = 1 }
-					}
-					priority = 0
-				}
-				capital_scope = {
-					create_unit = {
-						division = "name = \"Bulldog Brigade\" division_template = \"Bulldog Brigadet\" start_experience_factor = 0.5"
-						owner = ROOT
-						count = 6
-					}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"Bulldog Brigade\" division_template = \"Bulldog Brigade\" start_experience_factor = 0.5"
+					owner = ROOT
+					count = 6
 				}
 			}
 		}
 
-		ai_will_do = { factor = 9000 }
+		ai_will_do = { base = 9000 }
 	}
 
 	NEN_war_time_mobilization_ai = {
@@ -103,7 +79,6 @@ NEN_decisions_war_time_mobilization_category = {
 		available = { NEN = { has_war = yes } }
 		visible = { NEN = { is_ai = yes } }
 		fire_only_once = yes
-		cost = 0
 		days_remove = 5
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision NEN_war_time_mobilization_ai"
@@ -139,7 +114,7 @@ NEN_decisions_war_time_mobilization_category = {
 				}
 				capital_scope = {
 					create_unit = {
-						division = "name = \"Bulldog Brigade\" division_template = \"Bulldog Brigadet\" start_experience_factor = 0.5"
+						division = "name = \"Bulldog Brigade\" division_template = \"Bulldog Brigade\" start_experience_factor = 0.5"
 						owner = ROOT
 						count = 6
 					}
@@ -147,7 +122,7 @@ NEN_decisions_war_time_mobilization_category = {
 			}
 		}
 
-		ai_will_do = { factor = 9000 }
+		ai_will_do = { base = 9000 }
 	}
 
 	NEN_war_second_wave_defenders = {
@@ -191,7 +166,7 @@ NEN_decisions_war_time_mobilization_category = {
 				}
 				capital_scope = {
 					create_unit = {
-						division = "name = \"Bulldog Brigade\" division_template = \"Bulldog Brigadet\" start_experience_factor = 0.5"
+						division = "name = \"Bulldog Brigade\" division_template = \"Bulldog Brigade\" start_experience_factor = 0.5"
 						owner = ROOT
 						count = 12
 					}
@@ -199,7 +174,7 @@ NEN_decisions_war_time_mobilization_category = {
 			}
 		}
 
-		ai_will_do = { factor = 9000 }
+		ai_will_do = { base = 9000 }
 	}
 
 	NEN_war_second_wave_defenders_ai = {
@@ -207,7 +182,6 @@ NEN_decisions_war_time_mobilization_category = {
 		available = { NEN = { surrender_progress > 0.25 } }
 		visible = { NEN = { is_ai = yes } }
 		fire_only_once = yes
-		cost = 0
 		days_remove = 10
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision NEN_war_second_wave_defenders_ai"
@@ -243,7 +217,7 @@ NEN_decisions_war_time_mobilization_category = {
 				}
 				capital_scope = {
 					create_unit = {
-						division = "name = \"Bulldog Brigade\" division_template = \"Bulldog Brigadet\" start_experience_factor = 0.5"
+						division = "name = \"Bulldog Brigade\" division_template = \"Bulldog Brigade\" start_experience_factor = 0.5"
 						owner = ROOT
 						count = 12
 					}
@@ -251,7 +225,7 @@ NEN_decisions_war_time_mobilization_category = {
 			}
 		}
 
-		ai_will_do = { factor = 9000 }
+		ai_will_do = { base = 9000 }
 	}
 
 	NEN_war_desperate_defenders = {
@@ -295,7 +269,7 @@ NEN_decisions_war_time_mobilization_category = {
 				}
 				capital_scope = {
 					create_unit = {
-						division = "name = \"Bulldog Brigade\" division_template = \"Bulldog Brigadet\" start_experience_factor = 0.5"
+						division = "name = \"Bulldog Brigade\" division_template = \"Bulldog Brigade\" start_experience_factor = 0.5"
 						owner = ROOT
 						count = 18
 					}
@@ -303,7 +277,7 @@ NEN_decisions_war_time_mobilization_category = {
 			}
 		}
 
-		ai_will_do = { factor = 9000 }
+		ai_will_do = { base = 9000 }
 	}
 
 	NEN_war_desperate_defenders_ai = {
@@ -311,7 +285,6 @@ NEN_decisions_war_time_mobilization_category = {
 		available = { NEN = { surrender_progress > 0.50 } }
 		visible = { NEN = { is_ai = yes } }
 		fire_only_once = yes
-		cost = 0
 		days_remove = 15
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision NEN_war_desperate_defenders_ai"
@@ -355,15 +328,13 @@ NEN_decisions_war_time_mobilization_category = {
 			}
 		}
 
-		ai_will_do = { factor = 9000 }
+		ai_will_do = { base = 9000 }
 	}
 
 	NEN_creating_infantry_reserves = {
 		icon = GFX_decision_military_plan
-		available = { NEN = { always = yes } }
 		visible = { NEN = { always = yes } }
 		fire_only_once = yes
-		cost = 0
 		days_remove = 21
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision NEN_creating_infantry_reserves"
@@ -388,12 +359,12 @@ NEN_decisions_war_time_mobilization_category = {
 			}
 		}
 
-		ai_will_do = { factor = 9000 }
+		ai_will_do = { base = 9000 }
 	}
 
 	NEN_mobilizing_the_reserves = {
 		icon = GFX_decision_military_plan
-		available = { 
+		available = {
 			NEN = {
 				OR = {
 					has_completed_focus = NEN_focus_new_new_england
@@ -407,11 +378,10 @@ NEN_decisions_war_time_mobilization_category = {
 					NYK = { has_war_with = NEN }
 					USB = { has_war_with = NEN }
 				}
-			} 
+			}
 		}
 		visible = { NEN = { always = yes } }
 		fire_only_once = yes
-		cost = 0
 		days_remove = 21
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision NEN_mobilizing_the_reserves"
@@ -455,7 +425,7 @@ NEN_decisions_war_time_mobilization_category = {
 			}
 		}
 
-		ai_will_do = { factor = 9000 }
+		ai_will_do = { base = 9000 }
 	}
 
 }

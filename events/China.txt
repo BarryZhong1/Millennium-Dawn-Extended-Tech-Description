@@ -1,4 +1,4 @@
-﻿add_namespace = china
+add_namespace = china
 add_namespace = china_news
 add_namespace = south_china_sea_clash
 add_namespace = sino_indian
@@ -195,7 +195,6 @@ country_event = {
 		custom_effect_tooltip = moonbase_chain_end_tt
 	}
 }
-
 
 #Rover Mars Mission
 country_event = {
@@ -649,22 +648,15 @@ country_event = {
 	title = china.4.t
 	desc = china.4.d
 	picture = GFX_melamine_scandal
-
-	fire_only_once = yes
-
+	is_triggered_only = yes
 	trigger = {
 		tag = CHI
 		has_government = communism
-		date > 2008.7.1
-		date < 2008.7.30
 	}
 
 	option = {
 		name = china.4.a
 		log = "[GetDateText]: [This.GetName]: china.4.a executed"
-		ai_chance = {
-			base = 100
-		}
 
 		add_political_power = -10
 
@@ -677,6 +669,10 @@ country_event = {
 			}
 			recalculate_party = yes
 		}
+
+		ai_chance = {
+			base = 100
+		}
 	}
 }
 
@@ -686,10 +682,8 @@ country_event = {
 	title = china.5.t
 	desc = china.5.d
 	picture = GFX_typhoon
-
-	fire_only_once = yes
-
 	is_triggered_only = yes
+	fire_only_once = yes
 
 	option = {
 		name = china.5.a
@@ -706,12 +700,14 @@ country_event = {
 	id = china.6
 	title = china.6.t
 	desc = china.6.d
-	picture = GFX_election_day
+	is_triggered_only = yes
 	hidden = yes
 
 	trigger = {
-		CHI = { has_elections = yes }
-		CHI = { NOT = { has_completed_focus = CHI_Free_and_Fair_Elections } }
+		CHI = {
+			has_elections = yes
+			NOT = { has_completed_focus = CHI_Free_and_Fair_Elections }
+		}
 	}
 
 	fire_only_once = yes
@@ -719,7 +715,6 @@ country_event = {
 	option = {
 		name = china.6.a
 		news_event = { hours = 6 id = china_news.12 }
-		log = "[GetDateText]: [This.GetName]: china.6.a executed"
 	}
 
 }
@@ -734,10 +729,9 @@ country_event = {
 	is_triggered_only = yes
 
 	option = {
+		log = "[GetDateText]: [This.GetName]: china.7.a executed"
 		name = china.7.a
 		add_political_power = 100
-		set_country_flag = chi_the_one_china_policy
-		log = "[GetDateText]: [This.GetName]: china.7.a executed"
 	}
 }
 
@@ -815,7 +809,6 @@ country_event = {
 			}
 		}
 	}
-
 
 	option = {
 		name = china.9.a
@@ -1225,9 +1218,8 @@ country_event = {
 						set_variable = { party_pop_array^11 = 0.03 } #Caliphate
 						set_variable = { party_pop_array^12 = 0.33 } #Neutral_Muslim_Brotherhood
 						set_variable = { party_pop_array^19 = 0.08 } #Maoist
-						clear_array = ruling_party
-						clear_array = gov_coalition_array
-						add_to_array = { ruling_party = 4 }
+						set_temp_variable = { rul_party_temp = 4 }
+						change_ruling_party_effect = yes
 						if = {
 							limit = { CHI = { has_elections = no } }
 							set_politics = {
@@ -1241,19 +1233,13 @@ country_event = {
 								elections_allowed = yes
 							}
 						}
-						update_government_coalition_strength = yes
-						update_party_name = yes
-						set_coalition_drift = yes
 						recalculate_party = yes
 						set_variable = { var = debt value = 0 }
 						set_variable = { var = int_investments value = 0 }
 						set_variable = { var = treasury value = 12 }
 						set_variable = { var = corporate_tax_rate value = 13 }
 						set_variable = { var = population_tax_rate value = 15 }
-						set_variable = { military_factory_employment_var = 1 }
-						set_variable = { civilian_factory_employment_var = 1 }
-						set_variable = { naval_factory_employment_var = 1 }
-						set_variable = { office_employment_var = 1 }
+						setup_employment_variables = yes
 						add_ideas = {
 							widespread_corruption
 							sunni
@@ -1288,16 +1274,8 @@ country_event = {
 						set_variable = { party_pop_array^11 = 0.03 } #Caliphate
 						set_variable = { party_pop_array^12 = 0.33 } #Neutral_Muslim_Brotherhood
 						set_variable = { party_pop_array^19 = 0.08 } #Maoist
-						clear_array = ruling_party
-						clear_array = gov_coalition_array
-						add_to_array = { ruling_party = 1 }
-						set_politics = {
-							ruling_party = democratic
-							elections_allowed = yes
-						}
-						update_government_coalition_strength = yes
-						update_party_name = yes
-						set_coalition_drift = yes
+						set_temp_variable = { rul_party_temp = 1 }
+						change_ruling_party_effect = yes
 						recalculate_party = yes
 						set_variable = { var = debt value = 0 }
 						set_variable = { var = int_investments value = 0 }
@@ -1331,13 +1309,8 @@ country_event = {
 						set_variable = { party_pop_array^14 = 0.33 } #Neutral_conservatism
 						set_variable = { party_pop_array^18 = 0.10 } #social
 						set_variable = { party_pop_array^19 = 0.18 } #Maoist
-						clear_array = ruling_party
-						clear_array = gov_coalition_array
-						add_to_array = { ruling_party = 14 }
-						set_politics = {
-							ruling_party = neutrality
-							elections_allowed = yes
-						}
+						set_temp_variable = { rul_party_temp = 14 }
+						change_ruling_party_effect = yes
 						set_popularities = {
 							democratic = 0.0
 							communism = 0.0
@@ -1345,9 +1318,6 @@ country_event = {
 							neutrality = 92.0
 							nationalist = 0.0
 						}
-						update_government_coalition_strength = yes
-						update_party_name = yes
-						set_coalition_drift = yes
 						recalculate_party = yes
 						set_variable = { var = debt value = 0 }
 						set_variable = { var = int_investments value = 0 }
@@ -1380,9 +1350,8 @@ country_event = {
 						set_variable = { party_pop_array^12 = 0.33 } #Neutral_Muslim_Brotherhood
 						set_variable = { party_pop_array^19 = 0.08 } #Maoist
 						set_variable = { party_pop_array^22 = 0.51 } #Nat_Autocracy
-						clear_array = ruling_party
-						clear_array = gov_coalition_array
-						add_to_array = { ruling_party = 22 }
+						set_temp_variable = { rul_party_temp = 22 }
+						change_ruling_party_effect = yes
 						if = {
 							limit = { CHI = { has_elections = no } }
 							set_politics = {
@@ -1403,9 +1372,6 @@ country_event = {
 							neutrality = 41.0
 							nationalist = 51.0
 						}
-						update_government_coalition_strength = yes
-						update_party_name = yes
-						set_coalition_drift = yes
 						recalculate_party = yes
 						set_variable = { var = debt value = 0 }
 						set_variable = { var = int_investments value = 0 }
@@ -1480,9 +1446,8 @@ country_event = {
 						set_variable = { party_pop_array^19 = 0.08 } #Maoist
 						set_variable = { party_pop_array^20 = 0.03 } #Populist
 						set_variable = { party_pop_array^23 = 0.39 } #Monarchist
-						clear_array = ruling_party
-						clear_array = gov_coalition_array
-						add_to_array = { ruling_party = 4 }
+						set_temp_variable = { rul_party_temp = 4 }
+						change_ruling_party_effect = yes
 						if = {
 							limit = { CHI = { has_elections = no } }
 							set_politics = {
@@ -1496,19 +1461,13 @@ country_event = {
 								elections_allowed = yes
 							}
 						}
-						update_government_coalition_strength = yes
-						update_party_name = yes
-						set_coalition_drift = yes
 						recalculate_party = yes
 						set_variable = { var = debt value = 0 }
 						set_variable = { var = int_investments value = 0 }
 						set_variable = { var = treasury value = 12 }
 						set_variable = { var = corporate_tax_rate value = 13 }
 						set_variable = { var = population_tax_rate value = 15 }
-						set_variable = { military_factory_employment_var = 1 }
-						set_variable = { civilian_factory_employment_var = 1 }
-						set_variable = { naval_factory_employment_var = 1 }
-						set_variable = { office_employment_var = 1 }
+						setup_employment_variables = yes
 						add_ideas = {
 							widespread_corruption
 							buddism
@@ -1542,16 +1501,8 @@ country_event = {
 						set_variable = { party_pop_array^19 = 0.15 } #Maoist
 						set_variable = { party_pop_array^20 = 0.02 } #Populist
 						set_variable = { party_pop_array^23 = 0.39 } #Monarchist
-						clear_array = ruling_party
-						clear_array = gov_coalition_array
-						add_to_array = { ruling_party = 1 }
-						set_politics = {
-							ruling_party = democratic
-							elections_allowed = yes
-						}
-						update_government_coalition_strength = yes
-						update_party_name = yes
-						set_coalition_drift = yes
+						set_temp_variable = { rul_party_temp = 1 }
+						change_ruling_party_effect = yes
 						recalculate_party = yes
 						set_variable = { var = debt value = 0 }
 						set_variable = { var = int_investments value = 0 }
@@ -1591,16 +1542,8 @@ country_event = {
 						set_variable = { party_pop_array^19 = 0.18 } #Maoist
 						set_variable = { party_pop_array^20 = 0.02 } #Populist
 						set_variable = { party_pop_array^23 = 0.39 } #Monarchist
-						clear_array = ruling_party
-						clear_array = gov_coalition_array
-						add_to_array = { ruling_party = 14 }
-						set_politics = {
-							ruling_party = neutrality
-							elections_allowed = yes
-						}
-						update_government_coalition_strength = yes
-						update_party_name = yes
-						set_coalition_drift = yes
+						set_temp_variable = { rul_party_temp = 14 }
+						change_ruling_party_effect = yes
 						recalculate_party = yes
 						set_variable = { var = debt value = 0 }
 						set_variable = { var = int_investments value = 0 }
@@ -1639,9 +1582,8 @@ country_event = {
 						set_variable = { party_pop_array^19 = 0.18 } #Maoist
 						set_variable = { party_pop_array^22 = 0.37 } #Nat_Autocracy
 						set_variable = { party_pop_array^23 = 0.39 } #Monarchist
-						clear_array = ruling_party
-						clear_array = gov_coalition_array
-						add_to_array = { ruling_party = 22 }
+						set_temp_variable = { rul_party_temp = 22 }
+						change_ruling_party_effect = yes
 						if = {
 							limit = { CHI = { has_elections = no } }
 							set_politics = {
@@ -1655,9 +1597,6 @@ country_event = {
 								elections_allowed = yes
 							}
 						}
-						update_government_coalition_strength = yes
-						update_party_name = yes
-						set_coalition_drift = yes
 						recalculate_party = yes
 						set_variable = { var = debt value = 0 }
 						set_variable = { var = int_investments value = 0 }
@@ -1761,255 +1700,229 @@ country_event = {
 	option = {
 		name = china.19.a
 		log = "[GetDateText]: [This.GetName]: china.19.a executed"
-		ai_chance = {
-			base = 75
-			modifier = {
-				has_global_flag = chi_seize_outer_mongolia
-				factor = 100
-			}
-		}
 		596 = { add_dynamic_modifier = { modifier = CHI_outer_mongolia } }
 		597 = { add_dynamic_modifier = { modifier = CHI_outer_mongolia } }
-		CHI = { add_stability = 0.05
-				set_autonomy = {
+		CHI = {
+			add_stability = 0.05
+			set_autonomy = {
 				target = MON
 				autonomy_state = autonomy_special_administrative_region_MON
 			}
 			set_country_flag = MON_sar_exec
 			set_temp_variable = { temp_opinion = 2 }
 			change_communist_cadres_opinion = yes
+		}
+		MON = {
+			set_cosmetic_tag = MON_autonomy_special_administrative_region
+			clr_country_flag = dynamic_flag
+			add_ideas = Non_State_Actor
+			remove_opinion_modifier = { target = CHI modifier = former_suzerain }
+			if = {
+				limit = { has_idea = jebtsundamba_khutuktu }
+				swap_ideas = {
+				remove_idea = jebtsundamba_khutuktu
+				add_idea = mongolia_rely_to_china
+				}
+				else = {
+				add_ideas = mongolia_rely_to_china
+				}
 			}
+		}
+		if = {
+			limit = { has_government = communism }
 			MON = {
-				set_cosmetic_tag = MON_autonomy_special_administrative_region
-				clr_country_flag = dynamic_flag
-				add_ideas = Non_State_Actor
-				remove_opinion_modifier = { target = CHI modifier = former_suzerain }
+				set_popularities = {
+					democratic = 0.0
+					communism = 51.0
+					fascism = 0.0
+					neutrality = 8.0
+					nationalist = 41.0
+				}
+				set_variable = { party_pop_array^4 = 0.40 } #Communist
+				set_variable = { party_pop_array^5 = 0.04 } #Socialist
+				set_variable = { party_pop_array^6 = 0.06 } #Reactionary
+				set_variable = { party_pop_array^19 = 0.08 } #Maoist
+				set_variable = { party_pop_array^20 = 0.03 } #Populist
+				set_variable = { party_pop_array^23 = 0.39 } #Monarchist
+				set_temp_variable = { rul_party_temp = 4 }
+				change_ruling_party_effect = yes
 				if = {
-					limit = { has_idea = jebtsundamba_khutuktu }
-					swap_ideas = {
-					remove_idea = jebtsundamba_khutuktu
-					add_idea = mongolia_rely_to_china
+					limit = { CHI = { has_elections = no } }
+					set_politics = {
+						ruling_party = communism
+						elections_allowed = no
 					}
-					else = {
-					add_ideas = mongolia_rely_to_china
+				}
+				else = {
+					set_politics = {
+						ruling_party = communism
+						elections_allowed = yes
 					}
+				}
+				recalculate_party = yes
+				set_variable = { var = debt value = 0 }
+				set_variable = { var = int_investments value = 0 }
+				set_variable = { var = treasury value = 12 }
+				set_variable = { var = corporate_tax_rate value = 13 }
+				set_variable = { var = population_tax_rate value = 15 }
+				add_ideas = {
+					widespread_corruption
+					buddism
+					stable_growth
+					defence_00
+					edu_04
+					health_05
+					social_03
+					bureau_03
+					police_03
+					no_military
+					no_women_in_military
+					communist_cadres
+					farmers
+					the_priesthood
 				}
 			}
+		}
+		else_if = {
+			limit = { has_government = democratic }
+			MON = {
+				set_popularities = {
+					democratic = 44.0
+					communism = 0.0
+					fascism = 0.0
+					neutrality = 15.0
+					nationalist = 41.0
+				}
+				set_variable = { party_pop_array^1 = 0.34 } #conservatism
+				set_variable = { party_pop_array^3 = 0.10 } #social
+				set_variable = { party_pop_array^19 = 0.15 } #Maoist
+				set_variable = { party_pop_array^20 = 0.02 } #Populist
+				set_variable = { party_pop_array^23 = 0.39 } #Monarchist
+				set_temp_variable = { rul_party_temp = 1 }
+				change_ruling_party_effect = yes
+				recalculate_party = yes
+				set_variable = { var = debt value = 0 }
+				set_variable = { var = int_investments value = 0 }
+				set_variable = { var = treasury value = 12 }
+				set_variable = { var = corporate_tax_rate value = 13 }
+				set_variable = { var = population_tax_rate value = 15 }
+				add_ideas = {
+					widespread_corruption
+					buddism
+					stable_growth
+					defence_00
+					edu_04
+					health_05
+					social_03
+					bureau_03
+					police_03
+					no_military
+					no_women_in_military
+					landowners
+					farmers
+					the_priesthood
+				}
+			}
+		}
+		else_if = {
+			limit = { has_government = neutrality }
+			MON = {
+				set_popularities = {
+					democratic = 0.0
+					communism = 0.0
+					fascism = 0.0
+					neutrality = 59.0
+					nationalist = 41.0
+				}
+				set_variable = { party_pop_array^14 = 0.31 } #Neutral_conservatism
+				set_variable = { party_pop_array^18 = 0.10 } #social
+				set_variable = { party_pop_array^19 = 0.18 } #Maoist
+				set_variable = { party_pop_array^20 = 0.02 } #Populist
+				set_variable = { party_pop_array^23 = 0.39 } #Monarchist
+				set_temp_variable = { rul_party_temp = 14 }
+				change_ruling_party_effect = yes
+				recalculate_party = yes
+				set_variable = { var = debt value = 0 }
+				set_variable = { var = int_investments value = 0 }
+				set_variable = { var = treasury value = 12 }
+				set_variable = { var = corporate_tax_rate value = 13 }
+				set_variable = { var = population_tax_rate value = 15 }
+				add_ideas = {
+					widespread_corruption
+					buddism
+					stable_growth
+					defence_00
+					edu_04
+					health_05
+					social_03
+					bureau_03
+					police_03
+					no_military
+					no_women_in_military
+					landowners
+					farmers
+					the_priesthood
+				}
+			}
+		}
+		else_if = {
+			limit = { has_government = nationalist }
+			MON = {
+				set_popularities = {
+					democratic = 0.0
+					communism = 0.0
+					fascism = 0.0
+					neutrality = 24.0
+					nationalist = 76.0
+				}
+				set_variable = { party_pop_array^18 = 0.06 } #social
+				set_variable = { party_pop_array^19 = 0.18 } #Maoist
+				set_variable = { party_pop_array^22 = 0.37 } #Nat_Autocracy
+				set_variable = { party_pop_array^23 = 0.39 } #Monarchist
+				set_temp_variable = { rul_party_temp = 22 }
+				change_ruling_party_effect = yes
 				if = {
-					limit = { has_government = communism }
-					MON = {
-						set_popularities = {
-							democratic = 0.0
-							communism = 51.0
-							fascism = 0.0
-							neutrality = 8.0
-							nationalist = 41.0
-						}
-						set_variable = { party_pop_array^4 = 0.40 } #Communist
-						set_variable = { party_pop_array^5 = 0.04 } #Socialist
-						set_variable = { party_pop_array^6 = 0.06 } #Reactionary
-						set_variable = { party_pop_array^19 = 0.08 } #Maoist
-						set_variable = { party_pop_array^20 = 0.03 } #Populist
-						set_variable = { party_pop_array^23 = 0.39 } #Monarchist
-						clear_array = ruling_party
-						clear_array = gov_coalition_array
-						add_to_array = { ruling_party = 4 }
-						if = {
-							limit = { CHI = { has_elections = no } }
-							set_politics = {
-								ruling_party = communism
-								elections_allowed = no
-							}
-						}
-						else = {
-							set_politics = {
-								ruling_party = communism
-								elections_allowed = yes
-							}
-						}
-						update_government_coalition_strength = yes
-						update_party_name = yes
-						set_coalition_drift = yes
-						recalculate_party = yes
-						set_variable = { var = debt value = 0 }
-						set_variable = { var = int_investments value = 0 }
-						set_variable = { var = treasury value = 12 }
-						set_variable = { var = corporate_tax_rate value = 13 }
-						set_variable = { var = population_tax_rate value = 15 }
-						add_ideas = {
-							widespread_corruption
-							buddism
-							stable_growth
-							defence_00
-							edu_04
-							health_05
-							social_03
-							bureau_03
-							police_03
-							no_military
-							no_women_in_military
-							communist_cadres
-							farmers
-							the_priesthood
-						}
+					limit = { CHI = { has_elections = no } }
+					set_politics = {
+						ruling_party = nationalist
+						elections_allowed = no
 					}
 				}
-				else_if = {
-					limit = { has_government = democratic }
-					MON = {
-						set_popularities = {
-							democratic = 44.0
-							communism = 0.0
-							fascism = 0.0
-							neutrality = 15.0
-							nationalist = 41.0
-						}
-						set_variable = { party_pop_array^1 = 0.34 } #conservatism
-						set_variable = { party_pop_array^3 = 0.10 } #social
-						set_variable = { party_pop_array^19 = 0.15 } #Maoist
-						set_variable = { party_pop_array^20 = 0.02 } #Populist
-						set_variable = { party_pop_array^23 = 0.39 } #Monarchist
-						clear_array = ruling_party
-						clear_array = gov_coalition_array
-						add_to_array = { ruling_party = 1 }
-						set_politics = {
-							ruling_party = democratic
-							elections_allowed = yes
-						}
-						update_government_coalition_strength = yes
-						update_party_name = yes
-						set_coalition_drift = yes
-						recalculate_party = yes
-						set_variable = { var = debt value = 0 }
-						set_variable = { var = int_investments value = 0 }
-						set_variable = { var = treasury value = 12 }
-						set_variable = { var = corporate_tax_rate value = 13 }
-						set_variable = { var = population_tax_rate value = 15 }
-						add_ideas = {
-							widespread_corruption
-							buddism
-							stable_growth
-							defence_00
-							edu_04
-							health_05
-							social_03
-							bureau_03
-							police_03
-							no_military
-							no_women_in_military
-							landowners
-							farmers
-							the_priesthood
-						}
+				else = {
+					set_politics = {
+						ruling_party = nationalist
+						elections_allowed = yes
 					}
 				}
-				else_if = {
-					limit = { has_government = neutrality }
-					MON = {
-						set_popularities = {
-							democratic = 0.0
-							communism = 0.0
-							fascism = 0.0
-							neutrality = 59.0
-							nationalist = 41.0
-						}
-						set_variable = { party_pop_array^14 = 0.31 } #Neutral_conservatism
-						set_variable = { party_pop_array^18 = 0.10 } #social
-						set_variable = { party_pop_array^19 = 0.18 } #Maoist
-						set_variable = { party_pop_array^20 = 0.02 } #Populist
-						set_variable = { party_pop_array^23 = 0.39 } #Monarchist
-						clear_array = ruling_party
-						clear_array = gov_coalition_array
-						add_to_array = { ruling_party = 14 }
-						set_politics = {
-							ruling_party = neutrality
-							elections_allowed = yes
-						}
-						update_government_coalition_strength = yes
-						update_party_name = yes
-						set_coalition_drift = yes
-						recalculate_party = yes
-						set_variable = { var = debt value = 0 }
-						set_variable = { var = int_investments value = 0 }
-						set_variable = { var = treasury value = 12 }
-						set_variable = { var = corporate_tax_rate value = 13 }
-						set_variable = { var = population_tax_rate value = 15 }
-						add_ideas = {
-							widespread_corruption
-							buddism
-							stable_growth
-							defence_00
-							edu_04
-							health_05
-							social_03
-							bureau_03
-							police_03
-							no_military
-							no_women_in_military
-							landowners
-							farmers
-							the_priesthood
-						}
-					}
+				recalculate_party = yes
+				set_variable = { var = debt value = 0 }
+				set_variable = { var = int_investments value = 0 }
+				set_variable = { var = treasury value = 12 }
+				set_variable = { var = corporate_tax_rate value = 13 }
+				set_variable = { var = population_tax_rate value = 15 }
+				add_ideas = {
+					widespread_corruption
+					buddism
+					stable_growth
+					defence_00
+					edu_04
+					health_05
+					social_03
+					bureau_03
+					police_03
+					no_military
+					no_women_in_military
+					landowners
+					labour_unions
+					the_priesthood
 				}
-				else_if = {
-					limit = { has_government = nationalist }
-					MON = {
-						set_popularities = {
-							democratic = 0.0
-							communism = 0.0
-							fascism = 0.0
-							neutrality = 24.0
-							nationalist = 76.0
-						}
-						set_variable = { party_pop_array^18 = 0.06 } #social
-						set_variable = { party_pop_array^19 = 0.18 } #Maoist
-						set_variable = { party_pop_array^22 = 0.37 } #Nat_Autocracy
-						set_variable = { party_pop_array^23 = 0.39 } #Monarchist
-						clear_array = ruling_party
-						clear_array = gov_coalition_array
-						add_to_array = { ruling_party = 22 }
-						if = {
-							limit = { CHI = { has_elections = no } }
-							set_politics = {
-								ruling_party = nationalist
-								elections_allowed = no
-							}
-						}
-						else = {
-							set_politics = {
-								ruling_party = nationalist
-								elections_allowed = yes
-							}
-						}
-						update_government_coalition_strength = yes
-						update_party_name = yes
-						set_coalition_drift = yes
-						recalculate_party = yes
-						set_variable = { var = debt value = 0 }
-						set_variable = { var = int_investments value = 0 }
-						set_variable = { var = treasury value = 12 }
-						set_variable = { var = corporate_tax_rate value = 13 }
-						set_variable = { var = population_tax_rate value = 15 }
-						add_ideas = {
-							widespread_corruption
-							buddism
-							stable_growth
-							defence_00
-							edu_04
-							health_05
-							social_03
-							bureau_03
-							police_03
-							no_military
-							no_women_in_military
-							landowners
-							labour_unions
-							the_priesthood
-						}
-					}
-				}
-				news_event = china_news.19
+			}
+		}
+		news_event = china_news.19
+
+		ai_chance = {
+			base = 75
+		}
 	}
 
 	option = {
@@ -2023,7 +1936,7 @@ country_event = {
 			}
 		}
 		CHI = { add_opinion_modifier = { target = MON modifier = betrayed_our_cause }
-				country_event = { id = china.20 } }
+				country_event = china.20 }
 	}
 }
 
@@ -2042,15 +1955,18 @@ news_event = {
 		log = "[GetDateText]: [This.GetName]: china.20.a executed"
 		ai_chance = { base = 80 }
 		declare_war_on = {
-		 target = MON
-		 type = annex_everything
-	  }
+			target = MON
+			type = annex_everything
+		}
 	}
 
 	option = {
 		name = china.20.b
 		log = "[GetDateText]: [This.GetName]: china.20.b executed"
 		ai_chance = { base = 20 }
+		set_temp_variable = { wargoal_on = MON }
+		set_temp_variable = { wargoal_type = 2 }
+		add_threat_from_wargoal_effect = yes
 		create_wargoal = {
 			target = MON
 			type = annex_everything
@@ -2070,20 +1986,19 @@ country_event = {
 
 	option = {
 		name = china.21.a
+		log = "[GetDateText]: [This.GetName]: china.21.a executed"
 		add_political_power = 100
 		if = { limit = { NOT = { country_exists = MON } }
-			   556 = { remove_dynamic_modifier = { modifier = CHI_inner_mongolia_autonomous_region } }
-			   556 = { add_dynamic_modifier = { modifier = CHI_mongolia_autonomous_region } }
-			   1097 = { remove_dynamic_modifier = { modifier = CHI_inner_mongolia_autonomous_region } }
-			   1097 = { add_dynamic_modifier = { modifier = CHI_mongolia_autonomous_region } }
-			   596 = { add_dynamic_modifier = { modifier = CHI_mongolia_autonomous_region } }
-			   597 = { add_dynamic_modifier = { modifier = CHI_mongolia_autonomous_region } }
-						}
+			556 = { remove_dynamic_modifier = { modifier = CHI_inner_mongolia_autonomous_region } }
+			556 = { add_dynamic_modifier = { modifier = CHI_mongolia_autonomous_region } }
+			1097 = { remove_dynamic_modifier = { modifier = CHI_inner_mongolia_autonomous_region } }
+			1097 = { add_dynamic_modifier = { modifier = CHI_mongolia_autonomous_region } }
+			596 = { add_dynamic_modifier = { modifier = CHI_mongolia_autonomous_region } }
+			597 = { add_dynamic_modifier = { modifier = CHI_mongolia_autonomous_region } }
+		}
 		set_province_name = { id = 4801 name = CHI_4801_name }
 		set_province_name = { id = 13945 name = CHI_13945_name }
 		set_province_name = { id = 13994 name = CHI_13994_name }
-		set_country_flag = chi_regain_outer_mongolia
-		log = "[GetDateText]: [This.GetName]: china.21.a executed"
 	}
 }
 
@@ -2182,7 +2097,6 @@ country_event = {
 	option = {
 		name = china.24.a
 		log = "[GetDateText]: [This.GetName]: china.24.a executed"
-		clr_country_flag = Recognised_ROC
 		CHI = {
 			remove_opinion_modifier = { modifier = recognize_taiwan_chi target = ROOT }
 		}
@@ -2201,7 +2115,6 @@ country_event = {
 		CHI = {
 			add_opinion_modifier = { target = ROOT modifier = harsh_sanctions }
 		}
-		set_country_flag = loyal_to_ROC
 	}
 }
 
@@ -2278,10 +2191,6 @@ country_event = {
 			}
 			hidden_effect = {
 				TAI = {
-					set_politics = {
-						ruling_party = communism
-						elections_allowed = yes
-					}
 					set_popularities = {
 						democratic = 59.0
 						communism = 37.0
@@ -2294,14 +2203,10 @@ country_event = {
 					set_variable = { party_pop_array^6 = 0.370 } #Reactionary
 					set_variable = { party_pop_array^14 = 0.03 } #Neutral_conservatism
 					set_variable = { party_pop_array^18 = 0.01 } #neutral_Social
-					clear_array = ruling_party
-					clear_array = gov_coalition_array
-					add_to_array = { ruling_party = 6 }
-					add_to_array = { gov_coalition_array = 1 }
-					add_to_array = { gov_coalition_array = 14 }
-					update_government_coalition_strength = yes
-					update_party_name = yes
-					set_coalition_drift = yes
+					set_temp_variable = { rul_party_temp = 6 }
+					set_temp_variable = { col_one = 1 }
+					set_temp_variable = { col_two = 14 }
+					change_ruling_party_effect = yes
 					recalculate_party = yes
 				}
 			}
@@ -2312,10 +2217,6 @@ country_event = {
 			}
 			hidden_effect = {
 				TAI = {
-					set_politics = {
-						ruling_party = democratic
-						elections_allowed = yes
-					}
 					set_popularities = {
 						democratic = 68.0
 						communism = 0.5
@@ -2328,14 +2229,10 @@ country_event = {
 					set_variable = { party_pop_array^6 = 0.005 } #Reactionary
 					set_variable = { party_pop_array^14 = 0.3 } #Neutral_conservatism
 					set_variable = { party_pop_array^18 = 0.015 } #neutral_Social
-					clear_array = ruling_party
-					clear_array = gov_coalition_array
-					add_to_array = { ruling_party = 1 }
-					add_to_array = { gov_coalition_array = 6 }
-					add_to_array = { gov_coalition_array = 14 }
-					update_government_coalition_strength = yes
-					update_party_name = yes
-					set_coalition_drift = yes
+					set_temp_variable = { rul_party_temp = 1 }
+					set_temp_variable = { col_one = 6 }
+					set_temp_variable = { col_two = 14 }
+					change_ruling_party_effect = yes
 					recalculate_party = yes
 					recalculate_party = yes
 				}
@@ -2347,10 +2244,6 @@ country_event = {
 			}
 			hidden_effect = {
 				TAI = {
-					set_politics = {
-						ruling_party = neutrality
-						elections_allowed = yes
-					}
 					set_popularities = {
 						democratic = 50.0
 						communism = 18.5
@@ -2363,14 +2256,10 @@ country_event = {
 					set_variable = { party_pop_array^6 = 0.185 } #Reactionary
 					set_variable = { party_pop_array^14 = 0.300 } #Neutral_conservatism
 					set_variable = { party_pop_array^18 = 0.015 } #neutral_Social
-					clear_array = ruling_party
-					clear_array = gov_coalition_array
-					add_to_array = { ruling_party = 14 }
-					add_to_array = { gov_coalition_array = 1 }
-					add_to_array = { gov_coalition_array = 6 }
-					update_government_coalition_strength = yes
-					update_party_name = yes
-					set_coalition_drift = yes
+					set_temp_variable = { rul_party_temp = 14 }
+					set_temp_variable = { col_one = 1 }
+					set_temp_variable = { col_two = 6 }
+					change_ruling_party_effect = yes
 					recalculate_party = yes
 					recalculate_party = yes
 				}
@@ -2394,10 +2283,6 @@ country_event = {
 				remove_ideas = Major_Non_NATO_Ally
 			}
 			if = {
-				limit = { has_idea = rival_government }
-				remove_ideas = rival_government
-			}
-			if = {
 				limit = { has_idea = fate_of_mongolian_area }
 				remove_ideas = fate_of_mongolian_area
 			}
@@ -2414,11 +2299,6 @@ country_event = {
 						is_greater_china_state = yes
 					}
 					remove_core_of = TAI
-				}
-				every_state = { #remove claim for former Mainland states
-					limit = {
-						is_greater_china_state = yes
-					}
 					remove_claim_by = TAI
 				}
 				496 = { remove_claim_by = TAI }
@@ -2468,6 +2348,7 @@ country_event = {
 
 	option = {
 		name = china.26.a
+		log = "[GetDateText]: [This.GetName]: china.26.a"
 		add_political_power = 100
 		598 = { add_dynamic_modifier = { modifier = CHI_taiwan_autonomous_region } }
 		599 = { add_dynamic_modifier = { modifier = CHI_taiwan_autonomous_region } }
@@ -2476,6 +2357,10 @@ country_event = {
 		1156 = { add_dynamic_modifier = { modifier = CHI_taiwan_autonomous_region } }
 		1157 = { add_dynamic_modifier = { modifier = CHI_taiwan_autonomous_region } }
 		1158 = { add_dynamic_modifier = { modifier = CHI_taiwan_autonomous_region } }
+		if = {
+				limit = { TAI = { has_idea = the_great_chip_empire } }
+				CHI = { add_ideas = the_great_chip_empire }
+			 }
 		news_event = { id = china_news.25 days = 5 }
 		log = "[GetDateText]: [This.GetName]: china.26.a executed"
 	}
@@ -2703,6 +2588,8 @@ country_event = {
 	option = {
 		name = china.30.a #We no longer have to submit to the Chinese!
 		CHI = {
+			set_temp_variable = { wargoal_on = VIE }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = puppet_wargoal_focus
 				target = VIE
@@ -2899,6 +2786,8 @@ country_event = {
 	option = {
 		name = china.32.a #We no longer have to submit to the Chinese!
 		CHI = {
+			set_temp_variable = { wargoal_on = IND }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				type = take_state_focus
 				target = IND
@@ -3234,7 +3123,6 @@ country_event = {
 		hidden_effect = {
 			set_temp_variable = { percent_change = 2 }
 			set_temp_variable = { tag_index = CHI.id }
-			set_temp_variable = { influence_target = THIS.id }
 			change_influence_percentage = yes
 			CHI = {
 				country_event = { id = china.39 days = 3 }
@@ -3571,34 +3459,27 @@ country_event = {
 		name = china.52.a
 		log = "[GetDateText]: [This.GetName]: china.52.a executed"
 		hidden_effect = {
-			if = {
-				limit = { has_dlc = "Man the Guns" }
-				create_equipment_variant = {
-					name = "Liaoning Class"
-					type = carrier_hull_2
-					name_group = CHI_CV_HISTORICAL
-					parent_version = 0
-					modules = {
-						fixed_ship_engine_slot = module_surface_oil_power
-						fixed_ship_fire_control_system_slot = module_digital_integrated_fire_control
-						fixed_ship_radar_slot = module_radar_3
-						fixed_ship_auxillary_slot_2 = module_ciws_2
-						fixed_ship_auxillary_slot_1 = module_ciws_2
-						fixed_ship_auxillary_slot = module_ciws_2
-						fixed_ship_flight_deck = module_flight_deck_2
-						front_1_custom_slot = module_vls_asm_2
-						front_2_custom_slot = module_vls_sam_2
-						mid_1_custom_slot = module_vls_sam_2
-						mid_2_custom_slot = module_helipads_1
-					}
+			create_equipment_variant = {
+				name = "Liaoning Class"
+				type = carrier_hull_2
+				name_group = CHI_CV_HISTORICAL
+				parent_version = 0
+				modules = {
+					fixed_ship_engine_slot = module_surface_oil_power
+					fixed_ship_fire_control_system_slot = module_digital_integrated_fire_control
+					fixed_ship_radar_slot = module_radar_3
+					fixed_ship_auxillary_slot_2 = module_ciws_2
+					fixed_ship_auxillary_slot_1 = module_ciws_2
+					fixed_ship_auxillary_slot = module_ciws_2
+					fixed_ship_flight_deck = module_flight_deck_2
+					front_1_custom_slot = module_vls_asm_2
+					front_2_custom_slot = module_vls_sam_2
+					mid_1_custom_slot = module_vls_sam_2
+					mid_2_custom_slot = module_helipads_1
 				}
-				set_technology = { carrier_hull_2 = 1 }
-				load_oob = "CHI_naval_varyag_MTG"
 			}
-			else = {
-				set_technology = { modern_carrier_2 = 1 }
-				load_oob = "CHI_naval_varyag"
-			}
+			set_technology = { carrier_hull_2 = 1 }
+			load_oob = "CHI_naval_varyag_MTG"
 		}
 		custom_effect_tooltip = CHI_varyag_construction_tt
 		add_tech_bonus = {
@@ -3620,7 +3501,6 @@ country_event = {
 		modify_treasury_effect = yes
 	}
 }
-
 
 #Peace in border areas
 country_event = {
@@ -3676,30 +3556,6 @@ country_event = {
 	}
 }
 
-#Conflict breaks out in Taiwan Strait
-country_event = {
-	id = china.55
-	title = china.55.t
-	desc = china.55.d
-
-	hidden = yes
-
-	trigger = {
-		CHI = { has_war_with = TAI }
-	}
-
-	fire_only_once = yes
-
-	option = {
-		name = china.55.a
-		CHI = { set_country_flag = CHI_taiwan_strait_war }
-		log = "[GetDateText]: [This.GetName]: china.55.a executed"
-	}
-
-}
-
-
-
 #Outer Mongolia Conflict Result
 country_event = {
 	id = china.56
@@ -3716,7 +3572,6 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: china.56.a executed"
 		trigger = {
 			original_tag = CHI
-			NOT = { has_country_flag = chi_outer_mongolia_sar }
 		}
 		CHI = {
 			annex_country = { target = MON }
@@ -3757,7 +3612,6 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: china.57.a executed"
 	}
 }
-
 
 #China achieves reunification
 country_event = {
@@ -3802,7 +3656,7 @@ country_event = {
 		declare_war_on = {
 		 target = TAI
 		 type = annex_everything
-	  }
+	 }
 	   news_event = {
 			hours = 6
 			id = china_news.32
@@ -3813,6 +3667,9 @@ country_event = {
 		name = china.59.b
 		log = "[GetDateText]: [This.GetName]: china.59.b executed"
 		ai_chance = { base = 20 }
+		set_temp_variable = { wargoal_on = TAI }
+		set_temp_variable = { wargoal_type = 2 }
+		add_threat_from_wargoal_effect = yes
 		create_wargoal = {
 			target = TAI
 			type = annex_everything
@@ -3843,7 +3700,7 @@ country_event = {
 		declare_war_on = {
 		 target = TAI
 		 type = annex_everything
-	  }
+	 }
 	   news_event = {
 			hours = 6
 			id = china_news.34
@@ -3854,6 +3711,9 @@ country_event = {
 		name = china.60.b
 		log = "[GetDateText]: [This.GetName]: china.60.b executed"
 		ai_chance = { base = 20 }
+		set_temp_variable = { wargoal_on = TAI }
+		set_temp_variable = { wargoal_type = 2 }
+		add_threat_from_wargoal_effect = yes
 		create_wargoal = {
 			target = TAI
 			type = annex_everything
@@ -3899,7 +3759,7 @@ country_event = {
 		declare_war_on = {
 		 target = TAI
 		 type = annex_everything
-	  }
+	 }
 	   news_event = {
 			id = china_news.36
 			hours = 6
@@ -3910,6 +3770,9 @@ country_event = {
 	option = {
 		name = china.62.b
 		ai_chance = { base = 20 }
+		set_temp_variable = { wargoal_on = TAI }
+		set_temp_variable = { wargoal_type = 2 }
+		add_threat_from_wargoal_effect = yes
 		create_wargoal = {
 			target = TAI
 			type = annex_everything
@@ -3934,6 +3797,9 @@ country_event = {
 	option = {
 		name = china.63.a #Create Wargol Only
 		ai_chance = { base = 80 }
+		set_temp_variable = { wargoal_on = MON }
+		set_temp_variable = { wargoal_type = 2 }
+		add_threat_from_wargoal_effect = yes
 		create_wargoal = {
 			target = MON
 			type = annex_everything
@@ -3976,6 +3842,50 @@ country_event = {
 	}
 }
 
+country_event = {
+	id = china.65
+	title = china.65.t
+	desc = china.65.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = china.65.a
+		log = "[GetDateText]: [This.GetName]: china.65.a"
+		random_list = {
+			50 = {
+				add_tech_bonus = {
+					name = strategy_of_invigorating_through_STE
+					bonus = 0.3
+					uses = 1
+					category = CAT_internet_tech
+				}
+			}
+			50 = {
+				add_tech_bonus = {
+					name = strategy_of_invigorating_through_STE
+					bonus = 0.3
+					uses = 1
+					category = CAT_computing_tech
+				}
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					OR = {
+						NOT = { has_completed_focus = CHI_Hu_Jintao_Agenda }
+						NOT = { has_completed_focus = CHI_Zeng_Qinghong_Agenda }
+					}
+				}
+				country_event = {
+					id = china.65
+					days = 365
+				}
+			}
+		}
+	}
+}
 
 ###CHINA regular news events
 
@@ -3985,13 +3895,10 @@ news_event = {
 	title = china_news.1.t
 	desc = china_news.1.d
 	picture = GFX_china_19th_national_congress
-
-	fire_only_once = yes
+	is_triggered_only = yes
 
 	trigger = {
 		tag = CHI
-		date > 2017.10.18
-		date < 2017.10.24
 		NOT = { has_global_flag = chi_19_ncccp }
 	}
 	immediate = {
@@ -4010,7 +3917,6 @@ news_event = {
 	option = {
 		name = china_news.1.b
 		trigger = { NOT = { original_tag = CHI } }
-		log = "[GetDateText]: [This.GetName]: china_news.1.b executed"
 	}
 }
 
@@ -4039,7 +3945,6 @@ news_event = {
 	option = {
 		name = china_news.2.b
 		trigger = { NOT = { original_tag = CHI } }
-		log = "[GetDateText]: [This.GetName]: china_news.2.b executed"
 	}
 }
 
@@ -4056,7 +3961,6 @@ news_event = {
 
 	option = {
 		name = china_news.3.a
-		log = "[GetDateText]: [This.GetName]: china_news.3.a executed"
 	}
 }
 
@@ -4071,7 +3975,6 @@ news_event = {
 
 	option = {
 		name = china_news.4.a
-		log = "[GetDateText]: [This.GetName]: china_news.4.a executed"
 	}
 }
 
@@ -4089,7 +3992,6 @@ news_event = {
 
 	option = {
 		name = china_news.5.a
-		log = "[GetDateText]: [This.GetName]: china_news.5.a executed"
 	}
 }
 
@@ -4108,7 +4010,6 @@ news_event = {
 	# China continues to open up to the world!
 	option = {
 		name = china_news.6.a
-		log = "[GetDateText]: [This.GetName]: china_news.6.a executed"
 	}
 }
 
@@ -4126,7 +4027,6 @@ news_event = {
 
 	option = {
 		name = china_news.7.a #There is nothing holding back China's development now...
-		log = "[GetDateText]: [This.GetName]: china_news.7.a executed"
 	}
 }
 
@@ -4144,7 +4044,6 @@ news_event = {
 
 	option = {
 		name = china_news.8.a #The People's Republic returns to its roots.
-		log = "[GetDateText]: [This.GetName]: china_news.8.a executed"
 	}
 }
 
@@ -4162,7 +4061,6 @@ news_event = {
 
 	option = {
 		name = china_news.9.a #Communism is once again a force to be reckoned with...
-		log = "[GetDateText]: [This.GetName]: china_news.9.a executed"
 	}
 }
 
@@ -4181,13 +4079,11 @@ news_event = {
 	option = {
 		trigger = { NOT = { has_government = democratic } }
 		name = china_news.10.a #This is a good day for China.
-		log = "[GetDateText]: [This.GetName]: china_news.10.a executed"
 	}
 
 	option = {
 		trigger = { has_government = democratic }
 		name = china_news.10.b #Sri Lankan sovereignty has been eroded!
-		log = "[GetDateText]: [This.GetName]: china_news.10.b executed"
 	}
 }
 
@@ -4206,13 +4102,11 @@ news_event = {
 	option = {
 		trigger = { NOT = { original_tag = CHI } }
 		name = china_news.11.a #The Chinese have lost their senses!
-		log = "[GetDateText]: [This.GetName]: china_news.11.a executed"
 	}
 
 	option = {
 		trigger = { original_tag = CHI }
 		name = china_news.11.b #The Chinese people are once again free from foreign oppression!
-		log = "[GetDateText]: [This.GetName]: china_news.11.b executed"
 	}
 }
 
@@ -4231,7 +4125,6 @@ news_event = {
 
 	option = {
 		name = china_news.12.a #The CCP will not give up power that easily...
-		log = "[GetDateText]: [This.GetName]: china_news.12.a executed"
 	}
 }
 
@@ -4240,16 +4133,12 @@ news_event = {
 	id = china_news.13
 	title = china_news.13.t
 	desc = china_news.13.d
-
 	picture = GFX_news_rise_of_taliban
-
 	is_triggered_only = yes
-
 	major = yes
 
 	option = {
 		name = china_news.13.a
-		log = "[GetDateText]: [This.GetName]: china_news.13.a executed"
 	}
 }
 
@@ -4258,16 +4147,12 @@ news_event = {
 	id = china_news.14
 	title = china_news.14.t
 	desc = china_news.14.d
-
 	picture = GFX_news_rocket_explosion
-
 	is_triggered_only = yes
-
 	major = yes
 
 	option = {
 		name = china_news.14.a
-		log = "[GetDateText]: [This.GetName]: china_news.14.a executed"
 	}
 }
 
@@ -4285,7 +4170,6 @@ news_event = {
 
 	option = {
 		name = china_news.15.a
-		log = "[GetDateText]: [This.GetName]: china_news.15.a executed"
 	}
 }
 
@@ -4294,16 +4178,12 @@ news_event = {
 	id = china_news.16
 	title = china_news.16.t
 	desc = china_news.16.d
-
 	picture = GFX_chinese_flag
-
 	is_triggered_only = yes
-
 	major = yes
 
 	option = {
 		name = china_news.16.a
-		log = "[GetDateText]: [This.GetName]: china_news.16.a executed"
 	}
 }
 
@@ -4312,16 +4192,13 @@ news_event = {
 	id = china_news.17
 	title = china_news.17.t
 	desc = china_news.17.d
-
 	picture = GFX_chinese_flag
-
 	is_triggered_only = yes
 
 	major = yes
 
 	option = {
 		name = china_news.17.a
-		log = "[GetDateText]: [This.GetName]: china_news.17.a executed"
 	}
 }
 
@@ -4339,7 +4216,6 @@ news_event = {
 
 	option = {
 		name = china_news.18.a
-		log = "[GetDateText]: [This.GetName]: china_news.18.a executed"
 	}
 }
 
@@ -4357,7 +4233,6 @@ news_event = {
 
 	option = {
 		name = china_news.19.a
-		log = "[GetDateText]: [This.GetName]: china_news.19.a executed"
 	}
 }
 
@@ -4375,7 +4250,6 @@ news_event = {
 
 	option = {
 		name = china_news.20.a
-		log = "[GetDateText]: [This.GetName]: china_news.20.a executed"
 	}
 }
 
@@ -4394,13 +4268,11 @@ news_event = {
 	option = {
 		name = china_news.21.a
 		trigger = { NOT = { original_tag = TAI } }
-		log = "[GetDateText]: [This.GetName]: china_news.21.a executed"
 	}
 
 	option = {
 		name = china_news.21.b
 		trigger = { original_tag = TAI }
-		log = "[GetDateText]: [This.GetName]: china_news.21.b executed"
 	}
 }
 
@@ -4418,20 +4290,17 @@ news_event = {
 
 	option = {
 		name = china_news.22.a
-		trigger = { NOT = { original_tag = TAI original_tag = CHI } }
-		log = "[GetDateText]: [This.GetName]: china_news.22.a executed"
+		trigger = { NOT = { original_tag = TAI } NOT = { original_tag = CHI } }
 	}
 
 	option = {
 		name = china_news.22.b
 		trigger = { original_tag = TAI }
-		log = "[GetDateText]: [This.GetName]: china_news.22.b executed"
 	}
 
 	option = {
 		name = china_news.22.c
 		trigger = { original_tag = CHI }
-		log = "[GetDateText]: [This.GetName]: china_news.22.b executed"
 	}
 
 }
@@ -4450,7 +4319,6 @@ news_event = {
 
 	option = {
 		name = china_news.23.a
-		log = "[GetDateText]: [This.GetName]: china_news.23.a executed"
 	}
 
 }
@@ -4491,7 +4359,6 @@ news_event = {
 
 	option = {
 		name = china_news.24.a
-		log = "[GetDateText]: [This.GetName]: china_news.24.a executed"
 	}
 }
 
@@ -4509,7 +4376,6 @@ news_event = {
 
 	option = {
 		name = china_news.25.a
-		log = "[GetDateText]: [This.GetName]: china_news.25.a executed"
 	}
 
 }
@@ -4550,7 +4416,6 @@ news_event = {
 
 	option = { #Serious Concern
 		name = china_news.27.a
-		log = "[GetDateText]: [This.GetName]: china_news.27.a executed"
 		trigger = {
 			OR = {
 				tag = JAP
@@ -4562,7 +4427,6 @@ news_event = {
 
 	option = { #Here we back
 		name = china_news.27.b
-		log = "[GetDateText]: [This.GetName]: china_news.27.b executed"
 		trigger = {
 			OR = {
 				is_in_faction_with = CHI
@@ -4573,7 +4437,6 @@ news_event = {
 
 	option = { #The Awakening Giant
 		name = china_news.27.c
-		log = "[GetDateText]: [This.GetName]: china_news.27.c executed"
 		trigger = {
 			NOT = { OR = { tag = USA
 						   is_in_faction_with = USA } }
@@ -4605,7 +4468,6 @@ news_event = {
 	option = {
 		name = china_news.28.b
 		trigger = { NOT = { original_tag = CHI } }
-		log = "[GetDateText]: [This.GetName]: china_news.28.b executed"
 	}
 }
 
@@ -4644,7 +4506,6 @@ news_event = {
 	option = {
 		name = china_news.29.b
 		trigger = { NOT = { original_tag = CHI } }
-		log = "[GetDateText]: [This.GetName]: china_news.29.b executed"
 	}
 }
 
@@ -4669,7 +4530,6 @@ news_event = {
 	option = {
 		name = china_news.30.a
 		trigger = { NOT = { original_tag = CHI } }
-		log = "[GetDateText]: [This.GetName]: china_news.30.a executed"
 	}
 	option = {
 		name = china_news.30.b
@@ -4695,13 +4555,11 @@ news_event = {
 	option = {
 		name = china_news.31.a #Truly a clash of titans.
 		trigger = { NOT = { original_tag = USA } }
-		log = "[GetDateText]: [This.GetName]: china_news.31.a executed"
 	}
 
 	option = {
 		name = china_news.31.b #Truly a clash of titans.
 		trigger = { original_tag = USA }
-		log = "[GetDateText]: [This.GetName]: china_news.31.b executed"
 	}
 }
 
@@ -4718,7 +4576,6 @@ news_event = {
 
 	option = { #Prepare for the worst
 		name = china_news.32.a
-		log = "[GetDateText]: [This.GetName]: china_news.32.a executed"
 		trigger = {
 			OR = {
 				tag = JAP
@@ -4730,7 +4587,6 @@ news_event = {
 
 	option = { #There is no other course
 		name = china_news.32.b
-		log = "[GetDateText]: [This.GetName]: china_news.32.b executed"
 		trigger = {
 			OR = {
 				is_in_faction_with = CHI
@@ -4741,7 +4597,6 @@ news_event = {
 
 	option = { #Millions will die for old conflict
 		name = china_news.32.c
-		log = "[GetDateText]: [This.GetName]: china_news.32.c executed"
 		trigger = {
 			NOT = { OR = { tag = USA
 						   is_in_faction_with = USA } }
@@ -4764,7 +4619,6 @@ news_event = {
 
 	option = { #Prepare for the worst
 		name = china_news.33.a
-		log = "[GetDateText]: [This.GetName]: china_news.33.a executed"
 		trigger = {
 			OR = {
 				tag = JAP
@@ -4776,7 +4630,6 @@ news_event = {
 
 	option = { #There is no other course
 		name = china_news.33.b
-		log = "[GetDateText]: [This.GetName]: china_news.33.b executed"
 		trigger = {
 			OR = {
 				is_in_faction_with = CHI
@@ -4787,7 +4640,6 @@ news_event = {
 
 	option = { #Millions will die for old conflict
 		name = china_news.33.c
-		log = "[GetDateText]: [This.GetName]: china_news.33.c executed"
 		trigger = {
 			NOT = { OR = { tag = USA
 						   is_in_faction_with = USA } }
@@ -4810,7 +4662,6 @@ news_event = {
 
 	option = { #Prepare for the worst
 		name = china_news.34.a
-		log = "[GetDateText]: [This.GetName]: china_news.34.a executed"
 		trigger = {
 			OR = {
 				tag = JAP
@@ -4822,7 +4673,6 @@ news_event = {
 
 	option = { #There is no other course
 		name = china_news.34.b
-		log = "[GetDateText]: [This.GetName]: china_news.34.b executed"
 		trigger = {
 			OR = {
 				is_in_faction_with = CHI
@@ -4833,7 +4683,6 @@ news_event = {
 
 	option = { #Millions will die for old conflict
 		name = china_news.34.c
-		log = "[GetDateText]: [This.GetName]: china_news.34.c executed"
 		trigger = {
 			NOT = { OR = { tag = USA
 						   is_in_faction_with = USA } }
@@ -4856,7 +4705,6 @@ news_event = {
 
 	option = { #Prepare for the worst
 		name = china_news.35.a
-		log = "[GetDateText]: [This.GetName]: china_news.35.a executed"
 		trigger = {
 			OR = {
 				tag = JAP
@@ -4868,7 +4716,6 @@ news_event = {
 
 	option = { #There is no other course
 		name = china_news.35.b
-		log = "[GetDateText]: [This.GetName]: china_news.35.b executed"
 		trigger = {
 			OR = {
 				is_in_faction_with = CHI
@@ -4879,7 +4726,6 @@ news_event = {
 
 	option = { #Millions will die for old conflict
 		name = china_news.35.c
-		log = "[GetDateText]: [This.GetName]: china_news.35.c executed"
 		trigger = {
 			NOT = { OR = { tag = USA
 						   is_in_faction_with = USA } }
@@ -4902,7 +4748,6 @@ news_event = {
 
 	option = { #Prepare for the worst
 		name = china_news.36.a
-		log = "[GetDateText]: [This.GetName]: china_news.36.a executed"
 		trigger = {
 			OR = {
 				tag = JAP
@@ -4914,7 +4759,6 @@ news_event = {
 
 	option = { #There is no other course
 		name = china_news.36.b
-		log = "[GetDateText]: [This.GetName]: china_news.36.b executed"
 		trigger = {
 			OR = {
 				is_in_faction_with = CHI
@@ -4925,7 +4769,6 @@ news_event = {
 
 	option = { #Millions will die for old conflict
 		name = china_news.36.c
-		log = "[GetDateText]: [This.GetName]: china_news.36.c executed"
 		trigger = {
 			NOT = { OR = { tag = USA
 						   is_in_faction_with = USA } }
@@ -4948,7 +4791,6 @@ news_event = {
 
 	option = { #Prepare for the worst
 		name = china_news.37.a
-		log = "[GetDateText]: [This.GetName]: china_news.37.a executed"
 		trigger = {
 			OR = {
 				tag = JAP
@@ -4960,7 +4802,6 @@ news_event = {
 
 	option = { #There is no other course
 		name = china_news.37.b
-		log = "[GetDateText]: [This.GetName]: china_news.37.b executed"
 		trigger = {
 			OR = {
 				is_in_faction_with = CHI
@@ -4971,7 +4812,6 @@ news_event = {
 
 	option = { #Millions will die for old conflict
 		name = china_news.37.c
-		log = "[GetDateText]: [This.GetName]: china_news.37.c executed"
 		trigger = {
 			NOT = { OR = { tag = USA
 						   is_in_faction_with = USA } }
@@ -4988,12 +4828,10 @@ news_event = {
 	desc = china_news.38.d
 	picture = GFX_genshin_impact
 
-
 	is_triggered_only = yes
 
 	option = { #China
 		name = china_news.38.a
-		log = "[GetDateText]: [This.GetName]: china_news.38.a executed"
 		trigger = {
 			NOT = {
 				tag = CHI
@@ -5003,7 +4841,6 @@ news_event = {
 
 	option = { #Other Tag
 		name = china_news.38.b
-		log = "[GetDateText]: [This.GetName]: china_news.38.b executed"
 		trigger = {
 				tag = CHI
 		}
@@ -5017,12 +4854,10 @@ news_event = {
 	desc = china_news.39.d
 	picture = GFX_the_wandering_earth
 
-
 	is_triggered_only = yes
 
 	option = { #China
 		name = china_news.39.a
-		log = "[GetDateText]: [This.GetName]: china_news.39.a executed"
 		trigger = {
 			NOT = {
 				tag = CHI
@@ -5032,7 +4867,6 @@ news_event = {
 
 	option = { #Other Tag
 		name = china_news.39.b
-		log = "[GetDateText]: [This.GetName]: china_news.39.b executed"
 		trigger = {
 				tag = CHI
 		}
@@ -5053,7 +4887,6 @@ news_event = {
 
 	option = { #Serious Concern
 		name = china_news.40.a
-		log = "[GetDateText]: [This.GetName]: china_news.40.a executed"
 		trigger = {
 			OR = {
 				tag = JAP
@@ -5065,7 +4898,6 @@ news_event = {
 
 	option = { #Rising China
 		name = china_news.40.b
-		log = "[GetDateText]: [This.GetName]: china_news.40.b executed"
 		trigger = {
 			OR = {
 				is_in_faction_with = CHI
@@ -5076,7 +4908,6 @@ news_event = {
 
 	option = { #The Awakening Giant
 		name = china_news.40.c
-		log = "[GetDateText]: [This.GetName]: china_news.40.c executed"
 		trigger = {
 			NOT = { OR = { tag = USA
 						   is_in_faction_with = USA } }
@@ -5100,7 +4931,6 @@ news_event = {
 
 	option = { #Serious Concern
 		name = china_news.41.a
-		log = "[GetDateText]: [This.GetName]: china_news.41.a executed"
 		trigger = {
 			OR = {
 				tag = JAP
@@ -5112,7 +4942,6 @@ news_event = {
 
 	option = { #Rising China
 		name = china_news.41.b
-		log = "[GetDateText]: [This.GetName]: china_news.41.b executed"
 		trigger = {
 			OR = {
 				is_in_faction_with = CHI
@@ -5123,7 +4952,6 @@ news_event = {
 
 	option = { #The Awakening Giant
 		name = china_news.41.c
-		log = "[GetDateText]: [This.GetName]: china_news.41.c executed"
 		trigger = {
 			NOT = { OR = { tag = USA
 						   is_in_faction_with = USA } }
@@ -5134,7 +4962,6 @@ news_event = {
 
 	option = { #There is no other course
 		name = china_news.41.e
-		log = "[GetDateText]: [This.GetName]: china_news.41.e executed"
 		trigger = {
 			OR = {
 				is_in_faction_with = RAJ
@@ -5158,7 +4985,6 @@ news_event = {
 
 	option = { #Serious Concern
 		name = china_news.42.a
-		log = "[GetDateText]: [This.GetName]: china_news.42.a executed"
 		trigger = {
 			OR = {
 				tag = JAP
@@ -5170,7 +4996,6 @@ news_event = {
 
 	option = { #Rising China
 		name = china_news.42.b
-		log = "[GetDateText]: [This.GetName]: china_news.42.b executed"
 		trigger = {
 			OR = {
 				is_in_faction_with = CHI
@@ -5181,7 +5006,6 @@ news_event = {
 
 	option = { #The Awakening Giant
 		name = china_news.42.c
-		log = "[GetDateText]: [This.GetName]: china_news.42.c executed"
 		trigger = {
 			NOT = { OR = { tag = USA
 						   is_in_faction_with = USA } }
@@ -5205,7 +5029,6 @@ news_event = {
 
 	option = { #Serious Concern
 		name = china_news.43.a
-		log = "[GetDateText]: [This.GetName]: china_news.43.a executed"
 		trigger = {
 			OR = {
 				tag = JAP
@@ -5217,7 +5040,6 @@ news_event = {
 
 	option = { #Rising China
 		name = china_news.43.b
-		log = "[GetDateText]: [This.GetName]: china_news.43.b executed"
 		trigger = {
 			OR = {
 				is_in_faction_with = CHI
@@ -5228,7 +5050,6 @@ news_event = {
 
 	option = { #The Awakening Giant
 		name = china_news.43.c
-		log = "[GetDateText]: [This.GetName]: china_news.43.c executed"
 		trigger = {
 			NOT = { OR = { tag = USA
 						   is_in_faction_with = USA } }
@@ -5276,6 +5097,8 @@ country_event = {
 	option = {
 		trigger = { NOT = { original_tag = CHI } }
 		name = south_china_sea_clash.1.c #This means war!
+		set_temp_variable = { wargoal_on = CHI }
+		add_threat_from_wargoal_effect = yes
 		create_wargoal = {
 			type = take_state
 			target = CHI
@@ -5333,7 +5156,9 @@ country_event = {
 
 	option = {
 		trigger = { original_tag = CHI }
-		name = south_china_sea_clash.1.c #China will not be defeated!
+		name = south_china_sea_clash.2.c #China will not be defeated!
+		set_temp_variable = { wargoal_on = VIE }
+		add_threat_from_wargoal_effect = yes
 		create_wargoal = {
 			type = take_state
 			target = VIE
@@ -5408,6 +5233,8 @@ country_event = {
 	option = {
 		trigger = { original_tag = CHI }
 		name = south_china_sea_clash.4.c #China will not be defeated!
+		set_temp_variable = { wargoal_on = PHI }
+		add_threat_from_wargoal_effect = yes
 		create_wargoal = {
 			type = take_state
 			target = PHI
@@ -5464,6 +5291,8 @@ country_event = {
 	option = {
 		trigger = { original_tag = CHI }
 		name = south_china_sea_clash.5.c #China will not be defeated!
+		set_temp_variable = { wargoal_on = MAY }
+		add_threat_from_wargoal_effect = yes
 		create_wargoal = {
 			type = take_state
 			target = MAY
@@ -5510,13 +5339,11 @@ news_event = {
 	option = {
 		trigger = { NOT = { has_country_flag = confrontation_target } }
 		name = south_china_sea_clash.6.a #Let's see how this plays out...
-		log = "[GetDateText]: [This.GetName]: south_china_sea_clash.6.a executed"
 	}
 
 	option = {
 		trigger = { has_country_flag = confrontation_target }
 		name = south_china_sea_clash.6.b #We should deploy troops to the Spratlys immediately!
-		log = "[GetDateText]: [This.GetName]: south_china_sea_clash.6.b executed"
 	}
 }
 
@@ -5566,7 +5393,7 @@ country_event = {
 				target = ROOT
 				modifier = criticized_us
 			}
-			country_event = { id = south_china_sea_clash.8 }
+			country_event = south_china_sea_clash.8
 		}
 		ai_chance = {
 			base = 20
@@ -5612,7 +5439,7 @@ country_event = {
 				type = destroyer
 				count = 1
 			}
-			country_event = { id = south_china_sea_clash.9 }
+			country_event = south_china_sea_clash.9
 		}
 		news_event = china_news.31
 		set_temp_variable = { modify_chinese_aggression = 5 }
@@ -5674,9 +5501,13 @@ country_event = {
 
 	option = {
 		name = south_china_sea_clash.9.b #This aggression must be punished!
+		set_temp_variable = { wargoal_on = CHI }
+		set_temp_variable = { wargoal_type = 1 }
+		add_threat_from_wargoal_effect = yes
 		create_wargoal = {
 			type = topple_government
 			target = CHI
+			expire = 120
 		}
 		ai_chance = {
 			base = 20
@@ -5761,8 +5592,6 @@ country_event = {
 	}
 }
 
-
-
 #The Fate of the Macclesfield Bank
 country_event = {
 	id = south_china_sea_clash.11
@@ -5819,7 +5648,6 @@ country_event = {
 	}
 }
 
-
 #Bhutanese sovereignty is being violated!
 country_event = {
 	id = sino_indian.1
@@ -5835,7 +5663,7 @@ country_event = {
 		trigger = { original_tag = RAJ }
 		add_war_support = 0.02
 		CHI = {
-			country_event = { id = sino_indian.3 }
+			country_event = sino_indian.3
 			add_opinion_modifier = { target = RAJ modifier = resisted_territorial_ambition }
 		}
 		ai_chance = {
@@ -5876,7 +5704,7 @@ country_event = {
 		add_political_power = -50
 		if = {
 			limit = { NOT = { original_tag = BHU } }
-			BHU = { country_event = { id = sino_indian.2 } }
+			BHU = { country_event = sino_indian.2 }
 			diplomatic_relation = {
 				country = BHU
 				relation = guarantee
@@ -5886,9 +5714,8 @@ country_event = {
 		else = {
 			set_temp_variable = { percent_change = 3 }
 			set_temp_variable = { tag_index = CHI.id }
-			set_temp_variable = { influence_target = THIS.id }
 			change_influence_percentage = yes
-			every_other_country = { news_event = { id = sino_indian.4 } }
+			every_other_country = { news_event = sino_indian.4 }
 		}
 		log = "[GetDateText]: [This.GetName]: sino_indian.1.b executed"
 		ai_chance = {
@@ -5948,7 +5775,7 @@ country_event = {
 		}
 		add_war_support = 0.02
 		CHI = {
-			country_event = { id = sino_indian.3 }
+			country_event = sino_indian.3
 			add_opinion_modifier = { target = BHU modifier = resisted_territorial_ambition }
 		}
 		log = "[GetDateText]: [This.GetName]: sino_indian.1.e executed"
@@ -5970,9 +5797,8 @@ country_event = {
 		add_political_power = -50
 		set_temp_variable = { percent_change = 3 }
 		set_temp_variable = { tag_index = CHI.id }
-		set_temp_variable = { influence_target = THIS.id }
 		change_influence_percentage = yes
-		every_other_country = { news_event = { id = sino_indian.4 } }
+		every_other_country = { news_event = sino_indian.4 }
 		log = "[GetDateText]: [This.GetName]: sino_indian.2.a executed"
 		ai_chance = {
 			base = 20
@@ -6021,7 +5847,7 @@ country_event = {
 		name = sino_indian.2.b #We must defend ourselves!
 		add_war_support = 0.02
 		CHI = {
-			country_event = { id = sino_indian.3 }
+			country_event = sino_indian.3
 			add_opinion_modifier = { target = BHU modifier = resisted_territorial_ambition }
 		}
 		ai_chance = {
@@ -6046,10 +5872,9 @@ country_event = {
 		BHU = {
 			set_temp_variable = { percent_change = 1 }
 			set_temp_variable = { tag_index = CHI.id }
-			set_temp_variable = { influence_target = THIS.id }
 			change_influence_percentage = yes
 		}
-		every_other_country = { news_event = { id = sino_indian.5 } }
+		every_other_country = { news_event = sino_indian.5 }
 		ai_chance = {
 			base = 60
 		}
@@ -6071,7 +5896,7 @@ country_event = {
 					on_cancel = sino_indian.8
 				}
 				defender = {
-					state = 455
+					state = 982
 					num_provinces = 1
 					on_win = sino_indian.7
 					on_lose = sino_indian.6
@@ -6150,7 +5975,6 @@ news_event = {
 
 	option = {
 		name = sino_indian.5.a #China has backed down, for now.
-		log = "[GetDateText]: [This.GetName]: sino_indian.5.a executed"
 	}
 }
 
@@ -6180,7 +6004,6 @@ news_event = {
 		BHU = {
 			set_temp_variable = { percent_change = 3 }
 			set_temp_variable = { tag_index = CHI.id }
-			set_temp_variable = { influence_target = THIS.id }
 			change_influence_percentage = yes
 		}
 		log = "[GetDateText]: [This.GetName]: sino_indian.6.a executed"
@@ -6194,7 +6017,6 @@ news_event = {
 			BHU = {
 				set_temp_variable = { percent_change = 3 }
 				set_temp_variable = { tag_index = CHI.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 			}
 		}
@@ -6248,7 +6070,6 @@ news_event = {
 
 	option = {
 		name = sino_indian.8.a #Peace, for now...
-		log = "[GetDateText]: [This.GetName]: sino_indian.8.a executed"
 	}
 }
 
@@ -6345,7 +6166,7 @@ country_event = {
 				modifier = declaration_of_friendship
 			}
 		}
-		every_country = { news_event = { id = sino_indian.12 days = 2 } }
+		news_event = { id = sino_indian.12 days = 2 }
 		ai_chance = {
 			base = 10
 			modifier = {
@@ -6454,21 +6275,18 @@ news_event = {
 	id = sino_indian.12
 	title = sino_indian.12.t
 	desc = sino_indian.12.d
-
 	picture = GFX_trade_agreement
-
 	is_triggered_only = yes
+	major = yes
 
 	option = {
 		name = sino_indian.12.a #A good day for peace and diplomacy!
 		trigger = { NOT = { original_tag = PAK } }
-		log = "[GetDateText]: [This.GetName]: sino_indian.12.a executed"
 	}
 
 	option = {
 		name = sino_indian.12.b #An extremely worrying development...
 		trigger = { original_tag = PAK }
-		log = "[GetDateText]: [This.GetName]: sino_indian.12.b executed"
 	}
 }
 
@@ -6477,21 +6295,18 @@ news_event = {
 	id = sino_indian.13
 	title = sino_indian.13.t
 	desc = sino_indian.13.d
-
 	picture = GFX_china_indian_border_skirmish
-
 	is_triggered_only = yes
+	major = yes
 
 	option = {
 		name = sino_indian.13.a #China is seeking new allies...
 		trigger = { NOT = { original_tag = RAJ } }
-		log = "[GetDateText]: [This.GetName]: sino_indian.13.a executed"
 	}
 
 	option = {
 		name = sino_indian.13.b #What should we make of this?
 		trigger = { original_tag = RAJ }
-		log = "[GetDateText]: [This.GetName]: sino_indian.13.b executed"
 	}
 }
 
@@ -6508,13 +6323,13 @@ country_event = {
 
 	option = {
 		name = sco.1.a #We see no reason why their request should not be granted.
-		log = "[GetDateText]: [This.GetName]: sco.1.a executed"
 	}
 
 	option = {
 		name = sco.1.b #We cannot grant them this status!
+		log = "[GetDateText]: [This.GetName]: sco.1.b"
 		FROM = { set_country_flag = SCO_observer_status_rejected }
-		log = "[GetDateText]: [This.GetName]: sco.1.b executed"
+
 		ai_chance = {
 			base = 0
 		}
@@ -6630,27 +6445,23 @@ news_event = {
 	id = sco.6
 	title = sco.6.t
 	desc = sco.6.d
-
 	picture = GFX_news_generic_soldiers
-
 	is_triggered_only = yes
+	major = yes
 
 	option = {
 		trigger = { has_government = democratic }
 		name = sco.6.a #Are these threatening drills meant for our benefit?
-		log = "[GetDateText]: [This.GetName]: sco.6.a executed"
 	}
 
 	option = {
 		trigger = { has_government = communism }
 		name = sco.6.b #Only terrorists have anything to fear from this!
-		log = "[GetDateText]: [This.GetName]: sco.6.b executed"
 	}
 
 	option = {
-		trigger = { NOT = { has_government = communism has_government = democratic } }
+		trigger = { NOT = { has_government = communism } NOT = { has_government = democratic } }
 		name = sco.6.c #An interesting development.
-		log = "[GetDateText]: [This.GetName]: sco.6.c executed"
 	}
 }
 
@@ -6661,19 +6472,17 @@ news_event = {
 	desc = sco.7.d
 
 	picture = GFX_trade_agreement
-
 	is_triggered_only = yes
+	major = yes
 
 	option = {
 		trigger = { has_government = democratic }
 		name = sco.7.a #The Chinese threat continues to grow...
-		log = "[GetDateText]: [This.GetName]: sco.6.a executed"
 	}
 
 	option = {
 		trigger = { NOT = { has_government = democratic } }
 		name = sco.7.b #A good day for diplomacy!
-		log = "[GetDateText]: [This.GetName]: sco.7.b executed"
 	}
 }
 
@@ -6682,21 +6491,18 @@ news_event = {
 	id = sco.8
 	title = sco.8.t
 	desc = sco.8.d
-
 	picture = GFX_news_press_conference
-
 	is_triggered_only = yes
+	major = yes
 
 	option = {
 		trigger = { has_government = democratic }
 		name = sco.8.a #Chinese aggression has alienated this nation.
-		log = "[GetDateText]: [This.GetName]: sco.8.a executed"
 	}
 
 	option = {
 		trigger = { NOT = { has_government = democratic } }
 		name = sco.8.b #A sad day for international cooperation...
-		log = "[GetDateText]: [This.GetName]: sco.8.b executed"
 	}
 }
 
@@ -6705,14 +6511,12 @@ news_event = {
 	id = sco.9
 	title = sco.9.t
 	desc = sco.9.d
-
 	picture = GFX_china_90th_pla_anniversary
-
 	is_triggered_only = yes
+	major = yes
 
 	option = {
 		name = sco.9.a #China is not willing to share the spotlight...
-		log = "[GetDateText]: [This.GetName]: sco.9.a executed"
 	}
 }
 
@@ -7073,9 +6877,13 @@ country_event = {
 	option = {
 		name = arunachal_war.30.b
 		log = "[GetDateText]: [This.GetName]: arunachal_war.30.b"
+		set_temp_variable = { wargoal_on = PREV }
+		set_temp_variable = { wargoal_type = 2 }
+		add_threat_from_wargoal_effect = yes
 		create_wargoal = {
 			type = annex_everything
 			target = PREV
+			expire = 120
 		}
 	}
 }

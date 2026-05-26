@@ -1,22 +1,16 @@
-# set_temp_variable = { temp_modify_social_con_government = +- }
+# Effect: modify_social_conservatism_government
+# Purpose: Modifies the social conservatism of thegovernment
 modify_social_conservatism_government = {
 	add_to_variable = { social_conservatism_government = temp_modify_social_con_government }
-	clamp_variable = {
-		var = social_conservatism_government
-		min = 0
-		max = 100
-	}
+	clamp_variable = { var = social_conservatism_government min = 0 max = 100 }
 	custom_effect_tooltip = conservatism_government_change_tt
 }
 
-# set_temp_variable = { temp_modify_gcc_unity = +- }
+# Effect: modify_gcc_unity
+# Purpose: Modifies the GCC Unity mechanic for the GCC
 modify_gcc_unity = {
 	add_to_variable = { global.gcc_unity = temp_modify_gcc_unity }
-	clamp_variable = {
-		var = global.gcc_unity
-		min = 0
-		max = 100
-	}
+	clamp_variable = { var = global.gcc_unity min = 0 max = 100 }
 	custom_effect_tooltip = GCC_unity_change_tt
 }
 
@@ -198,7 +192,6 @@ IRQ_MNF_setup = {
 			startup_politics = yes
 			ingame_startup_nations_effect = yes
 
-			declare_war_on = { target = IRQ type = civil_war }
 			add_ideas = {
 				Non_State_Actor
 				sunni
@@ -225,7 +218,6 @@ IRQ_MNF_setup = {
 			}
 			171 = {
 				transfer_state_to = MNF
-				set_state_flag = MNF_starting_state_setup
 			}
 		}
 
@@ -244,34 +236,34 @@ IRQ_MNF_setup = {
 			}
 		}
 
-		MNF = {
-			create_country_leader = {
-				name = "David D. McKiernan"
-				picture = "USA_David_McKiernan.dds"
-				ideology = Western_Autocracy
-				traits = {
-					western_Western_Autocracy
-					military_career
-					pro_american
+		if = {
+			limit = { country_exists = MNF }
+			MNF = {
+				create_country_leader = {
+					name = "David D. McKiernan"
+					picture = "USA_David_McKiernan.dds"
+					ideology = Western_Autocracy
+					traits = {
+						western_Western_Autocracy
+						military_career
+						pro_american
+					}
 				}
-			}
-		}
-
-		MNF = {
-			if = {
-				limit = { NOT = { has_war_with = IRQ } }
-				declare_war_on = {
-					target = IRQ
-					type = civil_war
+				set_country_flag = is_iraq_mnf
+				if = {
+					limit = { NOT = { has_war_with = IRQ } }
+					declare_war_on = {
+						target = IRQ
+						type = civil_war
+					}
 				}
+				add_civil_war_target = IRQ
+				become_exiled_in = { target = USA legitimacy = 25 }
+				171 = {
+					set_state_controller_to = IRQ
+				}
+				leave_faction = yes
 			}
-			add_civil_war_target = IRQ
-			become_exiled_in = { target = USA legitimacy = 25 }
-			171 = {
-				set_state_controller_to = IRQ
-			}
-			leave_faction = yes
-			#create_faction = NULL
 		}
 	}
 }
@@ -312,8 +304,7 @@ syrian_civil_war_setup = {
 
 		hidden_effect = {
 			SYR = {
-				every_state = {
-					limit = { is_core_of = SYR }
+				every_core_state = {
 					add_core_of = FSA
 				}
 				every_owned_state = {
@@ -377,9 +368,6 @@ syrian_civil_war_setup = {
 					}
 				}
 
-				add_to_array = { global.rival_governments = THIS }
-				set_country_flag = rival_government_SYR
-
 				set_global_flag = FSA_free_syrian_army_active_flag
 
 				set_temp_variable = { rul_party_temp = opposition_party_index }
@@ -387,39 +375,8 @@ syrian_civil_war_setup = {
 
 				set_temp_variable = { rul_party_temp = opposition_party_index }
 				change_ruling_party_effect = yes
-				set_cosmetic_tag = NULL
 
-				set_variable = { civilian_factory_employment_var = 1 }
-				set_variable = { naval_factory_employment_var = 1 }
-				set_variable = { military_factory_employment_var = 1 }
-				set_variable = { office_employment_var = 1 }
-				set_variable = { gdpc_converging_var = PREV.gdpc_converging_var }
-				inherit_technology = PREV
-				if = {
-					limit = {
-						NOT = { has_variable = domestic_influence_amount }
-					}
-					set_variable = { domestic_influence_amount = 100 }
-				}
-				if = {
-					limit = { NOT = { has_variable = corporate_tax_rate } }
-					set_variable = { var = corporate_tax_rate value = 20 }
-				}
-				if = {
-					limit = { NOT = { has_variable = population_tax_rate } }
-					set_variable = { var = population_tax_rate value = 20 }
-				}
-				ingame_init_investment_system = yes
-				init_auto_influence_array = yes
-				calculate_influence_percentage = yes #set alignment drifts from influence
-				startup_politics = yes
-				ingame_update_setup = yes 	#money system
-				setup_init_factions = yes 	#flags for int. factions
-				set_law_vars = yes 	#vars for change laws secondary effects
-				update_neighbors_effects = yes # Updates Neighbor Effects
-				economic_cycle_drift_popularity = yes #drift from neighbor
-				ai_update_build_units = yes
-				calculate_expected_spending = yes
+				ingame_startup_nations_effect = yes
 
 				activate_mission = FSA_defection_to_extremist
 				add_ideas = FSA_extremism1
@@ -622,18 +579,7 @@ AS_spawn_isis_into_game = {
 				threat = 5
 				name = ISIS.threat
 			}
-			every_country = {
-				limit = { no_jihadist_government = yes }
-				add_opinion_modifier = { target = ISI modifier = terrorism_is_no_no }
-				add_opinion_modifier = { target = ISI modifier = terrorism_is_no_no_trade }
-				# add_ai_strategy = { type = befriend id = "ISI" value = -200 }
-				# add_ai_strategy = { type = support id = "ISI" value = -200 }
-				# add_ai_strategy = { type = protect id = "ISI" value = -200 }
-				# add_ai_strategy = { type = send_volunteers_desire id = "ISI" value = -200 }
-				# add_ai_strategy = { type = contain id = "ISI" value = 200 }
-				# add_ai_strategy = { type = antagonize id = "ISI" value = 200 }
-				# # add_ai_strategy = { type = conquer id = "ISI" value = 200 }
-			}
+			apply_terrorism_opinion_to_world = yes
 		}
 	}
 }
@@ -1253,108 +1199,6 @@ clamp_shia = {
 	}
 }
 
-GCC_show_supporters = {
-	if = {
-		limit = {
-			BHR = {
-				has_idea = idea_gcc_member_state
-				has_country_flag = supports_membership_@ROOT
-			}
-		}
-		BHR_GetNameWithFlag = yes
-	}
-	if = {
-		limit = {
-			EGY = {
-				has_idea = idea_gcc_member_state
-				has_country_flag = supports_membership_@ROOT
-			}
-		}
-		EGY_GetNameWithFlag = yes
-	}
-	if = {
-		limit = {
-			IRQ = {
-				has_idea = idea_gcc_member_state
-				has_country_flag = supports_membership_@ROOT
-			}
-		}
-		IRQ_GetNameWithFlag = yes
-	}
-	if = {
-		limit = {
-			JOR = {
-				has_idea = idea_gcc_member_state
-				has_country_flag = supports_membership_@ROOT
-			}
-		}
-		JOR_GetNameWithFlag = yes
-	}
-	if = {
-		limit = {
-			KUW = {
-				has_idea = idea_gcc_member_state
-				has_country_flag = supports_membership_@ROOT
-			}
-		}
-		KUW_GetNameWithFlag = yes
-	}
-	if = {
-		limit = {
-			MOR = {
-				has_idea = idea_gcc_member_state
-				has_country_flag = supports_membership_@ROOT
-			}
-		}
-		MOR_GetNameWithFlag = yes
-	}
-	if = {
-		limit = {
-			OMA = {
-				has_idea = idea_gcc_member_state
-				has_country_flag = supports_membership_@ROOT
-			}
-		}
-		OMA_GetNameWithFlag = yes
-	}
-	if = {
-		limit = {
-			QAT = {
-				has_idea = idea_gcc_member_state
-				has_country_flag = supports_membership_@ROOT
-			}
-		}
-		QAT_GetNameWithFlag = yes
-	}
-	if = {
-		limit = {
-			SAU = {
-				has_idea = idea_gcc_member_state
-				has_country_flag = supports_membership_@ROOT
-			}
-		}
-		SAU_GetNameWithFlag = yes
-	}
-	if = {
-		limit = {
-			UAE = {
-				has_idea = idea_gcc_member_state
-				has_country_flag = supports_membership_@ROOT
-			}
-		}
-		UAE_GetNameWithFlag = yes
-	}
-	if = {
-		limit = {
-			YEM = {
-				has_idea = idea_gcc_member_state
-				has_country_flag = supports_membership_@ROOT
-			}
-		}
-		YEM_GetNameWithFlag = yes
-	}
-}
-
 # Arab Spring Section
 
 # Effect: change_arab_spring_strength
@@ -1422,6 +1266,20 @@ calculate_monthly_arab_spring_change = {
 		add_to_variable = { arab_spring_change = -3 }
 	}
 
+	# Healthcare Spending
+	if = {
+		limit = { has_idea = health_04 }
+		add_to_variable = { arab_spring_change = -1 }
+	}
+	else_if = {
+		limit = { has_idea = health_05 }
+		add_to_variable = { arab_spring_change = -2 }
+	}
+	else_if = {
+		limit = { has_idea = health_06 }
+		add_to_variable = { arab_spring_change = -3 }
+	}
+
 	# Corruption Increases Arab Spring Likelihood
 	if = { limit = { has_idea = paralyzing_corruption }
 		add_to_variable = { arab_spring_change = 6 }
@@ -1437,6 +1295,18 @@ calculate_monthly_arab_spring_change = {
 	}
 	else_if = { limit = { has_idea = systematic_corruption }
 		add_to_variable = { arab_spring_change = 2 }
+	}
+	else_if = { limit = { has_idea = widespread_corruption }
+		add_to_variable = { arab_spring_change = 1 }
+	}
+	else_if = { limit = { has_idea = modest_corruption }
+		add_to_variable = { arab_spring_change = -1 }
+	}
+	else_if = { limit = { has_idea = slight_corruption }
+		add_to_variable = { arab_spring_change = -2 }
+	}
+	else_if = { limit = { has_idea = negligible_corruption }
+		add_to_variable = { arab_spring_change = -3 }
 	}
 
 	# Historical Section
@@ -1511,6 +1381,47 @@ calculate_monthly_arab_spring_change = {
 		}
 		subtract_from_variable = { arab_spring_change = 4 }
 	}
+
+	if = {
+		limit = {
+			check_variable = { government_coalition_strength <  0.500 }
+		}
+		add_to_variable = { arab_spring_change = 2 }
+	}
+	else_if = {
+		limit = {
+			check_variable = { government_coalition_strength > 0.499 }
+			check_variable = { government_coalition_strength < 0.599 }
+		}
+		add_to_variable = { arab_spring_change = -1 }
+	}
+	else_if = {
+		limit = {
+			check_variable = { government_coalition_strength > 0.599 }
+			check_variable = { government_coalition_strength < 0.699 }
+		}
+		add_to_variable = { arab_spring_change = -2 }
+	}
+	else_if = {
+		limit = {
+			check_variable = { government_coalition_strength > 0.699 }
+			check_variable = { government_coalition_strength < 0.799 }
+		}
+		add_to_variable = { arab_spring_change = -3 }
+	}
+	else_if = {
+		limit = {
+			check_variable = { government_coalition_strength > 0.799 }
+			check_variable = { government_coalition_strength < 0.899 }
+		}
+		add_to_variable = { arab_spring_change = -4 }
+	}
+	else_if = {
+		limit = {
+			check_variable = { government_coalition_strength > 0.899 }
+		}
+		add_to_variable = { arab_spring_change = -5 }
+	}
 }
 
 # Effect: increment_arab_spring_strength
@@ -1519,4 +1430,181 @@ increment_arab_spring_strength = {
 	calculate_monthly_arab_spring_change = yes
 	set_temp_variable = { temp_strength = arab_spring_change }
 	change_arab_spring_strength = yes
+}
+
+
+# Effect: Update social conservatism idea
+# Purpose: Updates the social conservatism idea for Arab nations
+update_social_conservatism_idea = {
+	if = {
+		limit = { check_variable = { social_conservatism_society > 90 } }
+		if = {
+			limit = { has_idea = conservative_society }
+			swap_ideas = {
+				remove_idea = conservative_society
+				add_idea = extremely_conservative_society
+			}
+		}
+		else_if = {
+			limit = { has_idea = shia_conservative_society }
+			swap_ideas = {
+				remove_idea = shia_conservative_society
+				add_idea = shia_extremely_conservative_society
+			}
+		}
+	}
+	else_if = {
+		limit = { check_variable = { social_conservatism_society > 64 } }
+		if = {
+			limit = { has_idea = extremely_conservative_society }
+			swap_ideas = {
+				remove_idea = extremely_conservative_society
+				add_idea = conservative_society
+			}
+		}
+		else_if = {
+			limit = { has_idea = shia_extremely_conservative_society }
+			swap_ideas = {
+				remove_idea = shia_extremely_conservative_society
+				add_idea = shia_conservative_society
+			}
+		}
+	}
+	else_if = {
+		limit = { check_variable = { social_conservatism_society > 49 } }
+		if = {
+			limit = { has_idea = conservative_society }
+			swap_ideas = {
+				remove_idea = conservative_society
+				add_idea = moderately_conservative_society
+			}
+		}
+		else_if = {
+			limit = { has_idea = shia_conservative_society }
+			swap_ideas = {
+				remove_idea = shia_conservative_society
+				add_idea = shia_moderately_conservative_society
+			}
+		}
+	}
+	else_if = {
+		limit = { check_variable = { social_conservatism_society > 29 } }
+		if = {
+			limit = { has_idea = moderately_conservative_society }
+			swap_ideas = {
+				remove_idea = moderately_conservative_society
+				add_idea = moderately_liberal_society
+			}
+		}
+		else_if = {
+			limit = { has_idea = shia_moderately_conservative_society }
+			swap_ideas = {
+				remove_idea = shia_moderately_conservative_society
+				add_idea = shia_moderately_liberal_society
+			}
+		}
+	}
+	else_if = {
+		limit = { check_variable = { social_conservatism_society > 9 } }
+		if = {
+			limit = { has_idea = moderately_liberal_society }
+			swap_ideas = {
+				remove_idea = moderately_liberal_society
+				add_idea = liberal_society
+			}
+		}
+		else_if = {
+			limit = { has_idea = shia_moderately_liberal_society }
+			swap_ideas = {
+				remove_idea = shia_moderately_liberal_society
+				add_idea = shia_liberal_society
+			}
+		}
+	}
+	else = {
+		if = {
+			limit = { has_idea = liberal_society }
+			swap_ideas = {
+				remove_idea = liberal_society
+				add_idea = extremely_liberal_society
+			}
+		}
+		else_if = {
+			limit = { has_idea = shia_liberal_society }
+			swap_ideas = {
+				remove_idea = shia_liberal_society
+				add_idea = shia_extremely_liberal_society
+			}
+		}
+	}
+}
+
+# On Actions
+on_weekly_gcc_dominant_member_check = {
+	if = { limit = { has_country_flag = gcc_dominant_member }
+		# Gulf Cooperation Council Unity Additions
+		if = { limit = { threat > 0.75 }
+			add_to_variable = { global.gcc_unity = 0.75 }
+		}
+		else_if = { limit = { threat > 0.50 }
+			add_to_variable = { global.gcc_unity = 0.50 }
+		}
+		else_if = { limit = { threat > 0.25 }
+			add_to_variable = { global.gcc_unity = 0.25 }
+		}
+		clamp_variable = { var = global.gcc_unity min = 0 max = 100 }
+
+		if = {
+			limit = {
+				has_idea = idea_gcc_member_state
+				has_completed_focus = GCC_limited_unified_command
+				NOT = { has_completed_focus = GCC_a_robust_alliance }
+				is_in_faction = no
+				has_defensive_war = yes
+				all_enemy_country = {
+					NOT = { has_idea = idea_gcc_member_state }
+				}
+			}
+			create_faction_from_template = faction_template_gcc
+			# Add to Faction
+			for_each_scope_loop = {
+				array = global.gcc_member_state
+				PREV = { add_to_faction = PREV }
+			}
+			set_country_flag = gcc_formed
+		}
+		else_if = {
+			limit = {
+				NOT = {
+					any_of_scopes = {
+						array = global.gcc_member_state
+						OR = {
+							has_war = yes
+							has_completed_focus = GCC_a_robust_alliance
+						}
+					}
+				}
+				any_of_scopes = {
+					array = global.gcc_member_state
+					has_war = no
+					has_country_flag = gcc_formed
+				}
+			}
+			if = { limit = { is_faction_leader = yes }
+				dismantle_faction = yes
+			}
+			# Add to Faction
+			for_each_scope_loop = {
+				array = global.gcc_member_state
+				if = { limit = { has_completed_focus = GCC_joint_defense_agreement }
+					for_each_scope_loop = {
+						array = global.gcc_member_state
+						if = { limit = { NOT = { tag = ROOT } }
+							give_guarantee = PREV
+						}
+					}
+				}
+			}
+		}
+	}
 }

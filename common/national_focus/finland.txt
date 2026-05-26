@@ -1,4 +1,4 @@
-﻿focus_tree = {
+focus_tree = {
 	id = finland_focus
 
 	country = {
@@ -33,7 +33,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -60,7 +60,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -86,7 +86,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -124,7 +124,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -152,7 +152,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -181,7 +181,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -209,12 +209,12 @@
 			log = "[GetDateText]: [Root.GetName]: Focus FIN_focus_on_civilian_industry"
 			swap_ideas = {
 				remove_idea = civilian_industry_project
-				add_idea = civilian_industry_project4
+				add_idea = civilian_industry_project3
 			}
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -244,7 +244,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -271,7 +271,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -297,7 +297,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -336,7 +336,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -362,7 +362,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -401,7 +401,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -440,7 +440,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -467,7 +467,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -493,7 +493,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -521,12 +521,11 @@
 			log = "[GetDateText]: [Root.GetName]: Focus FIN_secure_european_trade_deals"
 			set_temp_variable = { modify_eurosceptic = -0.05 }
 			EU_eurosceptic_change = yes
-			every_country = {
+			every_other_country = {
 				limit = {
 					has_idea = EU_member
 					NOT = { has_war_with = FIN }
 				}
-				#increase_trade_influence_by_2 = yes needs to be looked at again
 				add_opinion_modifier = {
 					target = FIN
 					modifier = trade_mission
@@ -535,7 +534,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -566,8 +565,6 @@
 				}
 				ICE = {
 					set_temp_variable = { percent_change = 1 }
-					set_temp_variable = { tag_index = FIN.id }
-					set_temp_variable = { influence_target = THIS.id }
 					change_influence_percentage = yes
 					add_opinion_modifier = { target = FIN modifier = trade_mission }
 				}
@@ -583,8 +580,6 @@
 				}
 				NOR = {
 					set_temp_variable = { percent_change = 1 }
-					set_temp_variable = { tag_index = FIN.id }
-					set_temp_variable = { influence_target = THIS.id }
 					change_influence_percentage = yes
 					add_opinion_modifier = { target = FIN modifier = trade_mission }
 				}
@@ -600,8 +595,6 @@
 				}
 				SWE = {
 					set_temp_variable = { percent_change = 1 }
-					set_temp_variable = { tag_index = FIN.id }
-					set_temp_variable = { influence_target = THIS.id }
 					change_influence_percentage = yes
 					add_opinion_modifier = { target = FIN modifier = trade_mission }
 				}
@@ -617,8 +610,6 @@
 				}
 				DEN = {
 					set_temp_variable = { percent_change = 1 }
-					set_temp_variable = { tag_index = FIN.id }
-					set_temp_variable = { influence_target = THIS.id }
 					change_influence_percentage = yes
 					add_opinion_modifier = { target = FIN modifier = trade_mission }
 				}
@@ -626,7 +617,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -656,8 +647,6 @@
 			log = "[GetDateText]: [Root.GetName]: Focus FIN_trade_with_russia"
 			SOV = {
 				set_temp_variable = { percent_change = 1 }
-				set_temp_variable = { tag_index = FIN.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 				add_opinion_modifier = {
 					target = FIN
@@ -667,7 +656,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -697,15 +686,13 @@
 			log = "[GetDateText]: [Root.GetName]: Focus FIN_trade_with_the_united_states"
 			USA = {
 				set_temp_variable = { percent_change = 1 }
-				set_temp_variable = { tag_index = FIN.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 				add_opinion_modifier = { target = FIN modifier = trade_mission }
 			}
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -735,15 +722,13 @@
 			log = "[GetDateText]: [Root.GetName]: Focus FIN_trade_with_china"
 			CHI = {
 				set_temp_variable = { percent_change = 1 }
-				set_temp_variable = { tag_index = FIN.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 				add_opinion_modifier = { target = FIN modifier = trade_mission }
 			}
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -780,7 +765,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
@@ -817,7 +802,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 1
 				is_historical_focus_on = yes
@@ -866,7 +851,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 1
 				is_historical_focus_on = yes
@@ -900,7 +885,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
@@ -944,7 +929,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 1
 				is_historical_focus_on = yes
@@ -981,7 +966,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -1018,7 +1003,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 1
 				is_historical_focus_on = yes
@@ -1056,7 +1041,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
@@ -1097,7 +1082,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 1
 				is_historical_focus_on = yes
@@ -1135,7 +1120,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
@@ -1179,7 +1164,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 1
 				is_historical_focus_on = yes
@@ -1221,7 +1206,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
@@ -1261,7 +1246,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	focus = {
@@ -1295,7 +1280,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
@@ -1335,7 +1320,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
@@ -1373,7 +1358,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 1
 				is_historical_focus_on = yes
@@ -1404,7 +1389,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -1430,7 +1415,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -1458,7 +1443,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -1484,7 +1469,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -1523,7 +1508,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -1558,7 +1543,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -1592,7 +1577,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -1621,7 +1606,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -1664,7 +1649,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -1709,7 +1694,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -1748,7 +1733,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -1791,7 +1776,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
@@ -1856,7 +1841,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -1881,15 +1866,13 @@
 			log = "[GetDateText]: [Root.GetName]: Focus FIN_finnish_german_trade"
 			GER = {
 				set_temp_variable = { percent_change = 1 }
-				set_temp_variable = { tag_index = FIN.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 				add_opinion_modifier = { target = FIN modifier = trade_mission }
 			}
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -1918,10 +1901,9 @@
 			log = "[GetDateText]: [Root.GetName]: Focus FIN_european_involvement"
 			set_temp_variable = { modify_eurosceptic = -0.05 }
 			EU_eurosceptic_change = yes
-			every_country = {
+			every_other_country = {
 				limit = {
 					has_idea = EU_member
-					NOT = { original_tag = FIN }
 					NOT = { has_war_with = FIN }
 				}
 				add_opinion_modifier = {
@@ -1932,7 +1914,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 				modifier = {
 					factor = 0
 					gov_is_eurosceptical = yes
@@ -1999,7 +1981,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -2026,8 +2008,10 @@
 		available = {
 			NOT = { has_war_with = GER }
 			is_subject = no
-			GER = { is_subject = no }
-			GER = { has_government = nationalist }
+			GER = {
+				is_subject = no
+				has_government = nationalist
+			}
 		}
 
 		completion_reward = {
@@ -2045,7 +2029,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -2094,7 +2078,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 1
 				is_historical_focus_on = yes
@@ -2124,7 +2108,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -2147,17 +2131,10 @@
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus FIN_nato_drills_on_finnish_soil"
 			army_experience = 30
-			#every_country = {
-			#	limit = {
-			#		is_in_faction_with = FIN
-			#		NOT = { original_tag = FIN }
-			#	}
-			#	country_event = nato.5
-			#}
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -2193,7 +2170,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -2251,7 +2228,7 @@
 				}
 
 				add_equipment_to_stockpile = {
-					type = infantry_weapons3
+					type = infantry_weapons_4
 					amount = 250
 					producer = ENG
 				}
@@ -2284,7 +2261,7 @@
 				}
 
 				add_equipment_to_stockpile = {
-					type = infantry_weapons3
+					type = infantry_weapons_4
 					amount = 250
 					producer = FRA
 				}
@@ -2317,7 +2294,7 @@
 				}
 
 				add_equipment_to_stockpile = {
-					type = infantry_weapons3
+					type = infantry_weapons_4
 					amount = 250
 					producer = GER
 				}
@@ -2350,7 +2327,7 @@
 				}
 
 				add_equipment_to_stockpile = {
-					type = infantry_weapons3
+					type = infantry_weapons_4
 					amount = 250
 					producer = USA
 				}
@@ -2361,7 +2338,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -2400,7 +2377,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -2441,7 +2418,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
@@ -2474,7 +2451,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -2517,7 +2494,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 1
 				is_historical_focus_on = yes
@@ -2554,7 +2531,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -2581,7 +2558,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 1
 				is_historical_focus_on = yes
@@ -2626,7 +2603,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -2662,7 +2639,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -2701,7 +2678,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -2755,7 +2732,7 @@
 			}
 
 			add_equipment_to_stockpile = {
-				type = infantry_weapons3
+				type = infantry_weapons_4
 				amount = 800
 				producer = SWE
 			}
@@ -2764,7 +2741,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -2795,7 +2772,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -2826,7 +2803,7 @@
 		}
 
 		ai_will_do = {
-			factor = 10
+			base = 10
 		}
 	}
 
@@ -2874,7 +2851,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
@@ -2927,7 +2904,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				add = 25
 				gov_is_eurosceptical = yes
@@ -2958,9 +2935,8 @@
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus FIN_csto_embassies"
-			every_country = {
+			every_other_country = {
 				limit = {
-					NOT = { original_tag = FIN }
 					NOT = { original_tag = SOV }
 					is_in_faction_with = SOV
 				}
@@ -2972,7 +2948,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -3011,7 +2987,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -3042,8 +3018,10 @@
 			#	has_idea = EU_member
 			#}
 			is_subject = no
-			SOV = { is_subject = no }
-			SOV = { is_faction_leader = yes }
+			SOV = {
+				is_subject = no
+				is_faction_leader = yes
+			}
 		}
 
 		completion_reward = {
@@ -3100,7 +3078,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -3131,8 +3109,10 @@
 			#	has_idea = EU_member
 			#}
 			is_subject = no
-			SOV = { is_subject = no }
-			SOV = { is_faction_leader = yes }
+			SOV = {
+				is_subject = no
+				is_faction_leader = yes
+			}
 		}
 
 		completion_reward = {
@@ -3145,7 +3125,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -3180,7 +3160,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -3232,14 +3212,14 @@
 			}
 
 			add_equipment_to_stockpile = {
-				type = infantry_weapons3
+				type = infantry_weapons_4
 				amount = 800
 				producer = SOV
 			}
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -3273,7 +3253,7 @@
 		}
 
 		ai_will_do = {
-			factor = 0
+			base = 0
 		}
 	}
 
@@ -3308,7 +3288,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -3357,7 +3337,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -3383,7 +3363,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -3417,7 +3397,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -3446,7 +3426,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -3473,7 +3453,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -3499,6 +3479,8 @@
 				name = "Finnish-Russian Border Conflict"
 				threat = 4
 			}
+			set_temp_variable = { wargoal_on = SOV }
+			add_threat_from_wargoal_effect = yes
 			create_wargoal = {
 				target = SOV
 				type = take_claimed_state
@@ -3509,7 +3491,7 @@
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 

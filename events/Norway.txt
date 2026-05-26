@@ -1,4 +1,4 @@
-﻿add_namespace = norway
+add_namespace = norway
 
 # Åsta Train Collision
 country_event = {
@@ -17,7 +17,7 @@ country_event = {
 		add_ruling_outlook_popularity = yes
 
 		ai_chance = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -87,45 +87,51 @@ country_event = {
 	id = norway.5
 	title = norway.5.t
 	desc = norway.5.d
-	#
-	#fire_only_once = yes
+
 	is_triggered_only = yes
-	# Okay
+
 	option = {
 		name = norway.5.a
 		log = "[GetDateText]: [This.GetName]: norway.5.a executed"
-		random_list = {
-			50 = {
-				add_resource = {
-					type = oil
-					amount = 5
-					state = 542
-				}
-			}
-			50 = {
-				add_resource = {
-					type = oil
-					amount = 6
-					state = 30
+		NOR = {
+			random_owned_state = {
+				random_list = {
+					50 = {
+						add_resource = {
+							type = oil
+							amount = 5
+						}
+					}
+					50 = {
+						add_resource = {
+							type = oil
+							amount = 6
+						}
+					}
 				}
 			}
 		}
 		newline = yes
-		set_temp_variable = { treasury_change = -7.42 }
-		modify_treasury_effect = yes
+		random_owned_state = {
+			limit = {
+				is_coastal = yes
+			}
+			add_resource = {
+				type = oil
+				amount = 6
+			}
+		}
+
 		newline = yes
 		set_temp_variable = { percent_change = 5 }
-		set_temp_variable = { tag_index = ROOT }
 		set_temp_variable = { influence_target = NOR }
 		change_influence_percentage = yes
 		newline = yes
-		NOR = {
-			country_event = {
-				id = norway.6
-			}
-		}
+		set_temp_variable = { treasury_change = -7.42 }
+		modify_treasury_effect = yes
+		NOR = { country_event = norway.6 }
 		ai_chance = {
-			factor = 1
+			base = 1
 		}
 	}
 	# No
@@ -133,9 +139,7 @@ country_event = {
 		name = norway.5.b
 		log = "[GetDateText]: [This.GetName]: norway.5.b executed"
 		NOR = {
-			country_event = {
-				id = norway.7
-			}
+			country_event = norway.7
 		}
 		ai_chance = {
 			factor = 0
@@ -155,7 +159,7 @@ country_event = {
 		name = norway.6.a
 		log = "[GetDateText]: [This.GetName]: norway.6.a executed"
 		ai_chance = {
-			factor = 1
+			base = 1
 		}
 	}
 }
@@ -172,7 +176,7 @@ country_event = {
 		name = norway.7.a
 		log = "[GetDateText]: [This.GetName]: norway.7.a executed"
 		ai_chance = {
-			factor = 1
+			base = 1
 		}
 	}
 }
@@ -207,7 +211,7 @@ country_event = {
 		set_temp_variable = { influence_target = SYR }
 		change_influence_percentage = yes
 		ai_chance = {
-			factor = 1
+			base = 1
 		}
 	}
 	# Reasonable Amount of Aid
@@ -232,7 +236,7 @@ country_event = {
 		set_temp_variable = { influence_target = SYR }
 		change_influence_percentage = yes
 		ai_chance = {
-			factor = 1
+			base = 1
 		}
 	}
 	# Considerable Amount of Aid
@@ -257,7 +261,7 @@ country_event = {
 		set_temp_variable = { influence_target = SYR }
 		change_influence_percentage = yes
 		ai_chance = {
-			factor = 1
+			base = 1
 		}
 	}
 }
@@ -299,7 +303,7 @@ country_event = {
 			}
 		}
 		ai_chance = {
-			factor = 1
+			base = 1
 		}
 	}
 }
@@ -316,7 +320,7 @@ country_event = {
 		name = norway.82.a
 		log = "[GetDateText]: [This.GetName]: norway.82.a executed"
 		ai_chance = {
-			factor = 1
+			base = 1
 		}
 	}
 }
@@ -342,7 +346,7 @@ country_event = {
 				days = 1
 			}
 		}
-		custom_effect_tooltip = NOR_if_they_aceept_TT
+		custom_effect_tooltip = TT_IF_THEY_ACCEPT
 		effect_tooltip = {
 			if = {
 				limit = { has_dlc = "No Step Back" }
@@ -399,7 +403,7 @@ country_event = {
 			custom_effect_tooltip = NOR_higher_relations_more_likely_TT
 		}
 		ai_chance = {
-			factor = 1
+			base = 1
 		}
 	}
 	# USA
@@ -412,7 +416,7 @@ country_event = {
 				days = 1
 			}
 		}
-		custom_effect_tooltip = NOR_if_they_aceept_TT
+		custom_effect_tooltip = TT_IF_THEY_ACCEPT
 		effect_tooltip = {
 			if = {
 				limit = { has_dlc = "No Step Back" }
@@ -469,7 +473,7 @@ country_event = {
 		newline = yes
 		custom_effect_tooltip = NOR_higher_relations_more_likely_TT
 		ai_chance = {
-			factor = 1
+			base = 1
 		}
 	}
 }
@@ -532,7 +536,7 @@ country_event = {
 			}
 		}
 		ai_chance = {
-			factor = 1
+			base = 1
 		}
 	}
 	# Actually, These Cost Too Much...
@@ -540,7 +544,7 @@ country_event = {
 		name = norway.92.b
 		log = "[GetDateText]: [This.GetName]: norway.92.b executed"
 		ai_chance = {
-			factor = 1
+			base = 1
 		}
 	}
 }
@@ -606,14 +610,14 @@ country_event = {
 			}
 		}
 		ai_chance = {
-			factor = 1
+			base = 1
 		}
 	}
 	option = {
 		name = norway.9.b
 		log = "[GetDateText]: [This.GetName]: norway.9.a executed"
 		ai_chance = {
-			factor = 1
+			base = 1
 		}
 	}
 }
@@ -631,7 +635,7 @@ country_event = {
 		name = norway.93.a
 		log = "[GetDateText]: [This.GetName]: norway.12.a executed"
 		ai_chance = {
-			factor = 1
+			base = 1
 		}
 	}
 }
@@ -652,11 +656,9 @@ country_event = {
 				original_tag = USA
 			}
 			NOR = {
-				country_event = {
-					id = norway.9
-				}
+				country_event = norway.9
 			}
-			custom_effect_tooltip = NOR_if_we_accept_TT
+			custom_effect_tooltip = TT_IF_WE_ACCEPT
 			effect_tooltip = {
 				if = {
 					limit = { has_dlc = "No Step Back" }
@@ -713,7 +715,7 @@ country_event = {
 			limit = {
 				original_tag = GER
 			}
-			custom_effect_tooltip = NOR_if_we_accept_TT
+			custom_effect_tooltip = TT_IF_WE_ACCEPT
 			effect_tooltip = {
 				if = {
 					limit = { has_dlc = "No Step Back" }
@@ -766,9 +768,7 @@ country_event = {
 				}
 			}
 			NOR = {
-				country_event = {
-					id = norway.92
-				}
+				country_event = norway.92
 			}
 		}
 		ai_chance = {
@@ -784,9 +784,7 @@ country_event = {
 		name = norway.94.b
 		log = "[GetDateText]: [This.GetName]: norway.94.b executed"
 		NOR = {
-			country_event = {
-				id = norway.93
-			}
+			country_event = norway.93
 		}
 		ai_chance = {
 			base = 1
@@ -832,7 +830,7 @@ country_event = {
 			}
 		}
 		ai_chance = {
-			factor = 1
+			base = 1
 		}
 	}
 }
@@ -858,7 +856,7 @@ country_event = {
 			}
 		}
 		ai_chance = {
-			factor = 1
+			base = 1
 		}
 	}
 }
@@ -875,7 +873,7 @@ country_event = {
 		name = norway.12.a
 		log = "[GetDateText]: [This.GetName]: norway.12.a executed"
 		ai_chance = {
-			factor = 1
+			base = 1
 		}
 	}
 }
@@ -906,7 +904,7 @@ country_event = {
 			popularity = -0.10
 		}
 		ai_chance = {
-			factor = 1
+			base = 1
 		}
 	}
 	# No Legalization
@@ -925,7 +923,7 @@ country_event = {
 			popularity = 0.10
 		}
 		ai_chance = {
-			factor = 1
+			base = 1
 		}
 	}
 }
@@ -942,7 +940,7 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: norway.16.a executed"
 		add_ideas = NOR_anti_migration
 		ai_chance = {
-			factor = 1
+			base = 1
 		}
 	}
 	# Pro Immigration
@@ -951,7 +949,7 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: norway.16.b executed"
 		add_ideas = NOR_pro_migration
 		ai_chance = {
-			factor = 1
+			base = 1
 		}
 	}
 }
@@ -967,7 +965,7 @@ country_event = {
 	option = {
 		name = norway.100.a
 		log = "[GetDateText]: [This.GetName]: norway.100.a executed"
-		custom_effect_tooltip = NOR_if_they_aceept_TT
+		custom_effect_tooltip = TT_IF_THEY_ACCEPT
 		NOR = {
 			set_country_flag = NOR_UK_AGREED
 		}
@@ -1012,7 +1010,7 @@ country_event = {
 		name = norway.100.b
 		log = "[GetDateText]: [This.GetName]: norway.100.b executed"
 		ai_chance = {
-			factor = 1
+			base = 1
 		}
 	}
 }
@@ -1032,7 +1030,7 @@ country_event = {
 		set_temp_variable = { sender_nation = ENG.id }
 		set_improved_trade_agreement = yes
 		ai_chance = {
-			factor = 1
+			base = 1
 		}
 	}
 }
@@ -1048,7 +1046,7 @@ country_event = {
 		name = norway.102.a
 		log = "[GetDateText]: [This.GetName]: norway.102.a executed"
 		ai_chance = {
-			factor = 1
+			base = 1
 		}
 	}
 }
@@ -1063,7 +1061,7 @@ country_event = {
 	option = {
 		name = norway.103.a
 		log = "[GetDateText]: [This.GetName]: norway.103.a executed"
-		custom_effect_tooltip = NOR_if_we_accept_TT
+		custom_effect_tooltip = TT_IF_WE_ACCEPT
 		newline = yes
 		if = {
 			limit = {
@@ -1142,7 +1140,7 @@ country_event = {
 			}
 		}
 		ai_chance = {
-			factor = 1
+			base = 1
 		}
 	}
 }
@@ -1214,7 +1212,7 @@ country_event = {
 			modify_treasury_effect = yes
 		}
 		ai_chance = {
-			factor = 1
+			base = 1
 		}
 	}
 }
@@ -1231,7 +1229,7 @@ country_event = {
 		name = norway.105.a
 		log = "[GetDateText]: [This.GetName]: norway.105.a executed"
 		ai_chance = {
-			factor = 1
+			base = 1
 		}
 	}
 }
@@ -1247,7 +1245,7 @@ country_event = {
 		name = norway.106.a
 		log = "[GetDateText]: [This.GetName]: norway.106.a executed"
 		ai_chance = {
-			factor = 1
+			base = 1
 		}
 	}
 }

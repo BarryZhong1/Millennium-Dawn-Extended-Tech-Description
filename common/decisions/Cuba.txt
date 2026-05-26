@@ -10,11 +10,12 @@ CUB_ter_defence_category = {
 			has_war = yes
 		}
 		visible = {
-				has_completed_focus = CUB_create_ter_defense
+			has_completed_focus = CUB_create_ter_defense
 		}
+		cost = 15
+
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove CUB_ter_oboronaup_start"
-			add_political_power = -15
 			add_manpower = -5000
 			set_temp_variable = { treasury_change = -6 }
 			modify_treasury_effect = yes
@@ -46,6 +47,7 @@ CUB_ter_defence_category = {
 				}
 			}
 		}
+		ai_will_do = { base = 0 }
 	}
 	CUB_ter_oboronaup = {
 		cost = 15
@@ -61,7 +63,6 @@ CUB_ter_defence_category = {
 		}
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove CUB_ter_oboronaup_start"
-			add_political_power = -15
 			add_manpower = -5000
 			set_temp_variable = { treasury_change = -6 }
 			modify_treasury_effect = yes
@@ -93,6 +94,7 @@ CUB_ter_defence_category = {
 				}
 			}
 		}
+		ai_will_do = { base = 0 }
 	}
 }
 
@@ -105,10 +107,11 @@ CUB_blockade_fight_category = {
 		modifier = {
 			health_cost_multiplier_modifier = 0.05
 		}
-		ai_will_do = { factor = 355 }
+		ai_will_do = { base = 355 }
+		cost = 150
+
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: CUB_us_citizens_propoganda"
-			add_political_power = -150
 			add_stability = 0.05
 			set_temp_variable = { treasury_change = -10 }
 			modify_treasury_effect = yes
@@ -155,7 +158,7 @@ CUB_blockade_fight_category = {
 				has_war_with = RAJ
 			}
 		}
-		ai_will_do = { factor = 355 }
+		ai_will_do = { base = 355 }
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: CUB_attract_eastern_inv"
 			set_temp_variable = { treasury_change = 10 }
@@ -196,7 +199,7 @@ CUB_blockade_fight_category = {
 				has_war_with = USA
 			}
 		}
-		ai_will_do = { factor = 355 }
+		ai_will_do = { base = 355 }
 		visible = {
 			USA = {
 				has_country_flag = blockade_cuba_yes
@@ -223,7 +226,7 @@ CUB_blockade_fight_category = {
 		days_remove = 45
 		fire_only_once = no
 		cost = 100
-		ai_will_do = { factor = 355 }
+		ai_will_do = { base = 355 }
 		available = {
 			USA = {
 				has_opinion = {
@@ -259,7 +262,7 @@ CUB_blockade_fight_category = {
 		days_remove = 45
 		fire_only_once = no
 		cost = 100
-		ai_will_do = { factor = 355 }
+		ai_will_do = { base = 355 }
 		available = {
 			USA = {
 				has_opinion = {
@@ -295,7 +298,7 @@ CUB_blockade_fight_category = {
 		days_remove = 45
 		fire_only_once = no
 		cost = 100
-		ai_will_do = { factor = 355 }
+		ai_will_do = { base = 355 }
 		available = {
 			USA = {
 				has_opinion = {
@@ -331,7 +334,7 @@ CUB_blockade_fight_category = {
 		days_remove = 45
 		fire_only_once = no
 		cost = 100
-		ai_will_do = { factor = 355 }
+		ai_will_do = { base = 355 }
 		available = {
 			USA = {
 				has_opinion = {
@@ -369,7 +372,7 @@ CUB_blockade_fight_category = {
 		fire_only_once = yes
 		icon = GFX_decision_cub_tourism_button
 		cost = 135
-		ai_will_do = { factor = 355 }
+		ai_will_do = { base = 355 }
 		modifier = {
 			political_power_factor = 0.05
 			bureaucracy_cost_multiplier_modifier = 0.05
@@ -407,7 +410,7 @@ CUB_blockade_fight_category = {
 		days_remove = 70
 		fire_only_once = yes
 		cost = 100
-		ai_will_do = { factor = 355 }
+		ai_will_do = { base = 355 }
 		modifier = {
 			political_power_factor = 0.05
 			bureaucracy_cost_multiplier_modifier = -0.05
@@ -448,7 +451,7 @@ CUB_blockade_fight_category = {
 		days_remove = 150
 		fire_only_once = no
 		cost = 150
-		ai_will_do = { factor = 355 }
+		ai_will_do = { base = 355 }
 		modifier = {
 			political_power_factor = -0.05
 			bureaucracy_cost_multiplier_modifier = 0.05
@@ -477,7 +480,7 @@ CUB_blockade_fight_category = {
 				}
 			}
 		}
-		ai_will_do = { factor = 355 }
+		ai_will_do = { base = 355 }
 		modifier = {
 			political_power_factor = -0.05
 		}
@@ -500,7 +503,7 @@ CUB_blockade_fight_category = {
 		fire_only_once = yes
 		cost = 165
 		icon = GFX_decision_cub_dom_button
-		ai_will_do = { factor = 355 }
+		ai_will_do = { base = 355 }
 		available = {
 			DOM = { influence_higher_40 = yes }
 			DOM = {
@@ -536,7 +539,6 @@ CUB_blockade_fight_category = {
 				}
 			}
 			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = CUB }
 			set_temp_variable = { influence_target = DOM }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = -5 }
@@ -552,7 +554,7 @@ CUB_blockade_fight_category = {
 		fire_only_once = yes
 		cost = 150
 		icon = GFX_decision_cub_hai_button
-		ai_will_do = { factor = 355 }
+		ai_will_do = { base = 355 }
 		available = {
 			HAI = { influence_higher_40 = yes }
 			HAI = {
@@ -582,7 +584,6 @@ CUB_blockade_fight_category = {
 				}
 			}
 			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = CUB }
 			set_temp_variable = { influence_target = HAI }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = -5 }
@@ -599,7 +600,7 @@ CUB_blockade_fight_category = {
 		fire_only_once = no
 		cost = 120
 		icon = GFX_decision_cub_canada_button
-		ai_will_do = { factor = 355 }
+		ai_will_do = { base = 355 }
 		available = {
 			CAN = {
 				has_opinion = {
@@ -620,7 +621,6 @@ CUB_blockade_fight_category = {
 			set_temp_variable = { treasury_change = 5 }
 			modify_treasury_effect = yes
 			set_temp_variable = { percent_change = 3 }
-			set_temp_variable = { tag_index = CUB }
 			set_temp_variable = { influence_target = CAN }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = -6 }
@@ -633,7 +633,7 @@ CUB_blockade_fight_category = {
 		days_remove = 150
 		fire_only_once = yes
 		cost = 120
-		ai_will_do = { factor = 355 }
+		ai_will_do = { base = 355 }
 		icon = GFX_decision_cub_canada_button
 		available = {
 			CAN = {
@@ -668,7 +668,6 @@ CUB_blockade_fight_category = {
 			set_temp_variable = { sender_nation = CUB }
 			set_improved_trade_agreement = yes
 			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = CUB }
 			set_temp_variable = { influence_target = CAN }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = -5 }
@@ -682,7 +681,7 @@ CUB_blockade_fight_category = {
 		fire_only_once = yes
 		icon = GFX_decision_cub_mexico_button
 		cost = 120
-		ai_will_do = { factor = 355 }
+		ai_will_do = { base = 355 }
 		available = {
 			MEX = {
 				has_opinion = {
@@ -710,7 +709,7 @@ CUB_blockade_fight_category = {
 		fire_only_once = yes
 		cost = 150
 		icon = GFX_decision_cub_mexico_button
-		ai_will_do = { factor = 355 }
+		ai_will_do = { base = 355 }
 		available = {
 			MEX = {
 				has_opinion = {
@@ -762,7 +761,7 @@ CUB_alba_category = {
 			stability_factor = 0.01
 			health_cost_multiplier_modifier = 0.05
 		}
-		ai_will_do = { factor = 100 }
+		ai_will_do = { base = 100 }
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove CUB_alba_healthcare"
 			add_stability = 0.06
@@ -789,7 +788,7 @@ CUB_alba_category = {
 			bureaucracy_cost_multiplier_modifier = 0.03
 
 		}
-		ai_will_do = { factor = 100 }
+		ai_will_do = { base = 100 }
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove CUB_alba_schools"
 			add_stability = 0.02
@@ -815,7 +814,7 @@ CUB_alba_category = {
 			bureaucracy_cost_multiplier_modifier = 0.05
 			education_cost_multiplier_modifier = 0.05
 		}
-		ai_will_do = { factor = 100 }
+		ai_will_do = { base = 100 }
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove CUB_own_currency"
 			add_stability = 0.02
@@ -833,11 +832,16 @@ CUB_alba_category = {
 		fire_only_once = yes
 		icon = cuba_oil_button
 		modifier = {
-			local_resources_factor = 0.15
+			local_resources_oil_factor = 0.15
+			local_resources_aluminium_factor = 0.15
+			local_resources_rubber_factor = 0.15
+			local_resources_tungsten_factor = 0.15
+			local_resources_steel_factor = 0.15
+			local_resources_chromium_factor = 0.15
 			research_speed_factor = 0.05
 			bureaucracy_cost_multiplier_modifier = -0.02
 		}
-		ai_will_do = { factor = 100 }
+		ai_will_do = { base = 100 }
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove CUB_alba_petrosur"
 			add_stability = 0.06
@@ -859,7 +863,7 @@ CUB_alba_category = {
 			industrial_capacity_factory = 0.1
 			research_speed_factor = 0.05
 		}
-		ai_will_do = { factor = 100 }
+		ai_will_do = { base = 100 }
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove CUB_alba_telesur"
 			add_stability = 0.06
@@ -880,7 +884,7 @@ CUB_alba_category = {
 			political_power_factor = 0.03
 			research_speed_factor = 0.05
 		}
-		ai_will_do = { factor = 100 }
+		ai_will_do = { base = 100 }
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove CUB_alba_sport"
 			add_stability = 0.03
@@ -928,7 +932,7 @@ CUB_confederation_category = {
 		fire_only_once = no
 		days_remove = 365
 		ai_will_do = {
-			factor = 355
+			base = 355
 		}
 		available = {
 			country_exists = HAI
@@ -944,7 +948,7 @@ CUB_confederation_category = {
 			tag = CUB
 			HAI = {
 				NOT = {
-					has_country_flag = antillies_conf_agree
+					has_country_flag = antilles_conf_agree
 				}
 			}
 		}
@@ -959,7 +963,7 @@ CUB_confederation_category = {
 		fire_only_once = no
 		days_remove = 365
 		ai_will_do = {
-			factor = 355
+			base = 355
 		}
 		available = {
 			country_exists = DOM
@@ -975,7 +979,7 @@ CUB_confederation_category = {
 			tag = CUB
 			DOM = {
 				NOT = {
-					has_country_flag = antillies_conf_agree
+					has_country_flag = antilles_conf_agree
 				}
 			}
 		}
@@ -990,7 +994,7 @@ CUB_confederation_category = {
 		fire_only_once = no
 		days_remove = 365
 		ai_will_do = {
-			factor = 355
+			base = 355
 		}
 		available = {
 			country_exists = PTR
@@ -1007,7 +1011,7 @@ CUB_confederation_category = {
 			country_exists = PTR
 			PTR = {
 				NOT = {
-					has_country_flag = antillies_conf_agree
+					has_country_flag = antilles_conf_agree
 				}
 			}
 		}
@@ -1022,7 +1026,7 @@ CUB_confederation_category = {
 		fire_only_once = no
 		days_remove = 365
 		ai_will_do = {
-			factor = 355
+			base = 355
 		}
 		available = {
 			country_exists = COL
@@ -1039,7 +1043,7 @@ CUB_confederation_category = {
 			country_exists = COL
 			COL = {
 				NOT = {
-					has_country_flag = antillies_conf_agree
+					has_country_flag = antilles_conf_agree
 				}
 			}
 		}
@@ -1054,7 +1058,7 @@ CUB_confederation_category = {
 		icon = GFX_decision_cuba_antilean_button
 		days_remove = 365
 		ai_will_do = {
-			factor = 355
+			base = 355
 		}
 		available = {
 			country_exists = JAM
@@ -1071,7 +1075,7 @@ CUB_confederation_category = {
 			country_exists = JAM
 			JAM = {
 				NOT = {
-					has_country_flag = antillies_conf_agree
+					has_country_flag = antilles_conf_agree
 				}
 			}
 		}
@@ -1086,11 +1090,11 @@ CUB_confederation_category = {
 		icon = GFX_decision_cuba_antilean_button
 		days_remove = 40
 		ai_will_do = {
-			factor = 355
+			base = 355
 		}
 		available = {
 			NOT = {
-			country_exists = PTR
+				country_exists = PTR
 			}
 		}
 		visible = {
@@ -1104,7 +1108,7 @@ CUB_confederation_category = {
 			}
 			PTR = {
 				NOT = {
-					has_country_flag = antillies_conf_agree
+					has_country_flag = antilles_conf_agree
 				}
 			}
 		}
@@ -1113,14 +1117,12 @@ CUB_confederation_category = {
 			USA = {	country_event = { id = cuba.40 days = 1 } }
 		}
 	}
+
 	CUB_form_confederation = {
 		cost = 80
 		fire_only_once = yes
 		icon = cuba_antileancreate_button
-		days_remove = 1
-		ai_will_do = {
-			factor = 355
-		}
+
 		available = {
 			country_exists = CUB
 			HAI = { is_subject_of = CUB }
@@ -1129,12 +1131,50 @@ CUB_confederation_category = {
 			JAM = { is_subject_of = CUB }
 			PTR = { is_subject_of = CUB }
 		}
-		visible = {
-			tag = CUB
-		}
-		remove_effect = {
+
+		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision CUB_form_confederation"
-			confederation_creation = yes
+			create_faction_from_template = faction_template_antillean_confederation
+			set_cosmetic_tag = CUB_confederation
+			if = {
+				limit = {
+					COL = { has_country_flag = antilles_conf_agree }
+				}
+				CUB = { add_to_faction = COL }
+				COL = { add_ideas = CUB_caribbean_nation }
 			}
+			if = {
+				limit = {
+					HAI = { has_country_flag = antilles_conf_agree }
+				}
+				CUB = { add_to_faction = HAI }
+				HAI = { add_ideas = CUB_caribbean_nation }
+			}
+			if = {
+				limit = {
+					DOM = { has_country_flag = antilles_conf_agree }
+				}
+				CUB = { add_to_faction = DOM }
+				DOM = { add_ideas = CUB_caribbean_nation }
+			}
+			if = {
+				limit = {
+					JAM = { has_country_flag = antilles_conf_agree }
+				}
+				CUB = { add_to_faction = JAM }
+				JAM = { add_ideas = CUB_caribbean_nation }
+			}
+			if = {
+				limit = {
+					PTR = { has_country_flag = antilles_conf_agree }
+				}
+				CUB = { add_to_faction = PTR }
+				PTR = { add_ideas = CUB_caribbean_nation }
+			}
+		}
+
+		ai_will_do = {
+			base = 500
+		}
 	}
 }

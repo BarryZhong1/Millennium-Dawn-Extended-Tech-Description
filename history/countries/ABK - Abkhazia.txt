@@ -1,23 +1,52 @@
-﻿capital = 706
+capital = 706
 2000.1.1 = {
-	### for all nations # Don't get clever ideas with it
-	every_country = {
-		# Check if I need to set the Error Stop Equipment Variants
-		# TODO: This needs to be removed at some point in the future
-		if = {
-			limit = { has_dlc = "No Step Back" }
-			create_equipment_variants_for_error_stop = yes
-		}
-	}
-	set_country_flag = dynamic_flag
+	set_variable = { currency_strength = 0.45 }
 	set_cosmetic_tag = ABK
+	set_country_flag = dynamic_flag
 	set_variable = { gdp_per_capita = 1.299 }
 
+	set_technology = {
+		integrated_transportation_system = 1
+		post_conventional_rail = 1
+		early_high_speed_rail = 1
+		early_freight_locomotive = 1
+		armoured_mass_assault = 1
+		night_vision_1 = 1
+		support_weapons = 1
+		infantry_weapons_1 = 1
+		cnc_equipment_1 = 1
+		Anti_tank_0 = 1
+		Heavy_Anti_tank_0 = 1
+		util_vehicle_1 = 1
+		basic_computing = 1
+		integrated_circuit = 1
+		computing1 = 1
+		radar = 1
+		internet1 = 1
+		nanofibers_1 = 1
+		printing_1 = 1
+		fuel_refining = 1
+		construction1 = 1
+		fuel_silos = 1
+	}
+
+	if = {
+		limit = { NOT = { has_dlc = "La Resistance" } }
+		set_technology = {
+			decryption1 = 1
+			encryption1 = 1
+		}
+	}
 	if = { limit = { has_dlc = "No Step Back" }
+		# INFO: This needs to be removed eventually when we can figure out the workaround for error vehicles
+		every_country = {
+			create_equipment_variants_for_error_stop = yes
+		}
 		set_oob = "ABK_2000_nsb"
 
 		set_technology = {
 			mbt_tech_ops = 1
+			mbt_tech = 1
 			nsb_artillery_0 = 1
 			nsb_Anti_Air_0 = 1
 		}
@@ -30,7 +59,7 @@
 				Early_APC = 1
 				APC_1 = 1
 				IFV_1 = 1
-				artillery_0 = 1
+				tech_arty_0 = 1
 				SP_R_arty_0 = 1
 				SP_arty_0 = 1
 				SP_Anti_Air_0 = 1
@@ -38,53 +67,21 @@
 			}
 		}
 	}
-	if = {
-		limit = { has_dlc = "By Blood Alone" }
+	if = { limit = { has_dlc = "By Blood Alone" }
 		set_air_oob = "ABK_2000_bba"
 		else = {
 			set_air_oob = "ABK_2000_nonbba"
 		}
 	}
 
-	set_technology = {
-		integrated_transportation_system = 1
-		post_conventional_rail = 1
-		early_high_speed_rail = 1
-		early_freight_locomotive = 1
-
-		legacy_doctrines = 1
-		armoured_mass_assault = 1
-
-		night_vision_1 = 1
-		support_weapons = 1
-
-		landing_craft = 1
-
-		#For templates
-		infantry_weapons = 1
-		command_control_equipment = 1
-		Anti_tank_0 = 1
-		Heavy_Anti_tank_0 = 1
-		util_vehicle_0 = 1
-
-		##Industrial/Engineering Techs
-		basic_computing = 1
-		integrated_circuit = 1
-		computing1 = 1
-		decryption1 = 1
-		encryption1 = 1
-
-		radar = 1
-		internet1 = 1 	#1G
-
-		industrial_electrospun_polymeric_nanofibers = 1
-		stereolitography = 1
-		fuel_refining = 1
-		construction1 = 1
-	}
-
 	#Starting Ideas/Laws
 	add_ideas = {
+		partially_nationalized_healthcare
+		balanced_protections
+		standard_maintenance
+		russia_rouble
+		light_regulations
+
 		systematic_corruption
 		orthodox_christian
 		Non_State_Actor
@@ -127,7 +124,7 @@
 	add_to_array = { influence_array_val = 9.4 } # Legacy Values: 10 Influence
 	# Total should always equate to 100%
 	# Creates the sorted influence
-	startup_influence = yes
+	sort_influence = yes
 
 	#Monetary System
 	set_variable = { var = debt value = 0.164 }
@@ -135,10 +132,7 @@
 	set_variable = { var = treasury value = 0.86 }
 	set_variable = { var = corporate_tax_rate value = 9 }
 	set_variable = { var = population_tax_rate value = 10 }
-	every_controlled_state = {
-		set_variable = { productivity_state_var = 774 }
-	}
-	set_variable = { overall_productivity = 774 }
+	set_variable = { var = overall_productivity value = 774 }
 
 	set_politics = {
 		ruling_party = communism
@@ -201,4 +195,21 @@
 	recruit_character = ABK_anatoly_khrulyov
 	recruit_character = ABK_aleksander_voinsky
 	recruit_character = ABK_adgur_gumba
+
+	# Relation Starting Configuration (moved from on_startup)
+	add_opinion_modifier = { target = CUB modifier = sanctions }
+	add_relation_modifier = { target = USA modifier = USA_World_Economical_Relations }
+	add_relation_modifier = { target = SOV modifier = SOV_World_Economical_Relations }
+	add_relation_modifier = { target = CHI modifier = CHI_World_Economical_Relations }
+	add_relation_modifier = { target = FRA modifier = FRA_World_Economical_Relations }
+	add_relation_modifier = { target = GER modifier = GER_World_Economical_Relations }
+	add_relation_modifier = { target = ENG modifier = ENG_World_Economical_Relations }
+	add_relation_modifier = { target = SPR modifier = SPR_World_Economical_Relations }
+	add_relation_modifier = { target = ITA modifier = ITA_World_Economical_Relations }
+	add_relation_modifier = { target = UKR modifier = UKR_World_Economical_Relations }
+	add_relation_modifier = { target = ISR modifier = ISR_World_Economical_Relations }
+	add_opinion_modifier = { target = TTP modifier = AlQaida_Are_Terrorists }
+	add_opinion_modifier = { target = TTP modifier = AlQaida_Are_Terrorists_Trade }
+	add_opinion_modifier = { target = TAL modifier = Taliban_Are_Terrorists }
+	add_opinion_modifier = { target = TAL modifier = Taliban_Are_Terrorists_Trade }
 }

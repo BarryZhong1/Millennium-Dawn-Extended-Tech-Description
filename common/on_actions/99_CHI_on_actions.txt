@@ -1,4 +1,61 @@
 on_actions = {
+	on_weekly_TAI = {
+		effect = {
+			if = {
+				limit = { has_dynamic_modifier = the_great_chip_race_modifier }
+
+				set_temp_variable = { tai_chips = TAI.resource_produced@microchips }
+				set_temp_variable = { chi_chips = CHI.resource_produced@microchips }
+
+				if = { limit = { check_variable = { chi_chips < 1 } } set_temp_variable = { chi_chips = 1 } }
+
+				if = {
+					limit = { check_variable = { chi_chips > tai_chips } }
+					remove_dynamic_modifier = { modifier = the_great_chip_race_modifier }
+				}
+
+				divide_temp_variable = { chi_chips = tai_chips }
+
+				set_variable = { tai_microchip_const_boost_var = chi_chips }
+				multiply_temp_variable = { chi_chips = 0.25 }
+				set_variable = { tai_microchip_prod_boost_var = chi_chips }
+			}
+
+			if = {
+				limit = {
+					NOT = { has_country_flag = has_had_chip_event }
+				}
+				country_event = taiwan.18
+			}
+		}
+	}
+	on_weekly_CHI = {
+		effect = {
+			if = {
+				limit = {
+					NOT = { has_country_flag = CHI_promise_of_elections }
+					CHI = {
+						has_elections = yes
+						NOT = { has_completed_focus = CHI_Free_and_Fair_Elections }
+					}
+				}
+				set_country_flag = CHI_promise_of_elections
+				country_event = china.6
+			}
+
+			if = {
+				limit = { has_war_with = NKO }
+				if = {
+					limit = { has_idea = CHI_china_economic_assistant }
+					remove_ideas = CHI_china_economic_assistant
+				}
+				if = {
+					limit = { NKO = { has_idea = NKO_china_economic_assistant } }
+					NKO = { remove_ideas = NKO_china_economic_assistant }
+				}
+			}
+		}
+	}
 	on_monthly_CHI = {
 		effect = {
 			#Chinese Aggression
@@ -13,15 +70,11 @@ on_actions = {
 						has_communist_government_or_in_coalition = yes
 						has_communist_government = yes
 					}
-					AND = { HKG = { is_subject_of = CHI }
-							has_country_flag = CHI_sar_five_decade_period
-							date > 2047.7.1
-						  }
-					}
-				annex_country = {
-				target = HKG
-				transfer_troops = yes
-			   }
+					HKG = { is_subject_of = CHI }
+					has_country_flag = CHI_sar_five_decade_period
+					date > 2047.7.1
+				}
+				annex_country = { target = HKG transfer_troops = yes }
 				595 = { add_core_of = CHI }
 				595 = { remove_dynamic_modifier = { modifier = CHI_hong_kong } }
 				595 = { add_dynamic_modifier = { modifier = CHI_special_economic_zone } }
@@ -32,15 +85,11 @@ on_actions = {
 						has_communist_government_or_in_coalition = yes
 						has_communist_government = yes
 					}
-					AND = { MAC = { is_subject_of = CHI }
-							has_country_flag = CHI_sar_five_decade_period
-							date > 2049.12.20
-						  }
-					}
-				annex_country = {
-				target = MAC
-				transfer_troops = yes
-			   }
+					MAC = { is_subject_of = CHI }
+					has_country_flag = CHI_sar_five_decade_period
+					date > 2049.12.20
+				}
+				annex_country = { target = MAC transfer_troops = yes }
 				1106 = { add_core_of = CHI }
 				1106 = { remove_dynamic_modifier = { modifier = CHI_macau } }
 				1106 = { add_dynamic_modifier = { modifier = CHI_special_economic_zone } }
@@ -51,16 +100,15 @@ on_actions = {
 						has_communist_government_or_in_coalition = yes
 						has_communist_government = yes
 					}
-					AND = { OR = {
-								 MON = { is_subject_of = CHI }
-								 MON = { exists = no }
-								}
-						   OR = {
-								 TAI = { is_subject_of = CHI }
-								 TAI = { exists = no }
-								 }
-						  }
+					OR = {
+						MON = { is_subject_of = CHI }
+						NOT = { country_exists = MON }
 					}
+					OR = {
+						TAI = { is_subject_of = CHI }
+						NOT = { country_exists = TAI }
+					}
+				}
 				country_event = { id = china.58 days = 1 }
 			}
 			if = {
@@ -69,8 +117,8 @@ on_actions = {
 						has_communist_government_or_in_coalition = yes
 						has_communist_government = yes
 					}
-					MON = { exists = no }
-					TAI = { exists = no }
+					NOT = { country_exists = MON }
+					NOT = { country_exists = TAI }
 					is_greater_china_state_owned = yes
 					is_outer_manchuria_state_owned = yes
 					is_buryatia_state_owned = yes
@@ -79,30 +127,17 @@ on_actions = {
 				}
 				country_event = { id = china.64 days = 1 }
 			}
-			random_list = {
-				20 = {
-					subtract_from_variable = { CHI.kasmir_china_readiness = 5 }
-				}
-				80 = {
-					# nothing
-				}
+			random = {
+				chance = 20
+				subtract_from_variable = { CHI.kasmir_china_readiness = 5 }
 			}
-			# tension is handled in RAJ
-			random_list = {
-				20 = {
-					subtract_from_variable = { GLOBAL.arunachal_tension = 5 }
-				}
-				80 = {
-					# nothing
-				}
+			random = {
+				chance = 20
+				subtract_from_variable = { GLOBAL.arunachal_tension = 5 }
 			}
-			random_list = {
-				20 = {
-					subtract_from_variable = { CHI.arunachal_readiness = 5 }
-				}
-				80 = {
-					# nothing
-				}
+			random = {
+				chance = 20
+				subtract_from_variable = { CHI.arunachal_readiness = 5 }
 			}
 
 			# moved out for smooth value calculation
@@ -123,11 +158,7 @@ on_actions = {
 					100 = {
 						modifier = {
 							factor = 0
-							NOT = {
-								CHI = {
-									has_country_flag = borderland_calm_down
-								}
-							}
+							NOT = { CHI = { has_country_flag = borderland_calm_down } }
 						}
 						add_political_power = 1
 					}

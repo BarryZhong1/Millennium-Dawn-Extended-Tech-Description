@@ -9,8 +9,6 @@ basic_ai_space_prioritization = {
 		}
 		#if you GNSS system selected is less than the GNSS system you have unlocked, build more modern GNSS stuff
 		set_country_flag = focus_GNSS_upgrade
-	} else = {
-		set_country_flag = focus_comsat_upgrade
 	}
 }
 
@@ -98,16 +96,7 @@ basic_ai_space_program_production = {
 	}
 }
 
-basic_ai_space_launch = {
-	#just use the launch code here, but pull the variables from the other stuff before
-	#limit AI to launching one - 2 at a time to ensure the weight stuff will always work out
-	#make AI launch as they build, so they just keep a steady pace
-}
-
 missile_ui_update = {
-	if = { limit = { NOT = { has_variable = global.missile_ui_updated } }
-		set_variable = { global.missile_ui_updated = 0 }
-	}
 	add_to_variable = { global.missile_ui_updated = 1 }
 }
 
@@ -118,248 +107,118 @@ missile_ui_update = {
 ### production gui ###
 
 set_prod_display_arrays = {
-	resize_array = { prod_1_display_array = 0 }
-	resize_array = { prod_2_display_array = 0 }
-	resize_array = { prod_3_display_array = 0 }
-	resize_array = { prod_4_display_array = 0 }
-	resize_array = { prod_5_display_array = 0 }
-	resize_array = { prod_6_display_array = 0 }
-	resize_array = { prod_7_display_array = 0 }
-	resize_array = { prod_8_display_array = 0 }
-	resize_array = { prod_9_display_array = 0 }
-	resize_array = { prod_10_display_array = 0 }
-	resize_array = { prod_11_display_array = 0 }
-	resize_array = { prod_12_display_array = 0 }
-	resize_array = { prod_13_display_array = 0 }
-	resize_array = { prod_14_display_array = 0 }
-	resize_array = { prod_15_display_array = 0 }
-
-	if = {
-		limit = {
-			has_tech = GNSS1
-		}
+	if = { limit = { has_tech = GNSS1 }
 		add_to_array = { prod_11_display_array = global.prod_11_array^0 }
 	}
-	if = {
-		limit = {
-			has_tech = GNSS2
-		}
+	if = { limit = { has_tech = GNSS2 }
 		add_to_array = { prod_11_display_array = global.prod_11_array^1 }
 	}
-	if = {
-		limit = {
-			has_tech = GNSS3
-		}
+	if = { limit = { has_tech = GNSS3 }
 		add_to_array = { prod_11_display_array = global.prod_11_array^2 }
 	}
-	if = {
-		limit = {
-			has_tech = GNSS4
-		}
+	if = { limit = { has_tech = GNSS4 }
 		add_to_array = { prod_11_display_array = global.prod_11_array^3 }
 	}
-	if = {
-		limit = {
-			has_tech = GNSS5
-		}
+	if = { limit = { has_tech = GNSS5 }
 		add_to_array = { prod_11_display_array = global.prod_11_array^4 }
 	}
-	if = {
-		limit = {
-			has_tech = GNSS6
-		}
+	if = { limit = { has_tech = GNSS6 }
 		add_to_array = { prod_11_display_array = global.prod_11_array^5 }
 	}
-	if = {
-		limit = {
-			has_tech = GNSS7
-		}
+	if = { limit = { has_tech = GNSS7 }
 		add_to_array = { prod_11_display_array = global.prod_11_array^6 }
 	}
-	if = {
-		limit = {
-			has_tech = GNSS8
-		}
+	if = { limit = { has_tech = GNSS8 }
 		add_to_array = { prod_11_display_array = global.prod_11_array^7 }
 	}
-	if = {
-		limit = {
-			has_tech = COMSAT1
-		}
+	if = { limit = { has_tech = COMSAT1 }
 		add_to_array = { prod_12_display_array = global.prod_12_array^0 }
 	}
-	if = {
-		limit = {
-			has_tech = COMSAT2
-		}
+	if = { limit = { has_tech = COMSAT2 }
 		add_to_array = { prod_12_display_array = global.prod_12_array^1 }
 	}
-	if = {
-		limit = {
-			has_tech = COMSAT3
-		}
+	if = { limit = { has_tech = COMSAT3 }
 		add_to_array = { prod_12_display_array = global.prod_12_array^2 }
 	}
-	if = {
-		limit = {
-			has_tech = COMSAT4
-		}
+	if = { limit = { has_tech = COMSAT4 }
 		add_to_array = { prod_12_display_array = global.prod_12_array^3 }
 	}
-	if = {
-		limit = {
-			has_tech = COMSAT5
-		}
+	if = { limit = { has_tech = COMSAT5 }
 		add_to_array = { prod_12_display_array = global.prod_12_array^4 }
 	}
-	if = {
-		limit = {
-			has_tech = COMSAT6
-		}
+	if = { limit = { has_tech = COMSAT6 }
 		add_to_array = { prod_12_display_array = global.prod_12_array^5 }
 	}
-	if = {
-		limit = {
-			has_tech = COMSAT7
-		}
+	if = { limit = { has_tech = COMSAT7 }
 		add_to_array = { prod_12_display_array = global.prod_12_array^6 }
 	}
-	if = {
-		limit = {
-			has_tech = COMSAT8
-		}
+	if = { limit = { has_tech = COMSAT8 }
 		add_to_array = { prod_12_display_array = global.prod_12_array^7 }
 	}
-	if = {
-		limit = {
-			has_tech = SPYSAT1
-		}
+	if = { limit = { has_tech = SPYSAT1 }
 		add_to_array = { prod_13_display_array = global.prod_13_array^0 }
 	}
-	if = {
-		limit = {
-			has_tech = SPYSAT2
-		}
+	if = { limit = { has_tech = SPYSAT2 }
 		add_to_array = { prod_13_display_array = global.prod_13_array^1 }
 	}
-	if = {
-		limit = {
-			has_tech = SPYSAT3
-		}
+	if = { limit = { has_tech = SPYSAT3 }
 		add_to_array = { prod_13_display_array = global.prod_13_array^2 }
 	}
-	if = {
-		limit = {
-			has_tech = SPYSAT4
-		}
+	if = { limit = { has_tech = SPYSAT4 }
 		add_to_array = { prod_13_display_array = global.prod_13_array^3 }
 	}
-	if = {
-		limit = {
-			has_tech = SPYSAT5
-		}
+	if = { limit = { has_tech = SPYSAT5 }
 		add_to_array = { prod_13_display_array = global.prod_13_array^4 }
 	}
-	if = {
-		limit = {
-			has_tech = SPYSAT6
-		}
+	if = { limit = { has_tech = SPYSAT6 }
 		add_to_array = { prod_13_display_array = global.prod_13_array^5 }
 	}
-	if = {
-		limit = {
-			has_tech = SPYSAT7
-		}
+	if = { limit = { has_tech = SPYSAT7 }
 		add_to_array = { prod_13_display_array = global.prod_13_array^6 }
 	}
-	if = {
-		limit = {
-			has_tech = SPYSAT8
-		}
+	if = { limit = { has_tech = SPYSAT8 }
 		add_to_array = { prod_13_display_array = global.prod_13_array^7 }
 	}
-	if = {
-		limit = {
-			has_tech = KILLSAT1
-		}
+	if = { limit = { has_tech = KILLSAT1 }
 		add_to_array = { prod_14_display_array = global.prod_14_array^0 }
 	}
-	if = {
-		limit = {
-			has_tech = KILLSAT2
-		}
+	if = { limit = { has_tech = KILLSAT2 }
 		add_to_array = { prod_14_display_array = global.prod_14_array^1 }
 	}
-	if = {
-		limit = {
-			has_tech = KILLSAT3
-		}
+	if = { limit = { has_tech = KILLSAT3 }
 		add_to_array = { prod_14_display_array = global.prod_14_array^2 }
 	}
-	if = {
-		limit = {
-			has_tech = KILLSAT4
-		}
+	if = { limit = { has_tech = KILLSAT4 }
 		add_to_array = { prod_14_display_array = global.prod_14_array^3 }
 	}
-	if = {
-		limit = {
-			has_tech = KILLSAT5
-		}
+	if = { limit = { has_tech = KILLSAT5 }
 		add_to_array = { prod_14_display_array = global.prod_14_array^4 }
 	}
-	if = {
-		limit = {
-			has_tech = KILLSAT6
-		}
+	if = { limit = { has_tech = KILLSAT6 }
 		add_to_array = { prod_14_display_array = global.prod_14_array^5 }
 	}
-	if = {
-		limit = {
-			has_tech = OLV1
-		}
+	if = { limit = { has_tech = OLV1 }
 		add_to_array = { prod_10_display_array = global.prod_10_array^0 }
 	}
-	if = {
-		limit = {
-			has_tech = OLV2
-		}
+	if = { limit = { has_tech = OLV2 }
 		add_to_array = { prod_10_display_array = global.prod_10_array^1 }
 	}
-	if = {
-		limit = {
-			has_tech = OLV3
-		}
+	if = { limit = { has_tech = OLV3 }
 		add_to_array = { prod_10_display_array = global.prod_10_array^2 }
 	}
-	if = {
-		limit = {
-			has_tech = OLV4
-		}
+	if = { limit = { has_tech = OLV4 }
 		add_to_array = { prod_10_display_array = global.prod_10_array^3 }
 	}
-	if = {
-		limit = {
-			has_tech = OLV5
-		}
+	if = { limit = { has_tech = OLV5 }
 		add_to_array = { prod_10_display_array = global.prod_10_array^4 }
 	}
-	if = {
-		limit = {
-			has_tech = OLV6
-		}
+	if = { limit = { has_tech = OLV6 }
 		add_to_array = { prod_10_display_array = global.prod_10_array^5 }
 	}
-	if = {
-		limit = {
-			has_tech = OLV7
-		}
+	if = { limit = { has_tech = OLV7 }
 		add_to_array = { prod_10_display_array = global.prod_10_array^6 }
 	}
-	if = {
-		limit = {
-			has_tech = OLV8
-		}
+	if = { limit = { has_tech = OLV8 }
 		add_to_array = { prod_10_display_array = global.prod_10_array^7 }
 	}
 }
@@ -370,36 +229,11 @@ clear_prod_display_arrays = {
 	clr_country_flag = missile_production_type_12
 	clr_country_flag = missile_production_type_13
 	clr_country_flag = missile_production_type_14
-	resize_array = { prod_1_display_array = 0 }
-	resize_array = { prod_2_display_array = 0 }
-	resize_array = { prod_3_display_array = 0 }
-	resize_array = { prod_4_display_array = 0 }
-	resize_array = { prod_5_display_array = 0 }
-	resize_array = { prod_6_display_array = 0 }
-	resize_array = { prod_7_display_array = 0 }
-	resize_array = { prod_8_display_array = 0 }
-	resize_array = { prod_9_display_array = 0 }
-	resize_array = { prod_10_display_array = 0 }
-	resize_array = { prod_11_display_array = 0 }
-	resize_array = { prod_12_display_array = 0 }
-	resize_array = { prod_13_display_array = 0 }
-	resize_array = { prod_14_display_array = 0 }
-	resize_array = { prod_15_display_array = 0 }
-	clear_array = prod_1_display_array
-	clear_array = prod_2_display_array
-	clear_array = prod_3_display_array
-	clear_array = prod_4_display_array
-	clear_array = prod_5_display_array
-	clear_array = prod_6_display_array
-	clear_array = prod_7_display_array
-	clear_array = prod_8_display_array
-	clear_array = prod_9_display_array
 	clear_array = prod_10_display_array
 	clear_array = prod_11_display_array
 	clear_array = prod_12_display_array
 	clear_array = prod_13_display_array
 	clear_array = prod_14_display_array
-	clear_array = prod_15_display_array
 }
 
 # function: calculate_production_vars_10
@@ -547,31 +381,6 @@ calculate_production_vars_14 = {
 	clamp_variable = { var = var_gui_prod_14_price_total min = var_gui_prod_14_price_unit }
 	clamp_variable = { var = var_gui_prod_14_amount min = 1 }
 }
-### Rods
-calculate_production_vars_15 = {
-	clamp_variable = { var = var_gui_prod_15_amount min = 1 max = 5000 }
-	clamp_variable = { var = prod_15_multiplier min = 1 max = var_gui_prod_15_amount }
-	# Initial Price of Production
-	set_variable = { var_gui_prod_15_price_total = var_gui_prod_15_price_unit }
-	multiply_variable = { var_gui_prod_15_price_total = var_gui_prod_15_amount }
-	set_temp_variable = { var_gui_prod_15_price_total_multiplier = prod_15_multiplier }
-	multiply_temp_variable = { var_gui_prod_15_price_total_multiplier = var_gui_prod_15_price_unit }
-	add_to_variable = { var_gui_prod_15_price_total = var_gui_prod_15_price_total_multiplier }
-
-	# Days
-	set_variable = { var_gui_prod_15_days = var_gui_prod_15_amount }
-	multiply_variable = { var_gui_prod_15_days = var_gui_prod_15_days_unit }
-	divide_variable = { var_gui_prod_15_days = prod_15_multiplier }
-
-	set_temp_variable = { modifier_15_prod = 1 }
-	subtract_from_temp_variable = { modifier_15_prod = modifier@rods_production_speed_modifier }
-	multiply_variable = { var_gui_prod_15_days = modifier_15_prod }
-	round_variable = var_gui_prod_15_days
-
-	clamp_variable = { var = var_gui_prod_15_days min = 1 }
-	clamp_variable = { var = var_gui_prod_15_price_total min = var_gui_prod_15_price_unit }
-	clamp_variable = { var = var_gui_prod_15_amount min = 1 }
-}
 
 ######################
 ### satellites gui ###
@@ -582,60 +391,46 @@ set_satellites_gui = {
 	set_COM_satellites = yes
 	set_SPY_satellites = yes
 	set_KILL_satellites = yes
-	set_RODS_satellites = yes
 }
 
 set_GNSS_satellites = {
-	set_variable = { var_GNSS_sat_total = 0 }
-	add_to_variable = { var_GNSS_sat_total = GNSS_satellite_array^0 }
-	add_to_variable = { var_GNSS_sat_total = GNSS_satellite_array^1 }
-	add_to_variable = { var_GNSS_sat_total = GNSS_satellite_array^2 }
-	add_to_variable = { var_GNSS_sat_total = GNSS_satellite_array^3 }
-	add_to_variable = { var_GNSS_sat_total = GNSS_satellite_array^4 }
-	add_to_variable = { var_GNSS_sat_total = GNSS_satellite_array^5 }
-	add_to_variable = { var_GNSS_sat_total = GNSS_satellite_array^6 }
-	add_to_variable = { var_GNSS_sat_total = GNSS_satellite_array^7 }
+	set_temp_variable = { tot = 0 }
+	for_each_loop = {
+		array = GNSS_satellite_array
+		value = v
+		add_to_temp_variable = { tot = v }
+	}
+	set_variable = { var_GNSS_sat_total = tot }
 }
 
 set_COM_satellites = {
-	set_variable = { var_COM_sat_total = 0 }
-	add_to_variable = { var_COM_sat_total = COM_satellite_array^0 }
-	add_to_variable = { var_COM_sat_total = COM_satellite_array^1 }
-	add_to_variable = { var_COM_sat_total = COM_satellite_array^2 }
-	add_to_variable = { var_COM_sat_total = COM_satellite_array^3 }
-	add_to_variable = { var_COM_sat_total = COM_satellite_array^4 }
-	add_to_variable = { var_COM_sat_total = COM_satellite_array^5 }
-	add_to_variable = { var_COM_sat_total = COM_satellite_array^6 }
-	add_to_variable = { var_COM_sat_total = COM_satellite_array^7 }
+	set_temp_variable = { tot = 0 }
+	for_each_loop = {
+		array = COM_satellite_array
+		value = v
+		add_to_temp_variable = { tot = v }
+	}
+	set_variable = { var_COM_sat_total = tot }
 }
 
 set_SPY_satellites = {
-	set_variable = { var_SPY_sat_total = 0 }
-	add_to_variable = { var_SPY_sat_total = SPY_satellite_array^0 }
-	add_to_variable = { var_SPY_sat_total = SPY_satellite_array^1 }
-	add_to_variable = { var_SPY_sat_total = SPY_satellite_array^2 }
-	add_to_variable = { var_SPY_sat_total = SPY_satellite_array^3 }
-	add_to_variable = { var_SPY_sat_total = SPY_satellite_array^4 }
-	add_to_variable = { var_SPY_sat_total = SPY_satellite_array^5 }
-	add_to_variable = { var_SPY_sat_total = SPY_satellite_array^6 }
-	add_to_variable = { var_SPY_sat_total = SPY_satellite_array^7 }
+	set_temp_variable = { tot = 0 }
+	for_each_loop = {
+		array = SPY_satellite_array
+		value = v
+		add_to_temp_variable = { tot = v }
+	}
+	set_variable = { var_SPY_sat_total = tot }
 }
 
 set_KILL_satellites = {
-	set_variable = { var_KILL_sat_total = 0 }
-	add_to_variable = { var_KILL_sat_total = KILL_satellite_array^0 }
-	add_to_variable = { var_KILL_sat_total = KILL_satellite_array^1 }
-	add_to_variable = { var_KILL_sat_total = KILL_satellite_array^2 }
-	add_to_variable = { var_KILL_sat_total = KILL_satellite_array^3 }
-	add_to_variable = { var_KILL_sat_total = KILL_satellite_array^4 }
-	add_to_variable = { var_KILL_sat_total = KILL_satellite_array^5 }
-}
-
-set_RODS_satellites = {
-	set_variable = { var_RODS_sat_total = 0 }
-	add_to_variable = { var_RODS_sat_total = RODS_satellite_array^0 }
-	add_to_variable = { var_RODS_sat_total = RODS_satellite_array^1 }
-	add_to_variable = { var_RODS_sat_total = RODS_satellite_array^2 }
+	set_temp_variable = { tot = 0 }
+	for_each_loop = {
+		array = KILL_satellite_array
+		value = v
+		add_to_temp_variable = { tot = v }
+	}
+	set_variable = { var_KILL_sat_total = tot }
 }
 
 ### satellite systems
@@ -736,7 +531,6 @@ update_sat_systems_stats = {
 	add_access_COM_civ_vars = yes
 	add_access_SPY_mil_vars = yes
 	add_access_SPY_civ_vars = yes
-	force_update_dynamic_modifier = yes
 }
 
 check_sat_systems_min_sat_num = {
@@ -751,7 +545,7 @@ check_sat_systems_min_sat_num = {
 			}
 		}
 		subtract_from_variable = { var_GNSS_mil_system_idx = 1 }
-		ROOT = { news_event = { id = satellites.2 } }
+		ROOT = { news_event = satellites.2 }
 	}
 	if = {
 		limit = {
@@ -763,57 +557,41 @@ check_sat_systems_min_sat_num = {
 			}
 		}
 		subtract_from_variable = { var_GNSS_civ_system_idx = 1 }
-		ROOT = { news_event = { id = satellites.3 } }
+		ROOT = { news_event = satellites.3 }
 	}
 	#COM
 	if = {
 		limit = {
-			check_variable = {
-				COM_satellite_array^var_COM_mil_system_idx < global.COM_sat_system_min_array^var_COM_mil_system_idx
-			}
-			check_variable = {
-				var_COM_mil_system_idx > 0
-			}
+			check_variable = { COM_satellite_array^var_COM_mil_system_idx < global.COM_sat_system_min_array^var_COM_mil_system_idx }
+			check_variable = { var_COM_mil_system_idx > 0 }
 		}
 		subtract_from_variable = { var_COM_mil_system_idx = 1 }
-		ROOT = { news_event = { id = satellites.4 } }
+		ROOT = { news_event = satellites.4 }
 	}
 	if = {
 		limit = {
-			check_variable = {
-				COM_satellite_array^var_COM_civ_system_idx < global.COM_sat_system_min_array^var_COM_civ_system_idx
-			}
-			check_variable = {
-				var_COM_civ_system_idx > 0
-			}
+			check_variable = { COM_satellite_array^var_COM_civ_system_idx < global.COM_sat_system_min_array^var_COM_civ_system_idx }
+			check_variable = { var_COM_civ_system_idx > 0 }
 		}
 		subtract_from_variable = { var_COM_civ_system_idx = 1 }
-		ROOT = { news_event = { id = satellites.5 } }
+		ROOT = { news_event = satellites.5 }
 	}
 	#SPY
 	if = {
 		limit = {
-			check_variable = {
-				SPY_satellite_array^var_SPY_mil_system_idx < global.SPY_sat_system_min_array^var_SPY_mil_system_idx
-			}
-			check_variable = {
-				var_SPY_mil_system_idx > 0
-			}
+			check_variable = { SPY_satellite_array^var_SPY_mil_system_idx < global.SPY_sat_system_min_array^var_SPY_mil_system_idx }
+			check_variable = { var_SPY_mil_system_idx > 0 }
 		}
 		subtract_from_variable = { var_SPY_mil_system_idx = 1 }
-		ROOT = { news_event = { id = satellites.6 } }
+		ROOT = { news_event = satellites.6 }
 	}
 	if = {
 		limit = {
-			check_variable = {
-				SPY_satellite_array^var_SPY_civ_system_idx < global.SPY_sat_system_min_array^var_SPY_civ_system_idx
-			}
-			check_variable = {
-				var_SPY_civ_system_idx > 0
-			}
+			check_variable = { SPY_satellite_array^var_SPY_civ_system_idx < global.SPY_sat_system_min_array^var_SPY_civ_system_idx }
+			check_variable = { var_SPY_civ_system_idx > 0 }
 		}
 		subtract_from_variable = { var_SPY_civ_system_idx = 1 }
-		ROOT = { news_event = { id = satellites.7 } }
+		ROOT = { news_event = satellites.7 }
 	}
 }
 
@@ -869,7 +647,7 @@ update_GNSS_SBAS = {
 	set_variable = { var_GNSS_mil_SBAS_num = var_GNSS_sat_total }
 	subtract_from_variable = { var_GNSS_mil_SBAS_num = var_GNSS_mil_sat_system_num }
 	set_variable = { var_GNSS_mil_SBAS_bonus = var_GNSS_mil_SBAS_num }
-	divide_variable = { var_GNSS_mil_SBAS_bonus = 100 }
+	multiply_variable = { var_GNSS_mil_SBAS_bonus = 0.01 }
 	set_temp_variable = { temp1 = var_GNSS_mil_coverage }
 	set_temp_variable = { temp2 = 1 }
 	subtract_from_temp_variable = { temp2 = temp1 }
@@ -885,7 +663,7 @@ update_GNSS_SBAS = {
 	set_variable = { var_GNSS_civ_SBAS_num = var_GNSS_sat_total }
 	subtract_from_variable = { var_GNSS_civ_SBAS_num = var_GNSS_civ_sat_system_num }
 	set_variable = { var_GNSS_civ_SBAS_bonus = var_GNSS_civ_SBAS_num }
-	divide_variable = { var_GNSS_civ_SBAS_bonus = 100 }
+	multiply_variable = { var_GNSS_civ_SBAS_bonus = 0.01 }
 	set_temp_variable = { temp1 = var_GNSS_civ_coverage }
 	set_temp_variable = { temp2 = 1 }
 	subtract_from_temp_variable = { temp2 = temp1 }
@@ -933,42 +711,40 @@ update_COM_system_stats = {
 			add_to_variable = { var_COM_civ_receiver_cap = temp2 }
 		}
 	}
-	if = {
-		limit = {
-			check_variable = {
-				var_COM_mil_sat_system_num > var_COM_mil_sat_system_max
-			}
-		}
+
+	if = { limit = { check_variable = { var_COM_mil_sat_system_num > var_COM_mil_sat_system_max } }
 		set_variable = { var_COM_mil_coverage = 1.0 }
 	}
 	else = {
 		set_variable = { var_COM_mil_coverage = var_COM_mil_sat_system_num }
 		divide_variable = { var_COM_mil_coverage = var_COM_mil_sat_system_max }
 	}
+
+	# Satellite Communication System - Military
 	set_variable = { var_COM_mil_receiver_num = num_battalions }
 	add_to_variable = { var_COM_mil_receiver_num = num_ships }
 	add_to_variable = { var_COM_mil_receiver_num = num_deployed_planes }
 	add_treaty_COM_mil_receiver_num = yes
-	set_variable = { var_sat_network_traffic_mil = var_COM_mil_receiver_num }
-	divide_variable = { var_sat_network_traffic_mil = var_COM_mil_receiver_cap }
-	set_variable = { var_COM_mil_sat_system_bonus = var_COM_mil_coverage }
-	if = {
-		limit = {
-			check_variable = {
-				var_sat_network_traffic_mil > 1
-			}
-		}
-		set_temp_variable = { temp3 = var_sat_network_traffic_mil }
-		subtract_from_temp_variable = { temp3 = 1 }
-		subtract_from_variable = { var_COM_mil_sat_system_bonus = temp3 }
-		clamp_variable = { var = var_COM_mil_sat_system_bonus min = 0 }
+
+	if = { limit = { check_variable = { var_COM_mil_receiver_cap = 0 } }
+		set_variable = { var_sat_network_traffic_mil = 0 }
+		set_variable = { var_COM_mil_receiver_cap = 0 }
 	}
-	if = {
-		limit = {
-			check_variable = {
-				var_COM_civ_sat_system_num > var_COM_civ_sat_system_max
-			}
+	else = {
+		set_variable = { var_sat_network_traffic_mil = var_COM_mil_receiver_num }
+		divide_variable = { var_sat_network_traffic_mil = var_COM_mil_receiver_cap }
+		set_variable = { var_COM_mil_sat_system_bonus = var_COM_mil_coverage }
+
+		if = { limit = { check_variable = { var_sat_network_traffic_civ > 1 } }
+			set_temp_variable = { temp3 = var_sat_network_traffic_mil }
+			subtract_from_temp_variable = { temp3 = 1 }
+			subtract_from_variable = { var_COM_mil_sat_system_bonus = temp3 }
+			clamp_variable = { var = var_COM_mil_sat_system_bonus min = 0 }
 		}
+	}
+
+	# Satellite Communication System - Civilian
+	if = { limit = { check_variable = { var_COM_civ_sat_system_num > var_COM_civ_sat_system_max } }
 		set_variable = { var_COM_civ_coverage = 1.0 }
 	}
 	else = {
@@ -978,19 +754,22 @@ update_COM_system_stats = {
 	set_variable = { var_COM_civ_receiver_num = num_controlled_states }
 	multiply_variable = { var_COM_civ_receiver_num = 100 }
 	add_treaty_COM_civ_receiver_num = yes
-	set_variable = { var_sat_network_traffic_civ = var_COM_civ_receiver_num }
-	divide_variable = { var_sat_network_traffic_civ = var_COM_civ_receiver_cap }
-	set_variable = { var_COM_civ_sat_system_bonus = var_COM_civ_coverage }
-	if = {
-		limit = {
-			check_variable = {
-				var_sat_network_traffic_civ > 1
-			}
+
+	if = { limit = { check_variable = { var_COM_civ_receiver_cap = 0 } }
+		set_variable = { var_sat_network_traffic_civ = 0 }
+		set_variable = { var_COM_civ_sat_system_bonus = 0 }
+	}
+	else = {
+		set_variable = { var_sat_network_traffic_civ = var_COM_civ_receiver_num }
+		divide_variable = { var_sat_network_traffic_civ = var_COM_civ_receiver_cap }
+		set_variable = { var_COM_civ_sat_system_bonus = var_COM_civ_coverage }
+
+		if = { limit = { check_variable = { var_sat_network_traffic_civ > 1 } }
+			set_temp_variable = { temp4 = var_sat_network_traffic_civ }
+			subtract_from_temp_variable = { temp4 = 1 }
+			subtract_from_variable = { var_COM_civ_sat_system_bonus = temp4 }
+			clamp_variable = { var = var_COM_civ_sat_system_bonus min = 0 }
 		}
-		set_temp_variable = { temp4 = var_sat_network_traffic_civ }
-		subtract_from_temp_variable = { temp4 = 1 }
-		subtract_from_variable = { var_COM_civ_sat_system_bonus = temp4 }
-		clamp_variable = { var = var_COM_civ_sat_system_bonus min = 0 }
 	}
 }
 
@@ -1014,8 +793,9 @@ add_treaty_COM_civ_receiver_num = {
 	}
 	add_to_variable = { var_COM_civ_receiver_num = var_treaty_COM_civ_receiver_num }
 }
-###
 
+# Effect: update_SPY_system_stats
+# Purpose: Updates the Reconnaissance Satellite System variables and values
 update_SPY_system_stats = {
 	### SPY mil system
 	set_variable = { var_SPY_mil_sat_system_num = SPY_satellite_array^var_SPY_mil_system_idx }
@@ -1069,7 +849,6 @@ update_SPY_mission_num = {
 		}
 		subtract_from_variable = { var_SPY_mission_num_total = var_SPY_civ_sat_system_num }
 	}
-	#subtract_from_variable = { var_SPY_mission_num_total = var_SPY_civ_sat_system_num }
 	set_variable = { var_SPY_mission_num_available = var_SPY_mission_num_total }
 	subtract_from_variable = { var_SPY_mission_num_available = var_SPY_mission_active_sat }
 	update_SPY_mission_start_button = yes
@@ -1078,7 +857,6 @@ update_SPY_mission_num = {
 update_SPY_mission_start_button = {
 	set_variable = { ROOT.var_SPY_mission_intel_ratio = ROOT.var_SPY_mission_num_gui }
 	var:orbit_selected_TAG = {
-		#set_variable = { ROOT.var_SPY_mission_num_gui = num_controlled_states }
 		divide_variable = { ROOT.var_SPY_mission_intel_ratio = ROOT.var_SPY_mission_num_gui }
 	}
 	set_variable = { ROOT.var_SPY_mission_intel_add = ROOT.var_SPY_mission_intel_ratio }
@@ -1086,7 +864,6 @@ update_SPY_mission_start_button = {
 }
 
 update_SPY_mission_plus_minus_button = {
-	#set_variable = { ROOT.var_SPY_mission_intel_ratio = ROOT.var_SPY_mission_num_gui }
 	var:orbit_selected_TAG = {
 		set_variable = { ROOT.var_SPY_mission_intel_ratio = ROOT.var_SPY_mission_num_gui }
 		divide_variable = { ROOT.var_SPY_mission_intel_ratio = num_controlled_states }
@@ -1096,251 +873,110 @@ update_SPY_mission_plus_minus_button = {
 }
 
 calculate_GNSS_mil_gui_vars = {
-
 	set_variable = { var_GNSS_mil_army_speed_factor_base = global.GNSS_mil_army_speed_factor_max_array^var_GNSS_mil_system_idx }
 	set_variable = { var_GNSS_mil_army_speed_factor_min = global.GNSS_mil_army_speed_factor_min_array^var_GNSS_mil_system_idx }
 	multiply_variable = { var_GNSS_mil_army_speed_factor_base = var_GNSS_mil_sat_system_bonus }
-	if = {
-		limit = {
-			check_variable = {
-				var_GNSS_mil_army_speed_factor_base < var_GNSS_mil_army_speed_factor_min
-			}
-		}
-		set_variable = { var_GNSS_mil_army_speed_factor_base = var_GNSS_mil_army_speed_factor_min }
-	}
+	clamp_variable = { var = var_GNSS_mil_army_speed_factor_base min = var_GNSS_mil_army_speed_factor_min }
 	#air_cas_efficiency
 	set_variable = { var_GNSS_mil_air_cas_efficiency_base = global.GNSS_mil_air_cas_efficiency_max_array^var_GNSS_mil_system_idx }
 	set_variable = { var_GNSS_mil_air_cas_efficiency_min = global.GNSS_mil_air_cas_efficiency_min_array^var_GNSS_mil_system_idx }
 	multiply_variable = { var_GNSS_mil_air_cas_efficiency_base = var_GNSS_mil_sat_system_bonus }
-	if = {
-		limit = {
-			check_variable = {
-				var_GNSS_mil_air_cas_efficiency_base < var_GNSS_mil_air_cas_efficiency_min
-			}
-		}
-		set_variable = { var_GNSS_mil_air_cas_efficiency_base = var_GNSS_mil_air_cas_efficiency_min }
-	}
+	clamp_variable = { var = var_GNSS_mil_air_cas_efficiency_base min = var_GNSS_mil_air_cas_efficiency_min }
 	#air_nav_efficiency
 	set_variable = { var_GNSS_mil_air_nav_efficiency_base = global.GNSS_mil_air_nav_efficiency_max_array^var_GNSS_mil_system_idx }
 	set_variable = { var_GNSS_mil_air_nav_efficiency_min = global.GNSS_mil_air_nav_efficiency_min_array^var_GNSS_mil_system_idx }
 	multiply_variable = { var_GNSS_mil_air_nav_efficiency_base = var_GNSS_mil_sat_system_bonus }
-	if = {
-		limit = {
-			check_variable = {
-				var_GNSS_mil_air_nav_efficiency_base  < var_GNSS_mil_air_nav_efficiency_min
-			}
-		}
-		set_variable = { var_GNSS_mil_air_nav_efficiency_base = var_GNSS_mil_air_nav_efficiency_min }
-	}
+	clamp_variable = { var = var_GNSS_mil_air_nav_efficiency_base min = var_GNSS_mil_air_nav_efficiency_min }
 	#air_strategic_bomber_bombing_factor
 	set_variable = { var_GNSS_mil_air_strategic_bomber_bombing_factor_base = global.GNSS_mil_air_strategic_bomber_bombing_factor_max_array^var_GNSS_mil_system_idx }
 	set_variable = { var_GNSS_mil_air_strategic_bomber_bombing_factor_min = global.GNSS_mil_air_strategic_bomber_bombing_factor_min_array^var_GNSS_mil_system_idx }
 	multiply_variable = { var_GNSS_mil_air_strategic_bomber_bombing_factor_base = var_GNSS_mil_sat_system_bonus }
-	if = {
-		limit = {
-			check_variable = {
-				var_GNSS_mil_air_strategic_bomber_bombing_factor_base < var_GNSS_mil_air_strategic_bomber_bombing_factor_min
-			}
-		}
-		set_variable = { var_GNSS_mil_air_strategic_bomber_bombing_factor_base = var_GNSS_mil_air_strategic_bomber_bombing_factor_min }
-	}
+	clamp_variable = { var = var_GNSS_mil_air_strategic_bomber_bombing_factor_base min = var_GNSS_mil_air_strategic_bomber_bombing_factor_min }
 	#positioning
 	set_variable = { var_GNSS_mil_positioning_base = global.GNSS_mil_positioning_max_array^var_GNSS_mil_system_idx }
 	set_variable = { var_GNSS_mil_positioning_min = global.GNSS_mil_positioning_min_array^var_GNSS_mil_system_idx }
 	multiply_variable = { var_GNSS_mil_positioning_base = var_GNSS_mil_sat_system_bonus }
-	if = {
-		limit = {
-			check_variable = {
-				var_GNSS_mil_positioning_base < var_GNSS_mil_positioning_min
-			}
-		}
-		set_variable = { var_GNSS_mil_positioning_base = var_GNSS_mil_positioning_min }
-	}
+	clamp_variable = { var = var_GNSS_mil_positioning_base min = var_GNSS_mil_positioning_min }
 	#naval_hit_chance
 	set_variable = { var_GNSS_mil_naval_hit_chance_base = global.GNSS_mil_naval_hit_chance_max_array^var_GNSS_mil_system_idx }
 	set_variable = { var_GNSS_mil_naval_hit_chance_min = global.GNSS_mil_naval_hit_chance_min_array^var_GNSS_mil_system_idx }
 	multiply_variable = { var_GNSS_mil_naval_hit_chance_base = var_GNSS_mil_sat_system_bonus }
-	if = {
-		limit = {
-			check_variable = {
-				var_GNSS_mil_naval_hit_chance_base < var_GNSS_mil_naval_hit_chance_min
-			}
-		}
-		set_variable = { var_GNSS_mil_naval_hit_chance_base = var_GNSS_mil_naval_hit_chance_min }
-	}
+	clamp_variable = { var = var_GNSS_mil_naval_hit_chance_base min = var_GNSS_mil_naval_hit_chance_min }
 }
 calculate_GNSS_civ_gui_vars = {
 	set_variable = { var_GNSS_civ_production_speed_buildings_factor_base = global.GNSS_civ_production_speed_buildings_factor_max_array^var_GNSS_civ_system_idx }
 	set_variable = { var_GNSS_civ_production_speed_buildings_factor_min = global.GNSS_civ_production_speed_buildings_factor_min_array^var_GNSS_civ_system_idx }
 	multiply_variable = { var_GNSS_civ_production_speed_buildings_factor_base = var_GNSS_civ_sat_system_bonus }
-	if = {
-		limit = {
-			check_variable = {
-				var_GNSS_civ_production_speed_buildings_factor_base < var_GNSS_civ_production_speed_buildings_factor_min
-			}
-		}
-		set_variable = { var_GNSS_civ_production_speed_buildings_factor_base = var_GNSS_civ_production_speed_buildings_factor_min }
-	}
+	clamp_variable = { var = var_GNSS_civ_production_speed_buildings_factor_base min = var_GNSS_civ_production_speed_buildings_factor_min }
 	#production_speed_infrastructure_factor
 	set_variable = { var_GNSS_civ_production_speed_infrastructure_factor_base = global.GNSS_civ_production_speed_infrastructure_factor_max_array^var_GNSS_civ_system_idx }
 	set_variable = { var_GNSS_civ_production_speed_infrastructure_factor_min = global.GNSS_civ_production_speed_infrastructure_factor_min_array^var_GNSS_civ_system_idx }
 	multiply_variable = { var_GNSS_civ_production_speed_infrastructure_factor_base = var_GNSS_civ_sat_system_bonus }
-	if = {
-		limit = {
-			check_variable = {
-				var_GNSS_civ_production_speed_infrastructure_factor_base < var_GNSS_civ_production_speed_infrastructure_factor_min
-			}
-		}
-		set_variable = { var_GNSS_civ_production_speed_infrastructure_factor_base = var_GNSS_civ_production_speed_infrastructure_factor_min }
-	}
+	clamp_variable = { var = var_GNSS_civ_production_speed_infrastructure_factor_base min = var_GNSS_civ_production_speed_infrastructure_factor_min }
 	#local_resources_factor
 	set_variable = { var_GNSS_civ_local_resources_factor_base = global.GNSS_civ_local_resources_factor_max_array^var_GNSS_civ_system_idx }
 	set_variable = { var_GNSS_civ_local_resources_factor_min = global.GNSS_civ_local_resources_factor_min_array^var_GNSS_civ_system_idx }
 	multiply_variable = { var_GNSS_civ_local_resources_factor_base = var_GNSS_civ_sat_system_bonus }
-	if = {
-		limit = {
-			check_variable = {
-				var_GNSS_civ_local_resources_factor_base < var_GNSS_civ_local_resources_factor_min
-			}
-		}
-		set_variable = { var_GNSS_civ_local_resources_factor_base = var_GNSS_civ_local_resources_factor_min }
-	}
+	clamp_variable = { var = var_GNSS_civ_local_resources_factor_base min = var_GNSS_civ_local_resources_factor_min }
 }
 calculate_COM_mil_gui_vars = {
 	# Command Power
 	set_variable = { var_COM_mil_max_command_power_base = global.COM_mil_max_command_power_max_array^var_COM_mil_system_idx }
 	set_variable = { var_COM_mil_max_command_power_min = global.COM_mil_max_command_power_min_array^var_COM_mil_system_idx }
 	multiply_variable = { var_COM_mil_max_command_power_base = var_COM_mil_sat_system_bonus }
-	if = {
-		limit = {
-			check_variable = {
-				var_COM_mil_max_command_power_base < var_COM_mil_max_command_power_min
-			}
-		}
-		set_variable = { var_COM_mil_max_command_power_base = var_COM_mil_max_command_power_min }
-	}
+	clamp_variable = { var = var_COM_mil_max_command_power_base min = var_COM_mil_max_command_power_min }
 	#army_org_factor
 	set_variable = { var_COM_mil_army_org_factor_base = global.COM_mil_army_org_factor_max_array^var_COM_mil_system_idx }
 	set_variable = { var_COM_mil_army_org_factor_min = global.COM_mil_army_org_factor_min_array^var_COM_mil_system_idx }
 	multiply_variable = { var_COM_mil_army_org_factor_base = var_COM_mil_sat_system_bonus }
-	if = {
-		limit = {
-			check_variable = {
-				var_COM_mil_army_org_factor_base < var_COM_mil_army_org_factor_min
-			}
-		}
-		set_variable = { var_COM_mil_army_org_factor_base = var_COM_mil_army_org_factor_min }
-	}
+	clamp_variable = { var = var_COM_mil_army_org_factor_base min = var_COM_mil_army_org_factor_min }
 	#planning_speed
 	set_variable = { var_COM_mil_planning_speed_base = global.COM_mil_planning_speed_max_array^var_COM_mil_system_idx }
 	set_variable = { var_COM_mil_planning_speed_min = global.COM_mil_planning_speed_min_array^var_COM_mil_system_idx }
 	multiply_variable = { var_COM_mil_planning_speed_base = var_COM_mil_sat_system_bonus }
-	if = {
-		limit = {
-			check_variable = {
-				var_COM_mil_planning_speed_base < var_COM_mil_planning_speed_min
-			}
-		}
-		set_variable = { var_COM_mil_planning_speed_base = var_COM_mil_planning_speed_min }
-	}
+	clamp_variable = { var = var_COM_mil_planning_speed_base min = var_COM_mil_planning_speed_min }
 	#air_escort_efficiency
 	set_variable = { var_COM_mil_air_escort_efficiency_base = global.COM_mil_air_escort_efficiency_max_array^var_COM_mil_system_idx }
 	set_variable = { var_COM_mil_air_escort_efficiency_min = global.COM_mil_air_escort_efficiency_min_array^var_COM_mil_system_idx }
 	multiply_variable = { var_COM_mil_air_escort_efficiency_base = var_COM_mil_sat_system_bonus }
-	if = {
-		limit = {
-			check_variable = {
-				var_COM_mil_air_escort_efficiency_base < var_COM_mil_air_escort_efficiency_min
-			}
-		}
-		set_variable = { var_COM_mil_air_escort_efficiency_base = var_COM_mil_air_escort_efficiency_min }
-	}
+	clamp_variable = { var = var_COM_mil_air_escort_efficiency_base min = var_COM_mil_air_escort_efficiency_min }
 	#air_intercept_efficiency
 	set_variable = { var_COM_mil_air_intercept_efficiency_base = global.COM_mil_air_intercept_efficiency_max_array^var_COM_mil_system_idx }
 	set_variable = { var_COM_mil_air_intercept_efficiency_min = global.COM_mil_air_intercept_efficiency_min_array^var_COM_mil_system_idx }
 	multiply_variable = { var_COM_mil_air_intercept_efficiency_base = var_COM_mil_sat_system_bonus }
-	if = {
-		limit = {
-			check_variable = {
-				var_COM_mil_air_intercept_efficiency_base < var_COM_mil_air_intercept_efficiency_min
-			}
-		}
-		set_variable = { var_COM_mil_air_intercept_efficiency_base = var_COM_mil_air_intercept_efficiency_min }
-	}
+	clamp_variable = { var = var_COM_mil_air_intercept_efficiency_base min = var_COM_mil_air_intercept_efficiency_min }
 	#naval_coordination
 	set_variable = { var_COM_mil_naval_coordination_base = global.COM_mil_naval_coordination_max_array^var_COM_mil_system_idx }
 	set_variable = { var_COM_mil_naval_coordination_min = global.COM_mil_naval_coordination_min_array^var_COM_mil_system_idx }
 	multiply_variable = { var_COM_mil_naval_coordination_base = var_COM_mil_sat_system_bonus }
-	if = {
-		limit = {
-			check_variable = {
-				var_COM_mil_naval_coordination_base < var_COM_mil_naval_coordination_min
-			}
-		}
-		set_variable = { var_COM_mil_naval_coordination_base = var_COM_mil_naval_coordination_min }
-	}
+	clamp_variable = { var = var_COM_mil_naval_coordination_base min = var_COM_mil_naval_coordination_min }
 }
 calculate_COM_civ_gui_vars = {
 	#political_power_factor
 	set_variable = { var_COM_civ_political_power_factor_base = global.COM_civ_political_power_factor_max_array^var_COM_civ_system_idx }
 	set_variable = { var_COM_civ_political_power_factor_min = global.COM_civ_political_power_factor_min_array^var_COM_civ_system_idx }
 	multiply_variable = { var_COM_civ_political_power_factor_base = var_COM_civ_sat_system_bonus }
-	if = {
-		limit = {
-			check_variable = {
-				var_COM_civ_political_power_factor_base < var_COM_civ_political_power_factor_min
-			}
-		}
-		set_variable = { var_COM_civ_political_power_factor_base = var_COM_civ_political_power_factor_min }
-	}
+	clamp_variable = { var = var_COM_civ_political_power_factor_base min = var_COM_civ_political_power_factor_min }
 	#decryption_factor
 	set_variable = { var_COM_civ_decryption_factor_base = global.COM_civ_decryption_factor_max_array^var_COM_civ_system_idx }
 	set_variable = { var_COM_civ_decryption_factor_min = global.COM_civ_decryption_factor_min_array^var_COM_civ_system_idx }
 	multiply_variable = { var_COM_civ_decryption_factor_base = var_COM_civ_sat_system_bonus }
-	if = {
-		limit = {
-			check_variable = {
-				var_COM_civ_decryption_factor_base < var_COM_civ_decryption_factor_min
-			}
-		}
-		set_variable = { var_COM_civ_decryption_factor_base = var_COM_civ_decryption_factor_min }
-	}
+	clamp_variable = { var = var_COM_civ_decryption_factor_base min = var_COM_civ_decryption_factor_min }
 	#encryption_factor
 	set_variable = { var_COM_civ_encryption_factor_base = global.COM_civ_encryption_factor_max_array^var_COM_civ_system_idx }
 	set_variable = { var_COM_civ_encryption_factor_min = global.COM_civ_encryption_factor_min_array^var_COM_civ_system_idx }
 	multiply_variable = { var_COM_civ_encryption_factor_base = var_COM_civ_sat_system_bonus }
-	if = {
-		limit = {
-			check_variable = {
-				var_COM_civ_encryption_factor_base < var_COM_civ_encryption_factor_min
-			}
-		}
-		set_variable = { var_COM_civ_encryption_factor_base = var_COM_civ_encryption_factor_min }
-	}
+	clamp_variable = { var = var_COM_civ_encryption_factor_base min = var_COM_civ_encryption_factor_min }
 	#intel_network_gain_factor
 	set_variable = { var_COM_civ_intel_network_gain_factor_base = global.COM_civ_intel_network_gain_factor_max_array^var_COM_civ_system_idx }
 	set_variable = { var_COM_civ_intel_network_gain_factor_min = global.COM_civ_intel_network_gain_factor_min_array^var_COM_civ_system_idx }
 	multiply_variable = { var_COM_civ_intel_network_gain_factor_base = var_COM_civ_sat_system_bonus }
-	if = {
-		limit = {
-			check_variable = {
-				var_COM_civ_intel_network_gain_factor_base < var_COM_civ_intel_network_gain_factor_min
-			}
-		}
-		set_variable = { var_COM_civ_intel_network_gain_factor_base = var_COM_civ_intel_network_gain_factor_min }
-	}
+	clamp_variable = { var = var_COM_civ_intel_network_gain_factor_base min = var_COM_civ_intel_network_gain_factor_min }
 	#operation_outcome
 	set_variable = { var_COM_civ_operation_outcome_base = global.COM_civ_operation_outcome_max_array^var_COM_civ_system_idx }
 	set_variable = { var_COM_civ_operation_outcome_min = global.COM_civ_operation_outcome_min_array^var_COM_civ_system_idx }
 	multiply_variable = { var_COM_civ_operation_outcome_base = var_COM_civ_sat_system_bonus }
-	if = {
-		limit = {
-			check_variable = {
-				var_COM_civ_operation_outcome_base < var_COM_civ_operation_outcome_min
-			}
-		}
-		set_variable = { var_COM_civ_operation_outcome_base = var_COM_civ_operation_outcome_min }
-	}
+	clamp_variable = { var = var_COM_civ_operation_outcome_base min = var_COM_civ_operation_outcome_min }
 }
 calculate_SPY_mil_gui_vars = {
 	### SPY mil
@@ -1348,74 +984,34 @@ calculate_SPY_mil_gui_vars = {
 	set_variable = { var_SPY_mil_max_planning_factor_base = global.SPY_mil_max_planning_factor_max_array^var_SPY_mil_system_idx }
 	set_variable = { var_SPY_mil_max_planning_factor_min = global.SPY_mil_max_planning_factor_min_array^var_SPY_mil_system_idx }
 	multiply_variable = { var_SPY_mil_max_planning_factor_base = var_SPY_mil_sat_system_bonus }
-	if = {
-		limit = {
-			check_variable = {
-				var_SPY_mil_max_planning_factor_base < var_SPY_mil_max_planning_factor_min
-			}
-		}
-		set_variable = { var_SPY_mil_max_planning_factor_base = var_SPY_mil_max_planning_factor_min }
-	}
+	clamp_variable = { var = var_SPY_mil_max_planning_factor_base min = var_SPY_mil_max_planning_factor_min }
 	#recon_factor
 	set_variable = { var_SPY_mil_recon_factor_base = global.SPY_mil_recon_factor_max_array^var_SPY_mil_system_idx }
 	set_variable = { var_SPY_mil_recon_factor_min = global.SPY_mil_recon_factor_min_array^var_SPY_mil_system_idx }
 	multiply_variable = { var_SPY_mil_recon_factor_base = var_SPY_mil_sat_system_bonus }
-	if = {
-		limit = {
-			check_variable = {
-				var_SPY_mil_recon_factor_base < var_SPY_mil_recon_factor_min
-			}
-		}
-		set_variable = { var_SPY_mil_recon_factor_base = var_SPY_mil_recon_factor_min }
-	}
+	clamp_variable = { var = var_SPY_mil_recon_factor_base min = var_SPY_mil_recon_factor_min }
 	#air_weather_penalty
 	set_variable = { var_SPY_mil_air_weather_penalty_base = global.SPY_mil_air_weather_penalty_max_array^var_SPY_mil_system_idx }
 	set_variable = { var_SPY_mil_air_weather_penalty_min = global.SPY_mil_air_weather_penalty_min_array^var_SPY_mil_system_idx }
 	multiply_variable = { var_SPY_mil_air_weather_penalty_base = var_SPY_mil_sat_system_bonus }
-	if = {
-		limit = {
-			check_variable = {
-				var_SPY_mil_air_weather_penalty_base < var_SPY_mil_air_weather_penalty_min
-			}
-		}
-		set_variable = { var_SPY_mil_air_weather_penalty_base = var_SPY_mil_air_weather_penalty_min }
-	}
+	clamp_variable = { var = var_SPY_mil_air_weather_penalty_base min = var_SPY_mil_air_weather_penalty_min }
 	#spotting_chance
 	set_variable = { var_SPY_mil_spotting_chance_base = global.SPY_mil_spotting_chance_max_array^var_SPY_mil_system_idx }
 	set_variable = { var_SPY_mil_spotting_chance_min = global.SPY_mil_spotting_chance_min_array^var_SPY_mil_system_idx }
 	multiply_variable = { var_SPY_mil_spotting_chance_base = var_SPY_mil_sat_system_bonus }
-	if = {
-		limit = {
-			check_variable = {
-				var_SPY_mil_spotting_chance_base < var_SPY_mil_spotting_chance_min
-			}
-		}
-		set_variable = { var_SPY_mil_spotting_chance_base = var_SPY_mil_spotting_chance_min }
-	}
+	clamp_variable = { var = var_SPY_mil_spotting_chance_base min = var_SPY_mil_spotting_chance_min }
+
 	#convoy_raiding_efficiency_factor
 	set_variable = { var_SPY_mil_convoy_raiding_efficiency_factor_base = global.SPY_mil_convoy_raiding_efficiency_factor_max_array^var_SPY_mil_system_idx }
 	set_variable = { var_SPY_mil_convoy_raiding_efficiency_factor_min = global.SPY_mil_convoy_raiding_efficiency_factor_min_array^var_SPY_mil_system_idx }
 	multiply_variable = { var_SPY_mil_convoy_raiding_efficiency_factor_base = var_SPY_mil_sat_system_bonus }
-	if = {
-		limit = {
-			check_variable = {
-				var_SPY_mil_convoy_raiding_efficiency_factor_base < var_SPY_mil_convoy_raiding_efficiency_factor_min
-			}
-		}
-		set_variable = { var_SPY_mil_convoy_raiding_efficiency_factor_base = var_SPY_mil_convoy_raiding_efficiency_factor_min }
-	}
+	clamp_variable = { var = var_SPY_mil_convoy_raiding_efficiency_factor_base min = var_SPY_mil_convoy_raiding_efficiency_factor_min }
+
 	#convoy_escort_efficiency
 	set_variable = { var_SPY_mil_convoy_escort_efficiency_base = global.SPY_mil_convoy_escort_efficiency_max_array^var_SPY_mil_system_idx }
 	set_variable = { var_SPY_mil_convoy_escort_efficiency_min = global.SPY_mil_convoy_escort_efficiency_min_array^var_SPY_mil_system_idx }
 	multiply_variable = { var_SPY_mil_convoy_escort_efficiency_base = var_SPY_mil_sat_system_bonus }
-	if = {
-		limit = {
-			check_variable = {
-				var_SPY_mil_convoy_escort_efficiency_base < var_SPY_mil_convoy_escort_efficiency_min
-			}
-		}
-		set_variable = { var_SPY_mil_convoy_escort_efficiency_base = var_SPY_mil_convoy_escort_efficiency_min }
-	}
+	clamp_variable = { var = var_SPY_mil_convoy_escort_efficiency_base min = var_SPY_mil_convoy_escort_efficiency_min }
 }
 calculate_SPY_civ_gui_vars = {
 	### SPY civ
@@ -1423,78 +1019,67 @@ calculate_SPY_civ_gui_vars = {
 	set_variable = { var_SPY_civ_research_speed_factor_base = global.SPY_civ_research_speed_factor_max_array^var_SPY_civ_system_idx }
 	set_variable = { var_SPY_civ_research_speed_factor_min = global.SPY_civ_research_speed_factor_min_array^var_SPY_civ_system_idx }
 	multiply_variable = { var_SPY_civ_research_speed_factor_base = var_SPY_civ_sat_system_bonus }
-	if = {
-		limit = {
-			check_variable = {
-				var_SPY_civ_research_speed_factor_base < var_SPY_civ_research_speed_factor_min
-			}
-		}
-		set_variable = { var_SPY_civ_research_speed_factor_base = var_SPY_civ_research_speed_factor_min }
-	}
+
+	clamp_variable = { var = var_SPY_civ_research_speed_factor_base min = var_SPY_civ_research_speed_factor_min }
 	#civilian_intel_factor
 	set_variable = { var_SPY_civ_civilian_intel_factor_base = global.SPY_civ_civilian_intel_factor_max_array^var_SPY_civ_system_idx }
 	set_variable = { var_SPY_civ_civilian_intel_factor_min = global.SPY_civ_civilian_intel_factor_min_array^var_SPY_civ_system_idx }
 	multiply_variable = { var_SPY_civ_civilian_intel_factor_base = var_SPY_civ_sat_system_bonus }
-	if = {
-		limit = {
-			check_variable = {
-				var_SPY_civ_civilian_intel_factor_base < var_SPY_civ_civilian_intel_factor_min
-			}
-		}
-		set_variable = { var_SPY_civ_civilian_intel_factor_base = var_SPY_civ_civilian_intel_factor_min }
-	}
+
+	clamp_variable = { var = var_SPY_civ_civilian_intel_factor_base min = var_SPY_civ_civilian_intel_factor_min }
 	#army_intel_factor
 	set_variable = { var_SPY_civ_army_intel_factor_base = global.SPY_civ_army_intel_factor_max_array^var_SPY_civ_system_idx }
 	set_variable = { var_SPY_civ_army_intel_factor_min = global.SPY_civ_army_intel_factor_min_array^var_SPY_civ_system_idx }
 	multiply_variable = { var_SPY_civ_army_intel_factor_base = var_SPY_civ_sat_system_bonus }
-	if = {
-		limit = {
-			check_variable = {
-				var_SPY_civ_army_intel_factor_base < var_SPY_civ_army_intel_factor_min
-			}
-		}
-		set_variable = { var_SPY_civ_army_intel_factor_base = var_SPY_civ_army_intel_factor_min }
-	}
+
+	clamp_variable = { var = var_SPY_civ_army_intel_factor_base min = var_SPY_civ_army_intel_factor_min }
 	#navy_intel_factor
 	set_variable = { var_SPY_civ_navy_intel_factor_base = global.SPY_civ_navy_intel_factor_max_array^var_SPY_civ_system_idx }
 	set_variable = { var_SPY_civ_navy_intel_factor_min = global.SPY_civ_navy_intel_factor_min_array^var_SPY_civ_system_idx }
 	multiply_variable = { var_SPY_civ_navy_intel_factor_base = var_SPY_civ_sat_system_bonus }
-	if = {
-		limit = {
-			check_variable = {
-				var_SPY_civ_navy_intel_factor_base < var_SPY_civ_navy_intel_factor_min
-			}
-		}
-		set_variable = { var_SPY_civ_navy_intel_factor_base = var_SPY_civ_navy_intel_factor_min }
-	}
+
+	clamp_variable = { var = var_SPY_civ_navy_intel_factor_base min = var_SPY_civ_navy_intel_factor_min }
 	#airforce_intel_factor
 	set_variable = { var_SPY_civ_airforce_intel_factor_base = global.SPY_civ_airforce_intel_factor_max_array^var_SPY_civ_system_idx }
 	set_variable = { var_SPY_civ_airforce_intel_factor_min = global.SPY_civ_airforce_intel_factor_min_array^var_SPY_civ_system_idx }
 	multiply_variable = { var_SPY_civ_airforce_intel_factor_base = var_SPY_civ_sat_system_bonus }
-	if = {
-		limit = {
-			check_variable = {
-				var_SPY_civ_airforce_intel_factor_base < var_SPY_civ_airforce_intel_factor_min
-			}
-		}
-		set_variable = { var_SPY_civ_airforce_intel_factor_base = var_SPY_civ_airforce_intel_factor_min }
-	}
+
+	clamp_variable = { var = var_SPY_civ_airforce_intel_factor_base min = var_SPY_civ_airforce_intel_factor_min }
 	#root_out_resistance_effectiveness_factor
 	set_variable = { var_SPY_civ_root_out_resistance_effectiveness_factor_base = global.SPY_civ_root_out_resistance_effectiveness_factor_max_array^var_SPY_civ_system_idx }
 	set_variable = { var_SPY_civ_root_out_resistance_effectiveness_factor_min = global.SPY_civ_root_out_resistance_effectiveness_factor_min_array^var_SPY_civ_system_idx }
 	multiply_variable = { var_SPY_civ_root_out_resistance_effectiveness_factor_base = var_SPY_civ_sat_system_bonus }
-	if = {
-		limit = {
-			check_variable = {
-				var_SPY_civ_root_out_resistance_effectiveness_factor_base < var_SPY_civ_root_out_resistance_effectiveness_factor_min
-			}
-		}
-		set_variable = { var_SPY_civ_root_out_resistance_effectiveness_factor_base = var_SPY_civ_root_out_resistance_effectiveness_factor_min }
-	}
+
+	clamp_variable = { var = var_SPY_civ_root_out_resistance_effectiveness_factor_base min = var_SPY_civ_root_out_resistance_effectiveness_factor_min }
 	###
 }
 
 add_access_GNSS_mil_vars = {
+	# Rebuild access arrays so stale country scopes cannot survive into scope loops.
+	clear_array = temp_GNSS_mil_access_array
+	for_each_loop = {
+		array = GNSS_mil_access_array
+		value = v
+		if = {
+			limit = {
+				NOT = { check_variable = { v = 0 } }
+				var:v = { exists = yes }
+				NOT = { is_in_array = { array = temp_GNSS_mil_access_array value = v } }
+			}
+			add_to_array = { array = temp_GNSS_mil_access_array value = v }
+		}
+	}
+	clear_array = GNSS_mil_access_array
+	clear_array = GNSS_mil_access_system_idx_array
+	for_each_loop = {
+		array = temp_GNSS_mil_access_array
+		value = v
+		add_to_array = { array = GNSS_mil_access_array value = v }
+		var:v = {
+			add_to_array = { array = ROOT.GNSS_mil_access_system_idx_array value = var_GNSS_mil_system_idx }
+		}
+	}
+	clear_array = temp_GNSS_mil_access_array
 	set_variable = { temp_GNSS_mil_access_system_highest_idx = 0 }
 	set_variable = { var_GNSS_mil_army_speed_factor = var_GNSS_mil_army_speed_factor_base }
 	set_variable = { var_GNSS_mil_air_cas_efficiency = var_GNSS_mil_air_cas_efficiency_base }
@@ -1552,64 +1137,47 @@ add_access_GNSS_mil_vars = {
 				}
 			}
 			#army_speed_factor
-			if = {
-				limit = {
-					check_variable = {
-						ROOT.var_GNSS_mil_army_speed_factor > global.GNSS_mil_army_speed_factor_max_array^temp_GNSS_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { ROOT.var_GNSS_mil_army_speed_factor = global.GNSS_mil_army_speed_factor_max_array^temp_GNSS_mil_access_system_highest_idx }
-			}
+			clamp_variable = { var = ROOT.var_GNSS_mil_army_speed_factor max = global.GNSS_mil_army_speed_factor_max_array^temp_GNSS_mil_access_system_highest_idx }
 			#air_cas_efficiency
-			if = {
-				limit = {
-					check_variable = {
-						ROOT.var_GNSS_mil_air_cas_efficiency > global.GNSS_mil_air_cas_efficiency_max_array^temp_GNSS_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { ROOT.var_GNSS_mil_air_cas_efficiency = global.GNSS_mil_air_cas_efficiency_max_array^temp_GNSS_mil_access_system_highest_idx }
-			}
+			clamp_variable = { var = ROOT.var_GNSS_mil_air_cas_efficiency max = global.GNSS_mil_air_cas_efficiency_max_array^temp_GNSS_mil_access_system_highest_idx }
 			#air_nav_efficiency
-			if = {
-				limit = {
-					check_variable = {
-						ROOT.var_GNSS_mil_air_nav_efficiency > global.GNSS_mil_air_nav_efficiency_max_array^temp_GNSS_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { ROOT.var_GNSS_mil_air_nav_efficiency = global.GNSS_mil_air_nav_efficiency_max_array^temp_GNSS_mil_access_system_highest_idx }
-			}
+			clamp_variable = { var = ROOT.var_GNSS_mil_air_nav_efficiency max = global.GNSS_mil_air_nav_efficiency_max_array^temp_GNSS_mil_access_system_highest_idx }
 			#air_strategic_bomber_bombing_factor
-			if = {
-				limit = {
-					check_variable = {
-						ROOT.var_GNSS_mil_air_strategic_bomber_bombing_factor > global.GNSS_mil_air_strategic_bomber_bombing_factor_max_array^temp_GNSS_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { ROOT.var_GNSS_mil_air_strategic_bomber_bombing_factor = global.GNSS_mil_air_strategic_bomber_bombing_factor_max_array^temp_GNSS_mil_access_system_highest_idx }
-			}
+			clamp_variable = { var = ROOT.var_GNSS_mil_air_strategic_bomber_bombing_factor max = global.GNSS_mil_air_strategic_bomber_bombing_factor_max_array^temp_GNSS_mil_access_system_highest_idx }
 			#positioning
-			if = {
-				limit = {
-					check_variable = {
-						ROOT.var_GNSS_mil_positioning > global.GNSS_mil_positioning_max_array^temp_GNSS_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { ROOT.var_GNSS_mil_positioning = global.GNSS_mil_army_speed_factor_max_array^temp_GNSS_mil_access_system_highest_idx }
-			}
+			clamp_variable = { var = ROOT.var_GNSS_mil_positioning max = global.GNSS_mil_positioning_max_array^temp_GNSS_mil_access_system_highest_idx }
 			#naval_hit_chance
-			if = {
-				limit = {
-					check_variable = {
-						ROOT.var_GNSS_mil_naval_hit_chance > global.GNSS_mil_naval_hit_chance_max_array^temp_GNSS_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { ROOT.var_GNSS_mil_naval_hit_chance = global.GNSS_mil_naval_hit_chance_max_array^temp_GNSS_mil_access_system_highest_idx }
-			}
+			clamp_variable = { var = ROOT.var_GNSS_mil_naval_hit_chance max = global.GNSS_mil_naval_hit_chance_max_array^temp_GNSS_mil_access_system_highest_idx }
 		}
 	}
 }
 
 add_access_GNSS_civ_vars = {
+	# Rebuild access arrays so stale country scopes cannot survive into scope loops.
+	clear_array = temp_GNSS_civ_access_array
+	for_each_loop = {
+		array = GNSS_civ_access_array
+		value = v
+		if = {
+			limit = {
+				NOT = { check_variable = { v = 0 } }
+				var:v = { exists = yes }
+				NOT = { is_in_array = { array = temp_GNSS_civ_access_array value = v } }
+			}
+			add_to_array = { array = temp_GNSS_civ_access_array value = v }
+		}
+	}
+	clear_array = GNSS_civ_access_array
+	clear_array = GNSS_civ_access_system_idx_array
+	for_each_loop = {
+		array = temp_GNSS_civ_access_array
+		value = v
+		add_to_array = { array = GNSS_civ_access_array value = v }
+		var:v = {
+			add_to_array = { array = ROOT.GNSS_civ_access_system_idx_array value = var_GNSS_civ_system_idx }
+		}
+	}
+	clear_array = temp_GNSS_civ_access_array
 	set_variable = { temp_GNSS_civ_access_system_highest_idx = 0 }
 	set_variable = { var_GNSS_civ_production_speed_buildings_factor = var_GNSS_civ_production_speed_buildings_factor_base }
 	set_variable = { var_GNSS_civ_production_speed_infrastructure_factor = var_GNSS_civ_production_speed_infrastructure_factor_base }
@@ -1641,53 +1209,24 @@ add_access_GNSS_civ_vars = {
 			if = {
 				limit = {
 					OR = {
-						check_variable = {
-							ROOT.var_GNSS_civ_system_idx < THIS.var_GNSS_civ_system_idx
-						}
-						check_variable = {
-							ROOT.var_GNSS_civ_system_idx = THIS.var_GNSS_civ_system_idx
-						}
+						check_variable = { ROOT.var_GNSS_civ_system_idx < THIS.var_GNSS_civ_system_idx }
+						check_variable = { ROOT.var_GNSS_civ_system_idx = THIS.var_GNSS_civ_system_idx }
 					}
 				}
 				add_to_variable = { ROOT.var_GNSS_civ_production_speed_buildings_factor = THIS.var_GNSS_civ_production_speed_buildings_factor_base }
 				add_to_variable = { ROOT.var_GNSS_civ_production_speed_infrastructure_factor = THIS.var_GNSS_civ_production_speed_infrastructure_factor_base }
 				add_to_variable = { ROOT.var_GNSS_civ_local_resources_factor = THIS.var_GNSS_civ_local_resources_factor_base }
-
 			}
 		}
-		if = {
-			limit = {
-				check_variable = {
-					ROOT.GNSS_civ_access_array^num > 0
-				}
-			}
+
+		# Clamp variables for the GNSS satellites to the maximum value
+		if = { limit = { check_variable = { ROOT.GNSS_civ_access_array^num > 0 } }
 			#production_speed_buildings_factor
-			if = {
-				limit = {
-					check_variable = {
-						ROOT.var_GNSS_civ_production_speed_buildings_factor > global.GNSS_civ_production_speed_buildings_factor_max_array^temp_GNSS_civ_access_system_highest_idx
-					}
-				}
-				set_variable = { ROOT.var_GNSS_civ_production_speed_buildings_factor = global.GNSS_civ_production_speed_buildings_factor_max_array^temp_GNSS_civ_access_system_highest_idx }
-			}
+			clamp_variable = { var = ROOT.var_GNSS_civ_production_speed_buildings_factor max = global.GNSS_civ_production_speed_buildings_factor_max_array^temp_GNSS_civ_access_system_highest_idx }
 			#production_speed_infrastructure_factor
-			if = {
-				limit = {
-					check_variable = {
-						ROOT.var_GNSS_civ_production_speed_infrastructure_factor > global.GNSS_civ_production_speed_infrastructure_factor_max_array^temp_GNSS_civ_access_system_highest_idx
-					}
-				}
-				set_variable = { ROOT.var_GNSS_civ_production_speed_infrastructure_factor = global.GNSS_civ_production_speed_infrastructure_factor_max_array^temp_GNSS_civ_access_system_highest_idx }
-			}
+			clamp_variable = { var = ROOT.var_GNSS_civ_production_speed_infrastructure_factor max = global.GNSS_civ_production_speed_infrastructure_factor_max_array^temp_GNSS_civ_access_system_highest_idx }
 			#local_resources_factor
-			if = {
-				limit = {
-					check_variable = {
-						ROOT.var_GNSS_civ_local_resources_factor > global.GNSS_civ_local_resources_factor_max_array^temp_GNSS_civ_access_system_highest_idx
-					}
-				}
-				set_variable = { ROOT.var_GNSS_civ_local_resources_factor = global.GNSS_civ_local_resources_factor_max_array^temp_GNSS_civ_access_system_highest_idx }
-			}
+			clamp_variable = { var = ROOT.var_GNSS_civ_local_resources_factor max = global.GNSS_civ_local_resources_factor_max_array^temp_GNSS_civ_access_system_highest_idx }
 		}
 	}
 }
@@ -1742,66 +1281,19 @@ add_access_COM_mil_vars = {
 				add_to_variable = { ROOT.var_COM_mil_naval_coordination = THIS.var_COM_mil_naval_coordination_base }
 			}
 		}
-		if = {
-			limit = {
-				check_variable = {
-					ROOT.COM_mil_access_array^num > 0
-				}
-			}
+		if = { limit = { check_variable = { ROOT.COM_mil_access_array^num > 0 } }
 			#max_command_power
-			if = {
-				limit = {
-					check_variable = {
-						ROOT.var_COM_mil_max_command_power > global.COM_mil_max_command_power_max_array^temp_COM_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { ROOT.var_COM_mil_max_command_power = global.COM_mil_max_command_power_max_array^temp_COM_mil_access_system_highest_idx }
-			}
+			clamp_variable = { var = ROOT.var_COM_mil_max_command_power max = global.COM_mil_max_command_power_max_array^temp_COM_mil_access_system_highest_idx }
 			#army_org_factor
-			if = {
-				limit = {
-					check_variable = {
-						ROOT.var_COM_mil_army_org_factor > global.COM_mil_army_org_factor_max_array^temp_COM_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { ROOT.var_COM_mil_army_org_factor = global.COM_mil_army_org_factor_max_array^temp_COM_mil_access_system_highest_idx }
-			}
+			clamp_variable = { var = ROOT.var_COM_mil_army_org_factor max = global.COM_mil_army_org_factor_max_array^temp_COM_mil_access_system_highest_idx }
 			#planning_speed
-			if = {
-				limit = {
-					check_variable = {
-						ROOT.var_COM_mil_planning_speed > global.COM_mil_planning_speed_max_array^temp_COM_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { ROOT.var_COM_mil_planning_speed = global.COM_mil_planning_speed_max_array^temp_COM_mil_access_system_highest_idx }
-			}
+			clamp_variable = { var = ROOT.var_COM_mil_planning_speed max = global.COM_mil_planning_speed_max_array^temp_COM_mil_access_system_highest_idx }
 			#air_escort_efficiency
-			if = {
-				limit = {
-					check_variable = {
-						ROOT.var_COM_mil_air_escort_efficiency > global.COM_mil_air_escort_efficiency_max_array^temp_COM_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { ROOT.var_COM_mil_air_escort_efficiency = global.COM_mil_air_escort_efficiency_max_array^temp_COM_mil_access_system_highest_idx }
-			}
+			clamp_variable = { var = ROOT.var_COM_mil_air_escort_efficiency max = global.COM_mil_air_escort_efficiency_max_array^temp_COM_mil_access_system_highest_idx }
 			#air_intercept_efficiency
-			if = {
-				limit = {
-					check_variable = {
-						ROOT.var_COM_mil_air_intercept_efficiency > global.COM_mil_air_intercept_efficiency_max_array^temp_COM_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { ROOT.var_COM_mil_air_intercept_efficiency = global.COM_mil_air_intercept_efficiency_max_array^temp_COM_mil_access_system_highest_idx }
-			}
+			clamp_variable = { var = ROOT.var_COM_mil_air_intercept_efficiency max = global.COM_mil_air_intercept_efficiency_max_array^temp_COM_mil_access_system_highest_idx }
 			#naval_coordination
-			if = {
-				limit = {
-					check_variable = {
-						ROOT.var_COM_mil_naval_coordination > global.COM_mil_naval_coordination_max_array^temp_COM_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { ROOT.var_COM_mil_naval_coordination = global.COM_mil_naval_coordination_max_array^temp_COM_mil_access_system_highest_idx }
-			}
+			clamp_variable = { var = ROOT.var_COM_mil_naval_coordination max = global.COM_mil_naval_coordination_max_array^temp_COM_mil_access_system_highest_idx }
 		}
 	}
 }
@@ -1861,50 +1353,15 @@ add_access_COM_civ_vars = {
 				}
 			}
 			#political_power_factor
-			if = {
-				limit = {
-					check_variable = {
-						ROOT.var_COM_civ_political_power_factor > global.COM_civ_political_power_factor_max_array^temp_COM_civ_access_system_highest_idx
-					}
-				}
-				set_variable = { ROOT.var_COM_civ_political_power_factor = global.COM_civ_political_power_factor_max_array^temp_COM_civ_access_system_highest_idx }
-			}
+			clamp_variable = { var = ROOT.var_COM_civ_political_power_factor max = global.COM_civ_political_power_factor_max_array^temp_COM_civ_access_system_highest_idx }
 			#decryption_factor
-			if = {
-				limit = {
-					check_variable = {
-						ROOT.var_COM_civ_decryption_factor > global.COM_civ_decryption_factor_max_array^temp_COM_civ_access_system_highest_idx
-					}
-				}
-				set_variable = { ROOT.var_COM_civ_decryption_factor = global.COM_civ_decryption_factor_max_array^temp_COM_civ_access_system_highest_idx }
-			}
+			clamp_variable = { var = ROOT.var_COM_civ_decryption_factor max = global.COM_civ_decryption_factor_max_array^temp_COM_civ_access_system_highest_idx }
 			#encryption_factor
-			if = {
-				limit = {
-					check_variable = {
-						ROOT.var_COM_civ_encryption_factor > global.COM_civ_encryption_factor_max_array^temp_COM_civ_access_system_highest_idx
-					}
-				}
-				set_variable = { ROOT.var_COM_civ_encryption_factor = global.COM_civ_encryption_factor_max_array^temp_COM_civ_access_system_highest_idx }
-			}
+			clamp_variable = { var = ROOT.var_COM_civ_encryption_factor max = global.COM_civ_encryption_factor_max_array^temp_COM_civ_access_system_highest_idx }
 			#intel_network_gain_factor
-			if = {
-				limit = {
-					check_variable = {
-						ROOT.var_COM_civ_intel_network_gain_factor > global.COM_civ_intel_network_gain_factor_max_array^temp_COM_civ_access_system_highest_idx
-					}
-				}
-				set_variable = { ROOT.var_COM_civ_intel_network_gain_factor = global.COM_civ_intel_network_gain_factor_max_array^temp_COM_civ_access_system_highest_idx }
-			}
+			clamp_variable = { var = ROOT.var_COM_civ_intel_network_gain_factor max = global.COM_civ_intel_network_gain_factor_max_array^temp_COM_civ_access_system_highest_idx }
 			#operation_outcome
-			if = {
-				limit = {
-					check_variable = {
-						ROOT.var_COM_civ_operation_outcome > global.COM_civ_operation_outcome_max_array^temp_COM_civ_access_system_highest_idx
-					}
-				}
-				set_variable = { ROOT.var_COM_civ_operation_outcome = global.COM_civ_operation_outcome_max_array^temp_COM_civ_access_system_highest_idx }
-			}
+			clamp_variable = { var = ROOT.var_COM_civ_operation_outcome max = global.COM_civ_operation_outcome_max_array^temp_COM_civ_access_system_highest_idx }
 		}
 	}
 }
@@ -1966,59 +1423,17 @@ add_access_SPY_mil_vars = {
 				}
 			}
 			#max_planning_factor
-			if = {
-				limit = {
-					check_variable = {
-						ROOT.var_SPY_mil_max_planning_factor > global.SPY_mil_max_planning_factor_max_array^temp_SPY_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { ROOT.var_SPY_mil_max_planning_factor = global.SPY_mil_max_planning_factor_max_array^temp_SPY_mil_access_system_highest_idx }
-			}
+			clamp_variable = { var = ROOT.var_SPY_mil_max_planning_factor max = global.SPY_mil_max_planning_factor_max_array^temp_SPY_mil_access_system_highest_idx }
 			#recon_factor
-			if = {
-				limit = {
-					check_variable = {
-						ROOT.var_SPY_mil_recon_factor > global.SPY_mil_recon_factor_max_array^temp_SPY_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { ROOT.var_SPY_mil_recon_factor = global.SPY_mil_recon_factor_max_array^temp_SPY_mil_access_system_highest_idx }
-			}
+			clamp_variable = { var = ROOT.var_SPY_mil_recon_factor max = global.SPY_mil_recon_factor_max_array^temp_SPY_mil_access_system_highest_idx }
 			#air_weather_penalty
-			if = {
-				limit = {
-					check_variable = {
-						ROOT.var_SPY_mil_air_weather_penalty > global.SPY_mil_air_weather_penalty_max_array^temp_SPY_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { ROOT.var_SPY_mil_air_weather_penalty = global.SPY_mil_air_weather_penalty_max_array^temp_SPY_mil_access_system_highest_idx }
-			}
+			clamp_variable = { var = ROOT.var_SPY_mil_air_weather_penalty max = global.SPY_mil_air_weather_penalty_max_array^temp_SPY_mil_access_system_highest_idx }
 			#spotting_chance
-			if = {
-				limit = {
-					check_variable = {
-						ROOT.var_SPY_mil_spotting_chance > global.SPY_mil_spotting_chance_max_array^temp_SPY_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { ROOT.var_SPY_mil_spotting_chance = global.SPY_mil_spotting_chance_max_array^temp_SPY_mil_access_system_highest_idx }
-			}
+			clamp_variable = { var = ROOT.var_SPY_mil_spotting_chance max = global.SPY_mil_spotting_chance_max_array^temp_SPY_mil_access_system_highest_idx }
 			#convoy_raiding_efficiency_factor
-			if = {
-				limit = {
-					check_variable = {
-						ROOT.var_SPY_mil_convoy_raiding_efficiency_factor > global.SPY_mil_convoy_raiding_efficiency_factor_max_array^temp_SPY_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { ROOT.var_SPY_mil_convoy_raiding_efficiency_factor = global.SPY_mil_convoy_raiding_efficiency_factor_max_array^temp_SPY_mil_access_system_highest_idx }
-			}
+			clamp_variable = { var = ROOT.var_SPY_mil_convoy_raiding_efficiency_factor max = global.SPY_mil_convoy_raiding_efficiency_factor_max_array^temp_SPY_mil_access_system_highest_idx }
 			#convoy_escort_efficiency
-			if = {
-				limit = {
-					check_variable = {
-						ROOT.var_SPY_mil_convoy_escort_efficiency > global.SPY_mil_convoy_escort_efficiency_max_array^temp_SPY_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { ROOT.var_SPY_mil_convoy_escort_efficiency = global.SPY_mil_convoy_escort_efficiency_max_array^temp_SPY_mil_access_system_highest_idx }
-			}
+			clamp_variable = { var = ROOT.var_SPY_mil_convoy_escort_efficiency max = global.SPY_mil_convoy_escort_efficiency_max_array^temp_SPY_mil_access_system_highest_idx }
 		}
 	}
 }
@@ -2073,593 +1488,20 @@ add_access_SPY_civ_vars = {
 				add_to_variable = { ROOT.var_SPY_civ_root_out_resistance_effectiveness_factor = THIS.var_SPY_civ_root_out_resistance_effectiveness_factor_base }
 			}
 		}
-		if = {
-			limit = {
-				check_variable = {
-					ROOT.SPY_civ_access_array^num > 0
-				}
-			}
+
+		if = { limit = { check_variable = { ROOT.SPY_civ_access_array^num > 0 } }
 			#research_speed_factor
-			if = {
-				limit = {
-					check_variable = {
-						ROOT.var_SPY_civ_research_speed_factor > global.SPY_civ_research_speed_factor_max_array^temp_SPY_civ_access_system_highest_idx
-					}
-				}
-				set_variable = { ROOT.var_SPY_civ_research_speed_factor = global.SPY_civ_research_speed_factor_max_array^temp_SPY_civ_access_system_highest_idx }
-			}
+			clamp_variable = { var = ROOT.var_SPY_civ_research_speed_factor max = global.SPY_civ_research_speed_factor_max_array^temp_SPY_civ_access_system_highest_idx }
 			#civilian_intel_factor
-			if = {
-				limit = {
-					check_variable = {
-						ROOT.var_SPY_civ_civilian_intel_factor > global.SPY_civ_civilian_intel_factor_max_array^temp_SPY_civ_access_system_highest_idx
-					}
-				}
-				set_variable = { ROOT.var_SPY_civ_civilian_intel_factor = global.SPY_civ_civilian_intel_factor_max_array^temp_SPY_civ_access_system_highest_idx }
-			}
+			clamp_variable = { var = ROOT.var_SPY_civ_civilian_intel_factor max = global.SPY_civ_civilian_intel_factor_max_array^temp_SPY_civ_access_system_highest_idx }
 			#army_intel_factor
-			if = {
-				limit = {
-					check_variable = {
-						ROOT.var_SPY_civ_army_intel_factor > global.SPY_civ_army_intel_factor_max_array^temp_SPY_civ_access_system_highest_idx
-					}
-				}
-				set_variable = { ROOT.var_SPY_civ_army_intel_factor = global.SPY_civ_army_intel_factor_max_array^temp_SPY_civ_access_system_highest_idx }
-			}
+			clamp_variable = { var = ROOT.var_SPY_civ_army_intel_factor max = global.SPY_civ_army_intel_factor_max_array^temp_SPY_civ_access_system_highest_idx }
 			#navy_intel_factor
-			if = {
-				limit = {
-					check_variable = {
-						ROOT.var_SPY_civ_navy_intel_factor > global.SPY_civ_navy_intel_factor_max_array^temp_SPY_civ_access_system_highest_idx
-					}
-				}
-				set_variable = { ROOT.var_SPY_civ_navy_intel_factor = global.SPY_civ_navy_intel_factor_max_array^temp_SPY_civ_access_system_highest_idx }
-			}
+			clamp_variable = { var = ROOT.var_SPY_civ_navy_intel_factor max = global.SPY_civ_navy_intel_factor_max_array^temp_SPY_civ_access_system_highest_idx }
 			#airforce_intel_factor
-			if = {
-				limit = {
-					check_variable = {
-						ROOT.var_SPY_civ_airforce_intel_factor > global.SPY_civ_airforce_intel_factor_max_array^temp_SPY_civ_access_system_highest_idx
-					}
-				}
-				set_variable = { ROOT.var_SPY_civ_airforce_intel_factor = global.SPY_civ_airforce_intel_factor_max_array^temp_SPY_civ_access_system_highest_idx }
-			}
+			clamp_variable = { var = ROOT.var_SPY_civ_airforce_intel_factor max = global.SPY_civ_airforce_intel_factor_max_array^temp_SPY_civ_access_system_highest_idx }
 			#root_out_resistance_effectiveness_factor
-			if = {
-				limit = {
-					check_variable = {
-						ROOT.var_SPY_civ_root_out_resistance_effectiveness_factor > global.SPY_civ_root_out_resistance_effectiveness_factor_max_array^temp_SPY_civ_access_system_highest_idx
-					}
-				}
-				set_variable = { ROOT.var_SPY_civ_root_out_resistance_effectiveness_factor = global.SPY_civ_root_out_resistance_effectiveness_factor_max_array^temp_SPY_civ_access_system_highest_idx }
-			}
-		}
-	}
-}
-
-#### scripted effects for offer
-# default = PREV = target / bonus TAG
-# ROOT = sending TAG / access TAG
-### does it work correctly? adding highest checks like for add_access_ effects?
-
-add_offer_access_GNSS_mil_vars = {
-	PREV = {
-		set_variable = { temp_GNSS_mil_access_system_highest_idx = 0 }
-		set_variable = { var_GNSS_mil_army_speed_factor = var_GNSS_mil_army_speed_factor_base }
-		set_variable = { var_GNSS_mil_air_cas_efficiency = var_GNSS_mil_air_cas_efficiency_base }
-		set_variable = { var_GNSS_mil_air_nav_efficiency = var_GNSS_mil_air_nav_efficiency_base }
-		set_variable = { var_GNSS_mil_air_strategic_bomber_bombing_factor = var_GNSS_mil_air_strategic_bomber_bombing_factor_base }
-		set_variable = { var_GNSS_mil_positioning = var_GNSS_mil_positioning_base }
-		set_variable = { var_GNSS_mil_naval_hit_chance = var_GNSS_mil_naval_hit_chance_base }
-		for_each_loop = {
-			array = GNSS_mil_access_system_idx_array
-			if = {
-				limit = {
-					check_variable = {
-						GNSS_mil_access_system_idx_array^i > temp_GNSS_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { temp_GNSS_mil_access_system_highest_idx = GNSS_mil_access_system_idx_array^i }
-			}
-		}
-		for_each_scope_loop = {
-			array = GNSS_mil_access_array
-			if = {
-				limit = {
-					NOT = {
-						check_variable = {
-							var_GNSS_mil_system_idx > THIS.var_GNSS_mil_system_idx
-						}
-					}
-				}
-				add_to_variable = { PREV.var_GNSS_mil_army_speed_factor = THIS.var_GNSS_mil_army_speed_factor_base }
-				add_to_variable = { PREV.var_GNSS_mil_air_cas_efficiency = THIS.var_GNSS_mil_air_cas_efficiency_base }
-				add_to_variable = { PREV.var_GNSS_mil_air_nav_efficiency = THIS.var_GNSS_mil_air_nav_efficiency_base }
-				add_to_variable = { PREV.var_GNSS_mil_air_strategic_bomber_bombing_factor = THIS.var_GNSS_mil_air_strategic_bomber_bombing_factor_base }
-				add_to_variable = { PREV.var_GNSS_mil_positioning = THIS.var_GNSS_mil_positioning_base }
-				add_to_variable = { PREV.var_GNSS_mil_naval_hit_chance = THIS.var_GNSS_mil_naval_hit_chance_base }
-			}
-			#army_speed_factor
-			if = {
-				limit = {
-					check_variable = {
-						PREV.var_GNSS_mil_army_speed_factor > global.GNSS_mil_army_speed_factor_max_array^PREV.temp_GNSS_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { PREV.var_GNSS_mil_army_speed_factor = global.GNSS_mil_army_speed_factor_max_array^PREV.temp_GNSS_mil_access_system_highest_idx }
-			}
-			#air_cas_efficiency
-			if = {
-				limit = {
-					check_variable = {
-						PREV.var_GNSS_mil_air_cas_efficiency > global.GNSS_mil_air_cas_efficiency_max_array^PREV.temp_GNSS_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { PREV.var_GNSS_mil_air_cas_efficiency = global.GNSS_mil_air_cas_efficiency_max_array^PREV.temp_GNSS_mil_access_system_highest_idx }
-			}
-			#air_nav_efficiency
-			if = {
-				limit = {
-					check_variable = {
-						PREV.var_GNSS_mil_air_nav_efficiency > global.GNSS_mil_air_nav_efficiency_max_array^PREV.temp_GNSS_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { PREV.var_GNSS_mil_air_nav_efficiency = global.GNSS_mil_air_nav_efficiency_max_array^PREV.temp_GNSS_mil_access_system_highest_idx }
-			}
-			#air_strategic_bomber_bombing_factor
-			if = {
-				limit = {
-					check_variable = {
-						PREV.var_GNSS_mil_air_strategic_bomber_bombing_factor > global.GNSS_mil_air_strategic_bomber_bombing_factor_max_array^PREV.temp_GNSS_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { PREV.var_GNSS_mil_air_strategic_bomber_bombing_factor = global.GNSS_mil_air_strategic_bomber_bombing_factor_max_array^PREV.temp_GNSS_mil_access_system_highest_idx }
-			}
-			#positioning
-			if = {
-				limit = {
-					check_variable = {
-						PREV.var_GNSS_mil_positioning > global.GNSS_mil_positioning_max_array^PREV.temp_GNSS_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { PREV.var_GNSS_mil_positioning = global.GNSS_mil_army_speed_factor_max_array^PREV.temp_GNSS_mil_access_system_highest_idx }
-			}
-			#naval_hit_chance
-			if = {
-				limit = {
-					check_variable = {
-						PREV.var_GNSS_mil_naval_hit_chance > global.GNSS_mil_naval_hit_chance_max_array^PREV.temp_GNSS_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { PREV.var_GNSS_mil_naval_hit_chance = global.GNSS_mil_naval_hit_chance_max_array^PREV.temp_GNSS_mil_access_system_highest_idx }
-			}
-		}
-	}
-}
-add_offer_access_GNSS_civ_vars = {
-	PREV = {
-		set_variable = { temp_GNSS_civ_access_system_highest_idx = 0 }
-		set_variable = { var_GNSS_civ_production_speed_buildings_factor = var_GNSS_civ_production_speed_buildings_factor_base }
-		set_variable = { var_GNSS_civ_production_speed_infrastructure_factor = var_GNSS_civ_production_speed_infrastructure_factor_base }
-		set_variable = { var_GNSS_civ_local_resources_factor = var_GNSS_civ_local_resources_factor_base }
-		for_each_loop = {
-			array = GNSS_civ_access_system_idx_array
-			if = {
-				limit = {
-					check_variable = {
-						GNSS_civ_access_system_idx_array^i > temp_GNSS_civ_access_system_highest_idx
-					}
-				}
-				set_variable = { temp_GNSS_civ_access_system_highest_idx = GNSS_civ_access_system_idx_array^i }
-			}
-		}
-		for_each_scope_loop = {
-			array = GNSS_civ_access_array
-			if = {
-				limit = {
-					NOT = {
-						check_variable = {
-							var_GNSS_civ_system_idx > THIS.var_GNSS_civ_system_idx
-						}
-					}
-				}
-				add_to_variable = { PREV.var_GNSS_civ_production_speed_buildings_factor = THIS.var_GNSS_civ_production_speed_buildings_factor_base }
-				add_to_variable = { PREV.var_GNSS_civ_production_speed_infrastructure_factor = THIS.var_GNSS_civ_production_speed_infrastructure_factor_base }
-				add_to_variable = { PREV.var_GNSS_civ_local_resources_factor = THIS.var_GNSS_civ_local_resources_factor_base }
-
-			}
-			#production_speed_buildings_factor
-			if = {
-				limit = {
-					check_variable = {
-						PREV.var_GNSS_civ_production_speed_buildings_factor > global.GNSS_civ_production_speed_buildings_factor_max_array^PREV.temp_GNSS_civ_access_system_highest_idx
-					}
-				}
-				set_variable = { PREV.var_GNSS_civ_production_speed_buildings_factor = global.GNSS_civ_production_speed_buildings_factor_max_array^PREV.temp_GNSS_civ_access_system_highest_idx }
-			}
-			#production_speed_infrastructure_factor
-			if = {
-				limit = {
-					check_variable = {
-						PREV.var_GNSS_civ_production_speed_infrastructure_factor > global.GNSS_civ_production_speed_infrastructure_factor_max_array^PREV.temp_GNSS_civ_access_system_highest_idx
-					}
-				}
-				set_variable = { PREV.var_GNSS_civ_production_speed_infrastructure_factor = global.GNSS_civ_production_speed_infrastructure_factor_max_array^PREV.temp_GNSS_civ_access_system_highest_idx }
-			}
-			#local_resources_factor
-			if = {
-				limit = {
-					check_variable = {
-						PREV.var_GNSS_civ_local_resources_factor > global.GNSS_civ_local_resources_factor_max_array^PREV.temp_GNSS_civ_access_system_highest_idx
-					}
-				}
-				set_variable = { PREV.var_GNSS_civ_local_resources_factor = global.GNSS_civ_local_resources_factor_max_array^PREV.temp_GNSS_civ_access_system_highest_idx }
-			}
-		}
-	}
-}
-add_offer_access_COM_mil_vars = {
-	PREV = {
-		set_variable = { temp_COM_mil_access_system_highest_idx = 0 }
-		set_variable = { var_COM_mil_max_command_power = var_COM_mil_max_command_power_base }
-		set_variable = { var_COM_mil_army_org_factor = var_COM_mil_army_org_factor_base }
-		set_variable = { var_COM_mil_planning_speed = var_COM_mil_planning_speed_base }
-		set_variable = { var_COM_mil_air_escort_efficiency = var_COM_mil_air_escort_efficiency_base }
-		set_variable = { var_COM_mil_air_intercept_efficiency = var_COM_mil_air_intercept_efficiency_base }
-		set_variable = { var_COM_mil_naval_coordination = var_COM_mil_naval_coordination_base }
-		for_each_loop = {
-			array = COM_mil_access_system_idx_array
-			if = {
-				limit = {
-					check_variable = {
-						COM_mil_access_system_idx_array^i > temp_COM_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { temp_COM_mil_access_system_highest_idx = COM_mil_access_system_idx_array^i }
-			}
-		}
-		for_each_scope_loop = {
-			array = COM_mil_access_array
-			if = {
-				limit = {
-					NOT = {
-						check_variable = {
-							var_COM_mil_system_idx > THIS.var_COM_mil_system_idx
-						}
-					}
-				}
-				add_to_variable = { PREV.var_COM_mil_max_command_power = THIS.var_COM_mil_max_command_power_base }
-				add_to_variable = { PREV.var_COM_mil_army_org_factor = THIS.var_COM_mil_army_org_factor_base }
-				add_to_variable = { PREV.var_COM_mil_planning_speed = THIS.var_COM_mil_planning_speed_base }
-				add_to_variable = { PREV.var_COM_mil_air_escort_efficiency = THIS.var_COM_mil_air_escort_efficiency_base }
-				add_to_variable = { PREV.var_COM_mil_air_intercept_efficiency = THIS.var_COM_mil_air_intercept_efficiency_base }
-				add_to_variable = { PREV.var_COM_mil_naval_coordination = THIS.var_COM_mil_naval_coordination_base }
-			}
-			#max_command_power
-			if = {
-				limit = {
-					check_variable = {
-						PREV.var_COM_mil_max_command_power > global.COM_mil_max_command_power_max_array^PREV.temp_COM_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { PREV.var_COM_mil_max_command_power = global.COM_mil_max_command_power_max_array^PREV.temp_COM_mil_access_system_highest_idx }
-			}
-			#army_org_factor
-			if = {
-				limit = {
-					check_variable = {
-						PREV.var_COM_mil_army_org_factor > global.COM_mil_army_org_factor_max_array^PREV.temp_COM_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { PREV.var_COM_mil_army_org_factor = global.COM_mil_army_org_factor_max_array^PREV.temp_COM_mil_access_system_highest_idx }
-			}
-			#planning_speed
-			if = {
-				limit = {
-					check_variable = {
-						PREV.var_COM_mil_planning_speed > global.COM_mil_planning_speed_max_array^PREV.temp_COM_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { PREV.var_COM_mil_planning_speed = global.COM_mil_planning_speed_max_array^PREV.temp_COM_mil_access_system_highest_idx }
-			}
-			#air_escort_efficiency
-			if = {
-				limit = {
-					check_variable = {
-						PREV.var_COM_mil_air_escort_efficiency > global.COM_mil_air_escort_efficiency_max_array^PREV.temp_COM_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { PREV.var_COM_mil_air_escort_efficiency = global.COM_mil_air_escort_efficiency_max_array^PREV.temp_COM_mil_access_system_highest_idx }
-			}
-			#air_intercept_efficiency
-			if = {
-				limit = {
-					check_variable = {
-						PREV.var_COM_mil_air_intercept_efficiency > global.COM_mil_air_intercept_efficiency_max_array^PREV.temp_COM_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { PREV.var_COM_mil_air_intercept_efficiency = global.COM_mil_air_intercept_efficiency_max_array^PREV.temp_COM_mil_access_system_highest_idx }
-			}
-			#naval_coordination
-			if = {
-				limit = {
-					check_variable = {
-						PREV.var_COM_mil_naval_coordination > global.COM_mil_naval_coordination_max_array^PREV.temp_COM_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { PREV.var_COM_mil_naval_coordination = global.COM_mil_naval_coordination_max_array^PREV.temp_COM_mil_access_system_highest_idx }
-			}
-		}
-	}
-}
-add_offer_access_COM_civ_vars = {
-	PREV = {
-		set_variable = { temp_COM_civ_access_system_highest_idx = 0 }
-		set_variable = { var_COM_civ_political_power_factor = var_COM_civ_political_power_factor_base }
-		set_variable = { var_COM_civ_decryption_factor = var_COM_civ_decryption_factor_base }
-		set_variable = { var_COM_civ_encryption_factor = var_COM_civ_encryption_factor_base }
-		set_variable = { var_COM_civ_intel_network_gain_factor = var_COM_civ_intel_network_gain_factor_base }
-		set_variable = { var_COM_civ_operation_outcome = var_COM_civ_operation_outcome_base }
-		for_each_loop = {
-			array = COM_civ_access_system_idx_array
-			if = {
-				limit = {
-					check_variable = {
-						COM_civ_access_system_idx_array^i > temp_COM_civ_access_system_highest_idx
-					}
-				}
-				set_variable = { temp_COM_civ_access_system_highest_idx = COM_civ_access_system_idx_array^i }
-			}
-		}
-		for_each_scope_loop = {
-			array = COM_civ_access_array
-			if = {
-				limit = {
-					NOT = {
-						check_variable = {
-							var_COM_civ_system_idx > THIS.var_COM_civ_system_idx
-						}
-					}
-				}
-				add_to_variable = { PREV.var_COM_civ_political_power_factor = THIS.var_COM_civ_political_power_factor_base }
-				add_to_variable = { PREV.var_COM_civ_decryption_factor = THIS.var_COM_civ_decryption_factor_base }
-				add_to_variable = { PREV.var_COM_civ_encryption_factor = THIS.var_COM_civ_encryption_factor_base }
-				add_to_variable = { PREV.var_COM_civ_intel_network_gain_factor = THIS.var_COM_civ_intel_network_gain_factor_base }
-				add_to_variable = { PREV.var_COM_civ_operation_outcome = THIS.var_COM_civ_operation_outcome_base }
-			}
-			#political_power_factor
-			if = {
-				limit = {
-					check_variable = {
-						PREV.var_COM_civ_political_power_factor > global.COM_civ_political_power_factor_max_array^PREV.temp_COM_civ_access_system_highest_idx
-					}
-				}
-				set_variable = { PREV.var_COM_civ_political_power_factor = global.COM_civ_political_power_factor_max_array^PREV.temp_COM_civ_access_system_highest_idx }
-			}
-			#decryption_factor
-			if = {
-				limit = {
-					check_variable = {
-						PREV.var_COM_civ_decryption_factor > global.COM_civ_decryption_factor_max_array^PREV.temp_COM_civ_access_system_highest_idx
-					}
-				}
-				set_variable = { PREV.var_COM_civ_decryption_factor = global.COM_civ_decryption_factor_max_array^PREV.temp_COM_civ_access_system_highest_idx }
-			}
-			#encryption_factor
-			if = {
-				limit = {
-					check_variable = {
-						PREV.var_COM_civ_encryption_factor > global.COM_civ_encryption_factor_max_array^PREV.temp_COM_civ_access_system_highest_idx
-					}
-				}
-				set_variable = { PREV.var_COM_civ_encryption_factor = global.COM_civ_encryption_factor_max_array^PREV.temp_COM_civ_access_system_highest_idx }
-			}
-			#intel_network_gain_factor
-			if = {
-				limit = {
-					check_variable = {
-						PREV.var_COM_civ_intel_network_gain_factor > global.COM_civ_intel_network_gain_factor_max_array^PREV.temp_COM_civ_access_system_highest_idx
-					}
-				}
-				set_variable = { PREV.var_COM_civ_intel_network_gain_factor = global.COM_civ_intel_network_gain_factor_max_array^PREV.temp_COM_civ_access_system_highest_idx }
-			}
-			#operation_outcome
-			if = {
-				limit = {
-					check_variable = {
-						PREV.var_COM_civ_operation_outcome > global.COM_civ_operation_outcome_max_array^PREV.temp_COM_civ_access_system_highest_idx
-					}
-				}
-				set_variable = { PREV.var_COM_civ_operation_outcome = global.COM_civ_operation_outcome_max_array^PREV.temp_COM_civ_access_system_highest_idx }
-			}
-		}
-	}
-}
-add_offer_access_SPY_mil_vars = {
-	PREV = {
-		set_variable = { temp_SPY_mil_access_system_highest_idx = 0 }
-		set_variable = { var_SPY_mil_max_planning_factor = var_SPY_mil_max_planning_factor_base }
-		set_variable = { var_SPY_mil_recon_factor = var_SPY_mil_recon_factor_base }
-		set_variable = { var_SPY_mil_air_weather_penalty = var_SPY_mil_air_weather_penalty_base }
-		set_variable = { var_SPY_mil_spotting_chance = var_SPY_mil_spotting_chance_base }
-		set_variable = { var_SPY_mil_convoy_raiding_efficiency_factor = var_SPY_mil_convoy_raiding_efficiency_factor_base }
-		set_variable = { var_SPY_mil_convoy_escort_efficiency = var_SPY_mil_convoy_escort_efficiency_base }
-		for_each_loop = {
-			array = SPY_mil_access_system_idx_array
-			if = {
-				limit = {
-					check_variable = {
-						SPY_mil_access_system_idx_array^i > temp_SPY_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { temp_SPY_mil_access_system_highest_idx = SPY_mil_access_system_idx_array^i }
-			}
-		}
-		for_each_scope_loop = {
-			array = SPY_mil_access_array
-			if = {
-				limit = {
-					NOT = {
-						check_variable = {
-							var_SPY_mil_system_idx > THIS.var_SPY_mil_system_idx
-						}
-					}
-				}
-				add_to_variable = { PREV.var_SPY_mil_max_planning_factor = THIS.var_SPY_mil_max_planning_factor_base }
-				add_to_variable = { PREV.var_SPY_mil_recon_factor = THIS.var_SPY_mil_recon_factor_base }
-				add_to_variable = { PREV.var_SPY_mil_air_weather_penalty = THIS.var_SPY_mil_air_weather_penalty_base }
-				add_to_variable = { PREV.var_SPY_mil_spotting_chance = THIS.var_SPY_mil_spotting_chance_base }
-				add_to_variable = { PREV.var_SPY_mil_convoy_raiding_efficiency_factor = THIS.var_SPY_mil_convoy_raiding_efficiency_factor_base }
-				add_to_variable = { PREV.var_SPY_mil_convoy_escort_efficiency = THIS.var_SPY_mil_convoy_escort_efficiency_base }
-			}
-			#max_planning_factor
-			if = {
-				limit = {
-					check_variable = {
-						PREV.var_SPY_mil_max_planning_factor > global.SPY_mil_max_planning_factor_max_array^PREV.temp_SPY_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { PREV.var_SPY_mil_max_planning_factor = global.SPY_mil_max_planning_factor_max_array^PREV.temp_SPY_mil_access_system_highest_idx }
-			}
-			#recon_factor
-			if = {
-				limit = {
-					check_variable = {
-						PREV.var_SPY_mil_recon_factor > global.SPY_mil_recon_factor_max_array^PREV.temp_SPY_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { PREV.var_SPY_mil_recon_factor = global.SPY_mil_recon_factor_max_array^PREV.temp_SPY_mil_access_system_highest_idx }
-			}
-			#air_weather_penalty
-			if = {
-				limit = {
-					check_variable = {
-						PREV.var_SPY_mil_air_weather_penalty > global.SPY_mil_air_weather_penalty_max_array^PREV.temp_SPY_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { PREV.var_SPY_mil_air_weather_penalty = global.SPY_mil_air_weather_penalty_max_array^PREV.temp_SPY_mil_access_system_highest_idx }
-			}
-			#spotting_chance
-			if = {
-				limit = {
-					check_variable = {
-						PREV.var_SPY_mil_spotting_chance > global.SPY_mil_spotting_chance_max_array^PREV.temp_SPY_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { PREV.var_SPY_mil_spotting_chance = global.SPY_mil_spotting_chance_max_array^PREV.temp_SPY_mil_access_system_highest_idx }
-			}
-			#convoy_raiding_efficiency_factor
-			if = {
-				limit = {
-					check_variable = {
-						PREV.var_SPY_mil_convoy_raiding_efficiency_factor > global.SPY_mil_convoy_raiding_efficiency_factor_max_array^PREV.temp_SPY_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { PREV.var_SPY_mil_convoy_raiding_efficiency_factor = global.SPY_mil_convoy_raiding_efficiency_factor_max_array^PREV.temp_SPY_mil_access_system_highest_idx }
-			}
-			#convoy_escort_efficiency
-			if = {
-				limit = {
-					check_variable = {
-						PREV.var_SPY_mil_convoy_escort_efficiency > global.SPY_mil_convoy_escort_efficiency_max_array^PREV.temp_SPY_mil_access_system_highest_idx
-					}
-				}
-				set_variable = { PREV.var_SPY_mil_convoy_escort_efficiency = global.SPY_mil_convoy_escort_efficiency_max_array^PREV.temp_SPY_mil_access_system_highest_idx }
-			}
-		}
-	}
-}
-add_offer_access_SPY_civ_vars = {
-	PREV = {
-		set_variable = { temp_SPY_civ_access_system_highest_idx = 0 }
-		set_variable = { var_SPY_civ_research_speed_factor = var_SPY_civ_research_speed_factor_base }
-		set_variable = { var_SPY_civ_civilian_intel_factor = var_SPY_civ_civilian_intel_factor_base }
-		set_variable = { var_SPY_civ_army_intel_factor = var_SPY_civ_army_intel_factor_base }
-		set_variable = { var_SPY_civ_navy_intel_factor = var_SPY_civ_navy_intel_factor_base }
-		set_variable = { var_SPY_civ_airforce_intel_factor = var_SPY_civ_airforce_intel_factor_base }
-		set_variable = { var_SPY_civ_root_out_resistance_effectiveness_factor = var_SPY_civ_root_out_resistance_effectiveness_factor_base }
-		for_each_loop = {
-			array = SPY_civ_access_system_idx_array
-			if = {
-				limit = {
-					check_variable = {
-						SPY_civ_access_system_idx_array^i > temp_SPY_civ_access_system_highest_idx
-					}
-				}
-				set_variable = { temp_SPY_civ_access_system_highest_idx = SPY_civ_access_system_idx_array^i }
-			}
-		}
-		for_each_scope_loop = {
-			array = SPY_civ_access_array
-			if = {
-				limit = {
-					NOT = {
-						check_variable = {
-							var_SPY_civ_system_idx > THIS.var_SPY_civ_system_idx
-						}
-					}
-				}
-				add_to_variable = { PREV.var_SPY_civ_research_speed_factor = THIS.var_SPY_civ_research_speed_factor_base }
-				add_to_variable = { PREV.var_SPY_civ_civilian_intel_factor = THIS.var_SPY_civ_civilian_intel_factor_base }
-				add_to_variable = { PREV.var_SPY_civ_army_intel_factor = THIS.var_SPY_civ_army_intel_factor_base }
-				add_to_variable = { PREV.var_SPY_civ_navy_intel_factor = THIS.var_SPY_civ_navy_intel_factor_base }
-				add_to_variable = { PREV.var_SPY_civ_airforce_intel_factor = THIS.var_SPY_civ_airforce_intel_factor_base }
-				add_to_variable = { PREV.var_SPY_civ_root_out_resistance_effectiveness_factor = THIS.var_SPY_civ_root_out_resistance_effectiveness_factor_base }
-			}
-			#research_speed_factor
-			if = {
-				limit = {
-					check_variable = {
-						PREV.var_SPY_civ_research_speed_factor > global.SPY_civ_research_speed_factor_max_array^PREV.temp_SPY_civ_access_system_highest_idx
-					}
-				}
-				set_variable = { PREV.var_SPY_civ_research_speed_factor = global.SPY_civ_research_speed_factor_max_array^PREV.temp_SPY_civ_access_system_highest_idx }
-			}
-			#civilian_intel_factor
-			if = {
-				limit = {
-					check_variable = {
-						PREV.var_SPY_civ_civilian_intel_factor > global.SPY_civ_civilian_intel_factor_max_array^PREV.temp_SPY_civ_access_system_highest_idx
-					}
-				}
-				set_variable = { PREV.var_SPY_civ_civilian_intel_factor = global.SPY_civ_civilian_intel_factor_max_array^PREV.temp_SPY_civ_access_system_highest_idx }
-			}
-			#army_intel_factor
-			if = {
-				limit = {
-					check_variable = {
-						PREV.var_SPY_civ_army_intel_factor > global.SPY_civ_army_intel_factor_max_array^PREV.temp_SPY_civ_access_system_highest_idx
-					}
-				}
-				set_variable = { PREV.var_SPY_civ_army_intel_factor = global.SPY_civ_army_intel_factor_max_array^PREV.temp_SPY_civ_access_system_highest_idx }
-			}
-			#navy_intel_factor
-			if = {
-				limit = {
-					check_variable = {
-						PREV.var_SPY_civ_navy_intel_factor > global.SPY_civ_navy_intel_factor_max_array^PREV.temp_SPY_civ_access_system_highest_idx
-					}
-				}
-				set_variable = { PREV.var_SPY_civ_navy_intel_factor = global.SPY_civ_navy_intel_factor_max_array^PREV.temp_SPY_civ_access_system_highest_idx }
-			}
-			#airforce_intel_factor
-			if = {
-				limit = {
-					check_variable = {
-						PREV.var_SPY_civ_airforce_intel_factor > global.SPY_civ_airforce_intel_factor_max_array^PREV.temp_SPY_civ_access_system_highest_idx
-					}
-				}
-				set_variable = { PREV.var_SPY_civ_airforce_intel_factor = global.SPY_civ_airforce_intel_factor_max_array^PREV.temp_SPY_civ_access_system_highest_idx }
-			}
-			#root_out_resistance_effectiveness_factor
-			if = {
-				limit = {
-					check_variable = {
-						PREV.var_SPY_civ_root_out_resistance_effectiveness_factor > global.SPY_civ_root_out_resistance_effectiveness_factor_max_array^PREV.temp_SPY_civ_access_system_highest_idx
-					}
-				}
-				set_variable = { PREV.var_SPY_civ_root_out_resistance_effectiveness_factor = global.SPY_civ_root_out_resistance_effectiveness_factor_max_array^PREV.temp_SPY_civ_access_system_highest_idx }
-			}
+			clamp_variable = { var = ROOT.var_SPY_civ_root_out_resistance_effectiveness_factor max = global.SPY_civ_root_out_resistance_effectiveness_factor_max_array^temp_SPY_civ_access_system_highest_idx }
 		}
 	}
 }
@@ -2689,19 +1531,16 @@ clear_spy_sat_mission_arrays = {
 	}
 }
 
-
-
 #####################
 ### space launch ###
 ####################
-
 set_OLV_display_array = {
 	resize_array = { OLV_display_array = 0 }
 	resize_array = { sat_payload_display_array = 0 }
 	resize_array = { spp_payload_display_array = 0 }
 	resize_array = { ASAT_display_array = 0 }
 	resize_array = { KILLSAT_display_array = 0 }
-	resize_array = { RODS_display_array = 0 }
+
 	### OLV1
 	add_to_array = { OLV_display_array = 101 }
 	### OLV2
@@ -2726,7 +1565,7 @@ set_sat_payload_display_array = {
 	resize_array = { spp_payload_display_array = 0 }
 	resize_array = { ASAT_display_array = 0 }
 	resize_array = { KILLSAT_display_array = 0 }
-	resize_array = { RODS_display_array = 0 }
+
 	### GNSS1
 	add_to_array = { sat_payload_display_array = 111 }
 	### GNSS2
@@ -2787,12 +1626,6 @@ set_sat_payload_display_array = {
 	add_to_array = { sat_payload_display_array = 145 }
 	### KILLSAT6
 	add_to_array = { sat_payload_display_array = 146 }
-	### RODS1
-	add_to_array = { sat_payload_display_array = 151 }
-	### RODS2
-	add_to_array = { sat_payload_display_array = 152 }
-	### RODS3
-	add_to_array = { sat_payload_display_array = 153 }
 }
 
 set_spp_payload_display_array = {
@@ -2801,7 +1634,7 @@ set_spp_payload_display_array = {
 	resize_array = { spp_payload_display_array = 0 }
 	resize_array = { ASAT_display_array = 0 }
 	resize_array = { KILLSAT_display_array = 0 }
-	resize_array = { RODS_display_array = 0 }
+
 	### SPP0
 	add_to_array = { spp_payload_display_array = 1000 }
 	### SPP1
@@ -2816,8 +1649,6 @@ set_ASAT_display_array = {
 	resize_array = { spp_payload_display_array = 0 }
 	resize_array = { ASAT_display_array = 0 }
 	resize_array = { KILLSAT_display_array = 0 }
-	resize_array = { RODS_display_array = 0 }
-	### ABM0
 }
 
 set_KILLSAT_display_array = {
@@ -2826,7 +1657,7 @@ set_KILLSAT_display_array = {
 	resize_array = { spp_payload_display_array = 0 }
 	resize_array = { ASAT_display_array = 0 }
 	resize_array = { KILLSAT_display_array = 0 }
-	resize_array = { RODS_display_array = 0 }
+
 	### KILLSAT1
 	add_to_array = { KILLSAT_display_array = 141 }
 	### KILLSAT2
@@ -2839,21 +1670,6 @@ set_KILLSAT_display_array = {
 	add_to_array = { KILLSAT_display_array = 145 }
 	### KILLSAT6
 	add_to_array = { KILLSAT_display_array = 146 }
-}
-
-set_RODS_display_array = {
-	resize_array = { OLV_display_array = 0 }
-	resize_array = { sat_payload_display_array = 0 }
-	resize_array = { spp_payload_display_array = 0 }
-	resize_array = { ASAT_display_array = 0 }
-	resize_array = { KILLSAT_display_array = 0 }
-	resize_array = { RODS_display_array = 0 }
-	### RODS1
-	add_to_array = { RODS_display_array = 151 }
-	### RODS2
-	add_to_array = { RODS_display_array = 152 }
-	### RODS3
-	add_to_array = { RODS_display_array = 153 }
 }
 
 clear_payload_types = {
@@ -2882,7 +1698,7 @@ launch_OLV = {
 		subtract_from_variable = { ROOT.var_OLV_flights = 1 }
 		subtract_from_variable = { ROOT.var_OLV_inventory = 1 }
 		add_to_variable = { var_orbital_launch_total = 1 }
-		randomize_variable = { # Pap has put his Doner in this code and I have no idea what this does
+		randomize_variable = { # Random roll for OLV launch success check
 			var = var_OLV_trajectory
 			distribution = uniform
 			min = 0
@@ -2976,342 +1792,63 @@ add_satellite_from_payload = {
 	resize_array = { COM_satellite_array = 8 }
 	resize_array = { SPY_satellite_array = 8 }
 	resize_array = { KILL_satellite_array = 6 }
-	resize_array = { RODS_satellite_array = 3 }
 
 	for_each_loop = {
 		array = payload_array
+		set_temp_variable = { payload_id = payload_array^i }
 		if = {
 			limit = {
-				check_variable = { payload_array^i = 111 }
+				check_variable = { payload_id > 110 }
+				check_variable = { payload_id < 119 }
 			}
-			add_to_variable = { GNSS_satellite_array^0 = 1 }
-			add_to_array = { orbit_array = payload_array^i }
+			set_temp_variable = { sat_idx = payload_id }
+			subtract_from_temp_variable = { sat_idx = 111 }
+			add_to_variable = { GNSS_satellite_array^sat_idx = 1 }
+			add_to_array = { orbit_array = payload_id }
 			set_variable = { var_orbit_display_ID = orbit_array^num }
 			subtract_from_variable = { var_orbit_display_ID = 1 }
 			add_new_satellite_to_orbit = yes
 		}
-		if = {
+		else_if = {
 			limit = {
-				check_variable = { payload_array^i = 112 }
+				check_variable = { payload_id > 120 }
+				check_variable = { payload_id < 129 }
 			}
-			add_to_variable = { GNSS_satellite_array^1 = 1 }
-			add_to_array = { orbit_array = payload_array^i }
+			set_temp_variable = { sat_idx = payload_id }
+			subtract_from_temp_variable = { sat_idx = 121 }
+			add_to_variable = { COM_satellite_array^sat_idx = 1 }
+			add_to_array = { orbit_array = payload_id }
 			set_variable = { var_orbit_display_ID = orbit_array^num }
 			subtract_from_variable = { var_orbit_display_ID = 1 }
 			add_new_satellite_to_orbit = yes
 		}
-		if = {
+		else_if = {
 			limit = {
-				check_variable = { payload_array^i = 113 }
+				check_variable = { payload_id > 130 }
+				check_variable = { payload_id < 139 }
 			}
-			add_to_variable = { GNSS_satellite_array^2 = 1 }
-			add_to_array = { orbit_array = payload_array^i }
+			set_temp_variable = { sat_idx = payload_id }
+			subtract_from_temp_variable = { sat_idx = 131 }
+			add_to_variable = { SPY_satellite_array^sat_idx = 1 }
+			add_to_array = { orbit_array = payload_id }
 			set_variable = { var_orbit_display_ID = orbit_array^num }
 			subtract_from_variable = { var_orbit_display_ID = 1 }
 			add_new_satellite_to_orbit = yes
 		}
-		if = {
+		else_if = {
 			limit = {
-				check_variable = { payload_array^i = 114 }
+				check_variable = { payload_id > 140 }
+				check_variable = { payload_id < 147 }
 			}
-			add_to_variable = { GNSS_satellite_array^3 = 1 }
-			add_to_array = { orbit_array = payload_array^i }
-			set_variable = { var_orbit_display_ID = orbit_array^num }
-			subtract_from_variable = { var_orbit_display_ID = 1 }
-			add_new_satellite_to_orbit = yes
-		}
-		if = {
-			limit = {
-				check_variable = { payload_array^i = 115 }
-			}
-			add_to_variable = { GNSS_satellite_array^4 = 1 }
-			add_to_array = { orbit_array = payload_array^i }
-			set_variable = { var_orbit_display_ID = orbit_array^num }
-			subtract_from_variable = { var_orbit_display_ID = 1 }
-			add_new_satellite_to_orbit = yes
-		}
-		if = {
-			limit = {
-				check_variable = { payload_array^i = 116 }
-			}
-			add_to_variable = { GNSS_satellite_array^5 = 1 }
-			add_to_array = { orbit_array = payload_array^i }
-			set_variable = { var_orbit_display_ID = orbit_array^num }
-			subtract_from_variable = { var_orbit_display_ID = 1 }
-			add_new_satellite_to_orbit = yes
-		}
-		if = {
-			limit = {
-				check_variable = { payload_array^i = 117 }
-			}
-			add_to_variable = { GNSS_satellite_array^6 = 1 }
-			add_to_array = { orbit_array = payload_array^i }
-			set_variable = { var_orbit_display_ID = orbit_array^num }
-			subtract_from_variable = { var_orbit_display_ID = 1 }
-			add_new_satellite_to_orbit = yes
-		}
-		if = {
-			limit = {
-				check_variable = { payload_array^i = 118 }
-			}
-			add_to_variable = { GNSS_satellite_array^7 = 1 }
-			add_to_array = { orbit_array = payload_array^i }
-			set_variable = { var_orbit_display_ID = orbit_array^num }
-			subtract_from_variable = { var_orbit_display_ID = 1 }
-			add_new_satellite_to_orbit = yes
-		}
-		if = {
-			limit = {
-				check_variable = { payload_array^i = 121 }
-			}
-			add_to_variable = { COM_satellite_array^0 = 1 }
-			add_to_array = { orbit_array = payload_array^i }
-			set_variable = { var_orbit_display_ID = orbit_array^num }
-			subtract_from_variable = { var_orbit_display_ID = 1 }
-			add_new_satellite_to_orbit = yes
-		}
-		if = {
-			limit = {
-				check_variable = { payload_array^i = 122 }
-			}
-			add_to_variable = { COM_satellite_array^1 = 1 }
-			add_to_array = { orbit_array = payload_array^i }
-			set_variable = { var_orbit_display_ID = orbit_array^num }
-			subtract_from_variable = { var_orbit_display_ID = 1 }
-			add_new_satellite_to_orbit = yes
-		}
-		if = {
-			limit = {
-				check_variable = { payload_array^i = 123 }
-			}
-			add_to_variable = { COM_satellite_array^2 = 1 }
-			add_to_array = { orbit_array = payload_array^i }
-			set_variable = { var_orbit_display_ID = orbit_array^num }
-			subtract_from_variable = { var_orbit_display_ID = 1 }
-			add_new_satellite_to_orbit = yes
-		}
-		if = {
-			limit = {
-				check_variable = { payload_array^i = 124 }
-			}
-			add_to_variable = { COM_satellite_array^3 = 1 }
-			add_to_array = { orbit_array = payload_array^i }
-			set_variable = { var_orbit_display_ID = orbit_array^num }
-			subtract_from_variable = { var_orbit_display_ID = 1 }
-			add_new_satellite_to_orbit = yes
-		}
-		if = {
-			limit = {
-				check_variable = { payload_array^i = 125 }
-			}
-			add_to_variable = { COM_satellite_array^4 = 1 }
-			add_to_array = { orbit_array = payload_array^i }
-			set_variable = { var_orbit_display_ID = orbit_array^num }
-			subtract_from_variable = { var_orbit_display_ID = 1 }
-			add_new_satellite_to_orbit = yes
-		}
-		if = {
-			limit = {
-				check_variable = { payload_array^i = 126 }
-			}
-			add_to_variable = { COM_satellite_array^5 = 1 }
-			add_to_array = { orbit_array = payload_array^i }
-			set_variable = { var_orbit_display_ID = orbit_array^num }
-			subtract_from_variable = { var_orbit_display_ID = 1 }
-			add_new_satellite_to_orbit = yes
-		}
-		if = {
-			limit = {
-				check_variable = { payload_array^i = 127 }
-			}
-			add_to_variable = { COM_satellite_array^6 = 1 }
-			add_to_array = { orbit_array = payload_array^i }
-			set_variable = { var_orbit_display_ID = orbit_array^num }
-			subtract_from_variable = { var_orbit_display_ID = 1 }
-			add_new_satellite_to_orbit = yes
-		}
-		if = {
-			limit = {
-				check_variable = { payload_array^i = 128 }
-			}
-			add_to_variable = { COM_satellite_array^7 = 1 }
-			add_to_array = { orbit_array = payload_array^i }
-			set_variable = { var_orbit_display_ID = orbit_array^num }
-			subtract_from_variable = { var_orbit_display_ID = 1 }
-			add_new_satellite_to_orbit = yes
-		}
-		if = {
-			limit = {
-				check_variable = { payload_array^i = 131 }
-			}
-			add_to_variable = { SPY_satellite_array^0 = 1 }
-			add_to_array = { orbit_array = payload_array^i }
-			set_variable = { var_orbit_display_ID = orbit_array^num }
-			subtract_from_variable = { var_orbit_display_ID = 1 }
-			add_new_satellite_to_orbit = yes
-		}
-		if = {
-			limit = {
-				check_variable = { payload_array^i = 132 }
-			}
-			add_to_variable = { SPY_satellite_array^1 = 1 }
-			add_to_array = { orbit_array = payload_array^i }
-			set_variable = { var_orbit_display_ID = orbit_array^num }
-			subtract_from_variable = { var_orbit_display_ID = 1 }
-			add_new_satellite_to_orbit = yes
-		}
-		if = {
-			limit = {
-				check_variable = { payload_array^i = 133 }
-			}
-			add_to_variable = { SPY_satellite_array^2 = 1 }
-			add_to_array = { orbit_array = payload_array^i }
-			set_variable = { var_orbit_display_ID = orbit_array^num }
-			subtract_from_variable = { var_orbit_display_ID = 1 }
-			add_new_satellite_to_orbit = yes
-		}
-		if = {
-			limit = {
-				check_variable = { payload_array^i = 134 }
-			}
-			add_to_variable = { SPY_satellite_array^3 = 1 }
-			add_to_array = { orbit_array = payload_array^i }
-			set_variable = { var_orbit_display_ID = orbit_array^num }
-			subtract_from_variable = { var_orbit_display_ID = 1 }
-			add_new_satellite_to_orbit = yes
-		}
-		if = {
-			limit = {
-				check_variable = { payload_array^i = 135 }
-			}
-			add_to_variable = { SPY_satellite_array^4 = 1 }
-			add_to_array = { orbit_array = payload_array^i }
-			set_variable = { var_orbit_display_ID = orbit_array^num }
-			subtract_from_variable = { var_orbit_display_ID = 1 }
-			add_new_satellite_to_orbit = yes
-		}
-		if = {
-			limit = {
-				check_variable = { payload_array^i = 136 }
-			}
-			add_to_variable = { SPY_satellite_array^5 = 1 }
-			add_to_array = { orbit_array = payload_array^i }
-			set_variable = { var_orbit_display_ID = orbit_array^num }
-			subtract_from_variable = { var_orbit_display_ID = 1 }
-			add_new_satellite_to_orbit = yes
-		}
-		if = {
-			limit = {
-				check_variable = { payload_array^i = 137 }
-			}
-			add_to_variable = { SPY_satellite_array^6 = 1 }
-			add_to_array = { orbit_array = payload_array^i }
-			set_variable = { var_orbit_display_ID = orbit_array^num }
-			subtract_from_variable = { var_orbit_display_ID = 1 }
-			add_new_satellite_to_orbit = yes
-		}
-		if = {
-			limit = {
-				check_variable = { payload_array^i = 138 }
-			}
-			add_to_variable = { SPY_satellite_array^7 = 1 }
-			add_to_array = { orbit_array = payload_array^i }
-			set_variable = { var_orbit_display_ID = orbit_array^num }
-			subtract_from_variable = { var_orbit_display_ID = 1 }
-			add_new_satellite_to_orbit = yes
-		}
-		if = {
-			limit = {
-				check_variable = { payload_array^i = 141 }
-			}
-			add_to_variable = { KILL_satellite_array^0 = 1 }
-			add_to_array = { orbit_array = payload_array^i }
-			set_variable = { var_orbit_display_ID = orbit_array^num }
-			subtract_from_variable = { var_orbit_display_ID = 1 }
-			add_new_satellite_to_orbit = yes
-		}
-		if = {
-			limit = {
-				check_variable = { payload_array^i = 142 }
-			}
-			add_to_variable = { KILL_satellite_array^1 = 1 }
-			add_to_array = { orbit_array = payload_array^i }
-			set_variable = { var_orbit_display_ID = orbit_array^num }
-			subtract_from_variable = { var_orbit_display_ID = 1 }
-			add_new_satellite_to_orbit = yes
-		}
-		if = {
-			limit = {
-				check_variable = { payload_array^i = 143 }
-			}
-			add_to_variable = { KILL_satellite_array^2 = 1 }
-			add_to_array = { orbit_array = payload_array^i }
-			set_variable = { var_orbit_display_ID = orbit_array^num }
-			subtract_from_variable = { var_orbit_display_ID = 1 }
-			add_new_satellite_to_orbit = yes
-		}
-		if = {
-			limit = {
-				check_variable = { payload_array^i = 144 }
-			}
-			add_to_variable = { KILL_satellite_array^3 = 1 }
-			add_to_array = { orbit_array = payload_array^i }
-			set_variable = { var_orbit_display_ID = orbit_array^num }
-			subtract_from_variable = { var_orbit_display_ID = 1 }
-			add_new_satellite_to_orbit = yes
-		}
-		if = {
-			limit = {
-				check_variable = { payload_array^i = 145 }
-			}
-			add_to_variable = { KILL_satellite_array^4 = 1 }
-			add_to_array = { orbit_array = payload_array^i }
-			set_variable = { var_orbit_display_ID = orbit_array^num }
-			subtract_from_variable = { var_orbit_display_ID = 1 }
-			add_new_satellite_to_orbit = yes
-		}
-		if = {
-			limit = {
-				check_variable = { payload_array^i = 146 }
-			}
-			add_to_variable = { KILL_satellite_array^5 = 1 }
-			add_to_array = { orbit_array = payload_array^i }
-			set_variable = { var_orbit_display_ID = orbit_array^num }
-			subtract_from_variable = { var_orbit_display_ID = 1 }
-			add_new_satellite_to_orbit = yes
-		}
-		if = {
-			limit = {
-				check_variable = { payload_array^i = 151 }
-			}
-			add_to_variable = { RODS_satellite_array^0 = 1 }
-			add_to_array = { orbit_array = payload_array^i }
-			set_variable = { var_orbit_display_ID = orbit_array^num }
-			subtract_from_variable = { var_orbit_display_ID = 1 }
-			add_new_satellite_to_orbit = yes
-		}
-		if = {
-			limit = {
-				check_variable = { payload_array^i = 152 }
-			}
-			add_to_variable = { RODS_satellite_array^1 = 1 }
-			add_to_array = { orbit_array = payload_array^i }
-			set_variable = { var_orbit_display_ID = orbit_array^num }
-			subtract_from_variable = { var_orbit_display_ID = 1 }
-			add_new_satellite_to_orbit = yes
-		}
-		if = {
-			limit = {
-				check_variable = { payload_array^i = 153 }
-			}
-			add_to_variable = { RODS_satellite_array^2 = 1 }
-			add_to_array = { orbit_array = payload_array^i }
+			set_temp_variable = { sat_idx = payload_id }
+			subtract_from_temp_variable = { sat_idx = 141 }
+			add_to_variable = { KILL_satellite_array^sat_idx = 1 }
+			add_to_array = { orbit_array = payload_id }
 			set_variable = { var_orbit_display_ID = orbit_array^num }
 			subtract_from_variable = { var_orbit_display_ID = 1 }
 			add_new_satellite_to_orbit = yes
 		}
 	}
-	#
 	clear_array = payload_array
 }
 
@@ -3353,13 +1890,6 @@ set_sat_orbit_startup = {
 		add_to_temp_variable = { temp5 = 1 }
 	}
 }
-
-temp_scripted_effect = {
-	642 = {
-		add_contested_owner = POL
-	}
-}
-
 
 add_new_satellite_to_orbit = {
 	if = {
@@ -3409,7 +1939,7 @@ add_new_satellite_to_orbit = {
 				check_variable = { sat_2_array^num > 399 }
 				check_variable = { sat_6_array^num > 0 }
 			}
-			set_variable = { sat_2_array^i = var_orbit_display_ID } #set_variable = { sat_2_array^i = 1 }
+			set_variable = { sat_2_array^i = var_orbit_display_ID }
 		}
 		else_if = {
 			limit = {
@@ -3440,7 +1970,7 @@ add_new_satellite_to_orbit = {
 				check_variable = { sat_4_array^num > 399 }
 				check_variable = { sat_6_array^num > 0 }
 			}
-			set_variable = { sat_4_array^i = var_orbit_display_ID } #set_variable = { sat_4_array^i = 1 }
+			set_variable = { sat_4_array^i = var_orbit_display_ID }
 		}
 		else_if = {
 			limit = {
@@ -3471,7 +2001,7 @@ add_new_satellite_to_orbit = {
 				check_variable = { sat_1_array^num > 179 }
 				check_variable = { sat_6_array^num > 0 }
 			}
-			set_variable = { sat_1_array^i = var_orbit_display_ID } #set_variable = { sat_1_array^i = 1 }
+			set_variable = { sat_1_array^i = var_orbit_display_ID }
 		}
 		else_if = {
 			limit = {
@@ -3502,7 +2032,7 @@ add_new_satellite_to_orbit = {
 				check_variable = { sat_5_array^num > 179 }
 				check_variable = { sat_6_array^num > 0 }
 			}
-			set_variable = { sat_5_array^i = var_orbit_display_ID } #set_variable = { sat_5_array^i = 1 }
+			set_variable = { sat_5_array^i = var_orbit_display_ID }
 		}
 		else_if = {
 			limit = {
@@ -3596,7 +2126,7 @@ add_new_satellite_to_orbit_4 = {
 		add_to_temp_variable = { temp4 = add_plus_X4 }
 		add_to_variable = { add_plus_X4 = 1 }
 	}
-	set_variable = { sat_4_array^temp4 = var_orbit_display_ID } #set_variable = { sat_4_array^temp4 = 1 }
+	set_variable = { sat_4_array^temp4 = var_orbit_display_ID }
 }
 add_new_satellite_to_orbit_5 = {
 	add_to_variable = { var_sat_in_orbit = 1 }
@@ -3615,7 +2145,7 @@ add_new_satellite_to_orbit_5 = {
 		add_to_temp_variable = { temp5 = add_plus_X5 }
 		add_to_variable = { add_plus_X5 = 1 }
 	}
-	set_variable = { sat_5_array^temp5 = var_orbit_display_ID } #set_variable = { sat_5_array^temp5 = 1 }
+	set_variable = { sat_5_array^temp5 = var_orbit_display_ID }
 }
 
 add_new_satellite_to_orbit_6 = {
@@ -3627,7 +2157,7 @@ add_new_satellite_to_orbit_6 = {
 			}
 			check_variable = { sat_6_array^num > 1503 }
 		}
-		ROOT = { news_event = { id = satellites.8 } }
+		ROOT = { news_event = satellites.8 }
 	}
 	else = {
 		add_to_variable = { var_sat_in_orbit = 1 }
@@ -3772,229 +2302,386 @@ remove_satellite_from_orbit = {
 
 remove_satellite_from_system = {
 	var:tempTAG = {
+		set_temp_variable = { sat_id = orbit_array^var_sat_ID }
 		if = {
 			limit = {
-				check_variable = { orbit_array^var_sat_ID = 111 }
+				check_variable = { sat_id > 110 }
+				check_variable = { sat_id < 119 }
 			}
-			subtract_from_variable = { GNSS_satellite_array^0 = 1 }
+			set_temp_variable = { sat_idx = sat_id }
+			subtract_from_temp_variable = { sat_idx = 111 }
+			subtract_from_variable = { GNSS_satellite_array^sat_idx = 1 }
 		}
-		if = {
+		else_if = {
 			limit = {
-				check_variable = { orbit_array^var_sat_ID = 112 }
+				check_variable = { sat_id > 120 }
+				check_variable = { sat_id < 129 }
 			}
-			subtract_from_variable = { GNSS_satellite_array^1 = 1 }
+			set_temp_variable = { sat_idx = sat_id }
+			subtract_from_temp_variable = { sat_idx = 121 }
+			subtract_from_variable = { COM_satellite_array^sat_idx = 1 }
 		}
-		if = {
+		else_if = {
 			limit = {
-				check_variable = { orbit_array^var_sat_ID = 113 }
+				check_variable = { sat_id > 130 }
+				check_variable = { sat_id < 139 }
 			}
-			subtract_from_variable = { GNSS_satellite_array^2 = 1 }
+			set_temp_variable = { sat_idx = sat_id }
+			subtract_from_temp_variable = { sat_idx = 131 }
+			subtract_from_variable = { SPY_satellite_array^sat_idx = 1 }
 		}
-		if = {
+		else_if = {
 			limit = {
-				check_variable = { orbit_array^var_sat_ID = 114 }
+				check_variable = { sat_id > 140 }
+				check_variable = { sat_id < 147 }
 			}
-			subtract_from_variable = { GNSS_satellite_array^3 = 1 }
-		}
-		if = {
-			limit = {
-				check_variable = { orbit_array^var_sat_ID = 115 }
-			}
-			subtract_from_variable = { GNSS_satellite_array^4 = 1 }
-		}
-		if = {
-			limit = {
-				check_variable = { orbit_array^var_sat_ID = 116 }
-			}
-			subtract_from_variable = { GNSS_satellite_array^5 = 1 }
-		}
-		if = {
-			limit = {
-				check_variable = { orbit_array^var_sat_ID = 117 }
-			}
-			subtract_from_variable = { GNSS_satellite_array^6 = 1 }
-		}
-		if = {
-			limit = {
-				check_variable = { orbit_array^var_sat_ID = 118 }
-			}
-			subtract_from_variable = { GNSS_satellite_array^7 = 1 }
-		}
-		if = {
-			limit = {
-				check_variable = { orbit_array^var_sat_ID = 121 }
-			}
-			subtract_from_variable = { COM_satellite_array^0 = 1 }
-		}
-		if = {
-			limit = {
-				check_variable = { orbit_array^var_sat_ID = 122 }
-			}
-			subtract_from_variable = { COM_satellite_array^1 = 1 }
-		}
-		if = {
-			limit = {
-				check_variable = { orbit_array^var_sat_ID = 123 }
-			}
-			subtract_from_variable = { COM_satellite_array^2 = 1 }
-		}
-		if = {
-			limit = {
-				check_variable = { orbit_array^var_sat_ID = 124 }
-			}
-			subtract_from_variable = { COM_satellite_array^3 = 1 }
-		}
-		if = {
-			limit = {
-				check_variable = { orbit_array^var_sat_ID = 125 }
-			}
-			subtract_from_variable = { COM_satellite_array^4 = 1 }
-		}
-		if = {
-			limit = {
-				check_variable = { orbit_array^var_sat_ID = 126 }
-			}
-			subtract_from_variable = { COM_satellite_array^5 = 1 }
-		}
-		if = {
-			limit = {
-				check_variable = { orbit_array^var_sat_ID = 127 }
-			}
-			subtract_from_variable = { COM_satellite_array^6 = 1 }
-		}
-		if = {
-			limit = {
-				check_variable = { orbit_array^var_sat_ID = 128 }
-			}
-			subtract_from_variable = { COM_satellite_array^7 = 1 }
-		}
-		if = {
-			limit = {
-				check_variable = { orbit_array^var_sat_ID = 131 }
-			}
-			subtract_from_variable = { SPY_satellite_array^0 = 1 }
-		}
-		if = {
-			limit = {
-				check_variable = { orbit_array^var_sat_ID = 132 }
-			}
-			subtract_from_variable = { SPY_satellite_array^1 = 1 }
-		}
-		if = {
-			limit = {
-				check_variable = { orbit_array^var_sat_ID = 133 }
-			}
-			subtract_from_variable = { SPY_satellite_array^2 = 1 }
-		}
-		if = {
-			limit = {
-				check_variable = { orbit_array^var_sat_ID = 134 }
-			}
-			subtract_from_variable = { SPY_satellite_array^3 = 1 }
-		}
-		if = {
-			limit = {
-				check_variable = { orbit_array^var_sat_ID = 135 }
-			}
-			subtract_from_variable = { SPY_satellite_array^4 = 1 }
-		}
-		if = {
-			limit = {
-				check_variable = { orbit_array^var_sat_ID = 136 }
-			}
-			subtract_from_variable = { SPY_satellite_array^5 = 1 }
-		}
-		if = {
-			limit = {
-				check_variable = { orbit_array^var_sat_ID = 137 }
-			}
-			subtract_from_variable = { SPY_satellite_array^6 = 1 }
-		}
-		if = {
-			limit = {
-				check_variable = { orbit_array^var_sat_ID = 138 }
-			}
-			subtract_from_variable = { SPY_satellite_array^7 = 1 }
-		}
-		if = {
-			limit = {
-				check_variable = { orbit_array^var_sat_ID = 141 }
-			}
-			subtract_from_variable = { KILL_satellite_array^0 = 1 }
-		}
-		if = {
-			limit = {
-				check_variable = { orbit_array^var_sat_ID = 142 }
-			}
-			subtract_from_variable = { KILL_satellite_array^1 = 1 }
-		}
-		if = {
-			limit = {
-				check_variable = { orbit_array^var_sat_ID = 143 }
-			}
-			subtract_from_variable = { KILL_satellite_array^2 = 1 }
-		}
-		if = {
-			limit = {
-				check_variable = { orbit_array^var_sat_ID = 144 }
-			}
-			subtract_from_variable = { KILL_satellite_array^3 = 1 }
-		}
-		if = {
-			limit = {
-				check_variable = { orbit_array^var_sat_ID = 145 }
-			}
-			subtract_from_variable = { KILL_satellite_array^4 = 1 }
-		}
-		if = {
-			limit = {
-				check_variable = { orbit_array^var_sat_ID = 146 }
-			}
-			subtract_from_variable = { KILL_satellite_array^5 = 1 }
-		}
-		if = {
-			limit = {
-				check_variable = { orbit_array^var_sat_ID = 151 }
-			}
-			subtract_from_variable = { RODS_satellite_array^0 = 1 }
-		}
-		if = {
-			limit = {
-				check_variable = { orbit_array^var_sat_ID = 152 }
-			}
-			subtract_from_variable = { RODS_satellite_array^1 = 1 }
-		}
-		if = {
-			limit = {
-				check_variable = { orbit_array^var_sat_ID = 153 }
-			}
-			subtract_from_variable = { RODS_satellite_array^2 = 1 }
+			set_temp_variable = { sat_idx = sat_id }
+			subtract_from_temp_variable = { sat_idx = 141 }
+			subtract_from_variable = { KILL_satellite_array^sat_idx = 1 }
 		}
 	}
 }
 
+advanced_filter_effect = {
+	if = {
+		limit = {
+			check_variable = { sat_disp_num = 1 }
+		}
+		if = {
+			limit = {
+				check_variable = { spec_filter = 0 }
+			}
+			set_variable = { spec_filter = 111 }
+		} else = {
+			add_to_variable = { spec_filter = 1 }
+			if = {
+				limit = {
+					check_variable = { spec_filter > 118 }
+				}
+				set_variable = { spec_filter = 0 }
+			}
+		}
+	}
+	if = {
+		limit = {
+			check_variable = { sat_disp_num = 2 }
+		}
+		if = {
+			limit = {
+				check_variable = { spec_filter = 0 }
+			}
+			set_variable = { spec_filter = 121 }
+		} else = {
+			add_to_variable = { spec_filter = 1 }
+			if = {
+				limit = {
+					check_variable = { spec_filter > 128 }
+				}
+				set_variable = { spec_filter = 0 }
+			}
+		}
+	}
+	if = {
+		limit = {
+			check_variable = { sat_disp_num = 3 }
+		}
+		if = {
+			limit = {
+				check_variable = { spec_filter = 0 }
+			}
+			set_variable = { spec_filter = 131 }
+		} else = {
+			add_to_variable = { spec_filter = 1 }
+			if = {
+				limit = {
+					check_variable = { spec_filter > 138 }
+				}
+				set_variable = { spec_filter = 0 }
+			}
+		}
+	}
+}
+
+target_all_filtered_sats = {
+	var:orbit_selected_TAG = {
+		if = {
+			limit = {
+				check_variable = { ROOT.sat_disp_num = 0 }
+			}
+			target_all_sats = yes
+		}
+		if = {
+			limit = {
+				check_variable = { ROOT.sat_disp_num = 1 }
+			}
+			set_temp_variable = { target_range_min = 110 }
+			set_temp_variable = { target_range_max = 119 }
+			target_sat_type = yes
+		}
+		if = {
+			limit = {
+				check_variable = { ROOT.sat_disp_num = 2 }
+			}
+			set_temp_variable = { target_range_min = 120 }
+			set_temp_variable = { target_range_max = 129 }
+			target_sat_type = yes
+		}
+		if = {
+			limit = {
+				check_variable = { ROOT.sat_disp_num = 3 }
+			}
+			set_temp_variable = { target_range_min = 130 }
+			set_temp_variable = { target_range_max = 139 }
+			target_sat_type = yes
+		}
+	}
+}
+
+target_sat_type = {
+	for_each_loop = {
+		array = sat_1_array
+		value = v
+		if = {
+			limit = { check_variable = { ROOT.spec_filter = 0 } }
+			set_temp_variable = { gfx_idx = v }
+			if = {
+				limit = {
+					check_variable = { orbit_array^gfx_idx > target_range_min }
+					check_variable = { orbit_array^gfx_idx < target_range_max }
+				}
+				add_to_array = { ROOT.sat_target_array = v }
+				add_to_array = { ROOT.sat_target_TAG_array = orbit_selected_TAG }
+			}
+		} else = {
+			set_temp_variable = { gfx_idx = v }
+			if = {
+				limit = {
+					check_variable = { orbit_array^gfx_idx = ROOT.spec_filter }
+				}
+				add_to_array = { ROOT.sat_target_array = v }
+				add_to_array = { ROOT.sat_target_TAG_array = orbit_selected_TAG }
+			}
+		}
+	}
+	for_each_loop = {
+		array = sat_2_array
+		value = v
+		if = {
+			limit = { check_variable = { ROOT.spec_filter = 0 } }
+			set_temp_variable = { gfx_idx = v }
+			if = {
+				limit = {
+					check_variable = { orbit_array^gfx_idx > target_range_min }
+					check_variable = { orbit_array^gfx_idx < target_range_max }
+				}
+				add_to_array = { ROOT.sat_target_array = v }
+				add_to_array = { ROOT.sat_target_TAG_array = orbit_selected_TAG }
+			}
+		} else = {
+			set_temp_variable = { gfx_idx = v }
+			if = {
+				limit = {
+					check_variable = { orbit_array^gfx_idx = ROOT.spec_filter }
+				}
+				add_to_array = { ROOT.sat_target_array = v }
+				add_to_array = { ROOT.sat_target_TAG_array = orbit_selected_TAG }
+			}
+		}
+	}
+	for_each_loop = {
+		array = sat_3_array
+		value = v
+		if = {
+			limit = { check_variable = { ROOT.spec_filter = 0 } }
+			set_temp_variable = { gfx_idx = v }
+			if = {
+				limit = {
+					check_variable = { orbit_array^gfx_idx > target_range_min }
+					check_variable = { orbit_array^gfx_idx < target_range_max }
+				}
+				add_to_array = { ROOT.sat_target_array = v }
+				add_to_array = { ROOT.sat_target_TAG_array = orbit_selected_TAG }
+			}
+		} else = {
+			set_temp_variable = { gfx_idx = v }
+			if = {
+				limit = {
+					check_variable = { orbit_array^gfx_idx = ROOT.spec_filter }
+				}
+				add_to_array = { ROOT.sat_target_array = v }
+				add_to_array = { ROOT.sat_target_TAG_array = orbit_selected_TAG }
+			}
+		}
+	}
+	for_each_loop = {
+		array = sat_4_array
+		value = v
+		if = {
+			limit = { check_variable = { ROOT.spec_filter = 0 } }
+			set_temp_variable = { gfx_idx = v }
+			if = {
+				limit = {
+					check_variable = { orbit_array^gfx_idx > target_range_min }
+					check_variable = { orbit_array^gfx_idx < target_range_max }
+				}
+				add_to_array = { ROOT.sat_target_array = v }
+				add_to_array = { ROOT.sat_target_TAG_array = orbit_selected_TAG }
+			}
+		} else = {
+			set_temp_variable = { gfx_idx = v }
+			if = {
+				limit = {
+					check_variable = { orbit_array^gfx_idx = ROOT.spec_filter }
+				}
+				add_to_array = { ROOT.sat_target_array = v }
+				add_to_array = { ROOT.sat_target_TAG_array = orbit_selected_TAG }
+			}
+		}
+	}
+	for_each_loop = {
+		array = sat_5_array
+		value = v
+		if = {
+			limit = { check_variable = { ROOT.spec_filter = 0 } }
+			set_temp_variable = { gfx_idx = v }
+			if = {
+				limit = {
+					check_variable = { orbit_array^gfx_idx > target_range_min }
+					check_variable = { orbit_array^gfx_idx < target_range_max }
+				}
+				add_to_array = { ROOT.sat_target_array = v }
+				add_to_array = { ROOT.sat_target_TAG_array = orbit_selected_TAG }
+			}
+		} else = {
+			set_temp_variable = { gfx_idx = v }
+			if = {
+				limit = {
+					check_variable = { orbit_array^gfx_idx = ROOT.spec_filter }
+				}
+				add_to_array = { ROOT.sat_target_array = v }
+				add_to_array = { ROOT.sat_target_TAG_array = orbit_selected_TAG }
+			}
+		}
+	}
+	for_each_loop = {
+		array = sat_6_array
+		value = v
+		if = {
+			limit = { check_variable = { ROOT.spec_filter = 0 } }
+			set_temp_variable = { gfx_idx = v }
+			if = {
+				limit = {
+					check_variable = { orbit_array^gfx_idx > target_range_min }
+					check_variable = { orbit_array^gfx_idx < target_range_max }
+				}
+				add_to_array = { ROOT.sat_target_array = v }
+				add_to_array = { ROOT.sat_target_TAG_array = orbit_selected_TAG }
+			}
+		} else = {
+			set_temp_variable = { gfx_idx = v }
+			if = {
+				limit = {
+					check_variable = { orbit_array^gfx_idx = ROOT.spec_filter }
+				}
+				add_to_array = { ROOT.sat_target_array = v }
+				add_to_array = { ROOT.sat_target_TAG_array = orbit_selected_TAG }
+			}
+		}
+	}
+}
+
+target_all_sats = {
+	for_each_loop = {
+		array = sat_1_array
+		value = v
+		index = i
+
+		if = {
+			limit = {
+				NOT = { check_variable = { v = -1 } }
+			}
+			add_to_array = { ROOT.sat_target_array = v }
+			add_to_array = { ROOT.sat_target_TAG_array = orbit_selected_TAG }
+		}
+	}
+	for_each_loop = {
+		array = sat_2_array
+		value = v
+		index = i
+
+		if = {
+			limit = {
+				NOT = { check_variable = { v = -1 } }
+			}
+			add_to_array = { ROOT.sat_target_array = v }
+			add_to_array = { ROOT.sat_target_TAG_array = orbit_selected_TAG }
+		}
+	}
+	for_each_loop = {
+		array = sat_3_array
+		value = v
+		index = i
+
+		if = {
+			limit = {
+				NOT = { check_variable = { v = -1 } }
+			}
+			add_to_array = { ROOT.sat_target_array = v }
+			add_to_array = { ROOT.sat_target_TAG_array = orbit_selected_TAG }
+		}
+	}
+	for_each_loop = {
+		array = sat_4_array
+		value = v
+		index = i
+
+		if = {
+			limit = {
+				NOT = { check_variable = { v = -1 } }
+			}
+			add_to_array = { ROOT.sat_target_array = v }
+			add_to_array = { ROOT.sat_target_TAG_array = orbit_selected_TAG }
+		}
+	}
+	for_each_loop = {
+		array = sat_5_array
+		value = v
+		index = i
+
+		if = {
+			limit = {
+				NOT = { check_variable = { v = -1 } }
+			}
+			add_to_array = { ROOT.sat_target_array = v }
+			add_to_array = { ROOT.sat_target_TAG_array = orbit_selected_TAG }
+		}
+	}
+	for_each_loop = {
+		array = sat_6_array
+		value = v
+		index = i
+
+		if = {
+			limit = {
+				NOT = { check_variable = { v = -1 } }
+			}
+			add_to_array = { ROOT.sat_target_array = v }
+			add_to_array = { ROOT.sat_target_TAG_array = orbit_selected_TAG }
+		}
+	}
+}
 
 anti_satellite_weapon_use = {
-	#set_variable = { ROOT.var_anti_sat_accuracy = 0 }
-	#set_variable = { ROOT.var_anti_satellite_weapon_num = 0 }
-	#set_temp_variable = { temp1 = ROOT.var_anti_satellite_weapon_num }
 	for_each_loop = {
 		array = sat_target_array
 		set_variable = { ROOT.var_sat_orbit = 0 }
 		set_variable = { tempTAG = ROOT.sat_target_TAG_array^i }
-		log = "anti_satellite_weapon_use [?tempTAG.GetTag]"
 		while_loop_effect = {
 			limit = {
 				check_variable = { ROOT.var_anti_satellite_weapon_num > 0 }
 				check_variable = { ROOT.sat_target_array^i > 0 }
 			}
-			randomize_variable = {
-				var = ROOT.var_sat_orbit
-				distribution = uniform
-				min = 0
-				max = 1
-			}
-			#subtract_from_temp_variable = { temp1 = 1 }
+			randomize_variable = { var = ROOT.var_sat_orbit distribution = uniform min = 0 max = 1 }
 			subtract_from_variable = { ROOT.var_anti_satellite_weapon_num = 1 }
 			if = {
 				limit = {
@@ -4020,7 +2707,6 @@ anti_satellite_weapon_use = {
 			update_sat_systems_stats = yes
 		}
 	}
-	#set_variable = { ROOT.var_anti_satellite_weapon_num = 0 }
 	clear_array = ROOT.sat_target_array
 	clear_array = ROOT.sat_target_TAG_array
 	if = {
@@ -4146,31 +2832,14 @@ nuclear_reactor_fuel_consumption = {
 
 	# Update Stockpile
 	add_to_variable = { var_reactor_material_stockpile = nuclear_reactor_fuel_production }
-	clamp_variable = { var = var_reactor_material_stockpile min = 0 max = 2000000 }
-}
-
-# Function: setup_starting_reactor_stockpile
-# Purpose: Setups the current nuclear reactor and enrichment facilities setup
-setup_starting_reactor_stockpile = {
-	set_variable = { nuclear_reactors = 0 }
-	every_controlled_state = {
-		add_to_variable = { PREV.nuclear_reactors = building_level@nuclear_reactor }
-	}
-	set_temp_variable = { starting_reactor_grade_stockpile = nuclear_reactors }
-	multiply_temp_variable = { starting_reactor_grade_stockpile = 2500 }
-	set_variable = { var_reactor_material_stockpile = starting_reactor_grade_stockpile }
-
-	if = {
-		limit = { check_variable = { enrichment_facilities > 0 } }
-		set_country_flag = enabled_nuclear_reactor_fuel_production
-	}
+	clamp_variable = { var = var_reactor_material_stockpile min = 0 max = 20000000 }
 }
 
 # Utilities
 # Function: modify_missile_inventory_count
 # Purpose: Allows you to modify the current amount of a missile's inventory
 # Parameters: missile_index (temp_var), missile_type, missile_count
-# 10;OLV 11;GNSS 12;COMSAT 13;SPYSAT 14;KILLSAT 15;Rods from God
+# 10;OLV 11;GNSS 12;COMSAT 13;SPYSAT 14;KILLSAT
 modify_missile_inventory_count = {
 	custom_effect_tooltip = modify_missile_inventory_count_tt
 	add_to_variable = { missile_inventory_array^missile_index = missile_count }
@@ -4222,11 +2891,8 @@ setup_missile_configuration_effect = {
 		set_country_flag = setup_missiles
 		set_variable = { orbit_selected_TAG = THIS.id }
 		set_variable = { nuclear_reactor_fuel_production = 0 }
-		set_variable = { var_nuclear_material_stockpile = 0 }
 		resize_array = { missile_inventory_array = 154 }
-		add_dynamic_modifier = { modifier = GNSS_system }
-		add_dynamic_modifier = { modifier = COMSAT_system }
-		add_dynamic_modifier = { modifier = SPYSAT_system }
+		add_dynamic_modifier = { modifier = satellite_system }
 		set_sat_orbit_startup = yes
 
 		# Configuration for Starting Payload Types
@@ -4240,8 +2906,105 @@ setup_missile_configuration_effect = {
 		add_to_array = { array = spp_inventory_array value = 1 index = 0 }
 		add_to_array = { array = spp_inventory_array value = 30 index = 1 }
 		add_to_array = { array = spp_inventory_array value = 1 index = 2 }
+
+		# Init the Systems
+		GNSS_mil_button_update = yes
+		GNSS_civ_button_update = yes
+		COM_mil_button_update = yes
+		COM_civ_button_update = yes
+		SPY_mil_button_update = yes
+		SPY_civ_button_update = yes
+
 		#for testing network traffic
 		set_COM_sat_receiver_tech_array = yes
 	}
+	missile_ui_update = yes
+}
+
+GNSS_mil_button_update = {
+	set_variable = { var_GNSS_mil_system_idx = GNSS_mil_systems_array^i }
+	set_variable = { var_GNSS_mil_sat_system_max = global.GNSS_sat_system_max_array^i }
+	set_variable = { var_GNSS_mil_army_speed_factor = GNSS_mil_army_speed_factor_array^i }
+	set_variable = { var_GNSS_mil_air_cas_efficiency = GNSS_mil_air_cas_efficiency_array^i }
+	set_variable = { var_GNSS_mil_air_nav_efficiency = GNSS_mil_air_nav_efficiency_array^i }
+	set_variable = { var_GNSS_mil_air_strategic_bomber_bombing_factor = GNSS_mil_air_strategic_bomber_bombing_factor_array^i }
+	set_variable = { var_GNSS_mil_positioning = GNSS_mil_positioning_array^i }
+	set_variable = { var_GNSS_mil_naval_hit_chance = GNSS_mil_naval_hit_chance_array^i }
+	update_GNSS_system_stats = yes
+	calculate_GNSS_mil_gui_vars = yes
+	clear_array = GNSS_mil_systems_array
+}
+
+GNSS_civ_button_update = {
+	set_variable = { var_GNSS_civ_system_idx = GNSS_civ_systems_array^i }
+	set_variable = { var_GNSS_civ_sat_system_max = global.GNSS_sat_system_max_array^i }
+	set_variable = { var_GNSS_civ_production_speed_buildings_factor = GNSS_civ_production_speed_buildings_factor_array^i }
+	set_variable = { var_GNSS_civ_production_speed_infrastructure_factor = GNSS_civ_production_speed_infrastructure_factor_array^i }
+	set_variable = { var_GNSS_civ_local_resources_factor = GNSS_civ_local_resources_factor_array^i }
+	update_GNSS_system_stats = yes
+	calculate_GNSS_civ_gui_vars = yes
+	clear_array = GNSS_civ_systems_array
+}
+
+COM_mil_button_update = {
+	set_variable = { var_COM_mil_system_idx = COM_mil_systems_array^i }
+	set_variable = { var_COM_mil_sat_system_max = global.COM_sat_system_max_array^i }
+	set_variable = { var_COM_mil_max_command_power = COM_mil_max_command_power_array^i }
+	set_variable = { var_COM_mil_army_org_factor = COM_mil_army_org_factor_array^i }
+	set_variable = { var_COM_mil_planning_speed = COM_mil_planning_speed_array^i }
+	set_variable = { var_COM_mil_air_escort_efficiency = COM_mil_air_escort_efficiency_array^i }
+	set_variable = { var_COM_mil_air_intercept_efficiency = COM_mil_air_intercept_efficiency_array^i }
+	set_variable = { var_COM_mil_naval_coordination = COM_mil_naval_coordination_array^i }
+	update_COM_system_stats = yes
+	calculate_COM_mil_gui_vars = yes
+	clear_array = COM_mil_systems_array
+}
+
+COM_civ_button_update = {
+	set_variable = { var_COM_civ_system_idx = COM_civ_systems_array^i }
+	set_variable = { var_COM_civ_sat_system_max = global.COM_sat_system_max_array^i }
+	set_variable = { var_COM_civ_political_power_factor = COM_civ_political_power_factor_array^i }
+	set_variable = { var_COM_civ_decryption_factor = COM_civ_decryption_factor_array^i }
+	set_variable = { var_COM_civ_encryption_factor = COM_civ_encryption_factor_array^i }
+	set_variable = { var_COM_civ_intel_network_gain_factor = COM_civ_intel_network_gain_factor_array^i }
+	set_variable = { var_COM_civ_operation_outcome = COM_civ_operation_outcome_array^i }
+	update_COM_system_stats = yes
+	calculate_COM_civ_gui_vars = yes
+	clear_array = COM_civ_systems_array
+}
+
+SPY_mil_button_update = {
+	set_variable = { var_SPY_mil_system_idx = SPY_mil_systems_array^i }
+	set_variable = { var_SPY_mil_sat_system_max = global.SPY_sat_system_max_array^i }
+	set_variable = { var_SPY_mil_max_planning_factor = SPY_mil_max_planning_factor_array^i }
+	set_variable = { var_SPY_mil_recon_factor = SPY_mil_recon_factor_array^i }
+	set_variable = { var_SPY_mil_air_weather_penalty = SPY_mil_air_weather_penalty_array^i }
+	set_variable = { var_SPY_mil_spotting_chance = SPY_mil_spotting_chance_array^i }
+	set_variable = { var_SPY_mil_convoy_raiding_efficiency_factor = SPY_mil_convoy_raiding_efficiency_factor_array^i }
+	set_variable = { var_SPY_mil_convoy_escort_efficiency = SPY_mil_convoy_escort_efficiency_array^i }
+	update_SPY_system_stats = yes
+	calculate_SPY_mil_gui_vars = yes
+	clear_array = SPY_mil_systems_array
+}
+
+SPY_civ_button_update = {
+	set_variable = { var_SPY_civ_system_idx = SPY_civ_systems_array^i }
+	set_variable = { var_SPY_civ_sat_system_max = global.SPY_sat_system_max_array^i }
+	set_variable = { var_SPY_civ_research_speed_factor = SPY_civ_research_speed_factor_array^i }
+	set_variable = { var_SPY_civ_civilian_intel_factor = SPY_civ_civilian_intel_factor_array^i }
+	set_variable = { var_SPY_civ_army_intel_factor = SPY_civ_army_intel_factor_array^i }
+	set_variable = { var_SPY_civ_navy_intel_factor = SPY_civ_navy_intel_factor_array^i }
+	set_variable = { var_SPY_civ_airforce_intel_factor = SPY_civ_airforce_intel_factor_array^i }
+	set_variable = { var_SPY_civ_root_out_resistance_effectiveness_factor = SPY_civ_root_out_resistance_effectiveness_factor_array^i }
+	update_SPY_system_stats = yes
+	calculate_SPY_civ_gui_vars = yes
+	clear_array = SPY_civ_systems_array
+}
+
+
+update_space_system_values = {
+	update_sat_systems_stats = yes
+	clear_spy_sat_mission_arrays = yes
+	update_SPY_mission_num = yes
 	missile_ui_update = yes
 }
