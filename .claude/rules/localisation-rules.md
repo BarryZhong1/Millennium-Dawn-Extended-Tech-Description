@@ -7,6 +7,12 @@
 - File header must be `l_english:` on the first line with no leading whitespace.
 - Use **1 space** of indentation for each key (not tabs).
 
+## File Naming
+
+- **All country-specific localisation** (events, focuses, decisions, ideas, missions for a single country) goes in the **single unified file**: `MD_focus_TAG_l_english.yml`. Do **not** create separate files per subsystem (e.g., `MD_TAG_rebellion_l_english.yml`, `MD_TAG_events_l_english.yml`). One country, one loc file.
+- Only create a **separate** loc file for a standalone cross-country mechanic or system that is not owned by any single country (e.g., `MD_NATO_events_l_english.yml`, `MD_tooltips_l_english.yml`).
+- Check existing files in `localisation/english/` for the naming pattern before creating new ones.
+
 ## Key Formatting
 
 - Keys use **no trailing version number**: write `key: "value"`, not `key:0 "value"`.
@@ -21,8 +27,10 @@
 - **Be concise.** Remove filler words and redundant phrasing. Prefer shorter sentences.
 - **No excessive hyphenation.** Only hyphenate compound modifiers before a noun (e.g., "pro-Western government"), not elsewhere.
 - **No ellipsis abuse.** Do not use `...` in descriptions or tooltips.
+- **No em dashes** (`—`) in player-facing strings. Use a period when the clause stands alone ("Their economy answers to us. Their borders remain intact."), a comma when introducing a participial phrase ("...transfers weekly, appearing as a new expense..."), or a colon when introducing a list or requirement ("Requires war contribution: one battle won or three months at war."). Em dashes read as soft connectors and almost always replace one of those three punctuation choices.
 - Capitalize proper nouns, party names, ideology group names, and in-game concepts (e.g., Political Power, Stability).
 - Do not use all-caps for emphasis; use in-game formatting codes instead if needed (e.g., `£icon`, `§Y...§!`).
+- **No padding filler.** Every sentence in a description should carry real information — founding facts, political orientation, mechanical implication, alignment. Sentences that restate the title or fill the box with "the party has remained influential over the years" add nothing. This applies to subideology descs, focus descs, idea descs, event flavour, and option text alike.
 
 ## Subideology Localisation Format
 
@@ -41,8 +49,7 @@ Rules:
 - **Description** (`TAG.ideology_desc`):
   - Opens with the dominant ideology group in parentheses (e.g., `(Classic Liberalism)`), then the full English party name, then native-language names in parentheses listed as `Language: Native Name`, comma-separated, followed by the abbreviation.
   - A `\n\n` separates the header line from the body paragraph.
-  - Body paragraph: 2–5 sentences covering founding, political orientation, notable history, and international alignments. Written in third person, past/present mix, encyclopedic tone.
-  - Do not pad with vague filler sentences.
+  - Body paragraph: 2–5 sentences covering founding, political orientation, notable history, and international alignments. Written in third person, past/present mix, encyclopedic tone. The "no padding filler" rule in Writing Style applies — every sentence should carry real information.
 
 Example:
 
@@ -71,6 +78,27 @@ HOI4 localisation files are checked by `check-yaml` in the pre-commit hook. The 
 - **Mixed indentation**: All keys in a file must be consistently indented (all with 1 leading space, or all without). Mixing indented and non-indented keys in the same file causes YAML to see two separate mappings. Remove stray spaces to make indentation uniform.
 - **Colons in values**: A bare colon followed by a space inside a quoted string can confuse some parsers — wrap the value in quotes as usual and this is safe, but watch for unquoted values.
 
+## Loc Key Collisions Between Game Objects
+
+An idea's `name = X` field redirects **both** the displayed name and the tooltip description: the game looks up `X` for the name and `X_desc` for the description. The idea's own ID is no longer used for loc.
+
+This creates a collision risk when an idea shares a name with a focus, decision, event, or other idea:
+
+- A focus `id = ENG_british_commercial_spaceport` and an idea `name = ENG_british_commercial_spaceport` will both read from the same `ENG_british_commercial_spaceport` / `_desc` loc keys.
+- If both define those keys in the same `.yml`, YAML treats it as a duplicate and the later definition wins — the focus name silently changes to the idea's text (or vice versa).
+- Even if only one side defines the keys, the other game object will display whatever text happens to be there — usually wrong.
+
+**Rule:** When picking a `name = X` for an idea, choose a key that no focus, decision, or other idea uses. If the idea's display text matches the focus's display text intentionally (e.g., the focus awards the idea and they share branding), still use a distinct key — they may need to diverge later, and identical text in two keys is cheap.
+
+Quick check before merging:
+
+```bash
+# Replace KEY with the value of your `name = ` field
+grep -rn "id = KEY\b\|^\s*KEY:\s*\"" common/ localisation/english/
+```
+
+If you see hits in both `common/national_focus/` and `common/ideas/` for the same KEY, rename one side.
+
 ## Common Mistakes to Avoid
 
 | Wrong                                                                   | Correct                                                                     |
@@ -88,50 +116,8 @@ HOI4 localisation files are checked by `check-yaml` in the pre-commit hook. The 
 | Duplicate keys in the same `.yml` file                                  | Remove the earlier duplicate; keep only one definition per key              |
 | Wrong color-code prefix, e.g. `§RY` (stray extra character)             | `§R` then text immediately — no stray character between code and content    |
 | Copy-pasted country-specific flavour text left unreplaced               | Update every reference to the original country's name, demonym, and culture |
+| Lowercase scope keywords: `[From.GetName]`, `[Root.GetName]`            | Always uppercase: `[FROM.GetName]`, `[ROOT.GetName]`, `[THIS.GetName]`      |
 
-## Recurring Typo Watchlist
+## Recurring Typos
 
-These typos appear frequently across country files — check for them when reviewing:
-
-| Typo                                                        | Correct                   |
-| ----------------------------------------------------------- | ------------------------- |
-| `Estabilish` / `estabilish`                                 | `Establish` / `establish` |
-| `innvoations`                                               | `innovations`             |
-| `irreperable` / `irrepairable`                              | `irreparable`             |
-| `unenmployed`                                               | `unemployed`              |
-| `existance`                                                 | `existence`               |
-| `effectivness`                                              | `effectiveness`           |
-| `disproportinate`                                           | `disproportionate`        |
-| `tarditions`                                                | `traditions`              |
-| `contrats` (used as contrast)                               | `by contrast`             |
-| `Airforce`                                                  | `Air Force`               |
-| `miltiary`                                                  | `military`                |
-| `coaltion`                                                  | `coalition`               |
-| `tumultous`                                                 | `tumultuous`              |
-| `recgonized`                                                | `recognized`              |
-| `Propgramme`                                                | `Programme`               |
-| `poeple`                                                    | `people`                  |
-| `it's` (possessive)                                         | `its`                     |
-| `Unloyal`                                                   | `Disloyal`                |
-| `Isreal`                                                    | `Israel`                  |
-| `unrepairable`                                              | `irreparable`             |
-| `bocme`                                                     | `become`                  |
-| `hovewer`                                                   | `however`                 |
-| `acomplish`                                                 | `accomplish`              |
-| `Endevours`                                                 | `Endeavours`              |
-| `Quiantified`                                               | `Quantified`              |
-| `convering`                                                 | `converting`              |
-| `encomapassing`                                             | `encompassing`            |
-| `fundamnetals`                                              | `fundamentals`            |
-| `civillian`                                                 | `civilian`                |
-| `civillisation` / `civilisation` (American English context) | `civilization`            |
-| `suprised`                                                  | `surprised`               |
-| `alledged`                                                  | `alleged`                 |
-| `succesful` / `succesfull`                                  | `successful`              |
-| `huminliating`                                              | `humiliating`             |
-| `reffered`                                                  | `referred`                |
-| `stronly`                                                   | `strongly`                |
-| `togeather`                                                 | `together`                |
-| `disasterous`                                               | `disastrous`              |
-| `religous`                                                  | `religious`               |
-| `suzerainity`                                               | `suzerainty`              |
+See [`.claude/docs/typo-watchlist.md`](.claude/docs/typo-watchlist.md) for the full list. Check it when reviewing localisation files.

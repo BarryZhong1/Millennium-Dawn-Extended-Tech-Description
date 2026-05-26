@@ -16,7 +16,7 @@ capital = 604
 	complete_special_project = sp:sp_aircraft_project
 
 	complete_special_project = sp:sp_composite_production
-	#This needs to be one less than the starting number to work properly
+	# Consumed by tools/analysis/pre_place_power_plants.py — re-run the bake after editing
 	set_variable = { startup_composite_fac_needed = 2 }
 
 	if = {
@@ -486,6 +486,7 @@ capital = 604
 				engines_3 = 1
 				refueling_1 = 1
 				avionics_1 = 1
+				avionics_2 = 1
 				awacs_1 = 1
 				redundant_1 = 1
 				early_weapons = 1
@@ -677,9 +678,9 @@ capital = 604
 	reverse_add_opinion_modifier = { target = PHI modifier = large_commercial_relations }
 	add_opinion_modifier = { target = BRU modifier = large_commercial_relations }
 	reverse_add_opinion_modifier = { target = BRU modifier = large_commercial_relations }
-	add_opinion_modifier = { target = NKO modifier = NKO_KOR_Koren_War_Ceasefire }
+	add_opinion_modifier = { target = NKO modifier = NKO_KOR_Korean_War_Ceasefire }
 	add_opinion_modifier = { target = NKO modifier = propaganda_broadcasts }
-	reverse_add_opinion_modifier = { target = NKO modifier = NKO_KOR_Koren_War_Ceasefire }
+	reverse_add_opinion_modifier = { target = NKO modifier = NKO_KOR_Korean_War_Ceasefire }
 	add_opinion_modifier = { target = USA modifier = diplomatic_proximity }
 	reverse_add_opinion_modifier = { target = USA modifier = diplomatic_proximity }
 
@@ -705,7 +706,7 @@ capital = 604
 	add_to_array = { influence_array_val = 70 }
 	add_to_array = { influence_array = GER.id }
 	add_to_array = { influence_array_val = 5 }
-	startup_influence = yes
+	sort_influence = yes
 
 	set_variable = { var = debt value = 167.842 }
 	set_variable = { var = treasury value = 141 }
@@ -754,7 +755,6 @@ capital = 604
 	add_to_array = { KOR.investment_targets = NZL }
 	add_to_array = { KOR.investment_targets = SOL }
 
-	set_country_flag = investment_targets_are_set_up
 
 	# Influence system
 	add_to_array = { KOR.influence_targets = CAM }
@@ -959,6 +959,7 @@ capital = 604
 			tech_naval_systems_engineering = 1
 			tech_power_systems_1 = 1
 			tech_power_systems_2 = 1
+			tech_diesel_power_systems_1 = 1
 
 			tech_combat_support_systems = 1
 			tech_fire_control_1 = 1
@@ -1172,6 +1173,7 @@ capital = 604
 	recruit_character = KOR_sim_seungseop
 
 	set_variable = { overall_productivity = 900 }
+	set_variable = { var_reactor_material_stockpile = 12500 }
 
 
 	# Relation Starting Configuration (moved from on_startup)

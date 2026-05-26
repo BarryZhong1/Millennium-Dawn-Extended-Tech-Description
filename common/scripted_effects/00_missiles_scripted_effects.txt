@@ -96,10 +96,6 @@ basic_ai_space_program_production = {
 	}
 }
 
-missile_ui_update = {
-	add_to_variable = { global.missile_ui_updated = 1 }
-}
-
 #################################################
 ### effects for gui / buttons / trigger / loc ###
 #################################################
@@ -545,7 +541,7 @@ check_sat_systems_min_sat_num = {
 			}
 		}
 		subtract_from_variable = { var_GNSS_mil_system_idx = 1 }
-		ROOT = { news_event = { id = satellites.2 } }
+		ROOT = { news_event = satellites.2 }
 	}
 	if = {
 		limit = {
@@ -557,7 +553,7 @@ check_sat_systems_min_sat_num = {
 			}
 		}
 		subtract_from_variable = { var_GNSS_civ_system_idx = 1 }
-		ROOT = { news_event = { id = satellites.3 } }
+		ROOT = { news_event = satellites.3 }
 	}
 	#COM
 	if = {
@@ -566,7 +562,7 @@ check_sat_systems_min_sat_num = {
 			check_variable = { var_COM_mil_system_idx > 0 }
 		}
 		subtract_from_variable = { var_COM_mil_system_idx = 1 }
-		ROOT = { news_event = { id = satellites.4 } }
+		ROOT = { news_event = satellites.4 }
 	}
 	if = {
 		limit = {
@@ -574,7 +570,7 @@ check_sat_systems_min_sat_num = {
 			check_variable = { var_COM_civ_system_idx > 0 }
 		}
 		subtract_from_variable = { var_COM_civ_system_idx = 1 }
-		ROOT = { news_event = { id = satellites.5 } }
+		ROOT = { news_event = satellites.5 }
 	}
 	#SPY
 	if = {
@@ -583,7 +579,7 @@ check_sat_systems_min_sat_num = {
 			check_variable = { var_SPY_mil_system_idx > 0 }
 		}
 		subtract_from_variable = { var_SPY_mil_system_idx = 1 }
-		ROOT = { news_event = { id = satellites.6 } }
+		ROOT = { news_event = satellites.6 }
 	}
 	if = {
 		limit = {
@@ -591,7 +587,7 @@ check_sat_systems_min_sat_num = {
 			check_variable = { var_SPY_civ_system_idx > 0 }
 		}
 		subtract_from_variable = { var_SPY_civ_system_idx = 1 }
-		ROOT = { news_event = { id = satellites.7 } }
+		ROOT = { news_event = satellites.7 }
 	}
 }
 
@@ -2163,7 +2159,7 @@ add_new_satellite_to_orbit_6 = {
 			}
 			check_variable = { sat_6_array^num > 1503 }
 		}
-		ROOT = { news_event = { id = satellites.8 } }
+		ROOT = { news_event = satellites.8 }
 	}
 	else = {
 		add_to_variable = { var_sat_in_orbit = 1 }
@@ -2841,19 +2837,6 @@ nuclear_reactor_fuel_consumption = {
 	clamp_variable = { var = var_reactor_material_stockpile min = 0 max = 20000000 }
 }
 
-# Function: setup_starting_reactor_stockpile
-# Purpose: Setups the current nuclear reactor and enrichment facilities setup
-setup_starting_reactor_stockpile = {
-	if = {
-		limit = { check_variable = { enrichment_facilities > 0 } }
-		set_country_flag = enabled_nuclear_reactor_fuel_production
-	}
-
-	set_temp_variable = { starting_reactor_grade_stockpile = nuclear_reactors }
-	multiply_temp_variable = { starting_reactor_grade_stockpile = 2500 }
-	set_variable = { var_reactor_material_stockpile = starting_reactor_grade_stockpile }
-}
-
 # Utilities
 # Function: modify_missile_inventory_count
 # Purpose: Allows you to modify the current amount of a missile's inventory
@@ -2937,7 +2920,7 @@ setup_missile_configuration_effect = {
 		#for testing network traffic
 		set_COM_sat_receiver_tech_array = yes
 	}
-	missile_ui_update = yes
+	international_systems_update = yes
 }
 
 GNSS_mil_button_update = {
@@ -3025,5 +3008,5 @@ update_space_system_values = {
 	update_sat_systems_stats = yes
 	clear_spy_sat_mission_arrays = yes
 	update_SPY_mission_num = yes
-	missile_ui_update = yes
+	international_systems_update = yes
 }

@@ -58,7 +58,7 @@ GER_Network_Infrastructure = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	Expand_Network_South = {
@@ -122,7 +122,7 @@ GER_Network_Infrastructure = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	Expand_Network_West = {
@@ -211,7 +211,7 @@ GER_Network_Infrastructure = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -238,6 +238,7 @@ GER_Network_Infrastructure = {
 			modify_treasury_effect = yes
 		}
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision Expand_Network_North_east"
 			if = {
 				limit = { controls_state = 539 }
 				539 = {
@@ -276,7 +277,7 @@ GER_Network_Infrastructure = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -303,6 +304,7 @@ GER_Network_Infrastructure = {
 			modify_treasury_effect = yes
 		}
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision Expand_Network_east"
 			if = {
 				limit = { controls_state = 972 }
 				972 = {
@@ -339,7 +341,7 @@ GER_Network_Infrastructure = {
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 }
@@ -350,12 +352,14 @@ GER_east_vs_west_divide = {
 		}
 
 		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision GER_divide_open"
+			if = { limit = { is_debug = yes }
+				log = "[GetDateText]: [ROOT.GetName]: DEBUG: Decision GER_divide_open"
+			}
 			set_country_flag = GER_open_divide
 		}
 
 		ai_will_do = {
-			base = 1
+			base = 0
 		}
 	}
 	GER_divide_close = {
@@ -364,11 +368,13 @@ GER_east_vs_west_divide = {
 		}
 
 		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision GER_divide_close"
+			if = { limit = { is_debug = yes }
+				log = "[GetDateText]: [ROOT.GetName]: DEBUG: Decision GER_divide_close"
+			}
 			clr_country_flag = GER_open_divide
 		}
 		ai_will_do = {
-			base = 1
+			base = 0
 		}
 	}
 
@@ -388,7 +394,7 @@ GER_east_vs_west_divide = {
 				}
 			}
 			custom_trigger_tooltip = {
-				tooltip = PER_presidential_decisions_only_one_is_available_TT
+				tooltip = only_one_decision_is_available_TT
 				NOT = {
 					has_decision = GER_increase_productivity_in_brandenburg
 					has_decision = GER_increase_productivity_in_sachsen
@@ -433,7 +439,7 @@ GER_east_vs_west_divide = {
 				}
 			}
 			custom_trigger_tooltip = {
-				tooltip = PER_presidential_decisions_only_one_is_available_TT
+				tooltip = only_one_decision_is_available_TT
 				NOT = {
 					has_decision = GER_increase_productivity_in_mecklenburg
 					has_decision = GER_increase_productivity_in_sachsen
@@ -478,7 +484,7 @@ GER_east_vs_west_divide = {
 				}
 			}
 			custom_trigger_tooltip = {
-				tooltip = PER_presidential_decisions_only_one_is_available_TT
+				tooltip = only_one_decision_is_available_TT
 				NOT = {
 					has_decision = GER_increase_productivity_in_mecklenburg
 					has_decision = GER_increase_productivity_in_brandenburg
@@ -503,7 +509,7 @@ GER_east_vs_west_divide = {
 			production_speed_buildings_factor = 0.10
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -523,7 +529,7 @@ GER_east_vs_west_divide = {
 				}
 			}
 			custom_trigger_tooltip = {
-				tooltip = PER_presidential_decisions_only_one_is_available_TT
+				tooltip = only_one_decision_is_available_TT
 				NOT = {
 					has_decision = GER_increase_productivity_in_mecklenburg
 					has_decision = GER_increase_productivity_in_brandenburg
@@ -548,7 +554,7 @@ GER_east_vs_west_divide = {
 			production_speed_buildings_factor = 0.10
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -568,7 +574,7 @@ GER_east_vs_west_divide = {
 				}
 			}
 			custom_trigger_tooltip = {
-				tooltip = PER_presidential_decisions_only_one_is_available_TT
+				tooltip = only_one_decision_is_available_TT
 				NOT = {
 					has_decision = GER_increase_productivity_in_mecklenburg
 					has_decision = GER_increase_productivity_in_brandenburg
@@ -593,7 +599,7 @@ GER_east_vs_west_divide = {
 			production_speed_buildings_factor = 0.10
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	GER_please_east_germans = {
@@ -616,7 +622,7 @@ GER_east_vs_west_divide = {
 			social_cost_multiplier_modifier = 0.05
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 
@@ -626,13 +632,11 @@ GER_east_vs_west_divide = {
 		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision GER_consult_with_an_advisor"
-			country_event = {
-				id = germany_divide.69420
-			}
+			country_event = germany_divide.69420
 		}
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 }
@@ -650,13 +654,12 @@ GER_bavarian_nationalism = {
 		}
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision GER_establish_ruling_party"
-			country_event = {
-				id = bavaria.2
-			}
+			country_event = bavaria.2
 			GER = {
 				set_country_flag = GER_federalization_one
 			}
 		}
+		ai_will_do = { base = 0 }
 	}
 	GER_relocate_institutions = {
 		fire_only_once = yes
@@ -918,7 +921,7 @@ GER_the_false_state = {
 			newline = yes
 			SYR = {
 				country_event = {
-					id = Germany.227
+					id = germany.227
 					days = 1
 				}
 			}
@@ -978,7 +981,7 @@ GER_the_false_state = {
 			newline = yes
 			EGY = {
 				country_event = {
-					id = Germany.227
+					id = germany.227
 					days = 1
 				}
 			}
@@ -1038,7 +1041,7 @@ GER_the_false_state = {
 			newline = yes
 			HEZ = {
 				country_event = {
-					id = Germany.227
+					id = germany.227
 					days = 1
 				}
 			}
@@ -1104,7 +1107,7 @@ GER_the_false_state = {
 			newline = yes
 			PAL = {
 				country_event = {
-					id = Germany.227
+					id = germany.227
 					days = 1
 				}
 			}
@@ -1252,6 +1255,7 @@ GER_bundeswehr_reforms_decisions = {
 		}
 	}
 	GER_modernize_equipment = {
+		fixed_random_seed = no
 		days_remove = 30
 		available = {
 			NOT = {
@@ -1441,7 +1445,6 @@ GER_civil_war_mission = {
 		fire_only_once = yes
 		activation = { hidden_trigger = { has_country_flag = GER_incoming_disaster } }
 		visible = { has_country_flag = GER_incoming_disaster }
-		allowed = { original_tag = GER }
 		available = {
 			has_country_flag = GER_did_mission_1_cw
 			has_country_flag = GER_did_mission_2_cw
@@ -1456,23 +1459,16 @@ GER_civil_war_mission = {
 			log = "[GetDateText]: [Root.GetName]: Decision GER_incoming_collapse"
 			custom_effect_tooltip = GER_civil_war_TT
 			hidden_effect = {
-				country_event = {
-					id = Germany.235
-				}
+				country_event = germany.235
 			}
-		}
-		ai_will_do = {
-			base = 1
 		}
 	}
 	GER_purge_banks = {
 		fire_only_once = yes
 		days_remove = 20
 		available = {
-			NOT = {
-				has_decision = GER_purge_government_institutions
-				has_decision = GER_purge_military
-			}
+			NOT = { has_decision = GER_purge_government_institutions }
+			NOT = { has_decision = GER_purge_military }
 		}
 		cost = 50
 		remove_effect = {
@@ -1487,7 +1483,31 @@ GER_civil_war_mission = {
 			}
 		}
 		ai_will_do = {
-			base = 1
+			base = 20
+			modifier = {
+				factor = 0
+				has_political_power < 50
+			}
+			modifier = {
+				add = 10
+				has_stability < 0.5
+			}
+			modifier = {
+				add = 15
+				has_stability < 0.35
+			}
+			modifier = {
+				factor = 1.5
+				OR = {
+					has_country_flag = GER_did_mission_1_cw
+					has_country_flag = GER_did_mission_2_cw
+				}
+			}
+			modifier = {
+				factor = 2
+				has_country_flag = GER_did_mission_1_cw
+				has_country_flag = GER_did_mission_2_cw
+			}
 		}
 	}
 	GER_purge_government_institutions = {
@@ -1495,10 +1515,8 @@ GER_civil_war_mission = {
 		days_remove = 20
 		cost = 50
 		available = {
-			NOT = {
-				has_decision = GER_purge_military
-				has_decision = GER_purge_banks
-			}
+			NOT = { has_decision = GER_purge_military }
+			NOT = { has_decision = GER_purge_banks }
 		}
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision GER_purge_government_institutions"
@@ -1514,7 +1532,31 @@ GER_civil_war_mission = {
 			}
 		}
 		ai_will_do = {
-			base = 1
+			base = 20
+			modifier = {
+				factor = 0
+				has_political_power < 50
+			}
+			modifier = {
+				add = 10
+				has_stability < 0.5
+			}
+			modifier = {
+				add = 15
+				has_stability < 0.35
+			}
+			modifier = {
+				factor = 1.5
+				OR = {
+					has_country_flag = GER_did_mission_1_cw
+					has_country_flag = GER_did_mission_3_cw
+				}
+			}
+			modifier = {
+				factor = 2
+				has_country_flag = GER_did_mission_1_cw
+				has_country_flag = GER_did_mission_3_cw
+			}
 		}
 	}
 	GER_purge_military = {
@@ -1522,10 +1564,8 @@ GER_civil_war_mission = {
 		days_remove = 20
 		cost = 50
 		available = {
-			NOT = {
-				has_decision = GER_purge_government_institutions
-				has_decision = GER_purge_banks
-			}
+			NOT = { has_decision = GER_purge_government_institutions }
+			NOT = { has_decision = GER_purge_banks }
 		}
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision GER_purge_military"
@@ -1541,13 +1581,38 @@ GER_civil_war_mission = {
 			}
 		}
 		ai_will_do = {
-			base = 1
+			base = 20
+			modifier = {
+				factor = 0
+				has_political_power < 50
+			}
+			modifier = {
+				add = 10
+				has_stability < 0.5
+			}
+			modifier = {
+				add = 15
+				has_stability < 0.35
+			}
+			modifier = {
+				factor = 1.5
+				OR = {
+					has_country_flag = GER_did_mission_2_cw
+					has_country_flag = GER_did_mission_3_cw
+				}
+			}
+			modifier = {
+				factor = 2
+				has_country_flag = GER_did_mission_2_cw
+				has_country_flag = GER_did_mission_3_cw
+			}
 		}
 	}
 }
 # German War on Terror Decisions #
 GER_war_on_terror = {
 	GER_authorize_attack = {
+		fixed_random_seed = no
 		days_remove = 20
 		custom_cost_trigger = {
 			has_army_experience > 19
@@ -1555,7 +1620,7 @@ GER_war_on_terror = {
 		custom_cost_text = army_xp_20
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = PER_presidential_decisions_only_one_is_available_TT
+				tooltip = only_one_decision_is_available_TT
 				NOT = {
 					has_decision = GER_authorize_airstrike
 					has_decision = GER_authorize_aid_mission
@@ -1576,14 +1641,10 @@ GER_war_on_terror = {
 			hidden_effect = {
 				random_list = {
 					60 = {
-						country_event = {
-							id = Germany.403
-						}
+						country_event = germany.403
 					}
 					40 = {
-						country_event = {
-							id = Germany.404
-						}
+						country_event = germany.404
 					}
 				}
 			}
@@ -1594,6 +1655,7 @@ GER_war_on_terror = {
 	}
 
 	GER_authorize_airstrike = {
+		fixed_random_seed = no
 		days_remove = 40
 		custom_cost_trigger = {
 			has_air_experience > 19
@@ -1601,7 +1663,7 @@ GER_war_on_terror = {
 		custom_cost_text = air_xp_20
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = PER_presidential_decisions_only_one_is_available_TT
+				tooltip = only_one_decision_is_available_TT
 				NOT = {
 					has_decision = GER_authorize_attack
 					has_decision = GER_authorize_aid_mission
@@ -1622,14 +1684,10 @@ GER_war_on_terror = {
 			hidden_effect = {
 				random_list = {
 					60 = {
-						country_event = {
-							id = Germany.4011
-						}
+						country_event = germany.4011
 					}
 					40 = {
-						country_event = {
-							id = Germany.4021
-						}
+						country_event = germany.4021
 					}
 				}
 			}
@@ -1646,7 +1704,7 @@ GER_war_on_terror = {
 		custom_cost_text = cost_15_0
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = PER_presidential_decisions_only_one_is_available_TT
+				tooltip = only_one_decision_is_available_TT
 				NOT = {
 					has_decision = GER_authorize_attack
 					has_decision = GER_authorize_airstrike
@@ -1670,7 +1728,7 @@ GER_war_on_terror = {
 		cost = 100
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = PER_presidential_decisions_only_one_is_available_TT
+				tooltip = only_one_decision_is_available_TT
 				NOT = {
 					has_decision = GER_authorize_attack
 					has_decision = GER_authorize_airstrike
@@ -1697,7 +1755,7 @@ GER_war_on_terror = {
 		days_remove = 180
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = PER_presidential_decisions_only_one_is_available_TT
+				tooltip = only_one_decision_is_available_TT
 				NOT = {
 					has_decision = GER_authorize_attack
 					has_decision = GER_authorize_airstrike
@@ -1748,7 +1806,7 @@ GER_imperial_bloc_invites = {
 			log = "[GetDateText]: [Root.GetName]: Decision GER_invite_italy"
 			ITA = {
 				country_event = {
-					id = Germany.240
+					id = germany.240
 					days = 1
 				}
 			}
@@ -1786,7 +1844,7 @@ GER_imperial_bloc_invites = {
 			log = "[GetDateText]: [Root.GetName]: Decision GER_invite_turkey"
 			TUR = {
 				country_event = {
-					id = Germany.240
+					id = germany.240
 					days = 1
 				}
 			}
@@ -1824,7 +1882,7 @@ GER_imperial_bloc_invites = {
 			log = "[GetDateText]: [Root.GetName]: Decision GER_invite_france"
 			FRA = {
 				country_event = {
-					id = Germany.240
+					id = germany.240
 					days = 1
 				}
 			}
@@ -1862,7 +1920,7 @@ GER_imperial_bloc_invites = {
 			log = "[GetDateText]: [Root.GetName]: Decision GER_invite_england"
 			ENG = {
 				country_event = {
-					id = Germany.240
+					id = germany.240
 					days = 1
 				}
 			}
@@ -1920,25 +1978,14 @@ GER_V_fall_Decision = {
 				limit = { has_idea = defence_04 }
 				swap_ideas = { remove_idea = defence_04 add_idea = defence_05 }
 			}
-			if = {
-				limit = { has_idea = police_01 }
-				swap_ideas = { remove_idea = police_01 add_idea = police_02 }
-			}
-			else_if = {
-				limit = { has_idea = police_02 }
-				swap_ideas = { remove_idea = police_02 add_idea = police_03 }
-			}
-			else_if = {
-				limit = { has_idea = police_03 }
-				swap_ideas = { remove_idea = police_03 add_idea = police_04 }
-			}
+			increase_policing_budget = yes
 			increase_conscription_effect = yes
 			hidden_effect = {
 				news_event = { id = GER_news.01 hours = 6 }
 			}
 		}
 		ai_will_do = {
-			factor = 100
+			base = 100
 		}
 	}
 	GER_Territorial_Defense = {
@@ -1963,11 +2010,11 @@ GER_V_fall_Decision = {
 						Mot_Inf_Bat = { x = 0 y = 0 }
 						Mot_Inf_Bat = { x = 0 y = 1 }
 						Mot_Inf_Bat = { x = 0 y = 2 }
-						mech_Inf_Bat = { x = 1 y = 0 }
+						Mech_Inf_Bat = { x = 1 y = 0 }
 					}
 					support = {
 						H_Engi_Comp = { x = 0 y = 0 }
-						mech_Recce_Comp = { x = 0 y = 1 }
+						Mech_Recce_Comp = { x = 0 y = 1 }
 						armor_Comp = { x = 0 y = 2 }
 						SP_Arty_Battery = { x = 0 y = 3 }
 					}
@@ -2008,7 +2055,7 @@ GER_V_fall_Decision = {
 			}
 		}
 		ai_will_do = {
-			factor = 10
+			base = 10
 		}
 	}
 	GER_call_reservists = {
@@ -2023,11 +2070,11 @@ GER_V_fall_Decision = {
 		}
 
 		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision GER_New_Ammunition "
+			log = "[GetDateText]: [Root.GetName]: Decision GER_call_reservists"
 			add_manpower = 150000
 		}
 		remove_effect = {
-
+			log = "[GetDateText]: [Root.GetName]: Decision GER_call_reservists"
 			GER = {
 				division_template = {
 					name = "Inactive Brigade"
@@ -2046,7 +2093,7 @@ GER_V_fall_Decision = {
 					}
 					support = {
 						H_Engi_Comp = { x = 0 y = 0 }
-						armor_Recce_comp = { x = 0 y = 1 }
+						armor_Recce_Comp = { x = 0 y = 1 }
 						SP_AA_Battery = { x = 0 y = 2 }
 						combat_service_support_company = { x = 0 y = 3 }
 					}
@@ -2078,7 +2125,7 @@ GER_V_fall_Decision = {
 			}
 		}
 		ai_will_do = {
-			factor = 10
+			base = 10
 		}
 	}
 	GER_fortifications_I = {
@@ -2126,7 +2173,7 @@ GER_V_fall_Decision = {
 			}
 		}
 		ai_will_do = {
-			factor = 10
+			base = 10
 		}
 	}
 	GER_fortifications_II = {
@@ -2172,7 +2219,7 @@ GER_V_fall_Decision = {
 		}
 
 		ai_will_do = {
-			factor = 10
+			base = 10
 		}
 	}
 	GER_fortifications_III = {
@@ -2237,7 +2284,7 @@ GER_V_fall_Decision = {
 			}
 		}
 		ai_will_do = {
-			factor = 10
+			base = 10
 		}
 	}
 	GER_end_V_Fall = {
@@ -2278,18 +2325,7 @@ GER_V_fall_Decision = {
 				limit = { has_idea = defence_06 }
 				swap_ideas = { remove_idea = defence_06 add_idea = defence_02 }
 			}
-			if = {
-				limit = { has_idea = police_02 }
-				swap_ideas = { remove_idea = police_02 add_idea = police_01 }
-			}
-			else_if = {
-				limit = { has_idea = police_03 }
-				swap_ideas = { remove_idea = police_03 add_idea = police_02 }
-			}
-			else_if = {
-				limit = { has_idea = police_04 }
-				swap_ideas = { remove_idea = police_04 add_idea = police_02 }
-			}
+			decrease_policing_budget = yes
 			decrease_conscription_effect = yes
 			GER = {
 				every_country_division = {
@@ -2319,7 +2355,7 @@ GER_V_fall_Decision = {
 			}
 		}
 		ai_will_do = {
-			factor = 100
+			base = 100
 		}
 	}
 }
@@ -2327,6 +2363,7 @@ GER_V_fall_Decision = {
 GER_Officer_Training_Decisions = {
 	#German National courses
 	GER_General_Staff_Course_Hamburg = {
+		fixed_random_seed = no
 		days_remove = 90
 		cost = 70
 		available = {
@@ -2372,10 +2409,11 @@ GER_Officer_Training_Decisions = {
 			}
 		 }
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	GER_Leadership_course_for_officers_Koblenz = {
+		fixed_random_seed = no
 
 		days_remove = 90
 		cost = 70
@@ -2422,10 +2460,11 @@ GER_Officer_Training_Decisions = {
 			}
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	GER_National_Defense_and_Armed_forces_Planning_Course = {
+		fixed_random_seed = no
 
 		days_remove = 90
 		cost = 70
@@ -2473,10 +2512,11 @@ GER_Officer_Training_Decisions = {
 			}
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	GER_Operational_leadership_and_command_course = {
+		fixed_random_seed = no
 
 		days_remove = 90
 		cost = 70
@@ -2524,10 +2564,11 @@ GER_Officer_Training_Decisions = {
 			}
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	GER_military_intelligence_course = {
+		fixed_random_seed = no
 
 		days_remove = 90
 		cost = 70
@@ -2575,10 +2616,11 @@ GER_Officer_Training_Decisions = {
 			}
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	GER_multinational_planning_seminar = {
+		fixed_random_seed = no
 
 		days_remove = 90
 		cost = 70
@@ -2626,11 +2668,12 @@ GER_Officer_Training_Decisions = {
 			}
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	# Naval Course
 	GER_Admiral_staff_course = {
+		fixed_random_seed = no
 
 		days_remove = 90
 		cost = 70
@@ -2678,12 +2721,11 @@ GER_Officer_Training_Decisions = {
 					}
 				}
 			}
-	 }
-	   ai_will_do = {
-			base = 1
 		}
+		ai_will_do = { base = 1 }
 	}
 	GER_Multi_national_Maritime_leadership_course = {
+		fixed_random_seed = no
 
 		days_remove = 90
 		cost = 70
@@ -2733,7 +2775,7 @@ GER_Officer_Training_Decisions = {
 			}
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	#Unit leader training
@@ -2762,7 +2804,7 @@ GER_Officer_Training_Decisions = {
 			}
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	GER_Launch_big_Trainings_exercise = {
@@ -2791,7 +2833,7 @@ GER_Officer_Training_Decisions = {
 			}
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 }
@@ -2805,7 +2847,7 @@ GER_balance_of_power_category = {
 
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = PER_presidential_decisions_only_one_is_available_TT
+				tooltip = only_one_decision_is_available_TT
 				NOT = {
 					#has_decision = GER_Promote_Cultural_exchange_Programs
 					has_decision = GER_provide_federal_foundings_for_migration_cultural_centers
@@ -2835,7 +2877,7 @@ GER_balance_of_power_category = {
 			productivity_growth_modifier = 0.03
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	GER_provide_federal_foundings_for_migration_cultural_centers = {
@@ -2845,7 +2887,7 @@ GER_balance_of_power_category = {
 
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = PER_presidential_decisions_only_one_is_available_TT
+				tooltip = only_one_decision_is_available_TT
 				NOT = {
 					has_decision = GER_Promote_Cultural_exchange_Programs
 					#has_decision = GER_provide_federal_foundings_for_migration_cultural_centers
@@ -2874,7 +2916,7 @@ GER_balance_of_power_category = {
 			social_cost_multiplier_modifier = 0.02
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	GER_Support_Multicultural_Art_and_literature_initiative = {
@@ -2884,7 +2926,7 @@ GER_balance_of_power_category = {
 
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = PER_presidential_decisions_only_one_is_available_TT
+				tooltip = only_one_decision_is_available_TT
 				NOT = {
 					has_decision = GER_Promote_Cultural_exchange_Programs
 					has_decision = GER_provide_federal_foundings_for_migration_cultural_centers
@@ -2913,7 +2955,7 @@ GER_balance_of_power_category = {
 			political_power_gain = 0.10
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	GER_launch_multicultural_media_campain = {
@@ -2923,7 +2965,7 @@ GER_balance_of_power_category = {
 
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = PER_presidential_decisions_only_one_is_available_TT
+				tooltip = only_one_decision_is_available_TT
 				NOT = {
 					has_decision = GER_Promote_Cultural_exchange_Programs
 					has_decision = GER_provide_federal_foundings_for_migration_cultural_centers
@@ -2956,7 +2998,7 @@ GER_balance_of_power_category = {
 			political_power_gain = 0.10
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	GER_Launch_Erinnerungskultur_campain = {
@@ -2966,7 +3008,7 @@ GER_balance_of_power_category = {
 
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = PER_presidential_decisions_only_one_is_available_TT
+				tooltip = only_one_decision_is_available_TT
 				NOT = {
 					has_decision = GER_Promote_Cultural_exchange_Programs
 					has_decision = GER_provide_federal_foundings_for_migration_cultural_centers
@@ -3002,7 +3044,7 @@ GER_balance_of_power_category = {
 			education_cost_multiplier_modifier = 0.05
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	#no multi culti
@@ -3013,7 +3055,7 @@ GER_balance_of_power_category = {
 
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = PER_presidential_decisions_only_one_is_available_TT
+				tooltip = only_one_decision_is_available_TT
 				NOT = {
 					has_decision = GER_Promote_Cultural_exchange_Programs
 					has_decision = GER_provide_federal_foundings_for_migration_cultural_centers
@@ -3047,7 +3089,7 @@ GER_balance_of_power_category = {
 			research_speed_factor = 0.01
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	GER_Promote_Traditional_german_values_in_media = {
@@ -3057,7 +3099,7 @@ GER_balance_of_power_category = {
 
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = PER_presidential_decisions_only_one_is_available_TT
+				tooltip = only_one_decision_is_available_TT
 				NOT = {
 					has_decision = GER_Promote_Cultural_exchange_Programs
 					has_decision = GER_provide_federal_foundings_for_migration_cultural_centers
@@ -3091,7 +3133,7 @@ GER_balance_of_power_category = {
 			migration_rate_value_factor = -0.02
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	GER_Support_heimatverein = {
@@ -3101,7 +3143,7 @@ GER_balance_of_power_category = {
 
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = PER_presidential_decisions_only_one_is_available_TT
+				tooltip = only_one_decision_is_available_TT
 				NOT = {
 					has_decision = GER_Promote_Cultural_exchange_Programs
 					has_decision = GER_provide_federal_foundings_for_migration_cultural_centers
@@ -3131,7 +3173,7 @@ GER_balance_of_power_category = {
 			nationalist_drift = 0.01
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	GER_Fund_national_Culture_festivals = {
@@ -3141,7 +3183,7 @@ GER_balance_of_power_category = {
 
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = PER_presidential_decisions_only_one_is_available_TT
+				tooltip = only_one_decision_is_available_TT
 				NOT = {
 					has_decision = GER_Promote_Cultural_exchange_Programs
 					has_decision = GER_provide_federal_foundings_for_migration_cultural_centers
@@ -3170,7 +3212,7 @@ GER_balance_of_power_category = {
 
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	GER_Launch_national_identity_courses_for_migrants = {
@@ -3180,7 +3222,7 @@ GER_balance_of_power_category = {
 
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = PER_presidential_decisions_only_one_is_available_TT
+				tooltip = only_one_decision_is_available_TT
 				NOT = {
 					has_decision = GER_Promote_Cultural_exchange_Programs
 					has_decision = GER_provide_federal_foundings_for_migration_cultural_centers
@@ -3212,7 +3254,7 @@ GER_balance_of_power_category = {
 			nationalist_acceptance = 1.1
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 }
@@ -3269,7 +3311,7 @@ GER_SAPOS_decision = {
 			custom_effect_tooltip = GER_SAPOS_CHI_II
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	GER_lease_acces_RUS = {
@@ -3325,7 +3367,7 @@ GER_SAPOS_decision = {
 			custom_effect_tooltip = GER_SAPOS_SOV_II
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 	GER_lease_acces_USA = {
@@ -3387,7 +3429,7 @@ GER_SAPOS_decision = {
 			custom_effect_tooltip = GER_SAPOS_USA_II
 		}
 		ai_will_do = {
-			factor = 1
+			base = 1
 		}
 	}
 }
