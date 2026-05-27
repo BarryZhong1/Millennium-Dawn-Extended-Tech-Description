@@ -1,7 +1,61 @@
 scripted_gui = {
+	countryeconomyview = {
+		window_name = "MD_countryeconomyview_market_prices"
+        context_type = player_context
+		parent_window_token = trade_tab
+
+		visible = {
+			ROOT = {
+				AND = {
+					is_ai = no
+					check_variable = { MD_tradeview_tab_trade_state = 1 }
+				}
+			}
+		}
+	}
+
+	countryeconomyview_tab = {
+		window_name = "MD_countryeconomyview_tabs"
+        context_type = player_context
+		parent_window_token = trade_tab
+
+		effects = {
+            trade_tab_click = {
+				set_variable = { MD_tradeview_tab_trade_state = 1 }
+				set_variable = { MD_tradeview_tab_economy_state = 2 }
+            }
+
+			economy_tab_click = {
+				set_variable = { MD_tradeview_tab_trade_state = 2 }
+				set_variable = { MD_tradeview_tab_economy_state = 1 }
+            }
+		}
+
+		properties = {
+			trade_tab = {
+				frame = MD_tradeview_tab_trade_state
+			}
+
+			economy_tab = {
+				frame = MD_tradeview_tab_economy_state
+			}
+		}
+	}
+
     countryeconomyview = {
 		window_name = "MD_countryeconomyview"
         context_type = player_context
 		parent_window_token = trade_tab
+
+		visible = {
+			ROOT = {
+				AND = {
+					is_ai = no
+					check_variable = { MD_tradeview_tab_economy_state = 1 }
+				}
+			}
+		}
+
+		
 	}
 }
