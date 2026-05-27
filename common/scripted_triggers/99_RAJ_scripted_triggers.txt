@@ -103,3 +103,126 @@ BRICS_can_observer = {
 		has_opinion = { target = ROOT value > 0 }
 	}
 }
+
+RAJ_rebel_opinion_collapsed = {
+	if = {
+		limit = { check_variable = { RAJ_rebel_target_state = 993 } }
+		check_variable = { RAJ_muslim_opinion < 5 }
+	}
+	else_if = {
+		limit = {
+			OR = {
+				check_variable = { RAJ_rebel_target_state = 980 }
+				check_variable = { RAJ_rebel_target_state = 477 }
+			}
+		}
+		check_variable = { RAJ_christians_opinion < 5 }
+	}
+	else_if = {
+		limit = { check_variable = { RAJ_rebel_target_state = 982 } }
+		check_variable = { RAJ_buddhist_opinion < 5 }
+	}
+	else_if = {
+		limit = { check_variable = { RAJ_rebel_target_state = 429 } }
+		check_variable = { RAJ_sikh_opinion < 5 }
+	}
+}
+
+RAJ_side_a_opinion_lower_than_b = {
+	if = {
+		limit = { check_variable = { RAJ_conflict_side_a = 1 } }
+		if = {
+			limit = { check_variable = { RAJ_conflict_side_b = 2 } }
+			check_variable = { RAJ_hindus_opinion < RAJ_muslim_opinion }
+		}
+		else_if = {
+			limit = { check_variable = { RAJ_conflict_side_b = 3 } }
+			check_variable = { RAJ_hindus_opinion < RAJ_christians_opinion }
+		}
+	}
+	else_if = {
+		limit = { check_variable = { RAJ_conflict_side_a = 2 } }
+		if = {
+			limit = { check_variable = { RAJ_conflict_side_b = 1 } }
+			check_variable = { RAJ_muslim_opinion < RAJ_hindus_opinion }
+		}
+		else_if = {
+			limit = { check_variable = { RAJ_conflict_side_b = 3 } }
+			check_variable = { RAJ_muslim_opinion < RAJ_christians_opinion }
+		}
+	}
+	else_if = {
+		limit = { check_variable = { RAJ_conflict_side_a = 3 } }
+		if = {
+			limit = { check_variable = { RAJ_conflict_side_b = 1 } }
+			check_variable = { RAJ_christians_opinion < RAJ_hindus_opinion }
+		}
+		else_if = {
+			limit = { check_variable = { RAJ_conflict_side_b = 2 } }
+			check_variable = { RAJ_christians_opinion < RAJ_muslim_opinion }
+		}
+	}
+}
+
+RAJ_side_b_opinion_lower_than_a = {
+	if = {
+		limit = { check_variable = { RAJ_conflict_side_b = 1 } }
+		if = {
+			limit = { check_variable = { RAJ_conflict_side_a = 2 } }
+			check_variable = { RAJ_hindus_opinion < RAJ_muslim_opinion }
+		}
+		else_if = {
+			limit = { check_variable = { RAJ_conflict_side_a = 3 } }
+			check_variable = { RAJ_hindus_opinion < RAJ_christians_opinion }
+		}
+	}
+	else_if = {
+		limit = { check_variable = { RAJ_conflict_side_b = 2 } }
+		if = {
+			limit = { check_variable = { RAJ_conflict_side_a = 1 } }
+			check_variable = { RAJ_muslim_opinion < RAJ_hindus_opinion }
+		}
+		else_if = {
+			limit = { check_variable = { RAJ_conflict_side_a = 3 } }
+			check_variable = { RAJ_muslim_opinion < RAJ_christians_opinion }
+		}
+	}
+	else_if = {
+		limit = { check_variable = { RAJ_conflict_side_b = 3 } }
+		if = {
+			limit = { check_variable = { RAJ_conflict_side_a = 1 } }
+			check_variable = { RAJ_christians_opinion < RAJ_hindus_opinion }
+		}
+		else_if = {
+			limit = { check_variable = { RAJ_conflict_side_a = 2 } }
+			check_variable = { RAJ_christians_opinion < RAJ_muslim_opinion }
+		}
+	}
+}
+
+RAJ_both_conflict_sides_below_30 = {
+	if = {
+		limit = { check_variable = { RAJ_conflict_side_a = 1 } }
+		check_variable = { RAJ_hindus_opinion < 30 }
+	}
+	else_if = {
+		limit = { check_variable = { RAJ_conflict_side_a = 2 } }
+		check_variable = { RAJ_muslim_opinion < 30 }
+	}
+	else_if = {
+		limit = { check_variable = { RAJ_conflict_side_a = 3 } }
+		check_variable = { RAJ_christians_opinion < 30 }
+	}
+	if = {
+		limit = { check_variable = { RAJ_conflict_side_b = 1 } }
+		check_variable = { RAJ_hindus_opinion < 30 }
+	}
+	else_if = {
+		limit = { check_variable = { RAJ_conflict_side_b = 2 } }
+		check_variable = { RAJ_muslim_opinion < 30 }
+	}
+	else_if = {
+		limit = { check_variable = { RAJ_conflict_side_b = 3 } }
+		check_variable = { RAJ_christians_opinion < 30 }
+	}
+}

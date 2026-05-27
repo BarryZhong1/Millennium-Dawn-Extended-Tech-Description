@@ -796,7 +796,7 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = RAJ_kill_a_cow_to_donate_shoes
+		id = RAJ_steady_elephant
 		icon = elephant_shield
 		x = 3
 		y = 7
@@ -809,7 +809,7 @@ focus_tree = {
 		prerequisite = { focus = RAJ_terror_and_disruptive_activities_act }
 		relative_position_id = RAJ_indias_politics
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: RAJ_kill_a_cow_to_donate_shoes"
+			log = "[GetDateText]: [Root.GetName]: RAJ_steady_elephant"
 			add_timed_idea = {
 				idea = RAJ_nationalist_limited_social_support
 				days = 1095
@@ -14138,65 +14138,24 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_protect_asian_allies"
 			give_guarantee = BRM
-			BRM = {
-				one_random_infrastructure = yes
-			}
-			add_opinion_modifier = {
-				target = BRM
-				modifier = diplomatic_support
-			}
-			reverse_add_opinion_modifier = {
-				target = BRM
-				modifier = diplomatic_support
-			}
+			BRM = { one_random_infrastructure = yes }
 			one_random_infrastructure = yes
-			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { influence_target = BRM }
-			change_influence_percentage = yes
-			add_opinion_modifier = {
-				target = KAC
-				modifier = diplomatic_support
+
+			set_temp_variable = { RAJ_asian_ally_targets^0 = BRM.id }
+			set_temp_variable = { RAJ_asian_ally_targets^1 = KAC.id }
+			set_temp_variable = { RAJ_asian_ally_targets^2 = SHN.id }
+			set_temp_variable = { RAJ_asian_ally_targets^3 = NHN.id }
+			set_temp_variable = { RAJ_asian_ally_targets^4 = KAR.id }
+			for_each_scope_loop = {
+				array = RAJ_asian_ally_targets
+				reverse_add_opinion_modifier = { target = ROOT modifier = diplomatic_support }
+				add_opinion_modifier = { target = ROOT modifier = diplomatic_support }
+				ROOT = {
+					set_temp_variable = { percent_change = 5 }
+					set_temp_variable = { influence_target = PREV.id }
+					change_influence_percentage = yes
+				}
 			}
-			reverse_add_opinion_modifier = {
-				target = KAC
-				modifier = diplomatic_support
-			}
-			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { influence_target = KAC }
-			change_influence_percentage = yes
-			add_opinion_modifier = {
-				target = SHN
-				modifier = diplomatic_support
-			}
-			reverse_add_opinion_modifier = {
-				target = SHN
-				modifier = diplomatic_support
-			}
-			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { influence_target = SHN }
-			change_influence_percentage = yes
-			add_opinion_modifier = {
-				target = NHN
-				modifier = diplomatic_support
-			}
-			reverse_add_opinion_modifier = {
-				target = NHN
-				modifier = diplomatic_support
-			}
-			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { influence_target = NHN }
-			change_influence_percentage = yes
-			add_opinion_modifier = {
-				target = KAR
-				modifier = diplomatic_support
-			}
-			reverse_add_opinion_modifier = {
-				target = KAR
-				modifier = diplomatic_support
-			}
-			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { influence_target = KAR }
-			change_influence_percentage = yes
 		}
 		ai_will_do = {
 			base = 1
@@ -15264,9 +15223,6 @@ focus_tree = {
 		x = 6
 		y = 3
 		cost = 6
-		available = {
-			NOT = { has_government = fascism }
-		}
 		search_filters = { FOCUS_FILTER_POLITICAL }
 		prerequisite = { focus = RAJ_stratpar_russi focus = RAJ_tradepar_china }
 		prerequisite = { focus = RAJ_stratpar_soaf }
@@ -15532,6 +15488,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_BRICS_as_polit_alliance"
 			custom_effect_tooltip = RAJ_more_relation_is_better
+			custom_effect_tooltip = RAJ_BRICS_polit_alliance_faction_warning_tt
 			if = { limit = { is_faction_leader = yes }
 				dismantle_faction = yes
 			}
@@ -16272,7 +16229,7 @@ focus_tree = {
 	}
 	###First Part of Salafist
 	focus = {
-		id = RAJ_land_of_salad
+		id = RAJ_delhi_caliphate
 		icon = india_salafism
 		x = -10
 		y = 6
@@ -16281,7 +16238,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INSURGENCY }
 		available = { has_government = fascism }
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: RAJ_land_of_salad"
+			log = "[GetDateText]: [Root.GetName]: RAJ_delhi_caliphate"
 			swap_ideas = {
 				remove_idea = hindu
 				add_idea = sunni
@@ -16307,8 +16264,8 @@ focus_tree = {
 		cost = 10
 		available = { has_government = fascism }
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT }
-		prerequisite = { focus = RAJ_land_of_salad }
-		relative_position_id = RAJ_land_of_salad
+		prerequisite = { focus = RAJ_delhi_caliphate }
+		relative_position_id = RAJ_delhi_caliphate
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_declare_holy_jihad"
 			add_named_threat = {
@@ -16978,8 +16935,8 @@ focus_tree = {
 		y = 1
 		cost = 7
 		available = { has_government = fascism }
-		prerequisite = { focus = RAJ_land_of_salad }
-		relative_position_id = RAJ_land_of_salad
+		prerequisite = { focus = RAJ_delhi_caliphate }
+		relative_position_id = RAJ_delhi_caliphate
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_EXPENDITURE FOCUS_FILTER_MILITARY_LAWS }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_proffesional_soldiers"
@@ -17624,7 +17581,7 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = RAJ_wrong_islam_in_iran
+		id = RAJ_iran_doctrinal_dispute
 		icon = attack_iran2
 		x = 1
 		y = 1
@@ -17637,7 +17594,7 @@ focus_tree = {
 		relative_position_id = RAJ_main_enemies_of_islamism
 		will_lead_to_war_with = PER
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: RAJ_wrong_islam_in_iran"
+			log = "[GetDateText]: [Root.GetName]: RAJ_iran_doctrinal_dispute"
 
 			add_stability = -0.05
 			add_war_support = 0.05
@@ -17655,7 +17612,7 @@ focus_tree = {
 				target = PER
 			}
 			add_named_threat = {
-				name = RAJ_wrong_islam_in_iran
+				name = RAJ_iran_doctrinal_dispute
 				threat = 3
 			}
 		}
@@ -17686,7 +17643,7 @@ focus_tree = {
 		prerequisite = {
 			focus = RAJ_to_avenge_the_oppression_of_the_uighurs
 			focus = RAJ_troubleshoot_the_map
-			focus = RAJ_wrong_islam_in_iran
+			focus = RAJ_iran_doctrinal_dispute
 			focus = RAJ_revenge_for_the_humiliation_of_chechnya
 		}
 		relative_position_id = RAJ_main_enemies_of_islamism
