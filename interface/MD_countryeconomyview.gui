@@ -258,19 +258,19 @@ guiTypes = {
 
         containerWindowType = {
 			name = "tabs"
-			position = { x=0 y=10 }
+			position = { x=-540 y=-8 }
 			size = { width = 100%% height = 30 }
 
             iconType ={
                 name ="trade_divider"
                 spriteType = "GFX_trade_divider"
-                position = { x=10 y = 34 }
+                position = { x=550 y = 50 }
                 Orientation = "UPPER_LEFT"
             }
 
 			buttonType = {
 				name = "trade_tab"
-				position = { x = -340 y = -15 }
+				position = { x = 0 y = 0 }
 				quadTextureSprite = "GFX_tab_large"
 				text = "TRADE_TAB"
 				buttonFont = "hoi_20b"
@@ -281,22 +281,11 @@ guiTypes = {
 
 			buttonType = {
 				name = "economy_tab"
-				position = { x = -90 y = -15 }
+				position = { x = 250 y = 0 }
 				quadTextureSprite = "GFX_tab_large"
 				buttonFont = "hoi_20b"
 				frame = 2
 				text = "ECONOMY_TAB"
-				clicksound = click_default
-				Orientation = "CENTER"
-			}
-
-            buttonType = {
-				name = "investments_tab"
-				position = { x = 160 y = -15 }
-				quadTextureSprite = "GFX_tab_large"
-				buttonFont = "hoi_20b"
-				frame = 2
-				text = "INVESTMENTS_TAB"
 				clicksound = click_default
 				Orientation = "CENTER"
 			}
@@ -305,8 +294,8 @@ guiTypes = {
 
     containerWindowType = {
         name = "MD_countryeconomyview"
-		position = { x=-606 y=0}
-        show_position = { x=-11 y =49 }
+		position = { x=-606 y=47}
+        show_position = { x=-11 y=47 }
         show_animation_type = decelerated
         hide_animation_type = accelerated
         animation_time = 300
@@ -335,12 +324,19 @@ guiTypes = {
 
             containerWindowType = {
                 name = "money"
-                position = { x=20 y=20 }
+                position = { x=20 y=35 }
                 size = { width = 300 height = 200 }
+
+                iconType ={
+                    name ="background"
+                    spriteType = "GFX_subview_header_bg_300x101"
+                    position = { x=-10 y = -40 }
+                    Orientation = "UPPER_LEFT"
+                }
 
                 instantTextboxType = {
                     name = "title"
-                    position = { x = 2 y = 0 }
+                    position = { x = 16 y = -30 }
                     font = "hoi_30header"
                     borderSize = { x = 0 y = 0 }
                     text = "MONEY_TITLE"
@@ -353,7 +349,7 @@ guiTypes = {
 
                 containerWindowType = {
                     name = "balance_container"
-                    position = { x=0 y=35 }
+                    position = { x=0 y=18 }
                     size = { width = 300 height = 200 }
 
                     background = {
@@ -390,7 +386,7 @@ guiTypes = {
                 
                 containerWindowType = {
                     name = "treasury_container"
-                    position = { x=0 y=70 }
+                    position = { x=0 y=66 }
                     size = { width = 300 height = 200 }
 
                     background = {
@@ -427,7 +423,7 @@ guiTypes = {
 
                 containerWindowType = {
                     name = "debt_container"
-                    position = { x=0 y=105 }
+                    position = { x=0 y=100 }
                     size = { width = 300 height = 200 }
 
                     background = {
@@ -464,7 +460,7 @@ guiTypes = {
 
                 containerWindowType = {
                     name = "investments_container"
-                    position = { x=0 y=140 }
+                    position = { x=0 y=134 }
                     size = { width = 300 height = 200 }
 
                     background = {
@@ -505,152 +501,191 @@ guiTypes = {
                 position = { x=270 y=20 }
                 size = { width = 300 height = 200 }
 
+                iconType ={
+                    name ="background"
+                    spriteType = "GFX_subview_header_bg_430x101"
+                    position = { x=-1 y = -22 }
+                    Orientation = "UPPER_LEFT"
+                }
+
                 instantTextboxType = {
                     name = "title"
-                    position = { x = 210 y = 0 }
+                    position = { x = 25 y = -13 }
                     font = "hoi_30header"
                     borderSize = { x = 0 y = 0 }
                     text = "STATS_TITLE"
                     maxWidth = 200
                     maxHeight = 40
-                    format = RIGHT
+                    format = left
                     #alwaystransparent = yes
                     fixedsize=yes
                 }
 
                 containerWindowType = {
                     name = "economy_stats_container"
-                    position = { x=-3 y=35 }
-                    size = { width = 80 height = 40 }
+                    position = { x=8 y=12 }
+                    size = { width = 80 height = 100 }
 
                     iconType = {
                         name = "gdp_bg"
                         spriteType = "GFX_generic_box_96"
                         position = { x = 0 y = 22 }
+                        pdx_tooltip = "NUM_GDP_TOTAL_DESC"
+                        pdx_tooltip_delayed = "NUM_GDP_TOTAL_DELAYED_DESC"
                     }
 
-                    instantTextBoxType = {
-                        name = "gdp_label"
-                        position = { x = 0 y = 0 }
-                        font = "hoi_18mbs"
-                        format = right
-                        maxWidth = 90
-                        maxHeight = 24
-                        fixedsize = yes
-                        text = "GDP_TOTAL"
-                        pdx_tooltip = "GDP_TOTAL_DESC"
+                    # instantTextBoxType = {
+                    #     name = "gdp_label"
+                    #     position = { x = 0 y = 0 }
+                    #     font = "hoi_18mbs"
+                    #     format = right
+                    #     maxWidth = 90
+                    #     maxHeight = 24
+                    #     fixedsize = yes
+                    #     text = "GDP_TOTAL"
+                    #     pdx_tooltip = "GDP_TOTAL_DESC"
+                    # }
+
+                    iconType = {
+                        name = "gdp_icon"
+                        spriteType = "GFX_population_tax_income_multiplier_modifier_texticon"
+                        position = { x = 3 y = 26 }
+                        alwaystransparent = yes
                     }
 
                     instantTextBoxType = {
                         name = "gdp_value"
-                        position = { x = 6 y = 26 }
+                        position = { x = 12 y = 26 }
                         font = "hoi_18mbs"
                         format = right
                         maxWidth = 80
                         maxHeight = 40
                         fixedsize = yes
                         text = "NUM_GDP_TOTAL"
-                        pdx_tooltip = "NUM_GDP_TOTAL_DESC"
-                        pdx_tooltip_delayed = "NUM_GDP_TOTAL_DELAYED_DESC"
+                        alwaystransparent = yes
                     }
 
-                    instantTextBoxType = {
-                        name = "gdpc_label"
-                        position = { x = 105 y = 0 }
-                        font = "hoi_18mbs"
-                        format = right
-                        maxWidth = 90
-                        maxHeight = 24
-                        fixedsize = yes
-                        text = "GDP_PER_CAPITA"
-                        pdx_tooltip = "GDP_PER_CAPITA_DESC"
-                    }
+                    # instantTextBoxType = {
+                    #     name = "gdpc_label"
+                    #     position = { x = 105 y = 0 }
+                    #     font = "hoi_18mbs"
+                    #     format = right
+                    #     maxWidth = 90
+                    #     maxHeight = 24
+                    #     fixedsize = yes
+                    #     text = "GDP_PER_CAPITA"
+                    #     pdx_tooltip = "GDP_PER_CAPITA_DESC"
+                    # }
 
                     iconType = {
                         name = "gdpc_bg"
                         spriteType = "GFX_generic_box_96"
                         position = { x = 105 y = 22 }
+                        pdx_tooltip = "NUM_GDP_PER_CAPITA_DESC"
+                        pdx_tooltip_delayed = "GDP_PER_CAPITA_DELAYED_DESC"
+                    }
+                    
+                    iconType = {
+                        name = "gdpc_icon"
+                        spriteType = "GFX_gdp_capita_cost_factor_texticon"
+                        position = { x = 107 y = 26 }
+                        alwaystransparent = yes
                     }
 
                     instantTextBoxType = {
                         name = "gdpc_value"
-                        position = { x = 111 y = 26 }
+                        position = { x = 117 y = 26 }
                         font = "hoi_18mbs"
                         format = right
                         maxWidth = 80
                         maxHeight = 40
                         fixedsize = yes
                         text = "NUM_GDP_PER_CAPITA"
-                        pdx_tooltip = "NUM_GDP_PER_CAPITA_DESC"
-                        pdx_tooltip_delayed = "GDP_PER_CAPITA_DELAYED_DESC"
+                        alwaystransparent = yes
                     }
 
-                    instantTextBoxType = {
-                        name = "productivity_label"
-                        position = { x = 210 y = 0 }
-                        font = "hoi_18mbs"
-                        format = right
-                        maxWidth = 90
-                        maxHeight = 24
-                        fixedsize = yes
-                        text = "PRODUCTIVITY"
-                        pdx_tooltip = "PRODUCTIVITY_DESC"
-                    }
+                    # instantTextBoxType = {
+                    #     name = "productivity_label"
+                    #     position = { x = 210 y = 0 }
+                    #     font = "hoi_18mbs"
+                    #     format = right
+                    #     maxWidth = 90
+                    #     maxHeight = 24
+                    #     fixedsize = yes
+                    #     text = "PRODUCTIVITY"
+                    #     pdx_tooltip = "PRODUCTIVITY_DESC"
+                    # }
 
                     iconType = {
                         name = "productivity_bg"
                         spriteType = "GFX_generic_box_96"
                         position = { x = 210 y = 22 }
+                        pdx_tooltip = "NUM_PRODUCTIVITY_DESC"
+                        pdx_tooltip_delayed = "NUM_PRODUCTIVITY_DELAYED_DESC"
+                    }
+
+                    iconType = {
+                        name = "productivity_icon"
+                        spriteType = "GFX_construction_speed_fuelsilo_texticon"
+                        position = { x = 213 y = 27 }
+                        alwaystransparent = yes
                     }
 
                     instantTextBoxType = {
                         name = "productivity_value"
-                        position = { x = 216 y = 26 }
+                        position = { x = 222 y = 26 }
                         font = "hoi_18mbs"
                         format = right
                         maxWidth = 80
                         maxHeight = 40
                         fixedsize = yes
                         text = "NUM_PRODUCTIVITY"
-                        pdx_tooltip = "NUM_PRODUCTIVITY_DESC"
-                        pdx_tooltip_delayed = "NUM_PRODUCTIVITY_DELAYED_DESC"
+                        alwaystransparent = yes
                     }
 
-                    instantTextBoxType = {
-                        name = "inflation_label"
-                        position = { x = 315 y = 0 }
-                        font = "hoi_18mbs"
-                        format = right
-                        maxWidth = 90
-                        maxHeight = 24
-                        fixedsize = yes
-                        text = "INFLATION"
-                        pdx_tooltip = "INFLATION_DESC"
-                    }
+                    # instantTextBoxType = {
+                    #     name = "inflation_label"
+                    #     position = { x = 315 y = 0 }
+                    #     font = "hoi_18mbs"
+                    #     format = right
+                    #     maxWidth = 90
+                    #     maxHeight = 24
+                    #     fixedsize = yes
+                    #     text = "INFLATION"
+                    #     pdx_tooltip = "INFLATION_DESC"
+                    # }
 
                     iconType = {
                         name = "inflation_bg"
                         spriteType = "GFX_generic_box_96"
                         position = { x = 315 y = 22 }
+                        pdx_tooltip = "NUM_INFLATION_DESC"
+                        pdx_tooltip_delayed = "NUM_INFLATION_DELAYED_DESC"
+                    }
+
+                    iconType = {
+                        name = "inflation_icon"
+                        spriteType = "GFX_corruption_cost_factor_texticon"
+                        position = { x = 320 y = 26 }
+                        alwaystransparent = yes
                     }
 
                     instantTextBoxType = {
                         name = "inflation_value"
-                        position = { x = 321 y = 26 }
+                        position = { x = 327 y = 26 }
                         font = "hoi_18mbs"
                         format = right
                         maxWidth = 80
                         maxHeight = 40
                         fixedsize = yes
                         text = "NUM_INFLATION"
-                        pdx_tooltip = "NUM_INFLATION_DESC"
-                        pdx_tooltip_delayed = "NUM_INFLATION_DELAYED_DESC"
+                        alwaystransparent = yes
                     }
                 }
 
                 containerWindowType = {
                     name = "buildings_container"
-                    position = { x=-5 y=103 }
+                    position = { x=3 y=80 }
                     size = { width = 300 height = 200 }
 
                     containerWindowType = {
@@ -942,11 +977,37 @@ guiTypes = {
                     size = { width = 300 height = 400 }
 
                     instantTextboxType = {
-                        name = "population_income_value"
+                        name = "population_income_label"
                         position = { x = 0 y = 0 }
                         font = "hoi_26mbs"
                         borderSize = { x = 0 y = 0 }
+                        text = "POPULATION_INCOME_LABEL"
+                        maxWidth = 300
+                        maxHeight = 40
+                        format = LEFT
+                        #alwaystransparent = yes
+                        fixedsize=yes
+                    }
+
+                    instantTextboxType = {
+                        name = "population_income_value"
+                        position = { x = 225 y = 0 }
+                        font = "hoi_20bs"
+                        borderSize = { x = 0 y = 0 }
                         text = "POPULATION_INCOME"
+                        maxWidth = 150
+                        maxHeight = 40
+                        format = RIGHT
+                        #alwaystransparent = yes
+                        fixedsize=yes
+                    }
+
+                    instantTextboxType = {
+                        name = "corporation_income_label"
+                        position = { x = 0 y = 25 }
+                        font = "hoi_26mbs"
+                        borderSize = { x = 0 y = 0 }
+                        text = "CORPORATION_INCOME_LABEL"
                         maxWidth = 300
                         maxHeight = 40
                         format = LEFT
@@ -956,10 +1017,23 @@ guiTypes = {
 
                     instantTextboxType = {
                         name = "corporation_income_value"
-                        position = { x = 0 y = 25 }
-                        font = "hoi_26mbs"
+                        position = { x = 225 y = 25 }
+                        font = "hoi_20bs"
                         borderSize = { x = 0 y = 0 }
                         text = "CORPORATION_INCOME"
+                        maxWidth = 150
+                        maxHeight = 40
+                        format = RIGHT
+                        #alwaystransparent = yes
+                        fixedsize=yes
+                    }
+
+                    instantTextboxType = {
+                        name = "investments_income_label"
+                        position = { x = -2 y = 50 }
+                        font = "hoi_26mbs"
+                        borderSize = { x = 0 y = 0 }
+                        text = "INVESTMENTS_INCOME_LABEL"
                         maxWidth = 300
                         maxHeight = 40
                         format = LEFT
@@ -969,10 +1043,23 @@ guiTypes = {
 
                     instantTextboxType = {
                         name = "investments_income_value"
-                        position = { x = 0 y = 50 }
-                        font = "hoi_26mbs"
+                        position = { x = 225 y = 50 }
+                        font = "hoi_20bs"
                         borderSize = { x = 0 y = 0 }
                         text = "INVESTMENTS_INCOME"
+                        maxWidth = 150
+                        maxHeight = 40
+                        format = right
+                        #alwaystransparent = yes
+                        fixedsize=yes
+                    }
+
+                    instantTextboxType = {
+                        name = "resources_income_label"
+                        position = { x = -1 y = 75 }
+                        font = "hoi_26mbs"
+                        borderSize = { x = 0 y = 0 }
+                        text = "RESOURCES_INCOME_LABEL"
                         maxWidth = 300
                         maxHeight = 40
                         format = LEFT
@@ -982,10 +1069,23 @@ guiTypes = {
 
                     instantTextboxType = {
                         name = "resources_income_value"
-                        position = { x = 0 y = 75 }
-                        font = "hoi_26mbs"
+                        position = { x = 225 y = 75 }
+                        font = "hoi_20bs"
                         borderSize = { x = 0 y = 0 }
                         text = "RESOURCES_INCOME"
+                        maxWidth = 150
+                        maxHeight = 40
+                        format = right
+                        #alwaystransparent = yes
+                        fixedsize=yes
+                    }
+
+                    instantTextboxType = {
+                        name = "additional_income_label"
+                        position = { x = 0 y = 100 }
+                        font = "hoi_26mbs"
+                        borderSize = { x = 0 y = 0 }
+                        text = "ADDITIONAL_INCOME_LABEL"
                         maxWidth = 300
                         maxHeight = 40
                         format = LEFT
@@ -995,39 +1095,13 @@ guiTypes = {
 
                     instantTextboxType = {
                         name = "additional_income_value"
-                        position = { x = 0 y = 100 }
-                        font = "hoi_26mbs"
+                        position = { x = 225 y = 100 }
+                        font = "hoi_20bs"
                         borderSize = { x = 0 y = 0 }
-                        text = "ADDITIONAL_INCOME"
-                        maxWidth = 300
+                        text = "RESOURCES_INCOME"
+                        maxWidth = 150
                         maxHeight = 40
-                        format = LEFT
-                        #alwaystransparent = yes
-                        fixedsize=yes
-                    }
-
-                    instantTextboxType = {
-                        name = "population_income_value"
-                        position = { x = 0 y = 0 }
-                        font = "hoi_26mbs"
-                        borderSize = { x = 0 y = 0 }
-                        text = "POPULATION_INCOME"
-                        maxWidth = 300
-                        maxHeight = 40
-                        format = LEFT
-                        #alwaystransparent = yes
-                        fixedsize=yes
-                    }
-
-                    instantTextboxType = {
-                        name = "population_income_value"
-                        position = { x = 0 y = 0 }
-                        font = "hoi_26mbs"
-                        borderSize = { x = 0 y = 0 }
-                        text = "POPULATION_INCOME"
-                        maxWidth = 300
-                        maxHeight = 40
-                        format = LEFT
+                        format = right
                         #alwaystransparent = yes
                         fixedsize=yes
                     }
@@ -1078,11 +1152,37 @@ guiTypes = {
                     size = { width = 300 height = 400 }
 
                     instantTextboxType = {
-                        name = "bereaucracy_expense_value"
+                        name = "bureaucracy_expense_label"
                         position = { x = 0 y = 0 }
                         font = "hoi_26mbs"
                         borderSize = { x = 0 y = 0 }
-                        text = "BEREAUCRACY_EXPENSE"
+                        text = "BUREAUCRACY_EXPENSE_LABEL"
+                        maxWidth = 300
+                        maxHeight = 40
+                        format = LEFT
+                        #alwaystransparent = yes
+                        fixedsize=yes
+                    }
+
+                    instantTextboxType = {
+                        name = "bureaucracy_expense_value"
+                        position = { x = 225 y = 0 }
+                        font = "hoi_20bs"
+                        borderSize = { x = 0 y = 0 }
+                        text = "BUREAUCRACY_EXPENSE"
+                        maxWidth = 150
+                        maxHeight = 40
+                        format = right
+                        #alwaystransparent = yes
+                        fixedsize=yes
+                    }
+
+                    instantTextboxType = {
+                        name = "defence_expense_label"
+                        position = { x = 0 y = 25 }
+                        font = "hoi_26mbs"
+                        borderSize = { x = 0 y = 0 }
+                        text = "DEFENCE_EXPENSE_LABEL"
                         maxWidth = 300
                         maxHeight = 40
                         format = LEFT
@@ -1092,132 +1192,231 @@ guiTypes = {
 
                     instantTextboxType = {
                         name = "defence_expense_value"
-                        position = { x = 0 y = 25 }
-                        font = "hoi_26mbs"
+                        position = { x = 225 y = 25 }
+                        font = "hoi_20bs"
                         borderSize = { x = 0 y = 0 }
                         text = "DEFENCE_EXPENSE"
+                        maxWidth = 150
+                        maxHeight = 40
+                        format = right
+                        #alwaystransparent = yes
+                        fixedsize=yes
+                    }
+
+                    instantTextboxType = {
+                        name = "security_expense_label"
+                        position = { x = 0 y = 50 }
+                        font = "hoi_26mbs"
+                        borderSize = { x = 0 y = 0 }
+                        text = "SECURITY_EXPENSE_LABEL"
                         maxWidth = 300
                         maxHeight = 40
                         format = LEFT
-                        #alwaystransparent = yes
-                        fixedsize=yes
+                        fixedsize = yes
                     }
 
                     instantTextboxType = {
                         name = "security_expense_value"
-                        position = { x = 0 y = 50 }
-                        font = "hoi_26mbs"
+                        position = { x = 225 y = 50 }
+                        font = "hoi_20bs"
                         borderSize = { x = 0 y = 0 }
                         text = "SECURITY_EXPENSE"
+                        maxWidth = 150
+                        maxHeight = 40
+                        format = RIGHT
+                        fixedsize = yes
+                    }
+
+                    instantTextboxType = {
+                        name = "education_expense_label"
+                        position = { x = 0 y = 75 }
+                        font = "hoi_26mbs"
+                        borderSize = { x = 0 y = 0 }
+                        text = "EDUCATION_EXPENSE_LABEL"
                         maxWidth = 300
                         maxHeight = 40
                         format = LEFT
-                        #alwaystransparent = yes
-                        fixedsize=yes
+                        fixedsize = yes
                     }
 
                     instantTextboxType = {
                         name = "education_expense_value"
-                        position = { x = 0 y = 75 }
-                        font = "hoi_26mbs"
+                        position = { x = 225 y = 75 }
+                        font = "hoi_20bs"
                         borderSize = { x = 0 y = 0 }
                         text = "EDUCATION_EXPENSE"
+                        maxWidth = 150
+                        maxHeight = 40
+                        format = RIGHT
+                        fixedsize = yes
+                    }
+
+                    instantTextboxType = {
+                        name = "health_expense_label"
+                        position = { x = 0 y = 100 }
+                        font = "hoi_26mbs"
+                        borderSize = { x = 0 y = 0 }
+                        text = "HEALTH_EXPENSE_LABEL"
                         maxWidth = 300
                         maxHeight = 40
                         format = LEFT
-                        #alwaystransparent = yes
-                        fixedsize=yes
+                        fixedsize = yes
                     }
 
                     instantTextboxType = {
                         name = "health_expense_value"
-                        position = { x = 0 y = 100 }
-                        font = "hoi_26mbs"
+                        position = { x = 225 y = 100 }
+                        font = "hoi_20bs"
                         borderSize = { x = 0 y = 0 }
                         text = "HEALTH_EXPENSE"
+                        maxWidth = 150
+                        maxHeight = 40
+                        format = RIGHT
+                        fixedsize = yes
+                    }
+
+                    instantTextboxType = {
+                        name = "welfare_expense_label"
+                        position = { x = 0 y = 125 }
+                        font = "hoi_26mbs"
+                        borderSize = { x = 0 y = 0 }
+                        text = "WELFARE_EXPENSE_LABEL"
                         maxWidth = 300
                         maxHeight = 40
                         format = LEFT
-                        #alwaystransparent = yes
-                        fixedsize=yes
+                        fixedsize = yes
                     }
 
                     instantTextboxType = {
                         name = "welfare_expense_value"
-                        position = { x = 0 y = 125 }
-                        font = "hoi_26mbs"
+                        position = { x = 225 y = 125 }
+                        font = "hoi_20bs"
                         borderSize = { x = 0 y = 0 }
                         text = "WELFARE_EXPENSE"
+                        maxWidth = 150
+                        maxHeight = 40
+                        format = RIGHT
+                        fixedsize = yes
+                    }
+
+                    instantTextboxType = {
+                        name = "infrastructure_expense_label"
+                        position = { x = 0 y = 150 }
+                        font = "hoi_26mbs"
+                        borderSize = { x = 0 y = 0 }
+                        text = "INFRASTRUCTURE_EXPENSE_LABEL"
                         maxWidth = 300
                         maxHeight = 40
                         format = LEFT
-                        #alwaystransparent = yes
-                        fixedsize=yes
+                        fixedsize = yes
                     }
 
                     instantTextboxType = {
                         name = "infrastructure_expense_value"
-                        position = { x = 0 y = 150 }
-                        font = "hoi_26mbs"
+                        position = { x = 225 y = 150 }
+                        font = "hoi_20bs"
                         borderSize = { x = 0 y = 0 }
                         text = "INFRASTRUCTURE_EXPENSE"
+                        maxWidth = 150
+                        maxHeight = 40
+                        format = RIGHT
+                        fixedsize = yes
+                    }
+
+                    instantTextboxType = {
+                        name = "migration_expense_label"
+                        position = { x = 0 y = 175 }
+                        font = "hoi_26mbs"
+                        borderSize = { x = 0 y = 0 }
+                        text = "MIGRATION_EXPENSE_LABEL"
                         maxWidth = 300
                         maxHeight = 40
                         format = LEFT
-                        #alwaystransparent = yes
-                        fixedsize=yes
+                        fixedsize = yes
                     }
 
                     instantTextboxType = {
                         name = "migration_expense_value"
-                        position = { x = 0 y = 175 }
-                        font = "hoi_26mbs"
+                        position = { x = 225 y = 175 }
+                        font = "hoi_20bs"
                         borderSize = { x = 0 y = 0 }
                         text = "MIGRATION_EXPENSE"
+                        maxWidth = 150
+                        maxHeight = 40
+                        format = RIGHT
+                        fixedsize = yes
+                    }
+
+                    instantTextboxType = {
+                        name = "un_expense_label"
+                        position = { x = 0 y = 200 }
+                        font = "hoi_26mbs"
+                        borderSize = { x = 0 y = 0 }
+                        text = "UN_EXPENSE_LABEL"
                         maxWidth = 300
                         maxHeight = 40
                         format = LEFT
-                        #alwaystransparent = yes
-                        fixedsize=yes
+                        fixedsize = yes
                     }
 
                     instantTextboxType = {
                         name = "un_expense_value"
-                        position = { x = 0 y = 200 }
-                        font = "hoi_26mbs"
+                        position = { x = 225 y = 200 }
+                        font = "hoi_20bs"
                         borderSize = { x = 0 y = 0 }
                         text = "UN_EXPENSE"
+                        maxWidth = 150
+                        maxHeight = 40
+                        format = RIGHT
+                        fixedsize = yes
+                    }
+
+                    instantTextboxType = {
+                        name = "debt_expense_label"
+                        position = { x = 0 y = 225 }
+                        font = "hoi_26mbs"
+                        borderSize = { x = 0 y = 0 }
+                        text = "DEBT_EXPENSE_LABEL"
                         maxWidth = 300
                         maxHeight = 40
                         format = LEFT
-                        #alwaystransparent = yes
-                        fixedsize=yes
+                        fixedsize = yes
                     }
 
                     instantTextboxType = {
                         name = "debt_expense_value"
-                        position = { x = 0 y = 225 }
-                        font = "hoi_26mbs"
+                        position = { x = 225 y = 225 }
+                        font = "hoi_20bs"
                         borderSize = { x = 0 y = 0 }
                         text = "DEBT_EXPENSE"
+                        maxWidth = 150
+                        maxHeight = 40
+                        format = RIGHT
+                        fixedsize = yes
+                    }
+
+                    instantTextboxType = {
+                        name = "additional_expense_label"
+                        position = { x = 0 y = 250 }
+                        font = "hoi_26mbs"
+                        borderSize = { x = 0 y = 0 }
+                        text = "ADDITIONAL_EXPENSE_LABEL"
                         maxWidth = 300
                         maxHeight = 40
                         format = LEFT
-                        #alwaystransparent = yes
-                        fixedsize=yes
+                        fixedsize = yes
                     }
 
                     instantTextboxType = {
                         name = "additional_expense_value"
-                        position = { x = 0 y = 250 }
-                        font = "hoi_26mbs"
+                        position = { x = 225 y = 250 }
+                        font = "hoi_20bs"
                         borderSize = { x = 0 y = 0 }
                         text = "ADDITIONAL_EXPENSE"
-                        maxWidth = 300
+                        maxWidth = 150
                         maxHeight = 40
-                        format = LEFT
-                        #alwaystransparent = yes
-                        fixedsize=yes
+                        format = RIGHT
+                        fixedsize = yes
                     }
                 }
             }
@@ -1365,7 +1564,7 @@ guiTypes = {
 
             containerWindowType = {
                 name = "taxes_container"
-                position = { x = 10 y = 195 }
+                position = { x = 10 y = 202 }
                 size = { width=100%% height=200 }
 
                 background = {
