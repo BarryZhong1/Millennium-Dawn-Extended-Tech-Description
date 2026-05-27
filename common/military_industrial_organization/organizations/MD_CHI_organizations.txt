@@ -3500,6 +3500,37 @@ CHI_avic_manufacturer = {
 		}
 	}
 
+	trait = {
+		token = CHI_kirin_avionics_trait
+		name = CHI_kirin_avionics_trait
+		icon = GFX_generic_mio_trait_icon_air_agility
+
+		position = { x = 11 y = 0 }
+
+		available = { FROM = { has_completed_focus = CHI_hisilicon_kirin } }
+
+		limit_to_equipment_type = {
+			mio_cat_eq_only_all_light_aircraft
+			mio_cat_eq_only_large_aircraft
+			mio_cat_eq_only_uav
+		}
+
+		equipment_bonus = {
+			air_agility = 0.04
+			reliability = 0.04
+		}
+
+		on_complete = { expenditure_for_mio_upgrade = yes }
+
+		ai_will_do = {
+			base = 10
+			modifier = {
+				factor = 0
+				check_variable = { FROM.interest_rate > 8 }
+			}
+		}
+	}
+
 }
 CHI_cetc_manufacturer = {
 	allowed = { OR = { original_tag = CHI original_tag = HKG original_tag = MAC original_tag = TIB original_tag = ETK original_tag = TAI original_tag = OMG } }
@@ -4489,6 +4520,63 @@ CHI_cetc_manufacturer = {
 		}
 	}
 
+	trait = {
+		token = CHI_advanced_node_chips_trait
+		name = CHI_advanced_node_chips_trait
+		icon = GFX_generic_mio_trait_icon_cnc_reliability
+
+		position = { x = 6 y = 0 }
+
+		available = { FROM = { has_country_flag = CHI_smic_advanced_node_completed } }
+
+		limit_to_equipment_type = { cnc_equipment_type }
+
+		equipment_bonus = {
+			reliability = 0.05
+			max_organisation = 0.04
+			build_cost_ic = -0.05
+		}
+
+		on_complete = { expenditure_for_mio_upgrade = yes }
+
+		ai_will_do = {
+			base = 10
+			modifier = {
+				factor = 0
+				check_variable = { FROM.interest_rate > 8 }
+			}
+		}
+	}
+
+	trait = {
+		token = CHI_indigenous_euv_trait_cetc
+		name = CHI_indigenous_euv_trait_cetc
+		icon = GFX_generic_mio_trait_icon_cnc_speed
+
+		all_parents = { CHI_advanced_node_chips_trait }
+
+		relative_position_id = CHI_advanced_node_chips_trait
+		position = { x = 0 y = 1 }
+
+		available = { FROM = { has_completed_focus = CHI_sicarrier_euv } }
+
+		limit_to_equipment_type = { cnc_equipment_type }
+
+		production_bonus = {
+			production_cost_factor = -0.05
+		}
+
+		on_complete = { expenditure_for_mio_upgrade = yes }
+
+		ai_will_do = {
+			base = 10
+			modifier = {
+				factor = 0
+				check_variable = { FROM.interest_rate > 8 }
+			}
+		}
+	}
+
 }
 CHI_casic_manufacturer = {
 	allowed = { OR = { original_tag = CHI original_tag = HKG original_tag = MAC original_tag = TIB original_tag = ETK original_tag = TAI original_tag = OMG } }
@@ -5169,6 +5257,37 @@ CHI_casic_manufacturer = {
 		}
 	}
 
+	trait = {
+		token = CHI_hbm_compute_trait
+		name = CHI_hbm_compute_trait
+		icon = GFX_generic_mio_trait_icon_aa_reliability
+
+		position = { x = 11 y = 0 }
+
+		available = { FROM = { has_country_flag = CHI_memory_independence_completed } }
+
+		limit_to_equipment_type = {
+			AA_Equipment
+			guided_missile_equipment
+			sam_missile_equipment
+		}
+
+		equipment_bonus = {
+			air_attack = 0.05
+			reliability = 0.04
+		}
+
+		on_complete = { expenditure_for_mio_upgrade = yes }
+
+		ai_will_do = {
+			base = 10
+			modifier = {
+				factor = 0
+				check_variable = { FROM.interest_rate > 8 }
+			}
+		}
+	}
+
 }
 CHI_casc_manufacturer = {
 	allowed = { OR = { original_tag = CHI original_tag = HKG original_tag = MAC original_tag = TIB original_tag = ETK original_tag = TAI original_tag = OMG } }
@@ -5577,6 +5696,31 @@ CHI_casc_manufacturer = {
 		equipment_bonus = { reliability = 0.06 }
 
 		production_bonus = { production_resource_penalty_factor = -0.10 }
+
+		on_complete = { expenditure_for_mio_upgrade = yes }
+
+		ai_will_do = {
+			base = 10
+			modifier = {
+				factor = 0
+				check_variable = { FROM.interest_rate > 8 }
+			}
+		}
+	}
+
+	trait = {
+		token = CHI_indigenous_euv_trait
+		name = CHI_indigenous_euv_trait
+		icon = GFX_generic_mio_trait_icon_icbm_reliability
+
+		position = { x = 11 y = 0 }
+
+		available = { FROM = { has_completed_focus = CHI_sicarrier_euv } }
+
+		equipment_bonus = {
+			reliability = 0.05
+			build_cost_ic = -0.05
+		}
 
 		on_complete = { expenditure_for_mio_upgrade = yes }
 

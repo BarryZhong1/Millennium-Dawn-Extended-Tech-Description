@@ -9326,4 +9326,328 @@ CHI_industrial_investment_category = {
 			}
 		}
 	}
+
+	# Semiconductor sector decisions — unlocked by focuses in the Semiconductor Industry branch
+
+	CHI_mature_node_export_drive_decision = {
+		icon = x
+		allowed = { original_tag = CHI }
+
+		visible = {
+			has_completed_focus = CHI_hua_hong_mature_node
+			check_variable = {
+				var = CHI_mature_node_export_stacks
+				value = 5
+				compare = less_than
+			}
+		}
+
+		available = {
+			has_political_power > 39
+		}
+
+		cost = 40
+		days_re_enable = 60
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_mature_node_export_drive_decision executed"
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
+			add_to_variable = { CHI_economy_trade_opinion_factor = 0.01 tooltip = trade_opinion_factor_tt }
+			add_to_variable = { CHI_mature_node_export_stacks = 1 }
+			newline = yes
+			set_temp_variable = { treasury_change = 3 }
+			modify_treasury_effect = yes
+		}
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+			modifier = {
+				factor = 0
+				has_political_power < 40
+			}
+		}
+	}
+
+	CHI_fabless_provincial_subsidy_decision = {
+		icon = x
+		allowed = { original_tag = CHI }
+
+		visible = {
+			has_completed_focus = CHI_fabless_design_cluster
+			check_variable = {
+				var = CHI_fabless_subsidy_stacks
+				value = 5
+				compare = less_than
+			}
+		}
+
+		available = {
+			has_political_power > 49
+		}
+
+		cost = 50
+		days_re_enable = 180
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_fabless_provincial_subsidy_decision executed"
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
+			add_to_variable = { CHI_economy_civilian_factories_productivity = 0.01 tooltip = civilian_factories_productivity_tt }
+			add_to_variable = { CHI_fabless_subsidy_stacks = 1 }
+			newline = yes
+			set_temp_variable = { treasury_change = -5 }
+			modify_treasury_effect = yes
+		}
+
+		ai_will_do = {
+			base = 4
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+			modifier = {
+				factor = 0
+				has_political_power < 50
+			}
+		}
+	}
+
+	CHI_replace_synopsys_cadence_decision = {
+		icon = x
+		allowed = { original_tag = CHI }
+		fire_only_once = yes
+
+		visible = {
+			has_completed_focus = CHI_domestic_eda
+		}
+
+		available = {
+			has_political_power > 74
+		}
+
+		cost = 75
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_replace_synopsys_cadence_decision executed"
+			add_tech_bonus = {
+				name = CHI_replace_synopsys_cadence_decision
+				bonus = 0.15
+				uses = 1
+				category = CAT_computing_tech
+			}
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
+			add_to_variable = { CHI_economy_production_factory_efficiency_gain_factor = 0.02 tooltip = production_factory_efficiency_gain_factor_tt }
+			set_country_flag = CHI_eda_independence_achieved
+		}
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+			modifier = {
+				factor = 0
+				has_political_power < 75
+			}
+		}
+	}
+
+	CHI_duv_breakthrough_decision = {
+		icon = x
+		allowed = { original_tag = CHI }
+		fire_only_once = yes
+
+		visible = {
+			has_completed_focus = CHI_smee_lithography
+		}
+
+		available = {
+			has_political_power > 99
+		}
+
+		cost = 100
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_duv_breakthrough_decision executed"
+			set_country_flag = CHI_smee_breakthrough_attempted
+			random_list = {
+				60 = {
+					add_tech_bonus = {
+						name = CHI_duv_breakthrough_decision
+						bonus = 0.10
+						uses = 1
+						category = CAT_cnc
+					}
+				}
+				30 = {
+					add_tech_bonus = {
+						name = CHI_duv_breakthrough_decision
+						bonus = 0.10
+						uses = 1
+						category = CAT_cnc
+					}
+					custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
+					add_to_variable = { CHI_economy_microchip_plant_productivity_modifier = 0.04 tooltip = microchip_plant_productivity_modifier_tt }
+				}
+				10 = {
+					set_temp_variable = { treasury_change = -5 }
+					modify_treasury_effect = yes
+				}
+			}
+			newline = yes
+			set_temp_variable = { treasury_change = -10 }
+			modify_treasury_effect = yes
+		}
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+			modifier = {
+				factor = 0
+				has_political_power < 100
+			}
+		}
+	}
+
+	CHI_critical_minerals_export_license_decision = {
+		icon = x
+		allowed = { original_tag = CHI }
+
+		visible = {
+			has_completed_focus = CHI_strategic_materials
+		}
+
+		available = {
+			has_political_power > 99
+		}
+
+		cost = 100
+		days_remove = 90
+		days_re_enable = 365
+
+		modifier = {
+			civilian_factory_use = 2
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_critical_minerals_export_license_decision executed"
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
+			add_to_variable = { CHI_economy_resource_export_multiplier_modifier = 0.03 tooltip = resource_export_multiplier_modifier_tt }
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_critical_minerals_export_license_decision expired"
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
+			add_to_variable = { CHI_economy_resource_export_multiplier_modifier = -0.03 tooltip = resource_export_multiplier_modifier_tt }
+		}
+
+		ai_will_do = {
+			base = 4
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+			modifier = {
+				factor = 0
+				has_political_power < 100
+			}
+		}
+	}
+
+	CHI_cxmt_hbm_qualification_decision = {
+		icon = x
+		allowed = { original_tag = CHI }
+		fire_only_once = yes
+
+		visible = {
+			has_completed_focus = CHI_memory_independence
+		}
+
+		available = {
+			has_political_power > 149
+		}
+
+		cost = 150
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_cxmt_hbm_qualification_decision executed"
+			add_tech_bonus = {
+				name = CHI_cxmt_hbm_qualification_decision
+				bonus = 0.10
+				uses = 1
+				category = CAT_computing_tech
+			}
+			570 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = { type = microchip_plant level = 1 instant_build = yes }
+			}
+			set_country_flag = CHI_hbm_domestic_qualified
+			newline = yes
+			set_temp_variable = { treasury_change = -10 }
+			modify_treasury_effect = yes
+		}
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+			modifier = {
+				factor = 0
+				has_political_power < 150
+			}
+		}
+	}
+
+	CHI_big_fund_iii_allocate_tranche_decision = {
+		icon = x
+		allowed = { original_tag = CHI }
+
+		visible = {
+			has_completed_focus = CHI_big_fund_phase2
+			check_variable = {
+				var = CHI_bfiii_stacks
+				value = 6
+				compare = less_than
+			}
+		}
+
+		available = {
+			has_political_power > 49
+		}
+
+		cost = 50
+		days_re_enable = 90
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_big_fund_iii_allocate_tranche_decision executed"
+			one_random_microchip_plant = yes
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
+			add_to_variable = { CHI_economy_production_factory_max_efficiency_factor = 0.02 tooltip = production_factory_max_efficiency_factor_tt }
+			add_to_variable = { CHI_bfiii_stacks = 1 }
+			newline = yes
+			set_temp_variable = { treasury_change = -8.5 }
+			modify_treasury_effect = yes
+		}
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+			modifier = {
+				factor = 0
+				has_political_power < 50
+			}
+		}
+	}
 }

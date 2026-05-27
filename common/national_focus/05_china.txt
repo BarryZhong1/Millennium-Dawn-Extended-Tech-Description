@@ -42,7 +42,7 @@ focus_tree = {
 	## Inlay Focusses
 	inlay_window = {
 		id = CHI_national_committee_inlay_window
-		position = { x = 2200 y = 200 }
+		position = { x = 2500 y = 50 }
 	}
 
 
@@ -10448,7 +10448,7 @@ focus_tree = {
 		id = CHI_western_energy_strategy
 		icon = oil_production2
 
-		x = 5
+		x = 10
 		y = 0
 		relative_position_id = CHI_coastal_sez_2nd_generation
 
@@ -10714,7 +10714,7 @@ focus_tree = {
 		id = CHI_northeast_revitalization_plan
 		icon = focus_JAP_the_five_great_cities
 
-		x = 17
+		x = 30
 		y = 0
 		relative_position_id = CHI_coastal_sez_2nd_generation
 
@@ -10729,12 +10729,14 @@ focus_tree = {
 					days = 1825
 				}
 			}
+			newline = yes
 			554 = {
 				add_dynamic_modifier = {
 					modifier = CHI_northeast_revitalisation
 					days = 1825
 				}
 			}
+			newline = yes
 			555 = {
 				add_dynamic_modifier = {
 					modifier = CHI_northeast_revitalisation
@@ -10928,7 +10930,7 @@ focus_tree = {
 		id = CHI_central_china_development
 		icon = industry_civilian
 
-		x = 11
+		x = 20
 		y = 0
 		relative_position_id = CHI_coastal_sez_2nd_generation
 
@@ -11742,7 +11744,7 @@ focus_tree = {
 		id = CHI_baosteel_ipo
 		icon = focus_generic_steel_mill
 
-		x = 18
+		x = 20
 		y = 3
 		relative_position_id = CHI_coastal_sez_2nd_generation
 
@@ -11990,7 +11992,7 @@ focus_tree = {
 		id = CHI_weqi_pipeline_lines
 		icon = oil_trade
 
-		x = 2
+		x = -3
 		y = 1
 		relative_position_id = CHI_863_ic_preparatory_research
 
@@ -12351,7 +12353,7 @@ focus_tree = {
 		id = CHI_private_oem_rise
 		icon = middle_class_focus
 
-		x = 1
+		x = -4
 		y = 1
 		relative_position_id = CHI_xinjiang_industrial_zones
 
@@ -12648,7 +12650,7 @@ focus_tree = {
 		id = CHI_big_fund_phase_1
 		icon = microschip_production
 
-		x = 36
+		x = 40
 		y = 3
 		relative_position_id = CHI_coastal_sez_2nd_generation
 
@@ -12665,7 +12667,21 @@ focus_tree = {
 				years = 2
 			}
 			newline = yes
-			one_random_microchip_plant = yes
+			random_owned_state = {
+				add_building_construction = {
+					type = microchip_plant
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			newline = yes
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
+			add_to_variable = { CHI_economy_receiving_investment_cost_modifier = -0.03 tooltip = receiving_investment_cost_modifier_tt }
+			add_to_variable = { CHI_economy_corporate_tax_income_multiplier_modifier = 0.02 tooltip = corporate_tax_income_multiplier_modifier_tt }
+			newline = yes
+			set_temp_variable = { treasury_change = -11.5 }
+			modify_treasury_effect = yes
 		}
 
 		ai_will_do = {
@@ -12681,7 +12697,7 @@ focus_tree = {
 		id = CHI_smic_zhangjiang
 		icon = construction2
 
-		x = -3
+		x = -4
 		y = 1
 		relative_position_id = CHI_big_fund_phase_1
 
@@ -12697,10 +12713,14 @@ focus_tree = {
 				add_building_construction = { type = microchip_plant level = 1 instant_build = yes }
 			}
 			newline = yes
-			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
-			add_to_variable = { CHI_economy_local_resources_microchips_factor = 0.05 tooltip = local_resources_microchips_factor_tt }
+			add_tech_bonus = {
+				name = CHI_smic_zhangjiang
+				category = CAT_cnc
+				bonus = 0.15
+				uses = 1
+			}
 			newline = yes
-			set_temp_variable = { treasury_change = -8.5 }
+			set_temp_variable = { treasury_change = -11.50 }
 			modify_treasury_effect = yes
 		}
 
@@ -12717,7 +12737,7 @@ focus_tree = {
 		id = CHI_hua_hong_mature_node
 		icon = construction3
 
-		x = 0
+		x = -1
 		y = 1
 		relative_position_id = CHI_smic_zhangjiang
 
@@ -12725,6 +12745,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_ECONOMY FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = CHI_smic_zhangjiang }
+		mutually_exclusive = { focus = CHI_smic_advanced_node }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_hua_hong_mature_node"
@@ -12737,11 +12758,18 @@ focus_tree = {
 				add_building_construction = { type = microchip_plant level = 1 instant_build = yes }
 			}
 			newline = yes
-			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
-			add_to_variable = { CHI_economy_production_speed_microchip_plant_factor = 0.04 tooltip = production_speed_microchip_plant_factor_tt }
-			add_to_variable = { CHI_economy_production_factory_max_efficiency_factor = 0.05 tooltip = production_factory_max_efficiency_factor_tt }
+			add_tech_bonus = {
+				name = CHI_hua_hong_mature_node
+				category = CAT_microchips
+				bonus = 0.25
+				uses = 1
+			}
+			unlock_decision_tooltip = {
+				decision = CHI_mature_node_export_drive_decision
+				show_effect_tooltip = yes
+			}
 			newline = yes
-			set_temp_variable = { treasury_change = -17 }
+			set_temp_variable = { treasury_change = -23 }
 			modify_treasury_effect = yes
 		}
 
@@ -12758,14 +12786,15 @@ focus_tree = {
 		id = CHI_smic_advanced_node
 		icon = construction
 
-		x = 0
-		y = 2
+		x = 1
+		y = 1
 		relative_position_id = CHI_smic_zhangjiang
 
 		cost = 14
 		search_filters = { FOCUS_FILTER_ECONOMY FOCUS_FILTER_INDUSTRY }
 
-		prerequisite = { focus = CHI_hua_hong_mature_node }
+		prerequisite = { focus = CHI_smic_zhangjiang }
+		mutually_exclusive = { focus = CHI_hua_hong_mature_node }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_smic_advanced_node"
@@ -12779,11 +12808,20 @@ focus_tree = {
 			}
 			newline = yes
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
-			add_to_variable = { CHI_economy_production_speed_microchip_plant_factor = 0.05 tooltip = production_speed_microchip_plant_factor_tt }
+			add_to_variable = { CHI_economy_production_speed_microchip_plant_factor = 0.06 tooltip = production_speed_microchip_plant_factor_tt }
 			add_to_variable = { CHI_economy_research_speed_factor = 0.04 tooltip = research_speed_factor_tt }
+			add_to_variable = { CHI_economy_microchip_plant_productivity_modifier = 0.05 tooltip = microchip_plant_productivity_modifier_tt }
+			newline = yes
+			add_tech_bonus = {
+				name = CHI_smic_advanced_node
+				category = CAT_computing_tech
+				bonus = 0.10
+				uses = 1
+			}
 			newline = yes
 			set_temp_variable = { treasury_change = -17 }
 			modify_treasury_effect = yes
+			hidden_effect = { country_event = { id = CHI_semiconductor_events.2 days = 90 } }
 		}
 
 		ai_will_do = {
@@ -12819,10 +12857,18 @@ focus_tree = {
 				add_building_construction = { type = microchip_plant level = 1 instant_build = yes }
 			}
 			newline = yes
-			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
-			add_to_variable = { CHI_economy_production_factory_max_efficiency_factor = 0.03 tooltip = production_factory_max_efficiency_factor_tt }
+			add_tech_bonus = {
+				name = CHI_fabless_design_cluster
+				category = CAT_computing_tech
+				bonus = 0.10
+				uses = 1
+			}
+			unlock_decision_tooltip = {
+				decision = CHI_fabless_provincial_subsidy_decision
+				show_effect_tooltip = yes
+			}
 			newline = yes
-			set_temp_variable = { treasury_change = -17 }
+			set_temp_variable = { treasury_change = -23 }
 			modify_treasury_effect = yes
 		}
 
@@ -12837,20 +12883,49 @@ focus_tree = {
 
 	focus = {
 		id = CHI_hisilicon_kirin
-		icon = x
+		icon = air_production
 
 		x = -1
 		y = 1
 		relative_position_id = CHI_fabless_design_cluster
 
-		cost = 14
+		cost = 5
 		search_filters = { FOCUS_FILTER_ECONOMY FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = CHI_fabless_design_cluster }
+		mutually_exclusive = { focus = CHI_loongson_riscv }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_hisilicon_kirin"
-			one_random_microchip_plant = yes
+			if = {
+				limit = { country_exists = USA }
+				USA = {
+					add_opinion_modifier = {
+						target = ROOT
+						modifier = chi_hisilicon_sanctions_target
+					}
+				}
+			}
+			if = {
+				limit = { has_dlc = "Arms Against Tyranny" }
+				mio:CHI_avic_manufacturer = {
+					unlock_mio_trait_tooltip = CHI_kirin_avionics_trait
+				}
+			}
+			else = {
+				add_tech_bonus = {
+					name = CHI_hisilicon_kirin
+					category = CAT_drones
+					bonus = 0.15
+					uses = 1
+				}
+				add_tech_bonus = {
+					name = CHI_hisilicon_kirin
+					category = CAT_internet_tech
+					bonus = 0.15
+					uses = 1
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -12864,16 +12939,17 @@ focus_tree = {
 
 	focus = {
 		id = CHI_domestic_eda
-		icon = x
+		icon = focus_generic_industral_devlopment_bucket
 
-		x = 1
-		y = 1
+		x = 2
+		y = 2
 		relative_position_id = CHI_fabless_design_cluster
 
 		cost = 10
-		search_filters = { FOCUS_FILTER_ECONOMY FOCUS_FILTER_INDUSTRY }
+		search_filters = { FOCUS_FILTER_ECONOMY FOCUS_FILTER_INDUSTRY FOCUS_FILTER_RESEARCH }
 
-		prerequisite = { focus = CHI_fabless_design_cluster }
+		prerequisite = { focus = CHI_hisilicon_kirin focus = CHI_loongson_riscv }
+		prerequisite = { focus = CHI_strategic_materials focus = CHI_smee_lithography }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_domestic_eda"
@@ -12886,8 +12962,13 @@ focus_tree = {
 				add_building_construction = { type = microchip_plant level = 1 instant_build = yes }
 			}
 			newline = yes
-			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
-			add_to_variable = { CHI_economy_research_speed_factor = 0.05 tooltip = research_speed_factor_tt }
+			add_tech_bonus = {
+				name = CHI_domestic_eda
+				category = CAT_computing_tech
+				bonus = 0.12
+				uses = 1
+			}
+			unlock_decision_tooltip = CHI_replace_synopsys_cadence_decision
 			newline = yes
 			set_temp_variable = { treasury_change = -17 }
 			modify_treasury_effect = yes
@@ -12904,16 +12985,17 @@ focus_tree = {
 
 	focus = {
 		id = CHI_loongson_riscv
-		icon = x
+		icon = focus_generic_industry_investment
 
-		x = 0
-		y = 2
+		x = 1
+		y = 1
 		relative_position_id = CHI_fabless_design_cluster
 
 		cost = 10
 		search_filters = { FOCUS_FILTER_ECONOMY FOCUS_FILTER_INDUSTRY }
 
-		prerequisite = { focus = CHI_domestic_eda }
+		prerequisite = { focus = CHI_fabless_design_cluster }
+		mutually_exclusive = { focus = CHI_hisilicon_kirin }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_loongson_riscv"
@@ -12922,11 +13004,27 @@ focus_tree = {
 				add_building_construction = { type = microchip_plant level = 1 instant_build = yes }
 			}
 			newline = yes
-			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
-			add_to_variable = { CHI_economy_research_speed_factor = 0.03 tooltip = research_speed_factor_tt }
-			add_to_variable = { CHI_economy_trade_opinion_factor = 0.05 tooltip = trade_opinion_factor_tt }
+			add_tech_bonus = {
+				name = CHI_loongson_riscv
+				category = CAT_microchips
+				ahead_reduction = 5
+				uses = 1
+			}
+			random_country = {
+				limit = {
+					OR = {
+						has_government = democratic
+						has_government = neutrality
+					}
+					has_opinion = { target = ROOT value > 20 }
+				}
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = chi_riscv_open_partner
+				}
+			}
 			newline = yes
-			set_temp_variable = { treasury_change = -8.5 }
+			set_temp_variable = { treasury_change = -11.5 }
 			modify_treasury_effect = yes
 		}
 
@@ -12943,7 +13041,7 @@ focus_tree = {
 		id = CHI_naura_amec
 		icon = industry_civilian
 
-		x = 3
+		x = 4
 		y = 1
 		relative_position_id = CHI_big_fund_phase_1
 
@@ -12964,10 +13062,10 @@ focus_tree = {
 			}
 			newline = yes
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
-			add_to_variable = { CHI_economy_production_speed_microchip_plant_factor = 0.04 tooltip = production_speed_microchip_plant_factor_tt }
-			add_to_variable = { CHI_economy_production_speed_buildings_factor = 0.04 tooltip = production_speed_buildings_factor_tt }
+			add_to_variable = { CHI_economy_production_speed_buildings_factor = 0.05 tooltip = production_speed_buildings_factor_tt }
+			add_to_variable = { CHI_economy_production_speed_facility_factor = 0.04 tooltip = production_speed_facility_factor_tt }
 			newline = yes
-			set_temp_variable = { treasury_change = -17 }
+			set_temp_variable = { treasury_change = -23 }
 			modify_treasury_effect = yes
 		}
 
@@ -12982,9 +13080,9 @@ focus_tree = {
 
 	focus = {
 		id = CHI_strategic_materials
-		icon = x
+		icon = focus_generic_expand_gold_mining
 
-		x = 0
+		x = -1
 		y = 1
 		relative_position_id = CHI_naura_amec
 
@@ -12992,23 +13090,34 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_ECONOMY FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = CHI_naura_amec }
+		mutually_exclusive = { focus = CHI_smee_lithography }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_strategic_materials"
-			540 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = { type = microchip_plant level = 1 instant_build = yes }
+			random_owned_state = {
+				add_resource = {
+					type = chromium
+					amount = 8
+				}
 			}
-			564 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = { type = microchip_plant level = 1 instant_build = yes }
+			random_owned_state = {
+				add_resource = {
+					type = tungsten
+					amount = 8
+				}
 			}
 			newline = yes
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
-			add_to_variable = { CHI_economy_production_speed_microchip_plant_factor = 0.04 tooltip = production_speed_microchip_plant_factor_tt }
-			add_to_variable = { CHI_economy_production_factory_max_efficiency_factor = 0.03 tooltip = production_factory_max_efficiency_factor_tt }
+			add_to_variable = { CHI_economy_local_resources_chromium_factor = 0.10 tooltip = local_resources_chromium_factor_tt }
+			add_to_variable = { CHI_economy_local_resources_tungsten_factor = 0.10 tooltip = local_resources_tungsten_factor_tt }
+			add_to_variable = { CHI_economy_resource_export_multiplier_modifier = 0.05 tooltip = resource_export_multiplier_modifier_tt }
 			newline = yes
-			set_temp_variable = { treasury_change = -17 }
+			unlock_decision_tooltip = {
+				decision = CHI_critical_minerals_export_license_decision
+				show_effect_tooltip = yes
+			}
+			newline = yes
+			set_temp_variable = { treasury_change = -15 }
 			modify_treasury_effect = yes
 		}
 
@@ -13023,16 +13132,17 @@ focus_tree = {
 
 	focus = {
 		id = CHI_smee_lithography
-		icon = x
+		icon = rally_the_industrialists
 
-		x = 2
+		x = 1
 		y = 1
 		relative_position_id = CHI_naura_amec
 
 		cost = 14
-		search_filters = { FOCUS_FILTER_ECONOMY FOCUS_FILTER_INDUSTRY }
+		search_filters = { FOCUS_FILTER_ECONOMY FOCUS_FILTER_INDUSTRY FOCUS_FILTER_RESEARCH }
 
 		prerequisite = { focus = CHI_naura_amec }
+		mutually_exclusive = { focus = CHI_strategic_materials }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_smee_lithography"
@@ -13042,11 +13152,29 @@ focus_tree = {
 			}
 			newline = yes
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
-			add_to_variable = { CHI_economy_production_speed_microchip_plant_factor = 0.05 tooltip = production_speed_microchip_plant_factor_tt }
-			add_to_variable = { CHI_economy_research_speed_factor = 0.04 tooltip = research_speed_factor_tt }
+			add_to_variable = { CHI_economy_production_speed_microchip_plant_factor = 0.10 tooltip = production_speed_microchip_plant_factor_tt }
 			newline = yes
-			set_temp_variable = { treasury_change = -8.5 }
+			add_tech_bonus = {
+				name = CHI_smee_lithography
+				category = CAT_microchips
+				bonus = 0.15
+				uses = 1
+			}
+			add_tech_bonus = {
+				name = CHI_smee_lithography
+				category = CAT_compCAT_microchipsuting_tech
+				ahead_reduction = 5
+				uses = 1
+			}
+			newline = yes
+			unlock_decision_tooltip = {
+				decision = CHI_duv_breakthrough_decision
+				show_effect_tooltip = yes
+			}
+			newline = yes
+			set_temp_variable = { treasury_change = -11.5 }
 			modify_treasury_effect = yes
+			hidden_effect = { country_event = { id = CHI_semiconductor_events.3 days = 180 } }
 		}
 
 		ai_will_do = {
@@ -13060,36 +13188,49 @@ focus_tree = {
 
 	focus = {
 		id = CHI_memory_independence
-		icon = x
+		icon = ENG_silicon_glen
 
-		x = -2
-		y = 4
-		relative_position_id = CHI_big_fund_phase_1
+		x = 0
+		y = 2
+		relative_position_id = CHI_smic_zhangjiang
 
 		cost = 14
 		search_filters = { FOCUS_FILTER_ECONOMY FOCUS_FILTER_INDUSTRY }
 
-		prerequisite = { focus = CHI_smic_advanced_node }
-		prerequisite = { focus = CHI_naura_amec }
+		prerequisite = { focus = CHI_smic_advanced_node focus = CHI_hua_hong_mature_node }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_memory_independence"
 			570 = {
 				add_extra_state_shared_building_slots = 2
-				add_building_construction = { type = industrial_complex level = 2 instant_build = yes }
+				add_building_construction = { type = microchip_plant level = 2 instant_build = yes }
 			}
 			564 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = { type = industrial_complex level = 2 instant_build = yes }
 			}
 			newline = yes
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
-			add_to_variable = { CHI_economy_production_speed_microchip_plant_factor = 0.07 tooltip = production_speed_microchip_plant_factor_tt }
-			add_to_variable = { CHI_economy_research_speed_factor = 0.04 tooltip = research_speed_factor_tt }
-			add_to_variable = { CHI_economy_local_resources_microchips_factor = 0.08 tooltip = local_resources_microchips_factor_tt }
+			add_to_variable = { CHI_economy_local_resources_microchips_factor = 0.05 tooltip = local_resources_microchips_factor_tt }
+			add_to_variable = { CHI_economy_microchip_plant_productivity_modifier = 0.05 tooltip = microchip_plant_productivity_modifier_tt }
 			newline = yes
-			set_temp_variable = { treasury_change = -25.5 }
+			unlock_decision_tooltip = {
+				decision = CHI_cxmt_hbm_qualification_decision
+				show_effect_tooltip = yes
+			}
+			if = {
+				limit = { NOT = { has_dlc = "Arms Against Tyranny" } }
+				add_tech_bonus = {
+					name = CHI_memory_independence
+					category = CAT_aa_missiles
+					bonus = 0.30
+					uses = 1
+				}
+			}
+			newline = yes
+			set_temp_variable = { treasury_change = -40 }
 			modify_treasury_effect = yes
+			hidden_effect = { country_event = { id = CHI_semiconductor_events.4 days = 60 } }
 		}
 
 		ai_will_do = {
@@ -13103,18 +13244,21 @@ focus_tree = {
 
 	focus = {
 		id = CHI_big_fund_phase2
-		icon = x
+		icon = focus_generic_stockpile_currency
 
 		x = 0
-		y = 5
+		y = 4
 		relative_position_id = CHI_big_fund_phase_1
 
 		cost = 14
 		search_filters = { FOCUS_FILTER_ECONOMY FOCUS_FILTER_INDUSTRY }
 
 		prerequisite = { focus = CHI_memory_independence }
-		prerequisite = { focus = CHI_loongson_riscv }
-		prerequisite = { focus = CHI_smee_lithography }
+		prerequisite = { focus = CHI_domestic_eda }
+
+		available = {
+			NOT = { has_idea = CHI_big_fund_phase_1_idea }
+		}
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_big_fund_phase2"
@@ -13133,9 +13277,12 @@ focus_tree = {
 			newline = yes
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
 			add_to_variable = { CHI_economy_research_speed_factor = 0.05 tooltip = research_speed_factor_tt }
-			add_to_variable = { CHI_economy_production_factory_max_efficiency_factor = 0.06 tooltip = production_factory_max_efficiency_factor_tt }
+			add_to_variable = { CHI_economy_production_factory_max_efficiency_factor = 0.05 tooltip = production_factory_max_efficiency_factor_tt }
+			add_to_variable = { CHI_economy_receiving_investment_cost_modifier = -0.05 tooltip = receiving_investment_cost_modifier_tt }
+			add_to_variable = { CHI_economy_return_on_investment_modifier = 0.03 tooltip = return_on_investment_modifier_tt }
+			unlock_decision_tooltip = CHI_big_fund_iii_allocate_tranche_decision
 			newline = yes
-			set_temp_variable = { treasury_change = -25.5 }
+			set_temp_variable = { treasury_change = -34.5 }
 			modify_treasury_effect = yes
 		}
 
@@ -13149,11 +13296,11 @@ focus_tree = {
 	}
 
 	focus = {
-		id = CHI_mature_node_counter_offensive
-		icon = x
+		id = CHI_mature_node_counter_offensive #The boycott needs to be an idea and be worked with it
+		icon = focus_PRC_urbanization_two
 
-		x = 0
-		y = 6
+		x = -1
+		y = 5
 		relative_position_id = CHI_big_fund_phase_1
 
 		cost = 10
@@ -13179,8 +13326,10 @@ focus_tree = {
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
 			add_to_variable = { CHI_economy_production_speed_microchip_plant_factor = 0.05 tooltip = production_speed_microchip_plant_factor_tt }
 			add_to_variable = { CHI_economy_trade_opinion_factor = 0.08 tooltip = trade_opinion_factor_tt }
+			add_to_variable = { CHI_economy_resource_export_multiplier_modifier = 0.06 tooltip = resource_export_multiplier_modifier_tt }
+			add_to_variable = { CHI_economy_consumer_goods_factor = -0.04 tooltip = consumer_goods_factor_tt }
 			newline = yes
-			set_temp_variable = { treasury_change = -25.5 }
+			set_temp_variable = { treasury_change = -34.5 }
 			modify_treasury_effect = yes
 		}
 
@@ -13195,16 +13344,16 @@ focus_tree = {
 
 	focus = {
 		id = CHI_sicarrier_euv
-		icon = x
+		icon = national_grid
 
-		x = 0
-		y = 7
+		x = 1
+		y = 5
 		relative_position_id = CHI_big_fund_phase_1
 
 		cost = 14
 		search_filters = { FOCUS_FILTER_ECONOMY FOCUS_FILTER_INDUSTRY }
 
-		prerequisite = { focus = CHI_mature_node_counter_offensive }
+		prerequisite = { focus = CHI_big_fund_phase2 }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_sicarrier_euv"
@@ -13214,11 +13363,33 @@ focus_tree = {
 			}
 			newline = yes
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
-			add_to_variable = { CHI_economy_production_speed_microchip_plant_factor = 0.18 tooltip = production_speed_microchip_plant_factor_tt }
-			add_to_variable = { CHI_economy_research_speed_factor = 0.06 tooltip = research_speed_factor_tt }
-			add_to_variable = { CHI_economy_local_resources_microchips_factor = 0.08 tooltip = local_resources_microchips_factor_tt }
+			add_to_variable = { CHI_economy_local_resources_microchips_factor = 0.08 tooltip = local_resources_microchips_factor_tt }			add_to_variable = { CHI_economy_energy_use_modifier_microchip_plant = -0.10 tooltip = energy_use_modifier_microchip_plant_tt }
 			newline = yes
-			set_temp_variable = { treasury_change = -17 }
+			if = {
+				limit = { NOT = { has_dlc = "Arms Against Tyranny" } }
+				add_tech_bonus = {
+					name = CHI_sicarrier_euv
+					category = CAT_missile
+					bonus = 0.25
+					uses = 1
+				}
+				add_tech_bonus = {
+					name = CHI_sicarrier_euv
+					category = CAT_computing_tech
+					bonus = 0.25
+					uses = 1
+				}
+			}
+			else = {
+				mio:CHI_casc_manufacturer = {
+					unlock_mio_trait_tooltip = CHI_indigenous_euv_trait
+				}
+				mio:CHI_cetc_manufacturer = {
+					unlock_mio_trait_tooltip = CHI_indigenous_euv_trait_cetc
+				}
+			}
+			newline = yes
+			set_temp_variable = { treasury_change = -23 }
 			modify_treasury_effect = yes
 		}
 
@@ -14067,7 +14238,7 @@ focus_tree = {
 		id = CHI_wto_commercial_bank_reform
 		icon = x
 
-		x = 29
+		x = 25
 		y = 3
 		relative_position_id = CHI_coastal_sez_2nd_generation
 
@@ -14086,9 +14257,21 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_wto_commercial_bank_reform"
+			add_tech_bonus = {
+				name = CHI_wto_commercial_bank_reform
+				bonus = 1.0
+				uses = 1
+				category = CAT_Civilian
+			}
+			newline = yes
+			add_timed_idea = { idea = CHI_commercial_bank_law_idea days = 1095 }
+			newline = yes
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
-			add_to_variable = { CHI_economy_corporate_tax_income_multiplier_modifier = 0.025 tooltip = corporate_tax_income_multiplier_modifier_tt }
+			add_to_variable = { CHI_economy_corporate_tax_income_multiplier_modifier = 0.05 tooltip = corporate_tax_income_multiplier_modifier_tt }
 			add_to_variable = { CHI_economy_interest_rate_multiplier_modifier = -0.25 tooltip = interest_rate_multiplier_modifier_tt }
+			newline = yes
+			set_temp_variable = { treasury_change = -50 }
+			modify_treasury_effect = yes
 		}
 
 		ai_will_do = {
@@ -14115,12 +14298,14 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_big_four_ipo"
-			set_temp_variable = { treasury_change = -200 }
-			modify_treasury_effect = yes
+			add_timed_idea = { idea = CHI_banking_modernised_idea days = 1095 }
 			newline = yes
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
-			add_to_variable = { CHI_economy_office_park_income_tax_modifier = 0.04 tooltip = office_park_income_tax_modifier_tt }
-			add_to_variable = { CHI_economy_corporate_tax_income_multiplier_modifier = 0.03 tooltip = corporate_tax_income_multiplier_modifier_tt }
+			add_to_variable = { CHI_economy_office_park_income_tax_modifier = 0.05 tooltip = office_park_income_tax_modifier_tt }
+			add_to_variable = { CHI_economy_corporate_tax_income_multiplier_modifier = 0.05 tooltip = corporate_tax_income_multiplier_modifier_tt }
+			newline = yes
+			set_temp_variable = { treasury_change = 50 }
+			modify_treasury_effect = yes
 		}
 
 		ai_will_do = {
@@ -14147,12 +14332,16 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_shadow_banking_cleanup"
-			set_temp_variable = { treasury_change = -100 }
-			modify_treasury_effect = yes
+			add_stability = -0.05
+			newline = yes
+			add_timed_idea = { idea = CHI_amc_bad_debt_idea days = 1460 }
 			newline = yes
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
-			add_to_variable = { CHI_economy_inflation_cost_multiplier_modifier = -0.04 tooltip = inflation_cost_multiplier_modifier_tt }
-			add_to_variable = { CHI_economy_interest_rate_multiplier_modifier = -0.03 tooltip = interest_rate_multiplier_modifier_tt }
+			add_to_variable = { CHI_economy_inflation_cost_multiplier_modifier = -0.05 tooltip = inflation_cost_multiplier_modifier_tt }
+			add_to_variable = { CHI_economy_return_on_investment_modifier = 0.05 tooltip = return_on_investment_modifier_tt }
+			newline = yes
+			set_temp_variable = { treasury_change = -50 }
+			modify_treasury_effect = yes
 		}
 
 		ai_will_do = {
@@ -14179,12 +14368,23 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_stock_exchanges_shanghai_shenzhen"
-			set_temp_variable = { treasury_change = -150 }
-			modify_treasury_effect = yes
+			532 = {
+				add_building_construction = {
+					type = offices
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			newline = yes
+			add_timed_idea = { idea = CHI_stock_connect_idea days = 1095 }
 			newline = yes
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
 			add_to_variable = { CHI_economy_office_park_income_tax_modifier = 0.05 tooltip = office_park_income_tax_modifier_tt }
-			add_to_variable = { CHI_economy_corporate_tax_income_multiplier_modifier = 0.02 tooltip = corporate_tax_income_multiplier_modifier_tt }
+			add_to_variable = { CHI_economy_production_speed_offices_factor = 0.05 tooltip = production_speed_offices_factor_tt }
+			newline = yes
+			set_temp_variable = { treasury_change = -50 }
+			modify_treasury_effect = yes
 		}
 
 		ai_will_do = {
@@ -14211,12 +14411,14 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_policy_banks_cdb"
-			set_temp_variable = { treasury_change = -150 }
-			modify_treasury_effect = yes
+			add_timed_idea = { idea = CHI_policy_bank_lending_idea days = 1825 }
 			newline = yes
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
-			add_to_variable = { CHI_economy_production_speed_buildings_factor = 0.04 tooltip = production_speed_buildings_factor_tt }
-			add_to_variable = { CHI_economy_interest_rate_multiplier_modifier = -0.03 tooltip = interest_rate_multiplier_modifier_tt }
+			add_to_variable = { CHI_economy_production_speed_buildings_factor = 0.05 tooltip = production_speed_buildings_factor_tt }
+			add_to_variable = { CHI_economy_interest_rate_multiplier_modifier = -0.05 tooltip = interest_rate_multiplier_modifier_tt }
+			newline = yes
+			set_temp_variable = { treasury_change = -50 }
+			modify_treasury_effect = yes
 		}
 
 		ai_will_do = {
@@ -14243,12 +14445,16 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_three_red_lines_crackdown"
-			set_temp_variable = { treasury_change = -50 }
-			modify_treasury_effect = yes
+			add_stability = -0.05
+			newline = yes
+			add_timed_idea = { idea = CHI_property_sector_contraction_idea days = 1460 }
 			newline = yes
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
-			add_to_variable = { CHI_economy_inflation_cost_multiplier_modifier = -0.03 tooltip = inflation_cost_multiplier_modifier_tt }
-			add_to_variable = { CHI_economy_health_cost_multiplier_modifier = -0.03 tooltip = health_cost_multiplier_modifier_tt }
+			add_to_variable = { CHI_economy_inflation_cost_multiplier_modifier = -0.05 tooltip = inflation_cost_multiplier_modifier_tt }
+			add_to_variable = { CHI_economy_return_on_investment_modifier = 0.03 tooltip = return_on_investment_modifier_tt }
+			newline = yes
+			set_temp_variable = { treasury_change = -50 }
+			modify_treasury_effect = yes
 		}
 
 		ai_will_do = {
@@ -14275,12 +14481,21 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_star_market_bse"
-			set_temp_variable = { treasury_change = -150 }
-			modify_treasury_effect = yes
+			add_tech_bonus = {
+				name = CHI_star_market_bse
+				bonus = 1.0
+				uses = 2
+				category = CAT_computing_tech
+			}
+			newline = yes
+			add_timed_idea = { idea = CHI_registration_based_ipo_idea days = 1095 }
 			newline = yes
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
-			add_to_variable = { CHI_economy_research_speed_factor = 0.03 tooltip = research_speed_factor_tt }
-			add_to_variable = { CHI_economy_production_speed_microchip_plant_factor = 0.04 tooltip = production_speed_microchip_plant_factor_tt }
+			add_to_variable = { CHI_economy_research_speed_factor = 0.05 tooltip = research_speed_factor_tt }
+			add_to_variable = { CHI_economy_production_speed_microchip_plant_factor = 0.05 tooltip = production_speed_microchip_plant_factor_tt }
+			newline = yes
+			set_temp_variable = { treasury_change = -50 }
+			modify_treasury_effect = yes
 		}
 
 		ai_will_do = {
@@ -14307,12 +14522,15 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_joint_stock_city_banks"
-			set_temp_variable = { treasury_change = -100 }
-			modify_treasury_effect = yes
+			add_timed_idea = { idea = CHI_gradual_reform_idea days = 1825 }
 			newline = yes
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
-			add_to_variable = { CHI_economy_corporate_tax_income_multiplier_modifier = 0.02 tooltip = corporate_tax_income_multiplier_modifier_tt }
+			add_to_variable = { CHI_economy_production_speed_offices_factor = 0.05 tooltip = production_speed_offices_factor_tt }
+			add_to_variable = { CHI_economy_corporate_tax_income_multiplier_modifier = 0.05 tooltip = corporate_tax_income_multiplier_modifier_tt }
 			add_to_variable = { CHI_economy_bureaucracy_cost_multiplier_modifier = -0.03 tooltip = bureaucracy_cost_multiplier_modifier_tt }
+			newline = yes
+			set_temp_variable = { treasury_change = -50 }
+			modify_treasury_effect = yes
 		}
 
 		ai_will_do = {
@@ -14340,12 +14558,23 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_cic_forex_reserves"
-			set_temp_variable = { treasury_change = -200 }
-			modify_treasury_effect = yes
+			547 = {
+				add_building_construction = {
+					type = offices
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			newline = yes
+			add_timed_idea = { idea = CHI_sovereign_wealth_diversification_idea days = 1825 }
 			newline = yes
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
-			add_to_variable = { CHI_economy_office_park_income_tax_modifier = 0.04 tooltip = office_park_income_tax_modifier_tt }
-			add_to_variable = { CHI_economy_education_cost_multiplier_modifier = -0.03 tooltip = education_cost_multiplier_modifier_tt }
+			add_to_variable = { CHI_economy_office_park_income_tax_modifier = 0.05 tooltip = office_park_income_tax_modifier_tt }
+			add_to_variable = { CHI_economy_return_on_investment_modifier = 0.05 tooltip = return_on_investment_modifier_tt }
+			newline = yes
+			set_temp_variable = { treasury_change = -50 }
+			modify_treasury_effect = yes
 		}
 
 		ai_will_do = {
@@ -14373,12 +14602,15 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_rmb_internationalisation"
-			set_temp_variable = { treasury_change = -150 }
-			modify_treasury_effect = yes
+			add_timed_idea = { idea = CHI_cips_expansion_idea days = 1825 }
 			newline = yes
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
 			add_to_variable = { CHI_economy_inflation_cost_multiplier_modifier = -0.05 tooltip = inflation_cost_multiplier_modifier_tt }
-			add_to_variable = { CHI_economy_interest_rate_multiplier_modifier = -0.04 tooltip = interest_rate_multiplier_modifier_tt }
+			add_to_variable = { CHI_economy_interest_rate_multiplier_modifier = -0.05 tooltip = interest_rate_multiplier_modifier_tt }
+			add_to_variable = { CHI_economy_trade_opinion_factor = 0.05 tooltip = trade_opinion_factor_neutral_tt }
+			newline = yes
+			set_temp_variable = { treasury_change = -50 }
+			modify_treasury_effect = yes
 		}
 
 		ai_will_do = {
