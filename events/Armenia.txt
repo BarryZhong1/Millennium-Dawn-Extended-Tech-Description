@@ -3919,12 +3919,12 @@ country_event = {
 		eurosceptic_change = yes
 		add_opinion_modifier = { modifier = recent_actions_positive target = GRE }
 		reverse_add_opinion_modifier = { modifier = recent_actions_positive target = GRE }
-		every_other_country = {
-			limit = {
-				has_idea = EU_member
-				NOT = { tag = GRE }
+		for_each_scope_loop = {
+			array = global.EU_member
+			tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+			if = { limit = { NOT = { tag = GRE } }
+				add_opinion_modifier = { target = ARM modifier = supports_us }
 			}
-			add_opinion_modifier = { target = ARM modifier = supports_us }
 		}
 	}
 }
@@ -4619,14 +4619,8 @@ country_event = {
 				type = annex_everything
 			}
 		}
-		add_opinion_modifier = {
-			modifier = recent_actions_negative
-			target = ARM
-		}
-		reverse_add_opinion_modifier = {
-			modifier = recent_actions_negative
-			target = ARM
-		}
+		add_opinion_modifier = { modifier = recent_actions_negative target = ARM }
+		reverse_add_opinion_modifier = { modifier = recent_actions_negative target = ARM }
 	}
 }
 
@@ -5572,7 +5566,7 @@ country_event = {
 	option = {
 		name = arme.125.a
 		log = "[GetDateText]: [This.GetName]: arme.125.a executed"
-		add_ideas = Major_Non_NATO_Ally
+		NATO_major_non_nato_ally_join = yes
 		add_opinion_modifier = { target = USA modifier = recent_actions_positive }
 		reverse_add_opinion_modifier = { target = USA modifier = recent_actions_positive }
 	}
@@ -6134,10 +6128,9 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: arme.138.a executed"
 		add_ideas = ARM_eu_coop_agreement
 		ARM_eu_ger_fra_check_script = yes
-		every_other_country = {
-			limit = {
-				has_idea = EU_member
-			}
+		for_each_scope_loop = {
+			array = global.EU_member
+			tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 			add_opinion_modifier = { target = ARM modifier = recent_actions_positive }
 		}
 		ai_chance = {
@@ -6266,10 +6259,9 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: arme.141.a executed"
 		ARM_eu_cooperation_script = yes
 		ARM_eu_ger_fra_check_script = yes
-		every_other_country = {
-			limit = {
-				has_idea = EU_member
-			}
+		for_each_scope_loop = {
+			array = global.EU_member
+			tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 			add_opinion_modifier = { target = ARM modifier = recent_actions_positive }
 		}
 		ai_chance = {
@@ -6811,10 +6803,9 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: arme.159.a executed"
 		add_ideas = ARM_eu_lgbt
 		ARM_eu_ger_fra_check_script = yes
-		every_other_country = {
-			limit = {
-				has_idea = EU_member
-			}
+		for_each_scope_loop = {
+			array = global.EU_member
+			tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 			add_opinion_modifier = { target = ARM modifier = recent_actions_positive }
 		}
 		ai_chance = {
@@ -8110,10 +8101,9 @@ country_event = {
 		add_political_power = 100
 		set_temp_variable = { treasury_change = -4 }
 		modify_treasury_effect = yes
-		every_other_country = {
-			limit = {
-				has_idea = EU_member
-			}
+		for_each_scope_loop = {
+			array = global.EU_member
+			tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 			add_opinion_modifier = { target = AZE modifier = recent_actions_negative }
 		}
 		HUN = {
@@ -8137,18 +8127,11 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: arme.195.a executed"
 		set_temp_variable = { treasury_change = 4 }
 		modify_treasury_effect = yes
-		add_opinion_modifier = {
-			modifier = recent_actions_positive
-			target = AZE
-		}
-		reverse_add_opinion_modifier = {
-			modifier = recent_actions_positive
-			target = AZE
-		}
-		every_other_country = {
-			limit = {
-				has_idea = EU_member
-			}
+		add_opinion_modifier = { modifier = recent_actions_positive target = AZE }
+		reverse_add_opinion_modifier = { modifier = recent_actions_positive target = AZE }
+		for_each_scope_loop = {
+			array = global.EU_member
+			tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 			add_opinion_modifier = { target = HUN modifier = recent_actions_negative }
 		}
 	}
