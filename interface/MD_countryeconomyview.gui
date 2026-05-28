@@ -959,6 +959,8 @@ guiTypes = {
                             format = LEFT
                             #alwaystransparent = yes
                             fixedsize=yes
+                            pdx_tooltip = "PERSONAL_INCOME_TAXES_TOOLTIP"
+                            pdx_tooltip_delayed = "PERSONAL_INCOME_TAXES_TOOLTIP_DELAYED"
                         }
 
                         instantTextboxType = {
@@ -972,6 +974,8 @@ guiTypes = {
                             format = RIGHT
                             #alwaystransparent = yes
                             fixedsize=yes
+                            pdx_tooltip = "PERSONAL_INCOME_TAXES_TOOLTIP"
+                            pdx_tooltip_delayed = "PERSONAL_INCOME_TAXES_TOOLTIP_DELAYED"
                         }
 
                         instantTextboxType = {
@@ -985,6 +989,8 @@ guiTypes = {
                             format = LEFT
                             #alwaystransparent = yes
                             fixedsize=yes
+                            pdx_tooltip = "CORPORATE_INCOME_TAXES_TOOLTIP"
+                            pdx_tooltip_delayed = "CORPORATE_INCOME_TAXES_TOOLTIP_DELAYED"
                         }
 
                         instantTextboxType = {
@@ -998,6 +1004,8 @@ guiTypes = {
                             format = RIGHT
                             #alwaystransparent = yes
                             fixedsize=yes
+                            pdx_tooltip = "CORPORATE_INCOME_TAXES_TOOLTIP"
+                            pdx_tooltip_delayed = "CORPORATE_INCOME_TAXES_TOOLTIP_DELAYED"
                         }
 
                         instantTextboxType = {
@@ -1011,6 +1019,8 @@ guiTypes = {
                             format = LEFT
                             #alwaystransparent = yes
                             fixedsize=yes
+                            pdx_tooltip = "GOVERNMENT_INVESTMENT_TOOLTIP"
+                            pdx_tooltip_delayed = "GOVERNMENT_INVESTMENT_TOOLTIP_DELAYED"
                         }
 
                         instantTextboxType = {
@@ -1024,6 +1034,8 @@ guiTypes = {
                             format = right
                             #alwaystransparent = yes
                             fixedsize=yes
+                            pdx_tooltip = "GOVERNMENT_INVESTMENT_TOOLTIP"
+                            pdx_tooltip_delayed = "GOVERNMENT_INVESTMENT_TOOLTIP_DELAYED"
                         }
 
                         instantTextboxType = {
@@ -2098,7 +2110,7 @@ guiTypes = {
                 containerWindowType = {
                     name = "workforce_stats"
                     position = { x=10 y=58 }
-                    size = { width = 230 height = 173 }
+                    size = { width = 230 height = 230 }
 
                     background = {
                         name = "Background"
@@ -2157,7 +2169,7 @@ guiTypes = {
                     
                     containerWindowType = {
                         name = "rate_container"
-                        position = { x=5 y=47 }
+                        position = { x=5 y=52 }
                         size = { width = 300 height = 200 }
 
                         background = {
@@ -2194,7 +2206,7 @@ guiTypes = {
 
                     containerWindowType = {
                         name = "average_worker_fullfillment_container"
-                        position = { x=5 y=87 }
+                        position = { x=5 y=97 }
                         size = { width = 300 height = 200 }
 
                         background = {
@@ -2231,7 +2243,7 @@ guiTypes = {
 
                     containerWindowType = {
                         name = "max_migration_rate_container"
-                        position = { x=5 y=127 }
+                        position = { x=5 y=142 }
                         size = { width = 300 height = 200 }
 
                         background = {
@@ -2268,7 +2280,7 @@ guiTypes = {
 
                     containerWindowType = {
                         name = "migration_rate_container"
-                        position = { x=0 y=215 }
+                        position = { x=5 y=186 }
                         size = { width = 300 height = 200 }
 
                         background = {
@@ -2307,528 +2319,914 @@ guiTypes = {
                 containerWindowType = {
                     name = "emplyment_change_container"
                     position = { x = 242 y = 58 }
-                    size = { width = 420 height = 140 }
-                    margin = { left = 5 top = 10 }
+                    size = { width = 420 height = 232 }
+                    margin = { left = 8 top = 10 }
 
                     background = {
                         name = "Background"
                         quadTextureSprite ="GFX_md_tiled_window1_border"
                     }
 
-                    # instantTextboxType = {
-                    #     name = "title"
-                    #     position = { x = 205 y = -60 }
-                    #     font = "hoi_30header"
-                    #     borderSize = { x = 0 y = 0 }
-                    #     text = "EMPLYMENT_CHANGE_TITLE"
-                    #     maxWidth = 200
-                    #     maxHeight = 40
-                    #     format = right
-                    #     #alwaystransparent = yes
-                    #     fixedsize=yes
-                    # }
+                    instantTextboxType = {
+                        name = "title"
+                        position = { x = 6 y = 0 }
+                        font = "hoi_30header"
+                        borderSize = { x = 0 y = 0 }
+                        text = "EMPLYMENT_CHANGE_TITLE"
+                        maxWidth = 280
+                        maxHeight = 40
+                        format = left
+                        #alwaystransparent = yes
+                        fixedsize=yes
+                    }
 
                     containerWindowType = {
                         name = "employment_change_civ"
-                        position = { x = 25 y = 20 }
+                        position = { x = 0 y =35 }
+                        size = { width=135 height=58 }
+
+                        background = {
+                            name = "Background"
+                            quadTextureSprite ="GFX_md_tiled_window1_border"
+                        }
 
                         iconType = {
-                            name ="background"
-                            spriteType = "GFX_generic_box_smallest"
+                            name ="Box"
+                            spriteType = "GFX_generic_box_small"
+                            position = { x = 23 y = 24 }
+                            alwaystransparent = yes
                         }
+
                         iconType = {
-                            name = "icon"
+                            name = "Icon"
                             spriteType = "GFX_state_buildings_strip"
                             frame = 1
-                            position = { x = 0 y = 0 }
+                            position = { x = 23 y = 22 }
+                            alwaystransparent = yes
                         }
+
                         instantTextBoxType = {
-                            name = "rate"
-                            position = { x = 20 y = 4 }
+                            name = "amount"
+                            position = { x = 42 y = 27 }
                             font = "hoi_18mbs"
-                            text = "[?population_tax_rate]%"
+                            text = "[?ROOT.military_factory_employment_var|.0%]"
                             format = centre
                             maxWidth = 55
                             maxHeight = 24
                             fixedsize = yes
-                            pdx_tooltip = "POPULATION_TAX_RATE_TT"
+                            alwaystransparent = yes
                         }
+
                         instantTextBoxType = {
                             name = "title"
-                            position = { x = -32 y = -22 }
+                            position = { x = 3 y = 4 }
                             font = "hoi_18mbs"
                             text = "EMPLOYMENT_CHANGE_CIV"
                             format = center
-                            maxWidth = 150
+                            maxWidth = 130
                             maxHeight = 24
                             fixedsize = yes
                             pdx_tooltip = "POPULATION_TAX_RATE_TT"
                         }
 
                         containerWindowType = {
-                            name = "increase_population_tax"
-                            position = { x = 68 y = -3 }
+                            name = "change_amount"
+                            position = { x = 90 y = 23 }
 
                             buttonType = {
-                                name = "increase_population_tax"
-                                spriteType = "GFX_small_plus_button"
-                                position = { x = 0 y = 0 }
-                                pdx_tooltip = "increases_population_tax_tooltip"
-                                pdx_tooltip_delayed = "increases_population_tax_delayed_tooltip"
+                                name = "increase_leased_civilian_factories"
+                                spriteType = "GFX_md_collapse_button"
+                                frame = 2
+                                position = { x = 1 y = 0 }
                             }
-
-                            instantTextBoxType = {
-                                name = "increase_population_tax_tooltip"
-                                position = { x = 0 y = 0 }
-                                font = "hoi_18mbs"
-                                format = left
-                                maxWidth = 24
-                                maxHeight = 24
-                                fixedsize = yes
-                                pdx_tooltip = "increases_population_tax_tooltip"
-                                pdx_tooltip_delayed = "increases_population_tax_delayed_tooltip"
-                            }
-                        }
-                        containerWindowType = {
-                            name = "decrease_population_tax"
-                            position = { x = 68 y = 12 }
 
                             buttonType = {
-                                name = "decrease_population_tax"
-                                spriteType = "GFX_small_minus_button"
-                                position = { x = 0 y = 0 }
-                                pdx_tooltip = "decreases_population_tax_tooltip"
-                                pdx_tooltip_delayed = "decreases_population_tax_delayed_tooltip"
-                            }
-
-                            instantTextBoxType = {
-                                name = "decrease_corporate_tax_tooltip"
-                                position = { x = 0 y = 0 }
-                                font = "hoi_18mbs"
-                                format = left
-                                maxWidth = 24
-                                maxHeight = 24
-                                fixedsize = yes
-                                pdx_tooltip = "decreases_population_tax_tooltip"
-                                pdx_tooltip_delayed = "decreases_population_tax_delayed_tooltip"
+                                name = "decrease_leased_civilian_factories"
+                                spriteType = "GFX_md_collapse_button"
+                                frame = 1
+                                position = { x = 0 y = 12 }
                             }
                         }
                     }
 
                     containerWindowType = {
                         name = "employment_change_mil"
-                        position = { x = 170 y = 20 }
+                        position = { x = 135 y =35 }
+                        size = { width=135 height=58 }
+
+                        background = {
+                            name = "Background"
+                            quadTextureSprite ="GFX_md_tiled_window1_border"
+                        }
 
                         iconType = {
-                            name ="background"
-                            spriteType = "GFX_generic_box_smallest"
+                            name ="Box"
+                            spriteType = "GFX_generic_box_small"
+                            position = { x = 23 y = 24 }
+                            alwaystransparent = yes
                         }
+
                         iconType = {
-                            name = "icon"
+                            name = "Icon"
                             spriteType = "GFX_state_buildings_strip"
                             frame = 2
-                            position = { x = 0 y = 0 }
+                            position = { x = 23 y = 22 }
+                            alwaystransparent = yes
                         }
+
                         instantTextBoxType = {
-                            name = "rate"
-                            position = { x = 20 y = 4 }
+                            name = "amount"
+                            position = { x = 42 y = 27 }
                             font = "hoi_18mbs"
-                            text = "[?population_tax_rate]%"
+                            text = "[?ROOT.civilian_factory_employment_var|.0%]"
                             format = centre
                             maxWidth = 55
                             maxHeight = 24
                             fixedsize = yes
-                            pdx_tooltip = "POPULATION_TAX_RATE_TT"
+                            alwaystransparent = yes
                         }
+
                         instantTextBoxType = {
                             name = "title"
-                            position = { x = -32 y = -22 }
+                            position = { x = 3 y = 4 }
                             font = "hoi_18mbs"
                             text = "EMPLOYMENT_CHANGE_MIL"
                             format = center
-                            maxWidth = 150
+                            maxWidth = 130
                             maxHeight = 24
                             fixedsize = yes
                             pdx_tooltip = "POPULATION_TAX_RATE_TT"
                         }
 
                         containerWindowType = {
-                            name = "increase_population_tax"
-                            position = { x = 68 y = -3 }
+                            name = "change_amount"
+                            position = { x = 90 y = 23 }
 
                             buttonType = {
-                                name = "increase_population_tax"
-                                spriteType = "GFX_small_plus_button"
-                                position = { x = 0 y = 0 }
+                                name = "increase_leased_civilian_factories"
+                                spriteType = "GFX_md_collapse_button"
+                                frame = 2
+                                position = { x = 1 y = 0 }
                             }
-
-                            instantTextBoxType = {
-                                name = "increase_population_tax_tooltip"
-                                position = { x = 0 y = 0 }
-                                font = "hoi_18mbs"
-                                format = left
-                                maxWidth = 24
-                                maxHeight = 24
-                                fixedsize = yes
-                                pdx_tooltip = "increases_population_tax_tooltip"
-                                pdx_tooltip_delayed = "increases_population_tax_delayed_tooltip"
-                            }
-                        }
-                        containerWindowType = {
-                            name = "decrease_population_tax"
-                            position = { x = 68 y = 12 }
 
                             buttonType = {
-                                name = "decrease_population_tax"
-                                spriteType = "GFX_small_minus_button"
-                                position = { x = 0 y = 0 }
-                            }
-
-                            instantTextBoxType = {
-                                name = "decrease_corporate_tax_tooltip"
-                                position = { x = 0 y = 0 }
-                                font = "hoi_18mbs"
-                                format = left
-                                maxWidth = 24
-                                maxHeight = 24
-                                fixedsize = yes
-                                pdx_tooltip = "decreases_population_tax_tooltip"
-                                pdx_tooltip_delayed = "decreases_population_tax_delayed_tooltip"
+                                name = "decrease_leased_civilian_factories"
+                                spriteType = "GFX_md_collapse_button"
+                                frame = 1
+                                position = { x = 0 y = 12 }
                             }
                         }
                     }
 
                     containerWindowType = {
                         name = "employment_change_offices"
-                        position = { x = 310 y = 20 }
+                        position = { x = 270 y =35 }
+                        size = { width=135 height=58 }
+
+                        background = {
+                            name = "Background"
+                            quadTextureSprite ="GFX_md_tiled_window1_border"
+                        }
 
                         iconType = {
-                            name ="background"
-                            spriteType = "GFX_generic_box_smallest"
+                            name ="Box"
+                            spriteType = "GFX_generic_box_small"
+                            position = { x = 23 y = 24 }
+                            alwaystransparent = yes
                         }
+
                         iconType = {
-                            name = "icon"
+                            name = "Icon"
                             spriteType = "GFX_state_buildings_strip"
-                            frame = 4
-                            position = { x = 0 y = 0 }
+                            frame = 35
+                            position = { x = 23 y = 22 }
+                            alwaystransparent = yes
                         }
+
                         instantTextBoxType = {
-                            name = "rate"
-                            position = { x = 20 y = 4 }
+                            name = "amount"
+                            position = { x = 42 y = 27 }
                             font = "hoi_18mbs"
-                            text = "[?population_tax_rate]%"
+                            text = "[?ROOT.office_employment_var|.0%]"
                             format = centre
                             maxWidth = 55
                             maxHeight = 24
                             fixedsize = yes
-                            pdx_tooltip = "POPULATION_TAX_RATE_TT"
+                            alwaystransparent = yes
                         }
+
                         instantTextBoxType = {
                             name = "title"
-                            position = { x = -32 y = -22 }
+                            position = { x = 3 y = 4 }
                             font = "hoi_18mbs"
                             text = "EMPLOYMENT_CHANGE_OFFICES"
                             format = center
-                            maxWidth = 150
+                            maxWidth = 130
                             maxHeight = 24
                             fixedsize = yes
                             pdx_tooltip = "POPULATION_TAX_RATE_TT"
                         }
 
                         containerWindowType = {
-                            name = "increase_population_tax"
-                            position = { x = 68 y = -3 }
+                            name = "change_amount"
+                            position = { x = 90 y = 23 }
 
                             buttonType = {
-                                name = "increase_population_tax"
-                                spriteType = "GFX_small_plus_button"
-                                position = { x = 0 y = 0 }
+                                name = "increase_leased_civilian_factories"
+                                spriteType = "GFX_md_collapse_button"
+                                frame = 2
+                                position = { x = 1 y = 0 }
                             }
-
-                            instantTextBoxType = {
-                                name = "increase_population_tax_tooltip"
-                                position = { x = 0 y = 0 }
-                                font = "hoi_18mbs"
-                                format = left
-                                maxWidth = 24
-                                maxHeight = 24
-                                fixedsize = yes
-                                pdx_tooltip = "increases_population_tax_tooltip"
-                                pdx_tooltip_delayed = "increases_population_tax_delayed_tooltip"
-                            }
-                        }
-                        containerWindowType = {
-                            name = "decrease_population_tax"
-                            position = { x = 68 y = 12 }
 
                             buttonType = {
-                                name = "decrease_population_tax"
-                                spriteType = "GFX_small_minus_button"
-                                position = { x = 0 y = 0 }
-                            }
-
-                            instantTextBoxType = {
-                                name = "decrease_corporate_tax_tooltip"
-                                position = { x = 0 y = 0 }
-                                font = "hoi_18mbs"
-                                format = left
-                                maxWidth = 24
-                                maxHeight = 24
-                                fixedsize = yes
-                                pdx_tooltip = "decreases_population_tax_tooltip"
-                                pdx_tooltip_delayed = "decreases_population_tax_delayed_tooltip"
+                                name = "decrease_leased_civilian_factories"
+                                spriteType = "GFX_md_collapse_button"
+                                frame = 1
+                                position = { x = 0 y = 12 }
                             }
                         }
                     }
 
                     containerWindowType = {
-                        name = "employment_change_shipyard"
-                        position = { x = 25 y = 80 }
+                        name = "employment_change_shipyards"
+                        position = { x = 0 y =95 }
+                        size = { width=135 height=58 }
+
+                        background = {
+                            name = "Background"
+                            quadTextureSprite ="GFX_md_tiled_window1_border"
+                        }
 
                         iconType = {
-                            name ="background"
-                            spriteType = "GFX_generic_box_smallest"
+                            name ="Box"
+                            spriteType = "GFX_generic_box_small"
+                            position = { x = 23 y = 24 }
+                            alwaystransparent = yes
                         }
+
                         iconType = {
-                            name = "icon"
+                            name = "Icon"
                             spriteType = "GFX_state_buildings_strip"
-                            frame = 35
-                            position = { x = 0 y = 0 }
+                            frame = 4
+                            position = { x = 23 y = 22 }
+                            alwaystransparent = yes
                         }
+
                         instantTextBoxType = {
-                            name = "rate"
-                            position = { x = 20 y = 4 }
+                            name = "amount"
+                            position = { x = 42 y = 27 }
                             font = "hoi_18mbs"
-                            text = "[?population_tax_rate]%"
+                            text = "[?ROOT.naval_factory_employment_var|.0%]"
                             format = centre
                             maxWidth = 55
                             maxHeight = 24
                             fixedsize = yes
-                            pdx_tooltip = "POPULATION_TAX_RATE_TT"
+                            alwaystransparent = yes
                         }
+
                         instantTextBoxType = {
                             name = "title"
-                            position = { x = -32 y = -22 }
+                            position = { x = 3 y = 4 }
                             font = "hoi_18mbs"
                             text = "EMPLOYMENT_CHANGE_SHIPYARD"
                             format = center
-                            maxWidth = 150
+                            maxWidth = 130
                             maxHeight = 24
                             fixedsize = yes
                             pdx_tooltip = "POPULATION_TAX_RATE_TT"
                         }
 
                         containerWindowType = {
-                            name = "increase_population_tax"
-                            position = { x = 68 y = -3 }
+                            name = "change_amount"
+                            position = { x = 90 y = 23 }
 
                             buttonType = {
-                                name = "increase_population_tax"
-                                spriteType = "GFX_small_plus_button"
-                                position = { x = 0 y = 0 }
+                                name = "increase_leased_civilian_factories"
+                                spriteType = "GFX_md_collapse_button"
+                                frame = 2
+                                position = { x = 1 y = 0 }
                             }
-
-                            instantTextBoxType = {
-                                name = "increase_population_tax_tooltip"
-                                position = { x = 0 y = 0 }
-                                font = "hoi_18mbs"
-                                format = left
-                                maxWidth = 24
-                                maxHeight = 24
-                                fixedsize = yes
-                                pdx_tooltip = "increases_population_tax_tooltip"
-                                pdx_tooltip_delayed = "increases_population_tax_delayed_tooltip"
-                            }
-                        }
-                        containerWindowType = {
-                            name = "decrease_population_tax"
-                            position = { x = 68 y = 12 }
 
                             buttonType = {
-                                name = "decrease_population_tax"
-                                spriteType = "GFX_small_minus_button"
-                                position = { x = 0 y = 0 }
-                            }
-
-                            instantTextBoxType = {
-                                name = "decrease_corporate_tax_tooltip"
-                                position = { x = 0 y = 0 }
-                                font = "hoi_18mbs"
-                                format = left
-                                maxWidth = 24
-                                maxHeight = 24
-                                fixedsize = yes
-                                pdx_tooltip = "decreases_population_tax_tooltip"
-                                pdx_tooltip_delayed = "decreases_population_tax_delayed_tooltip"
+                                name = "decrease_leased_civilian_factories"
+                                spriteType = "GFX_md_collapse_button"
+                                frame = 1
+                                position = { x = 0 y = 12 }
                             }
                         }
                     }
 
                     containerWindowType = {
                         name = "employment_change_agriculture"
-                        position = { x = 170 y = 80 }
+                        position = { x = 135 y =95 }
+                        size = { width=135 height=58 }
+
+                        background = {
+                            name = "Background"
+                            quadTextureSprite ="GFX_md_tiled_window1_border"
+                        }
 
                         iconType = {
-                            name ="background"
-                            spriteType = "GFX_generic_box_smallest"
+                            name ="Box"
+                            spriteType = "GFX_generic_box_small"
+                            position = { x = 23 y = 24 }
+                            alwaystransparent = yes
                         }
+
                         iconType = {
-                            name = "icon"
+                            name = "Icon"
                             spriteType = "GFX_state_buildings_strip"
                             frame = 33
-                            position = { x = 0 y = 0 }
+                            position = { x = 23 y = 22 }
+                            alwaystransparent = yes
                         }
+
                         instantTextBoxType = {
-                            name = "rate"
-                            position = { x = 20 y = 4 }
+                            name = "amount"
+                            position = { x = 42 y = 27 }
                             font = "hoi_18mbs"
-                            text = "[?population_tax_rate]%"
+                            text = "[?ROOT.agriculture_district_employment_var|.0%]"
                             format = centre
                             maxWidth = 55
                             maxHeight = 24
                             fixedsize = yes
-                            pdx_tooltip = "POPULATION_TAX_RATE_TT"
+                            alwaystransparent = yes
                         }
+
                         instantTextBoxType = {
                             name = "title"
-                            position = { x = -32 y = -22 }
+                            position = { x = 3 y = 4 }
                             font = "hoi_18mbs"
                             text = "EMPLOYMENT_CHANGE_AGRICULTURE"
                             format = center
-                            maxWidth = 150
+                            maxWidth = 130
                             maxHeight = 24
                             fixedsize = yes
                             pdx_tooltip = "POPULATION_TAX_RATE_TT"
                         }
 
                         containerWindowType = {
-                            name = "increase_population_tax"
-                            position = { x = 68 y = -3 }
+                            name = "change_amount"
+                            position = { x = 90 y = 23 }
 
                             buttonType = {
-                                name = "increase_population_tax"
-                                spriteType = "GFX_small_plus_button"
-                                position = { x = 0 y = 0 }
+                                name = "increase_leased_civilian_factories"
+                                spriteType = "GFX_md_collapse_button"
+                                frame = 2
+                                position = { x = 1 y = 0 }
                             }
-
-                            instantTextBoxType = {
-                                name = "increase_population_tax_tooltip"
-                                position = { x = 0 y = 0 }
-                                font = "hoi_18mbs"
-                                format = left
-                                maxWidth = 24
-                                maxHeight = 24
-                                fixedsize = yes
-                                pdx_tooltip = "increases_population_tax_tooltip"
-                                pdx_tooltip_delayed = "increases_population_tax_delayed_tooltip"
-                            }
-                        }
-                        containerWindowType = {
-                            name = "decrease_population_tax"
-                            position = { x = 68 y = 12 }
 
                             buttonType = {
-                                name = "decrease_population_tax"
-                                spriteType = "GFX_small_minus_button"
-                                position = { x = 0 y = 0 }
-                            }
-
-                            instantTextBoxType = {
-                                name = "decrease_corporate_tax_tooltip"
-                                position = { x = 0 y = 0 }
-                                font = "hoi_18mbs"
-                                format = left
-                                maxWidth = 24
-                                maxHeight = 24
-                                fixedsize = yes
-                                pdx_tooltip = "decreases_population_tax_tooltip"
-                                pdx_tooltip_delayed = "decreases_population_tax_delayed_tooltip"
+                                name = "decrease_leased_civilian_factories"
+                                spriteType = "GFX_md_collapse_button"
+                                frame = 1
+                                position = { x = 0 y = 12 }
                             }
                         }
                     }
 
                     containerWindowType = {
                         name = "employment_change_rafineries"
-                        position = { x = 310 y = 80 }
+                        position = { x = 270 y =95 }
+                        size = { width=135 height=58 }
+
+                        background = {
+                            name = "Background"
+                            quadTextureSprite ="GFX_md_tiled_window1_border"
+                        }
 
                         iconType = {
-                            name ="background"
-                            spriteType = "GFX_generic_box_smallest"
+                            name ="Box"
+                            spriteType = "GFX_generic_box_small"
+                            position = { x = 23 y = 24 }
+                            alwaystransparent = yes
                         }
+
                         iconType = {
-                            name = "icon"
+                            name = "Icon"
                             spriteType = "GFX_state_buildings_strip"
                             frame = 38
-                            position = { x = 0 y = 0 }
+                            position = { x = 23 y = 22 }
+                            alwaystransparent = yes
                         }
+
                         instantTextBoxType = {
-                            name = "rate"
-                            position = { x = 20 y = 4 }
+                            name = "amount"
+                            position = { x = 42 y = 27 }
                             font = "hoi_18mbs"
-                            text = "[?population_tax_rate]%"
+                            text = "[?ROOT.synthetic_refinery_employment_var|.0%]"
                             format = centre
                             maxWidth = 55
                             maxHeight = 24
                             fixedsize = yes
-                            pdx_tooltip = "POPULATION_TAX_RATE_TT"
+                            alwaystransparent = yes
                         }
+
                         instantTextBoxType = {
                             name = "title"
-                            position = { x = -32 y = -22 }
+                            position = { x = 3 y = 4 }
                             font = "hoi_18mbs"
                             text = "EMPLOYMENT_CHANGE_RAFINERIES"
                             format = center
-                            maxWidth = 150
+                            maxWidth = 130
                             maxHeight = 24
                             fixedsize = yes
                             pdx_tooltip = "POPULATION_TAX_RATE_TT"
                         }
 
                         containerWindowType = {
-                            name = "increase_population_tax"
-                            position = { x = 68 y = -3 }
+                            name = "change_amount"
+                            position = { x = 90 y = 23 }
 
                             buttonType = {
-                                name = "increase_population_tax"
-                                spriteType = "GFX_small_plus_button"
-                                position = { x = 0 y = 0 }
+                                name = "increase_leased_civilian_factories"
+                                spriteType = "GFX_md_collapse_button"
+                                frame = 2
+                                position = { x = 1 y = 0 }
                             }
-
-                            instantTextBoxType = {
-                                name = "increase_population_tax_tooltip"
-                                position = { x = 0 y = 0 }
-                                font = "hoi_18mbs"
-                                format = left
-                                maxWidth = 24
-                                maxHeight = 24
-                                fixedsize = yes
-                                pdx_tooltip = "increases_population_tax_tooltip"
-                                pdx_tooltip_delayed = "increases_population_tax_delayed_tooltip"
-                            }
-                        }
-                        containerWindowType = {
-                            name = "decrease_population_tax"
-                            position = { x = 68 y = 12 }
 
                             buttonType = {
-                                name = "decrease_population_tax"
-                                spriteType = "GFX_small_minus_button"
-                                position = { x = 0 y = 0 }
-                            }
-
-                            instantTextBoxType = {
-                                name = "decrease_corporate_tax_tooltip"
-                                position = { x = 0 y = 0 }
-                                font = "hoi_18mbs"
-                                format = left
-                                maxWidth = 24
-                                maxHeight = 24
-                                fixedsize = yes
-                                pdx_tooltip = "decreases_population_tax_tooltip"
-                                pdx_tooltip_delayed = "decreases_population_tax_delayed_tooltip"
+                                name = "decrease_leased_civilian_factories"
+                                spriteType = "GFX_md_collapse_button"
+                                frame = 1
+                                position = { x = 0 y = 12 }
                             }
                         }
                     }
+
+                    containerWindowType = {
+                        name = "employment_civilian_microchips"
+                        position = { x = 0 y =155 }
+                        size = { width=135 height=58 }
+
+                        background = {
+                            name = "Background"
+                            quadTextureSprite ="GFX_md_tiled_window1_border"
+                        }
+
+                        iconType = {
+                            name ="Box"
+                            spriteType = "GFX_generic_box_small"
+                            position = { x = 23 y = 24 }
+                            alwaystransparent = yes
+                        }
+
+                        iconType = {
+                            name = "Icon"
+                            spriteType = "GFX_state_buildings_strip"
+                            frame = 36
+                            position = { x = 23 y = 22 }
+                            alwaystransparent = yes
+                        }
+
+                        instantTextBoxType = {
+                            name = "amount"
+                            position = { x = 42 y = 27 }
+                            font = "hoi_18mbs"
+                            text = "[?microchip_plant_employment_var|.0%]"
+                            format = centre
+                            maxWidth = 55
+                            maxHeight = 24
+                            fixedsize = yes
+                            alwaystransparent = yes
+                        }
+
+                        instantTextBoxType = {
+                            name = "title"
+                            position = { x = 3 y = 4 }
+                            font = "hoi_18mbs"
+                            text = "EMPLOYMENT_CHANGE_MICROCHIPS"
+                            format = center
+                            maxWidth = 130
+                            maxHeight = 24
+                            fixedsize = yes
+                            pdx_tooltip = "POPULATION_TAX_RATE_TT"
+                        }
+
+                        containerWindowType = {
+                            name = "change_amount"
+                            position = { x = 90 y = 23 }
+
+                            buttonType = {
+                                name = "increase_leased_civilian_factories"
+                                spriteType = "GFX_md_collapse_button"
+                                frame = 2
+                                position = { x = 1 y = 0 }
+                            }
+
+                            buttonType = {
+                                name = "decrease_leased_civilian_factories"
+                                spriteType = "GFX_md_collapse_button"
+                                frame = 1
+                                position = { x = 0 y = 12 }
+                            }
+                        }
+                    }
+
+                    containerWindowType = {
+                        name = "employment_civilian_composites"
+                        position = { x = 135 y =155 }
+                        size = { width=135 height=58 }
+
+                        background = {
+                            name = "Background"
+                            quadTextureSprite ="GFX_md_tiled_window1_border"
+                        }
+
+                        iconType = {
+                            name ="Box"
+                            spriteType = "GFX_generic_box_small"
+                            position = { x = 23 y = 24 }
+                            alwaystransparent = yes
+                        }
+
+                        iconType = {
+                            name = "Icon"
+                            spriteType = "GFX_state_buildings_strip"
+                            frame = 37
+                            position = { x = 23 y = 22 }
+                            alwaystransparent = yes
+                        }
+
+                        instantTextBoxType = {
+                            name = "amount"
+                            position = { x = 42 y = 27 }
+                            font = "hoi_18mbs"
+                            text = "[?composite_plant_employment_var|.0%]"
+                            format = centre
+                            maxWidth = 55
+                            maxHeight = 24
+                            fixedsize = yes
+                            alwaystransparent = yes
+                        }
+
+                        instantTextBoxType = {
+                            name = "title"
+                            position = { x = 3 y = 4 }
+                            font = "hoi_18mbs"
+                            text = "EMPLOYMENT_CHANGE_COMPOSITE"
+                            format = center
+                            maxWidth = 130
+                            maxHeight = 24
+                            fixedsize = yes
+                            pdx_tooltip = "POPULATION_TAX_RATE_TT"
+                        }
+
+                        containerWindowType = {
+                            name = "change_amount"
+                            position = { x = 90 y = 23 }
+
+                            buttonType = {
+                                name = "increase_leased_civilian_factories"
+                                spriteType = "GFX_md_collapse_button"
+                                frame = 2
+                                position = { x = 1 y = 0 }
+                            }
+
+                            buttonType = {
+                                name = "decrease_leased_civilian_factories"
+                                spriteType = "GFX_md_collapse_button"
+                                frame = 1
+                                position = { x = 0 y = 12 }
+                            }
+                        }
+                    }
+
+                    # containerWindowType = {
+                    #     name = "employment_change_civ"
+                    #     position = { x = 25 y = 20 }
+
+                    #     iconType = {
+                    #         name ="background"
+                    #         spriteType = "GFX_generic_box_smallest"
+                    #     }
+                    #     iconType = {
+                    #         name = "icon"
+                    #         spriteType = "GFX_state_buildings_strip"
+                    #         frame = 1
+                    #         position = { x = 0 y = 0 }
+                    #     }
+                    #     instantTextBoxType = {
+                    #         name = "rate"
+                    #         position = { x = 20 y = 4 }
+                    #         font = "hoi_18mbs"
+                    #         text = "[?population_tax_rate]%"
+                    #         format = centre
+                    #         maxWidth = 55
+                    #         maxHeight = 24
+                    #         fixedsize = yes
+                    #         pdx_tooltip = "POPULATION_TAX_RATE_TT"
+                    #     }
+                    #     instantTextBoxType = {
+                    #         name = "title"
+                    #         position = { x = -32 y = -22 }
+                    #         font = "hoi_18mbs"
+                    #         text = "EMPLOYMENT_CHANGE_CIV"
+                    #         format = center
+                    #         maxWidth = 150
+                    #         maxHeight = 24
+                    #         fixedsize = yes
+                    #         pdx_tooltip = "POPULATION_TAX_RATE_TT"
+                    #     }
+
+                    #     containerWindowType = {
+                    #         name = "increase_population_tax"
+                    #         position = { x = 68 y = -3 }
+
+                    #         buttonType = {
+                    #             name = "increase_population_tax"
+                    #             spriteType = "GFX_small_plus_button"
+                    #             position = { x = 0 y = 0 }
+                    #             pdx_tooltip = "increases_population_tax_tooltip"
+                    #             pdx_tooltip_delayed = "increases_population_tax_delayed_tooltip"
+                    #         }
+
+                    #         instantTextBoxType = {
+                    #             name = "increase_population_tax_tooltip"
+                    #             position = { x = 0 y = 0 }
+                    #             font = "hoi_18mbs"
+                    #             format = left
+                    #             maxWidth = 24
+                    #             maxHeight = 24
+                    #             fixedsize = yes
+                    #             pdx_tooltip = "increases_population_tax_tooltip"
+                    #             pdx_tooltip_delayed = "increases_population_tax_delayed_tooltip"
+                    #         }
+                    #     }
+                    #     containerWindowType = {
+                    #         name = "decrease_population_tax"
+                    #         position = { x = 68 y = 12 }
+
+                    #         buttonType = {
+                    #             name = "decrease_population_tax"
+                    #             spriteType = "GFX_small_minus_button"
+                    #             position = { x = 0 y = 0 }
+                    #             pdx_tooltip = "decreases_population_tax_tooltip"
+                    #             pdx_tooltip_delayed = "decreases_population_tax_delayed_tooltip"
+                    #         }
+
+                    #         instantTextBoxType = {
+                    #             name = "decrease_corporate_tax_tooltip"
+                    #             position = { x = 0 y = 0 }
+                    #             font = "hoi_18mbs"
+                    #             format = left
+                    #             maxWidth = 24
+                    #             maxHeight = 24
+                    #             fixedsize = yes
+                    #             pdx_tooltip = "decreases_population_tax_tooltip"
+                    #             pdx_tooltip_delayed = "decreases_population_tax_delayed_tooltip"
+                    #         }
+                    #     }
+                    # }
+
+                    # containerWindowType = {
+                    #     name = "employment_change_mil"
+                    #     position = { x = 170 y = 20 }
+
+                    #     iconType = {
+                    #         name ="background"
+                    #         spriteType = "GFX_generic_box_smallest"
+                    #     }
+                    #     iconType = {
+                    #         name = "icon"
+                    #         spriteType = "GFX_state_buildings_strip"
+                    #         frame = 2
+                    #         position = { x = 0 y = 0 }
+                    #     }
+                    #     instantTextBoxType = {
+                    #         name = "rate"
+                    #         position = { x = 20 y = 4 }
+                    #         font = "hoi_18mbs"
+                    #         text = "[?population_tax_rate]%"
+                    #         format = centre
+                    #         maxWidth = 55
+                    #         maxHeight = 24
+                    #         fixedsize = yes
+                    #         pdx_tooltip = "POPULATION_TAX_RATE_TT"
+                    #     }
+                    #     instantTextBoxType = {
+                    #         name = "title"
+                    #         position = { x = -32 y = -22 }
+                    #         font = "hoi_18mbs"
+                    #         text = "EMPLOYMENT_CHANGE_MIL"
+                    #         format = center
+                    #         maxWidth = 150
+                    #         maxHeight = 24
+                    #         fixedsize = yes
+                    #         pdx_tooltip = "POPULATION_TAX_RATE_TT"
+                    #     }
+
+                    #     containerWindowType = {
+                    #         name = "increase_population_tax"
+                    #         position = { x = 68 y = -3 }
+
+                    #         buttonType = {
+                    #             name = "increase_population_tax"
+                    #             spriteType = "GFX_small_plus_button"
+                    #             position = { x = 0 y = 0 }
+                    #         }
+
+                    #         instantTextBoxType = {
+                    #             name = "increase_population_tax_tooltip"
+                    #             position = { x = 0 y = 0 }
+                    #             font = "hoi_18mbs"
+                    #             format = left
+                    #             maxWidth = 24
+                    #             maxHeight = 24
+                    #             fixedsize = yes
+                    #             pdx_tooltip = "increases_population_tax_tooltip"
+                    #             pdx_tooltip_delayed = "increases_population_tax_delayed_tooltip"
+                    #         }
+                    #     }
+                    #     containerWindowType = {
+                    #         name = "decrease_population_tax"
+                    #         position = { x = 68 y = 12 }
+
+                    #         buttonType = {
+                    #             name = "decrease_population_tax"
+                    #             spriteType = "GFX_small_minus_button"
+                    #             position = { x = 0 y = 0 }
+                    #         }
+
+                    #         instantTextBoxType = {
+                    #             name = "decrease_corporate_tax_tooltip"
+                    #             position = { x = 0 y = 0 }
+                    #             font = "hoi_18mbs"
+                    #             format = left
+                    #             maxWidth = 24
+                    #             maxHeight = 24
+                    #             fixedsize = yes
+                    #             pdx_tooltip = "decreases_population_tax_tooltip"
+                    #             pdx_tooltip_delayed = "decreases_population_tax_delayed_tooltip"
+                    #         }
+                    #     }
+                    # }
+
+                    # containerWindowType = {
+                    #     name = "employment_change_offices"
+                    #     position = { x = 310 y = 20 }
+
+                    #     iconType = {
+                    #         name ="background"
+                    #         spriteType = "GFX_generic_box_smallest"
+                    #     }
+                    #     iconType = {
+                    #         name = "icon"
+                    #         spriteType = "GFX_state_buildings_strip"
+                    #         frame = 4
+                    #         position = { x = 0 y = 0 }
+                    #     }
+                    #     instantTextBoxType = {
+                    #         name = "rate"
+                    #         position = { x = 20 y = 4 }
+                    #         font = "hoi_18mbs"
+                    #         text = "[?population_tax_rate]%"
+                    #         format = centre
+                    #         maxWidth = 55
+                    #         maxHeight = 24
+                    #         fixedsize = yes
+                    #         pdx_tooltip = "POPULATION_TAX_RATE_TT"
+                    #     }
+                    #     instantTextBoxType = {
+                    #         name = "title"
+                    #         position = { x = -32 y = -22 }
+                    #         font = "hoi_18mbs"
+                    #         text = "EMPLOYMENT_CHANGE_OFFICES"
+                    #         format = center
+                    #         maxWidth = 150
+                    #         maxHeight = 24
+                    #         fixedsize = yes
+                    #         pdx_tooltip = "POPULATION_TAX_RATE_TT"
+                    #     }
+
+                    #     containerWindowType = {
+                    #         name = "increase_population_tax"
+                    #         position = { x = 68 y = -3 }
+
+                    #         buttonType = {
+                    #             name = "increase_population_tax"
+                    #             spriteType = "GFX_small_plus_button"
+                    #             position = { x = 0 y = 0 }
+                    #         }
+
+                    #         instantTextBoxType = {
+                    #             name = "increase_population_tax_tooltip"
+                    #             position = { x = 0 y = 0 }
+                    #             font = "hoi_18mbs"
+                    #             format = left
+                    #             maxWidth = 24
+                    #             maxHeight = 24
+                    #             fixedsize = yes
+                    #             pdx_tooltip = "increases_population_tax_tooltip"
+                    #             pdx_tooltip_delayed = "increases_population_tax_delayed_tooltip"
+                    #         }
+                    #     }
+                    #     containerWindowType = {
+                    #         name = "decrease_population_tax"
+                    #         position = { x = 68 y = 12 }
+
+                    #         buttonType = {
+                    #             name = "decrease_population_tax"
+                    #             spriteType = "GFX_small_minus_button"
+                    #             position = { x = 0 y = 0 }
+                    #         }
+
+                    #         instantTextBoxType = {
+                    #             name = "decrease_corporate_tax_tooltip"
+                    #             position = { x = 0 y = 0 }
+                    #             font = "hoi_18mbs"
+                    #             format = left
+                    #             maxWidth = 24
+                    #             maxHeight = 24
+                    #             fixedsize = yes
+                    #             pdx_tooltip = "decreases_population_tax_tooltip"
+                    #             pdx_tooltip_delayed = "decreases_population_tax_delayed_tooltip"
+                    #         }
+                    #     }
+                    # }
+
+                    # containerWindowType = {
+                    #     name = "employment_change_shipyard"
+                    #     position = { x = 25 y = 80 }
+
+                    #     iconType = {
+                    #         name ="background"
+                    #         spriteType = "GFX_generic_box_smallest"
+                    #     }
+                    #     iconType = {
+                    #         name = "icon"
+                    #         spriteType = "GFX_state_buildings_strip"
+                    #         frame = 35
+                    #         position = { x = 0 y = 0 }
+                    #     }
+                    #     instantTextBoxType = {
+                    #         name = "rate"
+                    #         position = { x = 20 y = 4 }
+                    #         font = "hoi_18mbs"
+                    #         text = "[?population_tax_rate]%"
+                    #         format = centre
+                    #         maxWidth = 55
+                    #         maxHeight = 24
+                    #         fixedsize = yes
+                    #         pdx_tooltip = "POPULATION_TAX_RATE_TT"
+                    #     }
+                    #     instantTextBoxType = {
+                    #         name = "title"
+                    #         position = { x = -32 y = -22 }
+                    #         font = "hoi_18mbs"
+                    #         text = "EMPLOYMENT_CHANGE_SHIPYARD"
+                    #         format = center
+                    #         maxWidth = 150
+                    #         maxHeight = 24
+                    #         fixedsize = yes
+                    #         pdx_tooltip = "POPULATION_TAX_RATE_TT"
+                    #     }
+
+                    #     containerWindowType = {
+                    #         name = "increase_population_tax"
+                    #         position = { x = 68 y = -3 }
+
+                    #         buttonType = {
+                    #             name = "increase_population_tax"
+                    #             spriteType = "GFX_small_plus_button"
+                    #             position = { x = 0 y = 0 }
+                    #         }
+
+                    #         instantTextBoxType = {
+                    #             name = "increase_population_tax_tooltip"
+                    #             position = { x = 0 y = 0 }
+                    #             font = "hoi_18mbs"
+                    #             format = left
+                    #             maxWidth = 24
+                    #             maxHeight = 24
+                    #             fixedsize = yes
+                    #             pdx_tooltip = "increases_population_tax_tooltip"
+                    #             pdx_tooltip_delayed = "increases_population_tax_delayed_tooltip"
+                    #         }
+                    #     }
+                    #     containerWindowType = {
+                    #         name = "decrease_population_tax"
+                    #         position = { x = 68 y = 12 }
+
+                    #         buttonType = {
+                    #             name = "decrease_population_tax"
+                    #             spriteType = "GFX_small_minus_button"
+                    #             position = { x = 0 y = 0 }
+                    #         }
+
+                    #         instantTextBoxType = {
+                    #             name = "decrease_corporate_tax_tooltip"
+                    #             position = { x = 0 y = 0 }
+                    #             font = "hoi_18mbs"
+                    #             format = left
+                    #             maxWidth = 24
+                    #             maxHeight = 24
+                    #             fixedsize = yes
+                    #             pdx_tooltip = "decreases_population_tax_tooltip"
+                    #             pdx_tooltip_delayed = "decreases_population_tax_delayed_tooltip"
+                    #         }
+                    #     }
+                    # }
                 }
             }
         }
