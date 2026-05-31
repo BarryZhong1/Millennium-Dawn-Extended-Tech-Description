@@ -27,8 +27,10 @@
 - **Be concise.** Remove filler words and redundant phrasing. Prefer shorter sentences.
 - **No excessive hyphenation.** Only hyphenate compound modifiers before a noun (e.g., "pro-Western government"), not elsewhere.
 - **No ellipsis abuse.** Do not use `...` in descriptions or tooltips.
+- **No em dashes** (`—`) in player-facing strings. Use a period when the clause stands alone ("Their economy answers to us. Their borders remain intact."), a comma when introducing a participial phrase ("...transfers weekly, appearing as a new expense..."), or a colon when introducing a list or requirement ("Requires war contribution: one battle won or three months at war."). Em dashes read as soft connectors and almost always replace one of those three punctuation choices.
 - Capitalize proper nouns, party names, ideology group names, and in-game concepts (e.g., Political Power, Stability).
 - Do not use all-caps for emphasis; use in-game formatting codes instead if needed (e.g., `£icon`, `§Y...§!`).
+- **No padding filler.** Every sentence in a description should carry real information — founding facts, political orientation, mechanical implication, alignment. Sentences that restate the title or fill the box with "the party has remained influential over the years" add nothing. This applies to subideology descs, focus descs, idea descs, event flavour, and option text alike.
 
 ## Subideology Localisation Format
 
@@ -47,8 +49,7 @@ Rules:
 - **Description** (`TAG.ideology_desc`):
   - Opens with the dominant ideology group in parentheses (e.g., `(Classic Liberalism)`), then the full English party name, then native-language names in parentheses listed as `Language: Native Name`, comma-separated, followed by the abbreviation.
   - A `\n\n` separates the header line from the body paragraph.
-  - Body paragraph: 2–5 sentences covering founding, political orientation, notable history, and international alignments. Written in third person, past/present mix, encyclopedic tone.
-  - Do not pad with vague filler sentences.
+  - Body paragraph: 2–5 sentences covering founding, political orientation, notable history, and international alignments. Written in third person, past/present mix, encyclopedic tone. The "no padding filler" rule in Writing Style applies — every sentence should carry real information.
 
 Example:
 
