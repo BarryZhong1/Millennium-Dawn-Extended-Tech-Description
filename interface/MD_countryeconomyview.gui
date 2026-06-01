@@ -1,6 +1,145 @@
 guiTypes = {
     containerWindowType = {
-        name = "MD_countryeconomyview_market_prices"
+		name = "MD_topbar_economy_stats_container"
+		position = { x = 1044 y = 4 }
+
+		buttonType ={
+			name ="topbar_hide_money_bg"
+			spriteType = "GFX_investments_left_arrow"
+			position = { x=0 y=0 }
+			pdx_tooltip = "HIDE_MONEY_TOOLTIP"
+		}
+
+		buttonType ={
+			name ="topbar_show_money_bg"
+			spriteType = "GFX_investments_right_arrow"
+			position = { x=0 y=0 }
+			pdx_tooltip = "SHOW_MONEY_TOOLTIP"
+		}
+
+        containerWindowType = {
+            name = "topbar_debt_container"
+            position = { x = 20 y = 0 }
+
+            buttonType ={
+                name ="topbar_debt_bg"
+                spriteType = "GFX_generic_box_wider"
+                position = { x=0 y=0 }
+            }
+
+            iconType = {
+                name ="topbar_debt_icon"
+                spriteType = "GFX_debt"
+                position = { x= -1 y = 0 }
+            }
+
+            instantTextBoxType = {
+                name ="topbar_debt_text"
+                position = { x= 22 y = 4 }
+                font = "hoi_18mbs"
+                text = "[debt_display]"
+                format = right
+                maxWidth = 55
+                maxHeight = 24
+                fixedsize = yes
+
+                pdx_tooltip = "DEBT_TOOLTIP"
+                pdx_tooltip_delayed = "DEBT_TOOLTIP_DELAYED"
+            }
+        }
+        containerWindowType = {
+            name = "topbar_treasury_container"
+            position = { x = 102 y = 0 }
+
+            buttonType ={
+                name ="topbar_treasury_bg"
+                spriteType = "GFX_generic_box_wider"
+                position = { x=0 y=0 }
+            }
+
+            iconType = {
+                name ="topbar_treasury_icon"
+                spriteType = "GFX_treasury"
+                position = { x= -3 y = 0 }
+            }
+
+            instantTextBoxType = {
+                name ="topbar_treasury_text"
+                position = { x= 19 y = 4 }
+                font = "hoi_18mbs"
+                text = "[?treasury|3]"
+                format = right
+                maxWidth = 55
+                maxHeight = 24
+                fixedsize = yes
+
+                pdx_tooltip = "TREASURY_TOOLTIP"
+                pdx_tooltip_delayed = "TREASURY_TOOLTIP_DELAYED"
+            }
+        }
+        containerWindowType = {
+            name = "topbar_int_investments_container"
+            position = { x = 184 y = 0 }
+
+            buttonType ={
+                name ="topbar_int_investments_bg"
+                spriteType = "GFX_generic_box_wider"
+                position = { x=0 y=0 }
+            }
+
+            iconType = {
+                name ="topbar_int_investments_icon"
+                spriteType = "GFX_int_investments"
+                position = { x= -1 y = 0 }
+            }
+
+            instantTextBoxType = {
+                name ="topbar_int_investments_text"
+                position = { x= 22 y = 4 }
+                font = "hoi_18mbs"
+                text = "[?int_investments|2]"
+                format = right
+                maxWidth = 55
+                maxHeight = 24
+                fixedsize = yes
+
+                pdx_tooltip = "INT_INVESTMENTS_TOOLTIP"
+                pdx_tooltip_delayed = "INT_INVESTMENTS_TOOLTIP_DELAYED"
+            }
+        }
+
+        containerWindowType = {
+            name = "topbar_electricity_container"
+            position = { x = 266 y = 0 }
+
+            iconType ={
+                name ="topbar_electricity_bg"
+                spriteType = "GFX_generic_box_wider"
+                position = { x=0 y=0 }
+            }
+
+            iconType = {
+                name ="topbar_electricity_icon"
+                spriteType = "GFX_topbar_energy_balance"
+                position = { x= 1 y = 2 }
+            }
+
+            instantTextBoxType = {
+                name ="topbar_electricity_text"
+                position = { x= 21 y = 4 }
+                font = "hoi_18mbs"
+                text = "[energy_total_net_energy_balance]"
+                format = right
+                maxWidth = 55
+                maxHeight = 24
+                fixedsize = yes
+
+                pdx_tooltip = "UNFULFILLED_ENERGY_TOOLTIP"
+            }
+        }
+	}
+    containerWindowType = {
+        name = "MD_tradeview_market_prices"
 		position = { x=5 y=455}
         size = { width=680 height=50 }
         margin = { left=-7 top = 10 }
@@ -322,29 +461,30 @@ guiTypes = {
 			position = { x=0 y=0 }
 			size = { width = 720 height = 520 }
 
+            instantTextboxType = {
+                name = "title"
+                position = { x = 25 y = 8 }
+                font = "hoi_30"
+                borderSize = { x = 0 y = 0 }
+                text = "ECONOMY_TITLE"
+                maxWidth = 300
+                maxHeight = 40
+                format = LEFT
+                #alwaystransparent = yes
+                fixedsize=yes
+            }
+
+            buttonType = {
+                name = "economy_refresh_button"
+                spriteType = "GFX_refresh_button"
+                position = { x = 661 y = 6 }
+                pdx_tooltip = "REFRESH_ECONOMYVIEW_TOOLTIP"
+            }
+
             containerWindowType = {
                 name = "money"
                 position = { x=20 y=40 }
                 size = { width = 300 height = 200 }
-
-                # iconType ={
-                #     name ="trade_divider"
-                #     quadTextureSprite = "GFX_md_generic_box_228x45"
-                #     Orientation = "UPPER_LEFT"
-                # }
-
-                instantTextboxType = {
-                    name = "title"
-                    position = { x = 2 y = -35 }
-                    font = "hoi_30"
-                    borderSize = { x = 0 y = 0 }
-                    text = "ECONOMY_TITLE"
-                    maxWidth = 300
-                    maxHeight = 40
-                    format = LEFT
-                    #alwaystransparent = yes
-                    fixedsize=yes
-                }
 
                 containerWindowType = {
                     name = "values_container"
@@ -1057,6 +1197,8 @@ guiTypes = {
                             format = LEFT
                             #alwaystransparent = yes
                             fixedsize=yes
+                            pdx_tooltip = "TRADE_INCOME_REVENUES_TOOLTIP"
+                            pdx_tooltip_delayed = "TRADE_INCOME_REVENUES_TOOLTIP_DELAYED"
                         }
 
                         instantTextboxType = {
@@ -1070,6 +1212,8 @@ guiTypes = {
                             format = right
                             #alwaystransparent = yes
                             fixedsize=yes
+                            pdx_tooltip = "TRADE_INCOME_REVENUES_TOOLTIP"
+                            pdx_tooltip_delayed = "TRADE_INCOME_REVENUES_TOOLTIP_DELAYED"
                         }
 
                         instantTextboxType = {
@@ -1083,6 +1227,8 @@ guiTypes = {
                             format = LEFT
                             #alwaystransparent = yes
                             fixedsize=yes
+                            pdx_tooltip = "ADDITIONAL_INCOME_REVENUES_TOOLTIP"
+                            pdx_tooltip_delayed = "ADDITIONAL_INCOME_REVENUES_TOOLTIP_DELAYED"
                         }
 
                         instantTextboxType = {
@@ -1096,6 +1242,8 @@ guiTypes = {
                             format = right
                             #alwaystransparent = yes
                             fixedsize=yes
+                            pdx_tooltip = "ADDITIONAL_INCOME_REVENUES_TOOLTIP"
+                            pdx_tooltip_delayed = "ADDITIONAL_INCOME_REVENUES_TOOLTIP_DELAYED"
                         }
                     }
                 }
@@ -1154,6 +1302,8 @@ guiTypes = {
                             format = LEFT
                             #alwaystransparent = yes
                             fixedsize=yes
+                            pdx_tooltip = "BUREAUCRACY_EXPENSE_TOOLTIP"
+                            pdx_tooltip_delayed = "BUREAUCRACY_EXPENSE_TOOLTIP_DELAYED"
                         }
 
                         instantTextboxType = {
@@ -1167,6 +1317,8 @@ guiTypes = {
                             format = right
                             #alwaystransparent = yes
                             fixedsize=yes
+                            pdx_tooltip = "BUREAUCRACY_EXPENSE_TOOLTIP"
+                            pdx_tooltip_delayed = "BUREAUCRACY_EXPENSE_TOOLTIP_DELAYED"
                         }
 
                         instantTextboxType = {
@@ -1180,6 +1332,8 @@ guiTypes = {
                             format = LEFT
                             #alwaystransparent = yes
                             fixedsize=yes
+                            pdx_tooltip = "DEFENCE_SPENDING_TOOLTIP"
+                            pdx_tooltip_delayed = "DEFENCE_SPENDING_TOOLTIP_DELAYED"
                         }
 
                         instantTextboxType = {
@@ -1193,6 +1347,8 @@ guiTypes = {
                             format = right
                             #alwaystransparent = yes
                             fixedsize=yes
+                            pdx_tooltip = "DEFENCE_SPENDING_TOOLTIP"
+                            pdx_tooltip_delayed = "DEFENCE_SPENDING_TOOLTIP_DELAYED"
                         }
 
                         instantTextboxType = {
@@ -1205,6 +1361,8 @@ guiTypes = {
                             maxHeight = 40
                             format = LEFT
                             fixedsize = yes
+                            pdx_tooltip = "POLICE_SPENDING_TOOLTIP"
+                            pdx_tooltip_delayed = "POLICE_SPENDING_TOOLTIP_DELAYED"
                         }
 
                         instantTextboxType = {
@@ -1217,6 +1375,8 @@ guiTypes = {
                             maxHeight = 40
                             format = RIGHT
                             fixedsize = yes
+                            pdx_tooltip = "POLICE_SPENDING_TOOLTIP"
+                            pdx_tooltip_delayed = "POLICE_SPENDING_TOOLTIP_DELAYED"
                         }
 
                         instantTextboxType = {
@@ -1229,6 +1389,8 @@ guiTypes = {
                             maxHeight = 40
                             format = LEFT
                             fixedsize = yes
+                            pdx_tooltip = "EDUCATION_EXPENSE_TOOLTIP"
+                            pdx_tooltip_delayed = "EDUCATION_EXPENSE_TOOLTIP_DELAYED"
                         }
 
                         instantTextboxType = {
@@ -1241,6 +1403,8 @@ guiTypes = {
                             maxHeight = 40
                             format = RIGHT
                             fixedsize = yes
+                            pdx_tooltip = "EDUCATION_EXPENSE_TOOLTIP"
+                            pdx_tooltip_delayed = "EDUCATION_EXPENSE_TOOLTIP_DELAYED"
                         }
 
                         instantTextboxType = {
@@ -1253,6 +1417,8 @@ guiTypes = {
                             maxHeight = 40
                             format = LEFT
                             fixedsize = yes
+                            pdx_tooltip = "HEALTHCARE_EXPENSE_TOOLTIP"
+                            pdx_tooltip_delayed = "HEALTHCARE_EXPENSE_TOOLTIP_DELAYED"
                         }
 
                         instantTextboxType = {
@@ -1265,6 +1431,8 @@ guiTypes = {
                             maxHeight = 40
                             format = RIGHT
                             fixedsize = yes
+                            pdx_tooltip = "HEALTHCARE_EXPENSE_TOOLTIP"
+                            pdx_tooltip_delayed = "HEALTHCARE_EXPENSE_TOOLTIP_DELAYED"
                         }
 
                         instantTextboxType = {
@@ -1277,6 +1445,8 @@ guiTypes = {
                             maxHeight = 40
                             format = LEFT
                             fixedsize = yes
+                            pdx_tooltip = "WELFARE_EXPENSE_TOOLTIP"
+                            pdx_tooltip_delayed = "WELFARE_EXPENSE_TOOLTIP_DELAYED"
                         }
 
                         instantTextboxType = {
@@ -1289,6 +1459,8 @@ guiTypes = {
                             maxHeight = 40
                             format = RIGHT
                             fixedsize = yes
+                            pdx_tooltip = "WELFARE_EXPENSE_TOOLTIP"
+                            pdx_tooltip_delayed = "WELFARE_EXPENSE_TOOLTIP_DELAYED"
                         }
 
                         instantTextboxType = {
@@ -1301,6 +1473,8 @@ guiTypes = {
                             maxHeight = 40
                             format = LEFT
                             fixedsize = yes
+                            pdx_tooltip = "INFRA_EXPENSE_TOOLTIP"
+                            pdx_tooltip_delayed = "INFRA_EXPENSE_TOOLTIP_DELAYED"
                         }
 
                         instantTextboxType = {
@@ -1313,6 +1487,8 @@ guiTypes = {
                             maxHeight = 40
                             format = RIGHT
                             fixedsize = yes
+                            pdx_tooltip = "INFRA_EXPENSE_TOOLTIP"
+                            pdx_tooltip_delayed = "INFRA_EXPENSE_TOOLTIP_DELAYED"
                         }
 
                         instantTextboxType = {
@@ -1325,6 +1501,8 @@ guiTypes = {
                             maxHeight = 40
                             format = LEFT
                             fixedsize = yes
+                            pdx_tooltip = "MIGRATION_LAWS_TOOLTIP"
+                            pdx_tooltip_delayed = "MIGRATION_LAWS_TOOLTIP_DELAYED"
                         }
 
                         instantTextboxType = {
@@ -1337,6 +1515,8 @@ guiTypes = {
                             maxHeight = 40
                             format = RIGHT
                             fixedsize = yes
+                            pdx_tooltip = "MIGRATION_LAWS_TOOLTIP"
+                            pdx_tooltip_delayed = "MIGRATION_LAWS_TOOLTIP_DELAYED"
                         }
 
                         instantTextboxType = {
@@ -1349,6 +1529,8 @@ guiTypes = {
                             maxHeight = 40
                             format = LEFT
                             fixedsize = yes
+                            pdx_tooltip = "UNITED_NATIONS_TOOLTIP"
+                            pdx_tooltip_delayed = "UNITED_NATIONS_TOOLTIP_DELAYED"
                         }
 
                         instantTextboxType = {
@@ -1361,6 +1543,8 @@ guiTypes = {
                             maxHeight = 40
                             format = RIGHT
                             fixedsize = yes
+                            pdx_tooltip = "UNITED_NATIONS_TOOLTIP"
+                            pdx_tooltip_delayed = "UNITED_NATIONS_TOOLTIP_DELAYED"
                         }
 
                         instantTextboxType = {
@@ -1373,6 +1557,8 @@ guiTypes = {
                             maxHeight = 40
                             format = LEFT
                             fixedsize = yes
+                            pdx_tooltip = "INTEREST_EXPENSE_TOOLTIP"
+                            pdx_tooltip_delayed = "INTEREST_EXPENSE_TOOLTIP_DELAYED"
                         }
 
                         instantTextboxType = {
@@ -1385,6 +1571,8 @@ guiTypes = {
                             maxHeight = 40
                             format = RIGHT
                             fixedsize = yes
+                            pdx_tooltip = "INTEREST_EXPENSE_TOOLTIP"
+                            pdx_tooltip_delayed = "INTEREST_EXPENSE_TOOLTIP_DELAYED"
                         }
 
                         instantTextboxType = {
@@ -1397,6 +1585,8 @@ guiTypes = {
                             maxHeight = 40
                             format = LEFT
                             fixedsize = yes
+                            pdx_tooltip = "ADDITIONAL_EXPENSES_TOOLTIP"
+                            pdx_tooltip_delayed = "ADDITIONAL_EXPENSES_TOOLTIP_DELAYED"
                         }
 
                         instantTextboxType = {
@@ -1409,6 +1599,8 @@ guiTypes = {
                             maxHeight = 40
                             format = RIGHT
                             fixedsize = yes
+                            pdx_tooltip = "ADDITIONAL_EXPENSES_TOOLTIP"
+                            pdx_tooltip_delayed = "ADDITIONAL_EXPENSES_TOOLTIP_DELAYED"
                         }
                     }
                 }
@@ -1472,15 +1664,14 @@ guiTypes = {
                             background = {
                                 name = "Background"
                                 quadTextureSprite ="GFX_md_tiled_window1_border"
-                                pdx_tooltip = "lease_civilian_factories_tt"
-                                pdx_tooltip_delayed = "lease_civilian_factories_delayed_tt"
                             }
 
                             iconType = {
                                 name ="Box"
                                 spriteType = "GFX_generic_box_small"
                                 position = { x = 6 y = 8 }
-                                alwaystransparent = yes
+                                pdx_tooltip = "lease_civilian_factories_tt"
+                                pdx_tooltip_delayed = "lease_civilian_factories_delayed_tt"
                             }
 
                             iconType = {
@@ -1531,15 +1722,14 @@ guiTypes = {
                             background = {
                                 name = "Background"
                                 quadTextureSprite ="GFX_md_tiled_window1_border"
-                                pdx_tooltip = "lease_military_factories_tt"
-                                pdx_tooltip_delayed = "lease_military_factories_delayed_tt"
                             }
 
                             iconType = {
                                 name ="Box"
                                 spriteType = "GFX_generic_box_small"
                                 position = { x = 6 y = 8 }
-                                alwaystransparent = yes
+                                pdx_tooltip = "lease_military_factories_tt"
+                                pdx_tooltip_delayed = "lease_military_factories_delayed_tt"
                             }
 
                             iconType = {
@@ -1554,7 +1744,7 @@ guiTypes = {
                                 name = "amount"
                                 position = { x = 30 y = 11 }
                                 font = "hoi_18mbs"
-                                text = "[?leased_civilian_factories]"
+                                text = "[?leased_military_factories]"
                                 format = centre
                                 maxWidth = 55
                                 maxHeight = 24
@@ -1567,14 +1757,14 @@ guiTypes = {
                                 position = { x = 73 y = 8 }
 
                                 buttonType = {
-                                    name = "increase_leased_civilian_factories"
+                                    name = "increase_leased_military_factories"
                                     spriteType = "GFX_md_collapse_button"
                                     frame = 2
                                     position = { x = 1 y = 0 }
                                 }
 
                                 buttonType = {
-                                    name = "decrease_leased_civilian_factories"
+                                    name = "decrease_leased_military_factories"
                                     spriteType = "GFX_md_collapse_button"
                                     frame = 1
                                     position = { x = 0 y = 12 }
@@ -1583,22 +1773,21 @@ guiTypes = {
                         }
 
                         containerWindowType = {
-                            name = "lease_dockyard_factories"
+                            name = "lease_dockyards"
                             position = { x = 0 y =50 }
                             size = { width=100 height=42 }
 
                             background = {
                                 name = "Background"
                                 quadTextureSprite ="GFX_md_tiled_window1_border"
-                                pdx_tooltip = "lease_naval_dockyards_tt"
-                                pdx_tooltip_delayed = "lease_naval_dockyards_delayed_tt"
                             }
 
                             iconType = {
                                 name ="Box"
                                 spriteType = "GFX_generic_box_small"
                                 position = { x = 6 y = 8 }
-                                alwaystransparent = yes
+                                pdx_tooltip = "lease_naval_dockyards_tt"
+                                pdx_tooltip_delayed = "lease_naval_dockyards_delayed_tt"
                             }
 
                             iconType = {
@@ -1626,14 +1815,14 @@ guiTypes = {
                                 position = { x = 73 y = 8 }
 
                                 buttonType = {
-                                    name = "increase_leased_civilian_factories"
+                                    name = "increase_leased_dockyards"
                                     spriteType = "GFX_md_collapse_button"
                                     frame = 2
                                     position = { x = 1 y = 0 }
                                 }
 
                                 buttonType = {
-                                    name = "decrease_leased_civilian_factories"
+                                    name = "decrease_leased_dockyards"
                                     spriteType = "GFX_md_collapse_button"
                                     frame = 1
                                     position = { x = 0 y = 12 }
@@ -1642,7 +1831,7 @@ guiTypes = {
                         }
 
                         containerWindowType = {
-                            name = "lease_agriculture_factories"
+                            name = "lease_agriculture_districts"
                             position = { x = 115 y =50 }
                             size = { width=100 height=42 }
 
@@ -1670,7 +1859,7 @@ guiTypes = {
                                 name = "amount"
                                 position = { x = 30 y = 11 }
                                 font = "hoi_18mbs"
-                                text = "[?leased_civilian_factories]"
+                                text = "[?leased_agriculture_factories]"
                                 format = centre
                                 maxWidth = 55
                                 maxHeight = 24
@@ -1683,14 +1872,14 @@ guiTypes = {
                                 position = { x = 73 y = 8 }
 
                                 buttonType = {
-                                    name = "increase_leased_civilian_factories"
+                                    name = "increase_leased_agriculture_districts"
                                     spriteType = "GFX_md_collapse_button"
                                     frame = 2
                                     position = { x = 1 y = 0 }
                                 }
 
                                 buttonType = {
-                                    name = "decrease_leased_civilian_factories"
+                                    name = "decrease_leased_agriculture_districts"
                                     spriteType = "GFX_md_collapse_button"
                                     frame = 1
                                     position = { x = 0 y = 12 }
@@ -2145,7 +2334,7 @@ guiTypes = {
                     # }
 
                     containerWindowType = {
-                        name = "treshold_container"
+                        name = "unemployment_treshold_container"
                         position = { x=5 y=7 }
                         size = { width = 300 height = 200 }
 
@@ -2156,7 +2345,7 @@ guiTypes = {
 
                         instantTextboxType = {
                             name = "title"
-                            position = { x = 5 y = -2 }
+                            position = { x = 5 y = 0 }
                             font = "hoi_26mbs"
                             borderSize = { x = 0 y = 0 }
                             text = "UNEMPLOYMENT_THRESHOLD_TITLE"
@@ -2165,6 +2354,7 @@ guiTypes = {
                             format = LEFT
                             #alwaystransparent = yes
                             fixedsize=yes
+					        pdx_tooltip = "UNEMPLOYMENT_THRESHOLD_TT"
                         }
 
                         instantTextboxType = {
@@ -2178,11 +2368,12 @@ guiTypes = {
                             format = RIGHT
                             #alwaystransparent = yes
                             fixedsize=yes
+					        pdx_tooltip = "UNEMPLOYMENT_THRESHOLD_TT"
                         }
                     }
                     
                     containerWindowType = {
-                        name = "rate_container"
+                        name = "unemployment_container"
                         position = { x=5 y=52 }
                         size = { width = 300 height = 200 }
 
@@ -2202,6 +2393,8 @@ guiTypes = {
                             format = LEFT
                             #alwaystransparent = yes
                             fixedsize=yes
+                            pdx_tooltip = "EMPLOYMENT_TOOLTIP"
+                            pdx_tooltip_delayed = "EMPLOYMENT_TOOLTIP_DELAYED"
                         }
 
                         instantTextboxType = {
@@ -2215,6 +2408,8 @@ guiTypes = {
                             format = RIGHT
                             #alwaystransparent = yes
                             fixedsize=yes
+                            pdx_tooltip = "EMPLOYMENT_TOOLTIP"
+                            pdx_tooltip_delayed = "EMPLOYMENT_TOOLTIP_DELAYED"
                         }
                     }
 
@@ -2239,6 +2434,8 @@ guiTypes = {
                             format = LEFT
                             #alwaystransparent = yes
                             fixedsize=yes
+                            pdx_tooltip = "EMPLOYMENT_AVERAGE_TT"
+                            pdx_tooltip_delayed = "EMPLOYMENT_AVERAGE_TT_DELAYED"
                         }
 
                         instantTextboxType = {
@@ -2252,6 +2449,8 @@ guiTypes = {
                             format = RIGHT
                             #alwaystransparent = yes
                             fixedsize=yes
+                            pdx_tooltip = "EMPLOYMENT_AVERAGE_TT"
+                            pdx_tooltip_delayed = "EMPLOYMENT_AVERAGE_TT_DELAYED"
                         }
                     }
 
@@ -2276,6 +2475,8 @@ guiTypes = {
                             format = LEFT
                             #alwaystransparent = yes
                             fixedsize=yes
+                            pdx_tooltip = "MAXIMUM_MIGRATION_RATE_TT"
+                            pdx_tooltip_delayed = "MAXIMUM_MIGRATION_RATE_TT_DELAYED"
                         }
 
                         instantTextboxType = {
@@ -2289,6 +2490,8 @@ guiTypes = {
                             format = RIGHT
                             #alwaystransparent = yes
                             fixedsize=yes
+                            pdx_tooltip = "MAXIMUM_MIGRATION_RATE_TT"
+                            pdx_tooltip_delayed = "MAXIMUM_MIGRATION_RATE_TT_DELAYED"
                         }
                     }
 
@@ -2313,6 +2516,8 @@ guiTypes = {
                             format = LEFT
                             #alwaystransparent = yes
                             fixedsize=yes
+                            pdx_tooltip = "NET_MIGRATION_RATE_TT"
+                            pdx_tooltip_delayed = "NET_MIGRATION_RATE_TT_DELAYED"
                         }
 
                         instantTextboxType = {
@@ -2326,6 +2531,8 @@ guiTypes = {
                             format = RIGHT
                             #alwaystransparent = yes
                             fixedsize=yes
+                            pdx_tooltip = "NET_MIGRATION_RATE_TT"
+                            pdx_tooltip_delayed = "NET_MIGRATION_RATE_TT_DELAYED"
                         }
                     }
                 }
