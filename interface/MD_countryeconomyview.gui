@@ -630,8 +630,7 @@ guiTypes = {
         hide_animation_type = accelerated
         animation_time = 300
         size = { width=720 height=100% }
-	    verticalScrollbar = "right_vertical_slider"
-        margin = { top = 11 bottom = 10 }
+        margin = { top = 11 }
 
         show_sound = menu_open_window
 
@@ -642,13 +641,14 @@ guiTypes = {
         }
 
         containerWindowType = {
-			name = "economyview_container"
+			name = "economyview_header"
 			position = { x=0 y=0 }
-			size = { width = 720 height = 520 }
+			size = { width = 720 height = 300 }
+            margin = { left = 20 }
 
             instantTextboxType = {
                 name = "title"
-                position = { x = 25 y = 8 }
+                position = { x = 10 y = 8 }
                 font = "hoi_30"
                 borderSize = { x = 0 y = 0 }
                 text = "ECONOMY_TITLE"
@@ -662,162 +662,156 @@ guiTypes = {
             buttonType = {
                 name = "economy_refresh_button"
                 spriteType = "GFX_refresh_button"
-                position = { x = 661 y = 6 }
+                position = { x = 645 y = 6 }
                 pdx_tooltip = "REFRESH_ECONOMYVIEW_TOOLTIP"
             }
 
             containerWindowType = {
-                name = "money"
-                position = { x=20 y=40 }
-                size = { width = 300 height = 200 }
+                name = "values_container"
+                position = { x=0 y=50 }
+                size = { width = 235 height = 149 }
+
+                background = {
+                    name = "Background"
+                    quadTextureSprite ="GFX_md_tiled_window1_border"
+                }
 
                 containerWindowType = {
-                    name = "values_container"
-                    position = { x=-5 y=10 }
-                    size = { width = 235 height = 149 }
+                    name = "balance_container"
+                    position = { x=6 y=8 }
+                    size = { width = 220 height = 50 }
 
                     background = {
                         name = "Background"
-                        quadTextureSprite ="GFX_md_tiled_window1_border"
+                        quadTextureSprite ="GFX_tiled_window_transparent"
                     }
 
-                    containerWindowType = {
-                        name = "balance_container"
-                        position = { x=6 y=8 }
-                        size = { width = 220 height = 50 }
-
-                        background = {
-                            name = "Background"
-                            quadTextureSprite ="GFX_tiled_window_transparent"
-                        }
-
-                        iconType ={
-                            name ="stats_balance_background"
-                            spriteType = "GFX_md_generic_box_220x40"
-                            pdx_tooltip = "BALANCE_TOOLTIP"
-                            pdx_tooltip_delayed = "BALANCE_TOOLTIP_DELAYED"
-                        }
-
-                        instantTextboxType = {
-                            name = "title"
-                            position = { x = 5 y = 5 }
-                            font = "hoi_30header"
-                            borderSize = { x = 0 y = 0 }
-                            text = "BALANCE_TITLE"
-                            maxWidth = 140
-                            maxHeight = 40
-                            format = LEFT
-                            fixedsize=yes
-                            alwaystransparent = yes
-                        }
-
-                        instantTextboxType = {
-                            name = "value"
-                            position = { x = 112 y = 7 }
-                            font = "hoi_24header"
-                            borderSize = { x = 0 y = 0 }
-                            text = "BALANCE_VALUE"
-                            maxWidth = 100
-                            maxHeight = 40
-                            format = RIGHT
-                            fixedsize=yes
-                            alwaystransparent = yes
-                        }
-                    }
-                    
-                    containerWindowType = {
-                        name = "treasury_container"
-                        position = { x=6 y=54 }
-                        size = { width = 220 height = 50 }
-
-                        background = {
-                            name = "Background"
-                            quadTextureSprite ="GFX_tiled_window_transparent"
-                        }
-
-                        iconType ={
-                            name ="stats_treasury_background"
-                            spriteType = "GFX_md_generic_box_220x40"
-                            pdx_tooltip = "TREASURY_TOOLTIP"
-                            pdx_tooltip_delayed = "TREASURY_TOOLTIP_DELAYED"
-                        }
-
-                        instantTextboxType = {
-                            name = "title"
-                            position = { x = 5 y = 5 }
-                            font = "hoi_30header"
-                            borderSize = { x = 0 y = 0 }
-                            text = "TREASURY_TITLE"
-                            maxWidth = 140
-                            maxHeight = 40
-                            format = LEFT
-                            fixedsize=yes
-                            alwaystransparent = yes
-                        }
-
-                        instantTextboxType = {
-                            name = "value"
-                            position = { x = 112 y = 7  }
-                            font = "hoi_24header"
-                            borderSize = { x = 0 y = 0 }
-                            text = "TREASURY_VALUE"
-                            maxWidth = 100
-                            maxHeight = 40
-                            format = RIGHT
-                            fixedsize=yes
-                            alwaystransparent = yes
-                        }
+                    iconType ={
+                        name ="stats_balance_background"
+                        spriteType = "GFX_md_generic_box_220x40"
+                        pdx_tooltip = "BALANCE_TOOLTIP"
+                        pdx_tooltip_delayed = "BALANCE_TOOLTIP_DELAYED"
                     }
 
-                    containerWindowType = {
-                        name = "debt_container"
-                        position = { x=6 y=100 }
-                        size = { width = 220 height = 50 }
+                    instantTextboxType = {
+                        name = "title"
+                        position = { x = 5 y = 5 }
+                        font = "hoi_30header"
+                        borderSize = { x = 0 y = 0 }
+                        text = "BALANCE_TITLE"
+                        maxWidth = 140
+                        maxHeight = 40
+                        format = LEFT
+                        fixedsize=yes
+                        alwaystransparent = yes
+                    }
 
-                        background = {
-                            name = "Background"
-                            quadTextureSprite ="GFX_tiled_window_transparent"
-                        }
+                    instantTextboxType = {
+                        name = "value"
+                        position = { x = 112 y = 7 }
+                        font = "hoi_24header"
+                        borderSize = { x = 0 y = 0 }
+                        text = "BALANCE_VALUE"
+                        maxWidth = 100
+                        maxHeight = 40
+                        format = RIGHT
+                        fixedsize=yes
+                        alwaystransparent = yes
+                    }
+                }
+                
+                containerWindowType = {
+                    name = "treasury_container"
+                    position = { x=6 y=54 }
+                    size = { width = 220 height = 50 }
 
-                        iconType ={
-                            name ="stats_debt_background"
-                            spriteType = "GFX_md_generic_box_220x40"
-                            pdx_tooltip = "DEBT_TOOLTIP"
-                            pdx_tooltip_delayed = "DEBT_TOOLTIP_DELAYED"
-                        }
+                    background = {
+                        name = "Background"
+                        quadTextureSprite ="GFX_tiled_window_transparent"
+                    }
 
-                        instantTextboxType = {
-                            name = "title"
-                            position = { x = 8 y = 5 }
-                            font = "hoi_30header"
-                            borderSize = { x = 0 y = 0 }
-                            text = "DEBT_TITLE"
-                            maxWidth = 140
-                            maxHeight = 40
-                            format = LEFT
-                            fixedsize=yes
-                            alwaystransparent = yes
-                        }
+                    iconType ={
+                        name ="stats_treasury_background"
+                        spriteType = "GFX_md_generic_box_220x40"
+                        pdx_tooltip = "TREASURY_TOOLTIP"
+                        pdx_tooltip_delayed = "TREASURY_TOOLTIP_DELAYED"
+                    }
 
-                        instantTextboxType = {
-                            name = "value"
-                            position = { x = 112 y = 6 }
-                            font = "hoi_24header"
-                            borderSize = { x = 0 y = 0 }
-                            text = "DEBT_VALUE"
-                            maxWidth = 100
-                            maxHeight = 40
-                            format = RIGHT
-                            fixedsize=yes
-                            alwaystransparent = yes
-                        }
+                    instantTextboxType = {
+                        name = "title"
+                        position = { x = 5 y = 5 }
+                        font = "hoi_30header"
+                        borderSize = { x = 0 y = 0 }
+                        text = "TREASURY_TITLE"
+                        maxWidth = 140
+                        maxHeight = 40
+                        format = LEFT
+                        fixedsize=yes
+                        alwaystransparent = yes
+                    }
+
+                    instantTextboxType = {
+                        name = "value"
+                        position = { x = 112 y = 7  }
+                        font = "hoi_24header"
+                        borderSize = { x = 0 y = 0 }
+                        text = "TREASURY_VALUE"
+                        maxWidth = 100
+                        maxHeight = 40
+                        format = RIGHT
+                        fixedsize=yes
+                        alwaystransparent = yes
+                    }
+                }
+
+                containerWindowType = {
+                    name = "debt_container"
+                    position = { x=6 y=100 }
+                    size = { width = 220 height = 50 }
+
+                    background = {
+                        name = "Background"
+                        quadTextureSprite ="GFX_tiled_window_transparent"
+                    }
+
+                    iconType ={
+                        name ="stats_debt_background"
+                        spriteType = "GFX_md_generic_box_220x40"
+                        pdx_tooltip = "DEBT_TOOLTIP"
+                        pdx_tooltip_delayed = "DEBT_TOOLTIP_DELAYED"
+                    }
+
+                    instantTextboxType = {
+                        name = "title"
+                        position = { x = 8 y = 5 }
+                        font = "hoi_30header"
+                        borderSize = { x = 0 y = 0 }
+                        text = "DEBT_TITLE"
+                        maxWidth = 140
+                        maxHeight = 40
+                        format = LEFT
+                        fixedsize=yes
+                        alwaystransparent = yes
+                    }
+
+                    instantTextboxType = {
+                        name = "value"
+                        position = { x = 112 y = 6 }
+                        font = "hoi_24header"
+                        borderSize = { x = 0 y = 0 }
+                        text = "DEBT_VALUE"
+                        maxWidth = 100
+                        maxHeight = 40
+                        format = RIGHT
+                        fixedsize=yes
+                        alwaystransparent = yes
                     }
                 }
             }
 
             containerWindowType = {
                 name = "stats_container"
-                position = { x=251 y=25 }
+                position = { x=235 y=25 }
                 size = { width = 300 height = 200 }
 
                 containerWindowType = {
@@ -1241,11 +1235,320 @@ guiTypes = {
                     }
                 }
             }
+        }
+
+        containerWindowType = {
+			name = "economyview_container"
+			position = { x=0 y=202 }
+			size = { width = 722 height = 100%% }
+	        verticalScrollbar = "right_vertical_slider"
+            margin = { left = 20 bottom = 48 }
+
+            background = {
+				name = "Background"
+				quadTextureSprite ="GFX_tiled_window_transparent"
+			}
+
+            containerWindowType = {
+                name = "taxes_container"
+                position = { x = 0 y = 0 }
+                size = { width=675 height=70 }
+
+                background = {
+                    name = "Background"
+                    quadTextureSprite ="GFX_md_tiled_window1_border"
+                }
+
+                containerWindowType = {
+                    name = "population_tax"
+                    position = { x = 8 y =5 }
+                    size = { width=150 height=60 }
+
+                    background = {
+                        name = "Background"
+                        quadTextureSprite ="GFX_md_tiled_window1_border"
+                    }
+
+                    iconType = {
+                        name ="Box"
+                        spriteType = "GFX_generic_box_small"
+                        position = { x = 30 y = 24 }
+                        pdx_tooltip = "POPULATION_TAX_RATE_TT"
+                    }
+
+                    iconType = {
+                        name = "Icon"
+                        spriteType = "GFX_tax_rate"
+                        position = { x = 27 y = 24 }
+                        alwaystransparent = yes
+                    }
+
+                    instantTextBoxType = {
+                        name = "tax_rate"
+                        position = { x = 50 y = 28 }
+                        font = "hoi_18mbs"
+                        text = "[?population_tax_rate]%"
+                        format = centre
+                        maxWidth = 55
+                        maxHeight = 24
+                        fixedsize = yes
+                        alwaystransparent = yes
+                    }
+                    instantTextBoxType = {
+                        name = "title"
+                        position = { x = 0 y = 3 }
+                        font = "hoi_18mbs"
+                        text = "POPULATION_TAX_RATE"
+                        format = center
+                        maxWidth = 150
+                        maxHeight = 24
+                        fixedsize = yes
+                        pdx_tooltip = "POPULATION_TAX_RATE_TT"
+                    }
+
+                    containerWindowType = {
+                        name = "change_tax"
+                        position = { x = 97 y = 24 }
+
+                        buttonType = {
+                            name = "increase_population_tax"
+                            spriteType = "GFX_md_collapse_button"
+                            frame = 2
+                            position = { x = 1 y = 0 }
+                            pdx_tooltip = "increases_population_tax_tooltip"
+                            pdx_tooltip_delayed = "increases_population_tax_delayed_tooltip"
+                        }
+
+                        buttonType = {
+                            name = "decrease_population_tax"
+                            spriteType = "GFX_md_collapse_button"
+                            frame = 1
+                            position = { x = 0 y = 12 }
+                            pdx_tooltip = "decreases_population_tax_tooltip"
+                            pdx_tooltip_delayed = "decreases_population_tax_delayed_tooltip"
+                        }
+                    }
+                }
+
+                containerWindowType = {
+                    name = "corporate_tax"
+                    position = { x = 158 y =5 }
+                    size = { width=150 height=60 }
+
+                    background = {
+                        name = "Background"
+                        quadTextureSprite ="GFX_md_tiled_window1_border"
+                    }
+
+                    iconType = {
+                        name ="Box"
+                        spriteType = "GFX_generic_box_small"
+                        position = { x = 30 y = 24 }
+				        pdx_tooltip = "CORPORATE_TAX_RATE_TT"
+                    }
+
+                    iconType = {
+                        name = "Icon"
+                        spriteType = "GFX_tax_rate"
+                        position = { x = 27 y = 24 }
+                        alwaystransparent = yes
+                    }
+
+                    instantTextBoxType = {
+                        name = "tax_rate"
+                        position = { x = 50 y = 28 }
+                        font = "hoi_18mbs"
+                        text = "[?corporate_tax_rate]%"
+                        format = centre
+                        maxWidth = 55
+                        maxHeight = 24
+                        fixedsize = yes
+                        alwaystransparent = yes
+                    }
+                    instantTextBoxType = {
+                        name = "title"
+                        position = { x = 0 y = 3 }
+                        font = "hoi_18mbs"
+                        text = "CORPORATE_TAX_RATE"
+                        format = center
+                        maxWidth = 150
+                        maxHeight = 24
+                        fixedsize = yes
+                        pdx_tooltip = "CORPORATE_TAX_RATE_TT"
+                    }
+
+                    containerWindowType = {
+                        name = "change_tax"
+                        position = { x = 97 y = 24 }
+
+                        buttonType = {
+                            name = "increase_corporate_tax"
+                            spriteType = "GFX_md_collapse_button"
+                            frame = 2
+                            position = { x = 1 y = 0 }
+                            pdx_tooltip = "increases_corporate_tax_tooltip"
+                            pdx_tooltip_delayed = "increases_corporate_tax_delayed_tooltip"
+                        }
+
+                        buttonType = {
+                            name = "decrease_corporate_tax"
+                            spriteType = "GFX_md_collapse_button"
+                            frame = 1
+                            position = { x = 0 y = 12 }
+                            pdx_tooltip = "decreases_corporate_tax_tooltip"
+                            pdx_tooltip_delayed = "decreases_corporate_tax_delayed_tooltip"
+                        }
+                    }
+                }
+
+                containerWindowType = {
+                    name = "policy_rate"
+                    position = { x = 308 y =5 }
+                    size = { width=150 height=60 }
+
+                    background = {
+                        name = "Background"
+                        quadTextureSprite ="GFX_md_tiled_window1_border"
+                    }
+
+                    iconType = {
+                        name ="Box"
+                        spriteType = "GFX_generic_box_small"
+                        position = { x = 30 y = 24 }
+				        pdx_tooltip = "CB_POLICY_RATE_TT"
+                    }
+
+                    iconType = {
+                        name = "Icon"
+                        spriteType = "GFX_tax_rate"
+                        position = { x = 27 y = 24 }
+                        alwaystransparent = yes
+                    }
+
+                    instantTextBoxType = {
+                        name = "tax_rate"
+                        position = { x = 50 y = 28 }
+                        font = "hoi_18mbs"
+                        text = "[?cb_policy_rate]%"
+                        format = centre
+                        maxWidth = 55
+                        maxHeight = 24
+                        fixedsize = yes
+                        alwaystransparent = yes
+                    }
+                    instantTextBoxType = {
+                        name = "title"
+                        position = { x = 0 y = 3 }
+                        font = "hoi_18mbs"
+                        text = "CB_POLICY_RATE"
+                        format = center
+                        maxWidth = 150
+                        maxHeight = 24
+                        fixedsize = yes
+                        pdx_tooltip = "CB_POLICY_RATE_TT"
+                    }
+
+                    containerWindowType = {
+                        name = "change_tax"
+                        position = { x = 97 y = 24 }
+
+                        buttonType = {
+                            name = "increase_cb_rate"
+                            spriteType = "GFX_md_collapse_button"
+                            frame = 2
+                            position = { x = 1 y = 0 }
+					        pdx_tooltip = "increases_cb_rate_tooltip"
+                        }
+
+                        buttonType = {
+                            name = "decrease_cb_rate"
+                            spriteType = "GFX_md_collapse_button"
+                            frame = 1
+                            position = { x = 0 y = 12 }
+					        pdx_tooltip = "decreases_cb_rate_tooltip"
+                        }
+                    }
+                }
+
+                containerWindowType = {
+                    name = "expand_money_supply_button_container"
+                    position = { x = 465 y = 12 }
+
+                    buttonType = {
+                        name = "expand_money_supply_button"
+                        spriteType = "GFX_generic_button_wide"
+                        position = { x = 0 y = 0 }
+                        pdx_tooltip = "expand_money_supply_button_tooltip"
+                    }
+
+                    iconType = {
+                        name = "expand_money_supply_button_icon"
+                        spriteType = "GFX_daily_income"
+                        position = { x = 5 y = -3 }
+                        alwaystransparent = yes
+                    }
+
+                    instantTextBoxType = {
+                        name = "expand_money_supply_button_label"
+                        position = { x = 30 y = 0 }
+                        font = "hoi_18mbs"
+                        text = "EXPAND_MONEY_SUPPLY_BUTTON"
+                        format = centre
+                        maxWidth = 100
+                        maxHeight = 24
+                        fixedsize = yes
+                        alwaystransparent = yes
+                    }
+                }
+
+                containerWindowType = {
+                    name = "austerity_button_container"
+                    position = { x = 465 y = 35 }
+
+                    buttonType = {
+                        name = "austerity_button"
+                        spriteType = "GFX_generic_button_wide"
+                        position = { x = 0 y = 0 }
+                        pdx_tooltip = "austerity_button_tooltip"
+                    }
+
+                    iconType = {
+                        name = "austerity_button_icon"
+                        spriteType = "GFX_daily_expense"
+                        position = { x = 5 y = -3 }
+                        alwaystransparent = yes
+                    }
+
+                    instantTextBoxType = {
+                        name = "austerity_button_label"
+                        position = { x = 30 y = 0 }
+                        font = "hoi_18mbs"
+                        text = "AUSTERITY_BUTTON"
+                        format = centre
+                        maxWidth = 100
+                        maxHeight = 24
+                        fixedsize = yes
+                        alwaystransparent = yes
+                    }
+                }
+
+                containerWindowType = {
+                    name = "print_money_button"
+                    position = { x = 621 y = 18 }
+
+                    buttonType = {
+                        name = "print_money_button"
+                        position = { x = 0 y = 0 }
+                        spriteType = "GFX_printer"
+                        pdx_tooltip = "print_money_button_tooltip"
+                    }
+                }
+            }
 
             containerWindowType = {
                 name = "balance_details_container"
-                position = { x=18 y=275 }
-                size = { width = 418 height = 500 }
+                position = { x=0 y=74 }
+                size = { width = 420 height = 500 }
                 margin = { top = 10 left = 5 }
 
                 background = {
@@ -1808,7 +2111,7 @@ guiTypes = {
 
             containerWindowType = {
                 name = "economic_projects_container"
-                position = { x = 440 y = 275 }
+                position = { x = 424 y = 74 }
                 size = { width=250 height=500 }
 
                 background = {
@@ -2191,306 +2494,9 @@ guiTypes = {
             }
 
             containerWindowType = {
-                name = "taxes_container"
-                position = { x = 15 y = 202 }
-                size = { width=675 height=70 }
-
-                background = {
-                    name = "Background"
-                    position = { x=0 y=0}
-                    quadTextureSprite ="GFX_md_tiled_window1_border"
-                }
-
-                containerWindowType = {
-                    name = "population_tax"
-                    position = { x = 8 y =5 }
-                    size = { width=150 height=60 }
-
-                    background = {
-                        name = "Background"
-                        quadTextureSprite ="GFX_md_tiled_window1_border"
-                    }
-
-                    iconType = {
-                        name ="Box"
-                        spriteType = "GFX_generic_box_small"
-                        position = { x = 30 y = 24 }
-                        pdx_tooltip = "POPULATION_TAX_RATE_TT"
-                    }
-
-                    iconType = {
-                        name = "Icon"
-                        spriteType = "GFX_tax_rate"
-                        position = { x = 27 y = 24 }
-                        alwaystransparent = yes
-                    }
-
-                    instantTextBoxType = {
-                        name = "tax_rate"
-                        position = { x = 50 y = 28 }
-                        font = "hoi_18mbs"
-                        text = "[?population_tax_rate]%"
-                        format = centre
-                        maxWidth = 55
-                        maxHeight = 24
-                        fixedsize = yes
-                        alwaystransparent = yes
-                    }
-                    instantTextBoxType = {
-                        name = "title"
-                        position = { x = 0 y = 3 }
-                        font = "hoi_18mbs"
-                        text = "POPULATION_TAX_RATE"
-                        format = center
-                        maxWidth = 150
-                        maxHeight = 24
-                        fixedsize = yes
-                        pdx_tooltip = "POPULATION_TAX_RATE_TT"
-                    }
-
-                    containerWindowType = {
-                        name = "change_tax"
-                        position = { x = 97 y = 24 }
-
-                        buttonType = {
-                            name = "increase_population_tax"
-                            spriteType = "GFX_md_collapse_button"
-                            frame = 2
-                            position = { x = 1 y = 0 }
-                            pdx_tooltip = "increases_population_tax_tooltip"
-                            pdx_tooltip_delayed = "increases_population_tax_delayed_tooltip"
-                        }
-
-                        buttonType = {
-                            name = "decrease_population_tax"
-                            spriteType = "GFX_md_collapse_button"
-                            frame = 1
-                            position = { x = 0 y = 12 }
-                            pdx_tooltip = "decreases_population_tax_tooltip"
-                            pdx_tooltip_delayed = "decreases_population_tax_delayed_tooltip"
-                        }
-                    }
-                }
-
-                containerWindowType = {
-                    name = "corporate_tax"
-                    position = { x = 158 y =5 }
-                    size = { width=150 height=60 }
-
-                    background = {
-                        name = "Background"
-                        quadTextureSprite ="GFX_md_tiled_window1_border"
-                    }
-
-                    iconType = {
-                        name ="Box"
-                        spriteType = "GFX_generic_box_small"
-                        position = { x = 30 y = 24 }
-				        pdx_tooltip = "CORPORATE_TAX_RATE_TT"
-                    }
-
-                    iconType = {
-                        name = "Icon"
-                        spriteType = "GFX_tax_rate"
-                        position = { x = 27 y = 24 }
-                        alwaystransparent = yes
-                    }
-
-                    instantTextBoxType = {
-                        name = "tax_rate"
-                        position = { x = 50 y = 28 }
-                        font = "hoi_18mbs"
-                        text = "[?corporate_tax_rate]%"
-                        format = centre
-                        maxWidth = 55
-                        maxHeight = 24
-                        fixedsize = yes
-                        alwaystransparent = yes
-                    }
-                    instantTextBoxType = {
-                        name = "title"
-                        position = { x = 0 y = 3 }
-                        font = "hoi_18mbs"
-                        text = "CORPORATE_TAX_RATE"
-                        format = center
-                        maxWidth = 150
-                        maxHeight = 24
-                        fixedsize = yes
-                        pdx_tooltip = "CORPORATE_TAX_RATE_TT"
-                    }
-
-                    containerWindowType = {
-                        name = "change_tax"
-                        position = { x = 97 y = 24 }
-
-                        buttonType = {
-                            name = "increase_corporate_tax"
-                            spriteType = "GFX_md_collapse_button"
-                            frame = 2
-                            position = { x = 1 y = 0 }
-                            pdx_tooltip = "increases_corporate_tax_tooltip"
-                            pdx_tooltip_delayed = "increases_corporate_tax_delayed_tooltip"
-                        }
-
-                        buttonType = {
-                            name = "decrease_corporate_tax"
-                            spriteType = "GFX_md_collapse_button"
-                            frame = 1
-                            position = { x = 0 y = 12 }
-                            pdx_tooltip = "decreases_corporate_tax_tooltip"
-                            pdx_tooltip_delayed = "decreases_corporate_tax_delayed_tooltip"
-                        }
-                    }
-                }
-
-                containerWindowType = {
-                    name = "policy_rate"
-                    position = { x = 308 y =5 }
-                    size = { width=150 height=60 }
-
-                    background = {
-                        name = "Background"
-                        quadTextureSprite ="GFX_md_tiled_window1_border"
-                    }
-
-                    iconType = {
-                        name ="Box"
-                        spriteType = "GFX_generic_box_small"
-                        position = { x = 30 y = 24 }
-				        pdx_tooltip = "CB_POLICY_RATE_TT"
-                    }
-
-                    iconType = {
-                        name = "Icon"
-                        spriteType = "GFX_tax_rate"
-                        position = { x = 27 y = 24 }
-                        alwaystransparent = yes
-                    }
-
-                    instantTextBoxType = {
-                        name = "tax_rate"
-                        position = { x = 50 y = 28 }
-                        font = "hoi_18mbs"
-                        text = "[?cb_policy_rate]%"
-                        format = centre
-                        maxWidth = 55
-                        maxHeight = 24
-                        fixedsize = yes
-                        alwaystransparent = yes
-                    }
-                    instantTextBoxType = {
-                        name = "title"
-                        position = { x = 0 y = 3 }
-                        font = "hoi_18mbs"
-                        text = "CB_POLICY_RATE"
-                        format = center
-                        maxWidth = 150
-                        maxHeight = 24
-                        fixedsize = yes
-                        pdx_tooltip = "CB_POLICY_RATE_TT"
-                    }
-
-                    containerWindowType = {
-                        name = "change_tax"
-                        position = { x = 97 y = 24 }
-
-                        buttonType = {
-                            name = "increase_cb_rate"
-                            spriteType = "GFX_md_collapse_button"
-                            frame = 2
-                            position = { x = 1 y = 0 }
-					        pdx_tooltip = "increases_cb_rate_tooltip"
-                        }
-
-                        buttonType = {
-                            name = "decrease_cb_rate"
-                            spriteType = "GFX_md_collapse_button"
-                            frame = 1
-                            position = { x = 0 y = 12 }
-					        pdx_tooltip = "decreases_cb_rate_tooltip"
-                        }
-                    }
-                }
-
-                containerWindowType = {
-                    name = "expand_money_supply_button_container"
-                    position = { x = 465 y = 12 }
-
-                    buttonType = {
-                        name = "expand_money_supply_button"
-                        spriteType = "GFX_generic_button_wide"
-                        position = { x = 0 y = 0 }
-                        pdx_tooltip = "expand_money_supply_button_tooltip"
-                    }
-
-                    iconType = {
-                        name = "expand_money_supply_button_icon"
-                        spriteType = "GFX_daily_income"
-                        position = { x = 5 y = -3 }
-                        alwaystransparent = yes
-                    }
-
-                    instantTextBoxType = {
-                        name = "expand_money_supply_button_label"
-                        position = { x = 30 y = 0 }
-                        font = "hoi_18mbs"
-                        text = "EXPAND_MONEY_SUPPLY_BUTTON"
-                        format = centre
-                        maxWidth = 100
-                        maxHeight = 24
-                        fixedsize = yes
-                        alwaystransparent = yes
-                    }
-                }
-
-                containerWindowType = {
-                    name = "austerity_button_container"
-                    position = { x = 465 y = 35 }
-
-                    buttonType = {
-                        name = "austerity_button"
-                        spriteType = "GFX_generic_button_wide"
-                        position = { x = 0 y = 0 }
-                        pdx_tooltip = "austerity_button_tooltip"
-                    }
-
-                    iconType = {
-                        name = "austerity_button_icon"
-                        spriteType = "GFX_daily_expense"
-                        position = { x = 5 y = -3 }
-                        alwaystransparent = yes
-                    }
-
-                    instantTextBoxType = {
-                        name = "austerity_button_label"
-                        position = { x = 30 y = 0 }
-                        font = "hoi_18mbs"
-                        text = "AUSTERITY_BUTTON"
-                        format = centre
-                        maxWidth = 100
-                        maxHeight = 24
-                        fixedsize = yes
-                        alwaystransparent = yes
-                    }
-                }
-
-                containerWindowType = {
-                    name = "print_money_button"
-                    position = { x = 621 y = 18 }
-
-                    buttonType = {
-                        name = "print_money_button"
-                        position = { x = 0 y = 0 }
-                        spriteType = "GFX_printer"
-                        pdx_tooltip = "print_money_button_tooltip"
-                    }
-                }
-            }
-
-            containerWindowType = {
                 name = "workforce_container"
-                position = { x = 18 y = 778 }
-                size = { width=672 height=100% }
+                position = { x = 0 y = 576 }
+                size = { width=672 height=310 }
 
                 background = {
                     name = "Background"
