@@ -15,7 +15,6 @@ permissions:
 
 jobs:
   validate-tools:
-    if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -28,6 +27,8 @@ jobs:
             events
             history
             localisation
+            interface
+            gfx/flags
       - name: Set up Python
         uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6
         with:
@@ -49,7 +50,6 @@ jobs:
 
   report-lib-tests:
     name: report_lib + validator unit tests
-    if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
