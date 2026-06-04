@@ -8733,8 +8733,8 @@
 	}
 
 	focus = {
-		id = SAU_internal_affairs_Shia_Sunni
-		icon = GFX_focus_generic_treaty
+		id = SAU_shia_question
+		icon = agitate_shias_in_bahrain
 		x = -15
 		y = 1
 		cost = 10
@@ -8742,6 +8742,8 @@
 		cancel_if_invalid = yes
 		prerequisite = { focus = SAU_internal_foregin_affairs }
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SAU_shia_question"
+			add_political_power = 25
 		}
 		ai_will_do = {
 			factor = 1
@@ -8781,17 +8783,29 @@
 	}
 
 	focus = {
-		id = SAU_internal_affairs_Adopt_Shia
-		icon = GFX_focus_generic_treaty
+		id = SAU_shia_embrace
+		icon = LIB_mosque
 		x = -13
 		y = 2
 		cost = 10
 		relative_position_id = SAU_internal_foregin_affairs
 		cancel_if_invalid = yes
-		prerequisite = { focus = SAU_internal_affairs_Shia_Sunni }
-		mutually_exclusive = { focus = SAU_internal_affairs_Shia_crackdown }
-		mutually_exclusive = { focus = SAU_internal_affairs_Shia_Toleance }
+		prerequisite = { focus = SAU_shia_question }
+		mutually_exclusive = { focus = SAU_shia_crackdown }
+		mutually_exclusive = { focus = SAU_shia_tolerance }
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SAU_shia_embrace"
+			set_country_flag = SAU_SHIA_REVIVAL_FOCUS_PATH
+			shia_resistance_level_down = yes
+			add_stability = 0.02
+			custom_effect_tooltip = shia_population_increase_tt
+			add_to_variable = { shia_population = 5 }
+			clamp_shia = yes
+			increase_pop_gulf = yes
+			set_temp_variable = { percent_change = 3 }
+			set_temp_variable = { tag_index = PER }
+			set_temp_variable = { influence_target = SAU }
+			change_influence_percentage = yes
 		}
 		ai_will_do = {
 			factor = 1
@@ -8799,17 +8813,25 @@
 	}
 
 	focus = {
-		id = SAU_internal_affairs_Shia_Toleance
-		icon = GFX_focus_generic_treaty
+		id = SAU_shia_tolerance
+		icon = Generic_Religious_Unity
 		x = -15
 		y = 2
 		cost = 10
 		relative_position_id = SAU_internal_foregin_affairs
 		cancel_if_invalid = yes
-		prerequisite = { focus = SAU_internal_affairs_Shia_Sunni }
-		mutually_exclusive = { focus = SAU_internal_affairs_Shia_crackdown }
-		mutually_exclusive = { focus = SAU_internal_affairs_Adopt_Shia }
+		prerequisite = { focus = SAU_shia_question }
+		mutually_exclusive = { focus = SAU_shia_crackdown }
+		mutually_exclusive = { focus = SAU_shia_embrace }
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SAU_shia_tolerance"
+			set_country_flag = SAU_SHIA_TOLERANCE_FOCUS_PATH
+			shia_resistance_level_down = yes
+			add_stability = 0.05
+			custom_effect_tooltip = shia_population_increase_tt
+			add_to_variable = { shia_population = 2 }
+			clamp_shia = yes
+			increase_pop_gulf = yes
 		}
 		ai_will_do = {
 			factor = 1
@@ -8817,17 +8839,30 @@
 	}
 
 	focus = {
-		id = SAU_internal_affairs_Shia_crackdown
-		icon = GFX_focus_generic_treaty
+		id = SAU_shia_crackdown
+		icon = Minority_syr_repres
 		x = -17
 		y = 2
 		cost = 10
 		relative_position_id = SAU_internal_foregin_affairs
 		cancel_if_invalid = yes
-		prerequisite = { focus = SAU_internal_affairs_Shia_Sunni }
-		mutually_exclusive = { focus = SAU_internal_affairs_Shia_Toleance }
-		mutually_exclusive = { focus = SAU_internal_affairs_Adopt_Shia }
+		prerequisite = { focus = SAU_shia_question }
+		mutually_exclusive = { focus = SAU_shia_tolerance }
+		mutually_exclusive = { focus = SAU_shia_embrace }
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SAU_shia_crackdown"
+			set_country_flag = SAU_SHIA_CRACKDOWN_FOCUS_PATH
+			shia_resistance_level_up = yes
+			shia_resistance_level_up = yes
+			custom_effect_tooltip = shia_population_decrease_tt
+			subtract_from_variable = { shia_population = 3 }
+			clamp_shia = yes
+			decrease_pop_gulf = yes
+			set_temp_variable = { arg_popularity = 0.02 }
+			add_ruling_outlook_popularity = yes
+			add_stability = 0.05
+			add_war_support = 0.03
+			add_political_power = 50
 		}
 		ai_will_do = {
 			factor = 1
@@ -8835,15 +8870,21 @@
 	}
 
 	focus = {
-		id = SAU_internal_affairs_Shia_Sunni_copy_copy3
-		icon = GFX_focus_generic_treaty
+		id = SAU_shia_representation
+		icon = Parliament_monarchism
 		x = -13
 		y = 3
 		cost = 10
 		relative_position_id = SAU_internal_foregin_affairs
 		cancel_if_invalid = yes
-		prerequisite = { focus = SAU_internal_affairs_Adopt_Shia }
+		prerequisite = { focus = SAU_shia_embrace }
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SAU_shia_representation"
+			shia_resistance_level_down = yes
+			add_stability = 0.03
+			custom_effect_tooltip = shia_population_increase_tt
+			add_to_variable = { shia_population = 3 }
+			clamp_shia = yes
 		}
 		ai_will_do = {
 			factor = 1
@@ -8851,16 +8892,22 @@
 	}
 
 	focus = {
-		id = SAU_internal_affairs_Shia_Sunni_copy_copy4
-		icon = GFX_focus_generic_treaty
+		id = SAU_shia_eastern_investment
+		icon = construction_engineering
 		x = -13
 		y = 4
 		cost = 10
 		relative_position_id = SAU_internal_foregin_affairs
 		cancel_if_invalid = yes
-		prerequisite = { focus = SAU_internal_affairs_Shia_Sunni_copy_copy3 }
-		prerequisite = { focus = SAU_internal_affairs_Shia_Sunni_copy_copy5 }
+		prerequisite = { focus = SAU_shia_representation }
+		prerequisite = { focus = SAU_shia_dialogue }
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SAU_shia_eastern_investment"
+			add_stability = 0.04
+			custom_effect_tooltip = shia_population_increase_tt
+			add_to_variable = { shia_population = 3 }
+			clamp_shia = yes
+			add_political_power = 25
 		}
 		ai_will_do = {
 			factor = 1
@@ -8868,15 +8915,21 @@
 	}
 
 	focus = {
-		id = SAU_internal_affairs_Shia_Sunni_copy_copy5
-		icon = GFX_focus_generic_treaty
+		id = SAU_shia_dialogue
+		icon = diplomacy
 		x = -11
 		y = 3
 		cost = 10
 		relative_position_id = SAU_internal_foregin_affairs
 		cancel_if_invalid = yes
-		prerequisite = { focus = SAU_internal_affairs_Adopt_Shia }
+		prerequisite = { focus = SAU_shia_embrace }
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SAU_shia_dialogue"
+			shia_resistance_level_down = yes
+			add_stability = 0.03
+			custom_effect_tooltip = shia_population_increase_tt
+			add_to_variable = { shia_population = 2 }
+			clamp_shia = yes
 		}
 		ai_will_do = {
 			factor = 1
@@ -8884,16 +8937,22 @@
 	}
 
 	focus = {
-		id = SAU_internal_affairs_Shia_Sunni_copy_copy6
-		icon = GFX_focus_generic_treaty
+		id = SAU_shia_rights_reform
+		icon = Focus_AUS_lawmaking_leniency
 		x = -11
 		y = 4
 		cost = 10
 		relative_position_id = SAU_internal_foregin_affairs
 		cancel_if_invalid = yes
-		prerequisite = { focus = SAU_internal_affairs_Shia_Sunni_copy_copy5 }
-		prerequisite = { focus = SAU_internal_affairs_Shia_Sunni_copy_copy3 }
+		prerequisite = { focus = SAU_shia_dialogue }
+		prerequisite = { focus = SAU_shia_representation }
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SAU_shia_rights_reform"
+			shia_resistance_level_down = yes
+			add_stability = 0.03
+			custom_effect_tooltip = shia_population_increase_tt
+			add_to_variable = { shia_population = 2 }
+			clamp_shia = yes
 		}
 		ai_will_do = {
 			factor = 1
@@ -8901,15 +8960,21 @@
 	}
 
 	focus = {
-		id = SAU_internal_affairs_Shia_Sunni_copy_copy7
-		icon = GFX_focus_generic_treaty
+		id = SAU_shia_harmony
+		icon = Second_church_icon
 		x = -11
 		y = 5
 		cost = 10
 		relative_position_id = SAU_internal_foregin_affairs
 		cancel_if_invalid = yes
-		prerequisite = { focus = SAU_internal_affairs_Shia_Sunni_copy_copy6 }
+		prerequisite = { focus = SAU_shia_rights_reform }
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SAU_shia_harmony"
+			remove_shia_resistance = yes
+			add_stability = 0.05
+			custom_effect_tooltip = shia_population_increase_tt
+			add_to_variable = { shia_population = 2 }
+			clamp_shia = yes
 		}
 		ai_will_do = {
 			factor = 1
@@ -8917,15 +8982,20 @@
 	}
 
 	focus = {
-		id = SAU_internal_affairs_Shia_Sunni_copy_copy
-		icon = GFX_focus_generic_treaty
+		id = SAU_shia_clergy
+		icon = Church_icon
 		x = -13
 		y = 5
 		cost = 10
 		relative_position_id = SAU_internal_foregin_affairs
 		cancel_if_invalid = yes
-		prerequisite = { focus = SAU_internal_affairs_Shia_Sunni_copy_copy4 }
+		prerequisite = { focus = SAU_shia_eastern_investment }
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SAU_shia_clergy"
+			add_stability = 0.03
+			custom_effect_tooltip = shia_population_increase_tt
+			add_to_variable = { shia_population = 3 }
+			clamp_shia = yes
 		}
 		ai_will_do = {
 			factor = 1
@@ -8933,16 +9003,36 @@
 	}
 
 	focus = {
-		id = SAU_internal_affairs_Shia_Sunni_copy_copy2
-		icon = GFX_focus_generic_treaty
+		id = SAU_shia_state_religion
+		icon = IRQ_islamic_republic
 		x = -12
 		y = 6
 		cost = 10
 		relative_position_id = SAU_internal_foregin_affairs
 		cancel_if_invalid = yes
-		prerequisite = { focus = SAU_internal_affairs_Shia_Sunni_copy_copy }
-		prerequisite = { focus = SAU_internal_affairs_Shia_Sunni_copy_copy7 }
+		prerequisite = { focus = SAU_shia_clergy }
+		prerequisite = { focus = SAU_shia_harmony }
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SAU_shia_state_religion"
+			set_country_flag = SAU_shia_state_religion_adopted
+			if = {
+				limit = { has_idea = sunni }
+				swap_ideas = { remove_idea = sunni add_idea = shia }
+			}
+			else = {
+				add_idea = shia
+			}
+			remove_shia_resistance = yes
+			custom_effect_tooltip = shia_population_increase_tt
+			add_to_variable = { shia_population = 15 }
+			clamp_shia = yes
+			increase_pop_gulf = yes
+			increase_pop_gulf = yes
+			add_stability = -0.05
+			set_temp_variable = { percent_change = 5 }
+			set_temp_variable = { tag_index = PER }
+			set_temp_variable = { influence_target = SAU }
+			change_influence_percentage = yes
 		}
 		ai_will_do = {
 			factor = 1
@@ -8950,15 +9040,18 @@
 	}
 
 	focus = {
-		id = SAU_internal_affairs_Shia_Sunni_End
-		icon = GFX_focus_generic_treaty
+		id = SAU_shia_settlement
+		icon = Generic_Crown_Box
 		x = -15
 		y = 7
 		cost = 10
 		relative_position_id = SAU_internal_foregin_affairs
 		cancel_if_invalid = yes
-		prerequisite = { focus = SAU_internal_affairs_Shia_Sunni_copy_copy15 focus = SAU_internal_affairs_Shia_Sunni_copy_copy11 focus = SAU_internal_affairs_Shia_Sunni_copy_copy2 }
+		prerequisite = { focus = SAU_shia_eastern_purge focus = SAU_shia_economic_inclusion focus = SAU_shia_state_religion }
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SAU_shia_settlement"
+			add_stability = 0.05
+			add_political_power = 100
 		}
 		ai_will_do = {
 			factor = 1
@@ -8966,15 +9059,19 @@
 	}
 
 	focus = {
-		id = SAU_internal_affairs_Shia_Sunni_copy_copy8
-		icon = GFX_focus_generic_treaty
+		id = SAU_shia_rehabilitation
+		icon = Generic_Morale_Bonus_Focus
 		x = -15
 		y = 3
 		cost = 10
 		relative_position_id = SAU_internal_foregin_affairs
 		cancel_if_invalid = yes
-		prerequisite = { focus = SAU_internal_affairs_Shia_Toleance }
+		prerequisite = { focus = SAU_shia_tolerance }
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SAU_shia_rehabilitation"
+			shia_resistance_level_down = yes
+			add_stability = 0.03
+			add_political_power = 25
 		}
 		ai_will_do = {
 			factor = 1
@@ -8982,15 +9079,21 @@
 	}
 
 	focus = {
-		id = SAU_internal_affairs_Shia_Sunni_copy_copy9
-		icon = GFX_focus_generic_treaty
+		id = SAU_shia_integration
+		icon = Generic_Working_Class_Family
 		x = -15
 		y = 4
 		cost = 10
 		relative_position_id = SAU_internal_foregin_affairs
 		cancel_if_invalid = yes
-		prerequisite = { focus = SAU_internal_affairs_Shia_Sunni_copy_copy8 }
+		prerequisite = { focus = SAU_shia_rehabilitation }
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SAU_shia_integration"
+			shia_resistance_level_down = yes
+			add_stability = 0.03
+			custom_effect_tooltip = shia_population_increase_tt
+			add_to_variable = { shia_population = 1 }
+			clamp_shia = yes
 		}
 		ai_will_do = {
 			factor = 1
@@ -8998,15 +9101,21 @@
 	}
 
 	focus = {
-		id = SAU_internal_affairs_Shia_Sunni_copy_copy10
-		icon = GFX_focus_generic_treaty
+		id = SAU_shia_education
+		icon = education_reform
 		x = -15
 		y = 5
 		cost = 10
 		relative_position_id = SAU_internal_foregin_affairs
 		cancel_if_invalid = yes
-		prerequisite = { focus = SAU_internal_affairs_Shia_Sunni_copy_copy9 }
+		prerequisite = { focus = SAU_shia_integration }
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SAU_shia_education"
+			add_stability = 0.04
+			custom_effect_tooltip = shia_population_increase_tt
+			add_to_variable = { shia_population = 1 }
+			clamp_shia = yes
+			add_political_power = 25
 		}
 		ai_will_do = {
 			factor = 1
@@ -9014,15 +9123,22 @@
 	}
 
 	focus = {
-		id = SAU_internal_affairs_Shia_Sunni_copy_copy11
-		icon = GFX_focus_generic_treaty
+		id = SAU_shia_economic_inclusion
+		icon = economic_prosperity
 		x = -15
 		y = 6
 		cost = 10
 		relative_position_id = SAU_internal_foregin_affairs
 		cancel_if_invalid = yes
-		prerequisite = { focus = SAU_internal_affairs_Shia_Sunni_copy_copy10 }
+		prerequisite = { focus = SAU_shia_education }
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SAU_shia_economic_inclusion"
+			remove_shia_resistance = yes
+			add_stability = 0.06
+			custom_effect_tooltip = shia_population_increase_tt
+			add_to_variable = { shia_population = 2 }
+			clamp_shia = yes
+			add_political_power = 50
 		}
 		ai_will_do = {
 			factor = 1
@@ -9030,15 +9146,22 @@
 	}
 
 	focus = {
-		id = SAU_internal_affairs_Shia_Sunni_copy_copy12
-		icon = GFX_focus_generic_treaty
+		id = SAU_shia_suppress_dissent
+		icon = ban_islamic_schools
 		x = -17
 		y = 3
 		cost = 10
 		relative_position_id = SAU_internal_foregin_affairs
 		cancel_if_invalid = yes
-		prerequisite = { focus = SAU_internal_affairs_Shia_crackdown }
+		prerequisite = { focus = SAU_shia_crackdown }
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SAU_shia_suppress_dissent"
+			shia_resistance_level_up = yes
+			custom_effect_tooltip = shia_population_decrease_tt
+			subtract_from_variable = { shia_population = 2 }
+			clamp_shia = yes
+			add_stability = 0.03
+			add_political_power = 25
 		}
 		ai_will_do = {
 			factor = 1
@@ -9046,15 +9169,22 @@
 	}
 
 	focus = {
-		id = SAU_internal_affairs_Shia_Sunni_copy_copy13
-		icon = GFX_focus_generic_treaty
+		id = SAU_shia_security_clampdown
+		icon = islamophobia2
 		x = -17
 		y = 4
 		cost = 10
 		relative_position_id = SAU_internal_foregin_affairs
 		cancel_if_invalid = yes
-		prerequisite = { focus = SAU_internal_affairs_Shia_Sunni_copy_copy12 }
+		prerequisite = { focus = SAU_shia_suppress_dissent }
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SAU_shia_security_clampdown"
+			shia_resistance_level_up = yes
+			custom_effect_tooltip = shia_population_decrease_tt
+			subtract_from_variable = { shia_population = 2 }
+			clamp_shia = yes
+			add_war_support = 0.05
+			add_political_power = 25
 		}
 		ai_will_do = {
 			factor = 1
@@ -9062,15 +9192,22 @@
 	}
 
 	focus = {
-		id = SAU_internal_affairs_Shia_Sunni_copy_copy14
-		icon = GFX_focus_generic_treaty
+		id = SAU_shia_sunni_supremacy
+		icon = Sunni_Focus
 		x = -17
 		y = 5
 		cost = 10
 		relative_position_id = SAU_internal_foregin_affairs
 		cancel_if_invalid = yes
-		prerequisite = { focus = SAU_internal_affairs_Shia_Sunni_copy_copy13 }
+		prerequisite = { focus = SAU_shia_security_clampdown }
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SAU_shia_sunni_supremacy"
+			custom_effect_tooltip = shia_population_decrease_tt
+			subtract_from_variable = { shia_population = 3 }
+			clamp_shia = yes
+			add_stability = 0.05
+			add_war_support = 0.05
+			add_political_power = 25
 		}
 		ai_will_do = {
 			factor = 1
@@ -9078,15 +9215,26 @@
 	}
 
 	focus = {
-		id = SAU_internal_affairs_Shia_Sunni_copy_copy15
-		icon = GFX_focus_generic_treaty
+		id = SAU_shia_eastern_purge
+		icon = islamophobia
 		x = -17
 		y = 6
 		cost = 10
 		relative_position_id = SAU_internal_foregin_affairs
 		cancel_if_invalid = yes
-		prerequisite = { focus = SAU_internal_affairs_Shia_Sunni_copy_copy14 }
+		prerequisite = { focus = SAU_shia_sunni_supremacy }
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus SAU_shia_eastern_purge"
+			custom_effect_tooltip = shia_population_decrease_tt
+			subtract_from_variable = { shia_population = 5 }
+			clamp_shia = yes
+			decrease_pop_gulf = yes
+			decrease_pop_gulf = yes
+			remove_shia_resistance = yes
+			set_temp_variable = { arg_popularity = 0.03 }
+			add_ruling_outlook_popularity = yes
+			add_stability = 0.08
+			add_war_support = 0.05
 		}
 		ai_will_do = {
 			factor = 1
