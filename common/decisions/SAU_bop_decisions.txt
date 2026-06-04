@@ -1,0 +1,162 @@
+
+SAU_modernisation_balance_of_power_category = {
+
+	SAU_bop_note = {
+		icon = generic_political_actions
+		priority = 100
+
+		allowed = {
+			original_tag = SAU
+		}
+
+		visible = {
+			always = yes
+		}
+
+		available = {
+			always = no
+		}
+
+		complete_effect = { }
+
+		ai_will_do = { factor = 0 }
+	}
+
+	SAU_debug_bop_left = {
+		icon = generic_political_actions
+		priority = 50
+
+		allowed = {
+			original_tag = SAU
+		}
+
+		visible = {
+			is_debug = yes
+		}
+
+		available = {
+			always = yes
+		}
+
+		cost = 0
+		days_remove = 0
+		fire_only_once = no
+
+		complete_effect = {
+			add_power_balance_value = {
+				id = SAU_modernisation_balance_of_power_category
+				value = -0.05
+			}
+		}
+
+		ai_will_do = { factor = 0 }
+	}
+
+	SAU_debug_bop_right = {
+		icon = generic_political_actions
+		priority = 50
+
+		allowed = {
+			original_tag = SAU
+		}
+
+		visible = {
+			is_debug = yes
+		}
+
+		available = {
+			always = yes
+		}
+
+		cost = 0
+		days_remove = 0
+		fire_only_once = no
+
+		complete_effect = {
+			add_power_balance_value = {
+				id = SAU_modernisation_balance_of_power_category
+				value = 0.05
+			}
+		}
+
+		ai_will_do = { factor = 0 }
+	}
+
+	SAU_debug_water_pride_up = {
+		icon = generic_political_actions
+		priority = 40
+
+		allowed = { original_tag = SAU }
+
+		visible = {
+			is_debug = yes
+			OR = {
+				has_idea = SAU_national_water_pride_minus4
+				has_idea = SAU_national_water_pride_minus3
+				has_idea = SAU_national_water_pride_minus2
+				has_idea = SAU_national_water_pride_minus1
+				has_idea = SAU_national_water_pride_neutral
+				has_idea = SAU_national_water_pride_plus1
+				has_idea = SAU_national_water_pride_plus2
+				has_idea = SAU_national_water_pride_plus3
+			}
+		}
+
+		available = { always = yes }
+		cost = 0
+		days_remove = 0
+		fire_only_once = no
+
+		complete_effect = {
+			if = { limit = { has_idea = SAU_national_water_pride_minus4 } swap_ideas = { remove_idea = SAU_national_water_pride_minus4 add_idea = SAU_national_water_pride_minus3 } }
+			else_if = { limit = { has_idea = SAU_national_water_pride_minus3 } swap_ideas = { remove_idea = SAU_national_water_pride_minus3 add_idea = SAU_national_water_pride_minus2 } }
+			else_if = { limit = { has_idea = SAU_national_water_pride_minus2 } swap_ideas = { remove_idea = SAU_national_water_pride_minus2 add_idea = SAU_national_water_pride_minus1 } }
+			else_if = { limit = { has_idea = SAU_national_water_pride_minus1 } swap_ideas = { remove_idea = SAU_national_water_pride_minus1 add_idea = SAU_national_water_pride_neutral } }
+			else_if = { limit = { has_idea = SAU_national_water_pride_neutral } swap_ideas = { remove_idea = SAU_national_water_pride_neutral add_idea = SAU_national_water_pride_plus1 } }
+			else_if = { limit = { has_idea = SAU_national_water_pride_plus1 } swap_ideas = { remove_idea = SAU_national_water_pride_plus1 add_idea = SAU_national_water_pride_plus2 } }
+			else_if = { limit = { has_idea = SAU_national_water_pride_plus2 } swap_ideas = { remove_idea = SAU_national_water_pride_plus2 add_idea = SAU_national_water_pride_plus3 } }
+			else_if = { limit = { has_idea = SAU_national_water_pride_plus3 } swap_ideas = { remove_idea = SAU_national_water_pride_plus3 add_idea = SAU_national_water_pride_plus4 } }
+		}
+
+		ai_will_do = { factor = 0 }
+	}
+
+	SAU_debug_water_pride_down = {
+		icon = generic_political_actions
+		priority = 40
+
+		allowed = { original_tag = SAU }
+
+		visible = {
+			is_debug = yes
+			OR = {
+				has_idea = SAU_national_water_pride_minus3
+				has_idea = SAU_national_water_pride_minus2
+				has_idea = SAU_national_water_pride_minus1
+				has_idea = SAU_national_water_pride_neutral
+				has_idea = SAU_national_water_pride_plus1
+				has_idea = SAU_national_water_pride_plus2
+				has_idea = SAU_national_water_pride_plus3
+				has_idea = SAU_national_water_pride_plus4
+			}
+		}
+
+		available = { always = yes }
+		cost = 0
+		days_remove = 0
+		fire_only_once = no
+
+		complete_effect = {
+			if = { limit = { has_idea = SAU_national_water_pride_plus4 } swap_ideas = { remove_idea = SAU_national_water_pride_plus4 add_idea = SAU_national_water_pride_plus3 } }
+			else_if = { limit = { has_idea = SAU_national_water_pride_plus3 } swap_ideas = { remove_idea = SAU_national_water_pride_plus3 add_idea = SAU_national_water_pride_plus2 } }
+			else_if = { limit = { has_idea = SAU_national_water_pride_plus2 } swap_ideas = { remove_idea = SAU_national_water_pride_plus2 add_idea = SAU_national_water_pride_plus1 } }
+			else_if = { limit = { has_idea = SAU_national_water_pride_plus1 } swap_ideas = { remove_idea = SAU_national_water_pride_plus1 add_idea = SAU_national_water_pride_neutral } }
+			else_if = { limit = { has_idea = SAU_national_water_pride_neutral } swap_ideas = { remove_idea = SAU_national_water_pride_neutral add_idea = SAU_national_water_pride_minus1 } }
+			else_if = { limit = { has_idea = SAU_national_water_pride_minus1 } swap_ideas = { remove_idea = SAU_national_water_pride_minus1 add_idea = SAU_national_water_pride_minus2 } }
+			else_if = { limit = { has_idea = SAU_national_water_pride_minus2 } swap_ideas = { remove_idea = SAU_national_water_pride_minus2 add_idea = SAU_national_water_pride_minus3 } }
+			else_if = { limit = { has_idea = SAU_national_water_pride_minus3 } swap_ideas = { remove_idea = SAU_national_water_pride_minus3 add_idea = SAU_national_water_pride_minus4 } }
+		}
+
+		ai_will_do = { factor = 0 }
+	}
+}
