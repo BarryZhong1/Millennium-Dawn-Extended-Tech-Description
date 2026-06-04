@@ -2449,7 +2449,7 @@ focus_tree = {
 	# Military
 	focus = {
 		id = CHI_open_the_august_1st_building
-		icon = recruitment
+		icon = focus_PRC_central_military_commision
 
 		x = 203
 		y = 0
@@ -2466,7 +2466,13 @@ focus_tree = {
 				add_dynamic_modifier = { modifier = CHI_airforce_modifier }
 				add_dynamic_modifier = { modifier = CHI_defense_industry }
 			}
-			add_ideas = CHI_pla_officer_corps
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_landforce_modifier }
+			add_to_variable = { CHI_land_max_command_power_mult = 0.10 tooltip = max_command_power_mult_tt }
+			add_to_variable = { CHI_land_army_org_factor = 0.05 tooltip = army_org_factor_tt }
+			add_to_variable = { CHI_land_army_morale_factor = 0.05 tooltip = army_morale_factor_tt }
+			add_to_variable = { CHI_land_experience_gain_army_factor = 0.05 tooltip = experience_gain_army_factor_tt }
+			add_to_variable = { CHI_land_army_leader_cost_factor = -0.10 tooltip = army_leader_cost_factor_tt }
+			add_to_variable = { CHI_land_military_leader_cost_factor = -0.10 tooltip = military_leader_cost_factor_tt }
 			newline = yes
 			army_experience = 25
 			navy_experience = 15
@@ -3073,7 +3079,7 @@ focus_tree = {
 		id = CHI_streamline_the_ranks
 		icon = recruitment
 
-		x = -30
+		x = -31
 		y = 1
 		relative_position_id = CHI_open_the_august_1st_building
 
@@ -4311,7 +4317,12 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_the_komsomolsk_pipeline"
-			add_ideas = CHI_komsomolsk_pipeline
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_airforce_modifier }
+			add_to_variable = { CHI_air_air_attack_factor = 0.05 tooltip = air_attack_factor_tt }
+			add_to_variable = { CHI_air_experience_gain_air = 0.05 tooltip = experience_gain_air_tt }
+			newline = yes
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
+			add_to_variable = { CHI_economy_research_speed_factor = -0.03 tooltip = research_speed_factor_tt }
 			newline = yes
 			add_tech_bonus = { name = CHI_the_komsomolsk_pipeline bonus = 0.25 uses = 1 category = CAT_fighter }
 			mio:CHI_sac_manufacturer = { add_mio_funds = 2000 }
@@ -4339,10 +4350,11 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_the_self_reliant_path"
-			add_ideas = CHI_self_reliant_aviation
-			newline = yes
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_airforce_modifier }
-			add_to_variable = { CHI_air_air_attack_factor = 0.03 tooltip = air_attack_factor_tt }
+			add_to_variable = { CHI_air_air_attack_factor = -0.02 tooltip = air_attack_factor_tt }
+			newline = yes
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
+			add_to_variable = { CHI_economy_research_speed_factor = 0.05 tooltip = research_speed_factor_tt }
 			newline = yes
 			add_tech_bonus = { name = CHI_the_self_reliant_path bonus = 0.25 uses = 1 category = CAT_air_engine }
 		}
@@ -4427,12 +4439,21 @@ focus_tree = {
 			add_tech_bonus = { name = CHI_saturn_engine_crisis bonus = 0.25 uses = 1 category = CAT_air_engine }
 			mio:CHI_sac_manufacturer = { add_mio_funds = 2000 add_mio_task_capacity = 1 }
 			if = {
-				limit = { has_idea = CHI_komsomolsk_pipeline }
-				remove_ideas = CHI_komsomolsk_pipeline
+				limit = { has_completed_focus = CHI_the_komsomolsk_pipeline }
+				custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_airforce_modifier }
+				add_to_variable = { CHI_air_air_attack_factor = -0.05 tooltip = air_attack_factor_tt }
+				add_to_variable = { CHI_air_experience_gain_air = -0.05 tooltip = experience_gain_air_tt }
+				newline = yes
+				custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
+				add_to_variable = { CHI_economy_research_speed_factor = 0.03 tooltip = research_speed_factor_tt }
 			}
 			else_if = {
-				limit = { has_idea = CHI_self_reliant_aviation }
-				remove_ideas = CHI_self_reliant_aviation
+				limit = { has_completed_focus = CHI_the_self_reliant_path }
+				custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_airforce_modifier }
+				add_to_variable = { CHI_air_air_attack_factor = 0.05 tooltip = air_attack_factor_tt }
+				newline = yes
+				custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
+				add_to_variable = { CHI_economy_research_speed_factor = -0.05 tooltip = research_speed_factor_tt }
 			}
 			set_temp_variable = { treasury_change = -50 }
 			modify_treasury_effect = yes
@@ -5040,10 +5061,11 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_project_998"
-			add_ideas = CHI_998_project_authorization
-			newline = yes
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_navy_modifier }
-			add_to_variable = { CHI_navy_navy_max_range_factor = 0.05 tooltip = navy_max_range_factor_tt }
+			add_to_variable = { CHI_navy_experience_gain_navy_factor = 0.05 tooltip = experience_gain_navy_factor_tt }
+			add_to_variable = { CHI_navy_navy_anti_air_attack_factor = 0.10 tooltip = navy_anti_air_attack_factor_tt }
+			add_to_variable = { CHI_navy_navy_max_range_factor = 0.10 tooltip = navy_max_range_factor_tt }
+			add_to_variable = { CHI_navy_naval_coordination = 0.05 tooltip = naval_coordination_tt }
 			newline = yes
 			add_tech_bonus = { name = CHI_project_998 bonus = 0.25 uses = 1 category = CAT_surface_ship }
 			set_temp_variable = { treasury_change = -40 }
