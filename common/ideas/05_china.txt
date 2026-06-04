@@ -3030,6 +3030,38 @@ ideas = {
 			on_remove = { log = "[GetDateText]: [Root.GetName]: remove idea CHI_joint_venture_era_idea" }
 		}
 
+		CHI_streamline_the_ranks_idea = {
+			picture = x
+			modifier = {
+				training_time_factor = 0.10
+				army_org_factor = -0.15
+				industrial_capacity_factory = -0.10
+				land_doctrine_cost_factor = 0.10
+			}
+
+			cancel = {
+				num_divisions < CHI_streamline_div_baseline
+					stockpile_ratio = {
+						archetype = infantry_weapons_type
+						ratio > 0.1
+					}
+					stockpile_ratio = {
+						archetype = artillery_equipment
+						ratio > 0.1
+					}
+					stockpile_ratio = {
+						archetype = medium_tank_chassis
+						ratio > 0.1
+					}
+			}
+
+			on_remove = {
+				custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_landforce_modifier }
+				add_to_variable = { CHI_land_army_org_factor = 0.05 tooltip = army_org_factor_tt }
+				add_to_variable = { CHI_land_recon_factor = 0.05 tooltip = recon_factor_tt }
+			}
+		}
+
 		## Semiconductor Industry Sector
 
 		CHI_semiconductor_backwardness = {

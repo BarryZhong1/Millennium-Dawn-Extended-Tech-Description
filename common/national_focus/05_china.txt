@@ -2460,23 +2460,19 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_open_the_august_1st_building"
-			hidden_effect = {
-				add_dynamic_modifier = { modifier = CHI_landforce_modifier }
-				add_dynamic_modifier = { modifier = CHI_navy_modifier }
-				add_dynamic_modifier = { modifier = CHI_airforce_modifier }
-				add_dynamic_modifier = { modifier = CHI_defense_industry }
-			}
-			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_landforce_modifier }
+			add_dynamic_modifier = { modifier = CHI_landforce_modifier }
 			add_to_variable = { CHI_land_max_command_power_mult = 0.10 tooltip = max_command_power_mult_tt }
-			add_to_variable = { CHI_land_army_org_factor = 0.05 tooltip = army_org_factor_tt }
-			add_to_variable = { CHI_land_army_morale_factor = 0.05 tooltip = army_morale_factor_tt }
-			add_to_variable = { CHI_land_experience_gain_army_factor = 0.05 tooltip = experience_gain_army_factor_tt }
 			add_to_variable = { CHI_land_army_leader_cost_factor = -0.10 tooltip = army_leader_cost_factor_tt }
 			add_to_variable = { CHI_land_military_leader_cost_factor = -0.10 tooltip = military_leader_cost_factor_tt }
 			newline = yes
 			army_experience = 25
 			navy_experience = 15
 			air_experience = 15
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = CHI_navy_modifier }
+				add_dynamic_modifier = { modifier = CHI_airforce_modifier }
+				add_dynamic_modifier = { modifier = CHI_defense_industry }
+			}
 		}
 
 		ai_will_do = { base = 1 }
@@ -3077,7 +3073,7 @@ focus_tree = {
 	## Army branch - Streamline the Ranks
 	focus = {
 		id = CHI_streamline_the_ranks
-		icon = recruitment
+		icon = military_mission
 
 		x = -31
 		y = 1
@@ -3091,39 +3087,21 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_streamline_the_ranks"
-			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_landforce_modifier }
-			add_to_variable = { CHI_land_army_org_factor = 0.05 tooltip = army_org_factor_tt }
-			add_to_variable = { CHI_land_training_time_factor = -0.05 tooltip = training_time_factor_tt }
-			add_to_variable = { CHI_land_recon_factor = 0.05 tooltip = recon_factor_tt }
-			add_to_variable = { CHI_land_army_attack_factor = 0.03 tooltip = army_attack_factor_tt }
-		}
-
-		ai_will_do = { base = 1 }
-	}
-
-	focus = {
-		id = CHI_from_division_to_brigade
-		icon = recruitment
-
-		x = 0
-		y = 1
-		relative_position_id = CHI_streamline_the_ranks
-
-		cost = 10
-
-		prerequisite = { focus = CHI_streamline_the_ranks }
-
-		search_filters = { FOCUS_FILTER_MILITARY }
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus CHI_from_division_to_brigade"
-			army_experience = 20
+			add_ideas = CHI_streamline_the_ranks_idea
+			set_variable = { CHI_streamline_div_baseline = num_divisions }
+			multiply_variable = { CHI_streamline_div_baseline = 0.8 }
+			custom_effect_tooltip = on_cancel_idea_tt
+			effect_tooltip = {
+				custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_landforce_modifier }
+				add_to_variable = { CHI_land_army_org_factor = 0.05 tooltip = army_org_factor_tt }
+				add_to_variable = { CHI_land_recon_factor = 0.05 tooltip = recon_factor_tt }
+			}
 			newline = yes
-			add_tech_bonus = {
-				name = CHI_from_division_to_brigade
-				bonus = 0.15
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.6
+				name = CHI_streamline_the_ranks
+				category = land_doctrine
 				uses = 1
-				category = CAT_land_doctrine
 			}
 		}
 
@@ -3132,15 +3110,15 @@ focus_tree = {
 
 	focus = {
 		id = CHI_informatized_local_wars
-		icon = recruitment
+		icon = army_planning
 
 		x = 2
-		y = 2
+		y = 1
 		relative_position_id = CHI_streamline_the_ranks
 
 		cost = 10
 
-		prerequisite = { focus = CHI_from_division_to_brigade }
+		prerequisite = { focus = CHI_streamline_the_ranks }
 
 		search_filters = { FOCUS_FILTER_MILITARY }
 
@@ -3160,15 +3138,15 @@ focus_tree = {
 
 	focus = {
 		id = CHI_combat_engineer_modernisation
-		icon = recruitment
+		icon = ukreplenia
 
 		x = -2
-		y = 2
+		y = 1
 		relative_position_id = CHI_streamline_the_ranks
 
-		cost = 10
+		cost = 5
 
-		prerequisite = { focus = CHI_from_division_to_brigade }
+		prerequisite = { focus = CHI_streamline_the_ranks }
 
 		search_filters = { FOCUS_FILTER_MILITARY }
 
@@ -3176,14 +3154,14 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_combat_engineer_modernisation"
 			add_tech_bonus = {
 				name = CHI_combat_engineer_modernisation
-				bonus = 0.15
+				bonus = 0.50
 				uses = 1
 				category = CAT_support_weapons
 			}
 			newline = yes
 			add_tech_bonus = {
-				name = CHI_combat_engineer_modernisation_excav
-				bonus = 0.15
+				name = CHI_combat_engineer_modernisation
+				bonus = 0.25
 				uses = 1
 				category = CAT_excavation_tech
 			}
@@ -3194,15 +3172,22 @@ focus_tree = {
 
 	focus = {
 		id = CHI_tactical_electronic_warfare
-		icon = recruitment
+		icon = radar2
 
 		x = 0
-		y = 2
+		y = 1
 		relative_position_id = CHI_streamline_the_ranks
 
-		cost = 10
+		cost = 5
 
-		prerequisite = { focus = CHI_from_division_to_brigade }
+		prerequisite = { focus = CHI_streamline_the_ranks }
+
+		available = {
+			OR = {
+				is_special_project_completed = sp:sp_radar_jamming_module
+				has_tech = computing4
+			}
+		}
 
 		search_filters = { FOCUS_FILTER_MILITARY }
 
@@ -3211,7 +3196,41 @@ focus_tree = {
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_landforce_modifier }
 			add_to_variable = { CHI_land_recon_factor = 0.05 tooltip = recon_factor_tt }
 			add_to_variable = { CHI_land_army_defence_factor = 0.03 tooltip = army_defence_factor_tt }
-			add_to_variable = { CHI_land_experience_gain_army_factor = 0.05 tooltip = experience_gain_army_factor_tt }
+			newline = yes
+			random_owned_state = {
+				limit = { is_coastal = yes }
+				add_building_construction = {
+					type = radar_station
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = { is_coastal = yes }
+				add_building_construction = {
+					type = radar_station
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = { is_coastal = yes }
+				add_building_construction = {
+					type = anti_air_building
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = { is_coastal = yes }
+				add_building_construction = {
+					type = anti_air_building
+					level = 2
+					instant_build = yes
+				}
+			}
+			set_temp_variable = { treasury_change = -20 }
+			modify_treasury_effect = yes
 		}
 
 		ai_will_do = { base = 1 }
@@ -3219,31 +3238,23 @@ focus_tree = {
 
 	focus = {
 		id = CHI_type_95_adoption
-		icon = recruitment
+		icon = QBZ_95
 
 		x = -5
-		y = 2
+		y = 1
 		relative_position_id = CHI_streamline_the_ranks
 
-		cost = 10
+		cost = 5
 
-		prerequisite = { focus = CHI_from_division_to_brigade }
+		prerequisite = { focus = CHI_streamline_the_ranks }
 
 		search_filters = { FOCUS_FILTER_MILITARY }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_type_95_adoption"
-			add_tech_bonus = {
-				name = CHI_type_95_adoption
-				bonus = 0.25
-				uses = 1
-				category = CAT_inf_wep
-			}
-			newline = yes
-			add_equipment_to_stockpile = {
-				type = infantry_weapons_2
-				amount = 500
-				producer = CHI
+			add_timed_idea = {
+				idea = CHI_type_95_adoption_idea
+				years = 1
 			}
 		}
 
@@ -3252,13 +3263,13 @@ focus_tree = {
 
 	focus = {
 		id = CHI_qbz191_rifle
-		icon = recruitment
+		icon = generic_rifle
 
 		x = 1
 		y = 1
 		relative_position_id = CHI_type_95_adoption
 
-		cost = 10
+		cost = 5
 
 		prerequisite = { focus = CHI_type_95_adoption }
 
@@ -3266,18 +3277,24 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_qbz191_rifle"
-			add_tech_bonus = {
-				name = CHI_qbz191_rifle
-				bonus = 0.25
-				uses = 1
-				category = CAT_inf_wep
+			if = {
+				limit = { has_tech = infantry_weapons_5 }
+				add_tech_bonus = {
+					name = CHI_qbz191_rifle
+					ahead_reduction = 5
+					uses = 1
+					technology = infantry_weapons_6
+				}
 			}
-			newline = yes
-			add_equipment_to_stockpile = {
-				type = infantry_weapons_5
-				amount = 500
-				producer = CHI
+			else = {
+				add_tech_bonus = {
+					name = CHI_qbz191_rifle
+					bonus = 0.25
+					uses = 1
+					category = CAT_inf_wep
+				}
 			}
+
 		}
 
 		ai_will_do = { base = 1 }
@@ -3285,24 +3302,32 @@ focus_tree = {
 
 	focus = {
 		id = CHI_individual_soldier_system
-		icon = recruitment
+		icon = counter
 
 		x = -1
 		y = 1
 		relative_position_id = CHI_type_95_adoption
 
-		cost = 10
+		cost = 7.8
 
 		prerequisite = { focus = CHI_type_95_adoption }
 
 		search_filters = { FOCUS_FILTER_MILITARY }
 
+		available = {
+			has_tech = cnc_equipment_5
+		}
+
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_individual_soldier_system"
+			sp:sp_tactical_augmented_reality = {
+				add_project_progress_ratio = 0.50
+			}
+			newline = yes
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_landforce_modifier }
-			add_to_variable = { CHI_land_recon_factor = 0.05 tooltip = recon_factor_tt }
-			add_to_variable = { CHI_land_experience_gain_army_factor = 0.05 tooltip = experience_gain_army_factor_tt }
-			add_to_variable = { CHI_land_army_defence_factor = 0.03 tooltip = army_defence_factor_tt }
+			add_to_variable = { CHI_land_recon_factor = 0.025 tooltip = recon_factor_tt }
+			add_to_variable = { CHI_land_breakthrough_factor = 0.025 tooltip = breakthrough_factor_tt }
+
 		}
 
 		ai_will_do = { base = 1 }
@@ -3310,7 +3335,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_red_arrow_program
-		icon = recruitment
+		icon = army_ptur
 
 		x = 0
 		y = 2
@@ -3326,11 +3351,17 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_red_arrow_program"
 			add_tech_bonus = {
 				name = CHI_red_arrow_program
-				bonus = 0.15
-				uses = 1
+				bonus = 0.25
+				uses = 2
+				category = CAT_l_at
 				category = CAT_h_at
 			}
 			newline = yes
+			add_equipment_to_stockpile = {
+				type = Anti_tank_2
+				amount = 200
+				producer = CHI
+			}
 			add_equipment_to_stockpile = {
 				type = Heavy_Anti_tank_2
 				amount = 200
@@ -3343,15 +3374,26 @@ focus_tree = {
 
 	focus = {
 		id = CHI_tactical_uav_integration
-		icon = recruitment
+		icon = army_nightvision
 
 		x = -2
 		y = 2
 		relative_position_id = CHI_type_95_adoption
 
-		cost = 10
+		cost = 5
 
 		prerequisite = { focus = CHI_individual_soldier_system }
+
+		available = {
+			is_special_project_completed = sp:sp_tactical_augmented_reality
+			if = {
+				limit = { has_dlc = "By Blood Alone" }
+				has_tech = drone_1
+			}
+			else = {
+				has_tech = Air_UAV1
+			}
+		}
 
 		search_filters = { FOCUS_FILTER_MILITARY }
 
@@ -3366,49 +3408,16 @@ focus_tree = {
 	}
 
 	focus = {
-		id = CHI_hj12_fire_and_forget
-		icon = recruitment
-
-		x = 0
-		y = 3
-		relative_position_id = CHI_type_95_adoption
-
-		cost = 10
-
-		prerequisite = { focus = CHI_red_arrow_program }
-
-		search_filters = { FOCUS_FILTER_MILITARY }
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus CHI_hj12_fire_and_forget"
-			add_tech_bonus = {
-				name = CHI_hj12_fire_and_forget
-				bonus = 0.20
-				uses = 1
-				category = CAT_l_at
-			}
-			newline = yes
-			add_equipment_to_stockpile = {
-				type = Anti_tank_3
-				amount = 200
-				producer = CHI
-			}
-		}
-
-		ai_will_do = { base = 1 }
-	}
-
-	focus = {
 		id = CHI_plz_howitzer_program
-		icon = recruitment
+		icon = Generic_SPG
 
 		x = -9
-		y = 2
+		y = 1
 		relative_position_id = CHI_streamline_the_ranks
 
-		cost = 10
+		cost = 5
 
-		prerequisite = { focus = CHI_from_division_to_brigade }
+		prerequisite = { focus = CHI_streamline_the_ranks }
 
 		search_filters = { FOCUS_FILTER_MILITARY }
 
@@ -3416,15 +3425,42 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_plz_howitzer_program"
 			add_tech_bonus = {
 				name = CHI_plz_howitzer_program
-				bonus = 0.20
+				bonus = 0.25
 				uses = 1
 				category = CAT_sp_arty
 			}
 			newline = yes
-			add_equipment_to_stockpile = {
-				type = SP_arty_2
-				amount = 100
-				producer = CHI
+			if = {
+				limit = { has_dlc = "No Step Back"}
+				create_equipment_variant = {
+					name = "PLZ-05"
+					type = medium_tank_artillery_chassis_2
+					modules = {
+						main_armament_slot = art_med_gun_gen2
+						reload_type_slot = automatic_loading
+						ammunition_load_slot = artillery_medium_ammo_2
+						turret_type_slot = tank_base_tank_turret
+						suspension_type_slot = tank_torsion_bar_suspension_medium
+						engine_type_slot = tank_diesel_engine_gen2
+
+						special_type_slot_1 = empty
+						special_type_slot_2 = empty
+						special_type_slot_4 = tank_battlestation_2
+					}
+					upgrades = {
+						tank_nsb_fire_upgrade = 2
+					}
+					icon = "GFX_CHI_SP_arty_2_medium"
+					design_team = mio:CHI_norinco_manufacturer
+				}
+			}
+			else = {
+				add_equipment_to_stockpile = {
+					type = medium_tank_artillery_chassis_2
+					amount = 150
+					producer = CHI
+
+				}
 			}
 		}
 
@@ -3433,13 +3469,13 @@ focus_tree = {
 
 	focus = {
 		id = CHI_artillery_modernisation
-		icon = recruitment
+		icon = artillery2
 
 		x = 1
 		y = 1
 		relative_position_id = CHI_plz_howitzer_program
 
-		cost = 10
+		cost = 5
 
 		prerequisite = { focus = CHI_plz_howitzer_program }
 
@@ -3455,7 +3491,7 @@ focus_tree = {
 			}
 			newline = yes
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_landforce_modifier }
-			add_to_variable = { CHI_land_army_attack_factor = 0.05 tooltip = army_attack_factor_tt }
+			add_to_variable = { CHI_land_army_artillery_attack_factor = 0.05 tooltip = army_artillery_attack_factor_tt }
 		}
 
 		ai_will_do = { base = 1 }
@@ -3463,13 +3499,13 @@ focus_tree = {
 
 	focus = {
 		id = CHI_phl_mlrs_modernisation
-		icon = recruitment
+		icon = Generic_MLRS
 
 		x = -1
 		y = 1
 		relative_position_id = CHI_plz_howitzer_program
 
-		cost = 10
+		cost = 5
 
 		prerequisite = { focus = CHI_plz_howitzer_program }
 
@@ -3479,48 +3515,15 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_phl_mlrs_modernisation"
 			add_tech_bonus = {
 				name = CHI_phl_mlrs_modernisation
-				bonus = 0.20
+				ahead_reduction = 5
 				uses = 1
 				category = CAT_sp_r_arty
 			}
 			newline = yes
-			add_equipment_to_stockpile = {
-				type = SP_R_arty_2
-				amount = 60
-				producer = CHI
-			}
-		}
-
-		ai_will_do = { base = 1 }
-	}
-
-	focus = {
-		id = CHI_pcl181_development
-		icon = recruitment
-
-		x = -3
-		y = 1
-		relative_position_id = CHI_plz_howitzer_program
-
-		cost = 10
-
-		prerequisite = { focus = CHI_plz_howitzer_program }
-
-		search_filters = { FOCUS_FILTER_MILITARY }
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus CHI_pcl181_development"
-			add_tech_bonus = {
-				name = CHI_pcl181_development
-				bonus = 0.20
+			add_design_template_bonus = {
 				uses = 1
-				category = CAT_arty
-			}
-			newline = yes
-			add_equipment_to_stockpile = {
-				type = artillery_2
-				amount = 100
-				producer = CHI
+				cost_factor = 0.80
+				equipment = medium_tank_rocket_chassis
 			}
 		}
 
@@ -3529,13 +3532,13 @@ focus_tree = {
 
 	focus = {
 		id = CHI_hq17_short_range_sam
-		icon = recruitment
+		icon = SAM
 
 		x = 0
 		y = 2
 		relative_position_id = CHI_plz_howitzer_program
 
-		cost = 10
+		cost = 5
 
 		prerequisite = { focus = CHI_artillery_modernisation }
 		prerequisite = { focus = CHI_phl_mlrs_modernisation }
@@ -3551,11 +3554,7 @@ focus_tree = {
 				category = CAT_sp_aa
 			}
 			newline = yes
-			add_equipment_to_stockpile = {
-				type = SP_Anti_Air_2
-				amount = 60
-				producer = CHI
-			}
+			two_anti_air = yes
 		}
 
 		ai_will_do = { base = 1 }
@@ -3563,13 +3562,13 @@ focus_tree = {
 
 	focus = {
 		id = CHI_hq17_medium_range_air_defense
-		icon = recruitment
+		icon = army_anti_missles
 
 		x = -1
 		y = 3
 		relative_position_id = CHI_plz_howitzer_program
 
-		cost = 10
+		cost = 5
 
 		prerequisite = { focus = CHI_hq17_short_range_sam }
 
@@ -3584,8 +3583,10 @@ focus_tree = {
 				category = CAT_sp_aa
 			}
 			newline = yes
-			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_landforce_modifier }
-			add_to_variable = { CHI_land_army_defence_factor = 0.05 tooltip = army_defence_factor_tt }
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_airforce_modifier }
+			add_to_variable = { CHI_air_static_anti_air_damage_factor = 0.05 tooltip = static_anti_air_damage_factor_tt }
+			newline = yes
+			two_radar_station = yes
 		}
 
 		ai_will_do = { base = 1 }
@@ -3593,7 +3594,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_pgz_gun_missile_hybrid
-		icon = recruitment
+		icon = air_defense2
 
 		x = 1
 		y = 3
@@ -3607,18 +3608,10 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_pgz_gun_missile_hybrid"
-			add_tech_bonus = {
-				name = CHI_pgz_gun_missile_hybrid
-				bonus = 0.15
-				uses = 1
-				category = CAT_sp_aa
-			}
-			newline = yes
-			add_equipment_to_stockpile = {
-				type = SP_Anti_Air_2
-				amount = 40
-				producer = CHI
-			}
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_airforce_modifier }
+			add_to_variable = { CHI_air_air_attack_factor = 0.05 tooltip = air_attack_factor_tt }
+			add_to_variable = { CHI_air_air_detection = 0.05 tooltip = air_detection_tt }
+			add_to_variable = { CHI_air_static_anti_air_hit_chance_factor = 0.05 tooltip = static_anti_air_hit_chance_factor_tt }
 		}
 
 		ai_will_do = { base = 1 }
@@ -3626,7 +3619,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_the_great_wall
-		icon = recruitment
+		icon = military_fort2
 
 		x = -4
 		y = 1
@@ -3645,6 +3638,9 @@ focus_tree = {
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_landforce_modifier }
 			add_to_variable = { CHI_land_army_defence_factor = 0.05 tooltip = army_defence_factor_tt }
 			add_to_variable = { CHI_land_army_org_factor = 0.05 tooltip = army_org_factor_tt }
+			newline = yes
+			set_grand_doctrine = defence_in_depth
+
 		}
 
 		ai_will_do = { base = 1 }
@@ -3652,7 +3648,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_the_iron_fist
-		icon = recruitment
+		icon = draw_up_war_plans
 
 		x = 0
 		y = 1
@@ -3671,6 +3667,8 @@ focus_tree = {
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_landforce_modifier }
 			add_to_variable = { CHI_land_army_attack_factor = 0.05 tooltip = army_attack_factor_tt }
 			add_to_variable = { CHI_land_army_org_factor = 0.05 tooltip = army_org_factor_tt }
+			newline = yes
+			set_grand_doctrine = combined_arms
 		}
 
 		ai_will_do = { base = 1 }
@@ -3678,7 +3676,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_the_sharp_blade
-		icon = recruitment
+		icon = Generic_Revanchism02
 
 		x = 4
 		y = 1
@@ -3697,6 +3695,8 @@ focus_tree = {
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_landforce_modifier }
 			add_to_variable = { CHI_land_planning_speed = 0.10 tooltip = planning_speed_tt }
 			add_to_variable = { CHI_land_army_attack_factor = 0.03 tooltip = army_attack_factor_tt }
+			newline = yes
+			set_grand_doctrine = shock_and_awe
 		}
 
 		ai_will_do = { base = 1 }
@@ -3704,7 +3704,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_strategic_reserve_system
-		icon = recruitment
+		icon = conscription
 
 		x = -1
 		y = 1
@@ -3722,7 +3722,7 @@ focus_tree = {
 			newline = yes
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_landforce_modifier }
 			add_to_variable = { CHI_land_training_time_factor = -0.05 tooltip = training_time_factor_tt }
-			add_to_variable = { CHI_land_experience_gain_army_factor = 0.05 tooltip = experience_gain_army_factor_tt }
+			add_to_variable = { CHI_land_recruitable_population = 0.025 tooltip = recruitable_population_tt }
 		}
 
 		ai_will_do = { base = 1 }
@@ -3730,7 +3730,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_peoples_armed_police_integration
-		icon = recruitment
+		icon = police_funding_bonus
 
 		x = 1
 		y = 1
@@ -3745,8 +3745,9 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_peoples_armed_police_integration"
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_landforce_modifier }
-			add_to_variable = { CHI_land_army_org_factor = 0.05 tooltip = army_org_factor_tt }
-			add_to_variable = { CHI_land_training_time_factor = -0.05 tooltip = training_time_factor_tt }
+			add_to_variable = { CHI_land_army_morale_factor = 0.05 tooltip = army_morale_factor_tt }
+			add_to_variable = { CHI_land_resistance_activity = -0.05 tooltip = resistance_activity_tt }
+			add_to_variable = { CHI_land_resistance_garrison_penetration_chance = -0.10 tooltip = resistance_garrison_penetration_chance_tt }
 		}
 
 		ai_will_do = { base = 1 }
@@ -3754,7 +3755,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_active_defense_doctrine
-		icon = recruitment
+		icon = border_conflict_bunker
 
 		x = 0
 		y = 2
@@ -3777,16 +3778,17 @@ focus_tree = {
 			}
 			newline = yes
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_landforce_modifier }
-			add_to_variable = { CHI_land_max_planning = 0.05 tooltip = max_planning_tt }
-			add_to_variable = { CHI_land_army_defence_factor = 0.03 tooltip = army_defence_factor_tt }
+			add_to_variable = { CHI_land_dig_in_speed_factor = 0.10 tooltip = dig_in_speed_factor_tt }
+			add_to_variable = { CHI_land_army_defence_factor = 0.05 tooltip = army_defence_factor_tt }
+			add_to_variable = { CHI_land_defence_in_depth_mastery_gain_factor = 0.05 tooltip = defence_in_depth_mastery_gain_factor_tt }
 		}
 
 		ai_will_do = { base = 1 }
 	}
 
 	focus = {
-		id = CHI_underground_great_wall
-		icon = recruitment
+		id = CHI_underground_great_wall #New Effects to represent the localisation. Be very creative
+		icon = focus_ETH_freedom_at_gunpoint
 
 		x = 0
 		y = 3
@@ -3800,9 +3802,6 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_underground_great_wall"
-			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_landforce_modifier }
-			add_to_variable = { CHI_land_army_defence_factor = 0.05 tooltip = army_defence_factor_tt }
-			add_to_variable = { CHI_land_army_org_factor = 0.05 tooltip = army_org_factor_tt }
 		}
 
 		ai_will_do = { base = 1 }
@@ -4054,12 +4053,12 @@ focus_tree = {
 		icon = recruitment
 
 		x = 10
-		y = 2
+		y = 1
 		relative_position_id = CHI_streamline_the_ranks
 
 		cost = 10
 
-		prerequisite = { focus = CHI_from_division_to_brigade }
+		prerequisite = { focus = CHI_streamline_the_ranks }
 
 		search_filters = { FOCUS_FILTER_MILITARY }
 
@@ -4182,7 +4181,7 @@ focus_tree = {
 
 		cost = 10
 
-		prerequisite = { focus = CHI_from_division_to_brigade }
+		prerequisite = { focus = CHI_streamline_the_ranks }
 
 		search_filters = { FOCUS_FILTER_MILITARY }
 
