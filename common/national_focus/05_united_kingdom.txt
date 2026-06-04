@@ -14125,7 +14125,7 @@ focus_tree = {
 
 	focus = {
 		id = ENG_cleanup_westminster
-		icon = "Waiting for Worms"
+		icon = "Waiting_for_Worms"
 
 		x = 0
 		y = 1
@@ -16505,16 +16505,10 @@ focus_tree = {
 					is_ai = yes
 				}
 				hidden_trigger = {
-					NOT = { has_country_flag = ENG_charles_ascension_flag } #Flag to prevent AI from taking the focus again after advisor has been replaced}
+					NOT = { has_country_flag = ENG_charles_was_ascended_flag } #Flag to prevent AI from taking the focus again after advisor has been replaced}
 				}
 			}
 			has_country_flag = ENG_elizabeth_ruling_monarch
-			if = {
-				limit = {
-					has_country_flag = ENG_inner_circle_event_pending_flag
-				}
-				NOT = { has_country_flag = ENG_inner_circle_event_pending_flag }
-			}
 			if = {
 				limit = {
 					has_country_flag = ENG_inner_circle_event_pending_flag
@@ -16534,8 +16528,8 @@ focus_tree = {
 		}
 
 		#Focus will need to pause while events are pending
-
 		cancel_if_invalid = no
+		continue_if_invalid = no
 
 
 		completion_reward = {
@@ -16626,7 +16620,7 @@ focus_tree = {
 
 		select_effect = { #Necessary to prevent AI from getting stuck if the focus is paused due to available trigger returning false
 			log = "[GetDateText]: [Root.GetName]: Focus ENG_the_prince_trust"
-			set_country_flag = ENG_charles_ascension_flag
+			set_country_flag = ENG_charles_was_ascension_flag
 		}
 
 		ai_will_do = {
@@ -16958,7 +16952,7 @@ focus_tree = {
 					is_ai = yes
 				}
 				hidden_trigger = {
-					NOT = { has_country_flag = ENG_andrew_ascension_flag } #Flag to prevent AI from taking the focus again after advisor has been replaced}
+					NOT = { has_country_flag = ENG_andrew_was_ascended_flag } #Flag to prevent AI from taking the focus again after advisor has been replaced}
 				}
 			}
 			NOT = { has_country_flag = ENG_andrew_epstein_punishment }
@@ -16982,8 +16976,8 @@ focus_tree = {
 		}
 
 		#Focus will need to pause while events are pending
-
 		cancel_if_invalid = no
+		continue_if_invalid = no
 
 
 		completion_reward = {
@@ -17070,7 +17064,7 @@ focus_tree = {
 
 		select_effect = { #Necessary to prevent AI from getting stuck if the focus is paused due to available trigger returning false
 			log = "[GetDateText]: [Root.GetName]: Focus ENG_naval_prince"
-			set_country_flag = ENG_andrew_ascension_flag
+			set_country_flag = ENG_andrew_was_ascended_flag
 		}
 
 		ai_will_do = {
@@ -17454,7 +17448,7 @@ focus_tree = {
 					is_ai = yes
 				}
 				hidden_trigger = {
-					NOT = { has_country_flag = ENG_anne_ascension_flag } #Flag to prevent AI from taking the focus again after advisor has been replaced}
+					NOT = { has_country_flag = ENG_anne_was_ascended_flag } #Flag to prevent AI from taking the focus again after advisor has been replaced}
 				}
 			}
 			has_country_flag = ENG_elizabeth_ruling_monarch
@@ -17477,8 +17471,8 @@ focus_tree = {
 		}
 
 		#Focus will need to pause while events are pending
-
 		cancel_if_invalid = no
+		continue_if_invalid = no
 
 
 		completion_reward = {
@@ -18004,7 +17998,7 @@ focus_tree = {
 					is_ai = yes
 				}
 				hidden_trigger = {
-					NOT = { has_country_flag = ENG_edward_ascension_flag } #Flag to prevent AI from taking the focus again after advisor has been replaced}
+					NOT = { has_country_flag = ENG_edward_was_ascended_flag } #Flag to prevent AI from taking the focus again after advisor has been replaced}
 				}
 			}
 			has_country_flag = ENG_elizabeth_ruling_monarch
@@ -18027,8 +18021,8 @@ focus_tree = {
 		}
 
 		#Focus will need to pause while events are pending
-
 		cancel_if_invalid = no
+		continue_if_invalid = no
 
 
 		completion_reward = {
@@ -18509,7 +18503,7 @@ focus_tree = {
 					is_ai = yes
 				}
 				hidden_trigger = {
-					NOT = { has_country_flag = ENG_philip_ascension_flag } #Flag to prevent AI from taking the focus again after advisor has been replaced}
+					NOT = { has_country_flag = ENG_philip_was_ascended_flag } #Flag to prevent AI from taking the focus again after advisor has been replaced}
 				}
 			}
 			has_country_flag = ENG_elizabeth_ruling_monarch
@@ -18532,8 +18526,8 @@ focus_tree = {
 		}
 
 		#Focus will need to pause while events are pending
-
 		cancel_if_invalid = no
+		continue_if_invalid = no
 
 
 		completion_reward = {
@@ -18944,7 +18938,7 @@ focus_tree = {
 					is_ai = yes
 				}
 				hidden_trigger = {
-					NOT = { has_country_flag = ENG_william_ascension_flag } #Flag to prevent AI from taking the focus again after advisor has been replaced}
+					NOT = { has_country_flag = ENG_william_was_ascended_flag } #Flag to prevent AI from taking the focus again after advisor has been replaced}
 				}
 			}
 			has_country_flag = ENG_elizabeth_ruling_monarch
@@ -18967,8 +18961,8 @@ focus_tree = {
 		}
 
 		#Focus will need to pause while events are pending
-
 		cancel_if_invalid = no
+		continue_if_invalid = no
 
 
 		completion_reward = {
@@ -19755,6 +19749,78 @@ focus_tree = {
 				set_state_flag = EGY_sinai
 			}
 			country_event = britain_md.30
+		}
+
+		ai_will_do = {
+			base = 1
+		}
+	}
+
+	focus = {
+		id = ENG_the_wonga_coup
+		icon = attack_egu
+
+		x = 4
+		y = 1
+		relative_position_id = ENG_the_sun_which_never_set
+
+		cost = 10
+
+		prerequisite = { focus = ENG_the_sun_which_never_set }
+
+		search_filters = { FOCUS_FILTER_ECONOMY FOCUS_FILTER_POLITICAL }
+
+		available = {
+			has_stability > 0.70
+			country_exists = EGU
+			if = {
+				limit = {
+					has_dlc = "La Resistance"
+				}
+				network_strength = {
+					target = EGU
+					value > 60
+				}
+			}
+			else_if  = {
+				limit = {
+					ENG = { is_ai = yes }
+					EGU = { is_ai = yes }
+				}
+			}
+			else = {
+				EGU = {
+					influence_higher_20 = yes
+				}
+			}
+			NOT = {
+				EGU = {
+					is_subject_of = ENG
+					is_ally_with = ENG
+					is_guaranteed_by = ENG
+					has_non_aggression_pact_with = ENG
+				}
+			}
+			if = {
+				limit = {
+					ENG = {
+						is_ai = yes
+					}
+				}
+			}
+			else = {
+				has_tech = special_forces_tech_4
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [THIS.GetName]: Focus ENG_the_wonga_coup"
+			add_to_variable = { ENG_fp_count = 1 }
+			custom_effect_tooltip = ENG_seize_oil_wonga_coup_TT
+			hidden_effect = {
+				set_technology = { special_forces_tech_3 = 1 popup = no }
+				set_technology = { special_forces_tech_4 = 1 popup = no }
+			}
 		}
 
 		ai_will_do = {
@@ -20838,18 +20904,15 @@ focus_tree = {
 						target = SCO
 						type = annex_everything
 					}
-				}
-				ENG = {
 					declare_war_on = {
 						target = WAS
 						type = annex_everything
 					}
-				}
-				ENG = {
 					declare_war_on = {
 						target = NIR
 						type = annex_everything
 					}
+					set_cosmetic_tag = ENG_England
 				}
 			}
 		}
