@@ -140,3 +140,28 @@ SAU_clear_posture = {
 	if = { limit = { has_idea = SAU_sp_posture_deterrence } remove_ideas = SAU_sp_posture_deterrence }
 	if = { limit = { has_idea = SAU_sp_posture_homeland } remove_ideas = SAU_sp_posture_homeland }
 }
+
+SAU_research_modifier_level_up = {
+	if = {
+		limit = { has_idea = SAU_research_modifier_01 }
+		swap_ideas = { remove_idea = SAU_research_modifier_01 add_idea = SAU_research_modifier_02 }
+	}
+	else_if = {
+		limit = { has_idea = SAU_research_modifier_02 }
+		swap_ideas = { remove_idea = SAU_research_modifier_02 add_idea = SAU_research_modifier_03 }
+	}
+	else_if = {
+		limit = { has_idea = SAU_research_modifier_03 }
+		swap_ideas = { remove_idea = SAU_research_modifier_03 add_idea = SAU_research_modifier_04 }
+	}
+	else_if = {
+		limit = { has_idea = SAU_research_modifier_04 }
+		custom_effect_tooltip = SAU_research_maxed_tt
+	}
+	else = {
+		add_ideas = SAU_research_modifier_01
+	}
+	remove_dynamic_modifier = { modifier = education_dynamic_modifier }
+	add_dynamic_modifier = { modifier = education_dynamic_modifier }
+}
+
