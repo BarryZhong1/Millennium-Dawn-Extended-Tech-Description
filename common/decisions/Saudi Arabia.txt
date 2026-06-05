@@ -1030,4 +1030,78 @@ SAU_Intelligence_category = {
 
 		ai_will_do = { base = 1 }
 	}
+
+	SAU_cyber_defensive_op = {
+		icon = generic_intelligence_operation
+
+		allowed = { original_tag = SAU }
+		visible = { has_country_flag = creation_of_GIP }
+		available = { has_intelligence_agency = yes }
+
+		target_array = global.countries
+		target_root_trigger = {
+			has_country_flag = creation_of_GIP
+			has_intelligence_agency = yes
+		}
+		target_trigger = {
+			country_exists = FROM
+			FROM = { NOT = { original_tag = SAU } }
+			network_strength = { target = FROM value > 1 }
+		}
+
+		cost = 50
+		days_re_enable = 120
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SAU_cyber_defensive_op vs [FROM.GetTag]"
+			set_temp_variable = { treasury_change = -50 }
+			modify_treasury_effect = yes
+			add_timed_idea = { idea = SAU_cyber_defensive_posture days = 90 }
+			FROM = {
+				add_timed_idea = { idea = SAU_cyber_defensive_target days = 90 }
+				set_country_flag = { flag = is_under_defensive_op_by_SAU days = 90 value = 1 }
+			}
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	SAU_cyber_offensive_op = {
+		icon = generic_operation
+
+		allowed = { original_tag = SAU }
+		visible = { has_country_flag = creation_of_GIP }
+		available = { 
+			has_intelligence_agency = yes 
+		}
+
+		target_array = global.countries
+		target_root_trigger = {
+			has_country_flag = creation_of_GIP
+			has_intelligence_agency = yes
+		}
+		target_trigger = {
+			country_exists = FROM
+			FROM = { NOT = { original_tag = SAU } }
+			network_strength = { target = FROM value > 1 }
+		}
+
+		cost = 75
+		days_re_enable = 180
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SAU_cyber_offensive_op vs [FROM.GetTag]"
+			set_temp_variable = { treasury_change = -80 }
+			modify_treasury_effect = yes
+			FROM = {
+				add_timed_idea = { idea = SAU_cyber_offensive_target days = 90 }
+				set_country_flag = { flag = is_under_offensive_attack_by_SAU days = 90 value = 1 }
+			}
+			add_political_power = 10
+		}
+
+		ai_will_do = { base = 1 }
+	}
 }

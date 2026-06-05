@@ -2,6 +2,56 @@ ideas = {
 
 	country = {
 
+				SAU_military_doctrine = {
+			on_add = { log = "[GetDateText]: [Root.GetName]: add idea SAU_military_doctrine" }
+			picture = arm_all_army_idea
+			allowed = { original_tag = SAU }
+			allowed_civil_war = { always = yes }
+			modifier = {
+				custom_modifier_tooltip = SAU_military_tt
+				army_org_factor = 0.05
+				experience_gain_army_factor = 0.05
+				experience_gain_air_factor = 0.05
+				experience_gain_navy_factor = 0.05
+			}
+		}
+
+
+		SAU_cyber_offensive_target = {
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			picture = spy_coup
+			modifier = {
+				stability_factor = -0.03
+			}
+			targeted_modifier = {
+				tag = SAU
+				defense_bonus_against = -0.10
+			}
+		}
+		SAU_cyber_defensive_target = {
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			picture = spy_coup
+			modifier = {
+				stability_factor = -0.03
+			}
+			targeted_modifier = {
+				tag = SAU
+				attack_bonus_against = -0.10
+			}
+		}
+		SAU_cyber_defensive_posture = {
+			allowed = { always = no }
+			allowed_civil_war = { always = yes }
+			picture = intel_bonus
+			modifier = {
+				civilian_intel_to_others = -15
+				army_intel_to_others = -15
+				navy_intel_to_others = -15
+			}
+		}
+
 		SAU_research_modifier_01 = {
 			on_add = { log = "[GetDateText]: [Root.GetName]: add idea SAU_research_modifier_01" }
 			allowed_civil_war = { always = yes }
@@ -1672,21 +1722,8 @@ ideas = {
 			}
 		}
 		# Military
-		
-		SAU_military_doctrine = {
-			on_add = { log = "[GetDateText]: [Root.GetName]: add idea SAU_military_doctrine" }
-			picture = arm_all_army_idea
-			allowed = { original_tag = SAU }
-			allowed_civil_war = { always = yes }
-			modifier = {
-				custom_modifier_tooltip = SAU_military_tt
-				army_org_factor = 0.05
-				experience_gain_army_factor = 0.05
-				experience_gain_air_factor = 0.05
-				experience_gain_navy_factor = 0.05
-			}
-		}
 	}
+
 
 	hidden_ideas = {
 
