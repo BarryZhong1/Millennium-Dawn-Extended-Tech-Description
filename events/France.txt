@@ -2845,7 +2845,7 @@ country_event = {
 		set_temp_variable = { party_popularity_increase = -0.1 }
 		add_relative_party_popularity = yes
 		add_timed_idea = { idea = FRA_ineluctable_collapse days = 365 }
-		unlock_decision_category_tooltip = Socialist_collapse_category
+		unlock_decision_category_tooltip = FRA_french_socialist_downfall_decision_category
 		country_event = { id = france_md.520 }
 		ai_chance = {
 			factor = 1
@@ -3279,7 +3279,7 @@ country_event = {
 		set_temp_variable = { temp_change = -0.3 }
 		FRA_police_budget = yes
 		set_temp_variable = { temp_change = 0.05 }
-		FRA_unstab = yes
+		FRA_destabilised = yes
 		add_political_power = 100
 
 		ai_chance = {
@@ -3567,7 +3567,7 @@ country_event = {
 		set_temp_variable = { temp_change = 0.1 }
 		FRA_farm_res = yes
 		set_temp_variable = { temp_change = 0.05 }
-		FRA_monthly = yes
+		FRA_monthly_positive = yes
 		set_temp_variable = { temp_opinion = 10 }
 		change_farmers_opinion = yes
 		add_political_power = 100
@@ -3673,7 +3673,7 @@ country_event = {
 		add_dynamic_modifier = {
 			modifier = FRA_6th_rep
 		}
-		remove_idea = FRA_5th_republic
+		remove_ideas = FRA_5th_republic
 		add_ideas = FRA_sixth_republic_idea
 
 		ai_chance = {
@@ -6458,7 +6458,7 @@ country_event = {#our stance on ukraine
 
 		FRA = {
 			send_equipment = {
-				equipment = infantry_weapons
+				equipment = infantry_weapons_type
 				amount = 1000
 				target = UKR
 			}
@@ -6511,7 +6511,7 @@ country_event = {
 
 		FRA = {
 			send_equipment = {
-				equipment = infantry_weapons
+				equipment = infantry_weapons_type
 				amount = 2000
 				target = ROOT
 			}
@@ -6522,11 +6522,6 @@ country_event = {
 			}
 			send_equipment = {
 				equipment = APC_1
-				amount = 50
-				target = ROOT
-			}
-			send_equipment = {
-				equipment = command_control_equipment2
 				amount = 50
 				target = ROOT
 			}
@@ -7498,7 +7493,7 @@ country_event = {#frexit or scam
 		log = "[GetDateText]: [This.GetName]: france_md.285.a executed"
 		random_list = {
 				70 = {#bce agree
-					country_event = { id = france_md.287 = 5 }
+					country_event = { id = france_md.287 days = 5 }
 
 				}
 				30 = {#bce refuse
@@ -7704,9 +7699,7 @@ country_event = {#boost nationalism
 		FRA = {
 			add_opinion_modifier = { target = ROOT modifier = has_expressed_loyalty }
 		}
-		THIS.id{
-			add_opinion_modifier = { target = FRA modifier = has_expressed_loyalty }
-		}
+		add_opinion_modifier = { target = FRA modifier = has_expressed_loyalty }
 
 		ai_chance = {
 			base = 4
@@ -8460,8 +8453,8 @@ country_event = {#USA friend or foe
 		}
 		ai_chance = {
 			base = 4
-			add = 2
 			modifier = {
+				add = 2
 				OR = {
 					has_idea = great_power
 					has_idea = large_power
@@ -9629,7 +9622,7 @@ country_event = {#victory saint louis on europe
 		add_ideas = FRA_victory_crusade_2_conversion
 		every_other_country = {
 			limit = { is_subject_of = FRA }
-			if {
+			if = {
 				limit={has_idea=pluralist}
 				swap_ideas = {
 					remove_idea = pluralist
@@ -9637,7 +9630,7 @@ country_event = {#victory saint louis on europe
 				}
 				add_ideas = FRA_harsh_subjugation
 			}
-			if {
+			if = {
 				limit={has_idea=orthodox_christian}
 				swap_ideas = {
 					remove_idea =orthodox_christian
@@ -9645,7 +9638,7 @@ country_event = {#victory saint louis on europe
 				}
 				add_ideas = FRA_harsh_subjugation
 			}
-			if {
+			if = {
 				limit={has_idea=sunni}
 				swap_ideas = {
 					remove_idea =sunni
@@ -9654,7 +9647,7 @@ country_event = {#victory saint louis on europe
 				}
 				add_ideas = FRA_harsh_subjugation
 			}
-			if {
+			if = {
 				limit={has_idea=shia}
 				swap_ideas = {
 					remove_idea =shia
@@ -9996,7 +9989,7 @@ country_event = {#invest civ
 	desc = france_md.498.d
 	picture = GFX_united_states_dollar
 
-	is_triggered_only = no
+	is_triggered_only = yes
 
 	option = {
 		name = france_md.498.a
@@ -10087,7 +10080,7 @@ country_event = {#invest infrastructure
 	desc = france_md.499.d
 	picture = GFX_united_states_dollar
 
-	is_triggered_only = no
+	is_triggered_only = yes
 
 	option = {
 		name = france_md.499.a
@@ -10159,7 +10152,7 @@ country_event = {
 	desc = france_md.502.d
 	picture = GFX_united_states_dollar
 
-	is_triggered_only = no
+	is_triggered_only = yes
 
 	option = {
 		name = france_md.502.a
@@ -10272,7 +10265,7 @@ country_event = {
 			modify_treasury_effect = yes
 			SAU = {
 				add_equipment_to_stockpile = {
-					type = infantry_weapons
+					type = infantry_weapons_type
 					amount = 5000
 				}
 			}
@@ -10314,7 +10307,7 @@ country_event = {
 			modify_treasury_effect = yes
 			SAU = {
 				add_equipment_to_stockpile = {
-					type = Jet_Multirole_Equipment
+					type = medium_plane_airframe
 					amount = 24
 				}
 			}
@@ -10356,7 +10349,7 @@ country_event = {
 				clr_country_flag = FRA_SAU_light_arms_contract
 			}
 			add_equipment_to_stockpile = {
-				type = infantry_weapons
+				type = infantry_weapons_type
 				amount = 5000
 			}
 		}
@@ -10384,7 +10377,7 @@ country_event = {
 				clr_country_flag = FRA_SAU_premium_arms_contract
 			}
 			add_equipment_to_stockpile = {
-				type = Jet_Multirole_Equipment
+				type = medium_plane_airframe
 				amount = 24
 			}
 		}
@@ -10431,7 +10424,7 @@ country_event = {
 			modify_treasury_effect = yes
 			UAE = {
 				add_equipment_to_stockpile = {
-					type = infantry_weapons
+					type = infantry_weapons_type
 					amount = 5000
 				}
 			}
@@ -10473,7 +10466,7 @@ country_event = {
 			modify_treasury_effect = yes
 			UAE = {
 				add_equipment_to_stockpile = {
-					type = Jet_Multirole_Equipment
+					type = medium_plane_airframe
 					amount = 24
 				}
 			}
@@ -10515,7 +10508,7 @@ country_event = {
 				clr_country_flag = FRA_UAE_light_arms_contract
 			}
 			add_equipment_to_stockpile = {
-				type = infantry_weapons
+				type = infantry_weapons_type
 				amount = 5000
 			}
 		}
@@ -10543,7 +10536,7 @@ country_event = {
 				clr_country_flag = FRA_UAE_premium_arms_contract
 			}
 			add_equipment_to_stockpile = {
-				type = Jet_Multirole_Equipment
+				type = medium_plane_airframe
 				amount = 24
 			}
 		}
@@ -10590,7 +10583,7 @@ country_event = {
 			modify_treasury_effect = yes
 			SER = {
 				add_equipment_to_stockpile = {
-					type = infantry_weapons
+					type = infantry_weapons_type
 					amount = 3000
 				}
 			}
@@ -10632,7 +10625,7 @@ country_event = {
 			modify_treasury_effect = yes
 			SER = {
 				add_equipment_to_stockpile = {
-					type = Jet_Multirole_Equipment
+					type = medium_plane_airframe
 					amount = 12
 				}
 			}
@@ -10674,7 +10667,7 @@ country_event = {
 				clr_country_flag = FRA_SER_light_arms_contract
 			}
 			add_equipment_to_stockpile = {
-				type = infantry_weapons
+				type = infantry_weapons_type
 				amount = 3000
 			}
 		}
@@ -10702,7 +10695,7 @@ country_event = {
 				clr_country_flag = FRA_SER_premium_arms_contract
 			}
 			add_equipment_to_stockpile = {
-				type = Jet_Multirole_Equipment
+				type = medium_plane_airframe
 				amount = 12
 			}
 		}
@@ -10749,7 +10742,7 @@ country_event = {
 			modify_treasury_effect = yes
 			GRE = {
 				add_equipment_to_stockpile = {
-					type = infantry_weapons
+					type = infantry_weapons_type
 					amount = 4000
 				}
 			}
@@ -10791,7 +10784,7 @@ country_event = {
 			modify_treasury_effect = yes
 			GRE = {
 				add_equipment_to_stockpile = {
-					type = Jet_Multirole_Equipment
+					type = medium_plane_airframe
 					amount = 18
 				}
 			}
@@ -10833,7 +10826,7 @@ country_event = {
 				clr_country_flag = FRA_GRE_light_arms_contract
 			}
 			add_equipment_to_stockpile = {
-				type = infantry_weapons
+				type = infantry_weapons_type
 				amount = 4000
 			}
 		}
@@ -10861,7 +10854,7 @@ country_event = {
 				clr_country_flag = FRA_GRE_premium_arms_contract
 			}
 			add_equipment_to_stockpile = {
-				type = Jet_Multirole_Equipment
+				type = medium_plane_airframe
 				amount = 18
 			}
 		}
@@ -10908,7 +10901,7 @@ country_event = {
 			modify_treasury_effect = yes
 			EGY = {
 				add_equipment_to_stockpile = {
-					type = infantry_weapons
+					type = infantry_weapons_type
 					amount = 4000
 				}
 			}
@@ -10950,7 +10943,7 @@ country_event = {
 			modify_treasury_effect = yes
 			EGY = {
 				add_equipment_to_stockpile = {
-					type = Jet_Multirole_Equipment
+					type = medium_plane_airframe
 					amount = 24
 				}
 			}
@@ -10992,7 +10985,7 @@ country_event = {
 				clr_country_flag = FRA_EGY_light_arms_contract
 			}
 			add_equipment_to_stockpile = {
-				type = infantry_weapons
+				type = infantry_weapons_type
 				amount = 4000
 			}
 		}
@@ -11020,7 +11013,7 @@ country_event = {
 				clr_country_flag = FRA_EGY_premium_arms_contract
 			}
 			add_equipment_to_stockpile = {
-				type = Jet_Multirole_Equipment
+				type = medium_plane_airframe
 				amount = 24
 			}
 		}
@@ -11067,7 +11060,7 @@ country_event = {
 			modify_treasury_effect = yes
 			IND = {
 				add_equipment_to_stockpile = {
-					type = infantry_weapons
+					type = infantry_weapons_type
 					amount = 8000
 				}
 			}
@@ -11109,7 +11102,7 @@ country_event = {
 			modify_treasury_effect = yes
 			IND = {
 				add_equipment_to_stockpile = {
-					type = Jet_Multirole_Equipment
+					type = medium_plane_airframe
 					amount = 36
 				}
 			}
@@ -11151,7 +11144,7 @@ country_event = {
 				clr_country_flag = FRA_IND_light_arms_contract
 			}
 			add_equipment_to_stockpile = {
-				type = infantry_weapons
+				type = infantry_weapons_type
 				amount = 8000
 			}
 		}
@@ -11179,7 +11172,7 @@ country_event = {
 				clr_country_flag = FRA_IND_premium_arms_contract
 			}
 			add_equipment_to_stockpile = {
-				type = Jet_Multirole_Equipment
+				type = medium_plane_airframe
 				amount = 36
 			}
 		}
@@ -11235,7 +11228,7 @@ country_event = {
 			name = FRA_joint_project_germany
 			bonus = 0.25
 			uses = 2
-			category = CAT_jet_fighter
+			category = CAT_mr_fighter
 		}
 		add_ideas = GER_FCAS_MGCS_project
 		add_opinion_modifier = {
@@ -11958,7 +11951,7 @@ country_event = {
 		USA = {
 			add_opinion_modifier = {
 				target = FRA
-				modifier = diplomatic_rejection
+				modifier = broke_off_diplomatic_relations
 			}
 		}
 		ai_chance = { base = 3 }
@@ -11999,12 +11992,12 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: france_md.802.a executed"
 		add_opinion_modifier = {
 			target = FRA
-			modifier = improved_relations
+			modifier = improve_relation
 		}
 		FRA = {
 			add_opinion_modifier = {
 				target = SOV
-				modifier = improved_relations
+				modifier = improve_relation
 			}
 		}
 		ai_chance = { base = 3 }
@@ -12041,13 +12034,13 @@ country_event = {
 		CUB = {
 			add_opinion_modifier = {
 				target = FRA
-				modifier = improved_relations
+				modifier = improve_relation
 			}
 		}
 		VEN = {
 			add_opinion_modifier = {
 				target = FRA
-				modifier = improved_relations
+				modifier = improve_relation
 			}
 		}
 		ai_chance = { base = 2 }
@@ -12169,7 +12162,7 @@ country_event = {
 		FRA = {
 			add_opinion_modifier = {
 				target = ISR
-				modifier = diplomatic_rejection
+				modifier = broke_off_diplomatic_relations
 			}
 		}
 		ai_chance = { base = 3 }
@@ -12275,7 +12268,7 @@ country_event = {
 		SOV = {
 			add_opinion_modifier = {
 				target = FRA
-				modifier = improved_relations
+				modifier = improve_relation
 			}
 		}
 		ai_chance = { base = 0 }
@@ -12409,12 +12402,12 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: france_md.811.a executed"
 		add_opinion_modifier = {
 			target = FRA
-			modifier = improved_relations
+			modifier = improve_relation
 		}
 		FRA = {
 			add_opinion_modifier = {
 				target = CHI
-				modifier = improved_relations
+				modifier = improve_relation
 			}
 		}
 		ai_chance = { base = 3 }
@@ -14573,7 +14566,7 @@ news_event = {
 			FRA = {
 				add_opinion_modifier = {
 					target = ROOT
-					modifier = improved_relations
+					modifier = improve_relation
 				}
 			}
 		}
@@ -14722,7 +14715,7 @@ country_event = {#chirac weakened who shall compete
 		set_temp_variable = { temp_outlook_increase = 0.05 }
 		add_relative_party_popularity = yes
 		hidden_effect = {
-			country_event = { id = france_md.504 days = 3 }
+			country_event = { id = france_md.986 days = 3 }
 		}
 		ai_chance = { base = 3 }
 	}
@@ -14744,7 +14737,7 @@ country_event = {#chirac weakened who shall compete
 		set_temp_variable = { temp_outlook_increase = -0.075 }
 		add_relative_party_popularity = yes
 		hidden_effect = {
-			country_event = { id = france_md.508 days = 3 }
+			country_event = { id = france_md.990 days = 3 }
 		}
 		ai_chance = {
 			base = 3
@@ -14757,49 +14750,49 @@ country_event = {#chirac weakened who shall compete
 }
 #PS vs communist
 country_event = {#yes
-	id = france_md.504
-	title = france_md.504.t
-	desc = france_md.504.d
+	id = france_md.986
+	title = france_md.986.t
+	desc = france_md.986.d
 	picture = GFX_generic_parliament
 	is_triggered_only = yes
 	timeout_days = 7
 	option = {#socialist favored
-		name = france_md.504.a
-		log = "[GetDateText]: [This.GetName]: france_md.504.a executed"
+		name = france_md.986.a
+		log = "[GetDateText]: [This.GetName]: france_md.986.a executed"
 		hidden_effect = {
-			country_event = { id = france_md.505 days = 10 }
+			country_event = { id = france_md.987 days = 10 }
 		}
 		ai_chance = {
 			base = 3
 		}
 	}
 	option = {#communist and barrage
-		name = france_md.504.b
-		log = "[GetDateText]: [This.GetName]: france_md.504.b executed"
+		name = france_md.986.b
+		log = "[GetDateText]: [This.GetName]: france_md.986.b executed"
 		hidden_effect = {
-			country_event = { id = france_md.506 days = 10 }
+			country_event = { id = france_md.988 days = 10 }
 		}
 		ai_chance = { base = 3 }
 	}
 	option = {#inconclusive outcome green won
-		name = france_md.504.c
-		log = "[GetDateText]: [This.GetName]: france_md.504.c executed"
+		name = france_md.986.c
+		log = "[GetDateText]: [This.GetName]: france_md.986.c executed"
 		hidden_effect = {
-			country_event = { id = france_md.507 days = 10 }
+			country_event = { id = france_md.989 days = 10 }
 		}
 		ai_chance = { base = 3 }
 	}
 }
 country_event = {#socialist win left
-	id = france_md.505
-	title = france_md.505.t
-	desc = france_md.505.d
+	id = france_md.987
+	title = france_md.987.t
+	desc = france_md.987.d
 	picture = GFX_generic_parliament
 	is_triggered_only = yes
 	timeout_days = 7
 	option = {#socialist favored
-		name = france_md.505.a
-		log = "[GetDateText]: [This.GetName]: france_md.505.a executed"
+		name = france_md.987.a
+		log = "[GetDateText]: [This.GetName]: france_md.987.a executed"
 		set_temp_variable = { party_index = 3 }
 		set_temp_variable = { party_popularity_increase = 0.2 }
 		set_temp_variable = { temp_outlook_increase = 0.2 }
@@ -14817,15 +14810,15 @@ country_event = {#socialist win left
 	}
 }
 country_event = {#commies win left
-	id = france_md.506
-	title = france_md.506.t
-	desc = france_md.506.d
+	id = france_md.988
+	title = france_md.988.t
+	desc = france_md.988.d
 	picture = GFX_generic_parliament
 	is_triggered_only = yes
 	timeout_days = 7
 	option = {#commies favored
-		name = france_md.506.a
-		log = "[GetDateText]: [This.GetName]: france_md.506.a executed"
+		name = france_md.988.a
+		log = "[GetDateText]: [This.GetName]: france_md.988.a executed"
 		set_temp_variable = { party_index = 4 }
 		set_temp_variable = { party_popularity_increase = 0.2 }
 		set_temp_variable = { temp_outlook_increase = 0.2 }
@@ -14842,8 +14835,8 @@ country_event = {#commies win left
 		ai_chance = { base = 3 }
 	}
 	option = {#commies barrage
-		name = france_md.506.b
-		log = "[GetDateText]: [This.GetName]: france_md.506.b executed"
+		name = france_md.988.b
+		log = "[GetDateText]: [This.GetName]: france_md.988.b executed"
 		set_temp_variable = { party_index = 4 }
 		set_temp_variable = { party_popularity_increase = 0.2 }
 		set_temp_variable = { temp_outlook_increase = 0.2 }
@@ -14861,15 +14854,15 @@ country_event = {#commies win left
 	}
 }
 country_event = {#greens win left
-	id = france_md.507
-	title = france_md.507.t
-	desc = france_md.507.d
+	id = france_md.989
+	title = france_md.989.t
+	desc = france_md.989.d
 	picture = GFX_generic_parliament
 	is_triggered_only = yes
 	timeout_days = 7
 	option = {#commies favored
-		name = france_md.507.a
-		log = "[GetDateText]: [This.GetName]: france_md.507.a executed"
+		name = france_md.989.a
+		log = "[GetDateText]: [This.GetName]: france_md.989.a executed"
 		set_temp_variable = { party_index = 17 }
 		set_temp_variable = { party_popularity_increase = 0.2 }
 		set_temp_variable = { temp_outlook_increase = 0.2 }
@@ -14887,15 +14880,15 @@ country_event = {#greens win left
 	}
 }
 country_event = {#neither right nor left
-	id = france_md.508
-	title = france_md.508.t
-	desc = france_md.508.d
+	id = france_md.990
+	title = france_md.990.t
+	desc = france_md.990.d
 	picture = GFX_generic_parliament
 	is_triggered_only = yes
 	timeout_days = 7
 	option = {#liberals favored
-		name = france_md.508.a
-		log = "[GetDateText]: [This.GetName]: france_md.508.a executed"
+		name = france_md.990.a
+		log = "[GetDateText]: [This.GetName]: france_md.990.a executed"
 		set_temp_variable = { party_index = 2 }
 		set_temp_variable = { party_popularity_increase = 0.2 }
 		set_temp_variable = { temp_outlook_increase = 0.2 }
@@ -14912,8 +14905,8 @@ country_event = {#neither right nor left
 		ai_chance = { base = 3 }
 	}
 	option = {#no liberals
-		name = france_md.508.b
-		log = "[GetDateText]: [This.GetName]: france_md.508.b executed"
+		name = france_md.990.b
+		log = "[GetDateText]: [This.GetName]: france_md.990.b executed"
 		if = {#eurosceptique try
 			limit = {has_country_flag = FRA_RPF_parainnage}
 			hidden_effect = {
