@@ -31,8 +31,6 @@ capital = 45
 	complete_special_project = sp:sp_naval_vessel_project
 	complete_special_project = sp:sp_medium_naval_nuclear_engines
 	complete_special_project = sp:sp_nuclear_energy
-	# Consumed by tools/analysis/pre_place_power_plants.py — re-run the bake after editing
-	set_variable = { startup_composite_fac_needed = 6 }
 	complete_special_project = sp:sp_aircraft_project
 
 	if = { limit = { has_dlc = "No Step Back" }
@@ -147,7 +145,7 @@ capital = 45
 			}
 			obsolete = yes
 			icon = "gfx/interface/technologies/GER/LAND/Leopard-1A1.dds"
-			model = "GER_MD4_medium_armor_entity_2"
+			model = "GER_MD_medium_armor_entity_2"
 		}
 
 		create_equipment_variant = {
@@ -199,7 +197,7 @@ capital = 45
 			}
 			obsolete = yes
 			icon = "gfx/interface/technologies/GER/LAND/Leopard-1A3.dds"
-			model = "GER_MD4_medium_armor_entity_2"
+			model = "GER_MD_medium_armor_entity_2"
 		}
 
 		create_equipment_variant = {
@@ -226,7 +224,7 @@ capital = 45
 			}
 			obsolete = yes
 			icon = "gfx/interface/technologies/GER/LAND/Leopard-1A4.dds"
-			model = "GER_MD4_medium_armor_entity_2"
+			model = "GER_MD_medium_armor_entity_2"
 		}
 		create_equipment_variant = {
 			name = "Leopard 1A5"
@@ -252,7 +250,7 @@ capital = 45
 			}
 			obsolete = yes
 			icon = "gfx/interface/technologies/GER/LAND/Leopard-1A5.dds"
-			model = "GER_MD4_medium_armor_entity_2"
+			model = "GER_MD_medium_armor_entity_2"
 		}
 
 		add_equipment_to_stockpile = {
@@ -286,7 +284,7 @@ capital = 45
 			}
 			obsolete = yes
 			icon = "gfx/interface/technologies/GER/LAND/Leopard-2A0.dds"
-			model = "GER_MD4_medium_armor_entity"
+			model = "GER_MD_medium_armor_entity"
 		}
 		create_equipment_variant = {
 			name = "Leopard 2A4"
@@ -312,7 +310,7 @@ capital = 45
 			}
 			obsolete = yes
 			icon = "gfx/interface/technologies/GER/LAND/Leopard-2A3.dds"
-			model = "GER_MD4_medium_armor_entity"
+			model = "GER_MD_medium_armor_entity"
 		}
 
 		add_equipment_to_stockpile = {
@@ -2540,15 +2538,23 @@ capital = 45
 				fixed_ship_engine_slot = module_light_surface_jet_turbine_power
 				fixed_ship_fire_control_system_slot = module_digital_integrated_fire_control
 				fixed_ship_radar_slot = module_radar_4
-				fixed_ship_auxillary_slot_2 = module_ciws_2
+				fixed_ship_auxillary_slot_2 = module_ciws_3
 				fixed_ship_auxillary_slot_1 = module_torpedoes_2
-				fixed_ship_auxillary_slot = module_vls_sam_1
-				fixed_ship_battery_slot = module_76mm_gun_2
-				front_1_custom_slot = module_asm_1
+				fixed_ship_auxillary_slot = module_vls_sam_2
+				fixed_ship_battery_slot = module_127mm_guns_2
+				front_1_custom_slot = module_asm_2
 				rear_1_custom_slot = module_light_helipad_1
 			}
 			obsolete = yes
 			icon = "gfx/interface/technologies/GER/NAV/Radii.dds"
+}
+		create_production_license = {
+			target = ALG
+			equipment = {
+				type = frigate_hull_3
+				version_name = "El Radii Class"
+			}
+			cost_factor = 0
 		}
 		#Sachsen Class
 		create_equipment_variant = {

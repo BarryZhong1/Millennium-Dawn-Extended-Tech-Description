@@ -2430,6 +2430,7 @@ generic_coalition_politics_decisions = {
 		cost = 50
 
 		visible = {
+			has_game_rule = { rule = rule_disable_muslim_brotherhood_civil_war option = no }
 			has_idea = al_jazeera_banned
 			NOT = {
 				has_idea = muslim_brotherhood_crackdown
@@ -2439,11 +2440,31 @@ generic_coalition_politics_decisions = {
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision GEN_crack_down_on_muslim_broterhood"
 			add_ideas = muslim_brotherhood_crackdown
-			QAT = { add_opinion_modifier = { target = ROOT modifier = Is_cracking_down_on_Muslim_Brotherhood } }
-			TUN = { add_opinion_modifier = { target = ROOT modifier = Is_cracking_down_on_Muslim_Brotherhood } }
 		}
 
-		ai_will_do = { base = 0 }
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				has_government = neutrality
+			}
+			modifier = {
+				factor = 0
+				neutrality < 0.15
+			}
+			modifier = {
+				factor = 5
+				neutrality > 0.4
+			}
+			modifier = {
+				factor = 8
+				neutrality > 0.55
+			}
+			modifier = {
+				factor = 0.3
+				democratic > 0.6
+			}
+		}
 	}
 
 	GEN_stop_crackdowns = {
@@ -2482,7 +2503,13 @@ generic_coalition_politics_decisions = {
 			TUN = { add_opinion_modifier = { target = ROOT modifier = GEN_stopped_crackdown } }
 		}
 
-		ai_will_do = { base = 0 }
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				neutrality > 0.35
+			}
+		}
 	}
 
 	GEN_ban_al_jazeera = {
@@ -2844,63 +2871,6 @@ generic_coalition_politics_decisions = {
 		}
 	}
 
-	NATO_apply_to_become_major_non_nato_ally = {
-		icon = GFX_decision_generic_leave_nato
-
-		available = {
-			NOT = { has_idea = Major_Non_NATO_Ally }
-			if = {
-				limit = {
-					country_exists = USA
-					USA = {
-						has_idea = NATO_member
-						is_faction_leader = yes
-					}
-				}
-				USA = {
-					has_opinion = { target = ROOT value > 100 }
-				}
-			}
-			else = {
-				any_of_scopes = {
-					array = global.nato_members
-					is_faction_leader = yes
-
-					has_opinion = { target = ROOT value > 100 }
-				}
-			}
-		}
-
-		visible = {
-			NOT = { has_global_flag = GAME_RULE_nato_disabled }
-			NOT = { has_idea = Major_Non_NATO_Ally }
-			is_in_faction = no
-			NOT = { has_idea = NATO_member }
-			NOT = { has_idea = CSTO_member }
-			NOT = { has_idea = non_state_actor }
-			NOT = { has_idea = lacks_international_recognition }
-		}
-
-		cost = 100
-
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision denounce_Status_As_Major_Non_NATO_Ally"
-			add_ideas = Major_Non_NATO_Ally
-			set_country_flag = Major_Non_NATO_Ally
-			add_to_tech_sharing_group = Major_Non_NATO_Ally_Share
-
-			every_other_country = {
-				limit = {
-					has_idea = NATO_member
-				}
-
-				add_opinion_modifier = { target = PREV modifier = Major_Non_NATO_Ally }
-				reverse_add_opinion_modifier = { target = PREV modifier = Major_Non_NATO_Ally }
-			}
-		}
-		ai_will_do = { base = 0 }
-	}
-
 	denounce_Status_As_Major_Non_NATO_Ally = {
 		icon = GFX_decision_generic_leave_nato
 
@@ -2949,6 +2919,7 @@ generic_coalition_politics_decisions = {
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision denounce_status_as_the_commonwealth_of_nation_member"
 			remove_dynamic_modifier = {	modifier = Commonwealth_member_modifier }
+			remove_from_array = { global.commonwealth_member = THIS }
 			ENG = { add_opinion_modifier = { target = PREV modifier = left_alliance } }
 		}
 		ai_will_do = { base = 0 }

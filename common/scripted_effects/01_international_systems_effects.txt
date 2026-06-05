@@ -531,7 +531,6 @@ update_ga_vote = {
 
 start_unsc_next_term_voting = {
 	set_global_flag = electing_new_unsc_members
-	set_variable = { global.electing_new_members_tracker = 0 } #use this to clear the global flag when the decision finishes
 
 	set_temp_variable = { even_year_checker = global.year }
 	modulo_temp_variable = { even_year_checker = 2 }
@@ -1518,14 +1517,12 @@ un_ai_sc_consider_action = {
 					check_variable = { sc_ai_action_type > 0 }
 				}
 
-				random_list = {
-					40 = {
-						set_temp_variable = { sc_new_vote_type = sc_ai_action_type }
-						set_temp_variable = { sc_new_vote_nation = sc_ai_target }
-						set_global_flag = sc_action_against@var:sc_ai_target
-						update_sc_vote = yes
-					}
-					60 = { }
+				random = {
+					chance = 40
+					set_temp_variable = { sc_new_vote_type = sc_ai_action_type }
+					set_temp_variable = { sc_new_vote_nation = sc_ai_target }
+					set_global_flag = sc_action_against@var:sc_ai_target
+					update_sc_vote = yes
 				}
 			}
 		}
@@ -1743,7 +1740,7 @@ un_sway_direction_effect = {
 	}
 }
 
-# Scales PP gain/loss by FROM's power tier; caller sets pp_sign = 1 (gain) or -1 (loss).
+# Scales PP gain/loss by FROM's power tier;
 apply_recognition_pp = {
 	if = { limit = { FROM = { has_idea = non_power } }           set_temp_variable = { pp_delta = 5 } }
 	else_if = { limit = { FROM = { has_idea = minor_power } }    set_temp_variable = { pp_delta = 10 } }
@@ -1752,7 +1749,6 @@ apply_recognition_pp = {
 	else_if = { limit = { FROM = { has_idea = great_power } }    set_temp_variable = { pp_delta = 50 } }
 	else_if = { limit = { FROM = { has_idea = super_power } }    set_temp_variable = { pp_delta = 100 } }
 	else = { set_temp_variable = { pp_delta = 0 } }
-	multiply_temp_variable = { pp_delta = pp_sign }
 	add_political_power = pp_delta
 }
 

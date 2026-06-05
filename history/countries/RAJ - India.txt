@@ -18,8 +18,6 @@ capital = 431
 	complete_special_project = sp:sp_helicopter_project
 	complete_special_project = sp:sp_nuclear_energy
 	complete_special_project = sp:sp_composite_production
-	# Consumed by tools/analysis/pre_place_power_plants.py — re-run the bake after editing
-	set_variable = { startup_composite_fac_needed = 1 }
 
 	if = {
 		limit = { has_dlc = "No Step Back" }
@@ -125,7 +123,7 @@ capital = 431
 				tank_nsb_armor_upgrade = 4
 			}
 			icon = "gfx/interface/technologies/RAJ/LAND/MBT3.dds"
-			model = "RAJ_MD4_medium_armor_entity"
+			model = "RAJ_MD_medium_armor_entity"
 		}
 		add_equipment_to_stockpile = {
 			type = medium_tank_chassis_1
@@ -389,6 +387,7 @@ capital = 431
 		un_aid_cdf_member
 	}
 	add_dynamic_modifier = { modifier = Commonwealth_member_modifier }
+	add_to_array = { global.commonwealth_member = THIS }
 	add_to_array = { global.un_aid_esco_contributor = THIS }
 	add_to_array = { global.un_aid_ido_contributor = THIS }
 	add_to_array = { global.un_aid_cdf_contributor = THIS }
@@ -633,6 +632,7 @@ capital = 431
 
 		complete_special_project = sp:sp_space_program_gdm
 		complete_special_project = sp:sp_nuclear_warhead_program
+		complete_special_project = sp:sp_nuclear_bomb
 		complete_special_project = sp:sp_missile_project
 
 		set_variable = { num_launchers_set = 7 }

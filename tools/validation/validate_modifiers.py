@@ -1,16 +1,10 @@
 #!/usr/bin/env python3
-##########################
-# Modifier Name Validation Script
-# Validates modifier names used inside modifier = { } blocks in Millennium Dawn
-# Checks for:
-#   1. Unknown modifier names (not seen 3+ times across the codebase)
-#   2. Possible typos (single-occurrence names that don't match known-good patterns)
-#
-# Approach: build a known-good set from codebase frequency (3+ uses = valid).
-# Custom MD modifiers in common/modifiers/ and common/dynamic_modifiers/ are
-# always valid. Single-use names that start with md_ or MD_ are also valid.
-# Targeted modifiers (XXX_opinion, XXX_autonomy_gain) are skipped.
-##########################
+"""Validate modifier names inside modifier = {} blocks in Millennium Dawn.
+
+Builds a known-good set from codebase frequency (3+ uses = valid). Custom MD
+modifiers in common/modifiers/ and common/dynamic_modifiers/ are always valid.
+Targeted modifiers (XXX_opinion, XXX_autonomy_gain) are skipped.
+"""
 import os
 import re
 import sys
@@ -19,6 +13,8 @@ from typing import Dict, FrozenSet, List, Set, Tuple
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
+import disk_cache
+from shared_utils import compute_line_offsets, line_for_offset
 from validator_common import (
     BaseValidator,
     FileOpener,
@@ -27,12 +23,8 @@ from validator_common import (
     should_skip_file,
 )
 
-# ---------------------------------------------------------------------------
-# Keys that can appear inside modifier = { } blocks but are NOT modifier names
-# ---------------------------------------------------------------------------
-
-# These are HOI4 structural / ai-weight / targeted-modifier keys that appear
-# inside blocks named "modifier" but carry no game-modifier meaning.
+# HOI4 structural / ai-weight / targeted-modifier keys that appear inside
+# blocks named "modifier" but carry no game-modifier meaning.
 _NON_MODIFIER_KEYS: FrozenSet[str] = frozenset(
     {
         # AI weight modifier fields
@@ -65,7 +57,6 @@ _NON_MODIFIER_KEYS: FrozenSet[str] = frozenset(
 # We detect these by looking for them as the FIRST assignment key in the block.
 _AI_WEIGHT_INDICATOR_KEYS: FrozenSet[str] = frozenset({"factor", "base", "add"})
 
-# Keys that introduce sub-blocks we should skip when looking for modifier names
 _SKIP_BLOCK_KEYS: FrozenSet[str] = frozenset(
     {
         "targeted_modifier",
@@ -76,16 +67,59 @@ _SKIP_BLOCK_KEYS: FrozenSet[str] = frozenset(
     }
 )
 
-# Regex patterns for skipping obviously parametric / targeted modifier entries
-# e.g. TAG_opinion, TAG_autonomy_gain, TAG_acceptance where TAG is a 3-letter tag.
+# Parametric/targeted modifier entries (e.g. TAG_opinion, TAG_autonomy_gain) — skip these.
 _TARGETED_MODIFIER_RE = re.compile(r"^[A-Z]{2,3}_[a-z]")
 
 # A modifier name is lowercase with underscores (and optionally digits).
 # Some MD custom modifiers use mixed case (e.g. MD_something) — allow those.
 _MODIFIER_NAME_RE = re.compile(r"^[a-z][a-z0-9_]*$|^[A-Z][A-Za-z0-9_]*$")
 
-# Minimum frequency threshold for a modifier name to be "known good"
 _FREQUENCY_THRESHOLD = 3
+
+# Parametric modifier families. HOI4 generates one concrete modifier per game
+# entity for each of these — e.g. the building infrastructure yields
+# state_repair_speed_infrastructure_factor, the trait superior_tactician yields
+# trait_superior_tactician_xp_gain_factor. They are valid but appear too rarely,
+# or only in decision files, to clear the frequency threshold.
+#
+# Sourced from resources/documentation/modifiers_documentation.md. Families with
+# an over-broad generic suffix (<ModifierStat>_factor, <Technology>_cost_factor,
+# <IdeaGroup>_cost_factor, <Operation>_cost/_outcome/_risk,
+# <SpecialProject>_speed_factor) are deliberately omitted — a regex for them
+# would whitelist genuine typos.
+_PARAMETRIC_MODIFIER_PATTERNS: Tuple[re.Pattern, ...] = tuple(
+    re.compile(p)
+    for p in (
+        # <Building>-keyed
+        r"^(?:state_)?repair_speed_[a-z][a-z0-9_]*_factor$",
+        r"^(?:state_)?production_speed_[a-z][a-z0-9_]*_factor$",
+        r"^production_cost_[a-z][a-z0-9_]*_factor$",
+        r"^(?:state_)?[a-z][a-z0-9_]*_max_level_terrain_limit$",
+        # <Trait>-keyed (covers the bare and trait_-prefixed forms)
+        r"^[a-z][a-z0-9_]*_xp_gain_factor$",
+        # <Unit>-keyed
+        r"^experience_gain_[a-z][a-z0-9_]*_(?:combat|mission|training)_factor$",
+        # <Equipment> / <EquipmentModule> / <Unit>-keyed design cost
+        r"^[a-z][a-z0-9_]*_design_cost_factor$",
+        r"^production_cost_max_[a-z][a-z0-9_]*$",
+        # <Doctrine>-keyed (covers _mastery_gain and _track_mastery_gain)
+        r"^[a-z][a-z0-9_]*_mastery_gain_factor$",
+        r"^[a-z][a-z0-9_]*_doctrine_cost_factor$",
+        # <Ideology>-keyed
+        r"^[a-z][a-z0-9_]*_drift(?:_from_guarantees)?$",
+        r"^[a-z][a-z0-9_]*_acceptance$",
+        # <CombatTactic>-keyed
+        r"^[a-z][a-z0-9_]*_preferred_weight_factor$",
+        # <IdeaCategory>-keyed
+        r"^[a-z][a-z0-9_]*_category_type_cost_factor$",
+        # <Resource>-keyed
+        r"^country_resource_(?:cost_)?[a-z][a-z0-9_]*$",
+        r"^state_resource_(?:cost_)?[a-z][a-z0-9_]*$",
+        r"^state_resources_[a-z][a-z0-9_]*_factor$",
+        r"^local_resources_[a-z][a-z0-9_]*_factor$",
+        r"^temporary_state_resource_[a-z][a-z0-9_]*$",
+    )
+)
 
 
 def _extract_modifier_blocks(text: str) -> List[Tuple[int, str]]:
@@ -108,26 +142,12 @@ def _extract_modifier_blocks(text: str) -> List[Tuple[int, str]]:
     skip_depth_stack: List[int] = []  # stack of depths at which skip-blocks started
     current_depth = 0
 
-    lines = text.split("\n")
-    # Build a cumulative-offset table so we can map char offset → line number
-    cum_offsets: List[int] = []
-    off = 0
-    for line in lines:
-        cum_offsets.append(off)
-        off += len(line) + 1  # +1 for \n
+    # Map char offset → 1-based line number via the shared bisect helper.
+    _line_offsets = compute_line_offsets(text)
 
     def char_to_lineno(pos: int) -> int:
-        lo, hi = 0, len(cum_offsets) - 1
-        while lo < hi:
-            mid = (lo + hi + 1) // 2
-            if cum_offsets[mid] <= pos:
-                lo = mid
-            else:
-                hi = mid - 1
-        return lo + 1  # 1-based
+        return line_for_offset(_line_offsets, pos)
 
-    # Tokenise the text into assignment-like tokens and braces.
-    # We walk character by character tracking brace depth.
     i = 0
     current_depth = 0
     in_string = False
@@ -156,13 +176,11 @@ def _extract_modifier_blocks(text: str) -> List[Tuple[int, str]]:
             i += 1
             continue
 
-        # Look for `WORD = {` patterns
         if ch.isalpha() or ch == "_":
             j = i
             while j < n and (text[j].isalnum() or text[j] == "_"):
                 j += 1
             word = text[i:j]
-            # Skip whitespace after word
             k = j
             while k < n and text[k] in " \t":
                 k += 1
@@ -171,16 +189,13 @@ def _extract_modifier_blocks(text: str) -> List[Tuple[int, str]]:
                 while k < n and text[k] in " \t":
                     k += 1
                 if k < n and text[k] == "{":
-                    # This is a WORD = { block
                     if word in _SKIP_BLOCK_KEYS:
                         # Mark depth at which this skip-block opens
                         # The { hasn't been counted yet, so after we pass it
                         # depth becomes current_depth + 1
                         skip_depth_stack.append(current_depth + 1)
                     elif word == "modifier" and not skip_depth_stack:
-                        # This is a modifier = { block we care about
                         block_lineno = char_to_lineno(i)
-                        # Extract the block body
                         body_start = k + 1
                         depth = 1
                         p = body_start
@@ -219,15 +234,12 @@ def _is_ai_weight_block(body: str) -> bool:
     like ``has_idea``, ``OR = {``, comparison operators) — these are always weight
     blocks even if factor/base/add hasn't been seen yet.
     """
-    # Quick check: if any AI weight indicator key appears in the raw body text
-    # as a standalone token, treat this as an AI weight block.
-    # This handles cases like:  has_decision = X \n factor = 1.25
+    # An indicator key anywhere in the body marks an AI weight block, even when
+    # it follows the modifier lines (e.g. `has_decision = X` then `factor = 1.25`).
     for indicator in _AI_WEIGHT_INDICATOR_KEYS:
-        # Look for `factor =`, `base =`, `add =` as standalone assignments
         if re.search(r"\b" + indicator + r"\s*=", body):
             return True
 
-    # Also flag blocks whose first non-comment key has a non-numeric value
     for line in body.split("\n"):
         stripped = line.strip()
         if not stripped or stripped.startswith("#"):
@@ -261,9 +273,8 @@ def _extract_modifier_names_from_body(body: str) -> List[str]:
         if not stripped or stripped.startswith("#"):
             continue
 
-        # Track depth changes
         opens = stripped.count("{") - stripped.count("}")
-        # Check if this line opens a sub-block — skip the key itself
+        # A line opening a sub-block names that block, not a modifier — skip it.
         if "{" in stripped:
             depth += opens
             continue
@@ -290,16 +301,9 @@ def _extract_modifier_names_from_body(body: str) -> List[str]:
     return names
 
 
-# ---------------------------------------------------------------------------
-# Pool workers (module-level for pickling)
-# ---------------------------------------------------------------------------
-
-
-def _harvest_modifiers_from_file(filepath: str) -> List[str]:
-    """Pool worker: extract all modifier names from a single file.
-
-    Used for building the known-good frequency table.
-    """
+def _harvest_modifiers_from_file(args: Tuple[str, str]) -> List[str]:
+    """Pool worker: extract all modifier names from a single file."""
+    filepath, mod_path = args
     if should_skip_file(filepath):
         return []
     text = FileOpener.open_text_file(
@@ -308,21 +312,27 @@ def _harvest_modifiers_from_file(filepath: str) -> List[str]:
     if not text or "modifier" not in text:
         return []
 
-    names: List[str] = []
-    for _lineno, body in _extract_modifier_blocks(text):
-        if _is_ai_weight_block(body):
-            continue
-        names.extend(_extract_modifier_names_from_body(body))
-    return names
+    def _compute():
+        names: List[str] = []
+        for _lineno, body in _extract_modifier_blocks(text):
+            if _is_ai_weight_block(body):
+                continue
+            names.extend(_extract_modifier_names_from_body(body))
+        return names
+
+    return disk_cache.per_file_cached_by_content(
+        mod_path, "modifiers.harvest", filepath, text, _compute
+    )
 
 
-def _harvest_flat_modifiers_from_traits_file(filepath: str) -> List[str]:
+def _harvest_flat_modifiers_from_traits_file(args: Tuple[str, str]) -> List[str]:
     """Pool worker: extract top-level modifier keys from traits files.
 
     Traits files (common/country_leader/*.txt, common/characters/*.txt) often
     place modifier keys directly at the trait body level (not in modifier = {}).
     We harvest these to supplement the known-good set.
     """
+    filepath, mod_path = args
     if should_skip_file(filepath):
         return []
     text = FileOpener.open_text_file(
@@ -331,27 +341,40 @@ def _harvest_flat_modifiers_from_traits_file(filepath: str) -> List[str]:
     if not text:
         return []
 
-    # Collect keys that appear at depth 2 (inside leader_traits = { trait = { KEY = VAL } })
-    # We do a simple heuristic: any `[a-z_]+ = <number>` at exactly 2 braces deep.
-    names: List[str] = []
-    depth = 0
-    in_string = False
-    for line in text.split("\n"):
-        stripped = line.strip()
-        if not stripped or stripped.startswith("#"):
-            continue
-        opens = stripped.count("{")
-        closes = stripped.count("}")
-        new_depth = depth + opens - closes
-        # At depth 2 we're inside a trait body
-        if depth == 2 and opens == 0 and closes == 0:
-            m = re.match(r"^([a-z][a-z0-9_]*)\s*=\s*(-?[0-9])", stripped)
-            if m:
-                key = m.group(1)
-                if key not in _NON_MODIFIER_KEYS and _MODIFIER_NAME_RE.match(key):
-                    names.append(key)
-        depth = new_depth
-    return names
+    def _compute():
+        # Collect keys that appear at depth 2 (inside leader_traits = { trait = { KEY = VAL } })
+        # We do a simple heuristic: any `[a-z_]+ = <number>` at exactly 2 braces deep.
+        names: List[str] = []
+        depth = 0
+        for line in text.split("\n"):
+            stripped = line.strip()
+            if not stripped or stripped.startswith("#"):
+                continue
+            opens = stripped.count("{")
+            closes = stripped.count("}")
+            new_depth = depth + opens - closes
+            # At depth 2 we're inside a trait body
+            if depth == 2 and opens == 0 and closes == 0:
+                m = re.match(r"^([a-z][a-z0-9_]*)\s*=\s*(-?[0-9])", stripped)
+                if m:
+                    key = m.group(1)
+                    if key not in _NON_MODIFIER_KEYS and _MODIFIER_NAME_RE.match(key):
+                        names.append(key)
+            depth = new_depth
+        return names
+
+    return disk_cache.per_file_cached_by_content(
+        mod_path, "modifiers.traits", filepath, text, _compute
+    )
+
+
+def _is_parametric_modifier(name: str) -> bool:
+    """True if ``name`` matches a parametric HOI4 modifier family.
+
+    See _PARAMETRIC_MODIFIER_PATTERNS — these are engine-generated per-entity
+    modifiers that are valid but too rare to clear the frequency threshold.
+    """
+    return any(pattern.match(name) for pattern in _PARAMETRIC_MODIFIER_PATTERNS)
 
 
 def _check_file_for_unknown_modifiers(
@@ -370,22 +393,27 @@ def _check_file_for_unknown_modifiers(
     if not text or "modifier" not in text:
         return []
 
-    results: List[Tuple[str, str, int]] = []
     rel = os.path.relpath(filepath, mod_path)
 
-    for lineno, body in _extract_modifier_blocks(text):
-        if _is_ai_weight_block(body):
-            continue
-        for name in _extract_modifier_names_from_body(body):
-            if name not in known_good:
-                results.append((name, rel, lineno))
+    def _compute():
+        # Parse all modifier names in the file (independent of known_good so the
+        # cached value is a pure function of file content); the known_good filter
+        # is applied below on the cached result.
+        parsed: List[Tuple[str, str, int]] = []
+        for lineno, body in _extract_modifier_blocks(text):
+            if _is_ai_weight_block(body):
+                continue
+            for name in _extract_modifier_names_from_body(body):
+                parsed.append((name, rel, lineno))
+        return parsed
 
-    return results
+    parsed = disk_cache.per_file_cached_by_content(
+        mod_path, "modifiers.check", filepath, text, _compute
+    )
 
-
-# ---------------------------------------------------------------------------
-# Validator class
-# ---------------------------------------------------------------------------
+    return [
+        (name, rel, lineno) for name, rel, lineno in parsed if name not in known_good
+    ]
 
 
 class Validator(BaseValidator):
@@ -452,14 +480,18 @@ class Validator(BaseValidator):
 
         # Harvest modifier = {} blocks from main files
         block_results = self._pool_map(
-            _harvest_modifiers_from_file, other_files, chunksize=50
+            _harvest_modifiers_from_file,
+            [(f, self.mod_path) for f in other_files],
+            chunksize=50,
         )
         for batch in block_results:
             all_names.extend(batch)
 
         # Harvest flat keys from traits files
         trait_results = self._pool_map(
-            _harvest_flat_modifiers_from_traits_file, traits_files, chunksize=50
+            _harvest_flat_modifiers_from_traits_file,
+            [(f, self.mod_path) for f in traits_files],
+            chunksize=50,
         )
         for batch in trait_results:
             all_names.extend(batch)
@@ -520,6 +552,10 @@ class Validator(BaseValidator):
                 seen.add(key)
                 # Modifiers prefixed with MD_ or md_ are always valid (custom MD)
                 if name.startswith("MD_") or name.startswith("md_"):
+                    continue
+                # Engine-generated parametric modifier families (per building,
+                # trait, unit, doctrine, resource, etc.)
+                if _is_parametric_modifier(name):
                     continue
                 unknown_errors.append((name, rel, lineno))
 
