@@ -9655,13 +9655,13 @@ CHI_industrial_investment_category = {
 CHI_military_decisions_category = {
 
 	# Reform path — stand up the five theatre commands (CHI_joint_operations_command)
-	CHI_establish_theatre_command = {
+	CHI_eastern_theatre_command = {
 		icon = GFX_decision_generic_military
 
 		allowed = { original_tag = CHI }
 
 		visible = {
-			has_country_flag = CHI_theatre_commands_unlocked
+			has_completed_focus = CHI_joint_operations_command
 		}
 
 		cost = 75
@@ -9669,14 +9669,386 @@ CHI_military_decisions_category = {
 		fire_only_once = yes
 
 		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision CHI_establish_theatre_command executed"
-			army_experience = 25
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_eastern_theatre_command executed"
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_landforce_modifier }
-			add_to_variable = { CHI_land_coordination_bonus = 0.05 tooltip = coordination_bonus_tt }
-			add_to_variable = { CHI_land_initiative_factor = 0.05 tooltip = initiative_factor_tt }
+			add_to_variable = { CHI_land_army_attack_factor = 0.05 tooltip = army_attack_factor_tt }
+			add_to_variable = { CHI_land_breakthrough_factor = 0.05 tooltip = breakthrough_factor_tt }
 		}
 
 		ai_will_do = { base = 5 }
+	}
+
+	CHI_southern_theatre_command = {
+		icon = GFX_decision_generic_military
+
+		allowed = { original_tag = CHI }
+
+		visible = {
+			has_completed_focus = CHI_joint_operations_command
+		}
+
+		cost = 75
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_southern_theatre_command executed"
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_landforce_modifier }
+			add_to_variable = { CHI_land_coordination_bonus = 0.05 tooltip = coordination_bonus_tt }
+			add_to_variable = { CHI_land_recon_factor = 0.05 tooltip = recon_factor_tt }
+		}
+
+		ai_will_do = { base = 5 }
+	}
+
+	CHI_western_theatre_command = {
+		icon = GFX_decision_generic_military
+
+		allowed = { original_tag = CHI }
+
+		visible = {
+			has_completed_focus = CHI_joint_operations_command
+		}
+
+		cost = 75
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_western_theatre_command executed"
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_landforce_modifier }
+			add_to_variable = { CHI_land_army_defence_factor = 0.05 tooltip = army_defence_factor_tt }
+			add_to_variable = { CHI_land_dig_in_speed_factor = 0.10 tooltip = dig_in_speed_factor_tt }
+		}
+
+		ai_will_do = { base = 5 }
+	}
+
+	CHI_northern_theatre_command = {
+		icon = GFX_decision_generic_military
+
+		allowed = { original_tag = CHI }
+
+		visible = {
+			has_completed_focus = CHI_joint_operations_command
+		}
+
+		cost = 75
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_northern_theatre_command executed"
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_landforce_modifier }
+			add_to_variable = { CHI_land_max_planning = 0.05 tooltip = max_planning_tt }
+			add_to_variable = { CHI_land_army_org_factor = 0.05 tooltip = army_org_factor_tt }
+		}
+
+		ai_will_do = { base = 5 }
+	}
+
+	CHI_central_theatre_command = {
+		icon = GFX_decision_generic_military
+
+		allowed = { original_tag = CHI }
+
+		visible = {
+			has_completed_focus = CHI_joint_operations_command
+		}
+
+		cost = 75
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_central_theatre_command executed"
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_landforce_modifier }
+			add_to_variable = { CHI_land_max_command_power_mult = 0.10 tooltip = max_command_power_mult_tt }
+			add_to_variable = { CHI_land_army_morale_factor = 0.05 tooltip = army_morale_factor_tt }
+		}
+
+		ai_will_do = { base = 5 }
+	}
+
+	# Reform path — transform each defense conglomerate's research culture (CHI_original_innovation_problem)
+	CHI_norinco_innovation = {
+		icon = GFX_decision_generic_research
+
+		allowed = { original_tag = CHI }
+
+		visible = { has_completed_focus = CHI_original_innovation_problem }
+
+		cost = 50
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_norinco_innovation executed"
+			hidden_effect = { add_timed_idea = { idea = CHI_norinco_innovation_idea days = 365 } }
+			custom_effect_tooltip = CHI_norinco_innovation_tt
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	CHI_caic_innovation = {
+		icon = GFX_decision_generic_research
+
+		allowed = { original_tag = CHI }
+
+		visible = { has_completed_focus = CHI_original_innovation_problem }
+
+		cost = 50
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_caic_innovation executed"
+			hidden_effect = { add_timed_idea = { idea = CHI_caic_innovation_idea days = 365 } }
+			custom_effect_tooltip = CHI_caic_innovation_tt
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	CHI_inner_mongolia_innovation = {
+		icon = GFX_decision_generic_research
+
+		allowed = { original_tag = CHI }
+
+		visible = { has_completed_focus = CHI_original_innovation_problem }
+
+		cost = 50
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_inner_mongolia_innovation executed"
+			hidden_effect = { add_timed_idea = { idea = CHI_inner_mongolia_innovation_idea days = 365 } }
+			custom_effect_tooltip = CHI_inner_mongolia_innovation_tt
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	CHI_avic_innovation = {
+		icon = GFX_decision_generic_research
+
+		allowed = { original_tag = CHI }
+
+		visible = { has_completed_focus = CHI_original_innovation_problem }
+
+		cost = 50
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_avic_innovation executed"
+			hidden_effect = { add_timed_idea = { idea = CHI_avic_innovation_idea days = 365 } }
+			custom_effect_tooltip = CHI_avic_innovation_tt
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	CHI_cetc_innovation = {
+		icon = GFX_decision_generic_research
+
+		allowed = { original_tag = CHI }
+
+		visible = { has_completed_focus = CHI_original_innovation_problem }
+
+		cost = 50
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_cetc_innovation executed"
+			hidden_effect = { add_timed_idea = { idea = CHI_cetc_innovation_idea days = 365 } }
+			custom_effect_tooltip = CHI_cetc_innovation_tt
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	CHI_casic_innovation = {
+		icon = GFX_decision_generic_research
+
+		allowed = { original_tag = CHI }
+
+		visible = { has_completed_focus = CHI_original_innovation_problem }
+
+		cost = 50
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_casic_innovation executed"
+			hidden_effect = { add_timed_idea = { idea = CHI_casic_innovation_idea days = 365 } }
+			custom_effect_tooltip = CHI_casic_innovation_tt
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	CHI_casc_innovation = {
+		icon = GFX_decision_generic_research
+
+		allowed = { original_tag = CHI }
+
+		visible = { has_completed_focus = CHI_original_innovation_problem }
+
+		cost = 50
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_casc_innovation executed"
+			hidden_effect = { add_timed_idea = { idea = CHI_casc_innovation_idea days = 365 } }
+			custom_effect_tooltip = CHI_casc_innovation_tt
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	CHI_haig_innovation = {
+		icon = GFX_decision_generic_research
+
+		allowed = { original_tag = CHI }
+
+		visible = { has_completed_focus = CHI_original_innovation_problem }
+
+		cost = 50
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_haig_innovation executed"
+			hidden_effect = { add_timed_idea = { idea = CHI_haig_innovation_idea days = 365 } }
+			custom_effect_tooltip = CHI_haig_innovation_tt
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	CHI_sac_innovation = {
+		icon = GFX_decision_generic_research
+
+		allowed = { original_tag = CHI }
+
+		visible = { has_completed_focus = CHI_original_innovation_problem }
+
+		cost = 50
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_sac_innovation executed"
+			hidden_effect = { add_timed_idea = { idea = CHI_sac_innovation_idea days = 365 } }
+			custom_effect_tooltip = CHI_sac_innovation_tt
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	CHI_cssc_innovation = {
+		icon = GFX_decision_generic_research
+
+		allowed = { original_tag = CHI }
+
+		visible = { has_completed_focus = CHI_original_innovation_problem }
+
+		cost = 50
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_cssc_innovation executed"
+			hidden_effect = { add_timed_idea = { idea = CHI_cssc_innovation_idea days = 365 } }
+			custom_effect_tooltip = CHI_cssc_innovation_tt
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	CHI_csic_innovation = {
+		icon = GFX_decision_generic_research
+
+		allowed = { original_tag = CHI }
+
+		visible = { has_completed_focus = CHI_original_innovation_problem }
+
+		cost = 50
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_csic_innovation executed"
+			hidden_effect = { add_timed_idea = { idea = CHI_csic_innovation_idea days = 365 } }
+			custom_effect_tooltip = CHI_csic_innovation_tt
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	CHI_csgc_innovation = {
+		icon = GFX_decision_generic_research
+
+		allowed = { original_tag = CHI }
+
+		visible = { has_completed_focus = CHI_original_innovation_problem }
+
+		cost = 50
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_csgc_innovation executed"
+			hidden_effect = { add_timed_idea = { idea = CHI_csgc_innovation_idea days = 365 } }
+			custom_effect_tooltip = CHI_csgc_innovation_tt
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	CHI_poly_innovation = {
+		icon = GFX_decision_generic_research
+
+		allowed = { original_tag = CHI }
+
+		visible = { has_completed_focus = CHI_original_innovation_problem }
+
+		cost = 50
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_poly_innovation executed"
+			hidden_effect = { add_timed_idea = { idea = CHI_poly_innovation_idea days = 365 } }
+			custom_effect_tooltip = CHI_poly_innovation_tt
+		}
+
+		ai_will_do = { base = 1 }
+	}
+
+	CHI_crrc_innovation = {
+		icon = GFX_decision_generic_research
+
+		allowed = { original_tag = CHI }
+
+		visible = { has_completed_focus = CHI_original_innovation_problem }
+
+		cost = 50
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CHI_crrc_innovation executed"
+			hidden_effect = { add_timed_idea = { idea = CHI_crrc_innovation_idea days = 365 } }
+			custom_effect_tooltip = CHI_crrc_innovation_tt
+		}
+
+		ai_will_do = { base = 1 }
 	}
 
 	# Reform path — weaponise the rare earth supply against a major rival (CHI_rare_earth_leverage)
@@ -9686,7 +10058,7 @@ CHI_military_decisions_category = {
 		allowed = { original_tag = CHI }
 
 		visible = {
-			has_country_flag = CHI_rare_earth_lever_unlocked
+			has_completed_focus = CHI_rare_earth_leverage
 		}
 
 		target_array = global.majors
@@ -9708,7 +10080,7 @@ CHI_military_decisions_category = {
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision CHI_rare_earth_embargo_decision on [From.GetName]"
 			FROM = {
-				add_dynamic_modifier = { modifier = CHI_rare_earth_embargoed days = 180 }
+				add_dynamic_modifier = { modifier = CHI_rare_earth_embargoed days = 180 } #This can be an idea
 			}
 		}
 
@@ -9722,7 +10094,7 @@ CHI_military_decisions_category = {
 		allowed = { original_tag = CHI }
 
 		visible = {
-			has_country_flag = CHI_clique_management_unlocked
+			has_completed_focus = CHI_the_northeast_tiger
 		}
 
 		available = {

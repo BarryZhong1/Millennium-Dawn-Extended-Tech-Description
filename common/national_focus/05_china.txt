@@ -2512,7 +2512,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_sasac
-		icon = aviation_industry
+		icon = central_planned_economy
 
 		x = -2
 		y = 0
@@ -2557,9 +2557,6 @@ focus_tree = {
 			add_to_variable = { CHI_economy_production_speed_buildings_factor = 0.05 tooltip = production_speed_buildings_factor_tt }
 			newline = yes
 			two_random_arms_factory = yes
-			newline = yes
-			set_temp_variable = { treasury_change = -50 }
-			modify_treasury_effect = yes
 		}
 
 		ai_will_do = { base = 1 }
@@ -2604,7 +2601,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_nco_corps_reform
-		icon = x
+		icon = military_academy
 
 		x = 2
 		y = 1
@@ -2656,13 +2653,11 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_establish_defence_conglomerates"
 			remove_ideas = CHI_divestiture_transition_idea
+			newline = yes
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_defense_industry }
 			add_to_variable = { CHI_di_industrial_capacity_factory = 0.05 tooltip = industrial_capacity_factory_tt }
 			add_to_variable = { CHI_di_production_speed_arms_factory_factor = 0.10 tooltip = production_speed_arms_factory_factor_tt }
 			add_to_variable = { CHI_di_military_industry_tax_modifier = -0.05 tooltip = military_industry_tax_modifier_tt }
-			newline = yes
-			set_temp_variable = { treasury_change = -100 }
-			modify_treasury_effect = yes
 		}
 
 		ai_will_do = { base = 1 }
@@ -2670,7 +2665,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_above_the_neck_reform
-		icon = x
+		icon = army_general_stuff1
 
 		x = -1
 		y = 1
@@ -2694,7 +2689,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_below_the_neck_disband
-		icon = x
+		icon = army_recruting
 
 		x = 1
 		y = 1
@@ -2718,7 +2713,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_avic_reunification
-		icon = x
+		icon = aviation_industry
 
 		x = -1
 		y = 1
@@ -2741,16 +2736,9 @@ focus_tree = {
 				bonus = 0.50
 				uses = 2
 				category = CAT_fixed_wing
-			}
-			add_tech_bonus = {
-				name = CHI_avic_reunification
-				bonus = 0.50
-				uses = 1
 				category = CAT_avionics
 			}
-			newline = yes
-			set_temp_variable = { treasury_change = -75 }
-			modify_treasury_effect = yes
+			two_random_arms_factory = yes
 		}
 
 		ai_will_do = { base = 1 }
@@ -2758,7 +2746,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_norinco_rationalism
-		icon = x
+		icon = industry_tanks
 
 		x = 1
 		y = 1
@@ -2779,18 +2767,12 @@ focus_tree = {
 			add_tech_bonus = {
 				name = CHI_norinco_rationalism
 				bonus = 0.50
-				uses = 1
+				uses = 2
 				category = CAT_inf_wep
-			}
-			add_tech_bonus = {
-				name = CHI_norinco_rationalism
-				bonus = 0.50
-				uses = 1
 				category = CAT_arty
 			}
 			newline = yes
-			set_temp_variable = { treasury_change = -75 }
-			modify_treasury_effect = yes
+			two_random_arms_factory = yes
 		}
 
 		ai_will_do = { base = 1 }
@@ -2798,7 +2780,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_own_designs
-		icon = x
+		icon = goal_JAP_protect_science
 
 		x = 3
 		y = 1
@@ -2817,6 +2799,8 @@ focus_tree = {
 			newline = yes
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_defense_industry }
 			add_to_variable = { CHI_di_production_factory_efficiency_gain_factor = 0.05 tooltip = production_factory_efficiency_gain_factor_tt }
+			add_to_variable = { CHI_di_mio_research_bonus = 0.05 tooltip = military_industrial_organization_research_bonus_tt }
+			add_to_variable = { CHI_di_personnel_cost_multiplier_modifier = 0.05 tooltip = personnel_cost_multiplier_modifier_tt }
 			newline = yes
 			set_temp_variable = { treasury_change = -50 }
 			modify_treasury_effect = yes
@@ -2826,8 +2810,8 @@ focus_tree = {
 	}
 
 	focus = {
-		id = CHI_ws15_bottleneck_solve
-		icon = x
+		id = CHI_ws15_bottleneck_solve #Russian Dependance
+		icon = jet_engine
 
 		x = -2
 		y = 2
@@ -2854,7 +2838,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_jiangnan_scale
-		icon = x
+		icon = civitavecchia_port
 
 		x = 0
 		y = 2
@@ -2873,23 +2857,9 @@ focus_tree = {
 			add_to_variable = { CHI_economy_dockyard_output_factor = 0.05 tooltip = industrial_capacity_dockyard_tt }
 			newline = yes
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_defense_industry }
-			add_to_variable = { CHI_di_military_industry_tax_modifier = -0.05 tooltip = military_industry_tax_modifier_tt }
+			add_to_variable = { CHI_di_dockyard_income_tax_modifier = -0.05 tooltip = dockyard_income_tax_modifier_tt }
 			newline = yes
-			add_tech_bonus = {
-				name = CHI_jiangnan_scale
-				bonus = 0.50
-				uses = 1
-				category = CAT_destroyer
-			}
-			add_tech_bonus = {
-				name = CHI_jiangnan_scale
-				bonus = 0.50
-				uses = 1
-				category = CAT_carrier
-			}
-			newline = yes
-			set_temp_variable = { treasury_change = -75 }
-			modify_treasury_effect = yes
+			two_random_dockyards = yes
 		}
 
 		ai_will_do = { base = 1 }
@@ -2897,7 +2867,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_central_military_civil_fusion
-		icon = x
+		icon = Focus_Generic_Consumer_Goods
 
 		x = 2
 		y = 2
@@ -2917,7 +2887,6 @@ focus_tree = {
 			newline = yes
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_defense_industry }
 			add_to_variable = { CHI_di_production_factory_max_efficiency_factor = 0.05 tooltip = production_factory_max_efficiency_factor_tt }
-			add_to_variable = { CHI_di_military_industry_tax_modifier = -0.05 tooltip = military_industry_tax_modifier_tt }
 		}
 
 		ai_will_do = { base = 1 }
@@ -2925,7 +2894,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_original_innovation_problem
-		icon = x
+		icon = blr_research_with_china
 
 		x = -2
 		y = 3
@@ -2939,9 +2908,20 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_original_innovation_problem"
-			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
-			add_to_variable = { CHI_economy_research_speed_factor = 0.05 tooltip = research_speed_factor_tt }
-			add_to_variable = { CHI_economy_production_factory_max_efficiency_factor = 0.05 tooltip = production_factory_max_efficiency_factor_tt }
+			unlock_decision_tooltip = CHI_norinco_innovation
+			unlock_decision_tooltip = CHI_caic_innovation
+			unlock_decision_tooltip = CHI_inner_mongolia_innovation
+			unlock_decision_tooltip = CHI_avic_innovation
+			unlock_decision_tooltip = CHI_cetc_innovation
+			unlock_decision_tooltip = CHI_casic_innovation
+			unlock_decision_tooltip = CHI_casc_innovation
+			unlock_decision_tooltip = CHI_haig_innovation
+			unlock_decision_tooltip = CHI_sac_innovation
+			unlock_decision_tooltip = CHI_cssc_innovation
+			unlock_decision_tooltip = CHI_csic_innovation
+			unlock_decision_tooltip = CHI_csgc_innovation
+			unlock_decision_tooltip = CHI_poly_innovation
+			unlock_decision_tooltip = CHI_crrc_innovation
 		}
 
 		ai_will_do = { base = 1 }
@@ -2949,7 +2929,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_rare_earth_leverage
-		icon = x
+		icon = embargo
 
 		x = 1
 		y = 3
@@ -2967,7 +2947,6 @@ focus_tree = {
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_economy_modifier }
 			add_to_variable = { CHI_economy_local_resources_tungsten_factor = 0.10 tooltip = local_resources_tungsten_factor_tt }
 			newline = yes
-			set_country_flag = CHI_rare_earth_lever_unlocked
 			unlock_decision_tooltip = CHI_rare_earth_embargo_decision
 		}
 
@@ -2976,7 +2955,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_joint_operations_command
-		icon = x
+		icon = peoples_liberation_army
 
 		x = 0
 		y = 2
@@ -2991,13 +2970,15 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_joint_operations_command"
-			CHI = { country_event = { id = CHI_military_event.3 days = 2 } }
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_landforce_modifier }
 			add_to_variable = { CHI_land_coordination_bonus = 0.05 tooltip = coordination_bonus_tt }
 			add_to_variable = { CHI_land_initiative_factor = 0.05 tooltip = initiative_factor_tt }
 			newline = yes
-			set_country_flag = CHI_theatre_commands_unlocked
-			unlock_decision_tooltip = CHI_establish_theatre_command
+			unlock_decision_tooltip = CHI_eastern_theatre_command
+			unlock_decision_tooltip = CHI_southern_theatre_command
+			unlock_decision_tooltip = CHI_western_theatre_command
+			unlock_decision_tooltip = CHI_northern_theatre_command
+			unlock_decision_tooltip = CHI_central_theatre_command
 			newline = yes
 			set_temp_variable = { treasury_change = -25 }
 			modify_treasury_effect = yes
@@ -3008,7 +2989,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_train_as_you_fight
-		icon = x
+		icon = Generic_Soldiers_Defense
 
 		x = -1
 		y = 3
@@ -3023,8 +3004,15 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_train_as_you_fight"
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_landforce_modifier }
-			add_to_variable = { CHI_land_experience_gain_army = 0.05 tooltip = experience_gain_army_tt }
-			add_to_variable = { CHI_land_army_morale_factor = 0.05 tooltip = army_morale_factor_tt }
+			add_to_variable = { CHI_land_minimum_training_level = -0.10 tooltip = minimum_training_level_tt }
+			add_to_variable = { CHI_land_trait_guerrilla_leader_trait_xp_gain_factor = 0.10 tooltip = trait_guerrilla_leader_trait_xp_gain_factor_tt }
+			add_to_variable = { CHI_land_terrain_trait_xp_gain_factor = 0.10 tooltip = terrain_trait_xp_gain_factor_tt }
+			newline = yes
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_airforce_modifier }
+			add_to_variable = { CHI_air_experience_gain_air = 0.05 tooltip = experience_gain_air_tt }
+			newline = yes
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_navy_modifier }
+			add_to_variable = { CHI_navy_experience_gain_navy = 0.05 tooltip = experience_gain_navy_tt }
 		}
 
 		ai_will_do = { base = 1 }
@@ -3032,7 +3020,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_train_generals
-		icon = x
+		icon = military_mission
 
 		x = 1
 		y = 3
@@ -3047,9 +3035,12 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_train_generals"
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_landforce_modifier }
-			add_to_variable = { CHI_land_army_leader_cost_factor = -0.10 tooltip = army_leader_cost_factor_tt }
-			newline = yes
-			army_experience = 25
+			add_to_variable = { CHI_land_army_leader_start_planning_level = 1 tooltip = army_leader_start_planning_level_tt }
+			add_to_variable = { CHI_land_army_leader_start_logistics_level = 1 tooltip = army_leader_start_logistics_level_tt }
+			add_to_variable = { CHI_land_grant_medal_cost_factor = -0.10 tooltip = grant_medal_cost_factor_tt }
+			add_to_variable = { CHI_land_assign_army_leader_cp_cost = -10 tooltip = assign_army_leader_cp_cost_tt }
+			add_to_variable = { CHI_land_automatic_grant_medal_chance = 0.25 tooltip = automatic_grant_medal_chance_tt }
+			add_to_variable = { CHI_land_personnel_cost_multiplier_modifier = 0.10 tooltip = personnel_cost_multiplier_modifier_tt }
 		}
 
 		ai_will_do = { base = 1 }
@@ -3057,7 +3048,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_military_training_outline
-		icon = x
+		icon = coalition_army
 
 		x = 0
 		y = 4
@@ -3074,9 +3065,6 @@ focus_tree = {
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_landforce_modifier }
 			add_to_variable = { CHI_land_army_attack_factor = 0.05 tooltip = army_attack_factor_tt }
 			add_to_variable = { CHI_land_army_defence_factor = 0.05 tooltip = army_defence_factor_tt }
-			newline = yes
-			set_temp_variable = { treasury_change = -25 }
-			modify_treasury_effect = yes
 		}
 
 		ai_will_do = { base = 1 }
@@ -3084,7 +3072,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_army_reorganisation
-		icon = x
+		icon = army_reform
 
 		x = -1
 		y = 5
@@ -3098,9 +3086,15 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_army_reorganisation"
-			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_landforce_modifier }
-			add_to_variable = { CHI_land_army_org_factor = 0.05 tooltip = army_org_factor_tt }
-			add_to_variable = { CHI_land_breakthrough_factor = 0.05 tooltip = breakthrough_factor_tt }
+			add_timed_idea = { idea = CHI_army_reorganisation_disruption_idea days = 180 }
+			newline = yes
+			custom_effect_tooltip = on_cancel_idea_tt
+			effect_tooltip = {
+				custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_landforce_modifier }
+				add_to_variable = { CHI_land_army_org_factor = 0.05 tooltip = army_org_factor_tt }
+				add_to_variable = { CHI_land_breakthrough_factor = 0.05 tooltip = breakthrough_factor_tt }
+				add_to_variable = { CHI_land_coordination_bonus = 0.05 tooltip = coordination_bonus_tt }
+			}
 		}
 
 		ai_will_do = { base = 1 }
@@ -3108,7 +3102,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_system_of_systems_operations
-		icon = x
+		icon = army_nightvision
 
 		x = 1
 		y = 5
@@ -3120,12 +3114,22 @@ focus_tree = {
 
 		search_filters = { FOCUS_FILTER_MILITARY_LAWS }
 
+		available = {
+			has_tech = artificial_intelligence_3
+			has_tech = robotics_3
+			has_tech = drone_3
+		}
+
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus CHI_system_of_systems_operations"
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_landforce_modifier }
-			add_to_variable = { CHI_land_recon_factor = 0.05 tooltip = recon_factor_tt }
-			add_to_variable = { CHI_land_coordination_bonus = 0.05 tooltip = coordination_bonus_tt }
-			add_to_variable = { CHI_land_army_attack_factor = 0.05 tooltip = army_attack_factor_tt }
+			add_to_variable = { CHI_land_recon_factor = 0.10 tooltip = recon_factor_tt }
+			add_to_variable = { CHI_land_coordination_bonus = 0.10 tooltip = coordination_bonus_tt }
+			add_to_variable = { CHI_land_initiative_factor = 0.05 tooltip = initiative_factor_tt }
+			newline = yes
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_airforce_modifier }
+			add_to_variable = { CHI_air_air_detection = 0.05 tooltip = air_detection_tt }
+			add_to_variable = { CHI_air_air_interception_detect_factor = 0.05 tooltip = air_interception_detect_factor_tt }
 		}
 
 		ai_will_do = { base = 1 }
@@ -3174,7 +3178,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_keep_the_shell_companies
-		icon = x
+		icon = integrated_economies
 
 		x = -3
 		y = 1
@@ -3204,7 +3208,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_smuggling_tax
-		icon = x
+		icon = NKO_bureau_38
 
 		x = -1
 		y = 1
@@ -3235,7 +3239,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_ranks_for_sale
-		icon = x
+		icon = NKO_bribe_officers
 
 		x = 1
 		y = 1
@@ -3266,7 +3270,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_the_northeast_tiger
-		icon = x
+		icon = CHI_cpc_party
 
 		x = 3
 		y = 1
@@ -3285,8 +3289,6 @@ focus_tree = {
 			newline = yes
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = CHI_defense_industry }
 			add_to_variable = { CHI_di_mio_task_capacity = 1 tooltip = military_industrial_organization_task_capacity_tt }
-			newline = yes
-			set_country_flag = CHI_clique_management_unlocked
 		}
 
 		ai_will_do = { base = 1 }
@@ -3294,7 +3296,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_poly_goes_global
-		icon = x
+		icon = export_economy
 
 		x = -1
 		y = 1
@@ -3331,7 +3333,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_arms_for_influence
-		icon = x
+		icon = ExpandTrade
 
 		x = -1
 		y = 1
@@ -3361,7 +3363,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_yuanhua_model
-		icon = x
+		icon = focus_PRC_assume_leadership
 
 		x = 1
 		y = 1
@@ -3390,7 +3392,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_beijing_command_clique
-		icon = x
+		icon = communist_china
 
 		x = 0
 		y = 1
@@ -3419,7 +3421,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_money_alliance
-		icon = x
+		icon = focus_PRC_promote_paper_bills
 
 		x = 1
 		y = 2
@@ -3453,7 +3455,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_guatian_reckoning
-		icon = x
+		icon = focus_CHI_decisive_battles
 
 		x = 0
 		y = 3
@@ -3475,7 +3477,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_bow_to_china_dream
-		icon = x
+		icon = focus_CHI_cradle_of_civilization
 
 		x = 2
 		y = 3
@@ -3499,7 +3501,7 @@ focus_tree = {
 
 	focus = {
 		id = CHI_warlord_temptation
-		icon = x
+		icon = focus_CHI_a_new_middle_kingdom
 
 		x = 0
 		y = 3
