@@ -363,10 +363,8 @@ SPR_the_regions_of_spain = {
 						owns_state = 944
 						owns_state = 1055
 					}
-					AND = {
-						NOT = { 944 = { is_core_of = GAL } }
-						NOT = { 1055 = { is_core_of = GAL } }
-					}
+					NOT = { 944 = { is_core_of = GAL } }
+					NOT = { 1055 = { is_core_of = GAL } }
 				}
 				else_if = {
 					limit = {
@@ -1502,13 +1500,9 @@ SPR_political_policy_category = {
 			set_temp_variable = { int_investment_change = treasury_change }
 			multiply_temp_variable = { int_investment_change = -1.25 }
 			modify_international_investment_effect = yes
-			random_list = {
-				30 = {
-					increase_corruption = yes
-				}
-				70 = {
-
-				}
+			random = {
+				chance = 30
+				increase_corruption = yes
 			}
 		}
 	}

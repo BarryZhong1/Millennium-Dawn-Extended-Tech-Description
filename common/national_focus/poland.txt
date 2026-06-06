@@ -397,18 +397,11 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_antagonize_the_europe"
-			every_other_country = {
-				limit = {
-					has_idea = EU_member
-				}
-				add_opinion_modifier = {
-					target = POL
-					modifier = POL_poland_closes_diplomacy
-				}
-				add_opinion_modifier = {
-					target = POL
-					modifier = POL_trade_poland_closes_diplomacy
-				}
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				add_opinion_modifier = { target = POL modifier = POL_poland_closes_diplomacy }
+				add_opinion_modifier = { target = POL modifier = POL_trade_poland_closes_diplomacy }
 			}
 			add_political_power = 100
 		}
@@ -952,21 +945,21 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_regain_western_trust"
-			custom_effect_tooltip = TT_ALL_NATO_MEMBER_NATIONS_GAIN
-			effect_tooltip = {
-				add_opinion_modifier = { target = ROOT modifier = POL_regains_our_trust }
-			}
 			for_each_scope_loop = {
 				array = global.nato_members
-				add_opinion_modifier = { target = ROOT modifier = POL_regains_our_trust }
-			}
-			custom_effect_tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
-			effect_tooltip = {
-				add_opinion_modifier = { target = ROOT modifier = POL_regains_our_trust }
+				tooltip = TT_ALL_NATO_MEMBER_NATIONS_GAIN
+				if = {
+					limit = { NOT = { tag = ROOT } }
+					add_opinion_modifier = { target = ROOT modifier = POL_regains_our_trust }
+				}
 			}
 			for_each_scope_loop = {
 				array = global.EU_member
-				add_opinion_modifier = { target = ROOT modifier = POL_regains_our_trust }
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				if = {
+					limit = { NOT = { tag = ROOT } }
+					add_opinion_modifier = { target = ROOT modifier = POL_regains_our_trust }
+				}
 			}
 			add_political_power = 50
 			add_ideas = POL_the_seeds_of_democracy_idea
@@ -1029,14 +1022,11 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_open_trade_with_eu"
-			every_other_country = {
-				limit = {
-					has_idea = EU_member
-				}
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 				add_opinion_modifier = { target = ROOT modifier = POL_reopens_trade }
 				set_temp_variable = { percent_change = 1 }
-				set_temp_variable = { tag_index = ROOT.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 			}
 			add_stability = 0.05
@@ -1079,13 +1069,10 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_seek_eu_integration"
-			every_other_country = {
-				limit = {
-					has_idea = EU_member
-				}
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 				set_temp_variable = { percent_change = 2 }
-				set_temp_variable = { tag_index = ROOT.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 			}
 		}
@@ -1209,21 +1196,21 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_calm_down_the_west"
-			custom_effect_tooltip = TT_ALL_NATO_MEMBER_NATIONS_GAIN
-			effect_tooltip = {
-				add_opinion_modifier = { target = ROOT modifier = POL_poland_takes_initiative }
-			}
 			for_each_scope_loop = {
 				array = global.nato_members
-				add_opinion_modifier = { target = ROOT modifier = POL_poland_takes_initiative }
-			}
-			custom_effect_tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
-			effect_tooltip = {
-				add_opinion_modifier = { target = ROOT modifier = POL_poland_takes_initiative }
+				tooltip = TT_ALL_NATO_MEMBER_NATIONS_GAIN
+				if = {
+					limit = { NOT = { tag = ROOT } }
+					add_opinion_modifier = { target = ROOT modifier = POL_poland_takes_initiative }
+				}
 			}
 			for_each_scope_loop = {
 				array = global.EU_member
-				add_opinion_modifier = { target = ROOT modifier = POL_poland_takes_initiative }
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				if = {
+					limit = { NOT = { tag = ROOT } }
+					add_opinion_modifier = { target = ROOT modifier = POL_poland_takes_initiative }
+				}
 			}
 			add_political_power = 100
 			add_ideas = POL_balanced_diplomacy_idea
@@ -1262,10 +1249,9 @@ focus_tree = {
 			custom_effect_tooltip = POL_no_to_eu_TT
 
 			add_political_power = 75
-			every_other_country = {
-				limit = {
-					has_idea = EU_member
-				}
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 				add_opinion_modifier = { target = ROOT modifier = POL_poland_hates_eu }
 			}
 		}
@@ -3942,25 +3928,23 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_antagonize_west"
-			custom_effect_tooltip = TT_ALL_NATO_MEMBER_NATIONS_GAIN
-			effect_tooltip = {
-				add_opinion_modifier = { target = POL modifier = POL_poland_cuts_the_trade }
-				add_opinion_modifier = { target = POL modifier = POL_trade_poland_cuts_the_trade }
-			}
 			for_each_scope_loop = {
 				array = global.nato_members
-				add_opinion_modifier = { target = POL modifier = POL_poland_cuts_the_trade }
-				add_opinion_modifier = { target = POL modifier = POL_trade_poland_cuts_the_trade }
-			}
-			custom_effect_tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
-			effect_tooltip = {
-				add_opinion_modifier = { target = POL modifier = POL_poland_cuts_the_trade }
-				add_opinion_modifier = { target = POL modifier = POL_trade_poland_cuts_the_trade }
+				tooltip = TT_ALL_NATO_MEMBER_NATIONS_GAIN
+				if = {
+					limit = { NOT = { tag = ROOT } }
+					add_opinion_modifier = { target = POL modifier = POL_poland_cuts_the_trade }
+					add_opinion_modifier = { target = POL modifier = POL_trade_poland_cuts_the_trade }
+				}
 			}
 			for_each_scope_loop = {
 				array = global.EU_member
-				add_opinion_modifier = { target = POL modifier = POL_poland_cuts_the_trade }
-				add_opinion_modifier = { target = POL modifier = POL_trade_poland_cuts_the_trade }
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				if = {
+					limit = { NOT = { tag = ROOT } }
+					add_opinion_modifier = { target = POL modifier = POL_poland_cuts_the_trade }
+					add_opinion_modifier = { target = POL modifier = POL_trade_poland_cuts_the_trade }
+				}
 			}
 			every_other_country = {
 				limit = {
@@ -4033,25 +4017,23 @@ focus_tree = {
 					modifier = POL_trade_poland_cuts_the_trade
 				}
 			}
-			custom_effect_tooltip = TT_ALL_NATO_MEMBER_NATIONS_GAIN
-			effect_tooltip = {
-				add_opinion_modifier = { target = POL modifier = POL_poland_opens_the_trade }
-				add_opinion_modifier = { target = POL modifier = POL_trade_poland_opens_the_trade }
-			}
 			for_each_scope_loop = {
 				array = global.nato_members
-				add_opinion_modifier = { target = POL modifier = POL_poland_opens_the_trade }
-				add_opinion_modifier = { target = POL modifier = POL_trade_poland_opens_the_trade }
-			}
-			custom_effect_tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
-			effect_tooltip = {
-				add_opinion_modifier = { target = POL modifier = POL_poland_opens_the_trade }
-				add_opinion_modifier = { target = POL modifier = POL_trade_poland_opens_the_trade }
+				tooltip = TT_ALL_NATO_MEMBER_NATIONS_GAIN
+				if = {
+					limit = { NOT = { tag = ROOT } }
+					add_opinion_modifier = { target = POL modifier = POL_poland_opens_the_trade }
+					add_opinion_modifier = { target = POL modifier = POL_trade_poland_opens_the_trade }
+				}
 			}
 			for_each_scope_loop = {
 				array = global.EU_member
-				add_opinion_modifier = { target = POL modifier = POL_poland_opens_the_trade }
-				add_opinion_modifier = { target = POL modifier = POL_trade_poland_opens_the_trade }
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				if = {
+					limit = { NOT = { tag = ROOT } }
+					add_opinion_modifier = { target = POL modifier = POL_poland_opens_the_trade }
+					add_opinion_modifier = { target = POL modifier = POL_trade_poland_opens_the_trade }
+				}
 			}
 			add_political_power = 100
 			swap_ideas = {
@@ -4600,6 +4582,7 @@ focus_tree = {
 		prerequisite = {
 			focus = POL_minor_threats_first
 		}
+		will_lead_to_war_with = AUS
 
 		bypass = {
 			has_completed_focus = POL_minor_threats_first
@@ -4633,6 +4616,9 @@ focus_tree = {
 						is_subject_of = POL
 					}
 				}
+				AUS = {
+					is_neighbor_of = POL
+				}
 			}
 		}
 
@@ -4663,6 +4649,7 @@ focus_tree = {
 		prerequisite = {
 			focus = POL_surround_germany
 		}
+		will_lead_to_war_with = SWI
 
 		bypass = {
 			has_completed_focus = POL_surround_germany
@@ -4724,6 +4711,9 @@ focus_tree = {
 			focus = POL_nato_is_the_enemy
 			focus = POL_csto_is_the_enemy
 		}
+		will_lead_to_war_with = SLV
+		will_lead_to_war_with = CRO
+		will_lead_to_war_with = BOS
 
 		bypass = {
 			has_completed_focus = POL_minor_threats_first
@@ -4830,6 +4820,9 @@ focus_tree = {
 		prerequisite = {
 			focus = POL_take_west_balkans
 		}
+		will_lead_to_war_with = SER
+		will_lead_to_war_with = ALB
+		will_lead_to_war_with = FYR
 
 		bypass = {
 			has_completed_focus = POL_take_west_balkans
@@ -5030,6 +5023,7 @@ focus_tree = {
 		prerequisite = {
 			focus = POL_prepare_for_the_big_one
 		}
+		will_lead_to_war_with = GER
 
 		bypass = {
 			has_completed_focus = POL_prepare_for_the_big_one
@@ -5079,6 +5073,7 @@ focus_tree = {
 		prerequisite = {
 			focus = POL_prepare_for_the_big_one
 		}
+		will_lead_to_war_with = ITA
 
 		bypass = {
 			has_completed_focus = POL_prepare_for_the_big_one
@@ -5128,6 +5123,7 @@ focus_tree = {
 		prerequisite = {
 			focus = POL_prepare_for_the_big_one
 		}
+		will_lead_to_war_with = FRA
 
 		bypass = {
 			has_completed_focus = POL_prepare_for_the_big_one
@@ -5183,6 +5179,8 @@ focus_tree = {
 		prerequisite = {
 			focus = POL_revenge_on_germany
 		}
+		will_lead_to_war_with = ENG
+		will_lead_to_war_with = USA
 
 		bypass = {
 			OR = {
@@ -5318,6 +5316,7 @@ focus_tree = {
 		prerequisite = {
 			focus = POL_csto_is_the_enemy
 		}
+		will_lead_to_war_with = UKR
 
 		bypass = {
 			has_completed_focus = POL_csto_is_the_enemy
@@ -5405,6 +5404,7 @@ focus_tree = {
 		prerequisite = {
 			focus = POL_get_closer_to_moscow
 		}
+		will_lead_to_war_with = BLR
 
 		bypass = {
 			has_completed_focus = POL_get_closer_to_moscow
@@ -5493,6 +5493,7 @@ focus_tree = {
 			focus = POL_prepare_for_the_giant
 			focus = POL_belarusian_strategy
 		}
+		will_lead_to_war_with = SOV
 
 		bypass = {
 			OR = {
@@ -12389,13 +12390,13 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_FOREIGN_POLICY }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_security_summit"
-			custom_effect_tooltip = TT_ALL_NATO_MEMBER_NATIONS_GAIN
-			effect_tooltip = {
-				add_opinion_modifier = { target = ROOT modifier = POL_held_security_summit }
-			}
 			for_each_scope_loop = {
 				array = global.nato_members
-				add_opinion_modifier = { target = ROOT modifier = POL_held_security_summit }
+				tooltip = TT_ALL_NATO_MEMBER_NATIONS_GAIN
+				if = {
+					limit = { NOT = { tag = ROOT } }
+					add_opinion_modifier = { target = ROOT modifier = POL_held_security_summit }
+				}
 			}
 
 			add_timed_idea = {
@@ -12755,8 +12756,9 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_FOREIGN_POLICY }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_continue_eu_intergration"
-			every_other_country = {
-				limit = { has_idea = EU_member }
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 				add_opinion_modifier = { target = ROOT modifier = POL_continued_eu_integration }
 			}
 		}
@@ -12815,11 +12817,10 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_INFLUENCE FOCUS_FILTER_FOREIGN_POLICY }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_connections_to_eu_members"
-			every_other_country = {
-				limit = { has_idea = EU_member }
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 				set_temp_variable = { percent_change = 3 }
-				set_temp_variable = { tag_index = ROOT.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 			}
 		}
@@ -12851,11 +12852,10 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_INFLUENCE FOCUS_FILTER_FOREIGN_POLICY }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_focus_on_political_connections"
-			every_other_country = {
-				limit = { has_idea = EU_member }
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 				set_temp_variable = { percent_change = 3 }
-				set_temp_variable = { tag_index = ROOT.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 				add_opinion_modifier = { target = ROOT modifier = POL_connections_to_eu }
 			}
@@ -13004,8 +13004,9 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_STABILITY }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_reassure_elections_result"
-			every_other_country = {
-				limit = { has_idea = EU_member }
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 				set_temp_variable = { percent_change = -3 }
 				set_temp_variable = { tag_index = THIS.id }
 				set_temp_variable = { influence_target = ROOT.id }
@@ -14230,11 +14231,10 @@ focus_tree = {
 
 		search_filters = { FOCUS_FILTER_FOREIGN_POLICY }
 		completion_reward = {
-			every_other_country = {
-				limit = { has_idea = EU_member }
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 				set_temp_variable = { percent_change = 2 }
-				set_temp_variable = { tag_index = ROOT.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 				add_opinion_modifier = { target = ROOT modifier = POL_Eurozone_acceptation }
 			}
@@ -14646,8 +14646,6 @@ focus_tree = {
 				limit = { NOT = { BLR = { has_government = democratic } } }
 				BLR = {
 					set_temp_variable = { percent_change = 2 }
-					set_temp_variable = { tag_index = ROOT.id }
-					set_temp_variable = { influence_target = THIS.id }
 					change_influence_percentage = yes
 				}
 			}
@@ -14656,8 +14654,6 @@ focus_tree = {
 				limit = { UKR = { NOT = { has_government = democratic } } }
 				UKR = {
 					set_temp_variable = { percent_change = 2 }
-					set_temp_variable = { tag_index = ROOT.id }
-					set_temp_variable = { influence_target = THIS.id }
 					change_influence_percentage = yes
 				}
 			}
@@ -14940,8 +14936,9 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_FOREIGN_POLICY }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_rely_on_europe"
-			every_other_country = {
-				limit = { has_idea = EU_member }
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 				add_opinion_modifier = { target = ROOT modifier = POL_relied_on_europe }
 				reverse_add_opinion_modifier = { target = ROOT modifier = POL_relied_on_europe }
 			}
@@ -15753,11 +15750,10 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_FOREIGN_POLICY }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_eurozone_opposition"
-			every_other_country = {
-				limit = { has_idea = EU_member }
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 				set_temp_variable = { percent_change = -2 }
-				set_temp_variable = { tag_index = ROOT.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 				add_opinion_modifier = { target = ROOT modifier = POL_Eurozone_denied }
 			}
@@ -15881,11 +15877,10 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_disapproval_of_accepting_illegal_immigrants"
 
 			add_stability = 0.05
-			every_other_country = {
-				limit = { has_idea = EU_member }
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 				set_temp_variable = { percent_change = -3 }
-				set_temp_variable = { tag_index = ROOT.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 				add_opinion_modifier = { target = ROOT modifier = POL_refusing_immigrants }
 			}
@@ -15936,7 +15931,6 @@ focus_tree = {
 			POL = {
 				set_temp_variable = { percent_change = -10 }
 				set_temp_variable = { tag_index = SOV.id }
-				set_temp_variable = { influence_target = POL.id }
 				change_influence_percentage = yes
 				add_to_variable = { party_pop_array^20 = 0.075 }
 				recalculate_party = yes
@@ -18347,8 +18341,6 @@ focus_tree = {
 			every_neighbor_country = {
 				add_opinion_modifier = { target = POL modifier = POL_improving_relations }
 				set_temp_variable = { percent_change = 3 }
-				set_temp_variable = { tag_index = ROOT.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 			}
 		}
@@ -18456,8 +18448,6 @@ focus_tree = {
 				two_random_infrastructure = yes
 				add_opinion_modifier = { target = POL modifier = POL_highway_project }
 				set_temp_variable = { percent_change = 2 }
-				set_temp_variable = { tag_index = ROOT.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 			}
 			POL = {
@@ -18772,8 +18762,6 @@ focus_tree = {
 			UKR = {
 				add_opinion_modifier = { target = POL modifier = POL_reactors_cooperation }
 				set_temp_variable = { percent_change = 3 }
-				set_temp_variable = { tag_index = ROOT.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 			}
 		}
@@ -19547,8 +19535,6 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: POL_russian_right_wing"
 			SOV = {
 				set_temp_variable = { percent_change = 5 }
-				set_temp_variable = { tag_index = ROOT.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 				add_to_variable = { party_pop_array^20 = 0.075 }
 				recalculate_party = yes
@@ -19642,8 +19628,6 @@ focus_tree = {
 				}
 
 				set_temp_variable = { percent_change = 5 }
-				set_temp_variable = { tag_index = ROOT.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 				two_random_infrastructure = yes
 			}
@@ -19690,8 +19674,6 @@ focus_tree = {
 				}
 
 				set_temp_variable = { percent_change = 5 }
-				set_temp_variable = { tag_index = ROOT.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 				one_random_industrial_complex = yes
 				one_random_arms_factory = yes
@@ -20487,13 +20469,11 @@ focus_tree = {
 		}
 
 		available = {
-			AND = {
-				OR = {
-					nationalist_monarchists_are_in_power = yes
-					neutrality_neutral_conservatism_are_in_power = yes
-				}
-				has_any_power_balance = yes
+			OR = {
+				nationalist_monarchists_are_in_power = yes
+				neutrality_neutral_conservatism_are_in_power = yes
 			}
+			has_any_power_balance = yes
 		}
 
 		bypass = {
@@ -20534,13 +20514,11 @@ focus_tree = {
 		}
 
 		available = {
-			AND = {
-				neutrality_neutral_conservatism_are_in_power = yes
-				date > 2000.11.01
-				NOT = {
-					has_idea = POL_unstable_government_idea
-					has_country_flag = POL_walesa_wins
-				}
+			neutrality_neutral_conservatism_are_in_power = yes
+			date > 2000.11.01
+			NOT = {
+				has_idea = POL_unstable_government_idea
+				has_country_flag = POL_walesa_wins
 			}
 		}
 
@@ -20596,13 +20574,11 @@ focus_tree = {
 		}
 
 		available = {
-			AND = {
-				OR = {
-					nationalist_monarchists_are_in_power = yes
-					neutrality_neutral_conservatism_are_in_power = yes
-				}
-				has_any_power_balance = yes
+			OR = {
+				nationalist_monarchists_are_in_power = yes
+				neutrality_neutral_conservatism_are_in_power = yes
 			}
+			has_any_power_balance = yes
 		}
 
 		bypass = {
@@ -20645,18 +20621,16 @@ focus_tree = {
 		}
 
 		available = {
-			AND = {
-				nationalist_monarchists_are_in_power = yes
-				has_completed_focus = POL_upr
-				has_country_flag = POL_korwin_wins
-				UKR = {
-					is_subject = no
-					exists = yes
-				}
-				has_country_leader = {
-					name = "Janusz Korwin-Mikke"
-					ruling_only = yes
-				}
+			nationalist_monarchists_are_in_power = yes
+			has_completed_focus = POL_upr
+			has_country_flag = POL_korwin_wins
+			UKR = {
+				is_subject = no
+				exists = yes
+			}
+			has_country_leader = {
+				name = "Janusz Korwin-Mikke"
+				ruling_only = yes
 			}
 		}
 
@@ -20671,8 +20645,6 @@ focus_tree = {
 
 			UKR = {
 				set_temp_variable = { percent_change = 2 }
-				set_temp_variable = { tag_index = POL.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 			}
 			add_political_power = 50
@@ -20691,20 +20663,18 @@ focus_tree = {
 		cost = 5
 
 		available = {
-			AND = {
-				nationalist_monarchists_are_in_power = yes
-				has_country_flag = POL_korwin_wins
-				UKR = {
-					is_subject = no
-					exists = yes
-				}
-				NOT = {
-					has_completed_focus = POL_mutual_independence_guarantee
-				}
-				has_country_leader = {
-					name = "Janusz Korwin-Mikke"
-					ruling_only = yes
-				}
+			nationalist_monarchists_are_in_power = yes
+			has_country_flag = POL_korwin_wins
+			UKR = {
+				is_subject = no
+				exists = yes
+			}
+			NOT = {
+				has_completed_focus = POL_mutual_independence_guarantee
+			}
+			has_country_leader = {
+				name = "Janusz Korwin-Mikke"
+				ruling_only = yes
 			}
 		}
 
@@ -20745,20 +20715,18 @@ focus_tree = {
 		cost = 5
 
 		available = {
-			AND = {
-				nationalist_monarchists_are_in_power = yes
-				has_country_flag = POL_korwin_wins
-				UKR = {
-					is_subject = no
-					exists = yes
-				}
-				NOT = {
-					has_completed_focus = POL_mutual_independence_guarantee
-				}
-				has_country_leader = {
-					name = "Janusz Korwin-Mikke"
-					ruling_only = yes
-				}
+			nationalist_monarchists_are_in_power = yes
+			has_country_flag = POL_korwin_wins
+			UKR = {
+				is_subject = no
+				exists = yes
+			}
+			NOT = {
+				has_completed_focus = POL_mutual_independence_guarantee
+			}
+			has_country_leader = {
+				name = "Janusz Korwin-Mikke"
+				ruling_only = yes
 			}
 		}
 
@@ -20803,20 +20771,18 @@ focus_tree = {
 		cost = 5
 
 		available = {
-			AND = {
-				nationalist_monarchists_are_in_power = yes
-				has_country_flag = POL_korwin_wins
-				UKR = {
-					is_subject = no
-					exists = yes
-				}
-				NOT = {
-					has_completed_focus = POL_mutual_independence_guarantee
-				}
-				has_country_leader = {
-					name = "Janusz Korwin-Mikke"
-					ruling_only = yes
-				}
+			nationalist_monarchists_are_in_power = yes
+			has_country_flag = POL_korwin_wins
+			UKR = {
+				is_subject = no
+				exists = yes
+			}
+			NOT = {
+				has_completed_focus = POL_mutual_independence_guarantee
+			}
+			has_country_leader = {
+				name = "Janusz Korwin-Mikke"
+				ruling_only = yes
 			}
 		}
 
@@ -20835,8 +20801,6 @@ focus_tree = {
 
 			UKR = {
 				set_temp_variable = { percent_change = 4 }
-				set_temp_variable = { tag_index = POL.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 			}
 			every_neighbor_country = {
@@ -20872,20 +20836,18 @@ focus_tree = {
 		cost = 5
 
 		available = {
-			AND = {
-				nationalist_monarchists_are_in_power = yes
-				has_country_flag = POL_korwin_wins
-				UKR = {
-					is_subject = no
-					exists = yes
-				}
-				NOT = {
-					has_completed_focus = POL_mutual_independence_guarantee
-				}
-				has_country_leader = {
-					name = "Janusz Korwin-Mikke"
-					ruling_only = yes
-				}
+			nationalist_monarchists_are_in_power = yes
+			has_country_flag = POL_korwin_wins
+			UKR = {
+				is_subject = no
+				exists = yes
+			}
+			NOT = {
+				has_completed_focus = POL_mutual_independence_guarantee
+			}
+			has_country_leader = {
+				name = "Janusz Korwin-Mikke"
+				ruling_only = yes
 			}
 		}
 
@@ -20924,21 +20886,19 @@ focus_tree = {
 		cost = 5
 
 		available = {
-			AND = {
-				nationalist_monarchists_are_in_power = yes
-				has_country_flag = POL_korwin_wins
-				UKR = {
-					is_subject = no
-					exists = yes
-				}
-				has_war = no
-				NOT = {
-					has_completed_focus = POL_seek_further_cooperation
-				}
-				has_country_leader = {
-					name = "Janusz Korwin-Mikke"
-					ruling_only = yes
-				}
+			nationalist_monarchists_are_in_power = yes
+			has_country_flag = POL_korwin_wins
+			UKR = {
+				is_subject = no
+				exists = yes
+			}
+			has_war = no
+			NOT = {
+				has_completed_focus = POL_seek_further_cooperation
+			}
+			has_country_leader = {
+				name = "Janusz Korwin-Mikke"
+				ruling_only = yes
 			}
 		}
 
@@ -20952,13 +20912,11 @@ focus_tree = {
 		}
 
 		bypass = {
-			AND = {
-				700 = {
-					is_fully_controlled_by = POL
-				}
-				701 = {
-					is_fully_controlled_by = POL
-				}
+			700 = {
+				is_fully_controlled_by = POL
+			}
+			701 = {
+				is_fully_controlled_by = POL
 			}
 		}
 
@@ -20994,21 +20952,19 @@ focus_tree = {
 		cost = 5
 
 		available = {
-			AND = {
-				nationalist_monarchists_are_in_power = yes
-				has_country_flag = POL_korwin_wins
-				700 = {
-					is_fully_controlled_by = POL
-				}
-				701 = {
-					is_fully_controlled_by = POL
-				}
-				has_country_leader = {
-					name = "Janusz Korwin-Mikke"
-					ruling_only = yes
-				}
-				has_war = no
+			nationalist_monarchists_are_in_power = yes
+			has_country_flag = POL_korwin_wins
+			700 = {
+				is_fully_controlled_by = POL
 			}
+			701 = {
+				is_fully_controlled_by = POL
+			}
+			has_country_leader = {
+				name = "Janusz Korwin-Mikke"
+				ruling_only = yes
+			}
+			has_war = no
 		}
 
 		prerequisite = {
@@ -21016,17 +20972,15 @@ focus_tree = {
 		}
 
 		bypass = {
-			AND = {
-				nationalist_monarchists_are_in_power = yes
-				699 = {
-					is_fully_controlled_by = POL
-				}
-				695 = {
-					is_fully_controlled_by = POL
-				}
-				333 = {
-					is_fully_controlled_by = POL
-				}
+			nationalist_monarchists_are_in_power = yes
+			699 = {
+				is_fully_controlled_by = POL
+			}
+			695 = {
+				is_fully_controlled_by = POL
+			}
+			333 = {
+				is_fully_controlled_by = POL
 			}
 		}
 
@@ -21062,17 +21016,15 @@ focus_tree = {
 		cost = 5
 
 		available = {
-			AND = {
-				nationalist_monarchists_are_in_power = yes
-				has_country_flag = POL_korwin_wins
-				UKR = {
-					exists = yes
-					has_war = no
-				}
-				has_country_leader = {
-					name = "Janusz Korwin-Mikke"
-					ruling_only = yes
-				}
+			nationalist_monarchists_are_in_power = yes
+			has_country_flag = POL_korwin_wins
+			UKR = {
+				exists = yes
+				has_war = no
+			}
+			has_country_leader = {
+				name = "Janusz Korwin-Mikke"
+				ruling_only = yes
 			}
 		}
 
@@ -21126,17 +21078,15 @@ focus_tree = {
 		cost = 5
 
 		available = {
-			AND = {
-				nationalist_monarchists_are_in_power = yes
-				has_country_flag = POL_korwin_wins
-				UKR = {
-					exists = yes
-					has_war = no
-				}
-				has_country_leader = {
-					name = "Janusz Korwin-Mikke"
-					ruling_only = yes
-				}
+			nationalist_monarchists_are_in_power = yes
+			has_country_flag = POL_korwin_wins
+			UKR = {
+				exists = yes
+				has_war = no
+			}
+			has_country_leader = {
+				name = "Janusz Korwin-Mikke"
+				ruling_only = yes
 			}
 		}
 
@@ -21148,7 +21098,6 @@ focus_tree = {
 			nationalist_monarchists_are_in_power = yes
 			UKR = {
 				OR = {
-					is_subject_of = POL
 					is_subject_of = POL
 					all_state = {
 						is_controlled_by = POL
@@ -21198,20 +21147,18 @@ focus_tree = {
 		cost = 5
 
 		available = {
-			AND = {
-				nationalist_monarchists_are_in_power = yes
-				has_country_flag = POL_korwin_wins
-				UKR = {
-					is_subject = no
-					exists = yes
-				}
-				NOT = {
-					has_completed_focus = POL_demand_lwow
-				}
-				has_country_leader = {
-					name = "Janusz Korwin-Mikke"
-					ruling_only = yes
-				}
+			nationalist_monarchists_are_in_power = yes
+			has_country_flag = POL_korwin_wins
+			UKR = {
+				is_subject = no
+				exists = yes
+			}
+			NOT = {
+				has_completed_focus = POL_demand_lwow
+			}
+			has_country_leader = {
+				name = "Janusz Korwin-Mikke"
+				ruling_only = yes
 			}
 		}
 
@@ -21251,20 +21198,18 @@ focus_tree = {
 		cost = 5
 
 		available = {
-			AND = {
-				nationalist_monarchists_are_in_power = yes
-				has_country_flag = POL_korwin_wins
-				UKR = {
-					is_subject = no
-					exists = yes
-				}
-				NOT = {
-					has_completed_focus = POL_demand_lwow
-				}
-				has_country_leader = {
-					name = "Janusz Korwin-Mikke"
-					ruling_only = yes
-				}
+			nationalist_monarchists_are_in_power = yes
+			has_country_flag = POL_korwin_wins
+			UKR = {
+				is_subject = no
+				exists = yes
+			}
+			NOT = {
+				has_completed_focus = POL_demand_lwow
+			}
+			has_country_leader = {
+				name = "Janusz Korwin-Mikke"
+				ruling_only = yes
 			}
 		}
 
@@ -21305,29 +21250,27 @@ focus_tree = {
 		cost = 5
 
 		available = {
-			AND = {
-				nationalist_monarchists_are_in_power = yes
-				has_country_flag = POL_korwin_wins
-				UKR = {
-					is_subject = no
-					exists = yes
-				}
-				OR = {
-					NOT = {
-						has_country_flag = POL_ukraine_disapproval
-					}
-					has_country_flag = {
-						flag = POL_ukraine_disapproval
-						days > 365
-					}
-				}
+			nationalist_monarchists_are_in_power = yes
+			has_country_flag = POL_korwin_wins
+			UKR = {
+				is_subject = no
+				exists = yes
+			}
+			OR = {
 				NOT = {
-					has_completed_focus = POL_demand_lwow
+					has_country_flag = POL_ukraine_disapproval
 				}
-				has_country_leader = {
-					name = "Janusz Korwin-Mikke"
-					ruling_only = yes
+				has_country_flag = {
+					flag = POL_ukraine_disapproval
+					days > 365
 				}
+			}
+			NOT = {
+				has_completed_focus = POL_demand_lwow
+			}
+			has_country_leader = {
+				name = "Janusz Korwin-Mikke"
+				ruling_only = yes
 			}
 		}
 
@@ -21380,26 +21323,24 @@ focus_tree = {
 		cost = 5
 
 		available = {
-			AND = {
-				nationalist_monarchists_are_in_power = yes
-				has_country_flag = POL_korwin_wins
-				UKR = {
-					is_subject = no
-					exists = yes
+			nationalist_monarchists_are_in_power = yes
+			has_country_flag = POL_korwin_wins
+			UKR = {
+				is_subject = no
+				exists = yes
+			}
+			OR = {
+				NOT = {
+					has_country_flag = POL_ukraine_disapproval
 				}
-				OR = {
-					NOT = {
-						has_country_flag = POL_ukraine_disapproval
-					}
-					has_country_flag = {
-						flag = POL_ukraine_disapproval
-						days > 365
-					}
+				has_country_flag = {
+					flag = POL_ukraine_disapproval
+					days > 365
 				}
-				has_country_leader = {
-					name = "Janusz Korwin-Mikke"
-					ruling_only = yes
-				}
+			}
+			has_country_leader = {
+				name = "Janusz Korwin-Mikke"
+				ruling_only = yes
 			}
 		}
 
@@ -21911,17 +21852,15 @@ focus_tree = {
 		cost = 5
 
 		available = {
-			AND = {
-				nationalist_monarchists_are_in_power = yes
-				has_country_flag = POL_korwin_wins
-				LIT = {
-					is_subject = no
-					exists = yes
-				}
-				has_country_leader = {
-					name = "Janusz Korwin-Mikke"
-					ruling_only = yes
-				}
+			nationalist_monarchists_are_in_power = yes
+			has_country_flag = POL_korwin_wins
+			LIT = {
+				is_subject = no
+				exists = yes
+			}
+			has_country_leader = {
+				name = "Janusz Korwin-Mikke"
+				ruling_only = yes
 			}
 		}
 
@@ -21964,20 +21903,15 @@ focus_tree = {
 		cost = 5
 
 		available = {
-			AND = {
-				nationalist_monarchists_are_in_power = yes
-				has_country_flag = POL_korwin_wins
-				LIT = {
-					OR = {
-						is_subject_of = POL
-						is_subject_of = POL
-					}
-					exists = yes
-				}
-				has_country_leader = {
-					name = "Janusz Korwin-Mikke"
-					ruling_only = yes
-				}
+			nationalist_monarchists_are_in_power = yes
+			has_country_flag = POL_korwin_wins
+			LIT = {
+				is_subject_of = POL
+				exists = yes
+			}
+			has_country_leader = {
+				name = "Janusz Korwin-Mikke"
+				ruling_only = yes
 			}
 		}
 
@@ -22146,22 +22080,20 @@ focus_tree = {
 		#}
 
 		available = {
-			AND = {
-				nationalist_monarchists_are_in_power = yes
-				has_country_flag = POL_korwin_wins
-				has_completed_focus = POL_upr
-				BLR = {
-					is_subject = no
-					exists = yes
-				}
-				LIT = {
-					is_subject = no
-					exists = yes
-				}
-				has_country_leader = {
-					name = "Janusz Korwin-Mikke"
-					ruling_only = yes
-				}
+			nationalist_monarchists_are_in_power = yes
+			has_country_flag = POL_korwin_wins
+			has_completed_focus = POL_upr
+			BLR = {
+				is_subject = no
+				exists = yes
+			}
+			LIT = {
+				is_subject = no
+				exists = yes
+			}
+			has_country_leader = {
+				name = "Janusz Korwin-Mikke"
+				ruling_only = yes
 			}
 		}
 
@@ -22198,20 +22130,18 @@ focus_tree = {
 		mutually_exclusive = { focus = POL_connection_with_russia }
 
 		available = {
-			AND = {
-				nationalist_monarchists_are_in_power = yes
-				has_country_flag = POL_korwin_wins
-				LIT = {
-					is_subject = no
-					exists = yes
-				}
-				NOT = {
-					has_completed_focus = POL_recognition_of_the_greatness_of_the_CSTO
-				}
-				has_country_leader = {
-					name = "Janusz Korwin-Mikke"
-					ruling_only = yes
-				}
+			nationalist_monarchists_are_in_power = yes
+			has_country_flag = POL_korwin_wins
+			LIT = {
+				is_subject = no
+				exists = yes
+			}
+			NOT = {
+				has_completed_focus = POL_recognition_of_the_greatness_of_the_CSTO
+			}
+			has_country_leader = {
+				name = "Janusz Korwin-Mikke"
+				ruling_only = yes
 			}
 		}
 
@@ -22304,20 +22234,18 @@ focus_tree = {
 		cost = 5
 
 		available = {
-			AND = {
-				nationalist_monarchists_are_in_power = yes
-				has_country_flag = POL_korwin_wins
-				LIT = {
-					is_subject = no
-					exists = yes
-				}
-				NOT = {
-					has_completed_focus = POL_recognition_of_the_greatness_of_the_CSTO
-				}
-				has_country_leader = {
-					name = "Janusz Korwin-Mikke"
-					ruling_only = yes
-				}
+			nationalist_monarchists_are_in_power = yes
+			has_country_flag = POL_korwin_wins
+			LIT = {
+				is_subject = no
+				exists = yes
+			}
+			NOT = {
+				has_completed_focus = POL_recognition_of_the_greatness_of_the_CSTO
+			}
+			has_country_leader = {
+				name = "Janusz Korwin-Mikke"
+				ruling_only = yes
 			}
 		}
 
@@ -22384,20 +22312,18 @@ focus_tree = {
 		cost = 5
 
 		available = {
-			AND = {
-				nationalist_monarchists_are_in_power = yes
-				has_country_flag = POL_korwin_wins
-				LIT = {
-					is_subject = no
-					exists = yes
-				}
-				NOT = {
-					has_completed_focus = POL_recognition_of_the_greatness_of_the_CSTO
-				}
-				has_country_leader = {
-					name = "Janusz Korwin-Mikke"
-					ruling_only = yes
-				}
+			nationalist_monarchists_are_in_power = yes
+			has_country_flag = POL_korwin_wins
+			LIT = {
+				is_subject = no
+				exists = yes
+			}
+			NOT = {
+				has_completed_focus = POL_recognition_of_the_greatness_of_the_CSTO
+			}
+			has_country_leader = {
+				name = "Janusz Korwin-Mikke"
+				ruling_only = yes
 			}
 		}
 
@@ -22563,13 +22489,13 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_erasing_old_disputes"
-			custom_effect_tooltip = TT_ALL_NATO_MEMBER_NATIONS_GAIN
-			effect_tooltip = {
-				add_opinion_modifier = { target = POL modifier = POL_poland_seeks_russian_cooperation }
-			}
 			for_each_scope_loop = {
 				array = global.nato_members
-				add_opinion_modifier = { target = POL modifier = POL_poland_seeks_russian_cooperation }
+				tooltip = TT_ALL_NATO_MEMBER_NATIONS_GAIN
+				if = {
+					limit = { NOT = { tag = ROOT } }
+					add_opinion_modifier = { target = POL modifier = POL_poland_seeks_russian_cooperation }
+				}
 			}
 			reverse_add_opinion_modifier = { target = SOV modifier = POL_trade_poland_starts_cooperation }
 		}
@@ -22664,13 +22590,13 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_recognition_of_the_greatness_of_the_CSTO"
-			custom_effect_tooltip = TT_ALL_NATO_MEMBER_NATIONS_GAIN
-			effect_tooltip = {
-				add_opinion_modifier = { target = POL modifier = POL_Poland_seeks_alliance_with_russia }
-			}
 			for_each_scope_loop = {
 				array = global.nato_members
-				add_opinion_modifier = { target = POL modifier = POL_Poland_seeks_alliance_with_russia }
+				tooltip = TT_ALL_NATO_MEMBER_NATIONS_GAIN
+				if = {
+					limit = { NOT = { tag = ROOT } }
+					add_opinion_modifier = { target = POL modifier = POL_Poland_seeks_alliance_with_russia }
+				}
 			}
 			reverse_add_opinion_modifier = {
 				target = SOV
@@ -23434,8 +23360,14 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_trade_blockade_with_east"
-			send_embargo = SOV
-			send_embargo = BLR
+			if = {
+				limit = { has_dlc = "By Blood Alone" }
+				send_embargo = SOV
+			}
+			if = {
+				limit = { has_dlc = "By Blood Alone" }
+				send_embargo = BLR
+			}
 			add_political_power = 150
 			set_temp_variable = { temp_opinion = -5 }
 			change_international_bankers_opinion = yes
@@ -23531,12 +23463,8 @@ focus_tree = {
 				name = "Lech Wałęsa"
 				ruling_only = yes
 			}
-			SAU = {
-				exists = yes
-				NOt = {
-					has_war_with = POL
-				}
-			}
+			country_exists = SAU
+			NOT = { has_war_with = SAU }
 		}
 
 		prerequisite = {
@@ -23659,12 +23587,8 @@ focus_tree = {
 				name = "Lech Wałęsa"
 				ruling_only = yes
 			}
-			AST = {
-				exists = yes
-				NOt = {
-					has_war_with = POL
-				}
-			}
+			country_exists = AST
+			NOT = { has_war_with = AST }
 		}
 
 		prerequisite = {
@@ -23726,13 +23650,15 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_arrangements_with_the_west"
-			every_country = {
-				limit = {
-					OR = {
-						has_idea = NATO_member
-						has_idea = EU_member
-					}
+			for_each_scope_loop = {
+				array = global.nato_members
+				add_opinion_modifier = {
+					target = POL
+					modifier = POL_trade_poland_exports_to_us
 				}
+			}
+			for_each_scope_loop = {
+				array = global.EU_member
 				add_opinion_modifier = {
 					target = POL
 					modifier = POL_trade_poland_exports_to_us
@@ -24008,12 +23934,8 @@ focus_tree = {
 				name = "Lech Wałęsa"
 				ruling_only = yes
 			}
-			SOV = {
-				exists = yes
-				NOt = {
-					has_war_with = POL
-				}
-			}
+			country_exists = SOV
+			NOT = { has_war_with = SOV }
 		}
 
 		prerequisite = {
@@ -24039,7 +23961,7 @@ focus_tree = {
 			}
 			if = {
 				limit = {
-					USA = { exists = yes }
+					country_exists = USA
 				}
 				reverse_add_opinion_modifier = {
 					target = USA
@@ -24152,12 +24074,8 @@ focus_tree = {
 				name = "Lech Wałęsa"
 				ruling_only = yes
 			}
-			CHI = {
-				exists = yes
-				NOt = {
-					has_war_with = POL
-				}
-			}
+			country_exists = CHI
+			NOT = { has_war_with = CHI }
 		}
 
 		prerequisite = {
@@ -24274,11 +24192,10 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_visit_to_brussels"
 
-			every_other_country = {
-				limit = { has_idea = EU_member }
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 				set_temp_variable = { percent_change = 4 }
-				set_temp_variable = { tag_index = ROOT.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 			}
 			reverse_add_opinion_modifier = {
@@ -24496,8 +24413,9 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_join_the_eurozone"
-			every_other_country = {
-				limit = { has_idea = EU_member }
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 				add_opinion_modifier = { target = ROOT modifier = POL_Eurozone_acceptation }
 			}
 			add_political_power = 100
@@ -24552,11 +24470,10 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_criticize_the_eurozone"
-			every_other_country = {
-				limit = { has_idea = EU_member }
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 				set_temp_variable = { percent_change = -3 }
-				set_temp_variable = { tag_index = ROOT.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 				add_opinion_modifier = { target = ROOT modifier = POL_Eurozone_denied }
 			}
@@ -24937,8 +24854,6 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_infiltrate_belarusian_policy"
 			BLR = {
 				set_temp_variable = { percent_change = 4 }
-				set_temp_variable = { tag_index = ROOT.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 			}
 			reverse_add_opinion_modifier = {
@@ -25104,6 +25019,8 @@ focus_tree = {
 		prerequisite = {
 			focus = POL_troubled_border
 		}
+		will_lead_to_war_with = BLR
+		will_lead_to_war_with = SOV
 
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -25451,8 +25368,14 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus POL_close_east_border"
-			send_embargo = SOV
-			send_embargo = BLR
+			if = {
+				limit = { has_dlc = "By Blood Alone" }
+				send_embargo = SOV
+			}
+			if = {
+				limit = { has_dlc = "By Blood Alone" }
+				send_embargo = BLR
+			}
 
 			if = {
 				limit = { has_idea = consumption_economy }
@@ -25661,10 +25584,12 @@ focus_tree = {
 			add_ideas = POL_anti_russia_coalition_member_idea
 			every_other_country = {
 				limit = {
-					OR = {
-						capital_scope = { is_on_continent = europe }
-						capital_scope = { is_on_continent = africa }
-						capital_scope = { is_on_continent = middle_east }
+					capital_scope = {
+						OR = {
+							is_on_continent = europe
+							is_on_continent = africa
+							is_on_continent = middle_east
+						}
 					}
 					OR = {
 						has_government = democratic

@@ -54,6 +54,7 @@ scripted_diplomatic_actions = {
 				clear_variable = pending_request_mil_gnss_access
 				set_country_flag = { flag = recently_rejected_request_mil_gnss_access_@PREV value = 1 days = 270 }
 			}
+			set_country_flag = { flag = recently_rejected_request_mil_gnss_access_@ROOT value = 1 days = 270 }
 		}
 
 		#### AI SECTION ###
@@ -61,7 +62,7 @@ scripted_diplomatic_actions = {
 			base = 0
 			modifier = {
 				# Offer/request to allied and friendly nations
-				add = 100
+				add = 30
 				OR = {
 					ROOT = { has_opinion = { target = PREV value > 149 } }
 					AND = {
@@ -74,7 +75,7 @@ scripted_diplomatic_actions = {
 					}
 					AND = {
 						ROOT = { has_opinion = { target = PREV value > 49 } }
-						PREV = { has_volunteers_amount_from = { tag = ROOT count > 0 } }
+						has_volunteers_amount_from = { tag = ROOT count > 0 }
 					}
 					AND = {
 						ROOT = { has_opinion = { target = PREV value > 49 } }
@@ -82,44 +83,44 @@ scripted_diplomatic_actions = {
 					}
 					AND = {
 						ROOT = { has_idea = NATO_member }
-						PREV = { has_idea = NATO_member }
+						has_idea = NATO_member
 					}
 					AND = {
 						ROOT = { has_idea = EU_member }
-						PREV = { has_idea = EU_member }
+						has_idea = EU_member
 					}
 					ROOT = { is_in_faction_with = PREV }
-					PREV = { has_war_together_with = ROOT }
+					has_war_together_with = ROOT
 					AND = {
 						ROOT = { original_tag = USA }
-						PREV = { has_idea = Major_Non_NATO_Ally }
+						has_idea = Major_Non_NATO_Ally
 					}
 					AND = {
 						ROOT = { original_tag = USA }
-						PREV = { has_idea = NATO_member }
+						has_idea = NATO_member
 					}
 					AND = {
 						ROOT = { original_tag = ENG }
-						PREV = { has_dynamic_modifier = { modifier = Commonwealth_member_modifier } }
+						has_dynamic_modifier = { modifier = Commonwealth_member_modifier }
 					}
 					AND = {
-						PREV = { original_tag = ENG }
+						original_tag = ENG
 						ROOT = { has_dynamic_modifier = { modifier = Commonwealth_member_modifier } }
 					}
 					AND = {
 						ROOT = { original_tag = CHI }
-						PREV = { has_idea = sco_member }
+						has_idea = sco_member
 					}
 					AND = {
 						ROOT = { original_tag = CHI }
-						PREV = { has_idea = sco_member_mil }
+						has_idea = sco_member_mil
 					}
 					AND = {
-						PREV = { original_tag = CHI }
+						original_tag = CHI
 						ROOT = { has_idea = sco_member }
 					}
 					AND = {
-						PREV = { original_tag = CHI }
+						original_tag = CHI
 						ROOT = { has_idea = sco_member_mil }
 					}
 				}
@@ -129,21 +130,19 @@ scripted_diplomatic_actions = {
 				add = -100
 				OR = {
 					ROOT = { has_opinion = { target = PREV value < 150 } }
-					PREV = { has_war_with = ROOT }
-					PREV = { is_justifying_wargoal_against = ROOT }
-					PREV = { has_wargoal_against = ROOT }
+					has_war_with = ROOT
+					is_justifying_wargoal_against = ROOT
+					has_wargoal_against = ROOT
 					AND = {
 						ROOT = { is_in_faction = yes }
-						PREV = {
-							is_in_faction = yes
-							NOT = { is_in_faction_with = ROOT }
-						}
+						is_in_faction = yes
+						NOT = { is_in_faction_with = ROOT }
 					}
 				}
 			}
 			modifier = {
 				add = 50
-				check_variable = { PREV.var_GNSS_mil_system_idx > ROOT.var_GNSS_mil_system_idx }
+				check_variable = { var_GNSS_mil_system_idx > ROOT.var_GNSS_mil_system_idx }
 			}
 			modifier = {
 				add = -100
@@ -155,6 +154,10 @@ scripted_diplomatic_actions = {
 					ROOT = { NOT = { check_variable = { pending_request_mil_gnss_access = 0 } } }
 					ROOT = { has_country_flag = recently_rejected_request_mil_gnss_access_@PREV }
 				}
+			}
+			modifier = {
+				factor = 0
+				has_country_flag = MD_auto_reject_satellite_access
 			}
 		}
 		ai_acceptance = {
@@ -342,7 +345,7 @@ scripted_diplomatic_actions = {
 				clear_variable = pending_offer_mil_gnss_access
 
 				# Do Not Instant Revoke
-				set_country_flag = { flag = recently_accepted_mil_gnss_@PREV value = 1 days = 180 }
+				set_country_flag = { flag = recently_accepted_mil_gnss_@PREV value = 1 days = 270 }
 			}
 			THIS = { country_event = satellites.9 }
 			ROOT = { country_event = satellites.9 }
@@ -353,6 +356,9 @@ scripted_diplomatic_actions = {
 				clear_variable = pending_offer_mil_gnss_access
 				set_country_flag = { flag = recently_rejected_offer_mil_gnss_access_@PREV value = 1 days = 270 }
 			}
+			THIS = {
+				set_country_flag = { flag = recently_rejected_offer_mil_gnss_access_@ROOT value = 1 days = 270 }
+			}
 		}
 
 		#### AI SECTION ###
@@ -360,7 +366,7 @@ scripted_diplomatic_actions = {
 			base = 0
 			modifier = {
 				# Offer/request to allied and friendly nations
-				add = 100
+				add = 30
 				OR = {
 					ROOT = { has_opinion = { target = PREV value > 149 } }
 					AND = {
@@ -373,7 +379,7 @@ scripted_diplomatic_actions = {
 					}
 					AND = {
 						ROOT = { has_opinion = { target = PREV value > 49 } }
-						PREV = { has_volunteers_amount_from = { tag = ROOT count > 0 } }
+						has_volunteers_amount_from = { tag = ROOT count > 0 }
 					}
 					AND = {
 						ROOT = { has_opinion = { target = PREV value > 49 } }
@@ -381,44 +387,44 @@ scripted_diplomatic_actions = {
 					}
 					AND = {
 						ROOT = { has_idea = NATO_member }
-						PREV = { has_idea = NATO_member }
+						has_idea = NATO_member
 					}
 					AND = {
 						ROOT = { has_idea = EU_member }
-						PREV = { has_idea = EU_member }
+						has_idea = EU_member
 					}
 					ROOT = { is_in_faction_with = PREV }
-					PREV = { has_war_together_with = ROOT }
+					has_war_together_with = ROOT
 					AND = {
 						ROOT = { original_tag = USA }
-						PREV = { has_idea = Major_Non_NATO_Ally }
+						has_idea = Major_Non_NATO_Ally
 					}
 					AND = {
 						ROOT = { original_tag = USA }
-						PREV = { has_idea = NATO_member }
+						has_idea = NATO_member
 					}
 					AND = {
 						ROOT = { original_tag = ENG }
-						PREV = { has_dynamic_modifier = { modifier = Commonwealth_member_modifier } }
+						has_dynamic_modifier = { modifier = Commonwealth_member_modifier }
 					}
 					AND = {
-						PREV = { original_tag = ENG }
+						original_tag = ENG
 						ROOT = { has_dynamic_modifier = { modifier = Commonwealth_member_modifier } }
 					}
 					AND = {
 						ROOT = { original_tag = CHI }
-						PREV = { has_idea = sco_member }
+						has_idea = sco_member
 					}
 					AND = {
 						ROOT = { original_tag = CHI }
-						PREV = { has_idea = sco_member_mil }
+						has_idea = sco_member_mil
 					}
 					AND = {
-						PREV = { original_tag = CHI }
+						original_tag = CHI
 						ROOT = { has_idea = sco_member }
 					}
 					AND = {
-						PREV = { original_tag = CHI }
+						original_tag = CHI
 						ROOT = { has_idea = sco_member_mil }
 					}
 				}
@@ -428,15 +434,13 @@ scripted_diplomatic_actions = {
 				add = -100
 				OR = {
 					ROOT = { has_opinion = { target = PREV value < 150 } }
-					PREV = { has_war_with = ROOT }
-					PREV = { is_justifying_wargoal_against = ROOT }
-					PREV = { has_wargoal_against = ROOT }
+					has_war_with = ROOT
+					is_justifying_wargoal_against = ROOT
+					has_wargoal_against = ROOT
 					AND = {
 						ROOT = { is_in_faction = yes }
-						PREV = {
-							is_in_faction = yes
-							NOT = { is_in_faction_with = ROOT }
-						}
+						is_in_faction = yes
+						NOT = { is_in_faction_with = ROOT }
 					}
 				}
 			}
@@ -623,9 +627,19 @@ scripted_diplomatic_actions = {
 			log = "[GetDateText]: [Root.GetName]: diplomatic action complete_effect revoke_mil_gnss_access"
 			ROOT = {
 				remove_from_array = { array = ROOT.GNSS_mil_treaty_array value = PREV.id }
-				remove_from_array = { array = PREV.GNSS_mil_access_array value = ROOT.id }
-				remove_from_array = { array = PREV.GNSS_mil_access_system_idx_array value = ROOT.var_GNSS_mil_system_idx }
 				PREV = {
+					set_temp_variable = { temp_GNSS_mil_access_break = 0 }
+					for_each_loop = {
+						array = GNSS_mil_access_array
+						value = v
+						index = i
+						break = temp_GNSS_mil_access_break
+						if = {
+							limit = { check_variable = { v = ROOT.id } }
+							remove_from_array = { array = GNSS_mil_access_array index = i }
+							set_temp_variable = { temp_GNSS_mil_access_break = 1 }
+						}
+					}
 					add_access_GNSS_mil_vars = yes
 				}
 				set_country_flag = { flag = recently_revoke_mil_gnss_access_@PREV days = 180 value = 1 }
@@ -634,7 +648,7 @@ scripted_diplomatic_actions = {
 			ROOT = { country_event = satellites.9 }
 		}
 		reject_effect = {
-			log = "[GetDateText]: [Root.GetName]: diplomatic action reject_effect offer_mil_gnss_access"
+			log = "[GetDateText]: [Root.GetName]: diplomatic action reject_effect revoke_mil_gnss_access"
 			ROOT = {
 				set_country_flag = {
 					flag = recently_revoke_mil_gnss_access_@PREV
@@ -662,7 +676,7 @@ scripted_diplomatic_actions = {
 					}
 					AND = {
 						ROOT = { has_opinion = { target = PREV value > 49 } }
-						PREV = { has_volunteers_amount_from = { tag = ROOT count > 0 } }
+						has_volunteers_amount_from = { tag = ROOT count > 0 }
 					}
 					AND = {
 						ROOT = { has_opinion = { target = PREV value > 49 } }
@@ -670,44 +684,44 @@ scripted_diplomatic_actions = {
 					}
 					AND = {
 						ROOT = { has_idea = NATO_member }
-						PREV = { has_idea = NATO_member }
+						has_idea = NATO_member
 					}
 					AND = {
 						ROOT = { has_idea = EU_member }
-						PREV = { has_idea = EU_member }
+						has_idea = EU_member
 					}
 					ROOT = { is_in_faction_with = PREV }
-					PREV = { has_war_together_with = ROOT }
+					has_war_together_with = ROOT
 					AND = {
 						ROOT = { original_tag = USA }
-						PREV = { has_idea = Major_Non_NATO_Ally }
+						has_idea = Major_Non_NATO_Ally
 					}
 					AND = {
 						ROOT = { original_tag = USA }
-						PREV = { has_idea = NATO_member }
+						has_idea = NATO_member
 					}
 					AND = {
 						ROOT = { original_tag = ENG }
-						PREV = { has_dynamic_modifier = { modifier = Commonwealth_member_modifier } }
+						has_dynamic_modifier = { modifier = Commonwealth_member_modifier }
 					}
 					AND = {
-						PREV = { original_tag = ENG }
+						original_tag = ENG
 						ROOT = { has_dynamic_modifier = { modifier = Commonwealth_member_modifier } }
 					}
 					AND = {
 						ROOT = { original_tag = CHI }
-						PREV = { has_idea = sco_member }
+						has_idea = sco_member
 					}
 					AND = {
 						ROOT = { original_tag = CHI }
-						PREV = { has_idea = sco_member_mil }
+						has_idea = sco_member_mil
 					}
 					AND = {
-						PREV = { original_tag = CHI }
+						original_tag = CHI
 						ROOT = { has_idea = sco_member }
 					}
 					AND = {
-						PREV = { original_tag = CHI }
+						original_tag = CHI
 						ROOT = { has_idea = sco_member_mil }
 					}
 				}
@@ -717,15 +731,13 @@ scripted_diplomatic_actions = {
 				add = 300
 				OR = {
 					ROOT = { has_opinion = { target = PREV value < 150 } }
-					PREV = { has_war_with = ROOT }
-					PREV = { is_justifying_wargoal_against = ROOT }
-					PREV = { has_wargoal_against = ROOT }
+					has_war_with = ROOT
+					is_justifying_wargoal_against = ROOT
+					has_wargoal_against = ROOT
 					AND = {
 						ROOT = { is_in_faction = yes }
-						PREV = {
-							is_in_faction = yes
-							NOT = { is_in_faction_with = ROOT }
-						}
+						is_in_faction = yes
+						NOT = { is_in_faction_with = ROOT }
 					}
 				}
 			}
@@ -794,7 +806,7 @@ scripted_diplomatic_actions = {
 				clear_variable = pending_request_civ_gnss_access
 
 				# Do Not Instant Revoke
-				set_country_flag = { flag = recently_accepted_civ_gnss_@PREV value = 1 days = 180 }
+				set_country_flag = { flag = recently_accepted_civ_gnss_@PREV value = 1 days = 270 }
 			}
 			THIS = { country_event = satellites.9 }
 			ROOT = { country_event = satellites.9 }
@@ -805,6 +817,9 @@ scripted_diplomatic_actions = {
 				clear_variable = pending_request_civ_gnss_access
 				set_country_flag = { flag = recently_rejected_request_civ_gnss_access_@PREV value = 1 days = 270 }
 			}
+			THIS = {
+				set_country_flag = { flag = recently_rejected_request_civ_gnss_access_@ROOT value = 1 days = 270 }
+			}
 		}
 
 		#### AI SECTION ###
@@ -812,7 +827,7 @@ scripted_diplomatic_actions = {
 			base = 0
 			modifier = {
 				# Offer/request to allied and friendly nations
-				add = 100
+				add = 30
 				OR = {
 					ROOT = { has_opinion = { target = PREV value > 149 } }
 					AND = {
@@ -825,7 +840,7 @@ scripted_diplomatic_actions = {
 					}
 					AND = {
 						ROOT = { has_opinion = { target = PREV value > 49 } }
-						PREV = { has_volunteers_amount_from = { tag = ROOT count > 0 } }
+						has_volunteers_amount_from = { tag = ROOT count > 0 }
 					}
 					AND = {
 						ROOT = { has_opinion = { target = PREV value > 49 } }
@@ -833,44 +848,44 @@ scripted_diplomatic_actions = {
 					}
 					AND = {
 						ROOT = { has_idea = NATO_member }
-						PREV = { has_idea = NATO_member }
+						has_idea = NATO_member
 					}
 					AND = {
 						ROOT = { has_idea = EU_member }
-						PREV = { has_idea = EU_member }
+						has_idea = EU_member
 					}
 					ROOT = { is_in_faction_with = PREV }
-					PREV = { has_war_together_with = ROOT }
+					has_war_together_with = ROOT
 					AND = {
 						ROOT = { original_tag = USA }
-						PREV = { has_idea = Major_Non_NATO_Ally }
+						has_idea = Major_Non_NATO_Ally
 					}
 					AND = {
 						ROOT = { original_tag = USA }
-						PREV = { has_idea = NATO_member }
+						has_idea = NATO_member
 					}
 					AND = {
 						ROOT = { original_tag = ENG }
-						PREV = { has_dynamic_modifier = { modifier = Commonwealth_member_modifier } }
+						has_dynamic_modifier = { modifier = Commonwealth_member_modifier }
 					}
 					AND = {
-						PREV = { original_tag = ENG }
+						original_tag = ENG
 						ROOT = { has_dynamic_modifier = { modifier = Commonwealth_member_modifier } }
 					}
 					AND = {
 						ROOT = { original_tag = CHI }
-						PREV = { has_idea = sco_member }
+						has_idea = sco_member
 					}
 					AND = {
 						ROOT = { original_tag = CHI }
-						PREV = { has_idea = sco_member_mil }
+						has_idea = sco_member_mil
 					}
 					AND = {
-						PREV = { original_tag = CHI }
+						original_tag = CHI
 						ROOT = { has_idea = sco_member }
 					}
 					AND = {
-						PREV = { original_tag = CHI }
+						original_tag = CHI
 						ROOT = { has_idea = sco_member_mil }
 					}
 				}
@@ -880,15 +895,13 @@ scripted_diplomatic_actions = {
 				add = -100
 				OR = {
 					ROOT = { has_opinion = { target = PREV value < 150 } }
-					PREV = { has_war_with = ROOT }
-					PREV = { is_justifying_wargoal_against = ROOT }
-					PREV = { has_wargoal_against = ROOT }
+					has_war_with = ROOT
+					is_justifying_wargoal_against = ROOT
+					has_wargoal_against = ROOT
 					AND = {
 						ROOT = { is_in_faction = yes }
-						PREV = {
-							is_in_faction = yes
-							NOT = { is_in_faction_with = ROOT }
-						}
+						is_in_faction = yes
+						NOT = { is_in_faction_with = ROOT }
 					}
 				}
 			}
@@ -906,6 +919,10 @@ scripted_diplomatic_actions = {
 					ROOT = { NOT = { check_variable = { pending_request_civ_gnss_access = 0 } } }
 					ROOT = { has_country_flag = recently_rejected_request_civ_gnss_access_@PREV }
 				}
+			}
+			modifier = {
+				factor = 0
+				has_country_flag = MD_auto_reject_satellite_access
 			}
 		}
 		ai_acceptance = {
@@ -1102,7 +1119,7 @@ scripted_diplomatic_actions = {
 				clear_variable = pending_offer_civ_gnss_access
 
 				# Do Not Instant Revoke
-				set_country_flag = { flag = recently_accepted_civ_gnss_@PREV value = 1 days = 180 }
+				set_country_flag = { flag = recently_accepted_civ_gnss_@PREV value = 1 days = 270 }
 			}
 			THIS = { country_event = satellites.9 }
 			ROOT = { country_event = satellites.9 }
@@ -1113,6 +1130,9 @@ scripted_diplomatic_actions = {
 				clear_variable = pending_offer_civ_gnss_access
 				set_country_flag = { flag = recently_rejected_offer_civ_gnss_access_@PREV value = 1 days = 270 }
 			}
+			THIS = {
+				set_country_flag = { flag = recently_rejected_offer_civ_gnss_access_@ROOT value = 1 days = 270 }
+			}
 		}
 
 		#### AI SECTION ###
@@ -1120,7 +1140,7 @@ scripted_diplomatic_actions = {
 			base = 0
 			modifier = {
 				# Offer/request to allied and friendly nations
-				add = 100
+				add = 30
 				OR = {
 					ROOT = { has_opinion = { target = PREV value > 149 } }
 					AND = {
@@ -1133,7 +1153,7 @@ scripted_diplomatic_actions = {
 					}
 					AND = {
 						ROOT = { has_opinion = { target = PREV value > 49 } }
-						PREV = { has_volunteers_amount_from = { tag = ROOT count > 0 } }
+						has_volunteers_amount_from = { tag = ROOT count > 0 }
 					}
 					AND = {
 						ROOT = { has_opinion = { target = PREV value > 49 } }
@@ -1141,44 +1161,44 @@ scripted_diplomatic_actions = {
 					}
 					AND = {
 						ROOT = { has_idea = NATO_member }
-						PREV = { has_idea = NATO_member }
+						has_idea = NATO_member
 					}
 					AND = {
 						ROOT = { has_idea = EU_member }
-						PREV = { has_idea = EU_member }
+						has_idea = EU_member
 					}
 					ROOT = { is_in_faction_with = PREV }
-					PREV = { has_war_together_with = ROOT }
+					has_war_together_with = ROOT
 					AND = {
 						ROOT = { original_tag = USA }
-						PREV = { has_idea = Major_Non_NATO_Ally }
+						has_idea = Major_Non_NATO_Ally
 					}
 					AND = {
 						ROOT = { original_tag = USA }
-						PREV = { has_idea = NATO_member }
+						has_idea = NATO_member
 					}
 					AND = {
 						ROOT = { original_tag = ENG }
-						PREV = { has_dynamic_modifier = { modifier = Commonwealth_member_modifier } }
+						has_dynamic_modifier = { modifier = Commonwealth_member_modifier }
 					}
 					AND = {
-						PREV = { original_tag = ENG }
+						original_tag = ENG
 						ROOT = { has_dynamic_modifier = { modifier = Commonwealth_member_modifier } }
 					}
 					AND = {
 						ROOT = { original_tag = CHI }
-						PREV = { has_idea = sco_member }
+						has_idea = sco_member
 					}
 					AND = {
 						ROOT = { original_tag = CHI }
-						PREV = { has_idea = sco_member_mil }
+						has_idea = sco_member_mil
 					}
 					AND = {
-						PREV = { original_tag = CHI }
+						original_tag = CHI
 						ROOT = { has_idea = sco_member }
 					}
 					AND = {
-						PREV = { original_tag = CHI }
+						original_tag = CHI
 						ROOT = { has_idea = sco_member_mil }
 					}
 				}
@@ -1188,15 +1208,13 @@ scripted_diplomatic_actions = {
 				add = -100
 				OR = {
 					ROOT = { has_opinion = { target = PREV value < 150 } }
-					PREV = { has_war_with = ROOT }
-					PREV = { is_justifying_wargoal_against = ROOT }
-					PREV = { has_wargoal_against = ROOT }
+					has_war_with = ROOT
+					is_justifying_wargoal_against = ROOT
+					has_wargoal_against = ROOT
 					AND = {
 						ROOT = { is_in_faction = yes }
-						PREV = {
-							is_in_faction = yes
-							NOT = { is_in_faction_with = ROOT }
-						}
+						is_in_faction = yes
+						NOT = { is_in_faction_with = ROOT }
 					}
 				}
 			}
@@ -1397,9 +1415,19 @@ scripted_diplomatic_actions = {
 			log = "[GetDateText]: [Root.GetName]: diplomatic action complete_effect revoke_civ_gnss_access"
 			ROOT = {
 				remove_from_array = { array = ROOT.GNSS_civ_treaty_array value = PREV.id }
-				remove_from_array = { array = PREV.GNSS_civ_access_array value = ROOT.id }
-				remove_from_array = { array = PREV.GNSS_civ_access_system_idx_array value = ROOT.var_GNSS_civ_system_idx }
 				PREV = {
+					set_temp_variable = { temp_GNSS_civ_access_break = 0 }
+					for_each_loop = {
+						array = GNSS_civ_access_array
+						value = v
+						index = i
+						break = temp_GNSS_civ_access_break
+						if = {
+							limit = { check_variable = { v = ROOT.id } }
+							remove_from_array = { array = GNSS_civ_access_array index = i }
+							set_temp_variable = { temp_GNSS_civ_access_break = 1 }
+						}
+					}
 					add_access_GNSS_civ_vars = yes
 				}
 
@@ -1409,7 +1437,7 @@ scripted_diplomatic_actions = {
 			ROOT = { country_event = satellites.9 }
 		}
 		reject_effect = {
-			log = "[GetDateText]: [Root.GetName]: diplomatic action reject_effect offer_civ_gnss_access"
+			log = "[GetDateText]: [Root.GetName]: diplomatic action reject_effect revoke_civ_gnss_access"
 			ROOT = {
 				set_country_flag = { flag = recently_revoke_civ_gnss_access_@PREV days = 180 value = 1 }
 			}
@@ -1433,7 +1461,7 @@ scripted_diplomatic_actions = {
 					}
 					AND = {
 						ROOT = { has_opinion = { target = PREV value > 49 } }
-						PREV = { has_volunteers_amount_from = { tag = ROOT count > 0 } }
+						has_volunteers_amount_from = { tag = ROOT count > 0 }
 					}
 					AND = {
 						ROOT = { has_opinion = { target = PREV value > 49 } }
@@ -1441,44 +1469,44 @@ scripted_diplomatic_actions = {
 					}
 					AND = {
 						ROOT = { has_idea = NATO_member }
-						PREV = { has_idea = NATO_member }
+						has_idea = NATO_member
 					}
 					AND = {
 						ROOT = { has_idea = EU_member }
-						PREV = { has_idea = EU_member }
+						has_idea = EU_member
 					}
 					ROOT = { is_in_faction_with = PREV }
-					PREV = { has_war_together_with = ROOT }
+					has_war_together_with = ROOT
 					AND = {
 						ROOT = { original_tag = USA }
-						PREV = { has_idea = Major_Non_NATO_Ally }
+						has_idea = Major_Non_NATO_Ally
 					}
 					AND = {
 						ROOT = { original_tag = USA }
-						PREV = { has_idea = NATO_member }
+						has_idea = NATO_member
 					}
 					AND = {
 						ROOT = { original_tag = ENG }
-						PREV = { has_dynamic_modifier = { modifier = Commonwealth_member_modifier } }
+						has_dynamic_modifier = { modifier = Commonwealth_member_modifier }
 					}
 					AND = {
-						PREV = { original_tag = ENG }
+						original_tag = ENG
 						ROOT = { has_dynamic_modifier = { modifier = Commonwealth_member_modifier } }
 					}
 					AND = {
 						ROOT = { original_tag = CHI }
-						PREV = { has_idea = sco_member }
+						has_idea = sco_member
 					}
 					AND = {
 						ROOT = { original_tag = CHI }
-						PREV = { has_idea = sco_member_mil }
+						has_idea = sco_member_mil
 					}
 					AND = {
-						PREV = { original_tag = CHI }
+						original_tag = CHI
 						ROOT = { has_idea = sco_member }
 					}
 					AND = {
-						PREV = { original_tag = CHI }
+						original_tag = CHI
 						ROOT = { has_idea = sco_member_mil }
 					}
 				}
@@ -1488,15 +1516,13 @@ scripted_diplomatic_actions = {
 				add = 400
 				OR = {
 					ROOT = { has_opinion = { target = PREV value < 150 } }
-					PREV = { has_war_with = ROOT }
-					PREV = { is_justifying_wargoal_against = ROOT }
-					PREV = { has_wargoal_against = ROOT }
+					has_war_with = ROOT
+					is_justifying_wargoal_against = ROOT
+					has_wargoal_against = ROOT
 					AND = {
 						ROOT = { is_in_faction = yes }
-						PREV = {
-							is_in_faction = yes
-							NOT = { is_in_faction_with = ROOT }
-						}
+						is_in_faction = yes
+						NOT = { is_in_faction_with = ROOT }
 					}
 				}
 			}
@@ -1565,7 +1591,7 @@ scripted_diplomatic_actions = {
 				clear_variable = pending_request_mil_com_access
 
 				# Do Not Instant Revoke
-				set_country_flag = { flag = recently_accepted_mil_com_@PREV value = 1 days = 180 }
+				set_country_flag = { flag = recently_accepted_mil_com_@PREV value = 1 days = 270 }
 			}
 			THIS = { country_event = satellites.9 }
 			ROOT = { country_event = satellites.9 }
@@ -1576,6 +1602,9 @@ scripted_diplomatic_actions = {
 				clear_variable = pending_request_mil_com_access
 				set_country_flag = { flag = recently_rejected_request_mil_com_access_@PREV value = 1 days = 270 }
 			}
+			THIS = {
+				set_country_flag = { flag = recently_rejected_request_mil_com_access_@ROOT value = 1 days = 270 }
+			}
 		}
 
 		#### AI SECTION ###
@@ -1583,7 +1612,7 @@ scripted_diplomatic_actions = {
 			base = 0
 			modifier = {
 				# Offer/request to allied and friendly nations
-				add = 100
+				add = 30
 				OR = {
 					ROOT = { has_opinion = { target = PREV value > 149 } }
 					AND = {
@@ -1596,7 +1625,7 @@ scripted_diplomatic_actions = {
 					}
 					AND = {
 						ROOT = { has_opinion = { target = PREV value > 49 } }
-						PREV = { has_volunteers_amount_from = { tag = ROOT count > 0 } }
+						has_volunteers_amount_from = { tag = ROOT count > 0 }
 					}
 					AND = {
 						ROOT = { has_opinion = { target = PREV value > 49 } }
@@ -1604,44 +1633,44 @@ scripted_diplomatic_actions = {
 					}
 					AND = {
 						ROOT = { has_idea = NATO_member }
-						PREV = { has_idea = NATO_member }
+						has_idea = NATO_member
 					}
 					AND = {
 						ROOT = { has_idea = EU_member }
-						PREV = { has_idea = EU_member }
+						has_idea = EU_member
 					}
 					ROOT = { is_in_faction_with = PREV }
-					PREV = { has_war_together_with = ROOT }
+					has_war_together_with = ROOT
 					AND = {
 						ROOT = { original_tag = USA }
-						PREV = { has_idea = Major_Non_NATO_Ally }
+						has_idea = Major_Non_NATO_Ally
 					}
 					AND = {
 						ROOT = { original_tag = USA }
-						PREV = { has_idea = NATO_member }
+						has_idea = NATO_member
 					}
 					AND = {
 						ROOT = { original_tag = ENG }
-						PREV = { has_dynamic_modifier = { modifier = Commonwealth_member_modifier } }
+						has_dynamic_modifier = { modifier = Commonwealth_member_modifier }
 					}
 					AND = {
-						PREV = { original_tag = ENG }
+						original_tag = ENG
 						ROOT = { has_dynamic_modifier = { modifier = Commonwealth_member_modifier } }
 					}
 					AND = {
 						ROOT = { original_tag = CHI }
-						PREV = { has_idea = sco_member }
+						has_idea = sco_member
 					}
 					AND = {
 						ROOT = { original_tag = CHI }
-						PREV = { has_idea = sco_member_mil }
+						has_idea = sco_member_mil
 					}
 					AND = {
-						PREV = { original_tag = CHI }
+						original_tag = CHI
 						ROOT = { has_idea = sco_member }
 					}
 					AND = {
-						PREV = { original_tag = CHI }
+						original_tag = CHI
 						ROOT = { has_idea = sco_member_mil }
 					}
 				}
@@ -1651,15 +1680,13 @@ scripted_diplomatic_actions = {
 				add = -100
 				OR = {
 					ROOT = { has_opinion = { target = PREV value < 150 } }
-					PREV = { has_war_with = ROOT }
-					PREV = { is_justifying_wargoal_against = ROOT }
-					PREV = { has_wargoal_against = ROOT }
+					has_war_with = ROOT
+					is_justifying_wargoal_against = ROOT
+					has_wargoal_against = ROOT
 					AND = {
 						ROOT = { is_in_faction = yes }
-						PREV = {
-							is_in_faction = yes
-							NOT = { is_in_faction_with = ROOT }
-						}
+						is_in_faction = yes
+						NOT = { is_in_faction_with = ROOT }
 					}
 				}
 			}
@@ -1677,6 +1704,10 @@ scripted_diplomatic_actions = {
 					ROOT = { NOT = { check_variable = { pending_request_mil_com_access = 0 } } }
 					ROOT = { has_country_flag = recently_rejected_request_mil_com_access_@PREV }
 				}
+			}
+			modifier = {
+				factor = 0
+				has_country_flag = MD_auto_reject_satellite_access
 			}
 		}
 		ai_acceptance = {
@@ -1865,7 +1896,7 @@ scripted_diplomatic_actions = {
 				clear_variable = pending_offer_mil_com_access
 
 				# Do Not Instant Revoke
-				set_country_flag = { flag = recently_accepted_mil_com_@PREV value = 1 days = 180 }
+				set_country_flag = { flag = recently_accepted_mil_com_@PREV value = 1 days = 270 }
 			}
 			THIS = { country_event = satellites.9 }
 			ROOT = { country_event = satellites.9 }
@@ -1876,6 +1907,9 @@ scripted_diplomatic_actions = {
 				clear_variable = pending_offer_mil_com_access
 				set_country_flag = { flag = recently_rejected_offer_mil_com_access_@PREV value = 1 days = 270 }
 			}
+			THIS = {
+				set_country_flag = { flag = recently_rejected_offer_mil_com_access_@ROOT value = 1 days = 270 }
+			}
 		}
 
 		#### AI SECTION ###
@@ -1883,7 +1917,7 @@ scripted_diplomatic_actions = {
 			base = 0
 			modifier = {
 				# Offer/request to allied and friendly nations
-				add = 100
+				add = 30
 				OR = {
 					ROOT = { has_opinion = { target = PREV value > 149 } }
 					AND = {
@@ -1896,7 +1930,7 @@ scripted_diplomatic_actions = {
 					}
 					AND = {
 						ROOT = { has_opinion = { target = PREV value > 49 } }
-						PREV = { has_volunteers_amount_from = { tag = ROOT count > 0 } }
+						has_volunteers_amount_from = { tag = ROOT count > 0 }
 					}
 					AND = {
 						ROOT = { has_opinion = { target = PREV value > 49 } }
@@ -1904,44 +1938,44 @@ scripted_diplomatic_actions = {
 					}
 					AND = {
 						ROOT = { has_idea = NATO_member }
-						PREV = { has_idea = NATO_member }
+						has_idea = NATO_member
 					}
 					AND = {
 						ROOT = { has_idea = EU_member }
-						PREV = { has_idea = EU_member }
+						has_idea = EU_member
 					}
 					ROOT = { is_in_faction_with = PREV }
-					PREV = { has_war_together_with = ROOT }
+					has_war_together_with = ROOT
 					AND = {
 						ROOT = { original_tag = USA }
-						PREV = { has_idea = Major_Non_NATO_Ally }
+						has_idea = Major_Non_NATO_Ally
 					}
 					AND = {
 						ROOT = { original_tag = USA }
-						PREV = { has_idea = NATO_member }
+						has_idea = NATO_member
 					}
 					AND = {
 						ROOT = { original_tag = ENG }
-						PREV = { has_dynamic_modifier = { modifier = Commonwealth_member_modifier } }
+						has_dynamic_modifier = { modifier = Commonwealth_member_modifier }
 					}
 					AND = {
-						PREV = { original_tag = ENG }
+						original_tag = ENG
 						ROOT = { has_dynamic_modifier = { modifier = Commonwealth_member_modifier } }
 					}
 					AND = {
 						ROOT = { original_tag = CHI }
-						PREV = { has_idea = sco_member }
+						has_idea = sco_member
 					}
 					AND = {
 						ROOT = { original_tag = CHI }
-						PREV = { has_idea = sco_member_mil }
+						has_idea = sco_member_mil
 					}
 					AND = {
-						PREV = { original_tag = CHI }
+						original_tag = CHI
 						ROOT = { has_idea = sco_member }
 					}
 					AND = {
-						PREV = { original_tag = CHI }
+						original_tag = CHI
 						ROOT = { has_idea = sco_member_mil }
 					}
 				}
@@ -1951,15 +1985,13 @@ scripted_diplomatic_actions = {
 				add = -100
 				OR = {
 					ROOT = { has_opinion = { target = PREV value < 150 } }
-					PREV = { has_war_with = ROOT }
-					PREV = { is_justifying_wargoal_against = ROOT }
-					PREV = { has_wargoal_against = ROOT }
+					has_war_with = ROOT
+					is_justifying_wargoal_against = ROOT
+					has_wargoal_against = ROOT
 					AND = {
 						ROOT = { is_in_faction = yes }
-						PREV = {
-							is_in_faction = yes
-							NOT = { is_in_faction_with = ROOT }
-						}
+						is_in_faction = yes
+						NOT = { is_in_faction_with = ROOT }
 					}
 				}
 			}
@@ -2173,7 +2205,7 @@ scripted_diplomatic_actions = {
 			ROOT = { country_event = satellites.9 }
 		}
 		reject_effect = {
-			log = "[GetDateText]: [Root.GetName]: diplomatic action reject_effect offer_mil_com_access"
+			log = "[GetDateText]: [Root.GetName]: diplomatic action reject_effect revoke_mil_com_access"
 			ROOT = {
 				set_country_flag = { flag = recently_revoke_mil_com_access_@PREV days = 180 value = 1 }
 			}
@@ -2196,7 +2228,7 @@ scripted_diplomatic_actions = {
 					}
 					AND = {
 						ROOT = { has_opinion = { target = PREV value > 49 } }
-						PREV = { has_volunteers_amount_from = { tag = ROOT count > 0 } }
+						has_volunteers_amount_from = { tag = ROOT count > 0 }
 					}
 					AND = {
 						ROOT = { has_opinion = { target = PREV value > 49 } }
@@ -2204,44 +2236,44 @@ scripted_diplomatic_actions = {
 					}
 					AND = {
 						ROOT = { has_idea = NATO_member }
-						PREV = { has_idea = NATO_member }
+						has_idea = NATO_member
 					}
 					AND = {
 						ROOT = { has_idea = EU_member }
-						PREV = { has_idea = EU_member }
+						has_idea = EU_member
 					}
 					ROOT = { is_in_faction_with = PREV }
-					PREV = { has_war_together_with = ROOT }
+					has_war_together_with = ROOT
 					AND = {
 						ROOT = { original_tag = USA }
-						PREV = { has_idea = Major_Non_NATO_Ally }
+						has_idea = Major_Non_NATO_Ally
 					}
 					AND = {
 						ROOT = { original_tag = USA }
-						PREV = { has_idea = NATO_member }
+						has_idea = NATO_member
 					}
 					AND = {
 						ROOT = { original_tag = ENG }
-						PREV = { has_dynamic_modifier = { modifier = Commonwealth_member_modifier } }
+						has_dynamic_modifier = { modifier = Commonwealth_member_modifier }
 					}
 					AND = {
-						PREV = { original_tag = ENG }
+						original_tag = ENG
 						ROOT = { has_dynamic_modifier = { modifier = Commonwealth_member_modifier } }
 					}
 					AND = {
 						ROOT = { original_tag = CHI }
-						PREV = { has_idea = sco_member }
+						has_idea = sco_member
 					}
 					AND = {
 						ROOT = { original_tag = CHI }
-						PREV = { has_idea = sco_member_mil }
+						has_idea = sco_member_mil
 					}
 					AND = {
-						PREV = { original_tag = CHI }
+						original_tag = CHI
 						ROOT = { has_idea = sco_member }
 					}
 					AND = {
-						PREV = { original_tag = CHI }
+						original_tag = CHI
 						ROOT = { has_idea = sco_member_mil }
 					}
 				}
@@ -2251,15 +2283,13 @@ scripted_diplomatic_actions = {
 				add = 400
 				OR = {
 					ROOT = { has_opinion = { target = PREV value < 150 } }
-					PREV = { has_war_with = ROOT }
-					PREV = { is_justifying_wargoal_against = ROOT }
-					PREV = { has_wargoal_against = ROOT }
+					has_war_with = ROOT
+					is_justifying_wargoal_against = ROOT
+					has_wargoal_against = ROOT
 					AND = {
 						ROOT = { is_in_faction = yes }
-						PREV = {
-							is_in_faction = yes
-							NOT = { is_in_faction_with = ROOT }
-						}
+						is_in_faction = yes
+						NOT = { is_in_faction_with = ROOT }
 					}
 				}
 			}
@@ -2329,7 +2359,7 @@ scripted_diplomatic_actions = {
 				add_access_COM_civ_vars = yes
 				clear_variable = pending_request_civ_com_access
 
-				set_country_flag = { flag = recently_accepted_mil_com_@PREV days = 180 value = 1 }
+				set_country_flag = { flag = recently_accepted_civ_com_@PREV value = 1 days = 270 }
 			}
 			THIS = { country_event = satellites.9 }
 			ROOT = { country_event = satellites.9 }
@@ -2340,6 +2370,9 @@ scripted_diplomatic_actions = {
 				clear_variable = pending_request_civ_com_access
 				set_country_flag = { flag = recently_rejected_request_civ_com_access_@PREV value = 1 days = 270 }
 			}
+			THIS = {
+				set_country_flag = { flag = recently_rejected_request_civ_com_access_@ROOT value = 1 days = 270 }
+			}
 		}
 
 		#### AI SECTION ###
@@ -2347,7 +2380,7 @@ scripted_diplomatic_actions = {
 			base = 0
 			modifier = {
 				# Offer/request to allied and friendly nations
-				add = 100
+				add = 30
 				OR = {
 					ROOT = { has_opinion = { target = PREV value > 149 } }
 					AND = {
@@ -2360,7 +2393,7 @@ scripted_diplomatic_actions = {
 					}
 					AND = {
 						ROOT = { has_opinion = { target = PREV value > 49 } }
-						PREV = { has_volunteers_amount_from = { tag = ROOT count > 0 } }
+						has_volunteers_amount_from = { tag = ROOT count > 0 }
 					}
 					AND = {
 						ROOT = { has_opinion = { target = PREV value > 49 } }
@@ -2368,44 +2401,44 @@ scripted_diplomatic_actions = {
 					}
 					AND = {
 						ROOT = { has_idea = NATO_member }
-						PREV = { has_idea = NATO_member }
+						has_idea = NATO_member
 					}
 					AND = {
 						ROOT = { has_idea = EU_member }
-						PREV = { has_idea = EU_member }
+						has_idea = EU_member
 					}
 					ROOT = { is_in_faction_with = PREV }
-					PREV = { has_war_together_with = ROOT }
+					has_war_together_with = ROOT
 					AND = {
 						ROOT = { original_tag = USA }
-						PREV = { has_idea = Major_Non_NATO_Ally }
+						has_idea = Major_Non_NATO_Ally
 					}
 					AND = {
 						ROOT = { original_tag = USA }
-						PREV = { has_idea = NATO_member }
+						has_idea = NATO_member
 					}
 					AND = {
 						ROOT = { original_tag = ENG }
-						PREV = { has_dynamic_modifier = { modifier = Commonwealth_member_modifier } }
+						has_dynamic_modifier = { modifier = Commonwealth_member_modifier }
 					}
 					AND = {
-						PREV = { original_tag = ENG }
+						original_tag = ENG
 						ROOT = { has_dynamic_modifier = { modifier = Commonwealth_member_modifier } }
 					}
 					AND = {
 						ROOT = { original_tag = CHI }
-						PREV = { has_idea = sco_member }
+						has_idea = sco_member
 					}
 					AND = {
 						ROOT = { original_tag = CHI }
-						PREV = { has_idea = sco_member_mil }
+						has_idea = sco_member_mil
 					}
 					AND = {
-						PREV = { original_tag = CHI }
+						original_tag = CHI
 						ROOT = { has_idea = sco_member }
 					}
 					AND = {
-						PREV = { original_tag = CHI }
+						original_tag = CHI
 						ROOT = { has_idea = sco_member_mil }
 					}
 				}
@@ -2415,15 +2448,13 @@ scripted_diplomatic_actions = {
 				add = -100
 				OR = {
 					ROOT = { has_opinion = { target = PREV value < 150 } }
-					PREV = { has_war_with = ROOT }
-					PREV = { is_justifying_wargoal_against = ROOT }
-					PREV = { has_wargoal_against = ROOT }
+					has_war_with = ROOT
+					is_justifying_wargoal_against = ROOT
+					has_wargoal_against = ROOT
 					AND = {
 						ROOT = { is_in_faction = yes }
-						PREV = {
-							is_in_faction = yes
-							NOT = { is_in_faction_with = ROOT }
-						}
+						is_in_faction = yes
+						NOT = { is_in_faction_with = ROOT }
 					}
 				}
 			}
@@ -2441,6 +2472,10 @@ scripted_diplomatic_actions = {
 					ROOT = { NOT = { check_variable = { pending_request_civ_com_access = 0 } } }
 					ROOT = { has_country_flag = recently_rejected_request_civ_com_access_@PREV }
 				}
+			}
+			modifier = {
+				factor = 0
+				has_country_flag = MD_auto_reject_satellite_access
 			}
 		}
 		ai_acceptance = {
@@ -2625,7 +2660,7 @@ scripted_diplomatic_actions = {
 				}
 				clear_variable = pending_offer_civ_com_access
 
-				set_country_flag = { flag = recently_accepted_mil_com_@PREV days = 180 value = 1 }
+				set_country_flag = { flag = recently_accepted_civ_com_@PREV value = 1 days = 270 }
 			}
 			THIS = { country_event = satellites.9 }
 			ROOT = { country_event = satellites.9 }
@@ -2636,13 +2671,16 @@ scripted_diplomatic_actions = {
 				clear_variable = pending_offer_civ_com_access
 				set_country_flag = { flag = recently_rejected_offer_civ_com_access_@PREV value = 1 days = 270 }
 			}
+			THIS = {
+				set_country_flag = { flag = recently_rejected_offer_civ_com_access_@ROOT value = 1 days = 270 }
+			}
 		}
 		#### AI SECTION ###
 		ai_desire = {
 			base = 0
 			modifier = {
 				# Offer/request to allied and friendly nations
-				add = 100
+				add = 30
 				OR = {
 					ROOT = { has_opinion = { target = PREV value > 149 } }
 					AND = {
@@ -2655,7 +2693,7 @@ scripted_diplomatic_actions = {
 					}
 					AND = {
 						ROOT = { has_opinion = { target = PREV value > 49 } }
-						PREV = { has_volunteers_amount_from = { tag = ROOT count > 0 } }
+						has_volunteers_amount_from = { tag = ROOT count > 0 }
 					}
 					AND = {
 						ROOT = { has_opinion = { target = PREV value > 49 } }
@@ -2663,44 +2701,44 @@ scripted_diplomatic_actions = {
 					}
 					AND = {
 						ROOT = { has_idea = NATO_member }
-						PREV = { has_idea = NATO_member }
+						has_idea = NATO_member
 					}
 					AND = {
 						ROOT = { has_idea = EU_member }
-						PREV = { has_idea = EU_member }
+						has_idea = EU_member
 					}
 					ROOT = { is_in_faction_with = PREV }
-					PREV = { has_war_together_with = ROOT }
+					has_war_together_with = ROOT
 					AND = {
 						ROOT = { original_tag = USA }
-						PREV = { has_idea = Major_Non_NATO_Ally }
+						has_idea = Major_Non_NATO_Ally
 					}
 					AND = {
 						ROOT = { original_tag = USA }
-						PREV = { has_idea = NATO_member }
+						has_idea = NATO_member
 					}
 					AND = {
 						ROOT = { original_tag = ENG }
-						PREV = { has_dynamic_modifier = { modifier = Commonwealth_member_modifier } }
+						has_dynamic_modifier = { modifier = Commonwealth_member_modifier }
 					}
 					AND = {
-						PREV = { original_tag = ENG }
+						original_tag = ENG
 						ROOT = { has_dynamic_modifier = { modifier = Commonwealth_member_modifier } }
 					}
 					AND = {
 						ROOT = { original_tag = CHI }
-						PREV = { has_idea = sco_member }
+						has_idea = sco_member
 					}
 					AND = {
 						ROOT = { original_tag = CHI }
-						PREV = { has_idea = sco_member_mil }
+						has_idea = sco_member_mil
 					}
 					AND = {
-						PREV = { original_tag = CHI }
+						original_tag = CHI
 						ROOT = { has_idea = sco_member }
 					}
 					AND = {
-						PREV = { original_tag = CHI }
+						original_tag = CHI
 						ROOT = { has_idea = sco_member_mil }
 					}
 				}
@@ -2710,15 +2748,13 @@ scripted_diplomatic_actions = {
 				add = -100
 				OR = {
 					ROOT = { has_opinion = { target = PREV value < 150 } }
-					PREV = { has_war_with = ROOT }
-					PREV = { is_justifying_wargoal_against = ROOT }
-					PREV = { has_wargoal_against = ROOT }
+					has_war_with = ROOT
+					is_justifying_wargoal_against = ROOT
+					has_wargoal_against = ROOT
 					AND = {
 						ROOT = { is_in_faction = yes }
-						PREV = {
-							is_in_faction = yes
-							NOT = { is_in_faction_with = ROOT }
-						}
+						is_in_faction = yes
+						NOT = { is_in_faction_with = ROOT }
 					}
 				}
 			}
@@ -2933,7 +2969,7 @@ scripted_diplomatic_actions = {
 			ROOT = { country_event = satellites.9 }
 		}
 		reject_effect = {
-			log = "[GetDateText]: [Root.GetName]: diplomatic action reject_effect offer_civ_com_access"
+			log = "[GetDateText]: [Root.GetName]: diplomatic action reject_effect revoke_civ_com_access"
 			ROOT = {
 				set_country_flag = { flag = recently_revoke_civ_com_access_@PREV days = 180 value = 1 }
 			}
@@ -2956,7 +2992,7 @@ scripted_diplomatic_actions = {
 					}
 					AND = {
 						ROOT = { has_opinion = { target = PREV value > 49 } }
-						PREV = { has_volunteers_amount_from = { tag = ROOT count > 0 } }
+						has_volunteers_amount_from = { tag = ROOT count > 0 }
 					}
 					AND = {
 						ROOT = { has_opinion = { target = PREV value > 49 } }
@@ -2964,44 +3000,44 @@ scripted_diplomatic_actions = {
 					}
 					AND = {
 						ROOT = { has_idea = NATO_member }
-						PREV = { has_idea = NATO_member }
+						has_idea = NATO_member
 					}
 					AND = {
 						ROOT = { has_idea = EU_member }
-						PREV = { has_idea = EU_member }
+						has_idea = EU_member
 					}
 					ROOT = { is_in_faction_with = PREV }
-					PREV = { has_war_together_with = ROOT }
+					has_war_together_with = ROOT
 					AND = {
 						ROOT = { original_tag = USA }
-						PREV = { has_idea = Major_Non_NATO_Ally }
+						has_idea = Major_Non_NATO_Ally
 					}
 					AND = {
 						ROOT = { original_tag = USA }
-						PREV = { has_idea = NATO_member }
+						has_idea = NATO_member
 					}
 					AND = {
 						ROOT = { original_tag = ENG }
-						PREV = { has_dynamic_modifier = { modifier = Commonwealth_member_modifier } }
+						has_dynamic_modifier = { modifier = Commonwealth_member_modifier }
 					}
 					AND = {
-						PREV = { original_tag = ENG }
+						original_tag = ENG
 						ROOT = { has_dynamic_modifier = { modifier = Commonwealth_member_modifier } }
 					}
 					AND = {
 						ROOT = { original_tag = CHI }
-						PREV = { has_idea = sco_member }
+						has_idea = sco_member
 					}
 					AND = {
 						ROOT = { original_tag = CHI }
-						PREV = { has_idea = sco_member_mil }
+						has_idea = sco_member_mil
 					}
 					AND = {
-						PREV = { original_tag = CHI }
+						original_tag = CHI
 						ROOT = { has_idea = sco_member }
 					}
 					AND = {
-						PREV = { original_tag = CHI }
+						original_tag = CHI
 						ROOT = { has_idea = sco_member_mil }
 					}
 				}
@@ -3011,15 +3047,13 @@ scripted_diplomatic_actions = {
 				add = 400
 				OR = {
 					ROOT = { has_opinion = { target = PREV value < 150 } }
-					PREV = { has_war_with = ROOT }
-					PREV = { is_justifying_wargoal_against = ROOT }
-					PREV = { has_wargoal_against = ROOT }
+					has_war_with = ROOT
+					is_justifying_wargoal_against = ROOT
+					has_wargoal_against = ROOT
 					AND = {
 						ROOT = { is_in_faction = yes }
-						PREV = {
-							is_in_faction = yes
-							NOT = { is_in_faction_with = ROOT }
-						}
+						is_in_faction = yes
+						NOT = { is_in_faction_with = ROOT }
 					}
 				}
 			}
@@ -3038,8 +3072,8 @@ scripted_diplomatic_actions = {
 			modifier = {
 				factor = 0
 				OR = {
-					ROOT = { has_country_flag = recently_accepted_mil_com_@PREV }
-					THIS = { has_country_flag = recently_accepted_mil_com_@ROOT }
+					ROOT = { has_country_flag = recently_accepted_civ_com_@PREV }
+					THIS = { has_country_flag = recently_accepted_civ_com_@ROOT }
 				}
 			}
 		}
@@ -3091,7 +3125,7 @@ scripted_diplomatic_actions = {
 				add_access_SPY_mil_vars = yes
 				clear_variable = pending_request_mil_spy_access
 
-				set_country_flag = { flag = recently_accepted_mil_spy_@PREV value = 1 days = 180 }
+				set_country_flag = { flag = recently_accepted_mil_spy_@PREV value = 1 days = 270 }
 			}
 			THIS = { country_event = satellites.9 }
 			ROOT = { country_event = satellites.9 }
@@ -3102,6 +3136,9 @@ scripted_diplomatic_actions = {
 				clear_variable = pending_request_mil_spy_access
 				set_country_flag = { flag = recently_rejected_request_mil_spy_access_@PREV value = 1 days = 270 }
 			}
+			THIS = {
+				set_country_flag = { flag = recently_rejected_request_mil_spy_access_@ROOT value = 1 days = 270 }
+			}
 		}
 
 		#### AI SECTION ###
@@ -3109,7 +3146,7 @@ scripted_diplomatic_actions = {
 			base = 0
 			modifier = {
 				# Offer/request to allied and friendly nations
-				add = 100
+				add = 30
 				OR = {
 					ROOT = { has_opinion = { target = PREV value > 149 } }
 					AND = {
@@ -3122,7 +3159,7 @@ scripted_diplomatic_actions = {
 					}
 					AND = {
 						ROOT = { has_opinion = { target = PREV value > 49 } }
-						PREV = { has_volunteers_amount_from = { tag = ROOT count > 0 } }
+						has_volunteers_amount_from = { tag = ROOT count > 0 }
 					}
 					AND = {
 						ROOT = { has_opinion = { target = PREV value > 49 } }
@@ -3130,44 +3167,44 @@ scripted_diplomatic_actions = {
 					}
 					AND = {
 						ROOT = { has_idea = NATO_member }
-						PREV = { has_idea = NATO_member }
+						has_idea = NATO_member
 					}
 					AND = {
 						ROOT = { has_idea = EU_member }
-						PREV = { has_idea = EU_member }
+						has_idea = EU_member
 					}
 					ROOT = { is_in_faction_with = PREV }
-					PREV = { has_war_together_with = ROOT }
+					has_war_together_with = ROOT
 					AND = {
 						ROOT = { original_tag = USA }
-						PREV = { has_idea = Major_Non_NATO_Ally }
+						has_idea = Major_Non_NATO_Ally
 					}
 					AND = {
 						ROOT = { original_tag = USA }
-						PREV = { has_idea = NATO_member }
+						has_idea = NATO_member
 					}
 					AND = {
 						ROOT = { original_tag = ENG }
-						PREV = { has_dynamic_modifier = { modifier = Commonwealth_member_modifier } }
+						has_dynamic_modifier = { modifier = Commonwealth_member_modifier }
 					}
 					AND = {
-						PREV = { original_tag = ENG }
+						original_tag = ENG
 						ROOT = { has_dynamic_modifier = { modifier = Commonwealth_member_modifier } }
 					}
 					AND = {
 						ROOT = { original_tag = CHI }
-						PREV = { has_idea = sco_member }
+						has_idea = sco_member
 					}
 					AND = {
 						ROOT = { original_tag = CHI }
-						PREV = { has_idea = sco_member_mil }
+						has_idea = sco_member_mil
 					}
 					AND = {
-						PREV = { original_tag = CHI }
+						original_tag = CHI
 						ROOT = { has_idea = sco_member }
 					}
 					AND = {
-						PREV = { original_tag = CHI }
+						original_tag = CHI
 						ROOT = { has_idea = sco_member_mil }
 					}
 				}
@@ -3177,15 +3214,13 @@ scripted_diplomatic_actions = {
 				add = -100
 				OR = {
 					ROOT = { has_opinion = { target = PREV value < 150 } }
-					PREV = { has_war_with = ROOT }
-					PREV = { is_justifying_wargoal_against = ROOT }
-					PREV = { has_wargoal_against = ROOT }
+					has_war_with = ROOT
+					is_justifying_wargoal_against = ROOT
+					has_wargoal_against = ROOT
 					AND = {
 						ROOT = { is_in_faction = yes }
-						PREV = {
-							is_in_faction = yes
-							NOT = { is_in_faction_with = ROOT }
-						}
+						is_in_faction = yes
+						NOT = { is_in_faction_with = ROOT }
 					}
 				}
 			}
@@ -3203,6 +3238,10 @@ scripted_diplomatic_actions = {
 					ROOT = { NOT = { check_variable = { pending_request_mil_spy_access = 0 } } }
 					ROOT = { has_country_flag = recently_rejected_request_mil_spy_access_@PREV }
 				}
+			}
+			modifier = {
+				factor = 0
+				has_country_flag = MD_auto_reject_satellite_access
 			}
 		}
 		ai_acceptance = {
@@ -3390,7 +3429,7 @@ scripted_diplomatic_actions = {
 				}
 				clear_variable = pending_offer_mil_spy_access
 
-				set_country_flag = { flag = recently_accepted_mil_spy_@PREV value = 1 days = 180 }
+				set_country_flag = { flag = recently_accepted_mil_spy_@PREV value = 1 days = 270 }
 			}
 			THIS = { country_event = satellites.9 }
 			ROOT = { country_event = satellites.9 }
@@ -3401,6 +3440,9 @@ scripted_diplomatic_actions = {
 				clear_variable = pending_offer_mil_spy_access
 				set_country_flag = { flag = recently_rejected_offer_mil_spy_access_@PREV value = 1 days = 270 }
 			}
+			THIS = {
+				set_country_flag = { flag = recently_rejected_offer_mil_spy_access_@ROOT value = 1 days = 270 }
+			}
 		}
 
 		#### AI SECTION ###
@@ -3408,7 +3450,7 @@ scripted_diplomatic_actions = {
 			base = 0
 			modifier = {
 				# Offer/request to allied and friendly nations
-				add = 100
+				add = 30
 				OR = {
 					ROOT = { has_opinion = { target = PREV value > 149 } }
 					AND = {
@@ -3421,7 +3463,7 @@ scripted_diplomatic_actions = {
 					}
 					AND = {
 						ROOT = { has_opinion = { target = PREV value > 49 } }
-						PREV = { has_volunteers_amount_from = { tag = ROOT count > 0 } }
+						has_volunteers_amount_from = { tag = ROOT count > 0 }
 					}
 					AND = {
 						ROOT = { has_opinion = { target = PREV value > 49 } }
@@ -3429,44 +3471,44 @@ scripted_diplomatic_actions = {
 					}
 					AND = {
 						ROOT = { has_idea = NATO_member }
-						PREV = { has_idea = NATO_member }
+						has_idea = NATO_member
 					}
 					AND = {
 						ROOT = { has_idea = EU_member }
-						PREV = { has_idea = EU_member }
+						has_idea = EU_member
 					}
 					ROOT = { is_in_faction_with = PREV }
-					PREV = { has_war_together_with = ROOT }
+					has_war_together_with = ROOT
 					AND = {
 						ROOT = { original_tag = USA }
-						PREV = { has_idea = Major_Non_NATO_Ally }
+						has_idea = Major_Non_NATO_Ally
 					}
 					AND = {
 						ROOT = { original_tag = USA }
-						PREV = { has_idea = NATO_member }
+						has_idea = NATO_member
 					}
 					AND = {
 						ROOT = { original_tag = ENG }
-						PREV = { has_dynamic_modifier = { modifier = Commonwealth_member_modifier } }
+						has_dynamic_modifier = { modifier = Commonwealth_member_modifier }
 					}
 					AND = {
-						PREV = { original_tag = ENG }
+						original_tag = ENG
 						ROOT = { has_dynamic_modifier = { modifier = Commonwealth_member_modifier } }
 					}
 					AND = {
 						ROOT = { original_tag = CHI }
-						PREV = { has_idea = sco_member }
+						has_idea = sco_member
 					}
 					AND = {
 						ROOT = { original_tag = CHI }
-						PREV = { has_idea = sco_member_mil }
+						has_idea = sco_member_mil
 					}
 					AND = {
-						PREV = { original_tag = CHI }
+						original_tag = CHI
 						ROOT = { has_idea = sco_member }
 					}
 					AND = {
-						PREV = { original_tag = CHI }
+						original_tag = CHI
 						ROOT = { has_idea = sco_member_mil }
 					}
 				}
@@ -3476,15 +3518,13 @@ scripted_diplomatic_actions = {
 				add = -100
 				OR = {
 					ROOT = { has_opinion = { target = PREV value < 150 } }
-					PREV = { has_war_with = ROOT }
-					PREV = { is_justifying_wargoal_against = ROOT }
-					PREV = { has_wargoal_against = ROOT }
+					has_war_with = ROOT
+					is_justifying_wargoal_against = ROOT
+					has_wargoal_against = ROOT
 					AND = {
 						ROOT = { is_in_faction = yes }
-						PREV = {
-							is_in_faction = yes
-							NOT = { is_in_faction_with = ROOT }
-						}
+						is_in_faction = yes
+						NOT = { is_in_faction_with = ROOT }
 					}
 				}
 			}
@@ -3698,7 +3738,7 @@ scripted_diplomatic_actions = {
 			ROOT = { country_event = satellites.9 }
 		}
 		reject_effect = {
-			log = "[GetDateText]: [Root.GetName]: diplomatic action reject_effect offer_mil_spy_access"
+			log = "[GetDateText]: [Root.GetName]: diplomatic action reject_effect revoke_mil_spy_access"
 			ROOT = {
 				set_country_flag = {
 					flag = recently_revoke_mil_spy_access_@PREV
@@ -3726,7 +3766,7 @@ scripted_diplomatic_actions = {
 					}
 					AND = {
 						ROOT = { has_opinion = { target = PREV value > 49 } }
-						PREV = { has_volunteers_amount_from = { tag = ROOT count > 0 } }
+						has_volunteers_amount_from = { tag = ROOT count > 0 }
 					}
 					AND = {
 						ROOT = { has_opinion = { target = PREV value > 49 } }
@@ -3734,44 +3774,44 @@ scripted_diplomatic_actions = {
 					}
 					AND = {
 						ROOT = { has_idea = NATO_member }
-						PREV = { has_idea = NATO_member }
+						has_idea = NATO_member
 					}
 					AND = {
 						ROOT = { has_idea = EU_member }
-						PREV = { has_idea = EU_member }
+						has_idea = EU_member
 					}
 					ROOT = { is_in_faction_with = PREV }
-					PREV = { has_war_together_with = ROOT }
+					has_war_together_with = ROOT
 					AND = {
 						ROOT = { original_tag = USA }
-						PREV = { has_idea = Major_Non_NATO_Ally }
+						has_idea = Major_Non_NATO_Ally
 					}
 					AND = {
 						ROOT = { original_tag = USA }
-						PREV = { has_idea = NATO_member }
+						has_idea = NATO_member
 					}
 					AND = {
 						ROOT = { original_tag = ENG }
-						PREV = { has_dynamic_modifier = { modifier = Commonwealth_member_modifier } }
+						has_dynamic_modifier = { modifier = Commonwealth_member_modifier }
 					}
 					AND = {
-						PREV = { original_tag = ENG }
+						original_tag = ENG
 						ROOT = { has_dynamic_modifier = { modifier = Commonwealth_member_modifier } }
 					}
 					AND = {
 						ROOT = { original_tag = CHI }
-						PREV = { has_idea = sco_member }
+						has_idea = sco_member
 					}
 					AND = {
 						ROOT = { original_tag = CHI }
-						PREV = { has_idea = sco_member_mil }
+						has_idea = sco_member_mil
 					}
 					AND = {
-						PREV = { original_tag = CHI }
+						original_tag = CHI
 						ROOT = { has_idea = sco_member }
 					}
 					AND = {
-						PREV = { original_tag = CHI }
+						original_tag = CHI
 						ROOT = { has_idea = sco_member_mil }
 					}
 				}
@@ -3781,15 +3821,13 @@ scripted_diplomatic_actions = {
 				add = 400
 				OR = {
 					ROOT = { has_opinion = { target = PREV value < 150 } }
-					PREV = { has_war_with = ROOT }
-					PREV = { is_justifying_wargoal_against = ROOT }
-					PREV = { has_wargoal_against = ROOT }
+					has_war_with = ROOT
+					is_justifying_wargoal_against = ROOT
+					has_wargoal_against = ROOT
 					AND = {
 						ROOT = { is_in_faction = yes }
-						PREV = {
-							is_in_faction = yes
-							NOT = { is_in_faction_with = ROOT }
-						}
+						is_in_faction = yes
+						NOT = { is_in_faction_with = ROOT }
 					}
 				}
 			}
@@ -3858,7 +3896,7 @@ scripted_diplomatic_actions = {
 				add_to_array = { array = SPY_civ_access_system_idx_array value = PREV.var_SPY_civ_system_idx }
 				add_access_SPY_civ_vars = yes
 				clear_variable = pending_request_civ_spy_access
-				set_country_flag = { flag = recently_accepted_civ_spy_@PREV value = 1 days = 180 }
+				set_country_flag = { flag = recently_accepted_civ_spy_@PREV value = 1 days = 270 }
 			}
 			THIS = { country_event = satellites.9 }
 			ROOT = { country_event = satellites.9 }
@@ -3869,6 +3907,9 @@ scripted_diplomatic_actions = {
 				clear_variable = pending_request_civ_spy_access
 				set_country_flag = { flag = recently_rejected_request_civ_spy_access_@PREV value = 1 days = 270 }
 			}
+			THIS = {
+				set_country_flag = { flag = recently_rejected_request_civ_spy_access_@ROOT value = 1 days = 270 }
+			}
 		}
 
 		#### AI SECTION ###
@@ -3876,7 +3917,7 @@ scripted_diplomatic_actions = {
 			base = 0
 			modifier = {
 				# Offer/request to allied and friendly nations
-				add = 100
+				add = 30
 				OR = {
 					ROOT = { has_opinion = { target = PREV value > 149 } }
 					AND = {
@@ -3889,7 +3930,7 @@ scripted_diplomatic_actions = {
 					}
 					AND = {
 						ROOT = { has_opinion = { target = PREV value > 49 } }
-						PREV = { has_volunteers_amount_from = { tag = ROOT count > 0 } }
+						has_volunteers_amount_from = { tag = ROOT count > 0 }
 					}
 					AND = {
 						ROOT = { has_opinion = { target = PREV value > 49 } }
@@ -3897,44 +3938,44 @@ scripted_diplomatic_actions = {
 					}
 					AND = {
 						ROOT = { has_idea = NATO_member }
-						PREV = { has_idea = NATO_member }
+						has_idea = NATO_member
 					}
 					AND = {
 						ROOT = { has_idea = EU_member }
-						PREV = { has_idea = EU_member }
+						has_idea = EU_member
 					}
 					ROOT = { is_in_faction_with = PREV }
-					PREV = { has_war_together_with = ROOT }
+					has_war_together_with = ROOT
 					AND = {
 						ROOT = { original_tag = USA }
-						PREV = { has_idea = Major_Non_NATO_Ally }
+						has_idea = Major_Non_NATO_Ally
 					}
 					AND = {
 						ROOT = { original_tag = USA }
-						PREV = { has_idea = NATO_member }
+						has_idea = NATO_member
 					}
 					AND = {
 						ROOT = { original_tag = ENG }
-						PREV = { has_dynamic_modifier = { modifier = Commonwealth_member_modifier } }
+						has_dynamic_modifier = { modifier = Commonwealth_member_modifier }
 					}
 					AND = {
-						PREV = { original_tag = ENG }
+						original_tag = ENG
 						ROOT = { has_dynamic_modifier = { modifier = Commonwealth_member_modifier } }
 					}
 					AND = {
 						ROOT = { original_tag = CHI }
-						PREV = { has_idea = sco_member }
+						has_idea = sco_member
 					}
 					AND = {
 						ROOT = { original_tag = CHI }
-						PREV = { has_idea = sco_member_mil }
+						has_idea = sco_member_mil
 					}
 					AND = {
-						PREV = { original_tag = CHI }
+						original_tag = CHI
 						ROOT = { has_idea = sco_member }
 					}
 					AND = {
-						PREV = { original_tag = CHI }
+						original_tag = CHI
 						ROOT = { has_idea = sco_member_mil }
 					}
 				}
@@ -3944,15 +3985,13 @@ scripted_diplomatic_actions = {
 				add = -100
 				OR = {
 					ROOT = { has_opinion = { target = PREV value < 150 } }
-					PREV = { has_war_with = ROOT }
-					PREV = { is_justifying_wargoal_against = ROOT }
-					PREV = { has_wargoal_against = ROOT }
+					has_war_with = ROOT
+					is_justifying_wargoal_against = ROOT
+					has_wargoal_against = ROOT
 					AND = {
 						ROOT = { is_in_faction = yes }
-						PREV = {
-							is_in_faction = yes
-							NOT = { is_in_faction_with = ROOT }
-						}
+						is_in_faction = yes
+						NOT = { is_in_faction_with = ROOT }
 					}
 				}
 			}
@@ -3970,6 +4009,10 @@ scripted_diplomatic_actions = {
 					ROOT = { NOT = { check_variable = { pending_request_civ_spy_access = 0 } } }
 					ROOT = { has_country_flag = recently_rejected_request_civ_spy_access_@PREV }
 				}
+			}
+			modifier = {
+				factor = 0
+				has_country_flag = MD_auto_reject_satellite_access
 			}
 		}
 		ai_acceptance = {
@@ -4154,7 +4197,7 @@ scripted_diplomatic_actions = {
 				PREV = { add_access_SPY_civ_vars = yes }
 				clear_variable = pending_offer_civ_spy_access
 
-				set_country_flag = { flag = recently_accepted_civ_spy_@PREV value = 1 days = 180 }
+				set_country_flag = { flag = recently_accepted_civ_spy_@PREV value = 1 days = 270 }
 			}
 			THIS = { country_event = satellites.9 }
 			ROOT = { country_event = satellites.9 }
@@ -4165,6 +4208,9 @@ scripted_diplomatic_actions = {
 				clear_variable = pending_offer_civ_spy_access
 				set_country_flag = { flag = recently_rejected_offer_civ_spy_access_@PREV value = 1 days = 270 }
 			}
+			THIS = {
+				set_country_flag = { flag = recently_rejected_offer_civ_spy_access_@ROOT value = 1 days = 270 }
+			}
 		}
 
 		#### AI SECTION ###
@@ -4172,7 +4218,7 @@ scripted_diplomatic_actions = {
 			base = 0
 			modifier = {
 				# Offer/request to allied and friendly nations
-				add = 100
+				add = 30
 				OR = {
 					ROOT = { has_opinion = { target = PREV value > 149 } }
 					AND = {
@@ -4185,7 +4231,7 @@ scripted_diplomatic_actions = {
 					}
 					AND = {
 						ROOT = { has_opinion = { target = PREV value > 49 } }
-						PREV = { has_volunteers_amount_from = { tag = ROOT count > 0 } }
+						has_volunteers_amount_from = { tag = ROOT count > 0 }
 					}
 					AND = {
 						ROOT = { has_opinion = { target = PREV value > 49 } }
@@ -4193,44 +4239,44 @@ scripted_diplomatic_actions = {
 					}
 					AND = {
 						ROOT = { has_idea = NATO_member }
-						PREV = { has_idea = NATO_member }
+						has_idea = NATO_member
 					}
 					AND = {
 						ROOT = { has_idea = EU_member }
-						PREV = { has_idea = EU_member }
+						has_idea = EU_member
 					}
 					ROOT = { is_in_faction_with = PREV }
-					PREV = { has_war_together_with = ROOT }
+					has_war_together_with = ROOT
 					AND = {
 						ROOT = { original_tag = USA }
-						PREV = { has_idea = Major_Non_NATO_Ally }
+						has_idea = Major_Non_NATO_Ally
 					}
 					AND = {
 						ROOT = { original_tag = USA }
-						PREV = { has_idea = NATO_member }
+						has_idea = NATO_member
 					}
 					AND = {
 						ROOT = { original_tag = ENG }
-						PREV = { has_dynamic_modifier = { modifier = Commonwealth_member_modifier } }
+						has_dynamic_modifier = { modifier = Commonwealth_member_modifier }
 					}
 					AND = {
-						PREV = { original_tag = ENG }
+						original_tag = ENG
 						ROOT = { has_dynamic_modifier = { modifier = Commonwealth_member_modifier } }
 					}
 					AND = {
 						ROOT = { original_tag = CHI }
-						PREV = { has_idea = sco_member }
+						has_idea = sco_member
 					}
 					AND = {
 						ROOT = { original_tag = CHI }
-						PREV = { has_idea = sco_member_mil }
+						has_idea = sco_member_mil
 					}
 					AND = {
-						PREV = { original_tag = CHI }
+						original_tag = CHI
 						ROOT = { has_idea = sco_member }
 					}
 					AND = {
-						PREV = { original_tag = CHI }
+						original_tag = CHI
 						ROOT = { has_idea = sco_member_mil }
 					}
 				}
@@ -4240,15 +4286,13 @@ scripted_diplomatic_actions = {
 				add = -100
 				OR = {
 					ROOT = { has_opinion = { target = PREV value < 150 } }
-					PREV = { has_war_with = ROOT }
-					PREV = { is_justifying_wargoal_against = ROOT }
-					PREV = { has_wargoal_against = ROOT }
+					has_war_with = ROOT
+					is_justifying_wargoal_against = ROOT
+					has_wargoal_against = ROOT
 					AND = {
 						ROOT = { is_in_faction = yes }
-						PREV = {
-							is_in_faction = yes
-							NOT = { is_in_faction_with = ROOT }
-						}
+						is_in_faction = yes
+						NOT = { is_in_faction_with = ROOT }
 					}
 				}
 			}
@@ -4460,7 +4504,7 @@ scripted_diplomatic_actions = {
 			ROOT = { country_event = satellites.9 }
 		}
 		reject_effect = {
-			log = "[GetDateText]: [Root.GetName]: diplomatic action reject_effect offer_civ_spy_access"
+			log = "[GetDateText]: [Root.GetName]: diplomatic action reject_effect revoke_civ_spy_access"
 			ROOT = {
 				set_country_flag = { flag = recently_revoke_civ_spy_access_@PREV days = 180 value = 1 }
 			}
@@ -4483,7 +4527,7 @@ scripted_diplomatic_actions = {
 					}
 					AND = {
 						ROOT = { has_opinion = { target = PREV value > 49 } }
-						PREV = { has_volunteers_amount_from = { tag = ROOT count > 0 } }
+						has_volunteers_amount_from = { tag = ROOT count > 0 }
 					}
 					AND = {
 						ROOT = { has_opinion = { target = PREV value > 49 } }
@@ -4491,44 +4535,44 @@ scripted_diplomatic_actions = {
 					}
 					AND = {
 						ROOT = { has_idea = NATO_member }
-						PREV = { has_idea = NATO_member }
+						has_idea = NATO_member
 					}
 					AND = {
 						ROOT = { has_idea = EU_member }
-						PREV = { has_idea = EU_member }
+						has_idea = EU_member
 					}
 					ROOT = { is_in_faction_with = PREV }
-					PREV = { has_war_together_with = ROOT }
+					has_war_together_with = ROOT
 					AND = {
 						ROOT = { original_tag = USA }
-						PREV = { has_idea = Major_Non_NATO_Ally }
+						has_idea = Major_Non_NATO_Ally
 					}
 					AND = {
 						ROOT = { original_tag = USA }
-						PREV = { has_idea = NATO_member }
+						has_idea = NATO_member
 					}
 					AND = {
 						ROOT = { original_tag = ENG }
-						PREV = { has_dynamic_modifier = { modifier = Commonwealth_member_modifier } }
+						has_dynamic_modifier = { modifier = Commonwealth_member_modifier }
 					}
 					AND = {
-						PREV = { original_tag = ENG }
+						original_tag = ENG
 						ROOT = { has_dynamic_modifier = { modifier = Commonwealth_member_modifier } }
 					}
 					AND = {
 						ROOT = { original_tag = CHI }
-						PREV = { has_idea = sco_member }
+						has_idea = sco_member
 					}
 					AND = {
 						ROOT = { original_tag = CHI }
-						PREV = { has_idea = sco_member_mil }
+						has_idea = sco_member_mil
 					}
 					AND = {
-						PREV = { original_tag = CHI }
+						original_tag = CHI
 						ROOT = { has_idea = sco_member }
 					}
 					AND = {
-						PREV = { original_tag = CHI }
+						original_tag = CHI
 						ROOT = { has_idea = sco_member_mil }
 					}
 				}
@@ -4538,15 +4582,13 @@ scripted_diplomatic_actions = {
 				add = 400
 				OR = {
 					ROOT = { has_opinion = { target = PREV value < 150 } }
-					PREV = { has_war_with = ROOT }
-					PREV = { is_justifying_wargoal_against = ROOT }
-					PREV = { has_wargoal_against = ROOT }
+					has_war_with = ROOT
+					is_justifying_wargoal_against = ROOT
+					has_wargoal_against = ROOT
 					AND = {
 						ROOT = { is_in_faction = yes }
-						PREV = {
-							is_in_faction = yes
-							NOT = { is_in_faction_with = ROOT }
-						}
+						is_in_faction = yes
+						NOT = { is_in_faction_with = ROOT }
 					}
 				}
 			}

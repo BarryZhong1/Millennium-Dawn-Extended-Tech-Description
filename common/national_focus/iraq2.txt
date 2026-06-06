@@ -310,7 +310,6 @@ focus_tree = {
 				add_opinion_modifier = { target = IRQ modifier = major_improve_trade }
 			}
 			set_temp_variable = { percent_change = 1.5 }
-			set_temp_variable = { tag_index = IRQ }
 			set_temp_variable = { influence_target = SYR }
 			change_influence_percentage = yes
 		}
@@ -569,7 +568,6 @@ focus_tree = {
 				add_opinion_modifier = { target = IRQ modifier = major_improve_trade }
 			}
 			set_temp_variable = { percent_change = 1.5 }
-			set_temp_variable = { tag_index = IRQ }
 			set_temp_variable = { influence_target = SYR }
 			change_influence_percentage = yes
 			add_opinion_modifier = { target = PER modifier = major_improve_trade }
@@ -577,7 +575,6 @@ focus_tree = {
 				add_opinion_modifier = { target = IRQ modifier = major_improve_trade }
 			}
 			set_temp_variable = { percent_change = 1.5 }
-			set_temp_variable = { tag_index = IRQ }
 			set_temp_variable = { influence_target = PER }
 			change_influence_percentage = yes
 		}
@@ -771,19 +768,15 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus IRQ_exporting_the_resistance_economy"
 			set_temp_variable = { percent_change = 2 }
-			set_temp_variable = { tag_index = IRQ }
 			set_temp_variable = { influence_target = SYR }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 2 }
-			set_temp_variable = { tag_index = IRQ }
 			set_temp_variable = { influence_target = LEB }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 2 }
-			set_temp_variable = { tag_index = IRQ }
 			set_temp_variable = { influence_target = YEM }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 1 }
-			set_temp_variable = { tag_index = IRQ }
 			set_temp_variable = { influence_target = PER }
 			change_influence_percentage = yes
 			set_temp_variable = { treasury_change = -30 }
@@ -1350,9 +1343,7 @@ focus_tree = {
 			two_random_dockyards = yes
 			every_country = {
 				limit = {
-					OR = {
-						has_idea = idea_gcc_member_state
-					}
+					has_idea = idea_gcc_member_state
 				}
 				add_opinion_modifier = {
 					target = IRQ
@@ -1836,7 +1827,6 @@ focus_tree = {
 			}
 			newline = yes
 			set_temp_variable = { percent_change = 3 }
-			set_temp_variable = { tag_index = IRQ }
 			set_temp_variable = { influence_target = SYR }
 			change_influence_percentage = yes
 			newline = yes
@@ -3321,8 +3311,6 @@ focus_tree = {
 						owner = ROOT
 						count = 1
 					}
-				}
-				capital_scope = {
 					create_unit = {
 						division = "name = \"2nd. Al-Quds Brigade 'Saraya'\" division_template = \"Al-Quds Brigade\" start_experience_factor = 1.0"
 						owner = ROOT
@@ -3720,11 +3708,9 @@ focus_tree = {
 		}
 		available = {
 			nationalist_fascist_are_in_power = yes
-			OR = {
-				NOT = {
-					country_exists = KUR
-					country_exists = PUK
-				}
+			NOT = {
+				country_exists = KUR
+				country_exists = PUK
 			}
 			NOT = {
 				OR = {
@@ -3939,8 +3925,7 @@ focus_tree = {
 				NOT = {
 					is_subject_of = IRQ
 				}
-			}
-			SYR = {
+
 				NOT = {
 					has_civil_war = yes
 				}
@@ -4262,8 +4247,7 @@ focus_tree = {
 				NOT = {
 					is_subject_of = IRQ
 				}
-			}
-			EGY = {
+
 				NOT = {
 					has_civil_war = yes
 				}
@@ -4452,8 +4436,7 @@ focus_tree = {
 				NOT = {
 					is_subject_of = IRQ
 				}
-			}
-			PAL = {
+
 				NOT = {
 					has_civil_war = yes
 				}
@@ -4603,8 +4586,7 @@ focus_tree = {
 				}
 				BHR = {
 					set_country_flag = is_IRAQ
-				}
-				BHR = {
+
 					set_temp_variable = { party_index = 21 }
 					set_temp_variable = { party_popularity_increase = 0.35 }
 					set_temp_variable = { temp_outlook_increase = 0.35 }
@@ -4908,10 +4890,10 @@ focus_tree = {
 			}
 			newline = yes
 			add_tech_bonus = {
-				name = CAT_bm
+				name = CAT_OLV
 				bonus = 0.2
 				uses = 1
-				category = CAT_bm
+				category = CAT_OLV
 			}
 		}
 	}
@@ -6369,7 +6351,6 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus IRQ_kurdish_cooperation"
 			set_temp_variable = { percent_change = 4 }
-			set_temp_variable = { tag_index = IRQ }
 			set_temp_variable = { influence_target = KUR }
 			change_influence_percentage = yes
 			newline = yes
@@ -6689,7 +6670,6 @@ focus_tree = {
 			change_influence_percentage = yes
 			newline = yes
 			set_temp_variable = { percent_change = 3 }
-			set_temp_variable = { tag_index = IRQ }
 			set_temp_variable = { influence_target = PER }
 			change_influence_percentage = yes
 		}
@@ -7699,21 +7679,16 @@ focus_tree = {
 				set_temp_variable = { IRQ_internet_station_cost = 0 }
 
 				while_loop_effect = {
-					break = temp_break
 					limit = { any_core_state = { internet_station < 1 } }
-					if = {
-						limit = { any_core_state = { internet_station < 1 } }
-						random_core_state = {
-							limit = { internet_station < 1 }
-							add_building_construction = {
-								type = internet_station
-								level = 1
-								instant_build = yes
-							}
-							add_to_temp_variable = { IRQ_internet_station_cost = -3 }
+					random_core_state = {
+						limit = { internet_station < 1 }
+						add_building_construction = {
+							type = internet_station
+							level = 1
+							instant_build = yes
 						}
+						add_to_temp_variable = { IRQ_internet_station_cost = -3 }
 					}
-					else = { set_temp_variable = { temp_break = 1 } }
 				}
 				hidden_effect = {
 					set_temp_variable = { treasury_change = IRQ_internet_station_cost }
@@ -8057,7 +8032,6 @@ focus_tree = {
 				change_permanent_investment_target = yes
 				newline = yes
 				set_temp_variable = { percent_change = 2.5 }
-				set_temp_variable = { tag_index = IRQ }
 				set_temp_variable = { influence_target = VIE }
 				change_influence_percentage = yes
 			}
@@ -8712,8 +8686,6 @@ focus_tree = {
 				every_country = {
 					limit = { OR = { has_idea = shia has_idea = sunni has_idea = ibadi has_idea = sufi_islam } }
 					set_temp_variable = { percent_change = 2.5 }
-					set_temp_variable = { tag_index = IRQ }
-					set_temp_variable = { influence_target = THIS }
 					change_influence_percentage = yes
 				}
 			}
@@ -10071,12 +10043,10 @@ focus_tree = {
 			change_influence_percentage = yes
 			newline = yes
 			set_temp_variable = { percent_change = 2 }
-			set_temp_variable = { tag_index = IRQ }
 			set_temp_variable = { influence_target = JOR }
 			change_influence_percentage = yes
 			newline = yes
 			set_temp_variable = { percent_change = 2 }
-			set_temp_variable = { tag_index = IRQ }
 			set_temp_variable = { influence_target = HEZ }
 			change_influence_percentage = yes
 		}
@@ -10166,7 +10136,6 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus IRQ_status_quo_najaf"
 			set_temp_variable = { percent_change = 3 }
-			set_temp_variable = { tag_index = IRQ }
 			set_temp_variable = { influence_target = PER }
 			change_influence_percentage = yes
 			newline = yes
@@ -10930,7 +10899,6 @@ focus_tree = {
 				}
 				newline = yes
 				set_temp_variable = { percent_change = 4.5 }
-				set_temp_variable = { tag_index = IRQ }
 				set_temp_variable = { influence_target = AFG }
 				change_influence_percentage = yes
 				newline = yes
@@ -10962,7 +10930,6 @@ focus_tree = {
 				}
 				newline = yes
 				set_temp_variable = { percent_change = 4.5 }
-				set_temp_variable = { tag_index = IRQ }
 				set_temp_variable = { influence_target = TAL }
 				change_influence_percentage = yes
 				newline = yes
@@ -11029,7 +10996,6 @@ focus_tree = {
 			}
 			newline = yes
 			set_temp_variable = { percent_change = 4.5 }
-			set_temp_variable = { tag_index = IRQ }
 			set_temp_variable = { influence_target = TUR }
 			change_influence_percentage = yes
 			newline = yes
@@ -11096,7 +11062,6 @@ focus_tree = {
 			}
 			newline = yes
 			set_temp_variable = { percent_change = 4.5 }
-			set_temp_variable = { tag_index = IRQ }
 			set_temp_variable = { influence_target = PAL }
 			change_influence_percentage = yes
 			newline = yes
@@ -11435,7 +11400,6 @@ focus_tree = {
 				}
 				newline = yes
 				set_temp_variable = { percent_change = 1.5 }
-				set_temp_variable = { tag_index = IRQ }
 				set_temp_variable = { influence_target = PER }
 				change_influence_percentage = yes
 			}
@@ -11977,7 +11941,6 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus IRQ_commands_in_syria"
 			set_temp_variable = { percent_change = 1.5 }
-			set_temp_variable = { tag_index = IRQ }
 			set_temp_variable = { influence_target = SYR }
 			change_influence_percentage = yes
 			newline = yes
@@ -12342,11 +12305,9 @@ focus_tree = {
 		cost = 2
 		search_filters = { FOCUS_FILTER_POLITICAL }
 		available = {
-			OR = {
-				NOT = {
-					nationalist_fascist_are_in_power = yes
-					has_country_flag = IRQ_interim_government
-				}
+			NOT = {
+				nationalist_fascist_are_in_power = yes
+				has_country_flag = IRQ_interim_government
 			}
 		}
 		completion_reward = {
@@ -12656,47 +12617,38 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus IRQ_arab_friends"
 			set_temp_variable = { percent_change = 1.5 }
-			set_temp_variable = { tag_index = IRQ }
 			set_temp_variable = { influence_target = SYR }
 			change_influence_percentage = yes
 			newline = yes
 			set_temp_variable = { percent_change = 1.5 }
-			set_temp_variable = { tag_index = IRQ }
 			set_temp_variable = { influence_target = JOR }
 			change_influence_percentage = yes
 			newline = yes
 			set_temp_variable = { percent_change = 1.5 }
-			set_temp_variable = { tag_index = IRQ }
 			set_temp_variable = { influence_target = KUW }
 			change_influence_percentage = yes
 			newline = yes
 			set_temp_variable = { percent_change = 1.5 }
-			set_temp_variable = { tag_index = IRQ }
 			set_temp_variable = { influence_target = PAL }
 			change_influence_percentage = yes
 			newline = yes
 			set_temp_variable = { percent_change = 1.5 }
-			set_temp_variable = { tag_index = IRQ }
 			set_temp_variable = { influence_target = BHR }
 			change_influence_percentage = yes
 			newline = yes
 			set_temp_variable = { percent_change = 1.5 }
-			set_temp_variable = { tag_index = IRQ }
 			set_temp_variable = { influence_target = QAT }
 			change_influence_percentage = yes
 			newline = yes
 			set_temp_variable = { percent_change = 1.5 }
-			set_temp_variable = { tag_index = IRQ }
 			set_temp_variable = { influence_target = UAE }
 			change_influence_percentage = yes
 			newline = yes
 			set_temp_variable = { percent_change = 1.5 }
-			set_temp_variable = { tag_index = IRQ }
 			set_temp_variable = { influence_target = OMA }
 			change_influence_percentage = yes
 			newline = yes
 			set_temp_variable = { percent_change = 1.5 }
-			set_temp_variable = { tag_index = IRQ }
 			set_temp_variable = { influence_target = YEM }
 			change_influence_percentage = yes
 		}
@@ -12729,7 +12681,6 @@ focus_tree = {
 				}
 			}
 			set_temp_variable = { percent_change = 3.5 }
-			set_temp_variable = { tag_index = IRQ }
 			set_temp_variable = { influence_target = SAU }
 			change_influence_percentage = yes
 			newline = yes

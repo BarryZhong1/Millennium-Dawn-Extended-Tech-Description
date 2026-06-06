@@ -95,9 +95,8 @@ class IdeaStandardizer(BaseStandardizer):
                 props[prop_name] = line
             elif prop_name in _BLOCK_PROPS:
                 block, next_i = extract_block(block_lines, i)
-                if (
-                    prop_name in _ALWAYS_NO_FILTERED
-                    and self.is_performance_hurting_block(block, prop_name)
+                if prop_name in _ALWAYS_NO_FILTERED and self.is_always_no_block(
+                    block, prop_name
                 ):
                     i = next_i
                     continue
@@ -154,10 +153,18 @@ class IdeaStandardizer(BaseStandardizer):
 
         return False
 
-    def is_performance_hurting_block(
-        self, block_lines: List[str], property_name: str
-    ) -> bool:
-        """Check if a block matches performance-hurting patterns to be removed"""
+    def is_always_no_block(self, block_lines: List[str], property_name: str) -> bool:
+        """Check if a block contains only `always = no` — a redundant default.
+
+        Removed as code cleanup, NOT a performance optimization.
+        `allowed` is checked once at game start/load (default = always allowed)
+        and is bypassed by add_ideas — so `allowed = { always = no }` is dead code.
+        Tradeoff: `has_available_idea_with_trait` builds a list of every idea that
+        passes `allowed`, then evaluates their `available` triggers at runtime.
+        Keeping `allowed = { always = no }` keeps ideas out of that list (fewer
+        runtime checks). Removing it lets more ideas into the pool (more runtime
+        checks). MD does not use that trigger, so the tradeoff is moot here.
+        """
         if property_name not in _ALWAYS_NO_FILTERED:
             return False
         return any(
@@ -177,24 +184,21 @@ class IdeaStandardizer(BaseStandardizer):
 
         for i, line in enumerate(block_lines):
             stripped = line.strip()
-            # Skip blank lines
             if not stripped:
                 continue
-            # Skip commented-out code (but keep inline comments)
+            # Skip commented-out code, but keep a leading comment (i == 0).
             if stripped.startswith("#") and i > 0:
                 continue
 
-            # Calculate indentation based on brace depth
             line_indent = base_indent + ("\t" * depth)
 
-            # If this is a closing brace, decrease depth first
+            # A closing brace dedents before it is emitted.
             if stripped == "}":
                 depth = max(0, depth - 1)
                 line_indent = base_indent + ("\t" * depth)
 
             compacted.append(line_indent + stripped)
 
-            # Update depth based on braces in this line
             if i == 0 and "{" in stripped:
                 depth += 1
             elif i > 0 and stripped.endswith("{"):

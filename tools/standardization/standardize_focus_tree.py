@@ -95,6 +95,12 @@ _COMMENTED_EMPTY_BLOCK_RE = re.compile(
     r"^#\s*(available|bypass|cancel|visible|mutually_exclusive)\s*=\s*\{\s*\}$"
 )
 
+# Matches an existing log line so we can correct a wrong focus ID or missing prefix.
+# Handles [Root.GetName] / [This.GetName] (any capitalisation) and an optional "Focus " prefix.
+_LOG_FOCUS_RE = re.compile(
+    r'(log\s*=\s*"\[GetDateText\]:\s*\[[Rr]oot\.[Gg]etName\]:\s*)(?:Focus\s+)?(\w+)(")'
+)
+
 
 def extract_focus_properties(focus_lines):
     """Extract properties from focus block lines"""
@@ -232,9 +238,15 @@ def compact_block(block_lines):
     return compacted
 
 
+def _fix_log_id(line: str, focus_id: str) -> str:
+    """Correct a log line: ensure 'Focus ' prefix and replace the focus ID."""
+    return _LOG_FOCUS_RE.sub(rf"\g<1>Focus {focus_id}\g<3>", line)
+
+
 def emit_effect_block_with_log(lines, effect_block, focus_id):
     """Append an effect block to `lines`, injecting a log line as the first
-    statement if the block doesn't already contain one."""
+    statement if the block doesn't already contain one, or correcting a
+    mismatched focus ID / missing 'Focus ' prefix in an existing log line."""
     if not effect_block:
         return
     if focus_id and not any("log =" in line for line in effect_block):
@@ -265,6 +277,12 @@ def emit_effect_block_with_log(lines, effect_block, focus_id):
                 if i == 0 and "{" in line:
                     new_block.append(log_line)
             effect_block = new_block
+    elif focus_id:
+        # Log line already exists — correct wrong ID or missing 'Focus ' prefix.
+        effect_block = [
+            _fix_log_id(line, focus_id) if "log =" in line else line
+            for line in effect_block
+        ]
     for line in compact_block(effect_block[:]):
         lines.append(line)
     lines.append("")
@@ -275,7 +293,6 @@ def format_focus_offset_block(block_lines):
     lines = []
     lines.append("\t\toffset = {")
 
-    # Extract properties
     x_val = ""
     y_val = ""
     trigger_lines = []
@@ -299,7 +316,6 @@ def format_focus_offset_block(block_lines):
 
         i += 1
 
-    # Format output with 3-tab indentation for properties
     if x_val:
         lines.append(f"\t\t\t{x_val}")
     if y_val:
@@ -528,7 +544,6 @@ def format_shortcut_block(block_lines):
     lines = []
     lines.append("\tshortcut = {")
 
-    # Extract properties
     name = ""
     target = ""
     scroll_wheel_factor = ""
@@ -555,7 +570,6 @@ def format_shortcut_block(block_lines):
 
         i += 1
 
-    # Format output
     if name:
         lines.append(f"\t\t{name}")
     if target:
@@ -581,7 +595,6 @@ def format_inlay_window_block(block_lines):
     lines = []
     lines.append("\tinlay_window = {")
 
-    # Extract properties
     window_id = ""
     position_lines = []
     override_position_lines = []
@@ -608,7 +621,6 @@ def format_inlay_window_block(block_lines):
 
         i += 1
 
-    # Format output
     if window_id:
         lines.append(f"\t\t{window_id}")
 
@@ -635,7 +647,6 @@ def format_offset_block(block_lines):
     lines = []
     lines.append("\toffset = {")
 
-    # Extract properties
     x_val = ""
     y_val = ""
     trigger_lines = []
@@ -659,7 +670,6 @@ def format_offset_block(block_lines):
 
         i += 1
 
-    # Format output
     if x_val:
         lines.append(f"\t\t{x_val}")
     if y_val:
@@ -714,7 +724,6 @@ def format_initial_show_position_block(block_lines):
     lines = []
     lines.append("\tinitial_show_position = {")
 
-    # Extract properties
     x_val = ""
     y_val = ""
     focus_val = ""
@@ -754,18 +763,15 @@ def format_initial_show_position_block(block_lines):
 
         i += 1
 
-    # Format output - prefer single line if simple
+    # Prefer single-line output when the block has only simple coordinates.
     if focus_val and not x_val and not y_val and not offset_lines and not other_lines:
-        # Simple case: just focus reference
         return [f"\tinitial_show_position = {{ {focus_val} }}"]
 
     if x_val and y_val and not focus_val and not offset_lines and not other_lines:
-        # Simple case: just x/y coordinates
         x_num = x_val.split("=", 1)[1].strip()
         y_num = y_val.split("=", 1)[1].strip()
         return [f"\tinitial_show_position = {{ x = {x_num} y = {y_num} }}"]
 
-    # Multi-line format
     if x_val:
         lines.append(f"\t\t{x_val}")
     if y_val:

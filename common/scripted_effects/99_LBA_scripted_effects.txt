@@ -925,11 +925,12 @@ libya_update_casablanca_accords_acceptance = {
 			add_to_variable = { Morocco_acceptance = 40 }
 		}
 		else_if = {
-			limit = { has_country_flag = libya_western_sahara_peace_plan_independence }
-			add_to_variable = { Morocco_acceptance = 5 }
-		}
-		else_if = {
-			limit = { has_country_flag = libya_western_sahara_peace_plan_mauritania }
+			limit = {
+				OR = {
+					has_country_flag = libya_western_sahara_peace_plan_independence
+					has_country_flag = libya_western_sahara_peace_plan_mauritania
+				}
+			}
 			add_to_variable = { Morocco_acceptance = 5 }
 		}
 		if = {
@@ -1235,15 +1236,13 @@ libya_update_casablanca_accords_acceptance = {
 	}
 	else = {
 		if = {
-			limit = { has_country_flag = libya_western_sahara_peace_plan_annexation }
-			add_to_variable = { Mauritania_acceptance = 50 }
-		}
-		else_if = {
-			limit = { has_country_flag = libya_western_sahara_peace_plan_autonomy }
-			add_to_variable = { Mauritania_acceptance = 50 }
-		}
-		else_if = {
-			limit = { has_country_flag = libya_western_sahara_peace_plan_independence }
+			limit = {
+				OR = {
+					has_country_flag = libya_western_sahara_peace_plan_annexation
+					has_country_flag = libya_western_sahara_peace_plan_autonomy
+					has_country_flag = libya_western_sahara_peace_plan_independence
+				}
+			}
 			add_to_variable = { Mauritania_acceptance = 50 }
 		}
 		else_if = {
@@ -1850,8 +1849,8 @@ LBA_civil_war_cleanup_effect = {
 	add_state_core = 1101
 	set_capital = { state = 391 }
 	if = {
-		limit = { has_idea = Non_State_Actor }
-		remove_ideas = Non_State_Actor
+		limit = { has_idea = non_state_actor }
+		remove_ideas = non_state_actor
 	}
 	news_event = { id = LibyaNews.1 hours = 18 random_hours = 24 }
 }

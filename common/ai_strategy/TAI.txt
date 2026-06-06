@@ -16,10 +16,9 @@ TAI_we_focus_defense_on_main_island = {
 		country_exists = TAI
 		country_exists = CHI
 		NOT = {
-			AND = { #Failsafe for Taiwan to be proactive if Taiwan is at war with China and somehow much stronger than Chinese alliance
+			#Failsafe for Taiwan to be proactive if Taiwan is at war with China and somehow much stronger than Chinese alliance
 				has_war_with = CHI
 				enemies_strength_ratio < 0.5
-			}
 		}
 	}
 	abort_when_not_enabled = yes
@@ -65,9 +64,10 @@ TAI_construct_additional_microchips = {
 	allowed = { original_tag = TAI }
 	enable = {
 		num_of_available_civilian_factories > 15
-		check_variable = { microchip_plant_total < 40 }
+		check_variable = { microchip_plant_total < 50 }
 	}
 	abort_when_not_enabled = yes
 
-	ai_strategy = { type = building_target id = microchip_plant value = 125 }
+	ai_strategy = { type = build_building id = microchip_plant value = 50 }
+	ai_strategy = { type = building_target id = microchip_plant value = 150 }
 }

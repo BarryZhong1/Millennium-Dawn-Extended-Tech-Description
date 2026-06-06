@@ -1,4 +1,4 @@
-﻿focus_tree = {
+focus_tree = {
 	id = botswana_focus
 
 	country = {
@@ -843,13 +843,15 @@
 		available = {
 			NOT = { has_idea = BOT_ancestral_land_conflict }
 			country_exists = NAM
-			NAM = { owns_state = 282 }
-			NAM = { NOT = { is_subject_of = ROOT } }
+			NAM = {
+				owns_state = 282
+				NOT = { is_subject_of = ROOT }
+			}
 			OR = {
 				has_government = nationalist
 				custom_trigger_tooltip = {
 					tooltip = BOT_unite_bushmen_trigger_tt
-					is_in_array = { gov_coalition_array = 20 }
+					nationalist_right_wing_populists_are_in_coalition = yes
 				}
 			}
 		}
@@ -1351,12 +1353,9 @@
 							has_idea = BOT_house_of_chiefs_empowered
 						}
 					}
-					random_list = {
-						60 = {
-							start_civil_war_against_the_strongest_opposition = yes
-						}
-						40 = {
-						}
+					random = {
+						chance = 60
+						start_civil_war_against_the_strongest_opposition = yes
 					}
 				}
 				if = {
@@ -1366,12 +1365,9 @@
 							has_idea = BOT_house_of_chiefs_militarised
 						}
 					}
-					random_list = {
-						20 = {
-							start_civil_war_against_the_strongest_opposition = yes
-						}
-						80 = {
-						}
+					random = {
+						chance = 20
+						start_civil_war_against_the_strongest_opposition = yes
 					}
 				}
 			}
@@ -2905,16 +2901,8 @@
 				target = RAJ
 				modifier = declaration_of_friendship
 			}
-			RAJ = {
-				if = {
-					limit = { NOT = { is_in_array = { THIS.permanent_investment_targets = ROOT } } }
-					custom_effect_tooltip = add_to_investment_array_tooltip
-					add_to_array = { THIS.permanent_investment_targets = ROOT }
-				}
-				else = {
-					custom_effect_tooltip = add_to_investment_array_tooltip_already_in
-				}
-			}
+			set_temp_variable = { target_nation = RAJ }
+			change_permanent_investment_target = yes
 			BOT_boost_BDP_B = yes
 		}
 
@@ -2993,16 +2981,8 @@
 				target = USA
 				modifier = declaration_of_friendship
 			}
-			USA = {
-				if = {
-					limit = { NOT = { is_in_array = { THIS.permanent_investment_targets = ROOT } } }
-					custom_effect_tooltip = add_to_investment_array_tooltip
-					add_to_array = { THIS.permanent_investment_targets = ROOT }
-				}
-				else = {
-					custom_effect_tooltip = add_to_investment_array_tooltip_already_in
-				}
-			}
+			set_temp_variable = { target_nation = USA }
+			change_permanent_investment_target = yes
 			BOT_boost_BNF = yes
 		}
 
@@ -3080,16 +3060,8 @@
 				target = SAF
 				modifier = declaration_of_friendship
 			}
-			SAF = {
-				if = {
-					limit = { NOT = { is_in_array = { THIS.permanent_investment_targets = ROOT } } }
-					custom_effect_tooltip = add_to_investment_array_tooltip
-					add_to_array = { THIS.permanent_investment_targets = ROOT }
-				}
-				else = {
-					custom_effect_tooltip = add_to_investment_array_tooltip_already_in
-				}
-			}
+			set_temp_variable = { target_nation = SAF }
+			change_permanent_investment_target = yes
 			BOT_boost_BPP = yes
 		}
 

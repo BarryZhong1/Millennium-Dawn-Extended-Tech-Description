@@ -8,7 +8,7 @@ Afghanistan_domestic_decisions = {
 			always = no
 		}
 
-		Cost = 50
+		cost = 50
 
 		icon = GFX_decision_eng_trade_unions_support
 
@@ -42,7 +42,7 @@ Afghanistan_domestic_decisions = {
 			NOT = { has_country_flag = flag_time_afghanistan }
 		}
 
-		Cost = 150
+		cost = 150
 
 		icon = GFX_decision_eng_trade_unions_support
 
@@ -69,7 +69,7 @@ Afghanistan_domestic_decisions = {
 		}
 
 		days_remove = 10
-		Cost = 15
+		cost = 15
 
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision AFG_import_westernism"
@@ -114,7 +114,7 @@ Afghanistan_domestic_decisions = {
 			has_completed_focus = AFG_Atlanticism
 		}
 
-		Cost = 50
+		cost = 50
 
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision AFG_Join_nato_war"
@@ -188,9 +188,7 @@ Afghanistan_domestic_decisions = {
 				has_government = democratic
 			}
 			any_enemy_country = {
-				OR = {
-					has_war_with = USA
-				}
+				has_war_with = USA
 			}
 			USA = {
 				has_idea = NATO_member
@@ -202,7 +200,7 @@ Afghanistan_domestic_decisions = {
 			NOT = { has_idea = NATO_member }
 		}
 
-		Cost = 25
+		cost = 25
 
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision AFG_Request_nato_membership"
@@ -230,7 +228,7 @@ Afghanistan_domestic_decisions = {
 				}
 			}
 		}
-		Cost = 50
+		cost = 50
 		icon = GFX_decision_eng_trade_unions_support
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision AFG_Invite_Nahzat_e_Melli_ye_into_government"
@@ -279,7 +277,7 @@ Afghanistan_domestic_decisions = {
 				}
 			}
 		}
-		Cost = 50
+		cost = 50
 		icon = GFX_decision_eng_trade_unions_support
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision AFG_atta_installs_leadership"
@@ -2186,7 +2184,6 @@ Taliban_insurgency_category = {
 			AFG = {
 				set_temp_variable = { percent_change = 2 }
 				set_temp_variable = { tag_index = FROM.id }
-				set_temp_variable = { influence_target = AFG.id }
 				change_influence_percentage = yes
 				add_stability = 0.01
 				set_temp_variable = { taliban_strength_decrease = 5 }
@@ -2309,70 +2306,68 @@ Taliban_insurgency_category = {
 			}
 			custom_trigger_tooltip = {
 				tooltip = AFG_pakistan_border_more_than_two_fort_tt
-				AND = {
-					411 = {
-						any_province_building_level = {
-							province = {
-								id = 7519
-								id = 6209
-								id = 14129
-							}
-							building = bunker
-							level > 2
+				411 = {
+					any_province_building_level = {
+						province = {
+							id = 7519
+							id = 6209
+							id = 14129
 						}
+						building = bunker
+						level > 2
 					}
-					414 = {
-						any_province_building_level = {
-							province = {
-								id = 12831
-								id = 14686
-								id = 14687
-								id = 6114
-								id = 5082
-								id = 14688
-								id = 8090
-							}
-							building = bunker
-							level > 2
+				}
+				414 = {
+					any_province_building_level = {
+						province = {
+							id = 12831
+							id = 14686
+							id = 14687
+							id = 6114
+							id = 5082
+							id = 14688
+							id = 8090
 						}
+						building = bunker
+						level > 2
 					}
-					415 = {
-						any_province_building_level = {
-							province = {
-								id = 14690
-							}
-							building = bunker
-							level > 2
+				}
+				415 = {
+					any_province_building_level = {
+						province = {
+							id = 14690
 						}
+						building = bunker
+						level > 2
 					}
-					1152 = {
-						any_province_building_level = {
-							province = {
-								id = 2101
-								id = 4949
-								id = 5020
-							}
-							building = bunker
-							level > 2
+				}
+				1152 = {
+					any_province_building_level = {
+						province = {
+							id = 2101
+							id = 4949
+							id = 5020
 						}
+						building = bunker
+						level > 2
 					}
-					1153 = {
-						any_province_building_level = {
-							province = {
-								id = 14684
-							}
-							building = bunker
-							level > 2
+				}
+				1153 = {
+					any_province_building_level = {
+						province = {
+							id = 14684
 						}
+						building = bunker
+						level > 2
 					}
-					1154 = {
-						any_province_building_level = {
-							province = {
-								id = 10826
-							}
-							building = bunker
-							level > 2
+				}
+				1154 = {
+					any_province_building_level = {
+						province = {
+							id = 10826
 						}
+						building = bunker
+						level > 2
 					}
 				}
 			}
@@ -2533,8 +2528,8 @@ AFG_tal_insurgency_new = {
 				#Make the winner Afghanistan
 				drop_cosmetic_tag = yes
 				if = {
-					limit = { has_idea = Non_State_Actor }
-					remove_ideas = Non_State_Actor
+					limit = { has_idea = non_state_actor }
+					remove_ideas = non_state_actor
 				}
 				add_state_core = 409
 				add_state_core = 410

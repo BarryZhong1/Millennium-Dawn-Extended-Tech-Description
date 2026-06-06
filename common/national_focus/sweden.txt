@@ -1566,7 +1566,6 @@ focus_tree = {
 			add_to_variable = { SWE_V_pop_energy_use_multiplier = -0.05 tooltip = pop_energy_use_multiplier_tt }
 			newline = yes
 			set_temp_variable = { percent_change = 3 }
-			set_temp_variable = { tag_index = SWE }
 			set_temp_variable = { influence_target = HOL }
 			change_influence_percentage = yes
 
@@ -1618,7 +1617,6 @@ focus_tree = {
 			add_to_variable = { SWE_V_renewable_energy_gain_multiplier = 0.05 tooltip = renewable_energy_gain_multiplier_tt }
 			newline = yes
 			set_temp_variable = { percent_change = 3 }
-			set_temp_variable = { tag_index = SWE }
 			set_temp_variable = { influence_target = GER }
 			change_influence_percentage = yes
 			newline = yes
@@ -1666,7 +1664,6 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SWE_Vattenfall_PL"
 			set_temp_variable = { percent_change = 3 }
-			set_temp_variable = { tag_index = SWE }
 			set_temp_variable = { influence_target = POL }
 			change_influence_percentage = yes
 			newline = yes
@@ -1772,7 +1769,7 @@ focus_tree = {
 		ai_will_do = { base = 1 }
 	}
 
-	Focus = {
+	focus = {
 		id = SWE_Vattenfall_energy_link_ger
 		icon = baku_supsa
 
@@ -2259,7 +2256,6 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SWE_support_expansion"
 			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = SWE }
 			set_temp_variable = { influence_target = USA }
 			change_influence_percentage = yes
 			newline = yes
@@ -2582,12 +2578,10 @@ focus_tree = {
 			modify_debt_effect = yes
 			newline = yes
 			set_temp_variable = { percent_change = -3 }
-			set_temp_variable = { tag_index = SWE }
 			set_temp_variable = { influence_target = CHI }
 			change_influence_percentage = yes
 			newline = yes
 			set_temp_variable = { percent_change = -3 }
-			set_temp_variable = { tag_index = SWE }
 			set_temp_variable = { influence_target = CAN }
 			change_influence_percentage = yes
 			newline = yes
@@ -3228,7 +3222,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SWE_global_investments"
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = SWE_financial_place_modifier }
-			add_to_variable = { SWE_Finance_return_on_investment_modifier = 0.02 tooltip = return_on_investment_modifier_tt }
+			add_to_variable = { SWE_Finance_return_on_investment_modifier = 0.01 tooltip = return_on_investment_modifier_tt }
 			newline = yes
 			set_temp_variable = { int_investment_change = gdp_per_capita }
 			multiply_temp_variable = { int_investment_change = 0.055 }
@@ -4419,9 +4413,6 @@ focus_tree = {
 
 		available = {
 			is_subject = no
-		}
-
-		available = {
 			NOT = { has_idea = no_military }
 		}
 
@@ -6822,7 +6813,7 @@ focus_tree = {
 					country_event = { id = Sweden_foci.57 }
 				}
 			}
-			Else = {
+			else = {
 				add_tech_bonus = {
 					name = CAT_a_uav
 					bonus = 0.5
@@ -12359,16 +12350,19 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SWE_EU_continental_commitment"
-			every_country = {
-					limit = {
-						has_idea = NATO_member
-						capital_scope = { is_on_continent = europe }
-						has_opinion = {
-							 target = SWE
-							 value > 10
-						 }
+			for_each_scope_loop = {
+					array = global.nato_members
+					tooltip = TT_ALL_NATO_MEMBER_NATIONS_GAIN
+					if = {
+						limit = {
+							capital_scope = { is_on_continent = europe }
+							has_opinion = {
+								 target = SWE
+								 value > 10
+							 }
+						}
+					set_country_flag = swedish_partner
 					}
-				set_country_flag = swedish_partner
 			}
 		}
 
@@ -12711,19 +12705,21 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SWE_EU_logistic_networks"
-			every_country = {
-				limit = {
-					OR = {
-						original_tag = GER
-						original_tag = DEN
-						original_tag = POL
-						original_tag = FRA
-						original_tag = HOL
+			for_each_scope_loop = {
+				array = global.nato_members
+				if = {
+					limit = {
+						OR = {
+							original_tag = GER
+							original_tag = DEN
+							original_tag = POL
+							original_tag = FRA
+							original_tag = HOL
+						}
+						has_government = democratic
 					}
-					has_government = democratic
-					has_idea = NATO_member
+					country_event = Sweden_foci.10
 				}
-			country_event = Sweden_foci.10
 			}
 			SWE = {
 				add_ideas = SWE_Logistic_invests
@@ -12762,12 +12758,15 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SWE_USA_revitalize_atlantic_link"
-			every_country = {
-					limit = {
-						has_idea = NATO_member
-						capital_scope = { is_on_continent = north_america }
+			for_each_scope_loop = {
+					array = global.nato_members
+					tooltip = TT_ALL_NATO_MEMBER_NATIONS_GAIN
+					if = {
+						limit = {
+							capital_scope = { is_on_continent = north_america }
+						}
+					set_country_flag = swedish_partner
 					}
-				set_country_flag = swedish_partner
 			}
 		}
 
@@ -12944,13 +12943,12 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SWE_USA_think_tank_links"
-			every_country = {
-					limit = {
-					OR = {
-						has_idea = NATO_member
-						has_idea = EU_member
-					}
-				}
+			for_each_scope_loop = {
+				array = global.nato_members
+				country_event = Sweden_foci.13
+			}
+			for_each_scope_loop = {
+				array = global.EU_member
 				country_event = Sweden_foci.13
 			}
 			SWE = {
@@ -13993,16 +13991,18 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SWE_west_deepen_relations_NATO"
-			every_country = {
-				limit = {
-					has_government = democratic
-					has_idea = NATO_member
-					has_opinion = {
-							 target = SWE
-							 value > 10
-						 }
+			for_each_scope_loop = {
+				array = global.nato_members
+				if = {
+					limit = {
+						has_government = democratic
+						has_opinion = {
+							target = SWE
+							value > 10
+						}
+					}
+					set_country_flag = SWE_NATO_Friends
 				}
-				set_country_flag = SWE_NATO_Friends
 			}
 			if = {
 				limit = {
@@ -14469,14 +14469,14 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus SWE_west_nato_officer_training"
-			random_Army_leader = {
+			random_army_leader = {
 				limit = {
 					is_field_marshal = no
 				}
-					gain_xp = 100
-					add_attack = 1
-					add_planning = 1
-					add_unit_leader_trait = trickster
+				gain_xp = 100
+				add_attack = 1
+				add_planning = 1
+				add_unit_leader_trait = trickster
 			}
 			army_experience = 35
 			air_experience = 35
@@ -15978,7 +15978,7 @@ focus_tree = {
 		}
 
 		bypass = {
-			AGL = { exists = no }
+			NOT = { country_exists = AGL }
 		}
 
 		search_filters = { FOCUS_FILTER_POLITICAL }
@@ -16132,7 +16132,6 @@ focus_tree = {
 			SOV = { country_event = SWE_eastern.20 }
 			effect_tooltip = {
 				set_temp_variable = { percent_change = 5 }
-				set_temp_variable = { tag_index = SWE }
 				set_temp_variable = { influence_target = SOV }
 				change_influence_percentage = yes
 			}
@@ -16290,7 +16289,7 @@ focus_tree = {
 		}
 
 		bypass = {
-			CHI = { exists = no }
+			NOT = { country_exists = CHI }
 		}
 
 		search_filters = { FOCUS_FILTER_POLITICAL }
@@ -17500,7 +17499,7 @@ focus_tree = {
 		}
 
 		bypass = {
-			STK = { exists = no }
+			NOT = { country_exists = STK }
 		}
 
 		bypass_effect = {
@@ -17544,7 +17543,7 @@ focus_tree = {
 		}
 
 		bypass = {
-			GAH = { exists = no }
+			NOT = { country_exists = GAH }
 		}
 
 		bypass_effect = {
@@ -17592,7 +17591,7 @@ focus_tree = {
 		}
 
 		bypass = {
-			USA = { exists = no }
+			NOT = { country_exists = USA }
 		}
 
 		bypass_effect = {
@@ -17672,7 +17671,7 @@ focus_tree = {
 		}
 
 		bypass = {
-			FIN = { exists = no }
+			NOT = { country_exists = FIN }
 		}
 
 		will_lead_to_war_with = FIN
@@ -17731,7 +17730,7 @@ focus_tree = {
 			owns_state = 103
 			owns_state = 101
 			owns_state = 102
-			FIN = { exists = no }
+			NOT = { country_exists = FIN }
 		}
 
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
@@ -17808,9 +17807,9 @@ focus_tree = {
 		}
 
 		bypass = {
-			LIT = { exists = no }
-			EST = { exists = no }
-			LAT = { exists = no }
+			NOT = { country_exists = LIT }
+			NOT = { country_exists = EST }
+			NOT = { country_exists = LAT }
 		}
 
 		bypass_effect = {
@@ -17906,9 +17905,9 @@ focus_tree = {
 		}
 
 		bypass = {
-			NOR = { exists = no }
-			DEN = { exists = no }
-			ICE = { exists = no }
+			NOT = { country_exists = NOR }
+			NOT = { country_exists = DEN }
+			NOT = { country_exists = ICE }
 		}
 
 		bypass_effect = {
@@ -18058,7 +18057,7 @@ focus_tree = {
 		}
 
 		bypass = {
-			SOV = { exists = no }
+			NOT = { country_exists = SOV }
 		}
 
 		bypass_effect = {
@@ -18108,7 +18107,7 @@ focus_tree = {
 		}
 
 		bypass = {
-			GER = { exists = no }
+			NOT = { country_exists = GER }
 		}
 
 		bypass_effect = {
@@ -18253,7 +18252,7 @@ focus_tree = {
 		}
 
 		bypass = {
-			POL = { exists = no }
+			NOT = { country_exists = POL }
 		}
 
 		bypass_effect = {
@@ -18381,14 +18380,14 @@ focus_tree = {
 		}
 
 		bypass = {
-			DEN = { exists = no }
-			FAO = { exists = no }
-			GRL = { exists = no }
+			NOT = { country_exists = DEN }
+			NOT = { country_exists = FAO }
+			NOT = { country_exists = GRN }
 		}
 
 		will_lead_to_war_with = DEN
 		will_lead_to_war_with = FAO
-		will_lead_to_war_with = GRL
+		will_lead_to_war_with = GRN
 
 		bypass_effect = {
 			every_state = {
@@ -18407,7 +18406,7 @@ focus_tree = {
 			newline = yes
 			every_state = {
 				limit = {
-					is_core_of = GRL
+					is_core_of = GRN
 				}
 				add_claim_by = SWE
 			}
@@ -18429,23 +18428,23 @@ focus_tree = {
 				type = take_claimed_state
 			}
 			if = {
-				limit = { GRL = { exists = yes } }
+				limit = { country_exists = GRN }
 				newline = yes
 				every_state = {
 					limit = {
-						is_core_of = GRL
+						is_core_of = GRN
 					}
 					add_claim_by = SWE
 				}
-				set_temp_variable = { wargoal_on = GRL }
+				set_temp_variable = { wargoal_on = GRN }
 				add_threat_from_wargoal_effect = yes
 				create_wargoal = {
-					target = GRL
+					target = GRN
 					type = take_claimed_state
 				}
 			}
 			if = {
-				limit = { FAO = { exists = yes } }
+				limit = { country_exists = FAO }
 				newline = yes
 				every_state = {
 					limit = {
@@ -18485,7 +18484,7 @@ focus_tree = {
 		}
 
 		bypass = {
-			NOR = { exists = no }
+			NOT = { country_exists = NOR }
 		}
 
 		bypass_effect = {
@@ -18721,7 +18720,7 @@ focus_tree = {
 		}
 
 		bypass = {
-			ICE = { exists = no }
+			NOT = { country_exists = ICE }
 		}
 
 		bypass_effect = {
@@ -18829,7 +18828,7 @@ focus_tree = {
 		}
 
 		bypass = {
-			ENG = { exists = no }
+			NOT = { country_exists = ENG }
 		}
 
 		bypass_effect = {
@@ -18880,7 +18879,7 @@ focus_tree = {
 		}
 
 		bypass = {
-			IRE = { exists = no }
+			NOT = { country_exists = IRE }
 		}
 
 		bypass_effect = {
@@ -18962,7 +18961,7 @@ focus_tree = {
 		}
 
 		bypass = {
-			CAN = { exists = no }
+			NOT = { country_exists = CAN }
 		}
 
 		bypass_effect = {
@@ -19164,8 +19163,9 @@ focus_tree = {
 				ideology = nationalist
 				popularity = 0.05
 			}
-			add_to_variable = { party_pop_array^21 = 0.05 }
-			recalculate_party = yes
+			set_temp_variable = { party_index = 21 }
+			set_temp_variable = { party_popularity_increase = 0.05 }
+			add_relative_party_popularity = yes
 
 			add_ideas = SWE_idea_rassism
 		}
@@ -19204,8 +19204,9 @@ focus_tree = {
 				ideology = nationalist
 				popularity = 0.05
 			}
-			add_to_variable = { party_pop_array^23 = 0.05 }
-			recalculate_party = yes
+			set_temp_variable = { party_index = 23 }
+			set_temp_variable = { party_popularity_increase = 0.05 }
+			add_relative_party_popularity = yes
 
 			add_ideas = SWE_idea_pluralism
 		}
@@ -19696,9 +19697,7 @@ focus_tree = {
 		x = -1
 		y = 1
 
-		cost = 4-3
-
-
+		cost = 4.3
 
 		prerequisite = {
 			focus = SWE_nordi_royal_networks
@@ -19776,7 +19775,7 @@ focus_tree = {
 			}
 			custom_effect_tooltip = SWE_change_royal_modifier_tt
 			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = SWE_monarchy_modifier }
-			add_to_variable = { SWE_royal_return_on_investment_modifier = 0.02 tooltip = return_on_investment_modifier_tt }
+			add_to_variable = { SWE_royal_return_on_investment_modifier = 0.01 tooltip = return_on_investment_modifier_tt }
 		}
 
 		ai_will_do = {

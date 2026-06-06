@@ -544,13 +544,14 @@ focus_tree = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus SIN_eyeing_the_west"
-			every_country = {
-				limit = {
-					has_idea = NATO_member
-					has_government = democratic
+			for_each_scope_loop = {
+				array = global.nato_members
+				tooltip = TT_ALL_NATO_MEMBER_NATIONS_GAIN
+				if = {
+					limit = { has_government = democratic }
+					add_opinion_modifier = { target = SIN modifier = declaration_of_friendship }
+					reverse_add_opinion_modifier = { target = SIN modifier = declaration_of_friendship }
 				}
-				add_opinion_modifier = { target = SIN modifier = declaration_of_friendship }
-				reverse_add_opinion_modifier = { target = SIN modifier = declaration_of_friendship }
 			}
 		}
 
@@ -1226,7 +1227,7 @@ focus_tree = {
 		y = 1
 		relative_position_id = SIN_EDU_education_effort
 
-		cost = 10 # 70 days
+		cost = 10
 
 		available = {
 			is_subject = no
@@ -1676,7 +1677,7 @@ focus_tree = {
 		y = 3
 		relative_position_id = SIN_total_defence
 
-		cost = 10 # 70 days
+		cost = 10
 
 		search_filters = { FOCUS_FILTER_MILITARY_LAWS }
 
@@ -2199,7 +2200,7 @@ focus_tree = {
 		y = 3
 		relative_position_id = SIN_total_defence
 
-		cost = 10 # 70 days
+		cost = 10
 
 		search_filters = { FOCUS_FILTER_MILITARY_LAWS }
 
@@ -2901,16 +2902,35 @@ focus_tree = {
 		mutually_exclusive = { focus = SIN_go_east }
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus SIN_go_west"
+			set_temp_variable = { percent_change = 5 }
+			for_each_scope_loop = {
+				array = global.nato_members
+				if = {
+					limit = {
+						NOT = { original_tag = SIN }
+						NOT = { has_idea = EU_member }
+						NOT = { has_idea = Major_Non_NATO_Ally }
+					}
+					change_influence_percentage = yes
+					add_opinion_modifier = { target = ROOT modifier = declaration_of_friendship }
+				}
+			}
+			for_each_scope_loop = {
+				array = global.EU_member
+				if = {
+					limit = {
+						NOT = { original_tag = SIN }
+						NOT = { has_idea = Major_Non_NATO_Ally }
+					}
+					change_influence_percentage = yes
+					add_opinion_modifier = { target = ROOT modifier = declaration_of_friendship }
+				}
+			}
 			every_country = {
 				limit = {
-					OR = {
-						has_idea = NATO_member
-						has_idea = EU_member
-						has_idea = Major_Non_NATO_Ally
-					}
+					has_idea = Major_Non_NATO_Ally
 					NOT = { original_tag = SIN }
 				}
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 				add_opinion_modifier = { target = ROOT modifier = declaration_of_friendship }
 			}
@@ -2974,12 +2994,21 @@ focus_tree = {
 		prerequisite = { focus = SIN_go_west }
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus SIN_ally_with_nato"
+			for_each_scope_loop = {
+				array = global.nato_members
+				if = {
+					limit = {
+						NOT = { original_tag = SIN }
+					}
+					set_temp_variable = { receiver_nation = THIS.id }
+					set_temp_variable = { sender_nation = SIN.id }
+					set_improved_trade_agreement = yes
+					SIN_calculate_singaporean_trade_agreements = yes
+				}
+			}
 			every_country = {
 				limit = {
-					OR = {
-						has_idea = Major_Non_NATO_Ally
-						has_idea = NATO_member
-					}
+					has_idea = Major_Non_NATO_Ally
 					NOT = { original_tag = SIN }
 				}
 				set_temp_variable = { receiver_nation = THIS.id }
@@ -2987,7 +3016,7 @@ focus_tree = {
 				set_improved_trade_agreement = yes
 				SIN_calculate_singaporean_trade_agreements = yes
 			}
-			add_ideas = Major_Non_NATO_Ally
+			NATO_major_non_nato_ally_join = yes
 		}
 
 		ai_will_do = {
@@ -2999,9 +3028,9 @@ focus_tree = {
 		}
 	}
 
-	#Join NATO Faction
+	#Deepen Western Defense Ties
 	focus = {
-		id = SIN_join_nato
+		id = SIN_deepen_western_defense
 		icon = blr_nato_cooperation
 
 		x = -3
@@ -3013,66 +3042,22 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_INFLUENCE FOCUS_FILTER_DIPLOMACY FOCUS_FILTER_POLITICAL }
 
 		available = {
-			is_in_faction = no
 			is_subject = no
 			has_war = no
-			threat > 0.15
-			USA = {
-				 has_idea = NATO_member
-				has_government = democratic
-				 NOT = { has_war_with = SIN }
-				has_opinion = {
-					target = SIN
-					value > 9
-				}
-			 }
-			FRA = {
-				 has_government = democratic
-				 NOT = { has_war_with = SIN }
-				has_opinion = {
-					target = SIN
-					value > 9
-				}
-			 }
-			ENG = {
-				 has_government = democratic
-				 NOT = { has_war_with = SIN }
-				has_opinion = {
-					target = SIN
-					value > 9
-				}
-			 }
-			SIN = {
-				NOT = { has_war_with = USA }
-				NOT = { has_government = nationalist }
-				NOT = { has_government = communism }
-				NOT = { has_government = fascism }
-				has_opinion = {
-					target = USA
-					target = FRA
-					target = ENG
-					value > 9
-				}
-			}
-			NOT = {
-				any_enemy_country = {
-					has_idea = NATO_member
-				}
-			}
-			if = {
-				limit = { has_dlc = "By Blood Alone" }
-				any_of_scopes = {
-					array = global.nato_members
-					tooltip = TT_NO_NATO_MEMBER_IS_EMBARGOED_BY_ROOT
-					NOT = { is_embargoed_by = ROOT }
-				}
-			}
+			has_idea = Major_Non_NATO_Ally
 		}
 
 		prerequisite = { focus = SIN_ally_with_nato }
 		completion_reward = {
-			log = "[GetDateText]: [THIS.GetName]: Focus SIN_join_nato"
-			add_ideas = NATO_member
+			log = "[GetDateText]: [THIS.GetName]: Focus SIN_deepen_western_defense"
+			army_experience = 25
+			navy_experience = 25
+			air_experience = 25
+			for_each_scope_loop = {
+				array = global.nato_members
+				add_opinion_modifier = { target = PREV modifier = declaration_of_friendship }
+				reverse_add_opinion_modifier = { target = PREV modifier = declaration_of_friendship }
+			}
 		}
 
 		ai_will_do = {
@@ -3109,6 +3094,7 @@ focus_tree = {
 		mutually_exclusive = { focus = SIN_go_east }
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus SIN_go_third_world_country"
+			set_temp_variable = { percent_change = 5 }
 			every_country = {
 				limit = {
 					OR = {
@@ -3119,7 +3105,6 @@ focus_tree = {
 					}
 					NOT = { original_tag = SIN }
 				}
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 				add_opinion_modifier = { target = ROOT modifier = declaration_of_friendship }
 			}
@@ -3271,7 +3256,6 @@ focus_tree = {
 					}
 					NOT = { original_tag = SIN }
 				}
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 				add_opinion_modifier = { target = ROOT modifier = declaration_of_friendship }
 			}
@@ -4989,7 +4973,6 @@ focus_tree = {
 		prerequisite = { focus = SIN_the_chinese_media_model }
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus SIN_befriend_the_sco"
-			set_temp_variable = { tag_index = SIN.id }
 			set_temp_variable = { percent_change = 1 }
 			every_country = {
 				limit = {
@@ -5000,7 +4983,6 @@ focus_tree = {
 					}
 					NOT = { original_tag = SIN }
 				}
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 				add_opinion_modifier = { target = ROOT modifier = declaration_of_friendship }
 			}
@@ -5109,18 +5091,12 @@ focus_tree = {
 			log = "[GetDateText]: [THIS.GetName]: Focus SIN_greater_ties_with_europe"
 			if = {
 				limit = { NOT = { has_global_flag = GAME_RULE_eu_disabled } }
-				set_temp_variable = { tag_index = SIN.id }
 				set_temp_variable = { percent_change = 1 }
-				custom_effect_tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
-				effect_tooltip = {
-					set_temp_variable = { influence_target = THIS.id }
-					change_influence_percentage = yes
-					add_opinion_modifier = { target = ROOT modifier = declaration_of_friendship }
-				}
-				hidden_effect = {
-					for_each_scope_loop = {
-						array = global.EU_member
-						set_temp_variable = { influence_target = THIS.id }
+				for_each_scope_loop = {
+					array = global.EU_member
+					tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+					if = {
+						limit = { NOT = { tag = ROOT } }
 						change_influence_percentage = yes
 						add_opinion_modifier = { target = ROOT modifier = declaration_of_friendship }
 					}
@@ -5626,7 +5602,6 @@ focus_tree = {
 		prerequisite = { focus = SIN_operation_enticement }
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus SIN_prioritize_diplomacy"
-			set_temp_variable = { tag_index = SIN.id }
 			set_temp_variable = { percent_change = 1.5 }
 			every_other_country = {
 				limit = {
@@ -5634,7 +5609,6 @@ focus_tree = {
 						has_war_with = SIN
 					}
 				}
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 			}
 		}
@@ -5993,9 +5967,7 @@ focus_tree = {
 			60_percent_government_popularity = yes
 		}
 		bypass = {
-			OR = {
-				NOT = { has_idea = SIN_migrant_workers }
-			}
+			NOT = { has_idea = SIN_migrant_workers }
 		}
 
 		search_filters = { FOCUS_FILTER_POLITICAL }
@@ -6204,7 +6176,6 @@ focus_tree = {
 		prerequisite = { focus = SIN_singapore_south_east_asia }
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus SIN_asean_commentary"
-			set_temp_variable = { tag_index = SIN.id }
 			set_temp_variable = { percent_change = 1 }
 			every_country = {
 				limit = {
@@ -6214,7 +6185,6 @@ focus_tree = {
 					}
 					NOT = { original_tag = SIN }
 				}
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 				add_opinion_modifier = { target = ROOT modifier = declaration_of_friendship }
 			}
@@ -6299,7 +6269,6 @@ focus_tree = {
 		prerequisite = { focus = SIN_singapore_south_east_asia }
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus SIN_south_asian_countries"
-			set_temp_variable = { tag_index = SIN.id }
 			set_temp_variable = { percent_change = 1 }
 			every_country = {
 				limit = {
@@ -6323,7 +6292,6 @@ focus_tree = {
 					NOT = { has_idea = ASEAN_Member }
 					NOT = { original_tag = SIN }
 				}
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 				add_opinion_modifier = { target = ROOT modifier = declaration_of_friendship }
 			}
@@ -6368,7 +6336,6 @@ focus_tree = {
 		prerequisite = { focus = SIN_asean_commentary }
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus SIN_influence_the_members"
-			set_temp_variable = { tag_index = SIN.id }
 			set_temp_variable = { percent_change = 2.5 }
 			every_country = {
 				limit = {
@@ -6378,14 +6345,11 @@ focus_tree = {
 					}
 					NOT = { original_tag = SIN }
 				}
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 			}
 			every_country = {
 				limit = {
-					OR = {
-						has_idea = ASEAN_Member
-					}
+					has_idea = ASEAN_Member
 					NOT = { original_tag = SIN }
 				}
 				set_temp_variable = { receiver_nation = THIS.id }
@@ -7103,18 +7067,29 @@ focus_tree = {
 		prerequisite = { focus = SIN_expand_foreign_reserve }
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus SIN_gi_invest_to_africa_nation"
-			every_country = {
-				limit = {
-					OR = {
-						has_idea = OAU_member
-						has_idea = AU_member
+			for_each_scope_loop = {
+				array = global.AU_member
+				if = {
+					limit = {
+						NOT = { original_tag = SIN }
 					}
-					NOT = { original_tag = SIN }
+					set_temp_variable = { receiver_nation = THIS.id }
+					set_temp_variable = { sender_nation = SIN.id }
+					set_improved_trade_agreement = yes
+					SIN_calculate_singaporean_trade_agreements = yes
 				}
-				set_temp_variable = { receiver_nation = THIS.id }
-				set_temp_variable = { sender_nation = SIN.id }
-				set_improved_trade_agreement = yes
-				SIN_calculate_singaporean_trade_agreements = yes
+			}
+			for_each_scope_loop = {
+				array = global.OAU_member
+				if = {
+					limit = {
+						NOT = { original_tag = SIN }
+					}
+					set_temp_variable = { receiver_nation = THIS.id }
+					set_temp_variable = { sender_nation = SIN.id }
+					set_improved_trade_agreement = yes
+					SIN_calculate_singaporean_trade_agreements = yes
+				}
 			}
 			215 = {
 				add_building_construction = {
@@ -7160,9 +7135,7 @@ focus_tree = {
 					}
 					NOT = { original_tag = SIN }
 				}
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
-				set_temp_variable = { percent_change = 3.5 }
 			}
 			set_temp_variable = { treasury_change = -85 }
 			modify_treasury_effect = yes
@@ -7196,17 +7169,18 @@ focus_tree = {
 		prerequisite = { focus = SIN_expand_foreign_reserve }
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus SIN_gi_invest_to_europian_union_country"
-			every_country = {
-				limit = {
-					OR = {
-						has_idea = EU_member
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				if = {
+					limit = {
+						NOT = { original_tag = SIN }
 					}
-					NOT = { original_tag = SIN }
+					set_temp_variable = { receiver_nation = THIS.id }
+					set_temp_variable = { sender_nation = SIN.id }
+					set_improved_trade_agreement = yes
+					SIN_calculate_singaporean_trade_agreements = yes
 				}
-				set_temp_variable = { receiver_nation = THIS.id }
-				set_temp_variable = { sender_nation = SIN.id }
-				set_improved_trade_agreement = yes
-				SIN_calculate_singaporean_trade_agreements = yes
 			}
 			943 = {
 				add_building_construction = {
@@ -7223,15 +7197,20 @@ focus_tree = {
 				}
 			}
 			set_temp_variable = { percent_change = 1 }
+			for_each_scope_loop = {
+				array = global.EU_member
+				if = {
+					limit = {
+						NOT = { original_tag = SIN }
+					}
+					change_influence_percentage = yes
+				}
+			}
 			every_country = {
 				limit = {
-					OR = {
-						is_neighbor_of = SIN
-						has_idea = EU_member
-					}
+					is_neighbor_of = SIN
 					NOT = { original_tag = SIN }
 				}
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 			}
 			set_temp_variable = { treasury_change = -50 }
@@ -7273,15 +7252,18 @@ focus_tree = {
 		prerequisite = { focus = SIN_expand_foreign_reserve }
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus SIN_gi_invest_to_csto_nation"
-			every_country = {
-				limit = {
-					has_idea = CSTO_member
-					NOT = { original_tag = SIN }
+			for_each_scope_loop = {
+				array = global.CSTO_member
+				tooltip = TT_ALL_CSTO_MEMBER_NATIONS_GAIN
+				if = {
+					limit = {
+						NOT = { original_tag = SIN }
+					}
+					set_temp_variable = { receiver_nation = THIS.id }
+					set_temp_variable = { sender_nation = SIN.id }
+					set_improved_trade_agreement = yes
+					SIN_calculate_singaporean_trade_agreements = yes
 				}
-				set_temp_variable = { receiver_nation = THIS.id }
-				set_temp_variable = { sender_nation = SIN.id }
-				set_improved_trade_agreement = yes
-				SIN_calculate_singaporean_trade_agreements = yes
 			}
 			644 = {
 				add_building_construction = {
@@ -7298,7 +7280,6 @@ focus_tree = {
 						has_idea = CSTO_member
 					}
 				}
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 			}
 			set_temp_variable = { treasury_change = -25 }
@@ -7920,12 +7901,7 @@ focus_tree = {
 		cost = 7.9 # 55 dys
 
 		available = {
-			530 = {
-				is_owned_by = SIN
-			}
-		}
-
-		available = {
+			owns_state = 530
 			is_subject = no
 			has_tech = construction2
 		}
@@ -7977,15 +7953,10 @@ focus_tree = {
 		y = 1
 		relative_position_id = SIN_expand_changi_airport_area_phase1
 
-		cost = 10 # 70 days
+		cost = 10
 
 		available = {
-			530 = {
-				is_owned_by = SIN
-			}
-		}
-
-		available = {
+			owns_state = 530
 			is_subject = no
 			has_tech = construction3
 		}
@@ -8034,15 +8005,10 @@ focus_tree = {
 		y = 1
 		relative_position_id = SIN_expand_changi_airport_area_phase2
 
-		cost = 10 # 70 days
+		cost = 10
 
 		available = {
-			530 = {
-				is_owned_by = SIN
-			}
-		}
-
-		available = {
+			owns_state = 530
 			is_subject = no
 			has_tech = construction4
 		}
@@ -8088,15 +8054,10 @@ focus_tree = {
 		y = 1
 		relative_position_id = SIN_expand_changi_bay
 
-		cost = 10 # 70 days
+		cost = 10
 
 		available = {
-			530 = {
-				is_owned_by = SIN
-			}
-		}
-
-		available = {
+			owns_state = 530
 			is_subject = no
 			has_tech = construction5
 		}
@@ -8132,15 +8093,10 @@ focus_tree = {
 		y = 1
 		relative_position_id = SIN_singapore_masterplan
 
-		cost = 10 # 70 days
+		cost = 10
 
 		available = {
-			530 = {
-				is_owned_by = SIN
-			}
-		}
-
-		available = {
+			owns_state = 530
 			is_subject = no
 			has_tech = construction3
 		}
@@ -8175,15 +8131,10 @@ focus_tree = {
 		y = 1
 		relative_position_id = SIN_tekong_island_expansion
 
-		cost = 10 # 70 days
+		cost = 10
 
 		available = {
-			530 = {
-				is_owned_by = SIN
-			}
-		}
-
-		available = {
+			owns_state = 530
 			is_subject = no
 			has_tech = construction3
 		}
@@ -8213,15 +8164,10 @@ focus_tree = {
 		y = 1
 		relative_position_id = SIN_reclamation_sanyongkong_island
 
-		cost = 10 # 70 days
+		cost = 10
 
 		available = {
-			530 = {
-				is_owned_by = SIN
-			}
-		}
-
-		available = {
+			owns_state = 530
 			is_subject = no
 			has_tech = construction4
 		}
@@ -8251,20 +8197,10 @@ focus_tree = {
 		y = 1
 		relative_position_id = SIN_tekong_kechil_island_development
 
-		cost = 10 # 70 days
+		cost = 10
 
 		available = {
-			530 = {
-				is_owned_by = SIN
-			}
-		}
-
-		available = {
-			is_subject = no
-			has_tech = construction5
-		}
-
-		available = {
+			owns_state = 530
 			is_subject = no
 			has_tech = construction5
 		}
@@ -8304,15 +8240,10 @@ focus_tree = {
 		y = 1
 		relative_position_id = SIN_tekong_island_development
 
-		cost = 10 # 70 days
+		cost = 10
 
 		available = {
-			530 = {
-				is_owned_by = SIN
-			}
-		}
-
-		available = {
+			owns_state = 530
 			is_subject = no
 			has_tech = construction7
 		}
@@ -8352,15 +8283,10 @@ focus_tree = {
 		y = 1
 		relative_position_id = SIN_tekong_island_development
 
-		cost = 10 # 70 days
+		cost = 10
 
 		available = {
-			530 = {
-				is_owned_by = SIN
-			}
-		}
-
-		available = {
+			owns_state = 530
 			is_subject = no
 			has_tech = construction6
 		}
@@ -8399,14 +8325,9 @@ focus_tree = {
 		cost = 7.9 # 55 dys
 
 		available = {
-			530 = {
-				is_owned_by = SIN
-			}
-		}
-
-		available = {
 			is_subject = no
 			has_tech = construction2
+			owns_state = 530
 		}
 
 		search_filters = { FOCUS_FILTER_ECONOMY FOCUS_FILTER_NAVY FOCUS_FILTER_INDUSTRY }
@@ -8449,15 +8370,10 @@ focus_tree = {
 		y = 1
 		relative_position_id = SIN_psa_pasir_panjang_terminal_devlopment
 
-		cost = 10 # 70 days
+		cost = 10
 
 		available = {
-			530 = {
-				is_owned_by = SIN
-			}
-		}
-
-		available = {
+			owns_state = 530
 			is_subject = no
 			has_tech = construction3
 		}
@@ -8502,15 +8418,10 @@ focus_tree = {
 		y = 1
 		relative_position_id = SIN_jurong_island_reclamation_project
 
-		cost = 10 # 70 days
+		cost = 10
 
 		available = {
-			530 = {
-				is_owned_by = SIN
-			}
-		}
-
-		available = {
+			owns_state = 530
 			is_subject = no
 			has_tech = construction1
 		}
@@ -8555,15 +8466,10 @@ focus_tree = {
 		y = 1
 		relative_position_id = SIN_psa_pasir_panjang_terminal_devlopment_phase_2
 
-		cost = 10 # 70 days
+		cost = 10
 
 		available = {
-			530 = {
-				is_owned_by = SIN
-			}
-		}
-
-		available = {
+			owns_state = 530
 			is_subject = no
 			has_tech = construction4
 		}
@@ -8611,15 +8517,10 @@ focus_tree = {
 		y = 1
 		relative_position_id = SIN_jurong_island_development_project
 
-		cost = 10 # 70 days
+		cost = 10
 
 		available = {
-			530 = {
-				is_owned_by = SIN
-			}
-		}
-
-		available = {
+			owns_state = 530
 			is_subject = no
 			has_tech = construction6
 		}
@@ -8647,9 +8548,8 @@ focus_tree = {
 
 	###Tuas Area Development###
 	focus = {
-		id = SIN_tuas_bussiness_area_development
-		icon = SIN_tuas_bussiness_area_development
-
+		id = SIN_tuas_business_area_development
+		icon = SIN_tuas_business_area_development
 		x = 3
 		y = 1
 		relative_position_id = SIN_singapore_masterplan
@@ -8657,12 +8557,7 @@ focus_tree = {
 		cost = 7.9 # 55 dys
 
 		available = {
-			530 = {
-				is_owned_by = SIN
-			}
-		}
-
-		available = {
+			owns_state = 530
 			is_subject = no
 			has_tech = construction2
 		}
@@ -8671,7 +8566,7 @@ focus_tree = {
 		prerequisite = { focus = SIN_singapore_masterplan }
 
 		completion_reward = {
-			log = "[GetDateText]: [THIS.GetName]: Focus SIN_tuas_bussiness_area_development"
+			log = "[GetDateText]: [THIS.GetName]: Focus SIN_tuas_business_area_development"
 			530 = {
 				add_building_construction = {
 					type = offices
@@ -8704,23 +8599,18 @@ focus_tree = {
 
 		x = 0
 		y = 1
-		relative_position_id = SIN_tuas_bussiness_area_development
+		relative_position_id = SIN_tuas_business_area_development
 
-		cost = 10 # 70 days
-
-		available = {
-			530 = {
-				is_owned_by = SIN
-			}
-		}
+		cost = 10
 
 		available = {
+			owns_state = 530
 			is_subject = no
 			has_tech = construction3
 		}
 
 		search_filters = { FOCUS_FILTER_ECONOMY FOCUS_FILTER_INDUSTRY }
-		prerequisite = { focus = SIN_tuas_bussiness_area_development }
+		prerequisite = { focus = SIN_tuas_business_area_development }
 
 		completion_reward = {
 			log = "[GetDateText]: [THIS.GetName]: Focus SIN_tuas_reclamation_project_phase_1"
@@ -8744,15 +8634,10 @@ focus_tree = {
 		y = 1
 		relative_position_id = SIN_tuas_reclamation_project_phase_1
 
-		cost = 10 # 70 days
+		cost = 10
 
 		available = {
-			530 = {
-				is_owned_by = SIN
-			}
-		}
-
-		available = {
+			owns_state = 530
 			is_subject = no
 			has_tech = construction4
 		}
@@ -8796,15 +8681,10 @@ focus_tree = {
 		y = 1
 		relative_position_id = SIN_tuas_dock_development_project_phase_1
 
-		cost = 10 # 70 days
+		cost = 10
 
 		available = {
-			530 = {
-				is_owned_by = SIN
-			}
-		}
-
-		available = {
+			owns_state = 530
 			is_subject = no
 			has_tech = construction5
 		}

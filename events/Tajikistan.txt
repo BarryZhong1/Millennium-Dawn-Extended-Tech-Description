@@ -87,13 +87,10 @@ news_event = {
 
 country_event = {
 	id = tajik_flavor.3
-
 	hidden = yes
 	is_triggered_only = yes
-
-	option = {
-		name = tajik_flavor.3.a
-		log = "[GetDateText]: [This.GetName]: tajik_flavor.3.a executed"
+	immediate = {
+		log = "[GetDateText]: [This.GetName]: tajik_flavor.3 executed"
 		UZB = {
 			set_autonomy = {
 				target = ROOT
@@ -154,9 +151,6 @@ country_event = {
 			traits = {
 				nationalist_Nat_Autocracy
 			}
-		}
-		ai_chance = {
-			base = 1
 		}
 	}
 }
@@ -301,9 +295,7 @@ country_event = {
 			change_influence_percentage = yes
 		}
 		TAJ = {
-			country_event = {
-				id = tajik_focus.5
-			}
+			country_event = tajik_focus.5
 		}
 		ai_chance = {
 			base = 1
@@ -318,9 +310,7 @@ country_event = {
 		name = tajik_focus.4.b
 		log = "[GetDateText]: [This.GetName]: tajik_focus.4.b executed"
 		TAJ = {
-			country_event = {
-				id = tajik_focus.6
-			}
+			country_event = tajik_focus.6
 		}
 		ai_chance = {
 			base = 1
@@ -825,7 +815,10 @@ country_event = { # Tajikistan Pursues Aggressive Nationalization
 	option = { # Embargo
 		name = tajik_focus.20.b
 		log = "[GetDateText]: [This.GetName]: tajik_focus.20.b executed"
-		send_embargo = TAJ
+		if = {
+			limit = { has_dlc = "By Blood Alone" }
+			send_embargo = TAJ
+		}
 		TAJ = {
 			country_event = {
 				id = tajik_focus.21
@@ -1463,6 +1456,11 @@ country_event = { # Tajik Revolution
 					add_to_array = { ruling_party = 6 }
 					startup_politics = yes
 					load_focus_tree = { tree = tajikistan_focus keep_completed = yes }
+
+					# Economic initialization
+					set_temp_variable = { nation_to_copy_from = PREV.id }
+					setup_employment_variables = yes
+					ingame_update_setup = yes
 				}
 				# Transferring States
 				724 = {
@@ -1641,6 +1639,11 @@ country_event = { # Tajik Revolution
 					add_to_array = { ruling_party = 6 }
 					startup_politics = yes
 					load_focus_tree = { tree = tajikistan_focus keep_completed = yes }
+
+					# Economic initialization
+					set_temp_variable = { nation_to_copy_from = PREV.id }
+					setup_employment_variables = yes
+					ingame_update_setup = yes
 				}
 				# Transferring States
 				724 = {
@@ -1785,6 +1788,10 @@ country_event = {
 			}
 			drop_cosmetic_tag = yes
 			clr_country_flag = is_TAJIKISTAN
+			# Civil war drains fuel (state 724 with the agriculture district goes to Rahmon).
+			# Refill reserves so fossil power plants pass the fuel_k = 0 killswitch check.
+			set_fuel_ratio = 0.5
+			ingame_update_setup = yes
 		}
 		ai_chance = {
 			base = 1
@@ -2215,9 +2222,7 @@ country_event = { # Tajikistan Requests Concessions
 		name = tajik_focus.44.a
 		log = "[GetDateText]: [This.GetName]: tajik_focus.44.a executed"
 		TAJ = {
-			country_event = {
-				id = tajik_focus.45
-			}
+			country_event = tajik_focus.45
 		}
 		effect_tooltip = {
 			set_temp_variable = { treasury_change = -50.00 }
@@ -2244,9 +2249,7 @@ country_event = { # Tajikistan Requests Concessions
 		name = tajik_focus.44.b
 		log = "[GetDateText]: [This.GetName]: tajik_focus.44.b executed"
 		TAJ = {
-			country_event = {
-				id = tajik_focus.46
-			}
+			country_event = tajik_focus.46
 		}
 		ai_chance = {
 			base = 1
@@ -2343,9 +2346,7 @@ country_event = {
 		name = tajik_focus.49.a
 		log = "[GetDateText]: [This.GetName]: tajik_focus.49.a executed"
 		SOV = {
-			country_event = {
-				id = tajik_focus.50
-			}
+			country_event = tajik_focus.50
 		}
 		ai_chance = {
 			base = 1
@@ -2356,9 +2357,7 @@ country_event = {
 		name = tajik_focus.49.b
 		log = "[GetDateText]: [This.GetName]: tajik_focus.49.b executed"
 		USA = {
-			country_event = {
-				id = tajik_focus.50
-			}
+			country_event = tajik_focus.50
 		}
 		ai_chance = {
 			base = 1
@@ -2369,9 +2368,7 @@ country_event = {
 		name = tajik_focus.49.c
 		log = "[GetDateText]: [This.GetName]: tajik_focus.49.c executed"
 		CHI = {
-			country_event = {
-				id = tajik_focus.50
-			}
+			country_event = tajik_focus.50
 		}
 		ai_chance = {
 			base = 1
@@ -2382,9 +2379,7 @@ country_event = {
 		name = tajik_focus.49.d1
 		log = "[GetDateText]: [This.GetName]: tajik_focus.49.d1 executed"
 		RAJ = {
-			country_event = {
-				id = tajik_focus.50
-			}
+			country_event = tajik_focus.50
 		}
 		ai_chance = {
 			base = 1
@@ -3119,59 +3114,7 @@ country_event = {
 		custom_effect_tooltip = TAJ_elections_allowable_TT
 		clr_country_flag = TAJ_dictatorship_flag
 		hidden_effect = {
-			set_country_flag = no_leader_change
-			if = {
-				limit = {
-					check_variable = { term_limit > 0 }
-				}
-				set_variable = { current_term = 1 }
-			}
-			if = {
-				limit = {
-					has_government = democratic
-				}
-				set_politics = {
-					ruling_party = democratic
-					elections_allowed = yes
-				}
-			}
-			else_if = {
-				limit = {
-					has_government = communism
-				}
-				set_politics = {
-					ruling_party = communism
-					elections_allowed = yes
-				}
-			}
-			else_if = {
-				limit = {
-					has_government = fascism
-				}
-				set_politics = {
-					ruling_party = fascism
-					elections_allowed = yes
-				}
-			}
-			else_if = {
-				limit = {
-					has_government = neutrality
-				}
-				set_politics = {
-					ruling_party = neutrality
-					elections_allowed = yes
-				}
-			}
-			else_if = {
-				limit = {
-					has_government = nationalist
-				}
-				set_politics = {
-					ruling_party = nationalist
-					elections_allowed = yes
-				}
-			}
-			clr_country_flag = no_leader_change
+			enable_elections_with_no_leader_change = yes
 		}
 		ai_chance = {
 			base = 20
@@ -3227,7 +3170,6 @@ country_event = {
 		name = tajik_focus.63.a
 		log = "[GetDateText]: [This.GetName]: tajik_focus.62.a executed"
 		set_temp_variable = { percent_change = 5 }
-		set_temp_variable = { tag_index = ROOT }
 		set_temp_variable = { influence_target = TAJ }
 		change_influence_percentage = yes
 		TAJ = {
@@ -4195,9 +4137,7 @@ country_event = {
 		set_temp_variable = { treasury_change = -5.00 }
 		modify_treasury_effect = yes
 		SOV = {
-			country_event = {
-				id = tajik_radicalism.120
-			}
+			country_event = tajik_radicalism.120
 		}
 		ai_chance = {
 			base = 1
@@ -4215,11 +4155,7 @@ country_event = {
 				target = TAJ
 				modifier = recent_actions_negative
 			}
-		}
-		SOV = {
-			country_event = {
-				id = tajik_radicalism.121
-			}
+			country_event = tajik_radicalism.121
 		}
 		ai_chance = {
 			base = 1
@@ -4641,8 +4577,6 @@ country_event = {
 					target = BDA
 					type = annex_everything
 				}
-			}
-			TAJ = {
 				set_cosmetic_tag = TAJ_islamist_government_2
 				set_temp_variable = { rul_party_temp = 10 }
 				set_temp_variable = { disable_elections = 1 }
@@ -4751,11 +4685,8 @@ country_event = {
 			active = yes
 		}
 		FROM = {
-			country_event = {
-				id = iranic_confederation.2
-			}
-		}
-		FROM = {
+			country_event = iranic_confederation.2
+
 			add_to_variable = { var = iranic_states value = 1 }
 			clamp_variable = { var = iranic_states min = 0 max = 100 }
 		}
@@ -4769,9 +4700,7 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: iranic_confederation.1.b executed"
 		set_country_flag = is_IRAN
 		FROM = {
-			country_event = {
-				id = iranic_confederation.3
-			}
+			country_event = iranic_confederation.3
 		}
 		ai_chance = {
 			base = 0
@@ -5400,9 +5329,7 @@ country_event = {
 			add_core_of = FROM
 		}
 		FROM = {
-			country_event = {
-				id = iranic_confederation.11
-			}
+			country_event = iranic_confederation.11
 		}
 		ai_chance = {
 			base = 1
@@ -5421,9 +5348,7 @@ country_event = {
 			add_core_of = FROM
 		}
 		FROM = {
-			country_event = {
-				id = iranic_confederation.12
-			}
+			country_event = iranic_confederation.12
 		}
 		ai_chance = {
 			base = 0
@@ -5486,9 +5411,7 @@ country_event = {
 			add_core_of = FROM
 		}
 		FROM = {
-			country_event = {
-				id = iranic_confederation.16
-			}
+			country_event = iranic_confederation.16
 		}
 		ai_chance = {
 			base = 1
@@ -5507,9 +5430,7 @@ country_event = {
 			add_core_of = FROM
 		}
 		FROM = {
-			country_event = {
-				id = iranic_confederation.17
-			}
+			country_event = iranic_confederation.17
 		}
 		ai_chance = {
 			base = 0
@@ -5566,9 +5487,7 @@ country_event = {
 		name = iranic_confederation.18.a
 		log = "[GetDateText]: [This.GetName]: iranic_confederation.18.a executed"
 		FROM = {
-			country_event = {
-				id = iranic_confederation.19
-			}
+			country_event = iranic_confederation.19
 		}
 		ai_chance = {
 			base = 1
@@ -5583,11 +5502,7 @@ country_event = {
 				target = ROOT
 				autonomy_state = autonomy_irn_province
 			}
-		}
-		FROM = {
-			country_event = {
-				id = iranic_confederation.20
-			}
+			country_event = iranic_confederation.20
 		}
 		ai_chance = {
 			base = 1
@@ -5897,7 +5812,6 @@ country_event = { # Monthly Goods (Variation 1)
 			random_country = {
 				set_temp_variable = { percent_change = 1.50 }
 				set_temp_variable = { tag_index = TAJ }
-				set_temp_variable = { influence_target = THIS }
 				change_influence_percentage = yes
 			}
 		}
@@ -6660,14 +6574,13 @@ country_event = { # Tajikistan Increases Narcotics Flow Into Our Markets
 		clamp_variable = { var = TAJ_drugs_police_modifier min = 0 max = 0.99 }
 		add_to_variable = { var = TAJ_corruption_drugs_modifier value = 0.02 }
 		clamp_variable = { var = TAJ_corruption_drugs_modifier min = 0 max = 0.99 }
-		random_list = {
-			30 = {
+		random = {
+			chance = 30
+
 				add_stability = -0.01
-			}
-			70 = {
-				# nothing happens
-			}
+
 		}
+
 		ai_chance = {
 			base = 1
 		}
@@ -7272,9 +7185,7 @@ news_event = { # Uzbekistan Strikes Tajikistan in Targeted IMU Operation (News)
 	title = tajik_lore.12.t
 	desc = tajik_lore.12.d
 	picture = GFX_News_TAJ_Uzbek_fighter_jetts
-
 	is_triggered_only = yes
-	fire_only_once = yes
 	major = yes
 
 	option = { # A World in Disarray

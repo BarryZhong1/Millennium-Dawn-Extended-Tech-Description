@@ -1,4 +1,4 @@
-﻿add_namespace = AfricanUnion
+add_namespace = AfricanUnion
 add_namespace = AfricanUnionRandomEvents
 add_namespace = AfricanUnionSummit
 add_namespace = AfricanUnion_news
@@ -527,9 +527,8 @@ country_event = {
 		NOT = { has_global_flag = African_Union_formed }
 	}
 
-	option = {
-		name = AfricanUnion.4.a
-		log = "[GetDateText]: [This.GetName]: AfricanUnion.4.a executed"
+	immediate = {
+		log = "[GetDateText]: [This.GetName]: AfricanUnion.4 executed"
 		for_each_scope_loop = {
 			array = global.is_african_nation
 			if = {
@@ -669,7 +668,7 @@ country_event = {
 		}
 		random_scope_in_array = {
 			array = global.AU_member
-			limit = { NOT = { tag = PREV } }
+			limit = { NOT = { tag = ROOT } }
 			set_temp_variable = { tag_index = THIS }
 		}
 		set_temp_variable = { influence_target = ROOT }
@@ -812,7 +811,7 @@ country_event = {
 		}
 		random_scope_in_array = {
 			array = global.AU_member
-			limit = { NOT = { tag = PREV } }
+			limit = { NOT = { tag = ROOT } }
 			set_temp_variable = { tag_index = THIS }
 		}
 		set_temp_variable = { influence_target = ROOT }
@@ -938,7 +937,7 @@ country_event = {
 		}
 		random_scope_in_array = {
 			array = global.AU_member
-			limit = { NOT = { tag = PREV } }
+			limit = { NOT = { tag = ROOT } }
 			set_temp_variable = { influence_target = THIS }
 			country_event = { id = AfricanUnionRandomEvents.4 hours = 6 }
 		}
@@ -952,7 +951,6 @@ country_event = {
 				set_temp_variable = { treasury_change = 5 }
 				modify_treasury_effect = yes
 			}
-			set_temp_variable = { tag_index = ROOT }
 			set_temp_variable = { percent_change = 4 }
 			change_influence_percentage = yes
 		}
@@ -1255,7 +1253,6 @@ country_event = {
 		modify_treasury_effect = yes
 		set_temp_variable = { int_investment_change = 5 }
 		modify_international_investment_effect = yes
-		set_temp_variable = { tag_index = ROOT }
 		set_temp_variable = { influence_target = FROM }
 		set_temp_variable = { percent_change = 4 }
 		change_influence_percentage = yes
@@ -1291,7 +1288,6 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: AfricanUnionRandomEvents.7.a executed"
 		set_temp_variable = { treasury_change = debt_to_pay }
 		modify_treasury_effect = yes
-		set_temp_variable = { tag_index = ROOT }
 		set_temp_variable = { influence_target = FROM }
 		set_temp_variable = { percent_change = 5 }
 		change_influence_percentage = yes

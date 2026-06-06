@@ -346,9 +346,7 @@ shared_focus = {
 
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus AFRICAN_UNION_shared_focus_create_stock_exchange_our_country"
-		#For the originator
-		set_temp_variable = { treasury_change = -12 }
-		modify_treasury_effect = yes
+		#Global Stuff
 		capital_scope = {
 			add_building_construction = {
 				type = offices
@@ -357,6 +355,14 @@ shared_focus = {
 			}
 			add_extra_state_shared_building_slots = 1
 		}
+		newline = yes
+
+		#For the originator
+		set_temp_variable = { treasury_change = -12 }
+		modify_treasury_effect = yes
+		custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = african_union_reforms_modifier }
+		set_temp_variable = { research_speed_factor_temp = 0.10 }
+		add_to_variable = { research_speed_factor = research_speed_factor_temp tooltip = research_speed_factor_tt }
 		effect_tooltip = { african_union_use_mandate = yes }
 		newline = yes
 
@@ -367,6 +373,9 @@ shared_focus = {
 				has_idea = AU_member
 			}
 			unlock_national_focus = AFRICAN_UNION_shared_focus_create_stock_exchange_our_country
+			custom_effect_tooltip = { localization_key = modifies_dynamic_modifier_tt MODIFIER = african_union_reforms_modifier }
+			set_temp_variable = { research_speed_factor_temp = 0.05 }
+			add_to_variable = { research_speed_factor = research_speed_factor_temp tooltip = research_speed_factor_tt }
 		}
 	}
 
@@ -410,7 +419,7 @@ shared_focus = {
 	}
 
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus AFRICAN_UNION_shared_focus_create_stock_exchange_south_africa"
+		log = "[GetDateText]: [Root.GetName]: Focus AFRICAN_UNION_shared_focus_create_stock_exchange_egypt"
 		#Global Stuff
 		EGY = {
 			random_owned_state = {
@@ -1446,7 +1455,6 @@ shared_focus = {
 			}
 			if = { limit = { NOT = { has_completed_focus = AFRICAN_UNION_shared_focus_hq_in_nigeria } } unlock_national_focus = AFRICAN_UNION_shared_focus_hq_in_nigeria }
 			set_temp_variable = { tag_index = FRA }
-			set_temp_variable = { influence_target = THIS }
 			set_temp_variable = { percent_change = 2 }
 			change_influence_percentage = yes
 		}
@@ -1579,7 +1587,6 @@ shared_focus = {
 			}
 			if = { limit = { NOT = { has_completed_focus = AFRICAN_UNION_shared_focus_hq_in_ethiopia } } unlock_national_focus = AFRICAN_UNION_shared_focus_hq_in_ethiopia }
 			set_temp_variable = { tag_index = CHI }
-			set_temp_variable = { influence_target = THIS }
 			set_temp_variable = { percent_change = 2 }
 			change_influence_percentage = yes
 		}
@@ -1749,7 +1756,7 @@ shared_focus = {
 			if = { limit = { NOT = { has_completed_focus = AFRICAN_UNION_shared_focus_speak_french } } unlock_national_focus = AFRICAN_UNION_shared_focus_speak_french }
 			every_other_country = {
 				limit = {
-					French_Speaking = yes
+					has_country_flag = french_speaking_flag
 				}
 				add_opinion_modifier = {
 					target = PREV
@@ -1761,7 +1768,6 @@ shared_focus = {
 				}
 			}
 			set_temp_variable = { tag_index = FRA }
-			set_temp_variable = { influence_target = THIS }
 			set_temp_variable = { percent_change = 2 }
 			change_influence_percentage = yes
 		}
@@ -1819,7 +1825,7 @@ shared_focus = {
 			if = { limit = { NOT = { has_completed_focus = AFRICAN_UNION_shared_focus_speak_english } } unlock_national_focus = AFRICAN_UNION_shared_focus_speak_english }
 			every_other_country = {
 				limit = {
-					English_Speaking = yes
+					has_country_flag = english_speaking_flag
 				}
 				add_opinion_modifier = {
 					target = PREV
@@ -1831,7 +1837,6 @@ shared_focus = {
 				}
 			}
 			set_temp_variable = { tag_index = USA }
-			set_temp_variable = { influence_target = THIS }
 			set_temp_variable = { percent_change = 2 }
 			change_influence_percentage = yes
 		}
@@ -1889,7 +1894,7 @@ shared_focus = {
 			if = { limit = { NOT = { has_completed_focus = AFRICAN_UNION_shared_focus_speak_swahili } } unlock_national_focus = AFRICAN_UNION_shared_focus_speak_swahili }
 			every_other_country = {
 				limit = {
-					Swahili_Speaking = yes
+					has_country_flag = swahili_speaking_flag
 				}
 				add_opinion_modifier = {
 					target = PREV
@@ -1992,7 +1997,6 @@ shared_focus = {
 					}
 					set_temp_variable = { tag_index = THIS }
 				}
-				set_temp_variable = { influence_target = THIS }
 				set_temp_variable = { percent_change = 2 }
 				change_influence_percentage = yes
 			}

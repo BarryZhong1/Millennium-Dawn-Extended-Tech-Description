@@ -616,14 +616,11 @@ focus_tree = {
 				}
 				newline = yes
 				hidden_effect = {
-					random_list = {
-						50 = {
-							country_event = {
-								id = belarus_md.1
-								days = 5
-							}
-						}
-						50 = {
+					random = {
+						chance = 50
+						country_event = {
+							id = belarus_md.1
+							days = 5
 						}
 					}
 				}
@@ -3737,14 +3734,7 @@ focus_tree = {
 					create_unit = {
 						division = "name = \"GCO Infantry Brigade\" division_template = \"GCO Infantry Brigade\" start_experience_factor = 0.2"
 						owner = BLR
-					}
-				}
-				random_owned_controlled_state = {
-					limit = { ROOT = { has_full_control_of_state = PREV } }
-					prioritize = { 703 }
-					create_unit = {
-						division = "name = \"GCO Infantry Brigade\" division_template = \"GCO Infantry Brigade\" start_experience_factor = 0.2"
-						owner = BLR
+						count = 2
 					}
 				}
 			}
@@ -4211,7 +4201,6 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus BLR_pro_poland_propoganda"
 			unlock_decision_category_tooltip = BLR_pol_revol_category
 			set_temp_variable = { percent_change = 5.2 }
-			set_temp_variable = { tag_index = BLR }
 			set_temp_variable = { influence_target = POL }
 			change_influence_percentage = yes
 			add_opinion_modifier = {
@@ -4258,7 +4247,6 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus BLR_open_border_with_pol"
 			set_temp_variable = { percent_change = 3.1 }
-			set_temp_variable = { tag_index = BLR }
 			set_temp_variable = { influence_target = POL }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 3.1 }
@@ -4467,14 +4455,15 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_ANNEXATION }
 
 		available = {
-			POL = { nationalist_right_wing_populists_are_in_power = yes }
+			POL = {
+				nationalist_right_wing_populists_are_in_power = yes
+
+				influence_higher_30 = yes
+			}
 			country_exists = POL
 			OR = {
 				nationalist_right_wing_populists_are_in_power = yes
 				nationalist_monarchists_are_in_power = yes
-			}
-			POL = {
-				influence_higher_30 = yes
 			}
 		}
 
@@ -5216,9 +5205,9 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus BLR_GrodnoAzot"
 			custom_effect_tooltip = BLR_grodno_TT
 			hidden_effect = {
-				set_variable = { BLR.current_azot_capacity = 0 }
-				set_variable = { BLR.current_max_azot_capacity = 3 }
-				set_variable = { BLR.max_azot_capacity = 7 }
+				set_variable = { current_azot_capacity = 0 }
+				set_variable = { current_max_azot_capacity = 3 }
+				set_variable = { max_azot_capacity = 7 }
 				add_ideas = BLR_azot_fertilizers_income
 			}
 		}
@@ -5657,6 +5646,7 @@ focus_tree = {
 			modify_treasury_effect = yes
 			703 = {
 				set_temp_variable = { electric_addition = 0.430 }
+				set_temp_variable = { storage_addition = 0.10 }
 				add_hydroelectric_energy_production_effect = yes
 			}
 			newline = yes
@@ -5699,7 +5689,7 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus BLR_Chinese_kal"
 			CHI = { country_event = belarus_azot.1 }
 			hidden_effect = {
-				set_variable = { BLR.max_azot_capacity = 8 }
+				set_variable = { max_azot_capacity = 8 }
 			}
 		}
 
@@ -7811,11 +7801,10 @@ focus_tree = {
 			add_relative_party_popularity = yes
 			set_temp_variable = { modify_batka = 3 }
 			modify_batka_support = yes
-			every_other_country = {
-				limit = { has_idea = EU_member }
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
 				set_temp_variable = { percent_change = 3 }
-				set_temp_variable = { tag_index = ROOT.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 			}
 		}
@@ -8127,15 +8116,12 @@ focus_tree = {
 			set_temp_variable = { treasury_change = 2.50 }
 			modify_treasury_effect = yes
 			set_temp_variable = { percent_change = 1.5 }
-			set_temp_variable = { tag_index = BLR }
 			set_temp_variable = { influence_target = SOV }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 1.5 }
-			set_temp_variable = { tag_index = BLR }
 			set_temp_variable = { influence_target = AZE }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 1.5 }
-			set_temp_variable = { tag_index = BLR }
 			set_temp_variable = { influence_target = UKR }
 			change_influence_percentage = yes
 		}
@@ -8484,22 +8470,7 @@ focus_tree = {
 					create_unit = {
 						division = "name = \"Militia Brigade\" division_template = \"Militia Brigade\" start_experience_factor = 1"
 						owner = BLR
-					}
-				}
-				random_owned_controlled_state = {
-					limit = { ROOT = { has_full_control_of_state = PREV } }
-					prioritize = { 702 }
-					create_unit = {
-						division = "name = \"Militia Brigade\" division_template = \"Militia Brigade\" start_experience_factor = 1"
-						owner = BLR
-					}
-				}
-				random_owned_controlled_state = {
-					limit = { ROOT = { has_full_control_of_state = PREV } }
-					prioritize = { 704 }
-					create_unit = {
-						division = "name = \"Militia Brigade\" division_template = \"Militia Brigade\" start_experience_factor = 1"
-						owner = BLR
+						count = 3
 					}
 				}
 			}
@@ -8688,14 +8659,12 @@ focus_tree = {
 
 		available = {
 			emerging_reactionaries_are_in_power = yes
-			OR = {
-				NOT = {
-					SOV = {
-						nationalist_military_junta_are_in_power = yes
-						has_country_leader = {
-							name = "Yevgeny Prigozhin"
-							ruling_only = yes
-						}
+			NOT = {
+				SOV = {
+					nationalist_military_junta_are_in_power = yes
+					has_country_leader = {
+						name = "Yevgeny Prigozhin"
+						ruling_only = yes
 					}
 				}
 			}
@@ -9992,16 +9961,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus BLR_NATO_Membership_Campaign"
 			add_stability = -0.05
-			add_ideas = Major_Non_NATO_Ally
-			set_country_flag = Major_Non_NATO_Ally
-			custom_effect_tooltip = TT_ALL_NATO_MEMBER_NATIONS_GAIN
-			effect_tooltip = {
-				add_opinion_modifier = { target = BLR modifier = diplomatic_support }
-			}
-			for_each_scope_loop = {
-				array = global.nato_members
-				add_opinion_modifier = { target = BLR modifier = diplomatic_support }
-			}
+			NATO_major_non_nato_ally_join = yes
 		}
 
 		ai_will_do = {
@@ -10041,15 +10001,14 @@ focus_tree = {
 				dismantle_faction = yes
 			}
 			add_to_tech_sharing_group = Major_Non_NATO_Ally_Share
-			custom_effect_tooltip = TT_ALL_NATO_MEMBER_NATIONS_GAIN
-			effect_tooltip = {
-				add_opinion_modifier = { target = ROOT modifier = NATO_commitment }
-				reverse_add_opinion_modifier = { target = ROOT modifier = NATO_commitment }
-			}
 			for_each_scope_loop = {
 				array = global.nato_members
-				add_opinion_modifier = { target = ROOT modifier = NATO_commitment }
-				reverse_add_opinion_modifier = { target = ROOT modifier = NATO_commitment }
+				tooltip = TT_ALL_NATO_MEMBER_NATIONS_GAIN
+				if = {
+					limit = { NOT = { tag = ROOT } }
+					add_opinion_modifier = { target = ROOT modifier = NATO_commitment }
+					reverse_add_opinion_modifier = { target = ROOT modifier = NATO_commitment }
+				}
 			}
 		}
 
@@ -10196,11 +10155,9 @@ focus_tree = {
 		}
 
 		bypass = {
-			AND = {
-				NOT = { country_exists = LIT }
-				NOT = { country_exists = LAT }
-				NOT = { country_exists = EST }
-			}
+			NOT = { country_exists = LIT }
+			NOT = { country_exists = LAT }
+			NOT = { country_exists = EST }
 		}
 
 		completion_reward = {
@@ -10560,13 +10517,11 @@ focus_tree = {
 			add_relative_party_popularity = yes
 			if = {
 				limit = { NOT = { has_global_flag = GAME_RULE_eu_disabled } }
-				custom_effect_tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
-				effect_tooltip = {
-					add_opinion_modifier = { target = FRA modifier = supports_us }
-				}
-				hidden_effect = {
-					for_each_scope_loop = {
-						array = global.EU_member
+				for_each_scope_loop = {
+					array = global.EU_member
+					tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+					if = {
+						limit = { NOT = { tag = ROOT } }
 						add_opinion_modifier = { target = ROOT modifier = supports_us }
 					}
 				}
@@ -11956,7 +11911,7 @@ local_resources_chromium_factor = 0.05 }
 			change_small_medium_business_owners_opinion = yes
 			change_international_bankers_opinion = yes
 			change_landowners_opinion = yes
-			set_temp_Variable = { temp_opinion = 10 }
+			set_temp_variable = { temp_opinion = 10 }
 			change_labour_unions_opinion = yes
 			change_farmers_opinion = yes
 			change_communist_cadres_opinion = yes
@@ -12990,8 +12945,6 @@ local_resources_chromium_factor = 0.05 }
 					modifier = improve_trade
 				}
 				set_temp_variable = { percent_change = 2 }
-				set_temp_variable = { tag_index = ROOT.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 			}
 		}
@@ -13111,9 +13064,11 @@ local_resources_chromium_factor = 0.05 }
 		}
 
 		bypass = {
-			LIT = { has_communist_government = yes }
-			OR = {
-			LIT = { has_socialist_government = yes }
+			LIT = {
+				OR = {
+					has_communist_government = yes
+					has_socialist_government = yes
+				}
 			}
 		}
 

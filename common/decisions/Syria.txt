@@ -255,7 +255,7 @@ Syria_decisions = {
 				has_war_with = FSA
 				has_war_with = NUS
 			}
-			ROJ = { exists = yes }
+			country_exists = ROJ
 			NOT = { has_country_flag = Rojava_Negotiations }
 		}
 
@@ -866,10 +866,12 @@ Syria_greater_syria_decisions = {
 		}
 
 		available = {
-			HOU = { is_subject = no }
-			HOU = { is_in_faction = no }
 			has_idea = shia
-			HOU = { has_idea = shia }
+			HOU = {
+				is_subject = no
+				is_in_faction = no
+				has_idea = shia
+			}
 		}
 
 		cost = 150
@@ -1316,7 +1318,7 @@ Syria_damascus_spring_organization = {
 			log = "[GetDateText]: [Root.GetName]: Mission timeout sectarian_groups_start_to_seek_independence"
 			country_event = SyriaFocus.97
 			if = {
-				limit = { has_idea = citizenship_denied_kurds }
+				limit = { has_idea = idea_syrian_kurds_without_citizenships }
 				country_event = SyriaFocus.111
 			}
 		}
@@ -1379,10 +1381,8 @@ Syria_economic_investments = {
 	hisiyah_industrial_expansion = {
 		icon = GFX_decision_economy
 		visible = {
-			AND = {
-				has_completed_focus = SYR_legalise_private_banking
-				has_country_flag = hisiyah_invigorated
-			}
+			has_completed_focus = SYR_legalise_private_banking
+			has_country_flag = hisiyah_invigorated
 		}
 		available = {
 			controls_state = 188
@@ -1487,10 +1487,8 @@ Syria_economic_investments = {
 	aleppan_economy_booming = {
 		icon = GFX_decision_economy
 		visible = {
-			AND = {
-				has_completed_focus = SYR_legalise_private_banking
-				has_country_flag = aleppan_slums_cleared
-			}
+			has_completed_focus = SYR_legalise_private_banking
+			has_country_flag = aleppan_slums_cleared
 		}
 		available = {
 			controls_state = 566
@@ -1595,10 +1593,8 @@ Syria_economic_investments = {
 	damascus_private_sector_booming = {
 		icon = GFX_decision_economy
 		visible = {
-			AND = {
-				has_completed_focus = SYR_economic_revitalization
-				has_country_flag = damascus_private_sector_encouraged
-			}
+			has_completed_focus = SYR_economic_revitalization
+			has_country_flag = damascus_private_sector_encouraged
 		}
 		available = {
 			controls_state = 186
@@ -1901,20 +1897,18 @@ Syria_economic_investments = {
 				limit = { controls_state = 193 }
 				if = {
 					limit = {
-						AND = {
-							OR = {
-								check_variable = {
-									kurdish_status  > 49
-								}
-								NOT = {
-									has_dynamic_modifier = {
-										modifier = kurdish_political_inclusiveness_dynamic_modifier
-										scope = SYR
-									}
+						OR = {
+							check_variable = {
+								kurdish_status  > 49
+							}
+							NOT = {
+								has_dynamic_modifier = {
+									modifier = kurdish_political_inclusiveness_dynamic_modifier
+									scope = SYR
 								}
 							}
-							has_completed_focus = SYR_legalise_private_banking
 						}
+						has_completed_focus = SYR_legalise_private_banking
 					}
 					193 = {
 						add_extra_state_shared_building_slots = 1

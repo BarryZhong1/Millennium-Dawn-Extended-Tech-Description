@@ -1,4 +1,4 @@
-﻿# Author(s): AngriestBird, Droid, IranianMaggot
+# Author(s): AngriestBird, Droid, IranianMaggot
 focus_tree = {
 	id = norway_focus
 
@@ -138,7 +138,6 @@ focus_tree = {
 			}
 			newline = yes
 			set_temp_variable = { percent_change = 2 }
-			set_temp_variable = { tag_index = NOR }
 			set_temp_variable = { influence_target = ENG }
 			change_influence_percentage = yes
 			newline = yes
@@ -342,7 +341,6 @@ focus_tree = {
 			}
 			newline = yes
 			set_temp_variable = { percent_change = 3 }
-			set_temp_variable = { tag_index = NOR }
 			set_temp_variable = { influence_target = ENG }
 			change_influence_percentage = yes
 		}
@@ -802,12 +800,10 @@ focus_tree = {
 				}
 				newline = yes
 				set_temp_variable = { percent_change = 5 }
-				set_temp_variable = { tag_index = NOR }
 				set_temp_variable = { influence_target = FIN }
 				change_influence_percentage = yes
 				newline = yes
 				set_temp_variable = { percent_change = 5 }
-				set_temp_variable = { tag_index = NOR }
 				set_temp_variable = { influence_target = SWE }
 				change_influence_percentage = yes
 				newline = yes
@@ -2047,14 +2043,13 @@ focus_tree = {
 
 		x = 2
 		y = 1
-		available = {
-			western_social_democrats_are_in_power = yes
-		}
+
 		cost = 7.15
 		search_filters = { FOCUS_FILTER_POLITICAL }
 		prerequisite = { focus = NOR_modernization_of_the_welfare_state }
 		relative_position_id = NOR_modernization_of_the_welfare_state
 		available = {
+			western_social_democrats_are_in_power = yes
 			542 = {
 				is_owned_and_controlled_by = NOR
 			}
@@ -2188,17 +2183,14 @@ focus_tree = {
 			army_experience = 25
 			newline = yes
 			set_temp_variable = { percent_change = 2 }
-			set_temp_variable = { tag_index = NOR }
 			set_temp_variable = { influence_target = GER }
 			change_influence_percentage = yes
 			newline = yes
 			set_temp_variable = { percent_change = 2 }
-			set_temp_variable = { tag_index = NOR }
 			set_temp_variable = { influence_target = POL }
 			change_influence_percentage = yes
 			newline = yes
 			set_temp_variable = { percent_change = 2 }
-			set_temp_variable = { tag_index = NOR }
 			set_temp_variable = { influence_target = DEN }
 			change_influence_percentage = yes
 		}
@@ -2258,7 +2250,6 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus NOR_weight_behind_gaza"
 			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = NOR }
 			set_temp_variable = { influence_target = PAL }
 			change_influence_percentage = yes
 			newline = yes
@@ -2614,7 +2605,6 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus NOR_relieve_pressure_from_greece"
 			set_temp_variable = { percent_change = 2 }
-			set_temp_variable = { tag_index = NOR }
 			set_temp_variable = { influence_target = GRE }
 			change_influence_percentage = yes
 			newline = yes
@@ -2666,22 +2656,15 @@ focus_tree = {
 		relative_position_id = NOR_christan_peoples_party
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus NOR_our_european_allies"
-			custom_effect_tooltip = TT_ALL_NATO_MEMBER_NATIONS_GAIN
-			effect_tooltip = {
-				add_opinion_modifier = { target = NOR modifier = diplomatic_proximity }
-				set_temp_variable = { percent_change = 2 }
-				set_temp_variable = { tag_index = NOR }
-				set_temp_variable = { influence_target = THIS }
-				change_influence_percentage = yes
-			}
 			for_each_scope_loop = {
 				array = global.nato_members
-
-				add_opinion_modifier = { target = NOR modifier = diplomatic_proximity }
-				set_temp_variable = { percent_change = 2 }
-				set_temp_variable = { tag_index = NOR }
-				set_temp_variable = { influence_target = THIS }
-				change_influence_percentage = yes
+				tooltip = TT_ALL_NATO_MEMBER_NATIONS_GAIN
+				if = {
+					limit = { NOT = { tag = ROOT } }
+					add_opinion_modifier = { target = NOR modifier = diplomatic_proximity }
+					set_temp_variable = { percent_change = 2 }
+					change_influence_percentage = yes
+				}
 			}
 		}
 
@@ -2731,12 +2714,10 @@ focus_tree = {
 			one_random_industrial_complex = yes
 			newline = yes
 			set_temp_variable = { percent_change = 2 }
-			set_temp_variable = { tag_index = NOR }
 			set_temp_variable = { influence_target = ICE }
 			change_influence_percentage = yes
 			newline = yes
 			set_temp_variable = { percent_change = 2 }
-			set_temp_variable = { tag_index = NOR }
 			set_temp_variable = { influence_target = LIC }
 			change_influence_percentage = yes
 			newline = yes
@@ -3211,14 +3192,13 @@ focus_tree = {
 
 		x = -1
 		y = 4
-		available = {
-			nationalist_right_wing_populists_are_in_power = yes
-		}
+
 		cost = 7.15
 		search_filters = { FOCUS_FILTER_POLITICAL }
 		prerequisite = { focus = NOR_reaffirm_oil_state }
 		relative_position_id = NOR_party_of_progress
 		available = {
+			nationalist_right_wing_populists_are_in_power = yes
 			31 = {
 				is_owned_and_controlled_by = NOR
 			}
