@@ -12,385 +12,6 @@ focus_tree = {
 	continuous_focus_position = { x = 400 y = 3040 }
 
 	focus = {
-		id = HKG_combat_vested_interests
-		icon = anti_establishment
-		x = 0
-		y = 0
-		cost = 10
-		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_CORRUPTION }
-
-		completion_reward = {
-			add_political_power = 100
-			add_stability = -0.01
-			log = "[GetDateText]: [This.GetName]: focus HKG_combat_vested_interests executed"
-		}
-
-		ai_will_do = {
-			base = 3
-		}
-	}
-
-	focus = {
-		id = HKG_take_on_heung_ye_kuk
-		icon = Heung_Yee_Kuk
-		x = -3
-		y = 1
-		relative_position_id = HKG_combat_vested_interests
-		cost = 10
-		prerequisite = { focus = HKG_combat_vested_interests }
-		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
-
-		completion_reward = {
-			add_political_power = 50
-			set_temp_variable = { temp_opinion = -3 }
-			change_farmers_opinion = yes
-			log = "[GetDateText]: [This.GetName]: focus HKG_take_on_heung_ye_kuk executed"
-		}
-
-		ai_will_do = {
-			base = 3
-		}
-	}
-
-	focus = {
-		id = HKG_repeal_small_house_policy
-		icon = HKG_repeal_small_house
-		x = -3
-		y = 2
-		relative_position_id = HKG_combat_vested_interests
-		cost = 10
-		prerequisite = { focus = HKG_take_on_heung_ye_kuk }
-		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
-
-		completion_reward = {
-			swap_ideas = {
-				remove_idea = disloyal_heung_yee_kuk
-				add_idea = disloyal_heung_yee_kuk_1
-			}
-			set_temp_variable = { party_index = 6 }
-			set_temp_variable = { party_popularity_increase = 0.05 }
-			set_temp_variable = { temp_outlook_increase = 0.05 }
-			add_relative_party_popularity = yes
-			set_temp_variable = { temp_opinion = -5 }
-			change_farmers_opinion = yes
-			log = "[GetDateText]: [This.GetName]: focus HKG_repeal_small_house_policy executed"
-		}
-
-		ai_will_do = {
-			base = 2
-			modifier = { factor = 0 has_government = communism }
-		}
-	}
-
-	focus = {
-		id = HKG_reform_heung_yee_kuk
-		icon = reform_heung_yee_kuk
-		x = -4
-		y = 3
-		relative_position_id = HKG_combat_vested_interests
-		cost = 10
-		prerequisite = { focus = HKG_repeal_small_house_policy }
-		mutually_exclusive = { focus = HKG_dissolve_heung_yee_kuk }
-		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
-
-		completion_reward = {
-			add_political_power = -100
-			add_stability = 0.05
-			set_temp_variable = { temp_opinion = 10 }
-			change_farmers_opinion = yes
-			swap_ideas = {
-				remove_idea = disloyal_heung_yee_kuk_1
-				add_idea = loyal_heung_yee_kuk
-			}
-			log = "[GetDateText]: [This.GetName]: focus HKG_reform_heung_yee_kuk executed"
-		}
-
-		ai_will_do = {
-			base = 3
-			modifier = { factor = 2 has_government = democratic }
-		}
-	}
-
-	focus = {
-		id = HKG_dissolve_heung_yee_kuk
-		icon = dissolve_heung_yee_kuk
-		x = -2
-		y = 3
-		relative_position_id = HKG_combat_vested_interests
-		cost = 10
-		prerequisite = { focus = HKG_repeal_small_house_policy }
-		mutually_exclusive = { focus = HKG_reform_heung_yee_kuk }
-		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
-		available = {
-			NOT = { has_idea = bureau_01 }
-			NOT = { has_idea = bureau_02 }
-		}
-
-		completion_reward = {
-			add_political_power = -25
-			add_stability = -0.10
-			set_temp_variable = { temp_opinion = 5 }
-			change_landowners_opinion = yes
-			swap_ideas = {
-				remove_idea = farmers
-				add_idea = landowners
-			}
-			effect_tooltip = {
-				swap_ideas = {
-					remove_idea = disloyal_heung_yee_kuk_1
-					add_idea = disloyal_heung_yee_kuk_2
-				}
-			}
-			hidden_effect = {
-				remove_ideas = disloyal_heung_yee_kuk_1
-				add_timed_idea = {
-					idea = disloyal_heung_yee_kuk_2
-					days = 480
-				}
-			}
-			log = "[GetDateText]: [This.GetName]: focus HKG_dissolve_heung_yee_kuk executed"
-		}
-
-		ai_will_do = {
-			base = 1
-			modifier = { factor = 2 has_government = communism }
-		}
-	}
-
-	focus = {
-		id = HKG_take_on_politicians
-		icon = dangerous_deal3
-		x = 3
-		y = 1
-		relative_position_id = HKG_combat_vested_interests
-		cost = 10
-		prerequisite = { focus = HKG_combat_vested_interests }
-		search_filters = { FOCUS_FILTER_CORRUPTION }
-
-		completion_reward = {
-			add_political_power = -50
-						add_stability = -0.01
-			            decrease_corruption = yes
-						log = "[GetDateText]: [This.GetName]: focus HKG_take_on_politicians executed"
-		}
-
-		ai_will_do = {
-			base = 2
-			modifier = { factor = 0 has_government = democratic }
-		}
-	}
-
-	focus = {
-		id = HKG_ensure_autonomy_of_ICAC
-		icon = ICAC
-		x = 3
-		y = 2
-		relative_position_id = HKG_combat_vested_interests
-		cost = 10
-		prerequisite = { focus = HKG_take_on_politicians }
-		search_filters = { FOCUS_FILTER_CORRUPTION }
-
-		completion_reward = {
-			swap_ideas = {
-				remove_idea = corrupt_politicians
-				add_idea = corrupt_politicians_1
-			}
-			log = "[GetDateText]: [This.GetName]: focus HKG_ensure_autonomy_of_ICAC executed"
-		}
-
-		ai_will_do = {
-			base = 3
-			modifier = { factor = 2 has_government = democratic }
-			modifier = { factor = 0 has_government = communism }
-		}
-	}
-
-	focus = {
-		id = HKG_anti_graft_investigations
-		icon = anti_establishment
-		x = 3
-		y = 3
-		relative_position_id = HKG_combat_vested_interests
-		cost = 10
-		prerequisite = { focus = HKG_ensure_autonomy_of_ICAC }
-		search_filters = { FOCUS_FILTER_CORRUPTION }
-
-		completion_reward = {
-			swap_ideas = {
-				remove_idea = corrupt_politicians_1
-				add_idea = corrupt_politicians_2
-			}
-			log = "[GetDateText]: [This.GetName]: focus HKG_anti_graft_investigations executed"
-		}
-
-		ai_will_do = {
-			base = 2
-		}
-	}
-
-	focus = {
-		id = HKG_take_on_triads
-		icon = infilitration
-		x = 0
-		y = 1
-		relative_position_id = HKG_combat_vested_interests
-		cost = 10
-		prerequisite = { focus = HKG_combat_vested_interests }
-		search_filters = { FOCUS_FILTER_STABILITY }
-
-		completion_reward = {
-			add_war_support = -0.01
-			custom_effect_tooltip = triads_dynamic_modifies_TT
-			set_temp_variable = { HKG_triads_delta = 0.25 }
-			triads_update_political_power_factor = yes
-			unlock_decision_category_tooltip = HKG_triad_decision_categories
-			log = "[GetDateText]: [This.GetName]: focus HKG_take_on_triads executed"
-		}
-
-		ai_will_do = {
-			base = 4
-		}
-	}
-
-	focus = {
-		id = HKG_increase_funding_for_OCTB
-		icon = united_states_dollar
-		x = 0
-		y = 2
-		relative_position_id = HKG_combat_vested_interests
-		cost = 10
-		prerequisite = { focus = HKG_take_on_triads }
-		search_filters = { FOCUS_FILTER_STABILITY }
-
-		completion_reward = {
-			set_temp_variable = { treasury_change = 0.5 }
-			modify_treasury_effect = yes
-			set_temp_variable = { HKG_modify_triad_strength = -5 }
-			HKG_modify_triad_strength = yes
-			log = "[GetDateText]: [This.GetName]: focus HKG_increase_funding_for_OCTB executed"
-		}
-
-		ai_will_do = {
-			base = 3
-			modifier = { factor = 0 has_active_mission = bankruptcy_incoming_collapse }
-		}
-	}
-
-	focus = {
-		id = HKG_step_up_police_raids
-		icon = defense
-		x = 0
-		y = 3
-		relative_position_id = HKG_combat_vested_interests
-		cost = 10
-		prerequisite = { focus = HKG_increase_funding_for_OCTB }
-		search_filters = { FOCUS_FILTER_STABILITY }
-
-		completion_reward = {
-			set_temp_variable = { treasury_change = -0.25 }
-			modify_treasury_effect = yes
-			set_temp_variable = { HKG_modify_triad_strength = -5 }
-			HKG_modify_triad_strength = yes
-			unlock_decision_tooltip = HKG_Gong_ou_police_jointly_arrest_triad_members
-			custom_effect_tooltip = HKG_strength_effect_police_raids_tt
-			log = "[GetDateText]: [This.GetName]: focus HKG_step_up_police_raids executed"
-		}
-
-		ai_will_do = {
-			base = 3
-		}
-	}
-
-	focus = {
-		id = HKG_crack_down_on_WSW_triad
-		icon = fight_with_WSW
-		x = -3
-		y = 4
-		relative_position_id = HKG_combat_vested_interests
-		cost = 5
-		prerequisite = { focus = HKG_step_up_police_raids }
-		search_filters = { FOCUS_FILTER_STABILITY }
-
-		completion_reward = {
-			custom_effect_tooltip = triads_dynamic_modifies_TT
-			set_temp_variable = { HKG_triads_delta = 0.25 }
-			triads_update_political_power_factor = yes
-			unlock_decision_tooltip = HKG_combat_underground_prostitution
-			log = "[GetDateText]: [This.GetName]: focus HKG_crack_down_on_WSW_triad executed"
-		}
-
-		ai_will_do = {
-			base = 2
-		}
-	}
-
-	focus = {
-		id = HKG_crack_down_on_SYO_triad
-		icon = fight_with_SYO
-		x = -1
-		y = 4
-		relative_position_id = HKG_combat_vested_interests
-		cost = 5
-		prerequisite = { focus = HKG_step_up_police_raids }
-		search_filters = { FOCUS_FILTER_STABILITY }
-
-		completion_reward = {
-			custom_effect_tooltip = triads_dynamic_modifies_TT
-			set_temp_variable = { HKG_triads_delta = 0.25 }
-			triads_update_political_power_factor = yes
-			unlock_decision_tooltip = HKG_intensify_efforts_to_combat_human_trafficking
-			log = "[GetDateText]: [This.GetName]: focus HKG_crack_down_on_SYO_triad executed"
-		}
-
-		ai_will_do = {
-			base = 2
-		}
-	}
-
-	focus = {
-		id = HKG_crack_down_on_14K_triad
-		icon = fight_with_14K
-		x = 1
-		y = 4
-		relative_position_id = HKG_combat_vested_interests
-		cost = 5
-		prerequisite = { focus = HKG_step_up_police_raids }
-		search_filters = { FOCUS_FILTER_STABILITY }
-
-		completion_reward = {
-			unlock_decision_tooltip = HKG_tough_on_drug_trafficking
-			log = "[GetDateText]: [This.GetName]: focus HKG_crack_down_on_14K_triad executed"
-		}
-
-		ai_will_do = {
-			base = 2
-		}
-	}
-
-	focus = {
-		id = HKG_crack_down_on_Luen_group_triad
-		icon = fight_with_LYS
-		x = 3
-		y = 4
-		relative_position_id = HKG_combat_vested_interests
-		cost = 5
-		prerequisite = { focus = HKG_step_up_police_raids }
-		search_filters = { FOCUS_FILTER_STABILITY }
-
-		completion_reward = {
-			custom_effect_tooltip = triads_dynamic_modifies_TT
-			set_temp_variable = { HKG_triads_delta = 0.25 }
-			triads_update_political_power_factor = yes
-			unlock_decision_tooltip = HKG_enhance_crackdown_on_illegal_gambling
-			log = "[GetDateText]: [This.GetName]: focus HKG_crack_down_on_Luen_group_triad executed"
-		}
-
-		ai_will_do = {
-			base = 2
-		}
-	}
-
-	focus = {
 		id = HKG_loyal_puppet
 		icon = align_to_china
 		x = 8
@@ -398,7 +19,6 @@ focus_tree = {
 		cost = 10
 		mutually_exclusive = { focus = HKG_great_hong_kong_nation focus = HKG_little_bird_under_british_wing focus = HKG_city_state_idea }
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_TFV_AUTONOMY }
-		available = { has_completed_focus = HKG_combat_vested_interests }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HKG_loyal_puppet"
 			add_political_power = 50
@@ -573,7 +193,6 @@ focus_tree = {
 		cost = 10
 		mutually_exclusive = { focus = HKG_little_bird_under_british_wing focus = HKG_city_state_idea focus = HKG_loyal_puppet }
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_ARMY FOCUS_FILTER_MANPOWER }
-		available = { has_completed_focus = HKG_combat_vested_interests }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HKG_great_hong_kong_nation"
 			add_political_power = 100
@@ -724,7 +343,6 @@ focus_tree = {
 		cost = 10
 		mutually_exclusive = { focus = HKG_great_hong_kong_nation focus = HKG_city_state_idea focus = HKG_loyal_puppet }
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_FOREIGN_POLICY FOCUS_FILTER_CMW }
-		available = { has_completed_focus = HKG_combat_vested_interests }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HKG_little_bird_under_british_wing"
 			add_political_power = 50
@@ -885,7 +503,6 @@ focus_tree = {
 		cost = 10
 		mutually_exclusive = { focus = HKG_great_hong_kong_nation focus = HKG_little_bird_under_british_wing focus = HKG_loyal_puppet }
 		search_filters = { FOCUS_FILTER_POLITICAL }
-		available = { has_completed_focus = HKG_combat_vested_interests }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HKG_city_state_idea"
 			add_political_power = 75
@@ -1037,16 +654,13 @@ focus_tree = {
 	focus = {
 		id = HKG_public_housing_problem
 		icon = house
-		x = -4
-		y = 5
+		x = 0
+		y = 0
 		cost = 10
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HKG_public_housing_problem"
-			add_political_power = 50
-			add_stability = 0.02
-			news_event = { id = hongkong_housing.1 days = 3 }
 		}
 
 		ai_will_do = {
@@ -1062,25 +676,53 @@ focus_tree = {
 		relative_position_id = HKG_public_housing_problem
 		cost = 10
 		prerequisite = { focus = HKG_public_housing_problem }
-		mutually_exclusive = { focus = HKG_lock_housing_price }
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HKG_sun_housing_policy"
-			add_political_power = 50
-			add_stability = -0.03
-			add_ideas = HKG_sun_housing_policy
-			set_temp_variable = { temp_opinion = 10 }
-			change_landowners_opinion = yes
-			set_temp_variable = { temp_opinion = 5 }
-			change_industrial_conglomerates_opinion = yes
-			set_temp_variable = { temp_opinion = -10 }
-			change_labour_unions_opinion = yes
 		}
 
 		ai_will_do = {
 			base = 3
 			modifier = { factor = 0 has_government = communism }
+		}
+	}
+
+	focus = {
+		id = HKG_small_house_policy
+		icon = HKG_repeal_small_house
+		x = -7
+		y = 2
+		relative_position_id = HKG_public_housing_problem
+		cost = 10
+		prerequisite = { focus = HKG_sun_housing_policy }
+		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus HKG_small_house_policy"
+		}
+
+		ai_will_do = {
+			base = 1
+		}
+	}
+
+	focus = {
+		id = HKG_brownfield_consolidation
+		icon = focus_generic_supply_line
+		x = -7
+		y = 3
+		relative_position_id = HKG_public_housing_problem
+		cost = 10
+		prerequisite = { focus = HKG_small_house_policy }
+		search_filters = { FOCUS_FILTER_INFRASTRUCTURE FOCUS_FILTER_ADD_BUILDING }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus HKG_brownfield_consolidation"
+		}
+
+		ai_will_do = {
+			base = 1
 		}
 	}
 
@@ -1096,18 +738,50 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HKG_end_tenants_purchase_scheme"
-			add_stability = -0.04
-			set_temp_variable = { treasury_change = 1.5 }
-			modify_treasury_effect = yes
-			set_temp_variable = { temp_opinion = 5 }
-			change_landowners_opinion = yes
-			set_temp_variable = { temp_opinion = -5 }
-			change_labour_unions_opinion = yes
-			add_popularity = { ideology = democratic popularity = -0.02 }
 		}
 
 		ai_will_do = {
 			base = 1
+		}
+	}
+
+	focus = {
+		id = HKG_revitalise_private_market
+		icon = liberalization
+		x = -5
+		y = 3
+		relative_position_id = HKG_public_housing_problem
+		cost = 10
+		prerequisite = { focus = HKG_end_tenants_purchase_scheme }
+		search_filters = { FOCUS_FILTER_ECONOMY FOCUS_FILTER_INTERNAL_AFFAIRS }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus HKG_revitalise_private_market"
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 0 has_government = communism }
+		}
+	}
+
+	focus = {
+		id = HKG_relax_mortgage_rules
+		icon = goal_JAP_valuedown
+		x = -5
+		y = 4
+		relative_position_id = HKG_public_housing_problem
+		cost = 10
+		prerequisite = { focus = HKG_revitalise_private_market }
+		search_filters = { FOCUS_FILTER_ECONOMY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus HKG_relax_mortgage_rules"
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = { factor = 0 has_government = communism }
 		}
 	}
 
@@ -1123,13 +797,6 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HKG_suspend_home_ownership_scheme"
-			add_stability = -0.03
-			set_temp_variable = { treasury_change = 1.0 }
-			modify_treasury_effect = yes
-			set_temp_variable = { temp_opinion = 8 }
-			change_landowners_opinion = yes
-			set_temp_variable = { temp_opinion = -5 }
-			change_labour_unions_opinion = yes
 		}
 
 		ai_will_do = {
@@ -1149,14 +816,6 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HKG_curtail_land_supply"
-			add_stability = -0.03
-			set_temp_variable = { treasury_change = 2.0 }
-			modify_treasury_effect = yes
-			add_ideas = HKG_curtailed_land_supply
-			set_temp_variable = { temp_opinion = 10 }
-			change_landowners_opinion = yes
-			set_temp_variable = { temp_opinion = -8 }
-			change_labour_unions_opinion = yes
 		}
 
 		ai_will_do = {
@@ -1179,11 +838,6 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HKG_regulate_sale_of_residential_buildings"
-			add_political_power = 25
-			add_stability = 0.02
-			set_temp_variable = { treasury_change = 0.5 }
-			modify_treasury_effect = yes
-			decrease_corruption = yes
 		}
 
 		ai_will_do = {
@@ -1199,27 +853,15 @@ focus_tree = {
 		relative_position_id = HKG_public_housing_problem
 		cost = 10
 		prerequisite = { focus = HKG_public_housing_problem }
-		mutually_exclusive = { focus = HKG_sun_housing_policy }
 		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HKG_lock_housing_price"
-			add_political_power = 50
-			add_stability = 0.05
-			set_temp_variable = { treasury_change = -2.0 }
-			modify_treasury_effect = yes
-			add_ideas = HKG_locked_housing_market
-			set_temp_variable = { temp_opinion = 10 }
-			change_labour_unions_opinion = yes
-			set_temp_variable = { temp_opinion = -10 }
-			change_landowners_opinion = yes
-			set_temp_variable = { temp_opinion = -5 }
-			change_industrial_conglomerates_opinion = yes
 		}
 
 		ai_will_do = {
 			factor = 1
-		
+
 			modifier = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
@@ -1239,20 +881,11 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HKG_expand_home_ownership_scheme"
-			add_stability = 0.05
-			set_temp_variable = { treasury_change = -3.0 }
-			modify_treasury_effect = yes
-			595 = {
-				add_extra_state_shared_building_slots = 1
-			}
-			set_temp_variable = { temp_opinion = 8 }
-			change_labour_unions_opinion = yes
-			add_popularity = { ideology = democratic popularity = 0.02 }
 		}
 
 		ai_will_do = {
 			factor = 1
-		
+
 			modifier = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
@@ -1272,14 +905,82 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HKG_let_government_hold_companies"
-			add_political_power = -75
-			add_ideas = HKG_government_real_estate_holding
-			set_temp_variable = { temp_opinion = -15 }
-			change_landowners_opinion = yes
-			set_temp_variable = { temp_opinion = -10 }
-			change_industrial_conglomerates_opinion = yes
-			set_temp_variable = { temp_opinion = 10 }
-			change_labour_unions_opinion = yes
+		}
+
+		ai_will_do = {
+			base = 2
+		}
+	}
+
+	focus = {
+		id = HKG_vacancy_tax
+		icon = GENERIC_austerity_measures
+		x = 6
+		y = 2
+		relative_position_id = HKG_public_housing_problem
+		cost = 10
+		prerequisite = { focus = HKG_lock_housing_price }
+		search_filters = { FOCUS_FILTER_ECONOMY FOCUS_FILTER_INTERNAL_AFFAIRS }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus HKG_vacancy_tax"
+		}
+
+		ai_will_do = {
+			base = 2
+		}
+	}
+
+	focus = {
+		id = HKG_light_public_housing
+		icon = dutch_house
+		x = 6
+		y = 3
+		relative_position_id = HKG_public_housing_problem
+		cost = 10
+		prerequisite = { focus = HKG_vacancy_tax }
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_ADD_BUILDING }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus HKG_light_public_housing"
+		}
+
+		ai_will_do = {
+			base = 2
+		}
+	}
+
+	focus = {
+		id = HKG_tenancy_control
+		icon = people_control
+		x = 4
+		y = 3
+		relative_position_id = HKG_public_housing_problem
+		cost = 10
+		prerequisite = { focus = HKG_let_government_hold_companies }
+		search_filters = { FOCUS_FILTER_INTERNAL_AFFAIRS }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus HKG_tenancy_control"
+		}
+
+		ai_will_do = {
+			base = 2
+		}
+	}
+
+	focus = {
+		id = HKG_starter_homes_scheme
+		icon = dutch_house_social
+		x = 4
+		y = 4
+		relative_position_id = HKG_public_housing_problem
+		cost = 10
+		prerequisite = { focus = HKG_tenancy_control }
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_ADD_BUILDING }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus HKG_starter_homes_scheme"
 		}
 
 		ai_will_do = {
@@ -1300,21 +1001,11 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HKG_maintain_public_housing_construction"
-			add_stability = 0.04
-			set_temp_variable = { treasury_change = -2.5 }
-			modify_treasury_effect = yes
-			595 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
 		}
 
 		ai_will_do = {
 			factor = 1
-		
+
 			modifier = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
@@ -1334,18 +1025,11 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HKG_land_reclamation"
-			add_political_power = -25
-			set_temp_variable = { treasury_change = -8.0 }
-			modify_treasury_effect = yes
-			595 = {
-				add_extra_state_shared_building_slots = 3
-			}
-			add_popularity = { ideology = democratic popularity = -0.02 }
 		}
 
 		ai_will_do = {
 			factor = 1
-		
+
 			modifier = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
@@ -1365,16 +1049,11 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HKG_subsidised_sale_flats_project"
-			add_stability = 0.04
-			set_temp_variable = { treasury_change = -3.5 }
-			modify_treasury_effect = yes
-			set_temp_variable = { temp_opinion = 5 }
-			change_labour_unions_opinion = yes
 		}
 
 		ai_will_do = {
 			factor = 1
-		
+
 			modifier = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
@@ -1394,15 +1073,11 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HKG_my_home_purchase_scheme"
-			add_stability = 0.05
-			set_temp_variable = { treasury_change = -3.0 }
-			modify_treasury_effect = yes
-			add_popularity = { ideology = democratic popularity = 0.03 }
 		}
 
 		ai_will_do = {
 			factor = 1
-		
+
 			modifier = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
@@ -1424,29 +1099,184 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus HKG_green_form_subsidised_home_ownership_scheme"
-			add_political_power = 100
-			add_stability = 0.10
-			set_temp_variable = { treasury_change = -2.0 }
-			modify_treasury_effect = yes
-			add_ideas = HKG_resolved_housing_crisis
-			if = {
-				limit = { has_idea = HKG_curtailed_land_supply }
-				remove_ideas = HKG_curtailed_land_supply
-			}
-			if = {
-				limit = { has_idea = HKG_locked_housing_market }
-				remove_ideas = HKG_locked_housing_market
-			}
-			news_event = { id = hongkong_housing.2 days = 1 }
 		}
 
 		ai_will_do = {
 			factor = 1
-		
+
 			modifier = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
+		}
+	}
+
+	focus = {
+		id = HKG_artificial_islands
+		icon = goal_JAP_chinese_island_chain
+		x = -3
+		y = 6
+		relative_position_id = HKG_public_housing_problem
+		cost = 10
+		prerequisite = { focus = HKG_green_form_subsidised_home_ownership_scheme }
+		search_filters = { FOCUS_FILTER_INFRASTRUCTURE FOCUS_FILTER_ADD_BUILDING }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus HKG_artificial_islands"
+		}
+
+		ai_will_do = {
+			factor = 1
+
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+		}
+	}
+
+	focus = {
+		id = HKG_northern_metropolis
+		icon = dutch_house_upgrade
+		x = 0
+		y = 6
+		relative_position_id = HKG_public_housing_problem
+		cost = 10
+		prerequisite = { focus = HKG_green_form_subsidised_home_ownership_scheme }
+		search_filters = { FOCUS_FILTER_INFRASTRUCTURE FOCUS_FILTER_ADD_BUILDING }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus HKG_northern_metropolis"
+		}
+
+		ai_will_do = {
+			factor = 1
+
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+		}
+	}
+
+	focus = {
+		id = HKG_country_park_periphery
+		icon = green_projects
+		x = 3
+		y = 6
+		relative_position_id = HKG_public_housing_problem
+		cost = 10
+		prerequisite = { focus = HKG_green_form_subsidised_home_ownership_scheme }
+		search_filters = { FOCUS_FILTER_INFRASTRUCTURE FOCUS_FILTER_ADD_BUILDING }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus HKG_country_park_periphery"
+		}
+
+		ai_will_do = {
+			factor = 1
+
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+		}
+	}
+
+	focus = {
+		id = HKG_redevelop_old_estates
+		icon = dutch_house
+		x = -3
+		y = 7
+		relative_position_id = HKG_public_housing_problem
+		cost = 10
+		prerequisite = { focus = HKG_artificial_islands }
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_ADD_BUILDING }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus HKG_redevelop_old_estates"
+		}
+
+		ai_will_do = {
+			base = 2
+		}
+	}
+
+	focus = {
+		id = HKG_abolish_subdivided_flats
+		icon = house
+		x = 0
+		y = 7
+		relative_position_id = HKG_public_housing_problem
+		cost = 10
+		prerequisite = { focus = HKG_northern_metropolis }
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus HKG_abolish_subdivided_flats"
+		}
+
+		ai_will_do = {
+			base = 2
+		}
+	}
+
+	focus = {
+		id = HKG_urban_renewal_push
+		icon = SER_Goverment_building
+		x = 3
+		y = 7
+		relative_position_id = HKG_public_housing_problem
+		cost = 10
+		prerequisite = { focus = HKG_country_park_periphery }
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_ADD_BUILDING }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus HKG_urban_renewal_push"
+		}
+
+		ai_will_do = {
+			base = 2
+		}
+	}
+
+	focus = {
+		id = HKG_smart_city_housing
+		icon = recycle_waste
+		x = 0
+		y = 8
+		relative_position_id = HKG_public_housing_problem
+		cost = 10
+		prerequisite = { focus = HKG_redevelop_old_estates }
+		prerequisite = { focus = HKG_abolish_subdivided_flats }
+		prerequisite = { focus = HKG_urban_renewal_push }
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_RESEARCH }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus HKG_smart_city_housing"
+		}
+
+		ai_will_do = {
+			base = 2
+		}
+	}
+
+	focus = {
+		id = HKG_housing_for_all
+		icon = house
+		x = 0
+		y = 9
+		relative_position_id = HKG_public_housing_problem
+		cost = 10
+		prerequisite = { focus = HKG_smart_city_housing }
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_AFFAIRS }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus HKG_housing_for_all"
+		}
+
+		ai_will_do = {
+			base = 3
 		}
 	}
 
@@ -2482,26 +2312,6 @@ focus_tree = {
 				factor = 0
 				has_active_mission = bankruptcy_incoming_collapse
 			}
-		}
-	}
-
-	focus = {
-		id = HKG_one_country_two_systems
-		icon = hong_kong2
-		x = 9
-		y = 0
-		cost = 7
-		search_filters = { FOCUS_FILTER_POLITICAL }
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus HKG_one_country_two_systems"
-			add_stability = -0.03
-			add_political_power = 15
-			country_event = { id = HKG_gen.1 days = 3 }
-		}
-
-		ai_will_do = {
-			base = 5
 		}
 	}
 
