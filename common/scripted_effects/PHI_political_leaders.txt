@@ -3,43 +3,73 @@
 
 set_leader_PHI = {
 	# Lakas–Christian Muslim Democrats (Lakas-CMD)
-	if = { limit = { has_country_flag = set_conservatism }
-
-		if = { limit = { check_variable = { conservatism_leader = 0 } }
-			add_to_variable = { conservatism_leader = 1 }
-			hidden_effect = { kill_country_leader = yes }
-			create_country_leader = {
-				name = "Gloria Macapagal Arroyo"
-				picture = "gfx/leaders/PHI/gloria_macapagal_arroyo.dds"
-				ideology = conservatism
-				traits = {
-					deceitful
-					teacher
-					captain_of_industry
-					experienced_banker
-					western_conservatism
-				}
-			}
-			if = { limit = { date < 2010.6.30 } set_temp_variable = { b = 1 } }
-		}
-
-		if = { limit = { check_variable = { conservatism_leader = 1 } NOT = { check_variable = { b = 1 } } }
-			add_to_variable = { conservatism_leader = 1 }
-			hidden_effect = { kill_country_leader = yes }
-			create_country_leader = {
-				name = "Gilbert Teodoro"
-				picture = "gfx/leaders/PHI/gilbert_teodoro.dds"
-				ideology = conservatism
-				traits = {
-					lawyer
-					rational
-					cautious
-					western_conservatism
-				}
-			}
-			if = { limit = { date < 2016.6.30 } set_temp_variable = { b = 1 } }
-		}
-
+	if = {
+    limit = {
+        has_country_flag = set_conservatism
+    }
+    if = {
+        limit = { check_variable = { conservatism_leader = 0 } }
+        add_to_variable = { conservatism_leader = 1 }
+        hidden_effect = { kill_country_leader = yes }
+        create_country_leader = {
+            name = "Gloria Macapagal Arroyo"
+            picture = "gfx/leaders/PHI/gloria_macapagal_arroyo.dds"
+            ideology = conservatism
+            traits = {
+                deceitful
+                teacher
+                captain_of_industry
+                experienced_banker
+                western_conservatism
+            }
+        }
+        if = { limit = { date < 2010.6.30 } set_temp_variable = { b = 1 } }
+    }
+if = {
+    limit = {
+        check_variable = { conservatism_leader = 1 }
+        NOT = { check_variable = { b = 1 } }
+        has_country_flag = PHI_edsa_dos_resolved
+        date < 2010.6.30
+    }
+    hidden_effect = { kill_country_leader = yes }
+    create_country_leader = {
+        name = "Gloria Macapagal Arroyo"
+        picture = "gfx/leaders/PHI/gloria_macapagal_arroyo.dds"
+        ideology = conservatism
+        traits = {
+            deceitful
+            teacher
+            captain_of_industry
+            experienced_banker
+            western_conservatism
+        }
+    }
+    if = { limit = { date < 2010.6.30 } set_temp_variable = { b = 1 } }
+}
+# EDSA Dos path — Teodoro takes over after 2010
+if = {
+    limit = {
+        check_variable = { conservatism_leader = 1 }
+        NOT = { check_variable = { b = 1 } }
+        has_country_flag = PHI_edsa_dos_resolved
+        date > 2010.6.29
+    }
+    add_to_variable = { conservatism_leader = 1 }
+    hidden_effect = { kill_country_leader = yes }
+    create_country_leader = {
+        name = "Gilbert Teodoro"
+        picture = "gfx/leaders/PHI/gilbert_teodoro.dds"
+        ideology = conservatism
+        traits = {
+            lawyer
+            rational
+            cautious
+            western_conservatism
+        }
+    }
+    if = { limit = { date < 2016.6.30 } set_temp_variable = { b = 1 } }
+}
 		if = { limit = { check_variable = { conservatism_leader = 2 } NOT = { check_variable = { b = 1 } } }
 			add_to_variable = { conservatism_leader = 1 }
 			if = { limit = { NOT = { has_country_flag = PHI_anti_dynasty_law_active } }
