@@ -1,6 +1,6 @@
 # Author(s): AngriestBird, Sheep, Fire Hair, Anakin, Borgers
 DEN_colonial_separatism_category = {
-	develop_infrastructure_greenland = {
+	develop_infrastructure_kitaa = {
 		cost = 25
 		days_remove = 30
 		available = {
@@ -8,17 +8,45 @@ DEN_colonial_separatism_category = {
 		}
 
 		visible = {
-			1 = { infrastructure < 5 }
-			controls_state = 1
+			1161 = { infrastructure < 5 }
+			controls_state = 1161
 		}
 		complete_effect = {
-			log = "[GetDateText]: [This.GetName]: decision develop_infrastructure_greenland executed"
-			1 = {
+			1161 = {
 				add_building_construction = {
 					type = infrastructure
 					level = 1
 					instant_build = yes
 				}
+			}
+			add_manpower = -200
+			set_temp_variable = { treasury_change = -4 }
+			modify_treasury_effect = yes
+		}
+
+		ai_will_do = {
+			base = 1
+		}
+	}
+	develop_infrastructure_tunu = {
+		cost = 25
+		days_remove = 30
+		available = {
+			1162 = { infrastructure < 5 }
+			has_manpower > 199
+			controls_state = 1162
+		}
+
+		visible = {
+			1162 = { infrastructure < 5 }
+			controls_state = 1162
+		}
+		complete_effect = {
+			1162 = {
+				 add_building_construction = {
+					 type = infrastructure
+					 level = 1
+					 instant_build = yes }
 			}
 			add_manpower = -200
 			set_temp_variable = { treasury_change = -4 }
@@ -169,7 +197,7 @@ DEN_decision_danish_revolutionary_thought = {
 			SWE = {
 				set_temp_variable = { party_index = 4 }
 				set_temp_variable = { party_popularity_increase = 0.05 }
-				set_temp_Variable = { temp_outlook_increase = 0.05 }
+				set_temp_variable = { temp_outlook_increase = 0.05 }
 				add_relative_party_popularity = yes
 			}
 		}
@@ -187,7 +215,7 @@ DEN_decision_danish_revolutionary_thought = {
 			NOR = {
 				set_temp_variable = { party_index = 4 }
 				set_temp_variable = { party_popularity_increase = 0.05 }
-				set_temp_Variable = { temp_outlook_increase = 0.05 }
+				set_temp_variable = { temp_outlook_increase = 0.05 }
 				add_relative_party_popularity = yes
 			}
 		}
@@ -205,7 +233,7 @@ DEN_decision_danish_revolutionary_thought = {
 			FIN = {
 				set_temp_variable = { party_index = 4 }
 				set_temp_variable = { party_popularity_increase = 0.05 }
-				set_temp_Variable = { temp_outlook_increase = 0.05 }
+				set_temp_variable = { temp_outlook_increase = 0.05 }
 				add_relative_party_popularity = yes
 			}
 		}
@@ -223,7 +251,7 @@ DEN_decision_danish_revolutionary_thought = {
 			ICE = {
 				set_temp_variable = { party_index = 4 }
 				set_temp_variable = { party_popularity_increase = 0.05 }
-				set_temp_Variable = { temp_outlook_increase = 0.05 }
+				set_temp_variable = { temp_outlook_increase = 0.05 }
 				add_relative_party_popularity = yes
 			}
 		}
@@ -797,7 +825,6 @@ DEN_generic_danish_political_decisions_category = {
 
 DEN_visitdenmark_category = {
 	DEN_TV_campaign = {
-		fixed_random_seed = no
 		icon = decision
 		available = {
 			tag = DEN
@@ -852,7 +879,6 @@ DEN_visitdenmark_category = {
 		}
 	}
 	DEN_Print_campaign = {
-		fixed_random_seed = no
 		icon = decision
 		available = {
 			tag = DEN
@@ -907,7 +933,6 @@ DEN_visitdenmark_category = {
 		}
 	}
 	DEN_socialmedia_campaign = {
-		fixed_random_seed = no
 		icon = decision
 		available = {
 			tag = DEN
@@ -962,7 +987,6 @@ DEN_visitdenmark_category = {
 		}
 	}
 	DEN_controversal_campaign = {
-		fixed_random_seed = no
 		icon = decision
 		available = {
 			tag = DEN
@@ -1156,8 +1180,6 @@ DEN_decision_Investments_Global = {
 			FROM = {
 				set_country_flag = DEN_Investments
 				set_temp_variable = { percent_change = 2.1 }
-				set_temp_variable = { tag_index = ROOT }
-				set_temp_variable = { influence_target = FROM }
 				change_influence_percentage = yes
 				set_temp_variable = { treasury_change = FROM.gdp_per_capita }
 				multiply_temp_variable = { treasury_change = 0.28 }
@@ -1270,7 +1292,6 @@ DEN_decision_Investments_Global = {
 
 DEN_decision_Investments_Global_II = {
 	DEN_DSV_Invest = {
-		fixed_random_seed = no
 		icon = generic_prepare_civil_war
 
 		targets = { all_countries }
@@ -1312,8 +1333,6 @@ DEN_decision_Investments_Global_II = {
 			FROM = {
 				set_country_flag = DEN_Investments
 				set_temp_variable = { percent_change = 1.9 }
-				set_temp_variable = { tag_index = ROOT }
-				set_temp_variable = { influence_target = FROM }
 				change_influence_percentage = yes
 				set_temp_variable = { treasury_change = FROM.gdp_per_capita }
 				multiply_temp_variable = { treasury_change = 0.28 }
@@ -1597,7 +1616,6 @@ DEN_decision_Investments_Global_II = {
 
 DEN_decision_Agriculture = {
 	DEN_Subventions_for_Grain_decision = {
-		fixed_random_seed = no
 		icon = decision_generic_eurozone
 		cost = 75
 		days_remove = 365
@@ -1659,7 +1677,6 @@ DEN_decision_Agriculture = {
 		}
 	}
 	DEN_Subventions_for_Pigs_decision = {
-		fixed_random_seed = no
 		icon = decision_generic_eurozone
 		cost = 75
 		days_remove = 365
@@ -1720,7 +1737,6 @@ DEN_decision_Agriculture = {
 	}
 
 	DEN_Subventions_for_Beef_decision = {
-		fixed_random_seed = no
 		icon = decision_generic_eurozone
 		cost = 75
 		days_remove = 365
@@ -1852,7 +1868,6 @@ DEN_decision_Agriculture = {
 	}
 
 	DEN_Request_Whine_grow_by_EU_decision = {
-		fixed_random_seed = no
 		icon = decision_generic_eurozone
 		cost = 75
 		days_remove = 365
@@ -1906,7 +1921,6 @@ DEN_decision_Agriculture = {
 	}
 
 	DEN_Reforestation_decision = {
-		fixed_random_seed = no
 		icon = decision_generic_eurozone
 		cost = 75
 		days_remove = 365
@@ -1985,7 +1999,6 @@ DEN_decision_Agriculture = {
 	}
 
 	DEN_wildlife_conservation_decision = {
-		fixed_random_seed = no
 		icon = decision_generic_eurozone
 		cost = 75
 		days_remove = 365
@@ -2049,7 +2062,6 @@ DEN_decision_Agriculture = {
 	}
 
 	DEN_water_conservation_decision = {
-		fixed_random_seed = no
 		icon = decision_generic_eurozone
 		cost = 75
 		days_remove = 365
@@ -2115,7 +2127,6 @@ DEN_decision_Agriculture = {
 	}
 
 	DEN_marine_conservation_decision = {
-		fixed_random_seed = no
 		icon = decision_generic_eurozone
 		cost = 75
 		days_remove = 365

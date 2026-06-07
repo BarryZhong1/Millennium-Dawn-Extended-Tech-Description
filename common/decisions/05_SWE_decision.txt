@@ -255,7 +255,7 @@ SWE_decision_Forsvarsmarkten_category = {
 		}
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision SWE_Officer_education_course"
-			random_Army_leader = {
+			random_army_leader = {
 				limit = {
 					is_field_marshal = no
 				}
@@ -409,18 +409,7 @@ SWE_decision_Forsvarsmarkten_category = {
 				limit = { has_idea = defence_04 }
 				swap_ideas = { remove_idea = defence_04 add_idea = defence_05 }
 			}
-			if = {
-				limit = { has_idea = police_01 }
-				swap_ideas = { remove_idea = police_01 add_idea = police_02 }
-			}
-			else_if = {
-				limit = { has_idea = police_02 }
-				swap_ideas = { remove_idea = police_02 add_idea = police_03 }
-			}
-			else_if = {
-				limit = { has_idea = police_03 }
-				swap_ideas = { remove_idea = police_03 add_idea = police_04 }
-			}
+			increase_policing_budget = yes
 			increase_conscription_effect = yes
 		}
 		ai_will_do = {
@@ -454,18 +443,7 @@ SWE_decision_Forsvarsmarkten_category = {
 				limit = { has_idea = defence_06 }
 				swap_ideas = { remove_idea = defence_06 add_idea = defence_02 }
 			}
-			if = {
-				limit = { has_idea = police_02 }
-				swap_ideas = { remove_idea = police_02 add_idea = police_01 }
-			}
-			else_if = {
-				limit = { has_idea = police_03 }
-				swap_ideas = { remove_idea = police_03 add_idea = police_02 }
-			}
-			else_if = {
-				limit = { has_idea = police_04 }
-				swap_ideas = { remove_idea = police_04 add_idea = police_02 }
-			}
+			decrease_policing_budget = yes
 			decrease_conscription_effect = yes
 			hidden_effect = {
 				SWE = { news_event = { id = Sweden_news.7 days = 1 } }
@@ -742,7 +720,7 @@ SWE_decision_Royal_category = {
 
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision SWE_send_to_UN"
-			If = {
+			if = {
 				limit = {
 					country_exists = USA
 					NOT = { has_war_with = USA }
@@ -756,7 +734,7 @@ SWE_decision_Royal_category = {
 				}
 			}
 			newline = yes
-			If = {
+			if = {
 				limit = {
 					country_exists = ENG
 					NOT = { has_war_with = ENG }
@@ -770,7 +748,7 @@ SWE_decision_Royal_category = {
 				}
 			}
 			newline = yes
-			If = {
+			if = {
 				limit = {
 					country_exists = FRA
 					NOT = { has_war_with = FRA }
@@ -784,7 +762,7 @@ SWE_decision_Royal_category = {
 				}
 			}
 			newline = yes
-			If = {
+			if = {
 				limit = {
 					country_exists = SOV
 					NOT = { has_war_with = SOV }
@@ -798,7 +776,7 @@ SWE_decision_Royal_category = {
 				}
 			}
 			newline = yes
-			If = {
+			if = {
 				limit = {
 					country_exists = CHI
 					NOT = { has_war_with = CHI }
@@ -866,7 +844,7 @@ SWE_decision_Royal_category = {
 
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision SWE_send_to_UN"
-			If = {
+			if = {
 				limit = {
 					country_exists = JAP
 					NOT = { has_war_with = JAP }
@@ -880,7 +858,7 @@ SWE_decision_Royal_category = {
 				}
 			}
 			newline = yes
-			If = {
+			if = {
 				limit = {
 					country_exists = IND
 					NOT = { has_war_with = IND }
@@ -894,7 +872,7 @@ SWE_decision_Royal_category = {
 				}
 			}
 			newline = yes
-			If = {
+			if = {
 				limit = {
 					country_exists = RAJ
 					NOT = { has_war_with = RAJ }
@@ -962,7 +940,7 @@ SWE_decision_Royal_category = {
 
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision SWE_send_to_UN"
-			If = {
+			if = {
 				limit = {
 					country_exists = GER
 					NOT = { has_war_with = GER }
@@ -976,7 +954,7 @@ SWE_decision_Royal_category = {
 				}
 			}
 			newline = yes
-			If = {
+			if = {
 				limit = {
 					country_exists = SPR
 					NOT = { has_war_with = SPR }
@@ -990,7 +968,7 @@ SWE_decision_Royal_category = {
 				}
 			}
 			newline = yes
-			If = {
+			if = {
 				limit = {
 					country_exists = ITA
 					NOT = { has_war_with = ITA }
@@ -1096,12 +1074,14 @@ SWE_decision_Royal_category = {
 		available = {
 			original_tag = SWE
 			OR = {
-				has_country_flag = philip_mandatory_service
-				has_country_flag = victoria_mandatory_service
-			}
-			NOT = {
-				has_country_flag = philip_officer_training
-				has_country_flag = victoria_officer_training
+				AND = {
+					has_country_flag = victoria_mandatory_service
+					NOT = { has_country_flag = victoria_officer_training }
+				}
+				AND = {
+					has_country_flag = philip_mandatory_service
+					NOT = { has_country_flag = philip_officer_training }
+				}
 			}
 		}
 		visible = {
@@ -1139,9 +1119,6 @@ SWE_decision_Royal_category = {
 SWE_balance_of_power_category = {
 	### Western ###
 	SWE_the_price_of_neutrality = {
-		allowed = {
-			original_tag = SWE
-		}
 		icon = GFX_decision_democracy
 
 		cost = 75
@@ -1194,9 +1171,6 @@ SWE_balance_of_power_category = {
 		}
 	}
 	SWE_ask_the_minister_of_defence_dialog = {
-		allowed = {
-			original_tag = SWE
-		}
 		icon = GFX_decision_democracy
 
 		cost = 75
@@ -1250,9 +1224,6 @@ SWE_balance_of_power_category = {
 		}
 	}
 	SWE_security_information_campain = {
-		allowed = {
-			original_tag = SWE
-		}
 		icon = GFX_decision_democracy
 
 		cost = 75
@@ -1306,9 +1277,6 @@ SWE_balance_of_power_category = {
 		}
 	}
 	SWE_symbolic_campain_to_make_citizens_familiar = {
-		allowed = {
-			original_tag = SWE
-		}
 		icon = GFX_decision_democracy
 
 		cost = 75
@@ -1363,9 +1331,6 @@ SWE_balance_of_power_category = {
 	}
 	### Neutral ###
 	SWE_the_swedish_way = {
-		allowed = {
-			original_tag = SWE
-		}
 		icon = GFX_decision_politics
 
 		cost = 75
@@ -1443,9 +1408,6 @@ SWE_balance_of_power_category = {
 		}
 	}
 	SWE_what_means_neutrality_to_us = {
-		allowed = {
-			original_tag = SWE
-		}
 		icon = GFX_decision_politics
 
 		cost = 75
@@ -1523,9 +1485,6 @@ SWE_balance_of_power_category = {
 		}
 	}
 	SWE_build_up_swedish_think_tank = {
-		allowed = {
-			original_tag = SWE
-		}
 		icon = GFX_decision_tanks
 
 		cost = 75
@@ -1600,9 +1559,6 @@ SWE_balance_of_power_category = {
 	}
 	### pro east ###
 	SWE_multipolar_world = {
-		allowed = {
-			original_tag = SWE
-		}
 		icon = GFX_decision_communism
 
 		cost = 75
@@ -1656,9 +1612,6 @@ SWE_balance_of_power_category = {
 		}
 	}
 	SWE_det_andra_europa = {
-		allowed = {
-			original_tag = SWE
-		}
 		icon = GFX_decision_communism
 
 		cost = 75
@@ -1711,9 +1664,6 @@ SWE_balance_of_power_category = {
 		}
 	}
 	SWE_do_ostkontact = {
-		allowed = {
-			original_tag = SWE
-		}
 		icon = GFX_decision_power_struggle
 
 		cost = 75
@@ -1763,9 +1713,6 @@ SWE_balance_of_power_category = {
 		}
 	}
 	SWE_blame_the_arrogant_west = {
-		allowed = {
-			original_tag = SWE
-		}
 		icon = GFX_decision_communism
 
 		cost = 75

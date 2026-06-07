@@ -620,23 +620,18 @@ focus_tree = {
 			RAJ_change_hindu_opinion = yes
 
 			set_temp_variable = { percent_change = 2 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = MAY }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 2 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = ENG }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 2 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = SRI }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 2 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = SEY }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 2 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = MRT }
 			change_influence_percentage = yes
 		}
@@ -1804,34 +1799,12 @@ focus_tree = {
 				set_temp_variable = { treasury_change = -7.5 }
 				modify_treasury_effect = yes
 				set_temp_variable = { percent_change = 5 }
-				set_temp_variable = { tag_index = RAJ }
 				set_temp_variable = { influence_target = BRA }
 				change_influence_percentage = yes
 
 				RAJ = {
 					random_owned_controlled_state = {
-						limit = {
-							free_building_slots = {
-								building = industrial_complex
-								size > 0
-								include_locked = yes
-							}
-							OR = {
-								is_in_home_area = yes
-								NOT = {
-									owner = {
-										any_owned_state = {
-											free_building_slots = {
-												building = industrial_complex
-												size > 0
-												include_locked = yes
-											}
-											is_in_home_area = yes
-										}
-									}
-								}
-							}
-						}
+						limit = { free_shared_building_slots = yes }
 						add_extra_state_shared_building_slots = 1
 						add_building_construction = {
 							type = industrial_complex
@@ -1877,28 +1850,7 @@ focus_tree = {
 
 				RAJ = {
 					random_owned_controlled_state = {
-						limit = {
-							free_building_slots = {
-								building = industrial_complex
-								size > 0
-								include_locked = yes
-							}
-							OR = {
-								is_in_home_area = yes
-								NOT = {
-									owner = {
-										any_owned_state = {
-											free_building_slots = {
-												building = industrial_complex
-												size > 0
-												include_locked = yes
-											}
-											is_in_home_area = yes
-										}
-									}
-								}
-							}
-						}
+						limit = { free_shared_building_slots = yes }
 						add_extra_state_shared_building_slots = 1
 						add_building_construction = {
 							type = industrial_complex
@@ -2739,28 +2691,7 @@ focus_tree = {
 
 				RAJ = {
 					random_owned_controlled_state = {
-						limit = {
-							free_building_slots = {
-								building = industrial_complex
-								size > 0
-								include_locked = yes
-							}
-							OR = {
-								is_in_home_area = yes
-								NOT = {
-									owner = {
-										any_owned_state = {
-											free_building_slots = {
-												building = industrial_complex
-												size > 0
-												include_locked = yes
-											}
-											is_in_home_area = yes
-										}
-									}
-								}
-							}
-						}
+						limit = { free_shared_building_slots = yes }
 						add_extra_state_shared_building_slots = 1
 						add_building_construction = {
 							type = industrial_complex
@@ -4171,22 +4102,7 @@ focus_tree = {
 				create_unit = {
 					division = "name = \"Assam Rifles\" division_template = \"Assam Rifles\" start_experience_factor = 1.0"
 					owner = RAJ
-				}
-			}
-			random_owned_controlled_state = {
-				limit = { ROOT = { has_full_control_of_state = PREV } }
-				prioritize = { 46 }
-				create_unit = {
-					division = "name = \"Assam Rifles\" division_template = \"Assam Rifles\" start_experience_factor = 1.0"
-					owner = RAJ
-				}
-			}
-			random_owned_controlled_state = {
-				limit = { ROOT = { has_full_control_of_state = PREV } }
-				prioritize = { 46 }
-				create_unit = {
-					division = "name = \"Assam Rifles\" division_template = \"Assam Rifles\" start_experience_factor = 1.0"
-					owner = RAJ
+					count = 3
 				}
 			}
 			set_temp_variable = { treasury_change = -5 }
@@ -4224,22 +4140,7 @@ focus_tree = {
 				create_unit = {
 					division = "name = \"Special Frontier Force\" division_template = \"Special Frontier Force\" start_experience_factor = 0.4"
 					owner = RAJ
-				}
-			}
-			random_owned_controlled_state = {
-				limit = { ROOT = { has_full_control_of_state = PREV } }
-				prioritize = { 46 }
-				create_unit = {
-					division = "name = \"Special Frontier Force\" division_template = \"Special Frontier Force\" start_experience_factor = 0.4"
-					owner = RAJ
-				}
-			}
-			random_owned_controlled_state = {
-				limit = { ROOT = { has_full_control_of_state = PREV } }
-				prioritize = { 46 }
-				create_unit = {
-					division = "name = \"Special Frontier Force\" division_template = \"Special Frontier Force\" start_experience_factor = 0.4"
-					owner = RAJ
+					count = 3
 				}
 			}
 			set_temp_variable = { treasury_change = -2 }
@@ -5087,7 +4988,7 @@ focus_tree = {
 	}
 	focus = {
 		id = RAJ_finsas
-		icon = blr_modern_army
+		icon = GFX_focus_PRC_a_modern_army
 		x = -24
 		y = 8
 		relative_position_id = RAJ_forces_of_india
@@ -5447,22 +5348,7 @@ focus_tree = {
 				create_unit = {
 					division = "name = \"National Security Guard\" division_template = \"National Security Guard\" start_experience_factor = 0.4"
 					owner = RAJ
-				}
-			}
-			random_owned_controlled_state = {
-				limit = { ROOT = { has_full_control_of_state = PREV } }
-				prioritize = { 46 }
-				create_unit = {
-					division = "name = \"National Security Guard\" division_template = \"National Security Guard\" start_experience_factor = 0.4"
-					owner = RAJ
-				}
-			}
-			random_owned_controlled_state = {
-				limit = { ROOT = { has_full_control_of_state = PREV } }
-				prioritize = { 46 }
-				create_unit = {
-					division = "name = \"National Security Guard\" division_template = \"National Security Guard\" start_experience_factor = 0.4"
-					owner = RAJ
+					count = 3
 				}
 			}
 			set_temp_variable = { treasury_change = -2 }
@@ -6857,7 +6743,6 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_delhi_beijing_speakers"
 			set_temp_variable = { percent_change = 1 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = CHI }
 			change_influence_percentage = yes
 			add_opinion_modifier = {
@@ -6896,7 +6781,6 @@ focus_tree = {
 				target = ISR
 			}
 			set_temp_variable = { percent_change = 2 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = ISR }
 			change_influence_percentage = yes
 		}
@@ -6930,8 +6814,6 @@ focus_tree = {
 					}
 				}
 				set_temp_variable = { percent_change = 7 }
-				set_temp_variable = { tag_index = RAJ }
-				set_temp_variable = { influence_target = ISR }
 				change_influence_percentage = yes
 
 				custom_effect_tooltip = TT_IF_THEY_ACCEPT
@@ -6947,28 +6829,7 @@ focus_tree = {
 
 					RAJ = {
 						random_owned_controlled_state = {
-							limit = {
-								free_building_slots = {
-									building = industrial_complex
-									size > 0
-									include_locked = yes
-								}
-								OR = {
-									is_in_home_area = yes
-									NOT = {
-										owner = {
-											any_owned_state = {
-												free_building_slots = {
-													building = industrial_complex
-													size > 0
-													include_locked = yes
-												}
-												is_in_home_area = yes
-											}
-										}
-									}
-								}
-							}
+							limit = { free_shared_building_slots = yes }
 							add_extra_state_shared_building_slots = 1
 							add_building_construction = {
 								type = industrial_complex
@@ -8656,7 +8517,6 @@ focus_tree = {
 				country_event = indian_event.30
 			}
 			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = BAN }
 			change_influence_percentage = yes
 		}
@@ -9179,23 +9039,18 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_communist_influence_zone"
 			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = NPM }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = NEP }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = BHU }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = BRM }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = SRI }
 			change_influence_percentage = yes
 			set_temp_variable = { temp_opinion = 5 }
@@ -11205,10 +11060,10 @@ focus_tree = {
 		y = 5
 		cost = 6
 		available = { has_government = nationalist }
-		available = { has_government = nationalist }
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INTERNAL_FACTION FOCUS_FILTER_INFLUENCE FOCUS_FILTER_INSURGENCY }
 		prerequisite = { focus = RAJ_preserve_caste_system focus = RAJ_dharmic_alliance }
 		relative_position_id = RAJ_hindutva_front
+
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_stomp_out_islam"
 			set_temp_variable = { temp_change = 2 }
@@ -11246,23 +11101,18 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_international_nationalism"
 			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = NPM }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = NEP }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = BHU }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = BRM }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = SRI }
 			change_influence_percentage = yes
 			set_temp_variable = { temp_opinion = 5 }
@@ -11439,22 +11289,7 @@ focus_tree = {
 				create_unit = {
 					division = "name = \"Azad Hind\" division_template = \"Azad Hind\" start_experience_factor = 1.0"
 					owner = RAJ
-				}
-			}
-			random_owned_controlled_state = {
-				limit = { ROOT = { has_full_control_of_state = PREV } }
-				prioritize = { 46 }
-				create_unit = {
-					division = "name = \"Azad Hind\" division_template = \"Azad Hind\" start_experience_factor = 1.0"
-					owner = RAJ
-				}
-			}
-			random_owned_controlled_state = {
-				limit = { ROOT = { has_full_control_of_state = PREV } }
-				prioritize = { 46 }
-				create_unit = {
-					division = "name = \"Azad Hind\" division_template = \"Azad Hind\" start_experience_factor = 1.0"
-					owner = RAJ
+					count = 3
 				}
 			}
 			set_temp_variable = { treasury_change = -5 }
@@ -11565,7 +11400,6 @@ focus_tree = {
 				country_event = indian_event.30
 			}
 			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = BAN }
 			change_influence_percentage = yes
 		}
@@ -11586,23 +11420,18 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_influence_indochina"
 			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = NPM }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = NEP }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = BHU }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = BRM }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = SRI }
 			change_influence_percentage = yes
 			set_temp_variable = { temp_opinion = 5 }
@@ -11706,20 +11535,7 @@ focus_tree = {
 						create_unit = {
 							division = "name = \"Tibet Rebels\" division_template = \"Tibet Rebels\" start_experience_factor = 1.0"
 							owner = TIB
-						}
-					}
-					random_owned_controlled_state = {
-						prioritize = { 46 }
-						create_unit = {
-							division = "name = \"Tibet Rebels\" division_template = \"Tibet Rebels\" start_experience_factor = 1.0"
-							owner = TIB
-						}
-					}
-					random_owned_controlled_state = {
-						prioritize = { 46 }
-						create_unit = {
-							division = "name = \"Tibet Rebels\" division_template = \"Tibet Rebels\" start_experience_factor = 1.0"
-							owner = TIB
+							count = 3
 						}
 					}
 					591 = {
@@ -12086,7 +11902,6 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_approach_singapore"
 			set_temp_variable = { percent_change = 2 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = SIN }
 			change_influence_percentage = yes
 			add_opinion_modifier = {
@@ -12275,7 +12090,6 @@ focus_tree = {
 			add_opinion_modifier = { modifier = declaration_of_friendship target = CHI }
 			reverse_add_opinion_modifier = { modifier = declaration_of_friendship target = CHI }
 			set_temp_variable = { percent_change = 3 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = CHI }
 			change_influence_percentage = yes
 		}
@@ -12305,8 +12119,6 @@ focus_tree = {
 			add_ideas = RAJ_huawei
 			CHI = {
 				set_temp_variable = { percent_change = 1 }
-				set_temp_variable = { tag_index = RAJ.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 				army_experience = 10
 				add_command_power = 10
@@ -12361,7 +12173,6 @@ focus_tree = {
 			}
 			one_random_infrastructure = yes
 			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = BRM }
 			change_influence_percentage = yes
 			add_opinion_modifier = {
@@ -12373,7 +12184,6 @@ focus_tree = {
 				modifier = diplomatic_support
 			}
 			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = KAC }
 			change_influence_percentage = yes
 			add_opinion_modifier = {
@@ -12385,7 +12195,6 @@ focus_tree = {
 				modifier = diplomatic_support
 			}
 			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = SHN }
 			change_influence_percentage = yes
 			add_opinion_modifier = {
@@ -12397,7 +12206,6 @@ focus_tree = {
 				modifier = diplomatic_support
 			}
 			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = NHN }
 			change_influence_percentage = yes
 			add_opinion_modifier = {
@@ -12409,7 +12217,6 @@ focus_tree = {
 				modifier = diplomatic_support
 			}
 			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = KAR }
 			change_influence_percentage = yes
 		}
@@ -12429,19 +12236,15 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_increase_regional_influence"
 			set_temp_variable = { percent_change = 3 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = AFG }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 3 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = SRI }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 3 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = MLD }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 3 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = SIA }
 			change_influence_percentage = yes
 		}
@@ -12610,15 +12413,12 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_east_asia_summit"
 			news_event = RAJ_eastas.1
 			set_temp_variable = { percent_change = 1.5 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = SOV }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 1.5 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = JAP }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 1.5 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = LAO }
 			change_influence_percentage = yes
 		}
@@ -12697,11 +12497,9 @@ focus_tree = {
 				modifier = diplomatic_support
 			}
 			set_temp_variable = { percent_change = 3 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = BHU }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 3 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = NEP }
 			change_influence_percentage = yes
 		}
@@ -12737,7 +12535,6 @@ focus_tree = {
 				target = BAN
 			}
 			set_temp_variable = { percent_change = 3 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = BAN }
 			change_influence_percentage = yes
 		}
@@ -12777,7 +12574,6 @@ focus_tree = {
 				modifier = diplomatic_support
 			}
 			set_temp_variable = { percent_change = 2 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = BAN }
 			change_influence_percentage = yes
 		}
@@ -12867,7 +12663,6 @@ focus_tree = {
 			set_temp_variable = { treasury_change = 2.45 }
 			modify_treasury_effect = yes
 			set_temp_variable = { percent_change = 2 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = BHU }
 			change_influence_percentage = yes
 			add_opinion_modifier = {
@@ -12962,7 +12757,6 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_partnership_with_uae"
 			set_temp_variable = { percent_change = 2 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = UAE }
 			change_influence_percentage = yes
 			add_opinion_modifier = {
@@ -13074,7 +12868,6 @@ focus_tree = {
 				target = ALG
 			}
 			set_temp_variable = { percent_change = 2 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = ALG }
 			change_influence_percentage = yes
 		}
@@ -13094,7 +12887,6 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_utilizing_indian_diaspora"
 			set_temp_variable = { percent_change = 2 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = ENG }
 			change_influence_percentage = yes
 			add_opinion_modifier = {
@@ -13106,7 +12898,6 @@ focus_tree = {
 				modifier = improve_trade
 			}
 			set_temp_variable = { percent_change = 2 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = SAU }
 			change_influence_percentage = yes
 			add_opinion_modifier = {
@@ -13118,7 +12909,6 @@ focus_tree = {
 				modifier = improve_trade
 			}
 			set_temp_variable = { percent_change = 2 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = MAY }
 			change_influence_percentage = yes
 			add_opinion_modifier = {
@@ -13162,7 +12952,6 @@ focus_tree = {
 				target = SEY
 			}
 			set_temp_variable = { percent_change = 2 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = SEY }
 			change_influence_percentage = yes
 		}
@@ -13198,7 +12987,6 @@ focus_tree = {
 				target = MRT
 			}
 			set_temp_variable = { percent_change = 2 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = MRT }
 			change_influence_percentage = yes
 		}
@@ -13234,7 +13022,6 @@ focus_tree = {
 				target = SRI
 			}
 			set_temp_variable = { percent_change = 2 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = SRI }
 			change_influence_percentage = yes
 		}
@@ -13262,7 +13049,6 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_stratpar_soaf"
 			set_temp_variable = { percent_change = 3 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = SAF }
 			change_influence_percentage = yes
 			add_opinion_modifier = {
@@ -13298,7 +13084,6 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_stratpar_russi"
 			set_temp_variable = { percent_change = 3 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = SOV }
 			change_influence_percentage = yes
 			add_opinion_modifier = {
@@ -13334,7 +13119,6 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_tradepar_china"
 			set_temp_variable = { percent_change = 3 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = CHI }
 			change_influence_percentage = yes
 			add_opinion_modifier = {
@@ -13408,7 +13192,6 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_stratpar_braz"
 			set_temp_variable = { percent_change = 3 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = BRA }
 			change_influence_percentage = yes
 			add_opinion_modifier = {
@@ -13436,7 +13219,6 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_friendship_with_israel"
 			set_temp_variable = { percent_change = 2 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = ISR }
 			change_influence_percentage = yes
 			add_opinion_modifier = { target = ISR modifier = improve_trade }
@@ -13461,7 +13243,6 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_friendship_with_france"
 			set_temp_variable = { percent_change = 2 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = FRA }
 			change_influence_percentage = yes
 			add_opinion_modifier = {
@@ -13968,8 +13749,6 @@ focus_tree = {
 					random_owned_controlled_state = { add_building_construction = { type = infrastructure level = 1 instant_build = yes } }
 					add_opinion_modifier = { target = RAJ modifier = declaration_of_friendship }
 					set_temp_variable = { percent_change = 2 }
-					set_temp_variable = { tag_index = ROOT.id }
-					set_temp_variable = { influence_target = THIS.id }
 					change_influence_percentage = yes
 				}
 			}
@@ -13982,8 +13761,6 @@ focus_tree = {
 					random_owned_controlled_state = { add_building_construction = { type = infrastructure level = 1 instant_build = yes } }
 					add_opinion_modifier = { target = RAJ modifier = declaration_of_friendship }
 					set_temp_variable = { percent_change = 2 }
-					set_temp_variable = { tag_index = ROOT.id }
-					set_temp_variable = { influence_target = THIS.id }
 					change_influence_percentage = yes
 				}
 			}
@@ -13996,8 +13773,6 @@ focus_tree = {
 					random_owned_controlled_state = { add_building_construction = { type = infrastructure level = 1 instant_build = yes } }
 					add_opinion_modifier = { target = RAJ modifier = declaration_of_friendship }
 					set_temp_variable = { percent_change = 2 }
-					set_temp_variable = { tag_index = ROOT.id }
-					set_temp_variable = { influence_target = THIS.id }
 					change_influence_percentage = yes
 				}
 			}
@@ -14010,8 +13785,6 @@ focus_tree = {
 					random_owned_controlled_state = { add_building_construction = { type = infrastructure level = 1 instant_build = yes } }
 					add_opinion_modifier = { target = RAJ modifier = declaration_of_friendship }
 					set_temp_variable = { percent_change = 2 }
-					set_temp_variable = { tag_index = ROOT.id }
-					set_temp_variable = { influence_target = THIS.id }
 					change_influence_percentage = yes
 				}
 			}
@@ -14079,16 +13852,7 @@ focus_tree = {
 		relative_position_id = RAJ_indian_minist_of_foreign_affairs
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_become_major_non_nato_allies"
-			add_ideas = Major_Non_NATO_Ally
-			set_country_flag = Major_Non_NATO_Ally
-			for_each_scope_loop = {
-				array = global.nato_members
-				tooltip = TT_ALL_NATO_MEMBER_NATIONS_GAIN
-				if = {
-					limit = { NOT = { tag = ROOT } }
-					add_opinion_modifier = { target = CAN modifier = diplomatic_support }
-				}
-			}
+			NATO_major_non_nato_ally_join = yes
 		}
 		ai_will_do = {
 			base = 1
@@ -14148,7 +13912,6 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: RAJ_tradedeals_with_us"
 			set_temp_variable = { percent_change = 2 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = USA }
 			change_influence_percentage = yes
 			add_opinion_modifier = {
@@ -14219,7 +13982,6 @@ focus_tree = {
 				modifier = diplomatic_support
 			}
 			set_temp_variable = { percent_change = 3 }
-			set_temp_variable = { tag_index = RAJ }
 			set_temp_variable = { influence_target = TAI }
 			change_influence_percentage = yes
 		}
@@ -14639,7 +14401,7 @@ focus_tree = {
 			}
 			NOT = {
 				has_war_with = PAK
-				PAK = { exists = no }
+				NOT = { country_exists = PAK }
 			}
 		}
 		completion_reward = {
@@ -14789,7 +14551,7 @@ focus_tree = {
 			NOT = {
 				is_in_faction_with = CHI
 				has_war_with = CHI
-				CHI = { exists = no }
+				NOT = { country_exists = CHI }
 				is_ally_with = CHI
 			}
 		}
@@ -14836,20 +14598,7 @@ focus_tree = {
 						create_unit = {
 							division = "name = \"Turkestan Rebels\" division_template = \"Turkestan Rebels\" start_experience_factor = 1.0"
 							owner = ETK
-						}
-					}
-					random_owned_controlled_state = {
-						prioritize = { 46 }
-						create_unit = {
-							division = "name = \"Turkestan Rebels\" division_template = \"Turkestan Rebels\" start_experience_factor = 1.0"
-							owner = ETK
-						}
-					}
-					random_owned_controlled_state = {
-						prioritize = { 46 }
-						create_unit = {
-							division = "name = \"Turkestan Rebels\" division_template = \"Turkestan Rebels\" start_experience_factor = 1.0"
-							owner = ETK
+							count = 3
 						}
 					}
 					591 = {
@@ -14967,22 +14716,22 @@ focus_tree = {
 			NOT = {
 				is_in_faction = yes
 				has_war_with = RAJ
-				KAZ = { exists = no }
+				NOT = { country_exists = KAZ }
 			}
 			NOT = {
 				is_in_faction = yes
 				has_war_with = RAJ
-				UZB = { exists = no }
+				NOT = { country_exists = UZB }
 			}
 			NOT = {
 				is_in_faction = yes
 				has_war_with = RAJ
-				KYR = { exists = no }
+				NOT = { country_exists = KYR }
 			}
 			NOT = {
 				is_in_faction = yes
 				has_war_with = RAJ
-				TAJ = { exists = no }
+				NOT = { country_exists = TAJ }
 			}
 			KAZ = {
 				influence_higher_30 = yes
@@ -15335,7 +15084,7 @@ focus_tree = {
 				influence_higher_40 = yes
 			}
 			NOT = {
-				SYR = { exists = no }
+				NOT = { country_exists = SYR }
 			}
 		}
 		prerequisite = { focus = RAJ_international_jihadis }

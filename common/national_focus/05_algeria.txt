@@ -96,7 +96,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		available = {
-			is_in_array = { ruling_party = 7 }
+			emerging_autocracy_are_in_power = yes
 		}
 
 		completion_reward = {
@@ -1405,11 +1405,12 @@ focus_tree = {
 
 		prerequisite = { focus = ALG_opposition_path }
 
-		available = { has_country_flag = ALG_ffs_in_power }
-
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
-		available = { has_country_flag = ALG_opposition_chosen }
+		available = {
+			has_country_flag = ALG_ffs_in_power
+			has_country_flag = ALG_opposition_chosen
+		}
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus ALG_OPP_free_elections"
@@ -1658,10 +1659,8 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		available = {
-			NOT = {
-				is_in_array = { ruling_party = 7 }
-				is_in_array = { ruling_party = 22 }
-			}
+			NOT = { emerging_autocracy_are_in_power = yes }
+			NOT = { nationalist_military_junta_are_in_power = yes }
 		}
 
 		completion_reward = {
@@ -2550,7 +2549,7 @@ focus_tree = {
 		newline = yes
 		set_country_flag = ALG_fis_win
 		mark_focus_tree_layout_dirty = yes
-		custom_Effect_tooltip = ALG_fis_win_tt
+		custom_effect_tooltip = ALG_fis_win_tt
 	}
 
 		ai_will_do = {
@@ -2673,14 +2672,13 @@ focus_tree = {
 
 		prerequisite = { focus = ALG_military_coup }
 
-		available = { has_country_flag = ALG_military_coup_path }
-
-		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_MILITARY_LAWS }
-
 		available = {
+			has_country_flag = ALG_military_coup_path
 			nationalist_military_junta_are_in_power = yes
 			20_percent_government_popularity = yes
 		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_MILITARY_LAWS }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus ALG_repression_campaign"
@@ -2766,7 +2764,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus ALG_expand_the_pna"
-			set_country_flag = promoted_admiral
+			set_country_flag = ALG_unlock_khaled_nezzar
 			country_event = alg_general.1
 			newline = yes
 			add_ideas = ALG_pna_expansion
@@ -3126,7 +3124,6 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus ALG_kick_out_morocco"
 			set_temp_variable = { percent_change = -20 }
 			set_temp_variable = { tag_index = MOR.id }
-			set_temp_variable = { influence_target = THIS.id }
 			change_influence_percentage = yes
 			newline = yes
 			reverse_add_opinion_modifier = {
@@ -3712,7 +3709,6 @@ focus_tree = {
 			newline = yes
 			set_temp_variable = { percent_change = 5 }
 			set_temp_variable = { tag_index = SOV.id }
-			set_temp_variable = { influence_target = THIS.id }
 			change_influence_percentage = yes
 		}
 
@@ -3774,7 +3770,6 @@ focus_tree = {
 			newline = yes
 			set_temp_variable = { percent_change = 5 }
 			set_temp_variable = { tag_index = SOV.id }
-			set_temp_variable = { influence_target = THIS.id }
 			change_influence_percentage = yes
 		}
 
@@ -6448,10 +6443,7 @@ focus_tree = {
 				create_unit = {
 					division = "name = \"104th Operational Maneuvers Regiment RMO\" division_template = \"104th Operational Maneuvers Regiment RMO\" start_experience_factor = 0.5"
 					owner = ALG
-				}
-				create_unit = {
-					division = "name = \"104th Operational Maneuvers Regiment RMO\" division_template = \"104th Operational Maneuvers Regiment RMO\" start_experience_factor = 0.5"
-					owner = ALG
+					count = 2
 				}
 			}
 		}
@@ -6707,10 +6699,7 @@ focus_tree = {
 				create_unit = {
 					division = "name = \"Armoured Brigade\" division_template = \"Armoured Brigade\" start_experience_factor = 0.5"
 					owner = ALG
-				}
-				create_unit = {
-					division = "name = \"Armoured Brigade\" division_template = \"Armoured Brigade\" start_experience_factor = 0.5"
-					owner = ALG
+					count = 2
 				}
 			}
 		}
@@ -7735,10 +7724,7 @@ focus_tree = {
 				create_unit = {
 					division = "name = \"104th Operational Maneuvers Regiment RMO\" division_template = \"104th Operational Maneuvers Regiment RMO\" start_experience_factor = 0.5"
 					owner = ALG
-				}
-				create_unit = {
-					division = "name = \"104th Operational Maneuvers Regiment RMO\" division_template = \"104th Operational Maneuvers Regiment RMO\" start_experience_factor = 0.5"
-					owner = ALG
+					count = 2
 				}
 			}
 		}
@@ -7767,7 +7753,7 @@ focus_tree = {
 				remove_idea = ALG_naval_reform2
 				add_idea = ALG_naval_reform3
 			}
-			If = {
+			if = {
 				limit = {
 					NOT = {
 						has_tech = corvette_hull_1
@@ -7777,7 +7763,7 @@ focus_tree = {
 					corvette_hull_1 = 1
 				}
 			}
-			If = {
+			if = {
 				limit = {
 					NOT = {
 						has_tech = corvette_hull_2
@@ -8765,22 +8751,7 @@ focus_tree = {
 				create_unit = {
 					division = "name = \"National Security Guard\" division_template = \"National Security Guard\" start_experience_factor = 0.4"
 					owner = ALG
-				}
-			}
-			random_owned_controlled_state = {
-				limit = { ROOT = { has_full_control_of_state = PREV } }
-				prioritize = { 46 }
-				create_unit = {
-					division = "name = \"National Security Guard\" division_template = \"National Security Guard\" start_experience_factor = 0.4"
-					owner = ALG
-				}
-			}
-			random_owned_controlled_state = {
-				limit = { ROOT = { has_full_control_of_state = PREV } }
-				prioritize = { 46 }
-				create_unit = {
-					division = "name = \"National Security Guard\" division_template = \"National Security Guard\" start_experience_factor = 0.4"
-					owner = ALG
+					count = 3
 				}
 			}
 			set_temp_variable = { treasury_change = -2 }
@@ -9494,7 +9465,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus ALG_drs_expand"
 			set_temp_variable = { temp_opinion = 10 }
-			change_The_Military_opinion = yes
+			change_the_military_opinion = yes
 			custom_effect_tooltip = {
 				localization_key = modifies_dynamic_modifier_tt
 				MODIFIER = ALG_algeria_police_modifier
@@ -13293,7 +13264,6 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus ALG_intervene_in_sahrawi"
 			set_temp_variable = { percent_change = 2 }
-			set_temp_variable = { tag_index = ALG }
 			set_temp_variable = { influence_target = MOR }
 			change_influence_percentage = yes
 			set_temp_variable = { influence_target = SHA }
@@ -13364,7 +13334,6 @@ focus_tree = {
 				}
 			}
 			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = ALG }
 			set_temp_variable = { influence_target = SHA }
 			change_influence_percentage = yes
 			SHA = {
@@ -13437,7 +13406,6 @@ focus_tree = {
 				}
 			}
 			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = ALG }
 			set_temp_variable = { influence_target = MOR }
 			change_influence_percentage = yes
 			MOR = {
@@ -13498,13 +13466,11 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus ALG_intervene_in_libya"
 			set_temp_variable = { percent_change = 2 }
-			set_temp_variable = { tag_index = ALG }
 			set_temp_variable = { influence_target = LBA }
 			change_influence_percentage = yes
 			if = {
 				limit = { country_exists = TUA }
 				set_temp_variable = { percent_change = 2 }
-				set_temp_variable = { tag_index = ALG }
 				set_temp_variable = { influence_target = TUA }
 				change_influence_percentage = yes
 			}
@@ -13633,7 +13599,6 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus ALG_peacekeepers"
 			add_stability = 0.05
 			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = ALG }
 			set_temp_variable = { influence_target = LBA }
 			change_influence_percentage = yes
 		}
@@ -13674,7 +13639,6 @@ focus_tree = {
 			}
 			country_event = { id = Algeria.238 days = 2 }
 			set_temp_variable = { percent_change = -5 }
-			set_temp_variable = { tag_index = ALG }
 			set_temp_variable = { influence_target = MAL }
 			change_influence_percentage = yes
 			newline = yes
@@ -13727,7 +13691,6 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus ALG_back_tuareg_rebellion"
 			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = ALG }
 			set_temp_variable = { influence_target = TUA }
 			change_influence_percentage = yes
 		}
@@ -13769,7 +13732,6 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus ALG_support_malian_army"
 			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = ALG }
 			set_temp_variable = { influence_target = MAL }
 			change_influence_percentage = yes
 		}
@@ -13812,7 +13774,6 @@ focus_tree = {
 			set_temp_variable = { treasury_change = -7.00 }
 			modify_treasury_effect = yes
 			set_temp_variable = { percent_change = 10 }
-			set_temp_variable = { tag_index = ALG.id }
 			set_temp_variable = { influence_target = MAL.id }
 			change_influence_percentage = yes
 			newline = yes
@@ -13908,7 +13869,6 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus ALG_support_tuareg_politicians"
 			set_temp_variable = { percent_change = 2.5 }
-			set_temp_variable = { tag_index = ALG }
 			set_temp_variable = { influence_target = TUA }
 			change_influence_percentage = yes
 			TUA = {
@@ -18247,7 +18207,6 @@ focus_tree = {
 				}
 			}
 			set_temp_variable = { percent_change = 4 }
-			set_temp_variable = { tag_index = ROOT }
 			change_influence_percentage = yes
 			country_event = alg_mufti.2
 			#For AI
@@ -18950,7 +18909,6 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus ALG_politic_outreach_iberia executed"
 			set_temp_variable = { percent_change = 6 }
-			set_temp_variable = { tag_index = ALG.id }
 			set_temp_variable = { influence_target = SPR.id }
 			change_influence_percentage = yes
 			set_temp_variable = { treasury_change = -6 }
@@ -18986,7 +18944,6 @@ focus_tree = {
 		log = "[GetDateText]: [Root.GetName]: focus ALG_fate_of_spain executed"
 		custom_effect_tooltip = ALG_spain_algeria_union_tt
 		set_temp_variable = { percent_change = 3 }
-		set_temp_variable = { tag_index = ALG }
 		set_temp_variable = { influence_target = SPR }
 		change_influence_percentage = yes
 		SPR = {
@@ -19039,19 +18996,15 @@ focus_tree = {
 		log = "[GetDateText]: [Root.GetName]: focus ALG_andalus_legacy executed"
 		add_ideas = ALG_andalus_crusade_idea
 		set_temp_variable = { percent_change = 6 }
-		set_temp_variable = { tag_index = ALG.id }
 		set_temp_variable = { influence_target = SPA.id }
 		change_influence_percentage = yes
 		set_temp_variable = { percent_change = 6 }
-		set_temp_variable = { tag_index = ALG.id }
 		set_temp_variable = { influence_target = POR.id }
 		change_influence_percentage = yes
 		set_temp_variable = { percent_change = 6 }
-		set_temp_variable = { tag_index = ALG.id }
 		set_temp_variable = { influence_target = FRA.id }
 		change_influence_percentage = yes
 		set_temp_variable = { percent_change = 6 }
-		set_temp_variable = { tag_index = ALG.id }
 		set_temp_variable = { influence_target = GBR.id }
 		change_influence_percentage = yes
 		set_temp_variable = { treasury_change = -10 }
@@ -19101,23 +19054,23 @@ focus_tree = {
 				target = POR
 			}
 			division_template = {
-						name = "Mujahideen Liwa Al-Andalus"
-						is_locked = yes
-						regiments = {
-							Mot_Militia_Bat = { x = 0 y = 0 }
-							Mot_Militia_Bat = { x = 0 y = 1 }
-							Mot_Militia_Bat = { x = 0 y = 2 }
-						}
-						support = {
-							Mot_Recce_Comp = { x = 0 y = 0 }
-							L_Engi_Comp = { x = 0 y = 1 }
-						}
+				name = "Mujahideen Liwa Al-Andalus"
+				is_locked = yes
+				regiments = {
+					Mot_Militia_Bat = { x = 0 y = 0 }
+					Mot_Militia_Bat = { x = 0 y = 1 }
+					Mot_Militia_Bat = { x = 0 y = 2 }
+				}
+				support = {
+					Mot_Recce_Comp = { x = 0 y = 0 }
+					L_Engi_Comp = { x = 0 y = 1 }
+				}
 			}
 			386 = {
 				create_unit = {
-				division = "name = \"Mujahideen Liwa Al-Andalus\" division_template = \"Mujahideen Liwa Al-Andalus\" start_experience_factor = 0.9"
-				prioritize_location = 1145
-				owner = ALG
+					division = "name = \"Mujahideen Liwa Al-Andalus\" division_template = \"Mujahideen Liwa Al-Andalus\" start_experience_factor = 0.9"
+					prioritize_location = 1145
+					owner = ALG
 				}
 			}
 		}
@@ -19328,7 +19281,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		available = {
-			is_in_array = { ruling_party = 19 }
+			neutrality_neutral_communism_are_in_power = yes
 		}
 
 		bypass = {
@@ -19342,7 +19295,7 @@ focus_tree = {
 			set_temp_variable = { party_popularity_increase = 0.10 }
 			set_temp_variable = { temp_outlook_increase = 0.10 }
 			add_relative_party_popularity = yes
-			custom_Effect_tooltip = ALG_increase_drift_TT
+			custom_effect_tooltip = ALG_increase_drift_TT
 		}
 
 		ai_will_do = {
@@ -19406,7 +19359,7 @@ focus_tree = {
 			set_temp_variable = { party_popularity_increase = 0.04 }
 			set_temp_variable = { temp_outlook_increase = 0.04 }
 			add_relative_party_popularity = yes
-			custom_Effect_tooltip = ALG_increase_drift_TT
+			custom_effect_tooltip = ALG_increase_drift_TT
 		}
 
 		ai_will_do = {
@@ -19506,7 +19459,7 @@ focus_tree = {
 			set_temp_variable = { party_popularity_increase = 0.05 }
 			set_temp_variable = { temp_outlook_increase = 0.05 }
 			add_relative_party_popularity = yes
-			custom_Effect_tooltip = ALG_increase_drift_TT
+			custom_effect_tooltip = ALG_increase_drift_TT
 		}
 
 		ai_will_do = {
@@ -19537,7 +19490,7 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: focus ALG_communist_propaganda"
 			set_temp_variable = { treasury_change = -0.5 }
 			modify_treasury_effect = yes
-			custom_Effect_tooltip = ALG_increase_drift_TT
+			custom_effect_tooltip = ALG_increase_drift_TT
 		}
 
 		ai_will_do = {
@@ -19567,7 +19520,7 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: focus ALG_prepare_government"
 			set_temp_variable = { treasury_change = -0.5 }
 			modify_treasury_effect = yes
-			custom_Effect_tooltip = ALG_increase_drift_TT
+			custom_effect_tooltip = ALG_increase_drift_TT
 		}
 
 		ai_will_do = {
@@ -19601,7 +19554,7 @@ focus_tree = {
 			set_temp_variable = { party_index = 19 }
 			set_temp_variable = { party_popularity_increase = 0.10 }
 			add_relative_party_popularity = yes
-			custom_Effect_tooltip = ALG_increase_drift_TT
+			custom_effect_tooltip = ALG_increase_drift_TT
 			set_temp_variable = { temp_opinion = 5 }
 			change_labour_unions_opinion = yes
 			change_communist_cadres_opinion = yes
@@ -19980,11 +19933,9 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus ALG_banish_authoritarian_influence"
 			set_temp_variable = { percent_change = -10 }
 			set_temp_variable = { tag_index = PER.id }
-			set_temp_variable = { influence_target = THIS.id }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = -10 }
 			set_temp_variable = { tag_index = SOV.id }
-			set_temp_variable = { influence_target = THIS.id }
 			change_influence_percentage = yes
 			reverse_add_opinion_modifier = {
 				target = PER
@@ -20272,11 +20223,9 @@ focus_tree = {
 			custom_effect_tooltip = TT_ALG_CORRUPTION_COSTS
 			set_temp_variable = { percent_change = 10 }
 			set_temp_variable = { tag_index = FRA.id }
-			set_temp_variable = { influence_target = THIS.id }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 10 }
 			set_temp_variable = { tag_index = SPR.id }
-			set_temp_variable = { influence_target = THIS.id }
 			change_influence_percentage = yes
 		}
 
@@ -20374,7 +20323,6 @@ focus_tree = {
 				ROOT = {
 					set_temp_variable = { percent_change = 5 }
 					set_temp_variable = { tag_index = PREV.id }
-					set_temp_variable = { influence_target = THIS.id }
 					change_influence_percentage = yes
 				}
 			}
@@ -20787,7 +20735,6 @@ focus_tree = {
 			custom_effect_tooltip = TT_ALG_CORRUPTION_COSTS
 			set_temp_variable = { percent_change = 5 }
 			set_temp_variable = { tag_index = QAT.id }
-			set_temp_variable = { influence_target = THIS.id }
 			change_influence_percentage = yes
 		}
 
@@ -21202,7 +21149,6 @@ focus_tree = {
 			custom_effect_tooltip = TT_ALG_CORRUPTION_COSTS
 			set_temp_variable = { percent_change = 5 }
 			set_temp_variable = { tag_index = TUR.id }
-			set_temp_variable = { influence_target = THIS.id }
 			change_influence_percentage = yes
 		}
 
@@ -21242,7 +21188,6 @@ focus_tree = {
 				}
 			}
 			set_temp_variable = { percent_change = 4 }
-			set_temp_variable = { tag_index = ROOT }
 			change_influence_percentage = yes
 		}
 
@@ -21336,7 +21281,6 @@ focus_tree = {
 					target = SYR
 				}
 				set_temp_variable = { percent_change = 3 }
-				set_temp_variable = { tag_index = ALG }
 				set_temp_variable = { influence_target = SYR }
 				change_influence_percentage = yes
 			}
@@ -21349,7 +21293,6 @@ focus_tree = {
 					}
 				}
 				set_temp_variable = { percent_change = 3 }
-				set_temp_variable = { tag_index = ALG }
 				set_temp_variable = { influence_target = SYR }
 				change_influence_percentage = yes
 				ALG = {
@@ -21563,7 +21506,7 @@ focus_tree = {
 				}
 			}
 			add_to_variable = { Caliphate_leader = 1 }
-			add_ideas = Non_State_Actor
+			add_ideas = non_state_actor
 			set_cosmetic_tag = AQIM
 			every_other_country = {
 				limit = { has_military_access_to = ROOT }
@@ -22454,7 +22397,7 @@ focus_tree = {
 		available = {
 			OR = {
 				emerging_communist_state_are_in_power = yes
-				is_in_array = { ruling_party = 7 }
+				emerging_autocracy_are_in_power = yes
 			}
 			NOT = {
 				has_completed_focus = ALG_mend_ties_with_rabat
@@ -22627,7 +22570,6 @@ focus_tree = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus ALG_support_polisario_struggle"
 		add_ideas = ALG_polisario_support_idea
-		set_temp_variable = { tag_index = ROOT }
 		set_temp_variable = { influence_target = SHA }
 		set_temp_variable = { percent_change = 4 }
 		change_influence_percentage = yes
@@ -23142,10 +23084,8 @@ focus_tree = {
 			ALG = {
 				set_temp_variable = { percent_change = 1 }
 				set_temp_variable = { tag_index = FRA.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 				set_temp_variable = { tag_index = USA.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 			}
 			for_each_scope_loop = {
@@ -23249,13 +23189,11 @@ focus_tree = {
 				if = {
 					limit = { NOT = { tag = ROOT } }
 					set_temp_variable = { percent_change = 2 }
-					set_temp_variable = { tag_index = ALG.id }
-					set_temp_variable = { influence_target = THIS.id }
 					change_influence_percentage = yes
 				}
 			}
 			add_war_support = 0.10
-			add_ideas = Major_Non_NATO_Ally
+			NATO_major_non_nato_ally_join = yes
 		}
 
 		ai_will_do = {
@@ -23417,7 +23355,7 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus ALG_exchange_research_with_nato"
 			set_temp_variable = { party_index = 1 }
 			set_temp_variable = { party_popularity_increase = 0.05 }
-			set_temp_Variable = { temp_outlook_increase = 0.10 }
+			set_temp_variable = { temp_outlook_increase = 0.10 }
 			add_relative_party_popularity = yes
 			set_temp_variable = { party_index = 2 }
 			set_temp_variable = { party_popularity_increase = 0.05 }
@@ -23479,8 +23417,8 @@ focus_tree = {
 		available = {
 			is_in_array = { global.UN_general_assembly = THIS }
 			NOT = { is_in_array = { global.security_council_members = THIS } }
-			NOT = { has_idea = Lacks_International_Recognition }
-			NOT = { has_idea = Non_State_Actor }
+			NOT = { has_idea = lacks_international_recognition }
+			NOT = { has_idea = non_state_actor }
 		}
 
 		completion_reward = {
@@ -23606,8 +23544,6 @@ focus_tree = {
 			reverse_add_opinion_modifier = { target = SOV modifier = supports_us }
 			SOV = {
 				set_temp_variable = { percent_change = 1 }
-				set_temp_variable = { tag_index = ALG.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 			}
 			set_temp_variable = { percent_change = 1 }
@@ -23689,7 +23625,6 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus ALG_align_with_south_africa"
 			set_temp_variable = { percent_change = 3 }
-				set_temp_variable = { tag_index = ALG }
 				set_temp_variable = { influence_target = SAF }
 				change_influence_percentage = yes
 				add_opinion_modifier = {
@@ -23724,7 +23659,6 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus ALG_align_with_brazil"
 			set_temp_variable = { percent_change = 3 }
-				set_temp_variable = { tag_index = ALG }
 				set_temp_variable = { influence_target = BRA }
 				change_influence_percentage = yes
 				add_opinion_modifier = {
@@ -23759,7 +23693,6 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus ALG_align_with_india"
 			set_temp_variable = { percent_change = 3 }
-				set_temp_variable = { tag_index = ALG }
 				set_temp_variable = { influence_target = RAJ }
 				change_influence_percentage = yes
 				add_opinion_modifier = {
@@ -23798,8 +23731,6 @@ focus_tree = {
 			reverse_add_opinion_modifier = { target = CHI modifier = supports_us }
 			CHI = {
 				set_temp_variable = { percent_change = 1 }
-				set_temp_variable = { tag_index = ALG.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 			}
 			set_temp_variable = { percent_change = 1 }
@@ -24117,20 +24048,14 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus ALG_eastern_alignment"
 			CHI = {
 				set_temp_variable = { percent_change = 1 }
-				set_temp_variable = { tag_index = ALG.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 				set_temp_variable = { tag_index = SOV.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 			}
 			SOV = {
 				set_temp_variable = { percent_change = 1 }
-				set_temp_variable = { tag_index = ALG.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 				set_temp_variable = { tag_index = SHI.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 			}
 			set_temp_variable = { percent_change = 1 }
@@ -24138,7 +24063,6 @@ focus_tree = {
 			set_temp_variable = { influence_target = THIS.id }
 			change_influence_percentage = yes
 			set_temp_variable = { tag_index = SOV.id }
-			set_temp_variable = { influence_target = THIS.id }
 			change_influence_percentage = yes
 		}
 
@@ -24844,13 +24768,12 @@ focus_tree = {
 				limit = {
 					is_african_nation = yes
 					NOT = {
-						has_idea = Non_State_Actor
-						has_idea = Lacks_International_Recognition
+						has_idea = non_state_actor
+						has_idea = lacks_international_recognition
 					}
 				}
 				set_temp_variable = { percent_change = 1 }
 				set_temp_variable = { tag_index = FROM }
-				set_temp_variable = { influence_target = THIS }
 				change_influence_percentage = yes
 			}
 		}
@@ -25094,7 +25017,6 @@ focus_tree = {
 					}
 				}
 			}
-			set_temp_variable = { tag_index = ROOT }
 			set_temp_variable = { influence_target = MOR }
 			set_temp_variable = { percent_change = 4 }
 			change_influence_percentage = yes
@@ -25143,7 +25065,6 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus ALG_influence_mauritania"
-			set_temp_variable = { tag_index = ROOT }
 			set_temp_variable = { influence_target = MAU }
 			set_temp_variable = { percent_change = 4 }
 			change_influence_percentage = yes
@@ -25176,7 +25097,6 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus ALG_our_east_brothers"
-			set_temp_variable = { tag_index = ROOT }
 			set_temp_variable = { influence_target = TUN }
 			set_temp_variable = { percent_change = 4 }
 			change_influence_percentage = yes
@@ -25211,8 +25131,6 @@ focus_tree = {
 				array = global.AU_member
 				add_opinion_modifier = { target = ROOT modifier = friendship }
 				set_temp_variable = { percent_change = 2 }
-				set_temp_variable = { tag_index = ROOT.id }
-				set_temp_variable = { influence_target = THIS.id }
 				change_influence_percentage = yes
 			}
 		}
@@ -25241,10 +25159,8 @@ focus_tree = {
 			increase_intervention_law_effect = yes
 			add_country_leader_trait = interventionist
 			set_temp_variable = { percent_change = 1.2 }
-			set_temp_variable = { tag_index = ALG.id }
 			every_other_country = {
-				limit = { is_sahel_nation = yes }
-				set_temp_variable = { influence_target = THIS.id }
+				limit = { has_country_flag = sahel_nation_flag }
 				change_influence_percentage = yes
 			}
 		}
@@ -25538,7 +25454,6 @@ focus_tree = {
 						reverse_add_opinion_modifier = { target = ROOT modifier = declaration_of_friendship }
 						set_temp_variable = { influence_target = v }
 						set_temp_variable = { percent_change = 1 }
-						set_temp_variable = { tag_index = ROOT }
 						change_influence_percentage = yes
 					}
 				}
@@ -25623,7 +25538,6 @@ focus_tree = {
 			if = {
 				limit = { country_exists = PAL }
 				set_temp_variable = { percent_change = 7 }
-				set_temp_variable = { tag_index = ALG }
 				set_temp_variable = { influence_target = PAL }
 				change_influence_percentage = yes
 			}
@@ -25633,7 +25547,6 @@ focus_tree = {
 					country_exists = HAM
 				}
 				set_temp_variable = { percent_change = 7 }
-				set_temp_variable = { tag_index = ALG }
 				set_temp_variable = { influence_target = HAM }
 				change_influence_percentage = yes
 			}
@@ -25735,7 +25648,6 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus ALG_palestinian_aid_package"
 			if = {
 				limit = { country_exists = PAL }
-				set_temp_variable = { tag_index = ROOT }
 				set_temp_variable = { influence_target = PAL }
 				set_temp_variable = { percent_change = 10 }
 				change_influence_percentage = yes
@@ -25751,7 +25663,6 @@ focus_tree = {
 				for_each_loop = {
 					array = global.middle_eastern_nations
 					var:v = {
-						set_temp_variable = { tag_index = ROOT }
 						set_temp_variable = { influence_target = v }
 						set_temp_variable = { percent_change = 2 }
 						change_influence_percentage = yes
@@ -25799,7 +25710,6 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus ALG_approach_hamas"
-			set_temp_variable = { tag_index = ROOT }
 			if = {
 				limit = { PAL = { neutrality_neutral_muslim_brotherhood_are_in_power = yes } }
 				set_temp_variable = { influence_target = PAL }
@@ -25843,7 +25753,6 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus ALG_approach_hamas"
-			set_temp_variable = { tag_index = ROOT }
 			if = {
 				limit = { PAL = { neutrality_neutral_muslim_brotherhood_are_in_power = yes } }
 				set_temp_variable = { influence_target = PAL }
@@ -25925,6 +25834,7 @@ focus_tree = {
 		available = {
 			country_exists = KBY
 			has_completed_focus = ALG_kabyle_autonomy_statute
+			nationalist_right_wing_populists_are_in_power = yes
 		}
 
 		completion_reward = {
@@ -25959,7 +25869,7 @@ focus_tree = {
 
 		available = {
 			country_exists = KBY
-			is_in_array = { ruling_party = 20 }
+			nationalist_right_wing_populists_are_in_power = yes
 		}
 
 		completion_reward = {
@@ -26000,7 +25910,7 @@ focus_tree = {
 
 		available = {
 			country_exists = KBY
-			is_in_array = { ruling_party = 20 }
+			nationalist_right_wing_populists_are_in_power = yes
 		}
 
 		completion_reward = {
@@ -26370,7 +26280,7 @@ focus_tree = {
 
 		available = {
 			country_exists = KBY
-			is_in_array = { ruling_party = 20 }
+			nationalist_right_wing_populists_are_in_power = yes
 		}
 
 		completion_reward = {
@@ -26814,7 +26724,7 @@ focus_tree = {
 			newline = yes
 			# Military humiliated
 			set_temp_variable = { temp_opinion = -20 }
-			change_The_Military_opinion = yes
+			change_the_military_opinion = yes
 			newline = yes
 			# Capital flight
 			set_temp_variable = { treasury_change = -8.5 }
@@ -28137,7 +28047,7 @@ focus_tree = {
 			set_temp_variable = { temp_opinion = 25 }
 			change_the_ulema_opinion = yes
 			set_temp_variable = { temp_opinion = -10 }
-			change_The_Military_opinion = yes
+			change_the_military_opinion = yes
 		}
 
 		ai_will_do = {
@@ -28237,7 +28147,7 @@ focus_tree = {
 			add_ideas = TAJ_sharia_in_society
 			add_political_power = 100
 			set_temp_variable = { temp_opinion = -10 }
-			change_The_Military_opinion = yes
+			change_the_military_opinion = yes
 			set_temp_variable = { temp_modify_social_con_government = 10 }
 			modify_social_conservatism_government = yes
 		}
@@ -28486,7 +28396,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		available = {
-			is_in_array = { ruling_party = 12 }
+			neutrality_neutral_muslim_brotherhood_are_in_power = yes
 		}
 
 		completion_reward = {
@@ -28545,7 +28455,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus ALG_governmental_cleansing"
 			set_temp_variable = { temp_opinion = -10 }
-			change_The_Military_opinion = yes
+			change_the_military_opinion = yes
 			set_temp_variable = { temp_modify_social_con_government = 10 }
 			modify_social_conservatism_government = yes
 			set_temp_variable = { party_popularity_increase = 0.05 }
@@ -28679,7 +28589,7 @@ focus_tree = {
 			set_temp_variable = { percent_change = 15 }
 			change_domestic_influence_percentage = yes
 			set_temp_variable = { temp_opinion = -10 }
-			change_The_Military_opinion = yes
+			change_the_military_opinion = yes
 			set_temp_variable = { debt_change = -50 }
 			modify_debt_effect = yes
 		}
@@ -28707,7 +28617,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus ALG_el_karaouin_uni"
 			set_temp_variable = { temp_opinion = -5 }
-			change_The_Military_opinion = yes
+			change_the_military_opinion = yes
 			add_ideas = FIS_jamiat_al_karaouine
 		}
 
@@ -29109,7 +29019,6 @@ focus_tree = {
 					}
 				}
 				set_temp_variable = { percent_change = 3 }
-				set_temp_variable = { tag_index = ROOT }
 				set_temp_variable = { influence_target = PREV }
 				change_influence_percentage = yes
 			}

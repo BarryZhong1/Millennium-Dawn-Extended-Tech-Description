@@ -1,167 +1,151 @@
 #!/usr/bin/env python3
-import argparse
-import fnmatch
+# Author(s): AngriestBird, Hiddengearz
+#
+# Basic style checks for HOI4 mod .txt files. Merged from the former
+# check_basic_style.py + check_basic_style_2.py — one file, one invocation.
+#
+# Errors (fail the run):
+#   - 4-space indent instead of a tab
+#   - unbalanced () / [] / {} counts in a file
+#   - a closing bracket whose nearest opener is a different type
+#   - running brace depth going negative (a stray closing brace)
+# Warnings (reported, do not fail):
+#   - missing space around an open/close brace
+#   - missing / doubled space around an '=' sign
+#   - an odd number of quotation marks on a line
+#
+# Curly-brace balance is also checked, more accurately, by check_braces.py in
+# the structural-lint job; the counts here are a cheap first pass. The
+# cross-type bracket heuristic is noisy for HOI4 (which barely uses () / []) and
+# is a candidate for removal if it proves to add no signal.
 import os
-import subprocess
+import re
 import sys
-import time
-from multiprocessing import Pool
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 from path_utils import clean_filepath
+from shared_utils import (
+    Timer,
+    collect_files_by_mode,
+    create_linting_parser,
+    get_root_dir,
+    print_timing_summary,
+    run_with_pool,
+)
 
-__version__ = 1.2
+__version__ = 2.0
 
-
-def get_git_diff_files(base_branch="main", staged_only=False):
-    """Get list of modified .txt files from git diff"""
-    try:
-        if staged_only:
-            # Check only staged files
-            cmd = ["git", "diff", "--cached", "--name-only", "--diff-filter=ACMRT"]
-        else:
-            # Check all modified files against base branch
-            cmd = [
-                "git",
-                "diff",
-                "--name-only",
-                "--diff-filter=ACMRT",
-                f"{base_branch}...HEAD",
-            ]
-
-        result = subprocess.run(cmd, capture_output=True, text=True, check=True)
-
-        # Filter for .txt files only
-        modified_files = []
-        for file in result.stdout.strip().split("\n"):
-            if file and file.endswith(".txt"):
-                # Check if file is in relevant directories
-                if any(
-                    file.startswith(dir + "/")
-                    for dir in ["common", "events", "history"]
-                ):
-                    if os.path.exists(file):
-                        modified_files.append(file)
-
-        return modified_files
-    except subprocess.CalledProcessError as e:
-        print(f"Error getting git diff: {e}")
-        return []
+_RE_COMMENT_BRACE = re.compile(r"#.*[{}]+", re.M | re.I)
+_RE_NO_SP_OPEN = re.compile(r"([^\s]+)\{|\{([^\s]+)", re.M | re.I)
+_RE_NO_SP_CLOSE = re.compile(r"([^\s]+)\}|\}([^\s]+)", re.M | re.I)
+_RE_COMMENT_QUOTE = re.compile(r'#.*["]+', re.M | re.I)
 
 
-def check_basic_style(filepath):
+def _check_brackets_and_indent(filepath):
+    """Bracket-balance, cross-type, and 4-space-indent checks. Returns an
+    error count. Comment-aware (skips from '#' to end of line)."""
     bad_count_file = 0
 
-    with open(filepath, "r", encoding="utf-8", errors="ignore") as file:
+    with open(filepath, "r", encoding="utf-8", errors="replace") as file:
         content = file.read()
 
-        # Store all brackets we find in this file, so we can validate everything on the end
-        brackets_list = []
-        indent_List = []
+        count_open_paren = 0
+        count_close_paren = 0
+        count_open_square = 0
+        count_close_square = 0
+        count_open_curly = 0
+        count_close_curly = 0
+        last_open_bracket = None
+        indent_count = 0
 
-        # To check if we are in a comment block.
-        checkIfInComment = False
-        # Used in case we are in a line comment (//)
         ignoreTillEndOfLine = False
-        # Used in case we are in a comment block (/* */). This is true if we detect a * inside a comment block.
-        # If the next character is a /, it means we end our comment block.
-        checkIfNextIsClosingBlock = False
-
-        lastIsCurlyBrace = False
-
-        # Extra information so we know what line we find errors at
         lineNumber = 1
 
-        indexOfCharacter = 0
-
         for c in content:
-            if lastIsCurlyBrace:
-                lastIsCurlyBrace = False
-            if c == "\n":  # Keeping track of our line numbers
-                lineNumber += 1  # so we can print accurate line number information when we detect a possible error
+            if c == "\n":
+                lineNumber += 1
+                ignoreTillEndOfLine = False
+                indent_count = 0
+                continue
             if c != " ":
-                indent_List = []
-            # if we are not in a comment block, we will check if we are at the start of one or count the () {} and []
-            if checkIfInComment == False:
-                if (
-                    ignoreTillEndOfLine
-                ):  # we are in a line comment, just continue going through the characters until we find an end of line
-                    if c == "\n":
-                        ignoreTillEndOfLine = False
-                else:  # validate brackets
-                    if c == "#":
-                        ignoreTillEndOfLine = True
-                    elif c == "(":
-                        brackets_list.append("(")
-                    elif c == ")":
-                        if len(brackets_list) > 0 and brackets_list[-1] in ["{", "["]:
-                            print(
-                                "ERROR: Possible missing round bracket ')' detected at {0} Line number: {1}".format(
-                                    clean_filepath(filepath), lineNumber
-                                )
-                            )
-                            bad_count_file += 1
-                        brackets_list.append(")")
-                    elif c == "[":
-                        brackets_list.append("[")
-                    elif c == "]":
-                        if len(brackets_list) > 0 and brackets_list[-1] in ["{", "("]:
-                            print(
-                                "ERROR: Possible missing square bracket ']' detected at {0} Line number: {1}".format(
-                                    clean_filepath(filepath), lineNumber
-                                )
-                            )
-                            bad_count_file += 1
-                        brackets_list.append("]")
-                    elif c == "{":
-                        brackets_list.append("{")
-                    elif c == "}":
-                        lastIsCurlyBrace = True
-                        if len(brackets_list) > 0 and brackets_list[-1] in ["(", "["]:
-                            print(
-                                "ERROR: Possible missing curly brace '}}' detected at {0} Line number: {1}".format(
-                                    clean_filepath(filepath), lineNumber
-                                )
-                            )
-                            bad_count_file += 1
-                        brackets_list.append("}")
+                indent_count = 0
+            if ignoreTillEndOfLine:
+                continue
+            if c == "#":
+                ignoreTillEndOfLine = True
+            elif c == "(":
+                count_open_paren += 1
+                last_open_bracket = "("
+            elif c == ")":
+                if last_open_bracket in ("{", "["):
+                    print(
+                        "ERROR: Possible missing round bracket ')' detected at {0} Line number: {1}".format(
+                            clean_filepath(filepath), lineNumber
+                        )
+                    )
+                    bad_count_file += 1
+                count_close_paren += 1
+                last_open_bracket = ")"
+            elif c == "[":
+                count_open_square += 1
+                last_open_bracket = "["
+            elif c == "]":
+                if last_open_bracket in ("{", "("):
+                    print(
+                        "ERROR: Possible missing square bracket ']' detected at {0} Line number: {1}".format(
+                            clean_filepath(filepath), lineNumber
+                        )
+                    )
+                    bad_count_file += 1
+                count_close_square += 1
+                last_open_bracket = "]"
+            elif c == "{":
+                count_open_curly += 1
+                last_open_bracket = "{"
+            elif c == "}":
+                if last_open_bracket in ("(", "["):
+                    print(
+                        "ERROR: Possible missing curly brace '}}' detected at {0} Line number: {1}".format(
+                            clean_filepath(filepath), lineNumber
+                        )
+                    )
+                    bad_count_file += 1
+                count_close_curly += 1
+                last_open_bracket = "}"
+            elif c == " ":
+                indent_count += 1
+                if indent_count == 4:
+                    print(
+                        "ERROR: spaces indent (4) detected instead of tab at {0} Line number: {1}".format(
+                            clean_filepath(filepath), lineNumber
+                        )
+                    )
+                    bad_count_file += 1
 
-                    elif c == " ":  # checking indent
-                        indent_List.append("space")
-                        if len(indent_List) == 4:
-                            print(
-                                "ERROR: spaces indent (4) detected instead of tab at {0} Line number: {1}".format(
-                                    clean_filepath(filepath), lineNumber
-                                )
-                            )
-                            bad_count_file += 1
-
-            indexOfCharacter += 1
-
-        if brackets_list.count("[") != brackets_list.count("]"):
+        if count_open_square != count_close_square:
             print(
                 "ERROR: A possible missing square bracket [ or ] in file {0} [ = {1} ] = {2}".format(
                     clean_filepath(filepath),
-                    brackets_list.count("["),
-                    brackets_list.count("]"),
+                    count_open_square,
+                    count_close_square,
                 )
             )
             bad_count_file += 1
-        if brackets_list.count("(") != brackets_list.count(")"):
+        if count_open_paren != count_close_paren:
             print(
                 "ERROR: A possible missing round bracket ( or ) in file {0} ( = {1} ) = {2}".format(
                     clean_filepath(filepath),
-                    brackets_list.count("("),
-                    brackets_list.count(")"),
+                    count_open_paren,
+                    count_close_paren,
                 )
             )
             bad_count_file += 1
-        if brackets_list.count("{") != brackets_list.count("}"):
+        if count_open_curly != count_close_curly:
             print(
                 "ERROR: A possible missing curly brace {{ or }} in file {0} {{ = {1} }} = {2}".format(
                     clean_filepath(filepath),
-                    brackets_list.count("{"),
-                    brackets_list.count("}"),
+                    count_open_curly,
+                    count_close_curly,
                 )
             )
             bad_count_file += 1
@@ -169,105 +153,148 @@ def check_basic_style(filepath):
     return bad_count_file
 
 
-def get_all_files(rootDir):
-    """Get all .txt files from relevant directories"""
-    files_list = []
+def _check_spacing_and_braces(filepath):
+    """Brace/equal-sign spacing, quote-parity, and running-brace-depth checks.
+    Returns (error_count, warning_count)."""
+    error_count = 0
+    warning_count = 0
+    with open(filepath, "r", encoding="utf-8", errors="replace") as file:
+        content = file.readlines()
+        lineNum = 0
+        openBraces = [0, 0]
 
-    for directory in ["common", "events", "history"]:
-        dir_path = os.path.join(rootDir, directory)
-        if os.path.exists(dir_path):
-            for root, dirnames, filenames in os.walk(dir_path):
-                for filename in fnmatch.filter(filenames, "*.txt"):
-                    files_list.append(os.path.join(root, filename))
+        for line in content:
+            lineNum += 1
+            if not line.startswith("#"):
+                if "{" in line:
+                    hasComment = _RE_COMMENT_BRACE.search(line)
+                    if not hasComment:
+                        openBraces[0] += line.count("{")
+                        # Subtract braces already styled correctly so the slow regex below only runs for the rest
+                        closingBraces = (
+                            line.count("{") - line.count(" {\n") - line.count(" { ")
+                        )
 
-    return files_list
+                        if closingBraces > 0:
+                            hasNoSpace = _RE_NO_SP_OPEN.search(line)
+                            if hasNoSpace:
+                                print(
+                                    "WARNING: Missing a space before or after open brace at {0} Line number: {1}".format(
+                                        clean_filepath(filepath), lineNum
+                                    )
+                                )
+                                warning_count += 1
+                if "}" in line:
+                    hasComment = _RE_COMMENT_BRACE.search(line)
+                    if not hasComment:
+                        openBraces[0] += -line.count("}")
+                        # Subtract braces already styled correctly so the slow regex below only runs for the rest
+                        openingBraces = (
+                            line.count("}") - line.count(" }\n") - line.count(" } ")
+                        )
+
+                        if openingBraces > 0:
+                            hasNoSpace = _RE_NO_SP_CLOSE.search(line)
+                            if hasNoSpace:
+                                print(
+                                    "WARNING: Missing a space before or after close brace at {0} Line number: {1}".format(
+                                        clean_filepath(filepath), lineNum
+                                    )
+                                )
+                                warning_count += 1
+                if '"' in line:
+                    if (line.count('"') % 2) != 0:
+                        hasComment = _RE_COMMENT_QUOTE.search(line)
+                        if not hasComment:
+                            print(
+                                "WARNING: Missing a quotation sign at {0} Line number: {1}".format(
+                                    clean_filepath(filepath), lineNum
+                                )
+                            )
+                            warning_count += 1
+
+                if "=" in line:
+                    equalSign = 0
+                    # Count only the equal signs not already correctly spaced
+                    equalSign = line.count("=") - line.count(" = ") - line.count(" =\n")
+
+                    if (line.count("  =") > 0) or (line.count("=  ") > 0):
+                        print(
+                            "WARNING: Two spaces before or after an equal sign at {0} Line number: {1}".format(
+                                clean_filepath(filepath), lineNum
+                            )
+                        )
+                        equalSign = equalSign - line.count("  =") - line.count("=  ")
+                        warning_count += 1
+                    if equalSign != 0:
+                        print(
+                            "WARNING: Missing a space before or after an equal sign at {0} Line number: {1}".format(
+                                clean_filepath(filepath), lineNum
+                            )
+                        )
+                        warning_count += 1
+                if "    " in line:
+                    print(
+                        "WARNING: spaces indent (4) detected instead of tab at {0} Line number: {1}".format(
+                            clean_filepath(filepath), lineNum
+                        )
+                    )
+                    warning_count += 1
+                if openBraces[0] <= -1:
+                    print(
+                        "ERROR: A possible missing curly brace {{ in file {0} {{line {1}}}".format(
+                            clean_filepath(filepath), lineNum
+                        )
+                    )
+                    openBraces[0] = 0
+                    error_count += 1
+
+    return (error_count, warning_count)
+
+
+def check_basic_style(filepath):
+    """Run both style passes over a file. Returns (error_count, warning_count)."""
+    errors = _check_brackets_and_indent(filepath)
+    extra_errors, warnings = _check_spacing_and_braces(filepath)
+    return (errors + extra_errors, warnings)
 
 
 def main():
-    parser = argparse.ArgumentParser(
-        description="Validate Basic Style for HOI4 mod files"
-    )
-    parser.add_argument(
-        "--mode",
-        choices=["all", "diff", "staged"],
-        default="all",
-        help="Check mode: all files, git diff files, or staged files only (default: all)",
-    )
-    parser.add_argument(
-        "--base-branch",
-        default="main",
-        help="Base branch for diff comparison (default: main)",
-    )
-    parser.add_argument(
-        "--files", nargs="+", help="Specific files to check (overrides mode)"
-    )
-    parser.add_argument(
-        "--workers",
-        type=int,
-        default=os.cpu_count() or 4,
-        help="Number of parallel workers (default: CPU count)",
-    )
-
+    parser = create_linting_parser("Validate Basic Style for HOI4 mod files")
     args = parser.parse_args()
 
+    timings = []
     print(f"Validating Basic Style (Mode: {args.mode})")
 
-    files_list = []
-    bad_count = 0
-
-    # Allow running from root directory as well as from inside the tools directory
-    scriptDir = os.path.realpath(__file__)
-    rootDir = os.path.dirname(os.path.dirname(scriptDir))
-
-    # Determine which files to check
-    if args.files:
-        # If specific files are provided, use those
-        files_list = args.files
-        print(f"Checking specified files: {len(files_list)} files")
-    elif args.mode == "diff":
-        # Check only modified files against base branch
-        files_list = get_git_diff_files(base_branch=args.base_branch, staged_only=False)
-        if not files_list:
-            print("No modified .txt files found in git diff")
-            return 0
-        print(
-            f"Checking modified files against {args.base_branch}: {len(files_list)} files"
+    with Timer("file collection") as t:
+        existing_files = collect_files_by_mode(
+            args, get_root_dir(), include_interface=True
         )
-    elif args.mode == "staged":
-        # Check only staged files
-        files_list = get_git_diff_files(staged_only=True)
-        if not files_list:
-            print("No staged .txt files found")
-            return 0
-        print(f"Checking staged files: {len(files_list)} files")
-    else:
-        # Default: check all files
-        files_list = get_all_files(rootDir)
-        print(f"Checking all files: {len(files_list)} files")
+    timings.append(("file collection", t.elapsed))
 
-    # Filter to existing files
-    existing_files = []
-    for filename in files_list:
-        if os.path.exists(filename):
-            existing_files.append(filename)
-        else:
-            print(f"WARNING: File not found: {filename}")
+    if not existing_files:
+        print("No files to check")
+        return 0
 
-    # Check files in parallel
-    with Pool(processes=args.workers) as pool:
-        results = pool.map(check_basic_style, existing_files)
-    bad_count = sum(results)
+    print(f"Checking {len(existing_files)} files...")
 
-    # Print summary
+    with Timer("checking") as t:
+        results = run_with_pool(check_basic_style, existing_files, args.workers)
+    timings.append(("checking", t.elapsed))
+
+    bad_count = sum(r[0] for r in results)
+    warning_count = sum(r[1] for r in results)
+
     print(
-        "------\nChecked {0} files\nErrors detected: {1}".format(
-            len(files_list), bad_count
-        )
+        f"------\nChecked {len(existing_files)} files\n"
+        f"Total Errors detected: {bad_count}\n"
+        f"Total Warnings detected: {warning_count}"
     )
     if bad_count == 0:
         print("File validation PASSED")
     else:
         print("File validation FAILED")
+    print_timing_summary(timings)
 
     return bad_count
 

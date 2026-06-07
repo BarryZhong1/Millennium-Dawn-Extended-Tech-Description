@@ -1978,16 +1978,13 @@ SOV_mvd_category = {
 					set_temp_variable = { temp_outlook_increase = 0.45 }
 					add_relative_party_popularity = yes
 
+					add_ideas = faction_warsaw_pact_idea
 					remove_ideas = Major_Non_NATO_Ally
 					leaving_EU = yes
 				}
-				SOV = {
-					set_autonomy = {
-						target = POL
-						autonomy_state = autonomy_warsaw
-						end_wars = no
-						end_civil_wars = no
-					}
+				POL = {
+					set_country_flag = SOV_warsaw_pact_pending_puppet
+					set_variable = { SOV_warsaw_pact_overlord_id = ROOT.id }
 				}
 				country_event = sov_warsaw_pact.3
 				set_temp_variable = { treasury_change = -15 }
@@ -2218,19 +2215,10 @@ SOV_mvd_category = {
 				remove_ideas = Major_Non_NATO_Ally
 				leaving_EU = yes
 			}
-			news_event = {
-				hours = 1
-				id = sov_warsaw_pact.4
+			HUN = {
+				set_country_flag = SOV_warsaw_pact_pending_puppet
+				set_variable = { SOV_warsaw_pact_overlord_id = ROOT.id }
 			}
-			SOV = {
-				set_autonomy = {
-					target = HUN
-					autonomy_state = autonomy_warsaw
-					end_wars = no
-					end_civil_wars = no
-				}
-			}
-			country_event = sov_warsaw_pact.5
 			set_temp_variable = { treasury_change = -15 }
 			modify_treasury_effect = yes
 		}
@@ -2331,19 +2319,10 @@ SOV_mvd_category = {
 					remove_ideas = Major_Non_NATO_Ally
 					leaving_EU = yes
 				}
-				news_event = {
-					hours = 1
-					id = sov_warsaw_pact.4
+				ALB = {
+					set_country_flag = SOV_warsaw_pact_pending_puppet
+					set_variable = { SOV_warsaw_pact_overlord_id = ROOT.id }
 				}
-				SOV = {
-					set_autonomy = {
-						target = ALB
-						autonomy_state = autonomy_warsaw
-						end_wars = no
-						end_civil_wars = no
-					}
-				}
-				country_event = sov_warsaw_pact.5
 				set_temp_variable = { treasury_change = -15 }
 				modify_treasury_effect = yes
 			}
@@ -2446,21 +2425,14 @@ SOV_mvd_category = {
 					set_temp_variable = { temp_outlook_increase = 0.45 }
 					add_relative_party_popularity = yes
 
+					add_ideas = faction_warsaw_pact_idea
 					country_event = sov_warsaw_pact.6
 					remove_ideas = Major_Non_NATO_Ally
 					leaving_EU = yes
 				}
-				news_event = {
-					hours = 1
-					id = sov_warsaw_pact.4
-				}
-				SOV = {
-					set_autonomy = {
-						target = CZE
-						autonomy_state = autonomy_warsaw
-						end_wars = no
-						end_civil_wars = no
-					}
+				CZE = {
+					set_country_flag = SOV_warsaw_pact_pending_puppet
+					set_variable = { SOV_warsaw_pact_overlord_id = ROOT.id }
 				}
 				SLO = {
 					start_civil_war = {
@@ -2491,23 +2463,15 @@ SOV_mvd_category = {
 					set_temp_variable = { party_popularity_increase = 0.45 }
 					set_temp_variable = { temp_outlook_increase = 0.45 }
 					add_relative_party_popularity = yes
+					add_ideas = faction_warsaw_pact_idea
 					country_event = sov_warsaw_pact.6
 					remove_ideas = Major_Non_NATO_Ally
 					leaving_EU = yes
 				}
-				news_event = {
-					hours = 1
-					id = sov_warsaw_pact.4
+				SLO = {
+					set_country_flag = SOV_warsaw_pact_pending_puppet
+					set_variable = { SOV_warsaw_pact_overlord_id = ROOT.id }
 				}
-				SOV = {
-					set_autonomy = {
-						target = SLO
-						autonomy_state = autonomy_warsaw
-						end_wars = no
-						end_civil_wars = no
-					}
-				}
-				country_event = sov_warsaw_pact.5
 				set_temp_variable = { treasury_change = -15 }
 				modify_treasury_effect = yes
 			}
@@ -3744,8 +3708,10 @@ SOV_democracy_taiwam_category = {
 		ai_will_do = { base = 355 }
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision SOV_more_weapon_taiwan"
-			TAI = { country_event = russia.46 }
-			TAI = { country_event = russia.41 }
+			TAI = {
+				country_event = russia.46
+				country_event = russia.41
+			}
 			add_opinion_modifier = {
 				target = TAI
 				modifier = military_cooperation
@@ -6765,7 +6731,7 @@ SOV_economy_category = {
 		visible = {
 			has_completed_focus = SOV_from_center_to_regions
 		}
-		ai_will_do = { base = 355 }
+
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove SOV_from_center_4"
 			add_stability = 0.02
@@ -6843,7 +6809,7 @@ SOV_economy_category = {
 		visible = {
 			has_completed_focus = SOV_from_center_to_regions
 		}
-		ai_will_do = { base = 355 }
+
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove SOV_from_center_7"
 			add_stability = 0.02
@@ -8058,22 +8024,7 @@ SOV_army_category = {
 				create_unit = {
 					division = "name = \"Battalion of Prisoners\" division_template = \"Battalion of Prisoners\" start_experience_factor = 0.1"
 					owner = ROOT
-				}
-			}
-			random_owned_controlled_state = {
-				limit = { ROOT = { has_full_control_of_state = PREV } }
-				prioritize = { 651 }
-				create_unit = {
-					division = "name = \"Battalion of Prisoners\" division_template = \"Battalion of Prisoners\" start_experience_factor = 0.1"
-					owner = ROOT
-				}
-			}
-			random_owned_controlled_state = {
-				limit = { ROOT = { has_full_control_of_state = PREV } }
-				prioritize = { 651 }
-				create_unit = {
-					division = "name = \"Battalion of Prisoners\" division_template = \"Battalion of Prisoners\" start_experience_factor = 0.1"
-					owner = ROOT
+					count = 3
 				}
 			}
 			hidden_effect = {
@@ -8160,22 +8111,7 @@ SOV_army_category = {
 				create_unit = {
 					division = "name = \"Battalion of Prisoners\" division_template = \"Battalion of Prisoners\" start_experience_factor = 0.1"
 					owner = ROOT
-				}
-			}
-			random_owned_controlled_state = {
-				limit = { ROOT = { has_full_control_of_state = PREV } }
-				prioritize = { 688 }
-				create_unit = {
-					division = "name = \"Battalion of Prisoners\" division_template = \"Battalion of Prisoners\" start_experience_factor = 0.1"
-					owner = ROOT
-				}
-			}
-			random_owned_controlled_state = {
-				limit = { ROOT = { has_full_control_of_state = PREV } }
-				prioritize = { 688 }
-				create_unit = {
-					division = "name = \"Battalion of Prisoners\" division_template = \"Battalion of Prisoners\" start_experience_factor = 0.1"
-					owner = ROOT
+					count = 3
 				}
 			}
 			hidden_effect = {
@@ -8294,26 +8230,14 @@ SOV_army_category = {
 						division = "name = \"Wolves\" division_template = \"Volunteer Assault Corps\" start_experience_factor = 0.1"
 						owner = ROOT
 					}
-				}
-				random_owned_controlled_state = {
-					limit = { ROOT = { has_full_control_of_state = PREV } }
-					prioritize = { 666 }
 					create_unit = {
 						division = "name = \"Veterans\" division_template = \"Volunteer Assault Corps\" start_experience_factor = 0.1"
 						owner = ROOT
 					}
-				}
-				random_owned_controlled_state = {
-					limit = { ROOT = { has_full_control_of_state = PREV } }
-					prioritize = { 666 }
 					create_unit = {
 						division = "name = \"Sever Z\" division_template = \"Volunteer Assault Corps\" start_experience_factor = 0.1"
 						owner = ROOT
 					}
-				}
-				random_owned_controlled_state = {
-					limit = { ROOT = { has_full_control_of_state = PREV } }
-					prioritize = { 666 }
 					create_unit = {
 						division = "name = \"St. George the Victorious\" division_template = \"Volunteer Assault Corps\" start_experience_factor = 0.1"
 						owner = ROOT

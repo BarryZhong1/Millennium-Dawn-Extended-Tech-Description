@@ -1,22 +1,17 @@
 #!/usr/bin/env python3
-##########################
-# Defines Validation Script
-# Cross-references MD_defines.lua against vanilla 00_defines.lua to catch
-# dead/fabricated defines, wrong namespaces, and duplicates.
-#
-# Checks:
-#   1. Every define in MD exists in vanilla with the correct namespace
-#   2. No duplicate defines within MD (last-write-wins is a silent bug)
-#   3. Suggests closest match for likely typos
-#
+# Cross-reference MD_defines.lua against vanilla 00_defines.lua to catch
+# dead/fabricated defines, wrong namespaces, and duplicates (where last-write
+# silently wins), suggesting the closest match for likely typos.
 # Requires vanilla HOI4 installed; auto-detects common Steam paths.
-##########################
 import difflib
 import os
 import re
 import sys
 from typing import Dict, List, Optional, Set, Tuple
 
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
+
+from shared_utils import find_hoi4_install
 from validator_common import BaseValidator, Colors, run_validator_main
 
 # Pattern: NDefines.NAMESPACE.NAME = value
@@ -28,21 +23,11 @@ VANILLA_DEFINE_RE = re.compile(r"^\s+(\w+)\s*=")
 # Pattern for namespace blocks in vanilla: NAMESPACE = {
 VANILLA_NAMESPACE_RE = re.compile(r"^(\w+)\s*=\s*\{")
 
-# Common Steam install locations
-STEAM_PATHS = [
-    os.path.expanduser("~/.local/share/Steam/steamapps/common/Hearts of Iron IV"),
-    os.path.expanduser("~/.steam/steam/steamapps/common/Hearts of Iron IV"),
-    "C:/Program Files (x86)/Steam/steamapps/common/Hearts of Iron IV",
-    "C:/Program Files/Steam/steamapps/common/Hearts of Iron IV",
-    os.path.expanduser(
-        "~/Library/Application Support/Steam/steamapps/common/Hearts of Iron IV"
-    ),
-]
-
 
 def find_vanilla_defines() -> Optional[str]:
     """Auto-detect the vanilla 00_defines.lua path."""
-    for base in STEAM_PATHS:
+    base = find_hoi4_install()
+    if base:
         path = os.path.join(base, "common", "defines", "00_defines.lua")
         if os.path.isfile(path):
             return path
@@ -202,21 +187,13 @@ class Validator(BaseValidator):
                 return
 
         # Parse both files
-        self.log(f"\n{'='*80}")
-        self.log(
-            f"{Colors.CYAN if self.use_colors else ''}Parsing vanilla defines...{Colors.ENDC if self.use_colors else ''}"
-        )
-        self.log(f"{'='*80}")
+        self._log_section("Parsing vanilla defines...")
 
         vanilla = parse_vanilla_defines(vanilla_path)
         total_vanilla = sum(len(v) for v in vanilla.values())
         self.log(f"  Found {total_vanilla} defines across {len(vanilla)} namespaces")
 
-        self.log(f"\n{'='*80}")
-        self.log(
-            f"{Colors.CYAN if self.use_colors else ''}Parsing MD defines...{Colors.ENDC if self.use_colors else ''}"
-        )
-        self.log(f"{'='*80}")
+        self._log_section("Parsing MD defines...")
 
         md_defines = parse_md_defines(md_path)
         self.log(f"  Found {len(md_defines)} defines")
@@ -228,11 +205,7 @@ class Validator(BaseValidator):
                 all_vanilla_names.setdefault(name, []).append(ns)
 
         # Check 1: Dead/fabricated defines
-        self.log(f"\n{'='*80}")
-        self.log(
-            f"{Colors.CYAN if self.use_colors else ''}Checking for dead/fabricated defines...{Colors.ENDC if self.use_colors else ''}"
-        )
-        self.log(f"{'='*80}")
+        self._log_section("Checking for dead/fabricated defines...")
 
         dead_results = []
         namespace_results = []
@@ -274,11 +247,7 @@ class Validator(BaseValidator):
         )
 
         # Check 3: Duplicates within MD
-        self.log(f"\n{'='*80}")
-        self.log(
-            f"{Colors.CYAN if self.use_colors else ''}Checking for duplicate defines...{Colors.ENDC if self.use_colors else ''}"
-        )
-        self.log(f"{'='*80}")
+        self._log_section("Checking for duplicate defines...")
 
         seen: Dict[str, Tuple[int, str]] = {}
         duplicate_results = []

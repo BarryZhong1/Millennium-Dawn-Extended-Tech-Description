@@ -1,22 +1,14 @@
 #!/usr/bin/env python3
-##########################
-# AI Role Reference Validation Script
-# Cross-references role_ratio and build_army references in AI strategy files
-# against role definitions in AI template files.
-#
-# Checks:
-#   1. Collects all valid role names from common/ai_templates/*.txt
-#   2. Finds all role_ratio id = X and build_army id = X in common/ai_strategy/*.txt
-#   3. Reports any referenced role not found in the template definitions
-#   4. Suggests closest match for likely typos
-##########################
+# Cross-reference role_ratio and build_army role references in
+# common/ai_strategy/*.txt against role definitions in common/ai_templates/*.txt
+# (plus known vanilla roles), suggesting the closest match for likely typos.
 import difflib
 import glob
 import os
 import re
-from typing import Dict, List, Set, Tuple
+from typing import List, Set, Tuple
 
-from validator_common import BaseValidator, Colors, run_validator_main, strip_comments
+from validator_common import BaseValidator, run_validator_main, strip_comments
 
 # Regex to match role definitions: role = <name>
 ROLE_DEF_RE = re.compile(r"role\s*=\s*(\w+)")
@@ -117,11 +109,7 @@ class Validator(BaseValidator):
 
     def _collect_valid_roles(self):
         """Collect all role definitions from AI template files."""
-        self.log(f"\n{'='*80}")
-        self.log(
-            f"{Colors.CYAN if self.use_colors else ''}Collecting role definitions from AI templates...{Colors.ENDC if self.use_colors else ''}"
-        )
-        self.log(f"{'='*80}")
+        self._log_section("Collecting role definitions from AI templates...")
 
         # Always scan ALL template files for role definitions, even in staged mode.
         # Role definitions are the "truth set" — we need the complete picture.
@@ -143,11 +131,7 @@ class Validator(BaseValidator):
 
     def _validate_strategy_references(self):
         """Validate that all role references in strategy files point to valid roles."""
-        self.log(f"\n{'='*80}")
-        self.log(
-            f"{Colors.CYAN if self.use_colors else ''}Checking role references in AI strategy files...{Colors.ENDC if self.use_colors else ''}"
-        )
-        self.log(f"{'='*80}")
+        self._log_section("Checking role references in AI strategy files...")
 
         strategy_files = self._collect_files(["common/ai_strategy/*.txt"])
         self.log(f"  Found {len(strategy_files)} strategy files to check")

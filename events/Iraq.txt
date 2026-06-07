@@ -70,7 +70,6 @@ country_event = {
 		modify_international_investment_effect = yes
 
 		set_temp_variable = { percent_change = 1.5 }
-		set_temp_variable = { tag_index = ROOT }
 		set_temp_variable = { influence_target = IRQ }
 		change_influence_percentage = yes
 
@@ -142,7 +141,6 @@ country_event = {
 		modify_international_investment_effect = yes
 
 		set_temp_variable = { percent_change = 1.5 }
-		set_temp_variable = { tag_index = ROOT }
 		set_temp_variable = { influence_target = IRQ }
 		change_influence_percentage = yes
 
@@ -249,7 +247,6 @@ country_event = {
 		modify_international_investment_effect = yes
 
 		set_temp_variable = { percent_change = 0.3 }
-		set_temp_variable = { tag_index = ROOT }
 		set_temp_variable = { influence_target = IRQ }
 		change_influence_percentage = yes
 
@@ -685,14 +682,11 @@ country_event = {
 	option = { # America
 		name = iraqi_events.21.a
 		log = "[GetDateText]: [This.GetName]: iraqi_events.21.a executed"
-		random_list = {
-			50 = {
-				custom_effect_tooltip = IRQ_increase_american_weariness_3_TT
-				add_to_variable = { var = IRQ_american_weariness value = 3 }
-				clamp_variable = { var = IRQ_american_weariness min = 0 max = 100 }
-			}
-			50 = {
-			}
+		random = {
+			chance = 50
+			custom_effect_tooltip = IRQ_increase_american_weariness_3_TT
+			add_to_variable = { var = IRQ_american_weariness value = 3 }
+			clamp_variable = { var = IRQ_american_weariness min = 0 max = 100 }
 		}
 		newline = yes
 		if = {
@@ -2001,6 +1995,19 @@ country_event = {
 		set_temp_variable = { tag_index = USA }
 		set_temp_variable = { influence_target = PAL }
 		change_influence_percentage = yes
+		hidden_effect = {
+			if = {
+				limit = {
+					USA = { has_idea = USA_afghan_mission_cost }
+				}
+				USA = {
+					country_event = {
+						id = iraq_war.24
+						days = 30
+					}
+				}
+			}
+		}
 		ai_chance = {
 			base = 5
 		}
@@ -2217,6 +2224,19 @@ country_event = {
 		set_temp_variable = { tag_index = USA }
 		set_temp_variable = { influence_target = PAL }
 		change_influence_percentage = yes
+		hidden_effect = {
+			if = {
+				limit = {
+					USA = { has_idea = USA_afghan_mission_cost }
+				}
+				USA = {
+					country_event = {
+						id = iraq_war.24
+						days = 30
+					}
+				}
+			}
+		}
 		ai_chance = {
 			base = 5
 		}
@@ -2907,6 +2927,60 @@ country_event = { # Establishment of the Iraqi De-Baathification Council
 		}
 	}
 }
+
+country_event = { # Afghanistan Withdrawal After Iraq Failure
+	id = iraq_war.24
+	title = iraq_war.24.t
+	desc = iraq_war.24.d
+	picture = GFX_handshake_black
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		has_idea = USA_afghan_mission_cost
+	}
+
+	option = { # Withdraw from Afghanistan
+		name = iraq_war.24.a
+		log = "[GetDateText]: [This.GetName]: iraq_war.24.a executed"
+		remove_ideas = USA_afghan_mission_cost
+		clr_country_flag = USA_disabled_casualty_report
+		if = {
+			limit = { NOT = { country_exists = AFG } }
+			release = AFG
+		}
+		else = {
+			set_autonomy = {
+				target = AFG
+				autonomous_state = autonomy_free
+				end_wars = no
+			}
+			remove_from_faction = AFG
+		}
+		ai_chance = {
+			base = 80
+			modifier = {
+				is_historical_focus_on = yes
+				add = 20
+			}
+		}
+	}
+
+	option = { # Stay the course
+		name = iraq_war.24.b
+		log = "[GetDateText]: [This.GetName]: iraq_war.24.b executed"
+		add_stability = -0.05
+		add_war_support = -0.05
+		ai_chance = {
+			base = 10
+			modifier = {
+				is_historical_focus_on = yes
+				factor = 0
+			}
+		}
+	}
+}
+
 # Iraqi Civil War
 
 country_event = { # Iraqi Defeat
@@ -3443,8 +3517,9 @@ country_event = { # Sunni Officers Rally Around Al-Douri
 		newline = yes
 		custom_effect_tooltip = IRQ_play_current_government_TT
 		hidden_effect = {
-			random_list = {
-				90 = {
+			random = {
+				chance = 90
+
 					create_dynamic_country = {
 						original_tag = IRQ
 						set_country_flag = IRQ_sunni_revolt
@@ -3658,11 +3733,9 @@ country_event = { # Sunni Officers Rally Around Al-Douri
 							}
 						}
 					}
-				}
-				10 = {
-					# Nothing happens
-				}
+
 			}
+
 		}
 		ai_chance = {
 			base = 5
@@ -3767,9 +3840,7 @@ country_event = { # Sunni Officers Rally Around Al-Douri
 						pro_iranian
 					}
 				}
-			}
-			# OOB
-			MDA = {
+				# OOB
 				division_template = {
 					name = "Shi'ite Militia"
 					priority = 0
@@ -3962,8 +4033,9 @@ country_event = { # Sunni Officers Rally Around Al-Douri
 		newline = yes
 		custom_effect_tooltip = IRQ_play_current_government_TT
 		hidden_effect = {
-			random_list = {
-				90 = {
+			random = {
+				chance = 90
+
 					create_dynamic_country = {
 						original_tag = IRQ
 						set_country_flag = IRQ_sunni_revolt
@@ -4178,11 +4250,9 @@ country_event = { # Sunni Officers Rally Around Al-Douri
 							}
 						}
 					}
-				}
-				10 = {
-					# Nothing happens
-				}
+
 			}
+
 		}
 		ai_chance = {
 			base = 5
@@ -4610,9 +4680,6 @@ country_event = { # AIQ In Iraq Begins Attacks
 						owner = ISI
 					}
 				}
-			}
-
-			ISI = {
 				create_country_leader = {
 					name = "Abu Musab Al-Zarqawi"
 					picture = "Abu_Musab_Al-Zarqawi.dds"
@@ -4625,8 +4692,8 @@ country_event = { # AIQ In Iraq Begins Attacks
 					}
 				}
 			}
-			IRQ = { every_core_state = { add_core_of = ISI } }
 			IRQ = {
+				every_core_state = { add_core_of = ISI }
 				declare_war_on = {
 					target = ISI
 					type = civil_war
@@ -4815,8 +4882,6 @@ country_event = { # AIQ In Iraq Begins Attacks
 						guerrilla_leader
 					}
 				}
-			}
-			ISI = {
 				set_cosmetic_tag = ISI_aiq_iraq
 			}
 			set_country_flag = is_IRAQ
@@ -4917,8 +4982,8 @@ news_event = { # Islamic Revolution in Iraq
 	is_triggered_only = yes
 
 	option = {
-		log = "[GetDateText]: [This.GetName]:iraqi_flavor_events.7.a executed"
 		name = iraqi_flavor_events.7.a
+		log = "[GetDateText]: [This.GetName]:iraqi_flavor_events.7.a executed"
 		clr_global_flag = IRQ_has_shia_civil_war
 	}
 }
@@ -4932,8 +4997,8 @@ news_event = { # Badr Victory
 	is_triggered_only = yes
 
 	option = {
-		log = "[GetDateText]: [This.GetName]:iraqi_flavor_events.8.a executed"
 		name = iraqi_flavor_events.8.a
+		log = "[GetDateText]: [This.GetName]:iraqi_flavor_events.8.a executed"
 		clr_global_flag = IRQ_has_shia_civil_war
 	}
 }
@@ -4947,8 +5012,8 @@ news_event = { # Badr Victory
 	is_triggered_only = yes
 
 	option = {
-		log = "[GetDateText]: [This.GetName]:iraqi_flavor_events.9.a executed"
 		name = iraqi_flavor_events.9.a
+		log = "[GetDateText]: [This.GetName]:iraqi_flavor_events.9.a executed"
 		clr_global_flag = IRQ_has_shia_civil_war
 	}
 }
@@ -5333,8 +5398,6 @@ country_event = {
 					count = 10
 				}
 			}
-		}
-		ARA = {
 			declare_war_on = {
 				target = PER
 				type = puppet_wargoal_focus
@@ -6584,7 +6647,6 @@ country_event = {
 		}
 		newline = yes
 		set_temp_variable = { percent_change = 2 }
-		set_temp_variable = { tag_index = ROOT }
 		set_temp_variable = { influence_target = IRQ }
 		change_influence_percentage = yes
 		ai_chance = {
@@ -7364,8 +7426,6 @@ country_event = {
 					end_wars = no
 				}
 				remove_from_faction = IRQ
-			}
-			USA = {
 				country_event = iraq_md.36
 			}
 		}
@@ -7909,8 +7969,6 @@ country_event = {
 						end_wars = no
 					}
 					remove_from_faction = IRQ
-				}
-				USA = {
 					country_event = iraq_md.36
 				}
 			}

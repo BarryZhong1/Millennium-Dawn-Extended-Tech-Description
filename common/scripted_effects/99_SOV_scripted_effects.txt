@@ -12,54 +12,14 @@ modify_capitalisation_gazprom_support = {
 ###########CAPITALISAION COMPANIES - GAZPROM CALCULATION EFFECT###########
 capitalisation_gazprom_calculate = {
 	###########GAZPROM CALCULATION - GAS STREAMS###########
-	###########GAZPROM GAS STREAMS - NORD STREAM###########
+	set_temp_variable = { modify_capitalisation_gazprom = 0 }
+	if = { limit = { GER = { has_idea = SOV_nord_stream_idea } } add_to_temp_variable = { modify_capitalisation_gazprom = 0.035 } }
+	if = { limit = { GER = { has_idea = SOV_nord_stream2_idea } } add_to_temp_variable = { modify_capitalisation_gazprom = 0.035 } }
+	if = { limit = { TUR = { has_idea = SOV_blue_stream_idea } } add_to_temp_variable = { modify_capitalisation_gazprom = 0.035 } }
+	if = { limit = { TUR = { has_idea = SOV_turkey_stream_idea } } add_to_temp_variable = { modify_capitalisation_gazprom = 0.035 } }
+	if = { limit = { NKO = { has_idea = SOV_korean_stream_idea } } add_to_temp_variable = { modify_capitalisation_gazprom = 0.035 } }
 	if = {
-		limit = {
-			GER = {
-				has_idea = SOV_nord_stream_idea
-			}
-		}
-		set_temp_variable = { modify_capitalisation_gazprom = 0.035 }
-		modify_capitalisation_gazprom_support = yes
-	}
-	###########GAZPROM GAS STREAMS - NORD STREAM 2###########
-	if = {
-		limit = {
-			GER = {
-				has_idea = SOV_nord_stream2_idea
-			}
-		}
-		set_temp_variable = { modify_capitalisation_gazprom = 0.035 }
-		modify_capitalisation_gazprom_support = yes
-	}
-	###########GAZPROM GAS STREAMS - BLUE STREAM###########
-	if = {
-		limit = {
-			TUR = {
-				has_idea = SOV_blue_stream_idea
-			}
-		}
-		set_temp_variable = { modify_capitalisation_gazprom = 0.035 }
-		modify_capitalisation_gazprom_support = yes
-	}
-	###########GAZPROM GAS STREAMS - TURKEY STREAM###########
-	if = {
-		limit = {
-			TUR = {
-				has_idea = SOV_turkey_stream_idea
-			}
-		}
-		set_temp_variable = { modify_capitalisation_gazprom = 0.035 }
-		modify_capitalisation_gazprom_support = yes
-	}
-	###########GAZPROM GAS STREAMS - KOREAN STREAM###########
-	if = {
-		limit = {
-			NKO = {
-				has_idea = SOV_korean_stream_idea
-			}
-		}
-		set_temp_variable = { modify_capitalisation_gazprom = 0.035 }
+		limit = { check_variable = { modify_capitalisation_gazprom > 0 } }
 		modify_capitalisation_gazprom_support = yes
 	}
 	##########GAZPROM CALCULATION - OIL PROVINCE###########
@@ -225,60 +185,17 @@ capitalisation_gazprom_calculate = {
 		set_temp_variable = { modify_capitalisation_gazprom = 0.001 }
 		modify_capitalisation_gazprom_support = yes
 	}
+	set_temp_variable = { modify_capitalisation_gazprom = 0 }
+	if = { limit = { owns_state = 658 } add_to_temp_variable = { modify_capitalisation_gazprom = 0.017 } }
+	if = { limit = { owns_state = 1130 } add_to_temp_variable = { modify_capitalisation_gazprom = 0.017 } }
+	if = { limit = { owns_state = 1131 } add_to_temp_variable = { modify_capitalisation_gazprom = 0.017 } }
+	if = { limit = { owns_state = 1132 } add_to_temp_variable = { modify_capitalisation_gazprom = 0.017 } }
+	if = { limit = { owns_state = 663 } add_to_temp_variable = { modify_capitalisation_gazprom = 0.015 } }
+	if = { limit = { owns_state = 661 } add_to_temp_variable = { modify_capitalisation_gazprom = 0.016 } }
+	if = { limit = { owns_state = 1118 } add_to_temp_variable = { modify_capitalisation_gazprom = 0.017 } }
+	if = { limit = { owns_state = 664 } add_to_temp_variable = { modify_capitalisation_gazprom = 0.014 } }
 	if = {
-		limit = {
-			owns_state = 658
-		}
-		set_temp_variable = { modify_capitalisation_gazprom = 0.017 }
-		modify_capitalisation_gazprom_support = yes
-	}
-	if = {
-		limit = {
-			owns_state = 1130
-		}
-		set_temp_variable = { modify_capitalisation_gazprom = 0.017 }
-		modify_capitalisation_gazprom_support = yes
-	}
-	if = {
-		limit = {
-			owns_state = 1131
-		}
-		set_temp_variable = { modify_capitalisation_gazprom = 0.017 }
-		modify_capitalisation_gazprom_support = yes
-	}
-	if = {
-		limit = {
-			owns_state = 1132
-		}
-		set_temp_variable = { modify_capitalisation_gazprom = 0.017 }
-		modify_capitalisation_gazprom_support = yes
-	}
-	if = {
-		limit = {
-			owns_state = 663
-		}
-		set_temp_variable = { modify_capitalisation_gazprom = 0.015 }
-		modify_capitalisation_gazprom_support = yes
-	}
-	if = {
-		limit = {
-			owns_state = 661
-		}
-		set_temp_variable = { modify_capitalisation_gazprom = 0.016 }
-		modify_capitalisation_gazprom_support = yes
-	}
-	if = {
-		limit = {
-			owns_state = 1118
-		}
-		set_temp_variable = { modify_capitalisation_gazprom = 0.017 }
-		modify_capitalisation_gazprom_support = yes
-	}
-	if = {
-		limit = {
-			owns_state = 664
-		}
-		set_temp_variable = { modify_capitalisation_gazprom = 0.014 }
+		limit = { check_variable = { modify_capitalisation_gazprom > 0 } }
 		modify_capitalisation_gazprom_support = yes
 	}
 	if = {
@@ -1005,60 +922,17 @@ capitalisation_rosneft_calculate = {
 		set_temp_variable = { modify_capitalisation_rosneft = 0.001 }
 		modify_capitalisation_rosneft_support = yes
 	}
+	set_temp_variable = { modify_capitalisation_rosneft = 0 }
+	if = { limit = { owns_state = 658 } add_to_temp_variable = { modify_capitalisation_rosneft = 0.08 } }
+	if = { limit = { owns_state = 1130 } add_to_temp_variable = { modify_capitalisation_rosneft = 0.09 } }
+	if = { limit = { owns_state = 1131 } add_to_temp_variable = { modify_capitalisation_rosneft = 0.08 } }
+	if = { limit = { owns_state = 1132 } add_to_temp_variable = { modify_capitalisation_rosneft = 0.08 } }
+	if = { limit = { owns_state = 663 } add_to_temp_variable = { modify_capitalisation_rosneft = 0.07 } }
+	if = { limit = { owns_state = 661 } add_to_temp_variable = { modify_capitalisation_rosneft = 0.08 } }
+	if = { limit = { owns_state = 1118 } add_to_temp_variable = { modify_capitalisation_rosneft = 0.08 } }
+	if = { limit = { owns_state = 664 } add_to_temp_variable = { modify_capitalisation_rosneft = 0.07 } }
 	if = {
-		limit = {
-			owns_state = 658
-		}
-		set_temp_variable = { modify_capitalisation_rosneft = 0.08 }
-		modify_capitalisation_rosneft_support = yes
-	}
-	if = {
-		limit = {
-			owns_state = 1130
-		}
-		set_temp_variable = { modify_capitalisation_rosneft = 0.09 }
-		modify_capitalisation_rosneft_support = yes
-	}
-	if = {
-		limit = {
-			owns_state = 1131
-		}
-		set_temp_variable = { modify_capitalisation_rosneft = 0.08 }
-		modify_capitalisation_rosneft_support = yes
-	}
-	if = {
-		limit = {
-			owns_state = 1132
-		}
-		set_temp_variable = { modify_capitalisation_rosneft = 0.08 }
-		modify_capitalisation_rosneft_support = yes
-	}
-	if = {
-		limit = {
-			owns_state = 663
-		}
-		set_temp_variable = { modify_capitalisation_rosneft = 0.07 }
-		modify_capitalisation_rosneft_support = yes
-	}
-	if = {
-		limit = {
-			owns_state = 661
-		}
-		set_temp_variable = { modify_capitalisation_rosneft = 0.08 }
-		modify_capitalisation_rosneft_support = yes
-	}
-	if = {
-		limit = {
-			owns_state = 1118
-		}
-		set_temp_variable = { modify_capitalisation_rosneft = 0.08 }
-		modify_capitalisation_rosneft_support = yes
-	}
-	if = {
-		limit = {
-			owns_state = 664
-		}
-		set_temp_variable = { modify_capitalisation_rosneft = 0.07 }
+		limit = { check_variable = { modify_capitalisation_rosneft > 0 } }
 		modify_capitalisation_rosneft_support = yes
 	}
 	##########OIL PROVINCE - FOREIGN PROVINCE###########
@@ -5292,7 +5166,6 @@ SOV_russian_governorates_created = {
 			}
 			hidden_effect = {
 				set_temp_variable = { percent_change = -15 }
-				set_temp_variable = { influence_target = MON }
 				change_influence_percentage = yes
 			}
 		}
@@ -5600,7 +5473,6 @@ SOV_russian_governorates_created = {
 			clr_country_flag = dynamic_flag
 			hidden_effect = {
 				set_temp_variable = { percent_change = -15 }
-				set_temp_variable = { influence_target = POL }
 				change_influence_percentage = yes
 			}
 		}
@@ -6315,8 +6187,10 @@ SOV_russian_republics_destroy_povoljie = {
 				SOV = { owns_state = 1133 }
 			}
 			NOT = {
-				UDM = { has_country_flag = SUB_subject_rebellion_flag }
-				UDM = { has_country_flag = SUB_subject_destroy_flag }
+				UDM = {
+					has_country_flag = SUB_subject_rebellion_flag
+					has_country_flag = SUB_subject_destroy_flag
+				}
 			}
 		}
 		russian_udmurtia_annex = yes
@@ -6334,8 +6208,10 @@ SOV_russian_republics_destroy_povoljie = {
 				SOV = { owns_state = 1132 }
 			}
 			NOT = {
-				MOV = { has_country_flag = SUB_subject_rebellion_flag }
-				MOV = { has_country_flag = SUB_subject_destroy_flag }
+				MOV = {
+					has_country_flag = SUB_subject_rebellion_flag
+					has_country_flag = SUB_subject_destroy_flag
+				}
 			}
 		}
 		russian_mordovia_annex = yes
@@ -6353,8 +6229,10 @@ SOV_russian_republics_destroy_povoljie = {
 				SOV = { owns_state = 1134 }
 			}
 			NOT = {
-				MEL = { has_country_flag = SUB_subject_rebellion_flag }
-				MEL = { has_country_flag = SUB_subject_destroy_flag }
+				MEL = {
+					has_country_flag = SUB_subject_rebellion_flag
+					has_country_flag = SUB_subject_destroy_flag
+				}
 			}
 		}
 		russian_mari_annex = yes
@@ -6372,8 +6250,10 @@ SOV_russian_republics_destroy_povoljie = {
 				SOV = { owns_state = 1134 }
 			}
 			NOT = {
-				CHU = { has_country_flag = SUB_subject_rebellion_flag }
-				CHU = { has_country_flag = SUB_subject_destroy_flag }
+				CHU = {
+					has_country_flag = SUB_subject_rebellion_flag
+					has_country_flag = SUB_subject_destroy_flag
+				}
 			}
 		}
 		russian_chuvashia_annex = yes
@@ -6391,8 +6271,10 @@ SOV_russian_republics_destroy_povoljie = {
 				SOV = { owns_state = 664 }
 			}
 			NOT = {
-				BSH = { has_country_flag = SUB_subject_rebellion_flag }
-				BSH = { has_country_flag = SUB_subject_destroy_flag }
+				BSH = {
+					has_country_flag = SUB_subject_rebellion_flag
+					has_country_flag = SUB_subject_destroy_flag
+				}
 			}
 		}
 		russian_bashkortostan_annex = yes
@@ -6410,8 +6292,10 @@ SOV_russian_republics_destroy_povoljie = {
 				SOV = { owns_state = 661 }
 			}
 			NOT = {
-				TAT = { has_country_flag = SUB_subject_rebellion_flag }
-				TAT = { has_country_flag = SUB_subject_destroy_flag }
+				TAT = {
+					has_country_flag = SUB_subject_rebellion_flag
+					has_country_flag = SUB_subject_destroy_flag
+				}
 			}
 		}
 		russian_tatarstan_annex = yes
@@ -6432,8 +6316,10 @@ SOV_russian_republics_destroy_caucas = {
 				SOV = { owns_state = 674 }
 			}
 			NOT = {
-				KBK = { has_country_flag = SUB_subject_rebellion_flag }
-				KBK = { has_country_flag = SUB_subject_destroy_flag }
+				KBK = {
+					has_country_flag = SUB_subject_rebellion_flag
+					has_country_flag = SUB_subject_destroy_flag
+				}
 			}
 		}
 		russian_kabardino_annex = yes
@@ -6451,8 +6337,10 @@ SOV_russian_republics_destroy_caucas = {
 				SOV = { owns_state = 1126 }
 			}
 			NOT = {
-				ING = { has_country_flag = SUB_subject_rebellion_flag }
-				ING = { has_country_flag = SUB_subject_destroy_flag }
+				ING = {
+					has_country_flag = SUB_subject_rebellion_flag
+					has_country_flag = SUB_subject_destroy_flag
+				}
 			}
 		}
 		russian_ingushetia_annex = yes
@@ -6470,8 +6358,10 @@ SOV_russian_republics_destroy_caucas = {
 				SOV = { owns_state = 1125 }
 			}
 			NOT = {
-				KCC = { has_country_flag = SUB_subject_rebellion_flag }
-				KCC = { has_country_flag = SUB_subject_destroy_flag }
+				KCC = {
+					has_country_flag = SUB_subject_rebellion_flag
+					has_country_flag = SUB_subject_destroy_flag
+				}
 			}
 		}
 		russian_karachaevo_annex = yes
@@ -6489,8 +6379,10 @@ SOV_russian_republics_destroy_caucas = {
 				SOV = { owns_state = 1127 }
 			}
 			NOT = {
-				ADY = { has_country_flag = SUB_subject_rebellion_flag }
-				ADY = { has_country_flag = SUB_subject_destroy_flag }
+				ADY = {
+					has_country_flag = SUB_subject_rebellion_flag
+					has_country_flag = SUB_subject_destroy_flag
+				}
 			}
 		}
 		russian_adygea_annex = yes
@@ -6508,8 +6400,10 @@ SOV_russian_republics_destroy_caucas = {
 				SOV = { owns_state = 671 }
 			}
 			NOT = {
-				DAG = { has_country_flag = SUB_subject_rebellion_flag }
-				DAG = { has_country_flag = SUB_subject_destroy_flag }
+				DAG = {
+					has_country_flag = SUB_subject_rebellion_flag
+					has_country_flag = SUB_subject_destroy_flag
+				}
 			}
 		}
 		russian_dagestan_annex = yes
@@ -6527,8 +6421,10 @@ SOV_russian_republics_destroy_caucas = {
 				SOV = { owns_state = 672 }
 			}
 			NOT = {
-				CHE = { has_country_flag = SUB_subject_rebellion_flag }
-				CHE = { has_country_flag = SUB_subject_destroy_flag }
+				CHE = {
+					has_country_flag = SUB_subject_rebellion_flag
+					has_country_flag = SUB_subject_destroy_flag
+				}
 			}
 		}
 		russian_chechnya_annex = yes
@@ -6549,8 +6445,10 @@ SOV_russian_republics_destroy_siberia = {
 				SOV = { owns_state = 678 }
 			}
 			NOT = {
-				KHM = { has_country_flag = SUB_subject_rebellion_flag }
-				KHM = { has_country_flag = SUB_subject_destroy_flag }
+				KHM = {
+					has_country_flag = SUB_subject_rebellion_flag
+					has_country_flag = SUB_subject_destroy_flag
+				}
 			}
 		}
 		russian_yugra_annex = yes
@@ -6568,8 +6466,10 @@ SOV_russian_republics_destroy_siberia = {
 				SOV = { owns_state = 1065 }
 			}
 			NOT = {
-				KHS = { has_country_flag = SUB_subject_rebellion_flag }
-				KHS = { has_country_flag = SUB_subject_destroy_flag }
+				KHS = {
+					has_country_flag = SUB_subject_rebellion_flag
+					has_country_flag = SUB_subject_destroy_flag
+				}
 			}
 		}
 		russian_khakassia_annex = yes
@@ -6587,8 +6487,10 @@ SOV_russian_republics_destroy_siberia = {
 				SOV = { owns_state = 689 }
 			}
 			NOT = {
-				CKK = { has_country_flag = SUB_subject_rebellion_flag }
-				CKK = { has_country_flag = SUB_subject_destroy_flag }
+				CKK = {
+					has_country_flag = SUB_subject_rebellion_flag
+					has_country_flag = SUB_subject_destroy_flag
+				}
 			}
 		}
 		russian_chukotka_annex = yes
@@ -6606,8 +6508,10 @@ SOV_russian_republics_destroy_siberia = {
 				SOV = { owns_state = 683 }
 			}
 			NOT = {
-				NEE = { has_country_flag = SUB_subject_rebellion_flag }
-				NEE = { has_country_flag = SUB_subject_destroy_flag }
+				NEE = {
+					has_country_flag = SUB_subject_rebellion_flag
+					has_country_flag = SUB_subject_destroy_flag
+				}
 			}
 		}
 		russian_nenets_annex = yes
@@ -6625,8 +6529,10 @@ SOV_russian_republics_destroy_siberia = {
 				SOV = { owns_state = 679 }
 			}
 			NOT = {
-				YAM = { has_country_flag = SUB_subject_rebellion_flag }
-				YAM = { has_country_flag = SUB_subject_destroy_flag }
+				YAM = {
+					has_country_flag = SUB_subject_rebellion_flag
+					has_country_flag = SUB_subject_destroy_flag
+				}
 			}
 		}
 		russian_yamal_annex = yes
@@ -6644,8 +6550,10 @@ SOV_russian_republics_destroy_siberia = {
 				SOV = { owns_state = 684 }
 			}
 			NOT = {
-				ALT = { has_country_flag = SUB_subject_rebellion_flag }
-				ALT = { has_country_flag = SUB_subject_destroy_flag }
+				ALT = {
+					has_country_flag = SUB_subject_rebellion_flag
+					has_country_flag = SUB_subject_destroy_flag
+				}
 			}
 		}
 		russian_altai_annex = yes
@@ -6663,8 +6571,10 @@ SOV_russian_republics_destroy_siberia = {
 				SOV = { owns_state = 648 }
 			}
 			NOT = {
-				KOM = { has_country_flag = SUB_subject_rebellion_flag }
-				KOM = { has_country_flag = SUB_subject_destroy_flag }
+				KOM = {
+					has_country_flag = SUB_subject_rebellion_flag
+					has_country_flag = SUB_subject_destroy_flag
+				}
 			}
 		}
 		russian_komi_annex = yes
@@ -6682,8 +6592,10 @@ SOV_russian_republics_destroy_siberia = {
 				SOV = { owns_state = 686 }
 			}
 			NOT = {
-				BRY = { has_country_flag = SUB_subject_rebellion_flag }
-				BRY = { has_country_flag = SUB_subject_destroy_flag }
+				BRY = {
+					has_country_flag = SUB_subject_rebellion_flag
+					has_country_flag = SUB_subject_destroy_flag
+				}
 			}
 		}
 		russian_buryatia_annex = yes
@@ -6701,8 +6613,10 @@ SOV_russian_republics_destroy_siberia = {
 				SOV = { owns_state = 1011 }
 			}
 			NOT = {
-				TUV = { has_country_flag = SUB_subject_rebellion_flag }
-				TUV = { has_country_flag = SUB_subject_destroy_flag }
+				TUV = {
+					has_country_flag = SUB_subject_rebellion_flag
+					has_country_flag = SUB_subject_destroy_flag
+				}
 			}
 		}
 		russian_tuva_annex = yes
@@ -6720,8 +6634,10 @@ SOV_russian_republics_destroy_siberia = {
 				SOV = { owns_state = 688 }
 			}
 			NOT = {
-				YAK = { has_country_flag = SUB_subject_rebellion_flag }
-				YAK = { has_country_flag = SUB_subject_destroy_flag }
+				YAK = {
+					has_country_flag = SUB_subject_rebellion_flag
+					has_country_flag = SUB_subject_destroy_flag
+				}
 			}
 		}
 		russian_yakutia_annex = yes
@@ -6742,8 +6658,10 @@ SOV_russian_republics_destroy_other = {
 				SOV = { owns_state = 1107 }
 			}
 			NOT = {
-				KLM = { has_country_flag = SUB_subject_rebellion_flag }
-				KLM = { has_country_flag = SUB_subject_destroy_flag }
+				KLM = {
+					has_country_flag = SUB_subject_rebellion_flag
+					has_country_flag = SUB_subject_destroy_flag
+				}
 			}
 		}
 		russian_kalmikiya_annex = yes
@@ -6761,8 +6679,10 @@ SOV_russian_republics_destroy_other = {
 				SOV = { owns_state = 1128 }
 			}
 			NOT = {
-				KAE = { has_country_flag = SUB_subject_rebellion_flag }
-				KAE = { has_country_flag = SUB_subject_destroy_flag }
+				KAE = {
+					has_country_flag = SUB_subject_rebellion_flag
+					has_country_flag = SUB_subject_destroy_flag
+				}
 			}
 		}
 		russian_karelia_annex = yes
@@ -9485,7 +9405,7 @@ uss_georgia_resolve = {
 			check_variable = { SOV.geoza < SOV.geoprotiv }
 		}
 		ABK = {
-			remove_ideas = Non_State_Actor
+			remove_ideas = non_state_actor
 			country_event = sov_sover_state.4
 		}
 	}
@@ -9495,7 +9415,7 @@ uss_georgia_resolve = {
 			check_variable = { SOV.geoza < SOV.geoprotiv }
 		}
 		SOO = {
-			remove_ideas = Non_State_Actor
+			remove_ideas = non_state_actor
 			country_event = sov_sover_state.4
 		}
 	}
@@ -12924,6 +12844,27 @@ SOV_soviet_republic_annex = {
 	}
 	if = {
 		limit = {
+			PMR = {
+				is_subject_of = SOV
+				influence_higher_50 = yes
+				emerging_communist_state_are_in_power = yes
+			}
+			has_completed_focus = SOV_coup_major_post_soviet_countries
+			emerging_communist_state_are_in_power = yes
+			country_exists = PMR
+		}
+		PMR = {
+			every_owned_state = {
+				add_core_of = SOV
+			}
+		}
+		add_political_power = -250
+		annex_country = { target = PMR transfer_troops = yes }
+		set_temp_variable = { treasury_change = -25 }
+		modify_treasury_effect = yes
+	}
+	if = {
+		limit = {
 			AZE = {
 				is_subject_of = SOV
 				influence_higher_50 = yes
@@ -12982,6 +12923,48 @@ SOV_soviet_republic_annex = {
 		}
 		add_political_power = -250
 		annex_country = { target = GEO transfer_troops = yes }
+		set_temp_variable = { treasury_change = -25 }
+		modify_treasury_effect = yes
+	}
+	if = {
+		limit = {
+			ABK = {
+				is_subject_of = SOV
+				influence_higher_50 = yes
+				emerging_communist_state_are_in_power = yes
+			}
+			has_completed_focus = SOV_coup_major_post_soviet_countries
+			emerging_communist_state_are_in_power = yes
+			country_exists = ABK
+		}
+		ABK = {
+			every_owned_state = {
+				add_core_of = SOV
+			}
+		}
+		add_political_power = -250
+		annex_country = { target = ABK transfer_troops = yes }
+		set_temp_variable = { treasury_change = -25 }
+		modify_treasury_effect = yes
+	}
+	if = {
+		limit = {
+			SOO = {
+				is_subject_of = SOV
+				influence_higher_50 = yes
+				emerging_communist_state_are_in_power = yes
+			}
+			has_completed_focus = SOV_coup_major_post_soviet_countries
+			emerging_communist_state_are_in_power = yes
+			country_exists = SOO
+		}
+		SOO = {
+			every_owned_state = {
+				add_core_of = SOV
+			}
+		}
+		add_political_power = -250
+		annex_country = { target = SOO transfer_troops = yes }
 		set_temp_variable = { treasury_change = -25 }
 		modify_treasury_effect = yes
 	}
@@ -13155,48 +13138,6 @@ SOV_soviet_republic_annex = {
 	}
 	if = {
 		limit = {
-			ABK = {
-				is_subject_of = SOV
-				influence_higher_50 = yes
-				emerging_communist_state_are_in_power = yes
-			}
-			has_completed_focus = SOV_coup_major_post_soviet_countries
-			emerging_communist_state_are_in_power = yes
-			country_exists = ABK
-		}
-		ABK = {
-			every_owned_state = {
-				add_core_of = SOV
-			}
-		}
-		add_political_power = -100
-		annex_country = { target = ABK transfer_troops = yes }
-		set_temp_variable = { treasury_change = -10 }
-		modify_treasury_effect = yes
-	}
-	if = {
-		limit = {
-			SOO = {
-				is_subject_of = SOV
-				influence_higher_50 = yes
-				emerging_communist_state_are_in_power = yes
-			}
-			has_completed_focus = SOV_coup_major_post_soviet_countries
-			emerging_communist_state_are_in_power = yes
-			country_exists = SOO
-		}
-		SOO = {
-			every_owned_state = {
-				add_core_of = SOV
-			}
-		}
-		add_political_power = -100
-		annex_country = { target = SOO transfer_troops = yes }
-		set_temp_variable = { treasury_change = -10 }
-		modify_treasury_effect = yes
-	}
-	if = {
-		limit = {
 			NKR = {
 				is_subject_of = SOV
 				influence_higher_50 = yes
@@ -13312,21 +13253,15 @@ warsaw_pact_perevorot_core_effect = {
 
 # Called from SOV scope after warsaw_pact_perevorot_core_effect.
 # Requires event_target:warsaw_target to be set.
-# Fires standard news event, sets autonomy, fires country event, and pays treasury.
+# Flags the target for deferred puppet creation; on_civil_war_end (99_SOV_on_actions.txt)
+# fires set_autonomy + news event sov_warsaw_pact.4 + country event sov_warsaw_pact.5
+# once the communist side wins the civil war. This lets SOV send volunteers normally
+# during the civil war instead of being locked out by an early puppet relationship.
 warsaw_pact_perevorot_finish_effect = {
-	news_event = {
-		hours = 1
-		id = sov_warsaw_pact.4
+	event_target:warsaw_target = {
+		set_country_flag = SOV_warsaw_pact_pending_puppet
+		set_variable = { SOV_warsaw_pact_overlord_id = ROOT.id }
 	}
-	SOV = {
-		set_autonomy = {
-			target = event_target:warsaw_target
-			autonomy_state = autonomy_warsaw
-			end_wars = no
-			end_civil_wars = no
-		}
-	}
-	country_event = sov_warsaw_pact.5
 	set_temp_variable = { treasury_change = -15 }
 	modify_treasury_effect = yes
 }

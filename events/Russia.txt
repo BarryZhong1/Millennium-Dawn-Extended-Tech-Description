@@ -41,8 +41,10 @@ country_event = {
 		if = { limit = { is_in_faction = yes }
 			leave_faction = yes
 		}
-		SOV = { add_to_faction = PREV }
-		SOV = { country_event = diplomatic_response.1 }
+		SOV = {
+			add_to_faction = PREV
+			country_event = diplomatic_response.1
+		}
 		add_ideas = S0V_russian_sphere_idea
 		ai_chance = {
 			base = 50
@@ -1883,15 +1885,17 @@ country_event = {
 	option = {
 		name = russia.59.a
 		log = "[GetDateText]: [This.GetName]: russia.59.a"
-		create_field_marshal = {
-			name = "Sergey Shoygu"
-			portrait_path = "gfx/leaders/SOV/Gen_Sergey_Shoygu.dds"
-			traits = { logistics_wizard }
-			skill = 2
-			attack_skill = 3
-			defense_skill = 2
-			planning_skill = 2
-			logistics_skill = 4
+		effect_tooltip = {
+			create_field_marshal = {
+				name = "Sergey Shoygu"
+				portrait_path = "gfx/leaders/SOV/Gen_Sergey_Shoygu.dds"
+				traits = { logistics_wizard }
+				skill = 2
+				attack_skill = 3
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 4
+			}
 		}
 	}
 }
@@ -3552,8 +3556,10 @@ country_event = {
 				factor = 90
 			}
 		}
-		SOV = { country_event = russia_governorate.3 }
-		SOV = { add_opinion_modifier = { target = LIT modifier = betrayed_our_cause } }
+		SOV = {
+			country_event = russia_governorate.3
+			add_opinion_modifier = { target = LIT modifier = betrayed_our_cause }
+		}
 	}
 }
 #Livonia Governorate Agree
@@ -3674,8 +3680,10 @@ country_event = {
 				factor = 90
 			}
 		}
-		SOV = { country_event = russia_governorate.6 }
-		SOV = { add_opinion_modifier = { target = LAT modifier = betrayed_our_cause } }
+		SOV = {
+			country_event = russia_governorate.6
+			add_opinion_modifier = { target = LAT modifier = betrayed_our_cause }
+		}
 	}
 }
 #Courland Governorate Agree
@@ -3796,8 +3804,10 @@ country_event = {
 				factor = 90
 			}
 		}
-		SOV = { country_event = russia_governorate.9 }
-		SOV = { add_opinion_modifier = { target = EST modifier = betrayed_our_cause } }
+		SOV = {
+			country_event = russia_governorate.9
+			add_opinion_modifier = { target = EST modifier = betrayed_our_cause }
+		}
 	}
 }
 #Estland Governorate Agree
@@ -3916,8 +3926,10 @@ country_event = {
 				factor = 90
 			}
 		}
-		SOV = { country_event = russia_governorate.12 }
-		SOV = { add_opinion_modifier = { target = GEO modifier = betrayed_our_cause } }
+		SOV = {
+			country_event = russia_governorate.12
+			add_opinion_modifier = { target = GEO modifier = betrayed_our_cause }
+		}
 	}
 }
 #Tiflis Governorate Agree
@@ -4035,8 +4047,10 @@ country_event = {
 				factor = 90
 			}
 		}
-		SOV = { country_event = russia_governorate.15 }
-		SOV = { add_opinion_modifier = { target = MLV modifier = betrayed_our_cause } }
+		SOV = {
+			country_event = russia_governorate.15
+			add_opinion_modifier = { target = MLV modifier = betrayed_our_cause }
+		}
 	}
 }
 #Bessarabia Governorate Agree
@@ -4165,8 +4179,10 @@ country_event = {
 				add = 90
 			}
 		}
-		SOV = { add_opinion_modifier = { target = BLR modifier = betrayed_our_cause } }
-		SOV = { country_event = russia_governorate.18 }
+		SOV = {
+			add_opinion_modifier = { target = BLR modifier = betrayed_our_cause }
+			country_event = russia_governorate.18
+		}
 	}
 
 	option = {
@@ -4414,8 +4430,10 @@ country_event = {
 				add = 90
 			}
 		}
-		SOV = { add_opinion_modifier = { target = ARM modifier = betrayed_our_cause } }
-		SOV = { country_event = russia_governorate.22 }
+		SOV = {
+			add_opinion_modifier = { target = ARM modifier = betrayed_our_cause }
+			country_event = russia_governorate.22
+		}
 	}
 
 	option = {
@@ -5884,8 +5902,6 @@ country_event = {
 		custom_effect_tooltip = SOV_koba_tooltip
 		hidden_effect = {
 			country_event = { id = sov_other.36 days = 100 }
-			set_country_flag = SOV_did_not_allow_duma_to_speak
-			mark_focus_tree_layout_dirty = yes
 		}
 
 		ai_chance = {
@@ -5895,6 +5911,10 @@ country_event = {
 	option = {
 		name = sov_other.35.b
 		log = "[GetDateText]: [This.GetName]: sov_other.35.b executed"
+		hidden_effect = {
+			set_country_flag = SOV_did_not_allow_duma_to_speak
+			mark_focus_tree_layout_dirty = yes
+		}
 		ai_chance = {
 			base = 100
 		}
@@ -5948,6 +5968,8 @@ country_event = {
 			add_relative_party_popularity = yes
 			set_temp_variable = { rul_party_temp = 22 }
 			change_ruling_party_effect = yes
+			clr_country_flag = SOV_did_not_allow_duma_to_speak
+			mark_focus_tree_layout_dirty = yes
 			complete_national_focus = SOV_kob_party_start
 		}
 		custom_effect_tooltip = jreci_kick
@@ -5981,7 +6003,7 @@ country_event = {
 	id = sov_other.39
 	title = sov_other.39.t
 	desc = sov_other.39.d
-	picture = GFX_centro_bank_milfas
+	picture = GFX_centro_bank_milfa
 	is_triggered_only = yes
 
 	option = {
@@ -6729,8 +6751,10 @@ country_event = {
 		if = { limit = { is_in_faction = yes }
 			leave_faction = yes
 		}
-		SOV = { add_to_faction = PREV }
-		SOV = { country_event = diplomatic_response.1 }
+		SOV = {
+			add_to_faction = PREV
+			country_event = diplomatic_response.1
+		}
 		add_opinion_modifier = { target = SOV modifier = has_expressed_loyalty }
 			diplomatic_relation = {
 				country = SOV
@@ -6790,8 +6814,10 @@ country_event = {
 		if = { limit = { is_in_faction = yes }
 		leave_faction = yes
 		}
-		SOV = { add_to_faction = PREV }
-		SOV = { country_event = diplomatic_response.1 }
+		SOV = {
+			add_to_faction = PREV
+			country_event = diplomatic_response.1
+		}
 
 		add_opinion_modifier = { target = SOV modifier = has_expressed_loyalty }
 			diplomatic_relation = {
@@ -6930,8 +6956,10 @@ country_event = {
 			}
 			leave_faction = yes
 		}
-		SOV = { add_to_faction = PREV }
-		SOV = { country_event = diplomatic_response.1 }
+		SOV = {
+			add_to_faction = PREV
+			country_event = diplomatic_response.1
+		}
 		add_opinion_modifier = { target = SOV modifier = has_expressed_loyalty }
 		diplomatic_relation = {
 			country = SOV
@@ -7457,12 +7485,14 @@ country_event = {
 			limit = { tag = CHI }
 			SOV = { set_country_flag = CHI_accepts_annexation }
 			effect_tooltip = {
-				SOV = { transfer_state = 1097 }
-				SOV = { transfer_state = 555 }
-				SOV = { transfer_state = 1096 }
-				SOV = { transfer_state = 554 }
-				SOV = { transfer_state = 552 }
-				SOV = { transfer_state = 1095 }
+				SOV = {
+					transfer_state = 1097
+					transfer_state = 555
+					transfer_state = 1096
+					transfer_state = 554
+					transfer_state = 552
+					transfer_state = 1095
+				}
 			}
 		}
 		SOV = { country_event = { id = sov_nationalists.24 days = 1 } }
@@ -7529,9 +7559,11 @@ country_event = {
 		log = "[GetDateText]: [This.GetName]: sov_nationalists.24.a executed"
 		if = {
 			limit = { SOV = { has_country_flag = CHI_accepts_annexation } }
-			SOV = { transfer_state = 1097 }
-			SOV = { transfer_state = 555 }
-			SOV = { transfer_state = 1096 }
+			SOV = {
+				transfer_state = 1097
+				transfer_state = 555
+				transfer_state = 1096
+			}
 		}
 	}
 }
@@ -8119,8 +8151,10 @@ country_event = {
 		if = { limit = { is_in_faction = yes }
 			leave_faction = yes
 		}
-		SOV = { add_to_faction = PREV }
-		SOV = { country_event = diplomatic_response.1 }
+		SOV = {
+			add_to_faction = PREV
+			country_event = diplomatic_response.1
+		}
 
 		add_opinion_modifier = { target = SOV modifier = has_expressed_loyalty }
 		diplomatic_relation = {
@@ -8160,8 +8194,10 @@ country_event = {
 				factor = 90
 			}
 		}
-		SOV = { country_event = sov_nationalists.42 }
-		SOV = { add_opinion_modifier = { target = ROM modifier = betrayed_our_cause } }
+		SOV = {
+			country_event = sov_nationalists.42
+			add_opinion_modifier = { target = ROM modifier = betrayed_our_cause }
+		}
 	}
 }
 
@@ -8968,7 +9004,7 @@ country_event = {
 				hours = 6
 				id = russia_news.11
 			}
-			IF = {
+			if = {
 				limit = {
 					BLR = {
 						has_government = communism
@@ -8979,7 +9015,7 @@ country_event = {
 					country_event = { id = sov_final_strike.6 days = 1 }
 				}
 			}
-			IF = {
+			if = {
 				limit = {
 					NOT = {
 						OR = {
@@ -8999,7 +9035,7 @@ country_event = {
 					country_event = { id = sov_final_strike.3 days = 15 }
 				}
 			}
-			IF = {
+			if = {
 				limit = { NOT = { SOV = { has_country_flag = SOV_western_sanctions } } }
 				set_country_flag = SOV_western_sanctions
 				add_dynamic_modifier = { modifier = SOV_western_sanctions_modifier }
@@ -9212,7 +9248,7 @@ country_event = {
 				hours = 6
 				id = russia_news.13
 			}
-			IF = {
+			if = {
 				limit = {
 					NOT = {
 						OR = {
@@ -9232,7 +9268,7 @@ country_event = {
 					country_event = { id = sov_final_strike.3 days = 15 }
 				}
 			}
-			IF = {
+			if = {
 				limit = { NOT = { SOV = { has_country_flag = SOV_western_sanctions } } }
 				set_country_flag = SOV_western_sanctions
 				add_dynamic_modifier = { modifier = SOV_western_sanctions_modifier }
@@ -10685,7 +10721,7 @@ country_event = {
 		set_temp_variable = { party_index = 15 }
 		set_temp_variable = { party_popularity_increase = 0.025 }
 		add_relative_party_popularity = yes
-		IF = {
+		if = {
 			limit = { has_idea = SOV_private_media_nationalisation_idea }
 			remove_ideas = SOV_private_media_nationalisation_idea
 		}
@@ -11339,7 +11375,7 @@ country_event = { # Fire
 	id = russia.303
 	title = russia.303.t
 	desc = russia.303.d
-	picture = GFX_buran_fire
+	picture = GFX_terrorist_attack
 
 	is_triggered_only = yes
 
@@ -14489,5 +14525,87 @@ country_event = {
 		name = sov_gru.13.a
 		log = "[GetDateText]: [This.GetName]: sov_gru.13.a executed"
 		add_ideas = SOV_wagner_africa
+	}
+}
+
+# Rostec consolidates the helicopter industry into JSC Russian Helicopters.
+country_event = {
+	id = russia.500
+	title = russia.500.t
+	desc = russia.500.d
+	picture = x
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = russia.500.a
+		log = "[GetDateText]: [This.GetName]: russia.500.a executed"
+		set_country_flag = SOV_russian_helicopters_consolidation
+		unlock_military_industrial_organization_tooltip = mio:SOV_russian_helicopters_tank_manufacturer
+		newline = yes
+		custom_effect_tooltip = TT_SOV_russian_helicopters_carry_traits
+		hidden_effect = {
+			if = {
+				limit = { mio:SOV_mil_helicopters_tank_manufacturer = { is_mio_trait_completed = SOV_mil_helicopters_tank_manufacturer_mi_8_heritage } }
+				mio:SOV_russian_helicopters_tank_manufacturer = { complete_mio_trait = SOV_mil_helicopters_tank_manufacturer_mi_8_heritage }
+			}
+			if = {
+				limit = { mio:SOV_mil_helicopters_tank_manufacturer = { is_mio_trait_completed = SOV_mil_helicopters_tank_manufacturer_mi_17_hip_h } }
+				mio:SOV_russian_helicopters_tank_manufacturer = { complete_mio_trait = SOV_mil_helicopters_tank_manufacturer_mi_17_hip_h }
+			}
+			if = {
+				limit = { mio:SOV_mil_helicopters_tank_manufacturer = { is_mio_trait_completed = SOV_mil_helicopters_tank_manufacturer_mi_171a2_lineage } }
+				mio:SOV_russian_helicopters_tank_manufacturer = { complete_mio_trait = SOV_mil_helicopters_tank_manufacturer_mi_171a2_lineage }
+			}
+			if = {
+				limit = { mio:SOV_mil_helicopters_tank_manufacturer = { is_mio_trait_completed = SOV_mil_helicopters_tank_manufacturer_mi_38_replacement } }
+				mio:SOV_russian_helicopters_tank_manufacturer = { complete_mio_trait = SOV_mil_helicopters_tank_manufacturer_mi_38_replacement }
+			}
+			if = {
+				limit = { mio:SOV_mil_helicopters_tank_manufacturer = { is_mio_trait_completed = SOV_mil_helicopters_tank_manufacturer_cabin_versatility } }
+				mio:SOV_russian_helicopters_tank_manufacturer = { complete_mio_trait = SOV_mil_helicopters_tank_manufacturer_cabin_versatility }
+			}
+			if = {
+				limit = { mio:SOV_mil_helicopters_tank_manufacturer = { is_mio_trait_completed = SOV_mil_helicopters_tank_manufacturer_glass_cockpit } }
+				mio:SOV_russian_helicopters_tank_manufacturer = { complete_mio_trait = SOV_mil_helicopters_tank_manufacturer_glass_cockpit }
+			}
+			if = {
+				limit = { mio:SOV_mil_helicopters_tank_manufacturer = { is_mio_trait_completed = SOV_mil_helicopters_tank_manufacturer_kazan_production } }
+				mio:SOV_russian_helicopters_tank_manufacturer = { complete_mio_trait = SOV_mil_helicopters_tank_manufacturer_kazan_production }
+			}
+			if = {
+				limit = { mio:SOV_mil_helicopters_tank_manufacturer = { is_mio_trait_completed = SOV_mil_helicopters_tank_manufacturer_vk_2500_engines } }
+				mio:SOV_russian_helicopters_tank_manufacturer = { complete_mio_trait = SOV_mil_helicopters_tank_manufacturer_vk_2500_engines }
+			}
+			if = {
+				limit = { mio:SOV_mil_helicopters_tank_manufacturer = { is_mio_trait_completed = SOV_mil_helicopters_tank_manufacturer_halo_heritage } }
+				mio:SOV_russian_helicopters_tank_manufacturer = { complete_mio_trait = SOV_mil_helicopters_tank_manufacturer_halo_heritage }
+			}
+			if = {
+				limit = { mio:SOV_mil_helicopters_tank_manufacturer = { is_mio_trait_completed = SOV_mil_helicopters_tank_manufacturer_mi_26t_lineage } }
+				mio:SOV_russian_helicopters_tank_manufacturer = { complete_mio_trait = SOV_mil_helicopters_tank_manufacturer_mi_26t_lineage }
+			}
+			if = {
+				limit = { mio:SOV_mil_helicopters_tank_manufacturer = { is_mio_trait_completed = SOV_mil_helicopters_tank_manufacturer_flying_crane } }
+				mio:SOV_russian_helicopters_tank_manufacturer = { complete_mio_trait = SOV_mil_helicopters_tank_manufacturer_flying_crane }
+			}
+			if = {
+				limit = { mio:SOV_mil_helicopters_tank_manufacturer = { is_mio_trait_completed = SOV_mil_helicopters_tank_manufacturer_mi_26t2v_avionics } }
+				mio:SOV_russian_helicopters_tank_manufacturer = { complete_mio_trait = SOV_mil_helicopters_tank_manufacturer_mi_26t2v_avionics }
+			}
+			if = {
+				limit = { mio:SOV_mil_helicopters_tank_manufacturer = { is_mio_trait_completed = SOV_mil_helicopters_tank_manufacturer_d_136_engines } }
+				mio:SOV_russian_helicopters_tank_manufacturer = { complete_mio_trait = SOV_mil_helicopters_tank_manufacturer_d_136_engines }
+			}
+			if = {
+				limit = { mio:SOV_mil_helicopters_tank_manufacturer = { is_mio_trait_completed = SOV_mil_helicopters_tank_manufacturer_composite_rotors } }
+				mio:SOV_russian_helicopters_tank_manufacturer = { complete_mio_trait = SOV_mil_helicopters_tank_manufacturer_composite_rotors }
+			}
+			if = {
+				limit = { mio:SOV_mil_helicopters_tank_manufacturer = { is_mio_trait_completed = SOV_mil_helicopters_tank_manufacturer_rostvertol_plant } }
+				mio:SOV_russian_helicopters_tank_manufacturer = { complete_mio_trait = SOV_mil_helicopters_tank_manufacturer_rostvertol_plant }
+			}
+		}
 	}
 }

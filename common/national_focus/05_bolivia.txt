@@ -1206,10 +1206,7 @@ focus_tree = {
 				create_unit = {
 					division = "name = \"Bolivian Deathsquads\" division_template = \"Brigada de Fuerzas Especiales\" start_experience_factor = 0.5"
 					owner = BOL
-				}
-				create_unit = {
-					division = "name = \"Bolivian Deathsquads\" division_template = \"Brigada de Fuerzas Especiales\" start_experience_factor = 0.5"
-					owner = BOL
+					count = 2
 				}
 			}
 		}
@@ -4319,14 +4316,7 @@ focus_tree = {
 				create_unit = {
 					division = "name = \"Indigenous Militia\" division_template = \"Brigada de Fuerzas Especiales\" start_experience_factor = 0.5"
 					owner = BOL
-				}
-				create_unit = {
-					division = "name = \"Indigenous Militia\" division_template = \"Brigada de Fuerzas Especiales\" start_experience_factor = 0.5"
-					owner = BOL
-				}
-				create_unit = {
-					division = "name = \"Indigenous Militia\" division_template = \"Brigada de Fuerzas Especiales\" start_experience_factor = 0.5"
-					owner = BOL
+					count = 3
 				}
 			}
 		}
@@ -6330,10 +6320,7 @@ focus_tree = {
 				create_unit = {
 					division = "name = \"Brigada de Fuerzas Especiales\" division_template = \"Brigada de Fuerzas Especiales\" start_experience_factor = 0.5"
 					owner = BOL
-				}
-				create_unit = {
-					division = "name = \"Brigada de Fuerzas Especiales\" division_template = \"Brigada de Fuerzas Especiales\" start_experience_factor = 0.5"
-					owner = BOL
+					count = 2
 				}
 			}
 		}
@@ -6590,10 +6577,7 @@ focus_tree = {
 				create_unit = {
 					division = "name = \"Brigada Blindada\" division_template = \"Brigada Blindada\" start_experience_factor = 0.5"
 					owner = BOL
-				}
-				create_unit = {
-					division = "name = \"Brigada Blindada\" division_template = \"Brigada Blindada\" start_experience_factor = 0.5"
-					owner = BOL
+					count = 2
 				}
 			}
 		}
@@ -7296,8 +7280,7 @@ focus_tree = {
 	}
 	focus = {
 		id = BOL_a_grand_armada
-		icon = Naval_Upgrade
-
+		icon = naval_upgrade
 		x = 0
 		y = 1
 
@@ -7348,10 +7331,7 @@ focus_tree = {
 				create_unit = {
 					division = "name = \"Brigada de Fuerzas Especiales\" division_template = \"Brigada de Fuerzas Especiales\" start_experience_factor = 0.5"
 					owner = BOL
-				}
-				create_unit = {
-					division = "name = \"Brigada de Fuerzas Especiales\" division_template = \"Brigada de Fuerzas Especiales\" start_experience_factor = 0.5"
-					owner = BOL
+					count = 2
 				}
 			}
 		}
@@ -7480,7 +7460,6 @@ focus_tree = {
 				}
 			}
 			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = BOL }
 			set_temp_variable = { influence_target = PAR }
 			change_influence_percentage = yes
 		}
@@ -7518,7 +7497,6 @@ focus_tree = {
 				}
 			}
 			set_temp_variable = { percent_change = 5 }
-			set_temp_variable = { tag_index = BOL }
 			set_temp_variable = { influence_target = ARG }
 			change_influence_percentage = yes
 		}
@@ -7691,7 +7669,6 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus BOL_brazil_pipeline"
 			set_temp_variable = { percent_change = 8 }
-			set_temp_variable = { tag_index = BOL }
 			set_temp_variable = { influence_target = BRA }
 			change_influence_percentage = yes
 		}
@@ -7846,7 +7823,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus BOL_natos_arm_in_latin_america"
-			add_ideas = Major_Non_NATO_Ally
+			NATO_major_non_nato_ally_join = yes
 		}
 
 		ai_will_do = {
@@ -7872,12 +7849,10 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus BOL_eu_trade_agreements"
 			add_ideas = BOL_eu_bolivia_trade_agreement
-			every_other_country = {
-				limit = { has_idea = EU_member }
-				add_opinion_modifier = {
-					target = ROOT
-					modifier = european_union_member_trade
-				}
+			for_each_scope_loop = {
+				array = global.EU_member
+				tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+				add_opinion_modifier = { target = ROOT modifier = european_union_member_trade }
 			}
 		}
 
@@ -8918,7 +8893,6 @@ focus_tree = {
 			}
 			newline = yes
 			set_temp_variable = { percent_change = 8 }
-			set_temp_variable = { tag_index = BOL }
 			set_temp_variable = { influence_target = CHL }
 			change_influence_percentage = yes
 			newline = yes
@@ -8978,44 +8952,35 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus BOL_a_new_day_in_the_americas"
 			set_temp_variable = { percent_change = 4 }
-			set_temp_variable = { tag_index = BOL }
 			set_temp_variable = { influence_target = BRA }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 4 }
-			set_temp_variable = { tag_index = BOL }
 			set_temp_variable = { influence_target = PRU }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 4 }
-			set_temp_variable = { tag_index = BOL }
 			set_temp_variable = { influence_target = ARG }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 4 }
-			set_temp_variable = { tag_index = BOL }
 			set_temp_variable = { influence_target = PAR }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 4 }
-			set_temp_variable = { tag_index = BOL }
 			set_temp_variable = { influence_target = ECU }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 4 }
-			set_temp_variable = { tag_index = BOL }
 			set_temp_variable = { influence_target = COL }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 4 }
-			set_temp_variable = { tag_index = BOL }
 			set_temp_variable = { influence_target = VEN }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 4 }
-			set_temp_variable = { tag_index = BOL }
 			set_temp_variable = { influence_target = GUY }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 4 }
-			set_temp_variable = { tag_index = BOL }
 			set_temp_variable = { influence_target = SUR }
 			change_influence_percentage = yes
 			set_temp_variable = { percent_change = 4 }
-			set_temp_variable = { tag_index = BOL }
 			set_temp_variable = { influence_target = URU }
+			change_influence_percentage = yes
 		}
 
 		ai_will_do = {
