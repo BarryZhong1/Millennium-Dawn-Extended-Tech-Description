@@ -4525,51 +4525,6 @@ country_event = { #Turko Syrian Union
 	}
 }
 #
-country_event = { #They accept
-	id = TurkeyFocusEvents.351
-	title = TurkeyFocusEvents.351.t
-	desc = TurkeyFocusEvents.351.d
-	picture = GFX_handshake_black
-
-	is_triggered_only = yes
-
-	option = { # Great
-		name = TurkeyFocusEvents.351.a
-		log = "[GetDateText]: [This.GetName]: TurkeyFocusEvents.351.a executed"
-		TUR = {
-			set_cosmetic_tag = TUR_TURKEY_SYRIA_UNION
-			annex_country = {
-				target = SYR
-				transfer_troops = yes
-			}
-		}
-		SYR = { every_core_state = { add_core_of = TUR } }
-		ai_chance = { factor = 10 }
-	}
-}
-#
-country_event = { #They don't accept
-	id = TurkeyFocusEvents.352
-	title = TurkeyFocusEvents.352.t
-	desc = TurkeyFocusEvents.352.d
-	picture = GFX_treaty_rejected
-
-	is_triggered_only = yes
-
-	option = { # Great
-		name = TurkeyFocusEvents.352.a
-		log = "[GetDateText]: [This.GetName]: TurkeyFocusEvents.352.a executed"
-		set_temp_variable = { wargoal_on = SYR }
-		set_temp_variable = { wargoal_type = 2 }
-		add_threat_from_wargoal_effect = yes
-		create_wargoal = {
-			type = annex_everything
-			target = SYR
-		}
-		ai_chance = { factor = 10 }
-	}
-}
-#
 country_event = { #
 	id = TurkeyFocusEvents.36
 	title = TurkeyFocusEvents.36.t
@@ -5038,69 +4993,6 @@ country_event = { #Beyezid III Dies
 			traits = {
 				nationalist_Monarchist
 			}
-		}
-		ai_chance = { factor = 10 }
-	}
-}
-#
-country_event = { #Turkey asks for Hejaz
-	id = TurkeyFocusEvents.55
-	title = TurkeyFocusEvents.55.t
-	desc = TurkeyFocusEvents.55.d
-	fire_only_once = yes
-	is_triggered_only = yes
-	option = { #No
-		name = TurkeyFocusEvents.55.a
-		log = "[GetDateText]: [This.GetName]: TurkeyFocusEvents.54.a executed"
-		TUR = {
-			country_event = TurkeyFocusEvents.57
-		}
-		ai_chance = { factor = 10 }
-	}
-	option = { #Ok
-		name = TurkeyFocusEvents.55.b
-		log = "[GetDateText]: [This.GetName]: TurkeyFocusEvents.55.b executed"
-		TUR = {
-			country_event = TurkeyFocusEvents.56
-		}
-		ai_chance = { factor = 0 }
-	}
-}
-#
-country_event = { #Turkey asks for Hejaz
-	id = TurkeyFocusEvents.56
-	title = TurkeyFocusEvents.56.t
-	desc = TurkeyFocusEvents.56.d
-	fire_only_once = yes
-	is_triggered_only = yes
-	option = { #No
-		name = TurkeyFocusEvents.56.a
-		log = "[GetDateText]: [This.GetName]: TurkeyFocusEvents.56.a executed"
-		932 = {
-			transfer_state_to = TUR
-		}
-		177 = {
-			transfer_state_to = TUR
-		}
-		ai_chance = { factor = 10 }
-	}
-}
-#
-country_event = { #Turkey asks for Hejaz
-	id = TurkeyFocusEvents.57
-	title = TurkeyFocusEvents.57.t
-	desc = TurkeyFocusEvents.57.d
-	fire_only_once = yes
-	is_triggered_only = yes
-	option = { #No
-		name = TurkeyFocusEvents.57.a
-		log = "[GetDateText]: [This.GetName]: TurkeyFocusEvents.57.a executed"
-		set_temp_variable = { wargoal_on = SAU }
-		set_temp_variable = { wargoal_type = 2 }
-		add_threat_from_wargoal_effect = yes
-		create_wargoal = {
-			type = annex_everything
-			target = SAU
 		}
 		ai_chance = { factor = 10 }
 	}
