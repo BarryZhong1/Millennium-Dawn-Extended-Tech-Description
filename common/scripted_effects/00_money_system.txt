@@ -1197,6 +1197,143 @@ calculate_additional_income_rate = {
 			add_to_variable = { additional_income_rate = KOS_international_aid_income }
 		}
 	}
+	#Libya
+	else_if = {
+		limit = {
+			OR = {
+				original_tag = LBA
+				original_tag = FEZ
+				original_tag = CYR
+				original_tag = TRP
+			}
+			NOT = { has_country_flag = libya_noc_dismantled }
+		}
+		set_variable = { libya_oil_nationalisation_additional_income = resource_produced@oil }
+		multiply_variable = { libya_oil_nationalisation_additional_income = oil_nationalisation_income }
+		add_to_variable = { additional_income_rate = libya_oil_nationalisation_additional_income }
+	}
+	# Liechtenstein
+	else_if = {
+		limit = { original_tag = LIC }
+		if = {
+			limit = { has_idea = LIC_idea_international_investments }
+			set_variable = { additional_income_LIC_international_investments = 0.4 }
+			add_to_variable = { additional_income_rate = additional_income_LIC_international_investments }
+		}
+		if = {
+			limit = { has_idea = LIC_idea_USA_cooperation }
+			set_variable = { additional_income_LIC_USA_cooperation = 0.1 }
+			add_to_variable = { additional_income_rate = additional_income_LIC_USA_cooperation }
+		}
+		if = {
+			limit = { has_idea = LIC_idea_EU_cooperation }
+			set_variable = { additional_income_LIC_EU_cooperation = 0.1 }
+			add_to_variable = { additional_income_rate = additional_income_LIC_EU_cooperation }
+		}
+		if = {
+			limit = { has_idea = LIC_idea_huge_tax_haven }
+			set_variable = { additional_income_LIC_huge_tax_haven = 0.075 }
+			add_to_variable = { additional_income_rate = additional_income_LIC_huge_tax_haven }
+		}
+	}
+	# Montenegro
+	else_if = {
+		limit = { original_tag = MNT }
+		if = {
+			limit = { has_idea = MNT_yacht }
+			set_variable = { additional_income_mnt_yacht = 0.215 }
+			add_to_variable = { additional_income_rate = additional_income_mnt_yacht }
+		}
+	}
+	##North Korea
+	else_if = {
+		limit = { original_tag = NKO }
+		if = {
+			limit = { has_idea = NKO_idea_outsource_international_animation }
+			set_variable = { additional_income_NKO_outsource_international_animation = 0.05 }
+			add_to_variable = { additional_income_rate = additional_income_NKO_outsource_international_animation }
+		}
+		if = {
+			limit = { has_idea = NKO_korean_repair_frontline_workers_sov }
+			set_variable = { additional_income_NKO_korean_repair_frontline_workers_sov = 0.100 }
+			add_to_variable = { additional_income_rate = additional_income_NKO_korean_repair_frontline_workers_sov }
+		}
+		else_if = {
+			limit = { has_idea = NKO_korean_repair_civil_workers_sov }
+			set_variable = { additional_income_NKO_korean_repair_civil_workers_sov = 0.075 }
+			add_to_variable = { additional_income_rate = additional_income_NKO_korean_repair_civil_workers_sov }
+		}
+		if = {
+			limit = { has_idea = NKO_china_economic_assistant }
+			set_variable = { additional_income_china_economic_assistant = 0.200 }
+			add_to_variable = { additional_income_rate = additional_income_china_economic_assistant }
+		}
+		if = {
+			limit = { has_idea = NKO_jangmadang_idea }
+			set_variable = { additional_income_NKO_jangmadang_idea = 0.200 }
+			add_to_variable = { additional_income_rate = additional_income_NKO_jangmadang_idea }
+		}
+	}
+	# Norway
+	else_if = {
+		limit = { original_tag = NRY }
+		if = {
+			limit = { has_idea = NRY_bergen_engines }
+			set_variable = { additional_income_NRY_engines = 0.700 }
+			add_to_variable = { additional_income_rate = additional_income_NRY_engines }
+		}
+	}
+	#Iran
+	else_if = {
+		limit = { original_tag = PER }
+		if = {
+			limit = { has_idea = PER_irgc_black_market_exploits }
+			set_variable = { additional_income_irgc_black_market = gdp_total }
+			multiply_variable = { additional_income_irgc_black_market = 0.002 }	#10% of GDP yearly estimated weekly
+			add_to_variable = { additional_income_rate = additional_income_irgc_black_market }
+		}
+		if = {
+			limit = { has_idea = PER_redirecting_money_from_proxies }
+			set_variable = { additional_income_redirection_money_from_proxies = gdp_total }
+			multiply_variable = { additional_income_redirection_money_from_proxies = 0.0004 }	#2% of GDP yearly estimated weekly
+			add_to_variable = { additional_income_rate = additional_income_redirection_money_from_proxies }
+		}
+		if = {
+			limit = { has_country_flag = PER_iraq_accepted_to_pay_half_billion_weekly }
+			set_variable = { additional_income_iran_war_compensation = 0.5 }
+			add_to_variable = { additional_income_rate = additional_income_iran_war_compensation }
+		}
+		if = {
+			limit = { has_country_flag = PER_iraq_accepted_to_pay_one_billion_weekly }
+			set_variable = { additional_income_iran_war_compensation = 1.0 }
+			add_to_variable = { additional_income_rate = additional_income_iran_war_compensation }
+		}
+		if = {
+			limit = { has_country_flag = PER_iraq_accepted_to_pay_two_billion_weekly }
+			set_variable = { additional_income_iran_war_compensation = 2.0 }
+			add_to_variable = { additional_income_rate = additional_income_iran_war_compensation }
+		}
+	}
+	#INDIA
+	else_if = { limit = { original_tag = RAJ }
+		if = {
+			limit = { has_idea = RAJ_Local_markets }
+			set_variable = { RAJ_Local_markets_income = 0.08 }
+			add_to_variable = { additional_income_rate = RAJ_Local_markets_income }
+		}
+	}
+	# Singapore
+	else_if = { limit = { original_tag = SIN }
+		if = { limit = { has_dynamic_modifier = { modifier = SIN_singaporean_trade_strength } }
+			set_variable = { SIN_tariff_income = signed_trade_agreements }
+			multiply_variable = { SIN_tariff_income = 0.075 }
+			add_to_variable = { additional_income_rate = SIN_tariff_income }
+		}
+		if = { limit = { has_idea = SIN_temasek }
+			set_variable = { SIN_temasek_dividend_income = 0.25 }
+			add_to_variable = { additional_income_rate = SIN_temasek_dividend_income }
+		}
+	}
 	# San-Marino
 	if = {
 		limit = { original_tag = SMA }
@@ -1837,8 +1974,8 @@ calculate_additional_income_rate = {
 		multiply_variable = { additional_income_SWE_Value_added_Tax = 0.0012 } #20% of yearly GDP
 		add_to_variable = { additional_income_rate = additional_income_SWE_Value_added_Tax }
 		if = {
-			limit = { country_exists = NOR }
-			set_variable = { additional_income_SWE_border_trade = NOR.gdp_per_capita }
+			limit = { country_exists = NRY }
+			set_variable = { additional_income_SWE_border_trade = NRY.gdp_per_capita }
 			multiply_variable = { additional_income_SWE_border_trade = 0.0002 } #2% of yearly GDP
 			add_to_variable = { additional_income_rate = additional_income_SWE_border_trade }
 		}
@@ -1954,6 +2091,79 @@ calculate_additional_income_rate = {
 			set_variable = { RAJ_Local_markets_income = 0.08 }
 			add_to_variable = { additional_income_rate = RAJ_Local_markets_income }
 		}
+		if = {
+			limit = { has_idea = TAJ_201st_base_upgrade }
+			set_variable = { additional_income_TAJ_201st_upgrade = 0.175 }
+			add_to_variable = { additional_income_rate = additional_income_TAJ_201st_upgrade }
+		}
+		if = {
+			limit = { has_idea = TAJ_gulfs_bankroll_idea }
+			set_variable = { additional_income_TAJ_bankroll = 0.050 }
+			add_to_variable = { additional_income_rate = additional_income_TAJ_bankroll }
+		}
+	}
+	# Tatarstan
+	else_if = {
+		limit = { original_tag = TAT }
+		if = {
+			limit = { has_idea = TAT_develop_turism }
+			set_variable = { additional_income_TAT_develop_turism = 0.100 }
+			add_to_variable = { additional_income_rate = additional_income_TAT_develop_turism }
+		}
+	}
+	# Tanzania
+	else_if = {
+		limit = { original_tag = TNZ }
+		if = {
+			limit = { has_country_flag = COM_the_zanzibar_agreement_payee }
+			set_variable = { additional_income_COM_zanzibar_agreement_payee = 0.250 }
+			add_to_variable = { additional_income_rate = additional_income_COM_zanzibar_agreement_payee }
+		}
+	}
+	#Turkey
+	else_if = {
+		limit = { original_tag = TUR }
+		if = {
+			limit = { has_idea = TUR_taxing_bosphor }
+			set_variable = { TUR_taxing_bosphorus = gdp_total }
+			multiply_variable = { TUR_taxing_bosphorus = 0.002 }	#10% of GDP yearly
+			add_to_variable = { additional_income_rate = TUR_taxing_bosphorus }
+		}
+		if = {
+			limit = { has_idea = SOV_turkey_stream_idea }
+			set_variable = { additional_expense_SOV_turkey_stream_idea = 1.375 }
+			add_to_variable = { additional_expenses_rate = additional_expense_SOV_turkey_stream_idea }
+		}
+		if = {
+			limit = { has_idea = SOV_blue_stream_idea }
+			set_variable = { additional_expense_SOV_blue_stream_idea = 1.375 }
+			add_to_variable = { additional_expenses_rate = additional_expense_SOV_blue_stream_idea }
+		}
+	}
+	#Venezuela
+	else_if = {
+		limit = { original_tag = VEN }
+		if = {
+			limit = { has_idea = VEN_iron_control_vdp }
+			set_variable = { additional_income_iron_control_vdp = gdp_total }
+			multiply_variable = { additional_income_iron_control_vdp = 0.002 }	#10% of GDP yearly estimated weekly
+			add_to_variable = { additional_income_rate = additional_income_iron_control_vdp }
+		}
+	}
+
+	if = {
+		limit = { has_idea = AZE_indian_ports_idea }
+		set_variable = { AZE_indian_ports_idea_gain = 0.25 }
+		add_to_variable = { additional_income_rate = AZE_indian_ports_idea_gain }
+	}
+	##Wa State
+	if = {
+		limit = {
+			original_tag = WAA
+			has_idea = WAA_Narcotics_Producer
+		}
+		set_variable = { additional_income_WAA_Narcotics_Producer = 0.08 }
+		add_to_variable = { additional_income_rate = additional_income_WAA_Narcotics_Producer }
 	}
 	# Gulf
 	if = {
